@@ -1,0 +1,98 @@
+/************************ 레이 아웃 div CSS ************************/
+	html { height:100%; width:100%; margin:0; padding:0; overflow-y:scroll;}
+	body { height:100%; width:100%; margin:0; padding:0; border:0 outset gray; background-color:#3e3e3e;}
+	/* border : (프레임의 두께) (dotted, dashed, solid, double, groove, ridge, indet, outset 중에서 선택하세요) (프레임색갈)*/	/* 높이값 100% 마진, 패딩 0 값이 0일 경우 단위 안붙여도 괜찮음 */
+
+	#wrap { width:1140px; min-height:100%; margin:0 auto; background-color:white;}
+	/* 가운데 정렬을 위해 가로값 주고 마진 위아래는 0 좌,우는 자동 min-height:100%  */
+	#header { width:1080px; height:95px; margin:0 auto; border-bottom:5px solid #002779; }
+	#content  { overflow:auto; width:1080px; margin:0 auto; padding:20px 0 74px 0;}
+
+	#footwrap { margin-top:-58px; height:58px; padding-top:16px; width:1140px; margin:-74px auto; clear:both;}
+	/* 푸터 전체 감싸기. 가로값은 100%. 푸터의 높이값 +패딩-top값 만큼 margin-top에 -높이값, 좌,우는 auto, 아래 마진은 0 */
+	#footer	  { width:1080px; height:45px; margin:0 auto; border-top:3px solid #626262; font-size:11px; color:#7A7A7A; text-align:center; padding-top:9px; line-height:160%; background-color:#EEEEEE;}
+	/* 푸터 내용이 들어갈 div. 가로값은 전체 가로값과 동일하게 해주고 가운데 정렬을 위해 margin:0 auto; 고정시킬 div를 위해 부모 div에 position:relative 해줌 */
+	#foot_div { width:200px; height:150px; position:absolute; top:-150px; left:0; background-color:#ccc; z-index:-1}
+
+	#navi     { width:200px; height:200px; float:left; background-color:#333; }
+	#2nd_content  { width:900px; float:left; } /* 왼쪽 네비와 병행하는 본문 */
+	#3rd_content  { width:700px; float:left; } /* 왼쪽 네비, 오른쪽 배너존과 병행하는 본문 */
+	/* float:left 왼쪽으로 띄워줌, 각 영역 가로값 계산(모두 더한 것 = #wrap 가로값)해서 고정 시켜줌. */
+	#sideinfo { width:200px; height:100px; float:right; background-color:#DCDAD9; }
+/************************ 레이 아웃 div CSS ************************/
+
+
+/* General Font CSS */
+	table,td, div, span, input, textarea, select{ font-family:맑은 고딕;  font-size: 12px; color: #48494F; }
+
+/* 일반 텍스트 CSS */
+	.small_text{ font-family:맑은 고딕;  font-size: 11px; color: #7A7A7A; } /* head & foot */
+
+/* 기타 CSS */
+	img,input { border:0; vertical-align:middle;}
+	a, input {outline:none; select-dummy: expression(this.hideFocus=true);}
+
+
+/* 링크 텍스트 CSS */
+	A:link { font-size: 12px; color:#7A7A7A;  text-decoration: none;}
+	A:visited { font-size: 12px; color:#7A7A7A;   text-decoration: none}
+	A:active { font-size: 12px; color:#7A7A7A;  text-decoration: none}
+	A:hover {  font-size: 12px; color:#6073D1;   text-decoration: none}
+
+	A.under:link { font-size: 12px; color:#48494F;  text-decoration: none}
+	A.under:visited {  font-size: 12px; color:#48494F;   text-decoration: none}
+	A.under:active {  font-size: 12px; color:#48494F;  text-decoration: none}
+	A.under:hover {  font-size: 12px; color:#6073D1;   text-decoration: underline}
+
+	A.no_auth:link { font-size: 12px; color:#003399;  text-decoration: none}
+	A.no_auth:visited {  font-size: 12px; color:#003399;   text-decoration: none}
+	A.no_auth:active {  font-size: 12px; color:#003399;  text-decoration: none}
+	A.no_auth:hover {  font-size: 12px; color:#000066;   text-decoration: underline}
+
+	A.menu1:link {font-family:맑은 고딕;  font-size: 13px; color: #7C87AC;   text-decoration: none}
+	A.menu1:visited {font-family:맑은 고딕; font-size: 13px; color: #7C87AC;   text-decoration: none}
+	A.menu1:active {font-family:맑은 고딕;  font-size: 13px; color: #7C87AC;  text-decoration: none}
+	A.menu1:hover {font-family:맑은 고딕;  font-size: 14px; color: #5674D5;   text-decoration: none}
+
+	.long_list {
+		text-overflow: ellipsis;
+	}
+
+
+/* 테이블, Div CSS */
+	.main_content { border-width:0 1px 1px 1px; border-color:#9EACC0; border-style: solid; padding:15px 15px 15px 15px; } /**/
+	.d2_sub1 { border-width:2px 2px 0px 2px; border-color:#6BA6FF; border-style: solid; }
+	.d2_sub2 { border-width:0 0 2px 0px; border-color:#6BA6FF; border-style: solid; }
+	.d3_sub  { border-width:0 0 1px 0; border-color:#B2BCDE; border-style: solid; padding:20px 0 10px 20px; }
+	.bottom  { border-width:0 0 1px 0; border-color:#D6D6D6; border-style: solid; }
+	.bottom3 { border-width:0 0 1px 0; border-color:#CFCFCF; border-style: solid;}
+	.top     { border-width:1px 0 0 0; border-color:#D6D6D6; border-style: solid; }
+	.top2    { border-width:1px 0 0 0; border-color:#B2BCDE; border-style: solid; }
+	.tb1	 { border-width:1px 0 1px 0; border-color:#CFCFCF; border-style: solid; }
+	.tb2	 { border-width:0 0 1px 0; border-color:#E1E1E1; border-style: solid; }
+	.form1   { border-width:0 0 1px 0; border-color:#CFCFCF; border-style: solid; color:#000000; padding:5px 0 5px 10px;}
+	.form2   { border-width:0 0 1px 0; border-color:#CFCFCF; border-style: solid; color:#4B4B4B; padding:0 0 0 10px;}
+	.form3   { border-width:0 1px 1px 0; border-color:#dddddd; border-style: solid; color:#4B4B4B;}
+	.blue_title {float:left; height:24px; padding-top:6px; border-width:1px 1px 1px 0; border-style:solid; border-color:#dddddd; background-color:#E2F0FC; color:#003366;}
+	.bor_ddd {float:left; height:24px; padding-top:6px; border-width:1px 1px 1px 0; border-style:solid; border-color:#dddddd;}
+
+
+/* FORM CSS */
+	.inputstyle {border-width: 1px 1px 1px 1px; border-color:#91D752; border-style: solid; background:#F0FAE6; font-size:12px}
+	.searchline { border-width:1px 1px 1px 1px; border-color:#DBDBDB; border-style: solid; BACKGROUND-COLOR:#F8F8F7;}
+	.bt_form { border-width: 1px 0 1px 1px; border-color:#cccccc; border-style: solid; cursor:pointer; }
+	.Inputcheck {border:#cccccc 0px solid;}
+	.inputstyle1 {font-family:맑은 고딕; color:#7A7A7A; border: #cccccc 1px solid; font-size: 9px; height:15px;}
+	.inputstyle11 {font-family:맑은 고딕; color:#7A7A7A; border: #cccccc 1px solid; font-size: 12px; background-color:#e0ecfe;}
+
+	.inputstyle2  { border-width:1px 1px 1px 1px; border-color: #cccccc; border-style: solid; font-size: 12px; height:18px;}
+	.inputstyle22 { border-width:1px 1px 1px 1px; border-color: #cccccc; border-style: solid; font-size: 12px; height:18px; background-color:#f4f3e8;}
+	.inputstyle_bt  { border:1px solid #eee; outline:1px solid #ccc; font-size: 11px; height:20px; padding-bottom:2px; background-color:#ECE9DD;}
+	.submit_bt  {font-family:맑은 고딕; border:1px solid #fff; outline:1px solid #ccc; font-size: 12px; background-color:#A4B0BD; color:white; padding-bottom:3px; cursor:pointer; cursor:pointer; }
+	.submit_bt2 {font-family:맑은 고딕; border:1px solid #eee; outline:1px solid #ccc; font-size: 12px; width:90px; height:28px; background-color:#838da5; color:white; padding-bottom:3px; cursor:pointer;}
+
+    .input { font-size:9pt; color:black; border:1x solid black; }
+	.button {font-family:맑은 고딕; border: #cccccc 1px solid; font-size: 12px; background-color:#99ccff;}
+	.sub_bt1{border-width:1px 1px 1px 1px; border-color: #707070; border-style: solid; background-color:#DEDEDE; line-height:170%; cursor:pointer;}
+	.sub_bt2{border-width:1px 1px 1px 1px; border-color: #4A96B0; border-style: solid; background-color:#A6F4FF; line-height:170%;} cursor:pointer;
+	.sub_bt3{border-width:1px 1px 1px 1px; border-color: #0089B4; border-style: solid; background-color:#34B4E3; line-height:170%; cursor:pointer;}
