@@ -55,7 +55,7 @@ function numChk(chk_frm){
 	if(!pattern.test(chk)){        //만약 값이 숫자가 아니면~
 		alert("숫자로만 입력할 수 있습니다!");
 		chk_frm.value = "";
-		chk_frm.focus(); 
+		chk_frm.focus();
 		return;
    }
 }
@@ -69,7 +69,7 @@ function onlyNumber1(form_name){
 			form_name.focus();
 			form_name.value="";
 		 }
-   }   
+   }
 }
 
 // 오픈 윈도우2

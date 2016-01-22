@@ -45,7 +45,7 @@
 									<div style="float:left; width:300px; height:26px; padding-top:5px; border-width:1px 0 1px 1px; text-align:center;" class="blue_title">담당업무</div>
 									<div style="float:left; width:196px; height:26px; padding-top:5px; border-width:1px 0 1px 1px; text-align:center;" class="blue_title">비 고</div>
 
-									<?										
+									<?
 										$add_where = " WHERE 1=1 ";
 
 										if($div_seq) $add_where.=" AND seq='$div_seq' ";
@@ -53,11 +53,11 @@
 										if(!$sh_con){// 통합검색일 경우
 											if($_search) $add_where.=" AND (div_code LIKE '%$_search%' OR div_name LIKE '%$_search%' OR  	res_work LIKE '%$_search%' OR note LIKE '%$_search%') ";
 										}else if($sh_con=='1'){// 부서코드로 검색
-											if($_search) $add_where.=" AND div_code LIKE '%$_search%' ";										
+											if($_search) $add_where.=" AND div_code LIKE '%$_search%' ";
 										}else if($sh_con=='2'){//부서명으로 검색
 											if($_search) $add_where.=" AND  	div_name LIKE '%$_search%' ";
 										}else if($sh_con=='3'){//담당업무로 검색
-											if($_search) $add_where.=" AND  	res_work LIKE '%$_search%' ";	
+											if($_search) $add_where.=" AND  	res_work LIKE '%$_search%' ";
 										}else if($sh_con=='4'){//비고로 검색
 											if($_search) $add_where.=" AND  	note LIKE '%$_search%' ";
 										}
@@ -82,8 +82,8 @@
 										$result = mysql_query($query, $connect);
 										while($rows = mysql_fetch_array($result)){
 									?>
-									<div style="clear:left; float:left; width:25px; height:24px; padding-top:4px; border-width:0 1px 1px 0; text-align:center;" class="bor_ddd"><input type="checkbox" name="seq[]" value="<?$rows[seq]?>"></div>
-									<div style="float:left; width:120px; height:24px; padding-top:4px; border-width:0 0 1px 0; text-align:center;" class="bor_ddd"><a href="<?$cms_url?>?m_di=1&amp;s_di=1&amp;ss_di=2&amp;mode=modify&amp;seq=<?=$rows[div_code]?>" class="no_auth"><?=$rows[div_code]?></a></div>
+								<div style="clear:left; float:left; width:25px; height:24px; padding-top:4px; border-width:0 1px 1px 0; text-align:center;" class="bor_ddd"><input type="checkbox" name="seq[]" value="<?$rows[seq]?>"></div>
+									<div style="float:left; width:120px; height:24px; padding-top:4px; border-width:0 0 1px 0; text-align:center;" class="bor_ddd"><a href="<?$cms_url?>?m_di=1&amp;s_di=1&amp;ss_di=2&amp;mode=modify&amp;seq=<?=$rows[seq]?>" class="no_auth"><?=$rows[div_code]?></a></div>
 									<div style="float:left; width:180px; height:24px; padding-top:4px; border-width:0 0 1px 1px; text-align:center;" class="bor_ddd"><?=$rows[div_name]?></div>
 									<div style="float:left; width:300px; height:24px; padding-top:4px; border-width:0 0 1px 1px; text-align:center;" class="bor_ddd"><?=$rows[res_work]?></div>
 									<div style="float:left; width:186px; height:24px; padding:4px 0 0 10px; border-width:0 0 1px 1px;" class="bor_ddd"><?=rg_cut_string($row[note], 30, "..")?></div>

@@ -1,8 +1,8 @@
 <?session_start();
 $host="localhost";
 $dbid="brdnc";     /// 셋업 파일에서 설정할 수 있도록 수정 요망
-$dbpass="qkfoa5928";     /// 셋업 파일에서 설정해서 넘어올 수 있도록 수정 요망 
-$dbname="brdnc";    /// 셋업 파일에서 설정해서 넘어올 수 있도록 수정 요망 
+$dbpass="qkfoa5928";     /// 셋업 파일에서 설정해서 넘어올 수 있도록 수정 요망
+$dbname="brdnc";    /// 셋업 파일에서 설정해서 넘어올 수 있도록 수정 요망
 $com_title="[주] 바램디앤씨";
 $doc_title="(주)바램디앤씨 _ 관리시스템";
 $doc_charset="UTF-8";

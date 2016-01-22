@@ -7,16 +7,17 @@
 	// MySQL 연결
 	$connect=dbconn();
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <?
-	$z_form=$_REQUEST['z_form'];
-	$a_form=$_REQUEST['a_form'];
+	$z_form=$_REQUEST['z_form']; // 우편번호 폼 이름
+	$a_form=$_REQUEST['a_form']; // 주소 폼 이름
 ?>
 <html>
  <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title><?=$doc_title?></title>
+	<link rel="shortcut icon" href="<?=$cms_url?>images/cms.ico">
 	<link type="text/css" rel="stylesheet" href="../common/cms.css">
 	<script type="text/JavaScript" language="JavaScript" src="../common/global.js"></script>
 	<script type="text/JavaScript">
@@ -35,21 +36,17 @@
 
 				var form=opener.document.form1;
 
-				var z1 = document.zipsearch.z_form.value+"1";
-				var z2 = document.zipsearch.z_form.value+"2";
+				var z = document.zipsearch.z_form.value;
 				var a1 = document.zipsearch.a_form.value+"1";
 				var a2 = document.zipsearch.a_form.value+"2";
 
-				zip1=zip.substring(0, 3);
-				zip2=zip.substring(4, 7);
+				zip=zip.substring(0, 5);
 
-				a = eval("form."+z1); // 우편번호 앞에 세자리 폼
-				b = eval("form."+z2); // 우편번호 뒤에 세자리 폼
+				a = eval("form."+z); // 우편번호 앞에 세자리 폼
 				c = eval("form."+a1); // 기본주소 폼 이름
 				d = eval("form."+a2); // 나머지주소 폼 이름
 
-				a.value=zip1;
-				b.value=zip2;
+				a.value=zip;
 				c.value=adr;
 				d.focus();
 
@@ -76,10 +73,10 @@
 
 				<div style="height:34px; border-width: 1px 0 1px 0; border-color:#CFCFCF; border-style: solid; margin-top:10px;">
 					<div style="float:left; height:28px; padding-top:6px; width: 100px; background-color:#F8F8F8; text-align:center;">
-						동 이 름
+						도 로 명
 					</div>
 					<div style="float:left; height:28px; width:160px; padding-top:7px; text-align:center;">
-						<input type="text" name="dong" size="22" class="inputstyle2"  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
+						<input type="text" name="dong" size="22" class="inputstyle2" value=<?=$dong?> onFocus="this.value=''"; onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
 					</div>
 					<div style="float:left; height:28px; width:50px; padding-top:7px; text-align:center;">
 						<input type="submit" value="우편번호 찾기" class="inputstyle_bt"><!-- <input type="image" src="../images/chk.jpg"> -->
@@ -93,7 +90,7 @@
 					if($mode=="search"){
 
 					## 주소 데이터베이스에서 사용자가 입력한 주소와 일치하는 레코드를 검색한다. ##
-					$query="SELECT zipcode, sido, gugun, dong, bunji FROM cms_zipcode WHERE (gugun LIKE '%$dong%') OR (dong LIKE '%$dong%')";
+					$query="SELECT zipcode, sido, gugun, eupmn,  doro, b_no_main, b_no_sub, law_dn, gugun_bn FROM cms_zipcode WHERE (eupmn LIKE '%$dong%') OR (eupmn_en LIKE '%$dong%') OR (doro LIKE '%$dong%') OR (doro_en LIKE '%$dong%') OR (gugun_bn LIKE '%$dong%') OR (law_dn LIKE '%$dong%') OR (rin LIKE '%$dong%') OR (admin_dn LIKE '%$dong%') OR (gugun_en LIKE '%$dong%') OR (gugun_en LIKE '%$dong%') OR (gugun_en LIKE '%$dong%');";
 					$result=mysql_query($query, $connect);
 					$total_num=mysql_num_rows($result);
 					## 검색 결과가 있으면 목록 상자 형태로 출력한다. ##
@@ -109,9 +106,10 @@
 					<div>
 						<?
 							while($rows = mysql_fetch_array($result)){
-								$addr1=$rows[sido]." ".$rows[gugun]." ".$rows[dong];
+								//if()
+								$addr1=$rows[sido]." ".$rows[gugun]." ".$rows[eupmn]." ".$rows[doro]." ".$rows[b_no_main]."-".$rows[b_no_sub];
 								$address1="$addr1";
-								$addr_code=explode("-", $rows[zipcode]);
+								// $addr_code=explode("-", $rows[zipcode]);
 						?>
 						<div style="clear:left; float:left; width:53px; height:25px; text-align:center; padding-top:5px; background-color:#F9F9F9;">
 							<a href="javascript:" onclick="open_move('<?=$rows[zipcode]?>', '<?=$address1?>')"><?=$rows[zipcode]?></a>

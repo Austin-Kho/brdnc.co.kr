@@ -25,8 +25,7 @@
 	$email1=$_POST['email1'];
 	$email2=$_POST['email2'];
 	$rcv_mail=$_POST['rcv_mail'];
-	$zipcode1=$_POST['zipcode1'];
-	$zipcode2=$_POST['zipcode2'];
+	$zipcode=$_POST['zipcode'];
 	$address1=$_POST['address1'];
 	$address2=$_POST['address2'];
 	$phone1=$_POST['phone1'];
@@ -51,7 +50,6 @@
 	$address2=addslashes($address2);                       //
 	$phone=$phone1."-".$phone2."-".$phone3;              //
 	$hphone=$hphone1."-".$hphone2."-".$hphone3;       //
-	$zipcode=$zipcode1."-".$zipcode2;                       /////
 
 	$pj_where = $headq."-".$team;
 

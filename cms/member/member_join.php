@@ -204,9 +204,7 @@
 			우편번호
 		</div>
 		<div style="float:left; width:512px; height:28px; border-width:0 0 1px 0; border-color:#E1E1E1; border-style:solid; padding:5px 0 0 20px;">
-			<input type="text" name="zipcode1" size="6" class="inputstyle2" readonly onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
-			-
-			<input type="text" name="zipcode2" size="6" class="inputstyle2" readonly onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">&nbsp;
+			<input type="text" name="zipcode" size="5" class="inputstyle2" readonly onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">&nbsp;
 			<input type="button" value="우편번호 검색" onclick="javascript:ZipWindow('zip_search.php', 'zipcode', 'address')" class="inputstyle_bt">
 		</div>
 		<div style="clear:left; float:left; width:180px; height:22px; background-color:#F8F8F7; padding:5px 0 0 20px;">

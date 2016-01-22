@@ -35,9 +35,9 @@
 	<div style="height:700px;">
 		<div style="float:left; width:730px; height:485px; padding-right:10px;">
 			<div style="height:230px;"><!-- 메인 배너 div -->
-				<div style="float:left; width:242px;"><a href="#/"><img src="images/img/3.jpg" width="235" height="220" title="월드메르디앙 가야" alt="" /></a></div>
-				<div style="float:left; width:242px;"><a href="http://dymaru.co.kr/" target="_blank"><img src="images/img/2.jpg" width="235" height="220" title="월드메르디앙 대연마루" alt="" /></a></div>
-				<div style="float:left; width:242px;"><a href="#/"><img src="images/img/1.jpg" width="235" height="220" title="월드메르디앙 펠라티움55" alt="" /></a></div>
+				<div style="float:left; width:242px;"><a href="http://송도양우내안애.kr/" target="_blank"><img src="images/img/3.jpg" width="235" height="220" title="양우내안애 에르바체" alt="" /></a></div>
+				<div style="float:left; width:242px;"><a href="http://송도양우내안애.kr/" target="_blank"><img src="images/img/2.jpg" width="235" height="220" title="양우내안애 에르바체" alt="" /></a></div>
+				<div style="float:left; width:242px;"><a href="http://송도양우내안애.kr/" target="_blank"><img src="images/img/1.jpg" width="235" height="220" title="양우내안애 에르바체" alt="" /></a></div>
 			</div>
 			<div style="height:28px; text-align:center; padding-top:8px;"><a href="#;"><img src="images/vit_bt.jpg" title="1" alt="" /></a></div>
 			<div style="clear:left; width:730px;"><!-- 공지 사항 div -->
