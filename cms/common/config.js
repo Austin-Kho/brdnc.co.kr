@@ -189,7 +189,7 @@ function com_submit(mode){
 	     return;
 	  }
    }
-	
+
 	if(!form.co_no2.value){
 		alert('사업자등록번호를 입력하세요!');
 		form.co_no2.focus();
@@ -246,13 +246,13 @@ function com_submit(mode){
 	     return;
 	  }
    }
-	
+
 	if(!form.or_no2.value){
 		alert('법인(주민)등록번호를 입력하세요!');
 		form.or_no2.focus();
 		return;
 	}
-	
+
 	if(form.or_no2.value) {
 	  if(!IsNumber(form.or_no2.name)||form.or_no2.value.length<7){
        alert("두 번째 법인(주민)등록번호는 7자리 숫자이어야 합니다!");
@@ -285,7 +285,7 @@ function com_submit(mode){
 		form.co_phone1.focus();
 		return;
 	}
-	
+
 	if(form.co_phone1.value) {
 	  if(!IsNumber(form.co_phone1.name)){
        alert("전화번호는 숫자이어야 합니다!");
@@ -300,7 +300,7 @@ function com_submit(mode){
 		form.co_phone2.focus();
 		return;
 	}
-	
+
 	if(form.co_phone2.value) {
 	  if(!IsNumber(form.co_phone2.name)){
        alert("전화번호는 숫자이어야 합니다!");
@@ -336,7 +336,7 @@ function com_submit(mode){
 		form.co_hp2.focus();
 		return;
 	}
-	
+
 	if(form.co_hp2.value) {
 	  if(!IsNumber(form.co_hp2.name)){
        alert("전화번호는 숫자이어야 합니다!");
@@ -378,7 +378,7 @@ function com_submit(mode){
 		form.carr_y.focus();
 		return;
 	}
-	
+
 	if(form.carr_y.value) {
 	  if(!IsNumber(form.carr_y.name)||form.carr_y.value.length<4){
        alert("년도는 네자리 숫자이어야 합니다!");
@@ -418,7 +418,7 @@ function com_submit(mode){
 		form.email1.focus();
 		return;
 	}
-	
+
 	if(!form.email2.value){
 		alert('이메일(비상)주소를 입력하세요!');
 		form.email2.focus();
@@ -431,9 +431,9 @@ function com_submit(mode){
 		return;
 	}
 
-	if(!form.zipcode1.value){
+	if(!form.zipcode.value){
 		alert('회사주소를 입력하세요!');
-		form.zipcode1.focus();
+		form.zipcode.focus();
 		return;
 	}
 
