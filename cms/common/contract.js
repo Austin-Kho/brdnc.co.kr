@@ -12,7 +12,7 @@ function data_move(mode,seq){
 }
 
 /////////타입 등록 체크박스 추가 함수
-function type_reg(frm,val, no, n){  // 체크박스 // 넘버  id="type_10"	
+function type_reg(frm,val, no, n){  // 체크박스 // 넘버  id="type_10"
 	if(frm=='1'){
 		var str1="type1_";
 		var str2="ck1_";
@@ -41,7 +41,7 @@ function type_reg(frm,val, no, n){  // 체크박스 // 넘버  id="type_10"
 		if(!n)ckbox.disabled=false;
 	}
 }
-function pj_data_reg(frm,val, no){  // 체크박스 // 넘버  id="type_10"	
+function pj_data_reg(frm,val, no){  // 체크박스 // 넘버  id="type_10"
 	if(frm=='1'){
 		var str1="type1_";
 		var str2="ck1_";
@@ -90,7 +90,7 @@ function con_formck(){
 		alert('최소한 하나 이상의 타입정보를 입력하여야 합니다!');
 		form.type_1.focus();
 		return;
-	}	
+	}
 	//////////////////////////////////////////////////
 	if(form.type_1.value){
 		if(!form.total_count_1.value){
@@ -98,53 +98,12 @@ function con_formck(){
 			form.total_count_1.focus();
 			return;
 		}
-		if(!form.sell_count_1.value){
-			alert('해당 TYPE 의 계약물량 정보를 입력하여 주세요');
-			form.sell_count_1.focus();
-			return;
-		}
-		if(!form.count_unit_1.value){
-			alert('해당 TYPE 의 계약물량 단위를 입력하여 주세요');
-			form.count_unit_1.focus();
-			return;
-		}
-		if(!form.pay_1.value){
-			alert('해당 TYPE 의 용역수수료를 입력하여 주세요');
-			form.pay_1.focus();
-			return;
-		}
-		if(!form.pay_con_1.value){
-			alert('해당 TYPE 의 수수료 책정 조건을 입력하여 주세요');
-			form.pay_con_1.focus();
-			return;
-		}
 	}
-
 	//////////////////////////////////////////////////
 	if(form.type_2.value){
 		if(!form.total_count_2.value){
 			alert('해당 TYPE 의 전체물량 정보를 입력하여 주세요');
 			form.total_count_2.focus();
-			return;
-		}
-		if(!form.sell_count_2.value){
-			alert('해당 TYPE 의 계약물량 정보를 입력하여 주세요');
-			form.sell_count_2.focus();
-			return;
-		}
-		if(!form.count_unit_2.value){
-			alert('해당 TYPE 의 계약물량 단위를 입력하여 주세요');
-			form.count_unit_2.focus();
-			return;
-		}
-		if(!form.pay_2.value){
-			alert('해당 TYPE 의 용역수수료를 입력하여 주세요');
-			form.pay_2.focus();
-			return;
-		}
-		if(!form.pay_con_2.value){
-			alert('해당 TYPE 의 수수료 책정 조건을 입력하여 주세요');
-			form.pay_con_2.focus();
 			return;
 		}
 	}
@@ -155,52 +114,12 @@ function con_formck(){
 			form.total_count_3.focus();
 			return;
 		}
-		if(!form.sell_count_3.value){
-			alert('해당 TYPE 의 계약물량 정보를 입력하여 주세요');
-			form.sell_count_3.focus();
-			return;
-		}
-		if(!form.count_unit_3.value){
-			alert('해당 TYPE 의 계약물량 단위를 입력하여 주세요');
-			form.count_unit_3.focus();
-			return;
-		}
-		if(!form.pay_3.value){
-			alert('해당 TYPE 의 용역수수료를 입력하여 주세요');
-			form.pay_3.focus();
-			return;
-		}
-		if(!form.pay_con_3.value){
-			alert('해당 TYPE 의 수수료 책정 조건을 입력하여 주세요');
-			form.pay_con_3.focus();
-			return;
-		}
 	}
 	//////////////////////////////////////////////////
 	if(form.type_4.value){
 		if(!form.total_count_4.value){
 			alert('해당 TYPE 의 전체물량 정보를 입력하여 주세요');
 			form.total_count_4.focus();
-			return;
-		}
-		if(!form.sell_count_4.value){
-			alert('해당 TYPE 의 계약물량 정보를 입력하여 주세요');
-			form.sell_count_4.focus();
-			return;
-		}
-		if(!form.count_unit_4.value){
-			alert('해당 TYPE 의 계약물량 단위를 입력하여 주세요');
-			form.count_unit_4.focus();
-			return;
-		}
-		if(!form.pay_4.value){
-			alert('해당 TYPE 의 용역수수료를 입력하여 주세요');
-			form.pay_4.focus();
-			return;
-		}
-		if(!form.pay_con_4.value){
-			alert('해당 TYPE 의 수수료 책정 조건을 입력하여 주세요');
-			form.pay_con_4.focus();
 			return;
 		}
 	}
@@ -211,52 +130,12 @@ function con_formck(){
 			form.total_count_5.focus();
 			return;
 		}
-		if(!form.sell_count_5.value){
-			alert('해당 TYPE 의 계약물량 정보를 입력하여 주세요');
-			form.sell_count_5.focus();
-			return;
-		}
-		if(!form.count_unit_5.value){
-			alert('해당 TYPE 의 계약물량 단위를 입력하여 주세요');
-			form.count_unit_5.focus();
-			return;
-		}
-		if(!form.pay_5.value){
-			alert('해당 TYPE 의 용역수수료를 입력하여 주세요');
-			form.pay_5.focus();
-			return;
-		}
-		if(!form.pay_con_5.value){
-			alert('해당 TYPE 의 수수료 책정 조건을 입력하여 주세요');
-			form.pay_con_5.focus();
-			return;
-		}
 	}
 	//////////////////////////////////////////////////
 	if(form.type_6.value){
 		if(!form.total_count_6.value){
 			alert('해당 TYPE 의 전체물량 정보를 입력하여 주세요');
 			form.total_count_6.focus();
-			return;
-		}
-		if(!form.sell_count_6.value){
-			alert('해당 TYPE 의 계약물량 정보를 입력하여 주세요');
-			form.sell_count_6.focus();
-			return;
-		}
-		if(!form.count_unit_6.value){
-			alert('해당 TYPE 의 계약물량 단위를 입력하여 주세요');
-			form.count_unit_6.focus();
-			return;
-		}
-		if(!form.pay_6.value){
-			alert('해당 TYPE 의 용역수수료를 입력하여 주세요');
-			form.pay_6.focus();
-			return;
-		}
-		if(!form.pay_con_6.value){
-			alert('해당 TYPE 의 수수료 책정 조건을 입력하여 주세요');
-			form.pay_con_6.focus();
 			return;
 		}
 	}
@@ -267,52 +146,12 @@ function con_formck(){
 			form.total_count_7.focus();
 			return;
 		}
-		if(!form.sell_count_7.value){
-			alert('해당 TYPE 의 계약물량 정보를 입력하여 주세요');
-			form.sell_count_7.focus();
-			return;
-		}
-		if(!form.count_unit_7.value){
-			alert('해당 TYPE 의 계약물량 단위를 입력하여 주세요');
-			form.count_unit_7.focus();
-			return;
-		}
-		if(!form.pay_7.value){
-			alert('해당 TYPE 의 용역수수료를 입력하여 주세요');
-			form.pay_7.focus();
-			return;
-		}
-		if(!form.pay_con_7.value){
-			alert('해당 TYPE 의 수수료 책정 조건을 입력하여 주세요');
-			form.pay_con_7.focus();
-			return;
-		}
 	}
 	//////////////////////////////////////////////////
 	if(form.type_8.value){
 		if(!form.total_count_8.value){
 			alert('해당 TYPE 의 전체물량 정보를 입력하여 주세요');
 			form.total_count_8.focus();
-			return;
-		}
-		if(!form.sell_count_8.value){
-			alert('해당 TYPE 의 계약물량 정보를 입력하여 주세요');
-			form.sell_count_8.focus();
-			return;
-		}
-		if(!form.count_unit_8.value){
-			alert('해당 TYPE 의 계약물량 단위를 입력하여 주세요');
-			form.count_unit_8.focus();
-			return;
-		}
-		if(!form.pay_8.value){
-			alert('해당 TYPE 의 용역수수료를 입력하여 주세요');
-			form.pay_8.focus();
-			return;
-		}
-		if(!form.pay_con_8.value){
-			alert('해당 TYPE 의 수수료 책정 조건을 입력하여 주세요');
-			form.pay_con_8.focus();
 			return;
 		}
 	}
@@ -323,26 +162,6 @@ function con_formck(){
 			form.total_count_9.focus();
 			return;
 		}
-		if(!form.sell_count_9.value){
-			alert('해당 TYPE 의 계약물량 정보를 입력하여 주세요');
-			form.sell_count_9.focus();
-			return;
-		}
-		if(!form.count_unit_9.value){
-			alert('해당 TYPE 의 계약물량 단위를 입력하여 주세요');
-			form.count_unit_9.focus();
-			return;
-		}
-		if(!form.pay_9.value){
-			alert('해당 TYPE 의 용역수수료를 입력하여 주세요');
-			form.pay_9.focus();
-			return;
-		}
-		if(!form.pay_con_9.value){
-			alert('해당 TYPE 의 수수료 책정 조건을 입력하여 주세요');
-			form.pay_con_9.focus();
-			return;
-		}
 	}
 	//////////////////////////////////////////////////
 	if(form.type_10.value){
@@ -351,36 +170,11 @@ function con_formck(){
 			form.total_count_10.focus();
 			return;
 		}
-		if(!form.sell_count_10.value){
-			alert('해당 TYPE 의 계약물량 정보를 입력하여 주세요');
-			form.sell_count_10.focus();
-			return;
-		}
-		if(!form.count_unit_10.value){
-			alert('해당 TYPE 의 계약물량 단위를 입력하여 주세요');
-			form.count_unit_10.focus();
-			return;
-		}
-		if(!form.pay_10.value){
-			alert('해당 TYPE 의 용역수수료를 입력하여 주세요');
-			form.pay_10.focus();
-			return;
-		}
-		if(!form.pay_con_10.value){
-			alert('해당 TYPE 의 수수료 책정 조건을 입력하여 주세요');
-			form.pay_con_10.focus();
-			return;
-		}
 	}
 	//////////////////////////////////////////////////
-	if(!form.client.value){
-		alert('발주사명을 입력하여 주세요!');
-		form.client.focus();
-		return;
-	}
-	if(!form.cont_date.value){
-		alert('계약체결일을 입력하여 주세요!');
-		form.cont_date.focus();
+	if(!form.pr_sd.value){
+		alert('수행 개시일을 입력하여 주세요!');
+		form.pr_sd.focus();
 		return;
 	}
 	form.submit();
@@ -660,14 +454,14 @@ function pj_data_put_1(){
 		form.submit();
 	}else{
 		return false;
-	}	
+	}
 }
 
 function pay_reg_bc(self){
 	var form=document.form1;
 
 	if(self.checked==true){
-	
+
 		if(!form.pay_1.value){
 		alert("수수료를 입력하십시요!");
 		self.checked=false;
@@ -682,5 +476,5 @@ function pay_reg_bc(self){
 		form.pay_7.value=form.pay_1.value;
 		form.pay_8.value=form.pay_1.value;
 		form.pay_batch.value=form.pay_1.value;
-	}	
+	}
 }

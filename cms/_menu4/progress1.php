@@ -59,9 +59,9 @@
 									<?
 										$where="WHERE is_data_reg = '0' ";
 										if($year_frm>1){
-											$where.=" AND cont_date LIKE '$year_frm%' ";
+											$where.=" AND pr_sd LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT * FROM cms_project_info $where ORDER BY cont_date DESC ";
+										$qry = "SELECT * FROM cms_project_info $where ORDER BY pr_sd DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -78,9 +78,9 @@
 									<?
 										$where="WHERE is_data_reg = '1' ";
 										if($year_frm>1){
-											$where.=" AND cont_date LIKE '$year_frm%' ";
+											$where.=" AND pr_sd LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT * FROM cms_project_info $where ORDER BY cont_date DESC ";
+										$qry = "SELECT * FROM cms_project_info $where ORDER BY pr_sd DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -96,7 +96,7 @@
 						<?
 							if($new_pj) $pre_pj_seq = $new_pj; // 신규 등록인지
 							if($reg_pj) $pre_pj_seq = $reg_pj; // 등록 수정인지
-							$p_qry = "SELECT pj_name, sort, data_cr, type_info, per_pay_type FROM cms_project_info WHERE seq = '$pre_pj_seq' ";
+							$p_qry = "SELECT pj_name, sort, data_cr, type_info FROM cms_project_info WHERE seq = '$pre_pj_seq' ";
 							$p_rlt = mysql_query($p_qry, $connect);
 							$p_row = mysql_fetch_array($p_rlt);
 							if($p_row[sort]==1) $sort="아파트(일반분양)";
@@ -110,8 +110,6 @@
 
 							$type=explode("-", $p_row[type_info]);
 							$t_count=count($type);
-							$pay=explode("-", $p_row[per_pay_type]);
-							$p_count=count($pay);
 							if($p_row[pj_name]) $pj_name ="<font color='#000099'>".$p_row[pj_name]."</font>";
 							if($sort) $pj_sort = "<font color='#000099'>".$sort."</font>";
 						?>

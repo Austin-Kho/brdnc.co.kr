@@ -5,9 +5,9 @@
 					<tr>
 						<td width="45%" class="d2_sub2"></td>
 						<td align="center" width="162" class="d2_sub1">
-							<a href="<?=$_SERVER['PHP_SELF']?>?m_di=1"><img src="../images/sub_menu_cont1.png" border="0" alt="" /><!-- <font size="2" color=""><b>계약현장 관리</b></font> --></a></td>
+							<a href="<?=$_SERVER['PHP_SELF']?>?m_di=1"><img src="../images/sub_menu_4_1.png" border="0" alt="" /><!-- <font size="2" color=""><b>계약현장 관리</b></font> --></a></td>
 						<td align="center" width="162" class="d2_sub2">
-							<a href="<?=$_SERVER['PHP_SELF']?>?m_di=2"><img src="../images/sub_menu_cont2_.png" border="0" alt="" /><!-- <font size="2" color=""><b>신규계약 관리</b></font> --></a></td>
+							<a href="<?=$_SERVER['PHP_SELF']?>?m_di=2"><img src="../images/sub_menu_4_2_.png" border="0" alt="" /><!-- <font size="2" color=""><b>신규계약 관리</b></font> --></a></td>
 						<td width="25%" class="d2_sub2"></td>
 					</tr>
 					</table>
@@ -22,7 +22,7 @@
 						</div>
 						<div style="float:left;">|</div>
 						<div style="float:left; text-align:center; width:120px;">
-							<b><a href="<?=$_SERVER['PHP_SELF']?>?m_di=<?=$m_di?>&amp;s_di=2" class="menu1">계약변경 수정</a></b>
+							<b><a href="<?=$_SERVER['PHP_SELF']?>?m_di=<?=$m_di?>&amp;s_di=2" class="menu1">기본정보 수정</a></b>
 						</div>
 					</div>
 					<!-- ===== sub menu end =====  -->

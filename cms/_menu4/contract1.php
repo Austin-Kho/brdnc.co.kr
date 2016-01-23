@@ -1,6 +1,6 @@
 					<!-- ===== subject table end ===== -->
 					<div style=" height:18px; background-color:#F8F8F8" class="d3_sub">
-						<b><font size="2" color="#cc0099">◈</font><font size="2" color="#6666cc"> 신규수주 진행현황</font></b>
+						<b><font size="2" color="#cc0099">◈</font><font size="2" color="#6666cc"> 프로젝트 검토현황</font></b>
 						<div style="float:right;">
 							<!-- <font color="red">*</font> 필수 항목은 반드시 입력하시기 바랍니다. -->
 						</div>
@@ -30,7 +30,9 @@
 						<div style="height:18px; text-align:right; padding:0 20px 2px 0; margin-top:10px;">
 							<!-- <a href="javascript:" onClick="excel_pop(<?=$ca_1_2_row[ca_1_2]?>,2);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL 출력</a> -->
 						</div>
-						신규 수주 진행 현황
+
+						검토 프로젝트 자료실
+
 						</td>
 					</tr>
 					</table>

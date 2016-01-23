@@ -47,7 +47,7 @@
 									<div style="float:left; width:150px; height:26px; padding-top:5px; border-width:1px 0 1px 1px; text-align:center;" class="blue_title">비상전화(Mobile)</div>
 									<div style="float:left; width:150px; height:26px; padding-top:5px; border-width:1px 0 1px 1px; text-align:center;" class="blue_title">이메일(Email)</div>
 
-									<?										
+									<?
 										if($is_reti=='1') $add_where = " WHERE 1=1 "; else $add_where = " WHERE is_reti<>'1' ";
 
 										if($div_seq) $add_where.=" AND div_seq='$div_seq' ";
@@ -55,11 +55,11 @@
 										if(!$sh_con){// 통합검색일 경우
 											if($_search) $add_where.=" AND (mem_name LIKE '%$_search%' OR div_posi LIKE '%$_search%' OR  	email LIKE '%$_search%') ";
 										}else if($sh_con=='1'){// (임)직원명으로 검색
-											if($_search) $add_where.=" AND mem_name LIKE '%$_search%' ";										
+											if($_search) $add_where.=" AND mem_name LIKE '%$_search%' ";
 										}else if($sh_con=='2'){//직급으로 검색
 											if($_search) $add_where.=" AND  	div_posi LIKE '%$_search%' ";
 										}else if($sh_con=='3'){//이메일로 검색
-											if($_search) $add_where.=" AND  	email LIKE '%$_search%' ";										
+											if($_search) $add_where.=" AND  	email LIKE '%$_search%' ";
 										}
 
 										$query="SELECT seq FROM cms_com_div_mem $add_where ORDER BY seq";

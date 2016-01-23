@@ -5,9 +5,9 @@
 					<tr>
 						<td width="15%" class="d2_sub2"></td>
 						<td align="center" width="162" class="d2_sub2">
-							<a href="<?=$_SERVER['PHP_SELF']?>?m_di=1"><img src="../images/sub_menu_field1_.png" border="0" alt="" /><!-- <font size="2" color=""><b>전도금 관리</b></font> --></a></td>
+							<a href="<?=$_SERVER['PHP_SELF']?>?m_di=1"><img src="../images/sub_menu_2_1_.png" border="0" alt="" /><!-- <font size="2" color=""><b>전도금 관리</b></font> --></a></td>
 						<td align="center" width="162" class="d2_sub1">
-							<a href="<?=$_SERVER['PHP_SELF']?>?m_di=2"><img src="../images/sub_menu_field2.png" border="0" alt="" /><!-- <font size="2" color=""><b>투입자원 관리</b></font> --></a></td>
+							<a href="<?=$_SERVER['PHP_SELF']?>?m_di=2"><img src="../images/sub_menu_2_2.png" border="0" alt="" /><!-- <font size="2" color=""><b>투입자원 관리</b></font> --></a></td>
 						<td width="55%" class="d2_sub2"></td>
 					</tr>
 					</table>
