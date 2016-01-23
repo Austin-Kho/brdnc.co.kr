@@ -181,10 +181,9 @@
 								<td width="150" class="form1" bgcolor="#F4F4F4" height="25"> 현장 주소 <font color="red">*</font></td>
 								<td class="form2" colspan="3">
 									<input type="button" value="우편번호 검색" onclick="javascript:ZipWindow('../member/zip_search.php',1)" class="inputstyle_bt" style="height:20px;">
-									<input type="text" name="zipcode1" value="<?=$addr[0]?>" size="5" class="inputstyle2" readonly onKeydown="ZipWindow('../member/zip_search.php',1);" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"> -
-									<input type="text" name="zipcode2" value="<?=$addr[1]?>" size="5" class="inputstyle2" readonly onKeydown="ZipWindow('../member/zip_search.php',1);" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
-									<input type="text" name="address1" value="<?=$addr[2]?>" size="51" class="inputstyle2" readonly onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
-									<input type="text" name="address2" value="<?=$addr[3]?>" size="30" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"> <font color="#788be2">나머지 주소</font>
+									<input type="text" name="zipcode" value="<?=$addr[0]?>" size="5" class="inputstyle2" readonly onKeydown="ZipWindow('../member/zip_search.php',1);" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
+									<input type="text" name="address1" value="<?=$addr[1]?>" size="51" class="inputstyle2" readonly onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
+									<input type="text" name="address2" value="<?=$addr[2]?>" size="30" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"> <font color="#788be2">나머지 주소</font>
 								</td>
 							</tr>
 							<tr>

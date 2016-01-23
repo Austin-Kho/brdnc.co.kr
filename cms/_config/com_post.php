@@ -51,8 +51,7 @@
 		$tax_off1_name = $_POST['tax_off1_name'];
 		$tax_off2_code = $_POST['tax_off2_code'];
 		$tax_off2_name = $_POST['tax_off2_name'];
-		$zipcode1 = $_POST['zipcode1'];
-		$zipcode2 = $_POST['zipcode2'];
+		$zipcode = $_POST['zipcode'];
 		$address1 = $_POST['address1'];
 		$address2 = $_POST['address2'];
 		$en_co_name = $_POST['en_co_name'];
@@ -70,7 +69,6 @@
 		$email = addslashes($email);
 		$calc_mail = $calc_mail1.'@'.$calc_mail2;
 		$calc_mail = addslashes($calc_mail);
-		$zipcode = $zipcode1.'-'.$zipcode2;
 		$address1 = addslashes($address1);
 		$address2 = addslashes($address2);
 		$en_co_name = addslashes($en_co_name);

@@ -17,7 +17,7 @@
 	$pj_name = $_REQUEST['pj_name'];
 	$sort = $_REQUEST['sort'];
 	$data_cr = $_REQUEST['data_cr'];
-	$address=$_REQUEST['zipcode1']."/".$_REQUEST['zipcode2']."/".$_REQUEST['address1']."/".$_REQUEST['address2'];
+	$address=$_REQUEST['zipcode']."/".$_REQUEST['address1']."/".$_REQUEST['address2'];
 	$local_tel = $_REQUEST['local_tel'];
 	$local_fax = $_REQUEST['local_fax'];
 	$pj_manager = $_REQUEST['pj_manager'];

@@ -32,7 +32,7 @@
 					form.submit();
 				}
 			}
-			function open_move(zip, adr){
+			function open_move(zip, adr1, adr2){ // zip = 우편번호, adr = 주소
 
 				var form=opener.document.form1;
 
@@ -40,15 +40,14 @@
 				var a1 = document.zipsearch.a_form.value+"1";
 				var a2 = document.zipsearch.a_form.value+"2";
 
-				zip=zip.substring(0, 5);
-
-				a = eval("form."+z); // 우편번호 앞에 세자리 폼
-				c = eval("form."+a1); // 기본주소 폼 이름
-				d = eval("form."+a2); // 나머지주소 폼 이름
+				a = eval("form."+z); // 우편번호 폼 이름
+				b = eval("form."+a1); // 기본주소 폼 이름
+				c = eval("form."+a2); // 나머지주소 폼 이름
 
 				a.value=zip;
-				c.value=adr;
-				d.focus();
+				b.value=adr1;
+				c.value=adr2;	
+				c.focus();							
 
 				self.close();
 			}
@@ -72,11 +71,11 @@
 				<input type="hidden" name="a_form" value='<?=$a_form?>'>
 
 				<div style="height:34px; border-width: 1px 0 1px 0; border-color:#CFCFCF; border-style: solid; margin-top:10px;">
-					<div style="float:left; height:28px; padding-top:6px; width: 100px; background-color:#F8F8F8; text-align:center;">
+					<div style="float:left; height:28px; padding-top:6px; width: 130px; background-color:#F8F8F8; text-align:center;">
 						도 로 명
 					</div>
 					<div style="float:left; height:28px; width:160px; padding-top:7px; text-align:center;">
-						<input type="text" name="dong" size="22" class="inputstyle2" value=<?=$dong?> onFocus="this.value=''"; onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
+						<input type="text" name="dong" size="22" class="inputstyle2" value="<?=$dong?>" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
 					</div>
 					<div style="float:left; height:28px; width:50px; padding-top:7px; text-align:center;">
 						<input type="submit" value="우편번호 찾기" class="inputstyle_bt"><!-- <input type="image" src="../images/chk.jpg"> -->
@@ -90,7 +89,7 @@
 					if($mode=="search"){
 
 					## 주소 데이터베이스에서 사용자가 입력한 주소와 일치하는 레코드를 검색한다. ##
-					$query="SELECT zipcode, sido, gugun, eupmn,  doro, b_no_main, b_no_sub, law_dn, gugun_bn FROM cms_zipcode WHERE (eupmn LIKE '%$dong%') OR (eupmn_en LIKE '%$dong%') OR (doro LIKE '%$dong%') OR (doro_en LIKE '%$dong%') OR (gugun_bn LIKE '%$dong%') OR (law_dn LIKE '%$dong%') OR (rin LIKE '%$dong%') OR (admin_dn LIKE '%$dong%') OR (gugun_en LIKE '%$dong%') OR (gugun_en LIKE '%$dong%') OR (gugun_en LIKE '%$dong%');";
+					$query="SELECT zipcode, sido, gugun, eupmn, doro, b_no_main, b_no_sub, law_dn, gugun_bn FROM cms_zipcode WHERE (eupmn LIKE '%$dong%') OR (eupmn_en LIKE '%$dong%') OR (doro LIKE '%$dong%') OR (doro_en LIKE '%$dong%') OR (gugun_bn LIKE '%$dong%') OR (law_dn LIKE '%$dong%') OR (rin LIKE '%$dong%') OR (admin_dn LIKE '%$dong%') OR (gugun_en LIKE '%$dong%') OR (gugun_en LIKE '%$dong%') OR (gugun_en LIKE '%$dong%');";
 					$result=mysql_query($query, $connect);
 					$total_num=mysql_num_rows($result);
 					## 검색 결과가 있으면 목록 상자 형태로 출력한다. ##
@@ -106,23 +105,23 @@
 					<div>
 						<?
 							while($rows = mysql_fetch_array($result)){
-								//if()
-								$addr1=$rows[sido]." ".$rows[gugun]." ".$rows[eupmn]." ".$rows[doro]." ".$rows[b_no_main]."-".$rows[b_no_sub];
-								$address1="$addr1";
-								// $addr_code=explode("-", $rows[zipcode]);
+								if(!$rows[b_no_sub]||$rows[b_no_sub]==0) {$b_no = $rows[b_no_main];} else {$b_no = $rows[b_no_main]."-".$rows[b_no_sub];}
+								if(!$rows[gugun_bn]||$rows[gugun_bn]==null) {$sub_adr = $rows[law_dn];} else {$sub_adr = $rows[law_dn].", ".$rows[gugun_bn];}
+								$addr_f=$rows[sido]." ".$rows[gugun]." ".$rows[eupmn]." ".$rows[doro]." ".$b_no." (".$sub_adr.")";
+								$addr = explode("(",$addr_f, 2);
 						?>
 						<div style="clear:left; float:left; width:53px; height:25px; text-align:center; padding-top:5px; background-color:#F9F9F9;">
-							<a href="javascript:" onclick="open_move('<?=$rows[zipcode]?>', '<?=$address1?>')"><?=$rows[zipcode]?></a>
+							<a href="javascript:" onclick="open_move('<?=$rows[zipcode]?>', '<?=$addr[0]?>', '<?=" (".$addr[1]?>')"><?=$rows[zipcode]?></a>
 						</div>
-						<div style="float:left; width:308px; height:25px; border-width:1px 0 0 0; border-style:solid; border-color:#EEEEEE; padding:5px 0 0 2px; background-color:#F9F9F9;">
-							<a href="javascript:" onclick="open_move('<?=$rows[zipcode]?>', '<?=$address1?>')"><?=$address1?><?=$rows[bunji]?></a>
+						<div style="float:left; width:450px; height:25px; border-width:1px 0 0 0; border-style:solid; border-color:#EEEEEE; padding:5px 0 0 2px; background-color:#F9F9F9;">
+							<a href="javascript:" onclick="open_move('<?=$rows[zipcode]?>', '<?=$addr[0]?>', '<?=" (".$addr[1]?>')"><?=$addr_f?><?=$rows[bunji]?></a>
 						</div>
 						<?	} ?>
 						<div style="height:50px; border-width:1px 0 0 0; border-color:#EEEEEE; border-style:solid; background-color:#F9F9F9;"> </div>
 					<? } ?>
 					</div>
 					<? }else{ ?>
-					<div style="height:78px; padding-top:35px; text-align:center;">
+					<div style="height:106px; padding-top:35px; text-align:center;">
 						<b>검색하려는 주소의 동/읍/면/리/건물명을 입력하세요.</b>
 					</div>
 					<? } ?>

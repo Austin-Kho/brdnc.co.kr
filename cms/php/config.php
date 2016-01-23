@@ -1,4 +1,5 @@
-<?session_start();
+<?php
+session_start();
 $host="localhost";
 $dbid="brdnc";     /// 셋업 파일에서 설정할 수 있도록 수정 요망
 $dbpass="qkfoa5928";     /// 셋업 파일에서 설정해서 넘어올 수 있도록 수정 요망
@@ -22,4 +23,3 @@ $is_johap=1; // 조합 업무대행사 여부 - 조합 업무대행사이고 현
 		mysql_select_db("brdnc", $connect); // 아이디를 변수로 넣었을때 에러나는 이유 찾아서 수정하기
 		return $connect;
 	}
-?>
