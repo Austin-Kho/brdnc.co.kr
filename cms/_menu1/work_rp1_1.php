@@ -42,7 +42,7 @@
 								</div>
 								<!-- ================================= 거래처 contents S ================================= -->
 								<div style="height:336px;">
-									<div style="width:25px; text-align:center;" class="blue_title"><input type="checkbox" name="mnum_cont" disabled></div>
+									<div style="width:25px; text-align:center;" class="blue_title"><input type="checkbox" name="mnum_cont" di_m1bled></div>
 									<div style="width:100px; text-align:center;" class="blue_title">상담일자 </div>
 									<div style="width:100px; text-align:center;" class="blue_title">고객명 </div>
 									<div style="width:110px; text-align:center;" class="blue_title">연락처</div>
@@ -124,7 +124,7 @@
 								</div>
 								<!-- ================================= 거래처 contents E ================================= -->
 								<?
-									if($sa_1_1_row[sa_1_1]<2){
+									if($_m1_1_1_row[_m1_1_1]<2){
 										$submit_str="alert('등록 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 										$del_str="alert('삭제 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 									}else{

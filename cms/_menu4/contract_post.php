@@ -130,7 +130,7 @@
 		echo ("<script>
 					window.alert('정상적으로 프로젝트(계약)정보가 등록 되었습니다!');
 					</script>");
-		echo "<meta http-equiv='Refresh' content='0; URL=contract_main.php?m_di=2&s_di=2'>";
+		echo "<meta http-equiv='Refresh' content='0; URL=project_main.php?m_di=2&s_di=2'>";
 
 	}else if($page_code=='modify'){ // 기존 계약 내용 수정이면
 

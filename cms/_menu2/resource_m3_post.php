@@ -28,5 +28,4 @@
 				window.alert('정상적으로 현장 직원 소속정보가 수정 되었습니다!');
 				location.href='resource_m3_modi.php?edit_code=$seq_num';
 			</script>");
-
 ?>

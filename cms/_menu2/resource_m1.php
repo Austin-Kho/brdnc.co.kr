@@ -7,10 +7,10 @@
 					</div>
 					<!-- ============== subject table end ============== -->
 					<?
-						$pr_2_1_rlt = mysql_query("select pr_2_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$pr_2_1_row = mysql_fetch_array($pr_2_1_rlt);
+						$_m2_2_1_rlt = mysql_query("select _m2_2_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m2_2_1_row = mysql_fetch_array($_m2_2_1_rlt);
 
-						if(!$pr_2_1_row[pr_2_1]||$pr_2_1_row[pr_2_1]==0){
+						if(!$_m2_2_1_row[_m2_2_1]||$_m2_2_1_row[_m2_2_1]==0){
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -28,7 +28,7 @@
 					<tr>
 						<td height="580" valign="top">
 						<div style="height:18px; text-align:right; padding:0 20px 2px 0; margin-top:10px;">
-							<!-- <a href="javascript:" onClick="excel_pop('<?=$pr_2_1_row[pr_2_1]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
+							<!-- <a href="javascript:" onClick="excel_pop('<?=$_m2_2_1_row[_m2_2_1]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
 						</div>
 
 						<?
@@ -75,9 +75,9 @@
 									<option value="" <?if(!$pj_list) echo "selected"?>> 선 택
 									<?
 										if($year_frm>1){
-											$where=" WHERE cont_date LIKE '$year_frm%' ";
+											$where=" WHERE pr_sd LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT seq, pj_name FROM cms_project_info $where ORDER BY cont_date DESC ";
+										$qry = "SELECT seq, pj_name FROM cms_project_info $where ORDER BY pr_sd DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>

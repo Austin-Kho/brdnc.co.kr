@@ -158,7 +158,7 @@
 			echo ("<script>
 						window.alert('정상적으로 프로젝트 데이터 정보가 등록 되었습니다!');
 					</script>");
-			echo "<meta http-equiv='Refresh' content='0; URL=contract_main.php?m_di=1&s_di=1&new_pj=$pj_seq'>";
+			echo "<meta http-equiv='Refresh' content='0; URL=project_main.php?m_di=1&s_di=1&new_pj=$pj_seq'>";
 
 
 
@@ -174,7 +174,7 @@
 				echo ("<script>
 							window.alert('정상적으로 데이터 등록 마감 처리 되었습니다!');
 						</script>");
-				echo "<meta http-equiv='Refresh' content='0; URL=contract_main.php?reg_pj=$seq'>";
+				echo "<meta http-equiv='Refresh' content='0; URL=project_main.php?reg_pj=$seq'>";
 			}
 
 
@@ -190,7 +190,7 @@
 				echo ("<script>
 							window.alert('정상적으로 데이터 재등록 처리 되었습니다!');
 						</script>");
-				echo "<meta http-equiv='Refresh' content='0; URL=contract_main.php?new_pj=$seq'>";
+				echo "<meta http-equiv='Refresh' content='0; URL=project_main.php?new_pj=$seq'>";
 			}
 		}else if($mode=="individual_reg"){ // 신규수주 프로그레스1 개별 등록 수정일 경우			
 			$data = $_REQUEST['data'];
@@ -263,7 +263,7 @@
 			echo ("<script>
 						window.alert('정상적으로 프로젝트 데이터 정보가 등록 되었습니다!');
 					</script>");
-			echo "<meta http-equiv='Refresh' content='0; URL=contract_main.php?m_di=1&s_di=1&new_pj=$pj_seq'>";
+			echo "<meta http-equiv='Refresh' content='0; URL=project_main.php?m_di=1&s_di=1&new_pj=$pj_seq'>";
 
 
 
@@ -279,7 +279,7 @@
 				echo ("<script>
 							window.alert('정상적으로 데이터 등록 마감 처리 되었습니다!');
 						</script>");
-				echo "<meta http-equiv='Refresh' content='0; URL=contract_main.php?reg_pj=$seq'>";
+				echo "<meta http-equiv='Refresh' content='0; URL=project_main.php?reg_pj=$seq'>";
 			}
 
 
@@ -295,7 +295,7 @@
 				echo ("<script>
 							window.alert('정상적으로 데이터 재등록 처리 되었습니다!');
 						</script>");
-				echo "<meta http-equiv='Refresh' content='0; URL=contract_main.php?new_pj=$seq'>";
+				echo "<meta http-equiv='Refresh' content='0; URL=project_main.php?new_pj=$seq'>";
 			}
 
 		}else if($mode=="individual_reg"){ // 신규수주 프로그레스1 개별 등록 수정일 경우		

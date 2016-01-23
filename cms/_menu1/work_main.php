@@ -23,7 +23,7 @@
 	<link rel="shortcut icon" href="<?=$cms_url?>images/cms.ico">
 	<link type="text/css" rel="stylesheet" href="<?=$cms_url?>common/cms.css">
 	<script src="../common/global.js"></script>
-	<script src="../common/sales.js"></script>
+	<script src="../common/_menu1.js"></script>
 	<script src="../include/calendar/calendar.js"></script>
 	<script type="text/javascript">/**/
 	<!--

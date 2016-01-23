@@ -147,7 +147,7 @@
 
 	echo ("<script>
 				window.alert('정상적으로 인원 정보가 등록 되었습니다!');
-				location.href='project_main.php?m_di=2&s_di=1';
+				location.href='local_main.php?m_di=2&s_di=1';
 			 </script>");
 
 	}else if($mode=='mem_modify'){ // 멤버 정보 수정 시
@@ -201,7 +201,7 @@
 		if(!$result) err_msg('데이터베이스 오류가 발생하였습니다.');
 		echo ("<script>
 					window.alert('정상적으로 퇴사 정보가 처리 되었습니다!');
-					location.href='project_main.php?m_di=2&s_di=1&pj_list=$pj_seq';
+					location.href='local_main.php?m_di=2&s_di=1&pj_list=$pj_seq';
 				</script>");
 
 

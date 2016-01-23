@@ -7,10 +7,10 @@
 					</div>
 					<!-- ============== subject table end ============== -->
 					<?
-						$pr_2_3_rlt = mysql_query("select pr_2_3 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$pr_2_3_row = mysql_fetch_array($pr_2_3_rlt);
+						$_m2_2_3_rlt = mysql_query("select _m2_2_3 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m2_2_3_row = mysql_fetch_array($_m2_2_3_rlt);
 
-						if(!$pr_2_3_row[pr_2_3]||$pr_2_3_row[pr_2_3]==0){
+						if(!$_m2_2_3_row[_m2_2_3]||$_m2_2_3_row[_m2_2_3]==0){
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -28,7 +28,7 @@
 					<tr>
 						<td valign="top">
 						<div style="height:18px; text-align:right; padding:0 20px 2px 0; margin-top:10px;">
-							<!-- <a href="javascript:" onClick="excel_pop('<?=$pr_2_3_row[pr_2_3]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
+							<!-- <a href="javascript:" onClick="excel_pop('<?=$_m2_2_3_row[_m2_2_3]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
 						</div>
 						<?
 							$headq = $_REQUEST['headq'];
@@ -69,9 +69,9 @@
 									<option value="" <?if(!$pj_list) echo "selected"?>> 선 택
 									<?
 										if($year_frm>1){
-											$where=" WHERE cont_date LIKE '$year_frm%' ";
+											$where=" WHERE pr_sd LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT seq, pj_name FROM cms_project_info $where ORDER BY cont_date DESC ";
+										$qry = "SELECT seq, pj_name FROM cms_project_info $where ORDER BY pr_sd DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -120,7 +120,7 @@
 								mysql_free_result($result);
 								if($total_bnum==0){
 							?>
-								<div style="clear:left; height:80px; text-align:center; padding-top:50px; margin-bottom:10px;">등록된 데이터가 없습니다.</div>							
+								<div style="clear:left; height:80px; text-align:center; padding-top:50px; margin-bottom:10px;">등록된 데이터가 없습니다.</div>
 							<?
 								}else{
 								$start=$_REQUEST['start'];
@@ -133,7 +133,7 @@
 								$result = mysql_query($query, $connect);
 								while($rows = mysql_fetch_array($result)){
 									$posi = explode("-", $rows[pj_where]);
-							?>							
+							?>
 							<div style="clear:left; width:200px; border-width:0 0 1px 0; text-align:center" class="bor_ddd"> <?=$rows[pj_name]?></div>
 							<div style="width:100px; border-width:0 0 1px 1px; text-align:center" class="bor_ddd">
 								<select name="headq" class="inputstyle2" style="height:20px; width:70px;" disabled>

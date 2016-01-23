@@ -7,10 +7,10 @@
 					</div>
 					<!-- ============================= subject table end ============================= -->
 					<?
-						$sa_2_3_rlt = mysql_query("select sa_2_3 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$sa_2_3_row = mysql_fetch_array($sa_2_3_rlt);
+						$_m1_2_3_rlt = mysql_query("select _m1_2_3 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m1_2_3_row = mysql_fetch_array($_m1_2_3_rlt);
 
-						if(!$sa_2_3_row[sa_2_3]||$sa_2_3_row[sa_2_3]==0){
+						if(!$_m1_2_3_row[_m1_2_3]||$_m1_2_3_row[_m1_2_3]==0){
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -28,7 +28,7 @@
 					<tr>
 						<td height="580" valign="top">
 						<div style="height:18px; text-align:right; padding:0 20px 2px 0; margin-top:10px;">
-							<!-- <a href="javascript:" onClick="excel_pop('<?=$sa_2_2_row[sa_2_2]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
+							<!-- <a href="javascript:" onClick="excel_pop('<?=$_m1_2_2_row[_m1_2_2]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
 						</div>
 						<form method="post" action="">
 						<div style="height:35px; border-width:1px 0 1px 0; border-color:#D6D6D6; border-style:solid;">
@@ -60,9 +60,9 @@
 									<option value=""<?if(!$pj_list) echo "selected"?>> 선 택
 									<?
 										if($year_frm>1){
-											$where=" WHERE cont_date LIKE '$year_frm%' ";
+											$where=" WHERE pr_sd LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT * FROM cms_project_info $where ORDER BY cont_date DESC ";
+										$qry = "SELECT * FROM cms_project_info $where ORDER BY pr_sd DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -88,7 +88,7 @@
 								$row = mysql_fetch_array($result);
 							?>
 							</div>
-							<div style="float:left; width:260px; height:26px; padding:9px 0px 0 0px; text-align:center;"><? echo "<font color='#cc0000'>*</font> <b>".$row[pj_name]."</b>";?></div>	
+							<div style="float:left; width:260px; height:26px; padding:9px 0px 0 0px; text-align:center;"><? echo "<font color='#cc0000'>*</font> <b>".$row[pj_name]."</b>";?></div>
 							<div style="float:left; width:120px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">소 속</div>
 							<?
 								$w_rlt = mysql_query("SELECT headq, team FROM cms_resource_headq, cms_resource_team WHERE cms_resource_headq.seq='$headq' AND cms_resource_team.seq='$team' ", $connect);

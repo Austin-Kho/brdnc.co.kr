@@ -7,10 +7,10 @@
 					</div>
 					<!-- ============== subject table end ============== -->
 					<?
-						$pr_1_1_rlt = mysql_query("select pr_1_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$pr_1_1_row = mysql_fetch_array($pr_1_1_rlt);
+						$_m2_1_1_rlt = mysql_query("select _m2_1_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m2_1_1_row = mysql_fetch_array($_m2_1_1_rlt);
 
-						if(!$pr_1_1_row[pr_1_1]||$pr_1_1_row[pr_1_1]==0){
+						if(!$_m2_1_1_row[_m2_1_1]||$_m2_1_1_row[_m2_1_1]==0){
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -36,7 +36,7 @@
 							<!-- ============ 본사 직원일 때 프로젝트 선택 가능 시작 ============  -->
 							<?
 								if($member_row[is_company]==1){
-								$pj_rlt = mysql_query("SELECT seq FROM cms_project_info ORDER BY cont_date DESC, seq DESC LIMIT 1", $connect);
+								$pj_rlt = mysql_query("SELECT seq FROM cms_project_info ORDER BY pr_sd DESC, seq DESC LIMIT 1", $connect);
 								$pj_row = mysql_fetch_array($pj_rlt);
 								 // if(!$pj_list) $pj_list = $pj_row[seq];
 								$year_frm=$_REQUEST['year_frm'];
@@ -66,9 +66,9 @@
 									<option value=""<?if(!$pj_list) echo "selected"?>> 선 택
 									<?
 										if($year_frm>1){
-											$where=" WHERE cont_date LIKE '$year_frm%' ";
+											$where=" WHERE pr_sd LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT * FROM cms_project_info $where ORDER BY cont_date DESC ";
+										$qry = "SELECT * FROM cms_project_info $where ORDER BY pr_sd DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -103,7 +103,7 @@
 							$auth_level=2; // 이페이지 마스터 쓰기 권한 레벨
 
 							if($auth_row[is_admin]==1){ $w_auth =2;
-							}else if($pr_1_1_row[pr_1_1]==2){ if($auth_row[auth_level]<=$auth_level){ $w_auth =2; }else{ $w_auth =1;}}else{	$w_auth =0;}
+							}else if($_m2_1_1_row[_m2_1_1]==2){ if($auth_row[auth_level]<=$auth_level){ $w_auth =2; }else{ $w_auth =1;}}else{	$w_auth =0;}
 							///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 							$class1 = $_REQUEST['class1'];

@@ -7,10 +7,10 @@
 					</div>
 					<!-- ============================= subject table end ============================= -->
 					<?
-						$sa_2_2_rlt = mysql_query("select sa_2_2 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$sa_2_2_row = mysql_fetch_array($sa_2_2_rlt);
+						$_m1_2_2_rlt = mysql_query("select _m1_2_2 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m1_2_2_row = mysql_fetch_array($_m1_2_2_rlt);
 
-						if(!$sa_2_2_row[sa_2_2]||$sa_2_2_row[sa_2_2]==0){
+						if(!$_m1_2_2_row[_m1_2_2]||$_m1_2_2_row[_m1_2_2]==0){
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -28,7 +28,7 @@
 					<tr>
 						<td height="570" valign="top">
 						<div style="height:18px; text-align:right; padding:0 20px 2px 0; margin-top:10px;">
-							<!-- <a href="javascript:" onClick="excel_pop('<?=$sa_2_1_row[sa_2_1]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
+							<!-- <a href="javascript:" onClick="excel_pop('<?=$_m1_2_1_row[_m1_2_1]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
 						</div>
 						<?
 							$pj_list=$_REQUEST['pj_list'];
@@ -74,9 +74,9 @@
 									<option value=""<?if(!$pj_list) echo "selected"?>> 선 택
 									<?
 										if($year_frm>1){
-											$where=" WHERE cont_date LIKE '$year_frm%' ";
+											$where=" WHERE pr_sd LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT * FROM cms_project_info $where ORDER BY cont_date DESC ";
+										$qry = "SELECT * FROM cms_project_info $where ORDER BY pr_sd DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -907,7 +907,7 @@
 
 						<div class="form2" style="height:36px; padding:12px 20px 0 0; text-align:right;">
 							<?
-								if($sa_2_2_row[sa_2_2]<2){
+								if($_m1_2_2_row[_m1_2_2]<2){
 									$submit_str="alert('등록 권한이 없습니다!')";
 								}else{
 									 $submit_str="cont_check(".$member_row[is_company].");";

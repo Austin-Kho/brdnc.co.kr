@@ -21,7 +21,7 @@
 	<link rel="shortcut icon" href="<?=$cms_url?>images/cms.ico">
 	<link rel="stylesheet" href="<?=$cms_url?>common/cms.css" type="text/css">
 	<script src="../common/global.js"></script>
-	<script src="../common/config.js"></script>
+	<script src="../common/_menu5.js"></script>
 	<script src="../common/member.js"></script>
 	<script src="../include/calendar/calendar.js"></script>
 	<script type="text/javascript">

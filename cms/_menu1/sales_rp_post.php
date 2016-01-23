@@ -635,6 +635,6 @@
 		echo ("<script>
 					window.alert('정상적으로 프로젝트(계약)정보가 변경 되었습니다!');
 				 </script>");
-		echo "<meta http-equiv='Refresh' content='0; URL=sales_main.php?m_di=2&s_di=1&pj_list=".$pj_seq."&pos_con_=2'>";
+		echo "<meta http-equiv='Refresh' content='0; URL=work_main.php?m_di=2&s_di=1&pj_list=".$pj_seq."&pos_con_=2'>";
 	}
 ?>

@@ -7,10 +7,10 @@
 					</div>
 					<!-- ============================= subject table end ============================= -->
 					<?
-						$sa_2_1_rlt = mysql_query("select sa_2_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$sa_2_1_row = mysql_fetch_array($sa_2_1_rlt);
+						$_m1_2_1_rlt = mysql_query("select _m1_2_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m1_2_1_row = mysql_fetch_array($_m1_2_1_rlt);
 
-						if(!$sa_2_1_row[sa_2_1]||$sa_2_1_row[sa_2_1]==0){
+						if(!$_m1_2_1_row[_m1_2_1]||$_m1_2_1_row[_m1_2_1]==0){
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -31,7 +31,7 @@
 							// 이 페이지 쓰기 권한 설정하기
 							$auth_level=2; // 이페이지 마스터 쓰기 권한 레벨
 
-							if($auth_row[is_admin]==1){ $w_auth =2; }else if($sa_2_1_row[sa_2_1]==2){ if($auth_row[auth_level]<=$auth_level){ $w_auth =2; }else{ $w_auth =1;}}else{	$w_auth =0;}
+							if($auth_row[is_admin]==1){ $w_auth =2; }else if($_m1_2_1_row[_m1_2_1]==2){ if($auth_row[auth_level]<=$auth_level){ $w_auth =2; }else{ $w_auth =1;}}else{	$w_auth =0;}
 							// w_auth = 0 > 쓰기 권한 없음 // w_auth = 1 > 실무자 쓰기 권한 // w_auth = 2 > 마스터 쓰기 권한
 					?>
 					<div style="display:inline;">
@@ -42,7 +42,7 @@
 						<input type="hidden" name="m_di" value="<?=$m_di?>">
 						<input type="hidden" name="s_di" value="<?=$s_di?>">
 						<div style="height:18px; text-align:right; padding:0 20px 2px 0; margin-top:10px;">
-							<!-- <a href="javascript:" onClick="excel_pop('<?=$sa_2_1_row[sa_2_1]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
+							<!-- <a href="javascript:" onClick="excel_pop('<?=$_m1_2_1_row[_m1_2_1]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
 						</div>
 						<div style="height:35px; border-width:1px 0 1px 0; border-color:#D6D6D6; border-style:solid;">
 							<!-- ============ 본사 직원일 때 프로젝트 선택 가능 시작 ============  -->
@@ -73,9 +73,9 @@
 									<option value=""<?if(!$pj_list) echo "selected"?>> 선 택
 									<?
 										if($year_frm>1){
-											$where=" WHERE cont_date LIKE '$year_frm%' ";
+											$where=" WHERE pr_sd LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT * FROM cms_project_info $where ORDER BY cont_date DESC ";
+										$qry = "SELECT * FROM cms_project_info $where ORDER BY pr_sd DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -298,7 +298,7 @@
 								$data_num=mysql_num_rows($result1);
 
 								/////////////////////////////////////////////////EXCEL 출력 소스
-								if($sa_2_1_row[sa_2_1]<1){
+								if($_m1_2_1_row[_m1_2_1]<1){
 									$excel_pop = "alert('출력 권한이 없습니다!');";
 								}else{
 									$url_where = urlencode($where);
@@ -680,7 +680,7 @@
 								<?if($w_auth>0){?>
 								<div style="float:left; width:30px; height:22px; padding-top:2px; border-width:0 0 1px 0; border-style=solid;" class="form3">
 									<?if($w_auth>1||($w_auth>0&&date('Y-m-d')==$rows1[cont_date])) { //관리자와 마스터 쓰기권한이 아니면 당일건에 대해서만 수정 가능 ?>
-									<a href="sales_main.php?m_di=2&amp;s_di=2&amp;pj_list=<?=$pj_list?>&amp;type=<?=$rows1[type_ho]?>&amp;dong=<?=$rows1[pj_dong]?>&amp;ho=<?=$rows1[pj_ho]?>&amp;mode=modi&amp;cont_sort2=<?=$cont_sort2?>">
+									<a href="work_main.php?m_di=2&amp;s_di=2&amp;pj_list=<?=$pj_list?>&amp;type=<?=$rows1[type_ho]?>&amp;dong=<?=$rows1[pj_dong]?>&amp;ho=<?=$rows1[pj_ho]?>&amp;mode=modi&amp;cont_sort2=<?=$cont_sort2?>">
 									<?}else{?><a href="javascript:" onclick="alert('관리자가 아니면 당일 건에 대해서만 수정 가능합니다.\n\n수정 문의 : <?=$admin_tel?>');"><? } ?>수정</a><!-- 수정 -->
 								</div>
 								<? } ?>
@@ -731,7 +731,7 @@
 							<div style="clear:left; height:24px; width:12930px; text-align:center; <?=$bgcolor?>">
 								<div style="clear:left; float:left; width:80px; height:22px; padding-top:2px; background-color:<?=$color[$rows1[type_ho]]?>;" class="form3">
 									<?if($w_auth>0) { //관리(쓰기)권한이 있는 경우에만 수정 가능 ?>
-									<a href="sales_main.php?m_di=2&amp;s_di=2&amp;pj_list=<?=$pj_list?>&amp;type=<?=$rows1[type_ho]?>&amp;con_no=<?=$rows1[con_no]?>&amp;mode=modi&amp;cont_sort2=<?=$cont_sort2?>" title="<?=$rows1[con_no].'번 수정등록'?>">
+									<a href="work_main.php?m_di=2&amp;s_di=2&amp;pj_list=<?=$pj_list?>&amp;type=<?=$rows1[type_ho]?>&amp;con_no=<?=$rows1[con_no]?>&amp;mode=modi&amp;cont_sort2=<?=$cont_sort2?>" title="<?=$rows1[con_no].'번 수정등록'?>">
 									<? } ?>
 									<? echo $rows1[con_no]; if($w_auth>0) {echo "</a>";}?> <!-- 계약관리번호 -->
 								</div>

@@ -3,10 +3,10 @@
 
 					<!-- ===== subject table end ===== -->
 					<?
-						$ct_1_1_rlt = mysql_query("select ct_1_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$ct_1_1_row = mysql_fetch_array($ct_1_1_rlt);
+						$_m4_1_1_rlt = mysql_query("select _m4_1_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m4_1_1_row = mysql_fetch_array($_m4_1_1_rlt);
 
-						if(!$ct_1_1_row[ct_1_1]||$ct_1_1_row[ct_1_1]==0){
+						if(!$_m4_1_1_row[_m4_1_1]||$_m4_1_1_row[_m4_1_1]==0){
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -239,7 +239,7 @@
 								(<font color="#7A7A7A">특정 구간의 계약관리번호를 입력할 경우, 예를 들어 0번부터 100번까지로 설정하였다면 해당 구간의 모든 번호가 등록됩니다.</font>)
 							</div>
 							<?
-								if($ct_1_1_row[ct_1_1]<2){
+								if($_m4_1_1_row[_m4_1_1]<2){
 									$submit_str="alert('등록 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 								}else{
 									 $submit_str="pj_data_put_1()";
@@ -597,7 +597,7 @@
 								(<font color="#7A7A7A">단, 이 경우 1, 2층을 개별 등록하였다면, 3층부터 입력하여야 중복이 되지 않으며 3층부터 15층까지로 설정하였다면 해당 구간의 모든 층이 등록됩니다.</font>)
 							</div>
 							<?
-								if($ct_1_1_row[ct_1_1]<2){
+								if($_m4_1_1_row[_m4_1_1]<2){
 									$submit_str="alert('등록 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 								}else{
 									$submit_str="pj_data_put_0()";
@@ -735,13 +735,13 @@
 								<?=number_format($rows[pay_ho]*1000)." 원"?>
 							</div>
 							<div style="float:left; height:24px; width:60px; text-align:center; padding:2px 0 0 50px; text-align:center;">
-								<? if($ct_1_1_row[ct_1_1]<2){?><a href="javascript:" onclick="alert('등록 권한이 없습니다.')">수 정</a>
+								<? if($_m4_1_1_row[_m4_1_1]<2){?><a href="javascript:" onclick="alert('등록 권한이 없습니다.')">수 정</a>
 								<?}else{?>
 								<a href="javascript:" onclick="popUp('progress1_edit.php?data=<?=$rows[seq]?>&info=<?=$pj_seq?>','progress1_edit')">수 정</a>
 								<? } ?>
 							</div>
 							<div style="float:left; height:24px; width:60px; text-align:center; padding-top:2px; text-align:center;">
-								<? if($ct_1_1_row[ct_1_1]<2){?><a href="javascript:" onclick="alert('삭제 권한이 없습니다.')">삭 제</a>
+								<? if($_m4_1_1_row[_m4_1_1]<2){?><a href="javascript:" onclick="alert('삭제 권한이 없습니다.')">삭 제</a>
 								<?}else{?>
 								<a href="javascript:" onclick="alert('준비중 입니다.');">삭 제</a>
 								<? } ?>
@@ -906,13 +906,13 @@
 								<?=number_format($rows[pay_ho]*1000)." 원"?>
 							</div>
 							<div style="float:left; height:24px; width:60px; text-align:center; padding-top:2px; text-align:center;">
-								<? if($ct_1_1_row[ct_1_1]<2){?><a href="javascript:" onclick="alert('등록 권한이 없습니다.')">수 정</a>
+								<? if($_m4_1_1_row[_m4_1_1]<2){?><a href="javascript:" onclick="alert('등록 권한이 없습니다.')">수 정</a>
 								<?}else{?>
 								<a href="javascript:" onclick="popUp('progress1_edit.php?data=<?=$rows[seq]?>&info=<?=$pj_seq?>','progress1_edit')">수 정</a>
 								<? } ?>
 							</div>
 							<div style="float:left; height:24px; width:60px; text-align:center; padding-top:2px; text-align:center;">
-								<? if($ct_1_1_row[ct_1_1]<2){?><a href="javascript:" onclick="alert('삭제 권한이 없습니다.')">삭 제</a>
+								<? if($_m4_1_1_row[_m4_1_1]<2){?><a href="javascript:" onclick="alert('삭제 권한이 없습니다.')">삭 제</a>
 								<?}else{?>
 								<a href="javascript:" onclick="alert('준비중 입니다.');">삭 제</a>
 								<? } ?>

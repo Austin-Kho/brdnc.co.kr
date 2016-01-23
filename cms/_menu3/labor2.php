@@ -7,10 +7,10 @@
 					</div>
 					<!-- ===== subject table end ===== -->
 					<?
-						$ca_2_2_rlt = mysql_query("select ca_2_2 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$ca_2_2_row = mysql_fetch_array($ca_2_2_rlt);
+						$_m3_2_2_rlt = mysql_query("select _m3_2_2 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m3_2_2_row = mysql_fetch_array($_m3_2_2_rlt);
 
-						if(!$ca_2_2_row[ca_2_2]||$ca_2_2_row[ca_2_2]==0){
+						if(!$_m3_2_2_row[_m3_2_2]||$_m3_2_2_row[_m3_2_2]==0){
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -28,7 +28,7 @@
 					<tr>
 						<td height="580" valign="top">
 						<div style="height:18px; text-align:right; padding:0 20px 2px 0; margin-top:10px;">
-							<!-- <a href="javascript:" onClick="excel_pop(<?=$ca_1_2_row[ca_1_2]?>,2);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL 출력</a> -->
+							<!-- <a href="javascript:" onClick="excel_pop(<?=$_m3_1_2_row[_m3_1_2]?>,2);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL 출력</a> -->
 						</div>
 						매입채무 등 기타 채권 / 채무 현황
 

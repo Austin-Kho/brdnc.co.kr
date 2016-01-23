@@ -7,10 +7,10 @@
 					</div>
 					<!-- ============== subject table end ============== -->
 					<?
-						$pr_2_2_rlt = mysql_query("select pr_2_2 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$pr_2_2_row = mysql_fetch_array($pr_2_2_rlt);
+						$_m2_2_2_rlt = mysql_query("select _m2_2_2 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m2_2_2_row = mysql_fetch_array($_m2_2_2_rlt);
 
-						if(!$pr_2_2_row[pr_2_2]||$pr_2_2_row[pr_2_2]==0){
+						if(!$_m2_2_2_row[_m2_2_2]||$_m2_2_2_row[_m2_2_2]==0){
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -28,7 +28,7 @@
 					<tr>
 						<td height="580" valign="top">
 						<div style="height:18px; text-align:right; padding:0 20px 2px 0; margin-top:10px;">
-							<!-- <a href="javascript:" onClick="excel_pop('<?=$pr_2_2_row[pr_2_2]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
+							<!-- <a href="javascript:" onClick="excel_pop('<?=$_m2_2_2_row[_m2_2_2]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
 						</div>
 						<?
 							$headq = $_REQUEST['headq'];
@@ -74,9 +74,9 @@
 									<option value="" <?if(!$pj_list) echo "selected"?>> 선 택
 									<?
 										if($year_frm>1){
-											$where=" WHERE cont_date LIKE '$year_frm%' ";
+											$where=" WHERE pr_sd LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT seq, pj_name FROM cms_project_info $where ORDER BY cont_date DESC ";
+										$qry = "SELECT seq, pj_name FROM cms_project_info $where ORDER BY pr_sd DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -84,7 +84,7 @@
 									<? } ?>
 								</select>
 							</div>
-							</form><!-- ================ 본사 직원용 폼 종료 ================ -->													
+							</form><!-- ================ 본사 직원용 폼 종료 ================ -->
 							<? } ?>
 							<!--  ============ 현장 담당자일 때 담당 프로젝트만 시작 ============  -->
 							<?
@@ -97,9 +97,9 @@
 								$row = mysql_fetch_array($result);
 								echo "<font color='#cc0000'>*</font> ".$row[pj_name]."  현장 인원 등록";
 							?>
-							</div>							
+							</div>
 							<? } ?>
-							
+
 							<div style="float:left; width:68px; height:28px; background-color:#F4F4F4; padding-top:7px; text-align:center; color:black;">
 								소속본부
 							</div>
@@ -120,7 +120,7 @@
 						</form>
 						<div style="height:28px; margin-top:20px; padding:0 0 0 10px;">
 							<a href="javascript:" onclick="resc_chk('<?=$pj_list?>','resc_basic.php?pj=<?=$pj_list?>&amp;sort=headq_list')" title="본부등록"><font color="black">본부등록</font></a> | <a href="javascript:" onclick="resc_chk('<?=$pj_list?>','resc_basic.php?pj=<?=$pj_list?>&amp;sort=team_list')" title="팀 등록"><font color="black">팀 등록</font></a>
-						</div>						
+						</div>
 						<!-- ====================신규 등록 테이블 스타트====================== -->
 						<form method="post" name="resc_reg" action="resource_post.php">
 						<input type="hidden" name="mode" value="mem_reg">
@@ -130,7 +130,7 @@
 						<tr>
 							<td style="border-width:1px 1px 0 1px; border-color:#d6d6d6; border-style:solid;">
 							<div style="height:32px; background-color:#F0F0E8; text-align:center;">
-								<div style="float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>								
+								<div style="float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>
 								<div style="float:left; width:70px; height: 26px; padding-top:6px;" class="form2">소속 팀 <a href="javascript:" onclick="resc_chk('<?=$pj_list?>','resc_basic.php?pj=<?=$pj_list?>&amp;sort=team_list')" title="팀 등록"><img src="../images/set.png" width="11" border="0" alt="" /></a></div>
 								<div style="float:left; width:70px; height: 26px; padding-top:6px;" class="form2">직 위</div>
 								<div style="float:left; width:70px; height: 26px; padding-top:6px;" class="form2">성 명</div>
@@ -144,7 +144,7 @@
 
 							<!-- 신규등록 1열 -->
 							<div style="height:32px; text-align:center;">
-								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>									
+								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>
 								<div style="float:left; width:70px; height: 26px; padding-top:6px;" class="form2"><!-- 소속팀 -->
 									<select name="team_1" class="inputstyle2" style="width:65px; height:20px;">
 										<option value="" selected> 선 택
@@ -172,8 +172,8 @@
 									<input type="text" name="id_num1_1" maxlength="6" value="" class="inputstyle2" style="width:50px;"> - <input type="text" name="id_num2_1" maxlength="7" value="" class="inputstyle2" style="width:60px;">
 								</div>
 								<div style="float:left; width:180px; height: 26px; padding-top:6px;" class="form2"><!-- 연락처 -->
-									<input type="text" name="tel1_1" maxlength="3" value="" class="inputstyle2" style="width:30px;"> - 
-									<input type="text" name="tel2_1" maxlength="4" value="" class="inputstyle2" style="width:40px;"> - 
+									<input type="text" name="tel1_1" maxlength="3" value="" class="inputstyle2" style="width:30px;"> -
+									<input type="text" name="tel2_1" maxlength="4" value="" class="inputstyle2" style="width:40px;"> -
 									<input type="text" name="tel3_1" maxlength="4" value="" class="inputstyle2" style="width:40px;">
 								</div>
 								<div style="float:left; width:90px; height: 26px; padding-top:6px;" class="form2"><!-- 은 행 -->
@@ -198,11 +198,11 @@
 									<input type="text" name="join_date_1" id="start_date_1" maxlength="10" value="" class="inputstyle2" style="width:70px;" onclick="openCalendar(this)">
 									<a href="javascript:" onclick="openCalendar(document.getElementById('start_date_1'));"><img src="../images/calendar.jpg" border="0" alt="" /></a>
 								</div>
-							</div>	
+							</div>
 
 							<!-- 신규등록 2열 -->
 							<div style="height:32px; text-align:center;">
-								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>									
+								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>
 								<div style="float:left; width:70px; height: 26px; padding-top:6px;" class="form2"><!-- 소속팀 -->
 									<select name="team_2" class="inputstyle2" style="width:65px; height:20px;">
 										<option value="" selected> 선 택
@@ -230,8 +230,8 @@
 									<input type="text" name="id_num1_2" maxlength="6" value="" class="inputstyle2" style="width:50px;"> - <input type="text" name="id_num2_2" maxlength="7" value="" class="inputstyle2" style="width:60px;">
 								</div>
 								<div style="float:left; width:180px; height: 26px; padding-top:6px;" class="form2"><!-- 연락처 -->
-									<input type="text" name="tel1_2" maxlength="3" value="" class="inputstyle2" style="width:30px;"> - 
-									<input type="text" name="tel2_2" maxlength="4" value="" class="inputstyle2" style="width:40px;"> - 
+									<input type="text" name="tel1_2" maxlength="3" value="" class="inputstyle2" style="width:30px;"> -
+									<input type="text" name="tel2_2" maxlength="4" value="" class="inputstyle2" style="width:40px;"> -
 									<input type="text" name="tel3_2" maxlength="4" value="" class="inputstyle2" style="width:40px;">
 								</div>
 								<div style="float:left; width:90px; height: 26px; padding-top:6px;" class="form2"><!-- 은 행 -->
@@ -256,11 +256,11 @@
 									<input type="text" name="join_date_2" id="start_date_2" maxlength="10" value="" class="inputstyle2" style="width:70px;" onclick="openCalendar(this)">
 									<a href="javascript:" onclick="openCalendar(document.getElementById('start_date_2'));"><img src="../images/calendar.jpg" border="0" alt="" /></a>
 								</div>
-							</div>	
+							</div>
 
 							<!-- 신규등록 3열 -->
 							<div style="height:32px; text-align:center;">
-								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>									
+								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>
 								<div style="float:left; width:70px; height: 26px; padding-top:6px;" class="form2"><!-- 소속팀 -->
 									<select name="team_3" class="inputstyle2" style="width:65px; height:20px;">
 										<option value="" selected> 선 택
@@ -288,8 +288,8 @@
 									<input type="text" name="id_num1_3" maxlength="6" value="" class="inputstyle2" style="width:50px;"> - <input type="text" name="id_num2_3" maxlength="7" value="" class="inputstyle2" style="width:60px;">
 								</div>
 								<div style="float:left; width:180px; height: 26px; padding-top:6px;" class="form2"><!-- 연락처 -->
-									<input type="text" name="tel1_3" maxlength="3" value="" class="inputstyle2" style="width:30px;"> - 
-									<input type="text" name="tel2_3" maxlength="4" value="" class="inputstyle2" style="width:40px;"> - 
+									<input type="text" name="tel1_3" maxlength="3" value="" class="inputstyle2" style="width:30px;"> -
+									<input type="text" name="tel2_3" maxlength="4" value="" class="inputstyle2" style="width:40px;"> -
 									<input type="text" name="tel3_3" maxlength="4" value="" class="inputstyle2" style="width:40px;">
 								</div>
 								<div style="float:left; width:90px; height: 26px; padding-top:6px;" class="form2"><!-- 은 행 -->
@@ -314,11 +314,11 @@
 									<input type="text" name="join_date_3" id="start_date_3" maxlength="10" value="" class="inputstyle2" style="width:70px;" onclick="openCalendar(this)">
 									<a href="javascript:" onclick="openCalendar(document.getElementById('start_date_3'));"><img src="../images/calendar.jpg" border="0" alt="" /></a>
 								</div>
-							</div>	
+							</div>
 
 							<!-- 신규등록 4열 -->
 							<div style="height:32px; text-align:center;">
-								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>									
+								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>
 								<div style="float:left; width:70px; height: 26px; padding-top:6px;" class="form2"><!-- 소속팀 -->
 									<select name="team_4" class="inputstyle2" style="width:65px; height:20px;">
 										<option value="" selected> 선 택
@@ -346,8 +346,8 @@
 									<input type="text" name="id_num1_4" maxlength="6" value="" class="inputstyle2" style="width:50px;"> - <input type="text" name="id_num2_4" maxlength="7" value="" class="inputstyle2" style="width:60px;">
 								</div>
 								<div style="float:left; width:180px; height: 26px; padding-top:6px;" class="form2"><!-- 연락처 -->
-									<input type="text" name="tel1_4" maxlength="3" value="" class="inputstyle2" style="width:30px;"> - 
-									<input type="text" name="tel2_4" maxlength="4" value="" class="inputstyle2" style="width:40px;"> - 
+									<input type="text" name="tel1_4" maxlength="3" value="" class="inputstyle2" style="width:30px;"> -
+									<input type="text" name="tel2_4" maxlength="4" value="" class="inputstyle2" style="width:40px;"> -
 									<input type="text" name="tel3_4" maxlength="4" value="" class="inputstyle2" style="width:40px;">
 								</div>
 								<div style="float:left; width:90px; height: 26px; padding-top:6px;" class="form2"><!-- 은 행 -->
@@ -372,11 +372,11 @@
 									<input type="text" name="join_date_4" id="start_date_4" maxlength="10" value="" class="inputstyle2" style="width:70px;" onclick="openCalendar(this)">
 									<a href="javascript:" onclick="openCalendar(document.getElementById('start_date_4'));"><img src="../images/calendar.jpg" border="0" alt="" /></a>
 								</div>
-							</div>	
+							</div>
 
 							<!-- 신규등록 5열 -->
 							<div style="height:32px; text-align:center;">
-								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>									
+								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>
 								<div style="float:left; width:70px; height: 26px; padding-top:6px;" class="form2"><!-- 소속팀 -->
 									<select name="team_5" class="inputstyle2" style="width:65px; height:20px;">
 										<option value="" selected> 선 택
@@ -404,8 +404,8 @@
 									<input type="text" name="id_num1_5" maxlength="6" value="" class="inputstyle2" style="width:50px;"> - <input type="text" name="id_num2_5" maxlength="7" value="" class="inputstyle2" style="width:60px;">
 								</div>
 								<div style="float:left; width:180px; height: 26px; padding-top:6px;" class="form2"><!-- 연락처 -->
-									<input type="text" name="tel1_5" maxlength="3" value="" class="inputstyle2" style="width:30px;"> - 
-									<input type="text" name="tel2_5" maxlength="4" value="" class="inputstyle2" style="width:40px;"> - 
+									<input type="text" name="tel1_5" maxlength="3" value="" class="inputstyle2" style="width:30px;"> -
+									<input type="text" name="tel2_5" maxlength="4" value="" class="inputstyle2" style="width:40px;"> -
 									<input type="text" name="tel3_5" maxlength="4" value="" class="inputstyle2" style="width:40px;">
 								</div>
 								<div style="float:left; width:90px; height: 26px; padding-top:6px;" class="form2"><!-- 은 행 -->
@@ -430,11 +430,11 @@
 									<input type="text" name="join_date_5" id="start_date_5" maxlength="10" value="" class="inputstyle2" style="width:70px;" onclick="openCalendar(this)">
 									<a href="javascript:" onclick="openCalendar(document.getElementById('start_date_5'));"><img src="../images/calendar.jpg" border="0" alt="" /></a>
 								</div>
-							</div>	
+							</div>
 
 							<!-- 신규등록 6열 -->
 							<div style="height:32px; text-align:center;">
-								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>									
+								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>
 								<div style="float:left; width:70px; height: 26px; padding-top:6px;" class="form2"><!-- 소속팀 -->
 									<select name="team_6" class="inputstyle2" style="width:65px; height:20px;">
 										<option value="" selected> 선 택
@@ -462,8 +462,8 @@
 									<input type="text" name="id_num1_6" maxlength="6" value="" class="inputstyle2" style="width:50px;"> - <input type="text" name="id_num2_6" maxlength="7" value="" class="inputstyle2" style="width:60px;">
 								</div>
 								<div style="float:left; width:180px; height: 26px; padding-top:6px;" class="form2"><!-- 연락처 -->
-									<input type="text" name="tel1_6" maxlength="3" value="" class="inputstyle2" style="width:30px;"> - 
-									<input type="text" name="tel2_6" maxlength="4" value="" class="inputstyle2" style="width:40px;"> - 
+									<input type="text" name="tel1_6" maxlength="3" value="" class="inputstyle2" style="width:30px;"> -
+									<input type="text" name="tel2_6" maxlength="4" value="" class="inputstyle2" style="width:40px;"> -
 									<input type="text" name="tel3_6" maxlength="4" value="" class="inputstyle2" style="width:40px;">
 								</div>
 								<div style="float:left; width:90px; height: 26px; padding-top:6px;" class="form2"><!-- 은 행 -->
@@ -488,11 +488,11 @@
 									<input type="text" name="join_date_6" id="start_date_6" maxlength="10" value="" class="inputstyle2" style="width:70px;" onclick="openCalendar(this)">
 									<a href="javascript:" onclick="openCalendar(document.getElementById('start_date_6'));"><img src="../images/calendar.jpg" border="0" alt="" /></a>
 								</div>
-							</div>	
+							</div>
 
 							<!-- 신규등록 7열 -->
 							<div style="height:32px; text-align:center;">
-								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>									
+								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>
 								<div style="float:left; width:70px; height: 26px; padding-top:6px;" class="form2"><!-- 소속팀 -->
 									<select name="team_7" class="inputstyle2" style="width:65px; height:20px;">
 										<option value="" selected> 선 택
@@ -520,8 +520,8 @@
 									<input type="text" name="id_num1_7" maxlength="6" value="" class="inputstyle2" style="width:50px;"> - <input type="text" name="id_num2_7" maxlength="7" value="" class="inputstyle2" style="width:60px;">
 								</div>
 								<div style="float:left; width:180px; height: 26px; padding-top:6px;" class="form2"><!-- 연락처 -->
-									<input type="text" name="tel1_7" maxlength="3" value="" class="inputstyle2" style="width:30px;"> - 
-									<input type="text" name="tel2_7" maxlength="4" value="" class="inputstyle2" style="width:40px;"> - 
+									<input type="text" name="tel1_7" maxlength="3" value="" class="inputstyle2" style="width:30px;"> -
+									<input type="text" name="tel2_7" maxlength="4" value="" class="inputstyle2" style="width:40px;"> -
 									<input type="text" name="tel3_7" maxlength="4" value="" class="inputstyle2" style="width:40px;">
 								</div>
 								<div style="float:left; width:90px; height: 26px; padding-top:6px;" class="form2"><!-- 은 행 -->
@@ -546,11 +546,11 @@
 									<input type="text" name="join_date_7" id="start_date_7" maxlength="10" value="" class="inputstyle2" style="width:70px;" onclick="openCalendar(this)">
 									<a href="javascript:" onclick="openCalendar(document.getElementById('start_date_7'));"><img src="../images/calendar.jpg" border="0" alt="" /></a>
 								</div>
-							</div>	
+							</div>
 
 							<!-- 신규등록 8열 -->
 							<div style="height:32px; text-align:center;">
-								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>									
+								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>
 								<div style="float:left; width:70px; height: 26px; padding-top:6px;" class="form2"><!-- 소속팀 -->
 									<select name="team_8" class="inputstyle2" style="width:65px; height:20px;">
 										<option value="" selected> 선 택
@@ -578,8 +578,8 @@
 									<input type="text" name="id_num1_8" maxlength="6" value="" class="inputstyle2" style="width:50px;"> - <input type="text" name="id_num2_8" maxlength="7" value="" class="inputstyle2" style="width:60px;">
 								</div>
 								<div style="float:left; width:180px; height: 26px; padding-top:6px;" class="form2"><!-- 연락처 -->
-									<input type="text" name="tel1_8" maxlength="3" value="" class="inputstyle2" style="width:30px;"> - 
-									<input type="text" name="tel2_8" maxlength="4" value="" class="inputstyle2" style="width:40px;"> - 
+									<input type="text" name="tel1_8" maxlength="3" value="" class="inputstyle2" style="width:30px;"> -
+									<input type="text" name="tel2_8" maxlength="4" value="" class="inputstyle2" style="width:40px;"> -
 									<input type="text" name="tel3_8" maxlength="4" value="" class="inputstyle2" style="width:40px;">
 								</div>
 								<div style="float:left; width:90px; height: 26px; padding-top:6px;" class="form2"><!-- 은 행 -->
@@ -604,11 +604,11 @@
 									<input type="text" name="join_date_8" id="start_date_8" maxlength="10" value="" class="inputstyle2" style="width:70px;" onclick="openCalendar(this)">
 									<a href="javascript:" onclick="openCalendar(document.getElementById('start_date_8'));"><img src="../images/calendar.jpg" border="0" alt="" /></a>
 								</div>
-							</div>	
+							</div>
 
 							<!-- 신규등록 9열 -->
 							<div style="height:32px; text-align:center;">
-								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>									
+								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>
 								<div style="float:left; width:70px; height: 26px; padding-top:6px;" class="form2"><!-- 소속팀 -->
 									<select name="team_9" class="inputstyle2" style="width:65px; height:20px;">
 										<option value="" selected> 선 택
@@ -636,8 +636,8 @@
 									<input type="text" name="id_num1_9" maxlength="6" value="" class="inputstyle2" style="width:50px;"> - <input type="text" name="id_num2_9" maxlength="7" value="" class="inputstyle2" style="width:60px;">
 								</div>
 								<div style="float:left; width:180px; height: 26px; padding-top:6px;" class="form2"><!-- 연락처 -->
-									<input type="text" name="tel1_9" maxlength="3" value="" class="inputstyle2" style="width:30px;"> - 
-									<input type="text" name="tel2_9" maxlength="4" value="" class="inputstyle2" style="width:40px;"> - 
+									<input type="text" name="tel1_9" maxlength="3" value="" class="inputstyle2" style="width:30px;"> -
+									<input type="text" name="tel2_9" maxlength="4" value="" class="inputstyle2" style="width:40px;"> -
 									<input type="text" name="tel3_9" maxlength="4" value="" class="inputstyle2" style="width:40px;">
 								</div>
 								<div style="float:left; width:90px; height: 26px; padding-top:6px;" class="form2"><!-- 은 행 -->
@@ -662,11 +662,11 @@
 									<input type="text" name="join_date_9" id="start_date_9" maxlength="10" value="" class="inputstyle2" style="width:70px;" onclick="openCalendar(this)">
 									<a href="javascript:" onclick="openCalendar(document.getElementById('start_date_9'));"><img src="../images/calendar.jpg" border="0" alt="" /></a>
 								</div>
-							</div>	
+							</div>
 
 							<!-- 신규등록 10열 -->
 							<div style="height:32px; text-align:center;">
-								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>									
+								<div style="clear:left; float:left; width:16px; height: 26px; padding-top:6px;" class="form2"><input type="checkbox"  disabled></div>
 								<div style="float:left; width:70px; height: 26px; padding-top:6px;" class="form2"><!-- 소속팀 -->
 									<select name="team_10" class="inputstyle2" style="width:65px; height:20px;">
 										<option value="" selected> 선 택
@@ -694,8 +694,8 @@
 									<input type="text" name="id_num1_10" maxlength="6" value="" class="inputstyle2" style="width:50px;"> - <input type="text" name="id_num2_10" maxlength="7" value="" class="inputstyle2" style="width:60px;">
 								</div>
 								<div style="float:left; width:180px; height: 26px; padding-top:6px;" class="form2"><!-- 연락처 -->
-									<input type="text" name="tel1_10" maxlength="3" value="" class="inputstyle2" style="width:30px;"> - 
-									<input type="text" name="tel2_10" maxlength="4" value="" class="inputstyle2" style="width:40px;"> - 
+									<input type="text" name="tel1_10" maxlength="3" value="" class="inputstyle2" style="width:30px;"> -
+									<input type="text" name="tel2_10" maxlength="4" value="" class="inputstyle2" style="width:40px;"> -
 									<input type="text" name="tel3_10" maxlength="4" value="" class="inputstyle2" style="width:40px;">
 								</div>
 								<div style="float:left; width:90px; height: 26px; padding-top:6px;" class="form2"><!-- 은 행 -->
@@ -720,14 +720,14 @@
 									<input type="text" name="join_date_10" id="start_date_10" maxlength="10" value="" class="inputstyle2" style="width:70px;" onclick="openCalendar(this)">
 									<a href="javascript:" onclick="openCalendar(document.getElementById('start_date_10'));"><img src="../images/calendar.jpg" border="0" alt="" /></a>
 								</div>
-							</div>	
-
-							
+							</div>
 
 
-							
 
-							
+
+
+
+
 
 
 
@@ -750,7 +750,7 @@
 						</tr>
 						</table>
 						</form>
-						<!-- ====================신규 등록 테이블 종료====================== -->						
+						<!-- ====================신규 등록 테이블 종료====================== -->
 						</td>
 					</tr>
 					</table>
