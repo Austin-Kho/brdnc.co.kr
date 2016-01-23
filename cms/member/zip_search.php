@@ -46,8 +46,8 @@
 
 				a.value=zip;
 				b.value=adr1;
-				c.value=adr2;	
-				c.focus();							
+				c.value=adr2;
+				c.focus();
 
 				self.close();
 			}
@@ -113,7 +113,7 @@
 						<div style="clear:left; float:left; width:53px; height:25px; text-align:center; padding-top:5px; background-color:#F9F9F9;">
 							<a href="javascript:" onclick="open_move('<?=$rows[zipcode]?>', '<?=$addr[0]?>', '<?=" (".$addr[1]?>')"><?=$rows[zipcode]?></a>
 						</div>
-						<div style="float:left; width:450px; height:25px; border-width:1px 0 0 0; border-style:solid; border-color:#EEEEEE; padding:5px 0 0 2px; background-color:#F9F9F9;">
+						<div style="float:left; width:448px; height:25px; border-width:1px 0 0 0; border-style:solid; border-color:#EEEEEE; padding:5px 0 0 2px; background-color:#F9F9F9;">
 							<a href="javascript:" onclick="open_move('<?=$rows[zipcode]?>', '<?=$addr[0]?>', '<?=" (".$addr[1]?>')"><?=$addr_f?><?=$rows[bunji]?></a>
 						</div>
 						<?	} ?>
