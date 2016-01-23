@@ -27,9 +27,9 @@
 							<!-- <a href="javascript:" onClick="excel_pop(<?=$ca_1_2_row[ca_1_2]?>,2);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL 출력</a> -->
 						</div>
 						<?
-							$mode=$_REQUEST['mode'];
-							$new_pj=$_REQUEST['new_pj'];
-							$reg_pj=$_REQUEST['reg_pj'];
+							$mode=$_REQUEST['mode']; // ???
+							$new_pj=$_REQUEST['new_pj']; // 신규 프로젝트 ??
+							$reg_pj=$_REQUEST['reg_pj']; // 등록 프로젝트 ??
 						?>
 						<form method="post" name="pj_data_reg" action="<?$_SERVER['PHP_SELF']?>">
 						<input type="hidden" name="mode">
@@ -42,7 +42,7 @@
 									<option value="1"> 전 체
 									<?
 										$start_year = "2012";
-										if(!$year_frm) $year_frm=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
+										// if(!$year_frm) $year_frm=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
 										$year=range($start_year,date('Y'));
 										for($i=(count($year)-1); $i>=0; $i--){
 									?>
@@ -94,8 +94,8 @@
 						<form name="form1" method="post" action="progress_post.php"><!-- 메인폼(form1) 시작 -->
 						<input type="hidden" name="mode" value="<?=$mode?>">
 						<?
-							if($new_pj) $pre_pj_seq = $new_pj;
-							if($reg_pj) $pre_pj_seq = $reg_pj;
+							if($new_pj) $pre_pj_seq = $new_pj; // 신규 등록인지
+							if($reg_pj) $pre_pj_seq = $reg_pj; // 등록 수정인지
 							$p_qry = "SELECT pj_name, sort, data_cr, type_info, per_pay_type FROM cms_project_info WHERE seq = '$pre_pj_seq' ";
 							$p_rlt = mysql_query($p_qry, $connect);
 							$p_row = mysql_fetch_array($p_rlt);
