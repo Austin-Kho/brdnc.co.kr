@@ -25,9 +25,9 @@
 	$cust_name = $_REQUEST['cust_name']; // 계약자 ------------------------------------------------???
 	$tel_1 = $_REQUEST['tel_1'];    // 연락처 1 -----------------------------???
 	$tel_2 = $_REQUEST['tel_2'];    // 연락처 2	----------------------------???
-	$id_addr = $_REQUEST['id_zip1'].":".$_REQUEST['id_zip2'].":".$_REQUEST['id_addr1'].":".$_REQUEST['id_addr2'];    // 계약자 주민등록상 주소
-	$dm_addr = $_REQUEST['dm_zip1'].":".$_REQUEST['dm_zip2'].":".$_REQUEST['dm_addr1'].":".$_REQUEST['dm_addr2'];    // 계약자 우편송부 주소
-	
+	$id_addr = $_REQUEST['id_zip'].":".$_REQUEST['id_addr1'].":".$_REQUEST['id_addr2'];    // 계약자 주민등록상 주소
+	$dm_addr = $_REQUEST['dm_zip'].":".$_REQUEST['dm_addr1'].":".$_REQUEST['dm_addr2'];    // 계약자 우편송부 주소
+
 	$doc_1 = $_REQUEST['doc_1']; // 각서9중
 	$doc_2 = $_REQUEST['doc_2']; // 주민등록등본
 	$doc_3 = $_REQUEST['doc_3']; // 주민등록초본
@@ -203,12 +203,12 @@
 	//--------------------------------------------------------------------------------잔금
 
 	$due_date = $_REQUEST['due_date'];   // 청약 시 계약 예정일(기한)
-	
+
 	$refund = $_REQUEST['refund'];   // 해지 환불 완료 여부
 
 	$mgm_to = $_REQUEST['mgm_to'];      // MGM 지급대상
 	$mgm_sum = $_REQUEST['mgm_sum'];  // MGM 지급금액
-	
+
 	$headq = $_REQUEST['headq'];              // 소속본부
 	$team = $_REQUEST['team'];                   // 소속 팀
 	$worker_where = $headq."-".$team;        // 담당직원 소속 입력형식 데이터
@@ -227,23 +227,23 @@
 									AND con_no = '$con_no' ";
 	}
 	/////////////////////////////////////////////////////////
-		
+
 
 	// 변수 다 받았으면 이제부터 시작
 	############### DB UPDATE ##############
 
 	if($cont_sort2==1&&$cont_sort3<>3&&$cont_sort3<>4){ // 청약일때
-		$query1 = " UPDATE cms_project_data SET is_pro_cont = '1', 
-													pro_cont_date = '$cont_date', 
-													pro_contractor = '$cust_name', 
-													pro_cont_tel_1 = '$tel_1', 
+		$query1 = " UPDATE cms_project_data SET is_pro_cont = '1',
+													pro_cont_date = '$cont_date',
+													pro_contractor = '$cust_name',
+													pro_cont_tel_1 = '$tel_1',
 													pro_cont_tel_2 = '$tel_2',
-													pro_deposit = '$de_11',	
+													pro_deposit = '$de_11',
 													pro_due_date = '$due_date',
 													cancel = '0',
 													refund = '0',
 
-													is_contract = '', 
+													is_contract = '',
 
 													cont_date = '',
 													contractor = '',
@@ -253,16 +253,16 @@
 													cont_dm_addr = '',
 													deposit_1st_1 = '',
 													cont_mgm_who = '',
-													cont_mgm_sum = '', 
+													cont_mgm_sum = '',
 
-													worker_where = '$worker_where', 
-													cont_worker = '$worker', 
-													note = '$note', 
-													updater = '$_SESSION[p_name]', 
+													worker_where = '$worker_where',
+													cont_worker = '$worker',
+													note = '$note',
+													updater = '$_SESSION[p_name]',
 													reg_time = now() ".$where_qry;
 
 	}else if($cont_sort2==2&&$cont_sort3<>3&&$cont_sort3<>4){ // 계약일때
-		$query1 =" UPDATE cms_project_data SET is_pro_cont = '',													 
+		$query1 =" UPDATE cms_project_data SET is_pro_cont = '',
 													 pj_dong = '$dong',
 													 pj_ho = '$ho',
 													 pro_deposit = '',
@@ -305,7 +305,7 @@
 													 cont_mgm_who = '$mgm_to',
 													 cont_mgm_sum = '$mgm_sum',
 													 worker_where = '$worker_where',
-													 cont_worker = '$worker',													 
+													 cont_worker = '$worker',
 													 deposit_2nd_1 = '$de_21',
 													 deposit_2nd_1_date = '$de_21_date',
 													 deposit_2nd_1_who = '$de_21_who',
@@ -412,25 +412,25 @@
 													 last_pay_2_who = '$lp_2_who',
 													 last_pay_3 = '$lp_3',
 													 last_pay_3_date = '$lp_3_date',
-													 last_pay_3_who = '$lp_3_who',												
+													 last_pay_3_who = '$lp_3_who',
 
-													worker_where = '$worker_where', 
-													cont_worker = '$worker', 
-													note = '$note', 
-													updater = '$_SESSION[p_name]', 
+													worker_where = '$worker_where',
+													cont_worker = '$worker',
+													note = '$note',
+													updater = '$_SESSION[p_name]',
 													reg_time = now() ".$where_qry;
 
 
 
 	}else if($cont_sort3==3&&$cont_sort2<>1&&$cont_sort2<>2){ // 청약해지일때
 		if($refund==0||$refund==null){ // 미환불일 때
-			$query1 =" UPDATE cms_project_data SET pro_cont_date = '$cont_date', 
-													pro_contractor = '$cust_name', 
-													pro_cont_tel_1 = '$tel_1', 
+			$query1 =" UPDATE cms_project_data SET pro_cont_date = '$cont_date',
+													pro_contractor = '$cust_name',
+													pro_cont_tel_1 = '$tel_1',
 													pro_cont_tel_2 = '$tel_2',
 													pro_deposit = '$deposit_1',
 													pro_due_date = '$due_date',
-													cancel = '1',													
+													cancel = '1',
 
 													is_contract = '',
 
@@ -443,17 +443,17 @@
 													deposit_1st_1 = '',
 
 													is_contract = '',
-													worker_where = '$worker_where', 
-													cont_worker = '$worker', 
-													note = '$note', 
-													updater = '$_SESSION[p_name]', 
+													worker_where = '$worker_where',
+													cont_worker = '$worker',
+													note = '$note',
+													updater = '$_SESSION[p_name]',
 													reg_time = now() ".$where_qry;
 
 		}else if($refund==1){ // 환불 완료일 때
 			$query1 =" UPDATE cms_project_data SET is_pro_cont = '',
 													pro_cont_date = '$cont_date',
-													pro_contractor = '$cust_name', 
-													pro_cont_tel_1 = '$tel_1', 
+													pro_contractor = '$cust_name',
+													pro_cont_tel_1 = '$tel_1',
 													pro_cont_tel_2 = '$tel_2',
 													pro_deposit = '',
 													pro_due_date = '',
@@ -461,10 +461,10 @@
 													refund = '1',
 
 													is_contract = '',
-													worker_where = '$worker_where', 
-													cont_worker = '$worker', 
-													note = '$note', 
-													updater = '$_SESSION[p_name]', 
+													worker_where = '$worker_where',
+													cont_worker = '$worker',
+													note = '$note',
+													updater = '$_SESSION[p_name]',
 													reg_time = now() ".$where_qry;
 		}
 
@@ -474,8 +474,8 @@
 													pj_dong = '',
 													pj_ho = '',
 													pro_cont_date = '',
-													pro_contractor = '', 
-													pro_cont_tel_1 = '', 
+													pro_contractor = '',
+													pro_cont_tel_1 = '',
 													pro_cont_tel_2 = '',
 													 pro_deposit = '',
 													 pro_due_date = '',
@@ -486,7 +486,7 @@
 													 cont_tel_1 = '',
 													 cont_tel_2 = '',
 													 cont_id_addr = '',
-													 cont_dm_addr = '',													 
+													 cont_dm_addr = '',
 													 doc_1 = '',
 													 doc_2 = '',
 													 doc_3 = '',
@@ -519,7 +519,7 @@
 													 cont_mgm_who = '',
 													 cont_mgm_sum = '',
 													 worker_where = '',
-													 cont_worker = '',													 
+													 cont_worker = '',
 													 deposit_2nd_1 = '',
 													 deposit_2nd_1_date = '',
 													 deposit_2nd_1_who = '',
@@ -619,10 +619,10 @@
 													 last_pay_3 = '',
 													 last_pay_3_date = '',
 													 last_pay_3_who = '',
-													worker_where = '', 
-													cont_worker = '', 
-													note = '', 
-													updater = '$_SESSION[p_name]', 
+													worker_where = '',
+													cont_worker = '',
+													note = '',
+													updater = '$_SESSION[p_name]',
 													reg_time = now() ".$where_qry;
 	}
 

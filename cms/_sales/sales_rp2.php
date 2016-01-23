@@ -46,13 +46,13 @@
 								<input type="radio" name="data_cr" value="1" <?if($data_cr==1) echo "checked";?> onclick = "submit();"> 계약관리번호별 관리
 							</div>
 						</div>
-						<div style="height:35px; border-width:1px 0 1px 0; border-color:#D6D6D6; border-style:solid;">							
+						<div style="height:35px; border-width:1px 0 1px 0; border-color:#D6D6D6; border-style:solid;">
 							<!-- ============ 본사 직원일 때 프로젝트 선택 가능 시작 ============  -->
 							<?
 								if($member_row[is_company]==1){
 								$pj_rlt = mysql_query("SELECT seq FROM cms_project_info ORDER BY seq DESC LIMIT 1", $connect);
 								$pj_row = mysql_fetch_array($pj_rlt);
-								$year_frm=$_REQUEST['year_frm'];								
+								$year_frm=$_REQUEST['year_frm'];
 							?>
 							<div style="float:left;  width:120px; height:28px; padding-top:7px; background-color:#F4F4F4; text-align:center; color:#000000;">년도 별</div>
 							<div style="float:left; width:238px; height:28px; padding:7px 0 0 22px;">
@@ -101,7 +101,7 @@
 								$row = mysql_fetch_array($result);
 							?>
 							</div>
-							<div style="float:left; width:260px; height:26px; padding:9px 0px 0 0px; text-align:center;"><? echo "<font color='#cc0000'>*</font> <b>".$row[pj_name]."</b>";?></div>	
+							<div style="float:left; width:260px; height:26px; padding:9px 0px 0 0px; text-align:center;"><? echo "<font color='#cc0000'>*</font> <b>".$row[pj_name]."</b>";?></div>
 							<div style="float:left; width:120px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">소 속</div>
 							<?
 								$w_rlt = mysql_query("SELECT headq, team FROM cms_resource_headq, cms_resource_team WHERE cms_resource_headq.seq='$headq' AND cms_resource_team.seq='$team' ", $connect);
@@ -116,10 +116,10 @@
 						<?
 							$mode=$_REQUEST['mode'];
 
-							$cont_sort1 = $_REQUEST['cont_sort1']; // 계약 / 해지 선택							
+							$cont_sort1 = $_REQUEST['cont_sort1']; // 계약 / 해지 선택
 							$cont_sort2 = $_REQUEST['cont_sort2']; // 청약 / 계약 여부
 							$cont_sort3 = $_REQUEST['cont_sort3']; // 청약해지 / 계약해지 여부
-							
+
 							$diff_no = $_REQUEST['diff_no'];
 							$type = $_REQUEST['type'];
 							$con_no = $_REQUEST['con_no'];
@@ -136,7 +136,7 @@
 										$cont_sort1=2; $cont_sort3=3; // 거래구분은 해지 //  청약해지
 									}else{ // 해지 물건이 아닌 경우
 										$cont_sort1 = 1; // 계약에 체크함
-									}							
+									}
 								}
 								if(!$cont_sort2&&$mo_row[is_pro_cont]==1) $cont_sort2=1; // 청약상태 손안댔고 청약물건이면 // 청약상태로
 								if(!$cont_sort2&&$mo_row[is_cont]==1) $cont_sort2=2; // 청약상태 손안댔고 계약물건이면 // 계약상태로
@@ -219,7 +219,7 @@
 										if(!$mode&&$cont_sort1==1&&($cont_sort2==2)) $where_add .= " AND is_contract='0' ";
 										if(!$mode&&$cont_sort1==2&&$cont_sort3==3) $where_add .= " AND is_pro_cont=1 ";
 										if(!$mode&&$cont_sort1==2&&$cont_sort3==4) $where_add .= " AND is_contract=1 ";
-										
+
 										$dong_qry="SELECT pj_dong FROM cms_project_data $where_add GROUP BY pj_dong ORDER BY pj_dong ";
 										$dong_rlt = mysql_query($dong_qry, $connect);
 										while($dong_rows = mysql_fetch_array($dong_rlt)){
@@ -249,7 +249,7 @@
 							</div>
 							<? }else{ // 동호수별 관리일 때 종료 // 계약관리번호별 관리일 때 시작?>
 							<div style="float:left; width:120px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">계약관리번호</div>
-							<div style="float:left; width:138px; height:28px; padding:7px 0 0 22px;">								
+							<div style="float:left; width:138px; height:28px; padding:7px 0 0 22px;">
 								<select name="con_no" class="inputstyle2" style="height:22px; width:100px;" onchange="submit();">
 									<option value="" <?if(!$con_no) echo 'selected'?>> 선 택
 									<?
@@ -291,15 +291,15 @@
 
 						<?
 							if($data_cr==0) $query = "SELECT * FROM cms_project_data WHERE pj_seq='$pj_list' AND type_ho='$type' AND pj_dong='$dong' AND pj_ho='$ho' ";// 동호수별 관리일 때
-							if($data_cr==1) $query = "SELECT * FROM cms_project_data WHERE pj_seq='$pj_list' AND con_no='$con_no' "; /////////////////////////////////////// 계약관리번호별 관리일 때 
+							if($data_cr==1) $query = "SELECT * FROM cms_project_data WHERE pj_seq='$pj_list' AND con_no='$con_no' "; /////////////////////////////////////// 계약관리번호별 관리일 때
 							$c_result = mysql_query($query, $connect);
-							$cont_row = mysql_fetch_array($c_result);							
+							$cont_row = mysql_fetch_array($c_result);
 
 							if($cont_row[is_except]==1){
 								$condition = "<font color='#000000'>기 분양 세대</font>";
 							}else if(($ho||$con_no)&&$cont_row[is_pro_cont]==1&&$cont_row[cancel]<>1){
 								$condition = "<font color='#009900'>현재 청약 상태</font>";
-								$cust_name = $cont_row[pro_contractor];								
+								$cust_name = $cont_row[pro_contractor];
 								$tel_1 = $cont_row[pro_cont_tel_1];
 								$tel_2 = $cont_row[pro_cont_tel_2];
 								$de_11 = $cont_row[pro_deposit];
@@ -332,9 +332,9 @@
 							$worker_where=explode("-", $cont_row[worker_where]);
 							if($cont_sort2==1||$cont_sort3==3)$cont_date = $cont_row[pro_cont_date]; else $cont_date = $cont_row[cont_date];
 						?>
-						<div style="height:35px; border-width:0 0 1px 0; border-style:solid; border-color:#707070; background-color:#ecefe7">							
+						<div style="height:35px; border-width:0 0 1px 0; border-style:solid; border-color:#707070; background-color:#ecefe7">
 							<div style="float:left; padding:7px 0 0 20px; font-size:13px; color:#000000;"><?if($diff_no) echo "<b>".$diff_no." 차<b>"; ?></div>
-							<div style="float:left; padding:7px 0 0 20px; font-size:13px; color:#000000;"><?if($type) echo "<b>".$type." 타입(TYPE)</b>"; ?></div>							
+							<div style="float:left; padding:7px 0 0 20px; font-size:13px; color:#000000;"><?if($type) echo "<b>".$type." 타입(TYPE)</b>"; ?></div>
 							<?	if($data_cr==0){ // 동호수별 관리일 때 ///?>
 							<div style="float:left; padding:7px 0 0 30px; font-size:13px; color:#000000;"><? if($dong) echo "<b>".$dong."동</b>"; ?></div>
 							<div style="float:left; padding:7px 0 0 30px; font-size:13px; color:#000000;"><? if($ho) echo "<b>".$ho."</b>"; ?></div>
@@ -342,11 +342,11 @@
 							<div style="float:left; padding:7px 0 0 30px; font-size:13px; color:#000000;"><? if($con_no) echo "<b>".$con_no."</b>"; ?></div>
 							<div style="float:left; padding:7px 30px 0 30px; font-size:13px; color:#000000;"><?=$condition?></div>
 							<?if($cont_sort2==2){?>
-							<div style="float:right; padding:7px 30px 0 0; font-size:13px; color:#000000;"><input type="checkbox" name="dongho_put" onclick="dong_ho_put();"> 동호수 입력</div>							
+							<div style="float:right; padding:7px 30px 0 0; font-size:13px; color:#000000;"><input type="checkbox" name="dongho_put" onclick="dong_ho_put();"> 동호수 입력</div>
 							<div style="float:right; padding:7px 10px 0 ; display:none;" id="ho"><input type="text" name="ho" value="<?=$cont_row[pj_ho]?>" style="width:50px;"> 호</div>
 							<div style="float:right; padding:7px 10px 0 ; display:none;" id="dong"><input type="text" name="dong" value="<?=$cont_row[pj_dong]?>" style="width:50px;"> 동</div>
 							<?}}?>
-							
+
 						</div>
 						<div style="height:35px; border-width:0 0 1px 0; border-style:solid; border-color:#e6e6e6;">
 							<div style="float:left;  width:105px; height:28px; padding:7px 0 0 15px; background-color:#F4F4F4; color:#000000;">계약고객명</div>
@@ -372,10 +372,12 @@
 							<div style="float:left; padding:8px 20px 0 10px; ">
 							<!-- <input type="text" name="addr" class="inputstyle2" style="width:436px;"> -->
 							<input type="button" value="우편번호 검색" onclick="javascript:ZipWindow('../member/zip_search.php', 'id_zip', 'id_addr');" class="inputstyle_bt">
-								<input type="text" name="id_zip1" value="<?=$id_addr[0]?>" size="3" class="inputstyle2" onKeydown="ZipWindow('../member/zip_search.php', 'id_zip', 'id_addr');" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"> -
-								<input type="text" name="id_zip2" value="<?=$id_addr[1]?>" size="3" class="inputstyle2" onKeydown="ZipWindow('../member/zip_search.php', 'id_zip', 'id_addr');" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
-								<input type="text" name="id_addr1" value="<?=$id_addr[2]?>" size="40" style="width:297px;" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');" style="width:310px;">
-								<input type="text" name="id_addr2" value="<?=$id_addr[3]?>" size="25" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"> <font color="#788be2">나머지 주소</font>
+								<input type="text" name="id_zip" value="<?=$id_addr[0]?>" size="8" class="inputstyle2" onKeydown="ZipWindow('../member/zip_search.php', 'id_zip', 'id_addr');" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
+
+
+
+								<input type="text" name="id_addr1" value="<?=$id_addr[1]?>" size="30" style="width:297px;" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');" style="width:310px;">
+								<input type="text" name="id_addr2" value="<?=$id_addr[2]?>" size="30" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"> <font color="#788be2">나머지 주소</font>
 							</div>
 						</div>
 						<div style="height:35px; border-width:0 0 1px 0; border-style:solid; border-color:#e6e6e6;">
@@ -383,10 +385,11 @@
 							<div style="float:left; padding:8px 20px 0 10px; ">
 							<!-- <input type="text" name="addr" class="inputstyle2" style="width:436px;"> -->
 							<input type="button" value="우편번호 검색" onclick="javascript:ZipWindow('../member/zip_search.php', 'dm_zip', 'dm_addr');" class="inputstyle_bt">
-								<input type="text" name="dm_zip1" value="<?=$dm_addr[0]?>" size="3" class="inputstyle2" onKeydown="ZipWindow('../member/zip_search.php', 'dm_zip', 'dm_addr');" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"> -
-								<input type="text" name="dm_zip2" value="<?=$dm_addr[1]?>" size="3" class="inputstyle2" onKeydown="ZipWindow('../member/zip_search.php', 'dm_zip', 'dm_addr');" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
-								<input type="text" name="dm_addr1" value="<?=$dm_addr[2]?>" size="40" style="width:297px;" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');" style="width:310px;">
-								<input type="text" name="dm_addr2" value="<?=$dm_addr[3]?>" size="25" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"> <font color="#788be2">나머지 주소</font>
+								<input type="text" name="dm_zip" value="<?=$dm_addr[0]?>" size="8" class="inputstyle2" onKeydown="ZipWindow('../member/zip_search.php', 'dm_zip', 'dm_addr');" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
+
+
+								<input type="text" name="dm_addr1" value="<?=$dm_addr[1]?>" size="30" style="width:297px;" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');" style="width:310px;">
+								<input type="text" name="dm_addr2" value="<?=$dm_addr[2]?>" size="30" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"> <font color="#788be2">나머지 주소</font>
 								<input type="checkbox" name="sa_addr" onclick="same_addr();"> 위와 같음
 							</div>
 						</div>
@@ -532,7 +535,7 @@
 						<?if($cont_sort2==2||$cont_sort3==4){?>
 						<div style="height:35px; border-width:0 0 1px 0; border-style:solid; border-color:#B2BCDE; padding:6px 0 6px 0;">
 							<div style="float:left;  width:105px; height:28px; padding:7px 0 0 15px; background-color:#F4F4F4; color:#000000;">
-								추가입력항목 - 
+								추가입력항목 -
 							</div>
 							<div style="float:left; width:926px; height:28px; padding-top:7px; margin-left:1px; background-color:#F4F4F4; color:#000000; text-align:center;">
 								<input type="checkbox" name="de_2c" onclick="frm_view();"> 2차계약금

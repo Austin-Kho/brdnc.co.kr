@@ -47,11 +47,11 @@ function coun_log_sub(mode){
 function cont_add(self,no,frm){
 	var add_num= eval(no-2);
 	if(frm==1){
-		var obj = eval("document.getElementById('cont_"+no+"')"); 
+		var obj = eval("document.getElementById('cont_"+no+"')");
 		var add = eval("document.getElementById('add_"+add_num+"')");
 		if(self.checked==1){      //자신을 체크 하였을 경우
 			obj.style.display="";  // 다음 디브를 보이게 하고
-			if(add_num>0) add.disabled=1;       // 자신보다 바로 전 체크박스를 비활성 
+			if(add_num>0) add.disabled=1;       // 자신보다 바로 전 체크박스를 비활성
 		}else{
 			obj.style.display="none";
 			if(add_num>0) add.disabled=0;
@@ -112,14 +112,14 @@ function work_log_sub(is_com, str){
 		form.work_num.focus();
 		return;
 	}
-	
+
 	var co_sort = [form.co_sort_1, form.co_sort_2, form.co_sort_3, form.co_sort_4, form.co_sort_5, form.co_sort_6, form.co_sort_7, form.co_sort_8, form.co_sort_9, form.co_sort_10, form.co_sort_11, form.co_sort_12];
 	var c_cust_name = [form.c_cust_name_1, form.c_cust_name_2, form.c_cust_name_3, form.c_cust_name_4, form.c_cust_name_5, form.c_cust_name_6, form.c_cust_name_7, form.c_cust_name_8, form.c_cust_name_9, form.c_cust_name_10, form.c_cust_name_11, form.c_cust_name_12];
 	var dong = [form.dong_1, form.dong_2, form.dong_3, form.dong_4, form.dong_5, form.dong_6, form.dong_7, form.dong_8, form.dong_9, form.dong_10, form.dong_11, form.dong_12];
 	var ho = [form.ho_1, form.ho_2, form.ho_3, form.ho_4, form.ho_5, form.ho_6, form.ho_7, form.ho_8, form.ho_9, form.ho_10, form.ho_11, form.ho_12];
 	var due_date = [form.due_date_1, form.due_date_2, form.due_date_3, form.due_date_4, form.due_date_5, form.due_date_6, form.due_date_7, form.due_date_8, form.due_date_9, form.due_date_10, form.due_date_11, form.due_date_12];
 	var c_worker = [form.c_worker_1, form.c_worker_2, form.c_worker_3, form.c_worker_4, form.c_worker_5, form.c_worker_6, form.c_worker_7, form.c_worker_8, form.c_worker_9, form.c_worker_10, form.c_worker_11, form.c_worker_12];
-	
+
 	for(var i=0; i<12; i++){
 		if(co_sort[i].value||c_cust_name[i].value||dong[i].value||ho[i].value||due_date[i].value||c_worker[i].value){
 			if(!co_sort[i].value){
@@ -211,7 +211,7 @@ function work_log_sub(is_com, str){
 		form.n_sale_plan.focus();
 		return;
 	}
-	if(confirm("등록 후 작성일자 익일까지만 수정 가능합니다.\n\n["+date+"] 업무일지를 "+str+" 하시겠습니까?")==true) form.submit(); else return; 
+	if(confirm("등록 후 작성일자 익일까지만 수정 가능합니다.\n\n["+date+"] 업무일지를 "+str+" 하시겠습니까?")==true) form.submit(); else return;
 }
 /********************업무일지 등록 종료*******************/
 
@@ -223,7 +223,7 @@ function work_log_sub(is_com, str){
 function cont_check(is_com){
 	var form1 = document.set1;
 	var form2 = document.form1;
-	
+
 	if(is_com=='1'){
 		if(!form1.pj_list.value){
 			alert('프로젝트를 선택하여 주십시요!');
@@ -317,7 +317,7 @@ function cont_check(is_com){
 	}else if(form1.con_no){
 		var conf_str = '거래 구분 : '+cont_sort+'\n계약 고객 : '+form2.cust_name.value+'\n거래 일자 : '+form2.cont_date.value+'\n계약관리번호 : '+form1.con_no.value+'\n\n상기 내용을 등록 하시겠습니까?';
 	}
-	
+
 	if(confirm(conf_str)==true){
 		form2.submit();
 	}else{
@@ -327,25 +327,22 @@ function cont_check(is_com){
 function same_addr(){
 	var form = document.form1;
 	if(form.sa_addr.checked==true){
-		if(form.dm_zip1.value||form.dm_zip2.value||form.dm_addr1.value||form.dm_addr2.value){
+		if(form.dm_zip.value||form.dm_addr1.value||form.dm_addr2.value){
 			if(confirm('우편송부 주소를 주민등록 주소로 교체하시겠습니까?')==true){
-				form.dm_zip1.value = form.id_zip1.value;
-				form.dm_zip2.value = form.id_zip2.value;
+				form.dm_zip.value = form.id_zip.value;
 				form.dm_addr1.value = form.id_addr1.value;
 				form.dm_addr2.value = form.id_addr2.value;
 			}else{
 				form.sa_addr.checked = false;
 				return;
-			}			
+			}
 		}else{
-			form.dm_zip1.value = form.id_zip1.value;
-			form.dm_zip2.value = form.id_zip2.value;
+			form.dm_zip.value = form.id_zip.value;
 			form.dm_addr1.value = form.id_addr1.value;
 			form.dm_addr2.value = form.id_addr2.value;
-		}		
+		}
 	}else{
-		form.dm_zip1.value = '';
-		form.dm_zip2.value = '';
+		form.dm_zip.value = '';
 		form.dm_addr1.value = '';
 		form.dm_addr2.value = '';
 	}
