@@ -41,14 +41,14 @@
 								$pj_list=$_REQUEST['pj_list'];
 								$headq=$_REQUEST['headq'];
 								$team=$_REQUEST['team'];
-								$writer=$_REQUEST['writer'];								
+								$writer=$_REQUEST['writer'];
 							?>
 							<form name="is_com_sel" method="post" action=""><!-- ================ 본사 직원용 폼 시작 ================ -->
 							<input type="hidden" name="m_di" value="<?=$m_di?>">
 							<input type="hidden" name="s_di" value="<?=$s_di?>">
 							<input type="hidden" name="ss_di" value="<?=$ss_di?>">
 							<input type="hidden" name="mode" value="<?=$mode?>">
-							
+
 							<!-- <input type="hidden" name="s_date" value="<?=$s_date?>">
 							<input type="hidden" name="e_date" value="<?=$e_date?>"> -->
 							<div style="float:left; height:28px; width:50px; background-color:#F4F4F4; padding:7px 20px 0 20px; color:black;">
@@ -75,9 +75,9 @@
 									<option value="" <?if(!$pj_list) echo "selected"?>> 선 택
 									<?
 										if($year_frm>1){
-											$where=" WHERE cont_date LIKE '$year_frm%' ";
+											$where=" WHERE pr_sd LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT seq, pj_name FROM cms_project_info $where ORDER BY cont_date DESC ";
+										$qry = "SELECT seq, pj_name FROM cms_project_info $where ORDER BY pr_sd DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -154,7 +154,7 @@
 								$row = mysql_fetch_array($result);
 							?>
 							</div>
-							<div style="float:left; width:260px; height:26px; padding:9px 0px 0 0px; text-align:center;"><? echo "<font color='#cc0000'>*</font> <b>".$row[pj_name]."</b>";?></div>	
+							<div style="float:left; width:260px; height:26px; padding:9px 0px 0 0px; text-align:center;"><? echo "<font color='#cc0000'>*</font> <b>".$row[pj_name]."</b>";?></div>
 							<div style="float:left; width:120px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">소 속</div>
 							<?
 								$w_rlt = mysql_query("SELECT headq, team FROM cms_resource_headq, cms_resource_team WHERE cms_resource_headq.seq='$headq' AND cms_resource_team.seq='$team' ", $connect);
@@ -192,7 +192,7 @@
 								</div>
 								<div style="height: 25px; padding:5px 5px 0 5px; margin:0 5px 0 5px;" class="bottom">
 									<a href="<?$_SERVER['PHP_SELF']?>?m_di=1&amp;s_di=3"><?=$s_di_3?></a>
-								</div>							
+								</div>
 							</td>
 						</tr>
 						</table>

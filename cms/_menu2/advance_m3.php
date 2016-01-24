@@ -65,9 +65,9 @@
 									<option value=""<?if(!$pj_list) echo "selected"?>> 선 택
 									<?
 										if($year_frm>1){
-											$where=" WHERE cont_date LIKE '$year_frm%' ";
+											$where=" WHERE pr_sd LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT * FROM cms_project_info $where ORDER BY cont_date DESC ";
+										$qry = "SELECT * FROM cms_project_info $where ORDER BY pr_sd DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>

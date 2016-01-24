@@ -36,7 +36,7 @@
 							<!-- ============ 본사 직원일 때 프로젝트 선택 가능 시작 ============  -->
 							<?
 								if($member_row[is_company]==1){
-								$pj_rlt = mysql_query("SELECT seq FROM cms_project_info ORDER BY cont_date DESC, seq DESC LIMIT 1", $connect);
+								$pj_rlt = mysql_query("SELECT seq FROM cms_project_info ORDER BY pr_sd DESC, seq DESC LIMIT 1", $connect);
 								$pj_row = mysql_fetch_array($pj_rlt);
 								// if(!$pj_list) $pj_list = $pj_row[seq];
 								$year_frm=$_REQUEST['year_frm'];
@@ -67,9 +67,9 @@
 									<option value=""<?if(!$pj_list) echo "selected"?>> 선 택
 									<?
 										if($year_frm>1){
-											$where=" WHERE cont_date LIKE '$year_frm%' ";
+											$where=" WHERE pr_sd LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT * FROM cms_project_info $where ORDER BY cont_date DESC ";
+										$qry = "SELECT * FROM cms_project_info $where ORDER BY pr_sd DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -179,7 +179,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<td class="bottom" id="out_td_1" style="display:none;">
 								<select name="account_1" id="out_account_1" style="width:70px;" disabled>
@@ -191,7 +191,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<!-- 적 요 _1 -->
 							<td class="bottom"><input type="text" name="cont_1" size="22" class="inputstyle2" style="background-color:#f9f9f9;"></td>
@@ -251,7 +251,7 @@
 									<option value="1"> 입 금
 									<option value="2"> 출 금
 									<option value="3"> 대 체
-								</select>								
+								</select>
 								<select name="class2_2" id="class2_2" style="width:52px;" onChange="inoutSel2(2)">
 									<option value="" selected> 선 택
 									<option value="1"> 수 익
@@ -284,7 +284,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<td class="bottom" id="out_td_2" style="display:none;">
 								<select name="account_2" id="out_account_2" style="width:70px;" disabled>
@@ -296,7 +296,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<!-- 적 요 _2 -->
 							<td class="bottom"><input type="text" name="cont_2"  size="22" class="inputstyle2" style="background-color:#f9f9f9;"></td>
@@ -389,7 +389,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<td class="bottom" id="out_td_3" style="display:none;">
 								<select name="account_3" id="out_account_3" style="width:70px;" disabled>
@@ -401,7 +401,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<!-- 적 요 _3 -->
 							<td class="bottom"><input type="text" name="cont_3"  size="22" class="inputstyle2" style="background-color:#f9f9f9;"></td>
@@ -495,7 +495,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<td class="bottom" id="out_td_4" style="display:none;">
 								<select name="account_4" id="out_account_4" style="width:70px;" disabled>
@@ -507,7 +507,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<!-- 적 요 _4 -->
 							<td class="bottom"><input type="text" name="cont_4"  size="22" class="inputstyle2" style="background-color:#f9f9f9;"></td>
@@ -600,7 +600,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<td class="bottom" id="out_td_5" style="display:none;">
 								<select name="account_5" id="out_account_5" style="width:70px;" disabled>
@@ -612,7 +612,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<!-- 적 요 _5 -->
 							<td class="bottom"><input type="text" name="cont_5"  size="22" class="inputstyle2" style="background-color:#f9f9f9;"></td>
@@ -705,7 +705,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<td class="bottom" id="out_td_6" style="display:none;">
 								<select name="account_6" id="out_account_6" style="width:70px;" disabled>
@@ -717,7 +717,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<!-- 적 요 _6 -->
 							<td class="bottom"><input type="text" name="cont_6"  size="22" class="inputstyle2" style="background-color:#f9f9f9;"></td>
@@ -810,7 +810,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<td class="bottom" id="out_td_7" style="display:none;">
 								<select name="account_7" id="out_account_7" style="width:70px;" disabled>
@@ -822,7 +822,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<!-- 적 요 _7 -->
 							<td class="bottom"><input type="text" name="cont_7"  size="22" class="inputstyle2" style="background-color:#f9f9f9;"></td>
@@ -915,7 +915,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<td class="bottom" id="out_td_8" style="display:none;">
 								<select name="account_8" id="out_account_8" style="width:70px;" disabled>
@@ -927,7 +927,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<!-- 적 요 _8 -->
 							<td class="bottom"><input type="text" name="cont_8"  size="22" class="inputstyle2" style="background-color:#f9f9f9;"></td>
@@ -1020,7 +1020,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<td class="bottom" id="out_td_9" style="display:none;">
 								<select name="account_9" id="out_account_9" style="width:70px;" disabled>
@@ -1032,7 +1032,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<!-- 적 요 _9 -->
 							<td class="bottom"><input type="text" name="cont_9"  size="22" class="inputstyle2" style="background-color:#f9f9f9;"></td>
@@ -1125,7 +1125,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<td class="bottom" id="out_td_10" style="display:none;">
 								<select name="account_10" id="out_account_10" style="width:70px;" disabled>
@@ -1137,7 +1137,7 @@
 									<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
 									<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 									<?}?>
-								</select>					
+								</select>
 							</td>
 							<!-- 적 요 _10 -->
 							<td class="bottom"><input type="text" name="cont_10"  size="22" class="inputstyle2" style="background-color:#f9f9f9;"></td>
