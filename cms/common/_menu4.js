@@ -206,276 +206,86 @@ function pj_data_put_0(){
 		return;
 	}
 
-	if(!form.floor_1.value&&!form.floor_2.value&&!form.floor_3.value&&!form.floor_4.value&&!form.floor_5.value&&!form.floor_6.value&&!form.floor_7.value&&!form.floor_8.value&&!form.min_floor.value){
+	if(!form.min_floor_1.value&&!form.min_floor_2.value&&!form.min_floor_3.value&&!form.min_floor_4.value&&!form.min_floor_5.value&&!form.min_floor_6.value){
 		alert("하나 이상의 데이터를 입력하십시요!");
-		form.floor_1.focus();
+		form.min_floor_1.focus();
 		return;
 	}
-	if(!form.dong.value){
-		alert("동 데이터를 입력하십시요!");
-		form.dong.focus();
-		return;
-	}
-	if(!form.line.value){
-		alert("라인 데이터를 입력하십시요!");
-		form.line.focus();
-		return;
-	}
-	if(form.floor_1.value){
-		if(!form.type_1.value){
-			alert("타입 정보를 선택하십시요!");
-			form.type_1.focus();
-			return;
-		}
-		if(!form.price_1.value){
-			alert("해당 층의 공급가격을 입력하십시요!");
-			form.price_1.focus();
-			return;
-		}
 
-		// if(!form.pay_1.value){
-		// 	alert("해당 호수의 수수료를 입력하십시요!");
-		// 	form.pay_1.focus();
-		// 	return;
-		// }
+
+	if(form.min_floor_1.value){
+		if(!form.type_1.value){alert("타입 정보를 선택하십시요!"); form.type_1.focus(); return;}
+		if(!form.dong_1.value){alert("동 정보를 선택하십시요!"); form.dong_1.focus(); return;}
+		if(!form.line_1.value){alert("라인 정보를 선택하십시요!"); form.line_1.focus(); return;}
 	}
-	if(form.floor_2.value){
-		if(!form.type_2.value){
-			alert("타입 정보를 선택하십시요!");
-			form.type_2.focus();
-			return;
-		}
-		if(!form.price_2.value){
-			alert("해당 층의 공급가격을 입력하십시요!");
-			form.price_2.focus();
-			return;
-		}
-		// if(!form.pay_2.value){
-		// 	alert("해당 호수의 수수료를 입력하십시요!");
-		// 	form.pay_2.focus();
-		// 	return;
-		// }
+	if(form.min_floor_1.value){	if(!form.max_floor_1.value){ alert("입력할 층의 범위를 지정 하십시요!"); form.max_floor_1.focus(); return;}}
+	if(form.max_floor_1.value){	if(!form.min_floor_1.value){ alert("입력할 층의 범위를 지정 하십시요!"); form.min_floor_1.focus(); return;}}
+
+	if(form.min_floor_2.value){
+		if(!form.type_2.value){alert("타입 정보를 선택하십시요!"); form.type_2.focus(); return;}
+		if(!form.dong_2.value){alert("동 정보를 선택하십시요!"); form.dong_2.focus(); return;}
+		if(!form.line_2.value){alert("라인 정보를 선택하십시요!"); form.line_2.focus(); return;}
 	}
-	if(form.floor_3.value){
-		if(!form.type_3.value){
-			alert("타입 정보를 선택하십시요!");
-			form.type_3.focus();
-			return;
-		}
-		if(!form.price_3.value){
-			alert("해당 층의 공급가격을 입력하십시요!");
-			form.price_3.focus();
-			return;
-		}
-		// if(!form.pay_3.value){
-		// 	alert("해당 호수의 수수료를 입력하십시요!");
-		// 	form.pay_3.focus();
-		// 	return;
-		// }
+	if(form.min_floor_2.value){	if(!form.max_floor_2.value){ alert("입력할 층의 범위를 지정 하십시요!"); form.max_floor_2.focus(); return;}}
+	if(form.max_floor_2.value){	if(!form.min_floor_2.value){ alert("입력할 층의 범위를 지정 하십시요!"); form.min_floor_2.focus(); return;}}
+
+	if(form.min_floor_3.value){
+		if(!form.type_3.value){alert("타입 정보를 선택하십시요!"); form.type_3.focus(); return;}
+		if(!form.dong_3.value){alert("동 정보를 선택하십시요!"); form.dong_3.focus(); return;}
+		if(!form.line_3.value){alert("라인 정보를 선택하십시요!"); form.line_3.focus(); return;}
 	}
-	if(form.floor_4.value){
-		if(!form.type_4.value){
-			alert("타입 정보를 선택하십시요!");
-			form.type_4.focus();
-			return;
-		}
-		if(!form.price_4.value){
-			alert("해당 층의 공급가격을 입력하십시요!");
-			form.price_4.focus();
-			return;
-		}
-		// if(!form.pay_4.value){
-		// 	alert("해당 호수의 수수료를 입력하십시요!");
-		// 	form.pay_4.focus();
-		// 	return;
-		// }
+	if(form.min_floor_3.value){	if(!form.max_floor_3.value){ alert("입력할 층의 범위를 지정 하십시요!"); form.max_floor_3.focus(); return;}}
+	if(form.max_floor_3.value){	if(!form.min_floor_3.value){ alert("입력할 층의 범위를 지정 하십시요!"); form.min_floor_3.focus(); return;}}
+
+	if(form.min_floor_4.value){
+		if(!form.type_4.value){alert("타입 정보를 선택하십시요!"); form.type_4.focus(); return;}
+		if(!form.dong_4.value){alert("동 정보를 선택하십시요!"); form.dong_4.focus(); return;}
+		if(!form.line_4.value){alert("라인 정보를 선택하십시요!"); form.line_4.focus(); return;}
 	}
-	if(form.floor_5.value){
-		if(!form.type_5.value){
-			alert("타입 정보를 선택하십시요!");
-			form.type_5.focus();
-			return;
-		}
-		if(!form.price_5.value){
-			alert("해당 층의 공급가격을 입력하십시요!");
-			form.price_5.focus();
-			return;
-		}
-		// if(!form.pay_5.value){
-		// 	alert("해당 호수의 수수료를 입력하십시요!");
-		// 	form.pay_5.focus();
-		// 	return;
-		// }
+	if(form.min_floor_4.value){	if(!form.max_floor_4.value){ alert("입력할 층의 범위를 지정 하십시요!"); form.max_floor_4.focus(); return;}}
+	if(form.max_floor_4.value){	if(!form.min_floor_4.value){ alert("입력할 층의 범위를 지정 하십시요!"); form.min_floor_4.focus(); return;}}
+
+	if(form.min_floor_5.value){
+		if(!form.type_5.value){alert("타입 정보를 선택하십시요!"); form.type_5.focus(); return;}
+		if(!form.dong_5.value){alert("동 정보를 선택하십시요!"); form.dong_5.focus(); return;}
+		if(!form.line_5.value){alert("라인 정보를 선택하십시요!"); form.line_5.focus(); return;}
 	}
-	if(form.floor_6.value){
-		if(!form.type_6.value){
-			alert("타입 정보를 선택하십시요!");
-			form.type_6.focus();
-			return;
-		}
-		if(!form.price_6.value){
-			alert("해당 층의 공급가격을 입력하십시요!");
-			form.price_6.focus();
-			return;
-		}
-		// if(!form.pay_6.value){
-		// 	alert("해당 호수의 수수료를 입력하십시요!");
-		// 	form.pay_6.focus();
-		// 	return;
-		// }
+	if(form.min_floor_5.value){	if(!form.max_floor_5.value){ alert("입력할 층의 범위를 지정 하십시요!"); form.max_floor_5.focus(); return;}}
+	if(form.max_floor_5.value){	if(!form.min_floor_5.value){ alert("입력할 층의 범위를 지정 하십시요!"); form.min_floor_5.focus(); return;}}
+
+	if(form.min_floor_6.value){
+		if(!form.type_6.value){alert("타입 정보를 선택하십시요!"); form.type_6.focus(); return;}
+		if(!form.dong_6.value){alert("동 정보를 선택하십시요!"); form.dong_6.focus(); return;}
+		if(!form.line_6.value){alert("라인 정보를 선택하십시요!"); form.line_6.focus(); return;}
 	}
-	if(form.floor_7.value){
-		if(!form.type_7.value){
-			alert("타입 정보를 선택하십시요!");
-			form.type_7.focus();
-			return;
-		}
-		if(!form.price_7.value){
-			alert("해당 층의 공급가격을 입력하십시요!");
-			form.price_7.focus();
-			return;
-		}
-		// if(!form.pay_7.value){
-		// 	alert("해당 호수의 수수료를 입력하십시요!");
-		// 	form.pay_7.focus();
-		// 	return;
-		// }
-	}
-	if(form.floor_8.value){
-		if(!form.type_8.value){
-			alert("타입 정보를 선택하십시요!");
-			form.type_8.focus();
-			return;
-		}
-		if(!form.price_8.value){
-			alert("해당 층의 공급가격을 입력하십시요!");
-			form.price_8.focus();
-			return;
-		}
-		// if(!form.pay_8.value){
-		// 	alert("해당 호수의 수수료를 입력하십시요!");
-		// 	form.pay_8.focus();
-		// 	return;
-		// }
-	}
-	if(form.min_floor.value){
-		if(!form.type_batch.value){
-			alert("타입 정보를 선택하십시요!");
-			form.type_batch.focus();
-			return;
-		}
-		if(!form.price_batch.value){
-			alert("해당 층의 공급가격을 입력하십시요!");
-			form.price_batch.focus();
-			return;
-		}
-		// if(!form.pay_batch.value){
-		// 	alert("해당 호수의 수수료를 입력하십시요!");
-		// 	form.pay_batch.focus();
-		// 	return;
-		// }
-	}
-	if(form.min_floor.value){
-		if(!form.max_floor.value){
-			alert("입력할 층의 범위를 지정 하십시요!");
-			form.max_floor.focus();
-			return;
-		}
-	}
-	if(form.max_floor.value){
-		if(!form.min_floor.value){
-			alert("입력할 층의 범위를 지정 하십시요!");
-			form.min_floor.focus();
-			return;
-		}
-	}
+	if(form.min_floor_6.value){	if(!form.max_floor_6.value){ alert("입력할 층의 범위를 지정 하십시요!"); form.max_floor_6.focus(); return;}}
+	if(form.max_floor_6.value){	if(!form.min_floor_6.value){ alert("입력할 층의 범위를 지정 하십시요!"); form.min_floor_6.focus(); return;}}
 	form.submit();
 }
 
-// 계약관리번호로 입력 시
-function pj_data_put_1(){
-	var form=document.form1;
 
-	if(!document.pj_data_reg.new_pj.value){
-		alert("등록할 프로젝트를 선택하여 주십시요!");
-		document.pj_data_reg.new_pj.focus();
-		return;
-	}
-	if(!form.min_con_no.value&&!form.max_con_no.value){
-		alert("하나 이상의 데이터를 입력하십시요!");
-		form.min_con_no.focus();
-		return;
-	}
-	if(form.min_con_no.value>form.max_con_no.value){
-		alert("입력한 범위의 숫자를 확인하여 주십시요!");
-		form.max_con_no.focus();
-		return;
-	}
-	if(form.min_con_no.value){
-		if(!form.max_con_no.value){
-			alert("입력할 계약관리번호의 범위를 지정 하십시요!");
-			form.max_con_no.focus();
-			return;
-		}
 
-		if(!form.sort_batch.value){
-			alert("공급방식을 선택하십시요!");
-			form.sort_batch.focus();
-			return;
-		}
-		if(!form.diff_no.value){
-			alert("차수 정보를 입력하십시요!");
-			form.diff_no.focus();
-			return;
-		}
-		if(!form.type_batch.value){
-			alert("타입 정보를 선택하십시요!");
-			form.type_batch.focus();
-			return;
-		}
-		if(!form.price_batch.value){
-			alert("해당 호수의 공급가격을 입력하십시요!");
-			form.price_batch.focus();
-			return;
-		}
-		if(!form.pay_batch.value){
-			alert("해당 호수의 수수료를 입력하십시요!");
-			form.pay_batch.focus();
-			return;
-		}
-	}
-	if(form.max_con_no.value){
-		if(!form.min_con_no.value){
-			alert("입력할 계약관리번호의 범위를 지정 하십시요!");
-			form.min_con_no.focus();
-			return;
-		}
-	}
-	if(confirm("계약관리번호 "+form.min_con_no.value+ "-" +form.max_con_no.value+"\n총"+(form.max_con_no.value-form.min_con_no.value+1)+"개의 데이터를 입력하시겠습니까?")){
-		form.submit();
-	}else{
-		return false;
-	}
-}
-
-function pay_reg_bc(self){
+function dong_reg_bc(self){
 	var form=document.form1;
 
 	if(self.checked==true){
 
-		if(!form.pay_1.value){
-		alert("수수료를 입력하십시요!");
+		if(!form.dong_1.value){
+		alert("동을 입력하십시요!");
 		self.checked=false;
-		form.pay_1.focus();
+		form.dong_1.focus();
 		return;
 		}
-		form.pay_2.value=form.pay_1.value;
-		form.pay_3.value=form.pay_1.value;
-		form.pay_4.value=form.pay_1.value;
-		form.pay_5.value=form.pay_1.value;
-		form.pay_6.value=form.pay_1.value;
-		form.pay_7.value=form.pay_1.value;
-		form.pay_8.value=form.pay_1.value;
-		form.pay_batch.value=form.pay_1.value;
+		form.dong_2.value=form.dong_1.value;
+		form.dong_3.value=form.dong_1.value;
+		form.dong_4.value=form.dong_1.value;
+		form.dong_5.value=form.dong_1.value;
+		form.dong_6.value=form.dong_1.value;
+	}else{
+		form.dong_2.value=null;
+		form.dong_3.value=null;
+		form.dong_4.value=null;
+		form.dong_5.value=null;
+		form.dong_6.value=null;
 	}
 }

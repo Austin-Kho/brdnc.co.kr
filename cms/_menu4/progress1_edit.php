@@ -11,10 +11,10 @@
 		err_msg('로그인 정보가 없습니다. 다시 로그인해 주세요.');
 	}
 
-	$data = $_REQUEST['data']; // 데이터 정보
+	$data = $_REQUEST['data']; // 데이터 정보 // 일련번호
 	$info = $_REQUEST['info']; // 현장 정보
 ?>
-<!DOCTYPE HTM>
+<!DOCTYPE HTML>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -47,47 +47,21 @@
 				form.type.focus();
 				return;
 			}
-			if(!form.is_except.value){
-				alert('세대 상태 정보를 선택하세요.');
-				form.is_except.focus();
-				return;
-			}
-			if(!form.price.value){
-				alert('공급가격 정보를 입력하세요.');
-				form.price.focus();
-				return;
-			}
-			if(!form.pay.value){
-				alert('수수료 정보를 입력하세요.');
-				form.pay.focus();
-				return;
-			}
-			form.submit();
-		}
-
-		function _editChk_1(){
-			var form = document.form1;
-
-			if(!form.con_no.value){
-				alert('계약관리번호를 입력하세요.');
-				form.con_no.focus();
-				return;
-			}
-			if(!form.type.value){
-				alert('타입 정보를 입력하세요.');
-				form.type.focus();
-				return;
-			}
-			if(!form.is_except.value){
-				alert('세대 상태 정보를 선택하세요.');
-				form.is_except.focus();
-				return;
-			}
-			if(!form.pay.value){
-				alert('수수료 정보를 입력하세요.');
-				form.pay.focus();
-				return;
-			}
+			// if(!form.is_except.value){
+			// 	alert('세대 상태 정보를 선택하세요.');
+			// 	form.is_except.focus();
+			// 	return;
+			// }
+			// if(!form.price.value){
+			// 	alert('공급가격 정보를 입력하세요.');
+			// 	form.price.focus();
+			// 	return;
+			// }
+			// if(!form.pay.value){
+			// 	alert('수수료 정보를 입력하세요.');
+			// 	form.pay.focus();
+			// 	return;
+			// }
 			form.submit();
 		}
 	//-->
