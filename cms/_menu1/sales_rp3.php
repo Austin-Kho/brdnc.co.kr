@@ -45,9 +45,8 @@
 								<select name="year_frm" onchange="submit();" class="inputstyle2" style="height:22px; width:100px;"><!-- ==================================== 계약년도 폼 ===================================== -->
 									<option value="1"> 전 체
 									<?
-										$start_year = "2013";
-										if(!$year_frm) $year_frm=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
-										$year=range($start_year,date('Y'));
+										// if(!$year_frm) $year_frm=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
+										$year=range(date('Y')-4,date('Y'));
 										for($i=(count($year)-1); $i>=0; $i--){
 									?>
 									<option value="<?=$year[$i]?>" <?if($year_frm==$year[$i]) echo "selected"; ?>><?=$year[$i]."년"?>
@@ -60,9 +59,9 @@
 									<option value=""<?if(!$pj_list) echo "selected"?>> 선 택
 									<?
 										if($year_frm>1){
-											$where=" WHERE pr_sd LIKE '$year_frm%' ";
+											$where=" WHERE start_date LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT * FROM cms_project_info $where ORDER BY pr_sd DESC ";
+										$qry = "SELECT * FROM cms_project_info $where ORDER BY start_date DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -117,10 +116,10 @@
 							<div style="float:left; height:22px; width:80px; background-color:#9e9e9e; color:#cccccc; padding-top:2px; text-align:center; border-width:1px 0 0 1px; border-style:solid; border-color:#cdcdcd;">기분양 세대</div>
 							<div style="float:left; height:22px; width:75px; padding:2px 10px 0 0; text-align:right; border-width:1px 1px 0 1px; border-style:solid; border-color:#cdcdcd; margin-right:30px;"><?if($pj_list) echo number_format($data_row[except])." 세대";?></div>
 							<?
-								$color_rlt = mysql_query("SELECT type_info, color_type FROM cms_project_info WHERE seq='$pj_list' ", $connect); // 타입별 컬러 구하기
+								$color_rlt = mysql_query("SELECT type_name, type_color FROM cms_project_info WHERE seq='$pj_list' ", $connect); // 타입별 컬러 구하기
 								$color_row = mysql_fetch_array($color_rlt);
-								$type = explode("-", $color_row[type_info]);
-								$color = explode("-", $color_row[color_type]);
+								$type = explode("-", $color_row[type_name]);
+								$color = explode("-", $color_row[type_color]);
 								if(count($type)<=6) $roof_num = count($type); else $roof_num = 6;
 								for($i=0; $i<$roof_num; $i++){
 									$type_color[$type[$i]] = $color[$i];

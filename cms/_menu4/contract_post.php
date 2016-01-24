@@ -110,8 +110,6 @@
 	$client_res_mail = $_REQUEST['client_res_mail']; // 발주사 담당자 이메일
 
 
-
-	$pr_sd = $_REQUEST['pr_sd'];  // 계약 체결일
 	$start_date = $_REQUEST['start_date'];  // 업무 개시일
 	$expiry_date = $_REQUEST['expiry_date']; // 계약 만료일
 	$pr_sp_con = $_REQUEST['pr_sp_con']; // 수수료 특별 지급조건
@@ -121,9 +119,9 @@
 	if($page_code=='new_reg'){ // 신규 등록이면
 		############# DB INSERT. #############
 
-		$query="INSERT INTO `cms_project_info` ( `pj_name`, `sort`, `data_cr`, `local_addr`, `local_tel`, `local_fax`, `pj_manager`, `type_info`, `color_type`, `total_count_type`, `count_unit`, `pr_sd`, `start_date`, `expiry_date`, `pr_sp_con`, `reg_date`)
+		$query="INSERT INTO `cms_project_info` ( `pj_name`, `sort`, `data_cr`, `local_addr`, `local_tel`, `local_fax`, `pj_manager`, `type_name`, `type_color`, `total_count_type`, `count_unit`, `start_date`, `expiry_date`, `pr_sp_con`, `reg_date`)
 
-							 VALUES('$pj_name', '$sort', '$data_cr', '$address', '$local_tel', '$local_fax', '$pj_manager', '$type', '$color', '$total_count', '$count_unit', '$pr_sd', '$start_date', '$expiry_date', '$pr_sp_con', now())";
+							 VALUES('$pj_name', '$sort', '$data_cr', '$address', '$local_tel', '$local_fax', '$pj_manager', '$type', '$color', '$total_count', '$count_unit', '$start_date', '$expiry_date', '$pr_sp_con', now())";
 		$result=mysql_query($query, $connect);
 		if(!$result) err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 
@@ -143,11 +141,10 @@
 																		   local_tel = '$local_tel',
 																		   local_fax = '$local_fax',
 																		   pj_manager = '$pj_manager',
-																		   type_info = '$type',
-																		   color_type = '$color',
+																		   type_name = '$type',
+																		   type_color = '$color',
 																		   total_count_type = '$total_count',
 																		   count_unit = '$count_unit',
-																		   pr_sd = '$pr_sd',
 																		   start_date = '$start_date',
 																		   expiry_date = '$expiry_date',
 																		   pr_sp_con = '$pr_sp_con',

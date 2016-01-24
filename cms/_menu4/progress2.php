@@ -65,9 +65,9 @@
 										<?
 											$where="";
 											if($year_frm>1){
-												$where=" WHERE pr_sd LIKE '$year_frm%' ";
+												$where=" WHERE start_date LIKE '$year_frm%' ";
 											}
-											$qry = "SELECT * FROM cms_project_info $where ORDER BY pr_sd DESC ";
+											$qry = "SELECT * FROM cms_project_info $where ORDER BY start_date DESC ";
 											$rlt = mysql_query($qry, $connect);
 											for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 										?>
@@ -94,7 +94,7 @@
 								<td style="border-width: 1px 0 0 0; border-color:#a5a5a5; border-style: solid;"> 계약 체결일</td>
 							</tr>
 							<?
-								$qry1 = "select * from cms_project_info $where order by pr_sd desc ";
+								$qry1 = "select * from cms_project_info $where order by start_date desc ";
 								$rlt1 = mysql_query($qry1, $connect);
 								for($i=0; $rows1=mysql_fetch_array($rlt1); $i++){
 									if($rows1[sort]==1) $sort="아파트(일반분양)";
@@ -139,8 +139,8 @@
 									$row = mysql_fetch_array($result);
 
 									$addr = explode("/",$row[local_addr]);
-									$type = explode("-",$row[type_info]);
-									$color = explode("-",$row[color_type]);
+									$type = explode("-",$row[type_name]);
+									$color = explode("-",$row[type_color]);
 									$t_count=count($type);
 									$total_count = explode("-",$row[total_count_type]);
 									$sell_count = explode("-",$row[sell_count_type]);
@@ -379,18 +379,15 @@
 								</td>
 								<td width="150" class="form1" bgcolor="#F4F4F4"> 수행 개시일 <font color="red">*</font></td>
 								<td  class="form2">
-									<input type="text" name="pr_sd" id="pr_sd" value="<?=$row[pr_sd]?>" size="25" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
-									<a href="javascript:" onclick="cal_add(document.getElementById('pr_sd'),this); event.cancelBubble=true"> <img src="http://cigiko.cafe24.com/cms/images/calendar.jpg" border="0" alt="" /></a>
-								</td>
-								<td width="150" class="form1" bgcolor="#F4F4F4" height="25"> 수행 기간 <!-- <font color="red">*</font> --></td>
-								<td  class="form2">
-
 									<div style="float:left;">
-										<input type="text" name="start_date" id="start_date" value="<?=$row[start_date]?>" size="15" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
+										<input type="text" name="start_date" id="start_date" value="<?=$row[start_date]?>" size="25" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
 										<a href="javascript:" onclick="cal_add(document.getElementById('start_date'),this); event.cancelBubble=true"> <img src="http://cigiko.cafe24.com/cms/images/calendar.jpg" border="0" alt="" /></a> ~
 									</div>
+								</td>
+								<td width="150" class="form1" bgcolor="#F4F4F4" height="25"> 종료 예정일 <!-- <font color="red">*</font> --></td>
+								<td  class="form2">
 									<div style="float:left; padding-left:5px; margin-right:5px;">
-										<input type="text" name="expiry_date" id="expiry_date" value="<?=$row[expiry_date]?>" size="15" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
+										<input type="text" name="expiry_date" id="expiry_date" value="<?=$row[expiry_date]?>" size="25" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
 										<a href="javascript:" onclick="cal_add(document.getElementById('expiry_date'),this); event.cancelBubble=true"> <img src="http://cigiko.cafe24.com/cms/images/calendar.jpg" border="0" alt="" /></a>
 									</div>
 							</tr>

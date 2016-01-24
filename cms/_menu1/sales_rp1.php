@@ -58,9 +58,8 @@
 								<select name="year_frm" onchange="submit();" class="inputstyle2" style="height:22px; width:100px;"><!-- ==================================== 계약년도 폼 ===================================== -->
 									<option value="1"> 전 체
 									<?
-										$start_year = "2013";
-										if(!$year_frm) $year_frm=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
-										$year=range($start_year,date('Y'));
+										// if(!$year_frm) $year_frm=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
+										$year=range(date('Y')-4,date('Y'));
 										for($i=(count($year)-1); $i>=0; $i--){
 									?>
 									<option value="<?=$year[$i]?>" <?if($year_frm==$year[$i]) echo "selected"; ?>><?=$year[$i]."년"?>
@@ -73,9 +72,9 @@
 									<option value=""<?if(!$pj_list) echo "selected"?>> 선 택
 									<?
 										if($year_frm>1){
-											$where=" WHERE pr_sd LIKE '$year_frm%' ";
+											$where=" WHERE start_date LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT * FROM cms_project_info $where ORDER BY pr_sd DESC ";
+										$qry = "SELECT * FROM cms_project_info $where ORDER BY start_date DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -151,14 +150,14 @@
 							$row=mysql_fetch_array($result);
 							$data_cr = $row[data_cr];
 
-							$color_rlt = mysql_query("SELECT type_info, color_type FROM cms_project_info WHERE seq='$pj_list'", $connect); /// 타입별 컬러 구분
+							$color_rlt = mysql_query("SELECT type_name, type_color FROM cms_project_info WHERE seq='$pj_list'", $connect); /// 타입별 컬러 구분
 							$color_row = mysql_fetch_array($color_rlt);
 							// 타입별 칼라 지정
-							$type_info = explode("-", $color_row[type_info]);
-							$type_color = explode("-", $color_row[color_type]);
+							$type_name = explode("-", $color_row[type_name]);
+							$type_color = explode("-", $color_row[type_color]);
 							///////////////////////////////////////////////////////////////////////
-							for($i=0; $i<count($type_info); $i++){
-								$color[$type_info[$i]]=$type_color[$i];
+							for($i=0; $i<count($type_name); $i++){
+								$color[$type_name[$i]]=$type_color[$i];
 							}
 							///////////////////////////////////////////////////////////////////////
 						?>

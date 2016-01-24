@@ -1,3 +1,4 @@
+
 <?
 session_start();
 Header("Content-type: application/vnd.ms-excel");
@@ -47,14 +48,14 @@ Header("Expires: 0");
 		<td colspan="2" bgcolor="#EAEAEA">담당자</td>
 	</tr>
 <?
-		$color_rlt = mysql_query("SELECT type_info, color_type FROM cms_project_info WHERE seq='$pj_seq'", $connect); /// 타입별 컬러 구분
+		$color_rlt = mysql_query("SELECT type_name, type_color FROM cms_project_info WHERE seq='$pj_seq'", $connect); /// 타입별 컬러 구분
 		$color_row = mysql_fetch_array($color_rlt);
 		// 타입별 칼라 지정
-		$type_info = explode("-", $color_row[type_info]);
-		$type_color = explode("-", $color_row[color_type]);
+		$type_name = explode("-", $color_row[type_name]);
+		$type_color = explode("-", $color_row[type_color]);
 		///////////////////////////////////////////////////////////////////////
-		for($i=0; $i<count($type_info); $i++){
-			$color[$type_info[$i]]=$type_color[$i];
+		for($i=0; $i<count($type_name); $i++){
+			$color[$type_name[$i]]=$type_color[$i];
 		}
 		$query1 = "SELECT pj_dong, pj_ho, type_ho, is_except, pro_contractor, is_pro_cont, pro_cont_tel_1, pro_cont_tel_2,
 									    pro_cont_date, pro_draufgabe, pro_due_date, is_contract, contractor, cont_tel_1, cont_tel_2,
@@ -288,17 +289,17 @@ Header("Expires: 0");
 		<td width="60" bgcolor="#EAEAEA">입금자3</td>
 
 		<td width="60" bgcolor="#EAEAEA">등록자</td>
-		<td width="120" bgcolor="#EAEAEA">등록일시</td>		
+		<td width="120" bgcolor="#EAEAEA">등록일시</td>
 	</tr>
 <?
-		$color_rlt = mysql_query("SELECT type_info, color_type FROM cms_project_info WHERE seq='$pj_seq'", $connect); /// 타입별 컬러 구분
+		$color_rlt = mysql_query("SELECT type_name, type_color FROM cms_project_info WHERE seq='$pj_seq'", $connect); /// 타입별 컬러 구분
 		$color_row = mysql_fetch_array($color_rlt);
 		// 타입별 칼라 지정
-		$type_info = explode("-", $color_row[type_info]);
-		$type_color = explode("-", $color_row[color_type]);
+		$type_name = explode("-", $color_row[type_name]);
+		$type_color = explode("-", $color_row[type_color]);
 		///////////////////////////////////////////////////////////////////////
-		for($i=0; $i<count($type_info); $i++){
-			$color[$type_info[$i]]=$type_color[$i];
+		for($i=0; $i<count($type_name); $i++){
+			$color[$type_name[$i]]=$type_color[$i];
 		}
 		$query1 = "SELECT * FROM cms_project_data $where $limit ";
 
@@ -326,7 +327,7 @@ Header("Expires: 0");
 
 			$id_ad = explode(":", $rows1[cont_id_addr]);
 			$dm_ad = explode(":", $rows1[cont_dm_addr]);
-										
+
 			$id_addr = $id_ad[0]."-".$id_ad[1]."&nbsp;&nbsp;&nbsp;".$id_ad[2]." ".$id_ad[3];
 			$dm_addr = $dm_ad[0]."-".$dm_ad[1]."&nbsp;&nbsp;&nbsp;".$dm_ad[2]." ".$dm_ad[3];
 
@@ -535,7 +536,7 @@ Header("Expires: 0");
 		<td align="center" height="24" <?=$bg_col?>><?=$rows1[last_pay_3_who]?></td><!-- 입금자3 -->
 
 		<td align="center" height="24" <?=$bg_col?>><?=$rows1[updater]?></td><!-- 등록자 -->
-		<td align="center" height="24" <?=$bg_col?>><?if($rows1[updater]) echo substr($rows1[reg_time], 2, 14);?></td><!-- 등록일시 -->	
+		<td align="center" height="24" <?=$bg_col?>><?if($rows1[updater]) echo substr($rows1[reg_time], 2, 14);?></td><!-- 등록일시 -->
 	</tr>
 <?
 		}

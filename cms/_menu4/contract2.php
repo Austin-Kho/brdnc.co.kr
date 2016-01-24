@@ -265,17 +265,13 @@
 						<tr>
 							<td width="150" class="form1" bgcolor="#F8F8F8"> 수행 개시일 <font color="red">*</font></td>
 							<td  class="form2">
-								<input type="text" name="pr_sd" id="pr_sd" value="" size="25" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
-								<a href="javascript:" onclick="cal_add(document.getElementById('pr_sd'),this); event.cancelBubble=true"> <img src="http://cigiko.cafe24.com/cms/images/calendar.jpg" border="0" alt="" /></a>
+								<input type="text" name="start_date" id="start_date" value="" size="25" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
+									<a href="javascript:" onclick="cal_add(document.getElementById('start_date'),this); event.cancelBubble=true"> <img src="http://cigiko.cafe24.com/cms/images/calendar.jpg" border="0" alt="" /></a>
 							</td>
-							<td width="150" class="form1" bgcolor="#F8F8F8" height="25"> 수행 기간 <!-- <font color="red">*</font> --></td>
+							<td width="150" class="form1" bgcolor="#F8F8F8" height="25"> 종료 예정일 <!-- <font color="red">*</font> --></td>
 							<td  class="form2">
-								<div style="float:left;">
-									<input type="text" name="start_date" id="start_date" value="" size="15" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
-									<a href="javascript:" onclick="cal_add(document.getElementById('start_date'),this); event.cancelBubble=true"> <img src="http://cigiko.cafe24.com/cms/images/calendar.jpg" border="0" alt="" /></a> ~
-								</div>
 								<div style="float:left; padding-left:5px; margin-right:5px;">
-									<input type="text" name="expiry_date" id="expiry_date" value="" size="15" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
+									<input type="text" name="expiry_date" id="expiry_date" value="" size="25" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
 									<a href="javascript:" onclick="cal_add(document.getElementById('expiry_date'),this); event.cancelBubble=true"> <img src="http://cigiko.cafe24.com/cms/images/calendar.jpg" border="0" alt="" /></a>
 								</div>
 							</td>

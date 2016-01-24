@@ -14,11 +14,12 @@
 	$data = $_REQUEST['data']; // 데이터 정보
 	$info = $_REQUEST['info']; // 현장 정보
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTM>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title><?=$doc_title?></title>
+	<link rel="shortcut icon" href="<?=$cms_url?>images/cms.ico">
 	<link type="text/css" rel="stylesheet" href="../common/cms.css">
 	<style type="text/css">
 		html { overflow:hidden; }
@@ -121,7 +122,7 @@
 				<input type="hidden" name="data_cr" value="<?=$rows1[data_cr]?>">
 				<div style="height:28px; background-color:#F4F4F4; border-width: 1px 0 1px 0; border-color:#CFCFCF; border-style: solid; text-align:center; padding-top:7px;">
 					변경 할 정보를 수정해 주십시요. (<font color="#ff0000">*</font>표시는 필수입력 정보)
-				</div>				
+				</div>
 				<div style="height:32px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
 					<div style="float:left; padding:9px 15px 0 0; text-align:right; width:100px;">
 						동  <font color="#ff0000">*</font>
@@ -235,7 +236,7 @@
 					<div style="float:left; padding-top:8px; text-align:left;">
 						<input type="text" name="diff_no" value="<?=$rows[diff_no]?>" class="inputstyle2" size="15" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"> 차
 					</div>
-				</div>				
+				</div>
 				<div style="height:32px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
 					<div style="float:left; padding:9px 15px 0 0; text-align:right; width:100px;">
 						기분양여부&nbsp;&nbsp;

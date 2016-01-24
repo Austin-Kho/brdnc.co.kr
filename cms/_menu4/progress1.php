@@ -41,9 +41,8 @@
 								<select name="year_frm" onchange="submit();" class="inputstyle2" style="height:22px; width:100px;"> <!-- =================== pj_data_reg - 1 - year_frm =================== -->
 									<option value="1"> 전 체
 									<?
-										$start_year = "2012";
 										// if(!$year_frm) $year_frm=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
-										$year=range($start_year,date('Y'));
+										$year=range(date('Y')-4,date('Y'));
 										for($i=(count($year)-1); $i>=0; $i--){
 									?>
 									<option value="<?=$year[$i]?>" <?if($year_frm==$year[$i]) echo "selected"; ?>><?=$year[$i]."년"?>
@@ -59,9 +58,9 @@
 									<?
 										$where="WHERE is_data_reg = '0' ";
 										if($year_frm>1){
-											$where.=" AND pr_sd LIKE '$year_frm%' ";
+											$where.=" AND start_date LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT * FROM cms_project_info $where ORDER BY pr_sd DESC ";
+										$qry = "SELECT * FROM cms_project_info $where ORDER BY start_date DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -78,9 +77,9 @@
 									<?
 										$where="WHERE is_data_reg = '1' ";
 										if($year_frm>1){
-											$where.=" AND pr_sd LIKE '$year_frm%' ";
+											$where.=" AND start_date LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT * FROM cms_project_info $where ORDER BY pr_sd DESC ";
+										$qry = "SELECT * FROM cms_project_info $where ORDER BY start_date DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -96,7 +95,7 @@
 						<?
 							if($new_pj) $pre_pj_seq = $new_pj; // 신규 등록인지
 							if($reg_pj) $pre_pj_seq = $reg_pj; // 등록 수정인지
-							$p_qry = "SELECT pj_name, sort, data_cr, type_info FROM cms_project_info WHERE seq = '$pre_pj_seq' ";
+							$p_qry = "SELECT pj_name, sort, data_cr, type_name FROM cms_project_info WHERE seq = '$pre_pj_seq' ";
 							$p_rlt = mysql_query($p_qry, $connect);
 							$p_row = mysql_fetch_array($p_rlt);
 							if($p_row[sort]==1) $sort="아파트(일반분양)";
@@ -108,7 +107,7 @@
 							if($p_row[sort]==7) $sort="레저(숙박)시설";
 							if($p_row[sort]==8) $sort="기 타";
 
-							$type=explode("-", $p_row[type_info]);
+							$type=explode("-", $p_row[type_name]);
 							$t_count=count($type);
 							if($p_row[pj_name]) $pj_name ="<font color='#000099'>".$p_row[pj_name]."</font>";
 							if($sort) $pj_sort = "<font color='#000099'>".$sort."</font>";
@@ -129,7 +128,7 @@
 								<?=$pj_sort?>
 							</div>
 							<?
-								if($reg_pj){
+								if($reg_pj){ // 등록 수정이면
 							?>
 							<div style="float:right; height:27px; width:120px; padding:5px 0 0 15px; ">
 								<input type="button" value="재 등록하기" onclick="data_move('re_reg','<?=$reg_pj?>');" class="inputstyle_bt" style="height:22px;">
@@ -137,8 +136,8 @@
 							<? } ?>
 						</div>
 						<?
-							if((!$reg_pj&&$new_pj)||(!$reg_pj&&!$new_pj)){
-								if($p_row[data_cr]==1){
+							if((!$reg_pj&&$new_pj)||(!$reg_pj&&!$new_pj)){ // 신규 등록이거나 신규등록도 등록 수정도 아니면
+								if($p_row[data_cr]==1){ //
 						?>
 						<input type="hidden" name="data_cr" value="<?=$p_row[data_cr]?>">
 
@@ -202,7 +201,7 @@
 									<select name="type_batch" style="width:60px;">
 										<option value="" selected> 선택
 										<?
-											if($p_row[type_info]){
+											if($p_row[type_name]){
 												for($i=0; $i<$t_count; $i++){
 										?>
 										<option value="<?=$type[$i]?>"> <?=$type[$i]?>
@@ -317,7 +316,7 @@
 									<select name="type_1" style="width:60px;">
 										<option value="" selected> 선택
 										<?
-											if($p_row[type_info]){
+											if($p_row[type_name]){
 												for($i=0; $i<$t_count; $i++){
 										?>
 										<option value="<?=$type[$i]?>"> <?=$type[$i]?>
@@ -348,7 +347,7 @@
 									<select name="type_2" style="width:60px;">
 										<option value="" selected> 선택
 										<?
-											if($p_row[type_info]){
+											if($p_row[type_name]){
 												for($i=0; $i<$t_count; $i++){
 										?>
 										<option value="<?=$type[$i]?>"> <?=$type[$i]?>
@@ -379,7 +378,7 @@
 									<select name="type_3" style="width:60px;">
 										<option value="" selected> 선택
 										<?
-											if($p_row[type_info]){
+											if($p_row[type_name]){
 												for($i=0; $i<$t_count; $i++){
 										?>
 										<option value="<?=$type[$i]?>"> <?=$type[$i]?>
@@ -410,7 +409,7 @@
 									<select name="type_4" style="width:60px;">
 										<option value="" selected> 선택
 										<?
-											if($p_row[type_info]){
+											if($p_row[type_name]){
 												for($i=0; $i<$t_count; $i++){
 										?>
 										<option value="<?=$type[$i]?>"> <?=$type[$i]?>
@@ -441,7 +440,7 @@
 									<select name="type_5" style="width:60px;">
 										<option value="" selected> 선택
 										<?
-											if($p_row[type_info]){
+											if($p_row[type_name]){
 												for($i=0; $i<$t_count; $i++){
 										?>
 										<option value="<?=$type[$i]?>"> <?=$type[$i]?>
@@ -472,7 +471,7 @@
 									<select name="type_6" style="width:60px;">
 										<option value="" selected> 선택
 										<?
-											if($p_row[type_info]){
+											if($p_row[type_name]){
 												for($i=0; $i<$t_count; $i++){
 										?>
 										<option value="<?=$type[$i]?>"> <?=$type[$i]?>
@@ -503,7 +502,7 @@
 									<select name="type_7" style="width:60px;">
 										<option value="" selected> 선택
 										<?
-											if($p_row[type_info]){
+											if($p_row[type_name]){
 												for($i=0; $i<$t_count; $i++){
 										?>
 										<option value="<?=$type[$i]?>"> <?=$type[$i]?>
@@ -534,7 +533,7 @@
 									<select name="type_8" style="width:60px;">
 										<option value="" selected> 선택
 										<?
-											if($p_row[type_info]){
+											if($p_row[type_name]){
 												for($i=0; $i<$t_count; $i++){
 										?>
 										<option value="<?=$type[$i]?>"> <?=$type[$i]?>
@@ -569,7 +568,7 @@
 									<select name="type_batch" style="width:60px;">
 										<option value="" selected> 선택
 										<?
-											if($p_row[type_info]){
+											if($p_row[type_name]){
 												for($i=0; $i<$t_count; $i++){
 										?>
 										<option value="<?=$type[$i]?>"> <?=$type[$i]?>

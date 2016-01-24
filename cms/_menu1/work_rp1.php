@@ -50,9 +50,8 @@
 								<select name="year_frm" onchange="submit();" class="inputstyle2" style="height:22px; width:100px;"><!-- ==================================== 계약년도 폼 ===================================== -->
 									<option value="1"> 전 체
 									<?
-										$start_year = "2013";
-										if(!$year_frm) $year_frm=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
-										$year=range($start_year,date('Y'));
+										// if(!$year_frm) $year_frm=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
+										$year=range(date('Y')-4,date('Y'));
 										for($i=(count($year)-1); $i>=0; $i--){
 									?>
 									<option value="<?=$year[$i]?>" <?if($year_frm==$year[$i]) echo "selected"; ?>><?=$year[$i]."년"?>
@@ -67,9 +66,9 @@
 									<option value="" <?if(!$pj_list) echo "selected"?>> 선 택
 									<?
 										if($year_frm>1){
-											$where=" WHERE pr_sd LIKE '$year_frm%' ";
+											$where=" WHERE start_date LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT seq, pj_name FROM cms_project_info $where ORDER BY pr_sd DESC ";
+										$qry = "SELECT seq, pj_name FROM cms_project_info $where ORDER BY start_date DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
