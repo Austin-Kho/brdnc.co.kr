@@ -172,9 +172,9 @@ function con_formck(){
 		}
 	}
 	//////////////////////////////////////////////////
-	if(!form.pr_sd.value){
+	if(!form.start_date.value){
 		alert('수행 개시일을 입력하여 주세요!');
-		form.pr_sd.focus();
+		form.start_date.focus();
 		return;
 	}
 	form.submit();
@@ -232,11 +232,12 @@ function pj_data_put_0(){
 			form.price_1.focus();
 			return;
 		}
-		if(!form.pay_1.value){
-			alert("해당 호수의 수수료를 입력하십시요!");
-			form.pay_1.focus();
-			return;
-		}
+
+		// if(!form.pay_1.value){
+		// 	alert("해당 호수의 수수료를 입력하십시요!");
+		// 	form.pay_1.focus();
+		// 	return;
+		// }
 	}
 	if(form.floor_2.value){
 		if(!form.type_2.value){
@@ -249,11 +250,11 @@ function pj_data_put_0(){
 			form.price_2.focus();
 			return;
 		}
-		if(!form.pay_2.value){
-			alert("해당 호수의 수수료를 입력하십시요!");
-			form.pay_2.focus();
-			return;
-		}
+		// if(!form.pay_2.value){
+		// 	alert("해당 호수의 수수료를 입력하십시요!");
+		// 	form.pay_2.focus();
+		// 	return;
+		// }
 	}
 	if(form.floor_3.value){
 		if(!form.type_3.value){
@@ -266,11 +267,11 @@ function pj_data_put_0(){
 			form.price_3.focus();
 			return;
 		}
-		if(!form.pay_3.value){
-			alert("해당 호수의 수수료를 입력하십시요!");
-			form.pay_3.focus();
-			return;
-		}
+		// if(!form.pay_3.value){
+		// 	alert("해당 호수의 수수료를 입력하십시요!");
+		// 	form.pay_3.focus();
+		// 	return;
+		// }
 	}
 	if(form.floor_4.value){
 		if(!form.type_4.value){
@@ -283,11 +284,11 @@ function pj_data_put_0(){
 			form.price_4.focus();
 			return;
 		}
-		if(!form.pay_4.value){
-			alert("해당 호수의 수수료를 입력하십시요!");
-			form.pay_4.focus();
-			return;
-		}
+		// if(!form.pay_4.value){
+		// 	alert("해당 호수의 수수료를 입력하십시요!");
+		// 	form.pay_4.focus();
+		// 	return;
+		// }
 	}
 	if(form.floor_5.value){
 		if(!form.type_5.value){
@@ -300,11 +301,11 @@ function pj_data_put_0(){
 			form.price_5.focus();
 			return;
 		}
-		if(!form.pay_5.value){
-			alert("해당 호수의 수수료를 입력하십시요!");
-			form.pay_5.focus();
-			return;
-		}
+		// if(!form.pay_5.value){
+		// 	alert("해당 호수의 수수료를 입력하십시요!");
+		// 	form.pay_5.focus();
+		// 	return;
+		// }
 	}
 	if(form.floor_6.value){
 		if(!form.type_6.value){
@@ -317,11 +318,11 @@ function pj_data_put_0(){
 			form.price_6.focus();
 			return;
 		}
-		if(!form.pay_6.value){
-			alert("해당 호수의 수수료를 입력하십시요!");
-			form.pay_6.focus();
-			return;
-		}
+		// if(!form.pay_6.value){
+		// 	alert("해당 호수의 수수료를 입력하십시요!");
+		// 	form.pay_6.focus();
+		// 	return;
+		// }
 	}
 	if(form.floor_7.value){
 		if(!form.type_7.value){
@@ -334,11 +335,11 @@ function pj_data_put_0(){
 			form.price_7.focus();
 			return;
 		}
-		if(!form.pay_7.value){
-			alert("해당 호수의 수수료를 입력하십시요!");
-			form.pay_7.focus();
-			return;
-		}
+		// if(!form.pay_7.value){
+		// 	alert("해당 호수의 수수료를 입력하십시요!");
+		// 	form.pay_7.focus();
+		// 	return;
+		// }
 	}
 	if(form.floor_8.value){
 		if(!form.type_8.value){
@@ -351,11 +352,11 @@ function pj_data_put_0(){
 			form.price_8.focus();
 			return;
 		}
-		if(!form.pay_8.value){
-			alert("해당 호수의 수수료를 입력하십시요!");
-			form.pay_8.focus();
-			return;
-		}
+		// if(!form.pay_8.value){
+		// 	alert("해당 호수의 수수료를 입력하십시요!");
+		// 	form.pay_8.focus();
+		// 	return;
+		// }
 	}
 	if(form.min_floor.value){
 		if(!form.type_batch.value){
@@ -368,11 +369,11 @@ function pj_data_put_0(){
 			form.price_batch.focus();
 			return;
 		}
-		if(!form.pay_batch.value){
-			alert("해당 호수의 수수료를 입력하십시요!");
-			form.pay_batch.focus();
-			return;
-		}
+		// if(!form.pay_batch.value){
+		// 	alert("해당 호수의 수수료를 입력하십시요!");
+		// 	form.pay_batch.focus();
+		// 	return;
+		// }
 	}
 	if(form.min_floor.value){
 		if(!form.max_floor.value){
