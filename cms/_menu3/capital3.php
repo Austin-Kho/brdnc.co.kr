@@ -7,10 +7,14 @@
 					</div>
 					<!-- ===== subject table end ===== -->
 					<?
-						$ca_1_3_rlt = mysql_query("select ca_1_3 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$ca_1_3_row = mysql_fetch_array($ca_1_3_rlt);
+						$_m3_1_3_rlt = mysql_query("select _m3_1_3 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m3_1_3_row = mysql_fetch_array($_m3_1_3_rlt);
 
+<<<<<<< HEAD
 						if(!$ca_1_3_row[ca_1_3]||$ca_1_3_row[ca_1_3]==0){
+=======
+						if(!$_m3_1_3_row[_m3_1_3]||$_m3_1_3_row[_m3_1_3]==0){
+>>>>>>> ad2b043cafb8270de4eda52aba399861669ae669
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -28,7 +32,7 @@
 					<tr>
 						<td height="580" valign="top">
 						<div style="height:18px; text-align:right; padding:0 20px 2px 0; margin-top:10px;" class="form2">
-							<!-- <a href="javascript:" onClick="excel_pop(<?=$ca_1_2_row[ca_1_2]?>,2);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL 출력</a> -->
+							<!-- <a href="javascript:" onClick="excel_pop(<?=$_m3_1_2_row[_m3_1_2]?>,2);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL 출력</a> -->
 						</div>
 						<form method="post" name="inout_frm" action="capital3_post.php">
 
@@ -1179,7 +1183,7 @@
 						<tr align="right" bgcolor="#F8F8F8">
 							<td style="border-width: 0 0 1px 0; border-color:#CFCFCF; border-style: solid; padding:0 20px 0 0px" height="48">
 							<?
-								if($ca_1_3_row[ca_1_3]<2){
+								if($_m3_1_3_row[_m3_1_3]<2){
 									$submit_str="alert('등록 권한이 없습니다!')";
 								}else{
 									 $submit_str="inout_frm_chk('com');";

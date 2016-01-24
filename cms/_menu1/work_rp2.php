@@ -7,10 +7,10 @@
 					</div>
 					<!-- ============================= subject table end ============================= -->
 					<?
-						$sa_1_2_rlt = mysql_query("select sa_1_2 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$sa_1_2_row = mysql_fetch_array($sa_1_2_rlt);
+						$_m1_1_2_rlt = mysql_query("select _m1_1_2 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m1_1_2_row = mysql_fetch_array($_m1_1_2_rlt);
 
-						if(!$sa_1_2_row[sa_1_2]||$sa_1_2_row[sa_1_2]==0){
+						if(!$_m1_1_2_row[_m1_1_2]||$_m1_1_2_row[_m1_1_2]==0){
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -28,7 +28,7 @@
 					<tr>
 						<td valign="top">
 						<div style="height:18px; text-align:right; padding:0 20px 2px 0; margin-top:10px;">
-							<!-- <a href="javascript:" onClick="excel_pop('<?=$sa_2_1_row[sa_2_1]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
+							<!-- <a href="javascript:" onClick="excel_pop('<?=$_m1_2_1_row[_m1_2_1]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
 						</div>
 						<div style="height:35px; border-width:1px 0 1px 0; border-color:#D6D6D6; border-style:solid;">
 							<!-- ============ 본사 직원일 때 프로젝트 선택 가능 시작 ============  -->

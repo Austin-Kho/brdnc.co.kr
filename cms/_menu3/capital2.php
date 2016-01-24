@@ -7,10 +7,10 @@
 					</div>
 					<!-- =====subject table end ===== -->
 					<?
-						$ca_1_2_rlt = mysql_query("SELECT ca_1_2 FROM cms_mem_auth WHERE user_id='$_SESSION[p_id]' ", $connect);
-						$ca_1_2_row = mysql_fetch_array($ca_1_2_rlt);
+						$_m3_1_2_rlt = mysql_query("SELECT _m3_1_2 FROM cms_mem_auth WHERE user_id='$_SESSION[p_id]' ", $connect);
+						$_m3_1_2_row = mysql_fetch_array($_m3_1_2_rlt);
 
-						if(!$ca_1_2_row[ca_1_2]||$ca_1_2_row[ca_1_2]==0){
+						if(!$_m3_1_2_row[_m3_1_2]||$_m3_1_2_row[_m3_1_2]==0){
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -37,7 +37,7 @@
 								$auth_level=2; // 이페이지 마스터 쓰기 권한 레벨
 
 								if($auth_row[is_admin]==1){ $w_auth =2;
-								}else if($ca_1_2_row[ca_1_2]==2){ if($auth_row[auth_level]<=$auth_level){ $w_auth =2; }else{ $w_auth =1;}}else{	$w_auth =0;}
+								}else if($_m3_1_2_row[_m3_1_2]==2){ if($auth_row[auth_level]<=$auth_level){ $w_auth =2; }else{ $w_auth =1;}}else{	$w_auth =0;}
 
 								$class1 = $_REQUEST['class1'];
 								$class2 = $_REQUEST['class2'];
@@ -65,7 +65,7 @@
 									if($sh_con==4) $add_where.=" AND (in_acc like '%$sh_text%' OR out_acc like '%$sh_text%') "; // 계정
 									if($sh_con==5) $add_where.=" AND evidence like '%$sh_text%' ";  //증빙서류
 								}
-								if($ca_1_2_row[ca_1_2]<1){
+								if($_m3_1_2_row[_m3_1_2]<1){
 									$excel_pop = "alert('출력 권한이 없습니다!');";
 								}else{
 									$url_where = urlencode($add_where);

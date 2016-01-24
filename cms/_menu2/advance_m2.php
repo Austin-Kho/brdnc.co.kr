@@ -7,10 +7,10 @@
 					</div>
 					<!-- ============== subject table end ============== -->
 					<?
-						$pr_1_2_rlt = mysql_query("select pr_1_2 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$pr_1_2_row = mysql_fetch_array($pr_1_2_rlt);
+						$_m2_1_2_rlt = mysql_query("select _m2_1_2 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m2_1_2_row = mysql_fetch_array($_m2_1_2_rlt);
 
-						if(!$pr_1_2_row[pr_1_2]||$pr_1_2_row[pr_1_2]==0){
+						if(!$_m2_1_2_row[_m2_1_2]||$_m2_1_2_row[_m2_1_2]==0){
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -28,7 +28,7 @@
 					<tr>
 						<td height="580" valign="top">
 						<div style="height:18px; text-align:right; padding:0 20px 2px 0; margin-top:10px;">
-							<!-- <a href="javascript:" onClick="excel_pop('<?=$pr_1_2_row[pr_1_2]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt=""> EXCEL로 출력</a> -->
+							<!-- <a href="javascript:" onClick="excel_pop('<?=$_m2_1_2_row[_m2_1_2]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt=""> EXCEL로 출력</a> -->
 						</div>
 						<form method="post" name="form1" action="<?=$_SERVER['PHP_SELF']?>">
 						<input type="hidden" name="s_di" value="2">
@@ -1196,7 +1196,7 @@
 						<tr align="right" bgcolor="#F8F8F8">
 							<td style="border-width: 0 0 1px 0; border-color:#CFCFCF; border-style: solid; padding:0 20px 0 0px" height="48">
 							<?
-								if($pr_1_2_row[pr_1_2]<2){
+								if($_m2_1_2_row[_m2_1_2]<2){
 									$submit_str="alert('등록 권한이 없습니다!')";
 								}else{
 									$submit_str=$submit_str_;

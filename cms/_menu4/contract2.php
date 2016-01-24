@@ -8,10 +8,10 @@
 					</div>
 					<!-- ===== subject table end ===== -->
 					<?
-						$ct_2_2_rlt = mysql_query("select ct_2_2 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$ct_2_2_row = mysql_fetch_array($ct_2_2_rlt);
+						$_m4_2_2_rlt = mysql_query("select _m4_2_2 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m4_2_2_row = mysql_fetch_array($_m4_2_2_rlt);
 
-						if(!$ct_2_2_row[ct_2_2]||$ct_2_2_row[ct_2_2]==0){
+						if(!$_m4_2_2_row[_m4_2_2]||$_m4_2_2_row[_m4_2_2]==0){
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -289,7 +289,7 @@
 						<tr align="right" bgcolor="#F8F8F8">
 							<td colspan="3" class="form2" height="48"></td>
 							<?
-								if($ct_2_2_row[ct_2_2]<2){
+								if($_m4_2_2_row[_m4_2_2]<2){
 									$submit_str="alert('등록 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 								}else{
 									 $submit_str="con_formck();";

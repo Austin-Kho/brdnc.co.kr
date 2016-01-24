@@ -7,10 +7,10 @@
 					</div>
 					<!-- =====subject table end===== -->
 					<?
-						$cg_1_3_rlt = mysql_query("select cg_1_3 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$cg_1_3_row = mysql_fetch_array($cg_1_3_rlt);
+						$_m5_1_3_rlt = mysql_query("select _m5_1_3 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m5_1_3_row = mysql_fetch_array($_m5_1_3_rlt);
 
-						if(!$cg_1_3_row[cg_1_3]||$cg_1_3_row[cg_1_3]==0){
+						if(!$_m5_1_3_row[_m5_1_3]||$_m5_1_3_row[_m5_1_3]==0){
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">

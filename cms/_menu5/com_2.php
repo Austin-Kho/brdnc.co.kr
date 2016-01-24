@@ -7,10 +7,10 @@
 					</div>
 					<!--===== subject table end===== -->
 					<?
-						$cg_2_2_rlt = mysql_query("select cg_2_2 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$cg_2_2_row = mysql_fetch_array($cg_2_2_rlt);
+						$_m5_2_2_rlt = mysql_query("select _m5_2_2 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m5_2_2_row = mysql_fetch_array($_m5_2_2_rlt);
 
-						if(!$cg_2_2_row[cg_2_2]||$cg_2_2_row[cg_2_2]==0){
+						if(!$_m5_2_2_row[_m5_2_2]||$_m5_2_2_row[_m5_2_2]==0){
 					?>
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
 						<tr>
@@ -27,7 +27,7 @@
 					<tr>
 						<td height="580" valign="top">
 						<div style="height:18px; text-align:right; padding:0 20px 2px 0; margin-top:10px;" class="form2">
-							<!-- <a href="javascript:" onClick="excel_pop('<?=$sa_2_1_row[sa_2_1]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
+							<!-- <a href="javascript:" onClick="excel_pop('<?=$_m1_2_1_row[_m1_2_1]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
 						</div>
 						<!-- 신규 사용자 등록자가 있을 때 처리 시작 -->
 						<?
@@ -73,7 +73,7 @@
 							<td> <?=$rs1[email]?> </td>
 							<td> <?=$rs1[reg_date]?> </td>
 							<?
-								if($cg_2_2_row[cg_2_2]<2){
+								if($_m5_2_2_row[_m5_2_2]<2){
 									$perm_str="alert('승인(거부) 권한이 없습니다!')";
 								}else{
 									$perm_str="permition('$rs1[no]',this.value);";
@@ -177,41 +177,40 @@
 						<!-- 영업관리 파트 시작 -->
 						<tr valign="middle">
 							<td width="120" rowspan="2" class="top2" align="center" <?if($is_com==2) echo "bgcolor='#d8d8d8'"; else "bgcolor='#f8f8f8'";?>><font size="2" color="black"><b>영업관리</b></font></td>
-							<td height="34" class="top2" align="right"><font color="black"><b>업무현황</b></font></td>
-							<td height="34" width="20" class="top2"><!-- <input type="checkbox" name="sa_1" onclick="checksel();"> --></td>
-
+							<td height="34" class="top2" align="right"><font color="black"><b onclick="auth_chk('1-1');">업무현황</b></font></td>
+							<td height="34" width="20" class="top2"><!-- <input type="checkbox" name="_m1_1" onclick="checksel();"> --></td>
 
 							<td class="top2" align="right"><font color="black">고객 상담일지</font></td>
 							<td class="top2">
-								<input type="checkbox" name="sa_1_1" <?if($asr[sa_1_1]>0) echo "checked";?>>조회
-								<input type="checkbox" name="sa_1_1_m" <?if($asr[sa_1_1]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m1_1_1" <?if($asr[_m1_1_1]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m1_1_1_m" <?if($asr[_m1_1_1]>1) echo "checked";?>>등록</td>
 							<td class="top2" align="right"><font color="black">업무일지</font></td>
 							<td class="top2">
-								<input type="checkbox" name="sa_1_2" <?if($asr[sa_1_2]>0) echo "checked";?>>조회
-								<input type="checkbox" name="sa_1_2_m" <?if($asr[sa_1_2]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m1_1_2" <?if($asr[_m1_1_2]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m1_1_2_m" <?if($asr[_m1_1_2]>1) echo "checked";?>>등록</td>
 							<td class="top2" align="right"><font color="black">업무보고</font></td>
 							<td class="top2">
-								<input type="checkbox" name="sa_1_3" <?if($asr[sa_1_3]>0) echo "checked";?>>조회
-								<input type="checkbox" name="sa_1_3_m" <?if($asr[sa_1_3]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m1_1_3" <?if($asr[_m1_1_3]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m1_1_3_m" <?if($asr[_m1_1_3]>1) echo "checked";?>>등록</td>
 							<td class="top2"></td>
 							<td class="top2"></td>
 						</tr>
 						<tr valign="middle">
-							<td height="34" align="right"><font color="black"><b>계약현황</b></font></td>
-							<td height="34"><!-- <input type="checkbox" name="sa_2"> --></td>
+							<td height="34" align="right"><font color="black"><b onclick="auth_chk('1-2');">계약현황</b></font></td>
+							<td height="34"><!-- <input type="checkbox" name="_m1_2"> --></td>
 
 							<td align="right"><font color="black">동호수 조회</font></td>
 							<td>
-								<input type="checkbox" name="sa_2_1" <?if($asr[sa_2_1]>0) echo "checked";?>>조회
-								<input type="checkbox" name="sa_2_1_m"<?if($asr[sa_2_1]>1) echo "checked";?> disabled>등록</td>
+								<input type="checkbox" name="_m1_2_1" <?if($asr[_m1_2_1]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m1_2_1_m"<?if($asr[_m1_2_1]>1) echo "checked";?> disabled>등록</td>
 							<td align="right"><font color="black">계약등록</font></td>
 							<td>
-								<input type="checkbox" name="sa_2_2" <?if($asr[sa_2_2]>0) echo "checked";?>>조회
-								<input type="checkbox" name="sa_2_2_m" <?if($asr[sa_2_2]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m1_2_2" <?if($asr[_m1_2_2]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m1_2_2_m" <?if($asr[_m1_2_2]>1) echo "checked";?>>등록</td>
 							<td align="right"><font color="black">계약현황</font></td>
 							<td>
-								<input type="checkbox" name="sa_2_3" <?if($asr[sa_2_3]>0) echo "checked";?>>조회
-								<input type="checkbox" name="sa_2_3_m" <?if($asr[sa_2_3]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m1_2_3" <?if($asr[_m1_2_3]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m1_2_3_m" <?if($asr[_m1_2_3]>1) echo "checked";?>>등록</td>
 							<td></td>
 							<td></td>
 						</tr>
@@ -221,38 +220,38 @@
 						<tr valign="middle">
 							<td rowspan="2" bgcolor="#f8f8f8" style="border-width: 1px 0 1px 0; border-color:#D6D6D6; border-style: solid;" align="center"><font size="2" color="black"><b>현장관리</b></font></td>
 
-							<td height="34" class="top" align="right"><font color="black"><b>전도금 관리</b></font></td>
-							<td height="34" class="top"><!-- <input type="checkbox" name="pr_1"> --></td>
+							<td height="34" class="top" align="right"><font color="black"><b onclick="auth_chk('2-1');">전도금 관리</b></font></td>
+							<td height="34" class="top"><!-- <input type="checkbox" name="_m2_1"> --></td>
 							<td class="top" align="right"><font color="black">전도금 내역</font></td>
 							<td class="top">
-								<input type="checkbox" name="pr_1_1" <?if($asr[pr_1_1]>0) echo "checked";?>>조회
-								<input type="checkbox" name="pr_1_1_m" <?if($asr[pr_1_1]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m2_1_1" <?if($asr[_m2_1_1]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m2_1_1_m" <?if($asr[_m2_1_1]>1) echo "checked";?>>등록</td>
 							<td class="top" align="right"><font color="black">전도금 입출등록</font></td>
 							<td class="top">
-								<input type="checkbox" name="pr_1_2" <?if($asr[pr_1_2]>0) echo "checked";?>>조회
-								<input type="checkbox" name="pr_1_2_m" <?if($asr[pr_1_2]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m2_1_2" <?if($asr[_m2_1_2]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m2_1_2_m" <?if($asr[_m2_1_2]>1) echo "checked";?>>등록</td>
 							<td class="top" align="right"><font color="black">전체 전도금 현황</font></td>
 							<td class="top">
-								<input type="checkbox" name="pr_1_3" <?if($asr[pr_1_3]>0) echo "checked";?>>조회
-								<input type="checkbox" name="pr_1_3_m" <?if($asr[pr_1_3]>1) echo "checked";?> disabled>등록</td>
+								<input type="checkbox" name="_m2_1_3" <?if($asr[_m2_1_3]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m2_1_3_m" <?if($asr[_m2_1_3]>1) echo "checked";?> disabled>등록</td>
 							<td class="top"></td>
 							<td class="top"></td>
 						</tr>
 						<tr valign="middle">
-							<td height="34" class="bottom" align="right"><font color="black"><b>투입자원 관리</b></font></td>
-							<td height="34" class="bottom"><!-- <input type="checkbox" name="pr_2"> --></td>
+							<td height="34" class="bottom" align="right"><font color="black"><b onclick="auth_chk('2-2');">투입자원 관리</b></font></td>
+							<td height="34" class="bottom"><!-- <input type="checkbox" name="_m2_2"> --></td>
 							<td class="bottom" align="right"><font color="black">현장 인원현황</font></td>
 							<td class="bottom">
-								<input type="checkbox" name="pr_2_1" <?if($asr[pr_2_1]>0) echo "checked";?>>조회
-								<input type="checkbox" name="pr_2_1_m" <?if($asr[pr_2_1]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m2_2_1" <?if($asr[_m2_2_1]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m2_2_1_m" <?if($asr[_m2_2_1]>1) echo "checked";?>>등록</td>
 							<td class="bottom" align="right"><font color="black">현장 인원등록</font></td>
 							<td class="bottom">
-								<input type="checkbox" name="pr_2_2" <?if($asr[pr_2_2]>0) echo "checked";?>>조회
-								<input type="checkbox" name="pr_2_2_m" <?if($asr[pr_2_2]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m2_2_2" <?if($asr[_m2_2_2]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m2_2_2_m" <?if($asr[_m2_2_2]>1) echo "checked";?>>등록</td>
 							<td class="bottom" align="right"><font color="black">사용자 소속관리</font></td>
 							<td class="bottom">
-								<input type="checkbox" name="pr_2_3" <?if($asr[pr_2_3]>0) echo "checked";?>>조회
-								<input type="checkbox" name="pr_2_3_m" <?if($asr[pr_2_3]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m2_2_3" <?if($asr[_m2_2_3]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m2_2_3_m" <?if($asr[_m2_2_3]>1) echo "checked";?>>등록</td>
 							<td class="bottom"></td>
 							<td class="bottom"></td>
 						</tr>
@@ -261,34 +260,34 @@
 						<!-- 자금관리 파트 시작 -->
 						<tr valign="middle">
 							<td rowspan="2" bgcolor="#f8f8f8" class="bottom" align="center"><font size="2" color="black"><b>자금관리</b></font></td>
-							<td height="34" align="right"><font color="black"><b>자금현황</b></font></td>
-							<td height="34"><!-- <input type="checkbox" name="ca_1"> --></td>
+							<td height="34" align="right"><font color="black"><b onclick="auth_chk('3-1');">자금현황</b></font></td>
+							<td height="34"><!-- <input type="checkbox" name="_m3_1"> --></td>
 							<td align="right"><font color="black">자금일보</font></td>
 							<td>
-								<input type="checkbox" name="ca_1_1" <?if($asr[ca_1_1]>0) echo "checked";?>>조회
-								<input type="checkbox" name="ca_1_1_m" <?if($asr[ca_1_1]>1) echo "checked";?> disabled>등록</td>
+								<input type="checkbox" name="_m3_1_1" <?if($asr[_m3_1_1]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m3_1_1_m" <?if($asr[_m3_1_1]>1) echo "checked";?> disabled>등록</td>
 							<td align="right"><font color="black">입출금 내역</font></td>
 							<td>
-								<input type="checkbox" name="ca_1_2" <?if($asr[ca_1_2]>0) echo "checked";?>>조회
-								<input type="checkbox" name="ca_1_2_m" <?if($asr[ca_1_2]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m3_1_2" <?if($asr[_m3_1_2]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m3_1_2_m" <?if($asr[_m3_1_2]>1) echo "checked";?>>등록</td>
 							<td align="right"><font color="black">입출금 등록</font></td>
 							<td>
-								<input type="checkbox" name="ca_1_3" <?if($asr[ca_1_3]>0) echo "checked";?>>조회
-								<input type="checkbox" name="ca_1_3_m" <?if($asr[ca_1_3]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m3_1_3" <?if($asr[_m3_1_3]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m3_1_3_m" <?if($asr[_m3_1_3]>1) echo "checked";?>>등록</td>
 							<td></td>
 							<td></td>
 						</tr>
 						<tr valign="middle">
-							<td height="34" class="bottom" align="right"><font color="black"><b>매출현황</b></font></td>
-							<td height="34" class="bottom"><!-- <input type="checkbox" name="ca_2"> --></td>
+							<td height="34" class="bottom" align="right"><font color="black"><b onclick="auth_chk('3-2');">매출현황</b></font></td>
+							<td height="34" class="bottom"><!-- <input type="checkbox" name="_m3_2"> --></td>
 							<td class="bottom" align="right"><font color="black">매출채권</font></td>
 							<td class="bottom">
-								<input type="checkbox" name="ca_2_1" <?if($asr[ca_2_1]>0) echo "checked";?>>조회
-								<input type="checkbox" name="ca_2_1_m" <?if($asr[ca_2_1]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m3_2_1" <?if($asr[_m3_2_1]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m3_2_1_m" <?if($asr[_m3_2_1]>1) echo "checked";?>>등록</td>
 							<td class="bottom" align="right"><font color="black">기타현황</font></td>
 							<td class="bottom">
-								<input type="checkbox" name="ca_2_2" <?if($asr[ca_2_2]>0) echo "checked";?>>조회
-								<input type="checkbox" name="ca_2_2_m" <?if($asr[ca_2_2]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m3_2_2" <?if($asr[_m3_2_2]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m3_2_2_m" <?if($asr[_m3_2_2]>1) echo "checked";?>>등록</td>
 							<td class="bottom"></td>
 							<td class="bottom"></td>
 							<td class="bottom"></td>
@@ -296,35 +295,35 @@
 						</tr>
 						<!-- 자금관리 파트 종료 -->
 
-						<!-- 수주관리 파트 시작 -->
+						<!-- 프로젝트 파트 시작 -->
 						<tr valign="middle">
-							<td rowspan="2" bgcolor="#f8f8f8" class="bottom" align="center"><font size="2" color="black"><b>수주관리</b></font></td>
-							<td height="34" align="right"><font color="black"><b>계약현장 관리</b></font></td>
-							<td height="34"><!-- <input type="checkbox" name="ct_1"> --></td>
-							<td align="right"><font color="black">진행계약 관리</font></td>
+							<td rowspan="2" bgcolor="#f8f8f8" class="bottom" align="center"><font size="2" color="black"><b>프로젝트</b></font></td>
+							<td height="34" align="right"><font color="black"><b onclick="auth_chk('4-1');">프로젝트 관리</b></font></td>
+							<td height="34"><!-- <input type="checkbox" name="_m4_1"> --></td>
+							<td align="right"><font color="black">데이터 등록</font></td>
 							<td>
-								<input type="checkbox" name="ct_1_1" <?if($asr[ct_1_1]>0) echo "checked";?>>조회
-								<input type="checkbox" name="ct_1_1_m" <?if($asr[ct_1_1]>1) echo "checked";?>>등록</td>
-							<td align="right"><font color="black">계약변경 수정</font></td>
+								<input type="checkbox" name="_m4_1_1" <?if($asr[_m4_1_1]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m4_1_1_m" <?if($asr[_m4_1_1]>1) echo "checked";?>>등록</td>
+							<td align="right"><font color="black">기본정보 수정</font></td>
 							<td>
-								<input type="checkbox" name="ct_1_2" <?if($asr[ct_1_2]>0) echo "checked";?>>조회
-								<input type="checkbox" name="ct_1_2_m" <?if($asr[ct_1_2]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m4_1_2" <?if($asr[_m4_1_2]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m4_1_2_m" <?if($asr[_m4_1_2]>1) echo "checked";?>>등록</td>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
 						</tr>
 						<tr valign="middle">
-							<td height="34" class="bottom" align="right"><font color="black"><b>신규계약 관리</b></font></td>
-							<td height="34" class="bottom"><!-- <input type="checkbox" name="ct_2"> --></td>
-							<td class="bottom" align="right"><font color="black">수주 진행현황</font></td>
+							<td height="34" class="bottom" align="right"><font color="black"><b onclick="auth_chk('4-2');">신규 프로젝트</b></font></td>
+							<td height="34" class="bottom"><!-- <input type="checkbox" name="_m4_2"> --></td>
+							<td class="bottom" align="right"><font color="black">검토 프로젝트</font></td>
 							<td class="bottom">
-								<input type="checkbox" name="ct_2_1" <?if($asr[ct_2_1]>0) echo "checked";?>>조회
-								<input type="checkbox" name="ct_2_1_m" <?if($asr[ct_2_1]>1) echo "checked";?>>등록</td>
-							<td class="bottom" align="right"><font color="black">신규계약 등록</font></td>
+								<input type="checkbox" name="_m4_2_1" <?if($asr[_m4_2_1]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m4_2_1_m" <?if($asr[_m4_2_1]>1) echo "checked";?>>등록</td>
+							<td class="bottom" align="right"><font color="black">프로젝트 등록</font></td>
 							<td class="bottom">
-								<input type="checkbox" name="ct_2_2" <?if($asr[ct_2_2]>0) echo "checked";?>>조회
-								<input type="checkbox" name="ct_2_2_m" <?if($asr[ct_2_2]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m4_2_2" <?if($asr[_m4_2_2]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m4_2_2_m" <?if($asr[_m4_2_2]>1) echo "checked";?>>등록</td>
 							<td class="bottom"></td>
 							<td class="bottom"></td>
 							<td class="bottom"></td>
@@ -335,37 +334,37 @@
 						<!-- 환경설정 파트 시작 -->
 						<tr valign="middle">
 							<td rowspan="2" bgcolor="#f8f8f8" align="center"><font size="2" color="black"><b>환경설정</b></font></td>
-							<td height="34" align="right"><font color="black"><b>기본정보 관리</b></font></td>
-							<td height="34"><!-- <input type="checkbox" name="cg_1"> --></td>
+							<td height="34" align="right"><font color="black"><b onclick="auth_chk('5-1');">기본정보 관리</b></font></td>
+							<td height="34"><!-- <input type="checkbox" name="_m5_1"> --></td>
 
 							<td align="right"><font color="black">부서정보 관리</font></td>
 							<td>
-								<input type="checkbox" name="cg_1_1" <?if($asr[cg_1_1]>0) echo "checked";?>>조회
-								<input type="checkbox" name="cg_1_1_m" <?if($asr[cg_1_1]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m5_1_1" <?if($asr[_m5_1_1]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m5_1_1_m" <?if($asr[_m5_1_1]>1) echo "checked";?>>등록</td>
 							<td align="right"><font color="black">직원정보 관리</font></td>
 							<td>
-								<input type="checkbox" name="cg_1_2" <?if($asr[cg_1_2]>0) echo "checked";?>>조회
-								<input type="checkbox" name="cg_1_2_m" <?if($asr[cg_1_2]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m5_1_2" <?if($asr[_m5_1_2]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m5_1_2_m" <?if($asr[_m5_1_2]>1) echo "checked";?>>등록</td>
 							<td align="right"><font color="black">거래처정보 관리</font></td>
 							<td>
-								<input type="checkbox" name="cg_1_3" <?if($asr[cg_1_3]>0) echo "checked";?>>조회
-								<input type="checkbox" name="cg_1_3_m" <?if($asr[cg_1_3]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m5_1_3" <?if($asr[_m5_1_3]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m5_1_3_m" <?if($asr[_m5_1_3]>1) echo "checked";?>>등록</td>
 							<td align="right"><font color="black">은행계좌 관리</font></td>
 							<td>
-								<input type="checkbox" name="cg_1_4" <?if($asr[cg_1_4]>0) echo "checked";?>>조회
-								<input type="checkbox" name="cg_1_4_m" <?if($asr[cg_1_4]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m5_1_4" <?if($asr[_m5_1_4]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m5_1_4_m" <?if($asr[_m5_1_4]>1) echo "checked";?>>등록</td>
 						</tr>
 						<tr valign="middle">
-							<td height="34" align="right"><font color="black"><b>회사정보 관리</b></font></td>
-							<td height="34"><!-- <input type="checkbox" name="cg_2"> --></td>
+							<td height="34" align="right"><font color="black"><b onclick="auth_chk('5-2');">회사정보 관리</b></font></td>
+							<td height="34"><!-- <input type="checkbox" name="_m5_2"> --></td>
 							<td align="right"><font color="black">회사 기본정보</font></td>
 							<td>
-								<input type="checkbox" name="cg_2_1" <?if($asr[cg_2_1]>0) echo "checked";?>>조회
-								<input type="checkbox" name="cg_2_1_m" <?if($asr[cg_2_1]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m5_2_1" <?if($asr[_m5_2_1]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m5_2_1_m" <?if($asr[_m5_2_1]>1) echo "checked";?>>등록</td>
 							<td align="right"><font color="black">사용자 권한관리</font></td>
 							<td>
-								<input type="checkbox" name="cg_2_2" <?if($asr[cg_2_2]>0) echo "checked";?>>조회
-								<input type="checkbox" name="cg_2_2_m" <?if($asr[cg_2_2]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m5_2_2" <?if($asr[_m5_2_2]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m5_2_2_m" <?if($asr[_m5_2_2]>1) echo "checked";?>>등록</td>
 							<td></td>
 							<td></td>
 							<td></td>
@@ -379,7 +378,7 @@
 						<tr bgcolor="#F8F8F8">
 							<td colspan="11" align="right" style="border-width: 0 0 1px 0; border-color:#D6D6D6; border-style: solid; padding:0 20px 0 0;" height="50">
 							<?
-								if($cg_2_2_row[cg_2_2]<2){
+								if($_m5_2_2_row[_m5_2_2]<2){
 									 $submit_str="alert('등록 권한이 없습니다!')";
 								}else{
 									 $submit_str="auth_submit('$mn');";

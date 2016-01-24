@@ -7,10 +7,10 @@
 					</div>
 					<!-- =====subject table end===== -->
 					<?
-						$cg_2_1_rlt = mysql_query("select cg_2_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$cg_2_1_row = mysql_fetch_array($cg_2_1_rlt);
+						$_m5_2_1_rlt = mysql_query("select _m5_2_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m5_2_1_row = mysql_fetch_array($_m5_2_1_rlt);
 
-						if(!$cg_2_1_row[cg_2_1]||$cg_2_1_row[cg_2_1]==0){
+						if(!$_m5_2_1_row[_m5_2_1]||$_m5_2_1_row[_m5_2_1]==0){
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -256,7 +256,7 @@
 					<tr align="right" bgcolor="#F8F8F8">
 						<td colspan="3" class="form2" height="48"></td>
 						<?
-							if($cg_2_1_row[cg_2_1]<2){
+							if($_m5_2_1_row[_m5_2_1]<2){
 								 $submit_str="alert('등록 권한이 없습니다!')";
 							}else{
 								 $submit_str="com_submit('$mode');";
@@ -523,7 +523,7 @@
 					<tr align="right" bgcolor="#F8F8F8">
 						<td colspan="3" class="form2" height="48"></td>
 						<?
-							if($cg_2_1_row[cg_2_1]<2){
+							if($_m5_2_1_row[_m5_2_1]<2){
 								 $submit_str="alert('등록 권한이 없습니다!')";
 							}else{
 								 $submit_str="com_submit('$mode');";

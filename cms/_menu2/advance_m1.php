@@ -7,10 +7,10 @@
 					</div>
 					<!-- ============== subject table end ============== -->
 					<?
-						$pr_1_1_rlt = mysql_query("select pr_1_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$pr_1_1_row = mysql_fetch_array($pr_1_1_rlt);
+						$_m2_1_1_rlt = mysql_query("select _m2_1_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m2_1_1_row = mysql_fetch_array($_m2_1_1_rlt);
 
-						if(!$pr_1_1_row[pr_1_1]||$pr_1_1_row[pr_1_1]==0){
+						if(!$_m2_1_1_row[_m2_1_1]||$_m2_1_1_row[_m2_1_1]==0){
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -103,7 +103,7 @@
 							$auth_level=2; // 이페이지 마스터 쓰기 권한 레벨
 
 							if($auth_row[is_admin]==1){ $w_auth =2;
-							}else if($pr_1_1_row[pr_1_1]==2){ if($auth_row[auth_level]<=$auth_level){ $w_auth =2; }else{ $w_auth =1;}}else{	$w_auth =0;}
+							}else if($_m2_1_1_row[_m2_1_1]==2){ if($auth_row[auth_level]<=$auth_level){ $w_auth =2; }else{ $w_auth =1;}}else{	$w_auth =0;}
 							///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 							$class1 = $_REQUEST['class1'];

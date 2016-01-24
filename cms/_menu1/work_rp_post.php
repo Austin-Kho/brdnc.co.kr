@@ -63,7 +63,7 @@
 					 err_msg('데이터베이스 오류가 발생하였습니다.dddd.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 				} else {
 					msg('정상적으로 고객 상담일지가 등록 되었습니다!');
-					echo "<meta http-equiv='Refresh' content='0; URL=sales_main.php?m_di=1&s_di=1'>";
+					echo "<meta http-equiv='Refresh' content='0; URL=work_main.php?m_di=1&s_di=1'>";
 				}
 			}
 		}
@@ -96,7 +96,7 @@
 				err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 			}else {
 				msg('정상적으로 고객 상담일지의 내용이 추가 되었습니다!');
-				echo "<meta http-equiv='Refresh' content='0; URL=sales_main.php?m_di=1&s_di=1'>";
+				echo "<meta http-equiv='Refresh' content='0; URL=work_main.php?m_di=1&s_di=1'>";
 			}
 		}
 
@@ -297,7 +297,7 @@
 					 err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 				} else {
 					msg('정상적으로 업무일지가 등록 되었습니다!');
-					echo "<meta http-equiv='Refresh' content='0; URL=sales_main.php?m_di=1&s_di=2'>";
+					echo "<meta http-equiv='Refresh' content='0; URL=work_main.php?m_di=1&s_di=2'>";
 				}
 			}
 		}
@@ -345,7 +345,7 @@
 				err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 			}else {
 				msg('정상적으로 업무일지가 수정 되었습니다!');
-				echo "<meta http-equiv='Refresh' content='0; URL=sales_main.php?m_di=1&s_di=2'>";
+				echo "<meta http-equiv='Refresh' content='0; URL=work_main.php?m_di=1&s_di=2'>";
 			}
 		}
 	}
@@ -394,7 +394,7 @@
 					 err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 				} else {
 					msg('정상적으로 거래처 정보가 등록 되었습니다!');
-					echo "<meta http-equiv='Refresh' content='0; URL=sales_main.php?m_di=1&s_di=3'>";
+					echo "<meta http-equiv='Refresh' content='0; URL=work_main.php?m_di=1&s_di=3'>";
 				}
 			}
 		}
@@ -431,7 +431,7 @@
 				err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 			}else {
 				msg('정상적으로 거래처 정보가 변경 되었습니다!');
-				echo "<meta http-equiv='Refresh' content='0; URL=sales_main.php?m_di=1&s_di=3'>";
+				echo "<meta http-equiv='Refresh' content='0; URL=work_main.php?m_di=1&s_di=3'>";
 			}
 		}
 		if($mode=='del'){ // 거래처 정보 개별 삭제(3)
@@ -443,7 +443,7 @@
 				err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 			}else{
 				msg('정상적으로 거래처 정보가 삭제 되었습니다!');
-				echo "<meta http-equiv='Refresh' content='0; URL=sales_main.php?m_di=1&s_di=3'>";
+				echo "<meta http-equiv='Refresh' content='0; URL=work_main.php?m_di=1&s_di=3'>";
 			}
 		}
 	}
