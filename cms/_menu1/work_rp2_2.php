@@ -6,7 +6,7 @@
 											$seq = $_REQUEST['seq'];
 											$qry = "SELECT * FROM cms_work_log WHERE seq='$seq'";
 											$rlt = mysql_query($qry, $connect);
-											$row = mysql_fetch_array($rlt);	
+											$row = mysql_fetch_array($rlt);
 											$sub_str = "저장하기";
 											$w_date = $row[work_date];
 
@@ -18,7 +18,7 @@
 											// 소속본부 구하기
 											$headq_rlt = mysql_query("SELECT headq FROM cms_resource_headq WHERE seq='$pj_where[0]' ", $connect);
 											$headq_row = mysql_fetch_array($headq_rlt);
-											// 소속 팀 구하기										
+											// 소속 팀 구하기
 											$team_rlt = mysql_query("SELECT team FROM cms_resource_team WHERE seq='$pj_where[1]' ", $connect);
 											$team_row = mysql_fetch_array($team_rlt);
 											/***************** 당일청계약 내용 *******************/
@@ -54,7 +54,7 @@
 									<div style="clear:left; float:left; width:15px; height:24px; padding-top:10px;"><img src="../images/list_bt.jpg" border="0" alt=""></div>
 									<div style="float:left; width:265px; height:28px; padding-top:8px; color:#000000;"><b><?if($mode=='reg'){?>업무일지 신규등록<?}else if($mode=='modify'){ echo $w_date." [ <font color='#000099'>".$headq_row[headq]."-".$team_row[team]."</font> ] 업무일지"; } ?></b></div>
 									<div style="float:left; width:250px; height:28px; padding-top:8px; text-align:center; color:#000000;"><b><?if($pj_list) echo "[ ".$pj_name_row[pj_name]." 현장 ]";?></b></div>
-									
+
 									<form name="form1" method="post" action="work_rp_post.php">
 									<input type="hidden" name="s_di" value="<?=$s_di?>">
 									<input type="hidden" name="mode" value="<?=$mode?>">
@@ -70,11 +70,11 @@
 											<a href="javascript:" onclick="cal_add(document.getElementById('work_date'),this); event.cancelBubble=true"> <img src="http://cigiko.cafe24.com/cms/images/calendar.jpg" border="0" alt="" /></a>
 											<!-- <a href="javascript:" onclick=" to_del('work_date');" title="지우기"><img src="../images/del.jpg" border="0" alt=""></a> -->
 										</div>
-										
+
 									</div>
 									<div style="width:120px; padding:7px 0 0 15px;" class="blue_title">출근인원(팀장포함) <font color="red">*</font></div>
 									<div style="width:240px; height:26px; padding:5px 0 0 10px; border-width:1px 0 1px 0;" class="bor_ddd"><input type="text" name="work_num" value="<?=$row[work_num]?>" class="inputstyle2" style="width:130px;"> 명</div>
-									
+
 									<div style="clear:left; height:26px; padding:8px 0 0 15px; color:#000000"><b><font color="red">*</font> 계약 사항</b></div>
 
 									<div style="clear:left; width:120px; padding:7px 0 0 15px; border-width:1px 1px 0 0;" class="blue_title">당일 청약(가계약)건 </div>
@@ -88,14 +88,14 @@
 									<table width="100%" border="0" cellpadding="0" cellspacing="0">
 									<tr>
 										<td style="border-width:1px 0 1px 0; border-style:solid; border-color:#dddddd;">
-											<div style="clear:left; width:120px; padding:7px 0 0 15px; border-width:0 0 1px 0; border-color:#E2F0FC;" class="blue_title">당일 (청)계약 내용</div>				
+											<div style="clear:left; width:120px; padding:7px 0 0 15px; border-width:0 0 1px 0; border-color:#E2F0FC;" class="blue_title">당일 (청)계약 내용</div>
 											<div style="width:110px; padding-top:7px; border-width:0 1px 1px 1px; background-color:#eef3eb; text-align:center;" class="blue_title">구 분</div>
 											<div style="width:100px; padding-top:7px; border-width:0 1px 1px 0; background-color:#eef3eb; text-align:center;" class="blue_title">고객명</div>
 											<div style="width:110px; padding-top:7px; border-width:0 1px 1px 0; background-color:#eef3eb; text-align:center;" class="blue_title">동호수</div>
 											<div style="width:120px; padding-top:7px; border-width:0 1px 1px 0; background-color:#eef3eb; text-align:center;" class="blue_title">계약 예정일</div>
 											<div style="width:110px; padding-top:7px; border-width:0 1px 1px 0; background-color:#eef3eb; text-align:center;" class="blue_title">담당자</div>
 											<div style="width:84px; padding-top:7px; border-width:0 0 1px 0; background-color:#eef3eb; text-align:center;" class="blue_title">입력란 추가</div>
-											
+
 
 											<!-- ================================================================== (청)계약 내용 입력 폼1 ====================================================================== -->
 											<div id="cont_1">
@@ -115,7 +115,7 @@
 														<input type="text" name="dong_1" value="<?=$obj_1[0]?>" class="inputstyle2" style="width:30px"> - <input type="text" name="ho_1" value="<?=$obj_1[1]?>" class="inputstyle2" style="width:35px">
 													</div>
 													<div style="float:left; width:120px; height:26px; padding-top:5px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;">
-														<input type="text" name="due_date_1" value="<?=$due_date[0]?>" id="due_date_1" size="30" class="inputstyle2" style="height:17px; width:80px;" onclick="openCalendar(this)" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')" <?if(!$co_sort[0]||$co_sort[0]<>1) echo "disabled";?>><a href="javascript:" onclick="openCalendar(document.getElementById('due_date_1'));"> <img src="../images/calendar.jpg" border="0" alt="" /></a>
+														<input type="text" name="due_date_1" value="<?=$due_date[0]?>" id="due_date_1" size="30" class="inputstyle2" style="height:17px; width:80px;" onclick="cal_add(this); event.cancelBubble=true" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')" <?if(!$co_sort[0]||$co_sort[0]<>1) echo "disabled";?>><a href="javascript:" onclick="cal_add(document.getElementById('due_date_1')); event.cancelBubble=true"> <img src="../images/calendar.jpg" border="0" alt="" /></a>
 													</div>
 													<div style="float:left; width:110px; height:26px; padding-top:5px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><input type="text" name="c_worker_1" value="<?=$c_worker[0]?>" class="inputstyle2" style="width:70px"></div>
 													<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;"><input type="checkbox" name="add_1" id="add_1" onclick="cont_add(this,2,1);" <? if(count($co_sort)>1) echo "checked "; if(count($co_sort)>2) echo "disabled";?>> 추가</div>
@@ -431,7 +431,7 @@
 											<div style="float:left; width:370px; height:24px; padding-top:7px; border-width:0 1px 1px 0; border-style:solid; border-color:#dddddd; background-color:#eef3eb; color:#003366; text-align:center;">진 행 사 항</div>
 											<div style="float:left; width:90px; height:24px; padding-top:7px; border-width:0 1px 1px 0; border-style:solid; border-color:#dddddd; background-color:#eef3eb; color:#003366; text-align:center;">담당자</div>
 											<div style="float:left; width:84px; height:24px; padding-top:7px; border-width:0 0 1px 0; border-style:solid; border-color:#dddddd; background-color:#eef3eb; color:#003366; text-align:center;">입력란 추가</div>
-											
+
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼1 ====================================================================== -->
 											<div id="coun_1">
 												<div style="clear:left; width:120px; padding:7px 0 0 15px; border-width:0 1px 0 0;" class="blue_title"></div>
@@ -447,7 +447,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_c_1" id="add_c_1" onclick="cont_add(this,2,2);" <? if(count($d_cust_name)>1) echo "checked "; if(count($d_cust_name)>2) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼1 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼2 ====================================================================== -->
 											<div id="coun_2" <?if(count($d_cust_name)<2) echo "style='display:none;'";?>>
@@ -464,7 +464,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_c_2" id="add_c_2" onclick="cont_add(this,3,2);" <? if(count($d_cust_name)>2) echo "checked "; if(count($d_cust_name)>3) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼2 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼3 ====================================================================== -->
 											<div id="coun_3" <?if(count($d_cust_name)<3) echo "style='display:none;'";?>>
@@ -481,7 +481,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_c_3" id="add_c_3" onclick="cont_add(this,4,2);" <? if(count($d_cust_name)>3) echo "checked "; if(count($d_cust_name)>4) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼3 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼4 ====================================================================== -->
 											<div id="coun_4" <?if(count($d_cust_name)<4) echo "style='display:none;'";?>>
@@ -498,7 +498,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_c_4" id="add_c_4" onclick="cont_add(this,5,2);" <? if(count($d_cust_name)>4) echo "checked "; if(count($d_cust_name)>5) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼4 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼5 ====================================================================== -->
 											<div id="coun_5" <?if(count($d_cust_name)<5) echo "style='display:none;'";?>>
@@ -515,7 +515,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_c_5" id="add_c_5" onclick="cont_add(this,6,2);" <? if(count($d_cust_name)>5) echo "checked "; if(count($d_cust_name)>6) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼5 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼6 ====================================================================== -->
 											<div id="coun_6" <?if(count($d_cust_name)<6) echo "style='display:none;'";?>>
@@ -532,7 +532,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_c_6" id="add_c_6" onclick="cont_add(this,7,2);" <? if(count($d_cust_name)>6) echo "checked "; if(count($d_cust_name)>7) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼6 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼7 ====================================================================== -->
 											<div id="coun_7" <?if(count($d_cust_name)<7) echo "style='display:none;'";?>>
@@ -549,7 +549,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_c_7" id="add_c_7" onclick="cont_add(this,8,2);" <? if(count($d_cust_name)>7) echo "checked "; if(count($d_cust_name)>8) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼7 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼8 ====================================================================== -->
 											<div id="coun_8" <?if(count($d_cust_name)<8) echo "style='display:none;'";?>>
@@ -566,7 +566,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_c_8" id="add_c_8" onclick="cont_add(this,9,2);" <? if(count($d_cust_name)>8) echo "checked "; if(count($d_cust_name)>9) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼8 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼9 ====================================================================== -->
 											<div id="coun_9" <?if(count($d_cust_name)<9) echo "style='display:none;'";?>>
@@ -583,7 +583,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_c_9" id="add_c_9" onclick="cont_add(this,10,2);" <? if(count($d_cust_name)>9) echo "checked "; if(count($d_cust_name)>10) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼9 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼10 ====================================================================== -->
 											<div id="coun_10" <?if(count($d_cust_name)<10) echo "style='display:none;'";?>>
@@ -600,7 +600,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_c_10" id="add_c_10" onclick="cont_add(this,11,2);" <? if(count($d_cust_name)>10) echo "checked "; if(count($d_cust_name)>11) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼10 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼11 ====================================================================== -->
 											<div id="coun_11" <?if(count($d_cust_name)<11) echo "style='display:none;'";?>>
@@ -617,7 +617,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_c_11" id="add_c_11" onclick="cont_add(this,12,2);" <? if(count($d_cust_name)>11) echo "checked "; if(count($d_cust_name)>12) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼11 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼12 ====================================================================== -->
 											<div id="coun_12" <?if(count($d_cust_name)<12) echo "style='display:none;'";?>>
@@ -632,7 +632,7 @@
 													<input type="text" name="d_worker_12" value="<?=$d_worker[11]?>" class="inputstyle2" style="width:70px">
 												</div>
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;"></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼12 ====================================================================== -->
 										</td>
 									</tr>
@@ -652,7 +652,7 @@
 											<div style="float:left; width:370px; height:24px; padding-top:7px; border-width:0 1px 1px 0; border-style:solid; border-color:#dddddd; background-color:#eef3eb; color:#003366; text-align:center;">진행 내용 / 방문 예정시간 / 연락처</div>
 											<div style="float:left; width:90px; height:24px; padding-top:7px; border-width:0 1px 1px 0; border-style:solid; border-color:#dddddd; background-color:#eef3eb; color:#003366; text-align:center;">담당자</div>
 											<div style="float:left; width:84px; height:24px; padding-top:7px; border-width:0 0 1px 0; border-style:solid; border-color:#dddddd; background-color:#eef3eb; color:#003366; text-align:center;">입력란 추가</div>
-											
+
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼1 ====================================================================== -->
 											<div id="tomo_1">
 												<div style="clear:left; width:120px; padding:7px 0 0 15px; border-width:0 1px 0 0;" class="blue_title"></div>
@@ -668,7 +668,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_t_1" id="add_t_1" onclick="cont_add(this,2,3);" <? if(count($n_cust_name)>1) echo "checked "; if(count($n_cust_name)>2) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼1 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼2 ====================================================================== -->
 											<div id="tomo_2" <?if(count($n_cust_name)<2) echo "style='display:none;'"?>>
@@ -685,7 +685,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_t_2" id="add_t_2" onclick="cont_add(this,3,3);" <? if(count($n_cust_name)>2) echo "checked "; if(count($n_cust_name)>3) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼2 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼3 ====================================================================== -->
 											<div id="tomo_3" <?if(count($n_cust_name)<3) echo "style='display:none;'"?>>
@@ -702,7 +702,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_t_3" id="add_t_3" onclick="cont_add(this,4,3);" <? if(count($n_cust_name)>3) echo "checked "; if(count($n_cust_name)>4) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼3 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼4 ====================================================================== -->
 											<div id="tomo_4" <?if(count($n_cust_name)<4) echo "style='display:none;'"?>>
@@ -719,7 +719,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_t_4" id="add_t_4" onclick="cont_add(this,5,3);" <? if(count($n_cust_name)>4) echo "checked "; if(count($n_cust_name)>5) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼4 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼5 ====================================================================== -->
 											<div id="tomo_5" <?if(count($n_cust_name)<5) echo "style='display:none;'"?>>
@@ -736,7 +736,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_t_5" id="add_t_5" onclick="cont_add(this,6,3);" <? if(count($n_cust_name)>5) echo "checked "; if(count($n_cust_name)>6) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼5 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼6 ====================================================================== -->
 											<div id="tomo_6" <?if(count($n_cust_name)<6) echo "style='display:none;'"?>>
@@ -753,7 +753,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_t_6" id="add_t_6" onclick="cont_add(this,7,3);" <? if(count($n_cust_name)>6) echo "checked "; if(count($n_cust_name)>7) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼6 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼7 ====================================================================== -->
 											<div id="tomo_7" <?if(count($n_cust_name)<7) echo "style='display:none;'"?>>
@@ -770,7 +770,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_t_7" id="add_t_7" onclick="cont_add(this,8,3);" <? if(count($n_cust_name)>7) echo "checked "; if(count($n_cust_name)>8) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼7 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼8 ====================================================================== -->
 											<div id="tomo_8" <?if(count($n_cust_name)<8) echo "style='display:none;'"?>>
@@ -787,7 +787,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_t_8" id="add_t_8" onclick="cont_add(this,9,3);" <? if(count($n_cust_name)>8) echo "checked "; if(count($n_cust_name)>9) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼8 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼9 ====================================================================== -->
 											<div id="tomo_9" <?if(count($n_cust_name)<9) echo "style='display:none;'"?>>
@@ -804,7 +804,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_t_9" id="add_t_9" onclick="cont_add(this,10,3);" <? if(count($n_cust_name)>9) echo "checked "; if(count($n_cust_name)>10) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼9 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼10 ====================================================================== -->
 											<div id="tomo_10" <?if(count($n_cust_name)<10) echo "style='display:none;'"?>>
@@ -821,7 +821,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_t_10" id="add_t_10" onclick="cont_add(this,11,3);" <? if(count($n_cust_name)>10) echo "checked "; if(count($n_cust_name)>11) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼10 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼11 ====================================================================== -->
 											<div id="tomo_11" <?if(count($n_cust_name)<11) echo "style='display:none;'"?>>
@@ -838,7 +838,7 @@
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;">
 													<input type="checkbox" name="add_t_11" id="add_t_11" onclick="cont_add(this,12,3);" <? if(count($n_cust_name)>11) echo "checked "; if(count($n_cust_name)>12) echo "disabled";?>> 추가
 												</div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼11 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼12 ====================================================================== -->
 											<div id="tomo_12" <?if(count($n_cust_name)<12) echo "style='display:none;'"?>>
@@ -853,7 +853,7 @@
 													<input type="text" name="n_worker_12" value="<?=$n_worker[11]?>" class="inputstyle2" style="width:70px">
 												</div>
 												<div style="float:left; width:70px; height:26px; padding-top:5px; text-align:center;"><!-- <input type="checkbox" name="add_t_12" id="add_t_12" onclick="cont_add(2,3);"> 추가 --></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼12 ====================================================================== -->
 										</td>
 									</tr>
@@ -863,7 +863,7 @@
 										<textarea name="n_sale_plan" rows="3" cols="76" class="inputstyle2" style="width:539px; height:80px;" onfocus="this.select();"><?=$row[n_sale_plan]?></textarea>
 									</div>
 
-									
+
 									</form>
 								</div>
 								<!-- ================================= 거래처 contents E ================================= -->
@@ -883,8 +883,8 @@
 											if(($member_row[is_admin]==1||date('Y-m-d')<=$retDAY)){// 관리자가 아니면 작성 익일 까지만 수정 가능
 												$submit_str="work_log_sub('$member_row[is_company]', '$str');";
 											}else{
-												$submit_str = "alert('당일 또는 익일까지만 수정 가능합니다!');";												
-											}											
+												$submit_str = "alert('당일 또는 익일까지만 수정 가능합니다!');";
+											}
 										}
 										// $del_str="if(confirm('해당 상담내용을 삭제 하시겠습니까?')==1) location.href='basic_post.php?s_di=1&amp;mode=del&amp;seq=$seq'";
 									}
