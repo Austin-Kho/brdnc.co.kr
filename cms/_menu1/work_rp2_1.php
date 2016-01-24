@@ -91,7 +91,7 @@
 										$result = mysql_query($query, $connect);
 										while($rows = mysql_fetch_array($result)){
 											$pj_where = explode("-", $rows[pj_where]);
-											$qry = "SELECT pj_name, headq, team, name FROM cms_project_info, cms_resource_headq, cms_resource_team, cms_member_table WHERE cms_project_info.seq='$rows[pj_seq]' AND cms_resource_headq.seq='$pj_where[0]' AND cms_resource_team.seq='$pj_where[1]' AND user_id='$rows[writer]' ";
+											$qry = "SELECT pj_name, headq, team, name FROM cms_project1_info, cms_resource_headq, cms_resource_team, cms_member_table WHERE cms_project1_info.seq='$rows[pj_seq]' AND cms_resource_headq.seq='$pj_where[0]' AND cms_resource_team.seq='$pj_where[1]' AND user_id='$rows[writer]' ";
 											$rlt = mysql_query($qry, $connect);
 											$dt_row = mysql_fetch_array($rlt);
 									?>

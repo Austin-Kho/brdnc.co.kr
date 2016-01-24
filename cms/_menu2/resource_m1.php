@@ -77,7 +77,7 @@
 										if($year_frm>1){
 											$where=" WHERE start_date LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT seq, pj_name FROM cms_project_info $where ORDER BY start_date DESC ";
+										$qry = "SELECT seq, pj_name FROM cms_project1_info $where ORDER BY start_date DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -125,7 +125,7 @@
 							?>
 							<div style="float:left; height:28px; background-color:#F8F8F8; padding:7px 20px 0 20px; color:black;">
 							<?
-								$result = mysql_query("SELECT seq, pj_name FROM cms_project_info, cms_member_table WHERE pj_seq=seq ", $connect);
+								$result = mysql_query("SELECT seq, pj_name FROM cms_project1_info, cms_member_table WHERE pj_seq=seq ", $connect);
 								$row = mysql_fetch_array($result);
 								echo "<font color='#cc0000'>*</font> ".$row[pj_name]."  현장 인원 현황";
 							?>

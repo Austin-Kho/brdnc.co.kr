@@ -48,7 +48,7 @@ Header("Expires: 0");
 		<td colspan="2" bgcolor="#EAEAEA">담당자</td>
 	</tr>
 <?
-		$color_rlt = mysql_query("SELECT type_name, type_color FROM cms_project_info WHERE seq='$pj_seq'", $connect); /// 타입별 컬러 구분
+		$color_rlt = mysql_query("SELECT type_name, type_color FROM cms_project1_info WHERE seq='$pj_seq'", $connect); /// 타입별 컬러 구분
 		$color_row = mysql_fetch_array($color_rlt);
 		// 타입별 칼라 지정
 		$type_name = explode("-", $color_row[type_name]);
@@ -292,7 +292,7 @@ Header("Expires: 0");
 		<td width="120" bgcolor="#EAEAEA">등록일시</td>
 	</tr>
 <?
-		$color_rlt = mysql_query("SELECT type_name, type_color FROM cms_project_info WHERE seq='$pj_seq'", $connect); /// 타입별 컬러 구분
+		$color_rlt = mysql_query("SELECT type_name, type_color FROM cms_project1_info WHERE seq='$pj_seq'", $connect); /// 타입별 컬러 구분
 		$color_row = mysql_fetch_array($color_rlt);
 		// 타입별 칼라 지정
 		$type_name = explode("-", $color_row[type_name]);

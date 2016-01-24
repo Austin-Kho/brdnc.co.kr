@@ -78,7 +78,7 @@
 		<div style="height:96%; margin:0 auto; width:96%; border-width:2px 2px 2px 2px; border-style: solid; border-color:#96ABE5;">
 			<div style="height:50px; border-width:0 0 2px 0; border-style: solid; border-color:#96ABE5; background-color:#D9EAF8; text-align:center; padding-top:30px; margin-bottom:12px;">
 				<?
-					$qry = "SELECT pj_name FROM cms_project_info WHERE seq='$pj' ";
+					$qry = "SELECT pj_name FROM cms_project1_info WHERE seq='$pj' ";
 					$rlt = mysql_query($qry, $connect);
 					$row = mysql_fetch_array($rlt);
 				?>
@@ -174,7 +174,7 @@
 		<div style="height:96%; margin:0 auto; width:96%; border-width:2px 2px 2px 2px; border-style: solid; border-color:#96ABE5;">
 			<div style="height:50px; border-width:0 0 2px 0; border-style: solid; border-color:#96ABE5; background-color:#D9EAF8; text-align:center; padding-top:30px; margin-bottom:12px;">
 				<?
-					$qry = "SELECT pj_name FROM cms_project_info WHERE seq='$pj' ";
+					$qry = "SELECT pj_name FROM cms_project1_info WHERE seq='$pj' ";
 					$rlt = mysql_query($qry, $connect);
 					$row = mysql_fetch_array($rlt);
 				?>
@@ -187,16 +187,16 @@
 				<form name="form1" action="resource_post.php">
 				<input type="hidden" name="mode" value="<?=$sort?>">
 				<input type="hidden" name="pj" value="<?=$pj?>">
-				
+
 				<div style="height:61px; border-width: 1px 0 1px 0; border-color:#CFCFCF; border-style: solid; margin-top:35px;">
 					<div style="float:left; height:25px; padding-top:5px; text-align:center; width:100px; background-color:#eaeaea;">현장명 :</div>
 					<div style="float:left; height:25px; padding:5px 0 0 15px; width:260px; border-width:0 0 1px 0; border-style:solid; border-color:#eaeaea;"><?=$row[pj_name]?></div>
 					<div style="clear:left; float:left; height:25px; padding-top:5px; text-align:center; width:100px; background-color:#eaeaea">본부명 :</div>
-					<div style="float:left; height:25px; padding:4px 0 0 15px; width:200px;"><input type="text" name="headq" id="headq_r" class="inputstyle2"></div>					
+					<div style="float:left; height:25px; padding:4px 0 0 15px; width:200px;"><input type="text" name="headq" id="headq_r" class="inputstyle2"></div>
 				</div>
 				</form>
 				<div style="height:35; text-align:center; padding-top:10px;">
-				</div>				
+				</div>
 				<div style="height:50px; text-align:center; padding-top:20px;">
 					<input type="button" value=" 저장하기" onclick="headq_sub('form1');" class="inputstyle_bt" style="height:20px;">
 					<input type="button" value=" 취 소 " onclick="history.back(1)" class="inputstyle_bt" style="height:20px;">
@@ -217,7 +217,7 @@
 		<div style="height:96%; margin:0 auto; width:96%; border-width:2px 2px 2px 2px; border-style: solid; border-color:#96ABE5;">
 			<div style="height:50px; border-width:0 0 2px 0; border-style: solid; border-color:#96ABE5; background-color:#D9EAF8; text-align:center; padding-top:30px; margin-bottom:12px;">
 				<?
-					$qry = "SELECT pj_name FROM cms_project_info WHERE seq='$pj' ";
+					$qry = "SELECT pj_name FROM cms_project1_info WHERE seq='$pj' ";
 					$rlt = mysql_query($qry, $connect);
 					$row = mysql_fetch_array($rlt);
 				?>
@@ -231,7 +231,7 @@
 				<input type="hidden" name="mode" value="<?=$sort?>">
 				<input type="hidden" name="pj" value="<?=$pj?>">
 				<input type="hidden" name="edit_code" value="<?=$edit_code?>">
-				
+
 				<div style="height:61px; border-width: 1px 0 1px 0; border-color:#CFCFCF; border-style: solid; margin-top:35px;">
 					<?
 						$q = "SELECT headq FROM cms_resource_headq WHERE seq='$edit_code' ";
@@ -241,7 +241,7 @@
 					<div style="float:left; height:25px; padding-top:5px; text-align:center; width:100px; background-color:#eaeaea;">현장명 :</div>
 					<div style="float:left; height:25px; padding:5px 0 0 15px; width:260px; border-width:0 0 1px 0; border-style:solid; border-color:#eaeaea;"><?=$row[pj_name]?></div>
 					<div style="clear:left; float:left; height:25px; padding-top:5px; text-align:center; width:100px; background-color:#eaeaea">본부명 :</div>
-					<div style="float:left; height:25px; padding:4px 0 0 15px; width:200px;"><input type="text" name="headq" id="headq_m" value="<?=$rw[headq]?>" class="inputstyle2"></div>					
+					<div style="float:left; height:25px; padding:4px 0 0 15px; width:200px;"><input type="text" name="headq" id="headq_m" value="<?=$rw[headq]?>" class="inputstyle2"></div>
 				</div>
 				</form>
 				<div style="height:35; text-align:center; padding-top:10px;">
@@ -266,7 +266,7 @@
 		<div style="height:96%; margin:0 auto; width:96%; border-width:2px 2px 2px 2px; border-style: solid; border-color:#96ABE5;">
 			<div style="height:50px; border-width:0 0 2px 0; border-style: solid; border-color:#96ABE5; background-color:#D9EAF8; text-align:center; padding-top:30px; margin-bottom:12px;">
 				<?
-					$qry = "SELECT pj_name FROM cms_project_info WHERE seq='$pj' ";
+					$qry = "SELECT pj_name FROM cms_project1_info WHERE seq='$pj' ";
 					$rlt = mysql_query($qry, $connect);
 					$row = mysql_fetch_array($rlt);
 				?>
@@ -282,7 +282,7 @@
 				<input type="hidden" name="headq_sel" value="<?=$headq_sel?>">
 				<input type="hidden" name="start" value="1">
 
-				<div style="height:28px; padding:7px 0 0 15px;"> 
+				<div style="height:28px; padding:7px 0 0 15px;">
 					<div style="float:left;">본부 별 :</div>
 					<div style="float:left; padding-left:10px;">
 						<select name="headq_sel" id="hs1" class="inputstyle2" style="width:100px; height:20px;" onchange="submit();">
@@ -313,7 +313,7 @@
 					$query="SELECT seq FROM cms_resource_team $where ";
 					$result=mysql_query($query, $connect);
 					$total_bnum = mysql_num_rows($result);	//// 총 게시물 수   11111111111111111111
-					mysql_free_result($result);					
+					mysql_free_result($result);
 					if($total_bnum==0){
 				?>
 				<div style="height:50px; border-width: 0 0 1px 0; border-color:#CFCFCF; border-style: solid; text-align:center; padding-top:20px;">
@@ -327,8 +327,8 @@
 					if(!$start) $start = 1;              // 현재페이지 444444444
 					$s = ($start-1)*$index_num;
 					$e = $index_num;
-					
-					$query2="SELECT cms_resource_team.seq, headq, team FROM cms_resource_team,cms_resource_headq 
+
+					$query2="SELECT cms_resource_team.seq, headq, team FROM cms_resource_team,cms_resource_headq
 							   $where AND headq_seq=cms_resource_headq.seq
 							   ORDER BY seq ASC LIMIT $s, $e";
 					$result2=mysql_query($query2, $connect);
@@ -383,8 +383,8 @@
 		<div style="height:96%; margin:0 auto; width:96%; border-width:2px 2px 2px 2px; border-style: solid; border-color:#96ABE5;">
 			<div style="height:50px; border-width:0 0 2px 0; border-style: solid; border-color:#96ABE5; background-color:#D9EAF8; text-align:center; padding-top:30px; margin-bottom:12px;">
 				<?
-					$qry = "SELECT cms_resource_headq.seq AS headq_seq, pj_name, headq FROM cms_project_info, cms_resource_headq 
-							WHERE cms_project_info.seq='$pj' AND cms_project_info.seq=cms_resource_headq.pj_seq AND cms_resource_headq.seq='$headq' ";
+					$qry = "SELECT cms_resource_headq.seq AS headq_seq, pj_name, headq FROM cms_project1_info, cms_resource_headq
+							WHERE cms_project1_info.seq='$pj' AND cms_project1_info.seq=cms_resource_headq.pj_seq AND cms_resource_headq.seq='$headq' ";
 					$rlt = mysql_query($qry, $connect);
 					$row = mysql_fetch_array($rlt);
 				?>
@@ -398,7 +398,7 @@
 				<input type="hidden" name="mode" value="<?=$sort?>">
 				<input type="hidden" name="pj" value="<?=$pj?>">
 				<input type="hidden" name="headq" value="<?=$row[headq_seq]?>">
-				
+
 				<div style="height:92px; border-width: 1px 0 1px 0; border-color:#CFCFCF; border-style: solid; margin-top:35px;">
 					<div style="float:left; height:25px; padding-top:5px; text-align:center; width:100px; background-color:#eaeaea;">현장명 :</div>
 					<div style="float:left; height:25px; padding:5px 0 0 15px; width:260px; border-width:0 0 1px 0; border-style:solid; border-color:#eaeaea;"><?=$row[pj_name]?></div>
@@ -409,7 +409,7 @@
 				</div>
 				</form>
 				<div style="height:35; text-align:center; padding-top:10px;">
-				</div>				
+				</div>
 				<div style="height:50px; text-align:center; padding-top:20px;">
 					<input type="button" value=" 저장하기" onclick="team_sub('form3');" class="inputstyle_bt" style="height:20px;">
 					<input type="button" value=" 취 소 " onclick="history.back(1)" class="inputstyle_bt" style="height:20px;">
@@ -431,11 +431,11 @@
 		<div style="height:96%; margin:0 auto; width:96%; border-width:2px 2px 2px 2px; border-style: solid; border-color:#96ABE5;">
 			<div style="height:50px; border-width:0 0 2px 0; border-style: solid; border-color:#96ABE5; background-color:#D9EAF8; text-align:center; padding-top:30px; margin-bottom:12px;">
 				<?
-					$qry = "SELECT cms_resource_headq.seq AS headq_seq, pj_name, headq, team 
-							FROM cms_project_info, cms_resource_headq, cms_resource_team 
-							WHERE cms_project_info.seq='$pj' 
-							AND cms_project_info.seq=cms_resource_headq.pj_seq 
-							AND cms_resource_headq.seq='$headq' 
+					$qry = "SELECT cms_resource_headq.seq AS headq_seq, pj_name, headq, team
+							FROM cms_project1_info, cms_resource_headq, cms_resource_team
+							WHERE cms_project1_info.seq='$pj'
+							AND cms_project1_info.seq=cms_resource_headq.pj_seq
+							AND cms_resource_headq.seq='$headq'
 							AND cms_resource_team.seq = '$edit_code' ";
 					$rlt = mysql_query($qry, $connect);
 					$row = mysql_fetch_array($rlt);
@@ -451,7 +451,7 @@
 				<input type="hidden" name="pj" value="<?=$pj?>">
 				<input type="hidden" name="headq" value="<?=$row[headq_seq]?>">
 				<input type="hidden" name="edit_code" value="<?=$edit_code?>">
-				
+
 				<div style="height:92px; border-width: 1px 0 1px 0; border-color:#CFCFCF; border-style: solid; margin-top:35px;">
 					<div style="float:left; height:25px; padding-top:5px; text-align:center; width:100px; background-color:#eaeaea;">현장명 :</div>
 					<div style="float:left; height:25px; padding:5px 0 0 15px; width:260px; border-width:0 0 1px 0; border-style:solid; border-color:#eaeaea;"><?=$row[pj_name]?></div>
@@ -462,7 +462,7 @@
 				</div>
 				</form>
 				<div style="height:35; text-align:center; padding-top:10px;">
-				</div>				
+				</div>
 				<div style="height:50px; text-align:center; padding-top:20px;">
 					<input type="button" value=" 저장하기" onclick="team_sub('form4');" class="inputstyle_bt" style="height:20px;">
 					<input type="button" value=" 취 소 " onclick="history.back(1)" class="inputstyle_bt" style="height:20px;">

@@ -99,9 +99,9 @@
 				<input type="hidden" name="edit_code" value="<?=$edit_code?>">
 				<?
 					$query = "SELECT headq_seq, team_seq, position, name, id_num, tel, bank_acc, bank_acc_num, bank_acc_holder, join_date,
-										  pj_name 
-										  FROM cms_resource_team_member, cms_project_info
-										  WHERE cms_resource_team_member.seq='$edit_code' AND pj_seq=cms_project_info.seq ";
+										  pj_name
+										  FROM cms_resource_team_member, cms_project1_info
+										  WHERE cms_resource_team_member.seq='$edit_code' AND pj_seq=cms_project1_info.seq ";
 					$result = mysql_query($query, $connect);
 					$row = mysql_fetch_array($result);
 					$id_num = explode("-",$row[id_num]);
@@ -141,19 +141,19 @@
 							<option value="2" <?if($row[position]==2) echo "selected"; ?>> 팀 장
 							<option value="3" <?if($row[position]==3) echo "selected"; ?>> 팀 원
 						</select>
-					</div>					
+					</div>
 					<div style="float:left; height:23px; padding:2px 10px 0 0; text-align:right; width:90px; background-color:#eaeaea;">성 명 :</div>
 					<div style="float:left; height:23px; padding:2px 0 0 15px; width:260px; border-width:0 0 1px 0; border-style:solid; border-color:#eaeaea;">
 						<input type="text" name="name" value="<?=$row[name]?>" class="inputstyle2" style="width:140px; height:16px;">
 					</div>
 					<div style="clear:left; float:left; height:23px; padding:2px 10px 0 0; text-align:right; width:90px; background-color:#eaeaea">주민등록번호 :</div>
 					<div style="float:left; height:23px; padding:2px 0 0 15px; width:260px; border-width:0 0 1px 0; border-style:solid; border-color:#eaeaea;">
-						<input type="text" name="id_num1" value="<?=$id_num[0]?>" class="inputstyle2" style="width:55px; height:16px;"> - 
+						<input type="text" name="id_num1" value="<?=$id_num[0]?>" class="inputstyle2" style="width:55px; height:16px;"> -
 						<input type="text" name="id_num2" value="<?=$id_num[1]?>" class="inputstyle2" style="width:70px; height:16px;">
 					</div>
 					<div style="clear:left; float:left; height:23px; padding:2px 10px 0 0; text-align:right; width:90px; background-color:#eaeaea;">연락처 :</div>
 					<div style="float:left; height:23px; padding:2px 0 0 15px; width:260px; border-width:0 0 1px 0; border-style:solid; border-color:#eaeaea;">
-						<input type="text" name="tel1" value="<?=$tel[0]?>" class="inputstyle2" style="width:30px; height:16px;"> - 
+						<input type="text" name="tel1" value="<?=$tel[0]?>" class="inputstyle2" style="width:30px; height:16px;"> -
 						<input type="text" name="tel2" value="<?=$tel[1]?>" class="inputstyle2" style="width:40px; height:16px;"> -
 						<input type="text" name="tel3" value="<?=$tel[2]?>" class="inputstyle2" style="width:40px; height:16px;">
 					</div>
@@ -183,7 +183,7 @@
 						<input type="text" name="join_date" id="j_date" value="<?=$row[join_date]?>" class="inputstyle2" style="width:120px; height:16px;" onclick="openCalendar(this)">
 						<a href="javascript:" onclick="openCalendar(document.getElementById('j_date'));"><img src="../images/calendar.jpg" border="0" alt="" /></a>
 					</div>
-				</div>				
+				</div>
 				<div style="height:50px; text-align:center; padding-top:10px;">
 					<input type="button" value=" 저장하기" onclick="mem_modi();" class="inputstyle_bt" style="height:20px;">
 					<input type="button" value=" 닫 기 " onclick="close_();" class="inputstyle_bt" style="height:20px;">

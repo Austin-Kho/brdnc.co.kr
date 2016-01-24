@@ -48,7 +48,7 @@
 							<!-- ============ 본사 직원일 때 프로젝트 선택 가능 시작 ============  -->
 							<?
 								if($member_row[is_company]==1){
-								$pj_rlt = mysql_query("SELECT seq FROM cms_project_info ORDER BY seq DESC LIMIT 1", $connect);
+								$pj_rlt = mysql_query("SELECT seq FROM cms_project1_info ORDER BY seq DESC LIMIT 1", $connect);
 								$pj_row = mysql_fetch_array($pj_rlt);
 								$year_frm=$_REQUEST['year_frm'];
 								$pj_list=$_REQUEST['pj_list'];
@@ -74,7 +74,7 @@
 										if($year_frm>1){
 											$where=" WHERE start_date LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT * FROM cms_project_info $where ORDER BY start_date DESC ";
+										$qry = "SELECT * FROM cms_project1_info $where ORDER BY start_date DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -95,7 +95,7 @@
 							<div style="float:left; width:120px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">
 								<font color='#cc0000'>*</font> 프로젝트 명
 							<?
-								$result = mysql_query("SELECT seq, pj_name FROM cms_project_info, cms_member_table WHERE seq=pj_seq AND user_id='$_SESSION[p_id]' ", $connect);
+								$result = mysql_query("SELECT seq, pj_name FROM cms_project1_info, cms_member_table WHERE seq=pj_seq AND user_id='$_SESSION[p_id]' ", $connect);
 								$row = mysql_fetch_array($result);
 							?>
 							</div>
@@ -146,11 +146,11 @@
 							<div style="float:left; width:100px;">분양율(청약+계약)</div>
 						</div>
 						<?
-							$result=mysql_query("SELECT pj_name, data_cr FROM cms_project_info WHERE seq='$pj_list' ", $connect);
+							$result=mysql_query("SELECT pj_name, data_cr FROM cms_project1_info WHERE seq='$pj_list' ", $connect);
 							$row=mysql_fetch_array($result);
 							$data_cr = $row[data_cr];
 
-							$color_rlt = mysql_query("SELECT type_name, type_color FROM cms_project_info WHERE seq='$pj_list'", $connect); /// 타입별 컬러 구분
+							$color_rlt = mysql_query("SELECT type_name, type_color FROM cms_project1_info WHERE seq='$pj_list'", $connect); /// 타입별 컬러 구분
 							$color_row = mysql_fetch_array($color_rlt);
 							// 타입별 칼라 지정
 							$type_name = explode("-", $color_row[type_name]);

@@ -119,7 +119,7 @@
 	if($page_code=='new_reg'){ // 신규 등록이면
 		############# DB INSERT. #############
 
-		$query="INSERT INTO `cms_project_info` ( `pj_name`, `sort`, `data_cr`, `local_addr`, `local_tel`, `local_fax`, `pj_manager`, `type_name`, `type_color`, `total_count_type`, `count_unit`, `start_date`, `expiry_date`, `pr_sp_con`, `reg_date`)
+		$query="INSERT INTO `cms_project1_info` ( `pj_name`, `sort`, `data_cr`, `local_addr`, `local_tel`, `local_fax`, `pj_manager`, `type_name`, `type_color`, `total_count_type`, `count_unit`, `start_date`, `expiry_date`, `pr_sp_con`, `reg_date`)
 
 							 VALUES('$pj_name', '$sort', '$data_cr', '$address', '$local_tel', '$local_fax', '$pj_manager', '$type', '$color', '$total_count', '$count_unit', '$start_date', '$expiry_date', '$pr_sp_con', now())";
 		$result=mysql_query($query, $connect);
@@ -134,7 +134,7 @@
 
 		 ############### DB UPDATE ##############
 
-		 $query1 =" UPDATE cms_project_info SET pj_name = '$pj_name',
+		 $query1 =" UPDATE cms_project1_info SET pj_name = '$pj_name',
 																		   sort = '$sort',
 																		   data_cr = '$data_cr',
 																		   local_addr = '$address',

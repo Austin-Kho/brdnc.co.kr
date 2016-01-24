@@ -35,7 +35,7 @@
 							<!-- ============ 본사 직원일 때 프로젝트 선택 가능 시작 ============  -->
 							<?
 								if($member_row[is_company]==1){
-								$pj_rlt = mysql_query("SELECT seq FROM cms_project_info ORDER BY seq DESC LIMIT 1", $connect);
+								$pj_rlt = mysql_query("SELECT seq FROM cms_project1_info ORDER BY seq DESC LIMIT 1", $connect);
 								$pj_row = mysql_fetch_array($pj_rlt);
 								// if(!$pj_list) $pj_list = $pj_row[seq];
 								$year_frm=$_REQUEST['year_frm'];
@@ -67,7 +67,7 @@
 										if($year_frm>1){
 											$where=" WHERE start_date LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT * FROM cms_project_info $where ORDER BY start_date DESC ";
+										$qry = "SELECT * FROM cms_project1_info $where ORDER BY start_date DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -84,7 +84,7 @@
 							?>
 							<div style="float:left; height:28px; background-color:#F8F8F8; padding:7px 20px 0 20px; color:black;">
 							<?
-								$result = mysql_query("SELECT seq, pj_name FROM cms_project_info, cms_member_table WHERE pj_seq=seq ", $connect);
+								$result = mysql_query("SELECT seq, pj_name FROM cms_project1_info, cms_member_table WHERE pj_seq=seq ", $connect);
 								$row = mysql_fetch_array($result);
 								echo "<font color='#cc0000'>*</font> ".$row[pj_name]."  현장 전도금 입출내역";
 							?>

@@ -68,7 +68,7 @@
 										if($year_frm>1){
 											$where=" WHERE start_date LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT seq, pj_name FROM cms_project_info $where ORDER BY start_date DESC ";
+										$qry = "SELECT seq, pj_name FROM cms_project1_info $where ORDER BY start_date DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -141,7 +141,7 @@
 							<div style="float:left; width:120px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">
 								<font color='#cc0000'>*</font> 프로젝트 명
 							<?
-								$result = mysql_query("SELECT seq, pj_name FROM cms_project_info, cms_member_table WHERE seq=pj_seq AND user_id='$_SESSION[p_id]' ", $connect);
+								$result = mysql_query("SELECT seq, pj_name FROM cms_project1_info, cms_member_table WHERE seq=pj_seq AND user_id='$_SESSION[p_id]' ", $connect);
 								$row = mysql_fetch_array($result);
 							?>
 							</div>

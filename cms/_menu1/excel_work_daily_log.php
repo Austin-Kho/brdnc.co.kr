@@ -13,7 +13,7 @@ Header("Expires: 0");
 //header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 //header('Content-Disposition: attachment;filename="01simple.xlsx"');
 //header('Cache-Control: max-age=0');
-	
+
 	// 데이터베이스 연결 정보와 기타 설정
 	include '../php/config.php';
 	// 각종 유틸 함수
@@ -23,7 +23,7 @@ Header("Expires: 0");
 
 	$seq = $_REQUEST['seq'];
 	// seq 만 받고 나머지 구하기
-	
+
 
 	$qry = "SELECT * FROM cms_work_log WHERE seq='$seq'";
 	$rlt = mysql_query($qry, $connect);
@@ -32,7 +32,7 @@ Header("Expires: 0");
 	$h_t = explode("-", $pj_where);
 
 	// 현장명 구하기
-	$pj_name_rlt = mysql_query("SELECT pj_name FROM cms_project_info WHERE seq='$row[pj_seq]' ", $connect);
+	$pj_name_rlt = mysql_query("SELECT pj_name FROM cms_project1_info WHERE seq='$row[pj_seq]' ", $connect);
 	$pj_name_row = mysql_fetch_array($pj_name_rlt);
 	// 소속본부 구하기
 	$headq_rlt = mysql_query("SELECT headq FROM cms_resource_headq WHERE seq='$h_t[0]' ", $connect);
@@ -78,7 +78,7 @@ Header("Expires: 0");
 </style>
 <meta http-equiv="Content-Type" content="application/vnd.ms-excel;charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<table border="1" cellpadding="0" cellspacing="0">	
+<table border="1" cellpadding="0" cellspacing="0">
 	<tr height="24">
 		<td colspan="7" rowspan="2" style="font-size:24px;" align="center"><b><?=$pj_name_row[pj_name]?> 현장 업무일지</b></td>
 		<td rowspan="2" style="width:37px; text-align:center;">결<br>재</td>
@@ -90,7 +90,7 @@ Header("Expires: 0");
 		<td></td>
 	</tr>
 	<tr height="31">
-		<td colspan="7" style="padding-left:20px;"><?=date('Y년 m월 d일 ', strtotime($row[work_date])).$day?></td>		
+		<td colspan="7" style="padding-left:20px;"><?=date('Y년 m월 d일 ', strtotime($row[work_date])).$day?></td>
 		<td colspan="3" style="text-align:center;"><?=$pj_name_row[pj_name]?> 현장</td>
 	</tr>
 	<tr height="26">
@@ -99,7 +99,7 @@ Header("Expires: 0");
 		<td colspan="2" style="text-align:center;"><?=$team_row[team]?></td>
 		<td colspan="3" style="text-align:center; background-color:#DCE6F1;">출근인원(팀장포함)</td>
 		<td colspan="3" style="text-align:right; padding-right:20px;"><?=$row[work_num]?> 명</td>
-	</tr>	
+	</tr>
 
 
 	<!-- ======================================= 당일 계약사항 ======================================= -->
@@ -125,8 +125,8 @@ Header("Expires: 0");
 		<td colspan="3" style="text-align:center; background-color:#EEECE1;">동호수</td>
 		<td colspan="3" style="text-align:center; background-color:#EEECE1;">계약 예정일</td>
 		<td style="width:93px; text-align:center; background-color:#EEECE1;">담당자</td>
-	</tr>	
-	<?		
+	</tr>
+	<?
 		for($i=0; $i<count($co_sort); $i++){
 			switch ($co_sort[$i]){
 				case 1 : $co_sort_ = "청약(가계약)"; break;
@@ -170,7 +170,7 @@ Header("Expires: 0");
 	</tr>
 
 	<tr height="26">
-		<? 
+		<?
 			$d_limit = 9-count($co_sort);
 			if(count($d_cust_name)<$d_limit){
 				$d_rowspan = $d_limit;
@@ -245,8 +245,8 @@ Header("Expires: 0");
 		<td style="width:93px;"></td>
 		<td style="width:93px;"></td>
 	</tr>
-	<!-- ======================================= 익일 업무 예정 ======================================= -->	
-<?	 
+	<!-- ======================================= 익일 업무 예정 ======================================= -->
+<?
 	// mysql_free_result($rlt);
 ?>
 </table>

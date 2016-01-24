@@ -10,15 +10,15 @@
 										$pj_where = explode("-", $row[pj_where]);
 
 										//현장명 구하기
-										$pj_name_rlt = mysql_query("SELECT pj_name FROM cms_project_info WHERE seq='$row[pj_seq]' ", $connect);
+										$pj_name_rlt = mysql_query("SELECT pj_name FROM cms_project1_info WHERE seq='$row[pj_seq]' ", $connect);
 										$pj_name_row = mysql_fetch_array($pj_name_rlt);
 										// 소속본부 구하기
 										$headq_rlt = mysql_query("SELECT headq FROM cms_resource_headq WHERE seq='$pj_where[0]' ", $connect);
 										$headq_row = mysql_fetch_array($headq_rlt);
-										// 소속 팀 구하기										
+										// 소속 팀 구하기
 										$team_rlt = mysql_query("SELECT team FROM cms_resource_team WHERE seq='$pj_where[1]' ", $connect);
 										$team_row = mysql_fetch_array($team_rlt);
-										
+
 										/***************** 당일청계약 내용 *******************/
 										$co_sort = explode("/", $row[co_sort]);
 										$c_cust_name = explode("/", $row[c_cust_name]);
@@ -26,13 +26,13 @@
 										$due_date = explode("/", $row[due_date]);
 										$c_worker = explode("/", $row[c_worker]);
 										/***************** 당일청계약 내용 *******************/
-										
+
 										/***************** 주요고객 진행사항 *******************/
 										$d_cust_name = explode("/", $row[d_cust_name]);
 										$d_content = explode("/", $row[d_content]);
 										$d_worker = explode("/", $row[d_worker]);
 										/***************** 주요고객 진행사항 *******************/
-										
+
 										/***************** 익일방문예정 고객 *******************/
 										$n_cust_name = explode("/", $row[n_cust_name]);
 										$n_content = explode("/", $row[n_content]);
@@ -93,7 +93,7 @@
 									<div style="clear:left; width:120px; padding:7px 0 0 15px;" class="blue_title">작성일자 <font color="red">*</font></div>
 									<div style="width:250px; height:24px; padding-top:7px; border-width:1px 0 1px 0; text-align:center;" class="bor_ddd"><?=date('Y년 m월 d일 ', strtotime($row[work_date])).$day?></div>
 									<div style="width:120px; padding:7px 0 0 15px;" class="blue_title">출근인원(팀장포함) <font color="red">*</font></div>
-									<div style="width:220px; height:24px; padding:7px 30px 0 0; border-width:1px 0 1px 0; text-align:right;" class="bor_ddd"><?=$row[work_num]?> 명</div>									
+									<div style="width:220px; height:24px; padding:7px 30px 0 0; border-width:1px 0 1px 0; text-align:right;" class="bor_ddd"><?=$row[work_num]?> 명</div>
 									<div style="clear:left; height:24px; padding:8px 0 0 15px; color:#000000"><b><font color="red">*</font> 계약 사항</b></div>
 									<div style="clear:left; width:120px; padding:7px 0 0 15px; border-width:1px 1px 0 0;" class="blue_title">당일 청약(가계약)건 </div>
 									<div style="width:240px; height:24px; padding:7px 0 0 10px; border-width:1px 0 0 0;" class="bor_ddd">
@@ -113,7 +113,7 @@
 											<div style="width:155px; padding-top:7px; border-width:0 1px 1px 0; background-color:#eef3eb; text-align:center;" class="blue_title">동호수</div>
 											<div style="width:155px; padding-top:7px; border-width:0 1px 1px 0; background-color:#eef3eb; text-align:center;" class="blue_title">계약 예정일</div>
 											<div style="width:115px; padding-top:7px; border-width:0 0 1px 0; background-color:#eef3eb; text-align:center;" class="blue_title">담당자</div>
-											
+
 
 											<!-- ================================================================== (청)계약 내용 입력 폼1 ====================================================================== -->
 											<div id="cont_1">
@@ -184,7 +184,7 @@
 												<div style="clear:left; width:120px; padding:7px 0 0 15px; border-width:0 1px 0 0;" class="blue_title"></div>
 												<div style="float:left;">
 													<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;">
-														<?if(!$co_sort[4]) echo "-";?><?if($co_sort[4]==1) echo "청약(가계약)";?><?if($co_sort[4]==2) echo "청약해지";?><?if($co_sort[4]==3) echo "계약(정계약)";?> 
+														<?if(!$co_sort[4]) echo "-";?><?if($co_sort[4]==1) echo "청약(가계약)";?><?if($co_sort[4]==2) echo "청약해지";?><?if($co_sort[4]==3) echo "계약(정계약)";?>
 													</div>
 													<div style="float:left; width:110px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$c_cust_name[4]?></div>
 													<div style="float:left; width:155px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;">
@@ -339,14 +339,14 @@
 											<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 1px 1px; border-style:solid; border-color:#dddddd; background-color:#eef3eb; color:#003366; text-align:center;">고객명</div>
 											<div style="float:left; width:423px; height:24px; padding-top:7px; border-width:0 1px 1px 0; border-style:solid; border-color:#dddddd; background-color:#eef3eb; color:#003366; text-align:center;">진 행 사 항</div>
 											<div style="float:left; width:113px; height:24px; padding-top:7px; border-width:0 0 1px 0; border-style:solid; border-color:#dddddd; background-color:#eef3eb; color:#003366; text-align:center;">담당자</div>
-											
+
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼1 ====================================================================== -->
 											<div id="coun_1">
 												<div style="clear:left; width:120px; padding:7px 0 0 15px; border-width:0 1px 0 0;" class="blue_title"></div>
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$d_cust_name[0]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$d_content[0]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$d_worker[0]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼1 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼2 ====================================================================== -->
 											<div id="coun_2" <?if(count($d_cust_name)<2) echo "style='display:none;'";?>>
@@ -354,7 +354,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$d_cust_name[1]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$d_content[1]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$d_worker[1]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼2 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼3 ====================================================================== -->
 											<div id="coun_3" <?if(count($d_cust_name)<3) echo "style='display:none;'";?>>
@@ -362,7 +362,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$d_cust_name[2]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$d_content[2]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$d_worker[2]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼3 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼4 ====================================================================== -->
 											<div id="coun_4" <?if(count($d_cust_name)<4) echo "style='display:none;'";?>>
@@ -370,7 +370,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$d_cust_name[3]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$d_content[3]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$d_worker[3]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼4 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼5 ====================================================================== -->
 											<div id="coun_5" <?if(count($d_cust_name)<5) echo "style='display:none;'";?>>
@@ -378,7 +378,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$d_cust_name[4]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$d_content[4]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$d_worker[4]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼5 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼6 ====================================================================== -->
 											<div id="coun_6" <?if(count($d_cust_name)<6) echo "style='display:none;'";?>>
@@ -386,7 +386,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$d_cust_name[5]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$d_content[5]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$d_worker[5]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼6 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼7 ====================================================================== -->
 											<div id="coun_7" <?if(count($d_cust_name)<7) echo "style='display:none;'";?>>
@@ -394,7 +394,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$d_cust_name[6]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$d_content[6]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$d_worker[6]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼7 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼8 ====================================================================== -->
 											<div id="coun_8" <?if(count($d_cust_name)<8) echo "style='display:none;'";?>>
@@ -402,7 +402,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$d_cust_name[7]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$d_content[7]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$d_worker[7]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼8 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼9 ====================================================================== -->
 											<div id="coun_9" <?if(count($d_cust_name)<9) echo "style='display:none;'";?>>
@@ -410,7 +410,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$d_cust_name[8]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$d_content[8]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$d_worker[8]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼9 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼10 ====================================================================== -->
 											<div id="coun_10" <?if(count($d_cust_name)<10) echo "style='display:none;'";?>>
@@ -418,7 +418,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$d_cust_name[9]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$d_content[9]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$d_worker[9]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼10 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼11 ====================================================================== -->
 											<div id="coun_11" <?if(count($d_cust_name)<11) echo "style='display:none;'";?>>
@@ -426,7 +426,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$d_cust_name[10]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$d_content[10]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$d_worker[10]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼11 ====================================================================== -->
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼12 ====================================================================== -->
 											<div id="coun_12" <?if(count($d_cust_name)<12) echo "style='display:none;'";?>>
@@ -434,7 +434,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$d_cust_name[11]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$d_content[11]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$d_worker[11]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 주요고객 진행 사항 입력 폼12 ====================================================================== -->
 										</td>
 									</tr>
@@ -451,14 +451,14 @@
 											<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 1px 1px; border-style:solid; border-color:#dddddd; background-color:#eef3eb; color:#003366; text-align:center;">고객명</div>
 											<div style="float:left; width:423px; height:24px; padding-top:7px; border-width:0 1px 1px 0; border-style:solid; border-color:#dddddd; background-color:#eef3eb; color:#003366; text-align:center;">진행 내용 / 방문 예정시간 / 연락처</div>
 											<div style="float:left; width:113px; height:24px; padding-top:7px; border-width:0 0 1px 0; border-style:solid; border-color:#dddddd; background-color:#eef3eb; color:#003366; text-align:center;">담당자</div>
-											
+
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼1 ====================================================================== -->
 											<div id="tomo_1">
 												<div style="clear:left; width:120px; padding:7px 0 0 15px; border-width:0 1px 0 0;" class="blue_title"></div>
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$n_cust_name[0]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$n_content[0]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$n_worker[0]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼1 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼2 ====================================================================== -->
 											<div id="tomo_2" <?if(count($n_cust_name)<2) echo "style='display:none;'"?>>
@@ -466,7 +466,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$n_cust_name[1]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$n_content[1]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$n_worker[1]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼2 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼3 ====================================================================== -->
 											<div id="tomo_3" <?if(count($n_cust_name)<3) echo "style='display:none;'"?>>
@@ -474,7 +474,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$n_cust_name[2]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$n_content[2]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$n_worker[2]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼3 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼4 ====================================================================== -->
 											<div id="tomo_4" <?if(count($n_cust_name)<4) echo "style='display:none;'"?>>
@@ -482,7 +482,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$n_cust_name[3]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$n_content[3]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$n_worker[3]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼4 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼5 ====================================================================== -->
 											<div id="tomo_5" <?if(count($n_cust_name)<5) echo "style='display:none;'"?>>
@@ -490,7 +490,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$n_cust_name[4]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$n_content[4]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$n_worker[4]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼5 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼6 ====================================================================== -->
 											<div id="tomo_6" <?if(count($n_cust_name)<6) echo "style='display:none;'"?>>
@@ -498,7 +498,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$n_cust_name[5]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$n_content[5]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$n_worker[5]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼6 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼7 ====================================================================== -->
 											<div id="tomo_7" <?if(count($n_cust_name)<7) echo "style='display:none;'"?>>
@@ -506,7 +506,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$n_cust_name[6]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$n_content[6]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$n_worker[6]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼7 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼8 ====================================================================== -->
 											<div id="tomo_8" <?if(count($n_cust_name)<8) echo "style='display:none;'"?>>
@@ -514,7 +514,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$n_cust_name[7]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$n_content[7]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$n_worker[7]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼8 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼9 ====================================================================== -->
 											<div id="tomo_9" <?if(count($n_cust_name)<9) echo "style='display:none;'"?>>
@@ -522,7 +522,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$n_cust_name[8]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$n_content[8]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$n_worker[8]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼9 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼10 ====================================================================== -->
 											<div id="tomo_10" <?if(count($n_cust_name)<10) echo "style='display:none;'"?>>
@@ -530,7 +530,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$n_cust_name[9]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$n_content[9]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$n_worker[9]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼10 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼11 ====================================================================== -->
 											<div id="tomo_11" <?if(count($n_cust_name)<11) echo "style='display:none;'"?>>
@@ -538,7 +538,7 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$n_cust_name[10]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$n_content[10]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$n_worker[10]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼11 ====================================================================== -->
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼12 ====================================================================== -->
 											<div id="tomo_12" <?if(count($n_cust_name)<12) echo "style='display:none;'"?>>
@@ -546,13 +546,13 @@
 												<div style="float:left; width:100px; height:24px; padding-top:7px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd; text-align:center;"><?=$n_cust_name[11]?></div>
 												<div style="float:left; width:413px; height:24px; padding:7px 0 0 10px; border-width:0 1px 0 0; border-style:solid; border-color:#dddddd;"><?=$n_content[11]?></div>
 												<div style="float:left; width:113px; height:24px; padding-top:7px; text-align:center;"><?=$n_worker[11]?></div>
-											</div>											
+											</div>
 											<!-- ================================================================== 익일 방문 예정고객 입력 폼12 ====================================================================== -->
 										</td>
 									</tr>
 									</table>
 									<div style="clear:left; width:120px; height:90px; padding:7px 0 0 15px; border-width:0 1px 1px 0;" class="blue_title">익일 영업계획 <font color="red">*</font></div>
-									<div style="float:left; width:625px; height:90px; padding:7px 0 0 10px; border-width:0 0 1px 0; border-style:solid; border-color:#dddddd; "><?=nl2br($row[n_sale_plan])?></div>								
+									<div style="float:left; width:625px; height:90px; padding:7px 0 0 10px; border-width:0 0 1px 0; border-style:solid; border-color:#dddddd; "><?=nl2br($row[n_sale_plan])?></div>
 								</div>
 								<!-- ================================= 거래처 contents E ================================= -->
 								<?

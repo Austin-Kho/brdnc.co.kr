@@ -67,7 +67,7 @@
 											if($year_frm>1){
 												$where=" WHERE start_date LIKE '$year_frm%' ";
 											}
-											$qry = "SELECT * FROM cms_project_info $where ORDER BY start_date DESC ";
+											$qry = "SELECT * FROM cms_project1_info $where ORDER BY start_date DESC ";
 											$rlt = mysql_query($qry, $connect);
 											for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 										?>
@@ -94,7 +94,7 @@
 								<td style="border-width: 1px 0 0 0; border-color:#a5a5a5; border-style: solid;"> 계약 체결일</td>
 							</tr>
 							<?
-								$qry1 = "select * from cms_project_info $where order by start_date desc ";
+								$qry1 = "select * from cms_project1_info $where order by start_date desc ";
 								$rlt1 = mysql_query($qry1, $connect);
 								for($i=0; $rows1=mysql_fetch_array($rlt1); $i++){
 									if($rows1[sort]==1) $sort="아파트(일반분양)";
@@ -134,7 +134,7 @@
 							<form name="form1" method="post" action="contract_post.php">
 							<?
 								if($pj){
-									$query="select * from cms_project_info where seq=$pj";
+									$query="select * from cms_project1_info where seq=$pj";
 									$result=mysql_query($query, $connect);
 									$row = mysql_fetch_array($result);
 

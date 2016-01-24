@@ -99,7 +99,7 @@
 	$result = mysql_query($query, $connect);
 	$rows = mysql_fetch_array($result);
 
-	$query1 = " SELECT data_cr FROM cms_project_info WHERE seq='$info'  ";
+	$query1 = " SELECT data_cr FROM cms_project1_info WHERE seq='$info'  ";
 	$result1 = mysql_query($query1, $connect);
 	$rows1 = mysql_fetch_array($result1);
 

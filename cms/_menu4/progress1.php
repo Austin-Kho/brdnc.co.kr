@@ -60,7 +60,7 @@
 										if($year_frm>1){
 											$where.=" AND start_date LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT * FROM cms_project_info $where ORDER BY start_date DESC ";
+										$qry = "SELECT * FROM cms_project1_info $where ORDER BY start_date DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -79,7 +79,7 @@
 										if($year_frm>1){
 											$where.=" AND start_date LIKE '$year_frm%' ";
 										}
-										$qry = "SELECT * FROM cms_project_info $where ORDER BY start_date DESC ";
+										$qry = "SELECT * FROM cms_project1_info $where ORDER BY start_date DESC ";
 										$rlt = mysql_query($qry, $connect);
 										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
 									?>
@@ -95,7 +95,7 @@
 						<?
 							if($new_pj) $pre_pj_seq = $new_pj; // 신규 등록인지
 							if($reg_pj) $pre_pj_seq = $reg_pj; // 등록 수정인지
-							$p_qry = "SELECT pj_name, sort, data_cr, type_name FROM cms_project_info WHERE seq = '$pre_pj_seq' ";
+							$p_qry = "SELECT pj_name, sort, data_cr, type_name FROM cms_project1_info WHERE seq = '$pre_pj_seq' ";
 							$p_rlt = mysql_query($p_qry, $connect);
 							$p_row = mysql_fetch_array($p_rlt);
 							if($p_row[sort]==1) $sort="아파트(일반분양)";
@@ -146,7 +146,7 @@
 							</div>
 							<?
 								// 현재 몇동 몇라인 만 표시 쿼리 // 향후 미니멈 몇층부터 맥시멈 몇층까지 해당라인에 등록된 데이타 몇개 까지 표시할 것
-								$chk_qry = "SELECT con_no FROM cms_project_data, cms_project_info WHERE pj_seq = '$pre_pj_seq' AND pj_seq=cms_project_info.seq AND is_data_reg != 1 ORDER BY reg_time DESC";
+								$chk_qry = "SELECT con_no FROM cms_project_data, cms_project1_info WHERE pj_seq = '$pre_pj_seq' AND pj_seq=cms_project1_info.seq AND is_data_reg != 1 ORDER BY reg_time DESC";
 								$chk_rlt = mysql_query($chk_qry, $connect);
 								$chk_row = mysql_fetch_array($chk_rlt);
 								$total_n = mysql_num_rows($chk_rlt);
@@ -257,7 +257,7 @@
 							</div>
 							<?
 								// 현재 몇동 몇라인 만 표시 쿼리 // 향후 미니멈 몇층부터 맥시멈 몇층까지 해당라인에 등록된 데이타 몇개 까지 표시할 것
-								$chk_qry = "SELECT pj_dong, pj_ho FROM cms_project_data, cms_project_info WHERE pj_seq = '$pre_pj_seq' AND pj_seq=cms_project_info.seq AND is_data_reg != 1 ORDER BY reg_time DESC";
+								$chk_qry = "SELECT pj_dong, pj_ho FROM cms_project_data, cms_project1_info WHERE pj_seq = '$pre_pj_seq' AND pj_seq=cms_project1_info.seq AND is_data_reg != 1 ORDER BY reg_time DESC";
 								$chk_rlt = mysql_query($chk_qry, $connect);
 								$chk_row = mysql_fetch_array($chk_rlt);
 								$total_n = mysql_num_rows($chk_rlt);

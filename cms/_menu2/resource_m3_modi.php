@@ -53,7 +53,7 @@
 	</script>
 </head>
 <?
-	$query="SELECT no, user_id, name, email, mobile, pj_seq, pj_where, pj_posi, pj_name FROM cms_member_table, cms_project_info WHERE no='$edit_code' ";
+	$query="SELECT no, user_id, name, email, mobile, pj_seq, pj_where, pj_posi, pj_name FROM cms_member_table, cms_project1_info WHERE no='$edit_code' ";
 	$result=mysql_query($query, $connect);
 	$row=mysql_fetch_array($result);
 	$posi=explode("-", $row[pj_where]);
@@ -65,7 +65,7 @@
 			<div style="height:50px; border-width:0 0 2px 0; border-style: solid; border-color:#96ABE5; background-color:#D9EAF8; text-align:center; padding-top:30px; margin-bottom:12px;">
 				<font color="#4C63BD" style="font-size:11pt"><b>현장 관계자 소속 관리</b></font>
 			</div>
-			<div style="padding:0 10px 0 10px;">				
+			<div style="padding:0 10px 0 10px;">
 				<div style="height:28px; background-color:#F4F4F4; border-width: 1px 0 1px 0; border-color:#CFCFCF; border-style: solid; text-align:center; padding-top:7px;">
 					현장 관계자 소속 정보를 수정해 주십시요. (<font color="#ff0000">*</font>표시는 필수입력 정보)
 				</div>
@@ -78,20 +78,20 @@
 					<div style="height:35px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
 					<div style="float:left; padding:9px 15px 0 0; text-align:right; width:100px;">프로젝트명  <font color="#ff0000">*</font></div>
 					<div style="float:left; padding-top:8px; text-align:left;">
-						<select name="pj" style="height:20px; width:150px;" class="inputstyle2" onchange="submit();">							
+						<select name="pj" style="height:20px; width:150px;" class="inputstyle2" onchange="submit();">
 							<?
-								$h_qry = "SELECT seq, pj_name FROM cms_project_info WHERE is_end<>'1' ORDER BY seq ";
+								$h_qry = "SELECT seq, pj_name FROM cms_project1_info WHERE is_end<>'1' ORDER BY seq ";
 								$h_rlt = mysql_query($h_qry, $connect);
 								while($h_rows = mysql_fetch_array($h_rlt)){
 							?>
 							<option value="<?=$h_rows[seq]?>" <?if($h_rows[seq]==$pj) echo "selected";?>><?=$h_rows[pj_name]?>
 							<? } ?>
-						</select>						
+						</select>
 					</div>
-				</div>			
+				</div>
 				<div style="height:35px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
 					<div style="float:left; padding:9px 15px 0 0; text-align:right; width:100px;">소속본부 <font color="#ff0000">*</font></div>
-					<div style="float:left; padding-top:8px; text-align:left;"> 
+					<div style="float:left; padding-top:8px; text-align:left;">
 						<select name="headq" style="height:20px; width:100px;" class="inputstyle2" onchange="submit();">
 							<option value="" <?if(!$headq) echo "selected";?>> 선 택
 							<?

@@ -21,7 +21,7 @@
 	//계약관리번호별 or 동호수별 관리 여부
 	$data_cr = $_REQUEST['data_cr'];
 
-	// 공통변수	
+	// 공통변수
 	$type_batch = $_REQUEST['type_batch'];
 	$price_batch = $_REQUEST['price_batch'];
 	$pay_batch = $_REQUEST['pay_batch'];
@@ -54,12 +54,12 @@
 
 		$pay_1 = $_REQUEST['pay_1'];   $pay_2 = $_REQUEST['pay_2'];	$pay_3 = $_REQUEST['pay_3'];	$pay_4 = $_REQUEST['pay_4'];
 		$pay_5 = $_REQUEST['pay_5'];	$pay_6 = $_REQUEST['pay_6'];	$pay_7 = $_REQUEST['pay_7'];	$pay_8 = $_REQUEST['pay_8'];
-	
+
 
 		$min_floor = $_REQUEST['min_floor'];
 		$max_floor = $_REQUEST['max_floor'];
-		
-		$price_batch = $_REQUEST['price_batch'];	
+
+		$price_batch = $_REQUEST['price_batch'];
 
 		// 변수 다 받았으면 이제부터 시작
 		if($mode=='reg'){ // 신규 등록이면
@@ -164,7 +164,7 @@
 
 		}else if($mode=="end"){ // 데이터 등록 마감시
 
-			$query1 =" UPDATE cms_project_info SET is_data_reg = '1' WHERE seq = '$seq' ";
+			$query1 =" UPDATE cms_project1_info SET is_data_reg = '1' WHERE seq = '$seq' ";
 			$result1=mysql_query($query1, $connect);
 
 			// 저장 과정에서 오류가 생기면
@@ -180,7 +180,7 @@
 
 		}else if($mode=="re_reg"){ // 데이터 재등록 시
 
-			$query1 =" UPDATE cms_project_info SET is_data_reg = '0' WHERE seq = '$seq' ";
+			$query1 =" UPDATE cms_project1_info SET is_data_reg = '0' WHERE seq = '$seq' ";
 			$result1=mysql_query($query1, $connect);
 
 			// 저장 과정에서 오류가 생기면
@@ -192,7 +192,7 @@
 						</script>");
 				echo "<meta http-equiv='Refresh' content='0; URL=project_main.php?new_pj=$seq'>";
 			}
-		}else if($mode=="individual_reg"){ // 신규수주 프로그레스1 개별 등록 수정일 경우			
+		}else if($mode=="individual_reg"){ // 신규수주 프로그레스1 개별 등록 수정일 경우
 			$data = $_REQUEST['data'];
 			$info = $_REQUEST['info'];
 			// $data_cr = $_REQUEST['data_cr'];
@@ -232,8 +232,8 @@
 
 		// 계약관리번호별 관리일 경우 DB작업 시작
 		if($mode=='reg'){ // 신규 등록이면
-			 
-			 
+
+
 			//기존에 등록되어 있는 계약관리번호가 있는지 체크 /// <----나중에 다시 체크
 			$ck_qry = "SELECT seq FROM cms_project_data WHERE pj_seq='$pj_seq' AND con_no='$con_no' ";
 			$ck_rlt = mysql_query($ck_qry, $connect);
@@ -269,7 +269,7 @@
 
 		}else if($mode=="end"){ // 데이터 등록 마감시
 
-			$query1 =" UPDATE cms_project_info SET is_data_reg = '1' WHERE seq = '$seq' ";
+			$query1 =" UPDATE cms_project1_info SET is_data_reg = '1' WHERE seq = '$seq' ";
 			$result1=mysql_query($query1, $connect);
 
 			// 저장 과정에서 오류가 생기면
@@ -285,7 +285,7 @@
 
 		}else if($mode=="re_reg"){ // 데이터 재등록 시
 
-			$query1 =" UPDATE cms_project_info SET is_data_reg = '0' WHERE seq = '$seq' ";
+			$query1 =" UPDATE cms_project1_info SET is_data_reg = '0' WHERE seq = '$seq' ";
 			$result1=mysql_query($query1, $connect);
 
 			// 저장 과정에서 오류가 생기면
@@ -298,18 +298,18 @@
 				echo "<meta http-equiv='Refresh' content='0; URL=project_main.php?new_pj=$seq'>";
 			}
 
-		}else if($mode=="individual_reg"){ // 신규수주 프로그레스1 개별 등록 수정일 경우		
+		}else if($mode=="individual_reg"){ // 신규수주 프로그레스1 개별 등록 수정일 경우
 			$data = $_REQUEST['data'];
 			$info = $_REQUEST['info'];
 			// $data_cr = $_REQUEST['data_cr'];
 			$con_no = $_REQUEST['con_no'];
 			$sa_sort = $_REQUEST['sa_sort'];
-			$diff_no = $_REQUEST['diff_no'];			
-			$type = $_REQUEST['type'];	
+			$diff_no = $_REQUEST['diff_no'];
+			$type = $_REQUEST['type'];
 			$is_except = $_REQUEST['is_except'];
 			$price = $_REQUEST['price'];
 			$pay = $_REQUEST['pay'];
-			
+
 
 			$query1 =" UPDATE cms_project_data SET con_no = '$con_no',
 														sa_sort = '$sa_sort',

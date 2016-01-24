@@ -10,11 +10,7 @@
 						$_m3_1_3_rlt = mysql_query("select _m3_1_3 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
 						$_m3_1_3_row = mysql_fetch_array($_m3_1_3_rlt);
 
-<<<<<<< HEAD
-						if(!$ca_1_3_row[ca_1_3]||$ca_1_3_row[ca_1_3]==0){
-=======
 						if(!$_m3_1_3_row[_m3_1_3]||$_m3_1_3_row[_m3_1_3]==0){
->>>>>>> ad2b043cafb8270de4eda52aba399861669ae669
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -48,7 +44,7 @@
 						<input type="hidden" name="cont_10_h" value=""> <!-- 수수료 발생 시 - 적요_10 -->
 						<?
 							// 현장 목록 가져오기
-							$pj_qry = "SELECT seq, pj_name FROM cms_project_info WHERE is_end!='1' ORDER BY pr_sd DESC, seq DESC";
+							$pj_qry = "SELECT seq, pj_name FROM cms_project1_info WHERE is_end!='1' ORDER BY start_date DESC, seq DESC";
 							$pj_rlt = mysql_query($pj_qry, $connect);
 							$pj_num = mysql_num_rows($pj_rlt);
 							for($i=0; $pj_rows = mysql_fetch_array($pj_rlt); $i++){
