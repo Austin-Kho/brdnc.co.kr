@@ -10,7 +10,7 @@
 						$_m1_2_1_rlt = mysql_query("select _m1_2_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
 						$_m1_2_1_row = mysql_fetch_array($_m1_2_1_rlt);
 
-						if(!$_m1_2_1_row[_m1_2_1]||$_m1_2_1_row[_m1_2_1]==0){
+						if(!$_m1_2_1_row[_m1_2_1]||$_m1_2_1_row[_m1_2_1]==0){ // 이 페이지 조회 권한 없을 때
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -113,7 +113,7 @@
 						</div>
 						<?
 							if(!$pj_list){ $pj_list=$member_row[pj_seq];} // 프로젝트 리스트의 값 [현장 seq 넘버] 가 없으면, 즉 현장 관계자일 때는 담당 현장 프로젝트 seq 넘버 설정
-							$pos_con_= $_REQUEST['pos_con_'];       /// ??
+							$pos_con_= $_REQUEST['pos_con_'];       /// 청약 계약 미계약 구분
 							$type_data_ =  $_REQUEST['type_data_']; /// 타입
 							$dong_data_ =  $_REQUEST['dong_data_']; /// 동
 							$diff_data_ =  $_REQUEST['diff_data_']; /// 차수
@@ -148,7 +148,7 @@
 						<?
 							$result=mysql_query("SELECT pj_name, data_cr,type_name, type_color FROM cms_project1_info WHERE seq='$pj_list' ", $connect);
 							$row=mysql_fetch_array($result);
-							$data_cr = $row[data_cr]; // 공급 구분 <--향후 차수명 으로 대체 요망 (cms_project3_diff 테이블 참조)
+							$data_cr = $row[data_cr];
 							$type_name = explode("-", $row[type_name]);
 							$type_color = explode("-", $row[type_color]);
 

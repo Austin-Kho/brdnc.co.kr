@@ -89,7 +89,7 @@
 					if($mode=="search"){
 
 					## 주소 데이터베이스에서 사용자가 입력한 주소와 일치하는 레코드를 검색한다. ##
-					$query="SELECT zipcode, sido, gugun, eupmn, doro, b_no_main, b_no_sub, law_dn, gugun_bn FROM cms_zipcode WHERE (eupmn LIKE '%$dong%') OR (eupmn_en LIKE '%$dong%') OR (doro LIKE '%$dong%') OR (doro_en LIKE '%$dong%') OR (gugun_bn LIKE '%$dong%') OR (law_dn LIKE '%$dong%') OR (rin LIKE '%$dong%') OR (admin_dn LIKE '%$dong%') OR (gugun_en LIKE '%$dong%') OR (gugun_en LIKE '%$dong%') OR (gugun_en LIKE '%$dong%');";
+					$query="SELECT zipcode, sido, gugun, eupmn, doro, b_no_main, b_no_sub, law_dn, gugun_bn FROM cms_zipcode WHERE (eupmn LIKE '%$dong%') OR (doro LIKE '%$dong%') OR (gugun_bn LIKE '%$dong%') OR (law_dn LIKE '%$dong%') OR (rin LIKE '%$dong%') OR (admin_dn LIKE '%$dong%');";
 					$result=mysql_query($query, $connect);
 					$total_num=mysql_num_rows($result);
 					## 검색 결과가 있으면 목록 상자 형태로 출력한다. ##
@@ -113,7 +113,7 @@
 						<div style="clear:left; float:left; width:53px; height:25px; text-align:center; padding-top:5px; background-color:#F9F9F9;">
 							<a href="javascript:" onclick="open_move('<?=$rows[zipcode]?>', '<?=$addr[0]?>', '<?=" (".$addr[1]?>')"><?=$rows[zipcode]?></a>
 						</div>
-						<div style="float:left; width:448px; height:25px; border-width:1px 0 0 0; border-style:solid; border-color:#EEEEEE; padding:5px 0 0 2px; background-color:#F9F9F9;">
+						<div style="float:left; width:446px; height:25px; border-width:1px 0 0 0; border-style:solid; border-color:#EEEEEE; padding:5px 0 0 2px; background-color:#F9F9F9;">
 							<a href="javascript:" onclick="open_move('<?=$rows[zipcode]?>', '<?=$addr[0]?>', '<?=" (".$addr[1]?>')"><?=$addr_f?><?=$rows[bunji]?></a>
 						</div>
 						<?	} ?>
