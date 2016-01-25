@@ -162,7 +162,7 @@
 				echo ("<script>
 							window.alert('정상적으로 프로젝트(계약)정보가 변경 되었습니다!');
 						 </script>");
-				echo "<meta http-equiv='Refresh' content='0; URL=project__main.php?m_di=1&s_di=2'>";
+				echo "<meta http-equiv='Refresh' content='0; URL=project_main.php?m_di=1&s_di=2'>";
 		 }
 	}
 ?>
