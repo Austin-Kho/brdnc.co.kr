@@ -113,13 +113,13 @@
 						</div>
 						<?
 							if(!$pj_list){ $pj_list=$member_row[pj_seq];} // 프로젝트 리스트의 값 [현장 seq 넘버] 가 없으면, 즉 현장 관계자일 때는 담당 현장 프로젝트 seq 넘버 설정
-							$pos_con_= $_REQUEST['pos_con_'];
-							$type_data_ =  $_REQUEST['type_data_'];
-							$dong_data_ =  $_REQUEST['dong_data_'];
-							$diff_data_ =  $_REQUEST['diff_data_'];
-							$list_limit = $_REQUEST['list_limit'];
-							$s_date = $_REQUEST['s_date'];
-							$e_date = $_REQUEST['e_date'];
+							$pos_con_= $_REQUEST['pos_con_'];       /// ??
+							$type_data_ =  $_REQUEST['type_data_']; /// 타입
+							$dong_data_ =  $_REQUEST['dong_data_']; /// 동
+							$diff_data_ =  $_REQUEST['diff_data_']; /// 차수
+							$list_limit = $_REQUEST['list_limit'];  /// 한 페이지 표시개수
+							$s_date = $_REQUEST['s_date'];  // 검색 시작일
+							$e_date = $_REQUEST['e_date'];  // 검색 종료일
 						?>
 						<div style="height:28px; margin-top:15px; padding:3px 15px 0 0; border-width:0 0 1px 0; border-color:#ccc; border-style:solid;">
 							<div style="float:left; padding-left:10px;">
@@ -146,15 +146,12 @@
 							<div style="float:left; width:100px;">분양율(청약+계약)</div>
 						</div>
 						<?
-							$result=mysql_query("SELECT pj_name, data_cr FROM cms_project1_info WHERE seq='$pj_list' ", $connect);
+							$result=mysql_query("SELECT pj_name, data_cr,type_name, type_color FROM cms_project1_info WHERE seq='$pj_list' ", $connect);
 							$row=mysql_fetch_array($result);
-							$data_cr = $row[data_cr];
+							$data_cr = $row[data_cr]; // 공급 구분 <--향후 차수명 으로 대체 요망 (cms_project3_diff 테이블 참조)
+							$type_name = explode("-", $row[type_name]);
+							$type_color = explode("-", $row[type_color]);
 
-							$color_rlt = mysql_query("SELECT type_name, type_color FROM cms_project1_info WHERE seq='$pj_list'", $connect); /// 타입별 컬러 구분
-							$color_row = mysql_fetch_array($color_rlt);
-							// 타입별 칼라 지정
-							$type_name = explode("-", $color_row[type_name]);
-							$type_color = explode("-", $color_row[type_color]);
 							///////////////////////////////////////////////////////////////////////
 							for($i=0; $i<count($type_name); $i++){
 								$color[$type_name[$i]]=$type_color[$i];
