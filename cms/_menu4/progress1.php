@@ -206,7 +206,7 @@
 									<input type="text" name="min_floor_1" class="inputstyle2" size="5"> 층 부터 ~ <input type="text" name="max_floor_1" class="inputstyle2" size="5"> 층 (일괄 등록)
 								</div>
 								<div style="float:left; height:27px; width:130px; padding-top:5px; border-width:0 0 0 0; border-color:#cccccc; border-style:solid; text-align:center;">
-									<input type="checkbox" name="except_batch_1">
+									<input type="checkbox" name="hold_1">
 								</div>
 							</div>
 							<!-- =============================================== line batch 1 end ================================================ -->
@@ -233,7 +233,7 @@
 									<input type="text" name="min_floor_2" class="inputstyle2" size="5"> 층 부터 ~ <input type="text" name="max_floor_2" class="inputstyle2" size="5"> 층 (일괄 등록)
 								</div>
 								<div style="float:left; height:27px; width:130px; padding-top:5px; border-width:0 0 0 0; border-color:#cccccc; border-style:solid; text-align:center;">
-									<input type="checkbox" name="except_batch_2">
+									<input type="checkbox" name="hold_2">
 								</div>
 							</div>
 							<!-- =============================================== line batch 2 end ================================================ -->
@@ -260,7 +260,7 @@
 									<input type="text" name="min_floor_3" class="inputstyle2" size="5"> 층 부터 ~ <input type="text" name="max_floor_3" class="inputstyle2" size="5"> 층 (일괄 등록)
 								</div>
 								<div style="float:left; height:27px; width:130px; padding-top:5px; border-width:0 0 0 0; border-color:#cccccc; border-style:solid; text-align:center;">
-									<input type="checkbox" name="except_batch_3">
+									<input type="checkbox" name="hold_3">
 								</div>
 							</div>
 							<!-- =============================================== line batch 3 end ================================================ -->
@@ -287,7 +287,7 @@
 									<input type="text" name="min_floor_4" class="inputstyle2" size="5"> 층 부터 ~ <input type="text" name="max_floor_4" class="inputstyle2" size="5"> 층 (일괄 등록)
 								</div>
 								<div style="float:left; height:27px; width:130px; padding-top:5px; border-width:0 0 0 0; border-color:#cccccc; border-style:solid; text-align:center;">
-									<input type="checkbox" name="except_batch_4">
+									<input type="checkbox" name="hold_4">
 								</div>
 							</div>
 							<!-- =============================================== line batch 4 end ================================================ -->
@@ -314,7 +314,7 @@
 									<input type="text" name="min_floor_5" class="inputstyle2" size="5"> 층 부터 ~ <input type="text" name="max_floor_5" class="inputstyle2" size="5"> 층 (일괄 등록)
 								</div>
 								<div style="float:left; height:27px; width:130px; padding-top:5px; border-width:0 0 0 0; border-color:#cccccc; border-style:solid; text-align:center;">
-									<input type="checkbox" name="except_batch_5">
+									<input type="checkbox" name="hold_5">
 								</div>
 							</div>
 							<!-- =============================================== line batch 5 end ================================================ -->
@@ -341,7 +341,7 @@
 									<input type="text" name="min_floor_6" class="inputstyle2" size="5"> 층 부터 ~ <input type="text" name="max_floor_6" class="inputstyle2" size="5"> 층 (일괄 등록)
 								</div>
 								<div style="float:left; height:27px; width:130px; padding-top:5px; border-width:0 0 0 0; border-color:#cccccc; border-style:solid; text-align:center;">
-									<input type="checkbox" name="except_batch_6">
+									<input type="checkbox" name="hold_6">
 								</div>
 							</div>
 							<!-- =============================================== line batch 6 end ================================================ -->
@@ -361,13 +361,13 @@
 							<div style="height:48px; padding-top:23px; text-align:center;">
 								<input type="button" value="데이터 입력" onclick="<?=$submit_str?>" class="submit_bt">
 							</div>
-						<?								
+						<?
 							}
 						?>
 						<!-- 등록 마감 된 기 등록 데이터 수정일 때는 안보임 끝 -->
 						</form>
 						<!------------------------------------동호수 별 입력 종료------------------------------------------//--->
-						
+
 						<!--------------------------동호수별 데이터 시작-------------------------//-->
 						<?
 							$new_pj = $_REQUEST['new_pj'];

@@ -18,7 +18,7 @@
 	$pj_sort = $_REQUEST['pj_sort'];
 	$seq = $_REQUEST['seq'];
 	$diff_no = $_REQUEST['diff_no'];
-	
+
 	// form(form1-post)에서 받은 데이터
 	if(!$diff_no) $diff_no = 1;
 	// 동 데이터
@@ -41,12 +41,12 @@
 	$type = array($type_1, $type_2, $type_3, $type_4, $type_5, $type_6);
 
 	// 층 데이터
-	$min_floor_1 = $_REQUEST['min_floor_1']; $max_floor_1 = $_REQUEST['max_floor_1'];		
-	$min_floor_2 = $_REQUEST['min_floor_2']; $max_floor_2 = $_REQUEST['max_floor_2'];		
+	$min_floor_1 = $_REQUEST['min_floor_1']; $max_floor_1 = $_REQUEST['max_floor_1'];
+	$min_floor_2 = $_REQUEST['min_floor_2']; $max_floor_2 = $_REQUEST['max_floor_2'];
 	$min_floor_3 = $_REQUEST['min_floor_3']; $max_floor_3 = $_REQUEST['max_floor_3'];
-	$min_floor_4 = $_REQUEST['min_floor_4']; $max_floor_3 = $_REQUEST['max_floor_4'];
-	$min_floor_5 = $_REQUEST['min_floor_5']; $max_floor_3 = $_REQUEST['max_floor_5'];
-	$min_floor_6 = $_REQUEST['min_floor_6']; $max_floor_3 = $_REQUEST['max_floor_6'];
+	$min_floor_4 = $_REQUEST['min_floor_4']; $max_floor_4 = $_REQUEST['max_floor_4'];
+	$min_floor_5 = $_REQUEST['min_floor_5']; $max_floor_5 = $_REQUEST['max_floor_5'];
+	$min_floor_6 = $_REQUEST['min_floor_6']; $max_floor_6 = $_REQUEST['max_floor_6'];
 	$min_floor = array($min_floor_1, $min_floor_2, $min_floor_3, $min_floor_4, $min_floor_5, $min_floor_6);
 	$max_floor = array($max_floor_1, $max_floor_2, $max_floor_3, $max_floor_4, $max_floor_5, $max_floor_6);
 
@@ -55,13 +55,13 @@
 
 		if($min_floor[$j]&&$max_floor[$j]){
 
-			$fl_range[$j] = range($min_floor[$j], $max_floor[$j]); 
+			$fl_range[$j] = range($min_floor[$j], $max_floor[$j]);
 			$fn[$j]= count($fl_range[$j]);  // 입력된 층의 개수
-		
+
 			for($i=0; $i<$fn[$j]; $i++){
 				$ho[$j] = $fl_range[$j][$i].$line[$j];
 
-				//기존에 등록되어 있는 동호수가 있는지 체크		
+				//기존에 등록되어 있는 동호수가 있는지 체크
 				$ck_qry = "SELECT seq
 					FROM cms_project2_indi_table
 					WHERE pj_seq='$pj_seq' AND dong='$dong[$j]' AND	ho ='$ho[$j]'";
@@ -73,14 +73,15 @@
 	}
 
 	// 기분양(제외세대) 데이터
-	$except_batch_1 = $_REQUEST['except_batch_1'];	if($except_batch_1=='on') $except_batch_1 = 1;
-	$except_batch_2 = $_REQUEST['except_batch_2'];	if($except_batch_2=='on') $except_batch_2 = 1;
-	$except_batch_3 = $_REQUEST['except_batch_3'];	if($except_batch_3=='on') $except_batch_3 = 1;	
-	$except_batch_4 = $_REQUEST['except_batch_4'];	if($except_batch_4=='on') $except_batch_4 = 1;	
-	$except_batch_5 = $_REQUEST['except_batch_5'];	if($except_batch_5=='on') $except_batch_5 = 1;
-	$except_batch_6 = $_REQUEST['except_batch_6'];	if($except_batch_6=='on') $except_batch_6 = 1;
+	$hold_1 = $_REQUEST['hold_1'];	if($hold_1=='on') $hold_1 = 1;
+	$hold_2 = $_REQUEST['hold_2'];	if($hold_2=='on') $hold_2 = 1;
+	$hold_3 = $_REQUEST['hold_3'];	if($hold_3=='on') $hold_3 = 1;
+	$hold_4 = $_REQUEST['hold_4'];	if($hold_4=='on') $hold_4 = 1;
+	$hold_5 = $_REQUEST['hold_5'];	if($hold_5=='on') $hold_5 = 1;
+	$hold_6 = $_REQUEST['hold_6'];	if($hold_6=='on') $hold_6 = 1;
+	$hold = array($hold_1, $hold_2, $hold_3, $hold_4, $hold_5, $hold_6);
 
-	
+
 
 	//// 동호수 데이터 입력 이제부터 시작
 	if($mode=='reg'){ // 데이터 등록 모드
@@ -98,11 +99,10 @@
 					$ho[$j] = $fl_range[$j][$i].$line[$j];
 					$floor = $fl_range[$j][$i];
 
-					$bat_qry="INSERT INTO `cms_project2_indi_table` ( `pj_seq`, `diff_no`, `type`, `dong`, `ho`, `floor`, `line`, `reg_time`)
-									VALUES('$pj_seq', '$diff_no', '$type[$j]', '$dong[$j]', '$ho[$j]', '$floor', '$line[$j]', now())";
-					
+					$bat_qry="INSERT INTO `cms_project2_indi_table` ( `pj_seq`, `diff_no`, `type`, `dong`, `ho`, `floor`, `line`, `is_hold`, `reg_time`)
+									        VALUES('$pj_seq', '$diff_no', '$type[$j]', '$dong[$j]', '$ho[$j]', '$floor', '$line[$j]', '$hold[$j]', now())";
+
 					//echo $bat_qry."<br>";
-					//echo $fl_range[$j][$i]."<br>";
 					$bat_rlt=mysql_query($bat_qry, $connect);
 					if(!$bat_rlt) err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 				}
