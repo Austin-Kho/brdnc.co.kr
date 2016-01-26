@@ -18,14 +18,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title><?=$doc_title?></title>
 	<link rel="shortcut icon" href="<?=$cms_url?>images/cms.ico">
-	<link type="text/css" rel="stylesheet" href="../common/cms.css">
-	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+	<link type="text/css" rel="stylesheet" href="../common/cms.css">	
 	<script type="text/JavaScript" language="JavaScript" src="../common/global.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/javascript">
-    $(document).ready(function(){
-     $("#loading").css("display","none");
-    });
-   </script>
+	    $(document).ready(function(){
+	     $("#loading").css("display","none");
+	    });
+    </script>
 	<script type="text/JavaScript">
 		<!--
 			function checkInput(form){
@@ -87,7 +87,7 @@
 						<input type="text" name="dong" size="22" class="inputstyle2" value="<?=$dong?>" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
 					</div>
 					<div style="float:left; height:28px; width:50px; padding-top:7px; text-align:center;">
-						<input type="submit" value="우편번호 찾기" onclick="document.getElementById('loading').style.display="";" class="inputstyle_bt"><!-- <input type="image" src="../images/chk.jpg"> -->
+						<input type="submit" value="우편번호 찾기" onclick="document.getElementById('loading').style.display='';" class="inputstyle_bt"><!-- <input type="image" src="../images/chk.jpg"> -->
 					</div>
 				</div>
 				</form>
