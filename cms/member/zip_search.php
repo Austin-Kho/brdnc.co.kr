@@ -19,7 +19,13 @@
 	<title><?=$doc_title?></title>
 	<link rel="shortcut icon" href="<?=$cms_url?>images/cms.ico">
 	<link type="text/css" rel="stylesheet" href="../common/cms.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/JavaScript" language="JavaScript" src="../common/global.js"></script>
+	<script type="text/javascript">
+    $(document).ready(function(){
+     $("#loading").css("display","none");
+    });
+   </script>
 	<script type="text/JavaScript">
 		<!--
 			function checkInput(form){
@@ -55,6 +61,9 @@
 	</script>
 </head>
 <body style="background-color:white;">
+<div id="loading" style="position:absolute; top:0px; right:0px; left:0px; bottom:0px; background:#000; z-index:100000; opacity: 0.0; text-align:center; padding-top:130px;">
+	<img src="../images/loading.gif"><br>loading...
+</div>
 <div style="border-width:1px 0 0 0; border-style: solid; border-color:#11ca1f;">
 	<div style="border-width:1px 0 0 0; border-style: solid; border-color:#C5FAC9; padding:6px 0 6px 0;">
 		<div style="margin:0 auto; width:96%; border-width:2px 2px 2px 2px; border-style: solid; border-color:#96ABE5; padding-bottom:8px; position:relative;">
@@ -107,7 +116,8 @@
 							while($rows = mysql_fetch_array($result)){
 								if(!$rows[b_no_sub]||$rows[b_no_sub]==0) {$b_no = $rows[b_no_main];} else {$b_no = $rows[b_no_main]."-".$rows[b_no_sub];}
 								if(!$rows[gugun_bn]||$rows[gugun_bn]==null) {$sub_adr = $rows[law_dn];} else {$sub_adr = $rows[law_dn].", ".$rows[gugun_bn];}
-								$addr_f=$rows[sido]." ".$rows[gugun]." ".$rows[eupmn]." ".$rows[doro]." ".$b_no." (".$sub_adr.")";
+								if($sub_adr=="") $sub_addr=""; else $sub_addr = "(".$sub_adr.")";
+								$addr_f=$rows[sido]." ".$rows[gugun]." ".$rows[eupmn]." ".$rows[doro]." ".$b_no." ".$sub_addr;
 								$addr = explode("(",$addr_f, 2);
 						?>
 						<div style="clear:left; float:left; width:53px; height:25px; text-align:center; padding-top:5px; background-color:#F9F9F9;">
