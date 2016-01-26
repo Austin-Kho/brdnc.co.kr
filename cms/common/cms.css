@@ -19,6 +19,7 @@
 	#3rd_content  { width:700px; float:left; } /* 왼쪽 네비, 오른쪽 배너존과 병행하는 본문 */
 	/* float:left 왼쪽으로 띄워줌, 각 영역 가로값 계산(모두 더한 것 = #wrap 가로값)해서 고정 시켜줌. */
 	#sideinfo { width:200px; height:100px; float:right; background-color:#DCDAD9; }
+	#loading {position:absolute; top:0px; right:0px; left:0px; bottom:0px; background:#000; z-index:100000; opacity: 0.7; text-align:center;}
 /************************ 레이 아웃 div CSS ************************/
 
 
