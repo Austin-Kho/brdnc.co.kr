@@ -18,10 +18,7 @@
 	$user_id=$_POST['user_id'];
 	if($admin_id==$user_id) $is_admin=1; // 콘피그 아이디와 같은 아이디 일경우 is_admin = 1 로 처리
 	$passwd=md5($_POST['passwd']);
-	$passwd2=md5($_POST['passwd2']);
 	$name=$_POST['name'];
-	//$jumin1=$_POST['jumin1'];
-	//$jumin2=$_POST['jumin2'];
 	$email1=$_POST['email1'];
 	$email2=$_POST['email2'];
 	$rcv_mail=$_POST['rcv_mail'];
@@ -99,22 +96,29 @@
 
 		if($passwd!=$row[passwd]){
 			err_msg('패스워드가 일치하지 않습니다!');
+			//echo $passwd."<br>";
+			//echo md5($row[passwd]);
+
 		}else{
 
 			$no = $_REQUEST['no'];
-			$new_passwd=md5($_REQUEST['new_passwd']);
-			if($new_passwd) $passwd=$new_passwd;
+			if(!$new_passwd==null){
+				$new_passwd=md5($_REQUEST['new_passwd']);
+				$passwd=$new_passwd;
+			}else{
+				$passwd=$row[passwd];
+			}
 
 			################### DB 업데이트 시작 #####################
 			$query = " UPDATE cms_member_table SET passwd = '$passwd',
-																name = '$name',
-																email = '$email',
-																rcv_mail = '$rcv_mail',
-																zipcode = '$zipcode',
-																address1 = '$address1',
-																address2 = '$address2',
-																phone = '$phone',
-																mobile = '$hphone'
+												name = '$name',
+												email = '$email',
+												rcv_mail = '$rcv_mail',
+												zipcode = '$zipcode',
+												address1 = '$address1',
+												address2 = '$address2',
+												phone = '$phone',
+												mobile = '$hphone'
 									WHERE no = '$no' ";
 			$result = mysql_query($query, $connect);
 
