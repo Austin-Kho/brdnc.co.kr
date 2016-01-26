@@ -19,19 +19,6 @@
 					</table>
 					</div>
 					<? }else{ ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
 					<tr>
@@ -381,21 +368,6 @@
 						</form>
 						<!------------------------------------동호수 별 입력 종료------------------------------------------//--->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 						<!--------------------------동호수별 데이터 시작-------------------------//-->
 						<?
 							$new_pj = $_REQUEST['new_pj'];
@@ -415,9 +387,6 @@
 						<form method="post" action="<?=$_SERVER['PHP_SELF']?>">
 							<input type="hidden" name="new_pj" value="<?=$new_pj?>">
 							<input type="hidden" name="reg_pj" value="<?=$reg_pj?>">
-
-
-
 							<div style="height:28px; margin-top:15px; padding:3px 10px 0 0;">
 							<div style="float:right; width:60px; text-align:right;">
 								<input type="button" value=" 검 색 " class="inputstyle_bt" onclick="submit()">
@@ -470,9 +439,6 @@
 								<b>타입별</b> :
 							</div>
 						</div>
-
-
-
 						<div style="height:26px; border-width:1px 0 1px; border-color:#ccc; border-style:solid; background-color:#f4f4f4;" class="form2">
 							<div style="float:left; height:24px; width:100px; text-align:center; padding-top:2px;">
 								동
@@ -485,7 +451,13 @@
 							</div>
 							<div style="float:left; height:24px; width:150px; text-align:center; padding-top:2px;">
 								구 분
-							</div>							
+							</div>
+							<div style="float:left; height:24px; width:250px; text-align:center; padding-top:2px;">
+								공 급 가
+							</div>
+							<div style="float:left; height:24px; width:165px; text-align:center; padding-top:2px;">
+								수 수 료 (세대당 / VAT별도)
+							</div>
 							<div style="float:left; height:24px; width:60px; text-align:center; padding-top:2px; text-align:center;">
 								수 정
 							</div>
@@ -539,7 +511,13 @@
 							</div>
 							<div style="float:left; height:24px; width:150px; text-align:center; padding-top:2px;">
 								<?=$except_str?>
-							</div>							
+							</div>
+							<div style="float:left; height:24px; width:200px; text-align:right; padding:2px 50px 0 0;">
+								<?=number_format($rows[price_ho]*1000)." 원"?>
+							</div>
+							<div style="float:left; height:24px; width:155px; text-align:center; padding:2px 10px 0 0; text-align:right;">
+								<?=number_format($rows[pay_ho]*1000)." 원"?>
+							</div>
 							<div style="float:left; height:24px; width:60px; text-align:center; padding-top:2px; text-align:center;">
 								<? if($_m4_1_1_row[_m4_1_1]<2){?><a href="javascript:" onclick="alert('등록 권한이 없습니다.')">수 정</a>
 								<?}else{?>
@@ -559,26 +537,4 @@
 					</tr>
 					</table>
 					</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 					<? } ?>
