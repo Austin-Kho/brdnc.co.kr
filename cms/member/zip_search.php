@@ -61,7 +61,7 @@
 	</script>
 </head>
 <body style="background-color:white;">
-<div id="loading" style="position:absolute; top:0px; right:0px; left:0px; bottom:0px; background:#000; z-index:100000; opacity: 0.0; text-align:center; padding-top:130px;">
+<div id="loading" style="position:absolute; top:0px; right:0px; left:0px; bottom:0px; background:#000; z-index:100000; opacity: 0.7; text-align:center; padding-top:130px;">
 	<img src="../images/loading.gif"><br>loading...
 </div>
 <div style="border-width:1px 0 0 0; border-style: solid; border-color:#11ca1f;">
@@ -87,7 +87,7 @@
 						<input type="text" name="dong" size="22" class="inputstyle2" value="<?=$dong?>" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
 					</div>
 					<div style="float:left; height:28px; width:50px; padding-top:7px; text-align:center;">
-						<input type="submit" value="우편번호 찾기" class="inputstyle_bt"><!-- <input type="image" src="../images/chk.jpg"> -->
+						<input type="submit" value="우편번호 찾기" onclick="document.getElementById('loading').style.display="";" class="inputstyle_bt"><!-- <input type="image" src="../images/chk.jpg"> -->
 					</div>
 				</div>
 				</form>
@@ -115,7 +115,15 @@
 						<?
 							while($rows = mysql_fetch_array($result)){
 								if(!$rows[b_no_sub]||$rows[b_no_sub]==0) {$b_no = $rows[b_no_main];} else {$b_no = $rows[b_no_main]."-".$rows[b_no_sub];}
-								if(!$rows[gugun_bn]||$rows[gugun_bn]==null) {$sub_adr = $rows[law_dn];} else {$sub_adr = $rows[law_dn].", ".$rows[gugun_bn];}
+								
+								if(!$rows[gugun_bn]||$rows[gugun_bn]==null) {
+									$sub_adr = $rows[law_dn];
+								} else if($rows[law_dn]==null&&!$rows[gugun_bn]==null){
+									$sub_adr = $rows[gugun_bn];
+								}else{
+									$sub_adr = $rows[law_dn].", ".$rows[gugun_bn];
+								}
+
 								if($sub_adr=="") $sub_addr=""; else $sub_addr = "(".$sub_adr.")";
 								$addr_f=$rows[sido]." ".$rows[gugun]." ".$rows[eupmn]." ".$rows[doro]." ".$b_no." ".$sub_addr;
 								$addr = explode("(",$addr_f, 2);
