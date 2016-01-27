@@ -1,6 +1,10 @@
 					<!-- ===== subject table end ===== -->
-
-
+					<div style=" height:18px; background-color:#F8F8F8" class="d3_sub">
+						<b><font size="2" color="#cc0099">◈</font><font size="2" color="#6666cc"> 동호수 데이터 입력</font></b>
+						<div style="float:right;">
+							<!-- <font color="red">*</font> 필수 항목은 반드시 입력하시기 바랍니다. -->
+						</div>
+					</div>
 					<!-- ===== subject table end ===== -->
 					<?
 						$_m4_1_1_rlt = mysql_query("select _m4_1_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
@@ -19,15 +23,12 @@
 					</table>
 					</div>
 					<? }else{ ?>
-
-
-
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td height="580" valign="top">
 						<div style="height:18px; text-align:right; padding:0 20px 2px 0; margin-top:10px;">
-							<!-- <a href="javascript:" onClick="excel_pop(<?=$ca_1_2_row[ca_1_2]?>,2);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL 출력</a> -->
+							<!-- <a href="javascript:" onClick="excel_pop(<?=$_m4_1_2_row[_m4_1_2]?>,2);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL 출력</a> -->
 						</div>
 						<?
 							$mode=$_REQUEST['mode']; // ???
@@ -35,63 +36,66 @@
 							$reg_pj=$_REQUEST['reg_pj']; // 등록 프로젝트 ??
 						?>
 						<form method="post" name="pj_data_reg" action="<?$_SERVER['PHP_SELF']?>">
-						<input type="hidden" name="mode">
-						<div style="height:35px; border-width:1px 0 1px 0; border-color:#D6D6D6; border-style:solid;">
-							<div style="float:left; height:28px; background-color:#F8F8F8; padding:7px 20px 0 20px; color:black;">
-								계 약 년 도
+							<input type="hidden" name="mode">
+					    <div style="height:35px; border-width:1px 0 1px 0; border-color:#D6D6D6; border-style:solid;">
+								<div style="float:left; height:28px; background-color:#F8F8F8; padding:7px 20px 0 20px; color:black;">
+									계 약 년 도
+								</div>
+								<div style="float:left; height:28px; padding:7px 20px 0 10px;">
+									<select name="year_frm" onchange="submit();" class="inputstyle2" style="height:22px; width:100px;"> <!-- =================== pj_data_reg - 1 - year_frm =================== -->
+										<option value="1"> 전 체
+										<?
+											// if(!$year_frm) $year_frm=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
+											$year=range(date('Y')-4,date('Y'));
+											for($i=(count($year)-1); $i>=0; $i--){
+										?>
+										<option value="<?=$year[$i]?>" <?if($year_frm==$year[$i]) echo "selected"; ?>><?=$year[$i]."년"?>
+										<? } ?>
+									</select>
+								</div>
+								<div style="float:left; height:28px; background-color:#F8F8F8; padding:7px 20px 0 20px; color:black;">
+									미 등록 프로젝트 [<font color="#0000cc">신규등록</font>]
+								</div>
+								<div style="float:left; height:28px; padding:6px 20px 0 10px;">
+									<select name="new_pj" onchange="select_ch('reg');" class="inputstyle2" style="height:22px; width:170px;"> <!-- =================== pj_data_reg - 2 - new_pj =================== -->
+										<option value=""<?if(!$new_pj) echo "selected"?>> 선 택
+										<?
+											$where="WHERE is_data_reg = '0' ";
+											if($year_frm>1){
+												$where.=" AND start_date LIKE '$year_frm%' ";
+											}
+											$qry = "SELECT * FROM cms_project1_info $where ORDER BY start_date DESC ";
+											$rlt = mysql_query($qry, $connect);
+											for($i=0; $rows=mysql_fetch_array($rlt); $i++){
+										?>
+										<option value="<?=$rows[seq]?>" <?if($new_pj==$rows[seq]) echo "selected"; ?>><?=$rows[pj_name]?>
+										<? } ?>
+									</select>
+								</div>
+								<div style="float:left; height:28px; background-color:#F8F8F8; padding:7px 20px 0 20px; color:black;">
+									기 등록 프로젝트 [<font color="#cc6666">데이터수정</font>]
+								</div>
+								<div style="float:left; height:28px; padding:7px 20px 0 30px;">
+									<select name="reg_pj" onchange="select_ch('modify');" class="inputstyle2" style="height:22px; width:170px;"> <!-- =================== pj_data_reg - 3 - reg_pj =================== -->
+										<option value="" <?if(!$reg_pj) echo "selected"?>> 선 택
+										<?
+											$where="WHERE is_data_reg = '1' ";
+											if($year_frm>1){
+												$where.=" AND start_date LIKE '$year_frm%' ";
+											}
+											$qry = "SELECT * FROM cms_project1_info $where ORDER BY start_date DESC ";
+											$rlt = mysql_query($qry, $connect);
+											for($i=0; $rows=mysql_fetch_array($rlt); $i++){
+										?>
+										<option value="<?=$rows[seq]?>" <?if($reg_pj==$rows[seq]) echo "selected"; ?>><?=$rows[pj_name]?>
+										<? } ?>
+									</select>
+								</div>
 							</div>
-							<div style="float:left; height:28px; padding:7px 20px 0 10px;">
-								<select name="year_frm" onchange="submit();" class="inputstyle2" style="height:22px; width:100px;"> <!-- =================== pj_data_reg - 1 - year_frm =================== -->
-									<option value="1"> 전 체
-									<?
-										// if(!$year_frm) $year_frm=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
-										$year=range(date('Y')-4,date('Y'));
-										for($i=(count($year)-1); $i>=0; $i--){
-									?>
-									<option value="<?=$year[$i]?>" <?if($year_frm==$year[$i]) echo "selected"; ?>><?=$year[$i]."년"?>
-									<? } ?>
-								</select>
-							</div>
-							<div style="float:left; height:28px; background-color:#F8F8F8; padding:7px 20px 0 20px; color:black;">
-								미 등록 프로젝트 [<font color="#0000cc">신규등록</font>]
-							</div>
-							<div style="float:left; height:28px; padding:6px 20px 0 10px;">
-								<select name="new_pj" onchange="select_ch('reg');" class="inputstyle2" style="height:22px; width:170px;"> <!-- =================== pj_data_reg - 2 - new_pj =================== -->
-									<option value=""<?if(!$new_pj) echo "selected"?>> 선 택
-									<?
-										$where="WHERE is_data_reg = '0' ";
-										if($year_frm>1){
-											$where.=" AND start_date LIKE '$year_frm%' ";
-										}
-										$qry = "SELECT * FROM cms_project1_info $where ORDER BY start_date DESC ";
-										$rlt = mysql_query($qry, $connect);
-										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
-									?>
-									<option value="<?=$rows[seq]?>" <?if($new_pj==$rows[seq]) echo "selected"; ?>><?=$rows[pj_name]?>
-									<? } ?>
-								</select>
-							</div>
-							<div style="float:left; height:28px; background-color:#F8F8F8; padding:7px 20px 0 20px; color:black;">
-								기 등록 프로젝트 [<font color="#cc6666">데이터수정</font>]
-							</div>
-							<div style="float:left; height:28px; padding:7px 20px 0 30px;">
-								<select name="reg_pj" onchange="select_ch('modify');" class="inputstyle2" style="height:22px; width:170px;"> <!-- =================== pj_data_reg - 3 - reg_pj =================== -->
-									<option value="" <?if(!$reg_pj) echo "selected"?>> 선 택
-									<?
-										$where="WHERE is_data_reg = '1' ";
-										if($year_frm>1){
-											$where.=" AND start_date LIKE '$year_frm%' ";
-										}
-										$qry = "SELECT * FROM cms_project1_info $where ORDER BY start_date DESC ";
-										$rlt = mysql_query($qry, $connect);
-										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
-									?>
-									<option value="<?=$rows[seq]?>" <?if($reg_pj==$rows[seq]) echo "selected"; ?>><?=$rows[pj_name]?>
-									<? } ?>
-								</select>
-							</div>
-						</div>
-						</form><!-- ==================================================================== pj_data_reg - end ==================================================================== -->
+						</form>
+						<!-- ====================================== pj_data_reg - end =============================================== -->
+
+
 
 						<form name="form1" method="post" action="progress_post.php"><!-- 메인폼(form1) 시작 -->
 						<input type="hidden" name="mode" value="<?=$mode?>">
@@ -138,6 +142,8 @@
 							</div>
 							<? } ?>
 						</div>
+
+
 
 						<!------------------------------------동호수 별 입력 시작--------------------------------------------->
 
@@ -191,10 +197,10 @@
 								<div style="float:left; height:27px; width:160px; padding:5px 0 0 20px; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
 									<input type="text" name="dong_1" class="inputstyle2" size="5"> 동 <input type="checkbox" name="dong_ik" onclick="dong_reg_bc(this);"> 일괄등록
 								</div>
-								<div style="float:left; height:27px; width:180px; padding-top:5px; text-align:center; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
+								<div style="float:left; height:27px; width:130px; padding-top:5px; text-align:center; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
 									<input type="text" name="line_1" class="inputstyle2" size="5"> 호 라인
 								</div>
-								<div style="float:left; height:27px; width:200px; padding-top:5px; text-align:center; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
+								<div style="float:left; height:27px; width:150px; padding-top:5px; text-align:center; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
 									<select name="type_1" style="width:60px;">
 										<option value="" selected> 선택
 										<?
@@ -364,26 +370,10 @@
 							<div style="height:48px; padding-top:23px; text-align:center;">
 								<input type="button" value="데이터 입력" onclick="<?=$submit_str?>" class="submit_bt">
 							</div>
-						<?
-							}
-						?>
+
 						<!-- 등록 마감 된 기 등록 데이터 수정일 때는 안보임 끝 -->
 						</form>
 						<!------------------------------------동호수 별 입력 종료----------------------------------------------->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 						<!--------------------------동호수별 데이터 시작-------------------------//-->
@@ -402,6 +392,7 @@
 								if($new_pj) $pj_seq = $new_pj;
 								if($reg_pj) $pj_seq = $reg_pj;
 						?>
+
 						<form method="post" action="<?=$_SERVER['PHP_SELF']?>">
 							<input type="hidden" name="new_pj" value="<?=$new_pj?>">
 							<input type="hidden" name="reg_pj" value="<?=$reg_pj?>">
@@ -409,60 +400,57 @@
 
 
 							<div style="height:28px; margin-top:15px; padding:3px 10px 0 0;">
-							<div style="float:right; width:60px; text-align:right;">
-								<input type="button" value=" 검 색 " class="inputstyle_bt" onclick="submit()">
-							</div>
-							<div style="float:right; width:220px; text-align:center;">
-								<b>호수별 (</b>오름차순 <input type="radio" value="1" name="ho_ad" id="ho_ad_" onclick="ad_control('2');" <?if($ho_ad==1) echo "checked";?>>	내림차순 <input type="radio" name="ho_ad" id="ho_ad_" value="2" onclick="ad_control('2');" <?if($ho_ad==2) echo "checked";?>><b>)</b>
-							</div>
-							<div style="float:right; width:220px; text-align:center;">
-								<b>동별 (</b>오름차순 <input type="radio" value="1" name="dong_ad" id="dong_ad_" onclick="ad_control('2');" <?if($dong_ad==1) echo "checked";?>> 내림차순 <input type="radio" value="2" name="dong_ad" id="dong_ad_" onclick="ad_control('2');" <?if($dong_ad==2) echo "checked";?>><b>)</b>
-							</div>
-							<div style="float:right; width:180px; text-align:center;">
-								<b>표시 개수</b><b>(</b>30개 <input type="radio" value="1" name="limit" <?if(!$limit||$limit==1) echo "checked";?>> 전체 <input type="radio" value="2" name="limit" <?if($limit==2) echo "checked";?>><b>)</b>
-							</div>
-							<div style="float:right; width:70px; text-align:center;">
-								<b>등록순</b> <input type="checkbox" name="reg_ad" id="reg_ad_" value="1" onclick="ad_control('1');" <?if($reg_ad==1||(!$reg_ad&&(!$dong_ad&&!$ho_ad))) echo "checked"?>>
-							</div>
-							<div style="float:right; padding-right:20px;">
-								<select name="dong_data_" style="width:70px;">
-									<option value="" selected> 선 택
-									<?
-										if(!$type_data_||$type_data_==0) {
-											$type_sel_qry = "";
-										} else {
-											$type_sel_qry = " AND type = '$type_data_' ";
-										}
-										$query = "SELECT dong FROM cms_project2_indi_table WHERE pj_seq = '$pj_seq' $type_sel_qry GROUP BY dong";
-										$result = mysql_query($query, $connect);
-										while($rows = mysql_fetch_array($result)){
-									?>
-									<option value="<?=$rows[dong]?>" <?if($dong_data_==$rows[dong]) echo "selected";?>> <?=$rows[dong]?>
-									<? } ?>
-								</select>
-							</div>
-							<div style="float:right; padding:0 10px; 0 15px;">
-								<b>동 별</b> :
-							</div>
-							<div style="float:right; padding-right:10px;">
-								<select name="type_data_" style="width:70px;" onchange="submit();">
-									<option value="" <?if(!$type_data_) echo "selected";?>> 선 택
-									<?
-										$query = "SELECT type FROM cms_project2_indi_table WHERE pj_seq = '$pj_seq' GROUP BY type ORDER BY type";
-										$result = mysql_query($query, $connect);
-										while($rows = mysql_fetch_array($result)){
-									?>
-									<option value="<?=$rows[type]?>" <?if($type_data_==$rows[type]) echo "selected";?>> <?=$rows[type]?>
-									<? } ?>
-								</select>
-							</div>
-							<div style="float:right; padding-right:10px;">
-								<b>타입별</b> :
-							</div>
+								<div style="float:right; width:60px; text-align:right;">
+									<input type="button" value=" 검 색 " class="inputstyle_bt" onclick="submit()">
+								</div>
+								<div style="float:right; width:220px; text-align:center;">
+									<b>호수별 (</b>오름차순 <input type="radio" value="1" name="ho_ad" id="ho_ad_" onclick="ad_control('2');" <?if($ho_ad==1) echo "checked";?>>	내림차순 <input type="radio" name="ho_ad" id="ho_ad_" value="2" onclick="ad_control('2');" <?if($ho_ad==2) echo "checked";?>><b>)</b>
+								</div>
+								<div style="float:right; width:220px; text-align:center;">
+									<b>동별 (</b>오름차순 <input type="radio" value="1" name="dong_ad" id="dong_ad_" onclick="ad_control('2');" <?if($dong_ad==1) echo "checked";?>> 내림차순 <input type="radio" value="2" name="dong_ad" id="dong_ad_" onclick="ad_control('2');" <?if($dong_ad==2) echo "checked";?>><b>)</b>
+								</div>
+								<div style="float:right; width:180px; text-align:center;">
+									<b>표시 개수</b><b>(</b>30개 <input type="radio" value="1" name="limit" <?if(!$limit||$limit==1) echo "checked";?>> 전체 <input type="radio" value="2" name="limit" <?if($limit==2) echo "checked";?>><b>)</b>
+								</div>
+								<div style="float:right; width:70px; text-align:center;">
+									<b>등록순</b> <input type="checkbox" name="reg_ad" id="reg_ad_" value="1" onclick="ad_control('1');" <?if($reg_ad==1||(!$reg_ad&&(!$dong_ad&&!$ho_ad))) echo "checked"?>>
+								</div>
+								<div style="float:right; padding-right:20px;">
+									<select name="dong_data_" style="width:70px;">
+										<option value="" selected> 선 택
+										<?
+											if(!$type_data_||$type_data_==0) {
+												$type_sel_qry = "";
+											} else {
+												$type_sel_qry = " AND type = '$type_data_' ";
+											}
+											$query = "SELECT dong FROM cms_project2_indi_table WHERE pj_seq = '$pj_seq' $type_sel_qry GROUP BY dong";
+											$result = mysql_query($query, $connect);
+											while($rows = mysql_fetch_array($result)){
+										?>
+										<option value="<?=$rows[dong]?>" <?if($dong_data_==$rows[dong]) echo "selected";?>> <?=$rows[dong]?>
+										<? } ?>
+									</select>
+								</div>
+								<div style="float:right; padding:0 10px; 0 15px;">
+									<b>동 별</b> :
+								</div>
+								<div style="float:right; padding-right:10px;">
+									<select name="type_data_" style="width:70px;" onchange="submit();">
+										<option value="" <?if(!$type_data_) echo "selected";?>> 선 택
+										<?
+											$query = "SELECT type FROM cms_project2_indi_table WHERE pj_seq = '$pj_seq' GROUP BY type ORDER BY type";
+											$result = mysql_query($query, $connect);
+											while($rows = mysql_fetch_array($result)){
+										?>
+										<option value="<?=$rows[type]?>" <?if($type_data_==$rows[type]) echo "selected";?>> <?=$rows[type]?>
+										<? } ?>
+									</select>
+								</div>
+								<div style="float:right; padding-right:10px;">
+									<b>타입별</b> :
+								</div>
 						</div>
-
-
-
 						<div style="height:26px; border-width:1px 0 1px; border-color:#ccc; border-style:solid; background-color:#f4f4f4;" class="form2">
 							<div style="float:left; height:24px; width:100px; text-align:center; padding-top:2px;">
 								동
@@ -543,32 +531,13 @@
 								<? } ?>
 							</div>
 						</div>
-						<? } ?>
+						<? }} ?>
 						<!--------------------------동호수별 데이터 종료------------------------- -->
+
+
+
 						</td>
 					</tr>
 					</table>
 					</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 					<? } ?>
