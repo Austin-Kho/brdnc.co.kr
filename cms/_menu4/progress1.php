@@ -201,10 +201,10 @@
 								<div style="float:left; height:27px; width:160px; padding:5px 0 0 20px; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
 									<input type="text" name="dong_1" class="inputstyle2" size="5"> 동 <input type="checkbox" name="dong_ik" onclick="dong_reg_bc(this);"> 일괄등록
 								</div>
-								<div style="float:left; height:27px; width:130px; padding-top:5px; text-align:center; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
+								<div style="float:left; height:27px; width:180px; padding-top:5px; text-align:center; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
 									<input type="text" name="line_1" class="inputstyle2" size="5"> 호 라인
 								</div>
-								<div style="float:left; height:27px; width:150px; padding-top:5px; text-align:center; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
+								<div style="float:left; height:27px; width:200px; padding-top:5px; text-align:center; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
 									<select name="type_1" style="width:60px;">
 										<option value="" selected> 선택
 										<?

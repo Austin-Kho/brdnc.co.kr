@@ -27,10 +27,11 @@
 	<script src="../include/calendar/calendar.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 	<script type="text/javascript">
-	    $(document).ready(function(){
-	     $("#loading").css("display","none");
-	    });
-    </script>
+	  $(document).ready(function(){
+	    $("#loading").css("display","none");
+	  });
+   </script>
+
 	<script type="text/javascript">/**/
 	<!--
 		function term_put(a,b,term){
