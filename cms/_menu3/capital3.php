@@ -180,12 +180,11 @@
 									<td class="bottom">
 										<select name="evi_1" style="width:75px">
 											<option value="1" selected> 증빙 없음
-											<option value="2"> 간이영수증
-											<option value="3"> 체크카드
-											<option value="4"> 신용카드
-											<option value="5"> 세금계산서
-											<option value="6"> 계산서
-											<option value="7"> 인건비
+											<option value="2"> 세금계산서
+											<option value="3"> 계산서(면세)
+											<option value="4"> 신용(체크)카드전표
+											<option value="5"> 현금영수증
+											<option value="6"> 간이영수증
 										</select>
 									</td>
 								</tr>
@@ -289,12 +288,11 @@
 									<td class="bottom">
 										<select name="evi_2" style="width:75px">
 											<option value="1" selected> 증빙 없음
-											<option value="2"> 간이영수증
-											<option value="3"> 체크카드
-											<option value="4"> 신용카드
-											<option value="5"> 세금계산서
-											<option value="6"> 계산서
-											<option value="7"> 인건비
+											<option value="2"> 세금계산서
+											<option value="3"> 계산서(면세)
+											<option value="4"> 신용(체크)카드전표
+											<option value="5"> 현금영수증
+											<option value="6"> 간이영수증
 										</select>
 									</td>
 								</tr>
@@ -398,12 +396,11 @@
 									<td class="bottom">
 										<select name="evi_3" style="width:75px">
 											<option value="1" selected> 증빙 없음
-											<option value="2"> 간이영수증
-											<option value="3"> 체크카드
-											<option value="4"> 신용카드
-											<option value="5"> 세금계산서
-											<option value="6"> 계산서
-											<option value="7"> 인건비
+											<option value="2"> 세금계산서
+											<option value="3"> 계산서(면세)
+											<option value="4"> 신용(체크)카드전표
+											<option value="5"> 현금영수증
+											<option value="6"> 간이영수증
 
 										</select>
 									</td>
@@ -508,12 +505,11 @@
 									<td class="bottom">
 										<select name="evi_4" style="width:75px">
 											<option value="1" selected> 증빙 없음
-											<option value="2"> 간이영수증
-											<option value="3"> 체크카드
-											<option value="4"> 신용카드
-											<option value="5"> 세금계산서
-											<option value="6"> 계산서
-											<option value="7"> 인건비
+											<option value="2"> 세금계산서
+											<option value="3"> 계산서(면세)
+											<option value="4"> 신용(체크)카드전표
+											<option value="5"> 현금영수증
+											<option value="6"> 간이영수증
 										</select>
 									</td>
 								</tr>
@@ -617,12 +613,11 @@
 									<td class="bottom">
 										<select name="evi_5" style="width:75px">
 											<option value="1" selected> 증빙 없음
-											<option value="2"> 간이영수증
-											<option value="3"> 체크카드
-											<option value="4"> 신용카드
-											<option value="5"> 세금계산서
-											<option value="6"> 계산서
-											<option value="7"> 인건비
+											<option value="2"> 세금계산서
+											<option value="3"> 계산서(면세)
+											<option value="4"> 신용(체크)카드전표
+											<option value="5"> 현금영수증
+											<option value="6"> 간이영수증
 										</select>
 									</td>
 								</tr>
@@ -726,12 +721,11 @@
 									<td class="bottom">
 										<select name="evi_6" style="width:75px">
 											<option value="1" selected> 증빙 없음
-											<option value="2"> 간이영수증
-											<option value="3"> 체크카드
-											<option value="4"> 신용카드
-											<option value="5"> 세금계산서
-											<option value="6"> 계산서
-											<option value="7"> 인건비
+											<option value="2"> 세금계산서
+											<option value="3"> 계산서(면세)
+											<option value="4"> 신용(체크)카드전표
+											<option value="5"> 현금영수증
+											<option value="6"> 간이영수증
 										</select>
 									</td>
 								</tr>
@@ -835,12 +829,11 @@
 									<td class="bottom">
 										<select name="evi_7" style="width:75px">
 											<option value="1" selected> 증빙 없음
-											<option value="2"> 간이영수증
-											<option value="3"> 체크카드
-											<option value="4"> 신용카드
-											<option value="5"> 세금계산서
-											<option value="6"> 계산서
-											<option value="7"> 인건비
+											<option value="2"> 세금계산서
+											<option value="3"> 계산서(면세)
+											<option value="4"> 신용(체크)카드전표
+											<option value="5"> 현금영수증
+											<option value="6"> 간이영수증
 										</select>
 									</td>
 								</tr>
@@ -944,12 +937,11 @@
 									<td class="bottom">
 										<select name="evi_8" style="width:75px">
 											<option value="1" selected> 증빙 없음
-											<option value="2"> 간이영수증
-											<option value="3"> 체크카드
-											<option value="4"> 신용카드
-											<option value="5"> 세금계산서
-											<option value="6"> 계산서
-											<option value="7"> 인건비
+											<option value="2"> 세금계산서
+											<option value="3"> 계산서(면세)
+											<option value="4"> 신용(체크)카드전표
+											<option value="5"> 현금영수증
+											<option value="6"> 간이영수증
 										</select>
 									</td>
 								</tr>
@@ -1053,12 +1045,11 @@
 									<td class="bottom">
 										<select name="evi_9" style="width:75px">
 											<option value="1" selected> 증빙 없음
-											<option value="2"> 간이영수증
-											<option value="3"> 체크카드
-											<option value="4"> 신용카드
-											<option value="5"> 세금계산서
-											<option value="6"> 계산서
-											<option value="7"> 인건비
+											<option value="2"> 세금계산서
+											<option value="3"> 계산서(면세)
+											<option value="4"> 신용(체크)카드전표
+											<option value="5"> 현금영수증
+											<option value="6"> 간이영수증
 										</select>
 									</td>
 								</tr>
@@ -1162,12 +1153,11 @@
 									<td class="bottom">
 										<select name="evi_10" style="width:75px">
 											<option value="1" selected> 증빙 없음
-											<option value="2"> 간이영수증
-											<option value="3"> 체크카드
-											<option value="4"> 신용카드
-											<option value="5"> 세금계산서
-											<option value="6"> 계산서
-											<option value="7"> 인건비
+											<option value="2"> 세금계산서
+											<option value="3"> 계산서(면세)
+											<option value="4"> 신용(체크)카드전표
+											<option value="5"> 현금영수증
+											<option value="6"> 간이영수증
 										</select>
 									</td>
 								</tr>

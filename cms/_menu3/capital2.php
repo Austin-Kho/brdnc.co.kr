@@ -217,12 +217,12 @@
 									 if($rows1[acc]) {$acc=$rows1[acc];}else{$acc="-";} // 거래처정보가 없을 때
 
 									 if($rows1[evidence]==1) $evi="증빙 없음";
-									 if($rows1[evidence]==2) $evi="간이영수증";
-									 if($rows1[evidence]==3) $evi="체크카드";
-									 if($rows1[evidence]==4) $evi="신용카드";
-									 if($rows1[evidence]==5) $evi="세금계산서";
-									 if($rows1[evidence]==6) $evi="계산서";
-									 if($rows1[evidence]==7) $evi="인건비";
+									 if($rows1[evidence]==2) $evi="세금계산서";
+									 if($rows1[evidence]==3) $evi="계산서(면세)";
+									 if($rows1[evidence]==4) $evi="신용(체크)카드전표";
+									 if($rows1[evidence]==5) $evi="현금영수증";
+									 if($rows1[evidence]==6) $evi="간이영수증";
+
 
 									 // ???
 									 if($rows1[in_acc]==0||($rows1[class1]==3&&$rows1[out_acc]==$rows1[no])){ // 입금계정정보가 없거나 대체거래이고 출금계정이 은행등록계좌와 같으면,
