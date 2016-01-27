@@ -93,13 +93,15 @@
 										<select name="class2_1" id="class2_1" style="width:52px;" onChange="inoutSel2(1)">
 											<option value="" selected> 선 택
 											<option value="1"> 수 익
-											<option value="2"> 차 입
+											<option value="2"> 차 입 
 											<option value="3"> 회 수
-											<option value="4"> 비 용
-											<option value="5"> 상 환
-											<option value="6"> 대 여
-											<option value="7"> 본 사
-											<option value="8"> 현 장
+											<option value="4"> 출 자
+											<option value="5"> 비 용
+											<option value="6"> 상 환
+											<option value="7"> 대 여
+											<option value="8"> 배 당
+											<option value="9"> 본 사
+											<option value="10"> 현 장
 										</select>
 									</td>
 									<?if($is_johap==0){?>
@@ -201,13 +203,15 @@
 										<select name="class2_2" id="class2_2" style="width:52px;" onChange="inoutSel2(2)">
 											<option value="" selected> 선 택
 											<option value="1"> 수 익
-											<option value="2"> 차 입
+											<option value="2"> 차 입 
 											<option value="3"> 회 수
-											<option value="4"> 비 용
-											<option value="5"> 상 환
-											<option value="6"> 대 여
-											<option value="7"> 본 사
-											<option value="8"> 현 장
+											<option value="4"> 출 자
+											<option value="5"> 비 용
+											<option value="6"> 상 환
+											<option value="7"> 대 여
+											<option value="8"> 배 당
+											<option value="9"> 본 사
+											<option value="10"> 현 장
 										</select>
 									</td>
 									<?if($is_johap==0){?>
@@ -309,13 +313,15 @@
 										<select name="class2_3" id="class2_3" style="width:52px;" onChange="inoutSel2(3)">
 											<option value="" selected> 선 택
 											<option value="1"> 수 익
-											<option value="2"> 차 입
+											<option value="2"> 차 입 
 											<option value="3"> 회 수
-											<option value="4"> 비 용
-											<option value="5"> 상 환
-											<option value="6"> 대 여
-											<option value="7"> 본 사
-											<option value="8"> 현 장
+											<option value="4"> 출 자
+											<option value="5"> 비 용
+											<option value="6"> 상 환
+											<option value="7"> 대 여
+											<option value="8"> 배 당
+											<option value="9"> 본 사
+											<option value="10"> 현 장
 										</select>
 									</td>
 									<?if($is_johap==0){?>
@@ -418,13 +424,15 @@
 										<select name="class2_4" id="class2_4" style="width:52px;" onChange="inoutSel2(4)">
 											<option value="" selected> 선 택
 											<option value="1"> 수 익
-											<option value="2"> 차 입
+											<option value="2"> 차 입 
 											<option value="3"> 회 수
-											<option value="4"> 비 용
-											<option value="5"> 상 환
-											<option value="6"> 대 여
-											<option value="7"> 본 사
-											<option value="8"> 현 장
+											<option value="4"> 출 자
+											<option value="5"> 비 용
+											<option value="6"> 상 환
+											<option value="7"> 대 여
+											<option value="8"> 배 당
+											<option value="9"> 본 사
+											<option value="10"> 현 장
 										</select>
 									</td>
 									<?if($is_johap==0){?>
@@ -526,13 +534,15 @@
 										<select name="class2_5" id="class2_5" style="width:52px;" onChange="inoutSel2(5)">
 											<option value="" selected> 선 택
 											<option value="1"> 수 익
-											<option value="2"> 차 입
+											<option value="2"> 차 입 
 											<option value="3"> 회 수
-											<option value="4"> 비 용
-											<option value="5"> 상 환
-											<option value="6"> 대 여
-											<option value="7"> 본 사
-											<option value="8"> 현 장
+											<option value="4"> 출 자
+											<option value="5"> 비 용
+											<option value="6"> 상 환
+											<option value="7"> 대 여
+											<option value="8"> 배 당
+											<option value="9"> 본 사
+											<option value="10"> 현 장
 										</select>
 									</td>
 									<?if($is_johap==0){?>
@@ -634,13 +644,15 @@
 										<select name="class2_6" id="class2_6" style="width:52px;" onChange="inoutSel2(6)">
 											<option value="" selected> 선 택
 											<option value="1"> 수 익
-											<option value="2"> 차 입
+											<option value="2"> 차 입 
 											<option value="3"> 회 수
-											<option value="4"> 비 용
-											<option value="5"> 상 환
-											<option value="6"> 대 여
-											<option value="7"> 본 사
-											<option value="8"> 현 장
+											<option value="4"> 출 자
+											<option value="5"> 비 용
+											<option value="6"> 상 환
+											<option value="7"> 대 여
+											<option value="8"> 배 당
+											<option value="9"> 본 사
+											<option value="10"> 현 장
 										</select>
 									</td>
 									<?if($is_johap==0){?>
@@ -742,13 +754,15 @@
 										<select name="class2_7" id="class2_7" style="width:52px;" onChange="inoutSel2(7)">
 											<option value="" selected> 선 택
 											<option value="1"> 수 익
-											<option value="2"> 차 입
+											<option value="2"> 차 입 
 											<option value="3"> 회 수
-											<option value="4"> 비 용
-											<option value="5"> 상 환
-											<option value="6"> 대 여
-											<option value="7"> 본 사
-											<option value="8"> 현 장
+											<option value="4"> 출 자
+											<option value="5"> 비 용
+											<option value="6"> 상 환
+											<option value="7"> 대 여
+											<option value="8"> 배 당
+											<option value="9"> 본 사
+											<option value="10"> 현 장
 										</select>
 									</td>
 									<?if($is_johap==0){?>
@@ -850,13 +864,15 @@
 										<select name="class2_8" id="class2_8" style="width:52px;" onChange="inoutSel2(8)">
 											<option value="" selected> 선 택
 											<option value="1"> 수 익
-											<option value="2"> 차 입
+											<option value="2"> 차 입 
 											<option value="3"> 회 수
-											<option value="4"> 비 용
-											<option value="5"> 상 환
-											<option value="6"> 대 여
-											<option value="7"> 본 사
-											<option value="8"> 현 장
+											<option value="4"> 출 자
+											<option value="5"> 비 용
+											<option value="6"> 상 환
+											<option value="7"> 대 여
+											<option value="8"> 배 당
+											<option value="9"> 본 사
+											<option value="10"> 현 장
 										</select>
 									</td>
 									<?if($is_johap==0){?>
@@ -958,13 +974,15 @@
 										<select name="class2_9" id="class2_9" style="width:52px;" onChange="inoutSel2(9)">
 											<option value="" selected> 선 택
 											<option value="1"> 수 익
-											<option value="2"> 차 입
+											<option value="2"> 차 입 
 											<option value="3"> 회 수
-											<option value="4"> 비 용
-											<option value="5"> 상 환
-											<option value="6"> 대 여
-											<option value="7"> 본 사
-											<option value="8"> 현 장
+											<option value="4"> 출 자
+											<option value="5"> 비 용
+											<option value="6"> 상 환
+											<option value="7"> 대 여
+											<option value="8"> 배 당
+											<option value="9"> 본 사
+											<option value="10"> 현 장
 										</select>
 									</td>
 									<?if($is_johap==0){?>
@@ -1066,13 +1084,15 @@
 										<select name="class2_10" id="class2_10" style="width:52px;" onChange="inoutSel2(10)">
 											<option value="" selected> 선 택
 											<option value="1"> 수 익
-											<option value="2"> 차 입
+											<option value="2"> 차 입 
 											<option value="3"> 회 수
-											<option value="4"> 비 용
-											<option value="5"> 상 환
-											<option value="6"> 대 여
-											<option value="7"> 본 사
-											<option value="8"> 현 장
+											<option value="4"> 출 자
+											<option value="5"> 비 용
+											<option value="6"> 상 환
+											<option value="7"> 대 여
+											<option value="8"> 배 당
+											<option value="9"> 본 사
+											<option value="10"> 현 장
 										</select>
 									</td>
 									<?if($is_johap==0){?>

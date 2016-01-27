@@ -93,11 +93,13 @@
 									<option value="1" <?if($class2==1) echo "selected";?>> 수 익
 									<option value="2" <?if($class2==2) echo "selected";?>> 차 입
 									<option value="3" <?if($class2==3) echo "selected";?>> 회 수
-									<option value="4" <?if($class2==4) echo "selected";?>> 비 용
-									<option value="5" <?if($class2==5) echo "selected";?>> 상 환
-									<option value="6" <?if($class2==6) echo "selected";?>> 대 여
-									<option value="7" <?if($class2==7) echo "selected";?>> 본 사
-									<option value="8" <?if($class2==8) echo "selected";?>> 현 장
+									<option value="4" <?if($class2==4) echo "selected";?>> 출 자
+									<option value="5" <?if($class2==5) echo "selected";?>> 비 용
+									<option value="6" <?if($class2==6) echo "selected";?>> 상 환
+									<option value="7" <?if($class2==7) echo "selected";?>> 대 여
+									<option value="8" <?if($class2==8) echo "selected";?>> 배 당
+									<option value="9" <?if($class2==9) echo "selected";?>> 본 사
+									<option value="10" <?if($class2==10) echo "selected";?>> 현 장
 								</select>
 							</td>
 							<td width="60" class="form2" bgcolor="#F4F4F4">거래기간 </td>
@@ -188,11 +190,13 @@
 									 if($rows1[class2]==1) $cla2="<font color='#0066ff'>[수익]</font>";
 									 if($rows1[class2]==2) $cla2="<font color='#6600ff'>[차입]</font>";
 									 if($rows1[class2]==3) $cla2="<font color='#0066ff'>[회수]</font>";
-									 if($rows1[class2]==4) $cla2="<font color='#ff3333'>[비용]</font>";
-									 if($rows1[class2]==5) $cla2="<font color='#006666'>[상환]</font>";
-									 if($rows1[class2]==6) $cla2="<font color='#993300'>[대여]</font>";
-									 if($rows1[class2]==7) $cla2="<font color='#669900'>[본사]</font>";
-									 if($rows1[class2]==8) $cla2="<font color='#009900'>[현장]</font>";
+									 if($rows1[class2]==4) $cla2="<font color='#0066ff'>[출자]</font>";
+									 if($rows1[class2]==5) $cla2="<font color='#ff3333'>[비용]</font>";
+									 if($rows1[class2]==6) $cla2="<font color='#006666'>[상환]</font>";
+									 if($rows1[class2]==7) $cla2="<font color='#993300'>[대여]</font>";
+									 if($rows1[class2]==8) $cla2="<font color='#ff3333'>[배당]</font>";
+									 if($rows1[class2]==9) $cla2="<font color='#669900'>[본사]</font>";
+									 if($rows1[class2]==10) $cla2="<font color='#009900'>[현장]</font>";
 
 									 $cla = $cla1." - ".$cla2;
 
