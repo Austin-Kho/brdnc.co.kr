@@ -7,7 +7,7 @@
 	// MySQL 연결
 	$connect=dbconn();
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html>
  <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -79,11 +79,12 @@
 		</div>
 
 		<?
-			if($rows[is_company]==1){
+			if($rows[is_company]==1){ //본사 직원이면 적용하기 - 부서선택
 		?>
 		<div id="com_select" >
 			<div style="clear:left; float:left; width:180px; height:28px; background-color:#F8F8F7; border-width:0 0 1px 0; border-color:#E1E1E1; border-style:solid; padding:5px 0 0 20px;">본사 담당 부서 선택</div>
 			<div style="float:left; width:512px; height:28px; border-width:0 0 1px 0; border-color:#E1E1E1; border-style:solid; padding:5px 0 0 20px;">
+				<!-- 현재 멤버테이블과 직원 테이블 분리상태이므로 향후 이에 대한 조정 요망 -->
 				<select name="div_seq" style="width:150px; height:23px;" class="inputstyle2" disabled>
 					<option value="" <?if(!$div_seq) echo "selected";?>> 부서선택
 					<?
@@ -97,7 +98,7 @@
 			</div>
 		</div>
 		<?
-			}else{
+			}else{  //현장 담당자 적용하기 - 담당현장
 		?>
 		<div id="pj_select"  <?=$pj_dis?>>
 			<div style="clear:left; float:left; width:180px; height:28px; background-color:#F8F8F7; border-width:0 0 1px 0; border-color:#E1E1E1; border-style:solid; padding:5px 0 0 20px;">현장 (담당 프로젝트) 선택</div>
@@ -153,8 +154,6 @@
 		<input type="hidden" name="headq" value="<?=$headq?>">
 		<input type="hidden" name="team" value="<?=$team?>">
 		<input type="hidden" name="posi" value="<?=$posi?>">
-
-
 
 		<div style="clear:left; float:left; width:180px; height:25px; background-color:#F8F8F7; padding:5px 0 0 20px;">아 이 디</div>
 		<div style="float:left; width:512px; height:25px; padding:5px 0 0 20px;">

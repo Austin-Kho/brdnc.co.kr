@@ -24,6 +24,12 @@
 	<script src="../common/_menu5.js"></script>
 	<script src="../common/member.js"></script>
 	<script src="../include/calendar/calendar.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+	   $(document).ready(function(){
+	    $("#loading").css("display","none");
+	   });
+    </script>
 	<script type="text/javascript">
 		<!--
 		//////////////////////// 직원 퇴사 처리 함수
@@ -48,6 +54,7 @@
 	</script>
  </head>
  <body onclick="cal_del();">
+ <div id="loading" style="padding-top:530px;"><img src="../images/loading.gif"><br>loading...</div>
  <!-- ======================== 3 =========================== -->
  <div id="wrap">
 	<div id="header">
