@@ -468,10 +468,12 @@ function com_submit(mode){
 		}
 
 		/////////////사용자 권한 설정 체크박스 컨트롤 ///////////////
-		function auth_chk(num){
-
-			var form=document.form3;
-		}
+		// function auth_chk(this, box_name){
+		// 	var form=document.form3;
+		// 	if(!this.checked==true){
+		// 		form.box_name.checked=='';
+		// 	}
+		// }
 
 		/////////////사용자 권한 설정 전송 함수 ///////////////
 		function auth_submit(mn){
