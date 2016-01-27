@@ -22,16 +22,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
 					<tr>
@@ -379,7 +369,7 @@
 						?>
 						<!-- 등록 마감 된 기 등록 데이터 수정일 때는 안보임 끝 -->
 						</form>
-						<!------------------------------------동호수 별 입력 종료------------------------------------------//--->
+						<!------------------------------------동호수 별 입력 종료----------------------------------------------->
 
 
 
@@ -485,7 +475,7 @@
 							</div>
 							<div style="float:left; height:24px; width:150px; text-align:center; padding-top:2px;">
 								구 분
-							</div>							
+							</div>
 							<div style="float:left; height:24px; width:60px; text-align:center; padding-top:2px; text-align:center;">
 								수 정
 							</div>
@@ -539,7 +529,7 @@
 							</div>
 							<div style="float:left; height:24px; width:150px; text-align:center; padding-top:2px;">
 								<?=$except_str?>
-							</div>							
+							</div>
 							<div style="float:left; height:24px; width:60px; text-align:center; padding-top:2px; text-align:center;">
 								<? if($_m4_1_1_row[_m4_1_1]<2){?><a href="javascript:" onclick="alert('등록 권한이 없습니다.')">수 정</a>
 								<?}else{?>

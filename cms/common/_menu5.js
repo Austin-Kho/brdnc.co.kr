@@ -471,10 +471,6 @@ function com_submit(mode){
 		function auth_chk(num){
 
 			var form=document.form3;
-			
-			if(num=='1-1'){
-				if(form.s)
-			}
 		}
 
 		/////////////사용자 권한 설정 전송 함수 ///////////////
