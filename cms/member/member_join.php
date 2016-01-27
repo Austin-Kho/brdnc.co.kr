@@ -7,7 +7,7 @@
 	// MySQL 연결
 	$connect=dbconn();
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html>
  <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -140,7 +140,7 @@
 		<div style="clear:left; float:left; width:180px; height:36px; background-color:#F8F8F7; border-width:0 0 1px 0; border-color:#E1E1E1; border-style:solid; padding:5px 0 0 20px;"></div>
 		<div style="float:left; width:512px; height:36px; border-width:0 0 1px 0; border-color:#E1E1E1; border-style:solid; padding:5px 0 0 20px;">
 			특수문자, 한글 공백을 포함할 수 없으며<br>
-			모두 소문자로 처리됩니다.(6~12자 사이)
+			모두 소문자로 처리됩니다.(4~12자 사이)
 		</div>
 		<div style="clear:left; float:left; width:180px; height:25px; background-color:#F8F8F7; padding:5px 0 0 20px;">
 			비밀번호 <span style="color:#cc0000">*</span>
@@ -251,8 +251,10 @@
 			</div>
 		</div>
 		<div style="clear:left; height:60px; text-align:center; padding-top:20px;">
-			<!-- <a href="javascript:checkInput()"><img src="../img/btn_ok.jpg" border='0'></a> --><input type="button" value="사용자 등록" onclick="checkInput('join');" class="submit_bt">
-			<!-- <a href="login_form.php"><img src="../img/btn_cancel.jpg" hspace="4" border='0'></a> --><input type="button" value="취 소" onclick="location.href='login_form.php' " class="submit_bt">
+			<!-- <a href="javascript:checkInput()"><img src="../img/btn_ok.jpg" border='0'></a> -->
+			<input type="button" value="사용자 등록" onclick="checkInput('join');" class="submit_bt">
+			<!-- <a href="login_form.php"><img src="../img/btn_cancel.jpg" hspace="4" border='0'></a> -->
+			<input type="button" value="취 소" onclick="location.href='login_form.php' " class="submit_bt">
 		</div>
 		</form>
 	</div>
