@@ -6,12 +6,11 @@
 	include '../php/util.php';
 	// MySQL 연결
 	$connect=dbconn();
-?>
-<!DOCTYPE HTML>
-<?
+
 	$z_form=$_REQUEST['z_form']; // 우편번호 폼 이름
 	$a_form=$_REQUEST['a_form']; // 주소 폼 이름
 ?>
+<!DOCTYPE HTML>
 <html>
  <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

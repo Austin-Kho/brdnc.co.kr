@@ -11,12 +11,13 @@
 		err_msg('로그인 정보가 없습니다. 다시 로그인해 주세요.');
 	}
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html>
  <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title><?=$doc_title?></title>
+	<link rel="shortcut icon" href="<?=$cms_url?>images/cms.ico">
 	<link type="text/css" rel="stylesheet" href="../common/cms.css">
 	<style type="text/css">
 		html { overflow:hidden; }
@@ -126,14 +127,14 @@
 					$result2=mysql_query($query2, $connect);
 					for($i=0; $rows2=mysql_fetch_array($result2); $i++){
 						$bunho=$total_bnum-($i+$cline)+1;
-						$msg_char=shortenStr($rows2[message], 20);
+						$msg_char=rg_cut_string($rows2[message], 12,"..");
 					?>
 				<div style="clear:left; height:30px; border-width: 0 0 1px 0; border-color:#CFCFCF; border-style: solid;">
 					<div style="float:left; padding-top:5px; text-align:center; width:25px;">
 						<input type="checkbox" name="mnum[]" value="<?=$rows2[mnum]?>">
 					</div>
 					<div style="float:left; padding-top:5px; text-align:center; width:70px;">
-						<?=shortenStr($rows2[name], 11)?>
+						<?=rg_cut_string($rows2[name], 6,"")?>
 					</div>
 					<div style="float:left; padding-top:5px; width:122px;">
 						<a href="message_view.php?mnum=<?=$rows2[mnum]?>&amp;gb=0"><?=$msg_char?></a>
@@ -145,7 +146,6 @@
 						<?=substr($rows2[receive_reg],0,16)?>
 					</div>
 				</div>
-
 				<?
 					}
 					mysql_free_result($result2);

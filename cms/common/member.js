@@ -1,4 +1,6 @@
-<!--
+/**
+ * checkInput(val) // 멤버 조인 폼 첵 
+ */
 
 function checkInput(val){
 	var frm = document.frm;
@@ -21,12 +23,12 @@ function checkInput(val){
 		form.user_id.focus();
 		return ;
 	}
-	if(!IsID(form.user_id.name)) {
-		alert("아이디는 4~10자의 영문소문자 숫자 또는 조합된 문자열이어야 합니다!");
-		form.user_id.focus();
-		form.user_id.select();
-		return ;
-	}
+	// if(!IsID(form.user_id.name)) {
+	// 	alert("아이디는 4~10자의 영문자나 숫자 또는 조합된 문자열이어야 합니다!");
+	// 	form.user_id.focus();
+	// 	form.user_id.select();
+	// 	return ;
+	// }
 
 	if(!form.passwd.value) {
 		alert("비밀번호를 입력하세요!");
@@ -41,7 +43,7 @@ function checkInput(val){
 	}
 	if(val=="join"){
 		if(form.passwd.value != form.passwd2.value) {
-			alert("입력하신 비밀번호가 일치하지 않습니다.\n다시 확인하시고 넣어주십시오!");
+			alert("입력하신 비밀번호가 일치하지 않습니다.\n다시 확인하시고 입력하여 주십시오!");
 			form.passwd2.focus();
 			form.passwd2.select();
 			return;
@@ -51,7 +53,7 @@ function checkInput(val){
 	if(val=='modify'){
 		if(form.new_passwd.value){
 			if(!form.new_passwd2.value||(form.new_passwd.value != form.new_passwd2.value)){
-				alert("새 비밀번호가 일치하지 않습니다. \n다시 확인하고 넣어 주십시요!");
+				alert("새 비밀번호가 일치하지 않습니다. \n다시 확인하고 입력하여 주십시요!");
 				form.new_passwd2.focus();
 				return;
 			}
@@ -501,8 +503,8 @@ function focus_move3(){
       alert('아이디(ID)를 입력하신 후에 확인하세요!');
 	  user_id.focus();
 	  return;
-	 }else if(str<6){
-		 alert('아이디는 띄어쓰기 없이 6~10자 \n영문/숫자를 혼합하여 입력하십시요.');
+	 }else if(str<4){
+		 alert('아이디는 4~10자의 영문자 숫자 \n또는 조합된 문자열이어야 합니다!');
 		 user_id.focus();
 		 return;
    }else {

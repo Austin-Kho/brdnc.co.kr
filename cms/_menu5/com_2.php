@@ -59,7 +59,7 @@
 								   FROM cms_member_table WHERE request='2' GROUP BY no ORDER BY no";
 							$rl1=mysql_query($q1, $connect);
 							for($i=0; $rs1=mysql_fetch_array($rl1); $i++){
-								$q2 = "SELECT pj_name FROM cms_project_info WHERE seq='$rs1[pj_seq]'";
+								$q2 = "SELECT pj_name FROM cms_project1_info WHERE seq='$rs1[pj_seq]'";
 								$rl2 = mysql_query($q2, $connect);
 								$rs2 = mysql_fetch_array($rl2);
 								if($rs1[is_company]==1) {$sort=$com_title;} else {$sort="현장 관계직원";}
@@ -134,9 +134,9 @@
 							if(!$mn||$mn=='0') $mem_sel_dis="display:none;"; else $mem_sel_dis="display:block;";
 							if($mn){
 								if($ms=='1') $mem_qry = "SELECT * FROM cms_member_table WHERE request='1' AND is_company='$ms' AND no='$mn' ORDER BY no ASC"; // 본사 직원일때 쿼리
-								if($ms=='2') $mem_qry = "SELECT no, user_id, name, is_company, pj_name, mobile, email, cms_project_info.seq, cms_member_table.reg_date AS r_date
-														 FROM cms_member_table, cms_project_info
-														 WHERE no='$mn' AND cms_member_table.pj_seq=cms_project_info.seq ORDER BY no ASC";               // 현장 관계 직원일 때 쿼리
+								if($ms=='2') $mem_qry = "SELECT no, user_id, name, is_company, pj_name, mobile, email, cms_project1_info.seq, cms_member_table.reg_date AS r_date
+														 FROM cms_member_table, cms_project1_info
+														 WHERE no='$mn' AND cms_member_table.pj_seq=cms_project1_info.seq ORDER BY no ASC";               // 현장 관계 직원일 때 쿼리
 								$mem_rlt = mysql_query($mem_qry, $connect);
 								$mem_row = mysql_fetch_array($mem_rlt);
 							}

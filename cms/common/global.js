@@ -1,4 +1,6 @@
-<!--
+/**
+ * 
+ */
 //팝업
 function popUp(url,name){
 	var window_left = (screen.width-640)/2;
