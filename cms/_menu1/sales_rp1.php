@@ -7,10 +7,10 @@
 					</div>
 					<!-- ============================= subject table end ============================= -->
 					<?
-						$_m1_2_1_rlt = mysql_query("select _m1_2_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$_m1_2_1_row = mysql_fetch_array($_m1_2_1_rlt);
+						$_m1_1_1_rlt = mysql_query("select _m1_1_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m1_1_1_row = mysql_fetch_array($_m1_1_1_rlt);
 
-						if(!$_m1_2_1_row[_m1_2_1]||$_m1_2_1_row[_m1_2_1]==0){ // 이 페이지 조회 권한 없을 때
+						if(!$_m1_1_1_row[_m1_1_1]||$_m1_1_1_row[_m1_1_1]==0){ // 이 페이지 조회 권한 없을 때
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -31,7 +31,7 @@
 							// 이 페이지 쓰기 권한 설정하기
 							$auth_level=2; // 이페이지 마스터 쓰기 권한 레벨
 
-							if($auth_row[is_admin]==1){ $w_auth =2; }else if($_m1_2_1_row[_m1_2_1]==2){ if($auth_row[auth_level]<=$auth_level){ $w_auth =2; }else{ $w_auth =1;}}else{	$w_auth =0;}
+							if($auth_row[is_admin]==1){ $w_auth =2; }else if($_m1_1_1_row[_m1_1_1]==2){ if($auth_row[auth_level]<=$auth_level){ $w_auth =2; }else{ $w_auth =1;}}else{	$w_auth =0;}
 							// w_auth = 0 > 쓰기 권한 없음 // w_auth = 1 > 실무자 쓰기 권한 // w_auth = 2 > 마스터 쓰기 권한
 					?>
 					<div style="display:inline;">
@@ -42,7 +42,7 @@
 						<input type="hidden" name="m_di" value="<?=$m_di?>">
 						<input type="hidden" name="s_di" value="<?=$s_di?>">
 						<div style="height:18px; text-align:right; padding:0 20px 2px 0; margin-top:10px;">
-							<!-- <a href="javascript:" onClick="excel_pop('<?=$_m1_2_1_row[_m1_2_1]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
+							<!-- <a href="javascript:" onClick="excel_pop('<?=$_m1_1_1_row[_m1_1_1]?>',1);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL로 출력</a> -->
 						</div>
 						<div style="height:35px; border-width:1px 0 1px 0; border-color:#D6D6D6; border-style:solid;">
 							<!-- ============ 본사 직원일 때 프로젝트 선택 가능 시작 ============  -->
@@ -294,7 +294,7 @@
 								$data_num=mysql_num_rows($result1);
 
 								/////////////////////////////////////////////////EXCEL 출력 소스
-								if($_m1_2_1_row[_m1_2_1]<1){
+								if($_m1_1_1_row[_m1_1_1]<1){
 									$excel_pop = "alert('출력 권한이 없습니다!');";
 								}else{
 									$url_where = urlencode($where);

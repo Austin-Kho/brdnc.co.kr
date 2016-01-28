@@ -9,7 +9,7 @@
 											$seq = $_REQUEST['seq'];
 											$qry = "SELECT * FROM cms_work_coun_log WHERE seq='$seq'";
 											$rlt = mysql_query($qry, $connect);
-											$row = mysql_fetch_array($rlt);	
+											$row = mysql_fetch_array($rlt);
 											$sub_str = "추가등록";
 										}else{
 											$sub_str = "등록하기";
@@ -27,11 +27,11 @@
 										<div style="float:left;">
 											<input type="text" name="coun_date" id="coun_date" value="<?=$row[coun_date]?>" size="30" class="inputstyle2" style="height:17px; width:140px;" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
 											<a href="javascript:" onclick="cal_add(document.getElementById('coun_date'),this); event.cancelBubble=true"> <img src="http://cigiko.cafe24.com/cms/images/calendar.jpg" border="0" alt="" /></a>
-										</div>										
-									</div>									
+										</div>
+									</div>
 									<div style="float:left; width:120px; height:26px; padding:5px 0 0 15px; border-width:1px 1px 1px 0; border-style:solid; border-color:#dddddd; background-color:#E2F0FC; color:#003366;">출근인원(팀장포함) <font color="red">*</font></div>
-									<div style="float:left; width:240px; height:26px; padding:5px 0 0 10px; border-width:1px 0 1px 0; border-style:solid; border-color:#dddddd; "><input type="text" name="cust_name" value="<?=$row[cust_name]?>" class="inputstyle2" style="width:160px;"></div>								
-									
+									<div style="float:left; width:240px; height:26px; padding:5px 0 0 10px; border-width:1px 0 1px 0; border-style:solid; border-color:#dddddd; "><input type="text" name="cust_name" value="<?=$row[cust_name]?>" class="inputstyle2" style="width:160px;"></div>
+
 									<div style="clear:left; float:left; width:120px; height:26px; padding:5px 0 0 15px; border-width:0 1px 1px 0; border-style:solid; border-color:#dddddd; background-color:#E2F0FC; color:#003366;">계약사항 </div>
 									<div style="float:left; width:240px; height:26px; padding:5px 0 0 10px; border-width:0 0 1px 0; border-style:solid; border-color:#dddddd; ">
 										<div style="float:left;">
@@ -66,11 +66,11 @@
 									<div style="float:left; width:240px; height:26px; padding:5px 0 0 10px; border-width:0 0 1px 0; border-style:solid; border-color:#dddddd; "><input type="text" name="live_where" value="<?=$row[live_where]?>" class="inputstyle2" style="width:160px"></div>
 									<div style="float:left; width:120px; height:26px; padding:5px 0 0 15px; border-width:0 1px 1px 0; border-style:solid; border-color:#dddddd; background-color:#E2F0FC; color:#003366;">관 심 도</div>
 									<div style="float:left; width:240px; height:26px; padding:5px 0 0 10px; border-width:0 0 1px 0; border-style:solid; border-color:#dddddd; ">
-										<input type="radio" name="inte_degree" value="1" <?if($row[inte_degree]==1) echo "checked";?>> [보통] 
+										<input type="radio" name="inte_degree" value="1" <?if($row[inte_degree]==1) echo "checked";?>> [보통]
 										<input type="radio" name="inte_degree" value="2" <?if($row[inte_degree]==2) echo "checked";?>> [높음]
 										<input type="radio" name="inte_degree" value="3" <?if($row[inte_degree]==3) echo "checked";?>> [매우높음]
 									</div>
-									
+
 
 									<div style="clear:left; float:left; width:120px; height:210px; padding:5px 0 0 15px; border-width:0 1px 1px 0; border-style:solid; border-color:#dddddd; background-color:#E2F0FC; color:#003366;">상담내용 <font color="red">*</font></div>
 									<div style="float:left; width:625px; height:210px; padding:5px 0 0 10px; border-width:0 0 1px 0; border-style:solid; border-color:#dddddd; "><textarea name="content" rows="3" cols="76" class="inputstyle2" style="width:546px; height:200px;"><?=$row[content]?></textarea></div>
@@ -81,7 +81,7 @@
 								</div>
 								<!-- ================================= 거래처 contents E ================================= -->
 								<?
-									if($_m1_1_1_row[_m1_1_1]<2){
+									if($_m1_2_1_row[_m1_2_1]<2){
 										$submit_str="alert('등록 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 										$del_str="alert('삭제 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 									}else{
