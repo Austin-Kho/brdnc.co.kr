@@ -1,16 +1,16 @@
 					<!-- ===== subject table end ===== -->
 					<div style=" height:18px; background-color:#F8F8F8" class="d3_sub">
-						<b><font size="2" color="#cc0099">◈</font><font size="2" color="#6666cc"> 현장별 수수료 채무(지급) 현황</font></b>
+						<b><font size="2" color="#cc0099">◈</font><font size="2" color="#6666cc"> 분개장</font></b>
 						<div style="float:right;">
 							<!-- <font color="red">*</font> 필수 항목은 반드시 입력하시기 바랍니다. -->
 						</div>
 					</div>
 					<!-- ===== subject table end ===== -->
 					<?
-						$_m3_2_2_rlt = mysql_query("select _m3_2_2 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$_m3_2_2_row = mysql_fetch_array($_m3_2_2_rlt);
+						$_m3_2_1_rlt = mysql_query("select _m3_2_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
+						$_m3_2_1_row = mysql_fetch_array($_m3_2_1_rlt);
 
-						if(!$_m3_2_2_row[_m3_2_2]||$_m3_2_2_row[_m3_2_2]==0){
+						if(!$_m3_2_1_row[_m3_2_1]||$_m3_2_1_row[_m3_2_1]==0){
 					?>
 					<div style="display:inline;">
 					<table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -30,7 +30,7 @@
 						<div style="height:18px; text-align:right; padding:0 20px 2px 0; margin-top:10px;">
 							<!-- <a href="javascript:" onClick="excel_pop(<?=$_m3_1_2_row[_m3_1_2]?>,2);"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> EXCEL 출력</a> -->
 						</div>
-						매입채무 등 기타 채권 / 채무 현황
+						건별 분개 기록
 
 
 

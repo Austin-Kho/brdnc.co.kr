@@ -17,20 +17,24 @@
 					<td class="main_content" valign="top">
 					<!-- ===== template start ===== -->
 					<div style="height:25px; padding-top:9px;" class="bottom">
-						<div style="float:left; text-align:center; width:120px;">
-							<b><a href="<?=$_SERVER['PHP_SELF']?>?m_di=<?=$m_di?>&amp;s_di=1" class="menu1">매출 채권</a></b>
+						<div style="float:left; text-align:center; width:100px;">
+							<b><a href="<?=$_SERVER['PHP_SELF']?>?m_di=<?=$m_di?>&amp;s_di=1" class="menu1">분개장</a></b>
+						</div>
+						<div style="float:left;">|</div>
+						<div style="float:left; text-align:center; width:110px;">
+							<b><a href="<?=$_SERVER['PHP_SELF']?>?m_di=<?=$m_di?>&amp;s_di=2" class="menu1">일 · 월계표</a></b>
 						</div>
 						<div style="float:left;">|</div>
 						<div style="float:left; text-align:center; width:120px;">
-							<b><a href="<?=$_SERVER['PHP_SELF']?>?m_di=<?=$m_di?>&amp;s_di=2" class="menu1">지급 채무</a></b>
+							<b><a href="<?=$_SERVER['PHP_SELF']?>?m_di=<?=$m_di?>&amp;s_di=3" class="menu1">주요 제무제표</a></b>
 						</div>
 					</div>
 					<!-- ===== sub menu end ===== -->
 					<div>
 						<?
-							if(!$s_di||$s_di==1) include "labor1.php";
-							if($s_di==2) include "labor2.php";
-							if($s_di==3) include "labor3.php";
+							if(!$s_di||$s_di==1) include "accounting1.php";
+							if($s_di==2) include "accounting2.php";
+							if($s_di==3) include "accounting3.php";
 						?>
 					</div>
 					<!-- ===== template end ===== -->

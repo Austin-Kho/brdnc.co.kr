@@ -12,13 +12,14 @@
 	}
 	$pj=$_REQUEST['pj'];
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title><?=$doc_title?></title>
-	<link type="text/css" rel="stylesheet" href="../common/cms.css">	
+	<link rel="shortcut icon" href="<?=$cms_url?>images/cms.ico">
+	<link type="text/css" rel="stylesheet" href="../common/cms.css">
 	<script type="text/JavaScript" language="JavaScript" src="../common/global.js"></script>
 	<script type="text/javascript">
 	<!--
@@ -50,7 +51,7 @@
 				</div>
 				<form name="form1" action="<?=$_SERVER['PHP_SELF']?>">
 				<div style="float:left; height:28px; text-align:center; padding:7px 0 0 10px; ;">
-					수익비용 : 
+					수익비용 :
 					<select name="acc_d1" class="inputstyle2" style="width:80px; height:22px;" onChange = "acc_d1_sub();">
 						<option value="" <?if(!$acc_d1) echo "selected";?>> 전 체
 						<option value="1" <?if($acc_d1=='1') echo " selected";?>> 수 익
@@ -58,7 +59,7 @@
 					</select>
 				</div>
 				<div style="float:left; height:28px; text-align:center; padding:7px 0 0 10px;">
-					중분류 계정과목 : 
+					중분류 계정과목 :
 					<select name="acc_d2" class="inputstyle2" style="width:150px; height:22px;" onChange = "submit();">
 					<?
 						// d2 계정 분류
@@ -80,7 +81,7 @@
 				<div style="clear:left; height:30px; background-color:#e0e3e9; border-width: 1px 0 1px 0; border-color:#CFCFCF; border-style: solid;">
 					<div style="float:left; padding:6px 0 0 10px;"><strong>수익 계정</strong></div>
 				</div>
-				<?						
+				<?
 						$qry = " SELECT seq, d1_seq, d2_acc_name FROM cms_capital_account_d2  WHERE d1_seq='1' ";
 						$rlt = mysql_query($qry, $connect);
 						while($rows = mysql_fetch_array($rlt)){ // d2 계정 나열 시작
@@ -99,13 +100,13 @@
 				<div style="height:30px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
 					<div style="float:left; padding:6px 0 0 30px; <?if($d3_rows[is_sp_acc]==0)echo "color:#003366;"; else echo "color:#a8a8a8;";?> width:120px; cursor:pointer;"  title="<?=$d3_rows[note]?>"><?=$d3_rows[d3_acc_name]?></div>
 					<div style="float:left; padding:6px 0 0 15px; color:#737373; cursor:pointer;" title="<?=$d3_rows[note]?>"><?=rg_cut_string($d3_rows[note],40,"...")?></div>
-				</div>				
+				</div>
 				<?
 								} // d3 계정 나열 종료
 							}// d2 계정 필터 종료
 						}//d2 계정 나열 종료
 					} // 수익 계정 표시 종료
-				?>				
+				?>
 				<?if(!$acc_d1||$acc_d1==2){ // 비용계정 표시 시작?>
 				<div style="clear:left; height:30px; background-color:#e1e4ea; border-width: 1px 0 1px 0; border-color:#CFCFCF; border-style: solid;">
 					<div style="float:left; padding:6px 0 0 10px;"><strong>비용 계정</strong></div>
@@ -115,7 +116,7 @@
 						$rlt = mysql_query($qry, $connect);
 						while($rows = mysql_fetch_array($rlt)){ // d2 계정 나열 시작
 							if(!$acc_d2||$acc_d2==$rows[seq]){ // d2 계정 필터 시작
-				?>				
+				?>
 				<div style="clear:left; height:30px; background-color:#f9faf5; border-width: 0 0 1px 0; border-color:#CFCFCF; border-style: solid;">
 					<div style="float:left; padding:6px 0 0 20px;"><?=$rows[d2_acc_name]?></div>
 				</div>
@@ -129,14 +130,14 @@
 				<div style="height:30px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
 					<div style="float:left; padding:6px 0 0 30px; <?if($d3_rows[is_sp_acc]==0)echo "color:#003366;"; else echo "color:#a8a8a8;";?> width:120px; cursor:pointer;"  title="<?=$d3_rows[note]?>"><?=$d3_rows[d3_acc_name]?></div>
 					<div style="float:left; padding:6px 0 0 15px; color:#737373; cursor:pointer;" title="<?=$d3_rows[note]?>"><?=rg_cut_string($d3_rows[note],40,"...")?></div>
-				</div>				
+				</div>
 				<?
 								} // d3 계정 나열 종료
 							} // d2 계정 필터 종료
 						}//d2 계정 나열 종료
 					} // 비용 계정 표시 종료
 				?>
-				
+
 				</form>
 			</div>
 		</td>

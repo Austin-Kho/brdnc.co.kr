@@ -71,7 +71,7 @@
 					<!-- ===================================== Head end / body start ===================================== -->
 					<?
 						if(!$m_di||$m_di==1) include "capital.php";
-						if($m_di==2) include "labor.php";
+						if($m_di==2) include "accounting.php";
 					?>
 					<!-- ===================================== body end / Foot start ===================================== -->
 				</div>
