@@ -3,10 +3,10 @@
 					<td valign="top">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr>
-						<td align="center" width="162" class="d2_sub1">
-							<a href="<?=$_SERVER['PHP_SELF']?>?m_di=1"><img src="../images/sub_menu_1_1.png" border="0" alt="" /><!-- <font size="2" color=""><b>업무현황</b></font> --></a></td>
 						<td align="center" width="162" class="d2_sub2">
-							<a href="<?=$_SERVER['PHP_SELF']?>?m_di=2"><img src="../images/sub_menu_1_2_.png" border="0" alt="" /><!-- <font size="2" color=""><b>계약현황</b></font> --></a></td>
+							<a href="<?=$_SERVER['PHP_SELF']?>?m_di=1"><img src="../images/sub_menu_1_1_.png" border="0" alt="" /><!-- <font size="2" color=""><b>업무현황</b></font> --></a></td>
+						<td align="center" width="162" class="d2_sub1">
+							<a href="<?=$_SERVER['PHP_SELF']?>?m_di=2"><img src="../images/sub_menu_1_2.png" border="0" alt="" /><!-- <font size="2" color=""><b>계약현황</b></font> --></a></td>
 						<td width="70%" class="d2_sub2"></td>
 					</tr>
 					</table>

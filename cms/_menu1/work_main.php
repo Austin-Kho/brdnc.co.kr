@@ -64,8 +64,8 @@
 		<div>
 			<!-- ============================= Head end / body start ============================= -->
 			<?
-				if(!$m_di||$m_di==1) include "work_rp.php";
-				if($m_di==2) include "sales_rp.php";
+				if(!$m_di||$m_di==1) include "sales_rp.php";
+				if($m_di==2) include "work_rp.php";
 			?>
 			<!-- ============================= body end / Foot start ============================= -->
 		</div>

@@ -175,7 +175,7 @@
 							<? } ?>
 
 							<div style="height:32px; border-width:1px 0 1px 0;border-color:#cccccc; border-style:solid; margin-top:5px; background-color:#F0F0E8;">
-								<div style="float:left; height:27px; width:180px; padding-top:5px; text-align:center; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
+								<div style="float:left; height:27px; width:210px; padding-top:5px; text-align:center; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
 									동 등록
 								</div>
 								<div style="float:left; height:27px; width:130px; padding-top:5px; text-align:center; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
@@ -194,7 +194,7 @@
 
 							<!-- =============================================== line batch 1 start ================================================ -->
 							<div style="height:32px; border-width:0 0 1px 0;border-color:#cccccc; border-style:solid;">
-								<div style="float:left; height:27px; width:160px; padding:5px 0 0 20px; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
+								<div style="float:left; height:27px; width:160px; padding:5px 0 0 50px; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
 									<input type="text" name="dong_1" class="inputstyle2" size="5"> 동 <input type="checkbox" name="dong_ik" onclick="dong_reg_bc(this);"> 일괄등록
 								</div>
 								<div style="float:left; height:27px; width:130px; padding-top:5px; text-align:center; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
@@ -221,7 +221,7 @@
 							<!-- =============================================== line batch 1 end ================================================ -->
 							<!-- =============================================== line batch 2 start ================================================ -->
 							<div style="height:32px; border-width:0 0 1px 0;border-color:#cccccc; border-style:solid;">
-								<div style="float:left; height:27px; width:160px; padding:5px 0 0 20px; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
+								<div style="float:left; height:27px; width:160px; padding:5px 0 0 50px; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
 									<input type="text" name="dong_2" class="inputstyle2" size="5"> 동
 								</div>
 								<div style="float:left; height:27px; width:130px; padding-top:5px; text-align:center; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
@@ -248,7 +248,7 @@
 							<!-- =============================================== line batch 2 end ================================================ -->
 							<!-- =============================================== line batch 3 start ================================================ -->
 							<div style="height:32px; border-width:0 0 1px 0;border-color:#cccccc; border-style:solid;">
-								<div style="float:left; height:27px; width:160px; padding:5px 0 0 20px; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
+								<div style="float:left; height:27px; width:160px; padding:5px 0 0 50px; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
 									<input type="text" name="dong_3" class="inputstyle2" size="5"> 동
 								</div>
 								<div style="float:left; height:27px; width:130px; padding-top:5px; text-align:center; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
@@ -275,7 +275,7 @@
 							<!-- =============================================== line batch 3 end ================================================ -->
 							<!-- =============================================== line batch 4 start ================================================ -->
 							<div style="height:32px; border-width:0 0 1px 0;border-color:#cccccc; border-style:solid;">
-								<div style="float:left; height:27px; width:160px; padding:5px 0 0 20px; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
+								<div style="float:left; height:27px; width:160px; padding:5px 0 0 50px; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
 									<input type="text" name="dong_4" class="inputstyle2" size="5"> 동
 								</div>
 								<div style="float:left; height:27px; width:130px; padding-top:5px; text-align:center; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
@@ -302,7 +302,7 @@
 							<!-- =============================================== line batch 4 end ================================================ -->
 							<!-- =============================================== line batch 5 start ================================================ -->
 							<div style="height:32px; border-width:0 0 1px 0;border-color:#cccccc; border-style:solid;">
-								<div style="float:left; height:27px; width:160px; padding:5px 0 0 20px; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
+								<div style="float:left; height:27px; width:160px; padding:5px 0 0 50px; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
 									<input type="text" name="dong_5" class="inputstyle2" size="5"> 동
 								</div>
 								<div style="float:left; height:27px; width:130px; padding-top:5px; text-align:center; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
@@ -329,7 +329,7 @@
 							<!-- =============================================== line batch 5 end ================================================ -->
 							<!-- =============================================== line batch 6 start ================================================ -->
 							<div style="height:32px; border-width:0 0 1px 0;border-color:#cccccc; border-style:solid;">
-								<div style="float:left; height:27px; width:160px; padding:5px 0 0 20px; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
+								<div style="float:left; height:27px; width:160px; padding:5px 0 0 50px; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
 									<input type="text" name="dong_6" class="inputstyle2" size="5"> 동
 								</div>
 								<div style="float:left; height:27px; width:130px; padding-top:5px; text-align:center; border-width:0 1px 0 0;border-color:#cccccc; border-style:solid;">
