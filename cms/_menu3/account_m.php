@@ -19,11 +19,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title><?=$doc_title?></title>
 	<link rel="shortcut icon" href="<?=$cms_url?>images/cms.ico">
-<<<<<<< HEAD:cms/_menu3/account_m.php
 	<link type="text/css" rel="stylesheet" href="../common/cms.css">
-=======
-	<link type="text/css" rel="stylesheet" href="../common/cms.css">	
->>>>>>> origin/master:cms/_menu3/account.php
+	<link type="text/css" rel="stylesheet" href="../common/cms.css">
 	<script type="text/JavaScript" language="JavaScript" src="../common/global.js"></script>
 	<script type="text/javascript">
 	<!--

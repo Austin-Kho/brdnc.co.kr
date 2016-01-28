@@ -174,7 +174,7 @@
 							<?
 								}else{
 
-								$query1="SELECT seq_num, class1, class2, account, cont, acc, in_acc, inc, out_acc, exp, evidence, worker, deal_date, name, no
+								$query1="SELECT seq_num, class1, class2, account, cont, acc, in_acc, inc, out_acc, exp, evidence, cms_capital_cash_book.note, worker, deal_date, name, no
 										   FROM cms_capital_cash_book, cms_capital_bank_account
 										   $add_where
 										   ORDER BY deal_date desc, seq_num DESC
@@ -222,8 +222,8 @@
 
 									 if($rows1[evidence]==1) $evi="증빙 없음";
 									 if($rows1[evidence]==2) $evi="세금계산서";
-									 if($rows1[evidence]==3) $evi="계산서(면세)";
-									 if($rows1[evidence]==4) $evi="신용(체크)카드전표";
+									 if($rows1[evidence]==3) $evi="계산서";
+									 if($rows1[evidence]==4) $evi="카드전표";
 									 if($rows1[evidence]==5) $evi="현금영수증";
 									 if($rows1[evidence]==6) $evi="간이영수증";
 
@@ -241,17 +241,17 @@
 									 }
 							?>
 							<tr>
-								<td align="center" height="20" class="tb2"><input type="checkbox" name="seq_num[]" value="<?=$rows1[seq_num]?>"></td>
-								<td align="center" height="30" class="tb2"><?=$rows1[deal_date]?></td>
-								<td align="center" height="30" class="tb2"><?=$cla?></td>
-								<td align="center" class="tb2" style="color:#000099;"><?=$account?></td>
-								<td align="left" height="30" class="tb2"><?=rg_cut_string($rows1[cont],20,"..");?></td>
-								<td align="left" height="30" class="tb2"><?=rg_cut_string($acc,8,"..")?></td>
-								<td align="center" height="30" bgcolor="#ececff" class="tb2"><?=$in_acc?></td>
-								<td align="right" height="30" class="tb2" bgcolor="#ececff" style="padding-right:10px;"><?=$inc?></td>
-								<td align="center" height="30" bgcolor="#fff0f0" class="tb2"><?=$out_acc?></td>
-								<td align="right" height="30" class="tb2" bgcolor="#fff0f0" style="padding-right:10px;"><?=$exp?></td>
-								<td align="center" height="30" class="tb2"><?=$evi?></td>
+								<td align="center" height="20" class="tb2" title="<?=$rows1[note]?>"><input type="checkbox" name="seq_num[]" value="<?=$rows1[seq_num]?>"></td>
+								<td align="center" height="30" class="tb2" title="<?=$rows1[note]?>"><?=$rows1[deal_date]?></td>
+								<td align="center" height="30" class="tb2" title="<?=$rows1[note]?>"><?=$cla?></td>
+								<td align="center" class="tb2"  title="<?=$rows1[note]?>" style="color:#000099;"><?=$account?></td>
+								<td align="left" height="30"  title="<?=$rows1[note]?>" class="tb2"><?=rg_cut_string($rows1[cont],20,"..");?></td>
+								<td align="left" height="30"  title="<?=$rows1[note]?>" class="tb2"><?=rg_cut_string($acc,10,"")?></td>
+								<td align="center" height="30  title="<?=$rows1[note]?>"" bgcolor="#ececff" class="tb2"><?=$in_acc?></td>
+								<td align="right" height="30"  title="<?=$rows1[note]?>" class="tb2" bgcolor="#ececff" style="padding-right:10px;"><?=$inc?></td>
+								<td align="center" height="30"  title="<?=$rows1[note]?>" bgcolor="#fff0f0" class="tb2"><?=$out_acc?></td>
+								<td align="right" height="30"  title="<?=$rows1[note]?>" class="tb2" bgcolor="#fff0f0" style="padding-right:10px;"><?=$exp?></td>
+								<td align="center" height="30"  title="<?=$rows1[note]?>" class="tb2"><?=$evi?></td>
 								<!-- <td align="center" height="30" class="tb2"></td> -->
 								<?if($w_auth>0){ //쓰기 권한 있는 직원에게만 출력 ?>
 								<td align="center" height="30" class="tb2">

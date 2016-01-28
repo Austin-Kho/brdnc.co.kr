@@ -88,16 +88,16 @@
 	$char1_6 = $_REQUEST['char1_6']; $char1_7 = $_REQUEST['char1_7']; $char1_8 = $_REQUEST['char1_8']; $char1_9 = $_REQUEST['char1_9']; $char1_10 = $_REQUEST['char1_10'];
 
 	// 수수료 발생 시 - 적요
-	$cont_1_h = rg_cut_string($_POST['cont_1_h'],12,"..")." - 은행수수료";
-	$cont_2_h = rg_cut_string($_POST['cont_2_h'],12,"..")." - 은행수수료";
-	$cont_3_h = rg_cut_string($_POST['cont_3_h'],12,"..")." - 은행수수료";
-	$cont_4_h = rg_cut_string($_POST['cont_4_h'],12,"..")." - 은행수수료";
-	$cont_5_h = rg_cut_string($_POST['cont_5_h'],12,"..")." - 은행수수료";
-	$cont_6_h = rg_cut_string($_POST['cont_6_h'],12,"..")." - 은행수수료";
-	$cont_7_h = rg_cut_string($_POST['cont_7_h'],12,"..")." - 은행수수료";
-	$cont_8_h = rg_cut_string($_POST['cont_8_h'],12,"..")." - 은행수수료";
-	$cont_9_h = rg_cut_string($_POST['cont_9_h'],12,"..")." - 은행수수료";
-	$cont_10_h = rg_cut_string($_POST['cont_10_h'],12,"..")." - 은행수수료";
+	$cont_1_h = rg_cut_string($_POST['cont_1_h'],16,"..")." - 수수료";
+	$cont_2_h = rg_cut_string($_POST['cont_2_h'],16,"..")." - 수수료";
+	$cont_3_h = rg_cut_string($_POST['cont_3_h'],16,"..")." - 수수료";
+	$cont_4_h = rg_cut_string($_POST['cont_4_h'],16,"..")." - 수수료";
+	$cont_5_h = rg_cut_string($_POST['cont_5_h'],16,"..")." - 수수료";
+	$cont_6_h = rg_cut_string($_POST['cont_6_h'],16,"..")." - 수수료";
+	$cont_7_h = rg_cut_string($_POST['cont_7_h'],16,"..")." - 수수료";
+	$cont_8_h = rg_cut_string($_POST['cont_8_h'],16,"..")." - 수수료";
+	$cont_9_h = rg_cut_string($_POST['cont_9_h'],16,"..")." - 수수료";
+	$cont_10_h = rg_cut_string($_POST['cont_10_h'],16,"..")." - 수수료";
 
 	// 수수료 발생 시 - 출금액
 	$char2_1 = $_POST['char2_1']; $char2_2 = $_POST['char2_2']; $char2_3 = $_POST['char2_3']; $char2_4 = $_POST['char2_4']; $char2_5 = $_POST['char2_5'];
@@ -113,7 +113,7 @@
 		}
 		if($char1_1=='on'){
 			 $query1="INSERT INTO `cms_capital_cash_book` (`com_div`, `class1`, `class2`, `account`, `cont`, `acc`, `out_acc`, `exp`, `evidence`, `worker`, `deal_date`)
-							  VALUES('$com_div_1', '2', '4', '지급수수료', '$cont_1_h', '$out_1[1]', '$out_1[0]', '$char2_1', '1', '$worker', '$deal_date')";
+							  VALUES('$com_div_1', '2', '5', '지급수수료', '$cont_1_h', '$out_1[1]', '$out_1[0]', '$char2_1', '1', '$worker', '$deal_date')";
 			 $result1=mysql_query($query1, $connect);
 			 if(!$result1) err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 		}
@@ -125,7 +125,7 @@
 		}
 		if($char1_2=='on'){
 			 $query2="INSERT INTO `cms_capital_cash_book` (`com_div`, `class1`, `class2`, `account`, `cont`, `acc`, `out_acc`, `exp`, `evidence`, `worker`, `deal_date`)
-							  VALUES('$com_div_2', '2', '4', '지급수수료', '$cont_2_h', '$out_2[1]', '$out_2[0]', '$char2_2', '1', '$worker', '$deal_date')";
+							  VALUES('$com_div_2', '2', '5', '지급수수료', '$cont_2_h', '$out_2[1]', '$out_2[0]', '$char2_2', '1', '$worker', '$deal_date')";
 			 $result2=mysql_query($query2, $connect);
 			 if(!$result2) err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 		}
@@ -138,7 +138,7 @@
 		}
 		if($char1_3=='on'){
 			 $query3="INSERT INTO `cms_capital_cash_book` (`com_div`, `class1`, `class2`, `account`, `cont`, `acc`, `out_acc`, `exp`, `evidence`, `worker`, `deal_date`)
-							  VALUES('$com_div_3', '2', '4', '지급수수료', '$cont_3_h', '$out_3[1]', '$out_3[0]', '$char2_3', '1', '$worker', '$deal_date')";
+							  VALUES('$com_div_3', '2', '5', '지급수수료', '$cont_3_h', '$out_3[1]', '$out_3[0]', '$char2_3', '1', '$worker', '$deal_date')";
 			 $result3=mysql_query($query3, $connect);
 			 if(!$result3) err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 		}
@@ -151,7 +151,7 @@
 		}
 		if($char1_4=='on'){
 			 $query4="INSERT INTO `cms_capital_cash_book` (`com_div`, `class1`, `class2`, `account`, `cont`, `acc`, `out_acc`, `exp`, `evidence`, `worker`, `deal_date`)
-							  VALUES('$com_div_4', '2', '4', '지급수수료', '$cont_4_h', '$out_4[1]', '$out_4[0]', '$char2_4', '1', '$worker', '$deal_date')";
+							  VALUES('$com_div_4', '2', '5', '지급수수료', '$cont_4_h', '$out_4[1]', '$out_4[0]', '$char2_4', '1', '$worker', '$deal_date')";
 			 $result4=mysql_query($query4, $connect);
 			 if(!$result4) err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 		}
@@ -164,7 +164,7 @@
 		}
 		if($char1_5=='on'){
 			 $query5="INSERT INTO `cms_capital_cash_book` (`com_div`, `class1`, `class2`, `account`, `cont`, `acc`, `out_acc`, `exp`, `evidence`, `worker`, `deal_date`)
-							  VALUES('$com_div_5', '2', '4', '지급수수료', '$cont_5_h', '$out_5[1]', '$out_5[0]', '$char2_5', '1', '$worker', '$deal_date')";
+							  VALUES('$com_div_5', '2', '5', '지급수수료', '$cont_5_h', '$out_5[1]', '$out_5[0]', '$char2_5', '1', '$worker', '$deal_date')";
 			 $result5=mysql_query($query5, $connect);
 			 if(!$result5) err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 		}
@@ -177,7 +177,7 @@
 		}
 		if($char1_6=='on'){
 			 $query6="INSERT INTO `cms_capital_cash_book` (`com_div`, `class1`, `class2`, `account`, `cont`, `acc`, `out_acc`, `exp`, `evidence`, `worker`, `deal_date`)
-							  VALUES('$com_div_6', '2', '4', '지급수수료', '$cont_6_h', '$out_6[1]', '$out_6[0]', '$char2_6', '1', '$worker', '$deal_date')";
+							  VALUES('$com_div_6', '2', '5', '지급수수료', '$cont_6_h', '$out_6[1]', '$out_6[0]', '$char2_6', '1', '$worker', '$deal_date')";
 			 $result6=mysql_query($query6, $connect);
 			 if(!$result6) err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 		}
@@ -190,7 +190,7 @@
 		}
 		if($char1_7=='on'){
 			 $query7="INSERT INTO `cms_capital_cash_book` (`com_div`, `class1`, `class2`, `account`, `cont`, `acc`, `out_acc`, `exp`, `evidence`, `worker`, `deal_date`)
-							  VALUES('$com_div_7', '2', '4', '지급수수료', '$cont_7_h', '$out_7[1]', '$out_7[0]', '$char2_7', '1', '$worker', '$deal_date')";
+							  VALUES('$com_div_7', '2', '5', '지급수수료', '$cont_7_h', '$out_7[1]', '$out_7[0]', '$char2_7', '1', '$worker', '$deal_date')";
 			 $result7=mysql_query($query7, $connect);
 			 if(!$result7) err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 		}
@@ -203,7 +203,7 @@
 		}
 		if($char1_8=='on'){
 			 $query8="INSERT INTO `cms_capital_cash_book` (`com_div`, `class1`, `class2`, `account`, `cont`, `acc`, `out_acc`, `exp`, `evidence`, `worker`, `deal_date`)
-							  VALUES('$com_div_8', '2', '4', '지급수수료', '$cont_8_h', '$out_8[1]', '$out_8[0]', '$char2_8', '1', '$worker', '$deal_date')";
+							  VALUES('$com_div_8', '2', '5', '지급수수료', '$cont_8_h', '$out_8[1]', '$out_8[0]', '$char2_8', '1', '$worker', '$deal_date')";
 			 $result8=mysql_query($query8, $connect);
 			 if(!$result8) err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 		}
@@ -216,7 +216,7 @@
 		}
 		if($char1_9=='on'){
 			 $query9="INSERT INTO `cms_capital_cash_book` (`com_div`, `class1`, `class2`, `account`, `cont`, `acc`, `out_acc`, `exp`, `evidence`, `worker`, `deal_date`)
-							  VALUES('$com_div_9', '2', '4', '지급수수료', '$cont_9_h', '$out_9[1]', '$out_9[0]', '$char2_9', '1', '$worker', '$deal_date')";
+							  VALUES('$com_div_9', '2', '5', '지급수수료', '$cont_9_h', '$out_9[1]', '$out_9[0]', '$char2_9', '1', '$worker', '$deal_date')";
 			 $result9=mysql_query($query9, $connect);
 			 if(!$result9) err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 		}
@@ -229,7 +229,7 @@
 		}
 		if($char1_10=='on'){
 			 $query10="INSERT INTO `cms_capital_cash_book` (`com_div`, `class1`, `class2`, `account`, `cont`, `acc`, `out_acc`, `exp`, `evidence`, `worker`, `deal_date`)
-							  VALUES('$com_div_10', '2', '4', '지급수수료', '$cont_10_h', '$out_10[1]', '$out_10[0]', '$char2_10', '1', '$worker', '$deal_date')";
+							  VALUES('$com_div_10', '2', '5', '지급수수료', '$cont_10_h', '$out_10[1]', '$out_10[0]', '$char2_10', '1', '$worker', '$deal_date')";
 			 $result10=mysql_query($query10, $connect);
 			 if(!$result10) err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 		}

@@ -27,6 +27,7 @@
 	$exp = $_POST['exp'];
 	$out = $_POST['out'];
 	$evi = $_POST['evi'];
+	$note = $_POST['note'];
 
 
 	############# 회원 정보 테이블에 입력 값을 등록한다. #############
@@ -41,6 +42,7 @@
 																 out_acc='$out',
 																 exp='$exp',
 																 evidence='$evi',
+																 note='$note',
 																 worker='$worker',
 																 deal_date='$deal_date'
 

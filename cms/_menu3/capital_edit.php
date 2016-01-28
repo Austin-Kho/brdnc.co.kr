@@ -48,7 +48,7 @@
 			}
 			var inc_account = document.getElementById('inc_account');
 			var out_account = document.getElementById('out_account');
-			if(form.class2.value==1){				
+			if(form.class2.value==1){
 				if(!inc_account.value){
 					alert('계정과목을 선택하세요!');
 					inc_account.focus();
@@ -152,16 +152,16 @@
 				</div>
 				<div style="height:32px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
 					<div style="float:left; padding:9px 15px 0 0; text-align:right; width:100px;">
-						구 분 <font color="#ff0000">*</font>
+						계정과목 <font color="#ff0000">*</font>
 					</div>
 					<div style="float:left; padding-top:8px; text-align:left;">
-						<select name="class1" style="width:92;" onChange="inoutSel_(this.form)">
+						<select name="class1" style="width:88;" onChange="inoutSel_(this.form)">
 							<option value="" <?if(!$rows[class1]) echo "selected";?>> 선 택
 							<option value="1" <?if($rows[class1]==1) echo "selected";?>> 입 금
 							<option value="2" <?if($rows[class1]==2) echo "selected";?>> 출 금
 							<option value="3" <?if($rows[class1]==3) echo "selected";?>> 대 체
 						</select>
-						<select name="class2" style="width:92;" onChange="inoutSel2_(this.form)">
+						<select name="class2" style="width:88;" onChange="inoutSel2_(this.form)">
 						<?if(!$rows[class1]){?>
 							<option value="" <?if(!$rows[class2]) echo "selected";?>> 선 택
 							<option value="1" <?if($rows[class2]==1) echo "selected";?>> 수 익
@@ -186,15 +186,8 @@
 							<option value="8" <?if($rows[class2]==8) echo "selected";?>> 현 장
 						<?}?>
 						</select>
-					</div>
-				</div>
-				<div style="height:32px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
-					<div style="float:left; padding:9px 15px 0 0; text-align:right; width:100px;">
-						계정과목 <font color="#ff0000">*</font>
-					</div>
-					<div style="float:left; padding-top:8px; text-align:left;">
-						<select name="account" id="inc_account" style="width:110px; <?if($rows[class1]<>1)echo "display:none;";?>" <?if($rows[class2]<>1) echo "disabled";?>>
-							<?								
+						<select name="account" id="inc_account" style="width:105px; <?if($rows[class1]<>1)echo "display:none;";?>" <?if($rows[class2]<>1) echo "disabled";?>>
+							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_seq='1' AND is_sp_acc <>'1' ORDER BY seq ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
 							?>
@@ -203,7 +196,7 @@
 							<option value="<?=$acc_rows[d3_acc_name]?>" <?if($rows[account]==$acc_rows[d3_acc_name]) echo "selected";?>> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
 							<?}?>
 						</select>
-						<select name="account" id="out_account" style="width:110px; <?if($rows[class1]==1)echo "display:none;";?>" <?if($rows[class2]<>4) echo "disabled";?>>
+						<select name="account" id="out_account" style="width:105px; <?if($rows[class1]==1)echo "display:none;";?>" <?if($rows[class2]<>5) echo "disabled";?>>
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_seq='2' AND is_sp_acc <>'1' ORDER BY seq ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
@@ -238,7 +231,7 @@
 					<div style="float:left; padding-top:8px; text-align:left;">
 						<input type="text" name="inc" value="<?=$rows[inc]?>" size="15" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')" <?if($rows[class1]==2) echo "disabled";?>>
 					</div>
-					<div style="float:left; padding-top:8px; text-align:left;">
+					<div style="float:left; padding:8px 0 0 5px; text-align:left;">
 						<select name="in" style="width:78;" <?if($rows[class1]==2) echo "disabled";?>>
 							<option value="" <?if(!$rows[in_acc]) echo "selected";?>> 선 택
 							<?
@@ -258,7 +251,7 @@
 					<div style="float:left; padding-top:8px; text-align:left;">
 						<input type="text" name="exp" value="<?=$rows[exp]?>" size="15" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')" <?if($rows[class1]==1) echo "disabled";?>>
 					</div>
-					<div style="float:left; padding-top:8px; text-align:left;">
+					<div style="float:left; padding:8px 0 0 5px; text-align:left;">
 						<select name="out" style="width:78;" <?if($rows[class1]==1) echo "disabled";?>>
 							<option value="" <?if(!$rows[out_acc]) echo "selected";?>> 선 택
 							<?
@@ -278,13 +271,20 @@
 					<div style="float:left; padding-top:8px; text-align:left;">
 						<select name="evi" style="width:190">
 							<option value="1" <?if($rows[evidence]==1) echo "selected";?>> 증빙 없음
-							<option value="2" <?if($rows[evidence]==2) echo "selected";?>> 간이영수증
-							<option value="3" <?if($rows[evidence]==3) echo "selected";?>> 체크카드
-							<option value="4" <?if($rows[evidence]==4) echo "selected";?>> 신용카드
-							<option value="5" <?if($rows[evidence]==5) echo "selected";?>> 세금계산서
-							<option value="6" <?if($rows[evidence]==6) echo "selected";?>> 계산서
-							<option value="7" <?if($rows[evidence]==7) echo "selected";?>> 인건비
+							<option value="2" <?if($rows[evidence]==2) echo "selected";?>> 세금계산서
+							<option value="3" <?if($rows[evidence]==3) echo "selected";?>> 계산서
+							<option value="4" <?if($rows[evidence]==4) echo "selected";?>> 신용(체크)카드전표
+							<option value="5" <?if($rows[evidence]==5) echo "selected";?>> 현금영수증
+							<option value="6" <?if($rows[evidence]==6) echo "selected";?>> 간이영수증
 						</select>
+					</div>
+				</div>
+				<div style="height:32px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
+					<div style="float:left; padding:9px 15px 0 0; text-align:right; width:100px;">
+						비 고
+					</div>
+					<div style="float:left; padding-top:8px; text-align:left;">
+						<textarea name="note" rows="2" cols="36" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"></textarea>
 					</div>
 				</div>
 				</form>

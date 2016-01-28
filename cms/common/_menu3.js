@@ -121,7 +121,7 @@ function inoutSel(no, pj){
 	var out_account_str = "out_account_"; // 비용 계정과목
 	var out_account = out_account_str+no;
 	var in_str = "in_"; // 입금처
-	var iin = in_str+no; 
+	var iin = in_str+no;
 	var inc_str = "inc_"; // 입금액
 	var inc = inc_str+no;
 	var out_str = "out_"; // 출금처
@@ -161,7 +161,7 @@ function inoutSel(no, pj){
 		out_id.disabled=true;
 		exp_id.disabled=true;
 	}else if(class1_id.value==2){
-		class2_id.length=4;								
+		class2_id.length=4;
 		class2_id.options[0].text = '비 용'
 		class2_id.options[0].value = '5';
 		//class2_id.options[0].selected =1;
@@ -202,7 +202,7 @@ function inoutSel(no, pj){
 		in_id.disabled=0;
 		inc_id.disabled=0;
 		out_id.disabled=0;
-		exp_id.disabled=0;		
+		exp_id.disabled=0;
 	}else{
 		class2_id.length=9;
 		class2_id.options[0].text = '선 택';
@@ -247,14 +247,14 @@ function inoutSel(no, pj){
 }
 // 구분목록 상자선택2 (capital3.php)
 function inoutSel2(no){
-	var class1_str = "class1_";
+	var class1_str = "class1_";  //개략계정
 	var class1 = class1_str+no;
-	var class2_str = "class2_";
+	var class2_str = "class2_";  //세부계정
 	var class2 = class2_str+no;
-	var jh_loan_str = "jh_loan_";
-	var jh_loan = jh_loan_str+no;
-	var pj_seq_str = "pj_seq_";
+	var pj_seq_str = "pj_seq_"; // 현장코드
 	var pj_seq = pj_seq_str+no;
+	var jh_loan_str = "jh_loan_"; // 조합대여 여부
+	var jh_loan = jh_loan_str+no;
 	var inc_td_str = "inc_td_"; // 수익계정
 	var inc_td = inc_td_str+no;
 	var out_td_str = "out_td_"; // 비용계정
@@ -264,7 +264,7 @@ function inoutSel2(no){
 	var out_account_str = "out_account_"; // 비용 계정과목
 	var out_account = out_account_str+no;
 	var in_str = "in_"; // 입금처
-	var iin = in_str+no; 
+	var iin = in_str+no;
 	var inc_str = "inc_"; // 입금액
 	var inc = inc_str+no;
 	var out_str = "out_"; // 출금처
@@ -274,8 +274,8 @@ function inoutSel2(no){
 
 	var class1_id = document.getElementById(class1);
 	var class2_id = document.getElementById(class2);
-	var jh_loan_id = document.getElementById(jh_loan);
 	var pj_seq_id = document.getElementById(pj_seq);
+	var jh_loan_id = document.getElementById(jh_loan);
 	var inc_td_id = document.getElementById(inc_td);
 	var out_td_id = document.getElementById(out_td);
 	var inc_account_id = document.getElementById(inc_account);
@@ -284,55 +284,57 @@ function inoutSel2(no){
 	var inc_id = document.getElementById(inc);
 	var out_id = document.getElementById(out);
 	var exp_id = document.getElementById(exp);
-	
+
+
 	if(class2_id.value==0) {class1_id.options[0].selected=1;}
-	if(class2_id.value>0&&class2_id.value<=4) {
-		class1_id.options[1].selected=1;
-		in_id.disabled=0; // 입금계정
-		inc_id.disabled=0; // 입금금액
-		out_id.disabled=1; // 출금계정
-		exp_id.disabled=1; // 출금금액
+	if(class2_id.value>0&&class2_id.value<=4) { // 입금 항목들을 선택하면
+		class1_id.options[1].selected=1; // 입금 선택
+		in_id.disabled=0; // 입금계정 열고
+		inc_id.disabled=0; // 입금금액 열고
+		out_id.disabled=1; // 출금계정 닫고
+		exp_id.disabled=1; // 출금금액 닫고
 	}
-	if(class2_id.value>4&&class2_id.value<=8) {
-		class1_id.options[2].selected=1;
-		in_id.disabled=1; // 입금계정
-		inc_id.disabled=1; // 입금금액
-		out_id.disabled=0; // 출금계정
-		exp_id.disabled=0; // 출금금액
+	if(class2_id.value>4&&class2_id.value<=8) { // 출금관련 항목들을 선택하면
+		class1_id.options[2].selected=1; // 출금 선택
+		in_id.disabled=1; // 입금계정 닫고
+		inc_id.disabled=1; // 입금금액 닫고
+		out_id.disabled=0; // 출금계정 열고
+		exp_id.disabled=0; // 출금금액 열고
 	}
-	if(class2_id.value>8){
-		class1_id.options[3].selected=1;		
-		in_id.disabled=0; // 입금계정
-		inc_id.disabled=0; // 입금금액
-		out_id.disabled=0; // 출금계정
-		exp_id.disabled=0; // 출금금액
+	if(class2_id.value>8){ // 대체항목들을 선택하면
+		class1_id.options[3].selected=1; // 대체 선택
+		in_id.disabled=0; // 입금계정 열고
+		inc_id.disabled=0; // 입금금액 열고
+		out_id.disabled=0; // 출금계정 열고
+		exp_id.disabled=0; // 출금금액 열고
 	}
-	
-	if(class2_id.value==1){
-		inc_td_id.style.display='';
-		out_td_id.style.display='none';
-		inc_account_id.disabled=false;
-		out_account_id.disabled=true;
-	}else if(class2_id.value==5){
-		inc_td_id.style.display='none';
-		out_td_id.style.display='';
-		inc_account_id.disabled=true;
-		out_account_id.disabled=false;
+
+	if(class2_id.value==1){ // 수익 선택하면
+		inc_td_id.style.display=''; // 수입계정과목 보이고
+		out_td_id.style.display='none'; // 지출계정과목 안보이고
+		inc_account_id.disabled=false; // 입금처 열고
+		out_account_id.disabled=true; // 출금처 닫고
+	}else if(class2_id.value==5){ // 비용 선택하면
+		inc_td_id.style.display='none'; // 입금계정과목 안보이고
+		out_td_id.style.display=''; // 출금 계정과목 보이고
+		inc_account_id.disabled=true; // 입금처 닫고
+		out_account_id.disabled=false; // 출금처 열고
 	}else{
-		inc_td_id.style.display='';
-		out_td_id.style.display='none';
-		inc_account_id.disabled=true;
-		out_account_id.disabled=true;
+		inc_td_id.style.display=''; // 입금계정과목 보이고
+		out_td_id.style.display='none'; // 출금계정과목 안보이고
+		inc_account_id.disabled=true; // 입금처 닫고
+		out_account_id.disabled=true; // 출금처 닫고
 	}
-	if(class2_id.value==6) jh_loan_id.disabled=0; else jh_loan_id.disabled=1;// 조합대여금 여부
-	if(class2_id.value==8){
-		pj_seq_id.disabled=false;		
-	}else{
-		pj_seq_id.disabled=true;
-	}
+	if(class2_id.value==7) jh_loan_id.disabled=0; else jh_loan_id.disabled=1;// 대여 선택 시 조합대여금 체크박스 열기
+	if(class2_id.value==10)	pj_seq_id.disabled=false; else 	pj_seq_id.disabled=true; // 현장 대체 선택 시 현장 선택 열기
 }
 
-// 조합대여금 여부 체크박스 체크 시
+
+/**
+ * // 조합대여금 여부 체크박스 체크 시
+ * @param  {[type]} no [description]
+ * @return {[type]}    [description]
+ */
 function jh_chk(no){
 	var jh_loan_str = "jh_loan_";
 	var jh_loan = jh_loan_str+no;
@@ -340,7 +342,7 @@ function jh_chk(no){
 	var inc_td = inc_td_str+no;
 
 	var out_td_str = "out_td_"; // 비용계정
-	var out_td = out_td_str+no;	
+	var out_td = out_td_str+no;
 
 	var out_account_str = "out_account_"; // 비용 계정과목
 	var out_account = out_account_str+no;
@@ -349,7 +351,7 @@ function jh_chk(no){
 	var inc_td_id = document.getElementById(inc_td);
 	var out_td_id = document.getElementById(out_td);
 	var out_account_id = document.getElementById(out_account);
-	
+
 	if(jh_loan_id.checked==true){
 		inc_td_id.style.display='none';
 		out_td_id.style.display='';
@@ -374,7 +376,7 @@ function inout_frm_chk(com){
 		form.class1_1.focus();
 		return;
 	}
-	
+
 	if(form.class1_1.value){
 		if(com=='com'){
 			if(form.class2_1.value=='8'){
@@ -417,7 +419,7 @@ function inout_frm_chk(com){
 			if(!form.exp_1.value){
 				alert('출금 금액을 입력하세요!');
 				form.exp_1.focus();
-				return;												
+				return;
 			}
 		}
 		if(form.class1_1.value==3){
@@ -541,7 +543,7 @@ function inout_frm_chk(com){
 				return;
 			}
 		}
-		if(!form.cont_3.value){	
+		if(!form.cont_3.value){
 			alert('적요 항목을 입력하세요!');
 			form.cont_3.focus();
 			return;
@@ -732,7 +734,7 @@ function inout_frm_chk(com){
 			if(!form.out_5.value){
 				alert('출금 계정 항목을 선택하세요!');
 				form.out_5.focus();
-				return;	
+				return;
 			}
 			var out_val = form.out_5.value.split("-");
 			if(form.in_5.value==out_val[0]){
@@ -871,7 +873,7 @@ function inout_frm_chk(com){
 				alert('입금 계정 항목을 선택하세요!');
 				form.in_7.focus();
 				return;
-			}	
+			}
 			if(!form.inc_7.value){
 				alert('입금 금액을 입력하세요!');
 				form.inc_7.focus();
@@ -1132,13 +1134,13 @@ function pj_inout_frm_chk(){
 		alert('프로젝트를 선택하여 주십시요!');
 		form.pj_list.focus();
 		return;
-	}	
+	}
 	inout_frm_chk();
 }
 
 
-// 대체시 체크 
-function transfer(frm1,frm2,frm3){	 
+// 대체시 체크
+function transfer(frm1,frm2,frm3){
 	if(frm1.value==3) frm3.value=frm2.value;
 }
 
@@ -1153,7 +1155,7 @@ function cate_chk(ref,name) {
 function charge(no,obj){
 	var form=document.inout_frm;
 	var nobj = obj.split("-");
-	
+
 	if(no==1){	if(nobj[0]==1||!obj){	form.char1_1.disabled=1;	}else{	form.char1_1.disabled=0;	}	}
 	if(no==2){	if(nobj[0]==1||!obj){	form.char1_2.disabled=1;	}else{	form.char1_2.disabled=0;	}	}
 	if(no==3){	if(nobj[0]==1||!obj){	form.char1_3.disabled=1;	}else{	form.char1_3.disabled=0;	}	}
