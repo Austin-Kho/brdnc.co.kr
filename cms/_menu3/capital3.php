@@ -127,7 +127,7 @@
 										</select>
 									</td>
 									<td class="bottom" id="out_td_1" style="display:none;">
-										<select name="account_1" id="out_account_1" style="width:70px;" disabled>
+										<select name="account_1" id="out_account_1" style="width:60px;" disabled>
 										<?
 											$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_seq='2' AND is_sp_acc <>'1' ORDER BY seq ASC";
 											$acc_rlt = mysql_query($acc_qry, $connect);
@@ -234,7 +234,7 @@
 										</select>
 									</td>
 									<td class="bottom" id="out_td_2" style="display:none;">
-										<select name="account_2" id="out_account_2" style="width:70px;" disabled>
+										<select name="account_2" id="out_account_2" style="width:60px;" disabled>
 										<?
 											$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_seq='2' AND is_sp_acc <>'1' ORDER BY seq ASC";
 											$acc_rlt = mysql_query($acc_qry, $connect);
@@ -341,7 +341,7 @@
 										</select>
 									</td>
 									<td class="bottom" id="out_td_3" style="display:none;">
-										<select name="account_3" id="out_account_3" style="width:70px;" disabled>
+										<select name="account_3" id="out_account_3" style="width:60px;" disabled>
 										<?
 											$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_seq='2' AND is_sp_acc <>'1' ORDER BY seq ASC";
 											$acc_rlt = mysql_query($acc_qry, $connect);
@@ -449,7 +449,7 @@
 										</select>
 									</td>
 									<td class="bottom" id="out_td_4" style="display:none;">
-										<select name="account_4" id="out_account_4" style="width:70px;" disabled>
+										<select name="account_4" id="out_account_4" style="width:60px;" disabled>
 										<?
 											$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_seq='2' AND is_sp_acc <>'1' ORDER BY seq ASC";
 											$acc_rlt = mysql_query($acc_qry, $connect);
@@ -556,7 +556,7 @@
 										</select>
 									</td>
 									<td class="bottom" id="out_td_5" style="display:none;">
-										<select name="account_5" id="out_account_5" style="width:70px;" disabled>
+										<select name="account_5" id="out_account_5" style="width:60px;" disabled>
 										<?
 											$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_seq='2' AND is_sp_acc <>'1' ORDER BY seq ASC";
 											$acc_rlt = mysql_query($acc_qry, $connect);
@@ -663,7 +663,7 @@
 										</select>
 									</td>
 									<td class="bottom" id="out_td_6" style="display:none;">
-										<select name="account_6" id="out_account_6" style="width:70px;" disabled>
+										<select name="account_6" id="out_account_6" style="width:60px;" disabled>
 										<?
 											$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_seq='2' AND is_sp_acc <>'1' ORDER BY seq ASC";
 											$acc_rlt = mysql_query($acc_qry, $connect);
@@ -770,7 +770,7 @@
 										</select>
 									</td>
 									<td class="bottom" id="out_td_7" style="display:none;">
-										<select name="account_7" id="out_account_7" style="width:70px;" disabled>
+										<select name="account_7" id="out_account_7" style="width:60px;" disabled>
 										<?
 											$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_seq='2' AND is_sp_acc <>'1' ORDER BY seq ASC";
 											$acc_rlt = mysql_query($acc_qry, $connect);
@@ -877,7 +877,7 @@
 										</select>
 									</td>
 									<td class="bottom" id="out_td_8" style="display:none;">
-										<select name="account_8" id="out_account_8" style="width:70px;" disabled>
+										<select name="account_8" id="out_account_8" style="width:60px;" disabled>
 										<?
 											$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_seq='2' AND is_sp_acc <>'1' ORDER BY seq ASC";
 											$acc_rlt = mysql_query($acc_qry, $connect);
@@ -984,7 +984,7 @@
 										</select>
 									</td>
 									<td class="bottom" id="out_td_9" style="display:none;">
-										<select name="account_9" id="out_account_9" style="width:70px;" disabled>
+										<select name="account_9" id="out_account_9" style="width:60px;" disabled>
 										<?
 											$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_seq='2' AND is_sp_acc <>'1' ORDER BY seq ASC";
 											$acc_rlt = mysql_query($acc_qry, $connect);
@@ -1091,7 +1091,7 @@
 										</select>
 									</td>
 									<td class="bottom" id="out_td_10" style="display:none;">
-										<select name="account_10" id="out_account_10" style="width:70px;" disabled>
+										<select name="account_10" id="out_account_10" style="width:60px;" disabled>
 										<?
 											$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_seq='2' AND is_sp_acc <>'1' ORDER BY seq ASC";
 											$acc_rlt = mysql_query($acc_qry, $connect);
