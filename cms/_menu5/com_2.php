@@ -290,8 +290,8 @@
 								<input type="checkbox" name="_m3_2_2_m" <?if($asr[_m3_2_2]>1) echo "checked";?>>등록</td>
 								<td class="bottom" align="right"><font color="black">제무제표</font></td>
 							<td class="bottom">
-								<input type="checkbox" name="_m3_2_2" <?if($asr[_m3_2_3]>0) echo "checked";?>>조회
-								<input type="checkbox" name="_m3_2_2_m" <?if($asr[_m3_2_3]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m3_2_3" <?if($asr[_m3_2_3]>0) echo "checked";?>>조회
+								<input type="checkbox" name="_m3_2_3_m" <?if($asr[_m3_2_3]>1) echo "checked";?>>등록</td>
 							<td class="bottom"></td>
 							<td class="bottom"></td>
 						</tr>
