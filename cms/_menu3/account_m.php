@@ -52,11 +52,14 @@
 				</div>
 				<form name="form1" action="<?=$_SERVER['PHP_SELF']?>">
 				<div style="float:left; height:28px; text-align:center; padding:7px 0 0 10px; ;">
-					수익비용 :
+					계정과목 :
 					<select name="acc_d1" class="inputstyle2" style="width:80px; height:22px;" onChange = "acc_d1_sub();">
 						<option value="" <?if(!$acc_d1) echo "selected";?>> 전 체
-						<option value="1" <?if($acc_d1=='1') echo " selected";?>> 수 익
-						<option value="2" <?if($acc_d1=='2') echo "selected";?>> 비 용
+						<option value="1" <?if($acc_d1=='1') echo " selected";?>> 자 산
+						<option value="2" <?if($acc_d1=='2') echo "selected";?>> 부 채
+						<option value="3" <?if($acc_d1=='3') echo "selected";?>> 자 본
+						<option value="4" <?if($acc_d1=='4') echo "selected";?>> 수 익
+						<option value="5" <?if($acc_d1=='5') echo "selected";?>> 비 용
 					</select>
 				</div>
 				<div style="float:left; height:28px; text-align:center; padding:7px 0 0 10px;">
