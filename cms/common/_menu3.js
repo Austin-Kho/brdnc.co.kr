@@ -140,17 +140,17 @@ function inoutSel(no, pj){
 	var out_id = document.getElementById(out);
 	var exp_id = document.getElementById(exp);
 
-	if(class1_id.value==1){//2번째 셀렉트바 정의
-		class2_id.length=4;
-		class2_id.options[0].text = '수 익';
-		class2_id.options[0].value = '1';
+	if(class1_id.value==1){   //2번째 셀렉트바 정의
+		class2_id.length=4;    //2번째 셀렉트바 정의
+		class2_id.options[0].text = '수 익';//2번째 셀렉트바 정의 
+		class2_id.options[0].value = '1';//2번째 셀렉트바 정의
 		//class2_id.options[0].selected =1;
-		class2_id.options[1].text = '차 입';
-		class2_id.options[1].value = '2';
-		class2_id.options[2].text = '회 수';
-		class2_id.options[2].value = '3';
-		class2_id.options[3].text = '출 자';
-		class2_id.options[3].value = '4';
+		class2_id.options[1].text = '차 입';//2번째 셀렉트바 정의
+		class2_id.options[1].value = '2';//2번째 셀렉트바 정의
+		class2_id.options[2].text = '회 수';//2번째 셀렉트바 정의
+		class2_id.options[2].value = '3';//2번째 셀렉트바 정의
+		class2_id.options[3].text = '출 자';//2번째 셀렉트바 정의
+		class2_id.options[3].value = '4';//2번째 셀렉트바 정의
 
 		inc_td_id.style.display='';   //입금처 활성화
 		out_td_id.style.display='none'; // 출금처 비활성화
@@ -245,9 +245,10 @@ function inoutSel(no, pj){
 		exp_id.disabled=0; // 출금금액
 	}
 }
+
 // 구분목록 상자선택2 (capital3.php)
 function inoutSel2(no){
-	var class1_str = "class1_";  //개략계정
+	var class1_str = "class1_";  //대분류 계정
 	var class1 = class1_str+no;
 	var class2_str = "class2_";  //세부계정
 	var class2 = class2_str+no;
@@ -255,14 +256,29 @@ function inoutSel2(no){
 	var pj_seq = pj_seq_str+no;
 	var jh_loan_str = "jh_loan_"; // 조합대여 여부
 	var jh_loan = jh_loan_str+no;
-	var inc_td_str = "inc_td_"; // 수익계정
-	var inc_td = inc_td_str+no;
-	var out_td_str = "out_td_"; // 비용계정
-	var out_td = out_td_str+no;
-	var inc_account_str = "inc_account_"; // 수익 계정과목
-	var inc_account = inc_account_str+no;
-	var out_account_str = "out_account_"; // 비용 계정과목
-	var out_account = out_account_str+no;
+
+	var d1_1_str = "d1_1_";   // 자산계정 td
+	var d1_1 = d1_1_str+no;
+	var d1_2_str = "d1_2_";   // 부채계정 td
+	var d1_2 = d1_2_str+no;
+	var d1_3_str = "d1_3_";   // 자본계정 td
+	var d1_3 = d1_3_str+no;
+	var d1_4_str = "d1_4_";   // 수익계정 td
+	var d1_4 = d1_4_str+no;
+	var d1_5_str = "d1_5_";   // 비용계정 td
+	var d1_5 = d1_5_str+no;
+
+	var d1_acc1_str = "d1_acc1_";   // 자산 계정과목
+	var d1_acc1 = d1_acc1_str+no;
+	var d1_acc2_str = "d1_acc2_";   // 부채 계정과목
+	var d1_acc2 = d1_acc2_str+no;
+	var d1_acc3_str = "d1_acc3_";   // 자본 계정과목
+	var d1_acc3 = d1_acc3_str+no;
+	var d1_acc4_str = "d1_acc4_";   // 수익 계정과목
+	var d1_acc4 = d1_acc4_str+no;
+	var d1_acc5_str = "d1_acc5_";   // 비용 계정과목
+	var d1_acc5 = d1_acc5_str+no;
+
 	var in_str = "in_"; // 입금처
 	var iin = in_str+no;
 	var inc_str = "inc_"; // 입금액
@@ -276,56 +292,129 @@ function inoutSel2(no){
 	var class2_id = document.getElementById(class2);
 	var pj_seq_id = document.getElementById(pj_seq);
 	var jh_loan_id = document.getElementById(jh_loan);
-	var inc_td_id = document.getElementById(inc_td);
-	var out_td_id = document.getElementById(out_td);
-	var inc_account_id = document.getElementById(inc_account);
-	var out_account_id = document.getElementById(out_account);
-	var in_id = document.getElementById(iin);
-	var inc_id = document.getElementById(inc);
-	var out_id = document.getElementById(out);
-	var exp_id = document.getElementById(exp);
+	var d1_1_id = document.getElementById(d1_1); ////////////계정과목
+	var d1_2_id = document.getElementById(d1_2);           //
+	var d1_3_id = document.getElementById(d1_3);           //
+	var d1_4_id = document.getElementById(d1_4);           //
+	var d1_5_id = document.getElementById(d1_5);           //
+	var d1_acc1_id = document.getElementById(d1_acc1);/////// 계정과목
+	var d1_acc2_id = document.getElementById(d1_acc2);     //
+	var d1_acc3_id = document.getElementById(d1_acc3);     //
+	var d1_acc4_id = document.getElementById(d1_acc4);     //
+	var d1_acc5_id = document.getElementById(d1_acc5);///////
+	var in_id = document.getElementById(iin); // 입금처
+	var inc_id = document.getElementById(inc); // 입금액
+	var out_id = document.getElementById(out); // 출금처
+	var exp_id = document.getElementById(exp); // 출금액
 
 
 	if(class2_id.value==0) {class1_id.options[0].selected=1;}
 	if(class2_id.value>0&&class2_id.value<=4) { // 입금 항목들을 선택하면
 		class1_id.options[1].selected=1; // 입금 선택
-		in_id.disabled=0; // 입금계정 열고
-		inc_id.disabled=0; // 입금금액 열고
-		out_id.disabled=1; // 출금계정 닫고
-		exp_id.disabled=1; // 출금금액 닫고
+		in_id.disabled=0; // 입금처 열고
+		inc_id.disabled=0; // 입금액 열고
+		out_id.disabled=1; // 출금처 닫고
+		exp_id.disabled=1; // 출금액 닫고
 	}
 	if(class2_id.value>4&&class2_id.value<=8) { // 출금관련 항목들을 선택하면
 		class1_id.options[2].selected=1; // 출금 선택
-		in_id.disabled=1; // 입금계정 닫고
-		inc_id.disabled=1; // 입금금액 닫고
-		out_id.disabled=0; // 출금계정 열고
-		exp_id.disabled=0; // 출금금액 열고
+		in_id.disabled=1; // 입금처 닫고
+		inc_id.disabled=1; // 입금액 닫고
+		out_id.disabled=0; // 출금처 열고
+		exp_id.disabled=0; // 출금액 열고
 	}
 	if(class2_id.value>8){ // 대체항목들을 선택하면
 		class1_id.options[3].selected=1; // 대체 선택
-		in_id.disabled=0; // 입금계정 열고
-		inc_id.disabled=0; // 입금금액 열고
-		out_id.disabled=0; // 출금계정 열고
-		exp_id.disabled=0; // 출금금액 열고
+		in_id.disabled=0; // 입금처 열고
+		inc_id.disabled=0; // 입금액 열고
+		out_id.disabled=0; // 출금처 열고
+		exp_id.disabled=0; // 출금액 열고
 	}
 
 	if(class2_id.value==1){ // 수익 선택하면
-		inc_td_id.style.display=''; // 수입계정과목 보이고
-		out_td_id.style.display='none'; // 지출계정과목 안보이고
-		inc_account_id.disabled=false; // 입금처 열고
-		out_account_id.disabled=true; // 출금처 닫고
+		d1_1_id.style.display='none'; 
+	    d1_2_id.style.display='none'; 
+	    d1_3_id.style.display='none'; 
+	    d1_4_id.style.display='';     // 수익계정과목 보이기
+	    d1_5_id.style.display='none';
+
+	    d1_acc1_id.style.disabled=1; 
+	    d1_acc2_id.style.disabled=1; 
+	    d1_acc3_id.style.disabled=1; 
+	    d1_acc4_id.style.disabled=0; // 수익계정과목 보이기
+	    d1_acc5_id.style.disabled=1; 
+
+	}else if(class2_id.value==2||class2_id.value==6){ // 차입이나 상환 선택하면
+		d1_1_id.style.display='none';
+	    d1_2_id.style.display='';     // 부채계정과목 보이고
+	    d1_3_id.style.display='none'; 
+	    d1_4_id.style.display='none'; 
+	    d1_5_id.style.display='none';
+
+	    d1_acc1_id.style.disabled=1; 
+	    d1_acc2_id.style.disabled=0;  // 부채계정과목 보이고
+	    d1_acc3_id.style.disabled=1;
+	    d1_acc4_id.style.disabled=1; 
+	    d1_acc5_id.style.disabled=1; 
+
+	}else if(class2_id.value==3||class2_id.value==7){ // 대여 또는 회수 선택하면
+		d1_1_id.style.display=''; // 자산계정과목 보이고
+	    d1_2_id.style.display='none'; 
+	    d1_3_id.style.display='none'; 
+	    d1_4_id.style.display='none';
+	    d1_5_id.style.display='none';
+
+	    d1_acc1_id.style.disabled=0;  // 자산계정과목 보이고
+	    d1_acc2_id.style.disabled=1; 
+	    d1_acc3_id.style.disabled=1;
+	    d1_acc4_id.style.disabled=1; 
+	    d1_acc5_id.style.disabled=1;
+
+	}else if(class2_id.value==4||class2_id.value==8){ //출자나 배당 선택하면
+		d1_1_id.style.display='none';
+	    d1_2_id.style.display='none'; 
+	    d1_3_id.style.display='';    // 자본계정과목 보이고
+	    d1_4_id.style.display='none'; 
+	    d1_5_id.style.display='none';
+
+	    d1_acc1_id.style.disabled=1; 
+	    d1_acc2_id.style.disabled=1; 
+	    d1_acc3_id.style.disabled=0; // 자본계정과목 보이고
+	    d1_acc4_id.style.disabled=1; 
+	    d1_acc5_id.style.disabled=1;
+
 	}else if(class2_id.value==5){ // 비용 선택하면
-		inc_td_id.style.display='none'; // 입금계정과목 안보이고
-		out_td_id.style.display=''; // 출금 계정과목 보이고
-		inc_account_id.disabled=true; // 입금처 닫고
-		out_account_id.disabled=false; // 출금처 열고
-	}else{
-		inc_td_id.style.display=''; // 입금계정과목 보이고
-		out_td_id.style.display='none'; // 출금계정과목 안보이고
-		inc_account_id.disabled=true; // 입금처 닫고
-		out_account_id.disabled=true; // 출금처 닫고
+		d1_1_id.style.display='none';
+	    d1_2_id.style.display='none'; 
+	    d1_3_id.style.display='none'; 
+	    d1_4_id.style.display='none'; 
+	    d1_5_id.style.display=''; // 비용계정과목 보이고
+
+	    d1_acc1_id.style.disabled=1; 
+	    d1_acc2_id.style.disabled=1; 
+	    d1_acc3_id.style.disabled=1;
+	    d1_acc4_id.style.disabled=1; 
+	    d1_acc5_id.style.disabled=0; // 비용계정과목 보이고
+
+	}else{ // 본사나 현장 대체일 경우에는 계정과목을 입력하지 않는다
+		d1_1_id.style.display='';
+	    d1_2_id.style.display='none'; 
+	    d1_3_id.style.display='none'; 
+	    d1_4_id.style.display='none'; 
+	    d1_5_id.style.display='none';
+
+	    d1_acc1_id.style.disabled=1; 
+	    d1_acc2_id.style.disabled=1; 
+	    d1_acc3_id.style.disabled=1;
+	    d1_acc4_id.style.disabled=1; 
+	    d1_acc5_id.style.disabled=1;
 	}
-	if(class2_id.value==7) jh_loan_id.disabled=0; else jh_loan_id.disabled=1;// 대여 선택 시 조합대여금 체크박스 열기
+	if(class2_id.value==3||class2_id.value==7){ 
+		jh_loan_id.disabled=0; 
+	}else{ 
+		jh_loan_id.disabled=1;// 대여 선택 시 조합대여금 체크박스 열기
+		jh_loan_id.checked=0;
+	}
 	if(class2_id.value==10)	pj_seq_id.disabled=false; else 	pj_seq_id.disabled=true; // 현장 대체 선택 시 현장 선택 열기
 }
 

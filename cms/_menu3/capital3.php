@@ -114,8 +114,44 @@
 									<td class="bottom">조합:<input type="checkbox" value="1" name="jh_loan_1" id="jh_loan_1" onClick="jh_chk(1);" disabled></td>
 
 									<!-- 회계계정 _1 -->
-									<td class="bottom" id="inc_td_1">
-										<select name="account_1" id="inc_account_1" style="width:60px;" disabled>
+									<td class="bottom" id="d1_1_1">
+										<select name="account_1" id="d1_acc1_1" style="width:60px;" disabled>
+										<?
+											$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
+											$acc_rlt = mysql_query($acc_qry, $connect);
+										?>
+											<option value="" selected> 선 택
+											<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+											<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
+											<?}?>
+										</select>
+									</td>
+									<td class="bottom" id="d1_2_1" style="display:none;">
+										<select name="account_1" id="d1_acc2_1" style="width:60px;" disabled>
+										<?
+											$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
+											$acc_rlt = mysql_query($acc_qry, $connect);
+										?>
+											<option value="" selected> 선 택
+											<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+											<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
+											<?}?>
+										</select>
+									</td>
+									<td class="bottom" id="d1_3_1" style="display:none;">
+										<select name="account_1" id="d1_acc3_1" style="width:60px;" disabled>
+										<?
+											$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
+											$acc_rlt = mysql_query($acc_qry, $connect);
+										?>
+											<option value="" selected> 선 택
+											<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+											<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
+											<?}?>
+										</select>
+									</td>
+									<td class="bottom" id="d1_4_1" style="display:none;">
+										<select name="account_1" id="d1_acc4_1" style="width:60px;" disabled>
 										<?
 											$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
 											$acc_rlt = mysql_query($acc_qry, $connect);
@@ -126,8 +162,8 @@
 											<?}?>
 										</select>
 									</td>
-									<td class="bottom" id="out_td_1" style="display:none;">
-										<select name="account_1" id="out_account_1" style="width:60px;" disabled>
+									<td class="bottom" id="d1_5_1" style="display:none;">
+										<select name="account_1" id="d1_acc5_1" style="width:60px;" disabled>
 										<?
 											$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
 											$acc_rlt = mysql_query($acc_qry, $connect);
