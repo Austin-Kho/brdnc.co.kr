@@ -20,6 +20,12 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
+		echo "<meta http-equiv='Refresh' content='0; URL=/cms/cms.php'>";
+	}
+
+
+	public function past_index()
+	{
 		$this->load->view('welcome_message');
 	}
 }
