@@ -33,20 +33,24 @@
 		function show_hide(id){
 			var obj = eval("document.getElementById('"+id+"')");
 			if(obj.style.display=='none') {
-				obj.style.display = ''; 
+				obj.style.display = '';
 			}else{
 				obj.style.display = 'none';
 			}
 		}
 
 		function d2_show(acc){
-
 			var val = acc.value;
-			var obj = eval("document.getElementById('"+val+"')");
-			obj.style.display = '';
+			var d1_val = val.substr(0,1);
+			var d1_obj = eval("document.getElementById('acc"+(eval(d1_val)+1)+"')");
+			var d2_obj = eval("document.getElementById('"+val+"')");
+
+			for(i=1; i>=5; i++){
+				eval("document.getElementById('acc"+i+"')").style.display="none";
+			}
+			d1_obj.style.display="";
+			d2_obj.style.display="";
 		}
-
-
 	//-->
 	</script>
 </head>
@@ -70,11 +74,7 @@
 				</div>
 				<form name="form1">
 				<div style="float:left; height:28px; text-align:center; padding:7px 0 0 10px; ;">
-<<<<<<< HEAD
-					계정과목 :
-=======
 					계정과목 [대분류] :
->>>>>>> bf6bc7319d9548632ac058d47d0fdb04c72f0f70
 					<select name="acc_d1" class="inputstyle2" style="width:80px; height:22px;" onChange = "acc_d1_sub();">
 						<option value="" <?if(!$acc_d1) echo "selected";?>> 전 체
 						<option value="1" <?if($acc_d1=='1') echo " selected";?>> 자 산
@@ -84,7 +84,7 @@
 						<option value="5" <?if($acc_d1=='5') echo "selected";?>> 비 용
 					</select>
 				</div>
-				<div style="float:left; height:28px; text-align:center; padding:7px 0 0 10px;">
+				<div style="float:left; height:28px; text-align:center; padding:7px 0 0 10px; display:none;">
 					계정과목 [중분류] :
 					<select name="acc_d2" class="inputstyle2" style="width:150px; height:22px;" onChange = "d2_show(this);">
 					<?
@@ -102,7 +102,7 @@
 						<?}?>
 					</select>
 				</div>
-				<div style="float:left; height:28px; text-align:center; padding:7px 0 0 10px;"> 
+				<div style="float:left; height:28px; text-align:center; padding:7px 0 0 10px;">
 					희귀 계정과목 표시 <input type="checkbox" name="is_sp" value="1" <?if($is_sp) echo "checked";?> onClick="submit();">
 				</div>
 
@@ -119,18 +119,17 @@
 							$show_hide = "show_hide('".$rows[d2_code]."')";
 					?>
 					<div style="clear:left; height:30px; background-color:#f9faf5; border-width: 0 0 1px 0; border-color:#CFCFCF; border-style: solid;">
-						<div style="float:left; padding:6px 0 0 20px; cursor:pointer;" onClick=<?=$show_hide?>><?=$rows[d2_acc_name]?></div>
+						<div style="float:left; padding:6px 0 0 20px; cursor:pointer;" onClick="<?=$show_hide?>"><?=$rows[d2_acc_name]?></div>
 					</div>
 					<div id="<?=$rows[d2_code]?>">
 					<?
-							$add_w = " WHERE d2_code = '$rows[d2_code]' ";
+							$add_w = " WHERE d1_code = '1' AND d2_code = '$rows[d2_code]' ";
 							if($is_sp==0) $add_w .= " AND is_sp_acc='0' "; else $add_w .= "";
 							$d3_qry = " SELECT d3_code, d3_acc_name, note FROM cms_capital_account_d3 $add_w ORDER BY d3_code ASC";
 							$d3_rlt = mysql_query($d3_qry, $connect);
-
-							while($d3_rows = mysql_fetch_array($d3_rlt)){ // d3 계정 나열 시작									
+							while($d3_rows = mysql_fetch_array($d3_rlt)){ // d3 계정 나열 시작
 					?>
-					
+
 						<div style="height:30px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
 							<div style="float:left; padding:6px 0 0 30px; <?if($d3_rows[is_sp_acc]==0)echo "color:#003366;"; else echo "color:#a8a8a8;";?> width:120px; cursor:pointer;"  title="<?=$d3_rows[note]?>"><?=$d3_rows[d3_acc_name]?></div>
 							<div style="float:left; padding:6px 0 0 15px; color:#737373; cursor:pointer;" title="<?=$d3_rows[note]?>"><?=rg_cut_string($d3_rows[note],40,"...")?></div>
@@ -141,6 +140,7 @@
 					</div>
 					<?
 						}//d2 계정 나열 종료
+						mysql_free_result($d3_rlt);
 					?>
 				</div>
 
@@ -157,18 +157,16 @@
 							$show_hide = "show_hide('".$rows[d2_code]."')";
 					?>
 					<div style="clear:left; height:30px; background-color:#f9faf5; border-width: 0 0 1px 0; border-color:#CFCFCF; border-style: solid;">
-						<div style="float:left; padding:6px 0 0 20px; cursor:pointer;" onClick=<?=$show_hide?>><?=$rows[d2_acc_name]?></div>
+						<div style="float:left; padding:6px 0 0 20px; cursor:pointer;" onClick="<?=$show_hide?>"><?=$rows[d2_acc_name]?></div>
 					</div>
 					<div id="<?=$rows[d2_code]?>">
 					<?
-							$add_w = " WHERE d2_code = '$rows[d2_code]' ";
+							$add_w = " WHERE d1_code = '2' AND d2_code = '$rows[d2_code]' ";
 							if($is_sp==0) $add_w .= " AND is_sp_acc='0' "; else $add_w .= "";
 							$d3_qry = " SELECT d3_code, d3_acc_name, note FROM cms_capital_account_d3 $add_w ORDER BY d3_code ASC";
 							$d3_rlt = mysql_query($d3_qry, $connect);
-
-							while($d3_rows = mysql_fetch_array($d3_rlt)){ // d3 계정 나열 시작									
+							while($d3_rows = mysql_fetch_array($d3_rlt)){ // d3 계정 나열 시작
 					?>
-					
 						<div style="height:30px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
 							<div style="float:left; padding:6px 0 0 30px; <?if($d3_rows[is_sp_acc]==0)echo "color:#003366;"; else echo "color:#a8a8a8;";?> width:120px; cursor:pointer;"  title="<?=$d3_rows[note]?>"><?=$d3_rows[d3_acc_name]?></div>
 							<div style="float:left; padding:6px 0 0 15px; color:#737373; cursor:pointer;" title="<?=$d3_rows[note]?>"><?=rg_cut_string($d3_rows[note],40,"...")?></div>
@@ -179,6 +177,7 @@
 					</div>
 					<?
 						}//d2 계정 나열 종료
+						mysql_free_result($d3_rlt);
 					?>
 				</div>
 
@@ -195,18 +194,18 @@
 							$show_hide = "show_hide('".$rows[d2_code]."')";
 					?>
 					<div style="clear:left; height:30px; background-color:#f9faf5; border-width: 0 0 1px 0; border-color:#CFCFCF; border-style: solid;">
-						<div style="float:left; padding:6px 0 0 20px; cursor:pointer;" onClick=<?=$show_hide?>><?=$rows[d2_acc_name]?></div>
+						<div style="float:left; padding:6px 0 0 20px; cursor:pointer;" onClick="<?=$show_hide?>"><?=$rows[d2_acc_name]?></div>
 					</div>
 					<div id="<?=$rows[d2_code]?>">
 					<?
-							$add_w = " WHERE d2_code = '$rows[d2_code]' ";
+							$add_w = " WHERE d1_code = '3' AND d2_code = '$rows[d2_code]' ";
 							if($is_sp==0) $add_w .= " AND is_sp_acc='0' "; else $add_w .= "";
 							$d3_qry = " SELECT d3_code, d3_acc_name, note FROM cms_capital_account_d3 $add_w ORDER BY d3_code ASC";
 							$d3_rlt = mysql_query($d3_qry, $connect);
 
-							while($d3_rows = mysql_fetch_array($d3_rlt)){ // d3 계정 나열 시작									
+							while($d3_rows = mysql_fetch_array($d3_rlt)){ // d3 계정 나열 시작
 					?>
-					
+
 						<div style="height:30px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
 							<div style="float:left; padding:6px 0 0 30px; <?if($d3_rows[is_sp_acc]==0)echo "color:#003366;"; else echo "color:#a8a8a8;";?> width:120px; cursor:pointer;"  title="<?=$d3_rows[note]?>"><?=$d3_rows[d3_acc_name]?></div>
 							<div style="float:left; padding:6px 0 0 15px; color:#737373; cursor:pointer;" title="<?=$d3_rows[note]?>"><?=rg_cut_string($d3_rows[note],40,"...")?></div>
@@ -217,6 +216,7 @@
 					</div>
 					<?
 						}//d2 계정 나열 종료
+						mysql_free_result($d3_rlt);
 					?>
 				</div>
 
@@ -233,18 +233,18 @@
 							$show_hide = "show_hide('".$rows[d2_code]."')";
 					?>
 					<div style="clear:left; height:30px; background-color:#f9faf5; border-width: 0 0 1px 0; border-color:#CFCFCF; border-style: solid;">
-						<div style="float:left; padding:6px 0 0 20px; cursor:pointer;" onClick=<?=$show_hide?>><?=$rows[d2_acc_name]?></div>
+						<div style="float:left; padding:6px 0 0 20px; cursor:pointer;" onClick="<?=$show_hide?>"><?=$rows[d2_acc_name]?></div>
 					</div>
 					<div id="<?=$rows[d2_code]?>">
 					<?
-							$add_w = " WHERE d2_code = '$rows[d2_code]' ";
+							$add_w = " WHERE d1_code = '4' AND d2_code = '$rows[d2_code]' ";
 							if($is_sp==0) $add_w .= " AND is_sp_acc='0' "; else $add_w .= "";
 							$d3_qry = " SELECT d3_code, d3_acc_name, note FROM cms_capital_account_d3 $add_w ORDER BY d3_code ASC";
 							$d3_rlt = mysql_query($d3_qry, $connect);
 
-							while($d3_rows = mysql_fetch_array($d3_rlt)){ // d3 계정 나열 시작								
+							while($d3_rows = mysql_fetch_array($d3_rlt)){ // d3 계정 나열 시작
 					?>
-					
+
 						<div style="height:30px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
 							<div style="float:left; padding:6px 0 0 30px; <?if($d3_rows[is_sp_acc]==0)echo "color:#003366;"; else echo "color:#a8a8a8;";?> width:120px; cursor:pointer;"  title="<?=$d3_rows[note]?>"><?=$d3_rows[d3_acc_name]?></div>
 							<div style="float:left; padding:6px 0 0 15px; color:#737373; cursor:pointer;" title="<?=$d3_rows[note]?>"><?=rg_cut_string($d3_rows[note],40,"...")?></div>
@@ -255,6 +255,7 @@
 					</div>
 					<?
 						}//d2 계정 나열 종료
+						mysql_free_result($d3_rlt);
 					?>
 				</div>
 
@@ -271,17 +272,17 @@
 							$show_hide = "show_hide('".$rows[d2_code]."')";
 					?>
 					<div style="clear:left; height:30px; background-color:#f9faf5; border-width: 0 0 1px 0; border-color:#CFCFCF; border-style: solid;">
-						<div style="float:left; padding:6px 0 0 20px; cursor:pointer;" onClick=<?=$show_hide?>><?=$rows[d2_acc_name]?></div>
+						<div style="float:left; padding:6px 0 0 20px; cursor:pointer;" onClick="<?=$show_hide?>"><?=$rows[d2_acc_name]?></div>
 					</div>
 					<div id="<?=$rows[d2_code]?>">
 					<?
-							$add_w = " WHERE d2_code = '$rows[d2_code]' ";
+							$add_w = " WHERE d1_code = '5' AND d2_code = '$rows[d2_code]' ";
 							if($is_sp==0) $add_w .= " AND is_sp_acc='0' "; else $add_w .= "";
 							$d3_qry = " SELECT d3_code, d3_acc_name, note FROM cms_capital_account_d3 $add_w ORDER BY d3_code ASC";
 							$d3_rlt = mysql_query($d3_qry, $connect);
 
-							while($d3_rows = mysql_fetch_array($d3_rlt)){ // d3 계정 나열 시작									
-					?>					
+							while($d3_rows = mysql_fetch_array($d3_rlt)){ // d3 계정 나열 시작
+					?>
 						<div style="height:30px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
 							<div style="float:left; padding:6px 0 0 30px; <?if($d3_rows[is_sp_acc]==0)echo "color:#003366;"; else echo "color:#a8a8a8;";?> width:120px; cursor:pointer;"  title="<?=$d3_rows[note]?>"><?=$d3_rows[d3_acc_name]?></div>
 							<div style="float:left; padding:6px 0 0 15px; color:#737373; cursor:pointer;" title="<?=$d3_rows[note]?>"><?=rg_cut_string($d3_rows[note],40,"...")?></div>
@@ -292,6 +293,7 @@
 					</div>
 					<?
 						}//d2 계정 나열 종료
+						mysql_free_result($d3_rlt);
 					?>
 				</div>
 				</form>
