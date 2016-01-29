@@ -140,7 +140,7 @@ function inoutSel(no, pj){
 	var out_id = document.getElementById(out);
 	var exp_id = document.getElementById(exp);
 
-	if(class1_id.value==1){
+	if(class1_id.value==1){//2번째 셀렉트바 정의
 		class2_id.length=4;
 		class2_id.options[0].text = '수 익';
 		class2_id.options[0].value = '1';
@@ -152,8 +152,8 @@ function inoutSel(no, pj){
 		class2_id.options[3].text = '출 자';
 		class2_id.options[3].value = '4';
 
-		inc_td_id.style.display='';
-		out_td_id.style.display='none';
+		inc_td_id.style.display='';   //입금처 활성화
+		out_td_id.style.display='none'; // 출금처 비활성화
 		inc_account_id.disabled=false;
 		out_account_id.disabled=true;
 		in_id.disabled=false;
