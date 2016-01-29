@@ -29,3 +29,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 cms/php/auth.php
 cms/php/config.php
 cms/setup/config_set.php
+sftp-config.json
