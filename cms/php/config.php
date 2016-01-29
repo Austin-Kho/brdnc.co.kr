@@ -5,7 +5,7 @@ $dbid="brdnc";     /// 셋업 파일에서 설정할 수 있도록 수정 요망
 $dbpass="qkfoa5928";     /// 셋업 파일에서 설정해서 넘어올 수 있도록 수정 요망
 $dbname="brdnc";    /// 셋업 파일에서 설정해서 넘어올 수 있도록 수정 요망
 $com_title="[주] 바램디앤씨";
-$doc_title="(주)바램디앤씨 _ 관리시스템";
+$doc_title="[주]바램디앤씨 _ 관리시스템";
 $doc_charset="UTF-8";
 $doc_copyright="
 			<b>[주] 바램디앤씨</b> | 인천광역시 연수구 인천타워대로323 B-1506(송도동, 송도센트로드오피스) 대표이사 고창균 | 전화 : 032-858-9556 | 문의하기 : <a href='mailto:cigiko@naver.com' class='under'>cigiko@naver.com</a><br>
