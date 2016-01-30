@@ -146,7 +146,7 @@
 						<!-- <input type="text" name="deal_date" id="deal_date" value="<?=$rows[deal_date]?>" class="inputstyle2" size="31" onclick="openCalendar(this)" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"> <a href="javascript:" onclick="openCalendar(document.getElementById('deal_date'));"><img src="../images/calendar.jpg" border="0" alt="" /></a> -->
 
 						<input type="text" name="deal_date" id="deal_date" value="<?=$rows[deal_date]?>" size="25" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
-						<a href="javascript:" onclick="cal_add(document.getElementById('deal_date'),this); event.cancelBubble=true"> <img src="http://cigiko.cafe24.com/cms/images/calendar.jpg" border="0" alt="" /></a>
+						<a href="javascript:" onclick="cal_add(document.getElementById('deal_date'),this); event.cancelBubble=true"> <img src="http://cigiko.cafe24.com/cms/images/calendar.jpg" border="0" alt="" /></a> <?=$rows[class1]."-".$rows[class2]?>
 					</div>
 				</div>
 				<div style="height:32px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
@@ -193,7 +193,7 @@
 
 
 						<!-- 자산 계정 목록 시작--> <!-- 대여/회수 -->
-						<select name="account" id="d1_1" style="width:105px; <?if($rows[class2]!=3||$rows[class2]!=7) echo 'display:none; disabled;';?>">
+						<select name="account_1" id="d1_1" style="width:105px; <?if($rows[class2]!=3&&$rows[class2]!=7) echo 'display:none; disabled;';?>" onChange="alert(self);">
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc !='1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
@@ -205,7 +205,7 @@
 						</select>
 						<!-- 자산 계정 목록 종료-->
 						<!-- 부채 계정 목록 시작--> <!-- 차입/상환 -->
-						<select name="account" id="d1_2" style="width:105px; <?if($rows[class2]!=2||$rows[class2]!=6) echo 'display:none; disabled;';?>">
+						<select name="account_2" id="d1_2" style="width:105px; <?if($rows[class2]!=2&&$rows[class2]!=6) echo 'display:none; disabled;';?>">
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc !='1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
@@ -217,7 +217,7 @@
 						</select>
 						<!-- 부채 계정 목록 종료-->
 						<!-- 자본 계정 목록 시작--> <!-- 출자/배당 -->
-						<select name="account" id="d1_3" style="width:105px; <?if($rows[class2]!=4||$rows[class2]!=8) echo 'display:none; disabled;';?>">
+						<select name="account_3" id="d1_3" style="width:105px; <?if($rows[class2]!=4&&$rows[class2]!=8) echo 'display:none; disabled;';?>">
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc !='1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
@@ -229,7 +229,7 @@
 						</select>
 						<!-- 자본 계정 목록 종료-->
 						<!-- 수익 계정 목록 시작--> <!-- 수익 -->
-						<select name="account" id="d1_4" style="width:105px; <?if($rows[class2]!=1) echo 'display:none; disabled;';?>">
+						<select name="account_4" id="d1_4" style="width:105px; <?if($rows[class2]!=1) echo 'display:none; disabled;';?>">
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc !='1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
@@ -241,7 +241,7 @@
 						</select>
 						<!-- 수익 계정 목록 종료-->
 						<!-- 비용 계정 목록 시작--> <!-- 비용 -->
-						<select name="account" id="d1_5" style="width:105px; <?if($rows[class2]!=5) echo 'display:none; disabled;';?>">
+						<select name="account_5" id="d1_5" style="width:105px; <?if($rows[class2]!=5) echo 'display:none; disabled;';?>">
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc !='1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);

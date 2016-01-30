@@ -19,11 +19,28 @@
 
 	$class1 = $_POST['class1'];
 	$class2 = $_POST['class2'];
-	$account = $_POST['account'];
+
+	$account_1 = $_POST[account_1];
+	$account_2 = $_POST[account_2];
+	$account_3 = $_POST[account_3];
+	$account_4 = $_POST[account_4];
+	$account_5 = $_POST[account_5];
+
+	if($account_1){
+		$account = $account_1;
+	}else if($account_2){
+		$account = $account_2;
+	}else if($account_3){
+		$account = $account_3;
+	}else if($account_4){
+		$account = $account_4;
+	}else{
+		$account = $account_5;
+	}
 	$is_jh = $_POST['is_jh'];
 	$cont = $_POST['cont'];
 	$acc = $_POST['acc'];
-	$inc = $_POST['inc'];
+	$inc = $_POST['inc'];$
 	$ina = $_POST['ina'];
 	$exp = $_POST['exp'];
 	$out = $_POST['out'];
@@ -54,8 +71,8 @@
 	if(!$result1) err_msg('데이터베이스 오류가 발생하였습니다.');     // util.php 파일에 선언한 err_msg()함수 호출, 메세지 출력 후 이전페이지로.
 
 	echo ("<script>
-					window.alert('정상적으로 입출금 정보가 수정 되었습니다!');
-					opener.location.reload();
-					self.close();
-				 </script>");
+				window.alert('정상적으로 입출금 정보가 수정 되었습니다!');
+				opener.location.reload();
+				self.close();
+		 </script>");
 ?>
