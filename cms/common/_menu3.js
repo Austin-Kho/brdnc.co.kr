@@ -1,9 +1,13 @@
-
-
 // 구분목록상자 선택1 (capital2.php)
-function inoutSel_(form){
+function inoutSel_bu(form, no){
+
+	alert(form.class1.value);
+
+
 	var inc_account = document.getElementById('inc_account');
 	var out_account = document.getElementById('out_account');
+
+
 	if(form.class1.value==1){
 		form.class2.length=4;
 		form.class2.options[0].text = '수 익';
@@ -15,10 +19,10 @@ function inoutSel_(form){
 		form.class2.options[3].text = '출 자';
 		form.class2.options[3].value = '4';
 
-		inc_account.style.display='';
-		out_account.style.display='none';
-		inc_account.disabled=0;
-		out_account.disabled=1;
+		//inc_account.style.display='';
+		//out_account.style.display='none';
+		//inc_account.disabled=0;
+		//out_account.disabled=1;
 
 	}else if(form.class1.value==2){
 		form.class2.length=4;
@@ -31,10 +35,10 @@ function inoutSel_(form){
 		form.class2.options[3].text = '배 당';
 		form.class2.options[3].value = '8';
 
-		inc_account.style.display='none';
-		out_account.style.display='';
-		inc_account.disabled=1;
-		out_account.disabled=0;
+		// inc_account.style.display='none';
+		// out_account.style.display='';
+		// inc_account.disabled=1;
+		// out_account.disabled=0;
 
 	}else if(form.class1.value==3){
 		form.class2.length=2;
@@ -43,10 +47,10 @@ function inoutSel_(form){
 		form.class2.options[1].text = '현 장'
 		form.class2.options[1].value = '8';
 
-		inc_account.style.display='';
-		out_account.style.display='none';
-		inc_account.disabled=1;
-		out_account.disabled=1;
+		// inc_account.style.display='';
+		// out_account.style.display='none';
+		// inc_account.disabled=1;
+		// out_account.disabled=1;
 
 	}else{
 		form.class2.length=11;
@@ -69,14 +73,76 @@ function inoutSel_(form){
 		form.class2.options[8].text = '배 당';
 		form.class2.options[8].value = '8';
 		form.class2.options[9].text = '본 사';
-		form.class2.options[9].value = '7';
+		form.class2.options[9].value = '9';
 		form.class2.options[10].text = '현 장';
-		form.class2.options[10].value = '8';
+		form.class2.options[10].value = '10';
 
-		inc_account.style.display='';
-		out_account.style.display='none';
-		inc_account.disabled=1;
-		out_account.disabled=1;
+		// inc_account.style.display='';
+		// out_account.style.display='none';
+		// inc_account.disabled=1;
+		// out_account.disabled=1;
+	}
+}
+
+
+// 구분목록상자 선택1 (capital2.php)
+function inoutSel_(form){
+
+	alert(form.class1.value);
+
+	if(form.class1.value==1){
+		form.class2.length=4;
+		form.class2.options[0].text = '수 익';
+		form.class2.options[0].value = '1';
+		form.class2.options[1].text = '차 입';
+		form.class2.options[1].value = '2';
+		form.class2.options[2].text = '회 수';
+		form.class2.options[2].value = '3';
+		form.class2.options[3].text = '출 자';
+		form.class2.options[3].value = '4';
+
+	}else if(form.class1.value==2){
+		form.class2.length=4;
+		form.class2.options[0].text = '비 용'
+		form.class2.options[0].value = '5';
+		form.class2.options[1].text = '상 환';
+		form.class2.options[1].value = '6';
+		form.class2.options[2].text = '대 여';
+		form.class2.options[2].value = '7';
+		form.class2.options[3].text = '배 당';
+		form.class2.options[3].value = '8';
+
+	}else if(form.class1.value==3){
+		form.class2.length=2;
+		form.class2.options[0].text = '본 사'
+		form.class2.options[0].value = '7';
+		form.class2.options[1].text = '현 장'
+		form.class2.options[1].value = '8';
+
+	}else{
+		form.class2.length=11;
+		form.class2.options[0].text = '선 택';
+		form.class2.options[0].value = '';
+		form.class2.options[1].text = '수 익';
+		form.class2.options[1].value = '1';
+		form.class2.options[2].text = '차 입';
+		form.class2.options[2].value = '2';
+		form.class2.options[3].text = '회 수';
+		form.class2.options[3].value = '3';
+		form.class2.options[4].text = '출 자';
+		form.class2.options[4].value = '4';
+		form.class2.options[5].text = '비 용';
+		form.class2.options[5].value = '5';
+		form.class2.options[6].text = '상 환';
+		form.class2.options[6].value = '6';
+		form.class2.options[7].text = '대 여';
+		form.class2.options[7].value = '7';
+		form.class2.options[8].text = '배 당';
+		form.class2.options[8].value = '8';
+		form.class2.options[9].text = '본 사';
+		form.class2.options[9].value = '9';
+		form.class2.options[10].text = '현 장';
+		form.class2.options[10].value = '10';
 	}
 }
 // 구분목록 상자선택2 (capital2.php)

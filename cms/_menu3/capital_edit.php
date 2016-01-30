@@ -25,7 +25,7 @@
 		html { overflow:hidden; }
 	</style>
 	<script type="text/JavaScript" language="JavaScript" src="../common/global.js"></script>
-	<script type="text/JavaScript" language="JavaScript" src="../common/capital.js"></script>
+	<script type="text/JavaScript" language="JavaScript" src="../common/_menu3.js"></script>
 	<script type="text/JavaScript" language="JavaScript" src="../include/calendar/calendar.js"></script>
 	<script type="text/javascript">
 	<!--
@@ -121,7 +121,7 @@
 	</script>
 </head>
 <?
-	$query="select * from cms_capital_cash_book,cms_capital_bank_account where (in_acc=no or out_acc=no) and seq_num='$edit_code'";
+	$query="select * from cms_capital_cash_book where seq_num='$edit_code'";
 	$result=mysql_query($query, $connect);
 	$rows=mysql_fetch_array($result);
 ?>
@@ -167,43 +167,47 @@
 							<option value="1" <?if($rows[class2]==1) echo "selected";?>> 수 익
 							<option value="2" <?if($rows[class2]==2) echo "selected";?>> 차 입
 							<option value="3" <?if($rows[class2]==3) echo "selected";?>> 회 수
-							<option value="4" <?if($rows[class2]==4) echo "selected";?>> 비 용
-							<option value="5" <?if($rows[class2]==5) echo "selected";?>> 상 환
-							<option value="6" <?if($rows[class2]==6) echo "selected";?>> 대 여
-							<option value="7" <?if($rows[class2]==7) echo "selected";?>> 본 사
-							<option value="8" <?if($rows[class2]==8) echo "selected";?>> 현 장
+							<option value="4" <?if($rows[class2]==4) echo "selected";?>> 출 자
+							<option value="5" <?if($rows[class2]==5) echo "selected";?>> 비 용
+							<option value="6" <?if($rows[class2]==6) echo "selected";?>> 상 환
+							<option value="7" <?if($rows[class2]==7) echo "selected";?>> 대 여
+							<option value="8" <?if($rows[class2]==8) echo "selected";?>> 배 당
+							<option value="9" <?if($rows[class2]==9) echo "selected";?>> 본 사
+							<option value="10" <?if($rows[class2]==10) echo "selected";?>> 현 장
 						<?}else if($rows[class1]==1){?>
 							<option value="" <?if(!$rows[class2]) echo "selected";?>> 선 택
 							<option value="1" <?if($rows[class2]==1) echo "selected";?>> 수 익
 							<option value="2" <?if($rows[class2]==2) echo "selected";?>> 차 입
 							<option value="3" <?if($rows[class2]==3) echo "selected";?>> 회 수
+							<option value="4" <?if($rows[class2]==4) echo "selected";?>> 출 자
 						<?}else if($rows[class1]==2){?>
-							<option value="4" <?if($rows[class2]==4) echo "selected";?>> 비 용
-							<option value="5" <?if($rows[class2]==5) echo "selected";?>> 상 환
-							<option value="6" <?if($rows[class2]==6) echo "selected";?>> 대 여
+							<option value="5" <?if($rows[class2]==5) echo "selected";?>> 비 용
+							<option value="6" <?if($rows[class2]==6) echo "selected";?>> 상 환
+							<option value="7" <?if($rows[class2]==7) echo "selected";?>> 대 여
+							<option value="8" <?if($rows[class2]==8) echo "selected";?>> 배 당
 						<?}else if($rows[class1]==3){?>
-							<option value="7" <?if($rows[class2]==7) echo "selected";?>> 본 사
-							<option value="8" <?if($rows[class2]==8) echo "selected";?>> 현 장
+							<option value="9" <?if($rows[class2]==9) echo "selected";?>> 본 사
+							<option value="10" <?if($rows[class2]==10) echo "selected";?>> 현 장
 						<?}?>
 						</select>
 						<select name="account" id="inc_account" style="width:105px; <?if($rows[class1]<>1)echo "display:none;";?>" <?if($rows[class2]<>1) echo "disabled";?>>
 							<?
-								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_seq='1' AND is_sp_acc <>'1' ORDER BY seq ASC";
+								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
 							?>
 							<option value=""> 선 택
 							<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-							<option value="<?=$acc_rows[d3_acc_name]?>" <?if($rows[account]==$acc_rows[d3_acc_name]) echo "selected";?>> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
+							<option value="<?=$acc_rows[d3_acc_name]?>" <?if($rows[account]==$acc_rows[d3_acc_name]) echo "selected";?>> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 							<?}?>
 						</select>
 						<select name="account" id="out_account" style="width:105px; <?if($rows[class1]==1)echo "display:none;";?>" <?if($rows[class2]<>5) echo "disabled";?>>
 							<?
-								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_seq='2' AND is_sp_acc <>'1' ORDER BY seq ASC";
+								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
 							?>
 							<option value=""> 선 택
 							<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-							<option value="<?=$acc_rows[d3_acc_name]?>" <?if($rows[account]==$acc_rows[d3_acc_name]) echo "selected";?>> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d1_seq].$acc_rows[d2_seq].str_pad($acc_rows[seq],2,0,STR_PAD_LEFT).")"?>
+							<option value="<?=$acc_rows[d3_acc_name]?>" <?if($rows[account]==$acc_rows[d3_acc_name]) echo "selected";?>> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 							<?}?>
 						</select>
 					</div>
@@ -284,7 +288,7 @@
 						비 고
 					</div>
 					<div style="float:left; padding-top:8px; text-align:left;">
-						<textarea name="note" rows="2" cols="36" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"></textarea>
+						<textarea name="note" rows="2" cols="36" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"><?=$rows[note]?></textarea>
 					</div>
 				</div>
 				</form>
