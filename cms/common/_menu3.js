@@ -470,6 +470,7 @@ function inoutSel(no, pj){
 
 // 구분목록 상자선택2 (capital3.php)
 function inoutSel2(no){
+
 	var class1_str = "class1_";  //대분류 계정
 	var class1 = class1_str+no;
 	var class2_str = "class2_";  //세부계정
@@ -554,82 +555,82 @@ function inoutSel2(no){
 		exp_id.disabled=0; // 출금액 열고
 
 		d1_1_id.style.display='';
-	  d1_2_id.style.display='none';
-	  d1_3_id.style.display='none';
-	  d1_4_id.style.display='none';
-	  d1_5_id.style.display='none';
+	    d1_2_id.style.display='none';
+	    d1_3_id.style.display='none';
+	    d1_4_id.style.display='none';
+	    d1_5_id.style.display='none';
 
-	  d1_acc1_id.style.disabled=1;
-	  d1_acc2_id.style.disabled=1;
-	  d1_acc3_id.style.disabled=1;
-	  d1_acc4_id.style.disabled=1;
-	  d1_acc5_id.style.disabled=1;
+	    d1_acc1_id.style.disabled=1;
+	    d1_acc2_id.style.disabled=1;
+	    d1_acc3_id.style.disabled=1;
+	    d1_acc4_id.style.disabled=1;
+	    d1_acc5_id.style.disabled=1;
 	}
 
-if(class2_id.value==1){ // 수익을 선택하면
+	if(class2_id.value==1){ // 수익을 선택하면
 		d1_1_id.style.display='none';
  		d1_2_id.style.display='none';
  	 	d1_3_id.style.display='none';
  	 	d1_4_id.style.display='';     // 수익계정과목 보이기
  	 	d1_5_id.style.display='none';
 
-  	d1_acc1_id.disabled=1;
-  	d1_acc2_id.disabled=1;
-  	d1_acc3_id.disabled=1;
-  	d1_acc4_id.disabled=false; // 수익계정과목 보이기
-  	d1_acc5_id.disabled=1;
+	  	d1_acc1_id.disabled=1;
+	  	d1_acc2_id.disabled=1;
+	  	d1_acc3_id.disabled=1;
+	  	d1_acc4_id.disabled=false; // 수익계정과목 보이기
+	  	d1_acc5_id.disabled=1;
 
 	}else if(class2_id.value==2||class2_id.value==6){ // 차입 / 상환  선택하면
 		d1_1_id.style.display='none';
-  	d1_2_id.style.display='';     // 부채계정과목 보이고
- 		d1_3_id.style.display='none';
-  	d1_4_id.style.display='none';
-  	d1_5_id.style.display='none';
+		d1_2_id.style.display='';     // 부채계정과목 보이고
+		d1_3_id.style.display='none';
+		d1_4_id.style.display='none';
+		d1_5_id.style.display='none';
 
-	 	d1_acc1_id.disabled=1;
-	 	d1_acc2_id.disabled=0;  // 부채계정과목 보이고
-	 	d1_acc3_id.disabled=1;
-	 	d1_acc4_id.disabled=1;
-	 	d1_acc5_id.disabled=1;
+		 	d1_acc1_id.disabled=1;
+		 	d1_acc2_id.disabled=0;  // 부채계정과목 보이고
+		 	d1_acc3_id.disabled=1;
+		 	d1_acc4_id.disabled=1;
+		 	d1_acc5_id.disabled=1;
 
 	}else if(class2_id.value==3||class2_id.value==7){ // 대여 / 회수 선택하면
 		d1_1_id.style.display=''; // 자산계정과목 보이고
-  	d1_2_id.style.display='none';
-  	d1_3_id.style.display='none';
-  	d1_4_id.style.display='none';
-  	d1_5_id.style.display='none';
+	  	d1_2_id.style.display='none';
+	  	d1_3_id.style.display='none';
+	  	d1_4_id.style.display='none';
+	  	d1_5_id.style.display='none';
 
-  	d1_acc1_id.disabled=0;  // 자산계정과목 보이고
-  	d1_acc2_id.disabled=1;
-  	d1_acc3_id.disabled=1;
-  	d1_acc4_id.disabled=1;
-  	d1_acc5_id.disabled=1;
+		d1_acc1_id.disabled=0;  // 자산계정과목 보이고
+		d1_acc2_id.disabled=1;
+		d1_acc3_id.disabled=1;
+		d1_acc4_id.disabled=1;
+		d1_acc5_id.disabled=1;
 
 	}else if(class2_id.value==4||class2_id.value==8){ //출자 / 배당 선택하면
 		d1_1_id.style.display='none';
-  	d1_2_id.style.display='none';
-  	d1_3_id.style.display='';    // 자본계정과목 보이고
-  	d1_4_id.style.display='none';
-  	d1_5_id.style.display='none';
+		d1_2_id.style.display='none';
+		d1_3_id.style.display='';    // 자본계정과목 보이고
+		d1_4_id.style.display='none';
+		d1_5_id.style.display='none';
 
-  	d1_acc1_id.disabled=1;
-  	d1_acc2_id.disabled=1;
-  	d1_acc3_id.disabled=0; // 자본계정과목 보이고
-  	d1_acc4_id.disabled=1;
-  	d1_acc5_id.disabled=1;
+		d1_acc1_id.disabled=1;
+		d1_acc2_id.disabled=1;
+		d1_acc3_id.disabled=0; // 자본계정과목 보이고
+		d1_acc4_id.disabled=1;
+		d1_acc5_id.disabled=1;
 	}
 	if(class2_id.value==5){ // 비용 선택하면
 		d1_1_id.style.display='none';
-  	d1_2_id.style.display='none';
-  	d1_3_id.style.display='none';
-  	d1_4_id.style.display='none';
-  	d1_5_id.style.display=''; // 비용계정과목 보이고
+		d1_2_id.style.display='none';
+		d1_3_id.style.display='none';
+		d1_4_id.style.display='none';
+		d1_5_id.style.display=''; // 비용계정과목 보이고
 
-	 	d1_acc1_id.disabled=1;
-	 	d1_acc2_id.disabled=1;
-	 	d1_acc3_id.disabled=1;
-	 	d1_acc4_id.disabled=1;
-	 	d1_acc5_id.disabled=0; // 비용계정과목 보이고
+		 	d1_acc1_id.disabled=1;
+		 	d1_acc2_id.disabled=1;
+		 	d1_acc3_id.disabled=1;
+		 	d1_acc4_id.disabled=1;
+		 	d1_acc5_id.disabled=0; // 비용계정과목 보이고
 	}
 
 	if(class2_id.value==3||class2_id.value==7){
@@ -677,7 +678,9 @@ function jh_chk(no){
 
 // 서브밋 체크
 function inout_frm_chk(com){
-	var form=document.inout_frm;
+
+	var form=document.inout_frm;	
+
 	if(!form.deal_date.value){
 		alert('거래일자를 입력하세요!');
 		form.deal_date.focus();
@@ -688,749 +691,96 @@ function inout_frm_chk(com){
 		form.class1_1.focus();
 		return;
 	}
+	
+	for(i=1; i<=10; i++){ // 총 10행 행수만큼 반복
 
-	if(form.class1_1.value){
-		if(com=='com'){
-			if(form.class2_1.value=='8'){
-				if(!form.pj_seq_1.value){
-					alert('전도금을 대체(이체)할 현장을 선택하여 주십시요!');
-					form.pj_seq_1.focus();
-					return;
-				}
-			}
-		}
-		if(form.class2_1.value==1||form.class2_1.value==4){
-			if(!document.getElementById('inc_account_1').value&&!document.getElementById('out_account_1').value){
-				alert('계정과목을 선택하여 주십시요!');
-				return;
-			}
-		}
-		if(!form.cont_1.value){
-			alert('적요 항목을 입력하세요!');
-			form.cont_1.focus();
-			return;
-		}
-		if(form.class1_1.value==1){
-			if(!form.in_1.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_1.focus();
-				return;
-			}
-			if(!form.inc_1.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_1.focus();
-				return;
-			}
-		}
-		if(form.class1_1.value==2){
-			if(!form.out_1.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_1.focus();
-				return;
-			}
-			if(!form.exp_1.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_1.focus();
-				return;
-			}
-		}
-		if(form.class1_1.value==3){
+		var d1_acc1 = "d1_acc1_"+i;   // 자산 계정과목
+		var d1_acc2 = "d1_acc2_"+i;   // 부채 계정과목
+		var d1_acc3 = "d1_acc3_"+i;   // 자본 계정과목
+		var d1_acc4 = "d1_acc4_"+i;   // 수익 계정과목
+		var d1_acc5 = "d1_acc5_"+i;   // 비용 계정과목
+		var d1_acc1_id = document.getElementById(d1_acc1);////// 자산계정 FORM
+		var d1_acc2_id = document.getElementById(d1_acc2);    // 부채계정 FORM
+		var d1_acc3_id = document.getElementById(d1_acc3);    // 자본계정 FORM
+		var d1_acc4_id = document.getElementById(d1_acc4);    // 수익계정 FORM
+		var d1_acc5_id = document.getElementById(d1_acc5);////// 비용계정 FORM
 
-			if(!form.in_1.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_1.focus();
+		if(eval('form.class1_'+i).value){
+
+			if(eval('form.class2_'+i).value=='10'){
+				if(!eval('form.pj_seq_'+i).value){
+					alert('전도금을 대체(이체)할 현장을 선택하여 주십시요!');
+					eval('form.pj_seq_'+i).focus();
+					return;
+				}
+			}
+			if(eval('form.class2_'+i).value<=8){
+				if(!d1_acc1_id.value&&!d1_acc2_id.value&&!d1_acc3_id.value&&!d1_acc4_id.value&&!d1_acc5_id.value){
+					alert('계정과목을 선택하여 주십시요!');
+					return;
+				}
+			}
+			if(!eval('form.cont_'+i).value){
+				alert('적요 항목을 입력하세요!');
+				eval('form.cont_'+i).focus();
 				return;
 			}
-			if(!form.inc_1.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_1.focus();
-				return;
+			if(eval('form.class1_'+i).value==1){
+				if(!eval('form.in_'+i).value){
+					alert('입금 계정 항목을 선택하세요!');
+					eval('form.in_'+i).focus();
+					return;
+				}
+				if(!eval('form.inc_'+i).value){
+					alert('입금 금액을 입력하세요!');
+					eval('form.inc_'+i).focus();
+					return;
+				}
 			}
-			if(!form.out_1.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_1.focus();
-				return;
+			if(eval('form.class1_'+i).value==2){
+				if(!eval('form.out_'+i).value){
+					alert('출금 계정 항목을 선택하세요!');
+					eval('form.out_'+i).focus();
+					return;
+				}
+				if(!eval('form.exp_'+i).value){
+					alert('출금 금액을 입력하세요!');
+					eval('form.exp_'+i).focus();
+					return;
+				}
 			}
-			var out_val = form.out_1.value.split("-");
-			if(form.in_1.value==out_val[0]){
-				alert('대체 거래인 경우 입금계정과 출금계정을 다르게 선택하여 주십시요!');
-				form.out_1.focus();
-				return;
+			if(eval('form.class1_'+i).value==3){
+
+				if(!eval('form.in_'+i).value){
+					alert('입금 계정 항목을 선택하세요!');
+					eval('form.in_'+i).focus();
+					return;
+				}
+				if(!eval('form.inc_'+i).value){
+					alert('입금 금액을 입력하세요!');
+					eval('form.inc_'+i).focus();
+					return;
+				}
+				if(!eval('form.out_'+i).value){
+					alert('출금 계정 항목을 선택하세요!');
+					eval('form.out_'+i).focus();
+					return;
+				}
+				var out_val = eval('form.out_'+i).value.split("-");
+				if(eval('form.in_'+i).value==out_val[0]){
+					alert('대체 거래인 경우 입금계정과 출금계정을 다르게 선택하여 주십시요!');
+					eval('form.out_'+i).focus();
+					return;
+				}
+				if(!eval('form.exp_'+i).value){
+					alert('출금 금액을 입력하세요!');
+					eval('form.exp_'+i).focus();
+					return;
+				}
 			}
-			if(!form.exp_1.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_1.focus();
-				return;
-			}
-		}
+		}	
 	}
 
-	if(form.class1_2.value){
-		if(com=='com'){
-			if(form.class2_2.value=='8'){
-				if(!form.pj_seq_2.value){
-					alert('전도금을 대체(이체)할 현장을 선택하여 주십시요!');
-					form.pj_seq_2.focus();
-					return;
-				}
-			}
-		}
-		if(form.class2_2.value==1||form.class2_2.value==4){
-			if(!document.getElementById('inc_account_2').value&&!document.getElementById('out_account_2').value){
-				alert('계정과목을 선택하여 주십시요!');
-				return;
-			}
-		}
-		if(!form.cont_2.value){
-			alert('적요 항목을 입력하세요!');
-			form.cont_2.focus();
-			return;
-		}
-		if(form.class1_2.value==1){
-			if(!form.in_2.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_2.focus();
-				return;
-			}
-			if(!form.inc_2.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_2.focus();
-				return;
-			}
-		}
-		if(form.class1_2.value==2){
-			if(!form.out_2.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_2.focus();
-				return;
-			}
-			if(!form.exp_2.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_2.focus();
-				return;
-			}
-		}
-		if(form.class1_2.value==3){
-			if(!form.in_2.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_2.focus();
-				return;
-			}
-			if(!form.inc_2.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_2.focus();
-				return;
-			}
-			if(!form.out_2.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_2.focus();
-				return;
-			}
-			var out_val = form.out_2.value.split("-");
-			if(form.in_2.value==out_val[0]){
-				alert('대체 거래인 경우 입금계정과 출금계정을 다르게 선택하여 주십시요!');
-				form.out_2.focus();
-				return;
-			}
-			if(!form.exp_2.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_2.focus();
-				return;
-			}
-		}
-	}
-	if(form.class1_3.value){
-		if(com=='com'){
-			if(form.class2_3.value=='8'){
-				if(!form.pj_seq_3.value){
-					alert('전도금을 대체(이체)할 현장을 선택하여 주십시요!');
-					form.pj_seq_3.focus();
-					return;
-				}
-			}
-		}
-		if(form.class2_3.value==1||form.class2_3.value==4){
-			if(!document.getElementById('inc_account_3').value&&!document.getElementById('out_account_3').value){
-				alert('계정과목을 선택하여 주십시요!');
-				return;
-			}
-		}
-		if(!form.cont_3.value){
-			alert('적요 항목을 입력하세요!');
-			form.cont_3.focus();
-			return;
-		}
-		if(form.class1_3.value==1){
-			if(!form.in_3.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_3.focus();
-				return;
-			}
-			if(!form.inc_3.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_3.focus();
-				return;
-			}
-		}
-		if(form.class1_3.value==2){
-			if(!form.out_3.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_3.focus();
-				return;
-			}
-			if(!form.exp_3.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_3.focus();
-				return;
-			}
-		}
-		if(form.class1_3.value==3){
-			if(!form.in_3.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_3.focus();
-				return;
-			}
-			if(!form.inc_3.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_3.focus();
-				return;
-			}
-			if(!form.out_3.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_3.focus();
-				return;
-			}
-			var out_val = form.out_3.value.split("-");
-			if(form.in_3.value==out_val[0]){
-				alert('대체 거래인 경우 입금계정과 출금계정을 다르게 선택하여 주십시요!');
-				form.out_3.focus();
-				return;
-			}
-			if(!form.exp_3.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_3.focus();
-				return;
-			}
-		}
-	}
-	if(form.class1_4.value){
-		if(com=='com'){
-			if(form.class2_4.value=='8'){
-				if(!form.pj_seq_4.value){
-					alert('전도금을 대체(이체)할 현장을 선택하여 주십시요!');
-					form.pj_seq_4.focus();
-					return;
-				}
-			}
-		}
-		if(form.class2_4.value==1||form.class2_4.value==4){
-			if(!document.getElementById('inc_account_4').value&&!document.getElementById('out_account_4').value){
-				alert('계정과목을 선택하여 주십시요!');
-				return;
-			}
-		}
-		if(!form.cont_4.value){
-			alert('적요 항목을 입력하세요!');
-			form.cont_4.focus();
-			return;
-		}
-		if(form.class1_4.value==1){
-			if(!form.in_4.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_4.focus();
-				return;
-			}
-			if(!form.inc_4.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_4.focus();
-				return;
-			}
-		}
-		if(form.class1_4.value==2){
-			if(!form.out_4.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_4.focus();
-				return;
-			}
-			if(!form.exp_4.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_4.focus();
-				return;
-			}
-		}
-		if(form.class1_4.value==3){
-			if(!form.in_4.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_4.focus();
-				return;
-			}
-			if(!form.inc_4.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_4.focus();
-				return;
-			}
-			if(!form.out_4.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_4.focus();
-				return;
-			}
-			var out_val = form.out_4.value.split("-");
-			if(form.in_4.value==out_val[0]){
-				alert('대체 거래인 경우 입금계정과 출금계정을 다르게 선택하여 주십시요!');
-				form.out_4.focus();
-				return;
-			}
-			if(!form.exp_4.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_4.focus();
-				return;
-			}
-		}
-	}
-	if(form.class1_5.value){
-		if(com=='com'){
-			if(form.class2_5.value=='8'){
-				if(!form.pj_seq_5.value){
-					alert('전도금을 대체(이체)할 현장을 선택하여 주십시요!');
-					form.pj_seq_5.focus();
-					return;
-				}
-			}
-		}
-		if(form.class2_5.value==1||form.class2_5.value==4){
-			if(!document.getElementById('inc_account_5').value&&!document.getElementById('out_account_5').value){
-				alert('계정과목을 선택하여 주십시요!');
-				return;
-			}
-		}
-		if(!form.cont_5.value){
-			alert('적요 항목을 입력하세요!');
-			form.cont_5.focus();
-			return;
-		}
-		if(form.class1_5.value==1){
-			if(!form.in_5.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_5.focus();
-				return;
-			}
-			if(!form.inc_5.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_5.focus();
-				return;
-			}
-		}
-		if(form.class1_5.value==2){
-			if(!form.out_5.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_5.focus();
-				return;
-			}
-			if(!form.exp_5.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_5.focus();
-				return;
-			}
-		}
-		if(form.class1_5.value==3){
-			if(!form.in_5.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_5.focus();
-				return;
-			}
-			if(!form.inc_5.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_5.focus();
-				return;
-			}
-			if(!form.out_5.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_5.focus();
-				return;
-			}
-			var out_val = form.out_5.value.split("-");
-			if(form.in_5.value==out_val[0]){
-				alert('대체 거래인 경우 입금계정과 출금계정을 다르게 선택하여 주십시요!');
-				form.out_5.focus();
-				return;
-			}
-			if(!form.exp_5.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_5.focus();
-				return;
-			}
-		}
-	}
-	if(form.class1_6.value){
-		if(com=='com'){
-			if(form.class2_6.value=='8'){
-				if(!form.pj_seq_6.value){
-					alert('전도금을 대체(이체)할 현장을 선택하여 주십시요!');
-					form.pj_seq_6.focus();
-					return;
-				}
-			}
-		}
-		if(form.class2_6.value==1||form.class2_6.value==4){
-			if(!document.getElementById('inc_account_6').value&&!document.getElementById('out_account_6').value){
-				alert('계정과목을 선택하여 주십시요!');
-				return;
-			}
-		}
-		if(!form.cont_6.value){
-			alert('적요 항목을 입력하세요!');
-			form.cont_6.focus();
-			return;
-		}
-		if(form.class1_6.value==1){
-			if(!form.in_6.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_6.focus();
-				return;
-			}
-			if(!form.inc_6.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_6.focus();
-				return;
-			}
-		}
-		if(form.class1_6.value==2){
-			if(!form.out_6.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_6.focus();
-				return;
-			}
-			if(!form.exp_6.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_6.focus();
-				return;
-			}
-		}
-		if(form.class1_6.value==3){
-			if(!form.in_6.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_6.focus();
-				return;
-			}
-			if(!form.inc_6.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_6.focus();
-				return;
-			}
-			if(!form.out_6.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_6.focus();
-				return;
-			}
-			var out_val = form.out_6.value.split("-");
-			if(form.in_6.value==out_val[0]){
-				alert('대체 거래인 경우 입금계정과 출금계정을 다르게 선택하여 주십시요!');
-				form.out_6.focus();
-				return;
-			}
-			if(!form.exp_6.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_6.focus();
-				return;
-			}
-		}
-	}
-	if(form.class1_7.value){
-		if(com=='com'){
-			if(form.class2_7.value=='8'){
-				if(!form.pj_seq_7.value){
-					alert('전도금을 대체(이체)할 현장을 선택하여 주십시요!');
-					form.pj_seq_7.focus();
-					return;
-				}
-			}
-		}
-		if(form.class2_7.value==1||form.class2_7.value==4){
-			if(!document.getElementById('inc_account_7').value&&!document.getElementById('out_account_7').value){
-				alert('계정과목을 선택하여 주십시요!');
-				return;
-			}
-		}
-		if(!form.cont_7.value){
-			alert('적요 항목을 입력하세요!');
-			form.cont_7.focus();
-			return;
-		}
-		if(form.class1_7.value==1){
-			if(!form.in_7.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_7.focus();
-				return;
-			}
-			if(!form.inc_7.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_7.focus();
-				return;
-			}
-		}
-		if(form.class1_7.value==2){
-			if(!form.out_7.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_7.focus();
-				return;
-			}
-			if(!form.exp_7.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_7.focus();
-				return;
-			}
-		}
-		if(form.class1_7.value==3){
-			if(!form.in_7.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_7.focus();
-				return;
-			}
-			if(!form.inc_7.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_7.focus();
-				return;
-			}
-			if(!form.out_7.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_7.focus();
-				return;
-			}
-			var out_val = form.out_7.value.split("-");
-			if(form.in_7.value==out_val[0]){
-				alert('대체 거래인 경우 입금계정과 출금계정을 다르게 선택하여 주십시요!');
-				form.out_7.focus();
-				return;
-			}
-			if(!form.exp_7.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_7.focus();
-				return;
-			}
-		}
-	}
-	if(form.class1_8.value){
-		if(com=='com'){
-			if(form.class2_8.value=='8'){
-				if(!form.pj_seq_8.value){
-					alert('전도금을 대체(이체)할 현장을 선택하여 주십시요!');
-					form.pj_seq_8.focus();
-					return;
-				}
-			}
-		}
-		if(form.class2_8.value==1||form.class2_8.value==4){
-			if(!document.getElementById('inc_account_8').value&&!document.getElementById('out_account_8').value){
-				alert('계정과목을 선택하여 주십시요!');
-				return;
-			}
-		}
-		if(!form.cont_8.value){
-			alert('적요 항목을 입력하세요!');
-			form.cont_8.focus();
-			return;
-		}
-		if(form.class1_8.value==1){
-			if(!form.in_8.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_8.focus();
-				return;
-			}
-			if(!form.inc_8.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_8.focus();
-				return;
-			}
-		}
-		if(form.class1_8.value==2){
-			if(!form.out_8.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_8.focus();
-				return;
-			}
-			if(!form.exp_8.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_8.focus();
-				return;
-			}
-		}
-		if(form.class1_8.value==3){
-			if(!form.in_8.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_8.focus();
-				return;
-			}
-			if(!form.inc_8.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_8.focus();
-				return;
-			}
-			if(!form.out_8.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_8.focus();
-				return;
-			}
-			var out_val = form.out_8.value.split("-");
-			if(form.in_8.value==out_val[0]){
-				alert('대체 거래인 경우 입금계정과 출금계정을 다르게 선택하여 주십시요!');
-				form.out_8.focus();
-				return;
-			}
-			if(!form.exp_8.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_8.focus();
-				return;
-			}
-		}
-	}
-	if(form.class1_9.value){
-		if(com=='com'){
-			if(form.class2_9.value=='8'){
-				if(!form.pj_seq_9.value){
-					alert('전도금을 대체(이체)할 현장을 선택하여 주십시요!');
-					form.pj_seq_9.focus();
-					return;
-				}
-			}
-		}
-		if(form.class2_9.value==1||form.class2_9.value==4){
-			if(!document.getElementById('inc_account_9').value&&!document.getElementById('out_account_9').value){
-				alert('계정과목을 선택하여 주십시요!');
-				return;
-			}
-		}
-		if(!form.cont_9.value){
-			alert('적요 항목을 입력하세요!');
-			form.cont_9.focus();
-			return;
-		}
-		if(form.class1_9.value==1){
-			if(!form.in_9.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_9.focus();
-				return;
-			}
-			if(!form.inc_9.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_9.focus();
-				return;
-			}
-		}
-		if(form.class1_9.value==2){
-			if(!form.out_9.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_9.focus();
-				return;
-			}
-			if(!form.exp_9.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_9.focus();
-				return;
-			}
-		}
-		if(form.class1_9.value==3){
-			if(!form.in_9.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_9.focus();
-				return;
-			}
-			if(!form.inc_9.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_9.focus();
-				return;
-			}
-			if(!form.out_9.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_9.focus();
-				return;
-			}
-			var out_val = form.out_9.value.split("-");
-			if(form.in_9.value==out_val[0]){
-				alert('대체 거래인 경우 입금계정과 출금계정을 다르게 선택하여 주십시요!');
-				form.out_9.focus();
-				return;
-			}
-			if(!form.exp_9.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_9.focus();
-				return;
-			}
-		}
-	}
-	if(form.class1_10.value){
-		if(com=='com'){
-			if(form.class2_10.value=='8'){
-				if(!form.pj_seq_10.value){
-					alert('전도금을 대체(이체)할 현장을 선택하여 주십시요!');
-					form.pj_seq_10.focus();
-					return;
-				}
-			}
-		}
-		if(form.class2_10.value==1||form.class2_10.value==4){
-			if(!document.getElementById('inc_account_10').value&&!document.getElementById('out_account_10').value){
-				alert('계정과목을 선택하여 주십시요!');
-				return;
-			}
-		}
-		if(!form.cont_10.value){
-			alert('적요 항목을 입력하세요!');
-			form.cont_10.focus();
-			return;
-		}
-		if(form.class1_10.value==1){
-			if(!form.in_10.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_10.focus();
-				return;
-			}
-			if(!form.inc_10.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_10.focus();
-				return;
-			}
-		}
-		if(form.class1_10.value==2){
-			if(!form.out_10.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_10.focus();
-				return;
-			}
-			if(!form.exp_10.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_10.focus();
-				return;
-			}
-		}
-		if(form.class1_10.value==3){
-			if(!form.in_10.value){
-				alert('입금 계정 항목을 선택하세요!');
-				form.in_10.focus();
-				return;
-			}
-			if(!form.inc_10.value){
-				alert('입금 금액을 입력하세요!');
-				form.inc_10.focus();
-				return;
-			}
-			if(!form.out_10.value){
-				alert('출금 계정 항목을 선택하세요!');
-				form.out_10.focus();
-				return;
-			}
-			var out_val = form.out_10.value.split("-");
-			if(form.in_10.value==out_val[0]){
-				alert('대체 거래인 경우 입금계정과 출금계정을 다르게 선택하여 주십시요!');
-				form.out_10.focus();
-				return;
-			}
-			if(!form.exp_10.value){
-				alert('출금 금액을 입력하세요!');
-				form.exp_10.focus();
-				return;
-			}
-		}
-	}
 	var aaa=confirm('거래내용을 등록하시겠습니까?');
 	if(aaa==true){
 		form.submit();
@@ -1477,7 +827,7 @@ function charge(no,obj){
 	if(no==7){	if(nobj[0]==1||!obj){	form.char1_7.disabled=1;	}else{	form.char1_7.disabled=0;	}	}
 	if(no==8){	if(nobj[0]==1||!obj){	form.char1_8.disabled=1;	}else{	form.char1_8.disabled=0;	}	}
 	if(no==9){	if(nobj[0]==1||!obj){	form.char1_9.disabled=1;	}else{	form.char1_9.disabled=0;	}	}
-	if(no==10){	if(nobj[0]==1||!obj){	form.char1_10.disabled=1; }else{	form.char1_10.disabled=0; } }
+	if(no==10){	if(nobj[0]==1||!obj){	form.char1_10.disabled=1;   }else{	form.char1_10.disabled=0;   }   }
 }
 
 // 수수료 체크박스
