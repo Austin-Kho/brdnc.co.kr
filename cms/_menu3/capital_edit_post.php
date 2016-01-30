@@ -20,6 +20,7 @@
 	$class1 = $_POST['class1'];
 	$class2 = $_POST['class2'];
 	$account = $_POST['account'];
+	$is_jh = $_POST['is_jh'];
 	$cont = $_POST['cont'];
 	$acc = $_POST['acc'];
 	$inc = $_POST['inc'];
@@ -30,11 +31,13 @@
 	$note = $_POST['note'];
 
 
+
 	############# 회원 정보 테이블에 입력 값을 등록한다. #############
 
 	$query1="UPDATE cms_capital_cash_book SET class1='$class1',
 																 class2='$class2',
 																 account='$account',
+																 is_jh_loan='$is_jh',
 																 cont='$cont',
 																 acc='$acc',
 																 in_acc='$ina',

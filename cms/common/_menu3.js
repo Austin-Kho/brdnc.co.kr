@@ -12,15 +12,13 @@ function inoutSel_(form){
 	var d1_4 = document.getElementById('d1_4');
 	var d1_5 = document.getElementById('d1_5');
 
-	alert(d1_1.style.display);
+	if(d1_1) d1_1.options[0].selected = 1;
+	if(d1_2) d1_2.options[0].selected = 1;
+	if(d1_3) d1_3.options[0].selected = 1;
+	if(d1_4) d1_4.options[0].selected = 1;
+	if(d1_5) d1_5.options[0].selected = 1;
 
-	// if(d1_1) d1_1.options[0].selected = 1;
-	// if(d1_2) d1_2.options[0].selected = 1;
-	// if(d1_3) d1_3.options[0].selected = 1;
-	// if(d1_4) d1_4.options[0].selected = 1;
-	// if(d1_5) d1_5.options[0].selected = 1;
-
-	if(form.class1.value==1){
+	if(form.class1.value==1){ // 입금 > 수익 선택
 		form.class2.length=4;
 		form.class2.options[0].text = '수 익';
 		form.class2.options[0].value = '1';
@@ -34,8 +32,20 @@ function inoutSel_(form){
 
 		if(form.inc) form.inc.disabled=0;
 		if(form.ina) form.ina.disabled=0;
-		if(form.exp) form.exp.disabled=1;
-		if(form.out) form.out.disabled=1;
+		if(form.exp) form.exp.disabled=1; form.exp.value=null;
+		if(form.out) form.out.disabled=1; form.out.options[0].selected=1;
+
+		if(d1_1) d1_1.style.display = 'none';
+		if(d1_2) d1_2.style.display = 'none';
+		if(d1_3) d1_3.style.display = 'none';
+		if(d1_4) d1_4.style.display = '';
+		if(d1_5) d1_5.style.display = 'none';
+
+		if(d1_1) d1_1.disabled=1;
+		if(d1_2) d1_2.disabled=1;
+		if(d1_3) d1_3.disabled=1;
+		if(d1_4) d1_4.disabled=0;
+		if(d1_5) d1_5.disabled=1;
 
 	}else if(form.class1.value==2){
 		form.class2.length=4;
@@ -49,10 +59,22 @@ function inoutSel_(form){
 		form.class2.options[3].value = '8';
 		form.class2.options[0].selected =1; // 비용을 선택하고 ///////
 
-		if(form.inc) form.inc.disabled=1;
-		if(form.ina) form.ina.disabled=1;
+		if(form.inc) form.inc.disabled=1; form.inc.value=null;
+		if(form.ina) form.ina.disabled=1; form.ina.options[0].selected=1;
 		if(form.exp) form.exp.disabled=0;
 		if(form.out) form.out.disabled=0;
+
+		if(d1_1) d1_1.style.display = 'none';
+		if(d1_2) d1_2.style.display = 'none';
+		if(d1_3) d1_3.style.display = 'none';
+		if(d1_4) d1_4.style.display = 'none';
+		if(d1_5) d1_5.style.display = '';
+
+		if(d1_1) d1_1.disabled=1;
+		if(d1_2) d1_2.disabled=1;
+		if(d1_3) d1_3.disabled=1;
+		if(d1_4) d1_4.disabled=1;
+		if(d1_5) d1_5.disabled=0;
 
 	}else if(form.class1.value==3){
 		form.class2.length=2;
@@ -66,6 +88,18 @@ function inoutSel_(form){
 		if(form.ina) form.ina.disabled=0;
 		if(form.exp) form.exp.disabled=0;
 		if(form.out) form.out.disabled=0;
+
+		if(d1_1) d1_1.style.display = '';
+		if(d1_2) d1_2.style.display = 'none';
+		if(d1_3) d1_3.style.display = 'none';
+		if(d1_4) d1_4.style.display = 'none';
+		if(d1_5) d1_5.style.display = 'none';
+
+		if(d1_1) d1_1.disabled=1;
+		if(d1_2) d1_2.disabled=1;
+		if(d1_3) d1_3.disabled=1;
+		if(d1_4) d1_4.disabled=1;
+		if(d1_5) d1_5.disabled=1;
 
 	}else{
 		form.class2.length=11;
@@ -97,13 +131,22 @@ function inoutSel_(form){
 		if(form.ina) form.ina.disabled=0;
 		if(form.exp) form.exp.disabled=0;
 		if(form.out) form.out.disabled=0;
+
+		if(d1_1) d1_1.style.display = '';
+		if(d1_2) d1_2.style.display = 'none';
+		if(d1_3) d1_3.style.display = 'none';
+		if(d1_4) d1_4.style.display = 'none';
+		if(d1_5) d1_5.style.display = 'none';
+
+		if(d1_1) d1_1.disabled=1;
+		if(d1_2) d1_2.disabled=1;
+		if(d1_3) d1_3.disabled=1;
+		if(d1_4) d1_4.disabled=1;
+		if(d1_5) d1_5.disabled=1;
 	}
 }
 // 구분목록 상자선택2 (capital2.php  // capital_edit.php)
 function inoutSel2_(form){
-
-	// var inc_account = document.getElementById('inc_account');
-	// var out_account = document.getElementById('out_account');
 
 	if(form.class2.value==0) {
 		form.class1.options[0].selected=1;
@@ -111,6 +154,10 @@ function inoutSel2_(form){
 		if(form.ina) form.ina.disabled=0;
 		if(form.exp) form.exp.disabled=0;
 		if(form.out) form.out.disabled=0;
+		if(form.is_jh)form.is_jh.disabled=1;
+		if(form.is_jh)form.is_jh.checked=0;
+
+		// ????? 추후 테스트
 	}
 	if(form.class2.value>0&&form.class2.value<=4) {
 		form.class1.options[1].selected=1;
@@ -134,23 +181,86 @@ function inoutSel2_(form){
 		if(form.out) form.out.disabled=0;
 	}
 
+	var d1_1 = document.getElementById('d1_1');
+	var d1_2 = document.getElementById('d1_2');
+	var d1_3 = document.getElementById('d1_3');
+	var d1_4 = document.getElementById('d1_4');
+	var d1_5 = document.getElementById('d1_5');
 
-	// if(form.class2.value==1) {
-	// 	inc_account.style.display='';
-	// 	out_account.style.display='none';
-	// 	inc_account.disabled=0;
-	// 	out_account.disabled=1;
-	// }else if(form.class2.value==5) {
-	// 	inc_account.style.display='none';
-	// 	out_account.style.display='';
-	// 	inc_account.disabled=1;
-	// 	out_account.disabled=0;
-	// }else{
-	// 	inc_account.style.display='';
-	// 	out_account.style.display='none';
-	// 	inc_account.disabled=1;
-	// 	out_account.disabled=1;
-	// }
+	if(form.class2.value==1){ // 수익
+		if(d1_1) d1_1.style.display = 'none';
+		if(d1_2) d1_2.style.display = 'none';
+		if(d1_3) d1_3.style.display = 'none';
+		if(d1_4) d1_4.style.display = '';
+		if(d1_5) d1_5.style.display = 'none';
+
+		if(d1_1) d1_1.disabled=1;
+		if(d1_2) d1_2.disabled=1;
+		if(d1_3) d1_3.disabled=1;
+		if(d1_4) d1_4.disabled=0;
+		if(d1_5) d1_5.disabled=1;
+		if(form.is_jh)form.is_jh.disabled=1;
+		if(form.is_jh)form.is_jh.checked=0;
+	}
+	if(form.class2.value==2||form.class2.value==6){ // 차입 / 상환 = 부채
+		if(d1_1) d1_1.style.display = 'none';
+		if(d1_2) d1_2.style.display = '';
+		if(d1_3) d1_3.style.display = 'none';
+		if(d1_4) d1_4.style.display = 'none';
+		if(d1_5) d1_5.style.display = 'none';
+
+		if(d1_1) d1_1.disabled=1;
+		if(d1_2) d1_2.disabled=0;
+		if(d1_3) d1_3.disabled=1;
+		if(d1_4) d1_4.disabled=1;
+		if(d1_5) d1_5.disabled=1;
+		if(form.is_jh)form.is_jh.disabled=1;
+		if(form.is_jh)form.is_jh.checked=0;
+	}
+	if(form.class2.value==3||form.class2.value==7){ // 대여 / 회수 = 자산
+		if(d1_1) d1_1.style.display = '';
+		if(d1_2) d1_2.style.display = 'none';
+		if(d1_3) d1_3.style.display = 'none';
+		if(d1_4) d1_4.style.display = 'none';
+		if(d1_5) d1_5.style.display = 'none';
+
+		if(d1_1) d1_1.disabled=0;
+		if(d1_2) d1_2.disabled=1;
+		if(d1_3) d1_3.disabled=1;
+		if(d1_4) d1_4.disabled=1;
+		if(d1_5) d1_5.disabled=1;
+		if(form.is_jh)form.is_jh.disabled=0;
+	}
+	if(form.class2.value==4||form.class2.value==8){ // 출자 / 배당 = 자본
+		if(d1_1) d1_1.style.display = 'none';
+		if(d1_2) d1_2.style.display = 'none';
+		if(d1_3) d1_3.style.display = '';
+		if(d1_4) d1_4.style.display = 'none';
+		if(d1_5) d1_5.style.display = 'none';
+
+		if(d1_1) d1_1.disabled=1;
+		if(d1_2) d1_2.disabled=1;
+		if(d1_3) d1_3.disabled=0;
+		if(d1_4) d1_4.disabled=1;
+		if(d1_5) d1_5.disabled=1;
+		if(form.is_jh)form.is_jh.disabled=1;
+		if(form.is_jh)form.is_jh.checked=0;
+	}
+	if(form.class2.value==5){ // 비용
+		if(d1_1) d1_1.style.display = 'none';
+		if(d1_2) d1_2.style.display = 'none';
+		if(d1_3) d1_3.style.display = 'none';
+		if(d1_4) d1_4.style.display = 'none';
+		if(d1_5) d1_5.style.display = '';
+
+		if(d1_1) d1_1.disabled=1;
+		if(d1_2) d1_2.disabled=1;
+		if(d1_3) d1_3.disabled=1;
+		if(d1_4) d1_4.disabled=1;
+		if(d1_5) d1_5.disabled=0;
+		if(form.is_jh)form.is_jh.disabled=1;
+		if(form.is_jh)form.is_jh.checked=0;
+	}
 }
 
 // 구분 목록상자 선택1 (capital3.php)

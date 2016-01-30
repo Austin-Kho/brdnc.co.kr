@@ -30,36 +30,35 @@
 	<script type="text/javascript">
 	<!--
 		function _editChk(){
+
 			var form = document.form1;
+
+			var d1_1 = document.getElementById('d1_1');
+			var d1_2 = document.getElementById('d1_2');
+			var d1_3 = document.getElementById('d1_3');
+			var d1_4 = document.getElementById('d1_4');
+			var d1_5 = document.getElementById('d1_5');
+
 			if(!form.deal_date.value){
 				alert('거래 일자를 입력하세요!');
 				form.deal_date.focus();
 				return;
 			}
 			if(!form.class1.value){
-				alert('구분1을 입력하세요!');
-				form.class1.focus();
-				return;
+			 	alert('구분1을 입력하세요!');
+			 	form.class1.focus();
+			 	return;
 			}
 			if(!form.class2.value){
-				alert('구분2를 입력하세요!');
-				form.class2.focus();
-				return;
+			 	alert('구분2를 입력하세요!');
+			 	form.class2.focus();
+			 	return;
 			}
-			var inc_account = document.getElementById('inc_account');
-			var out_account = document.getElementById('out_account');
-			if(form.class2.value==1){
-				if(!inc_account.value){
-					alert('계정과목을 선택하세요!');
-					inc_account.focus();
-					return;
-				}
-			}else if(form.class2.value==4){
-				if(!out_account.value){
-					alert('계정과목을 선택하세요!');
-					out_account.focus();
-					return;
-				}
+
+			if(form.class1.value!=3&&!d1_1.value&&!d1_2.value&&!d1_3.value&&!d1_4.value&&!d1_5.value){
+			 	alert('계정과목을 선택하세요!');
+			 	form.account.focus();
+			 	return;
 			}
 			if(!form.cont.value){
 				alert('적요 항목을 입력하세요!');
@@ -71,8 +70,8 @@
 					 alert('입금 금액을 입력하세요!');
 					 form.acc.focus();
 					 return;
-				}
-				if(form.in.value){
+				}d1_5.value
+				if(form.ina.value){
 					 alert('입금 계정을 입력하세요!');
 					 form.acc.focus();
 					 return;
@@ -96,7 +95,7 @@
 					 form.acc.focus();
 					 return;
 				}
-				if(form.in.value){
+				if(form.ina.value){
 					 alert('입금 계정을 입력하세요!');
 					 form.acc.focus();
 					 return;
@@ -114,7 +113,7 @@
 			}
 			var s2_sub=confirm('입출금 거래정보를 수정하시겠습니까?');
 			if(s2_sub==true){
-				form.submit();
+				form.submit();				
 			}
 		}
 	//-->
@@ -146,7 +145,7 @@
 					<div style="float:left; padding-top:8px; text-align:left;">
 						<!-- <input type="text" name="deal_date" id="deal_date" value="<?=$rows[deal_date]?>" class="inputstyle2" size="31" onclick="openCalendar(this)" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"> <a href="javascript:" onclick="openCalendar(document.getElementById('deal_date'));"><img src="../images/calendar.jpg" border="0" alt="" /></a> -->
 
-						<input type="text" name="deal_date" id="deal_date" value="<?=$rows[deal_date]?>" size="31" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
+						<input type="text" name="deal_date" id="deal_date" value="<?=$rows[deal_date]?>" size="25" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
 						<a href="javascript:" onclick="cal_add(document.getElementById('deal_date'),this); event.cancelBubble=true"> <img src="http://cigiko.cafe24.com/cms/images/calendar.jpg" border="0" alt="" /></a>
 					</div>
 				</div>
@@ -194,9 +193,9 @@
 
 
 						<!-- 자산 계정 목록 시작--> <!-- 대여/회수 -->
-						<select name="account" id="d1_1" style="width:105px; <?if($rows[class2]<>3||$rows[class2]<>7) echo 'display:none; disabled;';?>">
+						<select name="account" id="d1_1" style="width:105px; <?if($rows[class2]!=3||$rows[class2]!=7) echo 'display:none; disabled;';?>">
 							<?
-								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
+								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc !='1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
 							?>
 							<option value=""> 선 택
@@ -206,9 +205,9 @@
 						</select>
 						<!-- 자산 계정 목록 종료-->
 						<!-- 부채 계정 목록 시작--> <!-- 차입/상환 -->
-						<select name="account" id="d1_2" style="width:105px; <?if($rows[class2]<>2||$rows[class2]<>6) echo 'display:none; disabled;';?>">
+						<select name="account" id="d1_2" style="width:105px; <?if($rows[class2]!=2||$rows[class2]!=6) echo 'display:none; disabled;';?>">
 							<?
-								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
+								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc !='1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
 							?>
 							<option value=""> 선 택
@@ -218,9 +217,9 @@
 						</select>
 						<!-- 부채 계정 목록 종료-->
 						<!-- 자본 계정 목록 시작--> <!-- 출자/배당 -->
-						<select name="account" id="d1_3" style="width:105px; <?if($rows[class2]<>4||$rows[class2]<>8) echo 'display:none; disabled;';?>">
+						<select name="account" id="d1_3" style="width:105px; <?if($rows[class2]!=4||$rows[class2]!=8) echo 'display:none; disabled;';?>">
 							<?
-								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
+								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc !='1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
 							?>
 							<option value=""> 선 택
@@ -230,9 +229,9 @@
 						</select>
 						<!-- 자본 계정 목록 종료-->
 						<!-- 수익 계정 목록 시작--> <!-- 수익 -->
-						<select name="account" id="d1_4" style="width:105px; <?if($rows[class2]<>1) echo 'display:none; disabled;';?>">
+						<select name="account" id="d1_4" style="width:105px; <?if($rows[class2]!=1) echo 'display:none; disabled;';?>">
 							<?
-								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
+								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc !='1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
 							?>
 							<option value=""> 선 택
@@ -242,9 +241,9 @@
 						</select>
 						<!-- 수익 계정 목록 종료-->
 						<!-- 비용 계정 목록 시작--> <!-- 비용 -->
-						<select name="account" id="d1_5" style="width:105px; <?if($rows[class2]<>5) echo 'display:none; disabled;';?>">
+						<select name="account" id="d1_5" style="width:105px; <?if($rows[class2]!=5) echo 'display:none; disabled;';?>">
 							<?
-								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
+								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc !='1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
 							?>
 							<option value=""> 선 택
@@ -253,6 +252,9 @@
 							<?}?>
 						</select>
 						<!-- 비용 계정 목록 종료-->
+					</div>
+					<div style="float:left; padding-top:8px; text-align:left;">
+						<input type="checkbox" name="is_jh" value="" <?if($rows[is_jh_loan]==1) echo 'checked'; else echo 'disabled';?>> 조합
 					</div>
 				</div>
 				<div style="height:32px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
