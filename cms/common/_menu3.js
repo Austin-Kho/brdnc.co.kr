@@ -112,6 +112,9 @@ function inoutSel(no, pj){
 	var class1 = class1_str+no;
 	var class2_str = "class2_"; // 구분2
 	var class2 = class2_str+no;
+
+
+
 	var inc_td_str = "inc_td_"; // 수익계정
 	var inc_td = inc_td_str+no;
 	var out_td_str = "out_td_"; // 비용계정
@@ -120,6 +123,11 @@ function inoutSel(no, pj){
 	var inc_account = inc_account_str+no;
 	var out_account_str = "out_account_"; // 비용 계정과목
 	var out_account = out_account_str+no;
+
+
+
+
+
 	var in_str = "in_"; // 입금처
 	var iin = in_str+no;
 	var inc_str = "inc_"; // 입금액
@@ -152,10 +160,18 @@ function inoutSel(no, pj){
 		class2_id.options[3].text = '출 자';//2번째 셀렉트바 정의
 		class2_id.options[3].value = '4';//2번째 셀렉트바 정의
 
+
+
+		//////////////////////////////
 		inc_td_id.style.display='';   //입금처 활성화
 		out_td_id.style.display='none'; // 출금처 비활성화
 		inc_account_id.disabled=false;
 		out_account_id.disabled=true;
+		//////////////////////////////
+
+
+
+
 		in_id.disabled=false;
 		inc_id.disabled=false;
 		out_id.disabled=true;
