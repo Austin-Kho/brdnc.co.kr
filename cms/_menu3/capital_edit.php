@@ -190,8 +190,11 @@
 							<option value="10" <?if($rows[class2]==10) echo "selected";?>> 현 장
 						<?}?>
 						</select>
+
+
+
 						<!-- 자산 계정 목록 시작--> <!-- 대여/회수 -->
-						<select name="account" id="inc_account" style="width:105px; <?if($rows[class2]<>3||$rows[class2]<>7) echo 'display:none; disabled;';?>">
+						<select name="account" id="d1_1" style="width:105px; <?if($rows[class2]<>3||$rows[class2]<>7) echo 'display:none; disabled;';?>">
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
@@ -203,7 +206,7 @@
 						</select>
 						<!-- 자산 계정 목록 종료-->
 						<!-- 부채 계정 목록 시작--> <!-- 차입/상환 -->
-						<select name="account" id="out_account" style="width:105px; <?if($rows[class2]<>2||$rows[class2]<>6) echo 'display:none; disabled;';?>">
+						<select name="account" id="d1_2" style="width:105px; <?if($rows[class2]<>2||$rows[class2]<>6) echo 'display:none; disabled;';?>">
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
@@ -215,7 +218,7 @@
 						</select>
 						<!-- 부채 계정 목록 종료-->
 						<!-- 자본 계정 목록 시작--> <!-- 출자/배당 -->
-						<select name="account" id="out_account" style="width:105px; <?if($rows[class2]<>4||$rows[class2]<>8) echo 'display:none; disabled;';?>">
+						<select name="account" id="d1_3" style="width:105px; <?if($rows[class2]<>4||$rows[class2]<>8) echo 'display:none; disabled;';?>">
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
@@ -227,7 +230,7 @@
 						</select>
 						<!-- 자본 계정 목록 종료-->
 						<!-- 수익 계정 목록 시작--> <!-- 수익 -->
-						<select name="account" id="out_account" style="width:105px; <?if($rows[class2]<>1) echo 'display:none; disabled;';?>">
+						<select name="account" id="d1_4" style="width:105px; <?if($rows[class2]<>1) echo 'display:none; disabled;';?>">
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
@@ -239,7 +242,7 @@
 						</select>
 						<!-- 수익 계정 목록 종료-->
 						<!-- 비용 계정 목록 시작--> <!-- 비용 -->
-						<select name="account" id="out_account" style="width:105px; <?if($rows[class2]<>5) echo 'display:none; disabled;';?>">
+						<select name="account" id="d1_5" style="width:105px; <?if($rows[class2]<>5) echo 'display:none; disabled;';?>">
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);

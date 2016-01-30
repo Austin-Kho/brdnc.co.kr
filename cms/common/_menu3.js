@@ -1,97 +1,29 @@
-// 구분목록상자 선택1 (capital2.php)
-function inoutSel_bu(form, no){
+/**
+ * MENU3 - 재무회계 페이지 함수 모음
+ */
 
-	alert(form.class1.value);
 
+// 구분목록상자 선택1 (capital2.php // capital_edit.php)
+function inoutSel_(form){
 
-	var inc_account = document.getElementById('inc_account');
-	var out_account = document.getElementById('out_account');
+	var d1_1 = document.getElementById('d1_1');
+	var d1_2 = document.getElementById('d1_2');
+	var d1_3 = document.getElementById('d1_3');
+	var d1_4 = document.getElementById('d1_4');
+	var d1_5 = document.getElementById('d1_5');
 
+	alert(d1_1.style.display);
+
+	// if(d1_1) d1_1.options[0].selected = 1;
+	// if(d1_2) d1_2.options[0].selected = 1;
+	// if(d1_3) d1_3.options[0].selected = 1;
+	// if(d1_4) d1_4.options[0].selected = 1;
+	// if(d1_5) d1_5.options[0].selected = 1;
 
 	if(form.class1.value==1){
 		form.class2.length=4;
 		form.class2.options[0].text = '수 익';
 		form.class2.options[0].value = '1';
-		form.class2.options[1].text = '차 입';
-		form.class2.options[1].value = '2';
-		form.class2.options[2].text = '회 수';
-		form.class2.options[2].value = '3';
-		form.class2.options[3].text = '출 자';
-		form.class2.options[3].value = '4';
-
-		//inc_account.style.display='';
-		//out_account.style.display='none';
-		//inc_account.disabled=0;
-		//out_account.disabled=1;
-
-	}else if(form.class1.value==2){
-		form.class2.length=4;
-		form.class2.options[0].text = '비 용'
-		form.class2.options[0].value = '5';
-		form.class2.options[1].text = '상 환';
-		form.class2.options[1].value = '6';
-		form.class2.options[2].text = '대 여';
-		form.class2.options[2].value = '7';
-		form.class2.options[3].text = '배 당';
-		form.class2.options[3].value = '8';
-
-		// inc_account.style.display='none';
-		// out_account.style.display='';
-		// inc_account.disabled=1;
-		// out_account.disabled=0;
-
-	}else if(form.class1.value==3){
-		form.class2.length=2;
-		form.class2.options[0].text = '본 사'
-		form.class2.options[0].value = '7';
-		form.class2.options[1].text = '현 장'
-		form.class2.options[1].value = '8';
-
-		// inc_account.style.display='';
-		// out_account.style.display='none';
-		// inc_account.disabled=1;
-		// out_account.disabled=1;
-
-	}else{
-		form.class2.length=11;
-		form.class2.options[0].text = '선 택';
-		form.class2.options[0].value = '';
-		form.class2.options[1].text = '수 익';
-		form.class2.options[1].value = '1';
-		form.class2.options[2].text = '차 입';
-		form.class2.options[2].value = '2';
-		form.class2.options[3].text = '회 수';
-		form.class2.options[3].value = '3';
-		form.class2.options[4].text = '출 자';
-		form.class2.options[4].value = '4';
-		form.class2.options[5].text = '비 용';
-		form.class2.options[5].value = '5';
-		form.class2.options[6].text = '상 환';
-		form.class2.options[6].value = '6';
-		form.class2.options[7].text = '대 여';
-		form.class2.options[7].value = '7';
-		form.class2.options[8].text = '배 당';
-		form.class2.options[8].value = '8';
-		form.class2.options[9].text = '본 사';
-		form.class2.options[9].value = '9';
-		form.class2.options[10].text = '현 장';
-		form.class2.options[10].value = '10';
-
-		// inc_account.style.display='';
-		// out_account.style.display='none';
-		// inc_account.disabled=1;
-		// out_account.disabled=1;
-	}
-}
-
-
-// 구분목록상자 선택1 (capital2.php)
-function inoutSel_(form){
-
-	if(form.class1.value==1){
-		form.class2.length=4;
-		form.class2.options[0].text = '수 익';
-		form.class2.options[0].value = '1';		
 		form.class2.options[1].text = '차 입';
 		form.class2.options[1].value = '2';
 		form.class2.options[2].text = '회 수';
@@ -108,7 +40,7 @@ function inoutSel_(form){
 	}else if(form.class1.value==2){
 		form.class2.length=4;
 		form.class2.options[0].text = '비 용';
-		form.class2.options[0].value = '5';		
+		form.class2.options[0].value = '5';
 		form.class2.options[1].text = '상 환';
 		form.class2.options[1].value = '6';
 		form.class2.options[2].text = '대 여';
@@ -167,7 +99,7 @@ function inoutSel_(form){
 		if(form.out) form.out.disabled=0;
 	}
 }
-// 구분목록 상자선택2 (capital2.php)
+// 구분목록 상자선택2 (capital2.php  // capital_edit.php)
 function inoutSel2_(form){
 
 	// var inc_account = document.getElementById('inc_account');
@@ -201,7 +133,7 @@ function inoutSel2_(form){
 		if(form.exp) form.exp.disabled=0;
 		if(form.out) form.out.disabled=0;
 	}
-	
+
 
 	// if(form.class2.value==1) {
 	// 	inc_account.style.display='';

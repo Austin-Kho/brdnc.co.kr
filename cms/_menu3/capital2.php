@@ -139,7 +139,7 @@
 								</td>
 								<td width="80" bgcolor="#EAEAEA" class="tb1">거래 일자</td>
 								<td width="80" bgcolor="#EAEAEA" class="tb1"> 구 분</td>
-								<td width="110" bgcolor="#EAEAEA" class="tb1"> 계정과목 <a href="javascript:" onclick="popUp_size('<?=$cms_url?>_capital/account.php','account',700,800)" title="계정과목 관리"><img src="../images/set.png" height="10" border="0" alt="설정"></a></td>
+								<td width="110" bgcolor="#EAEAEA" class="tb1"> 계정과목 <a href="javascript:" onclick="popUp_size('<?=$cms_url?>_menu3/account_m.php','account',700,800)" title="계정과목 관리"><img src="../images/set.png" height="10" border="0" alt="설정"></a></td>
 								<td width="190" bgcolor="#EAEAEA" class="tb1">적 요</td>
 								<td width="100" bgcolor="#EAEAEA" class="tb1">거 래 처</td>
 								<td width="50" bgcolor="#EAEAEA" class="tb1">입금처</td>
