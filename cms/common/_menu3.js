@@ -88,36 +88,52 @@ function inoutSel_bu(form, no){
 // 구분목록상자 선택1 (capital2.php)
 function inoutSel_(form){
 
-	alert(form.class1.value);
-
 	if(form.class1.value==1){
 		form.class2.length=4;
 		form.class2.options[0].text = '수 익';
-		form.class2.options[0].value = '1';
+		form.class2.options[0].value = '1';		
 		form.class2.options[1].text = '차 입';
 		form.class2.options[1].value = '2';
 		form.class2.options[2].text = '회 수';
 		form.class2.options[2].value = '3';
 		form.class2.options[3].text = '출 자';
 		form.class2.options[3].value = '4';
+		form.class2.options[0].selected =1; // 수익을 선택하고 ///////
+
+		if(form.inc) form.inc.disabled=0;
+		if(form.ina) form.ina.disabled=0;
+		if(form.exp) form.exp.disabled=1;
+		if(form.out) form.out.disabled=1;
 
 	}else if(form.class1.value==2){
 		form.class2.length=4;
-		form.class2.options[0].text = '비 용'
-		form.class2.options[0].value = '5';
+		form.class2.options[0].text = '비 용';
+		form.class2.options[0].value = '5';		
 		form.class2.options[1].text = '상 환';
 		form.class2.options[1].value = '6';
 		form.class2.options[2].text = '대 여';
 		form.class2.options[2].value = '7';
 		form.class2.options[3].text = '배 당';
 		form.class2.options[3].value = '8';
+		form.class2.options[0].selected =1; // 비용을 선택하고 ///////
+
+		if(form.inc) form.inc.disabled=1;
+		if(form.ina) form.ina.disabled=1;
+		if(form.exp) form.exp.disabled=0;
+		if(form.out) form.out.disabled=0;
 
 	}else if(form.class1.value==3){
 		form.class2.length=2;
-		form.class2.options[0].text = '본 사'
-		form.class2.options[0].value = '7';
-		form.class2.options[1].text = '현 장'
-		form.class2.options[1].value = '8';
+		form.class2.options[0].text = '본 사';
+		form.class2.options[0].value = '9';
+		form.class2.options[1].text = '현 장';
+		form.class2.options[1].value = '10';
+		form.class2.options[0].selected =1; // 본사를 선택하고 ///////
+
+		if(form.inc) form.inc.disabled=0;
+		if(form.ina) form.ina.disabled=0;
+		if(form.exp) form.exp.disabled=0;
+		if(form.out) form.out.disabled=0;
 
 	}else{
 		form.class2.length=11;
@@ -143,33 +159,66 @@ function inoutSel_(form){
 		form.class2.options[9].value = '9';
 		form.class2.options[10].text = '현 장';
 		form.class2.options[10].value = '10';
+		form.class2.options[0].selected =1; // 선택을 선택하고 ///////
+
+		if(form.inc) form.inc.disabled=0;
+		if(form.ina) form.ina.disabled=0;
+		if(form.exp) form.exp.disabled=0;
+		if(form.out) form.out.disabled=0;
 	}
 }
 // 구분목록 상자선택2 (capital2.php)
 function inoutSel2_(form){
-	var inc_account = document.getElementById('inc_account');
-	var out_account = document.getElementById('out_account');
 
-	if(form.class2.value==0) {form.class1.options[0].selected=1;}
-	if(form.class2.value>0&&form.class2.value<=4) {form.class1.options[1].selected=1;}
-	if(form.class2.value>4&&form.class2.value<=8) {form.class1.options[2].selected=1;}
-	if(form.class2.value>8){form.class1.options[3].selected=1;}
-	if(form.class2.value==1) {
-		inc_account.style.display='';
-		out_account.style.display='none';
-		inc_account.disabled=0;
-		out_account.disabled=1;
-	}else if(form.class2.value==5) {
-		inc_account.style.display='none';
-		out_account.style.display='';
-		inc_account.disabled=1;
-		out_account.disabled=0;
-	}else{
-		inc_account.style.display='';
-		out_account.style.display='none';
-		inc_account.disabled=1;
-		out_account.disabled=1;
+	// var inc_account = document.getElementById('inc_account');
+	// var out_account = document.getElementById('out_account');
+
+	if(form.class2.value==0) {
+		form.class1.options[0].selected=1;
+		if(form.inc) form.inc.disabled=0;
+		if(form.ina) form.ina.disabled=0;
+		if(form.exp) form.exp.disabled=0;
+		if(form.out) form.out.disabled=0;
 	}
+	if(form.class2.value>0&&form.class2.value<=4) {
+		form.class1.options[1].selected=1;
+		if(form.inc) form.inc.disabled=0;
+		if(form.ina) form.ina.disabled=0;
+		if(form.exp) form.exp.disabled=1;
+		if(form.out) form.out.disabled=1;
+	}
+	if(form.class2.value>4&&form.class2.value<=8) {
+		form.class1.options[2].selected=1;
+		if(form.inc) form.inc.disabled=1;
+		if(form.ina) form.ina.disabled=1;
+		if(form.exp) form.exp.disabled=0;
+		if(form.out) form.out.disabled=0;
+	}
+	if(form.class2.value>8){
+		form.class1.options[3].selected=1;
+		if(form.inc) form.inc.disabled=0;
+		if(form.ina) form.ina.disabled=0;
+		if(form.exp) form.exp.disabled=0;
+		if(form.out) form.out.disabled=0;
+	}
+	
+
+	// if(form.class2.value==1) {
+	// 	inc_account.style.display='';
+	// 	out_account.style.display='none';
+	// 	inc_account.disabled=0;
+	// 	out_account.disabled=1;
+	// }else if(form.class2.value==5) {
+	// 	inc_account.style.display='none';
+	// 	out_account.style.display='';
+	// 	inc_account.disabled=1;
+	// 	out_account.disabled=0;
+	// }else{
+	// 	inc_account.style.display='';
+	// 	out_account.style.display='none';
+	// 	inc_account.disabled=1;
+	// 	out_account.disabled=1;
+	// }
 }
 
 // 구분 목록상자 선택1 (capital3.php)

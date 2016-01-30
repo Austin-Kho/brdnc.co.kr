@@ -190,7 +190,8 @@
 							<option value="10" <?if($rows[class2]==10) echo "selected";?>> 현 장
 						<?}?>
 						</select>
-						<select name="account" id="inc_account" style="width:105px; <?if($rows[class1]<>1)echo "display:none;";?>" <?if($rows[class2]<>1) echo "disabled";?>>
+						<!-- 자산 계정 목록 시작--> <!-- 대여/회수 -->
+						<select name="account" id="inc_account" style="width:105px; <?if($rows[class2]<>3||$rows[class2]<>7) echo 'display:none; disabled;';?>">
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
@@ -200,7 +201,9 @@
 							<option value="<?=$acc_rows[d3_acc_name]?>" <?if($rows[account]==$acc_rows[d3_acc_name]) echo "selected";?>> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 							<?}?>
 						</select>
-						<select name="account" id="out_account" style="width:105px; <?if($rows[class1]==1)echo "display:none;";?>" <?if($rows[class2]<>5) echo "disabled";?>>
+						<!-- 자산 계정 목록 종료-->
+						<!-- 부채 계정 목록 시작--> <!-- 차입/상환 -->
+						<select name="account" id="out_account" style="width:105px; <?if($rows[class2]<>2||$rows[class2]<>6) echo 'display:none; disabled;';?>">
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
@@ -210,6 +213,43 @@
 							<option value="<?=$acc_rows[d3_acc_name]?>" <?if($rows[account]==$acc_rows[d3_acc_name]) echo "selected";?>> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 							<?}?>
 						</select>
+						<!-- 부채 계정 목록 종료-->
+						<!-- 자본 계정 목록 시작--> <!-- 출자/배당 -->
+						<select name="account" id="out_account" style="width:105px; <?if($rows[class2]<>4||$rows[class2]<>8) echo 'display:none; disabled;';?>">
+							<?
+								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
+								$acc_rlt = mysql_query($acc_qry, $connect);
+							?>
+							<option value=""> 선 택
+							<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+							<option value="<?=$acc_rows[d3_acc_name]?>" <?if($rows[account]==$acc_rows[d3_acc_name]) echo "selected";?>> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
+							<?}?>
+						</select>
+						<!-- 자본 계정 목록 종료-->
+						<!-- 수익 계정 목록 시작--> <!-- 수익 -->
+						<select name="account" id="out_account" style="width:105px; <?if($rows[class2]<>1) echo 'display:none; disabled;';?>">
+							<?
+								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
+								$acc_rlt = mysql_query($acc_qry, $connect);
+							?>
+							<option value=""> 선 택
+							<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+							<option value="<?=$acc_rows[d3_acc_name]?>" <?if($rows[account]==$acc_rows[d3_acc_name]) echo "selected";?>> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
+							<?}?>
+						</select>
+						<!-- 수익 계정 목록 종료-->
+						<!-- 비용 계정 목록 시작--> <!-- 비용 -->
+						<select name="account" id="out_account" style="width:105px; <?if($rows[class2]<>5) echo 'display:none; disabled;';?>">
+							<?
+								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
+								$acc_rlt = mysql_query($acc_qry, $connect);
+							?>
+							<option value=""> 선 택
+							<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+							<option value="<?=$acc_rows[d3_acc_name]?>" <?if($rows[account]==$acc_rows[d3_acc_name]) echo "selected";?>> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
+							<?}?>
+						</select>
+						<!-- 비용 계정 목록 종료-->
 					</div>
 				</div>
 				<div style="height:32px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
@@ -236,7 +276,7 @@
 						<input type="text" name="inc" value="<?=$rows[inc]?>" size="15" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')" <?if($rows[class1]==2) echo "disabled";?>>
 					</div>
 					<div style="float:left; padding:8px 0 0 5px; text-align:left;">
-						<select name="in" style="width:78;" <?if($rows[class1]==2) echo "disabled";?>>
+						<select name="ina" style="width:78;" <?if($rows[class1]==2) echo "disabled";?>>
 							<option value="" <?if(!$rows[in_acc]) echo "selected";?>> 선 택
 							<?
 								$query1="select * from cms_capital_bank_account ";

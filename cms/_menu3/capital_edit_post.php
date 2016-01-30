@@ -23,7 +23,7 @@
 	$cont = $_POST['cont'];
 	$acc = $_POST['acc'];
 	$inc = $_POST['inc'];
-	$in = $_POST['in'];
+	$ina = $_POST['ina'];
 	$exp = $_POST['exp'];
 	$out = $_POST['out'];
 	$evi = $_POST['evi'];
@@ -37,7 +37,7 @@
 																 account='$account',
 																 cont='$cont',
 																 acc='$acc',
-																 in_acc='$in',
+																 in_acc='$ina',
 																 inc='$inc',
 																 out_acc='$out',
 																 exp='$exp',
