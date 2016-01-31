@@ -8,8 +8,6 @@
 ?>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <?
-
-
 	$seq_num=$_REQUEST['seq_num'];
 	$worker=$_SESSION['p_name'];
 
