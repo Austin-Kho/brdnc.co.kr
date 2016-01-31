@@ -180,18 +180,18 @@
 							<td height="34" class="top2" align="right"><font color="black"><b onclick="auth_chk('1-1');">계약현황</b></font></td>
 							<td height="34" width="20" class="top2"><!-- <input type="checkbox" name="_m1_1" onclick="checksel();"> --></td>
 
-							<td class="top2" align="right"><font color="black">동호수 조회</font></td>
+							<td class="top2" align="right"><font color="black">계약현황</font></td>
 							<td class="top2">
 								<input type="checkbox" name="_m1_1_1" <?if($asr[_m1_1_1]>0) echo "checked";?>>조회
-								<input type="checkbox" name="_m1_1_1_m" <?if($asr[_m1_1_1]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m1_1_1_m" <?if($asr[_m1_1_1]>1) echo "checked";?> disabled>등록</td>
 							<td class="top2" align="right"><font color="black">계약등록</font></td>
 							<td class="top2">
 								<input type="checkbox" name="_m1_1_2" <?if($asr[_m1_1_2]>0) echo "checked";?>>조회
 								<input type="checkbox" name="_m1_1_2_m" <?if($asr[_m1_1_2]>1) echo "checked";?>>등록</td>
-							<td class="top2" align="right"><font color="black">계약현황</font></td>
+							<td class="top2" align="right"><font color="black">동호수 조회</font></td>
 							<td class="top2">
 								<input type="checkbox" name="_m1_1_3" <?if($asr[_m1_1_3]>0) echo "checked";?>>조회
-								<input type="checkbox" name="_m1_1_3_m" <?if($asr[_m1_1_3]>1) echo "checked";?>>등록</td>
+								<input type="checkbox" name="_m1_1_3_m" <?if($asr[_m1_1_3]>1) echo "checked";?> disabled>등록</td>
 							<td class="top2"></td>
 							<td class="top2"></td>
 						</tr>
@@ -202,7 +202,7 @@
 							<td align="right"><font color="black">고객 상담일지</font></td>
 							<td>
 								<input type="checkbox" name="_m1_2_1" <?if($asr[_m1_2_1]>0) echo "checked";?>>조회
-								<input type="checkbox" name="_m1_2_1_m"<?if($asr[_m1_2_1]>1) echo "checked";?> disabled>등록</td>
+								<input type="checkbox" name="_m1_2_1_m"<?if($asr[_m1_2_1]>1) echo "checked";?>>등록</td>
 							<td align="right"><font color="black">업무일지</font></td>
 							<td>
 								<input type="checkbox" name="_m1_2_2" <?if($asr[_m1_2_2]>0) echo "checked";?>>조회

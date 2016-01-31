@@ -71,7 +71,7 @@
 								<input type="button" value="우편번호 검색" onclick="javascript:ZipWindow('../member/zip_search.php','zipcode','address')" class="inputstyle_bt">
 								<input type="text" name="zipcode" value="" size="6" class="inputstyle2" readonly onKeydown="ZipWindow('../member/zip_search.php',1);" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
 								<input type="text" name="address1" value="" size="51" class="inputstyle2" readonly onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
-								<input type="text" name="address2" value="" size="30" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"> <font color="#788be2">나머지 주소</font>
+								<input type="text" name="address2" value="" size="35" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"> <font color="#788be2">나머지 주소</font>
 							</td>
 						</tr>
 						<tr>
@@ -84,7 +84,7 @@
 							</td>
 							<td width="150" class="form1" bgcolor="#F8F8F8"> 현장 관리 책임자 </td>
 							<td class="form2">
-								<input type="text" name="pj_manager" value="" size="30" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
+								<input type="text" name="pj_manager" value="" size="25" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
 							</td>
 						</tr>
 						<tr>
@@ -265,13 +265,13 @@
 						<tr>
 							<td width="150" class="form1" bgcolor="#F8F8F8"> 수행 개시일 <font color="red">*</font></td>
 							<td  class="form2">
-								<input type="text" name="start_date" id="start_date" value="" size="25" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
-									<a href="javascript:" onclick="cal_add(document.getElementById('start_date'),this); event.cancelBubble=true"> <img src="http://cigiko.cafe24.com/cms/images/calendar.jpg" border="0" alt="" /></a>
+								<input type="text" name="start_date" id="start_date" value="" size="24" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
+								<a href="javascript:" onclick="cal_add(document.getElementById('start_date'),this); event.cancelBubble=true"> <img src="http://cigiko.cafe24.com/cms/images/calendar.jpg" border="0" alt="" /></a>
 							</td>
 							<td width="150" class="form1" bgcolor="#F8F8F8" height="25"> 종료 예정일 <!-- <font color="red">*</font> --></td>
 							<td  class="form2">
-								<div style="float:left; padding-left:5px; margin-right:5px;">
-									<input type="text" name="expiry_date" id="expiry_date" value="" size="25" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
+								<div style="float:left; padding-left:0px; margin-right:5px;">
+									<input type="text" name="expiry_date" id="expiry_date" value="" size="24" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
 									<a href="javascript:" onclick="cal_add(document.getElementById('expiry_date'),this); event.cancelBubble=true"> <img src="http://cigiko.cafe24.com/cms/images/calendar.jpg" border="0" alt="" /></a>
 								</div>
 							</td>
