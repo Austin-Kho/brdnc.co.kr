@@ -66,11 +66,11 @@
 										$nex_row = mysql_fetch_array($nex_rlt);
 									?>
 									<div style="clear:left; float:left; width:50px; height:31px; padding-top:5px; text-align:center;">
-										<input type="button" value="Pre" onclick="location.href='sales_main.php?m_di=1&amp;s_di=2&amp;ss_di=3&amp;pj_list=<?=$pj_list?>&amp;headq=<?=$pj_where[0]?>&amp;team=<?=$pj_where[1]?>&amp;seq=<?=$pre_row[seq]?>' " <?if(trim($move_row[n])==trim($row[work_date])) echo "disabled";?>>
+										<input type="button" value="Pre" onclick="location.href='sales_main.php?m_di=2&amp;s_di=2&amp;ss_di=3&amp;pj_list=<?=$pj_list?>&amp;headq=<?=$pj_where[0]?>&amp;team=<?=$pj_where[1]?>&amp;seq=<?=$pre_row[seq]?>' " <?if(trim($move_row[n])==trim($row[work_date])) echo "disabled";?>>
 									</div>
 									<div style="float:left; width:220px; height:28px; padding-top:8px; text-align:center; color:#000000;"><b><?=$row[work_date]." [ <font color='#000099'>".$headq_row[headq]."-".$team_row[team]."</font> ] 업무일지";?></b></div>
 									<div style="float:left; width:50px; height:31px; padding-top:5px; text-align:center;">
-										<input type="button" value="Nex" onclick="location.href='sales_main.php?m_di=1&amp;s_di=2&amp;ss_di=3&amp;pj_list=<?=$pj_list?>&amp;headq=<?=$pj_where[0]?>&amp;team=<?=$pj_where[1]?>&amp;seq=<?=$nex_row[seq]?>' " <?if(trim($move_row[x])==trim($row[work_date])) echo "disabled";?>>
+										<input type="button" value="Nex" onclick="location.href='sales_main.php?m_di=2&amp;s_di=2&amp;ss_di=3&amp;pj_list=<?=$pj_list?>&amp;headq=<?=$pj_where[0]?>&amp;team=<?=$pj_where[1]?>&amp;seq=<?=$nex_row[seq]?>' " <?if(trim($move_row[x])==trim($row[work_date])) echo "disabled";?>>
 									</div>
 									<div style="float:left; width:250px; height:28px; padding:8px 0 0 20px; color:#000000;"><b><?="[ ".$pj_name_row[pj_name]." 현장 ]"?></b></div>
 
@@ -560,11 +560,11 @@
 										$submit_str="alert('등록 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 										$del_str="alert('삭제 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 									}else{
-										$submit_str="location.href='sales_main.php?m_di=1&amp;s_di=2&amp;ss_di=2&amp;mode=modify&amp;pj_list=".$row[pj_seq]."&amp;headq=".$pj_where[0]."&amp;team=".$pj_where[1]."&amp;seq=".$seq."' ";
+										$submit_str="location.href='sales_main.php?m_di=2&amp;s_di=2&amp;ss_di=2&amp;mode=modify&amp;pj_list=".$row[pj_seq]."&amp;headq=".$pj_where[0]."&amp;team=".$pj_where[1]."&amp;seq=".$seq."' ";
 									}
 								?>
 							<div style="clear:left; float:left; height:30px; width:605px; padding:8px 0 0 10px; border-width:1px 0 0 0; border-style:solid; border-color:#dddddd; margin-top:10px;">
 								<input type="button" value="수정하기" onclick="<?=$submit_str?>">
-								<input type="button" value="목록으로" onclick="location.href='<?=$_SERVER[PHP_SELF]?>?m_di=1&amp;s_di=2&amp;ss_di=1' ">
+								<input type="button" value="목록으로" onclick="location.href='<?=$_SERVER[PHP_SELF]?>?m_di=2&amp;s_di=2&amp;ss_di=1' ">
 							</div>
 							<div style="float:right; height:30px; width:150px; padding:8px 10px 0 0; border-width:1px 0 0 0; border-style:solid; border-color:#dddddd; text-align:right; margin-top:10px;"></div>

@@ -184,13 +184,13 @@
 							<td style="width:252px; height:480px; border-width:1px 0 1px 1px; border-style:solid; border-color:#cccccc; background-color:#f8f8f8; padding:5px 5px 5px 5px;" valign="top"><!-- B -->
 								<div style="height:50px; margin-bottom:6px; background-color:#e0eded;"></div>
 								<div style="height: 25px; padding:5px 5px 0 5px; margin:0px 5px 0 5px; border-width:1px 0 1px 0;" class="bottom">
-									<a href="<?$_SERVER['PHP_SELF']?>?m_di=1&amp;s_di=1"><?=$s_di_1?></a>
+									<a href="<?$_SERVER['PHP_SELF']?>?m_di=2&amp;s_di=1"><?=$s_di_1?></a>
 								</div>
 								<div style="height: 25px; padding:5px 5px 0 5px; margin:0 5px 0 5px;" class="bottom">
-									<a href="<?$_SERVER['PHP_SELF']?>?m_di=1&amp;s_di=2" style="color:#000000;"><b><?=$s_di_2?></b></a>
+									<a href="<?$_SERVER['PHP_SELF']?>?m_di=2&amp;s_di=2" style="color:#000000;"><b><?=$s_di_2?></b></a>
 								</div>
 								<div style="height: 25px; padding:5px 5px 0 5px; margin:0 5px 0 5px;" class="bottom">
-									<a href="<?$_SERVER['PHP_SELF']?>?m_di=1&amp;s_di=3"><?=$s_di_3?></a>
+									<a href="<?$_SERVER['PHP_SELF']?>?m_di=2&amp;s_di=3"><?=$s_di_3?></a>
 								</div>
 							</td>
 						</tr>

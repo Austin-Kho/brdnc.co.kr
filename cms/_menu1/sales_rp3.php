@@ -39,6 +39,7 @@
 								$pj_row = mysql_fetch_array($pj_rlt);
 								$year_frm=$_REQUEST['year_frm'];
 								$pj_list=$_REQUEST['pj_list'];
+								if(!$pj_list) $pj_list = 1;
 							?>
 							<div style="float:left;  width:120px; height:28px; padding-top:7px; background-color:#F4F4F4; text-align:center; color:#000000;">년도 별</div>
 							<div style="float:left; width:238px; height:28px; padding:7px 0 0 22px;">

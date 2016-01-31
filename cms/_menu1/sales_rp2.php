@@ -32,6 +32,7 @@
 						</div>
 						<?
 							$pj_list=$_REQUEST['pj_list'];
+							if(!$pj_list) $pj_list = 1;
 							$data_cr=$_REQUEST['data_cr'];
 
 							$result=mysql_query("SELECT data_cr FROM cms_project1_info WHERE seq='$pj_list' ", $connect);

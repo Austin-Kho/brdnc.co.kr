@@ -80,7 +80,7 @@
 								?>
 							<div style="float:left; height:30px; width:605px; padding:8px 0 0 10px; border-width:1px 0 0 0; border-style:solid; border-color:#dddddd;">
 								<input type="button" value="<?=$sub_str?>" onclick="<?=$submit_str?>">
-								<input type="button" value="목록으로" onclick="location.href='<?=$_SERVER[PHP_SELF]?>?m_di=1&amp;s_di=1&amp;ss_di=1' ">
+								<input type="button" value="목록으로" onclick="location.href='<?=$_SERVER[PHP_SELF]?>?m_di=2&amp;s_di=1&amp;ss_di=1' ">
 							</div>
 							<div style="float:right; height:30px; width:150px; padding:8px 10px 0 0; border-width:1px 0 0 0; border-style:solid; border-color:#dddddd; text-align:right;">
 								<?if($mode=='modify'){?><!-- <input type="button" value="내용삭제" onclick="<?=$del_str?>"> --><? } ?>

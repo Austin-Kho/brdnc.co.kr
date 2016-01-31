@@ -97,7 +97,9 @@
 									?>
 									<div style="clear:left; width:30px; border-width:0 1px 1px 0; text-align:center;" class="bor_ddd"><input type="checkbox" name="seq[]" value="<?$rows[seq]?>"></div>
 									<div style="width:100px; border-width:0 1px 1px 0; text-align:center;" class="bor_ddd">
-										<a href="sales_main.php?m_di=1&amp;s_di=2&amp;ss_di=3&amp;pj_list=<?=trim($rows[pj_seq])?>&amp;headq=<?=trim($pj_where[0])?>&amp;team=<?=trim($pj_where[1])?>&amp;seq=<?=trim($rows[seq])?>" class="no_auth"><?=$rows[work_date]?></a><!-- 작성일자 -->
+										<a href="sales_main.php?m_di=2&amp;s_di=2&amp;ss_di=3&amp;pj_list=<?=trim($rows[pj_seq])?>&amp;headq=<?=trim($pj_where[0])?>&amp;team=<?=trim($pj_where[1])?>&amp;seq=<?=trim($rows[seq])?>" class="no_auth">
+											<?=$rows[work_date]?>
+										</a><!-- 작성일자 -->
 									</div>
 									<div style="width:160px; border-width:0 0 1px 0; text-align:center;" class="bor_ddd"><?=$dt_row[pj_name]?></div><!-- 현장명 -->
 									<div style="width:80px; border-width:0 0 1px 1px; text-align:center;" class="bor_ddd"><?=$dt_row[headq]?></div><!-- 소속본부 -->
@@ -126,9 +128,13 @@
 										$submit_str="alert('등록 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 										$del_str="alert('삭제 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 									}else{
-										$submit_str=htmlspecialchars("location.href='$_SERVER[PHP_SELF]?m_di=1&s_di=2&ss_di=2&mode=reg' ");
+										$submit_str=htmlspecialchars("location.href='$_SERVER[PHP_SELF]?m_di=2&s_di=2&ss_di=2&mode=reg' ");
 										$del_str="alert('준비중..! 현재 해당 부서에 대한 수정 화면에서 개별 삭제처리만 가능합니다.')";
 									}
 								?>
-							<div style="float:left; height:30px; width:605px; padding:8px 0 0 10px; border-width:1px 0 0 0; border-style:solid; border-color:#dddddd;"><input type="button" value="신규 등록" onclick="<?=$submit_str?>"></div>
-							<div style="float:right; height:30px; width:150px; padding:8px 10px 0 0; border-width:1px 0 0 0; border-style:solid; border-color:#dddddd; text-align:right;"><!-- <input type="button" value="선택 삭제" onclick="<?=$del_str?>"> --></div>
+							<div style="float:left; height:30px; width:605px; padding:8px 0 0 10px; border-width:1px 0 0 0; border-style:solid; border-color:#dddddd;">
+								<input type="button" value="신규 등록" onclick="<?=$submit_str?>">
+							</div>
+							<div style="float:right; height:30px; width:150px; padding:8px 10px 0 0; border-width:1px 0 0 0; border-style:solid; border-color:#dddddd; text-align:right;">
+								<input type="button" value="선택 삭제" onclick="<?=$del_str?>">
+							</div>

@@ -115,7 +115,7 @@
 									<?
 										if($total_bnum>$index_num){
 											echo "<span>";
-											$back_url="&amp;m_di=1&amp;s_di=1";
+											$back_url="&amp;m_di=2&amp;s_di=1";
 											page_avg($total_bnum, $page_num, $index_num, $start, $back_url);
 											//1. 총게시물수 2. 한페이지 페이지수 3. 한페이지목록 수 4. 시작페이지 5. 해당페이지 필요변수
 											echo "</span>";
@@ -128,9 +128,13 @@
 										$submit_str="alert('등록 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 										$del_str="alert('삭제 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 									}else{
-										$submit_str="location.href='$_SERVER[PHP_SELF]?m_di=1&amp;s_di=1&amp;ss_di=2&amp;mode=reg' ";
+										$submit_str="location.href='$_SERVER[PHP_SELF]?m_di=2&amp;s_di=1&amp;ss_di=2&amp;mode=reg' ";
 										$del_str="alert('준비중..! 현재 해당 부서에 대한 수정 화면에서 개별 삭제처리만 가능합니다.')";
 									}
 								?>
-							<div style="float:left; height:30px; width:605px; padding:8px 0 0 10px; border-width:1px 0 0 0; border-style:solid; border-color:#dddddd;"><input type="button" value="신규 등록" onclick="<?=$submit_str?>"></div>
-							<div style="float:right; height:30px; width:150px; padding:8px 10px 0 0; border-width:1px 0 0 0; border-style:solid; border-color:#dddddd; text-align:right;"><!-- <input type="button" value="선택 삭제" onclick="<?=$del_str?>"> --></div>
+							<div style="float:left; height:30px; width:605px; padding:8px 0 0 10px; border-width:1px 0 0 0; border-style:solid; border-color:#dddddd;">
+								<input type="button" value="신규 등록" onclick="<?=$submit_str?>">
+							</div>
+							<div style="float:right; height:30px; width:150px; padding:8px 10px 0 0; border-width:1px 0 0 0; border-style:solid; border-color:#dddddd; text-align:right;">
+								<input type="button" value="선택 삭제" onclick="<?=$del_str?>">
+							</div>
