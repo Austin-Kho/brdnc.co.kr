@@ -227,7 +227,6 @@
 									 if($rows1[evidence]==5) $evi="현금영수증";
 									 if($rows1[evidence]==6) $evi="간이영수증";
 
-
 									 // ???
 									 if($rows1[in_acc]==0||($rows1[class1]==3&&$rows1[out_acc]==$rows1[no])){ // 입금계정정보가 없거나 대체거래이고 출금계정이 은행등록계좌와 같으면,
 										 $in_acc="";
@@ -245,8 +244,8 @@
 								<td align="center" height="30" class="tb2" title="<?=$rows1[note]?>"><?=$rows1[deal_date]?></td>
 								<td align="center" height="30" class="tb2" title="<?=$rows1[note]?>"><?=$cla?></td>
 								<td align="center" class="tb2"  title="<?=$rows1[note]?>" style="color:#000099;"><?=$account?></td>
-								<td align="left" height="30"  title="<?=$rows1[note]?>" class="tb2" style="cursor:pointer;"><?=rg_cut_string($rows1[cont],20,"..");?></td>
-								<td align="left" height="30"  title="<?=$rows1[note]?>" class="tb2"><?=rg_cut_string($acc,8,"")?></td>
+								<td align="left" height="30"  title="<?=$rows1[cont]?>" class="tb2" style="cursor:pointer;"><?=rg_cut_string($rows1[cont],20,"..");?></td>
+								<td align="left" height="30"  title="<?=$rows1[acc]?>" class="tb2"><?=rg_cut_string($acc,8,"")?></td>
 								<td align="center" height="30"  title="<?=$rows1[note]?>" bgcolor="#ececff" class="tb2"><?=$in_acc?></td>
 								<td align="right" height="30"  title="<?=$rows1[note]?>" class="tb2" bgcolor="#ececff" style="padding-right:10px;"><?=$inc?></td>
 								<td align="center" height="30"  title="<?=$rows1[note]?>" bgcolor="#fff0f0" class="tb2"><?=$out_acc?></td>

@@ -649,30 +649,20 @@ function inoutSel2(no){
  * @return {[type]}    [description]
  */
 function jh_chk(no){
-	var jh_loan_str = "jh_loan_";
+	var pj_seq_str = "pj_seq_"; // 현장코드
+	var pj_seq = pj_seq_str+no;
+	var jh_loan_str = "jh_loan_"; // 조합대여 여부
 	var jh_loan = jh_loan_str+no;
-	var inc_td_str = "inc_td_"; // 수익계정
-	var inc_td = inc_td_str+no;
 
-	var out_td_str = "out_td_"; // 비용계정
-	var out_td = out_td_str+no;
-
-	var out_account_str = "out_account_"; // 비용 계정과목
-	var out_account = out_account_str+no;
-
+	var pj_seq_id = document.getElementById(pj_seq);
 	var jh_loan_id = document.getElementById(jh_loan);
-	var inc_td_id = document.getElementById(inc_td);
-	var out_td_id = document.getElementById(out_td);
-	var out_account_id = document.getElementById(out_account);
+
+
 
 	if(jh_loan_id.checked==true){
-		inc_td_id.style.display='none';
-		out_td_id.style.display='';
-		out_account_id.disabled=false;
+		pj_seq_id.disabled=0;
 	}else{
-		inc_td_id.style.display='';
-		out_td_id.style.display='none';
-		out_account_id.disabled=true;
+		pj_seq_id.disabled=1;
 	}
 }
 

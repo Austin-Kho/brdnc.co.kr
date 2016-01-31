@@ -70,11 +70,11 @@
 										<td width="75" class="bottom">계정과목 <font color="red">*</font> <a href="javascript:" onclick="popUp_size('<?=$cms_url?>_menu3/account_m.php','account',700,800)" title="계정과목 관리"><img src="../images/set.png" height="10" border="0" alt="설정"></a></td>
 										<td width="120" class="bottom">적 요 <font color="red">*</font></td>
 										<td width="70" class="bottom">거 래 처</td>
-										<td width="60" class="bottom">입금처 <font color="red">*</font> <a href="javascript:" onclick="popUp('<?=$cms_url?>_capital/acc_list.php?fn=1&amp;frm=out_stock_frm','bank_acc')" title="은행계좌 관리"><img src="../images/set.png" height="10" border="0" alt="설정"></a></td>
+										<td width="60" class="bottom">입금처 <font color="red">*</font> <a href="javascript:" onclick="popUp('<?=$cms_url?>_menu3/acc_list.php?fn=1&amp;frm=out_stock_frm','bank_acc')" title="은행계좌 관리"><img src="../images/set.png" height="10" border="0" alt="설정"></a></td>
 										<td width="50" class="bottom">입금금액 <font color="red">*</font></td>
 										<td width="60" class="bottom">출금처 <font color="red">*</font> <a href="javascript:" onclick="popUp('<?=$cms_url?>_menu3/acc_list.php?fn=1&amp;frm=out_stock_frm','bank_acc')" title="은행계좌 관리"><img src="../images/set.png" height="10" border="0" alt="설정"></a></td>
 										<td width="50" class="bottom">출금금액 <font color="red">*</font></td>
-										<td width="110" class="bottom">송금수수료 <font color="red">*</font></td>
+										<td width="110" class="bottom">이체수수료 <font color="red">*</font></td>
 										<td width="70" class="bottom">증빙서류 <font color="red">*</font></td>
 									</tr>
 									<tr align="center">
