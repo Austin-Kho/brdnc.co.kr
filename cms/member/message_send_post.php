@@ -8,6 +8,7 @@
 	$connect=dbconn();
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<div style="position:absolute; top:0px; right:0px; left:0px; bottom:0px; background:#000; z-index:100000; opacity: 0.5; text-align:center;"></div>
 <?
 	// 이름과 아이디에 해당하는 세션이 있는지 확인
 	if(!isset($_SESSION['p_id'])||!isset($_SESSION['p_name'])){

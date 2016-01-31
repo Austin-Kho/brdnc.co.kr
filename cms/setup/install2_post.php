@@ -2,6 +2,7 @@
 	include "setup_lib.php";
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<div style="position:absolute; top:0px; right:0px; left:0px; bottom:0px; background:#000; z-index:100000; opacity: 0.5; text-align:center;"></div>
 <?
 	$hostname = $_REQUEST['hostname'];
 	$user_id = $_REQUEST['user_id'];

@@ -9,3 +9,4 @@
 	setcookie("p_sid", "", time(), '/');
 ?>
 <meta http-equiv='refresh' content='0; URL=../member/login_form.php'>
+<div style="position:absolute; top:0px; right:0px; left:0px; bottom:0px; background:#000; z-index:100000; opacity: 0.5; text-align:center;"></div>

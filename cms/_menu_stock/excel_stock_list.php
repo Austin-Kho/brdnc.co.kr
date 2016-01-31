@@ -1,4 +1,3 @@
-<meta http-equiv="Content-Type" content="application/vnd.ms-excel;charset=UTF-8">
 <?
 	// 데이터베이스 연결 정보와 기타 설정
 	include '../php/config.php';
@@ -6,7 +5,9 @@
 	include '../php/util.php';
 	// MySQL 연결
 	$connect=dbconn();
-
+?>
+<meta http-equiv="Content-Type" content="application/vnd.ms-excel;charset=UTF-8">
+<?
 	$add_where = stripslashes($_REQUEST['add_where']);
 	$add_arr = $_REQUEST['add_arr'];
 	$total_qty = $_REQUEST['total_qty'];
@@ -20,6 +21,7 @@
   Header("Pragma: no-cache");
   Header("Expires: 0");
 ?>
+
 
 <table border="1" width="100%" cellspacing="0" cellpadding="0">
 	<tr align="center" height="35">
