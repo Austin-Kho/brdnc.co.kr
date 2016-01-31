@@ -245,7 +245,7 @@
 								<td align="center" height="30" class="tb2" title="<?=$rows1[note]?>"><?=$rows1[deal_date]?></td>
 								<td align="center" height="30" class="tb2" title="<?=$rows1[note]?>"><?=$cla?></td>
 								<td align="center" class="tb2"  title="<?=$rows1[note]?>" style="color:#000099;"><?=$account?></td>
-								<td align="left" height="30"  title="<?=$rows1[note]?>" class="tb2"><?=rg_cut_string($rows1[cont],20,"..");?></td>
+								<td align="left" height="30"  title="<?=$rows1[note]?>" class="tb2" style="cursor:pointer;"><?=rg_cut_string($rows1[cont],20,"..");?></td>
 								<td align="left" height="30"  title="<?=$rows1[note]?>" class="tb2"><?=rg_cut_string($acc,8,"")?></td>
 								<td align="center" height="30"  title="<?=$rows1[note]?>" bgcolor="#ececff" class="tb2"><?=$in_acc?></td>
 								<td align="right" height="30"  title="<?=$rows1[note]?>" class="tb2" bgcolor="#ececff" style="padding-right:10px;"><?=$inc?></td>

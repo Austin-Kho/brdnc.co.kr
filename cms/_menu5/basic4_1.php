@@ -31,8 +31,8 @@
 										<select name="div_seq" style="width:80px; height:21px;">
 											<option value="" <?if(!$div_seq||$acc_sort==2) echo "selected";?>> 선 택
 											<?
-												
-												
+
+
 												$qry = "SELECT seq, div_name FROM cms_com_div ORDER BY seq";
 												$rlt = mysql_query($qry, $connect);
 												while($rows = mysql_fetch_array($rlt)){

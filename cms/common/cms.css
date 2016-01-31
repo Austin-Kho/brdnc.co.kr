@@ -92,7 +92,7 @@
 	.submit_bt  {font-family:맑은 고딕; border:1px solid #fff; outline:1px solid #ccc; font-size: 12px; background-color:#A4B0BD; color:white; padding-bottom:3px; cursor:pointer; cursor:pointer; }
 	.submit_bt2 {font-family:맑은 고딕; border:1px solid #eee; outline:1px solid #ccc; font-size: 12px; width:90px; height:28px; background-color:#838da5; color:white; padding-bottom:3px; cursor:pointer;}
 
-    .input { font-size:9pt; color:black; border:1x solid black; }
+  .input { font-size:9pt; color:black; border:1x solid black; }
 	.button {font-family:맑은 고딕; border: #cccccc 1px solid; font-size: 12px; background-color:#99ccff;}
 	.sub_bt1{border-width:1px 1px 1px 1px; border-color: #707070; border-style: solid; background-color:#DEDEDE; line-height:170%; cursor:pointer;}
 	.sub_bt2{border-width:1px 1px 1px 1px; border-color: #4A96B0; border-style: solid; background-color:#A6F4FF; line-height:170%;} cursor:pointer;

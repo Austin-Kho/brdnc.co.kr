@@ -113,7 +113,7 @@
 			}
 			var s2_sub=confirm('입출금 거래정보를 수정하시겠습니까?');
 			if(s2_sub==true){
-				form.submit();				
+				form.submit();
 			}
 		}
 	//-->
@@ -146,7 +146,7 @@
 						<!-- <input type="text" name="deal_date" id="deal_date" value="<?=$rows[deal_date]?>" class="inputstyle2" size="31" onclick="openCalendar(this)" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"> <a href="javascript:" onclick="openCalendar(document.getElementById('deal_date'));"><img src="../images/calendar.jpg" border="0" alt="" /></a> -->
 
 						<input type="text" name="deal_date" id="deal_date" value="<?=$rows[deal_date]?>" size="25" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
-						<a href="javascript:" onclick="cal_add(document.getElementById('deal_date'),this); event.cancelBubble=true"> <img src="http://cigiko.cafe24.com/cms/images/calendar.jpg" border="0" alt="" /></a> <?=$rows[class1]."-".$rows[class2]?>
+						<a href="javascript:" onclick="cal_add(document.getElementById('deal_date'),this); event.cancelBubble=true"> <img src="http://cigiko.cafe24.com/cms/images/calendar.jpg" border="0" alt="" /></a>
 					</div>
 				</div>
 				<div style="height:32px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">

@@ -40,14 +40,15 @@ Header("Expires: 0");
 			<td width="100" bgcolor="#EAEAEA">입금처</td>
 			<td width="100" bgcolor="#EAEAEA">입금금액</td>
 			<td width="100" bgcolor="#EAEAEA">지출처</td>
-			<td width="100" bgcolor="#EAEAEA">지출금액</td>			
+			<td width="100" bgcolor="#EAEAEA">지출금액</td>
 			<td width="100" bgcolor="#EAEAEA">현금시재</td>
 			<td width="100" bgcolor="#EAEAEA">예금잔고</td>
+			<td width="100" bgcolor="#EAEAEA">비 고</td>
 	</tr>
 <?
 	if($s_date){$s_add=" AND deal_date<'$s_date' ";}else{$s_add="  AND deal_date<'2000-01-01'  ";} // 시작일이 있으면 시작일 이후 없으면 2000-01-01부터 시작
 
-	$query1="SELECT seq_num, class1, class2, account, cont, acc, in_acc, inc, out_acc, exp, evidence, worker, deal_date, name, no
+	$query1="SELECT seq_num, class1, class2, account, cont, acc, in_acc, inc, out_acc, exp, evidence, cms_capital_cash_book.note, worker, deal_date, name, no
 			    FROM cms_capital_cash_book, cms_capital_bank_account
 			    $add_where
 			    ORDER BY deal_date, seq_num";
@@ -118,9 +119,10 @@ Header("Expires: 0");
 		<td align="center" height="30" bgcolor="#ECECFF"><?=$in_acc?></td>
 		<td align="right" height="30" bgcolor="#ECECFF"><?=$inc?></td>
 		<td align="center" height="30" bgcolor="#FFF0F0"><?=$out_acc?></td>
-		<td align="right" height="30" bgcolor="#FFF0F0"><?=$exp?></td>		
+		<td align="right" height="30" bgcolor="#FFF0F0"><?=$exp?></td>
 		<td align="right" height="30"><?=number_format($cash_hand)?></td>
 		<td align="right" height="30"><?=number_format($bank_balance)?></td>
+		<td align="right" height="30"><?=$rows1[note]?></td>
 	</tr>
 <?
 	 }
