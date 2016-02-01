@@ -90,16 +90,13 @@
 								</select>
 								<select name="class2" style="width:80px;" onchange = "inoutSel2_(this.form)">
 									<option value="" <?if(!$class2) echo "selected";?>> 선 택
-									<option value="1" <?if($class2==1) echo "selected";?>> 수 익
-									<option value="2" <?if($class2==2) echo "selected";?>> 차 입
-									<option value="3" <?if($class2==3) echo "selected";?>> 회 수
-									<option value="4" <?if($class2==4) echo "selected";?>> 출 자
+									<option value="1" <?if($class2==1) echo "selected";?>> 자 산
+									<option value="2" <?if($class2==2) echo "selected";?>> 부 채
+									<option value="3" <?if($class2==3) echo "selected";?>> 자 본
+									<option value="4" <?if($class2==4) echo "selected";?>> 수 익
 									<option value="5" <?if($class2==5) echo "selected";?>> 비 용
-									<option value="6" <?if($class2==6) echo "selected";?>> 상 환
-									<option value="7" <?if($class2==7) echo "selected";?>> 대 여
-									<option value="8" <?if($class2==8) echo "selected";?>> 배 당
-									<option value="9" <?if($class2==9) echo "selected";?>> 본 사
-									<option value="10" <?if($class2==10) echo "selected";?>> 현 장
+									<option value="6" <?if($class2==6) echo "selected";?>> 본 사
+									<option value="7" <?if($class2==7) echo "selected";?>> 현 장
 								</select>
 							</td>
 							<td width="60" class="form2" bgcolor="#F4F4F4">거래기간 </td>

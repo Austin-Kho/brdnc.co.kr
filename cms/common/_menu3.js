@@ -141,7 +141,7 @@ function inoutSel_(form){
 }
 // 구분목록 상자선택2 (capital2.php  // capital_edit.php)
 function inoutSel2_(form){
-	alert(form.class2.value);
+
 	var d1_1 = document.getElementById('d1_1');
 	var d1_2 = document.getElementById('d1_2');
 	var d1_3 = document.getElementById('d1_3');
@@ -677,124 +677,120 @@ function inout_frm_chk(com){
 
 	var form=document.inout_frm;
 
-	alert();
+	if(!form.deal_date.value){
+		alert('거래일자를 입력하세요!');
+		form.deal_date.focus();
+		return;
+	}
+	if(!form.class1_1.value&&!form.class1_2.value&&!form.class1_3.value&&!form.class1_4.value&&!form.class1_5.value&&!form.class1_6.value&&!form.class1_7.value&&!form.class1_8.value&&!form.class1_9.value&&!form.class1_10.value){
+		alert('하나 이상의 거래를 입력하세요!');
+		form.class1_1.focus();
+		return;
+	}
 
-	// if(!form.deal_date.value){
-	// 	alert('거래일자를 입력하세요!');
-	// 	form.deal_date.focus();
-	// 	return;
-	// }
-	// if(!form.class1_1.value&&!form.class1_2.value&&!form.class1_3.value&&!form.class1_4.value&&!form.class1_5.value&&!form.class1_6.value&&!form.class1_7.value&&!form.class1_8.value&&!form.class1_9.value&&!form.class1_10.value){
-	// 	alert('하나 이상의 거래를 입력하세요!');
-	// 	form.class1_1.focus();
-	// 	return;
-	// }
+	for(i=1; i<=10; i++){ // 총 10행 행수만큼 반복
 
-	// for(i=1; i<=10; i++){ // 총 10행 행수만큼 반복
+		var d1_acc1 = "d1_acc1_"+i;   // 자산 계정과목
+		var d1_acc2 = "d1_acc2_"+i;   // 부채 계정과목
+		var d1_acc3 = "d1_acc3_"+i;   // 자본 계정과목
+		var d1_acc4 = "d1_acc4_"+i;   // 수익 계정과목
+		var d1_acc5 = "d1_acc5_"+i;   // 비용 계정과목
+		var d1_acc1_id = document.getElementById(d1_acc1);////// 자산계정 FORM
+		var d1_acc2_id = document.getElementById(d1_acc2);    // 부채계정 FORM
+		var d1_acc3_id = document.getElementById(d1_acc3);    // 자본계정 FORM
+		var d1_acc4_id = document.getElementById(d1_acc4);    // 수익계정 FORM
+		var d1_acc5_id = document.getElementById(d1_acc5);////// 비용계정 FORM
 
-	// 	var d1_acc1 = "d1_acc1_"+i;   // 자산 계정과목
-	// 	var d1_acc2 = "d1_acc2_"+i;   // 부채 계정과목
-	// 	var d1_acc3 = "d1_acc3_"+i;   // 자본 계정과목
-	// 	var d1_acc4 = "d1_acc4_"+i;   // 수익 계정과목
-	// 	var d1_acc5 = "d1_acc5_"+i;   // 비용 계정과목
-	// 	var d1_acc1_id = document.getElementById(d1_acc1);////// 자산계정 FORM
-	// 	var d1_acc2_id = document.getElementById(d1_acc2);    // 부채계정 FORM
-	// 	var d1_acc3_id = document.getElementById(d1_acc3);    // 자본계정 FORM
-	// 	var d1_acc4_id = document.getElementById(d1_acc4);    // 수익계정 FORM
-	// 	var d1_acc5_id = document.getElementById(d1_acc5);////// 비용계정 FORM
+		if(eval('form.class1_'+i).value){
 
-	// 	if(eval('form.class1_'+i).value){
+			if(eval('form.class2_'+i).value=='10'){
+				if(!eval('form.pj_seq_'+i).value){
+					alert('전도금을 대체(이체)할 현장을 선택하여 주십시요!');
+					eval('form.pj_seq_'+i).focus();
+					return;
+				}
+			}
+			if(eval('form.jh_loan_'+i).checked==true){ // 조합여부 체크박스
+				if(!eval('form.pj_seq_'+i).value){ // 조합현장 선택목록
+					alert('대여금 지급 현장을 선택하세요!');
+					eval('form.pj_seq_'+i).focus();
+					return;
+				}
+			}
+			if(eval('form.class2_'+i).value<=8){
+				if(!d1_acc1_id.value&&!d1_acc2_id.value&&!d1_acc3_id.value&&!d1_acc4_id.value&&!d1_acc5_id.value){
+					alert('계정과목을 선택하여 주십시요!');
+					return;
+				}
+			}
+			if(!eval('form.cont_'+i).value){
+				alert('적요 항목을 입력하세요!');
+				eval('form.cont_'+i).focus();
+				return;
+			}
+			if(eval('form.class1_'+i).value==1){
+				if(!eval('form.in_'+i).value){
+					alert('입금 계정 항목을 선택하세요!');
+					eval('form.in_'+i).focus();
+					return;
+				}
+				if(!eval('form.inc_'+i).value){
+					alert('입금 금액을 입력하세요!');
+					eval('form.inc_'+i).focus();
+					return;
+				}
+			}
+			if(eval('form.class1_'+i).value==2){
+				if(!eval('form.out_'+i).value){
+					alert('출금 계정 항목을 선택하세요!');
+					eval('form.out_'+i).focus();
+					return;
+				}
+				if(!eval('form.exp_'+i).value){
+					alert('출금 금액을 입력하세요!');
+					eval('form.exp_'+i).focus();
+					return;
+				}
+			}
+			if(eval('form.class1_'+i).value==3){
 
-	// 		if(eval('form.class2_'+i).value=='10'){
-	// 			if(!eval('form.pj_seq_'+i).value){
-	// 				alert('전도금을 대체(이체)할 현장을 선택하여 주십시요!');
-	// 				eval('form.pj_seq_'+i).focus();
-	// 				return;
-	// 			}
-	// 		}
-	// 		if(eval('form.jh_loan_'+i).checked==true){ // 조합여부 체크박스
-	// 			if(!eval('form.pj_seq_'+i).value){ // 조합현장 선택목록
-	// 				alert('대여금 지급 현장을 선택하세요!');
-	// 				eval('form.pj_seq_'+i).focus();
-	// 				return;
-	// 			}
-	// 		}
-	// 		if(eval('form.class2_'+i).value<=8){
-	// 			if(!d1_acc1_id.value&&!d1_acc2_id.value&&!d1_acc3_id.value&&!d1_acc4_id.value&&!d1_acc5_id.value){
-	// 				alert('계정과목을 선택하여 주십시요!');
-	// 				return;
-	// 			}
-	// 		}
-	// 		if(!eval('form.cont_'+i).value){
-	// 			alert('적요 항목을 입력하세요!');
-	// 			eval('form.cont_'+i).focus();
-	// 			return;
-	// 		}
-	// 		if(eval('form.class1_'+i).value==1){
-	// 			if(!eval('form.in_'+i).value){
-	// 				alert('입금 계정 항목을 선택하세요!');
-	// 				eval('form.in_'+i).focus();
-	// 				return;
-	// 			}
-	// 			if(!eval('form.inc_'+i).value){
-	// 				alert('입금 금액을 입력하세요!');
-	// 				eval('form.inc_'+i).focus();
-	// 				return;
-	// 			}
-	// 		}
-	// 		if(eval('form.class1_'+i).value==2){
-	// 			if(!eval('form.out_'+i).value){
-	// 				alert('출금 계정 항목을 선택하세요!');
-	// 				eval('form.out_'+i).focus();
-	// 				return;
-	// 			}
-	// 			if(!eval('form.exp_'+i).value){
-	// 				alert('출금 금액을 입력하세요!');
-	// 				eval('form.exp_'+i).focus();
-	// 				return;
-	// 			}
-	// 		}
-	// 		if(eval('form.class1_'+i).value==3){
-
-	// 			if(!eval('form.in_'+i).value){
-	// 				alert('입금 계정 항목을 선택하세요!');
-	// 				eval('form.in_'+i).focus();
-	// 				return;
-	// 			}
-	// 			if(!eval('form.inc_'+i).value){
-	// 				alert('입금 금액을 입력하세요!');
-	// 				eval('form.inc_'+i).focus();
-	// 				return;
-	// 			}
-	// 			if(!eval('form.out_'+i).value){
-	// 				alert('출금 계정 항목을 선택하세요!');
-	// 				eval('form.out_'+i).focus();
-	// 				return;
-	// 			}
-	// 			var out_val = eval('form.out_'+i).value.split("-");
-	// 			if(eval('form.in_'+i).value==out_val[0]){
-	// 				alert('대체 거래인 경우 입금계정과 출금계정을 다르게 선택하여 주십시요!');
-	// 				eval('form.out_'+i).focus();
-	// 				return;
-	// 			}
-	// 			if(!eval('form.exp_'+i).value){
-	// 				alert('출금 금액을 입력하세요!');
-	// 				eval('form.exp_'+i).focus();
-	// 				return;
-	// 			}
-	// 		}
-	// 	}
+				if(!eval('form.in_'+i).value){
+					alert('입금 계정 항목을 선택하세요!');
+					eval('form.in_'+i).focus();
+					return;
+				}
+				if(!eval('form.inc_'+i).value){
+					alert('입금 금액을 입력하세요!');
+					eval('form.inc_'+i).focus();
+					return;
+				}
+				if(!eval('form.out_'+i).value){
+					alert('출금 계정 항목을 선택하세요!');
+					eval('form.out_'+i).focus();
+					return;
+				}
+				var out_val = eval('form.out_'+i).value.split("-");
+				if(eval('form.in_'+i).value==out_val[0]){
+					alert('대체 거래인 경우 입금계정과 출금계정을 다르게 선택하여 주십시요!');
+					eval('form.out_'+i).focus();
+					return;
+				}
+				if(!eval('form.exp_'+i).value){
+					alert('출금 금액을 입력하세요!');
+					eval('form.exp_'+i).focus();
+					return;
+				}
+			}
+		}
 	}
 
 	var aaa=confirm('거래내용을 등록하시겠습니까?');
 	if(aaa==true){
 		form.submit();
-	}else{
-		return;
 	}
 }
 
-// 현장 서브밋
+//// 현장 서브밋
 function pj_inout_frm_chk(){
 	var form=document.form1;
 	if(!form.pj_list.value){

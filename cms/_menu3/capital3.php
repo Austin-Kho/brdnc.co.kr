@@ -89,16 +89,13 @@
 											</select>
 											<select name="class2_1" id="class2_1" style="width:52px;" onChange="inoutSel2(1)">
 												<option value="" selected> 선 택
-												<option value="1"> 수 익
-												<option value="2"> 차 입
-												<option value="3"> 회 수
-												<option value="4"> 출 자
+												<option value="1"> 자 산
+												<option value="2"> 부 채
+												<option value="3"> 자 본
+												<option value="4"> 수 익
 												<option value="5"> 비 용
-												<option value="6"> 상 환
-												<option value="7"> 대 여
-												<option value="8"> 배 당
-												<option value="9"> 본 사
-												<option value="10"> 현 장
+												<option value="6"> 본 사
+												<option value="7"> 현 장
 											</select>
 										</td>
 										<!-- 현장코드 _1 -->
