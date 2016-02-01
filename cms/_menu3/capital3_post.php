@@ -93,16 +93,16 @@
 	$char1 = array($_POST['char1_1'], $_POST['char1_2'], $_POST['char1_3'], $_POST['char1_4'], $_POST['char1_5'], $_POST['char1_6'], $_POST['char1_7'], $_POST['char1_8'], $_POST['char1_9'], $_POST['char1_10']);
 
 	// 수수료 발생 시 - 적요
-	$cont_1_h = rg_cut_string($_POST['cont_1_h'],16,"..")."-이체수수료";
-	$cont_2_h = rg_cut_string($_POST['cont_2_h'],16,"..")."-이체수수료";
-	$cont_3_h = rg_cut_string($_POST['cont_3_h'],16,"..")."-이체수수료";
-	$cont_4_h = rg_cut_string($_POST['cont_4_h'],16,"..")."-이체수수료";
-	$cont_5_h = rg_cut_string($_POST['cont_5_h'],16,"..")."-이체수수료";
-	$cont_6_h = rg_cut_string($_POST['cont_6_h'],16,"..")."-이체수수료";
-	$cont_7_h = rg_cut_string($_POST['cont_7_h'],16,"..")."-이체수수료";
-	$cont_8_h = rg_cut_string($_POST['cont_8_h'],16,"..")."-이체수수료";
-	$cont_9_h = rg_cut_string($_POST['cont_9_h'],16,"..")."-이체수수료";
-	$cont_10_h= rg_cut_string($_POST['cont_10_h'],16,"..")."-이체수수료";
+	$cont_1_h = rg_cut_string($_POST['cont_1_h'],12,"..")."-이체수수료";
+	$cont_2_h = rg_cut_string($_POST['cont_2_h'],12,"..")."-이체수수료";
+	$cont_3_h = rg_cut_string($_POST['cont_3_h'],12,"..")."-이체수수료";
+	$cont_4_h = rg_cut_string($_POST['cont_4_h'],12,"..")."-이체수수료";
+	$cont_5_h = rg_cut_string($_POST['cont_5_h'],12,"..")."-이체수수료";
+	$cont_6_h = rg_cut_string($_POST['cont_6_h'],12,"..")."-이체수수료";
+	$cont_7_h = rg_cut_string($_POST['cont_7_h'],12,"..")."-이체수수료";
+	$cont_8_h = rg_cut_string($_POST['cont_8_h'],12,"..")."-이체수수료";
+	$cont_9_h = rg_cut_string($_POST['cont_9_h'],12,"..")."-이체수수료";
+	$cont_10_h= rg_cut_string($_POST['cont_10_h'],12,"..")."-이체수수료";
 	$cont_h = array($cont_1_h, $cont_2_h, $cont_3_h, $cont_4_h, $cont_5_h, $cont_6_h, $cont_7_h, $cont_8_h, $cont_9_h, $cont_10_h);
 
 	// 수수료 발생 시 - 출금액

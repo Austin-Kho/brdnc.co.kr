@@ -187,26 +187,25 @@
 									 if($rows1[class1]==2) $cla1="<font color='#ff3333'>[출금]</font>";
 									 if($rows1[class1]==3) $cla1="<font color='#669900'>[대체]</font>";
 
-									 if($rows1[class2]==1) $cla2="<font color='#0066ff'>[수익]</font>";
-									 if($rows1[class2]==2) $cla2="<font color='#6600ff'>[차입]</font>";
-									 if($rows1[class2]==3) $cla2="<font color='#0066ff'>[회수]</font>";
-									 if($rows1[class2]==4) $cla2="<font color='#0066ff'>[출자]</font>";
+									 if($rows1[class2]==1) $cla2="<font color='#0066ff'>[자산]</font>";
+									 if($rows1[class2]==2) $cla2="<font color='#6600ff'>[부채]</font>";
+									 if($rows1[class2]==3) $cla2="<font color='#0066ff'>[자본]</font>";
+									 if($rows1[class2]==4) $cla2="<font color='#0066ff'>[수익]</font>";
 									 if($rows1[class2]==5) $cla2="<font color='#ff3333'>[비용]</font>";
-									 if($rows1[class2]==6) $cla2="<font color='#006666'>[상환]</font>";
-									 if($rows1[class2]==7) $cla2="<font color='#993300'>[대여]</font>";
-									 if($rows1[class2]==8) $cla2="<font color='#ff3333'>[배당]</font>";
-									 if($rows1[class2]==9) $cla2="<font color='#669900'>[본사]</font>";
-									 if($rows1[class2]==10) $cla2="<font color='#009900'>[현장]</font>";
+									 if($rows1[class2]==6) $cla2="<font color='#669900'>[본사]</font>";
+									 if($rows1[class2]==7) $cla2="<font color='#009900'>[현장]</font>";
 
-									 $cla = $cla1." - ".$cla2;
+									 $cla = $cla1." - ".$cla2; // 구분 항목 텍스트
 
-									 if($rows1[account]==""){
+									 if($rows1[account]==""){ // 계정과목이 없으면
 										 $account = "-";
 									 }else{
-										 $account = "[".$rows1[account]."]";
+										 $account = "[".$rows1[account]."]"; // 계정과목 표시 형식
 									 }
 
 
+									 // 대체거래일 때
+									 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 									 if($rows1[inc]==0||($rows1[class1]==3&&$rows1[out_acc]==$rows1[no])){ // (수입금이 '0' 이거나 대체거래이고, 출금계정이 은행등록계좌와 같으면,
 										 $inc="-";
 									 }else{
@@ -217,6 +216,7 @@
 									 }else{
 										 $exp=number_format($rows1[exp]); // 지출금
 									 }
+									 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 									 if($rows1[acc]) {$acc=$rows1[acc];}else{$acc="-";} // 거래처정보가 없을 때
 
@@ -227,7 +227,8 @@
 									 if($rows1[evidence]==5) $evi="현금영수증";
 									 if($rows1[evidence]==6) $evi="간이영수증";
 
-									 // ???
+									 // 대체거래일 때
+									 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 									 if($rows1[in_acc]==0||($rows1[class1]==3&&$rows1[out_acc]==$rows1[no])){ // 입금계정정보가 없거나 대체거래이고 출금계정이 은행등록계좌와 같으면,
 										 $in_acc="";
 									 }else{
@@ -238,6 +239,7 @@
 									 }else{
 										 $out_acc=$rows1[name]; // 출금계정은 계좌별칭
 									 }
+									 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 							?>
 							<tr>
 								<td align="center" height="20" class="tb2" title="<?=$rows1[note]?>"><input type="checkbox" name="seq_num[]" value="<?=$rows1[seq_num]?>"></td>
@@ -314,8 +316,8 @@
 
 								$cash_hand = number_format($ca_row1[in_total]-$ca_row2[out_total])." 원"; // 현금시재
 								$bank_balance=number_format($b_row1[in_total]-$b_row2[out_total])." 원"; // 계좌잔고
-								$dept=number_format($de_row1[in_total]-$de_row2[out_total])." 원"; // 차용금 잔고
-								$loan=number_format($lo_row1[in_total]-$lo_row2[out_total])." 원"; // 대여금 잔고
+								// $dept=number_format($de_row1[in_total]-$de_row2[out_total])." 원"; // 차용금 잔고
+								// $loan=number_format($lo_row1[in_total]-$lo_row2[out_total])." 원"; // 대여금 잔고
 								if($bank_balance==0) $bank_balance="-";
 								if($cash_hand==0) $cash_hand="-";
 								if($dept==0) $dept="-";

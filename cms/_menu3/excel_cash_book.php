@@ -163,8 +163,8 @@ Header("Expires: 0");
 
 	$cash_hand = number_format($ca_row1[in_total]-$ca_row2[out_total])." 원"; // 현금시재
 	$bank_balance=number_format($b_row1[in_total]-$b_row2[out_total])." 원"; // 계좌잔고
-	$dept=number_format($de_row1[in_total]-$de_row2[out_total])." 원"; // 차용금 잔고
-	$loan=number_format($lo_row1[in_total]-$lo_row2[out_total])." 원"; // 대여금 잔고
+	// $dept=number_format($de_row1[in_total]-$de_row2[out_total])." 원"; // 차용금 잔고
+	// $loan=number_format($lo_row1[in_total]-$lo_row2[out_total])." 원"; // 대여금 잔고
 	if($bank_balance==0) $bank_balance="-";
 	if($cash_hand==0) $cash_hand="-";
 	if($dept==0) $dept="-";

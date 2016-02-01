@@ -174,37 +174,30 @@
 						<select name="class2" style="width:88;" onChange="inoutSel2_(this.form)">
 						<?if(!$rows[class1]){?>
 							<option value="" <?if(!$rows[class2]) echo "selected";?>> 선 택
-							<option value="1" <?if($rows[class2]==1) echo "selected";?>> 수 익
-							<option value="2" <?if($rows[class2]==2) echo "selected";?>> 차 입
-							<option value="3" <?if($rows[class2]==3) echo "selected";?>> 회 수
-							<option value="4" <?if($rows[class2]==4) echo "selected";?>> 출 자
+							<option value="1" <?if($rows[class2]==1) echo "selected";?>> 자 산
+							<option value="2" <?if($rows[class2]==2) echo "selected";?>> 부 채
+							<option value="3" <?if($rows[class2]==3) echo "selected";?>> 자 본
+							<option value="4" <?if($rows[class2]==4) echo "selected";?>> 수 익
 							<option value="5" <?if($rows[class2]==5) echo "selected";?>> 비 용
-							<option value="6" <?if($rows[class2]==6) echo "selected";?>> 상 환
-							<option value="7" <?if($rows[class2]==7) echo "selected";?>> 대 여
-							<option value="8" <?if($rows[class2]==8) echo "selected";?>> 배 당
-							<option value="9" <?if($rows[class2]==9) echo "selected";?>> 본 사
-							<option value="10" <?if($rows[class2]==10) echo "selected";?>> 현 장
-						<?}else if($rows[class1]==1){?>
+							<option value="6" <?if($rows[class2]==6) echo "selected";?>> 본 사
+							<option value="7" <?if($rows[class2]==7) echo "selected";?>> 현 장
+						<?}else if($rows[class1]<3){?>
 							<option value="" <?if(!$rows[class2]) echo "selected";?>> 선 택
-							<option value="1" <?if($rows[class2]==1) echo "selected";?>> 수 익
-							<option value="2" <?if($rows[class2]==2) echo "selected";?>> 차 입
-							<option value="3" <?if($rows[class2]==3) echo "selected";?>> 회 수
-							<option value="4" <?if($rows[class2]==4) echo "selected";?>> 출 자
-						<?}else if($rows[class1]==2){?>
+							<option value="1" <?if($rows[class2]==1) echo "selected";?>> 자 산
+							<option value="2" <?if($rows[class2]==2) echo "selected";?>> 부 채
+							<option value="3" <?if($rows[class2]==3) echo "selected";?>> 자 본
+							<option value="4" <?if($rows[class2]==4) echo "selected";?>> 수 익
 							<option value="5" <?if($rows[class2]==5) echo "selected";?>> 비 용
-							<option value="6" <?if($rows[class2]==6) echo "selected";?>> 상 환
-							<option value="7" <?if($rows[class2]==7) echo "selected";?>> 대 여
-							<option value="8" <?if($rows[class2]==8) echo "selected";?>> 배 당
 						<?}else if($rows[class1]==3){?>
-							<option value="9" <?if($rows[class2]==9) echo "selected";?>> 본 사
-							<option value="10" <?if($rows[class2]==10) echo "selected";?>> 현 장
+							<option value="6" <?if($rows[class2]==6) echo "selected";?>> 본 사
+							<option value="7" <?if($rows[class2]==7) echo "selected";?>> 현 장
 						<?}?>
 						</select>
 
 
 
-						<!-- 자산 계정 목록 시작--> <!-- 대여/회수 -->
-						<select name="account_1" id="d1_1" style="width:105px; <?if($rows[class2]!=3&&$rows[class2]!=7) echo 'display:none; disabled;';?>" onChange="alert(self);">
+						<!-- 자산 계정 목록 시작--> <!-- 입금/출금 -->
+						<select name="account_1" id="d1_1" style="width:105px; <?if($rows[class2]!=1) echo 'display:none; disabled;';?>">
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc !='1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
@@ -215,8 +208,8 @@
 							<?}?>
 						</select>
 						<!-- 자산 계정 목록 종료-->
-						<!-- 부채 계정 목록 시작--> <!-- 차입/상환 -->
-						<select name="account_2" id="d1_2" style="width:105px; <?if($rows[class2]!=2&&$rows[class2]!=6) echo 'display:none; disabled;';?>">
+						<!-- 부채 계정 목록 시작--> <!-- 입금/출금 -->
+						<select name="account_2" id="d1_2" style="width:105px; <?if($rows[class2]!=2) echo 'display:none; disabled;';?>">
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc !='1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
@@ -227,8 +220,8 @@
 							<?}?>
 						</select>
 						<!-- 부채 계정 목록 종료-->
-						<!-- 자본 계정 목록 시작--> <!-- 출자/배당 -->
-						<select name="account_3" id="d1_3" style="width:105px; <?if($rows[class2]!=4&&$rows[class2]!=8) echo 'display:none; disabled;';?>">
+						<!-- 자본 계정 목록 시작--> <!-- 입금/출금 -->
+						<select name="account_3" id="d1_3" style="width:105px; <?if($rows[class2]!=3) echo 'display:none; disabled;';?>">
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc !='1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
@@ -239,8 +232,8 @@
 							<?}?>
 						</select>
 						<!-- 자본 계정 목록 종료-->
-						<!-- 수익 계정 목록 시작--> <!-- 수익 -->
-						<select name="account_4" id="d1_4" style="width:105px; <?if($rows[class2]!=1) echo 'display:none; disabled;';?>">
+						<!-- 수익 계정 목록 시작--> <!-- 입금 -->
+						<select name="account_4" id="d1_4" style="width:105px; <?if($rows[class2]!=4) echo 'display:none; disabled;';?>">
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc !='1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
@@ -251,7 +244,7 @@
 							<?}?>
 						</select>
 						<!-- 수익 계정 목록 종료-->
-						<!-- 비용 계정 목록 시작--> <!-- 비용 -->
+						<!-- 비용 계정 목록 시작--> <!-- 출금 -->
 						<select name="account_5" id="d1_5" style="width:105px; <?if($rows[class2]!=5) echo 'display:none; disabled;';?>">
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc !='1' ORDER BY d3_code ASC";
@@ -270,7 +263,7 @@
 						조합대여금 <font color="#ff0000">*</font>
 					</div>
 					<div style="float:left; padding-top:6px; text-align:left;">
-						<input type="checkbox" name="is_jh" id="is_jh" value="1" onClick="edit_jh_chk();" <?if($rows[is_jh_loan]) echo 'checked';?> <? if(!$rows[is_jh_loan]&&$rows[class2]!=3&&$rows[class2]!=7) echo  'disabled';?>> 조합
+						<input type="checkbox" name="is_jh" id="is_jh" value="1" onClick="edit_jh_chk();" <?if($rows[is_jh_loan]) echo 'checked';?> <? if(!$rows[is_jh_loan]&&$rows[class2]!=1) echo  'disabled';?>> 조합
 					</div>
 					<div style="float:left; padding:6px 0 0 10px;">
 						<?
@@ -332,7 +325,7 @@
 						출금내역 <font color="#ff0000">*</font>
 					</div>
 					<div style="float:left; padding-top:5px; text-align:left;">
-						<input type="text" name="exp" value="<?=$rows[exp]?>" size="15" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')" <?if($rows[class1]==1) echo "disabled";?>>
+						<input type="text" name="exp" value="<?if($rows[exp]>0) echo $rows[exp]?>" size="15" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')" <?if($rows[class1]==1) echo "disabled";?>>
 					</div>
 					<div style="float:left; padding:6px 0 0 5px; text-align:left;">
 						<select name="out" style="width:78;" <?if($rows[class1]==1) echo "disabled";?>>

@@ -20,15 +20,15 @@ function inoutSel_(form){
 
 	if(form.class1.value==1){ // 입금 > 수익 선택
 		form.class2.length=4;
-		form.class2.options[0].text = '수 익';
+		form.class2.options[0].text = '자 산';
 		form.class2.options[0].value = '1';
-		form.class2.options[1].text = '차 입';
+		form.class2.options[1].text = '부 채';
 		form.class2.options[1].value = '2';
-		form.class2.options[2].text = '회 수';
+		form.class2.options[2].text = '자 본';
 		form.class2.options[2].value = '3';
-		form.class2.options[3].text = '출 자';
+		form.class2.options[3].text = '수 익';
 		form.class2.options[3].value = '4';
-		form.class2.options[0].selected =1; // 수익을 선택하고 ///////
+		form.class2.options[3].selected =1; // 수익을 선택하고 ///////
 
 		if(form.inc) form.inc.disabled=0;
 		if(form.ina) form.ina.disabled=0;
@@ -38,7 +38,7 @@ function inoutSel_(form){
 		if(d1_1) d1_1.style.display = 'none';
 		if(d1_2) d1_2.style.display = 'none';
 		if(d1_3) d1_3.style.display = 'none';
-		if(d1_4) d1_4.style.display = '';
+		if(d1_4) d1_4.style.display = '';     // 수익 계정과목을 선택한다.
 		if(d1_5) d1_5.style.display = 'none';
 
 		if(d1_1) d1_1.disabled=1;
@@ -47,17 +47,17 @@ function inoutSel_(form){
 		if(d1_4) d1_4.disabled=0;
 		if(d1_5) d1_5.disabled=1;
 
-	}else if(form.class1.value==2){
+	}else if(form.class1.value==2){ // 출금일 때
 		form.class2.length=4;
-		form.class2.options[0].text = '비 용';
-		form.class2.options[0].value = '5';
-		form.class2.options[1].text = '상 환';
-		form.class2.options[1].value = '6';
-		form.class2.options[2].text = '대 여';
-		form.class2.options[2].value = '7';
-		form.class2.options[3].text = '배 당';
-		form.class2.options[3].value = '8';
-		form.class2.options[0].selected =1; // 비용을 선택하고 ///////
+		form.class2.options[0].text = '자 산';
+		form.class2.options[0].value = '1';
+		form.class2.options[1].text = '부 채';
+		form.class2.options[1].value = '2';
+		form.class2.options[2].text = '자 본';
+		form.class2.options[2].value = '3';
+		form.class2.options[3].text = '비 용';
+		form.class2.options[3].value = '5';
+		form.class2.options[3].selected =1; // 비용을 선택하고 ///////
 
 		if(form.inc) form.inc.disabled=1; form.inc.value=null;
 		if(form.ina) form.ina.disabled=1; form.ina.options[0].selected=1;
@@ -79,9 +79,9 @@ function inoutSel_(form){
 	}else if(form.class1.value==3){
 		form.class2.length=2;
 		form.class2.options[0].text = '본 사';
-		form.class2.options[0].value = '9';
+		form.class2.options[0].value = '6';
 		form.class2.options[1].text = '현 장';
-		form.class2.options[1].value = '10';
+		form.class2.options[1].value = '7';
 		form.class2.options[0].selected =1; // 본사를 선택하고 ///////
 
 		if(form.inc) form.inc.disabled=0;
@@ -102,35 +102,29 @@ function inoutSel_(form){
 		if(d1_5) d1_5.disabled=1;
 
 	}else{
-		form.class2.length=11;
+		form.class2.length=8;
 		form.class2.options[0].text = '선 택';
 		form.class2.options[0].value = '';
-		form.class2.options[1].text = '수 익';
+		form.class2.options[1].text = '자 산';
 		form.class2.options[1].value = '1';
-		form.class2.options[2].text = '차 입';
+		form.class2.options[2].text = '부 채';
 		form.class2.options[2].value = '2';
-		form.class2.options[3].text = '회 수';
+		form.class2.options[3].text = '자 본';
 		form.class2.options[3].value = '3';
-		form.class2.options[4].text = '출 자';
+		form.class2.options[4].text = '수 익';
 		form.class2.options[4].value = '4';
 		form.class2.options[5].text = '비 용';
 		form.class2.options[5].value = '5';
-		form.class2.options[6].text = '상 환';
+		form.class2.options[6].text = '본 사';
 		form.class2.options[6].value = '6';
-		form.class2.options[7].text = '대 여';
+		form.class2.options[7].text = '현 장';
 		form.class2.options[7].value = '7';
-		form.class2.options[8].text = '배 당';
-		form.class2.options[8].value = '8';
-		form.class2.options[9].text = '본 사';
-		form.class2.options[9].value = '9';
-		form.class2.options[10].text = '현 장';
-		form.class2.options[10].value = '10';
 		form.class2.options[0].selected =1; // 선택을 선택하고 ///////
 
-		if(form.inc) form.inc.disabled=0;
-		if(form.ina) form.ina.disabled=0;
-		if(form.exp) form.exp.disabled=0;
-		if(form.out) form.out.disabled=0;
+		if(form.inc) form.inc.disabled=1; form.inc.value=null;
+		if(form.ina) form.ina.disabled=1; form.ina.options[0].selected=1;
+		if(form.exp) form.exp.disabled=1; form.exp.value=null;
+		if(form.out) form.out.disabled=1; form.ina.options[0].selected=1;
 
 		if(d1_1) d1_1.style.display = '';
 		if(d1_2) d1_2.style.display = 'none';
@@ -147,62 +141,39 @@ function inoutSel_(form){
 }
 // 구분목록 상자선택2 (capital2.php  // capital_edit.php)
 function inoutSel2_(form){
-
-	if(form.class2.value==0) {
-		form.class1.options[0].selected=1;
-		if(form.inc) form.inc.disabled=0;
-		if(form.ina) form.ina.disabled=0;
-		if(form.exp) form.exp.disabled=0;
-		if(form.out) form.out.disabled=0;
-		if(form.is_jh)form.is_jh.disabled=1;
-		if(form.is_jh)form.is_jh.checked=0;
-
-		// ????? 추후 테스트
-	}
-	if(form.class2.value>0&&form.class2.value<=4) {
-		form.class1.options[1].selected=1;
-		if(form.inc) form.inc.disabled=0;
-		if(form.ina) form.ina.disabled=0;
-		if(form.exp) form.exp.disabled=1;
-		if(form.out) form.out.disabled=1;
-	}
-	if(form.class2.value>4&&form.class2.value<=8) {
-		form.class1.options[2].selected=1;
-		if(form.inc) form.inc.disabled=1;
-		if(form.ina) form.ina.disabled=1;
-		if(form.exp) form.exp.disabled=0;
-		if(form.out) form.out.disabled=0;
-	}
-	if(form.class2.value>8){
-		form.class1.options[3].selected=1;
-		if(form.inc) form.inc.disabled=0;
-		if(form.ina) form.ina.disabled=0;
-		if(form.exp) form.exp.disabled=0;
-		if(form.out) form.out.disabled=0;
-	}
-
+	alert(form.class2.value);
 	var d1_1 = document.getElementById('d1_1');
 	var d1_2 = document.getElementById('d1_2');
 	var d1_3 = document.getElementById('d1_3');
 	var d1_4 = document.getElementById('d1_4');
 	var d1_5 = document.getElementById('d1_5');
 
-	if(form.class2.value==1){ // 수익
-		if(d1_1) d1_1.style.display = 'none';
-		if(d1_2) d1_2.style.display = 'none';
-		if(d1_3) d1_3.style.display = 'none';
-		if(d1_4) d1_4.style.display = '';
-		if(d1_5) d1_5.style.display = 'none';
-
-		if(d1_1) d1_1.disabled=1;
-		if(d1_2) d1_2.disabled=1;
-		if(d1_3) d1_3.disabled=1;
-		if(d1_4) d1_4.disabled=0;
-		if(d1_5) d1_5.disabled=1;
+	if(form.class2.value==0) {
+		form.class1.options[0].selected=1;
+		if(form.inc) form.inc.disabled=1; form.inc.value=null; // 입금액
+		if(form.ina) form.ina.disabled=1; form.ina.options[0].selected=1;
+		if(form.exp) form.exp.disabled=1; form.inc.value=null; // 출금액
+		if(form.out) form.out.disabled=1; form.ina.options[0].selected=1;
+		if(form.d1_1) form.d1_1.disabled=1; form.d1_1.options[0].selected=1;
 		if(form.is_jh)form.is_jh.disabled=1;
 		if(form.is_jh)form.is_jh.checked=0;
 	}
-	if(form.class2.value==2||form.class2.value==6){ // 차입 / 상환 = 부채
+
+	if(form.class2.value==1){ // 자산
+		if(d1_1) d1_1.style.display = '';
+		if(d1_2) d1_2.style.display = 'none';
+		if(d1_3) d1_3.style.display = 'none';
+		if(d1_4) d1_4.style.display = 'none';
+		if(d1_5) d1_5.style.display = 'none';
+
+		if(d1_1) d1_1.disabled=0;
+		if(d1_2) d1_2.disabled=1;
+		if(d1_3) d1_3.disabled=1;
+		if(d1_4) d1_4.disabled=1;
+		if(d1_5) d1_5.disabled=1;
+		if(form.is_jh)form.is_jh.disabled=0;
+	}
+	if(form.class2.value==2){ // 부채
 		if(d1_1) d1_1.style.display = 'none';
 		if(d1_2) d1_2.style.display = '';
 		if(d1_3) d1_3.style.display = 'none';
@@ -217,21 +188,7 @@ function inoutSel2_(form){
 		if(form.is_jh)form.is_jh.disabled=1;
 		if(form.is_jh)form.is_jh.checked=0;
 	}
-	if(form.class2.value==3||form.class2.value==7){ // 대여 / 회수 = 자산
-		if(d1_1) d1_1.style.display = '';
-		if(d1_2) d1_2.style.display = 'none';
-		if(d1_3) d1_3.style.display = 'none';
-		if(d1_4) d1_4.style.display = 'none';
-		if(d1_5) d1_5.style.display = 'none';
-
-		if(d1_1) d1_1.disabled=0;
-		if(d1_2) d1_2.disabled=1;
-		if(d1_3) d1_3.disabled=1;
-		if(d1_4) d1_4.disabled=1;
-		if(d1_5) d1_5.disabled=1;
-		if(form.is_jh)form.is_jh.disabled=0;
-	}
-	if(form.class2.value==4||form.class2.value==8){ // 출자 / 배당 = 자본
+	if(form.class2.value==3){ // 자본
 		if(d1_1) d1_1.style.display = 'none';
 		if(d1_2) d1_2.style.display = 'none';
 		if(d1_3) d1_3.style.display = '';
@@ -246,7 +203,34 @@ function inoutSel2_(form){
 		if(form.is_jh)form.is_jh.disabled=1;
 		if(form.is_jh)form.is_jh.checked=0;
 	}
+	if(form.class2.value==4){ // 수익
+		form.class1.options[1].selected=1;
+		if(form.inc) form.inc.disabled=0;
+		if(form.ina) form.ina.disabled=0;
+		if(form.exp) form.exp.disabled=1; form.exp.value=null; // 입금액
+		if(form.out) form.out.disabled=1; form.out.options[0].selected=1;
+
+		if(d1_1) d1_1.style.display = 'none';
+		if(d1_2) d1_2.style.display = 'none';
+		if(d1_3) d1_3.style.display = 'none';
+		if(d1_4) d1_4.style.display = '';
+		if(d1_5) d1_5.style.display = 'none';
+
+		if(d1_1) d1_1.disabled=1;
+		if(d1_2) d1_2.disabled=1;
+		if(d1_3) d1_3.disabled=1;
+		if(d1_4) d1_4.disabled=0;
+		if(d1_5) d1_5.disabled=1;
+		if(form.is_jh)form.is_jh.disabled=1;
+		if(form.is_jh)form.is_jh.checked=0;
+	}
 	if(form.class2.value==5){ // 비용
+		form.class1.options[2].selected=1;
+		if(form.inc) form.inc.disabled=1; form.inc.value=null; // 입금액
+		if(form.ina) form.ina.disabled=1; form.ina.options[0].selected=1;
+		if(form.exp) form.exp.disabled=0;
+		if(form.out) form.out.disabled=0;
+
 		if(d1_1) d1_1.style.display = 'none';
 		if(d1_2) d1_2.style.display = 'none';
 		if(d1_3) d1_3.style.display = 'none';
@@ -260,6 +244,14 @@ function inoutSel2_(form){
 		if(d1_5) d1_5.disabled=0;
 		if(form.is_jh)form.is_jh.disabled=1;
 		if(form.is_jh)form.is_jh.checked=0;
+	}
+
+	if(form.class2.value>5){
+		form.class1.options[3].selected=1;
+		if(form.inc) form.inc.disabled=0;
+		if(form.ina) form.ina.disabled=0;
+		if(form.exp) form.exp.disabled=0;
+		if(form.out) form.out.disabled=0;
 	}
 }
 
@@ -685,111 +677,113 @@ function inout_frm_chk(com){
 
 	var form=document.inout_frm;
 
-	if(!form.deal_date.value){
-		alert('거래일자를 입력하세요!');
-		form.deal_date.focus();
-		return;
-	}
-	if(!form.class1_1.value&&!form.class1_2.value&&!form.class1_3.value&&!form.class1_4.value&&!form.class1_5.value&&!form.class1_6.value&&!form.class1_7.value&&!form.class1_8.value&&!form.class1_9.value&&!form.class1_10.value){
-		alert('하나 이상의 거래를 입력하세요!');
-		form.class1_1.focus();
-		return;
-	}
+	alert();
 
-	for(i=1; i<=10; i++){ // 총 10행 행수만큼 반복
+	// if(!form.deal_date.value){
+	// 	alert('거래일자를 입력하세요!');
+	// 	form.deal_date.focus();
+	// 	return;
+	// }
+	// if(!form.class1_1.value&&!form.class1_2.value&&!form.class1_3.value&&!form.class1_4.value&&!form.class1_5.value&&!form.class1_6.value&&!form.class1_7.value&&!form.class1_8.value&&!form.class1_9.value&&!form.class1_10.value){
+	// 	alert('하나 이상의 거래를 입력하세요!');
+	// 	form.class1_1.focus();
+	// 	return;
+	// }
 
-		var d1_acc1 = "d1_acc1_"+i;   // 자산 계정과목
-		var d1_acc2 = "d1_acc2_"+i;   // 부채 계정과목
-		var d1_acc3 = "d1_acc3_"+i;   // 자본 계정과목
-		var d1_acc4 = "d1_acc4_"+i;   // 수익 계정과목
-		var d1_acc5 = "d1_acc5_"+i;   // 비용 계정과목
-		var d1_acc1_id = document.getElementById(d1_acc1);////// 자산계정 FORM
-		var d1_acc2_id = document.getElementById(d1_acc2);    // 부채계정 FORM
-		var d1_acc3_id = document.getElementById(d1_acc3);    // 자본계정 FORM
-		var d1_acc4_id = document.getElementById(d1_acc4);    // 수익계정 FORM
-		var d1_acc5_id = document.getElementById(d1_acc5);////// 비용계정 FORM
+	// for(i=1; i<=10; i++){ // 총 10행 행수만큼 반복
 
-		if(eval('form.class1_'+i).value){
+	// 	var d1_acc1 = "d1_acc1_"+i;   // 자산 계정과목
+	// 	var d1_acc2 = "d1_acc2_"+i;   // 부채 계정과목
+	// 	var d1_acc3 = "d1_acc3_"+i;   // 자본 계정과목
+	// 	var d1_acc4 = "d1_acc4_"+i;   // 수익 계정과목
+	// 	var d1_acc5 = "d1_acc5_"+i;   // 비용 계정과목
+	// 	var d1_acc1_id = document.getElementById(d1_acc1);////// 자산계정 FORM
+	// 	var d1_acc2_id = document.getElementById(d1_acc2);    // 부채계정 FORM
+	// 	var d1_acc3_id = document.getElementById(d1_acc3);    // 자본계정 FORM
+	// 	var d1_acc4_id = document.getElementById(d1_acc4);    // 수익계정 FORM
+	// 	var d1_acc5_id = document.getElementById(d1_acc5);////// 비용계정 FORM
 
-			if(eval('form.class2_'+i).value=='10'){
-				if(!eval('form.pj_seq_'+i).value){
-					alert('전도금을 대체(이체)할 현장을 선택하여 주십시요!');
-					eval('form.pj_seq_'+i).focus();
-					return;
-				}
-			}
-			if(eval('form.jh_loan_'+i).checked==true){ // 조합여부 체크박스
-				if(!eval('form.pj_seq_'+i).value){ // 조합현장 선택목록
-					alert('대여금 지급 현장을 선택하세요!');
-					eval('form.pj_seq_'+i).focus();
-					return;
-				}
-			}
-			if(eval('form.class2_'+i).value<=8){
-				if(!d1_acc1_id.value&&!d1_acc2_id.value&&!d1_acc3_id.value&&!d1_acc4_id.value&&!d1_acc5_id.value){
-					alert('계정과목을 선택하여 주십시요!');
-					return;
-				}
-			}
-			if(!eval('form.cont_'+i).value){
-				alert('적요 항목을 입력하세요!');
-				eval('form.cont_'+i).focus();
-				return;
-			}
-			if(eval('form.class1_'+i).value==1){
-				if(!eval('form.in_'+i).value){
-					alert('입금 계정 항목을 선택하세요!');
-					eval('form.in_'+i).focus();
-					return;
-				}
-				if(!eval('form.inc_'+i).value){
-					alert('입금 금액을 입력하세요!');
-					eval('form.inc_'+i).focus();
-					return;
-				}
-			}
-			if(eval('form.class1_'+i).value==2){
-				if(!eval('form.out_'+i).value){
-					alert('출금 계정 항목을 선택하세요!');
-					eval('form.out_'+i).focus();
-					return;
-				}
-				if(!eval('form.exp_'+i).value){
-					alert('출금 금액을 입력하세요!');
-					eval('form.exp_'+i).focus();
-					return;
-				}
-			}
-			if(eval('form.class1_'+i).value==3){
+	// 	if(eval('form.class1_'+i).value){
 
-				if(!eval('form.in_'+i).value){
-					alert('입금 계정 항목을 선택하세요!');
-					eval('form.in_'+i).focus();
-					return;
-				}
-				if(!eval('form.inc_'+i).value){
-					alert('입금 금액을 입력하세요!');
-					eval('form.inc_'+i).focus();
-					return;
-				}
-				if(!eval('form.out_'+i).value){
-					alert('출금 계정 항목을 선택하세요!');
-					eval('form.out_'+i).focus();
-					return;
-				}
-				var out_val = eval('form.out_'+i).value.split("-");
-				if(eval('form.in_'+i).value==out_val[0]){
-					alert('대체 거래인 경우 입금계정과 출금계정을 다르게 선택하여 주십시요!');
-					eval('form.out_'+i).focus();
-					return;
-				}
-				if(!eval('form.exp_'+i).value){
-					alert('출금 금액을 입력하세요!');
-					eval('form.exp_'+i).focus();
-					return;
-				}
-			}
-		}
+	// 		if(eval('form.class2_'+i).value=='10'){
+	// 			if(!eval('form.pj_seq_'+i).value){
+	// 				alert('전도금을 대체(이체)할 현장을 선택하여 주십시요!');
+	// 				eval('form.pj_seq_'+i).focus();
+	// 				return;
+	// 			}
+	// 		}
+	// 		if(eval('form.jh_loan_'+i).checked==true){ // 조합여부 체크박스
+	// 			if(!eval('form.pj_seq_'+i).value){ // 조합현장 선택목록
+	// 				alert('대여금 지급 현장을 선택하세요!');
+	// 				eval('form.pj_seq_'+i).focus();
+	// 				return;
+	// 			}
+	// 		}
+	// 		if(eval('form.class2_'+i).value<=8){
+	// 			if(!d1_acc1_id.value&&!d1_acc2_id.value&&!d1_acc3_id.value&&!d1_acc4_id.value&&!d1_acc5_id.value){
+	// 				alert('계정과목을 선택하여 주십시요!');
+	// 				return;
+	// 			}
+	// 		}
+	// 		if(!eval('form.cont_'+i).value){
+	// 			alert('적요 항목을 입력하세요!');
+	// 			eval('form.cont_'+i).focus();
+	// 			return;
+	// 		}
+	// 		if(eval('form.class1_'+i).value==1){
+	// 			if(!eval('form.in_'+i).value){
+	// 				alert('입금 계정 항목을 선택하세요!');
+	// 				eval('form.in_'+i).focus();
+	// 				return;
+	// 			}
+	// 			if(!eval('form.inc_'+i).value){
+	// 				alert('입금 금액을 입력하세요!');
+	// 				eval('form.inc_'+i).focus();
+	// 				return;
+	// 			}
+	// 		}
+	// 		if(eval('form.class1_'+i).value==2){
+	// 			if(!eval('form.out_'+i).value){
+	// 				alert('출금 계정 항목을 선택하세요!');
+	// 				eval('form.out_'+i).focus();
+	// 				return;
+	// 			}
+	// 			if(!eval('form.exp_'+i).value){
+	// 				alert('출금 금액을 입력하세요!');
+	// 				eval('form.exp_'+i).focus();
+	// 				return;
+	// 			}
+	// 		}
+	// 		if(eval('form.class1_'+i).value==3){
+
+	// 			if(!eval('form.in_'+i).value){
+	// 				alert('입금 계정 항목을 선택하세요!');
+	// 				eval('form.in_'+i).focus();
+	// 				return;
+	// 			}
+	// 			if(!eval('form.inc_'+i).value){
+	// 				alert('입금 금액을 입력하세요!');
+	// 				eval('form.inc_'+i).focus();
+	// 				return;
+	// 			}
+	// 			if(!eval('form.out_'+i).value){
+	// 				alert('출금 계정 항목을 선택하세요!');
+	// 				eval('form.out_'+i).focus();
+	// 				return;
+	// 			}
+	// 			var out_val = eval('form.out_'+i).value.split("-");
+	// 			if(eval('form.in_'+i).value==out_val[0]){
+	// 				alert('대체 거래인 경우 입금계정과 출금계정을 다르게 선택하여 주십시요!');
+	// 				eval('form.out_'+i).focus();
+	// 				return;
+	// 			}
+	// 			if(!eval('form.exp_'+i).value){
+	// 				alert('출금 금액을 입력하세요!');
+	// 				eval('form.exp_'+i).focus();
+	// 				return;
+	// 			}
+	// 		}
+	// 	}
 	}
 
 	var aaa=confirm('거래내용을 등록하시겠습니까?');
