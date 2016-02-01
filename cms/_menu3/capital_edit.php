@@ -142,7 +142,7 @@
 					<div style="float:left; padding:9px 15px 0 0; text-align:right; width:100px;">
 						거래일자  <font color="#ff0000">*</font>
 					</div>
-					<div style="float:left; padding-top:8px; text-align:left;">
+					<div style="float:left; padding-top:5px; text-align:left;">
 						<!-- <input type="text" name="deal_date" id="deal_date" value="<?=$rows[deal_date]?>" class="inputstyle2" size="31" onclick="openCalendar(this)" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"> <a href="javascript:" onclick="openCalendar(document.getElementById('deal_date'));"><img src="../images/calendar.jpg" border="0" alt="" /></a> -->
 
 						<input type="text" name="deal_date" id="deal_date" value="<?=$rows[deal_date]?>" size="25" class="inputstyle2" onclick="cal_add(this); event.cancelBubble=true"  readonly  onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
@@ -153,7 +153,7 @@
 					<div style="float:left; padding:9px 15px 0 0; text-align:right; width:100px;">
 						계정과목 <font color="#ff0000">*</font>
 					</div>
-					<div style="float:left; padding-top:8px; text-align:left;">
+					<div style="float:left; padding-top:6px; text-align:left;">
 						<select name="class1" style="width:88;" onChange="inoutSel_(this.form)">
 							<option value="" <?if(!$rows[class1]) echo "selected";?>> 선 택
 							<option value="1" <?if($rows[class1]==1) echo "selected";?>> 입 금
@@ -253,15 +253,38 @@
 						</select>
 						<!-- 비용 계정 목록 종료-->
 					</div>
-					<div style="float:left; padding-top:8px; text-align:left;">
-						<input type="checkbox" name="is_jh" value="" <?if($rows[is_jh_loan]==1) echo 'checked'; else echo 'disabled';?>> 조합
+				</div>
+				<div style="height:32px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
+					<div style="float:left; padding:9px 15px 0 0; text-align:right; width:100px;">
+						조합대여금 <font color="#ff0000">*</font>
+					</div>
+					<div style="float:left; padding-top:6px; text-align:left;">
+						<input type="checkbox" name="is_jh" value="1" <?if($rows[is_jh_loan]==1) echo 'checked'; else echo 'disabled';?>> 조합
+					</div>
+					<div style="float:left; padding:6px 0 0 10px;">
+						<?
+							// 현장 목록 가져오기
+							$pj_qry = "SELECT seq, pj_name FROM cms_project1_info WHERE is_end!='1' ORDER BY start_date DESC, seq DESC";
+							$pj_rlt = mysql_query($pj_qry, $connect);
+							$pj_num = mysql_num_rows($pj_rlt);
+							for($i=0; $pj_rows = mysql_fetch_array($pj_rlt); $i++){
+								$pj_seq[$i]= $pj_rows[seq];
+								$pj_name[$i]= $pj_rows[pj_name];
+							}
+						?>
+						<select name="any_jh" style="width:160px;">
+							<option value=""> 선 택
+							<? for($i=0; $i<$pj_num; $i++){ ?>
+							<option value="<?=$pj_seq[$i]?>" <?if($rows[any_jh]==$pj_seq[$i]) echo "selected";?>> <?=$pj_name[$i]?>
+							<? } ?>
+						</select>
 					</div>
 				</div>
 				<div style="height:32px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
 					<div style="float:left; padding:9px 15px 0 0; text-align:right; width:100px;">
 						적 요 <font color="#ff0000">*</font>
 					</div>
-					<div style="float:left; padding-top:8px; text-align:left;">
+					<div style="float:left; padding-top:5px; text-align:left;">
 						<input type="text" name="cont" value="<?=$rows[cont]?>" size="35" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')" >
 					</div>
 				</div>
@@ -269,7 +292,7 @@
 					<div style="float:left; padding:9px 15px 0 0; text-align:right; width:100px;">
 						거 래 처
 					</div>
-					<div style="float:left; padding-top:8px; text-align:left;">
+					<div style="float:left; padding-top:5px; text-align:left;">
 						<input type="text" name="acc" value="<?=$rows[acc]?>" size="35" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')">
 					</div>
 				</div>
@@ -277,10 +300,10 @@
 					<div style="float:left; padding:9px 15px 0 0; text-align:right; width:100px;">
 						입금내역 <font color="#ff0000">*</font>
 					</div>
-					<div style="float:left; padding-top:8px; text-align:left;">
+					<div style="float:left; padding-top:5px; text-align:left;">
 						<input type="text" name="inc" value="<?=$rows[inc]?>" size="15" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')" <?if($rows[class1]==2) echo "disabled";?>>
 					</div>
-					<div style="float:left; padding:8px 0 0 5px; text-align:left;">
+					<div style="float:left; padding:6px 0 0 5px; text-align:left;">
 						<select name="ina" style="width:78;" <?if($rows[class1]==2) echo "disabled";?>>
 							<option value="" <?if(!$rows[in_acc]) echo "selected";?>> 선 택
 							<?
@@ -297,10 +320,10 @@
 					<div style="float:left; padding:9px 15px 0 0; text-align:right; width:100px;">
 						출금내역 <font color="#ff0000">*</font>
 					</div>
-					<div style="float:left; padding-top:8px; text-align:left;">
+					<div style="float:left; padding-top:5px; text-align:left;">
 						<input type="text" name="exp" value="<?=$rows[exp]?>" size="15" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')" <?if($rows[class1]==1) echo "disabled";?>>
 					</div>
-					<div style="float:left; padding:8px 0 0 5px; text-align:left;">
+					<div style="float:left; padding:6px 0 0 5px; text-align:left;">
 						<select name="out" style="width:78;" <?if($rows[class1]==1) echo "disabled";?>>
 							<option value="" <?if(!$rows[out_acc]) echo "selected";?>> 선 택
 							<?
@@ -317,7 +340,7 @@
 					<div style="float:left; padding:9px 15px 0 0; text-align:right; width:100px;">
 						증빙서류
 					</div>
-					<div style="float:left; padding-top:8px; text-align:left;">
+					<div style="float:left; padding-top:6px; text-align:left;">
 						<select name="evi" style="width:190">
 							<option value="1" <?if($rows[evidence]==1) echo "selected";?>> 증빙 없음
 							<option value="2" <?if($rows[evidence]==2) echo "selected";?>> 세금계산서
@@ -332,7 +355,7 @@
 					<div style="float:left; padding:9px 15px 0 0; text-align:right; width:100px;">
 						비 고
 					</div>
-					<div style="float:left; padding-top:8px; text-align:left;">
+					<div style="float:left; padding-top:5px; text-align:left;">
 						<textarea name="note" rows="2" cols="36" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"><?=$rows[note]?></textarea>
 					</div>
 				</div>

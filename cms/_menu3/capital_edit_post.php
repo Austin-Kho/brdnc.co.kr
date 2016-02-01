@@ -37,6 +37,7 @@
 		$account = $account_5;
 	}
 	$is_jh = $_POST['is_jh'];
+	$any_jh = $_POST['any_jh'];
 	$cont = $_POST['cont'];
 	$acc = $_POST['acc'];
 	$inc = $_POST['inc'];$
@@ -46,14 +47,13 @@
 	$evi = $_POST['evi'];
 	$note = $_POST['note'];
 
-
-
 	############# 회원 정보 테이블에 입력 값을 등록한다. #############
 
 	$query1="UPDATE cms_capital_cash_book SET class1='$class1',
 																 class2='$class2',
 																 account='$account',
 																 is_jh_loan='$is_jh',
+																 any_jh='$any_jh',
 																 cont='$cont',
 																 acc='$acc',
 																 in_acc='$ina',
@@ -74,4 +74,5 @@
 				opener.location.reload();
 				self.close();
 		 </script>");
+	echo $query1;
 ?>

@@ -31,43 +31,43 @@
 	if(!$com_div[9]) $com_div[9]=1;
 
 	// 입출대체 구분
-	$class1 = array($_POST['class1_1'], $_POST['class1_2'], $_POST['class1_3'], $_POST['class1_4'], $_POST['class1_5'], 
+	$class1 = array($_POST['class1_1'], $_POST['class1_2'], $_POST['class1_3'], $_POST['class1_4'], $_POST['class1_5'],
 					$_POST['class1_6'], $_POST['class1_7'], $_POST['class1_8'], $_POST['class1_9'], $_POST['class1_10']);
 
 	// 입출금 세부 구분
-	$class2 = array($_POST['class2_1'], $_POST['class2_2'], $_POST['class2_3'], $_POST['class2_4'], $_POST['class2_5'], 
+	$class2 = array($_POST['class2_1'], $_POST['class2_2'], $_POST['class2_3'], $_POST['class2_4'], $_POST['class2_5'],
 					$_POST['class2_6'], $_POST['class2_7'], $_POST['class2_8'], $_POST['class2_9'], $_POST['class2_10']);
 
 	// 현장으로 전도금 송금시 현장 코드
-	$pj_seq = array($_POST['pj_seq_1'], $_POST['pj_seq_2'], $_POST['pj_seq_3'], $_POST['pj_seq_4'], $_POST['pj_seq_5'], 
+	$pj_seq = array($_POST['pj_seq_1'], $_POST['pj_seq_2'], $_POST['pj_seq_3'], $_POST['pj_seq_4'], $_POST['pj_seq_5'],
 					$_POST['pj_seq_6'], $_POST['pj_seq_7'], $_POST['pj_seq_8'], $_POST['pj_seq_9'], $_POST['pj_seq_10']);
 
 	// 조합 대여금 여부
-	$jh_loan = array($_POST['jh_loan_1'], $_POST['jh_loan_2'], $_POST['jh_loan_3'], $_POST['jh_loan_4'], $_POST['jh_loan_5'], 
+	$jh_loan = array($_POST['jh_loan_1'], $_POST['jh_loan_2'], $_POST['jh_loan_3'], $_POST['jh_loan_4'], $_POST['jh_loan_5'],
 					 $_POST['jh_loan_6'], $_POST['jh_loan_7'], $_POST['jh_loan_8'], $_POST['jh_loan_9'], $_POST['jh_loan_10']);
-	
+
 	// 계정과목
-	$account = array($_POST['account_1'], $_POST['account_2'], $_POST['account_3'], $_POST['account_4'], $_POST['account_5'], 
+	$account = array($_POST['account_1'], $_POST['account_2'], $_POST['account_3'], $_POST['account_4'], $_POST['account_5'],
 					 $_POST['account_6'], $_POST['account_7'], $_POST['account_8'], $_POST['account_9'], $_POST['account_10']);
 
 	// 적요
-	$cont = array($_POST['cont_1'], $_POST['cont_2'], $_POST['cont_3'], $_POST['cont_4'], $_POST['cont_5'], 
+	$cont = array($_POST['cont_1'], $_POST['cont_2'], $_POST['cont_3'], $_POST['cont_4'], $_POST['cont_5'],
 				  $_POST['cont_6'], $_POST['cont_7'], $_POST['cont_8'], $_POST['cont_9'], $_POST['cont_10']);
 
 	// 거래처
-	$acc = array($_POST['acc_1'], $_POST['acc_2'], $_POST['acc_3'], $_POST['acc_4'], $_POST['acc_5'], 
+	$acc = array($_POST['acc_1'], $_POST['acc_2'], $_POST['acc_3'], $_POST['acc_4'], $_POST['acc_5'],
 				 $_POST['acc_6'], $_POST['acc_7'], $_POST['acc_8'], $_POST['acc_9'], $_POST['acc_10']);
 
 	// 입금계정
-	$ina = array($_POST['in_1'], $_POST['in_2'], $_POST['in_3'], $_POST['in_4'], $_POST['in_5'], 
+	$ina = array($_POST['in_1'], $_POST['in_2'], $_POST['in_3'], $_POST['in_4'], $_POST['in_5'],
 				 $_POST['in_6'], $_POST['in_7'], $_POST['in_8'], $_POST['in_9'], $_POST['in_10']);
 
 	// 입금액
-	$inc = array($_POST['inc_1'], $_POST['inc_2'], $_POST['inc_3'], $_POST['inc_4'], $_POST['inc_5'], 
+	$inc = array($_POST['inc_1'], $_POST['inc_2'], $_POST['inc_3'], $_POST['inc_4'], $_POST['inc_5'],
 				 $_POST['inc_6'], $_POST['inc_7'], $_POST['inc_8'], $_POST['inc_9'], $_POST['inc_10']);
 
 	// 출금액
-	$exp = array($_POST['exp_1'], $_POST['exp_2'], $_POST['exp_3'], $_POST['exp_4'], $_POST['exp_5'], 
+	$exp = array($_POST['exp_1'], $_POST['exp_2'], $_POST['exp_3'], $_POST['exp_4'], $_POST['exp_5'],
 				 $_POST['exp_6'], $_POST['exp_7'], $_POST['exp_8'], $_POST['exp_9'], $_POST['exp_10']);
 
 	// 출금계정(seq코드와 은행명을 분리하여 사용)
@@ -112,7 +112,7 @@
 		############# CASH BOOK 테이블에 입력 값을 등록한다. #############
 
 		for($i=0; $i<10; $i++){   // 대여/회수 시 조합을 선택하기 위한 함수
-			if($class2[$i]<8&&$jh_loan[$i]!=null){
+			if($class2[$i]<8&&($jh_loan[$i]!=null||$jh_loan[$i]!=0)){
 				$any_jh[$i] = $pj_seq[$i];
 				$pj_seq[$i] = null;
 			}

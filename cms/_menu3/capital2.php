@@ -245,7 +245,7 @@
 								<td align="center" height="30" class="tb2" title="<?=$rows1[note]?>"><?=$cla?></td>
 								<td align="center" class="tb2"  title="<?=$rows1[note]?>" style="color:#000099;"><?=$account?></td>
 								<td align="left" height="30"  title="<?=$rows1[cont]?>" class="tb2" style="cursor:pointer;"><?=rg_cut_string($rows1[cont],20,"..");?></td>
-								<td align="left" height="30"  title="<?=$rows1[acc]?>" class="tb2"><?=rg_cut_string($acc,8,"")?></td>
+								<td align="left" height="30"  title="<?=$rows1[acc]?>" class="tb2"  style="cursor:pointer;"><?=rg_cut_string($acc,8,"")?></td>
 								<td align="center" height="30"  title="<?=$rows1[note]?>" bgcolor="#ececff" class="tb2"><?=$in_acc?></td>
 								<td align="right" height="30"  title="<?=$rows1[note]?>" class="tb2" bgcolor="#ececff" style="padding-right:10px;"><?=$inc?></td>
 								<td align="center" height="30"  title="<?=$rows1[note]?>" bgcolor="#fff0f0" class="tb2"><?=$out_acc?></td>
@@ -254,13 +254,13 @@
 								<!-- <td align="center" height="30" class="tb2"></td> -->
 								<?if($w_auth>0){ //쓰기 권한 있는 직원에게만 출력 ?>
 								<td align="center" height="30" class="tb2">
-									<?if($w_auth>1||($w_auth>0&&date('Y-m-d')==$rows1[deal_date])) { //관리자와 마스터 쓰기권한이 아니면 당일건에 대해서만 수정 삭제 가능 ?>
-									<a href='javascript:'onclick="popUp('capital_edit.php?edit_code=<?=$rows1[seq_num]?>','capital_edit')"><?}else{?><a href="javascript:" onclick="alert('관리자가 아니면 당일 건에 대해서만 수정/삭제 가능합니다.\n\n수정 문의 : <?=$admin_tel?>');"><? } ?>
+									<?if($w_auth>1||($w_auth>0&&date('Y-m-d', strtotime('-3 day'))<=$rows1[deal_date])) { //관리자와 마스터 쓰기권한이 아니면 당일건에 대해서만 수정 삭제 가능 ?>
+									<a href='javascript:'onclick="popUp('capital_edit.php?edit_code=<?=$rows1[seq_num]?>','capital_edit')"><?}else{?><a href="javascript:" onclick="alert('관리자가 아니면 3일전 이후 건에 대해서만 수정/삭제 가능합니다.\n\n수정 문의 : <?=$admin_tel?>');"><? } ?>
 									수정</a>
 								</td>
 								<td align="center" height="30" class="tb2">
-									<?if($w_auth>1||($w_auth>0&&date('Y-m-d')==$rows1[deal_date])) { //관리자와 마스터 쓰기권한이 아니면 당일건에 대해서만 수정 삭제 가능 ?>
-									<a href="javascript:" onclick="_del(<?=$rows1[seq_num]?>);"><?}else{?><a href="javascript:" onclick="alert('관리자가 아니면 당일 건에 대해서만 수정/삭제 가능합니다.\n\n삭제 문의 : <?=$admin_tel?>');"><? } ?>
+									<?if($w_auth>1||($w_auth>0&&date('Y-m-d', strtotime('-3 day'))<=$rows1[deal_date])) { //관리자와 마스터 쓰기권한이 아니면 당일건에 대해서만 수정 삭제 가능 ?>
+									<a href="javascript:" onclick="_del(<?=$rows1[seq_num]?>);"><?}else{?><a href="javascript:" onclick="alert('관리자가 아니면 3일전 이후 건에 대해서만 수정/삭제 가능합니다.\n\n삭제 문의 : <?=$admin_tel?>');"><? } ?>
 									삭제</a>
 								</td>
 								<?}?>
