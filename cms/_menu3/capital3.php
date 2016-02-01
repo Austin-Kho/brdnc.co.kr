@@ -65,7 +65,7 @@
 									<tr align="center" bgcolor="#f0f0e8">
 										<td width="20" class="bottom" height="20"><input type="checkbox" class="InputCheck" disabled onClick="checkAll();"></td>
 										<td width="120" class="bottom">구 분 <font color="red">*</font></td>
-										<td width="55" class="bottom">현장대체 <font color="red">*</font></td>
+										<td width="55" class="bottom">현 장 <font color="red">*</font></td>
 										<td width="55" class="bottom">조합대여</td>
 										<td width="75" class="bottom">계정과목 <font color="red">*</font> <a href="javascript:" onclick="popUp_size('<?=$cms_url?>_menu3/account_m.php','account',700,800)" title="계정과목 관리"><img src="../images/set.png" height="10" border="0" alt="설정"></a></td>
 										<td width="120" class="bottom">적 요 <font color="red">*</font></td>
@@ -81,13 +81,13 @@
 										<td class="bottom" height="30"><input type="checkbox" disabled  class="InputCheck"></td>
 										<!-- 구분 _1 -->
 										<td align="center" class="bottom">
-											<select name="class1_1" id="class1_1" style="width:52px;" onChange="inoutSel(1)">
+											<select name="class1_1" id="class1_1" style="width:52px;" onChange="inoutSel(this.form, 1)">
 												<option value="" selected> 선 택
 												<option value="1"> 입 금
 												<option value="2"> 출 금
 												<option value="3"> 대 체
 											</select>
-											<select name="class2_1" id="class2_1" style="width:52px;" onChange="inoutSel2(1)">
+											<select name="class2_1" id="class2_1" style="width:52px;" onChange="inoutSel2(this.form, 1)" disabled>
 												<option value="" selected> 선 택
 												<option value="1"> 자 산
 												<option value="2"> 부 채
@@ -112,7 +112,7 @@
 										<td class="bottom">조합:<input type="checkbox" value="1" name="jh_loan_1" id="jh_loan_1" onClick="jh_chk(1);" disabled></td>
 
 										<!-- 회계계정 _1 -->
-										<td class="bottom" id="d1_1_1">
+										<td class="bottom" id="d1_1_1"> <!-- 자산 계정 -->
 											<select name="account_1" id="d1_acc1_1" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
@@ -124,7 +124,7 @@
 												<?}?>
 											</select>
 										</td>
-										<td class="bottom" id="d1_2_1" style="display:none;">
+										<td class="bottom" id="d1_2_1" style="display:none;"> <!-- 부채 계정 -->
 											<select name="account_1" id="d1_acc2_1" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
@@ -136,7 +136,7 @@
 												<?}?>
 											</select>
 										</td>
-										<td class="bottom" id="d1_3_1" style="display:none;">
+										<td class="bottom" id="d1_3_1" style="display:none;"> <!-- 자본 계정 -->
 											<select name="account_1" id="d1_acc3_1" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
@@ -148,7 +148,7 @@
 												<?}?>
 											</select>
 										</td>
-										<td class="bottom" id="d1_4_1" style="display:none;">
+										<td class="bottom" id="d1_4_1" style="display:none;"> <!-- 수익 계정 -->
 											<select name="account_1" id="d1_acc4_1" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
@@ -160,7 +160,7 @@
 												<?}?>
 											</select>
 										</td>
-										<td class="bottom" id="d1_5_1" style="display:none;">
+										<td class="bottom" id="d1_5_1" style="display:none;"> <!-- 비용 계정 -->
 											<select name="account_1" id="d1_acc5_1" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
@@ -224,24 +224,14 @@
 										<td class="bottom" height="30"><input type="checkbox" disabled  class="InputCheck"></td>
 										<!-- 구분 _2 -->
 										<td class="bottom">
-											<select name="class1_2" id="class1_2" style="width:52px;" onChange="inoutSel(2)">
+											<select name="class1_2" id="class1_2" style="width:52px;" onChange="inoutSel(this.form, 2)">
 												<option value="" selected> 선 택
 												<option value="1"> 입 금
 												<option value="2"> 출 금
 												<option value="3"> 대 체
 											</select>
-											<select name="class2_2" id="class2_2" style="width:52px;" onChange="inoutSel2(2)">
+											<select name="class2_2" id="class2_2" style="width:52px;" onChange="inoutSel2(this.form, 2)" disabled>
 												<option value="" selected> 선 택
-												<option value="1"> 수 익
-												<option value="2"> 차 입
-												<option value="3"> 회 수
-												<option value="4"> 출 자
-												<option value="5"> 비 용
-												<option value="6"> 상 환
-												<option value="7"> 대 여
-												<option value="8"> 배 당
-												<option value="9"> 본 사
-												<option value="10"> 현 장
 											</select>
 										</td>
 										<!-- 현장코드 _2 -->
@@ -367,24 +357,14 @@
 										<td class="bottom" height="30"><input type="checkbox" disabled  class="InputCheck"></td>
 										<!-- 구분 _3 -->
 										<td class="bottom">
-											<select name="class1_3" id="class1_3" style="width:52px;" onChange="inoutSel(3)">
+											<select name="class1_3" id="class1_3" style="width:52px;" onChange="inoutSel(this.form, 3)">
 												<option value="" selected> 선 택
 												<option value="1"> 입 금
 												<option value="2"> 출 금
 												<option value="3"> 대 체
 											</select>
-											<select name="class2_3" id="class2_3" style="width:52px;" onChange="inoutSel2(3)">
+											<select name="class2_3" id="class2_3" style="width:52px;" onChange="inoutSel2(this.form, 3)" disabled>
 												<option value="" selected> 선 택
-												<option value="1"> 수 익
-												<option value="2"> 차 입
-												<option value="3"> 회 수
-												<option value="4"> 출 자
-												<option value="5"> 비 용
-												<option value="6"> 상 환
-												<option value="7"> 대 여
-												<option value="8"> 배 당
-												<option value="9"> 본 사
-												<option value="10"> 현 장
 											</select>
 										</td>
 										<!-- 현장코드 _3 -->
@@ -511,24 +491,14 @@
 										<td class="bottom" height="30"><input type="checkbox" disabled  class="InputCheck"></td>
 										<!-- 구분 _4 -->
 										<td class="bottom">
-											<select name="class1_4" id="class1_4" style="width:52px;" onChange="inoutSel(4)">
+											<select name="class1_4" id="class1_4" style="width:52px;" onChange="inoutSel(this.form, 4)">
 												<option value="" selected> 선 택
 												<option value="1"> 입 금
 												<option value="2"> 출 금
 												<option value="3"> 대 체
 											</select>
-											<select name="class2_4" id="class2_4" style="width:52px;" onChange="inoutSel2(4)">
+											<select name="class2_4" id="class2_4" style="width:52px;" onChange="inoutSel2(this.form, 4)" disabled>
 												<option value="" selected> 선 택
-												<option value="1"> 수 익
-												<option value="2"> 차 입
-												<option value="3"> 회 수
-												<option value="4"> 출 자
-												<option value="5"> 비 용
-												<option value="6"> 상 환
-												<option value="7"> 대 여
-												<option value="8"> 배 당
-												<option value="9"> 본 사
-												<option value="10"> 현 장
 											</select>
 										</td>
 										<!-- 현장코드 _4 -->
@@ -654,24 +624,14 @@
 										<td class="bottom" height="30"><input type="checkbox" disabled  class="InputCheck"></td>
 										<!-- 구분 _5 -->
 										<td class="bottom">
-											<select name="class1_5" id="class1_5" style="width:52px;" onChange="inoutSel(5)">
+											<select name="class1_5" id="class1_5" style="width:52px;" onChange="inoutSel(this.form, 5)">
 												<option value="" selected> 선 택
 												<option value="1"> 입 금
 												<option value="2"> 출 금
 												<option value="3"> 대 체
 											</select>
-											<select name="class2_5" id="class2_5" style="width:52px;" onChange="inoutSel2(5)">
+											<select name="class2_5" id="class2_5" style="width:52px;" onChange="inoutSel2(this.form, 5)" disabled>
 												<option value="" selected> 선 택
-												<option value="1"> 수 익
-												<option value="2"> 차 입
-												<option value="3"> 회 수
-												<option value="4"> 출 자
-												<option value="5"> 비 용
-												<option value="6"> 상 환
-												<option value="7"> 대 여
-												<option value="8"> 배 당
-												<option value="9"> 본 사
-												<option value="10"> 현 장
 											</select>
 										</td>
 										<!-- 현장코드 _5 -->
@@ -797,24 +757,14 @@
 										<td class="bottom" height="30"><input type="checkbox" disabled  class="InputCheck"></td>
 										<!-- 구분 _6 -->
 										<td class="bottom">
-											<select name="class1_6" id="class1_6" style="width:52px;" onChange="inoutSel(6)">
+											<select name="class1_6" id="class1_6" style="width:52px;" onChange="inoutSel(this.form, 6)">
 												<option value="" selected> 선 택
 												<option value="1"> 입 금
 												<option value="2"> 출 금
 												<option value="3"> 대 체
 											</select>
-											<select name="class2_6" id="class2_6" style="width:52px;" onChange="inoutSel2(6)">
+											<select name="class2_6" id="class2_6" style="width:52px;" onChange="inoutSel2(this.form, 6)" disabled>
 												<option value="" selected> 선 택
-												<option value="1"> 수 익
-												<option value="2"> 차 입
-												<option value="3"> 회 수
-												<option value="4"> 출 자
-												<option value="5"> 비 용
-												<option value="6"> 상 환
-												<option value="7"> 대 여
-												<option value="8"> 배 당
-												<option value="9"> 본 사
-												<option value="10"> 현 장
 											</select>
 										</td>
 										<!-- 현장코드 _6 -->
@@ -940,24 +890,14 @@
 										<td class="bottom" height="30"><input type="checkbox" disabled  class="InputCheck"></td>
 										<!-- 구분 _7 -->
 										<td class="bottom">
-											<select name="class1_7" id="class1_7" style="width:52px;" onChange="inoutSel(7)">
+											<select name="class1_7" id="class1_7" style="width:52px;" onChange="inoutSel(this.form, 7)">
 												<option value="" selected> 선 택
 												<option value="1"> 입 금
 												<option value="2"> 출 금
 												<option value="3"> 대 체
 											</select>
-											<select name="class2_7" id="class2_7" style="width:52px;" onChange="inoutSel2(7)">
+											<select name="class2_7" id="class2_7" style="width:52px;" onChange="inoutSel2(this.form, 7)" disabled>
 												<option value="" selected> 선 택
-												<option value="1"> 수 익
-												<option value="2"> 차 입
-												<option value="3"> 회 수
-												<option value="4"> 출 자
-												<option value="5"> 비 용
-												<option value="6"> 상 환
-												<option value="7"> 대 여
-												<option value="8"> 배 당
-												<option value="9"> 본 사
-												<option value="10"> 현 장
 											</select>
 										</td>
 										<!-- 현장코드 _7 -->
@@ -1083,24 +1023,14 @@
 										<td class="bottom" height="30"><input type="checkbox" disabled  class="InputCheck"></td>
 										<!-- 구분 _8 -->
 										<td class="bottom">
-											<select name="class1_8" id="class1_8" style="width:52px;" onChange="inoutSel(8)">
+											<select name="class1_8" id="class1_8" style="width:52px;" onChange="inoutSel(this.form, 8)">
 												<option value="" selected> 선 택
 												<option value="1"> 입 금
 												<option value="2"> 출 금
 												<option value="3"> 대 체
 											</select>
-											<select name="class2_8" id="class2_8" style="width:52px;" onChange="inoutSel2(8)">
+											<select name="class2_8" id="class2_8" style="width:52px;" onChange="inoutSel2(this.form, 8)" disabled>
 												<option value="" selected> 선 택
-												<option value="1"> 수 익
-												<option value="2"> 차 입
-												<option value="3"> 회 수
-												<option value="4"> 출 자
-												<option value="5"> 비 용
-												<option value="6"> 상 환
-												<option value="7"> 대 여
-												<option value="8"> 배 당
-												<option value="9"> 본 사
-												<option value="10"> 현 장
 											</select>
 										</td>
 										<!-- 현장코드 _8 -->
@@ -1226,24 +1156,14 @@
 										<td class="bottom" height="30"><input type="checkbox" disabled  class="InputCheck"></td>
 										<!-- 구분 _9 -->
 										<td class="bottom">
-											<select name="class1_9" id="class1_9" style="width:52px;" onChange="inoutSel(9)">
+											<select name="class1_9" id="class1_9" style="width:52px;" onChange="inoutSel(this.form, 9)">
 												<option value="" selected> 선 택
 												<option value="1"> 입 금
 												<option value="2"> 출 금
 												<option value="3"> 대 체
 											</select>
-											<select name="class2_9" id="class2_9" style="width:52px;" onChange="inoutSel2(9)">
+											<select name="class2_9" id="class2_9" style="width:52px;" onChange="inoutSel2(this.form, 9)" disabled>
 												<option value="" selected> 선 택
-												<option value="1"> 수 익
-												<option value="2"> 차 입
-												<option value="3"> 회 수
-												<option value="4"> 출 자
-												<option value="5"> 비 용
-												<option value="6"> 상 환
-												<option value="7"> 대 여
-												<option value="8"> 배 당
-												<option value="9"> 본 사
-												<option value="10"> 현 장
 											</select>
 										</td>
 										<!-- 현장코드 _9 -->
@@ -1369,24 +1289,14 @@
 										<td height="30"><input type="checkbox" disabled  class="InputCheck"></td>
 										<!-- 구분 _10 -->
 										<td class="bottom">
-											<select name="class1_10" id="class1_10" style="width:52px;" onChange="inoutSel(10)">
+											<select name="class1_10" id="class1_10" style="width:52px;" onChange="inoutSel(this.form, 10)">
 												<option value="" selected> 선 택
 												<option value="1"> 입 금
 												<option value="2"> 출 금
 												<option value="3"> 대 체
 											</select>
-											<select name="class2_10" id="class2_10" style="width:52px;" onChange="inoutSel2(10)">
+											<select name="class2_10" id="class2_10" style="width:52px;" onChange="inoutSel2(this.form, 10)" disabled>
 												<option value="" selected> 선 택
-												<option value="1"> 수 익
-												<option value="2"> 차 입
-												<option value="3"> 회 수
-												<option value="4"> 출 자
-												<option value="5"> 비 용
-												<option value="6"> 상 환
-												<option value="7"> 대 여
-												<option value="8"> 배 당
-												<option value="9"> 본 사
-												<option value="10"> 현 장
 											</select>
 										</td>
 										<!-- 현장코드 _10 -->

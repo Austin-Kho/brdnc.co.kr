@@ -165,28 +165,24 @@
 						계정과목 <font color="#ff0000">*</font>
 					</div>
 					<div style="float:left; padding-top:6px; text-align:left;">
-						<select name="class1" style="width:88;" onChange="inoutSel_(this.form)">
+						<select name="class1" style="width:88;" onChange="inoutSel(this.form)">
 							<option value="" <?if(!$rows[class1]) echo "selected";?>> 선 택
 							<option value="1" <?if($rows[class1]==1) echo "selected";?>> 입 금
 							<option value="2" <?if($rows[class1]==2) echo "selected";?>> 출 금
 							<option value="3" <?if($rows[class1]==3) echo "selected";?>> 대 체
 						</select>
-						<select name="class2" style="width:88;" onChange="inoutSel2_(this.form)">
-						<?if(!$rows[class1]){?>
+						<select name="class2" style="width:88;" onChange="inoutSel2(this.form)" <?if(!$rows[class2]) echo 'disabled';?>>
+						<?if(!$rows[class2]){?>
 							<option value="" <?if(!$rows[class2]) echo "selected";?>> 선 택
+						<?}else if($rows[class1]==1){?>
 							<option value="1" <?if($rows[class2]==1) echo "selected";?>> 자 산
 							<option value="2" <?if($rows[class2]==2) echo "selected";?>> 부 채
 							<option value="3" <?if($rows[class2]==3) echo "selected";?>> 자 본
 							<option value="4" <?if($rows[class2]==4) echo "selected";?>> 수 익
-							<option value="5" <?if($rows[class2]==5) echo "selected";?>> 비 용
-							<option value="6" <?if($rows[class2]==6) echo "selected";?>> 본 사
-							<option value="7" <?if($rows[class2]==7) echo "selected";?>> 현 장
-						<?}else if($rows[class1]<3){?>
-							<option value="" <?if(!$rows[class2]) echo "selected";?>> 선 택
+						<?}else if($rows[class1]==2){?>
 							<option value="1" <?if($rows[class2]==1) echo "selected";?>> 자 산
 							<option value="2" <?if($rows[class2]==2) echo "selected";?>> 부 채
 							<option value="3" <?if($rows[class2]==3) echo "selected";?>> 자 본
-							<option value="4" <?if($rows[class2]==4) echo "selected";?>> 수 익
 							<option value="5" <?if($rows[class2]==5) echo "selected";?>> 비 용
 						<?}else if($rows[class1]==3){?>
 							<option value="6" <?if($rows[class2]==6) echo "selected";?>> 본 사
