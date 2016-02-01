@@ -193,7 +193,7 @@
 						<?if($rows[class1]==3&&$rows[class2]!=1) $sel_style = 'disabled';?>
 						
 						<!-- 자산 계정 목록 시작--> <!-- 입금/출금 -->
-						<select name="account_1" id="d1_1" style="width:105px; <?if($rows[class1]!=3&&$rows[class2]!=1) $sel_style = 'display:none;';?>" <?=$sel_style?>>
+						<select name="account_1" id="d1_1" style="width:105px; <?if($rows[class1]!=3&&$rows[class2]!=1) echo 'display:none;';?>" <?=$sel_style?>>
 							<?
 								$acc_qry = "SELECT * FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc !='1' ORDER BY d3_code ASC";
 								$acc_rlt = mysql_query($acc_qry, $connect);
