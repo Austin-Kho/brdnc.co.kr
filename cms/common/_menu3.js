@@ -94,8 +94,10 @@ function inoutSel(form, no, pj){ // ==capital2.php 와 capital_edit.php => form 
 
 		in_id.disabled=0;
 		inc_id.disabled=0;
-		out_id.disabled=1;
-		exp_id.disabled=1;
+		out_id.disabled=1;  out_id.options[0].selected =1;
+		exp_id.disabled=1;  exp_id.value=null;
+
+		
 
 	}else if(class1_id.value==2){    //1번째 셀렉트바 출금이면
 		class2_id.length=4;
@@ -135,10 +137,11 @@ function inoutSel(form, no, pj){ // ==capital2.php 와 capital_edit.php => form 
 			d1_acc5_id.disabled=1;  d1_acc5_id.style.display='none'; 
 		}
 
-		in_id.disabled=1;
-		inc_id.disabled=1;
+		in_id.disabled=1;   in_id.options[0].selected =1;
+		inc_id.disabled=1;  inc_id.value=null;
 		out_id.disabled=0;
 		exp_id.disabled=0;
+		
 
 	}else if(class1_id.value==3){
 		class2_id.length=2;
