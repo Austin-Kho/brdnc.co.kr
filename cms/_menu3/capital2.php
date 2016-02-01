@@ -47,7 +47,7 @@
 								$sh_text = $_REQUEST['sh_text'];
 								$start = $_REQUEST['start'];
 
-								$add_where=" WHERE (com_div>0 AND ((in_acc=no AND class2<>8) OR out_acc=no) OR (com_div IS NULL AND in_acc=no AND class2=7))";
+								$add_where=" WHERE (com_div>0 AND ((in_acc=no AND class2<>7) OR out_acc=no) OR (com_div IS NULL AND in_acc=no AND class2=6))";
 
 								if($class1){
 									if($class1==1) $add_where.=" AND class1='1' ";
@@ -88,8 +88,23 @@
 									<option value="2" <?if($class1==2) echo "selected";?>> 출 금
 									<option value="3" <?if($class1==3) echo "selected";?>> 대 체
 								</select>
-								<select name="class2" style="width:80px;" onchange = "inoutSel2(this.form)" disabled>
+								<select name="class2" style="width:80px;" onchange = "inoutSel2(this.form)" <?if(!$class2) echo "disabled";?>>
+									<?if(!$class1||!$class2){?>
 									<option value="" <?if(!$class2) echo "selected";?>> 선 택
+									<?}else if($class1==1){?>
+									<option value="1" <?if($class2==1) echo "selected";?>> 자 산
+									<option value="2" <?if($class2==2) echo "selected";?>> 부 채
+									<option value="3" <?if($class2==3) echo "selected";?>> 자 본
+									<option value="4" <?if($class2==4) echo "selected";?>> 수 익
+									<?}else if($class1==2){?>
+									<option value="1" <?if($class2==1) echo "selected";?>> 자 산
+									<option value="2" <?if($class2==2) echo "selected";?>> 부 채
+									<option value="3" <?if($class2==3) echo "selected";?>> 자 본
+									<option value="5" <?if($class2==5) echo "selected";?>> 비 용
+									<?}else if($class1==3){?>
+									<option value="6" <?if($class2==6) echo "selected";?>> 본 사
+									<option value="7" <?if($class2==7) echo "selected";?>> 현 장
+									<?}?>
 								</select>
 							</td>
 							<td width="60" class="form2" bgcolor="#F4F4F4">거래기간 </td>

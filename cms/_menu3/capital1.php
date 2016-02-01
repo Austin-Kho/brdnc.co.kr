@@ -28,7 +28,56 @@
 						<tr>
 							<td height="580" valign="top">
 							<div style="height:18px; text-align:right; padding:0 20px 2px 0; margin-top:10px;" class="form2">
-								<!-- <a href="javascript:" onClick="window.alert('준비중입니다!');">▲ 손익계산서</a> -->
+							<!-- --------------------------------------------------------------------------------------------------------------------------- -->
+							<?
+								$auth_qry = "SELECT * FROM cms_member_table WHERE user_id='$_SESSION[p_id]' ";
+								$auth_rlt = mysql_query($auth_qry, $connect);
+								$auth_row= mysql_fetch_array($auth_rlt);
+
+								// 이 페이지 쓰기 권한 설정하기
+								$auth_level=2; // 이페이지 마스터 쓰기 권한 레벨
+
+								if($auth_row[is_admin]==1){ $w_auth =2;
+								}else if($_m3_1_1_row[_m3_1_1]==2){ if($auth_row[auth_level]<=$auth_level){ $w_auth =2; }else{ $w_auth =1;}}else{	$w_auth =0;}
+
+								$class1 = $_REQUEST['class1'];
+								$class2 = $_REQUEST['class2'];
+								$s_date = $_REQUEST['s_date'];
+								$e_date = $_REQUEST['e_date'];
+								$sh_con = $_REQUEST['sh_con'];
+								$sh_text = $_REQUEST['sh_text'];
+								$start = $_REQUEST['start'];
+
+								$add_where=" WHERE (com_div>0 AND ((in_acc=no AND class2<>8) OR out_acc=no) OR (com_div IS NULL AND in_acc=no AND class2=7))";
+
+								if($class1){
+									if($class1==1) $add_where.=" AND class1='1' ";
+									if($class1==2) $add_where.=" AND class1='2' ";
+									if($class1==3) $add_where.=" AND class1='3' ";
+								}
+								if($class2) $add_where.=" AND class2='$class2' ";
+								if($s_date) $add_where.=" AND deal_date>='$s_date' ";
+								if($e_date) {$add_where.=" AND deal_date<='$e_date' "; $e_add=" AND deal_date<='$e_date' ";} else{$e_add="";}
+
+								if($sh_text){
+									if($sh_con==1) $add_where.=" AND (bank like '%$sh_text%' OR name like '%$sh_text%' OR number like '%$sh_text%' OR holder like '%$sh_text%' OR note like '%$sh_text%' OR account like '%$sh_text%' OR cont like '%$sh_text%' OR acc like '%$sh_text%' OR evidence like '%$sh_text%' OR cms_capital_cash_book.worker like '%$sh_text%') "; // 통합검색
+									if($sh_con==2) $add_where.=" AND cont like '%$sh_text%' "; // 적 요
+									if($sh_con==3) $add_where.=" AND acc like '%$sh_text%' "; //거래처
+									if($sh_con==4) $add_where.=" AND (in_acc like '%$sh_text%' OR out_acc like '%$sh_text%') "; // 계정
+									if($sh_con==5) $add_where.=" AND evidence like '%$sh_text%' ";  //증빙서류
+								}
+								if($_m3_1_1_row[_m3_1_1]<1){
+									$excel_pop = "alert('출력 권한이 없습니다!');";
+								}else{
+									$url_where = urlencode($add_where);
+									$url_s_date = urlencode($s_date);
+									$url_e_date = urlencode($e_date);
+									$excel_pop = "alert('준비 중입니다!');";
+									// $excel_pop = "location.href='excel_cash_book.php?add_where=$url_where&amp;s_date=$url_s_date&amp;e_date=$url_e_date)' ";
+								}
+							?>
+							<a href="javascript:" onClick="<?=$excel_pop?>"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> 자금일보 출력</a>
+							<!-- --------------------------------------------------------------------------------------------------------------------------- -->
 							</div>
 							<form method="post" name="d_cash_book_frm" action="<?=$_SERVER['PHP_SELF']?>">
 							<input type="hidden" name="m_di" value="<?=$m_di?>">
@@ -143,7 +192,7 @@
 									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#ff3300"><?if($total_d_exp==0){echo "-";}else{echo number_format($total_d_exp);}?></font></td>
 									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#000099"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($total_ba==0){echo "-";}else{echo number_format($total_ba);}?></font></td>
 								</tr>
-							</table><table><tr><td height="8"></td></tr></table>aa
+							</table><table><tr><td height="8"></td></tr></table>
 
 
 							<table border="0" width="100%" cellspacing="0" cellpadding="0">
@@ -191,8 +240,8 @@
 												}
 										?>
 										<tr>
-											<td style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28"><?=rg_cut_string($da_in_acc,16,"..")?></td>
-											<td style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=rg_cut_string($da_in_cont,20,"..")?></td>
+											<td style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28"><?=rg_cut_string($da_in_acc,16,"")?></td>
+											<td style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=rg_cut_string($da_in_cont,20,"")?></td>
 											<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$income?></td>
 										</tr>
 										<? } ?>
@@ -239,8 +288,8 @@
 											}
 									?>
 									<tr>
-										<td style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;" height="28"><?=rg_cut_string($da_ex_acc,16,"..")?></td>
-										<td style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=rg_cut_string($da_ex_cont,20,"..")?></td>
+										<td style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;" height="28"><?=rg_cut_string($da_ex_acc,16,"")?></td>
+										<td style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=rg_cut_string($da_ex_cont,20,"")?></td>
 										<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$exp?></td>
 									</tr>
 									<? } ?>
@@ -296,8 +345,8 @@
 
 									 $cash_hand = number_format($ca_row1[in_total]-$ca_row2[out_total])." 원";
 									 $bank_balance=number_format($b_row1[in_total]-$b_row2[out_total])." 원";
-									 $dept=number_format($de_row1[in_total]-$de_row2[out_total])." 원";
-									 $loan=number_format($lo_row1[in_total]-$lo_row2[out_total])." 원";
+									 // $dept=number_format($de_row1[in_total]-$de_row2[out_total])." 원";
+									 // $loan=number_format($lo_row1[in_total]-$lo_row2[out_total])." 원";
 									 if($bank_balance==0) $bank_balance="-";
 									 if($cash_hand==0) $cash_hand="-";
 									 if($dept==0) $dept="-";
