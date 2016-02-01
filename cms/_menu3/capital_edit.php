@@ -39,73 +39,84 @@
 			var d1_4 = document.getElementById('d1_4');
 			var d1_5 = document.getElementById('d1_5');
 
-			if(!form.deal_date.value){
+			if(!form.deal_date.value){ // 거래일자
 				alert('거래 일자를 입력하세요!');
 				form.deal_date.focus();
 				return;
 			}
-			if(!form.class1.value){
+			if(!form.class1.value){ // 구분1(대분류)
 			 	alert('구분1을 입력하세요!');
 			 	form.class1.focus();
 			 	return;
 			}
-			if(!form.class2.value){
+			if(!form.class2.value){ // 구분2(중분류)
 			 	alert('구분2를 입력하세요!');
 			 	form.class2.focus();
 			 	return;
 			}
 
-			if(form.class1.value!=3&&!d1_1.value&&!d1_2.value&&!d1_3.value&&!d1_4.value&&!d1_5.value){
+			if(form.class1.value!=3&&!d1_1.value&&!d1_2.value&&!d1_3.value&&!d1_4.value&&!d1_5.value){ // 구분3(계정과목)
 			 	alert('계정과목을 선택하세요!');
 			 	form.account.focus();
 			 	return;
 			}
-			if(!form.cont.value){
+
+			if(form.is_jh.checked==true){ // 조합여부 체크박스
+				if(!form.any_jh.value){ // 조합현장 선택목록
+					alert('대여금 지급 현장을 선택하세요!');
+					form.any_jh.focus();
+					return;
+				}
+			}
+
+			if(!form.cont.value){ // 적요
 				alert('적요 항목을 입력하세요!');
 				form.cont.focus();
 				return;
 			}
-			if(form.acc.value==1){
-				if(form.inc.value){
+
+			if(form.class1.value==1){ // 입금 시
+				if(!form.inc.value){ // 입금액
 					 alert('입금 금액을 입력하세요!');
-					 form.acc.focus();
+					 form.inc.focus();
 					 return;
-				}d1_5.value
-				if(form.ina.value){
+				}
+				if(!form.ina.value){ // 입금처
 					 alert('입금 계정을 입력하세요!');
-					 form.acc.focus();
+					 form.ina.focus();
 					 return;
 				}
 			}
-			if(form.exp.value==2){
-				if(form.exp.value){
+
+			if(form.class1.value==2){ // 출금 시
+				if(!form.exp.value){ // 출금액
 					 alert('출금 금액을 입력하세요!');
 					 form.exp.focus();
 					 return;
 				}
-				if(form.out.value){
+				if(!form.out.value){
 					 alert('출금 계정을 입력하세요!');
 					 form.out.focus();
 					 return;
 				}
 			}
-			if(form.exp.value==3){
-				if(form.inc.value){
+			if(form.class1.value==3){ // 대체 시
+				if(!form.inc.value){
 					 alert('입금 금액을 입력하세요!');
-					 form.acc.focus();
+					 form.inc.focus();
 					 return;
 				}
-				if(form.ina.value){
+				if(!form.ina.value){
 					 alert('입금 계정을 입력하세요!');
-					 form.acc.focus();
+					 form.ina.focus();
 					 return;
 				}
-				if(form.exp.value){
+				if(!form.exp.value){
 					 alert('출금 금액을 입력하세요!');
 					 form.exp.focus();
 					 return;
 				}
-				if(form.out.value){
+				if(!form.out.value){
 					 alert('출금 계정을 입력하세요!');
 					 form.out.focus();
 					 return;
@@ -259,7 +270,7 @@
 						조합대여금 <font color="#ff0000">*</font>
 					</div>
 					<div style="float:left; padding-top:6px; text-align:left;">
-						<input type="checkbox" name="is_jh" value="1" <?if($rows[is_jh_loan]==1) echo 'checked'; else echo 'disabled';?>> 조합
+						<input type="checkbox" name="is_jh" id="is_jh" value="1" onClick="edit_jh_chk();" <?if($rows[is_jh_loan]) echo 'checked';?> <? if(!$rows[is_jh_loan]&&$rows[class2]!=3&&$rows[class2]!=7) echo  'disabled';?>> 조합
 					</div>
 					<div style="float:left; padding:6px 0 0 10px;">
 						<?
@@ -272,7 +283,7 @@
 								$pj_name[$i]= $pj_rows[pj_name];
 							}
 						?>
-						<select name="any_jh" style="width:160px;">
+						<select name="any_jh" id="any_jh" style="width:160px;" <?if(!$rows[any_jh]) echo "disabled";?>>
 							<option value=""> 선 택
 							<? for($i=0; $i<$pj_num; $i++){ ?>
 							<option value="<?=$pj_seq[$i]?>" <?if($rows[any_jh]==$pj_seq[$i]) echo "selected";?>> <?=$pj_name[$i]?>
@@ -301,7 +312,7 @@
 						입금내역 <font color="#ff0000">*</font>
 					</div>
 					<div style="float:left; padding-top:5px; text-align:left;">
-						<input type="text" name="inc" value="<?=$rows[inc]?>" size="15" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')" <?if($rows[class1]==2) echo "disabled";?>>
+						<input type="text" name="inc" value="<?if($rows[inc]>0) echo $rows[inc]?>" size="15" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')" <?if($rows[class1]==2) echo "disabled";?>>
 					</div>
 					<div style="float:left; padding:6px 0 0 5px; text-align:left;">
 						<select name="ina" style="width:78;" <?if($rows[class1]==2) echo "disabled";?>>
@@ -361,7 +372,7 @@
 				</div>
 				</form>
 				<div style="height:50px; text-align:center; padding-top:15px;">
-					<input type="button" value=" 수정하기 " onclick="_editChk()" style="height:20px;" class="inputstyle_bt">
+					<input type="button" value=" 수정하기 " onclick="_editChk();" style="height:20px;" class="inputstyle_bt">
 					<input type="button" value=" 닫 기 " onclick="self.close();" style="height:20px;" class="inputstyle_bt">
 				</div>
 			</div>

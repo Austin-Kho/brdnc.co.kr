@@ -255,7 +255,7 @@
 								<?if($w_auth>0){ //쓰기 권한 있는 직원에게만 출력 ?>
 								<td align="center" height="30" class="tb2">
 									<?if($w_auth>1||($w_auth>0&&date('Y-m-d', strtotime('-3 day'))<=$rows1[deal_date])) { //관리자와 마스터 쓰기권한이 아니면 당일건에 대해서만 수정 삭제 가능 ?>
-									<a href='javascript:'onclick="popUp('capital_edit.php?edit_code=<?=$rows1[seq_num]?>','capital_edit')"><?}else{?><a href="javascript:" onclick="alert('관리자가 아니면 3일전 이후 건에 대해서만 수정/삭제 가능합니다.\n\n수정 문의 : <?=$admin_tel?>');"><? } ?>
+									<a href='javascript:'onclick="popUp_size('capital_edit.php?edit_code=<?=$rows1[seq_num]?>','capital_edit','420','500')"><?}else{?><a href="javascript:" onclick="alert('관리자가 아니면 3일전 이후 건에 대해서만 수정/삭제 가능합니다.\n\n수정 문의 : <?=$admin_tel?>');"><? } ?>
 									수정</a>
 								</td>
 								<td align="center" height="30" class="tb2">

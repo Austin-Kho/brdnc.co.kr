@@ -666,10 +666,24 @@ function jh_chk(no){
 	}
 }
 
+// Edit 파일 조합 체크박스 체크 시
+function edit_jh_chk(){
+
+	var any_jh = document.getElementById('any_jh');
+	var is_jh = document.getElementById('is_jh');
+	//
+	if(is_jh.checked==true){
+		any_jh.disabled=0;
+	}else{
+		any_jh.disabled=1;
+		any_jh.options[0].selected=1;
+	}
+}
+
 // 서브밋 체크
 function inout_frm_chk(com){
 
-	var form=document.inout_frm;	
+	var form=document.inout_frm;
 
 	if(!form.deal_date.value){
 		alert('거래일자를 입력하세요!');
@@ -681,7 +695,7 @@ function inout_frm_chk(com){
 		form.class1_1.focus();
 		return;
 	}
-	
+
 	for(i=1; i<=10; i++){ // 총 10행 행수만큼 반복
 
 		var d1_acc1 = "d1_acc1_"+i;   // 자산 계정과목
@@ -700,6 +714,13 @@ function inout_frm_chk(com){
 			if(eval('form.class2_'+i).value=='10'){
 				if(!eval('form.pj_seq_'+i).value){
 					alert('전도금을 대체(이체)할 현장을 선택하여 주십시요!');
+					eval('form.pj_seq_'+i).focus();
+					return;
+				}
+			}
+			if(eval('form.jh_loan_'+i).checked==true){ // 조합여부 체크박스
+				if(!eval('form.pj_seq_'+i).value){ // 조합현장 선택목록
+					alert('대여금 지급 현장을 선택하세요!');
 					eval('form.pj_seq_'+i).focus();
 					return;
 				}
@@ -768,7 +789,7 @@ function inout_frm_chk(com){
 					return;
 				}
 			}
-		}	
+		}
 	}
 
 	var aaa=confirm('거래내용을 등록하시겠습니까?');

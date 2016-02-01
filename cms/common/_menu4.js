@@ -177,7 +177,10 @@ function con_formck(){
 		form.start_date.focus();
 		return;
 	}
-	form.submit();
+	var s2_sub=confirm('프로젝트 정보를 등록/수정하시겠습니까?');
+	if(s2_sub==true){
+		form.submit();
+	}
 }
 
 function select_ch(obj){

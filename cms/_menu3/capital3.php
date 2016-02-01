@@ -111,6 +111,7 @@
 											</select>
 										</td>
 
+										<!-- 조합 대여금여부 _1 -->
 										<td class="bottom">조합:<input type="checkbox" value="1" name="jh_loan_1" id="jh_loan_1" onClick="jh_chk(1);" disabled></td>
 
 										<!-- 회계계정 _1 -->

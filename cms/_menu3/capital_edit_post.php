@@ -40,7 +40,7 @@
 	$any_jh = $_POST['any_jh'];
 	$cont = $_POST['cont'];
 	$acc = $_POST['acc'];
-	$inc = $_POST['inc'];$
+	$inc = $_POST['inc'];
 	$ina = $_POST['ina'];
 	$exp = $_POST['exp'];
 	$out = $_POST['out'];
