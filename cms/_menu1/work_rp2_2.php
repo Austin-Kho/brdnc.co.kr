@@ -870,7 +870,7 @@
 								<?
 									if($mode=="reg") $str = "등록";
 									if($mode=="modify") $str = "수정";
-									if($_m1_1_2_row[_m1_1_2]<2){
+									if($_m1_2_2_row[_m1_2_2]<2){
 										$submit_str="alert('등록 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 										$del_str="alert('삭제 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 									}else{
