@@ -29,9 +29,9 @@ Header("Expires: 0");
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <table border="1">
 	<tr align="center" height="45">
-			<td colspan="11" style="font-size:15pt; text-align:center;"><b><?=$com_title?> 금전 출납부</b></td>
+			<td colspan="12" style="font-size:15pt; text-align:center;"><b><?=$com_title?> 자금 출납부</b></td>
 	</tr>
-	<tr align="center" height="35">
+	<tr align="center" height="35" style="font-size:9pt;">
 			<td width="80" bgcolor="#EAEAEA">거래일자</td>
 			<td width="80" bgcolor="#EAEAEA"> 구 분</td>
 			<td width="100" bgcolor="#EAEAEA"> 계정과목</td>
@@ -70,14 +70,14 @@ Header("Expires: 0");
 		 if($rows1[class1]==1) $cla1="<font color='#0066ff'>[입금]</font>";
 		 if($rows1[class1]==2) $cla1="<font color='#ff3333'>[출금]</font>";
 		 if($rows1[class1]==3) $cla1="<font color='#669900'>[대체]</font>";
-		 if($rows1[class2]==1) $cla2="<font color='#0066ff'>[수익]</font>";
-		 if($rows1[class2]==2) $cla2="<font color='#6600ff'>[차용]</font>";
-		 if($rows1[class2]==3) $cla2="<font color='#0066ff'>[회수]</font>";
-		 if($rows1[class2]==4) $cla2="<font color='#ff3333'>[비용]</font>";
-		 if($rows1[class2]==5) $cla2="<font color='#009900'>[상환]</font>";
-		 if($rows1[class2]==6) $cla2="<font color='#009900'>[대여]</font>";
-		 if($rows1[class2]==7) $cla2="<font color='#669900'>[본사]</font>";
-		  if($rows1[class2]==8) $cla2="<font color='#669900'>[현장]</font>";
+
+		 if($rows1[class2]==1) $cla2="<font color='#0066ff'>[자산]</font>";
+		 if($rows1[class2]==2) $cla2="<font color='#6600ff'>[부채]</font>";
+		 if($rows1[class2]==3) $cla2="<font color='#0066ff'>[자본]</font>";
+		 if($rows1[class2]==4) $cla2="<font color='#ff3333'>[수익]</font>";
+		 if($rows1[class2]==5) $cla2="<font color='#009900'>[비용]</font>";
+		 if($rows1[class2]==6) $cla2="<font color='#009900'>[본사]</font>";
+		 if($rows1[class2]==7) $cla2="<font color='#669900'>[현장]</font>";
 
 		 $cla = $cla1."-".$cla2;
 		 if($rows1[account]==""){
@@ -110,7 +110,7 @@ Header("Expires: 0");
 				$out_acc=$rows1[name];
 		 }
 ?>
-	<tr>
+	<tr  style="font-size:9pt;">
 		<td align="center" height="30"><?=$rows1[deal_date]?></td>
 		<td align="center" height="30"><?=$cla?></td>
 		<td align="center"><?=$account?></td>
@@ -131,7 +131,7 @@ Header("Expires: 0");
 </table>
 <p>
 <table border=1>
-<tr>
+<tr  style="font-size:9pt;">
 <?
 	$cash1=" SELECT SUM(inc) AS in_total FROM cms_capital_cash_book  WHERE (com_div>0 AND in_acc='1' AND class2<>8) OR (com_div IS NULL AND in_acc=1 AND class2=7) $e_add  "; // 현금수입금 합계 구하기
 	$ca_qry1=mysql_query( $cash1, $connect);
@@ -170,6 +170,6 @@ Header("Expires: 0");
 	if($dept==0) $dept="-";
 	if($loan==0) $loan="-";
 ?>
-	<td height="50" bgcolor="#ffffcc" align="center" colspan="11"> 현금시재 : <?= $cash_hand?> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 예금잔고: <?=$bank_balance?> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 차입금잔고 : <?=$dept?> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 대여금잔고 : <?=$loan?> </td>
+	<td height="50" bgcolor="#ffffcc" align="center" colspan="12"> 현금시재 : <?= $cash_hand?> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 예금잔고: <?=$bank_balance?> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 차입금잔고 : <?=$dept?> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 대여금잔고 : <?=$loan?> </td>
 </tr>
 </table>
