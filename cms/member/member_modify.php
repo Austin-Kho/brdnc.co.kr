@@ -85,7 +85,7 @@
 			<div style="clear:left; float:left; width:180px; height:28px; background-color:#F8F8F7; border-width:0 0 1px 0; border-color:#E1E1E1; border-style:solid; padding:5px 0 0 20px;">본사 담당 부서 선택</div>
 			<div style="float:left; width:512px; height:28px; border-width:0 0 1px 0; border-color:#E1E1E1; border-style:solid; padding:5px 0 0 20px;">
 				<!-- 현재 멤버테이블과 직원 테이블 분리상태이므로 향후 이에 대한 조정 요망 -->
-				<select name="div_seq" style="width:150px; height:23px;" class="inputstyle2" disabled>
+				<select name="div_seq" style="width:150px; height:23px;" class="inputstyle2">
 					<option value="" <?if(!$div_seq) echo "selected";?>> 부서선택
 					<?
 						$d_query="SELECT seq, div_name FROM cms_com_div ";
@@ -157,7 +157,7 @@
 
 		<div style="clear:left; float:left; width:180px; height:25px; background-color:#F8F8F7; padding:5px 0 0 20px;">아 이 디</div>
 		<div style="float:left; width:512px; height:25px; padding:5px 0 0 20px;">
-			<input type="text" name="user_id" value="<?=$rows[user_id]?>" style="ime-mode:disabled;" size='22' class='inputstyle2' maxlength="12" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"  readonly>
+			<input type="text" name="user_id" value="<?=$rows[user_id]?>" style="ime-mode:disabled;" size='23' class='inputstyle2' maxlength="12" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"  readonly>
 		</div>
 
 		<div style="clear:left; float:left; width:180px; height:36px; background-color:#F8F8F7; border-width:0 0 1px 0; border-color:#E1E1E1; border-style:solid; padding:5px 0 0 20px;"></div>
@@ -200,9 +200,9 @@
 		<div style="clear:left; float:left; width:180px; height:46px; background-color:#F8F8F7; border-width:0 0 1px 0; border-color:#E1E1E1; border-style:solid; padding:5px 0 0 20px;">전자메일 (Email) <span style="color:#cc0000">*</span></div>
 		<div style="float:left; width:512px; height:46px; border-width:0 0 1px 0; border-color:#E1E1E1; border-style:solid; padding:5px 0 0 20px;">
 			<div style="float:left;">
-				<input type="text" name="email1" value="<?=$email[0]?>" style="ime-mode:disabled;" size="15" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
+				<input type="text" name="email1" value="<?=$email[0]?>" style="ime-mode:disabled;" size="13" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
 			@
-			<input type="text" name="email2" value="<?=$email[1]?>" style="ime-mode:disabled;" size="15" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
+			<input type="text" name="email2" value="<?=$email[1]?>" style="ime-mode:disabled;" size="14" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
 			</div>
 			<div style="float:left; padding-left:3px;">
 				<select name="email3" Onchange="email2.value=this.value" class="inputstyle2" style="height:22px;">
@@ -243,7 +243,7 @@
 
 		<div style="clear:left; float:left; width:180px; height:28px; background-color:#F8F8F7; border-width:0 0 1px 0; border-color:#E1E1E1; border-style:solid; padding:5px 0 0 20px;">전화번호</div>
 		<div style="float:left; width:512px; height:28px; border-width:0 0 1px 0; border-color:#E1E1E1; border-style:solid; padding:5px 0 0 20px;">
-			<input type="text" name="phone1" value="<?=$tel[0]?>" size="7" class="inputstyle2" maxlength="3" onkeyup="focus_move(this,3,phone2);" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
+			<input type="text" name="phone1" value="<?=$tel[0]?>" size="4" class="inputstyle2" maxlength="3" onkeyup="focus_move(this,3,phone2);" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
 			-
 			<input type="text" name="phone2" size="6" value="<?=$tel[1]?>" class="inputstyle2" maxlength="4" onkeyup="focus_move(this,4,phone3);" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
 			-

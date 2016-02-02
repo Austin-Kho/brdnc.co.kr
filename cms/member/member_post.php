@@ -10,7 +10,7 @@
 	$mode = $_REQUEST['mode'];
 
 	$is_company=$_POST['is_company'];
-	$div_seq=$_POST['div_seq'];
+	$div_seq=$_POST['div_seq']; // 본사 담당 부서
 	$pj_seq=$_POST['pj_seq'];
 	$headq=$_POST['headq'];
 	$team=$_POST['team'];

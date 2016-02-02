@@ -30,8 +30,8 @@
 				obj.user_id.focus();
 				return;
 			}
-			if(str.length<6){
-				 alert('아이디는 띄어쓰기 없이 6~10자 \n영문/숫자를 혼합하여 입력하십시요.');
+			if(str.length<4){
+				 alert('아이디는 띄어쓰기 없이 4~10자 \n영문/숫자를 혼합하여 입력하십시요.');
 				 obj.user_id.focus();
 				 return;
 			}
@@ -83,7 +83,7 @@
 					</div>
 				</div>
 			<div style="padding-top:15px;">
-				<b>아이디는 6~12자 영문/숫자를 혼합하여 입력하십시요.</b>
+				<b>아이디는 4 - 12자 영문 / 숫자를 사용하여 입력하십시요.</b>
 			</div>
 			</div>
 			</form>
@@ -112,7 +112,7 @@
 					</div>
 				</div>
 			<div style="padding-top:15px; text-align:center;">
-				<b>아이디는 6~12자 영문/숫자를 혼합하여 입력하십시요.</b>
+				<b>아이디는 4 - 12자 영문 / 숫자를 사용하여 입력하십시요.</b>
 			</div>
 			</div>
 			</form>
