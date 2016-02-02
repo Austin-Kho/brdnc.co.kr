@@ -335,41 +335,36 @@
 								</tr>
 							</table>
 
-
-
-							<!-- 입금 테이블 -->
 							<table border="0" width="100%" cellspacing="0" cellpadding="0">
+								<!-- 입금 내역 -->
 								<tr bgcolor="#f5f5f5">
-									<td width="264" style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" colspan="5" height="28"> <b>수 입 내 역</b> </td>
+									<td style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" colspan="5" height="28"> <b>입 금 내 역</b> </td>
 								</tr>
 								<tr bgcolor="#f8f8f3">
-									<td align="center" width="20%" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28">거래처</td>
-									<td align="center" width="30%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;">적 요</td>
-									<td align="center" width="10%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;">금 액</td>
-									<td align="center" width="15%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;">계정과목</td>
-									<td align="center" width="25%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;">비 고</td>
+									<td align="center" width="150" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28">거 래 처</td>
+									<td align="center" width="200" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;">적 요</td>
+									<td align="center" width="100" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;">금 액</td>
+									<td align="center" width="100" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style:solid;">계정과목</td>
+									<td align="center" width="200" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style:solid;">비 고</td>
 								</tr>
 								<?
-									$da_in_qry="SELECT account, cont,acc,inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='$e_date' order by seq_num";
+									$da_in_qry="SELECT account, cont, acc, inc, note FROM cms_capital_cash_book WHERE (com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='$e_date' order by seq_num";
 									$da_in_rlt=mysql_query($da_in_qry, $connect);
 
 									$in_num = mysql_num_rows($da_in_rlt);
 
-									if($in_num<5) $num=5; else $num=$in_num+1; // 행수 설정;
+									if($in_num<2) $num=2; else $num=$in_num; // 행수 설정;
 
 									for($i=0;$i<=$num;$i++){
 										$da_in_rows=mysql_fetch_array($da_in_rlt);
 										if($da_in_rows[inc]==0){ $income="";}else{$income=number_format($da_in_rows[inc]);}
-										if(!$da_in_rows[acc]){ $da_in_acc="";	}else{ $da_in_acc=$da_in_rows[acc];	}
-										if(!$da_in_rows[cont]){ $da_in_cont="";	}else{ $da_in_cont=$da_in_rows[cont];	}
-										if(!$da_in_rows[account]){$da_in_account = "";}else{$da_in_account = $da_in_rows[account];}
 								?>
 								<tr>
-									<td style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28"><?=rg_cut_string($da_in_acc,16,"")?></td>
-									<td style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=rg_cut_string($da_in_cont,20,"")?></td>
+									<td style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28"><?=rg_cut_string($da_in_rows[acc],16,"")?></td>
+									<td style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=rg_cut_string($da_in_rows[cont],20,"")?></td>
 									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$income?></td>
-									<td align="center" width="32%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$da_in_account?></td>
-									<td align="center" width="32%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"></td>
+									<td align="center" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=rg_cut_string($da_in_rows[account],10,"")?></td>
+									<td align="center" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=rg_cut_string($da_in_rows[note],20,"")?></td>
 								</tr>
 								<? } ?>
 								<tr bgcolor="#f6f6f6">
@@ -378,52 +373,42 @@
 									$aar=mysql_query($aaq, $connect);
 									$aaro=mysql_fetch_array($aar);
 								?>
-									<td align="center" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28">TOTAL</td>
-									<td align="center" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"></td>
+									<td align="center" colspan="2" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28">입 금 합 계</td>
 									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#0066ff"><?if($aaro[total_inc]==0){echo "-";}else{echo number_format($aaro[total_inc]);}?></font></td>
-									<td align="center" width="32%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"></td>
-									<td align="center" width="32%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"></td>
+									<td align="center" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"></td>
+									<td align="center" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"></td>
 								</tr>
-							</table>
 
 
-
-							<!-- 출금 테이블 -->
-							<table border="0" width="100%" cellspacing="0" cellpadding="0" style="margin-top:15px;">
+								<tr><td height="15"></td></tr>
+								<!-- 출금 내역 -->
 								<tr bgcolor="#f5f5f5">
-									<td width="264" style="padding:0 0 0 10px; border-width: 1px 0 1px 0; border-color:#E1E1E1; border-style: solid;" colspan="3" height="28"> <b>지 출 내 역</b> </td>
+									<td style="padding:0 0 0 10px; border-width: 1px 0 1px 0; border-color:#E1E1E1; border-style: solid;" colspan="5" height="28"> <b>출 금 내 역</b> </td>
 								</tr>
 								<tr bgcolor="#f8f8f3">
-									<td align="center" width="28%" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28">거래처</td>
-									<td align="center" width="40%" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;">적 요</td>
-									<td align="center" width="32%" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;">금 액</td>
+									<td align="center" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28">거래처</td>
+									<td align="center" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;">적 요</td>
+									<td align="center" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;">금 액</td>
+									<td align="center" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;">계정과목</td>
+									<td align="center" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;">비 고</td>
 								</tr>
 								<?
-									$da_ex_qry="SELECT class1,cont,acc,inc,exp FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='$e_date' order by seq_num";
+									$da_ex_qry="SELECT account, cont, acc, exp, note FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='$e_date' order by seq_num";
 									$da_ex_rlt=mysql_query($da_ex_qry, $connect);
 
 									$ex_num = mysql_num_rows($da_ex_rlt);
+									if($ex_num<4) $num = 4; else $num = $ex_num;
 
 									for($i=0;$i<=$num;$i++){
 										$da_ex_rows=mysql_fetch_array($da_ex_rlt);
 										if($da_ex_rows[exp]==0){ $exp="";}else{$exp=number_format($da_ex_rows[exp]);}
-
-										if(!$da_ex_rows[acc]){
-											 $da_ex_acc="";
-										}else{
-											 $da_ex_acc=$da_ex_rows[acc];
-										}
-
-										if(!$da_ex_rows[cont]){
-											 $da_ex_cont="";
-										}else{
-											 $da_ex_cont=$da_ex_rows[cont];
-										}
 								?>
 								<tr>
-									<td style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28"><?=rg_cut_string($da_ex_acc,16,"")?></td>
-									<td style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=rg_cut_string($da_ex_cont,20,"")?></td>
+									<td style="padding:0 0 0 10px; border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28"><?=rg_cut_string($da_ex_rows[acc],16,"")?></td>
+									<td style="padding:0 0 0 10px; border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=rg_cut_string($da_ex_rows[cont],20,"")?></td>
 									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$exp?></td>
+									<td align="center" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=rg_cut_string($da_ex_rows[account],10,"")?></td>
+									<td align="center" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=rg_cut_string($da_ex_rows[note],20,"")?></td>
 								</tr>
 								<? } ?>
 								<tr bgcolor="#f6f6f6">
@@ -432,9 +417,10 @@
 									$bbr=mysql_query($bbq, $connect);
 									$bbro=mysql_fetch_array($bbr);
 								?>
-									<td align="center" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28">TOTAL</td>
-									<td align="center" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"></td>
+									<td align="center" colspan="2" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28">출 금 합 계</td>
 									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#ff3300"><?if($bbro[total_exp]==0){echo "-";}else{echo number_format($bbro[total_exp]);}?></font></td>
+									<td align="center" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"></td>
+									<td align="center" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"></td>
 								</tr>
 							</table>
 

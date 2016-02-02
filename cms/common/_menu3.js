@@ -5,59 +5,56 @@
 
 // 구분 목록상자 선택1 (capital2.php // capital_edit.php // capital3.php)
 function inoutSel(form, no, pj){ // ==capital2.php 와 capital_edit.php => form // capital3.php => no // 현장전도금일때 pj 인자활용
+	var class1_str = "class1_"; var class1 = class1_str+no;  // 구분1
+	var class2_str = "class2_"; var class2 = class2_str+no;  // 구분2
+	var pj_seq_str = "pj_seq_"; var pj_seq = pj_seq_str+no;  // 현장코드
+	var jh_loan_str = "jh_loan_"; var jh_loan = jh_loan_str+no;  // 조합대여 여부
 
-	var class1_str = "class1_"; var class1 = class1_str+no;  // 구분1	
-	var class2_str = "class2_"; var class2 = class2_str+no;  // 구분2	
-	var pj_seq_str = "pj_seq_"; var pj_seq = pj_seq_str+no;  // 현장코드	
-	var jh_loan_str = "jh_loan_"; var jh_loan = jh_loan_str+no;  // 조합대여 여부	
+	var d1_1_str = "d1_1_";  var d1_1 = d1_1_str+no;   // 자산계정 td
+	var d1_2_str = "d1_2_";  var d1_2 = d1_2_str+no;   // 부채계정 td
+	var d1_3_str = "d1_3_";   var d1_3 = d1_3_str+no;  // 자본계정 td
+	var d1_4_str = "d1_4_";   var d1_4 = d1_4_str+no;  // 수익계정 td
+	var d1_5_str = "d1_5_";   var d1_5 = d1_5_str+no;  // 비용계정 td
 
-	var d1_1_str = "d1_1_";  var d1_1 = d1_1_str+no;   // 자산계정 td	
-	var d1_2_str = "d1_2_";  var d1_2 = d1_2_str+no;   // 부채계정 td	
-	var d1_3_str = "d1_3_";   var d1_3 = d1_3_str+no;  // 자본계정 td	
-	var d1_4_str = "d1_4_";   var d1_4 = d1_4_str+no;  // 수익계정 td	
-	var d1_5_str = "d1_5_";   var d1_5 = d1_5_str+no;  // 비용계정 td	
+	var d1_acc1_str = "d1_acc1_";   var d1_acc1 = d1_acc1_str+no;  // 자산 계정과목
+	var d1_acc2_str = "d1_acc2_";   var d1_acc2 = d1_acc2_str+no;  // 부채 계정과목
+	var d1_acc3_str = "d1_acc3_";   var d1_acc3 = d1_acc3_str+no;  // 자본 계정과목
+	var d1_acc4_str = "d1_acc4_";   var d1_acc4 = d1_acc4_str+no;  // 수익 계정과목
+	var d1_acc5_str = "d1_acc5_";   var d1_acc5 = d1_acc5_str+no;  // 비용 계정과목
 
-	var d1_acc1_str = "d1_acc1_";   var d1_acc1 = d1_acc1_str+no;  // 자산 계정과목	
-	var d1_acc2_str = "d1_acc2_";   var d1_acc2 = d1_acc2_str+no;  // 부채 계정과목	
-	var d1_acc3_str = "d1_acc3_";   var d1_acc3 = d1_acc3_str+no;  // 자본 계정과목	
-	var d1_acc4_str = "d1_acc4_";   var d1_acc4 = d1_acc4_str+no;  // 수익 계정과목	
-	var d1_acc5_str = "d1_acc5_";   var d1_acc5 = d1_acc5_str+no;  // 비용 계정과목	
-
-	var in_str = "in_";   var iin = in_str+no;   // 입금처	
-	var inc_str = "inc_";  var inc = inc_str+no; // 입금액	
-	var out_str = "out_"; var out = out_str+no;  // 출금처	
+	var in_str = "in_";   var iin = in_str+no;   // 입금처
+	var inc_str = "inc_";  var inc = inc_str+no; // 입금액
+	var out_str = "out_"; var out = out_str+no;  // 출금처
 	var exp_str = "exp_"; var exp = exp_str+no;  // 출금액
-	
 
 	var class1_id = document.getElementById(class1); if(!no) var class1_id = form.class1;
 	var class2_id = document.getElementById(class2); if(!no) var class2_id = form.class2;
 	var pj_seq_id = document.getElementById(pj_seq); if(!no) var pj_seq_id = form.any_jh;
-	var jh_loan_id = document.getElementById(jh_loan); if(!no) var jh_loan_id = form.is_jh;	
+	var jh_loan_id = document.getElementById(jh_loan); if(!no) var jh_loan_id = form.is_jh;
 
 	var d1_1_id = document.getElementById(d1_1);
 	var d1_2_id = document.getElementById(d1_2);
 	var d1_3_id = document.getElementById(d1_3);
 	var d1_4_id = document.getElementById(d1_4);
-	var d1_5_id = document.getElementById(d1_5);	
+	var d1_5_id = document.getElementById(d1_5);
 
 	var d1_acc1_id = document.getElementById(d1_acc1); if(!no) var d1_acc1_id = document.getElementById('d1_1');
 	var d1_acc2_id = document.getElementById(d1_acc2); if(!no) var d1_acc2_id = document.getElementById('d1_2');
 	var d1_acc3_id = document.getElementById(d1_acc3); if(!no) var d1_acc3_id = document.getElementById('d1_3');
 	var d1_acc4_id = document.getElementById(d1_acc4); if(!no) var d1_acc4_id = document.getElementById('d1_4');
-	var d1_acc5_id = document.getElementById(d1_acc5); if(!no) var d1_acc5_id = document.getElementById('d1_5');	
+	var d1_acc5_id = document.getElementById(d1_acc5); if(!no) var d1_acc5_id = document.getElementById('d1_5');
 
 	var in_id = document.getElementById(iin);  if(!no) var in_id = form.ina;
 	var inc_id = document.getElementById(inc); if(!no) var inc_id = form.inc;
 	var out_id = document.getElementById(out); if(!no) var out_id = form.out;
 	var exp_id = document.getElementById(exp); if(!no) var exp_id = form.exp;
-	
 
 	class2_id.disabled=0;
 
 	if(class1_id.value==1){   //1번째 셀렉트바 입금이면
-		class2_id.length=4;    //2번째 셀렉트바 목록 4개		
+		class2_id.length=4;    //2번째 셀렉트바 목록 4개
 		class2_id.options[0].text = '자 산';//2-1번째 셀렉트바 텍스트 정의
-		class2_id.options[0].value = '1';//2-1번째 셀렉트바 값 정의		
+		class2_id.options[0].value = '1';//2-1번째 셀렉트바 값 정의
 		class2_id.options[1].text = '부 채';//2-2번째 셀렉트바 텍스트 정의
 		class2_id.options[1].value = '2';//2-2번째 셀렉트바 값 정의
 		class2_id.options[2].text = '자 본';//2-3번째 셀렉트바 텍스트 정의
@@ -97,12 +94,12 @@ function inoutSel(form, no, pj){ // ==capital2.php 와 capital_edit.php => form 
 		out_id.disabled=1;  out_id.options[0].selected =1;
 		exp_id.disabled=1;  exp_id.value=null;
 
-		
+
 
 	}else if(class1_id.value==2){    //1번째 셀렉트바 출금이면
 		class2_id.length=4;
 		class2_id.options[0].text = '자 산'
-		class2_id.options[0].value = '1';		
+		class2_id.options[0].value = '1';
 		class2_id.options[1].text = '부 채';
 		class2_id.options[1].value = '2';
 		class2_id.options[2].text = '자 본';
@@ -134,14 +131,14 @@ function inoutSel(form, no, pj){ // ==capital2.php 와 capital_edit.php => form 
 			d1_acc2_id.disabled=1;  d1_acc2_id.style.display='none';
 			d1_acc3_id.disabled=1;  d1_acc3_id.style.display='none';
 			d1_acc4_id.disabled=1;  d1_acc4_id.style.display='none';
-			d1_acc5_id.disabled=1;  d1_acc5_id.style.display='none'; 
+			d1_acc5_id.disabled=1;  d1_acc5_id.style.display='none';
 		}
 
 		in_id.disabled=1;   in_id.options[0].selected =1;
 		inc_id.disabled=1;  inc_id.value=null;
 		out_id.disabled=0;
 		exp_id.disabled=0;
-		
+
 
 	}else if(class1_id.value==3){
 		class2_id.length=2;
@@ -219,51 +216,49 @@ function inoutSel(form, no, pj){ // ==capital2.php 와 capital_edit.php => form 
 // 구분목록 상자선택2 (capital2.php // capital_edit.php // capital3.php)
 function inoutSel2(form, no){ // ==capital2.php 와 capital_edit.php => form // capital3.php => no 인자
 
-	var class1_str = "class1_"; var class1 = class1_str+no;  // 구분1	
-	var class2_str = "class2_"; var class2 = class2_str+no;  // 구분2	
-	var pj_seq_str = "pj_seq_"; var pj_seq = pj_seq_str+no;  // 현장코드	
-	var jh_loan_str = "jh_loan_"; var jh_loan = jh_loan_str+no;  // 조합대여 여부	
+	var class1_str = "class1_"; var class1 = class1_str+no;  // 구분1
+	var class2_str = "class2_"; var class2 = class2_str+no;  // 구분2
+	var pj_seq_str = "pj_seq_"; var pj_seq = pj_seq_str+no;  // 현장코드
+	var jh_loan_str = "jh_loan_"; var jh_loan = jh_loan_str+no;  // 조합대여 여부
 
-	var d1_1_str = "d1_1_";  var d1_1 = d1_1_str+no;   // 자산계정 td	
-	var d1_2_str = "d1_2_";  var d1_2 = d1_2_str+no;   // 부채계정 td	
-	var d1_3_str = "d1_3_";   var d1_3 = d1_3_str+no;  // 자본계정 td	
-	var d1_4_str = "d1_4_";   var d1_4 = d1_4_str+no;  // 수익계정 td	
-	var d1_5_str = "d1_5_";   var d1_5 = d1_5_str+no;  // 비용계정 td	
+	var d1_1_str = "d1_1_";  var d1_1 = d1_1_str+no;   // 자산계정 td
+	var d1_2_str = "d1_2_";  var d1_2 = d1_2_str+no;   // 부채계정 td
+	var d1_3_str = "d1_3_";   var d1_3 = d1_3_str+no;  // 자본계정 td
+	var d1_4_str = "d1_4_";   var d1_4 = d1_4_str+no;  // 수익계정 td
+	var d1_5_str = "d1_5_";   var d1_5 = d1_5_str+no;  // 비용계정 td
 
-	var d1_acc1_str = "d1_acc1_";   var d1_acc1 = d1_acc1_str+no;  // 자산 계정과목	
-	var d1_acc2_str = "d1_acc2_";   var d1_acc2 = d1_acc2_str+no;  // 부채 계정과목	
-	var d1_acc3_str = "d1_acc3_";   var d1_acc3 = d1_acc3_str+no;  // 자본 계정과목	
-	var d1_acc4_str = "d1_acc4_";   var d1_acc4 = d1_acc4_str+no;  // 수익 계정과목	
-	var d1_acc5_str = "d1_acc5_";   var d1_acc5 = d1_acc5_str+no;  // 비용 계정과목	
+	var d1_acc1_str = "d1_acc1_";   var d1_acc1 = d1_acc1_str+no;  // 자산 계정과목
+	var d1_acc2_str = "d1_acc2_";   var d1_acc2 = d1_acc2_str+no;  // 부채 계정과목
+	var d1_acc3_str = "d1_acc3_";   var d1_acc3 = d1_acc3_str+no;  // 자본 계정과목
+	var d1_acc4_str = "d1_acc4_";   var d1_acc4 = d1_acc4_str+no;  // 수익 계정과목
+	var d1_acc5_str = "d1_acc5_";   var d1_acc5 = d1_acc5_str+no;  // 비용 계정과목
 
-	var in_str = "in_";   var iin = in_str+no;   // 입금처	
-	var inc_str = "inc_";  var inc = inc_str+no; // 입금액	
-	var out_str = "out_"; var out = out_str+no;  // 출금처	
+	var in_str = "in_";   var iin = in_str+no;   // 입금처
+	var inc_str = "inc_";  var inc = inc_str+no; // 입금액
+	var out_str = "out_"; var out = out_str+no;  // 출금처
 	var exp_str = "exp_"; var exp = exp_str+no;  // 출금액
-	
 
 	var class1_id = document.getElementById(class1); if(!no) var class1_id = form.class1;
 	var class2_id = document.getElementById(class2); if(!no) var class2_id = form.class2;
 	var pj_seq_id = document.getElementById(pj_seq); if(!no) var pj_seq_id = form.any_jh;
-	var jh_loan_id = document.getElementById(jh_loan); if(!no) var jh_loan_id = form.is_jh;	
+	var jh_loan_id = document.getElementById(jh_loan); if(!no) var jh_loan_id = form.is_jh;
 
 	var d1_1_id = document.getElementById(d1_1);//////////// 자산계정 TD
 	var d1_2_id = document.getElementById(d1_2);          // 부채계정 TD
 	var d1_3_id = document.getElementById(d1_3);          // 자본계정 TD
 	var d1_4_id = document.getElementById(d1_4);          // 수익계정 TD
-	var d1_5_id = document.getElementById(d1_5);//////////// 비용계정 TD	
+	var d1_5_id = document.getElementById(d1_5);//////////// 비용계정 TD
 
 	var d1_acc1_id = document.getElementById(d1_acc1); if(!no) var d1_acc1_id = document.getElementById('d1_1');////// 자산계정 FORM
 	var d1_acc2_id = document.getElementById(d1_acc2); if(!no) var d1_acc2_id = document.getElementById('d1_2');    // 부채계정 FORM
 	var d1_acc3_id = document.getElementById(d1_acc3); if(!no) var d1_acc3_id = document.getElementById('d1_3');    // 자본계정 FORM
 	var d1_acc4_id = document.getElementById(d1_acc4); if(!no) var d1_acc4_id = document.getElementById('d1_4');    // 수익계정 FORM
-	var d1_acc5_id = document.getElementById(d1_acc5); if(!no) var d1_acc5_id = document.getElementById('d1_5');////// 비용계정 FORM	
+	var d1_acc5_id = document.getElementById(d1_acc5); if(!no) var d1_acc5_id = document.getElementById('d1_5');////// 비용계정 FORM
 
 	var in_id = document.getElementById(iin);  if(!no) var in_id = form.ina;
 	var inc_id = document.getElementById(inc); if(!no) var inc_id = form.inc;
 	var out_id = document.getElementById(out); if(!no) var out_id = form.out;
 	var exp_id = document.getElementById(exp); if(!no) var exp_id = form.exp;
-
 
 
 	if(class2_id.value>0&&class2_id.value<=3) { // 자산, 부채, 자본 항목들 선택 시
@@ -275,11 +270,11 @@ function inoutSel2(form, no){ // ==capital2.php 와 capital_edit.php => form // 
 	 	 	if(d1_4_id)d1_4_id.style.display='none';
 	 	 	if(d1_5_id)d1_5_id.style.display='none';
 
-		  	d1_acc1_id.disabled=0;  d1_acc1_id.style.display=''; // 자산계정과목 보이기 
-		  	d1_acc2_id.disabled=1;  d1_acc2_id.style.display='none'; 
-		  	d1_acc3_id.disabled=1;  d1_acc3_id.style.display='none'; 
-		  	d1_acc4_id.disabled=1;  d1_acc4_id.style.display='none'; 
-		  	d1_acc5_id.disabled=1;  d1_acc5_id.style.display='none'; 
+		  	d1_acc1_id.disabled=0;  d1_acc1_id.style.display=''; // 자산계정과목 보이기
+		  	d1_acc2_id.disabled=1;  d1_acc2_id.style.display='none';
+		  	d1_acc3_id.disabled=1;  d1_acc3_id.style.display='none';
+		  	d1_acc4_id.disabled=1;  d1_acc4_id.style.display='none';
+		  	d1_acc5_id.disabled=1;  d1_acc5_id.style.display='none';
 
 		}else if(class2_id.value==2){ // 부채 선택하면
 			if(d1_1_id) d1_1_id.style.display='none';
@@ -289,9 +284,9 @@ function inoutSel2(form, no){ // ==capital2.php 와 capital_edit.php => form // 
 			if(d1_5_id)d1_5_id.style.display='none';
 
 			d1_acc1_id.disabled=1;  d1_acc1_id.style.display='none';
-		  	d1_acc2_id.disabled=0;  d1_acc2_id.style.display='';   // 부채계정과목 보이기 
-		  	d1_acc3_id.disabled=1;  d1_acc3_id.style.display='none'; 
-		  	d1_acc4_id.disabled=1;  d1_acc4_id.style.display='none'; 
+		  	d1_acc2_id.disabled=0;  d1_acc2_id.style.display='';   // 부채계정과목 보이기
+		  	d1_acc3_id.disabled=1;  d1_acc3_id.style.display='none';
+		  	d1_acc4_id.disabled=1;  d1_acc4_id.style.display='none';
 		  	d1_acc5_id.disabled=1;  d1_acc5_id.style.display='none';
 
 		}else if(class2_id.value==3){ // 자본 선택하면
@@ -304,7 +299,7 @@ function inoutSel2(form, no){ // ==capital2.php 와 capital_edit.php => form // 
 			d1_acc1_id.disabled=1;  d1_acc1_id.style.display='none';
 		  	d1_acc2_id.disabled=1;  d1_acc2_id.style.display='none';
 		  	d1_acc3_id.disabled=0;  d1_acc3_id.style.display='';  // 자본계정과목 보이고
-		  	d1_acc4_id.disabled=1;  d1_acc4_id.style.display='none'; 
+		  	d1_acc4_id.disabled=1;  d1_acc4_id.style.display='none';
 		  	d1_acc5_id.disabled=1;  d1_acc5_id.style.display='none';
 		}
 
@@ -365,7 +360,7 @@ function inoutSel2(form, no){ // ==capital2.php 와 capital_edit.php => form // 
 	    d1_acc3_id.style.disabled=1;
 	    d1_acc4_id.style.disabled=1;
 	    d1_acc5_id.style.disabled=1;
-	}	
+	}
 
 	if(class2_id.value==1){
 		if(jh_loan_id)jh_loan_id.disabled=0;
@@ -397,6 +392,7 @@ function jh_chk(no){
 		pj_seq_id.disabled=0;
 	}else{
 		pj_seq_id.disabled=1;
+		pj_seq_id.options[0].selected=1;
 	}
 }
 

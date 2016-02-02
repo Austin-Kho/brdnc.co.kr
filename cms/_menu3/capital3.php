@@ -173,9 +173,9 @@
 											</select>
 										</td>
 										<!-- 적 요 _1 -->
-										<td class="bottom"><input type="text" name="cont_1" size="20" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="cont_1" size="20" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 거 래 처 _1 -->
-										<td class="bottom"><input type="text" name="acc_1" size="10" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="acc_1" size="10" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 입금처 _1 -->
 										<td class="bottom">
 										<select name="in_1" id="in_1" style="width:55px;" disabled>
@@ -306,9 +306,9 @@
 											</select>
 										</td>
 										<!-- 적 요 _2 -->
-										<td class="bottom"><input type="text" name="cont_2"  size="20" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="cont_2"  size="20" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 거 래 처 _2 -->
-										<td class="bottom"><input type="text" name="acc_2"  size="10" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="acc_2"  size="10" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 입금계정 _2 -->
 										<td class="bottom">
 										<select name="in_2" id="in_2" style="width:55px;" disabled>
@@ -439,9 +439,9 @@
 											</select>
 										</td>
 										<!-- 적 요 _3 -->
-										<td class="bottom"><input type="text" name="cont_3"  size="20" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="cont_3"  size="20" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 거 래 처 _3 -->
-										<td class="bottom"><input type="text" name="acc_3"  size="10" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="acc_3"  size="10" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 입금계정 _3 -->
 										<td class="bottom">
 										<select name="in_3" id="in_3" style="width:55px;" disabled>
@@ -573,9 +573,9 @@
 											</select>
 										</td>
 										<!-- 적 요 _4 -->
-										<td class="bottom"><input type="text" name="cont_4"  size="20" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="cont_4"  size="20" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 거 래 처 _4 -->
-										<td class="bottom"><input type="text" name="acc_4"  size="10" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="acc_4"  size="10" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 입금계정 _4 -->
 										<td class="bottom">
 										<select name="in_4" id="in_4" style="width:55px;" disabled>
@@ -706,9 +706,9 @@
 											</select>
 										</td>
 										<!-- 적 요 _5 -->
-										<td class="bottom"><input type="text" name="cont_5"  size="20" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="cont_5"  size="20" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 거 래 처 _5 -->
-										<td class="bottom"><input type="text" name="acc_5"  size="10" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="acc_5"  size="10" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 입금계정 _5 -->
 										<td class="bottom">
 										<select name="in_5" id="in_5" style="width:55px;" disabled>
@@ -839,9 +839,9 @@
 											</select>
 										</td>
 										<!-- 적 요 _6 -->
-										<td class="bottom"><input type="text" name="cont_6"  size="20" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="cont_6"  size="20" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 거 래 처 _6 -->
-										<td class="bottom"><input type="text" name="acc_6"  size="10" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="acc_6"  size="10" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 입금계정 _6 -->
 										<td class="bottom">
 										<select name="in_6" id="in_6" style="width:55px;" disabled>
@@ -972,9 +972,9 @@
 											</select>
 										</td>
 										<!-- 적 요 _7 -->
-										<td class="bottom"><input type="text" name="cont_7"  size="20" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="cont_7"  size="20" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 거 래 처 _7 -->
-										<td class="bottom"><input type="text" name="acc_7"  size="10" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="acc_7"  size="10" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 입금계정 _7 -->
 										<td class="bottom">
 										<select name="in_7" id="in_7" style="width:55px;" disabled>
@@ -1105,9 +1105,9 @@
 											</select>
 										</td>
 										<!-- 적 요 _8 -->
-										<td class="bottom"><input type="text" name="cont_8"  size="20" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="cont_8"  size="20" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 거 래 처 _8 -->
-										<td class="bottom"><input type="text" name="acc_8"  size="10" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="acc_8"  size="10" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 입금계정 _8 -->
 										<td class="bottom">
 										<select name="in_8" id="in_8" style="width:55px;" disabled>
@@ -1238,9 +1238,9 @@
 											</select>
 										</td>
 										<!-- 적 요 _9 -->
-										<td class="bottom"><input type="text" name="cont_9"  size="20" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="cont_9"  size="20" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 거 래 처 _9 -->
-										<td class="bottom"><input type="text" name="acc_9"  size="10" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="acc_9"  size="10" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 입금계정 _9 -->
 										<td class="bottom">
 										<select name="in_9" id="in_9" style="width:55px;" disabled>
@@ -1371,9 +1371,9 @@
 											</select>
 										</td>
 										<!-- 적 요 _10 -->
-										<td class="bottom"><input type="text" name="cont_10"  size="20" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="cont_10"  size="20" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 거 래 처 _10 -->
-										<td class="bottom"><input type="text" name="acc_10"  size="10" class="inputstyle2" style="background-color:#f9f9f9;"></td>
+										<td class="bottom"><input type="text" name="acc_10"  size="10" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')"></td>
 										<!-- 입금계정 _10 -->
 										<td class="bottom">
 										<select name="in_10" id="in_10" style="width:55px;" disabled>
