@@ -120,7 +120,7 @@
 
 					$query2="SELECT * FROM cms_message_info, cms_member_table WHERE receiveid_fk='$_SESSION[p_id]' AND sendid_fk=user_id AND receive_del='N' ORDER BY mnum DESC LIMIT $s, $e";
 					$result2=mysql_query($query2, $connect);
-					for($i=0; $rows2=mysql_fetch_array($result2); $i++){
+					while($rows2=mysql_fetch_array($result2)){
 						$bunho=$total_bnum-($i+$cbottom)+1;
 						$msg_char=rg_cut_string($rows2[message], 16,"..");
 				?>
