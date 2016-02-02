@@ -15,10 +15,24 @@ Header("Expires: 0");
 	$connect=dbconn();
 
 	$sh_date = stripslashes($_REQUEST['sh_date']);
+	
 
-	// $yi = date_format($sh_date, 'Y-m-d-w');
-	//w	 
-	//요일 숫자값으로 월요일(1) ~ 일요일(7)
+    $d_obj = date_create($sh_date);    
+    $year = date_format($d_obj, "Y");
+    $month = date_format($d_obj, "m");
+    $day = date_format($d_obj, "d");
+    $week = date_format($d_obj, "w"); // 0~6
+    if($week==0) $daily = "일요일";
+    if($week==1) $daily = "월요일";
+    if($week==2) $daily = "화요일";
+    if($week==3) $daily = "수요일";
+    if($week==4) $daily = "목요일";
+    if($week==5) $daily = "금요일";
+    if($week==6) $daily = "토요일";
+
+
+
+
 ?>
 <meta http-equiv="Content-Type" content="application/vnd.ms-excel;charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge"
@@ -40,7 +54,7 @@ Header("Expires: 0");
 		<td style="" rowspan="2"></td>
 	</tr>
 	<tr height="30" style="font-size: 9pt;">		
-		<td style="border-top:0; text-align: right; padding-right: 50px;" colspan="6"><?=$sh_date?></td>
+		<td style="border-top:0; text-align: right; padding-right: 50px;" colspan="6"><?=$year."년 ".$month."월 ".$day."일 ".$daily?></td>
 	</tr>
 	<tr height="45" style="font-size: 9pt;">		
 		<td style="border-right: 0;" colspan="10">■ 자 금 현 황</td>
