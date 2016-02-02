@@ -1,6 +1,6 @@
 /************************ 레이 아웃 div CSS ************************/
 	html { height:100%; width:100%; margin:0; padding:0; overflow-y:scroll;}
-	body { height:100%; width:100%; margin:0; padding:0; border:0 outset gray; background-color:#3e3e3e;}
+	body { height:100%; width:100%; margin:0; padding:0; border:0 outset gray; background-image : url('http://brdnc.cafe24.com/cms/images/bg_dot.jpg'); /*background-color:#3e3e3e;*/} 
 	/* border : (프레임의 두께) (dotted, dashed, solid, double, groove, ridge, indet, outset 중에서 선택하세요) (프레임색갈)*/	/* 높이값 100% 마진, 패딩 0 값이 0일 경우 단위 안붙여도 괜찮음 */
 
 	#wrap { width:1140px; min-height:100%; margin:0 auto; background-color:white;}
