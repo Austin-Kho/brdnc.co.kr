@@ -118,17 +118,20 @@
 
 									$num=$d_num;  // 행수 설정;
 
-									for($i=0; $i<=$num; $i++){
+									$hk_bgcolor = "color:#000099; background-color:#FCFDF2;";
+
+									for($i=0; $i<=$num; $i++){ // 현금계정 + 은행계좌 수 만큼 반복 한다.
 										 $d_rows=mysql_fetch_array($d_rlt);
 
-										 if($i==0) $td_str="<td align='center' style='padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;'>현금</td>";
-										 if($i==1) $td_str="<td align='center' style='padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;' rowspan='$num'>보통예금</td>";
+										 if($i==0) $td_str="<td align='center' style='padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid; ".$hk_bgcolor."'>현금</td>";
+										 if($i==1) $td_str="<td align='center' style='padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid; ' rowspan='$num'>보통예금</td>";
 										 if($i>1) $td_str="";
 
-										 $in_qry="SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2<>8) AND in_acc='$d_rows[no]' AND deal_date<='$e_date' "; // 계정별 설정일까지 총 수입
+										 $in_qry="SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND in_acc='$d_rows[no]' AND deal_date<='$e_date' "; // 계정별 설정일까지 총 수입
 										 $in_rlt=mysql_query($in_qry,$connect);
 										 $in_row=mysql_fetch_array($in_rlt);
-										 $in_qry1="SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2<>8) AND in_acc='$d_rows[no]' AND deal_date='$e_date' "; // 계정별 설정당일 수입
+
+										 $in_qry1="SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND in_acc='$d_rows[no]' AND deal_date='$e_date' "; // 계정별 설정당일 수입
 										 $in_rlt1=mysql_query($in_qry1,$connect);
 										 $in_row1=mysql_fetch_array($in_rlt1);
 
@@ -140,26 +143,27 @@
 										 $ex_rlt1=mysql_query($ex_qry1,$connect);
 										 $ex_row1=mysql_fetch_array($ex_rlt1);
 
-										 if(!$d_rows[name]){   // 설정일까지 시재 구하기
-											 $balance="";
-										 }else	if($in_row[inc]==$ex_row[exp]){
-											 $balance="-";
-										 }else{
-											 $balance=number_format($in_row[inc]-$ex_row[exp]);
+										 if(!$d_rows[name]){   // 입출금 계정이 없으면
+											 $balance=""; // 최종 금일 시재(잔고)
+										 }else	if($in_row[inc]==$ex_row[exp]){ // 계정별 총 입금과 지출이 동일하면
+											 $balance="-"; // 최종 금일 시재(잔고)
+										 }else{ // 그렇지 않으면
+											 $balance=number_format($in_row[inc]-$ex_row[exp]); // 계정별 최종 금일 시재(잔고)
 										 }
-										 if(!$d_rows[name]){   // 설정 당일 수입 구하기
-											 $d_inc="";
-										 }else	if($in_row1[inc]==0){
-											 $d_inc="-";
+
+										 if(!$d_rows[name]){   // 설정 당일 수입 구하기-> 입출금 계정이 없으면
+											 $d_inc=""; // 해당 계정 당일 입금(증가)
+										 }else	if($in_row1[inc]==0){ //
+											 $d_inc="-"; // 해당 계정 당일 입금(증가)
 										 }else{
-											 $d_inc=number_format($in_row1[inc]);
+											 $d_inc=number_format($in_row1[inc]); // 해당 계정 당일 입금(증가)
 										 }
 										 if(!$d_rows[name]){   // 설정 당일 지출 구하기
-											 $d_exp="";
+											 $d_exp=""; // 해당 계정 당일 출금 (감소)
 										 }else	if($ex_row1[exp]==0){
-											 $d_exp="-";
+											 $d_exp="-"; // 해당 계정 당일 출금 (감소)
 										 }else{
-											 $d_exp=number_format($ex_row1[exp]);
+											 $d_exp=number_format($ex_row1[exp]);  // 해당 계정 당일 출금 (감소)
 										 }
 
 										 if(!$d_rows[name]){  // 전일 잔액 구하기
@@ -170,29 +174,167 @@
 											 $y_bal=number_format(($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]);
 										 }
 
-										 $total_y_ba+=($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc];
-										 $total_d_inc+=$in_row1[inc];
-										 $total_d_exp+=$ex_row1[exp];
-										 $total_ba+=$in_row[inc]-$ex_row[exp];
+
+										 $total_y_ba+=($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]; // 토탈 전일 잔액
+										 if($i>0) $yk_total_y_ba += ($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]; // 보통예금 토탈 전일 잔액
+										 $total_d_inc+=$in_row1[inc]; // 금일 입금(증가)
+										 if($i>0) $yk_total_d_inc+=$in_row1[inc]; // 보통예금 금일 입금(증가)
+										 $total_d_exp+=$ex_row1[exp]; //금일 출금(감소)
+										 if($i>0) $yk_total_d_exp+=$ex_row1[exp]; //보통예금 금일 출금(감소)
+										 $total_ba+=$in_row[inc]-$ex_row[exp]; // 금일 잔액
+										 if($i>0) $yk_total_ba+=$in_row[inc]-$ex_row[exp]; // 보통예금 금일 잔액
 								?>
 								<tr>
 									<?=$td_str?>
-									<td style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;" height="28"><?=$d_rows[name]?></td><!-- 계정 명 -->
-									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$y_bal?></td> <!-- 전일 잔액 -->
-									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$d_inc?></td> <!-- 당일 입금 -->
-									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$d_exp?></td> <!-- 당일 출금 -->
-									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$balance?></td> <!-- 금일 잔액 -->
+									<td width="190" style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid; <?if($i==0) echo $hk_bgcolor?>" height="28">
+										<?=$d_rows[name]?>
+									</td><!-- 계정 명 -->
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid; <?if($i==0) echo $hk_bgcolor?>">
+										<?=$y_bal?>
+									</td> <!-- 전일 잔액 -->
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid; <?if($i==0) echo $hk_bgcolor?>">
+										<?=$d_inc?>
+									</td> <!-- 당일 입금 -->
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid; <?if($i==0) echo $hk_bgcolor?>">
+										<?=$d_exp?>
+									</td> <!-- 당일 출금 -->
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid; <?if($i==0) echo $hk_bgcolor?>;">
+										<?=$balance?>
+									</td> <!-- 금일 잔액 -->
 								</tr>
-								<? } ?>
+								<?
+										} // 현금 / 보통예금 수만큼 반복 for문 종료
+								?>
+
 								<tr bgcolor="#f6f6f6">
-									<td align="center" style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28">TOTAL</td>
-									<td style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"></td>
+									<td align="center" style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" colspan="2" height="28">
+										보통예금(가용자금) 계<?=$hk_bal?>
+									</td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($yk_total_y_ba==0){echo "-";}else{echo number_format($yk_total_y_ba);}?></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#0066ff"><?if($total_d_inc==0){echo "-";}else{echo  number_format($yk_total_d_inc);}?></font></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#ff3300"><?if($total_d_exp==0){echo "-";}else{echo number_format($yk_total_d_exp);}?></font></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#000099"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($yk_total_ba==0){echo "-";}else{echo number_format($yk_total_ba);}?></font></td>
+								</tr>
+								<!-- <tr bgcolor="#f6f6f6">
+									<td align="center" style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" colspan="2" height="28">TOTAL</td>
 									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($total_y_ba==0){echo "-";}else{echo number_format($total_y_ba);}?></td>
 									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#0066ff"><?if($total_d_inc==0){echo "-";}else{echo  number_format($total_d_inc);}?></font></td>
 									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#ff3300"><?if($total_d_exp==0){echo "-";}else{echo number_format($total_d_exp);}?></font></td>
 									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#000099"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($total_ba==0){echo "-";}else{echo number_format($total_ba);}?></font></td>
+								</tr> -->
+								<!-- -----------------------------------------대여금 집계 시작------------------------------------ -->
+								<?
+									// 조합 대여금 구하기 시작 ////////////////////////////////////////////////////////////////////////
+									// 조합 구하기 //
+									$jh_qry = "SELECT any_jh, COUNT(*) AS num_jh FROM cms_capital_cash_book WHERE any_jh<>0 GROUP BY any_jh";// 조합 구하기
+									$jh_rlt = mysql_query($jh_qry);
+									$jh_num=mysql_num_rows($jh_rlt);
+									$col_num = $jh_num+1;
+
+									$in_jh_qry="SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND any_jh='' AND deal_date<='$e_date' "; // 계정별 설정일까지 조합 총 대여금 회수
+									$in_jh_rlt=mysql_query($in_jh_qry,$connect);
+									$in_jh_row=mysql_fetch_array($in_jh_rlt);
+
+									$in_jh_qry1="SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND any_jh='' AND deal_date='$e_date' "; // 계정별 설정당일 수입
+									$in_jh_rlt1=mysql_query($in_jh_qry1,$connect);
+									$in_jh_row1=mysql_fetch_array($in_jh_rlt1);
+
+									$ex_jh_qry="SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND any_jh='' AND deal_date<='$e_date' "; // 계정별 설정일까지 총 지출
+									$ex_jh_rlt=mysql_query($ex_jh_qry,$connect);
+									$ex_jh_row=mysql_fetch_array($ex_jh_rlt);
+
+									$ex_jh_qry1="SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND any_jh='' AND deal_date='$e_date' "; // 계정별 설정당일 지출
+									$ex_jh_rlt1=mysql_query($ex_jh_qry1,$connect);
+									$ex_jh_row1=mysql_fetch_array($ex_jh_rlt1);
+
+
+									// 조합 대여금 구하기 종료 ////////////////////////////////////////////////////////////////////////
+
+									for($i=0; $i<=$jh_num; $i++){
+
+										$jh_row = mysql_fetch_array($jh_rlt);
+
+										$pn_qry = "SELECT pj_name FROM cms_project1_info WHERE seq = '$jh_row[any_jh]' "; // 조합명 구하기 쿼리
+										$pn_rlt = mysql_query($pn_qry);
+										$pn_row = mysql_fetch_array($pn_rlt);
+
+										if(!$pn_row[pj_name]){   // 조합(현장)명이 없으면
+											 $day_loan=""; // 최종 금일 대여금(잔액)
+										 }else	if($in_jh_row[inc]==$ex_jh_row[exp]){ // 계정별 총 입금과 지출이 동일하면
+											 $day_loan="-"; // 최종 금일 시재(잔고)
+										 }else{ // 그렇지 않으면
+											 $day_loan=number_format($in_jh_row[inc]-$ex_jh_row[exp]); // 계정별 최종 금일 시재(잔고)
+										 }
+
+										 if(!$pn_row[pj_name]){   // 설정 당일 수입 구하기-> 조합(현장)명이 없으면
+
+										 	/////여기까지 작업
+
+
+
+
+
+											 $d_inc=""; // 해당 계정 당일 입금(증가)
+										 }else	if($in_row1[inc]==0){ //
+											 $d_inc="-"; // 해당 계정 당일 입금(증가)
+										 }else{
+											 $d_inc=number_format($in_row1[inc]); // 해당 계정 당일 입금(증가)
+										 }
+										 if(!$d_rows[name]){   // 설정 당일 지출 구하기
+											 $d_exp=""; // 해당 계정 당일 출금 (감소)
+										 }else	if($ex_row1[exp]==0){
+											 $d_exp="-"; // 해당 계정 당일 출금 (감소)
+										 }else{
+											 $d_exp=number_format($ex_row1[exp]);  // 해당 계정 당일 출금 (감소)
+										 }
+
+										 if(!$d_rows[name]){  // 전일 잔액 구하기
+											 $y_bal="";
+										 }else if(($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]==0){
+											 $y_bal="-";
+										 }else{
+											 $y_bal=number_format(($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]);
+										 }
+
+
+										 $total_y_ba+=($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]; // 토탈 전일 잔액
+										 if($i>0) $yk_total_y_ba += ($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]; // 보통예금 토탈 전일 잔액
+										 $total_d_inc+=$in_row1[inc]; // 금일 입금(증가)
+										 if($i>0) $yk_total_d_inc+=$in_row1[inc]; // 보통예금 금일 입금(증가)
+										 $total_d_exp+=$ex_row1[exp]; //금일 출금(감소)
+										 if($i>0) $yk_total_d_exp+=$ex_row1[exp]; //보통예금 금일 출금(감소)
+										 $total_ba+=$in_row[inc]-$ex_row[exp]; // 금일 잔액
+										 if($i>0) $yk_total_ba+=$in_row[inc]-$ex_row[exp]; // 보통예금 금일 잔액
+
+
+
+										if($i==0) $td_str2="<td align='center' style='padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style:solid;' rowspan='$col_num'>조합대여금</td>";
+										if($i>0) $td_str2="";
+								?>
+								<tr>
+									<?=$td_str2?>
+									<td style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid; text-align:center;" height="28"><?=$pn_row[pj_name]?></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($aaa==0){echo "-";}else{echo number_format($aaa);}?></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#0066ff"><?if($bbb==0){echo "-";}else{echo  number_format($bbb);}?></font></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#ff3300"><?if($ccc==0){echo "-";}else{echo number_format($ccc);}?></font></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#000099"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($ddd==0){echo "-";}else{echo number_format($ddd);}?></font></td>
 								</tr>
-							</table><table><tr><td height="8"></td></tr></table>
+								<?
+									} // 조합 구하기 for 문 종료
+								?>
+								<tr bgcolor="#f6f6f6">
+									<td align="center" style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" colspan="2" height="28">
+										조합대여금 계<?=$hk_bal?>
+									</td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($yk_total_y_ba==0){echo "-";}else{echo number_format($yk_total_y_ba);}?></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#0066ff"><?if($total_d_inc==0){echo "-";}else{echo  number_format($yk_total_d_inc);}?></font></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#ff3300"><?if($total_d_exp==0){echo "-";}else{echo number_format($yk_total_d_exp);}?></font></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#000099"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($yk_total_ba==0){echo "-";}else{echo number_format($yk_total_ba);}?></font></td>
+								</tr>
+								<!-- -----------------------------------------대여금 집계 종료------------------------------------ -->
+							</table>
+
+							<table><tr><td height="8"></td></tr></table>
 
 
 							<table border="0" width="100%" cellspacing="0" cellpadding="0">
