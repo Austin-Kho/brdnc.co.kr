@@ -115,9 +115,7 @@
 									$d_qry=" SELECT * FROM cms_capital_bank_account "; // 은행계좌 정보 테이블
 									$d_rlt=mysql_query($d_qry, $connect);
 									$d_num=mysql_num_rows($d_rlt);
-
 									$num=$d_num;  // 행수 설정;
-
 									$hk_bgcolor = "color:#000099; background-color:#FCFDF2;";
 
 									for($i=0; $i<=$num; $i++){ // 현금계정 + 은행계좌 수 만큼 반복 한다.
@@ -174,7 +172,6 @@
 											 $y_bal=number_format(($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]);
 										 }
 
-
 										 $total_y_ba+=($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]; // 토탈 전일 잔액
 										 if($i>0) $yk_total_y_ba += ($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]; // 보통예금 토탈 전일 잔액
 										 $total_d_inc+=$in_row1[inc]; // 금일 입금(증가)
@@ -186,7 +183,7 @@
 								?>
 								<tr>
 									<?=$td_str?>
-									<td width="190" style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid; <?if($i==0) echo $hk_bgcolor?>" height="28">
+									<td width="185" style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid; <?if($i==0) echo $hk_bgcolor?>" height="28">
 										<?=$d_rows[name]?>
 									</td><!-- 계정 명 -->
 									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid; <?if($i==0) echo $hk_bgcolor?>">
@@ -205,7 +202,6 @@
 								<?
 										} // 현금 / 보통예금 수만큼 반복 for문 종료
 								?>
-
 								<tr bgcolor="#f6f6f6">
 									<td align="center" style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" colspan="2" height="28">
 										보통예금(가용자금) 계<?=$hk_bal?>
@@ -224,112 +220,104 @@
 								</tr> -->
 								<!-- -----------------------------------------대여금 집계 시작------------------------------------ -->
 								<?
-									// 조합 대여금 구하기 시작 ////////////////////////////////////////////////////////////////////////
-									// 조합 구하기 //
-									$jh_qry = "SELECT any_jh, COUNT(*) AS num_jh FROM cms_capital_cash_book WHERE any_jh<>0 GROUP BY any_jh";// 조합 구하기
+									$jh_qry = "SELECT any_jh FROM cms_capital_cash_book WHERE any_jh<>0 GROUP BY any_jh";// 조합 구하기
 									$jh_rlt = mysql_query($jh_qry);
 									$jh_num=mysql_num_rows($jh_rlt);
 									$col_num = $jh_num+1;
 
-									$in_jh_qry="SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND any_jh='' AND deal_date<='$e_date' "; // 계정별 설정일까지 조합 총 대여금 회수
-									$in_jh_rlt=mysql_query($in_jh_qry,$connect);
-									$in_jh_row=mysql_fetch_array($in_jh_rlt);
-
-									$in_jh_qry1="SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND any_jh='' AND deal_date='$e_date' "; // 계정별 설정당일 수입
-									$in_jh_rlt1=mysql_query($in_jh_qry1,$connect);
-									$in_jh_row1=mysql_fetch_array($in_jh_rlt1);
-
-									$ex_jh_qry="SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND any_jh='' AND deal_date<='$e_date' "; // 계정별 설정일까지 총 지출
-									$ex_jh_rlt=mysql_query($ex_jh_qry,$connect);
-									$ex_jh_row=mysql_fetch_array($ex_jh_rlt);
-
-									$ex_jh_qry1="SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND any_jh='' AND deal_date='$e_date' "; // 계정별 설정당일 지출
-									$ex_jh_rlt1=mysql_query($ex_jh_qry1,$connect);
-									$ex_jh_row1=mysql_fetch_array($ex_jh_rlt1);
-
-
-									// 조합 대여금 구하기 종료 ////////////////////////////////////////////////////////////////////////
-
 									for($i=0; $i<=$jh_num; $i++){
 
-										$jh_row = mysql_fetch_array($jh_rlt);
+										$jh_row = mysql_fetch_array($jh_rlt); // 거래한 조합을 구함// 조합코드 및 조합 수
 
 										$pn_qry = "SELECT pj_name FROM cms_project1_info WHERE seq = '$jh_row[any_jh]' "; // 조합명 구하기 쿼리
 										$pn_rlt = mysql_query($pn_qry);
-										$pn_row = mysql_fetch_array($pn_rlt);
+										$pn_row = mysql_fetch_array($pn_rlt); // 조합 명칭을 불러옴
+
+										// 총 회수금
+										$in_jh_qry="SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND any_jh = '$jh_row[any_jh]' AND deal_date<='$e_date' "; // 조합별 설정일까지 조합 총 대여금 회수
+										$in_jh_rlt=mysql_query($in_jh_qry,$connect);
+										$in_jh_row=mysql_fetch_array($in_jh_rlt);
+										if(!$in_jh_row) $in_jh_row = 0;
+
+										// 당일 회수금
+										$in_jh_qry1="SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND any_jh = '$jh_row[any_jh]' AND deal_date='$e_date' "; // 조합별 설정당일 수입
+										$in_jh_rlt1=mysql_query($in_jh_qry1,$connect);
+										$in_jh_row1=mysql_fetch_array($in_jh_rlt1);
+										if(!$in_jh_row1) $in_jh_row1 = 0;
+
+										// 총 대여금
+										$ex_jh_qry="SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND any_jh =' $jh_row[any_jh]' AND deal_date<='$e_date' "; // 조합별 설정일까지 총 지출
+										$ex_jh_rlt=mysql_query($ex_jh_qry,$connect);
+										$ex_jh_row=mysql_fetch_array($ex_jh_rlt);
+										if(!$ex_jh_row) $ex_jh_row = 0;
+
+										// 당일 대여금
+										$ex_jh_qry1="SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND any_jh = '$jh_row[any_jh]' AND deal_date='$e_date' "; // 조합별 설정당일 지출
+										$ex_jh_rlt1=mysql_query($ex_jh_qry1,$connect);
+										$ex_jh_row1=mysql_fetch_array($ex_jh_rlt1);
+										if(!$ex_jh_row1) $ex_jh_row1 = 0;
+
+										// 전일 대여금 잔액 구하기
+										if(!$pn_row[pj_name]){  // 조합 명칭이 없으면 // 마지막 행이면
+											$y_jh_ba="";
+										}else if(($ex_jh_row[exp]-$in_jh_row[inc])+$in_jh_row1[inc]-$ex_jh_row1[exp]==0){
+											$y_jh_ba = "-";
+										}else{
+											$y_jh_ba=number_format(($ex_jh_row[exp]-$in_jh_row[inc])+$in_jh_row1[inc]-$ex_jh_row1[exp]);
+										}
+
+										// 설정 당일 대여금 구하기
+										if(!$pn_row[pj_name]){  // 조합 명칭이 없으면 // 마지막 행이면
+											$d_jh_exp=""; // 해당 계정 당일 대여
+										}else	if($ex_jh_row1[exp]==0){
+											$d_jh_exp="-"; // 해당 계정 당일 대여
+										}else{
+											$d_jh_exp=number_format($ex_jh_row1[exp]);  // 해당 계정 대여금
+										}
+
+										if(!$pn_row[pj_name]){   // 설정 당일 회수금 구하기-> 조합(현장)명이 없으면
+											$d_jh_inc=""; // 해당 계정 당일 회수
+										}else	if($in_jh_row1[inc]==0){ //
+											$d_jh_inc="-"; // 해당 계정 당일 회수
+										}else{
+											$d_jh_inc=number_format($in_jh_row1[inc]); // 해당 계정 당일 회수금
+										}
 
 										if(!$pn_row[pj_name]){   // 조합(현장)명이 없으면
-											 $day_loan=""; // 최종 금일 대여금(잔액)
-										 }else	if($in_jh_row[inc]==$ex_jh_row[exp]){ // 계정별 총 입금과 지출이 동일하면
-											 $day_loan="-"; // 최종 금일 시재(잔고)
-										 }else{ // 그렇지 않으면
-											 $day_loan=number_format($in_jh_row[inc]-$ex_jh_row[exp]); // 계정별 최종 금일 시재(잔고)
-										 }
+											$day_loan=""; // 최종 금일 대여금(잔액)
+										}else	if($ex_jh_row[exp]==$in_jh_row[inc]){ // 계정별 총 입금과 지출이 동일하면
+											$day_loan="-"; // 최종 금일 시재(잔고)
+										}else{ // 그렇지 않으면
+											$day_loan = number_format($ex_jh_row[exp]-$in_jh_row[inc]); // 계정별 최종 금일 시재(잔고)
+										}
 
-										 if(!$pn_row[pj_name]){   // 설정 당일 수입 구하기-> 조합(현장)명이 없으면
-
-										 	/////여기까지 작업
-
-
-
-
-
-											 $d_inc=""; // 해당 계정 당일 입금(증가)
-										 }else	if($in_row1[inc]==0){ //
-											 $d_inc="-"; // 해당 계정 당일 입금(증가)
-										 }else{
-											 $d_inc=number_format($in_row1[inc]); // 해당 계정 당일 입금(증가)
-										 }
-										 if(!$d_rows[name]){   // 설정 당일 지출 구하기
-											 $d_exp=""; // 해당 계정 당일 출금 (감소)
-										 }else	if($ex_row1[exp]==0){
-											 $d_exp="-"; // 해당 계정 당일 출금 (감소)
-										 }else{
-											 $d_exp=number_format($ex_row1[exp]);  // 해당 계정 당일 출금 (감소)
-										 }
-
-										 if(!$d_rows[name]){  // 전일 잔액 구하기
-											 $y_bal="";
-										 }else if(($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]==0){
-											 $y_bal="-";
-										 }else{
-											 $y_bal=number_format(($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]);
-										 }
-
-
-										 $total_y_ba+=($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]; // 토탈 전일 잔액
-										 if($i>0) $yk_total_y_ba += ($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]; // 보통예금 토탈 전일 잔액
-										 $total_d_inc+=$in_row1[inc]; // 금일 입금(증가)
-										 if($i>0) $yk_total_d_inc+=$in_row1[inc]; // 보통예금 금일 입금(증가)
-										 $total_d_exp+=$ex_row1[exp]; //금일 출금(감소)
-										 if($i>0) $yk_total_d_exp+=$ex_row1[exp]; //보통예금 금일 출금(감소)
-										 $total_ba+=$in_row[inc]-$ex_row[exp]; // 금일 잔액
-										 if($i>0) $yk_total_ba+=$in_row[inc]-$ex_row[exp]; // 보통예금 금일 잔액
-
-
+										$tot_y_jh_ba+=($ex_jh_row[exp])-$in_jh_row[inc]+$in_jh_row1[inc]-$ex_jh_row1[exp]; // 토탈 전일 잔액 OK
+										$tot_d_jh_exp+=$ex_jh_row1[exp]; //금일 대여
+										$tot_d_jh_inc+=$in_jh_row1[inc]; // 금일 회수
+										$tot_jh_ba+=$ex_jh_row[exp]-$in_jh_row[inc]; //금일 잔액
 
 										if($i==0) $td_str2="<td align='center' style='padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style:solid;' rowspan='$col_num'>조합대여금</td>";
 										if($i>0) $td_str2="";
 								?>
 								<tr>
 									<?=$td_str2?>
-									<td style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid; text-align:center;" height="28"><?=$pn_row[pj_name]?></td>
-									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($aaa==0){echo "-";}else{echo number_format($aaa);}?></td>
-									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#0066ff"><?if($bbb==0){echo "-";}else{echo  number_format($bbb);}?></font></td>
-									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#ff3300"><?if($ccc==0){echo "-";}else{echo number_format($ccc);}?></font></td>
-									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#000099"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($ddd==0){echo "-";}else{echo number_format($ddd);}?></font></td>
+									<td style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;" height="28"><?=$pn_row[pj_name]?></td><!-- 조합 명 -->
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$y_jh_ba?></td> <!-- 전일 대여금 잔액 -->
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$d_jh_exp?></td> <!-- 당일 대여금 출금 -->
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$d_jh_inc?></td> <!-- 당일 대여금 회수 -->
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$day_loan?></td> <!-- 금일 대여금 잔액 -->
 								</tr>
 								<?
 									} // 조합 구하기 for 문 종료
 								?>
 								<tr bgcolor="#f6f6f6">
 									<td align="center" style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" colspan="2" height="28">
-										조합대여금 계<?=$hk_bal?>
+										조합대여금 계
 									</td>
-									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($yk_total_y_ba==0){echo "-";}else{echo number_format($yk_total_y_ba);}?></td>
-									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#0066ff"><?if($total_d_inc==0){echo "-";}else{echo  number_format($yk_total_d_inc);}?></font></td>
-									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#ff3300"><?if($total_d_exp==0){echo "-";}else{echo number_format($yk_total_d_exp);}?></font></td>
-									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#000099"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($yk_total_ba==0){echo "-";}else{echo number_format($yk_total_ba);}?></font></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($tot_y_jh_ba==0){echo "-";}else{echo number_format($tot_y_jh_ba);}?></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#ff3300"><?if($tot_d_jh_exp==0){echo "-";}else{echo  number_format($tot_d_jh_exp);}?></font></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#0066ff"><?if($tot_d_jh_inc==0){echo "-";}else{echo number_format($tot_d_jh_inc);}?></font></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#000099"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($tot_jh_ba==0){echo "-";}else{echo number_format($tot_jh_ba);}?></font></td>
 								</tr>
 								<!-- -----------------------------------------대여금 집계 종료------------------------------------ -->
 							</table>
@@ -337,124 +325,123 @@
 							<table><tr><td height="8"></td></tr></table>
 
 
+							<!-- 금일 수지 현황 -->
 							<table border="0" width="100%" cellspacing="0" cellpadding="0">
-								<tr>
-									<td>
-									<table border="0" width="100%" cellspacing="0" cellpadding="0">
-										<tr bgcolor="#f2f2f9">
-											<td colspan="3" style="padding:0 0 0 10px;border-width: 1px 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28">
-											<b><font color="#ee0066">▶</font> <font color="#003399">금 일 수 지 현 황</font></b> (<?=$e_date?> 현재)</td>
-										</tr>
-										<tr bgcolor="#f5f5f5">
-											<td width="264" align="center" style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" colspan="3" height="28"> 수 입 내 역 </td>
-										</tr>
-										<tr bgcolor="#f8f8f3">
-											<td align="center" width="28%" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28">거래처</td>
-											<td align="center" width="40%" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;">적 요</td>
-											<td align="center" width="32%" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;">금 액</td>
-										</tr>
-										<?
-											$da_in_qry="SELECT cont,acc,inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='$e_date' order by seq_num";
-											$da_in_rlt=mysql_query($da_in_qry, $connect);
-
-											$da_ex_qry="SELECT class1,cont,acc,inc,exp FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='$e_date' order by seq_num";
-											$da_ex_rlt=mysql_query($da_ex_qry, $connect);
-
-											$in_num = mysql_num_rows($da_in_rlt);
-											$ex_num = mysql_num_rows($da_ex_rlt);
-
-											if($in_num>$ex_num) $num=$in_num; else $num=$ex_num; // 행수 설정;
-
-											for($i=0;$i<=$num;$i++){
-												$da_in_rows=mysql_fetch_array($da_in_rlt);
-												if($da_in_rows[inc]==0){ $income="";}else{$income=number_format($da_in_rows[inc]);}
-
-												if(!$da_in_rows[acc]){
-													 $da_in_acc="";
-												}else{
-													 $da_in_acc=$da_in_rows[acc];
-												}
-
-												if(!$da_in_rows[cont]){
-													 $da_in_cont="";
-												}else{
-													 $da_in_cont=$da_in_rows[cont];
-												}
-										?>
-										<tr>
-											<td style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28"><?=rg_cut_string($da_in_acc,16,"")?></td>
-											<td style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=rg_cut_string($da_in_cont,20,"")?></td>
-											<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$income?></td>
-										</tr>
-										<? } ?>
-										<tr bgcolor="#f6f6f6">
-										<?
-											$aaq="SELECT SUM(inc) AS total_inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='$e_date'";
-											$aar=mysql_query($aaq, $connect);
-											$aaro=mysql_fetch_array($aar);
-										?>
-											<td align="center" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28">TOTAL</td>
-											<td align="center" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"></td>
-											<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#0066ff"><?if($aaro[total_inc]==0){echo "-";}else{echo number_format($aaro[total_inc]);}?></font></td>
-										</tr>
-									</table>
+								<tr bgcolor="#f2f2f9">
+									<td style="padding:0 0 0 10px; border-width: 1px 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28"><b><font color="#ee0066">
+										▶</font> <font color="#003399">금 일 수 지 현 황</font></b> (<?=$e_date?> 현재)
 									</td>
-									<td>
-									<table border="0" width="100%" cellspacing="0" cellpadding="0">
-									<tr bgcolor="#f2f2f9">
-										<td align="right" colspan="3" style="padding:0 10px 0 0px;border-width: 1px 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28">(단위 : 원)</td>
-									</tr>
-									<tr bgcolor="#f5f5f5">
-										<td width="264" align="center" style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;" colspan="3" height="28"> 지 출 내 역 </td>
-									</tr>
-									<tr bgcolor="#f8f8f3">
-										<td align="center" width="28%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;" height="28">거래처</td>
-										<td align="center" width="40%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;">적 요</td>
-										<td align="center" width="32%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;">금 액</td>
-									</tr>
-									<?
-										for($i=0;$i<=$num;$i++){
-											$da_ex_rows=mysql_fetch_array($da_ex_rlt);
-											if($da_ex_rows[exp]==0){ $exp="";}else{$exp=number_format($da_ex_rows[exp]);}
-
-											if(!$da_ex_rows[acc]){
-												 $da_ex_acc="";
-											}else{
-												 $da_ex_acc=$da_ex_rows[acc];
-											}
-
-											if(!$da_ex_rows[cont]){
-												 $da_ex_cont="";
-											}else{
-												 $da_ex_cont=$da_ex_rows[cont];
-											}
-									?>
-									<tr>
-										<td style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;" height="28"><?=rg_cut_string($da_ex_acc,16,"")?></td>
-										<td style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=rg_cut_string($da_ex_cont,20,"")?></td>
-										<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$exp?></td>
-									</tr>
-									<? } ?>
-									<tr bgcolor="#f6f6f6">
-									<?
-										$bbq="SELECT SUM(exp) AS total_exp FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='$e_date'";
-										$bbr=mysql_query($bbq, $connect);
-										$bbro=mysql_fetch_array($bbr);
-									?>
-										<td align="center" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;" height="28">TOTAL</td>
-										<td align="center" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"></td>
-										<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#ff3300"><?if($bbro[total_exp]==0){echo "-";}else{echo number_format($bbro[total_exp]);}?></font></td>
-									</tr>
-									</table>
-									</td>
+									<td style="padding:0 10px 0 10px; border-width: 1px 0 1px 0; border-color:#E1E1E1; border-style: solid; text-align:right;">(단위 : 원)</td>
 								</tr>
-								<tr><td height="33"></td></tr>
 							</table>
 
 
 
+							<!-- 입금 테이블 -->
+							<table border="0" width="100%" cellspacing="0" cellpadding="0">
+								<tr bgcolor="#f5f5f5">
+									<td width="264" style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" colspan="5" height="28"> <b>수 입 내 역</b> </td>
+								</tr>
+								<tr bgcolor="#f8f8f3">
+									<td align="center" width="20%" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28">거래처</td>
+									<td align="center" width="30%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;">적 요</td>
+									<td align="center" width="10%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;">금 액</td>
+									<td align="center" width="15%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;">계정과목</td>
+									<td align="center" width="25%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;">비 고</td>
+								</tr>
+								<?
+									$da_in_qry="SELECT account, cont,acc,inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='$e_date' order by seq_num";
+									$da_in_rlt=mysql_query($da_in_qry, $connect);
 
-							<table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:1px solid #D6D6D6;">
+									$in_num = mysql_num_rows($da_in_rlt);
+
+									if($in_num<5) $num=5; else $num=$in_num+1; // 행수 설정;
+
+									for($i=0;$i<=$num;$i++){
+										$da_in_rows=mysql_fetch_array($da_in_rlt);
+										if($da_in_rows[inc]==0){ $income="";}else{$income=number_format($da_in_rows[inc]);}
+										if(!$da_in_rows[acc]){ $da_in_acc="";	}else{ $da_in_acc=$da_in_rows[acc];	}
+										if(!$da_in_rows[cont]){ $da_in_cont="";	}else{ $da_in_cont=$da_in_rows[cont];	}
+										if(!$da_in_rows[account]){$da_in_account = "";}else{$da_in_account = $da_in_rows[account];}
+								?>
+								<tr>
+									<td style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28"><?=rg_cut_string($da_in_acc,16,"")?></td>
+									<td style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=rg_cut_string($da_in_cont,20,"")?></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$income?></td>
+									<td align="center" width="32%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$da_in_account?></td>
+									<td align="center" width="32%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"></td>
+								</tr>
+								<? } ?>
+								<tr bgcolor="#f6f6f6">
+								<?
+									$aaq="SELECT SUM(inc) AS total_inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='$e_date'";
+									$aar=mysql_query($aaq, $connect);
+									$aaro=mysql_fetch_array($aar);
+								?>
+									<td align="center" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28">TOTAL</td>
+									<td align="center" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#0066ff"><?if($aaro[total_inc]==0){echo "-";}else{echo number_format($aaro[total_inc]);}?></font></td>
+									<td align="center" width="32%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"></td>
+									<td align="center" width="32%" style="border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"></td>
+								</tr>
+							</table>
+
+
+
+							<!-- 출금 테이블 -->
+							<table border="0" width="100%" cellspacing="0" cellpadding="0" style="margin-top:15px;">
+								<tr bgcolor="#f5f5f5">
+									<td width="264" style="padding:0 0 0 10px; border-width: 1px 0 1px 0; border-color:#E1E1E1; border-style: solid;" colspan="3" height="28"> <b>지 출 내 역</b> </td>
+								</tr>
+								<tr bgcolor="#f8f8f3">
+									<td align="center" width="28%" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28">거래처</td>
+									<td align="center" width="40%" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;">적 요</td>
+									<td align="center" width="32%" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;">금 액</td>
+								</tr>
+								<?
+									$da_ex_qry="SELECT class1,cont,acc,inc,exp FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='$e_date' order by seq_num";
+									$da_ex_rlt=mysql_query($da_ex_qry, $connect);
+
+									$ex_num = mysql_num_rows($da_ex_rlt);
+
+									for($i=0;$i<=$num;$i++){
+										$da_ex_rows=mysql_fetch_array($da_ex_rlt);
+										if($da_ex_rows[exp]==0){ $exp="";}else{$exp=number_format($da_ex_rows[exp]);}
+
+										if(!$da_ex_rows[acc]){
+											 $da_ex_acc="";
+										}else{
+											 $da_ex_acc=$da_ex_rows[acc];
+										}
+
+										if(!$da_ex_rows[cont]){
+											 $da_ex_cont="";
+										}else{
+											 $da_ex_cont=$da_ex_rows[cont];
+										}
+								?>
+								<tr>
+									<td style="padding:0 0 0 10px;border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28"><?=rg_cut_string($da_ex_acc,16,"")?></td>
+									<td style="padding:0 0 0 10px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=rg_cut_string($da_ex_cont,20,"")?></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><?=$exp?></td>
+								</tr>
+								<? } ?>
+								<tr bgcolor="#f6f6f6">
+								<?
+									$bbq="SELECT SUM(exp) AS total_exp FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='$e_date'";
+									$bbr=mysql_query($bbq, $connect);
+									$bbro=mysql_fetch_array($bbr);
+								?>
+									<td align="center" style="border-width: 0 0 1px 0; border-color:#E1E1E1; border-style: solid;" height="28">TOTAL</td>
+									<td align="center" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"></td>
+									<td align="right" style="padding:0 10px 0 0px;border-width: 0 0 1px 1px; border-color:#E1E1E1; border-style: solid;"><font color="#ff3300"><?if($bbro[total_exp]==0){echo "-";}else{echo number_format($bbro[total_exp]);}?></font></td>
+								</tr>
+							</table>
+
+
+
+							<!-- 최종 집계 테이블 -->
+							<table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse; border:1px solid #D6D6D6; margin-top:15px;">
 								<tr align="center">
 								<?
 									 $cash1=" SELECT SUM(inc) AS in_total FROM cms_capital_cash_book  WHERE (com_div>0 AND class2<>8) AND in_acc='1' $e_add  "; // 현금시재 구하기
