@@ -2,7 +2,8 @@
 session_start();
 Header("Content-type: application/vnd.ms-excel");
 Header("Content-type: charset=UTF-8");
-Header("Content-Disposition: attachment; filename=daily_money_report.xls");
+$sh_date = stripslashes($_REQUEST['sh_date']);
+Header("Content-Disposition: attachment; filename=daily_money_report_".$sh_date.".xls");
 Header("Content-Description: PHP5 Generated Data");
 Header("Pragma: no-cache");
 Header("Expires: 0");
@@ -14,10 +15,7 @@ Header("Expires: 0");
 	// MySQL 연결
 	$connect=dbconn();
 
-	$sh_date = stripslashes($_REQUEST['sh_date']);
-	
-
-    $d_obj = date_create($sh_date);    
+    $d_obj = date_create($sh_date);
     $year = date_format($d_obj, "Y");
     $month = date_format($d_obj, "m");
     $day = date_format($d_obj, "d");
@@ -29,23 +27,19 @@ Header("Expires: 0");
     if($week==4) $daily = "목요일";
     if($week==5) $daily = "금요일";
     if($week==6) $daily = "토요일";
-
-
-
-
 ?>
 <meta http-equiv="Content-Type" content="application/vnd.ms-excel;charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge"
 
 <!-- td 11ea -->
 <table border="1">
-	<tr align="center" height="36" style="font-size: 9pt;">		
-		<td style="font-size:18pt; border-bottom: 0;" rowspan="2" colspan="6"><b><?=$com_title?> 자금일보</b></td>
-		<td style="width:45px;" valign="bottom" rowspan="3">결<br>재</td>
-		<td style="width:84px;">대리</td>
-		<td style="width:84px;">전무</td>
-		<td style="width:84px;">대표이사</td>
-		<td style="width:84px;">회장</td>
+	<tr align="center" height="26" style="font-size: 9pt;">
+		<td style="font-size:18pt; border-bottom: 0; width:328px;" rowspan="2" colspan="6"><b><?=$com_title?> 자금일보</b></td>
+		<td style="width:36px;" valign="bottom" rowspan="3">결<br>재</td>
+		<td style="width:64px;">대리</td>
+		<td style="width:64px;">전무</td>
+		<td style="width:64px;">대표이사</td>
+		<td style="width:64px;">회장</td>
 	</tr>
 	<tr align="center" height="50" style="font-size: 9pt;">
 		<td style="" rowspan="2"></td>
@@ -53,16 +47,16 @@ Header("Expires: 0");
 		<td style="" rowspan="2"></td>
 		<td style="" rowspan="2"></td>
 	</tr>
-	<tr height="30" style="font-size: 9pt;">		
+	<tr height="30" style="font-size: 9pt;">
 		<td style="border-top:0; text-align: right; padding-right: 50px;" colspan="6"><?=$year."년 ".$month."월 ".$day."일 ".$daily?></td>
 	</tr>
-	<tr height="45" style="font-size: 9pt;">		
+	<tr height="45" style="font-size: 9pt;">
 		<td style="border-right: 0;" colspan="10">■ 자 금 현 황</td>
 		<td style="border-left: 0; text-align: right;">(단위 : 원)</td>
 	</tr>
-	<tr align="center" height="36" style="font-size: 9pt;">		
-		<td style="background-color:#eaeaea;" colspan="3">구 분</td>
-		<td style="background-color:#eaeaea;" colspan="2">전일잔액</td>
+	<tr align="center" height="26" style="font-size: 9pt;">
+		<td style="background-color:#eaeaea; width=192px;" colspan="3">구 분</td>
+		<td style="background-color:#eaeaea; width=120px;" colspan="2">전일잔액</td>
 		<td style="background-color:#eaeaea;" colspan="2">입금(증가)</td>
 		<td style="background-color:#eaeaea;" colspan="2">출금(감소)</td>
 		<td style="background-color:#eaeaea;" colspan="2">금일잔액</td>
@@ -71,13 +65,13 @@ Header("Expires: 0");
 		$d_qry=" SELECT * FROM cms_capital_bank_account "; // 은행계좌 정보 테이블
 		$d_rlt=mysql_query($d_qry, $connect);
 		$d_num=mysql_num_rows($d_rlt);
-		$num=$d_num;  // 행수 설정;		
+		$num=$d_num;  // 행수 설정;
 
 		for($i=0; $i<=$num; $i++){ // 현금계정 + 은행계좌 수 만큼 반복 한다.
 			if($i==0) $hk_bgcolor = " color:#000099; background-color:#FCFDF2; "; else $hk_bgcolor = "";
 			$d_rows=mysql_fetch_array($d_rlt);
 
-			if($i==0) $td_str="<td align='center' style='background-color:#F0F0F0; ".$hk_bgcolor."'>현금</td>";
+			if($i==0) $td_str="<td align='center' style='width:72px;; ".$hk_bgcolor."'>현금</td>";
 			if($i==1) $td_str="<td align='center' rowspan='$num'>보통예금</td>";
 			if($i>1) $td_str="";
 
@@ -137,10 +131,10 @@ Header("Expires: 0");
 		$total_ba+=$in_row[inc]-$ex_row[exp]; // 금일 잔액
 		if($i>0) $yk_total_ba+=$in_row[inc]-$ex_row[exp]; // 보통예금 금일 잔액
 	?>
-	<tr align="center" height="36" style="font-size: 9pt;">
+	<tr align="center" height="26" style="font-size: 9pt;">
 		<?=$td_str?>
 		<td style="text-align: center; <?=$hk_bgcolor?>" colspan="2"><?=$d_rows[name]?></td>
-		<td style="text-align: right; padding-right: 18px; <?=$hk_bgcolor?>" colspan="2"><?=$y_bal?></td>	
+		<td style="text-align: right; padding-right: 18px; <?=$hk_bgcolor?>" colspan="2"><?=$y_bal?></td>
 		<td style="text-align: right; padding-right: 18px; <?=$hk_bgcolor?>" colspan="2"><?=$d_inc?></td>
 		<td style="text-align: right; padding-right: 18px; <?=$hk_bgcolor?>" colspan="2"><?=$d_exp?></td>
 		<td style="text-align: right; padding-right: 18px; <?=$hk_bgcolor?>" colspan="2"><?=$balance?></td>
@@ -148,10 +142,10 @@ Header("Expires: 0");
 	<?
 		} // 현금 / 보통예금 수만큼 반복 for문 종료
 	?>
-	<tr align="center" height="36" style="font-size: 9pt;">	
+	<tr align="center" height="26" style="font-size: 9pt;">
 		<td style="text-align: center; color:#000099; background-color:#FCFDF2;" colspan="3">보통예금(가용자금) 계</td>
 		<td style="text-align: right; padding-right: 18px; color:#000099; background-color:#FCFDF2;" colspan="2"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($yk_total_y_ba==0){echo "-";}else{echo number_format($yk_total_y_ba);}?></td>
-		<td style="text-align: right; padding-right: 18px; color:blue; background-color:#FCFDF2;" colspan="2"><?if($total_d_inc==0){echo "-";}else{echo  number_format($yk_total_d_inc);}?></font></td>	
+		<td style="text-align: right; padding-right: 18px; color:blue; background-color:#FCFDF2;" colspan="2"><?if($total_d_inc==0){echo "-";}else{echo  number_format($yk_total_d_inc);}?></font></td>
 		<td style="text-align: right; padding-right: 18px; color:red; background-color:#FCFDF2;" colspan="2"><?if($total_d_exp==0){echo "-";}else{echo number_format($yk_total_d_exp);}?></font></td>
 		<td style="text-align: right; padding-right: 18px; color:#000099; background-color:#FCFDF2;" colspan="2"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($yk_total_ba==0){echo "-";}else{echo number_format($yk_total_ba);}?></font></td>
 	</tr>
@@ -165,7 +159,7 @@ Header("Expires: 0");
 		for($i=0; $i<=$jh_num; $i++){
 
 			$jh_row = mysql_fetch_array($jh_rlt); // 거래한 조합을 구함// 조합코드 및 조합 수
-	
+
 			$pn_qry = "SELECT pj_name FROM cms_project1_info WHERE seq = '$jh_row[any_jh]' "; // 조합명 구하기 쿼리
 			$pn_rlt = mysql_query($pn_qry);
 			$pn_row = mysql_fetch_array($pn_rlt); // 조합 명칭을 불러옴
@@ -236,10 +230,10 @@ Header("Expires: 0");
 		if($i==0) $td_str2="<td align='center' rowspan='$col_num'>조합대여금</td>";
 		if($i>0) $td_str2="";
 	?>
-	<tr align="center" height="36" style="font-size: 9pt;">		
+	<tr align="center" height="26" style="font-size: 9pt;">
 		<?=$td_str2?>
 		<td style="text-align: center;" colspan="2"><?=rg_cut_string($pn_row[pj_name],10,"")?></td>
-		<td style="text-align: right; padding-right: 18px;" colspan="2"><?=$y_jh_ba?></td>	
+		<td style="text-align: right; padding-right: 18px;" colspan="2"><?=$y_jh_ba?></td>
 		<td style="text-align: right; padding-right: 18px;" colspan="2"><?=$d_jh_exp?></td>
 		<td style="text-align: right; padding-right: 18px;" colspan="2"><?=$d_jh_inc?></td>
 		<td style="text-align: right; padding-right: 18px;" colspan="2"><?=$day_loan?></td>
@@ -247,23 +241,23 @@ Header("Expires: 0");
 	<?
 		} // 조합 구하기 for 문 종료
 	?>
-	<tr align="center" height="36" style="font-size: 9pt;">	
+	<tr align="center" height="26" style="font-size: 9pt;">
 		<td style="text-align: center; color:#000099; background-color:#FCFDF2;" colspan="3">조합대여금 계</td>
 		<td style="text-align: right; padding-right: 18px; color:#000099; background-color:#FCFDF2;" colspan="2"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($tot_y_jh_ba==0){echo "-";}else{echo number_format($tot_y_jh_ba);}?></td>
-		<td style="text-align: right; padding-right: 18px; color:red; background-color:#FCFDF2;" colspan="2"><?if($tot_d_jh_exp==0){echo "-";}else{echo  number_format($tot_d_jh_exp);}?></font></td>	
+		<td style="text-align: right; padding-right: 18px; color:red; background-color:#FCFDF2;" colspan="2"><?if($tot_d_jh_exp==0){echo "-";}else{echo  number_format($tot_d_jh_exp);}?></font></td>
 		<td style="text-align: right; padding-right: 18px; color:blue; background-color:#FCFDF2;" colspan="2"><?if($tot_d_jh_inc==0){echo "-";}else{echo number_format($tot_d_jh_inc);}?></font></td>
 		<td style="text-align: right; padding-right: 18px; color:#000099; background-color:#FCFDF2;" colspan="2"><?if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($tot_jh_ba==0){echo "-";}else{echo number_format($tot_jh_ba);}?></font></td>
 	</tr>
 	<!-- -----------------------------------------대여금 집계 종료------------------------------------ -->
 
-	<tr height="45" style="font-size: 9pt;">		
+	<tr height="45" style="font-size: 9pt;">
 		<td style="padding-left: 10px;" colspan="11"><b>■ 금 일 수 지</b></td>
 	</tr>
-	<tr height="36" style="font-size: 9pt;">		
+	<tr height="26" style="font-size: 9pt;">
 		<td style="padding-left: 20px;" colspan="11"><b>입 금 내 역</b></td>
 	</tr>
 
-	<tr align="center" height="36" style="font-size: 9pt;">
+	<tr align="center" height="26" style="font-size: 9pt;">
 		<td style="background-color: #eaeaea;" colspan="2">거래처</td>
 		<td style="background-color: #eaeaea;" colspan="3">적 요</td>
 		<td style="background-color: #eaeaea;">금액</td>
@@ -284,15 +278,15 @@ Header("Expires: 0");
 			$da_in_rows=mysql_fetch_array($da_in_rlt);
 			if($da_in_rows[inc]==0){ $income="";}else{$income=number_format($da_in_rows[inc]);}
 	?>
-	<tr height="36" style="font-size: 9pt;">
+	<tr height="26" style="font-size: 9pt;">
 		<td style="padding-left: 14px;" colspan="2"><?=rg_cut_string($da_in_rows[acc],10,"")?></td>
 		<td style="padding-left: 14px;" colspan="3"><?=rg_cut_string($da_in_rows[cont],20,"")?></td>
-		<td style="width:110px; text-align: right; padding-right: 18px;"><?=$income?></td>
+		<td style="width:90px; text-align: right; padding-right: 18px;"><?=$income?></td>
 		<td style="padding-left: 14px;" colspan="2"><?=rg_cut_string($da_in_rows[account],7,"")?></td>
 		<td style="padding-left: 14px;" colspan="3"><?=rg_cut_string($da_in_rows[note],20,"")?></td>
 	</tr>
 	<? } ?>
-	<tr align="center" height="36" style="font-size: 9pt;" bgcolor="#eaeaea;">
+	<tr align="center" height="26" style="font-size: 9pt;" bgcolor="#eaeaea;">
 	<?
 		$aaq="SELECT SUM(inc) AS total_inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='$sh_date'";
 		$aar=mysql_query($aaq, $connect);
@@ -305,7 +299,7 @@ Header("Expires: 0");
 		<td style="color:#000099; background-color:#FCFDF2;" colspan="3"><?=rg_cut_string($da_in_rows[note],20,"")?></td>
 	</tr>
 
-	<tr height="36" style="font-size: 9pt;">		
+	<tr height="26" style="font-size: 9pt;">
 		<td style="padding-left: 20px;" colspan="11"></td>
 	</tr>
 
@@ -313,17 +307,17 @@ Header("Expires: 0");
 
 
 	<!-- 출금 내역 -->
-	<tr height="36" style="font-size: 9pt;">		
+	<tr height="26" style="font-size: 9pt;">
 		<td style="padding-left: 20px;" colspan="11"><b>출 금 내 역</b></td>
 	</tr>
 
-	<tr align="center" height="36" style="font-size: 9pt;">
+	<tr align="center" height="26" style="font-size: 9pt;">
 		<td style="background-color: #eaeaea;" colspan="2">거래처</td>
 		<td style="background-color: #eaeaea;" colspan="3">적 요</td>
 		<td style="background-color: #eaeaea;">금액</td>
 		<td style="background-color: #eaeaea;" colspan="2">계정과목</td>
 		<td style="background-color: #eaeaea;" colspan="3">비 고</td>
-	</tr>	
+	</tr>
 	<?
 		$da_ex_qry="SELECT account, cont, acc, exp, note FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='$sh_date' order by seq_num";
 		$da_ex_rlt=mysql_query($da_ex_qry, $connect);
@@ -335,16 +329,16 @@ Header("Expires: 0");
 			$da_ex_rows=mysql_fetch_array($da_ex_rlt);
 			if($da_ex_rows[exp]==0){ $exp="";}else{$exp=number_format($da_ex_rows[exp]);}
 	?>
-	<tr height="36" style="font-size: 9pt;">
+	<tr height="26" style="font-size: 9pt;">
 		<td style="padding-left: 18px;" colspan="2"><?=rg_cut_string($da_ex_rows[acc],10,"")?></td>
 		<td style="padding-left: 18px;" colspan="3"><?=rg_cut_string($da_ex_rows[cont],16,"")?></td>
-		<td style="width:110px; text-align: right; padding-right: 18px;"><?=$exp?></td>
+		<td style="width:90px; text-align: right; padding-right: 18px;"><?=$exp?></td>
 		<td style="padding-left: 18px;" colspan="2"><?=rg_cut_string($da_ex_rows[account],7,"")?></td>
 		<td style="padding-left: 18px;" colspan="3"><?=rg_cut_string($da_ex_rows[note],20,"")?></td>
 	</tr>
 	<? } ?>
 
-	<tr align="center" height="36" style="font-size: 9pt;" bgcolor="#eaeaea;">
+	<tr align="center" height="26" style="font-size: 9pt;" bgcolor="#eaeaea;">
 	<?
 		$bbq="SELECT SUM(exp) AS total_exp FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='$sh_date'";
 		$bbr=mysql_query($bbq, $connect);
@@ -356,11 +350,11 @@ Header("Expires: 0");
 		<td style="color:#000099; background-color:#FCFDF2;" colspan="2"></td>
 		<td style="color:#000099; background-color:#FCFDF2;" colspan="3"></td>
 	</tr>
-	
 
-	
+
+
 	<!--  -->
-	<!-- <tr align="center" height="36" style="font-size: 9pt;">		
+	<!-- <tr align="center" height="26" style="font-size: 9pt;">
 		<td style="width:114px">114</td>
 		<td style="width:60px">60</td>
 		<td style="width:60px">60</td>
