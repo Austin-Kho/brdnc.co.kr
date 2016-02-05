@@ -10,12 +10,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <?php
 	ini_set("display_errors", "1");
-	$mode = $_REQUEST[mode]; // 모드	
+	$mode = $_REQUEST[mode]; // 모드
 	// $s_id = $_SESSION[speedmail_id]; //??
 
 		if($mode =="ins" ) {
 			$table_name=$_REQUEST['table_name']; // 테이블 명
-			$table_name_qry=" `".$_REQUEST['table_name']."` "; // 테이블 명			
+			$table_name_qry=" `".$_REQUEST['table_name']."` "; // 테이블 명
 			$deli = $_REQUEST['deli']; // 구분 자
 
 			$colom1 = $_REQUEST['colom1'];
@@ -77,11 +77,6 @@
 
 
 
-
-			// var_dump($_FILES);
-		
-
-
 			$file = $_FILES['db_file']['tmp_name'];
 
 			$fp = fopen($file, "r");
@@ -91,7 +86,7 @@
 			}else{
 
 				while($data = fgets($fp)) {
-						
+
 					$a = explode($deli, $data);
 
 					if($colom1){ $value_arr = "  '".$a[0]."'"; }
@@ -125,7 +120,7 @@
 					$query="INSERT INTO $table_name_qry ($field_name)
 												 VALUES ($value_arr);";
 					$result=mysql_query($query, $connect);
-				}				
+				}
 
 				if(!$result){
 					echo "<script>
