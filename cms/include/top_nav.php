@@ -35,9 +35,11 @@
 	}
 //-->
 </script>
+
 <div style="height:95px;">
 	<div style="float:left; width:180px; height:70px; padding:25px 0 0 10px;"><!-- 첫째 줄 -->
-		  <a href="<?=$cms_url?>cms.php"><img src="<?=$cms_url?>images/cms_main_logo_.png" alt="" onmouseover="this.src='<?=$cms_url?>images/cms_main_logo.png' " onmouseout="this.src='<?=$cms_url?>images/cms_main_logo_.png' "></a></div><!-- 로고부분 -->
+		  <a href="<?=$cms_url?>cms.php"><img src="<?=$cms_url?>images/cms_main_logo_.png" alt="" onmouseover="this.src='<?=$cms_url?>images/cms_main_logo.png' " onmouseout="this.src='<?=$cms_url?>images/cms_main_logo_.png' "></a>
+	</div><!-- 로고부분 -->
 	<div style="float:left; width:890px; text-align:right;"><!-- 둘째 줄 -->
 		<div style="font-size:11px; height:15px; padding-top:5px;">
 			<?
@@ -80,7 +82,7 @@
 				$padding = "padding:45px 170px 0 0px;";
 			}
 		?>
-		<div style="text-align:right; height:30px; <?=$padding?>">
+		<nav style="text-align:right; height:30px; <?=$padding?>">
 			<?
 				$a = $_SERVER['PHP_SELF'];                   /////// ereg ..로...폴더단위까지만 비교해서 동일 폴더내 다른 파일까지 적용 시킬 것.//또는 동일 폴더 내 파일 전체를 해당 메인페이지 안에 Div로 넣을 것.
 				$url_0 = "/cms/cms.php";																			////////////////////////////
@@ -98,6 +100,7 @@
 				if($a==$url_4) {$a4="_"; $b=4;}else{$a4="";}
 				if($a==$url_5) {$a5="_"; $b=5;}else{$a5="";}
 			?>
-			<a href="<?=$cms_url?>_menu1/work_main.php"><img src="<?=$cms_url?>images/t_menu_1<?=$a1?>.png" id="tm_img0" onmouseover="img_over(0)" onmouseout="img_out(<?=$b?>)" alt=""></a><a href="<?=$cms_url?>_menu2/local_main.php"><img src="<?=$cms_url?>images/t_menu_2<?=$a2?>.png" id="tm_img1" onmouseover="img_over(1)" onmouseout="img_out(<?=$b?>)" alt=""></a><a href="<?=$cms_url?>_menu3/capital_main.php"><img src="<?=$cms_url?>images/t_menu_3<?=$a3?>.png" id="tm_img2" onmouseover="img_over(2)" onmouseout="img_out(<?=$b?>)" alt=""></a><a href="<?=$cms_url?>_menu4/project_main.php"><img src="<?=$cms_url?>images/t_menu_4<?=$a4?>.png" id="tm_img3" onmouseover="img_over(3)" onmouseout="img_out(<?=$b?>)" alt=""></a><a href="<?=$cms_url?>_menu5/config_main.php"><img src="<?=$cms_url?>images/t_menu_5<?=$a5?>.png" id="tm_img4" onmouseover="img_over(4)" onmouseout="img_out(<?=$b?>)" alt=""></a></div>
+			<a href="<?=$cms_url?>_menu1/work_main.php"><img src="<?=$cms_url?>images/t_menu_1<?=$a1?>.png" id="tm_img0" onmouseover="img_over(0)" onmouseout="img_out(<?=$b?>)" alt=""></a><a href="<?=$cms_url?>_menu2/local_main.php"><img src="<?=$cms_url?>images/t_menu_2<?=$a2?>.png" id="tm_img1" onmouseover="img_over(1)" onmouseout="img_out(<?=$b?>)" alt=""></a><a href="<?=$cms_url?>_menu3/capital_main.php"><img src="<?=$cms_url?>images/t_menu_3<?=$a3?>.png" id="tm_img2" onmouseover="img_over(2)" onmouseout="img_out(<?=$b?>)" alt=""></a><a href="<?=$cms_url?>_menu4/project_main.php"><img src="<?=$cms_url?>images/t_menu_4<?=$a4?>.png" id="tm_img3" onmouseover="img_over(3)" onmouseout="img_out(<?=$b?>)" alt=""></a><a href="<?=$cms_url?>_menu5/config_main.php"><img src="<?=$cms_url?>images/t_menu_5<?=$a5?>.png" id="tm_img4" onmouseover="img_over(4)" onmouseout="img_out(<?=$b?>)" alt=""></a>
+		</nav>
 	</div>
 </div>
