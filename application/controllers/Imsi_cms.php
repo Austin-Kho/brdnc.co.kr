@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Cms extends CI_Controller {
+class Imsi_cms extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
