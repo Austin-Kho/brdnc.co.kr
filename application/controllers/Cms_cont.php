@@ -22,9 +22,9 @@
 		public function index()
 		{
 			parent::__construct();
-			$this->load->view('cms_/cms_header');
-			$this->load->view('cms_/cms_article');
-			$this->load->view('cms_/cms_footer');
+			$this->load->view('cms_/cms_main_header');
+			$this->load->view('cms_/cms_main_index');
+			$this->load->view('cms_/cms_main_footer');
 
 			$this->load->model('cms/cms_model', '', TRUE);
 		}
