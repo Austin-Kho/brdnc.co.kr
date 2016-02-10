@@ -28,4 +28,40 @@
 
 			$this->load->model('cms/cms_model', '', TRUE);
 		}
+		public function work()
+		{
+			parent::__construct();
+			$this->load->view('cms_/cms_header');
+			$this->load->view('cms_/cms_article');
+			$this->load->view('cms_/cms_footer');
+
+			$this->load->model('cms/cms_model', '', TRUE);
+		}
+		public function capital()
+		{
+			parent::__construct();
+			$this->load->view('cms_/cms_header');
+			$this->load->view('cms_/cms_article');
+			$this->load->view('cms_/cms_footer');
+
+			$this->load->model('cms/cms_model', '', TRUE);
+		}
+		public function porject()
+		{
+			parent::__construct();
+			$this->load->view('cms_/cms_header');
+			$this->load->view('cms_/cms_article');
+			$this->load->view('cms_/cms_footer');
+
+			$this->load->model('cms/cms_model', '', TRUE);
+		}
+		public function config()
+		{
+			parent::__construct();
+			$this->load->view('cms_/cms_header');
+			$this->load->view('cms_/cms_article');
+			$this->load->view('cms_/cms_footer');
+
+			$this->load->model('cms/cms_model', '', TRUE);
+		}
 	}
