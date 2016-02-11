@@ -5,8 +5,9 @@
 
 	#wrap { width:1140px; min-height:100%; margin:0 auto; background-color:white;}
 	/* 가운데 정렬을 위해 가로값 주고 마진 위아래는 0 좌,우는 자동 min-height:100%  */
-	/*#header { width:1080px; height:95px; margin:0 auto; border-bottom:5px solid #002779; }*/
+
 	header { width:1080px; height:95px; margin:0 auto; border-bottom:5px solid #002779; }
+
 	article#content  { overflow:auto; width:1080px; margin:0 auto; padding:20px 0 74px 0;}
 
 	footer#footwrap { margin-top:-60px; height:68px; padding-top:6px; width:1140px; margin:-60px auto; clear:both; background-color: white;}

@@ -12,8 +12,8 @@
 		<title>[주]바램디앤씨 관리시스템</title>
 
 		<!-- Bootstrap core CSS -->
-    		<link type="text/css" href="/_static/lib/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet">
-		<link type="text/css" href="_static/css/cms.css" rel="stylesheet">
+    <link type="text/css" href="/_static/lib/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet">
+		<link type="text/css" href="/_static/css/cms.css" rel="stylesheet">
 		<!--[if lt IE 9]>
   		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
@@ -22,7 +22,7 @@
 		<script src="../common/_menu1.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
-			$("#loading").css("display","none");
+				$("#loading").css("display","none");
 			});
 		</script>
 	</head>
@@ -30,45 +30,35 @@
 		<div class="main_container">
 		<!-- <div id="loading" style="padding-top:530px;"><img src="../images/loading.gif"><br>loading...</div> -->
 			<header id="top">
-				<script type="text/javascript">
-				<!--
-					function message_win(ref) {
-						// ref = ref + "?id=" + <?=$_SESSION['p_id']?>;
-						var window_left = (screen.width-640)/2;
-						var window_top = (screen.height-480)/2;
-						window.open(ref,"message",'width=420,height=460,scrollbars=no,status=no,top=' + window_top + ',left=' + window_left + '');
-				 	}
-				</script>
-
 				<div id="header_wrap">
 					<div id="main_logo"><!-- 첫째 줄 -->
 						<a href="/cms_cont"><img src="/_static/img/cms_main_logo_.png" alt="" onmouseover="this.src='/_static/img/cms_main_logo.png' " onmouseout="this.src='/_static/img/cms_main_logo_.png' "></a>
 					</div><!-- main_logo -->
 
-					<nav class="top_nav_wrap"><!-- 둘째 줄 -->
+					<nav id="top_nav_wrap"><!-- 둘째 줄 -->
 						<ul>
-							<li><a class="menuLink" href="javascript:" onclick="alert('준비 중입니다!');"><b>매뉴얼</b></a></li>
-							<li>|</li>
-							<li><a class="menuLink" href="javascript:" onclick="alert('준비 중입니다!');"><b>My Page</b></a></li>
-							<li>|</li>
-							<li><a class="menuLink" href="javascript:" onclick="alert('준비 중입니다!');"><b>공지사항</b></a></li>
-							<li>|</li>
-							<li><a class="menuLink" href="javascript:" onclick="alert('준비 중입니다!');"><b>회원정보수정</b></a></li>
-							<li>|</li>
-							<li><a class="menuLink" href="javascript:" onclick="alert('준비 중입니다!');"><b>새 쪽지 : 0개</b></a></li>
+							<li><a class="menuLink" href="/cms/member/login_form.php">고창균 님</a></li>
 							<li>|</li>
 							<li><a class="menuLink" href="javascript:" onclick="alert('준비 중입니다!');"><b>로그아웃</b></a></li>
 							<li>|</li>
-							<li><a class="menuLink" href="/cms/member/login_form.php">고창균 님</a></li>
+							<li><a class="menuLink" href="javascript:" onclick="alert('준비 중입니다!');"><b>새 쪽지 : 0개</b></a></li>
+							<li>|</li>
+							<li><a class="menuLink" href="javascript:" onclick="alert('준비 중입니다!');"><b>회원정보수정</b></a></li>
+							<li>|</li>
+							<li><a class="menuLink" href="javascript:" onclick="alert('준비 중입니다!');"><b>공지사항</b></a></li>
+							<li>|</li>
+							<li><a class="menuLink" href="javascript:" onclick="alert('준비 중입니다!');"><b>My Page</b></a></li>
+							<li>|</li>
+							<li><a class="menuLink" href="javascript:" onclick="alert('준비 중입니다!');"><b>매뉴얼</b></a></li>
 						</ul>
 					</nav>
-					<nav class="main_nav_wrap"><!-- 세째 줄 -->
+					<nav id="main_nav_wrap"><!-- 세째 줄 -->
 						<ul>
-							<li><a class="main_nav" href="/cms/_menu1/work_main.php">영업관리</a></li>
-							<li><a class="main_nav" href="/cms/_menu2/local_main.php">현장관리</a></li>
-							<li><a class="main_nav" href="/cms/_menu3/capital_main.php">자금회계</a></li>
-							<li><a class="main_nav" href="/cms/_menu4/project_main.php">프로젝트</a></li>
-							<li><a class="main_nav" href="/cms/_menu5/config_main.php">환경설정</a></li>
+							<li><a class="main_nav" href="/cms_cont/work" onmouseover="nav_over(this, 0)" onmouseout="nav_out(this, 0)">영업관리</a></li>
+							<li><a class="main_nav" href="/cms_cont/local" onmouseover="nav_over(this, 1)" onmouseout="nav_out(this, 1)">현장관리</a></li>
+							<li><a class="main_nav" href="/cms_cont/capital" onmouseover="nav_over(this, 2)" onmouseout="nav_out(this, 2)">자금회계</a></li>
+							<li><a class="main_nav" href="/cms_cont/project" onmouseover="nav_over(this, 3)" onmouseout="nav_out(this, 3)">프로젝트</a></li>
+							<li><a class="main_nav" href="/cms_cont/config" onmouseover="nav_over(this, 4)" onmouseout="nav_out(this, 4)">환경설정</a></li>
 						</ul>
 					</nav>
 				</div><!-- header_wrap -->

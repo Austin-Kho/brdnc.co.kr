@@ -49,7 +49,7 @@
 							메인 구성 준비 중..2
 						</div>
 					</section> <!-- section 2 -->
-					<section  id="index_section_3"> <!-- section 3 -->
+					<section id="index_section_3"> <!-- section 3 -->
 						<div id="index_3rd_box">
 							메인 구성 준비 중..3
 						</div>

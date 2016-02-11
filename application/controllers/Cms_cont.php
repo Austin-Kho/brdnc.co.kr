@@ -22,45 +22,59 @@
 		public function index()
 		{
 			parent::__construct();
+
+
+			$this->load->model('cms/cms_model', '', TRUE);
+
+			$this->load->library('session');
+			$s_id = $this->session->id;
+
 			$this->load->view('cms_/cms_main_header');
 			$this->load->view('cms_/cms_main_index');
 			$this->load->view('cms_/cms_main_footer');
-
-			$this->load->model('cms/cms_model', '', TRUE);
 		}
 		public function work()
 		{
 			parent::__construct();
-			$this->load->view('cms_/cms_header');
-			$this->load->view('cms_/cms_article');
-			$this->load->view('cms_/cms_footer');
+			$this->load->view('cms_/cms_main_header');
+			$this->load->view('cms_/cms_main_content');
+			$this->load->view('cms_/cms_main_footer');
+
+			$this->load->model('cms/cms_model', '', TRUE);
+		}
+		public function local()
+		{
+			parent::__construct();
+			$this->load->view('cms_/cms_main_header');
+			$this->load->view('cms_/cms_main_content');
+			$this->load->view('cms_/cms_main_footer');
 
 			$this->load->model('cms/cms_model', '', TRUE);
 		}
 		public function capital()
 		{
 			parent::__construct();
-			$this->load->view('cms_/cms_header');
-			$this->load->view('cms_/cms_article');
-			$this->load->view('cms_/cms_footer');
+			$this->load->view('cms_/cms_main_header');
+			$this->load->view('cms_/cms_main_content');
+			$this->load->view('cms_/cms_main_footer');
 
 			$this->load->model('cms/cms_model', '', TRUE);
 		}
-		public function porject()
+		public function project()
 		{
 			parent::__construct();
-			$this->load->view('cms_/cms_header');
-			$this->load->view('cms_/cms_article');
-			$this->load->view('cms_/cms_footer');
+			$this->load->view('cms_/cms_main_header');
+			$this->load->view('cms_/cms_main_content');
+			$this->load->view('cms_/cms_main_footer');
 
 			$this->load->model('cms/cms_model', '', TRUE);
 		}
 		public function config()
 		{
 			parent::__construct();
-			$this->load->view('cms_/cms_header');
-			$this->load->view('cms_/cms_article');
-			$this->load->view('cms_/cms_footer');
+			$this->load->view('cms_/cms_main_header');
+			$this->load->view('cms_/cms_main_content');
+			$this->load->view('cms_/cms_main_footer');
 
 			$this->load->model('cms/cms_model', '', TRUE);
 		}
