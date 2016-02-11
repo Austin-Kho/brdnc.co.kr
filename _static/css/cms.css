@@ -1,19 +1,57 @@
 /************************ 레이 아웃 div CSS ************************/
 	html { height:100%; width:100%; margin:0; padding:0; overflow-y:scroll;}
-	body { height:100%; width:100%; margin:0; padding:0; border:0 outset gray; background-image : url('http://brdnc.cafe24.com/cms/images/bg_dot.jpg'); /*background-color:#3e3e3e;*/}
-	/* border : (프레임의 두께) (dotted, dashed, solid, double, groove, ridge, indet, outset 중에서 선택하세요) (프레임색갈)*/	/* 높이값 100% 마진, 패딩 0 값이 0일 경우 단위 안붙여도 괜찮음 */
+	body { height:100%; width:100%; margin:0; padding:0; border:0 outset gray; background-image : url('http://brdnc.cafe24.com/cms/images/bg_dot.jpg'); }
+	/* border : (프레임의 두께) (dotted, dashed, solid, double, groove, ridge, indet, outset 중에서 선택하세요) (프레임색깔)*/
+	/* 높이값 100% 마진, 패딩 값이 0일 경우 단위 안붙여도 괜찮음 */
 
-	#wrap { width:1140px; min-height:100%; margin:0 auto; background-color:white;}
+	.main_container { width:1140px; min-height:100%; margin:0 auto; background-color:white;}
+	#header_wrap {height: 93px;}
+
 	/* 가운데 정렬을 위해 가로값 주고 마진 위아래는 0 좌,우는 자동 min-height:100%  */
 	/*#header { width:1080px; height:95px; margin:0 auto; border-bottom:5px solid #002779; }*/
-	header { width:1080px; height:95px; margin:0 auto; border-bottom:5px solid #002779; }
-	article#content  { overflow:auto; width:1080px; margin:0 auto; padding:20px 0 74px 0;}
+	header#top { width:1080px; height:95px; margin:0 auto; border-bottom:5px solid #002779; }
+	#main_logo { float:left; width:180px; height:70px; padding:25px 0 0 10px; }
 
-	footer#footwrap { margin-top:-58px; height:58px; padding-top:16px; width:1140px; margin:-74px auto; clear:both;}
+
+	.top_nav_wrap { width: 1080px; }
+	/*#top_menu { text-align: right; }*/
+	.top_nav_wrap ul li { list-style: none; float: right; line-height: 16px; vertical-align: middle; text-align: center; margin:0 2px 0 2px; }
+    .top_nav_wrap .menuLink { text-decoration:none; display: block; width: 70px; font-size: 11px; font-family: "Trebuchet MS", 맑은 고딕, Arial; }
+    .top_nav_wrap .menuLink:hover { color: #077ABE; background-color: #efefef; }
+
+
+	.main_nav_wrap { margin-top: 43px; width: 860px; float: right; }
+	.main_nav_wrap ul { margin-left: 20px; }
+	.main_nav_wrap ul li { list-style: none; float: left; line-height: 30px; vertical-align: middle; text-align: center; margin-left: 1px;}
+
+
+    .main_nav_wrap .main_nav { text-decoration:none; display: block; width: 120px; font-size: 11pt; font-family: "Trebuchet MS", 맑은 고딕, Arial;  color: #002779; font-weight: bold; }
+    .main_nav_wrap .main_nav:hover { color: white; background-color: #124AA0; }
+
+
+	div#content_wrap  { overflow:auto; width:1080px; margin:0 auto; padding:20px 0 74px 0;}
+	#index_section_1 { float:left; width:736px; height:485px; padding-right:10px;}
+	.main_banner { float: left;  width: 242px;} /*메인 배너 이미지 디브*/
+	th#index_noti { width:706px; height:30px; border:1px solid #CBCDD9; padding:5px 0 0 10px;  color:#000000; background:url('/_static/img/headcell_bg.jpg') }
+	.index_noti { width:630px; height:30px; padding-top:3px; border-width:0 0 1px 0; border-style:solid; border-color:#EAEBF2; }
+	.index_noti_sub { width: 630px;}
+	.tb_cap_more { padding-right: 16px; text-align: right; font-size: 8pt; height: 26px;}
+
+
+	#index_section_2 { float:left; width:344px; height:485px;}
+	#index_1st_box { height:218px; border:2px solid #EE8509; }
+	#index_2nd_box { height:236px; border:1px solid #CDCDCD; margin-top:10px; }
+
+	#index_section_3 { clear:left; height:280px; border-width:1px 0 0 0; border-style:solid; border-color:#b4b8c5;}
+	#index_3rd_box { height:200px; border:1px solid #CDCDCD; margin-top:20px; }
+
+
+	footer#footwrap { margin-top:-58px; height:58px; padding-top:16px; width:1140px; margin:-74px auto; clear:both; background-color: red;}
 	/* 푸터 전체 감싸기. 가로값은 100%. 푸터의 높이값 +패딩-top값 만큼 margin-top에 -높이값, 좌,우는 auto, 아래 마진은 0 */
 	#footer	  { width:1080px; height:45px; margin:0 auto; border-top:3px solid #626262; font-size:11px; color:#7A7A7A; text-align:center; padding-top:9px; line-height:160%; background-color:#EEEEEE;}
 	/* 푸터 내용이 들어갈 div. 가로값은 전체 가로값과 동일하게 해주고 가운데 정렬을 위해 margin:0 auto; 고정시킬 div를 위해 부모 div에 position:relative 해줌 */
 	#foot_div { width:200px; height:150px; position:absolute; top:-150px; left:0; background-color:#ccc; z-index:-1}
+
 
 	#navi     { width:200px; height:200px; float:left; background-color:#333; }
 	#2nd_content  { width:900px; float:left; } /* 왼쪽 네비와 병행하는 본문 */

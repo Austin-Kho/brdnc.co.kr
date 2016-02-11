@@ -34,6 +34,8 @@
 					<? }else{?>
 					<div style="height:700px;">
 						<div style="float:left; width:730px; height:485px; padding-right:10px;">
+
+
 							<div style="height:230px;"><!-- 메인 배너 div -->
 								<div style="float:left; width:242px;"><a href="http://송도양우내안애.kr/" target="_blank"><img src="images/img/3.jpg" width="235" height="220" title="양우내안애 에르바체" alt="" /></a></div>
 								<div style="float:left; width:242px;"><a href="http://송도양우내안애.kr/" target="_blank"><img src="images/img/2.jpg" width="235" height="220" title="양우내안애 에르바체" alt="" /></a></div>
