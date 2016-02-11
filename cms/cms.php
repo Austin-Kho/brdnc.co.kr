@@ -83,7 +83,6 @@
 						</div>
 					</div>
 					<? } ?>
-					</div>
 			</article>
-
-			<? include 'include/footer.php'; ?>
+		</div><!-- id : wrap -->
+		<? include 'include/footer.php'; ?>

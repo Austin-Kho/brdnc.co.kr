@@ -1,6 +1,44 @@
 /**
- * 
+ *
  */
+// 쪽지창 열기
+function message_win(ref) {
+  // ref = ref + "?id=" + ;
+  var window_left = (screen.width-640)/2;
+  var window_top = (screen.height-480)/2;
+  window.open(ref,"message",'width=420,height=460,scrollbars=no,status=no,top=' + window_top + ',left=' + window_left + '');
+}
+
+// 이미지 메뉴 마우스 오버 시
+function img_over(n){
+  img = new Array();
+  img[0]=tm_img0;
+  img[1]=tm_img1;
+  img[2]=tm_img2;
+  img[3]=tm_img3;
+  img[4]=tm_img4;
+
+  for(i=0; i<=4; i++){
+
+    if(n==i){
+      img[n].src="http://brdnc.cafe24.com/cms/images/t_menu_"+(n+1)+"_.png";
+	  } else {
+      img[i].src="http://brdnc.cafe24.com/cms/images/t_menu_"+(i+1)+".png";
+    }
+  }
+}
+
+// 이미지 메뉴 마우스 아웃 시
+function img_out(page_no){
+  for(i=0; i<=4; i++){
+    if((i+1)==page_no){
+      img[i].src="http://brdnc.cafe24.com/cms/images/t_menu_"+(i+1)+"_.png";
+    } else {
+      img[i].src="http://brdnc.cafe24.com/cms/images/t_menu_"+(i+1)+".png";
+    }
+  }
+}
+
 //팝업
 function popUp(url,name){
 	var window_left = (screen.width-640)/2;

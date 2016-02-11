@@ -90,5 +90,5 @@
 				</div>
 				<? } ?>
 			</article>
-
+			</div><!-- id : wrap -->
 			<? include '../include/footer.php'; ?>

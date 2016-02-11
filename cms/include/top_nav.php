@@ -1,41 +1,3 @@
-<script type="text/javascript">
-<!--
-	function message_win(ref) {
-    // ref = ref + "?id=" + <?=$_SESSION['p_id']?>;
-	  var window_left = (screen.width-640)/2;
-	  var window_top = (screen.height-480)/2;
-	  window.open(ref,"message",'width=420,height=460,scrollbars=no,status=no,top=' + window_top + ',left=' + window_left + '');
-  }
-
-	function img_over(n){
-		 img = new Array();
-		 img[0]=tm_img0;
-		 img[1]=tm_img1;
-		 img[2]=tm_img2;
-		 img[3]=tm_img3;
-		 img[4]=tm_img4;
-
-		 for(i=0; i<=4; i++){
-
-				if(n==i){
-					 img[n].src="<?=$cms_url?>images/t_menu_"+(n+1)+"_.png";
-				} else {
-					 img[i].src="<?=$cms_url?>images/t_menu_"+(i+1)+".png";
-				}
-		 }
-	}
-	function img_out(page_no){
-		for(i=0; i<=4; i++){
-			if((i+1)==page_no){
-				img[i].src="<?=$cms_url?>images/t_menu_"+(i+1)+"_.png";
-			} else {
-				img[i].src="<?=$cms_url?>images/t_menu_"+(i+1)+".png";
-			}
-		}
-	}
-//-->
-</script>
-
 <div style="height:95px;">
 	<div style="float:left; width:180px; height:70px; padding:25px 0 0 10px;"><!-- 첫째 줄 -->
 		  <a href="<?=$cms_url?>cms.php"><img src="<?=$cms_url?>images/cms_main_logo_.png" alt="" onmouseover="this.src='<?=$cms_url?>images/cms_main_logo.png' " onmouseout="this.src='<?=$cms_url?>images/cms_main_logo_.png' "></a>
@@ -52,20 +14,20 @@
 			 <span style="font-size: 11px; color:#6699ff;"><?=$_SESSION['p_name']?></span> <span style="font-size: 11px; color:#4b4b4b;">님</span>&nbsp;|&nbsp;
 			 <a href="<?=$cms_url?>member/logout_process.php" style="font-size:11px;"><b>로그아웃</b></a>&nbsp;|&nbsp;
 			 <?
-			   // 아직 확인하지 않은 쪽지 수 파악
-			   $t_qry4="select count(mnum) as cnt_1 from cms_message_info where receiveid_fk='$_SESSION[p_id]' And receive_del='N' And receive_chk='N'";
-			   $t_res4=mysql_query($t_qry4, $connect);
-			   $t_rows4=mysql_fetch_array($t_res4);
+			 	// 아직 확인하지 않은 쪽지 수 파악
+		   	$t_qry4="select count(mnum) as cnt_1 from cms_message_info where receiveid_fk='$_SESSION[p_id]' And receive_del='N' And receive_chk='N'";
+			  $t_res4=mysql_query($t_qry4, $connect);
+			  $t_rows4=mysql_fetch_array($t_res4);
 
-			   mysql_free_result($t_res4);
+			  mysql_free_result($t_res4);
 
-			   if($t_rows4[cnt_1]==0){
-				    $bt_msg="images/bt_msg_0.gif";
-				    $color_msg="#7A7A7A";
-			   } else {
-				    $bt_msg="images/bt_msg.gif";
-				    $color_msg="#0088ff";
-			   }
+			  if($t_rows4[cnt_1]==0){
+				  $bt_msg="images/bt_msg_0.gif";
+				  $color_msg="#7A7A7A";
+			  } else {
+				  $bt_msg="images/bt_msg.gif";
+				  $color_msg="#0088ff";
+			  }
 			?>
 			<a href="javascript:message_win('<?=$cms_url?>member/message_1.php');"><img src="<?=$cms_url?><?=$bt_msg?>" width="13" alt=""></a>
 			<a href="javascript:message_win('<?=$cms_url?>member/message_1.php');"><b style="font-size:11px;"> 새 쪽지</b></a><span   style="font-size:11px;"> : </span>

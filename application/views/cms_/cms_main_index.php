@@ -13,7 +13,7 @@
 								<caption class="tb_cap_more"><b>+</b> 더보기</caption>
 								<thead>
 									<tr>
-										<th id="index_noti" colspan="2">공지사항</th>
+										<th id="index_noti" colspan="2">공 지 사 항</th>
 									</tr>
 								</thead>
 								<tbody>
