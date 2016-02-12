@@ -61,10 +61,10 @@
 					</div>
 				</div>
 			<div style="clear:left;">
-				<b> 영문입력의 경우 대소문자를 구분하여 입력해 주십시오. </b>
+				<b> 영문입력의 경우 대소문자를 구분하여 입력해 주십시오.</b>
 			</div>
 			<div style="height:50px;">
-				<input type="checkbox" name="id_rem" value="Y" <? if($_COOKIE[id_rem]) echo "checked"; ?>> <font color="#4b4b4b">ID 저장</font>
+				<input type="checkbox" name="id_re"  <? if($_COOKIE[id_rem]) echo "checked"; ?>> <font color="#4b4b4b">ID 저장</font>
 			</div>
 			<div style="border-bottom:1px solid #707070; margin-right:50px; padding-bottom:5px;">
 				<font size="2" color="#000066"><b>CMS 공지사항</b></font>
