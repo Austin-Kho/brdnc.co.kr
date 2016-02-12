@@ -12,7 +12,7 @@
 		<title>[주]바램디앤씨 관리시스템</title>
 
 		<!-- Bootstrap core CSS -->
-    		<link type="text/css" href="/_static/lib/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet">
+    <link type="text/css" href="/_static/lib/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet">
 		<link type="text/css" href="/_static/css/cms.css" rel="stylesheet">
 		<!--[if lt IE 9]>
   		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

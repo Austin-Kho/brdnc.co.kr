@@ -21,21 +21,15 @@
 
 		public function __construct(){
 			parent::__construct();
-			// Your own constructor code
+			$this->load->model('cms/cms_model', '', TRUE);
+			$this->load->library('session');
 		}
 
 		public function index()
 		{
-			$this->load->model('cms/cms_model', '', TRUE);
-
-			$this->load->library('session');
 			$s_id = $this->session->id;
-
 			$this->load->view('cms_/cms_main_header');
 			$this->load->view('cms_/cms_main_index');
 			$this->load->view('cms_/cms_main_footer');
-		}
-		public function url_data(){
-			echo $this->uri->segment(2);
 		}
 	}
