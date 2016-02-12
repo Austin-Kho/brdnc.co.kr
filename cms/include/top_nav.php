@@ -47,13 +47,13 @@
 		<nav style="text-align:right; height:30px; <?=$padding?>">
 			<?
 				$a = $_SERVER['PHP_SELF'];                   /////// ereg ..로...폴더단위까지만 비교해서 동일 폴더내 다른 파일까지 적용 시킬 것.//또는 동일 폴더 내 파일 전체를 해당 메인페이지 안에 Div로 넣을 것.
-				$url_0 = "/cms/cms.php";																			////////////////////////////
-				$url_1 = "/cms/_menu1/work_main.php";														/////////////
-				$url_2 = "/cms/_menu2/local_main.php";														//////////////
-				// $url_2_2 = "/cms/_stock/stock_main2.php";														//////////////
-				$url_3 = "/cms/_menu3/capital_main.php";											///////////////////////
-				$url_4 = "/cms/_menu4/project_main.php";													///////////////////////////
-				$url_5 = "/cms/_menu5/config_main.php";													//////////////////////////////////////////////////
+				$url_0 = "/cms/cms.php";							/////////////////////////////
+				$url_1 = "/cms/_menu1/work_main.php";			/////////////////////////////
+				$url_2 = "/cms/_menu2/local_main.php";			/////////////////////////////
+				// $url_2_2 = "/cms/_stock/stock_main2.php";		/////////////////////////////
+				$url_3 = "/cms/_menu3/capital_main.php";		/////////////////////////////
+				$url_4 = "/cms/_menu4/project_main.php";		/////////////////////////////
+				$url_5 = "/cms/_menu5/config_main.php";			/////////////////////////////
 
 				if($a==$url_0) {$a0="_"; $b=0;}else{$a0="";}
 				if($a==$url_1) {$a1="_"; $b=1;}else{$a1="";}
