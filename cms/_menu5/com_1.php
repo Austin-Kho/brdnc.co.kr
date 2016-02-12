@@ -217,12 +217,12 @@
 					<tr>
 						<td class="form1" bgcolor="#F8F8F8" height="25">세무서[1] <font color="red">*</font></td>
 						<td class="form2">
-							<input type="text" name="tax_off1_code" size="10" class="inputstyle2" readonly onclick="open_Win('<?=$cms_url?>_config/taxoff_search.php?n=1','taxoff')" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"><a href="javascript:open_Win('<?=$cms_url?>_config/taxoff_search.php?n=1','taxoff')"><img src="../images/form_serch.jpg" height="20" border="0" alt="" /></a>
+							<input type="text" name="tax_off1_code" size="10" class="inputstyle2" readonly onclick="open_Win('<?=$cms_url?>_menu5/taxoff_search.php?n=1','taxoff')" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"><a href="javascript:open_Win('<?=$cms_url?>_menu5/taxoff_search.php?n=1','taxoff')"><img src="../images/form_serch.jpg" height="20" border="0" alt="" /></a>
 							<input type="text" name="tax_off1_name" size="14" class="inputstyle2" readonly onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"> <a href="javascript:" onclick="document.form1.tax_off1_code.value=''; document.form1.tax_off1_name.value=''; ">삭제</a>
 						</td>
 						<td class="form1" bgcolor="#F8F8F8">세무서[2]</td>
 						<td class="form2">
-							<input type="text" name="tax_off2_code" size="10" class="inputstyle2" readonly onclick="open_Win('<?=$cms_url?>_config/taxoff_search.php?n=2','taxoff')" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"><a href="javascript:open_Win('<?=$cms_url?>_config/taxoff_search.php?n=2','taxoff')"><img src="../images/form_serch.jpg" height="20" border="0" alt="" /></a>
+							<input type="text" name="tax_off2_code" size="10" class="inputstyle2" readonly onclick="open_Win('<?=$cms_url?>_menu5/taxoff_search.php?n=2','taxoff')" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"><a href="javascript:open_Win('<?=$cms_url?>_menu5/taxoff_search.php?n=2','taxoff')"><img src="../images/form_serch.jpg" height="20" border="0" alt="" /></a>
 							<input type="text" name="tax_off2_name" size="14" class="inputstyle2" readonly onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"> <a href="javascript:" onclick="document.form1.tax_off2_code.value=''; document.form1.tax_off2_name.value=''; ">삭제</a>
 						</td>
 					</tr>
@@ -484,12 +484,12 @@
 					<tr>
 						<td class="form1" bgcolor="#F8F8F8" height="25">세무서[1] <font color="red">*</font></td>
 						<td class="form2">
-							<input type="text" name="tax_off1_code" value="<?=$rows[tax_off1_code]?>" size="10" class="inputstyle2" readonly onclick="open_Win('<?=$cms_url?>_config/taxoff_search.php?n=1','taxoff')" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"><a href="javascript:open_Win('<?=$cms_url?>_config/taxoff_search.php?n=1','taxoff')"><img src="../images/form_serch.jpg" height="20" border="0" alt="" /></a>
+							<input type="text" name="tax_off1_code" value="<?=$rows[tax_off1_code]?>" size="10" class="inputstyle2" readonly onclick="open_Win('<?=$cms_url?>_menu5/taxoff_search.php?n=1','taxoff')" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"><a href="javascript:open_Win('<?=$cms_url?>_menu5/taxoff_search.php?n=1','taxoff')"><img src="../images/form_serch.jpg" height="20" border="0" alt="" /></a>
 							<input type="text" name="tax_off1_name" value="<?=$rows[tax_off1_name]?>" size="14" class="inputstyle2" readonly onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"> <a href="javascript:" onclick="document.form1.tax_off1_code.value=''; document.form1.tax_off1_name.value=''; ">삭제</a>
 						</td>
 						<td class="form1" bgcolor="#F8F8F8">세무서[2]</td>
 						<td class="form2">
-							<input type="text" name="tax_off2_code" value="<?if($rows[tax_off2_code]<>0) echo $rows[tax_off2_code];?>" size="10" class="inputstyle2" readonly onclick="open_Win('<?=$cms_url?>_config/taxoff_search.php?n=2','taxoff')" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"><a href="javascript:open_Win('<?=$cms_url?>_config/taxoff_search.php?n=2','taxoff')"><img src="../images/form_serch.jpg" height="20" border="0" alt="" /></a>
+							<input type="text" name="tax_off2_code" value="<?if($rows[tax_off2_code]<>0) echo $rows[tax_off2_code];?>" size="10" class="inputstyle2" readonly onclick="open_Win('<?=$cms_url?>_menu5/taxoff_search.php?n=2','taxoff')" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"><a href="javascript:open_Win('<?=$cms_url?>_menu5/taxoff_search.php?n=2','taxoff')"><img src="../images/form_serch.jpg" height="20" border="0" alt="" /></a>
 							<input type="text" name="tax_off2_name" value="<?=$rows[tax_off2_name]?>" size="14" class="inputstyle2" readonly onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"> <a href="javascript:" onclick="document.form1.tax_off2_code.value=''; document.form1.tax_off2_name.value=''; ">삭제</a>
 						</td>
 					</tr>

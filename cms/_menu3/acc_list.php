@@ -38,11 +38,11 @@
 	//-->
 	</script>
 </head>
-<body style="background-color:white;">
+<body>
 
 
 
-<div style="height:100%; border-width:1px 0 0 0; border-style: solid; border-color:#11ca1f;">
+<div style="height:100%; border-width:1px 0 0 0; border-style: solid; border-color:#11ca1f; background-color: white;">
 	<div style="height:100%; border-width:1px 0 0 0; border-style: solid; border-color:#C5FAC9; padding:6px 0 0 0;">
 		<div style="height:96%; margin:0 auto; width:96%; border-width:2px 2px 2px 2px; border-style: solid; border-color:#96ABE5;">
 			<div style="height:50px; border-width:0 0 2px 0; border-style: solid; border-color:#96ABE5; background-color:#D9EAF8; text-align:center; padding-top:30px; margin-bottom:12px;">
@@ -124,7 +124,7 @@
 						$bunho=$total_bnum-($i+$cline)+1;
 						if($rows2[is_com]=='1'){$sort = "본사";}
 						if($rows2[is_com]=='0'){
-							$rlt = mysql_query("SELECT pj_name FROM cms_project_info WHERE seq='$rows2[pj_seq]' ", $connect);							
+							$rlt = mysql_query("SELECT pj_name FROM cms_project_info WHERE seq='$rows2[pj_seq]' ", $connect);
 							$row = mysql_fetch_array($rlt);
 							$sort = rg_cut_string($row[pj_name],9,"");
 						}

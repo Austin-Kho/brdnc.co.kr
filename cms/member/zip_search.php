@@ -59,11 +59,11 @@
 		//-->
 	</script>
 </head>
-<body style="background-color:white;">
+<body>
 <div id="loading" style="position:absolute; top:0px; right:0px; left:0px; bottom:0px; background:#000; z-index:100000; opacity: 0.7; text-align:center; padding-top:130px;">
 	<img src="../images/loading.gif"><br>loading...
 </div>
-<div style="border-width:1px 0 0 0; border-style: solid; border-color:#11ca1f;">
+<div style="border-width:1px 0 0 0; border-style: solid; border-color:#11ca1f; background-color: white;">
 	<div style="border-width:1px 0 0 0; border-style: solid; border-color:#C5FAC9; padding:6px 0 6px 0;">
 		<div style="margin:0 auto; width:96%; border-width:2px 2px 2px 2px; border-style: solid; border-color:#96ABE5; padding-bottom:8px; position:relative;">
 			<div style="height:38px; border-width:0 0 2px 0; border-style: solid; border-color:#96ABE5; background-color:#D9EAF8; text-align:center; padding-top:24px;">
