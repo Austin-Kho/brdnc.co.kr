@@ -5,7 +5,7 @@
 	/* 높이값 100% 마진, 패딩 값이 0일 경우 단위 안붙여도 괜찮음 */
 
 	/* main_container class css 지정 */
-	.main_container {width:1140px; min-height:94.5%; margin:0 auto; background-color:white; border-top:1px solid #57D1FF; }
+	.main_container {width:1140px; min-height:94.5%; margin:0 auto; background-color:white; border-top:1px solid #89B3F1; }
 
 	/*===== loading 화면 css 지정 =====*/
 	#loading {position:absolute; top:0px; right:0px; left:0px; bottom:0px; background:#000; z-index:100000; opacity: 0.7; text-align:center;}
