@@ -36,8 +36,8 @@
 
 </head>
 
-<body style="background-color:white;" OnUnload="opener.location.reload();">
-<div style="height:100%; border-width:1px 0 0 0; border-style: solid; border-color:#11ca1f;">
+<body OnUnload="opener.location.reload();">
+<div style="height:100%; border-width:1px 0 0 0; border-style: solid; border-color:#11ca1f; background-color: white;">
 	<div style="height:100%; border-width:1px 0 0 0; border-style: solid; border-color:#C5FAC9; padding:6px 0 0 0;">
 		<div style="height:96%; margin:0 auto; width:96%; border-width:2px 2px 2px 2px; border-style: solid; border-color:#96ABE5;">
 			<div style="height:50px; border-width:0 0 2px 0; border-style: solid; border-color:#96ABE5; background-color:#D9EAF8; text-align:center; padding-top:30px; margin-bottom:12px;">

@@ -73,8 +73,8 @@
 	//-->
 	</script>
 </head>
-<body style="background-color:white;">
-<div style="height:100%; border-width:1px 0 0 0; border-style: solid; border-color:#11ca1f;">
+<body>
+<div style="height:100%; border-width:1px 0 0 0; border-style: solid; border-color:#11ca1f; background-color: white;">
 	<div style="height:100%; border-width:1px 0 0 0; border-style: solid; border-color:#C5FAC9; padding:6px 0 0 0;">
 		<div style="height:96%; margin:0 auto; width:96%; border-width:2px 2px 2px 2px; border-style: solid; border-color:#96ABE5;">
 			<div style="height:50px; border-width:0 0 2px 0; border-style: solid; border-color:#96ABE5; background-color:#D9EAF8; text-align:center; padding-top:30px; margin-bottom:12px;">
@@ -120,8 +120,8 @@
 					$s = ($start-1)*$index_num;
 					$e = $index_num;
 
-					$query2="SELECT mnum, message, receive_chk, receive_reg, name 
-							    FROM cms_message_info, cms_member_table 
+					$query2="SELECT mnum, message, receive_chk, receive_reg, name
+							    FROM cms_message_info, cms_member_table
 							    WHERE sendid_fk='$_SESSION[p_id]' AND send_del='N' AND (receiveid_fk=user_id)
 							    ORDER BY mnum DESC LIMIT $s, $e";
 					$result2=mysql_query($query2, $connect);

@@ -59,8 +59,8 @@
 	$acc_d2 = $_REQUEST['acc_d2'];
 	$is_sp = $_REQUEST['is_sp'];
 ?>
-<body style="background-color:white;">
-<div style="height:100%; border-width:1px 0 0 0; border-style: solid; border-color:#11ca1f;">
+<body>
+<div style="border-width:1px 0 0 0; border-style: solid; border-color:#11ca1f; background-color: white;">
 	<div style="height:100%; border-width:1px 0 0 0; border-style: solid; border-color:#C5FAC9; padding:6px 0 0 0;">
 	<table border="0" cellspacing="0" cellpadding="0" style="height:96%; margin:0 auto; width:98%; border-width:2px 2px 2px 2px; border-style: solid; border-color:#96ABE5; margin-bottom:8px;">
 	<tr>

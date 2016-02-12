@@ -37,13 +37,13 @@
 				form_obj.tax_off2_name.value=b;
 			 }
 			 self.close();
-		}	
+		}
 	//-->
 	</script>
 </head>
 
-<body style="background-color:white;">
-<div style="height:100%; border-width:1px 0 0 0; border-style: solid; border-color:#11ca1f;">
+<body>
+<div style="height:100%; border-width:1px 0 0 0; border-style: solid; border-color:#11ca1f; background-color: white;">
 	<div style="height:100%; border-width:1px 0 0 0; border-style: solid; border-color:#C5FAC9; padding:6px 0 0 0;">
 		<div style="height:96%; margin:0 auto; width:96%; border-width:2px 2px 2px 2px; border-style: solid; border-color:#96ABE5;">
 			<div style="height:50px; border-width:0 0 2px 0; border-style: solid; border-color:#96ABE5; background-color:#D9EAF8; text-align:center; padding-top:30px; margin-bottom:12px;">
@@ -60,15 +60,15 @@
 				<input type="hidden" name="start" value="1">
 				<input type="hidden" name="n" value=<?=$n?>>
 				<div style="height:42px; text-align:center; padding-top:6px; ;">
-				<input type="text" name="tax_off" size="30" class="inputstyle2" style="height:18px" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');"> 
+				<input type="text" name="tax_off" size="30" class="inputstyle2" style="height:18px" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2');">
 				<input type="button" value=" 검 색 " onclick="submit();" class= "inputstyle_bt"><br>
 				세무서를 제외한  <font color="#0088ff">[관할 지역명]</font>만 입력하세요.
-					
+
 				</div>
 				<div style="clear:left; height:30px; background-color:#EAEAEA; border-width: 1px 0 1px 0; border-color:#CFCFCF; border-style: solid;">
 					<div style="float:left; padding-top:5px; text-align:center; width:30%;">관할 세무서 코드</div>
 					<div style="float:left; padding-top:5px; text-align:center; width:70%;">관할 세무서 명칭</div>
-				</div>				
+				</div>
 				<?
 					$total_bnum = $_REQUEST['total_bnum'];
 					if(!$tax_off) $where_add=''; else $where_add = " WHERE office like '%$tax_off%' ";
@@ -84,15 +84,15 @@
 				<div style="height:60px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid; text-align:center; padding-top:35px;">
 					등록 된 데이터가 없습니다.
 				</div>
-				<?	
+				<?
 					}else{
 					$page=$_GET['page'];
 					$gb=$_REQUEST['gb'];
 					$tax_off = $_REQUEST['tax_off'];
-					
+
 					$index_num = 6;                 // 한 페이지 표시할 목록 개수 22222222222222
 					$page_num = 10;					// 한 페이지에 표시할 페이지 수 33333
-					$start=$_REQUEST['start'];	
+					$start=$_REQUEST['start'];
 					if(!$start) $start = 1;              // 현재페이지 444444444
 					$s = ($start-1)*$index_num;
 					$e = $index_num;
@@ -107,11 +107,11 @@
 						$bunho=$total_bnum-($i+$cline)+1;
 					?>
 				<!-- <input type="hidden" name="total_bnum" value="<?=$search_bnum?>"> -->
-				
+
 					<div style="clear:left; height:24px;">
 						<div style="float:left; padding-top:2px; text-align:center; width:30%;"><a href="javascript:" onclick="value_put(<?=$rows2[code]?>,'<?=$rows2[office]?> 세무서',<?=$n?>);"><?=$rows2[code]?></a></div>
 						<div style="float:left; padding-top:2px; text-align:center; width:70%;"><a href="javascript:" onclick="value_put(<?=$rows2[code]?>,'<?=$rows2[office]?> 세무서',<?=$n?>);"><?=$rows2[office]?> 세무서</a></div>
-					</div>				
+					</div>
 				<?
 					}
 					mysql_free_result($result2);
@@ -134,6 +134,6 @@
 			</div>
 		</div>
 	</div>
-</div>	
+</div>
 </body>
 </html>
