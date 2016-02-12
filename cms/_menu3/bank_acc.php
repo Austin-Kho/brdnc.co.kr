@@ -69,7 +69,7 @@
 		} else {
 			return;
 		}
-	}	
+	}
 	//-->
 	</script>
 </head>
@@ -86,8 +86,8 @@
 		$alert_msg="수정";
 	}
 ?>
-<body style="background-color:white;" onclick="cal_del();">
-<div style="height:100%; border-width:1px 0 0 0; border-style: solid; border-color:#11ca1f;">
+<body onclick="cal_del();">
+<div style="height:100%; border-width:1px 0 0 0; border-style: solid; border-color:#11ca1f; background-color: white;">
 	<div style="height:100%; border-width:1px 0 0 0; border-style: solid; border-color:#C5FAC9; padding:6px 0 0 0;">
 		<div style="height:96%; margin:0 auto; width:96%; border-width:2px 2px 2px 2px; border-style: solid; border-color:#96ABE5;">
 			<div style="height:50px; border-width:0 0 2px 0; border-style: solid; border-color:#96ABE5; background-color:#D9EAF8; text-align:center; padding-top:30px; margin-bottom:12px;">
@@ -109,7 +109,7 @@
 				?>
 				<input type="hidden" name="no" value="<?=$edit_code?>">
 				<? } ?>
-				<div style="height:32px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">					
+				<div style="height:32px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
 					<div style="float:left; padding:7px 15px 0 0; text-align:right; width:100px;">
 						용도구분 <font color="#ff0000">*</font>
 					</div>
@@ -127,7 +127,7 @@
 						</select>
 					</div>
 				</div>
-				<div style="height:32px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">					
+				<div style="height:32px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid;">
 					<div style="float:left; padding:7px 15px 0 0; text-align:right; width:100px;">
 						거래은행 <font color="#ff0000">*</font>
 					</div>
