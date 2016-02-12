@@ -7,8 +7,8 @@
 	}
 	/* border : (프레임의 두께) (dotted, dashed, solid, double, groove, ridge, indet, outset 중에서 선택하세요) (프레임색깔)*/
 	/* 높이값 100% 마진, 패딩 값이 0일 경우 단위 안붙여도 괜찮음 */
-	::selection { background-color: #009766; color: white; }
-	::-moz-selection { background-color: #E13300; color: white; }
+	::selection { background-color: #FF5353; color: #FFF; }
+	::-moz-selection { background-color: #FF5353; color: #FFF; }
 
 	/* main_container class css 지정 */
 	.main_container {width:1140px; min-height:94.5%; margin:0 auto; background-color:white; border-top:1px solid #89B3F1; }
@@ -20,21 +20,34 @@
 	/*#header_wrap {height: 95px;}*/
 	header#top { width:1080px; height:95px; margin:0 auto; border-bottom:5px solid #002779; }
 	#main_logo { float:left; width:220px; height:70px; padding:25px 0 0 10px;}
-	#top_nav_wrap {float: right;}
+	#top_nav_wrap {float: right; padding-top: 5px;}
 	#top_nav_wrap ul li { list-style: none; float: left; line-height: 16px; vertical-align: middle; text-align: center; margin:0 2px 0 2px; }
   #top_nav_wrap .menuLink { text-decoration:none; display: block; width: 70px; font-size: 11px; font-family: "Trebuchet MS", 맑은 고딕, Arial; }
   #top_nav_wrap .menuLink:hover { color: #077ABE; background-color: #efefef; }
-	#main_nav_wrap { margin-top: 43px; width: 860px; float: right;}
+	#main_nav_wrap { margin-top: 38px; width: 860px; float: right;}
 	#main_nav_wrap ul { margin-left: 20px; }
 	#main_nav_wrap ul li { list-style: none; float: left; line-height: 30px; vertical-align: middle; text-align: center; margin-left: 1px;}
   #main_nav_wrap .main_nav { text-decoration:none; display: block; width: 120px; font-size: 11pt; font-family: "Trebuchet MS", 맑은 고딕, Arial;  color: #002779; font-weight: bold; }
 
 
-  #main_nav_wrap .sel_main_nav { text-decoration:none; display: block; width: 120px; font-size: 11pt; font-family: "Trebuchet MS", 맑은 고딕, Arial;  color: white; font-weight: bold; background-color: #124AA0; }
-
-
-  #main_nav_wrap .main_nav:hover { color: white; background-color: #5F98ED; }
-
+  #main_nav_wrap .sel_main_nav { text-decoration:none; display: block; width: 120px;
+  	font-size: 11pt; font-family: "Trebuchet MS", 맑은 고딕, Arial;  color: white;
+  	font-weight: bold;
+  	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2c539e+0,2c539e+100;Blue+3D+%232 */
+		background: rgb(44,83,158); /* Old browsers */
+		background: -moz-linear-gradient(top,  rgba(44,83,158,1) 0%, rgba(44,83,158,1) 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(top,  rgba(44,83,158,1) 0%,rgba(44,83,158,1) 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(to bottom,  rgba(44,83,158,1) 0%,rgba(44,83,158,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2c539e', endColorstr='#2c539e',GradientType=0 ); /* IE6-9 */
+	}
+  #main_nav_wrap .main_nav:hover { color: white;
+  	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#4f85bb+0,4f85bb+100;Blue+3D+%239 */
+		background: rgb(79,133,187); /* Old browsers */
+		background: -moz-linear-gradient(top,  rgba(79,133,187,1) 0%, rgba(79,133,187,1) 100%); /* FF3.6-15 */
+		background: -webkit-linear-gradient(top,  rgba(79,133,187,1) 0%,rgba(79,133,187,1) 100%); /* Chrome10-25,Safari5.1-6 */
+		background: linear-gradient(to bottom,  rgba(79,133,187,1) 0%,rgba(79,133,187,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4f85bb', endColorstr='#4f85bb',GradientType=0 ); /* IE6-9 */
+	}
 
 	/*===== main_contents box 부분 css 지정 =====*/
 	div#content_wrap  { overflow:auto; width:1080px; margin:0 auto; padding:20px 0 74px 0;}
@@ -79,7 +92,7 @@
 
 /* 기타 CSS */
 	img,input { border:0; vertical-align:middle;}
-	a, nav, input {outline:none; select-dummy: expression(this.hideFocus=true);}
+	a,nav,input,li,img {outline:none; select-dummy: expression(this.hideFocus=true);}
 
 
 /* 링크 텍스트 CSS */

@@ -1,6 +1,13 @@
 /**
  *
  */
+// 링크 점선 없애기
+function bluring(){
+if(event.srcElement.tagName=="A"||event.srcElement.tagName=="IMG") document.body.focus();
+}
+document.onfocusin=bluring;
+
+
 // 쪽지창 열기
 function message_win(ref) {
   // ref = ref + "?id=" + ;
