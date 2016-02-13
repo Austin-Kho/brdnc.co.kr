@@ -33,7 +33,7 @@
 			<header id="top">
 				<div id="header_wrap">
 					<div id="main_logo"><!-- 첫째 줄 -->
-						<a href="/main"><img src="/ci3/_static/img/cms_main_logo_.png" alt="" onmouseover="this.src='/ci3/_static/img/cms_main_logo.png' " onmouseout="this.src='/ci3/_static/img/cms_main_logo_.png' "></a>
+						<a href="/ci3/cms/"><img src="/ci3/_static/img/cms_main_logo_.png" alt="" onmouseover="this.src='/ci3/_static/img/cms_main_logo.png' " onmouseout="this.src='/ci3/_static/img/cms_main_logo_.png' "></a>
 					</div><!-- main_logo -->
 					<nav id="top_nav_wrap"><!-- 둘째 줄 -->
 						<ul>
