@@ -20,9 +20,9 @@
 			// 헤더 include
 			$this->load->view('cms_main_header');
 
-			// if(method_exists($this, $method)){
-			// 	$this->{"$method"}();
-			// }
+			if(method_exists($this, $method)){
+				$this->{"$method"}();
+			}
 			// 푸터 include
 			$this->load->view('cms_main_footer');
 		}
