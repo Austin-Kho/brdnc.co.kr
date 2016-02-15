@@ -7,19 +7,19 @@
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<link rel="shortcut icon" href="/ci3/_static/img/cms.ico">
+		<link rel="shortcut icon" href="/ci3/static/img/cms.ico">
 
 		<title>[주]바램디앤씨 관리시스템</title>
 
 		<!-- Bootstrap core CSS -->
-    <link type="text/css" href="/ci3/_static/lib/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet">
-		<link type="text/css" href="/ci3/_static/css/cms.css" rel="stylesheet">
+    <link type="text/css" href="/ci3/static/lib/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet">
+		<link type="text/css" href="/ci3/static/css/cms.css" rel="stylesheet">
 		<!--[if lt IE 9]>
   		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-		<script src="_static/lib/calendar/calendar.js"></script>
-		<script src="/ci3/_static/js/global.js"></script>
+		<script src="/ci3/static/lib/calendar/calendar.js"></script>
+		<script src="/ci3/static/js/global.js"></script>
 		<!-- <script src="../common/_menu1.js"></script> -->
 		<script type="text/javascript">
 			jQuery(document).ready(function(){
@@ -33,7 +33,7 @@
 			<header id="top">
 				<div id="header_wrap">
 					<div id="main_logo"><!-- 첫째 줄 -->
-						<a href="/ci3/cms/"><img src="/ci3/_static/img/cms_main_logo_.png" alt="" onmouseover="this.src='/ci3/_static/img/cms_main_logo.png' " onmouseout="this.src='/ci3/_static/img/cms_main_logo_.png' "></a>
+						<a href="/ci3/main/"><img src="/ci3/static/img/cms_main_logo_.png" alt="" onmouseover="this.src='/ci3/static/img/cms_main_logo.png' " onmouseout="this.src='/ci3/static/img/cms_main_logo_.png' "></a>
 					</div><!-- main_logo -->
 					<nav id="top_nav_wrap"><!-- 둘째 줄 -->
 						<ul>
@@ -48,11 +48,11 @@
 					</nav>
 					<nav id="main_nav_wrap"><!-- 세째 줄 -->
 						<ul>
-							<li><a class="<?if($this->uri->segment(2)!=='menu1') echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/cms/menu1">영업관리</a></li>
-							<li><a class="<?if($this->uri->segment(2)!=='menu2') echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/cms/menu2">현장관리</a></li>
-							<li><a class="<?if($this->uri->segment(2)!=='menu3') echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/cms/menu3">자금회계</a></li>
-							<li><a class="<?if($this->uri->segment(2)!=='menu4') echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/cms/menu4">프로젝트</a></li>
-							<li><a class="<?if($this->uri->segment(2)!=='menu5') echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/cms/menu5">환경설정</a></li>
+							<li><a class="<?if( !strpos($this->uri->segment(1), '1')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m1_work">영업관리</a></li>
+							<li><a class="<?if( !strpos($this->uri->segment(1), '2')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m2_local">현장관리</a></li>
+							<li><a class="<?if( !strpos($this->uri->segment(1), '3')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m3_capital">자금회계</a></li>
+							<li><a class="<?if( !strpos($this->uri->segment(1), '4')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m4_project">프로젝트</a></li>
+							<li><a class="<?if( !strpos($this->uri->segment(1), '5')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m5_config">환경설정</a></li>
 						</ul>
 					</nav>
 				</div><!-- header_wrap -->
