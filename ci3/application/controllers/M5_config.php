@@ -1,18 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Cms extends CI_Controller {
+class M5_config extends CI_Controller {
 
 	/**
 	 *
 	 */
 	public function __construct(){
 		parent::__construct();
-		//$this->load->model('cms/cms_model', '', TRUE);
+		//my code...
 	}
 
 	public function index(){
-		$this->main();
+		$this->basic();
 	}
 
 	public function _remap($method){
@@ -26,7 +26,7 @@ class Cms extends CI_Controller {
 		$this->load->view('cms_main_footer');
 	}
 
-	public function main(){
-		$this->load->view('cms_main_index');
+	public function basic(){
+		// echo 'config';
 	}
 }
