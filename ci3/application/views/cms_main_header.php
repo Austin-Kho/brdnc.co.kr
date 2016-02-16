@@ -33,11 +33,7 @@
 			<header id="top">
 				<div id="header_wrap">
 					<div id="main_logo"><!-- 첫째 줄 -->
-<<<<<<< HEAD
-						<a href="/ci3/cms/"><img src="/ci3/static/img/cms_main_logo_.png" alt="" onmouseover="this.src='/ci3/static/img/cms_main_logo.png' " onmouseout="this.src='/ci3/static/img/cms_main_logo_.png' "></a>
-=======
 						<a href="/ci3/main/"><img src="/ci3/static/img/cms_main_logo_.png" alt="" onmouseover="this.src='/ci3/static/img/cms_main_logo.png' " onmouseout="this.src='/ci3/static/img/cms_main_logo_.png' "></a>
->>>>>>> 98acc53ae316bcc0a5070ed6518ff189c2551f5c
 					</div><!-- main_logo -->
 					<nav id="top_nav_wrap"><!-- 둘째 줄 -->
 						<ul>
@@ -52,19 +48,21 @@
 					</nav>
 					<nav id="main_nav_wrap"><!-- 세째 줄 -->
 						<ul>
-<<<<<<< HEAD
-							<li><a class="<?if( !strpos($this->uri->segment(2), '1')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/cms/m1_work">영업관리</a></li>
-							<li><a class="<?if( !strpos($this->uri->segment(2), '2')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/cms/m2_local">현장관리</a></li>
-							<li><a class="<?if( !strpos($this->uri->segment(2), '3')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/cms/m3_capital">자금회계</a></li>
-							<li><a class="<?if( !strpos($this->uri->segment(2), '4')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/cms/m4_project">프로젝트</a></li>
-							<li><a class="<?if( !strpos($this->uri->segment(2), '5')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/cms/m5_config">환경설정</a></li>
-=======
-							<li><a class="<?if( !strpos($this->uri->segment(1), '1')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m1_work">영업관리</a></li>
-							<li><a class="<?if( !strpos($this->uri->segment(1), '2')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m2_local">현장관리</a></li>
-							<li><a class="<?if( !strpos($this->uri->segment(1), '3')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m3_capital">자금회계</a></li>
-							<li><a class="<?if( !strpos($this->uri->segment(1), '4')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m4_project">프로젝트</a></li>
-							<li><a class="<?if( !strpos($this->uri->segment(1), '5')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m5_config">환경설정</a></li>
->>>>>>> 98acc53ae316bcc0a5070ed6518ff189c2551f5c
+							<li>
+								<a class="<?if( !strpos($this->uri->segment(1), '1')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m1">영업관리</a>
+							</li>
+							<li>
+								<a class="<?if( !strpos($this->uri->segment(1), '2')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m2">현장관리</a>
+							</li>
+							<li>
+								<a class="<?if( !strpos($this->uri->segment(1), '3')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m3">자금회계</a>
+							</li>
+							<li>
+								<a class="<?if( !strpos($this->uri->segment(1), '4')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m4">프로젝트</a>
+							</li>
+							<li>
+								<a class="<?if( !strpos($this->uri->segment(1), '5')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m5">환경설정</a>
+							</li>
 						</ul>
 					</nav>
 				</div><!-- header_wrap -->

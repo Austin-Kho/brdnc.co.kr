@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M4_project extends CI_Controller {
+class M3 extends CI_Controller {
 
 	/**
 	 *
@@ -12,7 +12,7 @@ class M4_project extends CI_Controller {
 	}
 
 	public function index(){
-		$this->progress();
+		$this->capital();
 	}
 
 	public function _remap($method){
@@ -26,7 +26,7 @@ class M4_project extends CI_Controller {
 		$this->load->view('cms_main_footer');
 	}
 
-	public function progress(){
-		// echo 'project';
+	public function capital($m_di=''){
+		//echo 'capital';
 	}
 }

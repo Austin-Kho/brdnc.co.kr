@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M2_local extends CI_Controller {
+class M5 extends CI_Controller {
 
 	/**
 	 *
@@ -12,7 +12,7 @@ class M2_local extends CI_Controller {
 	}
 
 	public function index(){
-		$this->advance();
+		$this->config();
 	}
 
 	public function _remap($method){
@@ -26,7 +26,7 @@ class M2_local extends CI_Controller {
 		$this->load->view('cms_main_footer');
 	}
 
-	public function advance(){
-		//echo "local";
+	public function config($m_di=''){
+		// echo 'config';
 	}
 }

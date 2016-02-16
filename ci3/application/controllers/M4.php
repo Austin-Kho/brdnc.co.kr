@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M5_config extends CI_Controller {
+class M4 extends CI_Controller {
 
 	/**
 	 *
@@ -12,7 +12,7 @@ class M5_config extends CI_Controller {
 	}
 
 	public function index(){
-		$this->basic();
+		$this->project();
 	}
 
 	public function _remap($method){
@@ -26,7 +26,7 @@ class M5_config extends CI_Controller {
 		$this->load->view('cms_main_footer');
 	}
 
-	public function basic(){
-		// echo 'config';
+	public function project($m_di=''){
+		// echo 'project';
 	}
 }

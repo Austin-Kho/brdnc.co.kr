@@ -1,8 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-
-class M1_work extends CI_Controller {
+class M2 extends CI_Controller {
 
 	/**
 	 *
@@ -13,7 +12,7 @@ class M1_work extends CI_Controller {
 	}
 
 	public function index(){
-		$this->sales();
+		$this->local();
 	}
 
 	public function _remap($method){
@@ -27,7 +26,7 @@ class M1_work extends CI_Controller {
 		$this->load->view('cms_main_footer');
 	}
 
-	public function sales(){
-		//echo 'work';
+	public function local($m_di=''){
+		//echo "local";
 	}
 }
