@@ -28,12 +28,13 @@
 	 <form name="login" method="post" action="login_process.php" onsubmit="JavaScript:return(login_check());">
 	 <div style="width:600px; height:100%; margin:0px auto;"><!-- wrap div -->
 		<div style="height:150px;"></div>
+
 			<div style="width:600px; height:420px; border:2px solid #96ABE5; background-color:white;"><!-- box div -->
-			<div style="width:580px; height:60px; border-bottom:2px solid #96ABE5; background-color:#D9EAF8; padding:20px 0 0 20px;"><!-- 로고 제목 div -->
-				<img src="../images/cms_box_logo.png" alt="">
-			</div>
+				<div style="width:580px; height:60px; border-bottom:2px solid #96ABE5; background-color:#D9EAF8; padding:20px 0 0 20px;"><!-- 로고 제목 div -->
+					<img src="../images/cms_box_logo.png" alt="">
+				</div>
 			<div style="height:80px; padding:30px 0 0 50px;">
-				<div style="width:185px; float:left; background-color:white"><!-- 로그인 폼 -->
+				<div style="width:185px; float:left;"><!-- 로그인 폼 -->
 					<div style="height:30px;">
 						<input type="text" name="user_id" value="<? if($_COOKIE[id_rem]) echo $_COOKIE[p_id]; ?>" style="ime-mode:disabled;" size="26" maxlength="12" class="<? if($_COOKIE[id_rem]){ echo "off_2"; } else { echo "off_1"; }?>" onfocus="this.className='on_1';" onBlur="this.className='off_2';">
 					</div>

@@ -5,6 +5,6 @@
 			</div>
 		</footer>
 		<!-- Bootstrap core JavaScript=================================== -->
-		<script type="text/javascript" src="/_static/lib/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/ci3/static/lib/bootstrap/js/bootstrap.min.js"></script>
 	</body>
 </html>

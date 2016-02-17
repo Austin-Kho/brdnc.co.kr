@@ -12,7 +12,7 @@
 		<title>[주]바램디앤씨 관리시스템</title>
 
 		<!-- Bootstrap core CSS -->
-    <link type="text/css" href="/ci3/static/lib/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet">
+   		<link type="text/css" href="/ci3/static/lib/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet">
 		<link type="text/css" href="/ci3/static/css/cms.css" rel="stylesheet">
 		<!--[if lt IE 9]>
   		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -22,9 +22,9 @@
 		<script src="/ci3/static/js/global.js"></script>
 		<!-- <script src="../common/_menu1.js"></script> -->
 		<script type="text/javascript">
-			jQuery(document).ready(function(){
-				jQuery("#loading").css("display","none");
-			});
+			// jQuery(document).ready(function(){
+			// 	jQuery("#loading").css("display","none");
+			// });
 		</script>
 	</head>
 	<body onclick="cal_del();">
@@ -37,13 +37,23 @@
 					</div><!-- main_logo -->
 					<nav id="top_nav_wrap"><!-- 둘째 줄 -->
 						<ul>
+<?php 	if(@$this->session->userdata['logged_in'] == TRUE) { ?>
 							<li>
-								<a class="menuLink" href="/cms/member/login_form.php">로그인</a>
+								<a class="menuLink" href="/cms/member/login_form.php"><?php 	echo $this->session->userdata['user_id'] ?> 님</a>
+								<a href="/ci3/member/logout">로그아웃</a>
 							</li>
+							<li>|</li>
+							<li><a class="menuLink" href="javascript:" onclick="alert('회원 정보 수정 페이지로 이동!');"><b>회원정보수정</b></a></li>
+							<li>|</li>
+							<li><a class="menuLink" href="javascript:" onclick="alert('준비 중입니다!');"><b>공지사항</b></a></li>
+
+<?php 	}else{  ?>
+							<li><a class="menuLink" href="/ci3/member/login">로그인</a></li>
 							<li>|</li>
 							<li><a class="menuLink" href="javascript:" onclick="alert('회원 가입 페이지로 이동!');"><b>회원가입</b></a></li>
 							<li>|</li>
 							<li><a class="menuLink" href="javascript:" onclick="alert('준비 중입니다!');"><b>공지사항</b></a></li>
+<?php 	} ?>
 						</ul>
 					</nav>
 					<nav id="main_nav_wrap"><!-- 세째 줄 -->

@@ -8,7 +8,6 @@ class Main extends CI_Controller {
 	 */
 	public function __construct(){
 		parent::__construct();
-		//$this->load->model('cms/cms_model', '', TRUE);
 	}
 
 	public function _remap($method){

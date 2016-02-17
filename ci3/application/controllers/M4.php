@@ -8,7 +8,6 @@ class M4 extends CI_Controller {
 	 */
 	public function __construct(){
 		parent::__construct();
-		//my code...
 	}
 
 	public function index(){
