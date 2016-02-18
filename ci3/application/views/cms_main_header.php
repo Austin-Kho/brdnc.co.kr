@@ -40,16 +40,16 @@
 <?php if(@$this->session->userdata['logged_in'] == TRUE) { ?>
 							<li><a class="menuLink" href=""><span style="color: #1F52DA;"><strong><?php 	echo $this->session->userdata['user_id'] ?></strong></span> 님</a></li>
 							<li>|</li>
-							<li><a class="menuLink" href="/ci3/member/logout"><strong>로그아웃</strong></a></li>
+							<li><a class="menuLink" href="/ci3/member/logout/"><strong>로그아웃</strong></a></li>
 							<li>|</li>
-							<li><a class="menuLink" href="javascript:" onclick="alert('회원 정보 수정 페이지로 이동!');"><strong>회원정보수정</strong></a></li>
+							<li><a class="menuLink" href="/ci3/member/modify/"><strong>회원정보수정</strong></a></li>
 							<li>|</li>
 							<li><a class="menuLink" href="javascript:" onclick="alert('준비 중입니다!');"><strong>공지사항</strong></a></li>
 
 <?php 	}else{  ?>
-							<li><a class="menuLink" href="/ci3/member/login">로그인</a></li>
+							<li><a class="menuLink" href="/ci3/member/login/">로그인</a></li>
 							<li>|</li>
-							<li><a class="menuLink" href="javascript:" onclick="alert('회원 가입 페이지로 이동!');"><b>회원가입</b></a></li>
+							<li><a class="menuLink" href="/ci3/member/join/"><b>회원가입</b></a></li>
 							<li>|</li>
 							<li><a class="menuLink" href="javascript:" onclick="alert('준비 중입니다!');"><b>공지사항</b></a></li>
 <?php 	} ?>
@@ -58,19 +58,19 @@
 					<nav id="main_nav_wrap"><!-- 세째 줄 -->
 						<ul>
 							<li>
-								<a class="<?if( !strpos($this->uri->segment(1), '1')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m1">영업관리</a>
+								<a class="<?if( !strpos($this->uri->segment(1), '1')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m1/">영업관리</a>
 							</li>
 							<li>
-								<a class="<?if( !strpos($this->uri->segment(1), '2')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m2">현장관리</a>
+								<a class="<?if( !strpos($this->uri->segment(1), '2')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m2/">현장관리</a>
 							</li>
 							<li>
-								<a class="<?if( !strpos($this->uri->segment(1), '3')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m3">자금회계</a>
+								<a class="<?if( !strpos($this->uri->segment(1), '3')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m3/">자금회계</a>
 							</li>
 							<li>
-								<a class="<?if( !strpos($this->uri->segment(1), '4')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m4">프로젝트</a>
+								<a class="<?if( !strpos($this->uri->segment(1), '4')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m4/">프로젝트</a>
 							</li>
 							<li>
-								<a class="<?if( !strpos($this->uri->segment(1), '5')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m5">환경설정</a>
+								<a class="<?if( !strpos($this->uri->segment(1), '5')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m5/">환경설정</a>
 							</li>
 						</ul>
 					</nav>

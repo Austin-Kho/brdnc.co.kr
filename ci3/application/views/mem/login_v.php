@@ -26,7 +26,7 @@
 						<button class="btn btn-primary btn-xs" type="submit" style="height: 60px; width: 58px;">로그인</button>
 					</div>
 					<div class="col-xs-4" style="padding: 32px 0 0 0px; width: 310px; background-color: yollow;">
-						<a class="btn btn-default btn-sm" href="join/">회원가입</a>
+						<a class="btn btn-default btn-sm" href="/ci3/member/join/">회원가입</a>
 					</div>
 					<div class="col-xs-4" style="padding: 10px 0 0 0px;">
 						<!-- <label class="checkbox-inline">
