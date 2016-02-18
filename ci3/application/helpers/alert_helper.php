@@ -8,9 +8,8 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 		echo "<meta http-equiv=\"content-type\" content=\"text/html; charset=".$CI->config->item('charset')."\">";
 		echo "<script type='text/javascript'>
 					alert('".$msg."');
-					location.replace('".$url."');
-				</script>
-			";
+				</script>";
+		echo "<meta http-equiv='Refresh' content='0; URL=".$url."'>";
 			exit;
 	}
 
@@ -24,15 +23,14 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 
 	// 경고창 만
 	function alert_only($msg, $exit=TRUE){
+		$CI =& get_instance();
 		echo "<meta http-equiv=\"content-type\" content=\"text/html; charset=".$CI->config->item('charset')."\">";
 		echo "<script type='text/javascript'> alert('".$msg."');</script>";
 		if($exit) exit;
 	}
 
 	function replace($url='/'){
-		echo "<script type='text/javascript>";
-		if($url) echo "window.location.replace('".$url."');";
-		echo "</script>";
+		if($url) echo "<meta http-equiv='Refresh' content='0; URL=".$url."'>";
 		exit;
 	}
 // End of this File

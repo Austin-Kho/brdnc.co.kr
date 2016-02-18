@@ -41,17 +41,18 @@
 							</table>
 						</div>
 					</section> <!-- section 1 -->
-					<section  id="index_section_2"> <!-- section 2 -->
-						<div id="index_1st_box">
+					<section id="index_section_2"> <!-- section 2 -->
+						<div id="index_1st_box" style="padding: 10px 0 0 10px;">
 							메인 구성 준비 중..
 						</div>
-						<div id="index_2nd_box">
+						<div id="index_2nd_box" style="padding: 10px 0 0 10px;">
 							메인 구성 준비 중..2
 						</div>
 					</section> <!-- section 2 -->
 					<section id="index_section_3"> <!-- section 3 -->
-						<div id="index_3rd_box">
+						<div id="index_3rd_box" style="padding: 10px 0 0 10px;">
 							메인 구성 준비 중..3
+
 						</div>
 					</section> <!-- section 3 -->
 				</article>

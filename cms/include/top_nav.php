@@ -1,6 +1,6 @@
 <div style="height:95px;">
 	<div style="float:left; width:180px; height:70px; padding:25px 0 0 10px;"><!-- 첫째 줄 -->
-		  <a href="<?=$cms_url?>cms.php"><img src="<?=$cms_url?>images/cms_main_logo_.png" alt="" onmouseover="this.src='<?=$cms_url?>images/cms_main_logo.png' " onmouseout="this.src='<?=$cms_url?>images/cms_main_logo_.png' "></a>
+		<a href="<?=$cms_url?>cms.php"><img src="<?=$cms_url?>images/cms_main_logo_.png" alt="" onmouseover="this.src='<?=$cms_url?>images/cms_main_logo.png' " onmouseout="this.src='<?=$cms_url?>images/cms_main_logo_.png' "></a>
 	</div><!-- 로고부분 -->
 	<div style="float:left; width:890px; text-align:right;"><!-- 둘째 줄 -->
 		<div style="font-size:11px; height:15px; padding-top:5px;">
