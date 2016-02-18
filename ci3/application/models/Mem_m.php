@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit ('No direct script access allowed');
 
-class Member_m extends CI_Model
+class Mem_m extends CI_Model
 {
 	// public function __construct(){
 	// 	parent::__construct();
@@ -13,7 +13,7 @@ class Member_m extends CI_Model
 	 * @return [boolean]       [로그인 성공 여부]
 	 */
 	public function login($auth){
-		$sql = " SELECT user_id, email FROM cms_member_table WHERE user_id = '".$auth['user_id']."' AND passwd = '".$auth['passwd']."' ";
+		$sql = " SELECT user_id, email, request FROM cms_member_table WHERE user_id = '".$auth['user_id']."' AND passwd = '".$auth['passwd']."' ";
 		$qry = $this->db->query($sql);
 
 		if($qry->num_rows() >0 ){

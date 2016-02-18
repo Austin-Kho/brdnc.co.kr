@@ -37,15 +37,18 @@
 					</div><!-- main_logo -->
 					<nav id="top_nav_wrap"><!-- 둘째 줄 -->
 						<ul>
-<?php 	if(@$this->session->userdata['logged_in'] == TRUE) { ?>
+<?php if(@$this->session->userdata['logged_in'] == TRUE) { ?>
 							<li>
-								<a class="menuLink" href="/cms/member/login_form.php"><?php 	echo $this->session->userdata['user_id'] ?> 님</a>
-								<a href="/ci3/member/logout">로그아웃</a>
+								<a class="menuLink" href="/cms/member/login_form.php">
+									<span style="color: #1F52DA;"><strong><?php 	echo $this->session->userdata['user_id'] ?></strong></span> 님
+								</a>
 							</li>
 							<li>|</li>
-							<li><a class="menuLink" href="javascript:" onclick="alert('회원 정보 수정 페이지로 이동!');"><b>회원정보수정</b></a></li>
+							<li><a class="menuLink" href="/ci3/member/logout"><strong>로그아웃</strong></a></li>
 							<li>|</li>
-							<li><a class="menuLink" href="javascript:" onclick="alert('준비 중입니다!');"><b>공지사항</b></a></li>
+							<li><a class="menuLink" href="javascript:" onclick="alert('회원 정보 수정 페이지로 이동!');"><strong>회원정보수정</strong></a></li>
+							<li>|</li>
+							<li><a class="menuLink" href="javascript:" onclick="alert('준비 중입니다!');"><strong>공지사항</strong></a></li>
 
 <?php 	}else{  ?>
 							<li><a class="menuLink" href="/ci3/member/login">로그인</a></li>
