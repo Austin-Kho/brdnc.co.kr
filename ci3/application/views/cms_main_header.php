@@ -38,7 +38,7 @@
 					<nav id="top_nav_wrap"><!-- 둘째 줄 -->
 						<ul>
 <?php if(@$this->session->userdata['logged_in'] == TRUE) { ?>
-							<li><span style="color: #1F52DA;"><strong><?php 	echo $this->session->userdata['user_id'] ?></strong></span> 님</li>
+							<li><a class="menuLink" href=""><span style="color: #1F52DA;"><strong><?php 	echo $this->session->userdata['user_id'] ?></strong></span> 님</a></li>
 							<li>|</li>
 							<li><a class="menuLink" href="/ci3/member/logout"><strong>로그아웃</strong></a></li>
 							<li>|</li>
