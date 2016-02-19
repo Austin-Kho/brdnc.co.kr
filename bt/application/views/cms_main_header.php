@@ -49,7 +49,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">영업관리</a></li>
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">영업관리</a></li>
             <li><a href="#about">현장관리</a></li>
             <li><a href="#contact">자금관리</a></li>
             <li><a href="#contact">프로젝트</a></li>
@@ -62,9 +63,8 @@
                 <li><a href="#">공지사항</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-header">관계사이트</li>
-                <li><a href="#">조합사이트</a></li>
-                <li><a href="#">외환은행</a></li>
-                <li><a href="#">아시아신탁</a></li>
+                <li><a href="#">외환은행 간편조회</a></li>
+                <li><a href="#">동춘1구역조합사이트</a></li>
               </ul>
             </li>
           </ul>
