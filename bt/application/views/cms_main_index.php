@@ -14,18 +14,46 @@
           <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
           <li data-target="#carousel-example-generic" data-slide-to="1"></li>
           <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="4"></li>
         </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
           <div class="item active">
             <img src="/bt/static/img/111.jpg" alt="First slide">
+            <div class="carousel-caption">
+              <h3>First slide label</h3>
+              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            </div>
           </div>
           <div class="item">
             <img src="/bt/static/img/222.jpg" alt="Second slide">
+            <div class="carousel-caption">
+              <h3>Second slide label</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
           </div>
           <div class="item">
             <img src="/bt/static/img/333.jpg" alt="Third slide">
+            <div class="carousel-caption">
+              <h3>Third slide label</h3>
+              <p>Praesent commodo cursus magna, vel scelerisque nisl<br> consectetur.</p>
+            </div>
+          </div>
+          <div class="item">
+            <img src="/bt/static/img/444.jpg" alt="Third slide">
+            <div class="carousel-caption">
+              <h3>...</h3>
+              <p>...</p>
+            </div>
+          </div>
+          <div class="item">
+            <img src="/bt/static/img/555.jpg" alt="Third slide">
+            <div class="carousel-caption">
+              <h3>...</h3>
+              <p>...</p>
+            </div>
           </div>
         </div>
         <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -49,17 +77,41 @@
       </div>
 
 
-      <div class="page-header">
+      <!-- <div class="page-header">
         <h1>Panels</h1>
-      </div>
+      </div> -->
       <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-8">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
+              <h3 class="panel-title">첫번 째 제목</h3>
             </div>
             <div class="panel-body">
-              Panel content
+              첫번 째 내용
+            </div>
+            <div class="panel-body">
+              두번 째 내용
+            </div>
+          </div>
+          <div class="panel panel-success">
+            <div class="panel-heading">
+              <h3 class="panel-title">두번 째 제목</h3>
+            </div>
+            <div class="panel-body">
+              두번 째 내용
+            </div>
+          </div>
+        </div><!-- /.col-sm-8 -->
+        <div class="col-sm-4">
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">판넬 제목</h3>
+            </div>
+            <div class="panel-body">
+              다음 컨텐츠 레이아웃
+            </div>
+            <div class="panel-body">
+              준비 중!!
             </div>
           </div>
           <div class="panel panel-primary">
@@ -70,26 +122,8 @@
               Panel content
             </div>
           </div>
-        </div><!-- /.col-sm-4 -->
-        <div class="col-sm-4">
-          <div class="panel panel-success">
-            <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
-            </div>
-            <div class="panel-body">
-              Panel content
-            </div>
-          </div>
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
-            </div>
-            <div class="panel-body">
-              Panel content
-            </div>
-          </div>
-        </div><!-- /.col-sm-4 -->
-        <div class="col-sm-4">
+        </div><!-- /.col-sm-4
+       <!--  <div class="col-sm-4">
           <div class="panel panel-warning">
             <div class="panel-heading">
               <h3 class="panel-title">Panel title</h3>
@@ -106,15 +140,15 @@
               Panel content
             </div>
           </div>
-        </div><!-- /.col-sm-4 -->
+        </div> --><!-- /.col-sm-4 -->
       </div>
 
 
-      <div class="page-header">
+      <!-- <div class="page-header">
         <h1>Tables</h1>
-      </div>
+      </div> -->
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <table class="table">
             <thead>
               <tr>
@@ -122,6 +156,7 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Username</th>
+                <th>date-time</th>
               </tr>
             </thead>
             <tbody>
@@ -130,23 +165,26 @@
                 <td>Mark</td>
                 <td>Otto</td>
                 <td>@mdo</td>
+                <td>Otto</td>
               </tr>
               <tr>
                 <td>2</td>
                 <td>Jacob</td>
                 <td>Thornton</td>
                 <td>@fat</td>
+                <td>Username</td>
               </tr>
               <tr>
                 <td>3</td>
                 <td>Larry</td>
                 <td>the Bird</td>
                 <td>@twitter</td>
+                <td>Username</td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="col-md-6">
+        <!-- <div class="col-md-6">
           <table class="table table-striped">
             <thead>
               <tr>
@@ -177,7 +215,7 @@
               </tr>
             </tbody>
           </table>
-        </div>
+        </div> -->
       </div>
 
       <div class="row">
@@ -224,7 +262,7 @@
                 <th>#</th>
                 <th>First Name</th>
                 <th>Last Name</th>
-                <th>Username</th>
+                <th><p><a href="#">Inbox <span class="badge">42</span></a></p></th>
               </tr>
             </thead>
             <tbody>
@@ -318,12 +356,10 @@
       </p> -->
 
 
-      <div class="page-header">
+      <!-- <div class="page-header">
         <h1>Badges</h1>
-      </div>
-      <p>
-        <a href="#">Inbox <span class="badge">42</span></a>
-      </p>
+      </div> -->
+
       <ul class="nav nav-pills" role="tablist">
         <li role="presentation" class="active"><a href="#">Home <span class="badge">42</span></a></li>
         <li role="presentation"><a href="#">Profile</a></li>
@@ -427,7 +463,7 @@
                 </ul>
               </li>
             </ul>
-          </div><!--/.nav-collapse -->
+          </div>--><!--/.nav-collapse -->
         <!-- </div>
       </nav> -->
 
@@ -478,7 +514,7 @@
 
 
       <div class="page-header">
-        <h1>List groups</h1>
+        <h4>List groups</h4>
       </div>
       <div class="row">
         <div class="col-sm-4">

@@ -60,7 +60,7 @@
               </a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="/bt/member/logout/">로그아웃</a></li>
-                <li><a href="javascript:" onclick="alert('준비 중입니다!');">정보수정</a></li>
+                <li><a href="/bt/member/modify/">정보수정</a></li>
                 <li><a href="javascript:" onclick="alert('준비 중입니다!');">공지사항</a></li>
 <?php   }else{  ?>
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">기타메뉴 <span class="caret"></span></a>
@@ -72,7 +72,7 @@
                 <li class="divider"></li>
                 <li class="dropdown-header">관계사이트</li>
                 <li><a href="http://www.keb.co.kr/" target="blank">외환은행 간편조회</a></li>
-                <li><a href="#" target="blan">동춘1구역조합사이트</a></li>
+                <li><a href="http://xn--220b21dg6r6qdpdpmi3e.kr/" target="blank">동춘1구역조합사이트</a></li>
               </ul>
             </li>
           </ul>

@@ -9,28 +9,7 @@
 	/* 높이값 100% 마진, 패딩 값이 0일 경우 단위 안붙여도 괜찮음 */
 	::selection { background-color: #005FAF; color: #FFF; }
 	::-moz-selection { background-color: #005FAF; color: #FFF; }
+	a,nav,input,li,img {outline:none; select-dummy: expression(this.hideFocus=true);}
 
 	div.container#main_container { background-color: white; }
-	footer.footer { border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid; background-color: #eeeeee; }
-
-	.pale1 {padding-left: 1px;}
-	.pale2 {padding-left: 2px;}
-	.pale3 {padding-left: 3px;}
-	.pale4 {padding-left: 4px;}
-	.pale5 {padding-left: 5px;}
-	.pale6 {padding-left: 6px;}
-	.pale7 {padding-left: 7px;}
-	.pale8 {padding-left: 8px;}
-	.pale9 {padding-left: 9px;}
-	.pale10 {padding-left: 10px;}
-
-	.pari1 {padding-right: 1px;}
-	.pari2 {padding-right: 2px;}
-	.pari3 {padding-right: 3px;}
-	.pari4 {padding-right: 4px;}
-	.pari5 {padding-right: 5px;}
-	.pari6 {padding-right: 6px;}
-	.pari7 {padding-right: 7px;}
-	.pari8 {padding-right: 8px;}
-	.pari9 {padding-right: 9px;}
-	.pari10 {padding-right: 10px;}
+	footer.footer { border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid; background-color: #eeeeee; margin-top: 25px;}
