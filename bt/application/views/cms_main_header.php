@@ -44,7 +44,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
+<<<<<<< HEAD
           <a class="navbar-brand" href="/bt/" style="margin-top: -10px;"><img src="/bt/static/img/cms_main_logo.png" alt="" onmouseover="this.src='/bt/static/img/cms_main_logo_.png' " onmouseout="this.src='/bt/static/img/cms_main_logo.png' "></a>
+=======
+          <a class="navbar-brand" href="/bt/"><strong>[주]바램디앤씨</strong></a>
+>>>>>>> 59512bf967dabb6b7089593ce0eaadb6fe48210f
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -82,5 +86,9 @@
     </nav>
 
     <div class="container theme-showcase" role="main" id="main_container">
+<<<<<<< HEAD
     	<div style="height: 65px;"></div>
       <div><!-- footer wrap div  -->
+=======
+    	<div style="height: 65px;"></div>
+>>>>>>> 59512bf967dabb6b7089593ce0eaadb6fe48210f

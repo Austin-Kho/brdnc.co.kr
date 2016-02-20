@@ -2,11 +2,7 @@
 			<div></div>
 			<article>
 				<header>
-<<<<<<< HEAD
-					<img src="/bt/static/img/cms_main_logo.png" alt="" width="154px">
-=======
 					<img src="/ci3/static/img/cms_main_logo.png" alt="" width="154px">
->>>>>>> 59512bf967dabb6b7089593ce0eaadb6fe48210f
 				</header>
 				<section>
 					CMS 솔루션을 사용하기 위한 <span style="font-size: 14px; color:#060172">직원 계정을 등록</span>해 주시기 바랍니다.<br>
@@ -22,11 +18,7 @@
 				</header>
 <?php
 	$attributes = array('name' => 'join', 'class'=>'form-inline');
-<<<<<<< HEAD
-	echo form_open('http://brdnc.cafe24.com/bt/member/', $attributes);
-=======
 	echo form_open('http://brdnc.cafe24.com/ci3/member/', $attributes);
->>>>>>> 59512bf967dabb6b7089593ce0eaadb6fe48210f
 ?>
 					<fieldset class="pale10">
 						<div>

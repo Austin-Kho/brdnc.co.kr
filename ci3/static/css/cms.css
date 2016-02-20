@@ -25,8 +25,8 @@
   #top_nav_wrap .menuLink { text-decoration:none; display: block; width: 70px; font-size: 11px; font-family: "Trebuchet MS", 맑은 고딕, Arial; }
   #top_nav_wrap .menuLink:hover { color: #077ABE; background-color: #efefef; }
 	#main_nav_wrap { margin-top: 38px; width: 860px; float: right;}
-	#main_nav_wrap ul { margin-left: 20px; }
-	#main_nav_wrap ul li { list-style: none; float: left; line-height: 30px; vertical-align: middle; text-align: center; margin-left: 1px;}
+	#main_nav_wrap ol { margin-left: 20px; }
+	#main_nav_wrap ol li { list-style: none; float: left; line-height: 30px; vertical-align: middle; text-align: center; margin-left: 1px;}
   #main_nav_wrap .main_nav { text-decoration:none; display: block; width: 120px; font-size: 11pt; font-family: "Trebuchet MS", 맑은 고딕, Arial;  color: #002779; font-weight: bold; }
 
 

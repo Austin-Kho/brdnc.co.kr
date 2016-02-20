@@ -1,8 +1,14 @@
+<<<<<<< HEAD
       <div style="height: 10px;"></div>
 
       <!-- <div class="page-header">
         <h1>Navs</h1>
       </div> -->
+=======
+      <div class="page-header">
+        <!-- <h1>Navs</h1> -->
+      </div>
+>>>>>>> 59512bf967dabb6b7089593ce0eaadb6fe48210f
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="<?if( !$this->uri->segment(3) or strpos($this->uri->segment(3), '1')) echo 'active'; else echo '';?>">
         	<a href="/bt/m2/local/md_1/"><strong>전도금 관리</strong></a>
@@ -19,7 +25,11 @@
       </ul> -->
 
 
+<<<<<<< HEAD
       <!-- <div class="page-header"> -->
+=======
+      <div class="page-header">
+>>>>>>> 59512bf967dabb6b7089593ce0eaadb6fe48210f
       	<!-- <h1>Wells</h1> --><!-- 영문 h1 -->
         <!-- <h3>공지사항</h3> --><!-- 한글 h3 -->
       <!-- </div>
@@ -31,7 +41,11 @@
 
 
       <div class="page-header">
+<<<<<<< HEAD
        <!--  <h1>Tables</h1> -->
+=======
+        <h1>Tables</h1>
+>>>>>>> 59512bf967dabb6b7089593ce0eaadb6fe48210f
       </div>
       <div class="row">
         <div class="col-md-6">

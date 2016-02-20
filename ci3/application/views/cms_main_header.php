@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
 <html lang="ko">
 	<head>
-		<meta charset="UTF-8">
-		<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"> -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 		<meta name="description" content="">
 		<meta name="author" content="">
@@ -12,23 +12,32 @@
 		<title>[주]바램디앤씨 관리시스템</title>
 
 		<!-- Bootstrap core CSS -->
-   		<link type="text/css" href="/ci3/static/lib/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet">
-		<link type="text/css" href="/ci3/static/css/cms.css" rel="stylesheet">
-		<!--[if lt IE 9]>
-  		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<![endif]-->
-		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+   	<link type="text/css" rel="stylesheet" href="/ci3/static/lib/bootstrap/css/bootstrap.min.css" media="screen">
+
+   	<!-- Custom styles for this template -->
+    <link type="text/css" rel="stylesheet" href="/ci3/static/css/cms.css">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="/ci3/static/js/ie-emulation-modes-warning.js"></script>
+
+		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 		<script src="/ci3/static/lib/calendar/calendar.js"></script>
 		<script src="/ci3/static/js/global.js"></script>
 		<!-- <script src="../common/_menu1.js"></script> -->
+	</head>
+	<body onclick="cal_del();">
+		<div class="main_container">
 		<script type="text/javascript">
 			// jQuery(document).ready(function(){
 			// 	jQuery("#loading").css("display","none");
 			// });
 		</script>
-	</head>
-	<body onclick="cal_del();">
-		<div class="main_container">
 		<!-- <div id="loading" style="padding-top:530px;"><img src="../images/loading.gif"><br>loading...</div> -->
 			<header id="top">
 				<div id="header_wrap">
@@ -56,7 +65,7 @@
 						</ul>
 					</nav>
 					<nav id="main_nav_wrap"><!-- 세째 줄 -->
-						<ul>
+						<ol>
 							<li>
 								<a class="<?if( !strpos($this->uri->segment(1), '1')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m1/">영업관리</a>
 							</li>
@@ -72,7 +81,7 @@
 							<li>
 								<a class="<?if( !strpos($this->uri->segment(1), '5')) echo 'main_nav'; else echo 'sel_main_nav';?>" href="/ci3/m5/">환경설정</a>
 							</li>
-						</ul>
+						</ol>
 					</nav>
 				</div><!-- header_wrap -->
 			</header>

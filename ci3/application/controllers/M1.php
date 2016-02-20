@@ -26,6 +26,6 @@ class M1 extends CI_Controller {
 	}
 
 	public function work($m_di=''){
-		//echo 'work';
+		$this->load->view('menu/work_v');
 	}
 }
