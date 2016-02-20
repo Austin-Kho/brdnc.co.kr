@@ -22,13 +22,13 @@ class Member extends CI_Controller
 	 * @return [type] [description]
 	 */
 	public function _remap($method){
-		// 헤더 include
+		//헤더 include
 		$this->load->view('/mem/mem_header');
 
 		if(method_exists($this, $method)){
 			$this->{"$method"}();
 		}
-		// 푸터 include
+		//푸터 include
 		$this->load->view('/mem/mem_footer');
 	}
 
@@ -50,8 +50,8 @@ class Member extends CI_Controller
 		if($this->form_validation->run() == TRUE) { // 폼 전송 데이타가 있으면,
 			$login_data = array(
 				'user_id' => $this->input->post('user_id', TRUE),
-				'passwd' => md5($this->input->post('passwd', TRUE)),
-				'id_rem' => $this->input->post('id_rem',  TRUE)
+				'passwd' => md5($this->input->post('passwd', TRUE))//,
+				//'id_rem' => $this->input->post('id_rem',  TRUE)
 			);
 
 			$result = $this->mem_m->login($login_data);
@@ -78,7 +78,7 @@ class Member extends CI_Controller
 				exit;
 			}
 		}else{ // 폼 전송 데이타가 없으면,
-			// 쓰기 form 호출
+			// view 파일 -> 쓰기 form 호출
 			$this->load->view('mem/login_v');
 		}
 	}

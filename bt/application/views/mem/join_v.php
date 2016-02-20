@@ -2,11 +2,7 @@
 			<div style="height:10px;"></div>
 			<article style="width:750px; border:2px solid #96ABE5; background-color:white;">
 				<header style="width:746px; height:80px; border-bottom:2px solid #96ABE5; background-color:#D9EAF8; padding:19px 0 0 18px;">
-<<<<<<< HEAD
 					<img src="/bt/static/img/cms_main_logo.png" alt="" width="154px">
-=======
-					<img src="/ci3/static/img/cms_main_logo.png" alt="" width="154px">
->>>>>>> 59512bf967dabb6b7089593ce0eaadb6fe48210f
 				</header>
 				<section style="height:100px; text-align:center; padding-top:25px; font-size:14px; color:#818181; margin-bottom:15px;">
 					CMS 솔루션을 사용하기 위한 <span style="font-size: 14px; color:#060172">직원 계정을 등록</span>해 주시기 바랍니다.<br>
@@ -22,11 +18,7 @@
 				</header>
 <?php
 	$attributes = array('name' => 'join', 'class'=>'form-inline');
-<<<<<<< HEAD
 	echo form_open('http://brdnc.cafe24.com/bt/member/', $attributes);
-=======
-	echo form_open('http://brdnc.cafe24.com/ci3/member/', $attributes);
->>>>>>> 59512bf967dabb6b7089593ce0eaadb6fe48210f
 ?>
 					<fieldset style="padding: 0 20px 0 20px;" class="pale10">
 						<div style="border-width:1px 0 0 0; border-style:solid; border-color:#eaeaea;">
