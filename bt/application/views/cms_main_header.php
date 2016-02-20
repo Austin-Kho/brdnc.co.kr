@@ -32,10 +32,10 @@
 		<!-- <script src="../common/_menu1.js"></script> -->
 	</head>
 
-  <body role="document"  onclick="cal_del();">
+  <body role="document" onclick="cal_del();">
 
     <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -44,12 +44,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <!-- <a class="navbar-brand" href="/bt/" style="margin-top: -10px;"><img src="/bt/static/img/cms_main_logo.png" alt="" onmouseover="this.src='/bt/static/img/cms_main_logo_.png' " onmouseout="this.src='/bt/static/img/cms_main_logo.png' "></a> -->
-          <a class="navbar-brand" href="/bt/">[주]바램디앤씨</a>
+          <a class="navbar-brand" href="/bt/"><strong><small>|주|바램디앤씨</small></strong></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <!-- <li class="active"><a href="#">Home</a></li> -->
             <li class="<?if( !strpos($this->uri->segment(1), '1')) echo ''; else echo 'active';?>"><a href="/bt/m1/">영업관리</a></li>
             <li class="<?if( !strpos($this->uri->segment(1), '2')) echo ''; else echo 'active';?>"><a href="/bt/m2/">현장관리</a></li>
             <li class="<?if( !strpos($this->uri->segment(1), '3')) echo ''; else echo 'active';?>"><a href="/bt/m3/">자금관리</a></li>
@@ -85,4 +83,3 @@
     <div class="container theme-showcase" role="main" id="main_container">
     	<div style="height: 65px;"></div>
       <div><!-- footer wrap div  -->
-    	<div style="height: 65px;"></div>

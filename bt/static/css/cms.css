@@ -3,17 +3,15 @@
 	body {
 		height:100%; width:100%;
 		margin:0; padding:0; border:0 outset gray;
-		background-image : url('/ci3/static/img/bg_dot.jpg');
+		background-image : url('/bt/static/img/bg_dot.jpg');
 	}
 	/* border : (프레임의 두께) (dotted, dashed, solid, double, groove, ridge, indet, outset 중에서 선택하세요) (프레임색깔)*/
 	/* 높이값 100% 마진, 패딩 값이 0일 경우 단위 안붙여도 괜찮음 */
 	::selection { background-color: #005FAF; color: #FFF; }
 	::-moz-selection { background-color: #005FAF; color: #FFF; }
 
-	div.container#main_container {background-color: white;}
-	footer.footer {background-color: #eaeaea; border-width:1px 0 0 0; border-color:#cccccc; border-style: solid;}
-
-
+	div.container#main_container { background-color: white; }
+	footer.footer { border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid; background-color: #eeeeee; }
 
 	.pale1 {padding-left: 1px;}
 	.pale2 {padding-left: 2px;}

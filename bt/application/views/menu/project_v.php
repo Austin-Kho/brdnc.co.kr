@@ -3,9 +3,6 @@
       <!-- <div class="page-header">
         <h1>Navs</h1>
       </div> -->
-      <div class="page-header">
-        <!-- <h1>Navs</h1> -->
-      </div>
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="<?if( !$this->uri->segment(3) or strpos($this->uri->segment(3), '1')) echo 'active'; else echo '';?>">
         	<a href="/bt/m4/project/md_1/"><strong>프로젝트 관리</strong></a>
