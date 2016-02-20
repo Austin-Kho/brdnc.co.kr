@@ -26,6 +26,6 @@ class M4 extends CI_Controller {
 	}
 
 	public function project($m_di=''){
-		// echo 'project';
+		$this->load->view('menu/project_v');
 	}
 }

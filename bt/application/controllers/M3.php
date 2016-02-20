@@ -26,6 +26,6 @@ class M3 extends CI_Controller {
 	}
 
 	public function capital($m_di=''){
-		//echo 'capital';
+		$this->load->view('menu/capital_v');
 	}
 }

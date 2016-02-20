@@ -26,6 +26,6 @@ class M2 extends CI_Controller {
 	}
 
 	public function local($m_di=''){
-		//echo "local";
+		$this->load->view('menu/local_v');
 	}
 }

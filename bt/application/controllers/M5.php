@@ -26,6 +26,6 @@ class M5 extends CI_Controller {
 	}
 
 	public function config($m_di=''){
-		// echo 'config';
+		$this->load->view('menu/config_v');
 	}
 }

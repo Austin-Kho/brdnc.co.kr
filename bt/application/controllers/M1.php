@@ -25,7 +25,9 @@ class M1 extends CI_Controller {
 		$this->load->view('cms_main_footer');
 	}
 
-	public function work($m_di=''){
-		$this->load->view('menu/work_v');
+	public function work($m_di='', $s_di=''){
+		if( !$m_di or $m_di == 1 ) $this->load->view('menu/work_v');
+
+		if($m_di == 2 ) $this->load->view('menu/work_v');
 	}
 }

@@ -3,10 +3,10 @@
       </div>
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="<?if( !$this->uri->segment(3) or strpos($this->uri->segment(3), '1')) echo 'active'; else echo '';?>">
-        	<a href="/bt/m1/work/md_1/"><strong>계 약 현 황</strong></a>
+        	<a href="/bt/m2/local/md_1/"><strong>전도금 관리</strong></a>
         </li>
         <li role="presentation" class="<?if( !strpos($this->uri->segment(3), '2')) echo ''; else echo 'active';?>">
-        	<a href="/bt/m1/work/md_2/"><strong>업 무 현 황</strong></a>
+        	<a href="/bt/m2/local/md_2/"><strong>투입자원 관리</strong></a>
         </li>
         <!-- <li role="presentation"><a href="#">Messages</a></li> -->
       </ul>
