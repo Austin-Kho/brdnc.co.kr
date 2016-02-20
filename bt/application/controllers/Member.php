@@ -58,11 +58,7 @@ class Member extends CI_Controller
 
 			if($result) {
 				if($result->request==2){
-<<<<<<< HEAD
 					alert('관리자 사용 승인 후 사용이 가능합니다.\n승인 지연 시, 직접 관리자에게 문의하여 주세요.\n\nEmail : cigiko@naver.com / 전화문의 : 010-3320-0088', '/bt');
-=======
-					alert('관리자 사용 승인 후 사용이 가능합니다.\n승인 지연 시, 직접 관리자에게 문의하여 주세요.\n\nEmail : cigiko@naver.com / 전화문의 : 010-3320-0088', '/ci3');
->>>>>>> 59512bf967dabb6b7089593ce0eaadb6fe48210f
 				}else{
 					// 세션 생성
 					$newdata = array(
@@ -73,20 +69,12 @@ class Member extends CI_Controller
 
 					$this->session->set_userdata($newdata);
 
-<<<<<<< HEAD
 					echo "<meta http-equiv='Refresh' content='0; URL=/bt/main/'>";
-=======
-					echo "<meta http-equiv='Refresh' content='0; URL=/ci3/main/'>";
->>>>>>> 59512bf967dabb6b7089593ce0eaadb6fe48210f
 					exit;
 				}
 			}else{ // 아이디 // 비번이 맞지 않을 때
 				// 실패 시
-<<<<<<< HEAD
 				alert('아이디 또는 비밀번호를 확인해 주세요.', '/bt/member/login');
-=======
-				alert('아이디 또는 비밀번호를 확인해 주세요.', '/ci3/member/login');
->>>>>>> 59512bf967dabb6b7089593ce0eaadb6fe48210f
 				exit;
 			}
 		}else{ // 폼 전송 데이타가 없으면,
@@ -105,11 +93,7 @@ class Member extends CI_Controller
 
 		echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
 
-<<<<<<< HEAD
 		echo "<meta http-equiv='Refresh' content='0; URL=/bt/member/'>";
-=======
-		echo "<meta http-equiv='Refresh' content='0; URL=/ci3/member/'>";
->>>>>>> 59512bf967dabb6b7089593ce0eaadb6fe48210f
 		exit;
 	}
 
@@ -136,11 +120,7 @@ class Member extends CI_Controller
 
 			if($result) {
 				if($result->request==2){
-<<<<<<< HEAD
 					alert('관리자 사용 승인 후 사용이 가능합니다.\n승인 지연 시, 직접 관리자에게 문의하여 주세요.\n\nEmail : cigiko@naver.com / 전화문의 : 010-3320-0088', '/bt');
-=======
-					alert('관리자 사용 승인 후 사용이 가능합니다.\n승인 지연 시, 직접 관리자에게 문의하여 주세요.\n\nEmail : cigiko@naver.com / 전화문의 : 010-3320-0088', '/ci3');
->>>>>>> 59512bf967dabb6b7089593ce0eaadb6fe48210f
 				}else{
 					// 세션 생성
 					$newdata = array(
@@ -151,20 +131,12 @@ class Member extends CI_Controller
 
 					$this->session->set_userdata($newdata);
 
-<<<<<<< HEAD
 					echo "<meta http-equiv='Refresh' content='0; URL=/bt/main/'>";
-=======
-					echo "<meta http-equiv='Refresh' content='0; URL=/ci3/main/'>";
->>>>>>> 59512bf967dabb6b7089593ce0eaadb6fe48210f
 					exit;
 				}
 			}else{
 				// 실패 시
-<<<<<<< HEAD
 				alert('아이디 또는 비밀번호를 확인해 주세요.', '/bt/member/login');
-=======
-				alert('아이디 또는 비밀번호를 확인해 주세요.', '/ci3/member/login');
->>>>>>> 59512bf967dabb6b7089593ce0eaadb6fe48210f
 				exit;
 			}
 		}else{
