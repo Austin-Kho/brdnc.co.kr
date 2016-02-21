@@ -28,12 +28,12 @@ class M1 extends CI_Controller {
 	public function work($m_di='', $s_di=''){
 		if( !$m_di or $m_di == 1 )  {
 			$this->load->view('menu/work_v');
+			//$this->load->view('menu/m1_md1_v');
+
 
 
 		} else if($m_di == 2 ) {
 			$this->load->view('menu/work_v');
-
-
 		}
 	}
 }

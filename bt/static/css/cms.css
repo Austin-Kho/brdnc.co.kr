@@ -13,3 +13,7 @@
 
 	div.container#main_container { background-color: white; }
 	footer.footer { border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid; background-color: #eeeeee; margin-top: 25px;}
+
+	.s_di_menu {  }
+	.s_di_menu ul li {  }
+	.s_di_menu .menuLink {  }

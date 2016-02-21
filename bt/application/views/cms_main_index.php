@@ -21,35 +21,35 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
           <div class="item active">
-            <img src="/bt/static/img/111.jpg" alt="First slide">
+            <img src="/bt/static/img/555.jpg" alt="First slide">
             <div class="carousel-caption">
               <h3>First slide label</h3>
               <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </div>
           </div>
           <div class="item">
-            <img src="/bt/static/img/222.jpg" alt="Second slide">
+            <img src="/bt/static/img/111.jpg" alt="Second slide">
             <div class="carousel-caption">
               <h3>Second slide label</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
           </div>
           <div class="item">
-            <img src="/bt/static/img/333.jpg" alt="Third slide">
+            <img src="/bt/static/img/444.jpg" alt="Third slide">
             <div class="carousel-caption">
               <h3>Third slide label</h3>
               <p>Praesent commodo cursus magna, vel scelerisque nisl<br> consectetur.</p>
             </div>
           </div>
           <div class="item">
-            <img src="/bt/static/img/444.jpg" alt="Third slide">
+            <img src="/bt/static/img/333.jpg" alt="Third slide">
             <div class="carousel-caption">
               <h3>...</h3>
               <p>...</p>
             </div>
           </div>
           <div class="item">
-            <img src="/bt/static/img/555.jpg" alt="Third slide">
+            <img src="/bt/static/img/222.jpg" alt="Third slide">
             <div class="carousel-caption">
               <h3>...</h3>
               <p>...</p>
