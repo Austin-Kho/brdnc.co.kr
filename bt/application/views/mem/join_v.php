@@ -14,6 +14,8 @@
 			<input type="text" name="user_id" value="" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
 		<label for="inputPassword" class="">Password</label>
 			<input type="password" name="passwd" value="<?php echo set_value('passwd'); ?>" id="inputPassword" class="form-control" placeholder="비밀번호" required>
+		<label for="inputPassword" class="">Password Confirm</label>
+			<input type="password" name="passwd" value="<?php echo set_value('passwd'); ?>" id="inputPassword" class="form-control" placeholder="비밀번호 확인" required>
 		<div class="checkbox">
 			<label>
 				<!-- <input type="checkbox" name="id_rem" value="rem"> 아이디 저장하기 -->
