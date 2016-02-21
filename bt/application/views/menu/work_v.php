@@ -10,7 +10,7 @@
       </ul>
 
       <div class="page-header">
-        <nav class="sd_nav" style="margin-left: -20px;">
+        <nav class="sd_nav" style="margin-left: -38px;">
           <ul>
             <li><a href="/bt/m1/work/<?php echo $this->uri->segment(3); ?>/sd1/" class="<?php if($this->uri->segment(4)=='sd1') {echo 'menuActive';}else{echo 'menuLink';} ?>">계약현황</a></li>
             <li>|</li>
