@@ -39,7 +39,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['form_validation_required']		= '{field} 은(는) 필수 입력 항목입니다.';
 $lang['form_validation_isset']			= '{field} 은(는) 반드시 필요한 값입니다.';
-$lang['form_validation_valid_email']		= '{field} 유효한 이메일주소를 입력해 주세요.';
+$lang['form_validation_valid_email']		= '유효한 {field} 주소를 입력해 주세요.';
 $lang['form_validation_valid_emails']		= '{field} 은(는) 모두 유효한 이메일 주소를 입력해 주세요.';
 $lang['form_validation_valid_url']		= '{field} 은(는) 유효한 URL을 포함해야 합니다.';
 $lang['form_validation_valid_ip']		= '{field} 은(는) 유효한 IP를 포함해야 합니다.';

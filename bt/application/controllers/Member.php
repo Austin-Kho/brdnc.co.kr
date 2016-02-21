@@ -130,7 +130,46 @@ class Member extends CI_Controller
 	}
 
 	public function join() {
-		$this->load->view('mem/join_v');
-	}
-}
+		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+
+		// 라이브러리 로드
+		$this->load->library('form_validation'); // 폼 검증
+		$this->load->helper('alert');  // 경고창 사용자 헬퍼 로딩
+
+		// 폼 검증할 필드와 규칙 사전 정의
+		$this->form_validation->set_rules('name', '이름', 'required|max_length[20]');
+		$this->form_validation->set_rules('user_id', '아이디', 'required|alpha_numeric|min_length[5]|max_length[15]');
+		$this->form_validation->set_rules('email', '이메일', 'required|valid_email|max_length[50]');
+		$this->form_validation->set_rules('passwd', '비밀번호', 'required|matches[passcf]');
+		$this->form_validation->set_rules('passcf', '비밀번호 확인', 'required');
+
+		echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
+
+		if($this->form_validation->run() == FALSE) { // 폼 전송 데이타가 없으으면,
+
+			// view 파일 -> 쓰기 form 호출
+			$this->load->view('mem/join_v');
+
+		}else{ // 폼 전송 데이타가 있으면,
+
+			$join_data = array(
+				'name' => $this->input->post('name', TRUE),
+				'user_id' => $this->input->post('user_id', TRUE),
+				'email' => $this->input->post('email', TRUE),
+				'passwd' => md5($this->input->post('passwd', TRUE))
+			);
+
+			$result = $this->mem_m->join($join_data);
+
+			if($result) {
+				// 등록 성공 시
+				alert('등록 되었습니다. \n 관리자의 승인 후 로그인 하여 주십시요.', '/bt/member/login/');
+			}else{ // 아이디 // 비번이 맞지 않을 때
+				// 실패 시
+				alert('계정등록에 실패하였습니다.\n 다시 시도하여 주십시요.', '/bt/member/join/');
+				exit;
+			}
+		} // 폼 검증 종료
+	} // fucntion join 종료
+} // member class 종료
 // End of this File
