@@ -47,7 +47,7 @@
 								$sh_text = $_REQUEST['sh_text'];
 								$start = $_REQUEST['start'];
 
-								$add_where=" WHERE (com_div>0 AND ((in_acc=no AND class2<>7) OR out_acc=no) OR (com_div IS NULL AND in_acc=no AND class2=6))";
+								$add_where=" WHERE (com_div>0 AND ((in_acc=no AND class2<>7) OR out_acc=no) OR (com_div IS NULL AND in_acc=no AND class2=6)) ";
 
 								if($class1){
 									if($class1==1) $add_where.=" AND class1='1' ";
@@ -59,11 +59,11 @@
 								if($e_date) {$add_where.=" AND deal_date<='$e_date' "; $e_add=" AND deal_date<='$e_date' ";} else{$e_add="";}
 
 								if($sh_text){
-									if($sh_con==1) $add_where.=" AND (bank like '%$sh_text%' OR name like '%$sh_text%' OR number like '%$sh_text%' OR holder like '%$sh_text%' OR note like '%$sh_text%' OR account like '%$sh_text%' OR cont like '%$sh_text%' OR acc like '%$sh_text%' OR evidence like '%$sh_text%' OR cms_capital_cash_book.worker like '%$sh_text%') "; // 통합검색
-									if($sh_con==2) $add_where.=" AND cont like '%$sh_text%' "; // 적 요
-									if($sh_con==3) $add_where.=" AND acc like '%$sh_text%' "; //거래처
-									if($sh_con==4) $add_where.=" AND (in_acc like '%$sh_text%' OR out_acc like '%$sh_text%') "; // 계정
-									if($sh_con==5) $add_where.=" AND evidence like '%$sh_text%' ";  //증빙서류
+									if($sh_con==0) $add_where.=" AND (account like '%$sh_text%' OR cont like '%$sh_text%' OR acc like '%$sh_text%' OR evidence like '%$sh_text%' OR cms_capital_cash_book.worker like '%$sh_text%') "; // 통합검색
+									if($sh_con==1) $add_where.=" AND cont like '%$sh_text%' "; // 적 요
+									if($sh_con==2) $add_where.=" AND acc like '%$sh_text%' "; //거래처
+									if($sh_con==3) $add_where.=" AND (in_acc like '%$sh_text%' OR out_acc like '%$sh_text%') "; // 계정
+									if($sh_con==4) $add_where.=" AND evidence like '%$sh_text%' ";  //증빙서류
 								}
 								if($_m3_1_2_row[_m3_1_2]<1){
 									$excel_pop = "alert('출력 권한이 없습니다!');";
@@ -125,11 +125,11 @@
 							</td>
 							<td class="form2" bgcolor="#F4F4F4">
 								<select name="sh_con">
-									<option value="1" <?if($sh_con==1) echo "selected";?>> 통합검색
-									<option value="2" <?if($sh_con==2) echo "selected";?>> 적 요
-									<option value="3" <?if($sh_con==3) echo "selected";?>> 거래처
-									<option value="4" <?if($sh_con==4) echo "selected";?>> 입출금처
-									<option value="5" <?if($sh_con==5) echo "selected";?>> 증빙서류
+									<option value="0" <?if($sh_con==0) echo "selected";?>> 통합검색
+									<option value="1" <?if($sh_con==1) echo "selected";?>> 적 요
+									<option value="2" <?if($sh_con==2) echo "selected";?>> 거래처
+									<option value="3" <?if($sh_con==3) echo "selected";?>> 입출금처
+									<option value="4" <?if($sh_con==4) echo "selected";?>> 증빙서류
 								</select>
 							</td>
 							<td class="form2"><input type="text" name="sh_text" value="<?=$sh_text?>" size="16" class="inputstyle2" onmouseover="cngClass(this,'inputstyle22')" onmouseout="cngClass(this,'inputstyle2')" onClick="this.value='' "></td>
@@ -160,7 +160,8 @@
 								<?}?>
 							</tr>
 							<?
-								$query="SELECT seq_num FROM cms_capital_cash_book, cms_capital_bank_account $add_where ";
+								$query="SELECT seq_num FROM cms_capital_cash_book, cms_capital_bank_account ".$add_where;
+
 								$result=mysql_query($query, $connect);
 								$total_bnum=mysql_num_rows($result);     // 총 게시물 수   11111111111111111111
 								mysql_free_result($result);
