@@ -11,6 +11,7 @@ class M2 extends CI_Controller {
 		if(@$this->session->userdata['logged_in'] !== TRUE) {
 			echo "<meta http-equiv='Refresh' content='0; URL=/bt/member/'>";
 			exit;
+		}
 	}
 
 	/**
