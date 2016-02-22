@@ -140,8 +140,8 @@ class Member extends CI_Controller
 		$this->form_validation->set_rules('name', '이름', 'required|max_length[20]');
 		$this->form_validation->set_rules('user_id', '아이디', 'required|alpha_numeric|min_length[5]|max_length[15]');
 		$this->form_validation->set_rules('email', '이메일', 'required|valid_email|max_length[50]');
-		$this->form_validation->set_rules('passwd', '비밀번호', 'required|matches[passcf]');
-		$this->form_validation->set_rules('passcf', '비밀번호 확인', 'required');
+		$this->form_validation->set_rules('passwd', '비밀번호', 'required|matches[passcf]|max_length[200]');
+		$this->form_validation->set_rules('passcf', '비밀번호 확인', 'required|max_length[200]');
 
 		echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 
@@ -171,5 +171,56 @@ class Member extends CI_Controller
 			}
 		} // 폼 검증 종료
 	} // fucntion join 종료
+
+	public function modify() {
+		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+
+		// 라이브러리 로드
+		$this->load->library('form_validation'); // 폼 검증
+		$this->load->helper('alert');  // 경고창 사용자 헬퍼 로딩
+
+		// 폼 검증할 필드와 규칙 사전 정의
+		$this->form_validation->set_rules('name', '이름', 'required|max_length[20]');
+		$this->form_validation->set_rules('user_id', '아이디', 'required|alpha_numeric|min_length[5]|max_length[15]');
+		$this->form_validation->set_rules('email', '이메일', 'required|valid_email|max_length[50]');
+
+		$this->form_validation->set_rules('passwd', '비밀번호', 'required|max_length[200]');
+		$this->form_validation->set_rules('new_pass', '새 비밀번호', 'matches[passcf]|max_length[200]');
+		$this->form_validation->set_rules('passcf', '비밀번호 확인', 'max_length[200]');
+
+		// echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
+
+		if($this->form_validation->run() == FALSE) { // 폼 전송 데이타가 없으으면,
+
+			// 사용자 정보 가져오기
+			// 회원가입과 달리 정보수정화면에서 내용을 보여주고 수정하기 때문에 유저정보를 가져오는 부분 추가
+			$data['user'] = $this->mem_m->user_data_chk($this->session->userdata('user_id'));
+
+			// view 파일 -> 쓰기 form 호출
+			$this->load->view('mem/modify_v', $data);
+
+		}else{ // 폼 전송 데이타가 있으면,
+
+			// var_dump($_POST);
+			$modify_data = array(
+				'name' => $this->input->post('name', TRUE),
+				'user_id' => $this->input->post('user_id', TRUE),
+				'email' => $this->input->post('email', TRUE),
+				'passwd' => $this->input->post('passwd', TRUE),
+				'new_pass' => $this->input->post('new_pass', TRUE)
+			);
+
+			$result = $this->mem_m->modify($modify_data);
+			if($result) {
+				// 등록 성공 시
+				alert('사용자 정보가 변경 되었습니다.', '/bt/main/');
+				exit;
+			}else{ // 아이디 // 비번이 맞지 않을 때
+				// 실패 시
+				alert('변경 등록이 실패하였습니다.\n 패스워드를 확인하여 주십시요.', '/bt/member/modify/');
+				exit;
+			}
+		} // 폼 검증 종료
+	}
 } // member class 종료
 // End of this File

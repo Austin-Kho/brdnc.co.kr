@@ -8,7 +8,7 @@ class Mem_m extends CI_Model
 	// }
 
 	/**
-	 * [login 로그인 DB처리]
+	 * [login 로그인 DB처리 모델]
 	 * @param  [Array] $auth [로그인 정보 데이터]
 	 * @return [boolean]       [로그인 성공 여부]
 	 */
@@ -25,6 +25,11 @@ class Mem_m extends CI_Model
 		}
 	}
 
+	/**
+	 * [join 회원가입 모델]
+	 * @param  [Array] $new_data [회원 가입 정보]
+	 * @return [boolean]           [입력 성공 여부]
+	 */
 	public function join($new_data) {
 		// 중복 정보 확인
 		$i_sql = " SELECT no FROM cms_member_table WHERE user_id = '".$new_data['user_id']."'";
@@ -60,6 +65,53 @@ class Mem_m extends CI_Model
 
 			// 결과 반환
 			return $result;
+		}
+	}
+
+	/**
+	 * [user_data_chk 회원정보 수정시 현재 사용자 정보]
+	 * @param  [type] $user [현재 사용자 세션 아이디]
+	 * @return [Array]       [현재 사용자 정보]
+	 */
+	public function user_data_chk($user) {
+		$sql = " SELECT name, user_id, email, passwd FROM cms_member_table WHERE user_id = '".$user."'" ;
+		$qry = $this->db->query($sql);
+
+		return $qry->row();
+	}
+
+	/**
+	 * [modify 회원정보 수정 모델]
+	 * @param  [Array] $data [수정 데이타]
+	 * @return [boolean]       [성공 여부]
+	 */
+	public function modify($data) {
+
+		// 사용자 정보와 비밀번호가 맞는지 체크
+		$sql = " SELECT no FROM cms_member_table WHERE user_id = '". $data['user_id']."' AND passwd = '".md5($data['passwd'])."' ";
+		$qry = $this->db->query($sql);
+
+		if($qry->num_rows() >0 ){
+			// 맞는 데이터가 있다면 해당 내용 반환
+			if( !$data['new_pass']) {
+				$modi_data = array(
+					'name' => $data['name'],
+					'email' => $data['email']
+				);
+			}else{
+				$modi_data = array(
+					'name' => $data['name'],
+					'email' => $data['email'],
+					'passwd' => md5($data['new_pass'])
+				);
+			}
+
+			$where = array('user_id' => $data['user_id']);
+			// UPDATE
+			$result = $this->db->update('cms_member_table', $modi_data, $where);
+			return $result ;
+		}else{
+			return FALSE;
 		}
 	}
 }
