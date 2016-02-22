@@ -6,7 +6,7 @@
 	echo form_open('http://brdnc.cafe24.com/bt/member/modify/', $attributes);
 ?>
 		<div id="main_logo" style="margin: 100px 0 50px 0;">
-			<img src="/bt/static/img/cms_main_logo.png" alt="" onmouseover="this.src='/bt/static/img/cms_main_logo_.png' " onmouseout="this.src='/bt/static/img/cms_main_logo.png' " style="cursor: pointer;">
+			<img src="/bt/static/img/cms_main_logo_.png" alt="" style="cursor: pointer;">
 		</div>
 
 		<h3 class="form-signin-heading">등록 계정정보 변경</h3>

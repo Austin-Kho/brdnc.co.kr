@@ -1,7 +1,8 @@
+      <div class="page-header" id="sdi_sub">
+        <span class="glyphicon glyphicon-blackboard" aria-hidden="true" id="glyphicon"></span>
+        <span>거래처 정보 관리</span>
+      </div>
 
-				<!-- <div class="page-header">
-        <h4>Tables</h4>
-      </div> -->
       <div class="row">
         <div class="col-md-6">
           <table class="table">

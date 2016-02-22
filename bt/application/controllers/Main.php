@@ -26,6 +26,10 @@ class Main extends CI_Controller {
 	}
 
 	public function index(){
+		$this->main();
+	}
+
+	public function main() {
 		$this->load->view('cms_main_index');
 	}
 
