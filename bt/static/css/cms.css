@@ -7,6 +7,7 @@
 	}/*background-color: #222222;*/
 	/* border : (프레임의 두께) (dotted, dashed, solid, double, groove, ridge, indet, outset 중에서 선택하세요) (프레임색깔)*/
 	/* 높이값 100% 마진, 패딩 값이 0일 경우 단위 안붙여도 괜찮음 */
+
 	::selection { background-color: #005FAF; color: #FFF; }
 	::-moz-selection { background-color: #005FAF; color: #FFF; }
 	a,nav,input,li,img {outline:none; } /*select-dummy: expression(this.hideFocus=true);}*/
@@ -14,9 +15,7 @@
 	div.container#main_container { background-color: white; }
 	footer.footer { border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid; background-color: #eeeeee; margin-top: 25px;}
 
-	#md_sub a { color: #555555; }
-	#md_sub .active a { color: #337AB7; }
-
+	.nav-tabs { margin-bottom: -20px; }
 
 	.page-header .nav-pills a {  margin-top: 3px; width: 110px; text-align: center;}
 	.page-header .nav-pills a:hover { font-weight: bold; }
