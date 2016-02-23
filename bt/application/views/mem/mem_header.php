@@ -7,20 +7,20 @@
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<link rel="shortcut icon" href="/bt/static/img/cms.ico">
+		<link rel="shortcut icon" href="<?php echo $this->config->base_url(); ?>static/img/cms.ico">
 
 		<title>[주]바램디앤씨 관리시스템</title>
 
 		<!-- Bootstrap core CSS -->
-    		<link type="text/css" href="/bt/static/lib/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet">
-		<link type="text/css" href="/bt/static/css/cms.css" rel="stylesheet">
+    		<link type="text/css" href="<?php echo $this->config->base_url(); ?>static/lib/bootstrap/css/bootstrap.min.css" media="screen" rel="stylesheet">
+		<link type="text/css" href="<?php echo $this->config->base_url(); ?>static/css/cms.css" rel="stylesheet">
 
 		<!--[if lt IE 9]>
   		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
 		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-		<script src="/bt/static/lib/calendar/calendar.js"></script>
-		<script src="/bt/static/js/global.js"></script>
+		<script src="<?php echo $this->config->base_url(); ?>static/lib/calendar/calendar.js"></script>
+		<script src="<?php echo $this->config->base_url(); ?>static/js/global.js"></script>
 
 		<!-- <script src="../common/_menu1.js"></script> -->
 		<script type="text/javascript">

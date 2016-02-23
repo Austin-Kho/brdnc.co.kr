@@ -47,7 +47,7 @@ class Member extends CI_Controller
 		$this->form_validation->set_rules('user_id', '아이디', 'required|alpha_numeric');
 		$this->form_validation->set_rules('passwd', '비밀번호', 'required');
 
-		// echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
+		//echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 
 		if($this->form_validation->run() == FALSE) { // 폼 전송 데이타가 없으면,
 
@@ -55,6 +55,7 @@ class Member extends CI_Controller
 			$this->load->view('mem/login_v');
 
 		}else{   // 폼 전송 데이타가 있으면,
+
 			$hash_pass = md5($this->input->post('passwd'));
 			$login_data = array(
 				'user_id' => $this->input->post('user_id', TRUE),
@@ -67,7 +68,7 @@ class Member extends CI_Controller
 
 			if($result) {
 				if($result->request==2){
-					alert('관리자 사용 승인 후 사용이 가능합니다.\n승인 지연 시, 직접 관리자에게 문의하여 주세요.\n\nEmail : cigiko@naver.com / 전화문의 : 010-3320-0088', '/bt');
+					alert('관리자 사용 승인 후 사용이 가능합니다.\n승인 지연 시, 직접 관리자에게 문의하여 주세요.\n\nEmail : cigiko@naver.com / 전화문의 : 010-3320-0088', $this->config->base_url());
 				}else{
 					// 세션 생성
 					$newdata = array(
@@ -77,7 +78,7 @@ class Member extends CI_Controller
 					);
 					$this->session->set_userdata($newdata);
 
-					if($login_data['id_rem'] =='rem') { // 쿠키 저장 체크가 되어 있으면
+					if($login_data['id_rem'] =='rem') {        // 쿠키 저장 체크가 되어 있으면
 						if( !$this->input->cookie('id_r', TRUE)) { // 실제 쿠키가 없으면 만들고
 
 							$id_r_Cookie = array(
@@ -107,12 +108,12 @@ class Member extends CI_Controller
 						delete_cookie('id_r', '', '/', '');
 						delete_cookie('id', '', '/', '');
 					}
-					echo "<meta http-equiv='Refresh' content='0; URL=/bt/main/'>";
+					echo "<meta http-equiv='Refresh' content='0; URL=".$this->config->base_url()."main/'>";
 					exit;
 				}
 			}else{ // 아이디 // 비번이 맞지 않을 때
 				// 실패 시
-				alert('아이디 또는 비밀번호를 확인해 주세요.', '/bt/member/login');
+				alert('아이디 또는 비밀번호를 확인해 주세요.', $this->config->base_url().'member/login');
 				exit;
 			}
 		}
@@ -128,7 +129,7 @@ class Member extends CI_Controller
 
 		echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
 
-		echo "<meta http-equiv='Refresh' content='0; URL=/bt/member/'>";
+		echo "<meta http-equiv='Refresh' content='0; URL=".$this->config->base_url()."member/'>";
 		exit;
 	}
 
@@ -166,10 +167,10 @@ class Member extends CI_Controller
 
 			if($result) {
 				// 등록 성공 시
-				alert('등록 되었습니다. \n 관리자의 승인 후 로그인 하여 주십시요.', '/bt/member/login/');
+				alert('등록 되었습니다. \n 관리자의 승인 후 로그인 하여 주십시요.', $this->config->base_url().'member/login/');
 			}else{ // 아이디 // 비번이 맞지 않을 때
 				// 실패 시
-				alert('계정등록에 실패하였습니다.\n 다시 시도하여 주십시요.', '/bt/member/join/');
+				alert('계정등록에 실패하였습니다.\n 다시 시도하여 주십시요.', $this->config->base_url().'member/join/');
 				exit;
 			}
 		} // 폼 검증 종료
@@ -217,14 +218,14 @@ class Member extends CI_Controller
 
 			if($result) {
 				// 등록 성공 시
-				alert('사용자 정보가 변경 되었습니다.', '/bt/main/');
+				alert('사용자 정보가 변경 되었습니다.', $this->config->base_url().'main/');
 				exit;
 			}else{ // 아이디 // 비번이 맞지 않을 때
 				// 실패 시
-				alert('계정정보 변경등록에 실패하였습니다.\n사용자 비밀번호를 확인하여 주십시요.', '/bt/member/modify/');
+				alert('계정정보 변경등록에 실패하였습니다.\n사용자 비밀번호를 확인하여 주십시요.', $this->config->base_url().'member/modify/');
 				exit;
 			}
 		} // 폼 검증 종료
-	}
+	} // modify() 함수 종료
 } // member class 종료
 // End of this File

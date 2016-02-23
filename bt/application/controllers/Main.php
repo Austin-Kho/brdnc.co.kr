@@ -6,10 +6,12 @@ class Main extends CI_Controller {
 	/**
 	 *
 	 */
+	public $root;
+
 	public function __construct(){
 		parent::__construct();
 		if(@$this->session->userdata['logged_in'] !== TRUE) {
-			echo "<meta http-equiv='Refresh' content='0; URL=/bt/member/'>";
+			echo "<meta http-equiv='Refresh' content='0; URL=".$this->config->base_url()."member/'>";
 			exit;
 		}
 	}
@@ -34,6 +36,8 @@ class Main extends CI_Controller {
 	}
 
 	public function module() {
-		$this->load->view('cms_module');
+		//$this->load->view('cms_module');
+		$this->load->view('no_auth');
 	}
 }
+// End of this File

@@ -21,35 +21,35 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
           <div class="item active">
-            <img src="/bt/static/img/555.jpg" alt="First slide">
+            <img src="<?php echo $this->config->base_url(); ?>static/img/555.jpg" alt="First slide">
             <div class="carousel-caption">
               <h3>First slide label</h3>
               <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </div>
           </div>
           <div class="item">
-            <img src="/bt/static/img/111.jpg" alt="Second slide">
+            <img src="<?php echo $this->config->base_url(); ?>static/img/111.jpg" alt="Second slide">
             <div class="carousel-caption">
               <h3>Second slide label</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
           </div>
           <div class="item">
-            <img src="/bt/static/img/444.jpg" alt="Third slide">
+            <img src="<?php echo $this->config->base_url(); ?>static/img/444.jpg" alt="Third slide">
             <div class="carousel-caption">
               <h3>Third slide label</h3>
               <p>Praesent commodo cursus magna, vel scelerisque nisl<br> consectetur.</p>
             </div>
           </div>
           <div class="item">
-            <img src="/bt/static/img/333.jpg" alt="Third slide">
+            <img src="<?php echo $this->config->base_url(); ?>static/img/333.jpg" alt="Third slide">
             <div class="carousel-caption">
               <h3>...</h3>
               <p>...</p>
             </div>
           </div>
           <div class="item">
-            <img src="/bt/static/img/222.jpg" alt="Third slide">
+            <img src="<?php echo $this->config->base_url(); ?>static/img/222.jpg" alt="Third slide">
             <div class="carousel-caption">
               <h3>...</h3>
               <p>...</p>
@@ -73,7 +73,7 @@
       </div>
       <div class="well">
         <p>美정부, 아이폰 잠금해제 또 요청…"해제거부는 마케팅전략"// </h2>
-        <p>애플 "고객보안이 최우선" (샌프란시스코 AFP=연합뉴스) 팀 쿡 애플 최고경영자(CEO)는 17일(현지시간) '고객에게 드리는 메시지'를 통해 "미국 정부는 애플이 우리 고객의 보안을 위협하는 전에 없는 조처를 받아들이라고 요구해 왔다"며 "... <?php echo extension_loaded('mcrypt') ? 'Yup' : 'Nope'; ?></p>
+        <p>애플 "고객보안이 최우선" (샌프란시스코 AFP=연합뉴스) 팀 쿡 애플 최고경영자(CEO)는 17일(현지시간) '고객에게 드리는 메시지'를 통해 "미국 정부는 애플이 우리 고객의 보안을 위협하는 전에 없는 조처를 받아들이라고 요구해 왔다"며 "... <?php echo extension_loaded('mcrypt') ? 'Yup' : 'Nope';  echo $this->config->base_url();?></p>
       </div>
 
 

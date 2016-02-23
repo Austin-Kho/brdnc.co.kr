@@ -18,7 +18,7 @@
 				</header>
 <?php
 	$attributes = array('name' => 'join', 'class'=>'form-inline');
-	echo form_open('http://brdnc.cafe24.com/bt/member/', $attributes);
+	echo form_open($this->config->base_url.'member/', $attributes);
 ?>
 					<fieldset style="padding: 0 20px 0 20px;" class="pale10">
 						<div style="border-width:1px 0 0 0; border-style:solid; border-color:#eaeaea;">

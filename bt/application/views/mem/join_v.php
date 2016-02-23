@@ -2,10 +2,10 @@
 
 <?php
 	$attributes = array('name' => 'join', 'class' => 'form-signup');
-	echo form_open('http://brdnc.cafe24.com/bt/member/join/', $attributes);
+	echo form_open($this->config->base_url().'member/join/', $attributes);
 ?>
 		<div id="main_logo" style="margin: 100px 0 50px 0;">
-			<img src="/bt/static/img/cms_main_logo_.png" alt="" style="cursor: pointer;">
+			<img src="<?php echo $this->config->base_url(); ?>static/img/cms_main_logo_.png" alt="" style="cursor: pointer;">
 		</div>
 
 		<h3 class="form-signin-heading">신규 계정등록</h3>
@@ -25,5 +25,5 @@
 
 		<button class="btn btn-lg btn-primary btn-block" type="submit" style="margin: 20px 0 8px 0;">등록하기</button>
 	</form>
-	<a href="/bt/member/login/" style="color: #BBBBBB;" style="padding: 15px 0 60px 0;">돌아가기</a>
+	<a href="<?php echo $this->config->base_url(); ?>member/login/" style="color: #BBBBBB;" style="padding: 15px 0 60px 0;">돌아가기</a>
 </div> <!-- /container -->
