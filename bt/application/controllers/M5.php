@@ -51,8 +51,6 @@ class M5 extends CI_Controller {
 			$this->load->view('menu/m5/md2_v');
 			if( !$sdi or $sdi==1) $this->load->view('menu/m5/md2_sd1_v');
 			if($sdi==2) $this->load->view('menu/m5/md2_sd2_v');
-			if($sdi==3) $this->load->view('menu/m5/md2_sd3_v');
-
 		}
 	}
 }

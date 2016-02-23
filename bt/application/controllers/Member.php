@@ -49,10 +49,16 @@ class Member extends CI_Controller
 
 		// echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 
-		if($this->form_validation->run() == TRUE) { // 폼 전송 데이타가 있으면,
+		if($this->form_validation->run() == FALSE) { // 폼 전송 데이타가 없으면,
+
+			// view 파일 -> 쓰기 form 호출
+			$this->load->view('mem/login_v');
+
+		}else{   // 폼 전송 데이타가 있으면,
+			$hash_pass = md5($this->input->post('passwd'));
 			$login_data = array(
 				'user_id' => $this->input->post('user_id', TRUE),
-				'passwd' => md5($this->input->post('passwd', TRUE)),
+				'passwd' => $hash_pass,
 				'id_rem' => $this->input->post('id_rem',  TRUE)
 			);
 
@@ -109,9 +115,6 @@ class Member extends CI_Controller
 				alert('아이디 또는 비밀번호를 확인해 주세요.', '/bt/member/login');
 				exit;
 			}
-		}else{ // 폼 전송 데이타가 없으면,
-			// view 파일 -> 쓰기 form 호출
-			$this->load->view('mem/login_v');
 		}
 	}
 
@@ -145,7 +148,7 @@ class Member extends CI_Controller
 
 		echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 
-		if($this->form_validation->run() == FALSE) { // 폼 전송 데이타가 없으으면,
+		if($this->form_validation->run() == FALSE) { // 폼 전송 데이타가 없으면,
 
 			// view 파일 -> 쓰기 form 호출
 			$this->load->view('mem/join_v');
@@ -206,18 +209,19 @@ class Member extends CI_Controller
 				'name' => $this->input->post('name', TRUE),
 				'user_id' => $this->input->post('user_id', TRUE),
 				'email' => $this->input->post('email', TRUE),
-				'passwd' => $this->input->post('passwd', TRUE),
-				'new_pass' => $this->input->post('new_pass', TRUE)
+				'passwd' => md5($this->input->post('passwd', TRUE)),
+				'new_pass' => $this->input->post('new_pass', TRUE)   // 여기서는 해쉬하지 않는다 // 값이 없어도 해쉬값이 생성되기 때문
 			);
 
 			$result = $this->mem_m->modify($modify_data);
+
 			if($result) {
 				// 등록 성공 시
 				alert('사용자 정보가 변경 되었습니다.', '/bt/main/');
 				exit;
 			}else{ // 아이디 // 비번이 맞지 않을 때
 				// 실패 시
-				alert('변경 등록이 실패하였습니다.\n 패스워드를 확인하여 주십시요.', '/bt/member/modify/');
+				alert('계정정보 변경등록에 실패하였습니다.\n사용자 비밀번호를 확인하여 주십시요.', '/bt/member/modify/');
 				exit;
 			}
 		} // 폼 검증 종료

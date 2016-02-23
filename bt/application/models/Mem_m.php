@@ -59,7 +59,7 @@ class Mem_m extends CI_Model
 				'is_company' => 1,
 				'pj_posi' => 0,
 				'auth_level' => 9,
-				'reg_date' => date('Y-m-d H:i:S')
+				'reg_date' => 'now()'
 			);
 			$result = $this->db->insert('cms_member_table', $insert_array); // 테이블명, 데이터
 
@@ -88,26 +88,27 @@ class Mem_m extends CI_Model
 	public function modify($data) {
 
 		// 사용자 정보와 비밀번호가 맞는지 체크
-		$sql = " SELECT no FROM cms_member_table WHERE user_id = '". $data['user_id']."' AND passwd = '".md5($data['passwd'])."' ";
+		$sql = " SELECT no FROM cms_member_table WHERE user_id = '". $data['user_id']."' AND passwd = '".$data['passwd']."' ";
 		$qry = $this->db->query($sql);
 
-		if($qry->num_rows() >0 ){
-			// 맞는 데이터가 있다면 해당 내용 반환
-			if( !$data['new_pass']) {
+		if($qry->num_rows() >0 ){ // 사용자가 인증(ID, PASS가 일치)하면
+			// 비밀번호 변경 여부 체크
+			if( !$data['new_pass'] or $data['new_pass'] =='') {
 				$modi_data = array(
 					'name' => $data['name'],
 					'email' => $data['email']
 				);
 			}else{
+				$new_pass =  md5($data['new_pass']);
 				$modi_data = array(
 					'name' => $data['name'],
 					'email' => $data['email'],
-					'passwd' => md5($data['new_pass'])
+					'passwd' => $new_pass
 				);
 			}
 
 			$where = array('user_id' => $data['user_id']);
-			// UPDATE
+			// 데이터베이스 UPDATE
 			$result = $this->db->update('cms_member_table', $modi_data, $where);
 			return $result ;
 		}else{
