@@ -34,23 +34,37 @@ class M4 extends CI_Controller {
 	}
 
 	public function project($mdi='', $sdi=''){
+		//$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
-		$mdi = $this->uri->segment(3);
-		$sdi = $this->uri->segment(4);
+		if( !$this->uri->segment(3)) $m_di = 1; else $m_di = $this->uri->segment(3);
+		if( !$this->uri->segment(4)) $s_di = 1; else $s_di = $this->uri->segment(4);
 
-		$this->load->view('menu/m4/project_v');
+		$menu['s_di'] = array(
+			array('데이터 등록', '데이터 수정'), // 첫번째 하위 메뉴
+			array('검토 현장', '현장 등록'),                          // 두번째 하위 메뉴
+			array('동호수 데이터 입력', '기본정보 수정'), // 첫번째 하위 제목
+			array('프로젝트 검토 현황', '신규 프로젝트 등록')                                  // 두번째 하위 제목
+		);
 
-		if( !$mdi or $mdi == '1' )  {
-			$this->load->view('menu/m4/md1_v');
-			if( !$sdi or $sdi==1) $this->load->view('menu/m4/md1_sd1_v');
-			if($sdi==2) $this->load->view('menu/m4/md1_sd2_v');
-			if($sdi==3) $this->load->view('menu/m4/md1_sd3_v');
+		$this->load->view('menu/m4/project_v', $menu);
 
-		} else if($mdi == '2' ) {
-			$this->load->view('menu/m4/md2_v');
-			if( !$sdi or $sdi==1) $this->load->view('menu/m4/md2_sd1_v');
-			if($sdi==2) $this->load->view('menu/m4/md2_sd2_v');
-			if($sdi==3) $this->load->view('menu/m4/md2_sd3_v');
+		// 프로젝트 관리 1. 데이터등록 ////////////////////////////////////////////////////////////////////
+		if($m_di==1 && $s_di==1 ){
+			$this->load->view('/menu/m4/md1_sd1_v');
+
+
+		// 프로젝트 관리 2. 데이터수정 ////////////////////////////////////////////////////////////////////
+		}else if($m_di==1 && $s_di==2) {
+			$this->load->view('/menu/m4/md1_sd2_v');
+
+
+		// 신규 프로젝트 1. 검토현장 ////////////////////////////////////////////////////////////////////
+		}else if($m_di==2 && $s_di==1) {
+			$this->load->view('/menu/m4/md2_sd1_v');
+
+		// 신규 프로젝트 1. 현장등록 ////////////////////////////////////////////////////////////////////
+		}else if($m_di==2 && $s_di==2) {
+			$this->load->view('/menu/m4/md2_sd2_v');
 
 		}
 	}

@@ -34,23 +34,44 @@ class M1 extends CI_Controller {
 	}
 
 	public function work($mdi='', $sdi=''){
+		//$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
-		$mdi = $this->uri->segment(3);
-		$sdi = $this->uri->segment(4);
+		if( !$this->uri->segment(3)) $m_di = 1; else $m_di = $this->uri->segment(3);
+		if( !$this->uri->segment(4)) $s_di = 1; else $s_di = $this->uri->segment(4);
 
-		$this->load->view('menu/m1/work_v');
+		$menu['s_di'] = array(
+			array('계약 현황', '계약 등록', '동호수 현황'), // 첫번째 하위 메뉴
+			array('상담 일지', '업무 일지', '업무 보고'),                          // 두번째 하위 메뉴
+			array('현장별 계약현황', '현장별 계약등록(수정)', '동호수 계약 현황도'), // 첫번째 하위 제목
+			array('고객 상담일지', '현장별 업무일지', '시행사 업무보고')                                  // 두번째 하위 제목
+		);
 
-		if( !$mdi or $mdi == '1' )  {
-			$this->load->view('menu/m1/md1_v');
-			if( !$sdi or $sdi==1) $this->load->view('menu/m1/md1_sd1_v');
-			if($sdi==2) $this->load->view('menu/m1/md1_sd2_v');
-			if($sdi==3) $this->load->view('menu/m1/md1_sd3_v');
+		$this->load->view('menu/m1/work_v', $menu);
 
-		} else if($mdi == '2' ) {
-			$this->load->view('menu/m1/md2_v');
-			if( !$sdi or $sdi==1) $this->load->view('menu/m1/md2_sd1_v');
-			if($sdi==2) $this->load->view('menu/m1/md2_sd2_v');
-			if($sdi==3) $this->load->view('menu/m1/md2_sd3_v');
+		// 계약 현황 1. 계약 현황 ////////////////////////////////////////////////////////////////////
+		if($m_di==1 && $s_di==1 ){
+			$this->load->view('/menu/m1/md1_sd1_v');
+
+
+		// 계약 현황 2. 계약 등록 ////////////////////////////////////////////////////////////////////
+		}else if($m_di==1 && $s_di==2) {
+			$this->load->view('/menu/m1/md1_sd2_v');
+
+		// 계약 현황 3. 동호수 현황 ////////////////////////////////////////////////////////////////////
+		}else if($m_di==1 && $s_di==3) {
+			$this->load->view('/menu/m1/md1_sd3_v');
+
+		// 업무 현황 1. 상담일지 ////////////////////////////////////////////////////////////////////
+		}else if($m_di==2 && $s_di==1) {
+			$this->load->view('/menu/m1/md2_sd1_v');
+
+		// 업무 현황 2. 업무일지 ////////////////////////////////////////////////////////////////////
+		}else if($m_di==2 && $s_di==2) {
+			$this->load->view('/menu/m1/md2_sd2_v');
+
+		// 업무 현황 3. 업무보고 ////////////////////////////////////////////////////////////////////
+		}else if($m_di==2 && $s_di==3) {
+			$this->load->view('/menu/m1/md2_sd3_v');
 
 		}
 	}

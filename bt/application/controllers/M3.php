@@ -34,23 +34,44 @@ class M3 extends CI_Controller {
 	}
 
 	public function capital($mdi='', $sdi=''){
+		//$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
-		$mdi = $this->uri->segment(3);
-		$sdi = $this->uri->segment(4);
+		if( !$this->uri->segment(3)) $m_di = 1; else $m_di = $this->uri->segment(3);
+		if( !$this->uri->segment(4)) $s_di = 1; else $s_di = $this->uri->segment(4);
 
-		$this->load->view('menu/m3/capital_v');
+		$menu['s_di'] = array(
+			array('자금 일보', '입출금 내역', '입출금 등록'), // 첫번째 하위 메뉴
+			array('분 개 장', '일·월계표', '제무 제표'),                          // 두번째 하위 메뉴
+			array('자금 일보', '현장별 계약등록(수정)', '동호수 계약 현황도'), // 첫번째 하위 제목
+			array('분 개 장', '일·월계표', '주요 제무제표')                                  // 두번째 하위 제목
+		);
 
-		if( !$mdi or $mdi == '1' )  {
-			$this->load->view('menu/m3/md1_v');
-			if( !$sdi or $sdi==1) $this->load->view('menu/m3/md1_sd1_v');
-			if($sdi==2) $this->load->view('menu/m3/md1_sd2_v');
-			if($sdi==3) $this->load->view('menu/m3/md1_sd3_v');
+		$this->load->view('menu/m3/capital_v', $menu);
 
-		} else if($mdi == '2' ) {
-			$this->load->view('menu/m3/md2_v');
-			if( !$sdi or $sdi==1) $this->load->view('menu/m3/md2_sd1_v');
-			if($sdi==2) $this->load->view('menu/m3/md2_sd2_v');
-			if($sdi==3) $this->load->view('menu/m3/md2_sd3_v');
+		// 자금 현황 1. 자금일보 ////////////////////////////////////////////////////////////////////
+		if($m_di==1 && $s_di==1 ){
+			$this->load->view('/menu/m3/md1_sd1_v');
+
+
+		// 자금 현황 2. 입출금 내역 ////////////////////////////////////////////////////////////////////
+		}else if($m_di==1 && $s_di==2) {
+			$this->load->view('/menu/m3/md1_sd2_v');
+
+		// 자금 현황 3. 입출금 등록 ////////////////////////////////////////////////////////////////////
+		}else if($m_di==1 && $s_di==3) {
+			$this->load->view('/menu/m3/md1_sd3_v');
+
+		// 회계관리 1. 분개장 ////////////////////////////////////////////////////////////////////
+		}else if($m_di==2 && $s_di==1) {
+			$this->load->view('/menu/m3/md2_sd1_v');
+
+		// 회계관리 2. 일월계표 ////////////////////////////////////////////////////////////////////
+		}else if($m_di==2 && $s_di==2) {
+			$this->load->view('/menu/m3/md2_sd2_v');
+
+		// 회계관리 3. 제무제표 ////////////////////////////////////////////////////////////////////
+		}else if($m_di==2 && $s_di==3) {
+			$this->load->view('/menu/m3/md2_sd3_v');
 
 		}
 	}

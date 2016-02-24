@@ -1,15 +1,10 @@
-      <div class="page-header" id="sdi_sub">
-        <span class="glyphicon glyphicon-blackboard" aria-hidden="true" id="glyphicon"></span>
-        <span>현장별 계약현황</span>
-      </div>
-
       <div class="row">
         <div class="col-md-6">
           <table class="table">
             <thead>
               <tr>
                 <th>#</th>
-                <th>First Name</th>
+                <th>현장별 계약현황</th>
                 <th>Last Name</th>
                 <th>Username</th>
               </tr>
