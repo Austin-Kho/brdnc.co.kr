@@ -35,24 +35,37 @@ class M5 extends CI_Controller {
 	}
 
 	public function config($mdi='', $sdi=''){
+		$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		$mdi = $this->uri->segment(3);
 		$sdi = $this->uri->segment(4);
 
-		$this->load->view('menu/m5/config_v');
+		$md_bt = array(
+			$md1_sd_bt = array('부서 관리', '직원 관리', '거래처 정보', '계좌 관리'),
+			$md2_sd_bt = array('회사 정보', '권한 관리')
+		);
 
-		if( !$mdi or $mdi == '1' )  {
-			$this->load->view('menu/m5/md1_v');
-			if( !$sdi or $sdi==1) $this->load->view('menu/m5/md1_sd1_v');
-			if($sdi==2) $this->load->view('menu/m5/md1_sd2_v');
-			if($sdi==3) $this->load->view('menu/m5/md1_sd3_v');
-			if($sdi==4) $this->load->view('menu/m5/md1_sd4_v');
+		$sd_sub = array(
+			$md1_sd_sub = array('부서 정보 관리', '직원 보 관리', '거래처 정보 정보', '은행계좌 관리'),
+			$md2_sd_sub = array('회사 기본 정보', '사용자 권한관리')
+		);
 
-		} else if($mdi == '2' ) {
-			$this->load->view('menu/m5/md2_v');
-			if( !$sdi or $sdi==1) $this->load->view('menu/m5/md2_sd1_v');
-			if($sdi==2) $this->load->view('menu/m5/md2_sd2_v');
-		}
+		$this->load->view('menu/m5/config_v', $md_bt);
+
+		// if( !$mdi or $mdi == '1' )  {
+
+		// 	$this->load->view('menu/m5/md1_v');
+
+		// 	if( !$sdi or $sdi==1) $this->load->view('menu/m5/md1_sd1_v');
+		// 	if($sdi==2) $this->load->view('menu/m5/md1_sd2_v');
+		// 	if($sdi==3) $this->load->view('menu/m5/md1_sd3_v');
+		// 	if($sdi==4) $this->load->view('menu/m5/md1_sd4_v');
+
+		// } else if($mdi == '2' ) {
+		// 	$this->load->view('menu/m5/md2_v');
+		// 	if( !$sdi or $sdi==1) $this->load->view('menu/m5/md2_sd1_v');
+		// 	if($sdi==2) $this->load->view('menu/m5/md2_sd2_v');
+		// }
 	}
 }
 // End of this File
