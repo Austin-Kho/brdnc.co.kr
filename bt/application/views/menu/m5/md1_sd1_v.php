@@ -24,7 +24,6 @@
               </tr>
               <tr>
                 <td>3</td>
-                <td>Larry</td>
                 <td>the Bird</td>
                 <td>@twitter</td>
               </tr>

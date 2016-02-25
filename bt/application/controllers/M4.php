@@ -12,6 +12,7 @@ class M4 extends CI_Controller {
 			echo "<meta http-equiv='Refresh' content='0; URL=".$this->config->base_url()."member/'>";
 			exit;
 		}
+		$this->load->model('main_m'); //모델 파일 로드
 	}
 
 	/**
@@ -36,8 +37,8 @@ class M4 extends CI_Controller {
 	public function project($mdi='', $sdi=''){
 		//$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
-		if( !$this->uri->segment(3)) $m_di = 1; else $m_di = $this->uri->segment(3);
-		if( !$this->uri->segment(4)) $s_di = 1; else $s_di = $this->uri->segment(4);
+		if( !$this->uri->segment(3)) $mdi = 1; else $mdi = $this->uri->segment(3);
+		if( !$this->uri->segment(4)) $sdi = 1; else $sdi = $this->uri->segment(4);
 
 		$menu['s_di'] = array(
 			array('데이터 등록', '데이터 수정'), // 첫번째 하위 메뉴
@@ -49,23 +50,64 @@ class M4 extends CI_Controller {
 		$this->load->view('menu/m4/project_v', $menu);
 
 		// 프로젝트 관리 1. 데이터등록 ////////////////////////////////////////////////////////////////////
-		if($m_di==1 && $s_di==1 ){
-			$this->load->view('/menu/m4/md1_sd1_v');
+		if($mdi==1 && $sdi==1 ){
+			// 조회 등록 권한 체크
+			$auth = $this->main_m->auth_chk('_m4_1_1', $this->session->userdata['user_id']);
 
+			if( !$auth['_m4_1_1'] or $auth['_m4_1_1']==0) {
+				$this->load->view('no_auth');
+			}else{
+
+				//본 페이지 로딩
+				$this->load->view('/menu/m4/md1_sd1_v');
+			}
 
 		// 프로젝트 관리 2. 데이터수정 ////////////////////////////////////////////////////////////////////
-		}else if($m_di==1 && $s_di==2) {
-			$this->load->view('/menu/m4/md1_sd2_v');
+		}else if($mdi==1 && $sdi==2) {
+			// 조회 등록 권한 체크
+			$auth = $this->main_m->auth_chk('_m4_1_2', $this->session->userdata['user_id']);
+
+			if( !$auth['_m4_1_2'] or $auth['_m4_1_2']==0) {
+				$this->load->view('no_auth');
+			}else{
+
+				//본 페이지 로딩
+				$this->load->view('/menu/m4/md1_sd2_v');
+			}
+
+
+
 
 
 		// 신규 프로젝트 1. 검토현장 ////////////////////////////////////////////////////////////////////
-		}else if($m_di==2 && $s_di==1) {
-			$this->load->view('/menu/m4/md2_sd1_v');
+		}else if($mdi==2 && $sdi==1) {
+			// 조회 등록 권한 체크
+			$auth = $this->main_m->auth_chk('_m4_2_1', $this->session->userdata['user_id']);
+
+			if( !$auth['_m4_2_1'] or $auth['_m4_2_1']==0) {
+				$this->load->view('no_auth');
+			}else{
+
+				//본 페이지 로딩
+				$this->load->view('/menu/m4/md2_sd1_v');
+			}
+
+
+
+
 
 		// 신규 프로젝트 1. 현장등록 ////////////////////////////////////////////////////////////////////
-		}else if($m_di==2 && $s_di==2) {
-			$this->load->view('/menu/m4/md2_sd2_v');
+		}else if($mdi==2 && $sdi==2) {
+			// 조회 등록 권한 체크
+			$auth = $this->main_m->auth_chk('_m4_2_2', $this->session->userdata['user_id']);
 
+			if( !$auth['_m4_2_2'] or $auth['_m4_2_2']==0) {
+				$this->load->view('no_auth');
+			}else{
+
+				//본 페이지 로딩
+				$this->load->view('/menu/m4/md2_sd2_v');
+			}
 		}
 	}
 }
