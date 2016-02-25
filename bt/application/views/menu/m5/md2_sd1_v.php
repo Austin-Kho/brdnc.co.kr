@@ -1,253 +1,110 @@
-      <div class="row">
-        <div class="col-md-6">
-          <table class="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>회사 기본 정보</th>
-                <th>Last Name</th>
-                <th>Username</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-md-6">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
 
-      <div class="row">
-        <div class="col-md-6">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td rowspan="2">1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@TwBootstrap</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-md-6">
-          <table class="table table-condensed">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-
-      <div class="page-header">
-        <h1>Panels</h1>
-      </div>
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
+      <form>
+        <fieldset class="container" style="margin: 5px 0;">
+          <div>
+            <label class="col-md-2 form1" for="input01" style="padding-top: 8px; border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid; background-color: #eaeaea;">회사명</label>
+            <div class="col-md-4 form2" style="padding-top: 8px; border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid;">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
             </div>
-            <div class="panel-body">
-              Panel content
+            <label class="col-md-2 form1" for="input01" style="padding-top: 8px; border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid;">사업자등록번호</label>
+            <div class="col-md-4 form2" style="padding-top: 8px; border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid;">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
             </div>
           </div>
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
+          <div>
+            <label class="col-md-2 form1" for="input01">대표자</label>
+            <div class="col-md-4 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
             </div>
-            <div class="panel-body">
-              Panel content
-            </div>
-          </div>
-        </div><!-- /.col-sm-4 -->
-        <div class="col-sm-4">
-          <div class="panel panel-success">
-            <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
-            </div>
-            <div class="panel-body">
-              Panel content
+            <label class="col-md-2 form1" for="input01">법인등록번호</label>
+            <div class="col-md-4 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
             </div>
           </div>
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
+          <div>
+            <label class="col-md-2 form1" for="input01">업태</label>
+            <div class="col-md-4 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
             </div>
-            <div class="panel-body">
-              Panel content
-            </div>
-          </div>
-        </div><!-- /.col-sm-4 -->
-        <div class="col-sm-4">
-          <div class="panel panel-warning">
-            <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
-            </div>
-            <div class="panel-body">
-              Panel content
+            <label class="col-md-2 form1" for="input01">종목</label>
+            <div class="col-md-4 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
             </div>
           </div>
-          <div class="panel panel-danger">
-            <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
+          <div>
+            <label class="col-md-2 form1" for="input01">대표전화</label>
+            <div class="col-md-4 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
             </div>
-            <div class="panel-body">
-              Panel content
+            <label class="col-md-2 form1" for="input01">휴대전화(비상)</label>
+            <div class="col-md-4 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
             </div>
           </div>
-        </div><!-- /.col-sm-4 -->
-      </div>
-
-
-      <div class="page-header">
-        <h1>Badges</h1>
-      </div>
-      <p>
-        <a href="#">Inbox <span class="badge">42</span></a>
-      </p>
-      <ul class="nav nav-pills" role="tablist">
-        <li role="presentation" class="active"><a href="#">Home <span class="badge">42</span></a></li>
-        <li role="presentation"><a href="#">Profile</a></li>
-        <li role="presentation"><a href="#">Messages <span class="badge">3</span></a></li>
-      </ul>
-
-
-      <div class="page-header">
-        <h1>List groups</h1>
-      </div>
-      <div class="row">
-        <div class="col-sm-4">
-          <ul class="list-group">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-          </ul>
-        </div><!-- /.col-sm-4 -->
-        <div class="col-sm-4">
-          <div class="list-group">
-            <a href="#" class="list-group-item active">
-              Cras justo odio
-            </a>
-            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-            <a href="#" class="list-group-item">Morbi leo risus</a>
-            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-            <a href="#" class="list-group-item">Vestibulum at eros</a>
+          <div>
+            <label class="col-md-2 form1" for="input01">FAX</label>
+            <div class="col-md-4 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
+            </div>
+            <label class="col-md-2 form1" for="input01">기업구분</label>
+            <div class="col-md-4 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
+            </div>
           </div>
-        </div><!-- /.col-sm-4 -->
-        <div class="col-sm-4">
-          <div class="list-group">
-            <a href="#" class="list-group-item active">
-              <h4 class="list-group-item-heading">List group item heading</h4>
-              <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-            </a>
-            <a href="#" class="list-group-item">
-              <h4 class="list-group-item-heading">List group item heading</h4>
-              <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-            </a>
-            <a href="#" class="list-group-item">
-              <h4 class="list-group-item-heading">List group item heading</h4>
-              <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-            </a>
+          <div>
+            <label class="col-md-2 form1" for="input01">설립일자</label>
+            <div class="col-md-4 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
+            </div>
+            <label class="col-md-2 form1" for="input01">개업일자</label>
+            <div class="col-md-4 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
+            </div>
           </div>
-        </div><!-- /.col-sm-4 -->
-      </div>
+          <div>
+            <label class="col-md-2 form1" for="input01">기초잔액 입력월</label>
+            <div class="col-md-4 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
+            </div>
+            <label class="col-md-2 form1" for="input01">업무개시/결산주기</label>
+            <div class="col-md-4 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
+            </div>
+          </div>
+          <div>
+            <label class="col-md-2 form2" for="input01">E-mail(비상)</label>
+            <div class="col-md-4 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
+            </div>
+            <label class="col-md-2 form1" for="input01">세금계산서용 Email</label>
+            <div class="col-md-4 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
+            </div>
+          </div>
+          <div>
+            <label class="col-md-2 form1" for="input01">세무서[1]</label>
+            <div class="col-md-4 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
+            </div>
+            <label class="col-md-2 form1" for="input01">세무서[2]</label>
+            <div class="col-md-4 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
+            </div>
+          </div>
+          <div>
+            <label class="col-md-2 form1" for="input01">회사주소</label>
+            <div class="col-md-10 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
+            </div>
+            <label class="col-md-2 form1" for="input01">회사 영문명</label>
+            <div class="col-md-10 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
+            </div>
+            <label class="col-md-2 form1" for="input01">회사 영문주소</label>
+            <div class="col-md-10 form2">
+              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
+            </div>
+          </div>
+          <div><button>입력하기</button></div>
+        </fieldset>
+      </form>

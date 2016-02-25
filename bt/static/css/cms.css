@@ -4,13 +4,15 @@
 		height:100%; width:100%;
 		margin:0; padding:0; border:0 outset gray;
 		background-image : url('/bt/static/img/bg_dot.jpg');
-	}/*background-color: #222222;*/
+	}
+	/*background-color: #222222;*/
 	/* border : (프레임의 두께) (dotted, dashed, solid, double, groove, ridge, indet, outset 중에서 선택하세요) (프레임색깔)*/
 	/* 높이값 100% 마진, 패딩 값이 0일 경우 단위 안붙여도 괜찮음 */
 
 	::selection { background-color: #005FAF; color: #FFF; }
 	::-moz-selection { background-color: #005FAF; color: #FFF; }
-	a,nav,input,li,img {outline:none; } /*select-dummy: expression(this.hideFocus=true);}*/
+	a,nav,input,li,img {outline:none; }
+	/*select-dummy: expression(this.hideFocus=true);}*/
 
 	div.container#main_container { background-color: white; }
 	footer.footer { border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid; background-color: #eeeeee; margin-top: 25px;}
@@ -24,3 +26,6 @@
 
 	#sdi_sub { margin-top: -20px; padding: 18px 0 12px 20px; background-color: #F8F8F8; font-weight: bold; color: #6666D4; border-bottom-color: #B2BCDE;}
 	#glyphicon { color: #CC0099;" }
+
+	.form1 { padding: 55px 0; border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid;}
+	.form2 { padding: 55px 0; border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid;}
