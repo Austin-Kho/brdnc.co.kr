@@ -12,6 +12,7 @@ class M5 extends CI_Controller {
 			echo "<meta http-equiv='Refresh' content='0; URL=".$this->config->base_url()."member/'>";
 			exit;
 		}
+		$this->load->model('m5_m');
 		$this->load->helper('is_mobile');
 	}
 
@@ -49,9 +50,16 @@ class M5 extends CI_Controller {
 
 		$this->load->view('menu/m5/config_v', $menu);
 
+		$this->load->helper('alert');
+
 		// 기본정보관리 1. 부서관리 ////////////////////////////////////////////////////////////////////
 		if($m_di==1 && $s_di==1 ){
-			$this->load->view('/menu/m5/md1_sd1_v');
+			$result = $this->m5_m->auth_chk('_m5_2_1');  // 모델->디비에서 권한 체크
+			//if( !$result or $result == 0) {
+				$this->load->view('no_auth');
+			//}else if($result > 0){
+				$this->load->view('/menu/m5/md1_sd1_v');
+			//}
 
 
 		// 기본정보관리 2. 직원관리 ////////////////////////////////////////////////////////////////////
