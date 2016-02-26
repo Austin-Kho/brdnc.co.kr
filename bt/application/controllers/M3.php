@@ -12,6 +12,7 @@ class M3 extends CI_Controller {
 			echo "<meta http-equiv='Refresh' content='0; URL=".$this->config->base_url()."member/'>";
 			exit;
 		}
+		$this->load->model('main_m'); //모델 파일 로드
 	}
 
 	/**
@@ -36,8 +37,8 @@ class M3 extends CI_Controller {
 	public function capital($mdi='', $sdi=''){
 		//$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
-		if( !$this->uri->segment(3)) $m_di = 1; else $m_di = $this->uri->segment(3);
-		if( !$this->uri->segment(4)) $s_di = 1; else $s_di = $this->uri->segment(4);
+		if( !$this->uri->segment(3)) $mdi = 1; else $mdi = $this->uri->segment(3);
+		if( !$this->uri->segment(4)) $sdi = 1; else $sdi = $this->uri->segment(4);
 
 		$menu['s_di'] = array(
 			array('자금 일보', '입출금 내역', '입출금 등록'), // 첫번째 하위 메뉴
@@ -49,30 +50,103 @@ class M3 extends CI_Controller {
 		$this->load->view('menu/m3/capital_v', $menu);
 
 		// 자금 현황 1. 자금일보 ////////////////////////////////////////////////////////////////////
-		if($m_di==1 && $s_di==1 ){
-			$this->load->view('/menu/m3/md1_sd1_v');
+		if($mdi==1 && $sdi==1 ){
+			// 조회 등록 권한 체크
+			$auth = $this->main_m->auth_chk('_m3_1_1', $this->session->userdata['user_id']);
+
+			if( !$auth['_m3_1_1'] or $auth['_m3_1_1']==0) {
+				$this->load->view('no_auth');
+			}else{
+
+				//본 페이지 로딩
+				$this->load->view('/menu/m3/md1_sd1_v');
+			}
+
+
+
+
 
 
 		// 자금 현황 2. 입출금 내역 ////////////////////////////////////////////////////////////////////
-		}else if($m_di==1 && $s_di==2) {
-			$this->load->view('/menu/m3/md1_sd2_v');
+		}else if($mdi==1 && $sdi==2) {
+			// 조회 등록 권한 체크
+			$auth = $this->main_m->auth_chk('_m3_1_2', $this->session->userdata['user_id']);
+
+			if( !$auth['_m3_1_2'] or $auth['_m3_1_2']==0) {
+				$this->load->view('no_auth');
+			}else{
+
+				//본 페이지 로딩
+				$this->load->view('/menu/m3/md1_sd2_v');
+			}
+
+
+
+
 
 		// 자금 현황 3. 입출금 등록 ////////////////////////////////////////////////////////////////////
-		}else if($m_di==1 && $s_di==3) {
-			$this->load->view('/menu/m3/md1_sd3_v');
+		}else if($mdi==1 && $sdi==3) {
+			// 조회 등록 권한 체크
+			$auth = $this->main_m->auth_chk('_m3_1_3', $this->session->userdata['user_id']);
+
+			if( !$auth['_m3_1_3'] or $auth['_m3_1_3']==0) {
+				$this->load->view('no_auth');
+			}else{
+
+				//본 페이지 로딩
+				$this->load->view('/menu/m3/md1_sd3_v');
+			}
+
+
+
+
 
 		// 회계관리 1. 분개장 ////////////////////////////////////////////////////////////////////
-		}else if($m_di==2 && $s_di==1) {
-			$this->load->view('/menu/m3/md2_sd1_v');
+		}else if($mdi==2 && $sdi==1) {
+			// 조회 등록 권한 체크
+			$auth = $this->main_m->auth_chk('_m3_2_1', $this->session->userdata['user_id']);
+
+			if( !$auth['_m3_2_1'] or $auth['_m3_2_1']==0) {
+				$this->load->view('no_auth');
+			}else{
+
+				//본 페이지 로딩
+				$this->load->view('/menu/m3/md2_sd1_v');
+			}
+
+
+
+
 
 		// 회계관리 2. 일월계표 ////////////////////////////////////////////////////////////////////
-		}else if($m_di==2 && $s_di==2) {
-			$this->load->view('/menu/m3/md2_sd2_v');
+		}else if($mdi==2 && $sdi==2) {
+			// 조회 등록 권한 체크
+			$auth = $this->main_m->auth_chk('_m3_2_2', $this->session->userdata['user_id']);
+
+			if( !$auth['_m3_2_2'] or $auth['_m3_2_2']==0) {
+				$this->load->view('no_auth');
+			}else{
+
+				//본 페이지 로딩
+				$this->load->view('/menu/m3/md2_sd2_v');
+			}
+
+
+
+
 
 		// 회계관리 3. 제무제표 ////////////////////////////////////////////////////////////////////
-		}else if($m_di==2 && $s_di==3) {
-			$this->load->view('/menu/m3/md2_sd3_v');
+		}else if($mdi==2 && $sdi==3) {
+			// 조회 등록 권한 체크
+			$auth = $this->main_m->auth_chk('_m3_2_3', $this->session->userdata['user_id']);
 
+			if( !$auth['_m3_2_3'] or $auth['_m3_2_3']==0) {
+				$this->load->view('no_auth');
+			}else{
+
+				//본 페이지 로딩
+				$this->load->view('/menu/m3/md2_sd3_v');
+			}
 		}
 	}
 }

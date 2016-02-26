@@ -33,10 +33,10 @@
       </div>
 <!-- ---------------------------------sdi-menu end------------------------------------ -->
       <div class="page-header" id="sdi_sub">
-        <span class="glyphicon glyphicon-blackboard" aria-hidden="true" id="glyphicon"></span>
-        <span>
+        <span class="glyphicon glyphicon-book" aria-hidden="true" id="glyphicon"></span>
+        <span style="margin-left: 10px;">
 <?php
-			if($this->uri->segment(3)==1) {$k = 2; } else { $k = 3; }
+			if( !$this->uri->segment(3) or $this->uri->segment(3)==1) {$k = 2; } else { $k = 3; }
 			switch ($this->uri->segment(4)) {
 				case '1':
 					echo $s_di[$k][0];

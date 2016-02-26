@@ -12,8 +12,13 @@ class M5 extends CI_Controller {
 			echo "<meta http-equiv='Refresh' content='0; URL=".$this->config->base_url()."member/'>";
 			exit;
 		}
+<<<<<<< HEAD
 		$this->load->model('m5_m');
 		$this->load->helper('is_mobile');
+=======
+		$this->load->model('main_m'); //모델 파일 로드
+		$this->load->helper('is_mobile'); //모바일 기기 확인 헬퍼
+>>>>>>> b30f486aa2bcbc6712f921812a346c7c5dc31122
 	}
 
 	/**
@@ -35,11 +40,11 @@ class M5 extends CI_Controller {
 		$this->load->view('cms_main_footer');
 	}
 
-	public function config($m_di='', $s_di=''){
-		//$this->output->enable_profiler(TRUE); //프로파일러 보기//
+	public function config($mdi='', $sdi=''){
+		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
-		if( !$this->uri->segment(3)) $m_di = 1; else $m_di = $this->uri->segment(3);
-		if( !$this->uri->segment(4)) $s_di = 1; else $s_di = $this->uri->segment(4);
+		if( !$this->uri->segment(3)) $mdi = 1; else $mdi = $this->uri->segment(3);
+		if( !$this->uri->segment(4)) $sdi = 1; else $sdi = $this->uri->segment(4);
 
 		$menu['s_di'] = array(
 			array('부서 관리', '직원 관리', '거래처 정보', '계좌 관리'), // 첫번째 하위 메뉴
@@ -50,6 +55,7 @@ class M5 extends CI_Controller {
 
 		$this->load->view('menu/m5/config_v', $menu);
 
+<<<<<<< HEAD
 		$this->load->helper('alert');
 
 		// 기본정보관리 1. 부서관리 ////////////////////////////////////////////////////////////////////
@@ -60,28 +66,113 @@ class M5 extends CI_Controller {
 			//}else if($result > 0){
 				$this->load->view('/menu/m5/md1_sd1_v');
 			//}
+=======
+
+
+		// 기본정보관리 1. 부서관리 ////////////////////////////////////////////////////////////////////
+		if($mdi==1 && $sdi==1 ){
+			// 조회 등록 권한 체크
+			$auth = $this->main_m->auth_chk('_m5_1_1', $this->session->userdata['user_id']);
+
+			if( !$auth['_m5_1_1'] or $auth['_m5_1_1']==0) {
+				$this->load->view('no_auth');
+			}else{
+
+				//본 페이지 로딩
+				$this->load->view('/menu/m5/md1_sd1_v');
+			}
+
+
+
+
+
+>>>>>>> b30f486aa2bcbc6712f921812a346c7c5dc31122
 
 
 		// 기본정보관리 2. 직원관리 ////////////////////////////////////////////////////////////////////
-		}else if($m_di==1 && $s_di==2) {
-			$this->load->view('/menu/m5/md1_sd2_v');
+		}else if($mdi==1 && $sdi==2) {
+			// 조회 등록 권한 체크
+			$auth = $this->main_m->auth_chk('_m5_1_2', $this->session->userdata['user_id']);
+
+			if( !$auth['_m5_1_2'] or $auth['_m5_1_2']==0) {
+				$this->load->view('no_auth');
+			}else{
+
+				//본 페이지 로딩
+				$this->load->view('/menu/m5/md1_sd2_v');
+			}
+
+
+
+
+
 
 		// 기본정보관리 3. 거래처정보 ////////////////////////////////////////////////////////////////////
-		}else if($m_di==1 && $s_di==3) {
-			$this->load->view('/menu/m5/md1_sd3_v');
+		}else if($mdi==1 && $sdi==3) {
+			// 조회 등록 권한 체크
+			$auth = $this->main_m->auth_chk('_m5_1_3', $this->session->userdata['user_id']);
+
+			if( !$auth['_m5_1_3'] or $auth['_m5_1_3']==0) {
+				$this->load->view('no_auth');
+			}else{
+
+				//본 페이지 로딩
+				$this->load->view('/menu/m5/md1_sd3_v');
+			}
+
+
+
+
+
 
 		// 기본정보관리 4. 계좌관리 ////////////////////////////////////////////////////////////////////
-		}else if($m_di==1 && $s_di==4) {
-			$this->load->view('/menu/m5/md1_sd4_v');
+		}else if($mdi==1 && $sdi==4) {
+			// 조회 등록 권한 체크
+			$auth = $this->main_m->auth_chk('_m5_1_4', $this->session->userdata['user_id']);
+
+			if( !$auth['_m5_1_4'] or $auth['_m5_1_4']==0) {
+				$this->load->view('no_auth');
+			}else{
+
+				//본 페이지 로딩
+				$this->load->view('/menu/m5/md1_sd4_v');
+			}
+
+
+
+
+
 
 		// 회사정보관리 1. 회사정보 ////////////////////////////////////////////////////////////////////
-		}else if($m_di==2 && $s_di==1) {
-			$this->load->view('/menu/m5/md2_sd1_v');
+		}else if($mdi==2 && $sdi==1) {
+			// 조회 등록 권한 체크
+			$auth = $this->main_m->auth_chk('_m5_2_1', $this->session->userdata['user_id']);
+
+			if( !$auth['_m5_2_1'] or $auth['_m5_2_1']==0) {
+				$this->load->view('no_auth');
+			}else{
+
+				//본 페이지 로딩
+				$this->load->view('/menu/m5/md2_sd1_v');
+			}
+
+
+
+
+
 
 		// 권한정보관리 1. 권한관리 ////////////////////////////////////////////////////////////////////
-		}else if($m_di==2 && $s_di==2) {
-			$this->load->view('/menu/m5/md2_sd2_v');
+		}else if($mdi==2 && $sdi==2) {
+			// 조회 등록 권한 체크
+			$auth = $this->main_m->auth_chk('_m5_2_2', $this->session->userdata['user_id']);
 
+			if( !$auth['_m5_2_2'] or $auth['_m5_2_2']==0) {
+				$this->load->view('no_auth');
+			}else{
+
+				//본 페이지 로딩
+				$this->load->view('/menu/m5/md2_sd2_v');
+			}
 		}
 	}
 }
