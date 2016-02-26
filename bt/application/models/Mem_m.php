@@ -31,7 +31,7 @@ class Mem_m extends CI_Model
 	 * @return [boolean]           [입력 성공 여부]
 	 */
 	public function join($new_data) {
-		// 중복 정보 확인
+		////중복 정보 확인
 		$i_sql = " SELECT no FROM cms_member_table WHERE user_id = '".$new_data['user_id']."'";
 		$i_qry = $this->db->query($i_sql);
 

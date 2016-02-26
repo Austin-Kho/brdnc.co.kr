@@ -176,6 +176,28 @@ class Member extends CI_Controller
 		} // 폼 검증 종료
 	} // fucntion join 종료
 
+	/**
+	 * [user_id_chk 생성아이디 중복확인 콜백 함수]
+	 * @return [boolean] [아이디 중복 여부]
+	 */
+	// public function user_id_chk() {
+	// 	if($id){
+	// 		$result = array();
+	// 		$sql = " SELECT user_id FROM cms_member_table WHERE user_id = '".$id."' ";
+	// 		$qry = $this->db->query($sql);
+	// 		$result = @$qeury->row();
+
+	// 		if($result) {
+	// 			$this->form_validation->set_message('user_id_chk', $id.'은(는) 중복된 아이디입니다.');
+	// 			return FALSE;
+	// 		}else{
+	// 			return TRUE;
+	// 		}
+	// 	}else{
+	// 		return FALSE;
+	// 	}
+	// }
+
 	public function modify() {
 		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 

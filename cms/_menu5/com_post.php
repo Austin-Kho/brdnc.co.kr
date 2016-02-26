@@ -14,7 +14,7 @@
 
 	if($mode=="com_reg"||$mode=="com_modify"){
 		// form(form1-post)에서 받은 데이터
-		$seq = $_REQUEST['seq'];
+		$seq = $_REQUEST['seq']; // 정할때 받음
 		$co_name = $_POST['co_name'];
 		$co_no1 = $_POST['co_no1'];
 		$co_no2 = $_POST['co_no2'];
