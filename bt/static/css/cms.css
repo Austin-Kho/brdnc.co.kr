@@ -27,5 +27,5 @@
 	#sdi_sub { margin-top: -20px; padding: 18px 0 12px 20px; background-color: #F8F8F8; font-weight: bold; color: #6666D4; border-bottom-color: #B2BCDE;}
 	#glyphicon { color: #CC0099;" }
 
-	.form1 { padding: 55px 0; border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid;}
-	.form2 { padding: 55px 0; border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid;}
+	.width_100 { width: 100%;}
+	.abc { padding: 10px 0;  border-width:1px 0 0 0; border-style:solid; border-color:#EAEBF2;}

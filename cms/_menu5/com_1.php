@@ -35,7 +35,7 @@
 						$result=mysql_query($query, $connect);
 						$rows=mysql_fetch_array($result);
 
-						if(!$rows){
+						if(!$rows){ // 회사 등록정보가 없으면,
 							$mode = 'com_reg';
 					?>
 					<!-- ===== form1 start ===== -->

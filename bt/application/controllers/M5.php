@@ -12,13 +12,9 @@ class M5 extends CI_Controller {
 			echo "<meta http-equiv='Refresh' content='0; URL=".$this->config->base_url()."member/'>";
 			exit;
 		}
-<<<<<<< HEAD
-		$this->load->model('m5_m');
-		$this->load->helper('is_mobile');
-=======
+
 		$this->load->model('main_m'); //모델 파일 로드
 		$this->load->helper('is_mobile'); //모바일 기기 확인 헬퍼
->>>>>>> b30f486aa2bcbc6712f921812a346c7c5dc31122
 	}
 
 	/**
@@ -55,19 +51,6 @@ class M5 extends CI_Controller {
 
 		$this->load->view('menu/m5/config_v', $menu);
 
-<<<<<<< HEAD
-		$this->load->helper('alert');
-
-		// 기본정보관리 1. 부서관리 ////////////////////////////////////////////////////////////////////
-		if($m_di==1 && $s_di==1 ){
-			$result = $this->m5_m->auth_chk('_m5_2_1');  // 모델->디비에서 권한 체크
-			//if( !$result or $result == 0) {
-				$this->load->view('no_auth');
-			//}else if($result > 0){
-				$this->load->view('/menu/m5/md1_sd1_v');
-			//}
-=======
-
 
 		// 기본정보관리 1. 부서관리 ////////////////////////////////////////////////////////////////////
 		if($mdi==1 && $sdi==1 ){
@@ -85,8 +68,6 @@ class M5 extends CI_Controller {
 
 
 
-
->>>>>>> b30f486aa2bcbc6712f921812a346c7c5dc31122
 
 
 		// 기본정보관리 2. 직원관리 ////////////////////////////////////////////////////////////////////

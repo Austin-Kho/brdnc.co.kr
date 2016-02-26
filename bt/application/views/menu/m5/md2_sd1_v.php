@@ -1,110 +1,375 @@
+<form class="form-inline">
+	<fieldset style="font-size: 12px;">
+		<div class="row" style="margin: 0px;">
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1; background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">
+					회사명 <span style="color:#cc0000">*</span>
+				</label>
+			</div>
 
-      <form>
-        <fieldset class="container" style="margin: 5px 0;">
-          <div>
-            <label class="col-md-2 form1" for="input01" style="padding-top: 8px; border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid; background-color: #eaeaea;">회사명</label>
-            <div class="col-md-4 form2" style="padding-top: 8px; border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid;">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-            <label class="col-md-2 form1" for="input01" style="padding-top: 8px; border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid;">사업자등록번호</label>
-            <div class="col-md-4 form2" style="padding-top: 8px; border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid;">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-          </div>
-          <div>
-            <label class="col-md-2 form1" for="input01">대표자</label>
-            <div class="col-md-4 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-            <label class="col-md-2 form1" for="input01">법인등록번호</label>
-            <div class="col-md-4 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-          </div>
-          <div>
-            <label class="col-md-2 form1" for="input01">업태</label>
-            <div class="col-md-4 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-            <label class="col-md-2 form1" for="input01">종목</label>
-            <div class="col-md-4 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-          </div>
-          <div>
-            <label class="col-md-2 form1" for="input01">대표전화</label>
-            <div class="col-md-4 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-            <label class="col-md-2 form1" for="input01">휴대전화(비상)</label>
-            <div class="col-md-4 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-          </div>
-          <div>
-            <label class="col-md-2 form1" for="input01">FAX</label>
-            <div class="col-md-4 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-            <label class="col-md-2 form1" for="input01">기업구분</label>
-            <div class="col-md-4 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-          </div>
-          <div>
-            <label class="col-md-2 form1" for="input01">설립일자</label>
-            <div class="col-md-4 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-            <label class="col-md-2 form1" for="input01">개업일자</label>
-            <div class="col-md-4 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-          </div>
-          <div>
-            <label class="col-md-2 form1" for="input01">기초잔액 입력월</label>
-            <div class="col-md-4 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-            <label class="col-md-2 form1" for="input01">업무개시/결산주기</label>
-            <div class="col-md-4 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-          </div>
-          <div>
-            <label class="col-md-2 form2" for="input01">E-mail(비상)</label>
-            <div class="col-md-4 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-            <label class="col-md-2 form1" for="input01">세금계산서용 Email</label>
-            <div class="col-md-4 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-          </div>
-          <div>
-            <label class="col-md-2 form1" for="input01">세무서[1]</label>
-            <div class="col-md-4 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-            <label class="col-md-2 form1" for="input01">세무서[2]</label>
-            <div class="col-md-4 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-          </div>
-          <div>
-            <label class="col-md-2 form1" for="input01">회사주소</label>
-            <div class="col-md-10 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-            <label class="col-md-2 form1" for="input01">회사 영문명</label>
-            <div class="col-md-10 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-            <label class="col-md-2 form1" for="input01">회사 영문주소</label>
-            <div class="col-md-10 form2">
-              <input type="text" name="user_id" id="input01" value="" class="form-control  input-sm"  placeholder="">
-            </div>
-          </div>
-          <div><button>입력하기</button></div>
-        </fieldset>
-      </form>
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<input type="text" class="form-control input-sm" id="user_id" name="user_id" placeholder="ID" ime-mode:disabled;>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;  background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">사업자번호 <span style="color:#cc0000">*</span></label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:110%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:100%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:120%;"></div>
+				<div class="col-xs-3">
+					<select class="form-control input-sm" id="mobile1" name="mobile1" style="width:120%;">
+						<option>선택</option>
+						<option>법인</option>
+						<option>개인(일반)</option>
+						<option>개인(간이)</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="margin: 0px;">
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1; background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">
+					회사명 <span style="color:#cc0000">*</span>
+				</label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<input type="text" class="form-control input-sm" id="user_id" name="user_id" placeholder="ID" ime-mode:disabled;>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;  background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">사업자번호 <span style="color:#cc0000">*</span></label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:110%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:100%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:120%;"></div>
+				<div class="col-xs-3">
+					<select class="form-control input-sm" id="mobile1" name="mobile1" style="width:120%;">
+						<option>선택</option>
+						<option>법인</option>
+						<option>개인(일반)</option>
+						<option>개인(간이)</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="margin: 0px;">
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1; background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">
+					회사명 <span style="color:#cc0000">*</span>
+				</label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<input type="text" class="form-control input-sm" id="user_id" name="user_id" placeholder="ID" ime-mode:disabled;>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;  background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">사업자번호 <span style="color:#cc0000">*</span></label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:110%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:100%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:120%;"></div>
+				<div class="col-xs-3">
+					<select class="form-control input-sm" id="mobile1" name="mobile1" style="width:120%;">
+						<option>선택</option>
+						<option>법인</option>
+						<option>개인(일반)</option>
+						<option>개인(간이)</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="margin: 0px;">
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1; background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">
+					회사명 <span style="color:#cc0000">*</span>
+				</label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<input type="text" class="form-control input-sm" id="user_id" name="user_id" placeholder="ID" ime-mode:disabled;>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;  background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">사업자번호 <span style="color:#cc0000">*</span></label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:110%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:100%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:120%;"></div>
+				<div class="col-xs-3">
+					<select class="form-control input-sm" id="mobile1" name="mobile1" style="width:120%;">
+						<option>선택</option>
+						<option>법인</option>
+						<option>개인(일반)</option>
+						<option>개인(간이)</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="margin: 0px;">
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1; background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">
+					회사명 <span style="color:#cc0000">*</span>
+				</label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<input type="text" class="form-control input-sm" id="user_id" name="user_id" placeholder="ID" ime-mode:disabled;>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;  background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">사업자번호 <span style="color:#cc0000">*</span></label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:110%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:100%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:120%;"></div>
+				<div class="col-xs-3">
+					<select class="form-control input-sm" id="mobile1" name="mobile1" style="width:120%;">
+						<option>선택</option>
+						<option>법인</option>
+						<option>개인(일반)</option>
+						<option>개인(간이)</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="margin: 0px;">
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1; background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">
+					회사명 <span style="color:#cc0000">*</span>
+				</label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<input type="text" class="form-control input-sm" id="user_id" name="user_id" placeholder="ID" ime-mode:disabled;>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;  background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">사업자번호 <span style="color:#cc0000">*</span></label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:110%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:100%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:120%;"></div>
+				<div class="col-xs-3">
+					<select class="form-control input-sm" id="mobile1" name="mobile1" style="width:120%;">
+						<option>선택</option>
+						<option>법인</option>
+						<option>개인(일반)</option>
+						<option>개인(간이)</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="margin: 0px;">
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1; background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">
+					회사명 <span style="color:#cc0000">*</span>
+				</label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<input type="text" class="form-control input-sm" id="user_id" name="user_id" placeholder="ID" ime-mode:disabled;>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;  background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">사업자번호 <span style="color:#cc0000">*</span></label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:110%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:100%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:120%;"></div>
+				<div class="col-xs-3">
+					<select class="form-control input-sm" id="mobile1" name="mobile1" style="width:120%;">
+						<option>선택</option>
+						<option>법인</option>
+						<option>개인(일반)</option>
+						<option>개인(간이)</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="margin: 0px;">
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1; background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">
+					회사명 <span style="color:#cc0000">*</span>
+				</label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<input type="text" class="form-control input-sm" id="user_id" name="user_id" placeholder="ID" ime-mode:disabled;>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;  background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">사업자번호 <span style="color:#cc0000">*</span></label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:110%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:100%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:120%;"></div>
+				<div class="col-xs-3">
+					<select class="form-control input-sm" id="mobile1" name="mobile1" style="width:120%;">
+						<option>선택</option>
+						<option>법인</option>
+						<option>개인(일반)</option>
+						<option>개인(간이)</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="margin: 0px;">
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1; background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">
+					회사명 <span style="color:#cc0000">*</span>
+				</label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<input type="text" class="form-control input-sm" id="user_id" name="user_id" placeholder="ID" ime-mode:disabled;>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;  background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">사업자번호 <span style="color:#cc0000">*</span></label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:110%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:100%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:120%;"></div>
+				<div class="col-xs-3">
+					<select class="form-control input-sm" id="mobile1" name="mobile1" style="width:120%;">
+						<option>선택</option>
+						<option>법인</option>
+						<option>개인(일반)</option>
+						<option>개인(간이)</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="margin: 0px;">
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1; background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">
+					회사명 <span style="color:#cc0000">*</span>
+				</label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<input type="text" class="form-control input-sm" id="user_id" name="user_id" placeholder="ID" ime-mode:disabled;>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;  background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">사업자번호 <span style="color:#cc0000">*</span></label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1;">
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:110%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:100%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:120%;"></div>
+				<div class="col-xs-3">
+					<select class="form-control input-sm" id="mobile1" name="mobile1" style="width:120%;">
+						<option>선택</option>
+						<option>법인</option>
+						<option>개인(일반)</option>
+						<option>개인(간이)</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+
+
+		<div class="row" style="margin: 0px;">
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 1px 0; border-style:solid; border-color:#CACAC1; background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">
+					회사명 <span style="color:#cc0000">*</span>
+				</label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 1px 0; border-style:solid; border-color:#CACAC1;">
+				<input type="text" class="form-control input-sm" id="user_id" name="user_id" placeholder="ID" ime-mode:disabled;>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-4 col-md-2" style="padding: 11px 0 3px 15px; border-width:1px 0 1px 0; border-style:solid; border-color:#CACAC1;  background-color: #eaeaea;">
+				<label for="user_id" style="width:180px;">사업자번호 <span style="color:#cc0000">*</span></label>
+			</div>
+
+
+			<div class="form-group col-xs-12 col-sm-8 col-md-4" style="padding: 3px 0 3px 10px; border-width:1px 0 1px 0; border-style:solid; border-color:#CACAC1;">
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:110%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:100%;"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm" id="user_id" name="user_id" ime-mode:disabled; style="width:120%;"></div>
+				<div class="col-xs-3">
+					<select class="form-control input-sm" id="mobile1" name="mobile1" style="width:120%;">
+						<option>선택</option>
+						<option>법인</option>
+						<option>개인(일반)</option>
+						<option>개인(간이)</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin: 0px; padding: 15px 20px 0 0; text-align: right; height: 60px; border-width:0 0 1px 0; border-style:solid; border-color:#B2BCDE;">
+			<button class="btn btn-primary btn-sm">입력하기</button>
+		</div>
+
+	</fieldset>
+</form>
+
+
+
