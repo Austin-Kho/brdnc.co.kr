@@ -63,7 +63,7 @@ class M1 extends CI_Controller {
 			}else{
 
 				//본 페이지 로딩
-				$this->load->view('/menu/m5/md1_sd1_v');
+				$this->load->view('/menu/m1/md1_sd1_v');
 			}
 
 
@@ -82,7 +82,7 @@ class M1 extends CI_Controller {
 			}else{
 
 				//본 페이지 로딩
-				$this->load->view('/menu/m5/md1_sd2_v');
+				$this->load->view('/menu/m1/md1_sd2_v');
 			}
 
 
@@ -100,7 +100,7 @@ class M1 extends CI_Controller {
 			}else{
 
 				//본 페이지 로딩
-				$this->load->view('/menu/m5/md1_sd3_v');
+				$this->load->view('/menu/m1/md1_sd3_v');
 			}
 
 
@@ -118,7 +118,7 @@ class M1 extends CI_Controller {
 			}else{
 
 				//본 페이지 로딩
-				$this->load->view('/menu/m5/md1_sd4_v');
+				$this->load->view('/menu/m1/md2_sd1_v');
 			}
 
 
@@ -136,7 +136,7 @@ class M1 extends CI_Controller {
 			}else{
 
 				//본 페이지 로딩
-				$this->load->view('/menu/m5/md2_sd1_v');
+				$this->load->view('/menu/m1/md2_sd2_v');
 			}
 
 
@@ -154,7 +154,7 @@ class M1 extends CI_Controller {
 			}else{
 
 				//본 페이지 로딩
-				$this->load->view('/menu/m5/md2_sd2_v');
+				$this->load->view('/menu/m1/md2_sd3_v');
 			}
 		}
 	}

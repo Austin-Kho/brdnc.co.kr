@@ -83,4 +83,4 @@
 		</nav>
 
 		<div class="container theme-showcase" role="main" id="main_container">
-			<div style="height: 65px;"></div>
+			<div style="height: 80px;"></div>

@@ -18,11 +18,15 @@
 	footer.footer { border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid; background-color: #eeeeee; margin-top: 25px;}
 
 	.nav-tabs { margin-bottom: -20px; }
+	.nav-tabs  li a { color: #888; }
+	.nav-tabs  li a:hover { color: #5F5F5F; }
+	.nav-tabs  li.active a { color: #5674D5; }
+	.nav-tabs  li.active a:hover { color: #3152C1; }
 
-	.page-header .nav-pills a {  margin-top: 3px; width: 110px; text-align: center;}
-	.page-header .nav-pills a:hover { font-weight: bold; }
-	.page-header .nav-pills .active a { background-color: #eeeeee; color: #337ABD; font-weight: bold;}
-	.page-header .nav-pills .active a:hover { background-color: #DFDFDF; color: #337ABD; font-weight: bold; }
+	.page-header .nav-pills a {  margin-top: 3px; width: 110px; text-align: center; color: #7C87AC;}
+	.page-header .nav-pills a:hover { background-color: #F3F3F3; font-weight: bold; color: #6C78A2;}
+	.page-header .nav-pills .active a { background-color: #F3F5FC; color: #5674D5; font-weight: bold;}
+	.page-header .nav-pills .active a:hover { background-color: #E8ECF9; color: #5674D5;}
 
 	#sdi_sub { margin-top: -20px; padding: 18px 0 12px 20px; background-color: #F8F8F8; font-weight: bold; color: #6666D4; border-bottom-color: #B2BCDE;}
 	#glyphicon { color: #CC0099;" }

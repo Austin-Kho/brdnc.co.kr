@@ -1,8 +1,3 @@
-      <div style="height: 10px;"></div>
-
-      <!-- <div class="page-header">
-        <h1>Navs</h1>
-      </div> -->
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="<?if( !$this->uri->segment(3) or $this->uri->segment(3)=='1') echo 'active'; else echo '';?>">
           <a href="<?php echo $this->config->base_url(); ?>m2/local/1/"><strong>전도금 관리</strong></a>
