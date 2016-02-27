@@ -28,7 +28,14 @@
 	.page-header .nav-pills .active a:hover { background-color: #E8ECF9; color: #3355CA;}
 
 	#sdi_sub { margin-top: -20px; padding: 18px 0 12px 20px; background-color: #F8F8F8; font-weight: bold; color: #6666D4; border-bottom-color: #B2BCDE;}
-	#glyphicon { color: #CC0099;" }
 
-	.width_100 { width: 100%;}
-	.abc { padding: 10px 0;  border-width:1px 0 0 0; border-style:solid; border-color:#EAEBF2;}
+	/**************************glyphicon style*****************************/
+	#head_gly { color: #CC0099; }
+	.glyphicon-book { color: #CC0099; }
+	.glyphicon-calendar{ color: #7544BD; }
+	/**************************glyphicon style*****************************/
+
+
+
+
+

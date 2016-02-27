@@ -32,7 +32,7 @@
       </div>
 <!-- ---------------------------------sdi-menu end------------------------------------ -->
       <div class="page-header" id="sdi_sub">
-        <span class="glyphicon glyphicon-blackboard" aria-hidden="true" id="glyphicon"></span>
+        <span class="glyphicon glyphicon-book" aria-hidden="true" id="head_gly"></span>
         <span>
 <?php
 			if( !$this->uri->segment(3) or $this->uri->segment(3)==1) {$k = 2; } else { $k = 3; }
