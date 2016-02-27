@@ -5,7 +5,7 @@
 function bluring(){
 if(event.srcElement.tagName=="A"||event.srcElement.tagName=="IMG") document.body.focus();
 }
-document.onfocusin=bluring;
+document.onfocusing=bluring;
 
 
 // 쪽지창 열기

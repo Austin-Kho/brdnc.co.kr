@@ -14,6 +14,12 @@
 	a,nav,input,li,img {outline:none; }
 	/*select-dummy: expression(this.hideFocus=true);}*/
 
+	/**************************glyphicon style*****************************/
+	#head_gly { color: #CC0099; }
+	.glyphicon-book { color: #CC0099; }
+	.glyphicon-calendar{ color: #7544BD; }
+	/**************************glyphicon style*****************************/
+
 	div.container#main_container { background-color: white; }
 	footer.footer { border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid; background-color: #eeeeee; margin-top: 25px;}
 
@@ -29,11 +35,31 @@
 
 	#sdi_sub { margin-top: -20px; padding: 18px 0 12px 20px; background-color: #F8F8F8; font-weight: bold; color: #6666D4; border-bottom-color: #B2BCDE;}
 
-	/**************************glyphicon style*****************************/
-	#head_gly { color: #CC0099; }
-	.glyphicon-book { color: #CC0099; }
-	.glyphicon-calendar{ color: #7544BD; }
-	/**************************glyphicon style*****************************/
+	/*****************************************m5 style*******************************************/
+	#com_reg_form fieldset { font-size: 12px; }
+	#com_reg_form fieldset .row { margin: 0px; }
+	#com_reg_form fieldset .row.no-mobile {                       border-width:1px 0 0 0; border-style:solid; border-color:#CACAC1; }
+	#com_reg_form fieldset .row.foot_form { padding-bottom: 20px; border-bottom:1px; border-style:solid; border-color:#CACAC1; }
+	#com_reg_form fieldset .row.btn-wrap { padding: 15px 20px 0 0; text-align: right; height: 61px; border-width:0 0 1px 0; border-style:solid; border-color:#B2BCDE; background-color: #F8F8F8; margin-bottom: 25px; }
+
+	#com_reg_form fieldset .row div.form-group.label-wrap { padding: 11px 0 7px 15px; background-color: #F8F8F8; }
+	#com_reg_form fieldset .row div.form-group label { width:180px; }
+	#com_reg_form fieldset .row div.form-group label span.red { color: red; }
+	#com_reg_form fieldset .row div.form-group.form-wrap { padding: 3px 0 3px 10px; }
+	#com_reg_form fieldset .row div.form-group .form-control.wid-70 { width:70%; }
+	#com_reg_form fieldset .row div.form-group .form-control.wid-90 { width:90%; }
+	#com_reg_form fieldset .row div.form-group .form-control.wid-95 { width:95%; }
+	#com_reg_form fieldset .row div.form-group .form-control.wid-98 { width:98%; }
+	#com_reg_form fieldset .row div.form-group .form-control.wid-99 { width:99%; }
+	#com_reg_form fieldset .row div.form-group .form-control.wid-100 { width:100%; }
+	#com_reg_form fieldset .row div.form-group .form-control { margin: 2px 0; }
+	#com_reg_form fieldset .row div.form-group a,input.btn { margin: 2px 0; }
+	#com_reg_form fieldset .row div.form-group div { padding: 0; }
+	#com_reg_form fieldset .row div.form-group .glyphicon-wrap { padding: 8px 0 0 8px; }
+	#com_reg_form fieldset .row div.form-group .text-wrap { padding-top: 8px; }
+	/*****************************************m5 style********************************************/
+
+
 
 
 

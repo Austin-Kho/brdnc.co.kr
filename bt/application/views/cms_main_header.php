@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="ko">
-	<head>
-		<meta charset="utf-8">
+	<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -23,13 +22,32 @@
 
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></scrit>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
 
 		<script src="<?php echo $this->config->base_url(); ?>static/lib/calendar/calendar.js"></script>
 		<script src="<?php echo $this->config->base_url(); ?>static/js/global.js"></script>
-		<!-- <script src="../common/_menu1.js"></script> -->
+<?php
+	switch ($this->uri->segment(1)) {
+		case 'm1':
+			$menu_js = 'm1.js';
+			break;
+		case 'm2':
+			$menu_js = 'm2.js';
+			break;
+		case 'm3':
+			$menu_js = 'm3.js';
+			break;
+		case 'm4':
+			$menu_js = 'm4.js';
+			break;
+		case 'm5':
+			$menu_js = 'm5.js';
+			break;
+	}
+?>
+		<script src="<?php echo $this->config->base_url();?>static/js/<?php echo $menu_js;?>"></script>
 	</head>
 
 	<body role="document" onclick="cal_del();">

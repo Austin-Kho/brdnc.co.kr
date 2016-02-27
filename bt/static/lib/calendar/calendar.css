@@ -5,7 +5,6 @@
 
 #Cal_Table /* 달력 테이블 */
 {
-    width:100%;
     height:100%;
     font-size :8pt;
     font-family:맑은 고딕;
@@ -13,7 +12,6 @@
 
 #Cal_Header /* 달력 헤더 부분 TR태그*/
 {
-    width:100%;
 	text-align:center;
     background-color:#F4F4F4;
     height:24px;
@@ -57,7 +55,7 @@
 #Cal_Today /* 오늘 날짜 TD태그 */
 {
 	color:black;
-	background-color:#FFFFFF;    
+	background-color:#FFFFFF;
 	border:#a5a5a5 1px solid;
 }
 #Cal_MouseOver /* 마우스 오버 */

@@ -14,6 +14,7 @@ class M5 extends CI_Controller {
 		}
 
 		$this->load->model('main_m'); //모델 파일 로드
+		$this->load->model('m5_m'); //모델 파일 로드
 		$this->load->helper('is_mobile'); //모바일 기기 확인 헬퍼
 	}
 
@@ -152,7 +153,7 @@ class M5 extends CI_Controller {
 				$this->form_validation->set_rules('co_phone1', '대표전화', 'required|numeric');
 				$this->form_validation->set_rules('co_phone2', '대표전화', 'required|numeric');
 				$this->form_validation->set_rules('co_phone3', '대표전화', 'required|numeric');
-				$this->form_validation->set_rules('co_hp1', '휴대전화', 'required|numeric');  //////////////////select
+				$this->form_validation->set_rules('co_hp1', '휴대전화', 'required|numeric');
 				$this->form_validation->set_rules('co_hp2', '휴대전화', 'required|numeric');
 				$this->form_validation->set_rules('co_hp3', '휴대전화', 'required|numeric');
 				$this->form_validation->set_rules('co_fax1', '팩스번호', 'required|numeric');
@@ -183,9 +184,24 @@ class M5 extends CI_Controller {
 
 				//echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 
+				// 회사 등록 정보가 있는지 확인
+				$com_chk = $this->m5_m->is_com_chk();
+				if( !$com_chk) {
+					$com = array( // 없으면 등록권한 및 새로 등록하라는 변수 전달
+						'auth' => $auth['_m5_2_1'],
+						'mode' => 'com_reg'
+					);
+				}  else {
+					$com = array( // 있으면 등록권한, 등록회사정보 및 수정하라는 변수 전달
+						'auth' => $auth['_m5_2_1'],
+						'com' => $com_chk,
+						'mode' => 'com_modify'
+					);
+				}
+
 				if($this->form_validation->run() == FALSE) { // 폼 전송 데이타가 없으면,
 					//본 페이지 로딩
-					$this->load->view('/menu/m5/md2_sd1_v'); //
+					$this->load->view('/menu/m5/md2_sd1_v', $com); // 조회권한 있고 폼 전송 데이타가 없을 때 등록권한 데이터 및 등록데이터와 함께 폼 열기
 				}else{
 					//폼 데이타 가공
 					$co_no = $this->input->post('co_no1')."-".$this->input->post('co_no2')."-".$this->input->post('co_no3');
