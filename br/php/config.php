@@ -13,8 +13,8 @@ $doc_copyright="
 $admin_id="cigiko ";
 $admin_tel=" 010-3320-0088 ";
 global $cms_url, $cms_path;
-$cms_url="http://brdnc.cafe24.com/cms/";
-$cms_path= "/home2/hosting_users/brdnc/www/cms/";
+$cms_url="http://brdnc.cafe24.com/br/";
+$cms_path= "/home2/hosting_users/brdnc/www/br/";
 $is_johap=0; // 조합 업무대행사 여부 - 조합 업무대행사이고 현장관리 별도로 하지 않을 경우 '1' // 그렇지 않을 경우 '0'; 입력 할 것
 
 // MySQL 연결

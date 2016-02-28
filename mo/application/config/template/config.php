@@ -216,7 +216,7 @@ $config['directory_trigger'] = 'd';
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 4;
+$config['log_threshold'] = 2;
 
 /*
 |--------------------------------------------------------------------------
@@ -371,9 +371,9 @@ $config['encryption_key'] = '';
 |
 */
 $config['sess_driver'] = 'database'; // DB 사용
-$config['sess_cookie_name'] = 'ci_session';
+$config['sess_cookie_name'] = '';
 $config['sess_expiration'] = 7200; // 2시간
-$config['sess_save_path'] = 'cms_sessions'; // DB 테이블 명
+$config['sess_save_path'] = ''; // DB 테이블 명
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300; // 5분
 $config['sess_regenerate_destroy'] = FALSE;
