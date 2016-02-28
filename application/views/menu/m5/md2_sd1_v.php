@@ -264,7 +264,7 @@
 				</div>
 				<div class="col-xs-5">
 					<label for="email3" class="sr-only">이메일3</label>
-					<select class="form-control input-sm wid-70" id="email3" name="email3">
+					<select class="form-control input-sm wid-70" id="email3" name="email3" onchange="email2.value=this.value;">
 						<option value="">직접입력</option>
 						<option value="naver.com">네이버</option>
 						<option value="hanmail.net">한메일</option>
@@ -285,7 +285,7 @@
 				</div>
 				<div class="col-xs-5">
 					<label for="calc_mail3" class="sr-only">세금계산서이메일3</label>
-					<select class="form-control input-sm wid-70" id="calc_mail3" name="calc_mail3">
+					<select class="form-control input-sm wid-70" id="calc_mail3" name="calc_mail3" onchange="calc_mail2.value=this.value;">
 						<option value="">직접입력</option>
 						<option value="naver.com">네이버</option>
 						<option value="hanmail.net">한메일</option>
@@ -302,10 +302,10 @@
 				<label for="tax_off1_code">세무서[1] <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90" id="tax_off1_code" name="tax_off1_code"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90" id="tax_off1_code" name="tax_off1_code" readonly></div>
 				<div class="col-xs-4">
 					<label for="tax_off1_name" class="sr-only">세무서1 이름</label>
-					<input type="text" class="form-control input-sm wid-90" id="tax_off1_name" name="tax_off1_name">
+					<input type="text" class="form-control input-sm wid-90" id="tax_off1_name" name="tax_off1_name" readonly>
 				</div>
 				<div class="col-xs-5"></div>
 			</div>
@@ -313,10 +313,10 @@
 				<label for="tax_off2_code">세무서[2]</label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90" id=tax_off2_code"" name="tax_off2_code"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90" id=tax_off2_code"" name="tax_off2_code" readonly></div>
 				<div class="col-xs-4">
 					<label for="tax_off2_name" class="sr-only">세무서2 이름</label>
-					<input type="text" class="form-control input-sm wid-90" id="tax_off2_name" name="tax_off2_name">
+					<input type="text" class="form-control input-sm wid-90" id="tax_off2_name" name="tax_off2_name" readonly>
 				</div>
 				<div class="col-xs-5"></div>
 			</div>
@@ -328,7 +328,7 @@
 				<label for="zipcode">회사주소 <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-10 form-wrap">
-				<div class="col-md-1 col-sm-2 col-xs-3"><input type="button" class="btn btn-default btn-sm wid-90" value="우편번호"></div>
+				<div class="col-md-1 col-sm-2 col-xs-3"><input type="button" class="btn btn-default btn-sm wid-90" value="우편번호" onclick="javascript:ZipWindow('/popup/zip_search/','zipcode','address1', 'address2')"></div>
 				<div class="col-md-1 col-sm-5 col-xs-3">
 					<input type="text" class="form-control input-sm wid-95" id="zipcode" name="zipcode">
 				</div>
