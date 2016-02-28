@@ -26,8 +26,11 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-workspace
 *.sublime-project
 
+/application/config/database.php
+/application/config/config.php
+
 .gitignore
-cms/php/auth.php
-cms/php/config.php
-cms/setup/config_set.php
+br/php/auth.php
+br/php/config.php
+br/setup/config_set.php
 sftp-config.json
