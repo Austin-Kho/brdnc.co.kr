@@ -5,8 +5,7 @@
 function bluring(){
 if(event.srcElement.tagName=="A"||event.srcElement.tagName=="IMG") document.body.focus();
 }
-document.onfocusing=bluring;
-
+document.onfocusin=bluring;
 
 // 쪽지창 열기
 function message_win(ref) {
@@ -16,33 +15,6 @@ function message_win(ref) {
   window.open(ref,"message",'width=420,height=460,scrollbars=no,status=no,top=' + window_top + ',left=' + window_left + '');
 }
 
-// 이미지 메뉴 마우스 오버 시
-function nav_over(obj){
-	// obja = new Array();
- //  	obja=document.getElementById('main_nav_wrap').ul;
- //  	alert(obj);
-
-  // for(i=0; i<=4; i++){
-
-  //   if(n==i){
-  //     img[n].src="http://brdnc.cafe24.com/cms/images/t_menu_"+(n+1)+"_.png";
-	 //  } else {
-  //     img[i].src="http://brdnc.cafe24.com/cms/images/t_menu_"+(i+1)+".png";
-  //   }
-  // }
-}
-
-//이미지 메뉴 마우스 아웃 시
-function nav_out(page_no){
-
-  // for(i=0; i<=4; i++){
-  //   if((i+1)==page_no){
-  //     img[i].src="http://brdnc.cafe24.com/cms/images/t_menu_"+(i+1)+"_.png";
-  //   } else {
-  //     img[i].src="http://brdnc.cafe24.com/cms/images/t_menu_"+(i+1)+".png";
-  //   }
-  // }
-}
 //팝업
 function popUp(url,name){
 	var window_left = (screen.width-640)/2;

@@ -21,9 +21,9 @@ function img_over(n){
   for(i=0; i<=4; i++){
 
     if(n==i){
-      img[n].src="http://brdnc.cafe24.com/cms/images/t_menu_"+(n+1)+"_.png";
+      img[n].src="http://brdnc.cafe24.com/pc/images/t_menu_"+(n+1)+"_.png";
 	  } else {
-      img[i].src="http://brdnc.cafe24.com/cms/images/t_menu_"+(i+1)+".png";
+      img[i].src="http://brdnc.cafe24.com/pc/images/t_menu_"+(i+1)+".png";
     }
   }
 }
@@ -32,9 +32,9 @@ function img_over(n){
 function img_out(page_no){
   for(i=0; i<=4; i++){
     if((i+1)==page_no){
-      img[i].src="http://brdnc.cafe24.com/cms/images/t_menu_"+(i+1)+"_.png";
+      img[i].src="http://brdnc.cafe24.com/pc/images/t_menu_"+(i+1)+"_.png";
     } else {
-      img[i].src="http://brdnc.cafe24.com/cms/images/t_menu_"+(i+1)+".png";
+      img[i].src="http://brdnc.cafe24.com/pc/images/t_menu_"+(i+1)+".png";
     }
   }
 }
