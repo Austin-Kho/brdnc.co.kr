@@ -303,7 +303,10 @@
 				<label for="tax_off1_code">세무서[1] <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90" id="tax_off1_code" name="tax_off1_code" readonly></div>
+				<div class="col-xs-3">
+					<input type="text" class="form-control input-sm wid-90" id="tax_off1_code" name="tax_off1_code" aria-describedby="tax_off1_codeStatus" readonly>
+					<span class="glyphicon glyphicon-chevron-right form-control-feedback" aria-hidden="true"></span>
+				</div>
 				<div class="col-xs-4">
 					<label for="tax_off1_name" class="sr-only">세무서1 이름</label>
 					<input type="text" class="form-control input-sm wid-90" id="tax_off1_name" name="tax_off1_name" readonly>

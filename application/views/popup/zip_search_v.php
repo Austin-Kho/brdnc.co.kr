@@ -12,7 +12,7 @@
 		<!-- Bootstrap core CSS -->
 		<link rel="stylesheet" href="/static/lib/bootstrap/css/bootstrap.min.css" media="screen">
 		<!-- Custom styles for this template -->
-		<link rel="stylesheet" href="/static/css/cms.css">
+		<link rel="stylesheet" href="/static/css/zipsearch.css">
 		<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 		<script src="/static/js/ie-emulation-modes-warning.js"></script>
@@ -37,6 +37,15 @@
 			// $(document).ready(function(){
 			// 	$("#loading").css("display","none");
 			// });
+			function search_con () {
+				if(document.getElementById('sw1').checked == true){
+					document.getElementById('doro_name').style.display = '';
+					document.getElementById('build_name').style.display = 'none';
+				}else if(document.getElementById('sw2').checked == true){
+					document.getElementById('doro_name').style.display = 'none';
+					document.getElementById('build_name').style.display = '';
+				}
+			}
 		</script>
 		<script type="text/JavaScript">
 			<!--
@@ -73,105 +82,126 @@
 		</script>
 	</head>
 	<body>
-		<form class="form-inline" id="zipsearch" name="form1">
-			<div style="background-color: white; height: 544px;">
-				<div class="container" style="border: 1px solid #99B0FF; margin: 0 3px; height: 540px; padding: 0;">
-					<header id="header" class="" style="background-color: #332E33; margin: 3px; text-align: center; padding: 1px; height: 38px; border: 1px solid #222;">
-						<h1 style="font-size: 15px; color: white; padding: 0; margin: 0; padding-top: 8px; font-weight: bold;">주소검색</h1>
-					</header><!-- /header -->
-					<div style="padding: 5px 10px;">
-						※ 찾고자 하는 도로명주소 또는 건물명을 선택해 주세요.
+<?php
+	$attributes = array('name' => 'form1', 'id' => 'zipsearch', 'class' => 'form-inline');
+	echo form_open($this->config->base_url().'popup/zip_search/', $attributes);
+?>
+			<div class="container">
+				<header id="header">
+					<h1>주 소 검 색</h1>
+				</header><!-- /header -->
+				<div class="desc">
+					※ 찾고자 하는 도로명주소 또는 건물명을 선택해 주세요.
+				</div>
+				<div class="well">
+					<label class="sr-only" for="sw1">도로명주소 검색</label>
+					<span>
+						<input type="radio" name="sh_what" id="sw1" value="1" onclick="search_con();" checked> 도로명주소 검색</input>
+					</span>
+					<label class="sr-only" for="sw2">건물명 검색</label>
+					<span class="ml20">
+						<input type="radio" name="sh_what" id="sw2" value="2" onclick="search_con();"> 건물명 검색</input>
+					</span>
+				</div>
+				<div class="row">
+					<div class="form-group col-xs-2">
+						<label for="sido">시 / 도</label>
 					</div>
-					<div class="well" style="margin: 0 10px; padding: 5px 10px;">
-						<input type="radio" checked> 도로명주소 검색</input>
-						<input type="radio"> 건물명 검색</input>
-					</div>
-					<div class="row" style="margin: 5px 10px; padding: 10px 10px; border: 1px solid #eaeaea;">
-						<div style="float: left;">
-							<label style="width: 60px; ">시/도</label>
-							<select name="" class="">
-								<option value="">서울특별시</option>
-								<option value="">부산광역시</option>
-								<option value="">대구광역시</option>
-								<option value="">인천광역시</option>
-								<option value="">광주광역시</option>
-								<option value="">대전광역시</option>
-								<option value="">울산광역시</option>
-								<option value="">세종특별자치시</option>
-								<option value="">경기도</option>
-								<option value="">강원도</option>
-								<option value="">충청북도</option>
-								<option value="">충청남도</option>
-								<option value="">전라북도</option>
-								<option value="">전라남도</option>
-								<option value="">경상북도</option>
-								<option value="">경상남도</option>
-								<option value="">제주특별자치도</option>
+					<div class="form-group col-xs-10">
+						<div class="col-xs-7">
+							<select name="sido" class="form-control input-sm">
+								<option value="su">서울특별시</option>
+								<option value="bs">부산광역시</option>
+								<option value="dg">대구광역시</option>
+								<option value="ic">인천광역시</option>
+								<option value="gj">광주광역시</option>
+								<option value="dj">대전광역시</option>
+								<option value="us">울산광역시</option>
+								<option value="sj">세종특별자치시</option>
+								<option value="gg">경기도</option>
+								<option value="gw">강원도</option>
+								<option value="cb">충청북도</option>
+								<option value="cn">충청남도</option>
+								<option value="jb">전라북도</option>
+								<option value="jn">전라남도</option>
+								<option value="gb">경상북도</option>
+								<option value="gn">경상남도</option>
+								<option value="jj">제주특별자치도</option>
 							</select>
 						</div>
-						<div style="clear: both; float: left;">
-							<label style="width: 60px; ">도로명</label>
-							<input type="text">
+						<div class="col-xs-5"></div>
+					</div>
+					<div class="form-group col-xs-2">
+						<label id="doro_name" for="search_text">도로명</label>
+						<label id="build_name" for="search_text" style="display: none;">건물명</label>
+					</div>
+					<div class="form-group col-xs-10">
+						<div class="col-xs-7">
+							<input class="form-control input-sm" type="text" name="search_text" id="search_text" required autofocus>
 						</div>
-						<div style="float: left;">
-							<label style="width: 60px; ">건물번호</label>
-							<input type="text" style="width: 50px;"> - <input type="text" style="width: 50px;">
-							<input type="button" value="검색">
+						<div class="col-xs-5">
+							<button class="btn btn-primary btn-sm">검 색</button>
 						</div>
-					</div>
-					<div style="padding: 5px 10px;">
-						※ 해당되는 주소를 선택해주세요.
-					</div>
-					<div style="border: 1px solid $eaeaea; margin: 5px 10px;">
-						<table>
-							<thead>
-								<th>우편번호</th>
-								<th>주 소</th>
-							</thead>
-							<tr>
-								<th>d</th>
-								<th>d</th>
-							</tr>
-							<tr>
-								<th>a</th>
-								<th>a</th>
-							</tr>
-							<tr>
-								<th>a</th>
-								<th>a</th>
-							</tr>
-							<tr>
-								<th>a</th>
-								<th>d</th>
-							</tr>
-							<tr>
-								<th>a</th>
-								<th>a</th>
-							</tr>
-						</table>
-					</div>
-					<div style="text-align: center;">
-						pagenation
-					</div>
-					<div style="padding: 5px 10px; margin-top: 30px;">
-						※ 상세주소 입력 후 '확인'버튼을 눌러주세요.
-					</div>
-					<div style="border: 1px solid $eaeaea; margin: 5px 10px;">
-						<table>
-							<tr>
-								<th>도로명주소</th>
-								<th>d</th>
-							</tr>
-							<tr>
-								<th>상세주소입력</th>
-								<th>a</th>
-							</tr>
-						</table>
-					</div>
-					<div style="padding: 5px 10px; margin-bottom: 10xp; text-align: center;">
-						<a href="" class="btn btn-primary btn-sm"> 확 인 </a>
 					</div>
 				</div>
+
+				<div class="mt20">
+					<div class="desc pull-left">※ 해당되는 주소를 선택해주세요.<?//php var_dump($result); ?></div>
+					<div class="num text-right">(39 건)</div>
+				</div>
+				<div class="zip-tb">
+					<table class="table table-bordered table-condensed">
+						<tr>
+							<th class="col-xs-2 center">우편번호</th>
+							<th class="col-xs-10 center">주 소</th>
+						</tr>
+					</table>
+				</div>
+				<div id="main-select">
+					<select name="" class="form-control input-sm">
+						<!-- <option value="">12345 ----- 서울특별시 강남구 개포로15길 32-8 (개포동, 포이동 현대아파트)</option> -->
+					</select>
+				</div>
+				<div class="desc mt30">
+					※ 상세주소 입력 후 '확인'버튼을 눌러주세요.
+				</div>
+				<div class="zip-tb">
+					<table class="table table-bordered table-condensed">
+						<tr>
+							<th class="col-xs-2 center">
+								<div class="pt6">도로명주소</div>
+							</th>
+							<td class="col-xs-10">
+								<div class="col-xs-2 pl0">
+									<label class="sr-only" id="doro_name" for="">도로명</label>
+									<input class="form-control input-sm" type="text" readonly>
+								</div>
+								<div class="col-xs-10 pl0">
+									<label class="sr-only" id="doro_name" for="">도로명</label>
+									<input class="form-control input-sm" type="text" readonly>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th class="center">
+								<div class="pt6">상 세 주 소</div>
+							</th>
+							<td>
+								<div class="col-xs-7 pl0">
+									<label class="sr-only" id="doro_name" for="">도로명</label>
+									<input class="form-control input-sm" type="text">
+								</div>
+								<div class="col-xs-5 pl0">
+									<label class="sr-only" id="doro_name" for="">도로명</label>
+									<input class="form-control input-sm" type="text" readonly>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<footer class="center">
+					<a href="" class="btn btn-primary btn-sm"> 확 인 </a>
+				</footer>
 			</div>
 		</form>
 	</body>
