@@ -328,7 +328,9 @@
 				<label for="zipcode">회사주소 <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-10 form-wrap">
-				<div class="col-md-1 col-sm-2 col-xs-3"><input type="button" class="btn btn-default btn-sm wid-90" value="우편번호" onclick="javascript:ZipWindow('/popup/zip_search/','zipcode','address1', 'address2')"></div>
+				<div class="col-md-1 col-sm-2 col-xs-3">
+					<input type="button" class="btn btn-info btn-sm wid-90" value="우편번호" onclick="javascript:ZipWindow('/popup/zip_search/','zipcode','address1', 'address2')">
+				</div>
 				<div class="col-md-1 col-sm-5 col-xs-3">
 					<input type="text" class="form-control input-sm wid-95" id="zipcode" name="zipcode">
 				</div>

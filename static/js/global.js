@@ -97,10 +97,10 @@ function open_Win(ref,name,obj) {
 }
 
 // 우편번호 검색창 열기
- function ZipWindow(ref, z_form, a_form) { // ref = 파일경로, z_form = 우편번호 폼, a_form = 주소폼)
+ function ZipWindow(ref, z_form, a_form1, a_form2) { // ref = 파일경로, z_form = 우편번호 폼, a_form = 주소폼)
      var window_left = (screen.width-640)/2;
      var window_top = (screen.height-480)/2;
-     window.open(ref+ "?z_form=" + z_form + "&a_form=" + a_form, "zipWin","scrollbars=yes,width=620,height=320,status=no,top=" + window_top + ",left=" + window_left);
+     window.open(ref+ "?z_form=" + z_form + "&a_form1=" + a_form1+"&a_form2="+a_form2, "zipWin","scrollbars=no,width=520,height=540,status=no,top=" + window_top + ",left=" + window_left);
  }
 
 function login_check(form_name){
