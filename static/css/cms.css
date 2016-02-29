@@ -42,7 +42,7 @@
 	#com_reg_form fieldset .row.foot_form { padding-bottom: 20px; border-bottom:1px; border-style:solid; border-color:#CACAC1; }
 	#com_reg_form fieldset .row.btn-wrap { padding: 15px 20px 0 0; text-align: right; height: 61px; border-width:0 0 1px 0; border-style:solid; border-color:#B2BCDE; background-color: #F8F8F8; margin-bottom: 25px; }
 
-	#com_reg_form fieldset .row div.form-group.label-wrap { padding: 11px 0 7px 15px; background-color: #F8F8F8; }
+	#com_reg_form fieldset .row div.form-group.label-wrap { padding: 10px 0 7px 15px; background-color: #F8F8F8; }
 	#com_reg_form fieldset .row div.form-group label { width:180px; }
 	#com_reg_form fieldset .row div.form-group label span.red { color: red; }
 	#com_reg_form fieldset .row div.form-group.form-wrap { padding: 3px 0 3px 10px; }

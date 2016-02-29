@@ -76,8 +76,8 @@
 		<form class="form-inline" id="zipsearch" name="form1">
 			<div style="background-color: white; height: 544px;">
 				<div class="container" style="border: 1px solid #99B0FF; margin: 0 3px; height: 540px; padding: 0;">
-					<header id="header" class="" style="background-color: #aaaeee; margin: 3px; text-align: center; padding: 1px; height: 38px; border: 1px solid #3e3e3e;">
-						<h1 style="font-size: 15px; color: white; padding: 0; margin: 0; padding-top: 8px;">주소검색</h1>
+					<header id="header" class="" style="background-color: #332E33; margin: 3px; text-align: center; padding: 1px; height: 38px; border: 1px solid #222;">
+						<h1 style="font-size: 15px; color: white; padding: 0; margin: 0; padding-top: 8px; font-weight: bold;">주소검색</h1>
 					</header><!-- /header -->
 					<div style="padding: 5px 10px;">
 						※ 찾고자 하는 도로명주소 또는 건물명을 선택해 주세요.

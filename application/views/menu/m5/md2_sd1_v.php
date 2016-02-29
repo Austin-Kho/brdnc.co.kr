@@ -2,10 +2,8 @@
 <form class="form-inline" id="com_reg_form" name="form1">
 	<fieldset>
 		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
-			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
-				<label for="co_name">
-					회사명<span class="red">*</span>
-				</label>
+			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap" >
+				<label for="co_name">회사명<span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
 				<input type="text" class="form-control input-sm" id="co_name" name="co_name" maxlength="30">
@@ -16,15 +14,15 @@
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
 				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90" id="co_no1" name="co_no1" maxlength="3"></div>
 				<div class="col-xs-2">
-          <label for="co_no2" class="sr-only">사업자번호2 </label>
-          <input type="text" class="form-control input-sm wid-90" id="co_no2" name="co_no2" maxlength="2">
-        </div>
+					<label for="co_no2" class="sr-only">사업자번호2 </label>
+					<input type="text" class="form-control input-sm wid-90" id="co_no2" name="co_no2" maxlength="2">
+				</div>
 				<div class="col-xs-3">
-	        <label for="co_no3" class="sr-only">사업자번호3 </label>
-	        <input type="text" class="form-control input-sm wid-90" id="co_no3" name="co_no3" maxlength="5">
-        </div>
+					<label for="co_no3" class="sr-only">사업자번호3 </label>
+					<input type="text" class="form-control input-sm wid-90" id="co_no3" name="co_no3" maxlength="5">
+				</div>
 				<div class="col-xs-4">
-        	<label for="co_form" class="sr-only">사업자종류 </label>
+					<label for="co_form" class="sr-only">사업자종류 </label>
 					<select class="form-control input-sm wid-90" id="co_form" name="co_form">
 						<option value="">선택</option>
 						<option value="1">법인</option>
@@ -34,6 +32,9 @@
 				</div>
 			</div>
 		</div>
+
+
+
 
 		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
