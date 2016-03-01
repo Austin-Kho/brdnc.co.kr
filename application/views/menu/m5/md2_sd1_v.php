@@ -32,10 +32,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
-
 		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="ceo">
@@ -65,8 +61,6 @@
 				</div>
 			</div>
 		</div>
-
-
 		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="biz_cond">업태 <span class="red">*</span></label>
@@ -124,7 +118,6 @@
 				<div class="col-xs-3"></div>
 			</div>
 		</div>
-
 		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap"><label for="co_fax1">FAX</label></div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
@@ -172,8 +165,6 @@
 				<div class="col-xs-1"></div>
 			</div>
 		</div>
-
-
 		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="es_date">설립일자 <span class="red">*</span></label>
@@ -198,8 +189,6 @@
 				</div>
 			</div>
 		</div>
-
-
 		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="carr_y">기초잔액 입력월 <span class="red">*</span></label>
@@ -250,8 +239,6 @@
 				<div class="col-xs-5 text-wrap">개월</div>
 			</div>
 		</div>
-
-
 		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="email1">E-mail(비상) <span class="red">*</span>	</label>
@@ -296,8 +283,6 @@
 				</div>
 			</div>
 		</div>
-
-
 		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="tax_off1_code">세무서[1] <span class="red">*</span></label>
@@ -325,32 +310,28 @@
 				<div class="col-xs-5"></div>
 			</div>
 		</div>
-
-
 		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="zipcode">회사주소 <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-10 form-wrap">
-				<div class="col-md-1 col-sm-2 col-xs-3">
+				<div class="col-xs-3 col-sm-2 col-md-1">
 					<input type="button" class="btn btn-info btn-sm wid-90" value="우편번호" onclick="javascript:ZipWindow('/popup/zip_search/','zipcode','address1', 'address2')">
 				</div>
-				<div class="col-md-1 col-sm-5 col-xs-3">
-					<input type="text" class="form-control input-sm wid-95" id="zipcode" name="zipcode">
+				<div class="col-xs-3 col-sm-5 col-md-1">
+					<input type="text" class="form-control input-sm wid-95" id="zipcode" name="zipcode" readonly>
 				</div>
-				<div class="col-md-4 col-sm-6 col-xs-12">
+				<div class="col-xs-12 col-sm-6 col-md-4">
 					<label for="address1" class="sr-only">회사주소1</label>
-					<input type="text" class="form-control input-sm wid-98" id="address1" name="address1">
+					<input type="text" class="form-control input-sm wid-98" id="address1" name="address1" readonly>
 				</div>
-				<div class="col-md-3 col-sm-6 ol-xs-12">
+				<div class="col-xs-12 col-sm-6 col-md-3">
 					<label for="address2" class="sr-only">회사주소2</label>
 					<input type="text" class="form-control input-sm wid-98" id="address2" name="address2">
 				</div>
 				<div class="col-md-3 col-sm-12 col-xs-12 glyphicon-wrap">나머지 주소</div>
 			</div>
 		</div>
-
-
 		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="en_co_name">회사 영문명</label>
@@ -372,11 +353,8 @@
 			</div>
 		</div>
 <?php if($auth<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="com_submit('$mode');";} ?>
-
-
 		<div class="row btn-wrap">
 			<input type="button" class="btn btn-primary btn-sm" onclick="<?=$submit_str?>" value="입력하기">
 		</div>
-
 	</fieldset>
 </form>
