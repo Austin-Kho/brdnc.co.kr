@@ -18,25 +18,23 @@ class Main_m extends CI_Model
 
 	public function zip_search($data) {
 
-		$sh_what = $data['sh_what'];
-		$sido = $data['sido'];
 		$search_text = $data['search_text'];
 
-		if($data['sh_what'] == 1) {
-			//$where = "(lemd_name LIKE '%$search_text%') OR (lr_name LIKE '%$search_text%') OR (doro_name LIKE '%$search_text%') OR (ad_name LIKE '%$search_text%')'; // 도로명 검색 (법정읍면동/lemd_name/법정리/lr_name/도로명/doro_name/행정동/ad_name)";
+		if($data['sh_what'] == 1) { // 도로명주소 검색 시
+			$where = "(epmn LIKE '%$search_text%') OR (doro_name LIKE '%$search_text%') OR (ld_name LIKE '%$search_text%') OR (lr_name LIKE '%$search_text%') OR (ad_name LIKE '%$search_text%')";
 		} // 도로명 검색 (법정읍면동/lemd_name/법정리/lr_name/도로명/doro_name/행정동/ad_name)
 
-		if($data['sh_what'] == 2) {
-			//$where = "(abd_name LIKE '%$search_text%') OR (dbd_name LIKE '%$search_text%') OR (sgg_bdn LIKE '%$search_text%')"; // 도로명 검색 (법정읍면동/lemd_name/법정리/lr_name/도로명/doro_name/행정동/ad_name)';
+		if($data['sh_what'] == 2) { // 건물명 검색 시
+			$where = "(sgg_bd_name LIKE '%$search_text%')";
 		} // 건물명 검색 (건축물대장/abd_name/상세건물명/dbd_name/시군구용건물명/sgg_bdn)
 
-		$sql = " SELECT * FROM cms_zip_".$data['sido']." WHERE ".$where."; ";
-		// $qry = $this->db->qeury($sql);
-		// if($num =$qry->num_rows()>0) {
-		// 	return $result = $qry->result();
-		// }else{
-		// 	return FALSE;
-		// }
+		// zipcode
+		$sql = " SELECT * FROM cms_zip_".$data['sido']." WHERE ".$where;
+		$qry = $this->db->query($sql);
+
+		$rlt1 = $qry->num_rows();
+		$rlt2 = $qry->result();
+		return $result = array($rlt1, $rlt2);
 	}
 }
  // End of this File

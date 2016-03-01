@@ -26,7 +26,6 @@ function div_submit(mode){
 		return;
 	}
 }
-
 /**************  (환경설정 > 기본정보 관리 > 부서정보 관리) E ****************/
 
 
@@ -66,6 +65,7 @@ function div_mem_submit(mode){
 }
 /**************  (환경설정 > 기본정보 관리 > 직원정보 관리) E ****************/
 
+
 /**************  (환경설정 > 기본정보 관리 > 거래처정보 관리) S ****************/
 //////////////////////////////거래처 정보 입력 수정 시 !
 function acc_submit(mode){
@@ -96,6 +96,7 @@ function acc_submit(mode){
 	}
 }
 /**************  (환경설정 > 기본정보 관리 > 거래처정보 관리) E ****************/
+
 
 /**************  (환경설정 > 기본정보 관리 > 은행계좌 관리) S ****************/
 //////////////////////////////은행계좌 정보 입력 수정 시 !
@@ -162,6 +163,8 @@ function bank_submit(mode){
 
 
 
+
+
 /**************  (환경설정 > 회사정보 관리 > 회사 기본정보) S ****************/
 ///// 회사 정보 등록 시/////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////
@@ -207,7 +210,7 @@ function com_submit(mode){
 	}
 
 	if(form.co_no1.value) {
-	  if(/*!IsNumber(form.co_no1.name)||*/form.co_no1.value.length<3){
+	  if(!IsNumber(form.co_no1.name)||form.co_no1.value.length<3){
        alert("첫 번째 사업자등록번호는 세자리 숫자이어야 합니다!");
 			 form.co_no1.value="";
 	     form.co_no1.focus();
@@ -222,7 +225,7 @@ function com_submit(mode){
 	}
 
 	if(form.co_no2.value) {
-		if(/*!IsNumber(form.co_no2.name)||*/form.co_no2.value.length<2){
+		if(!IsNumber(form.co_no2.name)||form.co_no2.value.length<2){
        alert("두 번째 사업자등록번호는 두자리 숫자이어야 합니다!");
 			 form.co_no2.value="";
 	     form.co_no2.focus();
@@ -237,7 +240,7 @@ function com_submit(mode){
 	}
 
 	if(form.co_no3.value) {
-	  if(/*!IsNumber(form.co_no3.name)||*/form.co_no3.value.length<5){
+	  if(!IsNumber(form.co_no3.name)||form.co_no3.value.length<5){
        alert("세 번째 사업자등록번호는 다섯자리 숫자이어야 합니다!");
 			 form.co_no3.value="";
 	     form.co_no3.focus();
@@ -264,7 +267,7 @@ function com_submit(mode){
 	}
 
 	if(form.or_no1.value) {
-	  if(/*!IsNumber(form.or_no1.name)||*/form.or_no1.value.length<6){
+	  if(!IsNumber(form.or_no1.name)||form.or_no1.value.length<6){
        alert("첫 번째 법인(주민)등록번호는 6자리 숫자이어야 합니다!");
 			 form.or_no1.value="";
 	     form.or_no1.focus();
@@ -279,7 +282,7 @@ function com_submit(mode){
 	}
 
 	if(form.or_no2.value) {
-	  if(/*!IsNumber(form.or_no2.name)||*/form.or_no2.value.length<7){
+	  if(!IsNumber(form.or_no2.name)||form.or_no2.value.length<7){
        alert("두 번째 법인(주민)등록번호는 7자리 숫자이어야 합니다!");
 			 form.or_no2.value="";
 	     form.or_no2.focus();
@@ -311,14 +314,14 @@ function com_submit(mode){
 		return;
 	}
 
-	// if(form.co_phone1.value) {
-	//   if(!IsNumber(form.co_phone1.name)){
- //       alert("전화번호는 숫자이어야 합니다!");
-	// 		 form.co_phone1.value="";
-	//      form.co_phone1.focus();
-	//      return;
-	//   }
- //   }
+	if(form.co_phone1.value) {
+	  if(!IsNumber(form.co_phone1.name)){
+       alert("전화번호는 숫자이어야 합니다!");
+			 form.co_phone1.value="";
+	     form.co_phone1.focus();
+	     return;
+	  }
+   }
 
 	if(!form.co_phone2.value){
 		alert('대표전화번로를 입력하세요!');
@@ -326,14 +329,14 @@ function com_submit(mode){
 		return;
 	}
 
-	// if(form.co_phone2.value) {
-	//   if(!IsNumber(form.co_phone2.name)){
- //       alert("전화번호는 숫자이어야 합니다!");
-	// 		 form.co_phone2.value="";
-	//      form.co_phone2.focus();
-	//      return;
-	//   }
- //   }
+	if(form.co_phone2.value) {
+	  if(!IsNumber(form.co_phone2.name)){
+       alert("전화번호는 숫자이어야 합니다!");
+			 form.co_phone2.value="";
+	     form.co_phone2.focus();
+	     return;
+	  }
+   }
 
 	if(!form.co_phone3.value){
 		alert('대표전화번로를 입력하세요!');
@@ -341,14 +344,14 @@ function com_submit(mode){
 		return;
 	}
 
-	// if(form.co_phone3.value) {
-	//   if(!IsNumber(form.co_phone3.name)){
- //       alert("전화번호는 숫자이어야 합니다!");
-	// 		 form.co_phone3.value="";
-	//      form.co_phone3.focus();
-	//      return;
-	//   }
- //   }
+	if(form.co_phone3.value) {
+	  if(!IsNumber(form.co_phone3.name)){
+       alert("전화번호는 숫자이어야 합니다!");
+			 form.co_phone3.value="";
+	     form.co_phone3.focus();
+	     return;
+	  }
+   }
 
 	if(!form.co_hp1.value){
 		alert('휴대전화(비상)번호를 입력하세요!');
@@ -362,14 +365,14 @@ function com_submit(mode){
 		return;
 	}
 
-	// if(form.co_hp2.value) {
-	//   if(!IsNumber(form.co_hp2.name)){
- //       alert("전화번호는 숫자이어야 합니다!");
-	// 		 form.co_hp2.value="";
-	//      form.co_hp2.focus();
-	//      return;
-	//   }
- //   }
+	if(form.co_hp2.value) {
+	  if(!IsNumber(form.co_hp2.name)){
+       alert("전화번호는 숫자이어야 합니다!");
+			 form.co_hp2.value="";
+	     form.co_hp2.focus();
+	     return;
+	  }
+   }
 
 	if(!form.co_hp3.value){
 		alert('휴대전화(비상)번호를 입력하세요!');
@@ -377,14 +380,14 @@ function com_submit(mode){
 		return;
 	}
 
-	// if(form.co_hp3.value) {
-	//   if(!IsNumber(form.co_hp3.name)){
- //       alert("전화번호는 숫자이어야 합니다!");
-	// 		 form.co_hp3.value="";
-	//      form.co_hp3.focus();
-	//      return;
-	//   }
- //   }
+	if(form.co_hp3.value) {
+	  if(!IsNumber(form.co_hp3.name)){
+       alert("전화번호는 숫자이어야 합니다!");
+			 form.co_hp3.value="";
+	     form.co_hp3.focus();
+	     return;
+	  }
+   }
 
 	if(!form.es_date.value){
 		alert('설립일자를 입력하세요!');
@@ -419,14 +422,14 @@ function com_submit(mode){
 		return;
 	}
 
-	// if(form.carr_m.value) {
-	//   if(!IsNumber(form.carr_m.name)){
- //       alert("기초잔액 입력월을 숫자로 입력하세요!");
-	// 		 form.carr_m.value="";
-	//      form.carr_m.focus();
-	//      return;
-	//   }
- //   }
+	if(form.carr_m.value) {
+	  if(!IsNumber(form.carr_m.name)){
+       alert("기초잔액 입력월을 숫자로 입력하세요!");
+			 form.carr_m.value="";
+	     form.carr_m.focus();
+	     return;
+	  }
+   }
 
 	if(!form.m_wo_st.value){
 		alert('업무개시월을 입력하세요!');
