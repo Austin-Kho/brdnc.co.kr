@@ -6,20 +6,20 @@
 				<label for="co_name">회사명<span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<input type="text" class="form-control input-sm" id="co_name" name="co_name" maxlength="30" value="" required autofocus>
+				<input type="text" class="form-control input-sm han" id="co_name" name="co_name" maxlength="30" value="" required autofocus>
 			</div>
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="co_no1">사업자번호 <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90" id="co_no1" name="co_no1" maxlength="3" onkeypress="isNum();" required autofocus></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90 en_only" id="co_no1" name="co_no1" maxlength="3" onkeypress="isNum();" required autofocus></div>
 				<div class="col-xs-2">
 					<label for="co_no2" class="sr-only">사업자번호2 </label>
-					<input type="text" class="form-control input-sm wid-90" id="co_no2" name="co_no2" maxlength="2" onkeypress="isNum();" required autofocus>
+					<input type="text" class="form-control input-sm wid-90 en_only" id="co_no2" name="co_no2" maxlength="2" onkeypress="isNum();" required autofocus>
 				</div>
 				<div class="col-xs-3">
 					<label for="co_no3" class="sr-only">사업자번호3 </label>
-					<input type="text" class="form-control input-sm wid-90" id="co_no3" name="co_no3" maxlength="5" onkeypress="isNum();" required autofocus>
+					<input type="text" class="form-control input-sm wid-90 en_only" id="co_no3" name="co_no3" maxlength="5" onkeypress="isNum();" required autofocus>
 				</div>
 				<div class="col-xs-4">
 					<label for="co_form" class="sr-only">사업자종류 </label>
@@ -39,16 +39,16 @@
 				</label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<input type="text" class="form-control input-sm" id="ceo" name="ceo" maxlength="30" required autofocus>
+				<input type="text" class="form-control input-sm han" id="ceo" name="ceo" maxlength="30" required autofocus>
 			</div>
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="or_no1">법인(주민)등록번호 <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-95" id="or_no1" name="or_no1" maxlength="6" onkeypress="isNum();" required autofocus></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-95 en_only" id="or_no1" name="or_no1" maxlength="6" onkeypress="isNum();" required autofocus></div>
       	<div class="col-xs-4">
       		<label for="or_no2" class="sr-only">법인(주민)등록번호2 </label>
-      		<input type="text" class="form-control input-sm wid-90" id="or_no2" name="or_no2" maxlength="7" onkeypress="isNum();" required autofocus>
+      		<input type="text" class="form-control input-sm wid-90 en_only" id="or_no2" name="or_no2" maxlength="7" onkeypress="isNum();" required autofocus>
       	</div>
       	<div class="col-xs-5">
       		<label for="sur" class="sr-only">부가세신고주기</label>
@@ -66,14 +66,14 @@
 				<label for="biz_cond">업태 <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-					<input type="text" class="form-control input-sm" id="biz_cond" name="biz_cond" maxlength="30" required autofocus>
+					<input type="text" class="form-control input-sm han" id="biz_cond" name="biz_cond" maxlength="30" required autofocus>
 			</div>
 
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="biz_even">종목 <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<input type="text" class="form-control input-sm" id="biz_even" name="biz_even" maxlength="30" required autofocus>
+				<input type="text" class="form-control input-sm han" id="biz_even" name="biz_even" maxlength="30" required autofocus>
 			</div>
 		</div>
 		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
@@ -81,14 +81,14 @@
 				<label for="co_phone1">대표전화 <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90" id="co_phone1" name="co_phone1" maxlength="4" onkeypress="isNum();" required autofocus></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90 en_only" id="co_phone1" name="co_phone1" maxlength="4" onkeypress="isNum();" required autofocus></div>
 				<div class="col-xs-3">
 					<label for="co_phone2" class="sr-only">대표전화2</label>
-					<input type="text" class="form-control input-sm wid-90" id="co_phone2" name="co_phone2" maxlength="4" onkeypress="isNum();" required autofocus>
+					<input type="text" class="form-control input-sm wid-90 en_only" id="co_phone2" name="co_phone2" maxlength="4" onkeypress="isNum();" required autofocus>
 				</div>
 				<div class="col-xs-3">
 					<label for="co_phone3" class="sr-only">대표전화3</label>
-					<input type="text" class="form-control input-sm wid-90" id="co_phone3" name="co_phone3" maxlength="4" onkeypress="isNum();" required autofocus>
+					<input type="text" class="form-control input-sm wid-90 en_only" id="co_phone3" name="co_phone3" maxlength="4" onkeypress="isNum();" required autofocus>
 				</div>
 				<div class="col-xs-3"></div>
 			</div>
@@ -109,11 +109,11 @@
 				</div>
 				<div class="col-xs-3">
 					<label for="co_hp2" class="sr-only">휴대전화2</label>
-					<input type="text" class="form-control input-sm wid-90" id="co_hp2" name="co_hp2" maxlength="4" onkeypress="isNum();" required autofocus>
+					<input type="text" class="form-control input-sm wid-90 en_only" id="co_hp2" name="co_hp2" maxlength="4" onkeypress="isNum();" required autofocus>
 				</div>
 				<div class="col-xs-3">
 					<label for="co_hp3" class="sr-only">휴대전화2</label>
-					<input type="text" class="form-control input-sm wid-90" id="co_hp3" name="co_hp3" maxlength="4" onkeypress="isNum();" required autofocus>
+					<input type="text" class="form-control input-sm wid-90 en_only" id="co_hp3" name="co_hp3" maxlength="4" onkeypress="isNum();" required autofocus>
 				</div>
 				<div class="col-xs-3"></div>
 			</div>
@@ -121,14 +121,14 @@
 		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap"><label for="co_fax1">FAX</label></div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90" id="co_fax1" name="co_fax1" maxlength="4" onkeypress="isNum();"></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90 en_only" id="co_fax1" name="co_fax1" maxlength="4" onkeypress="isNum();"></div>
 				<div class="col-xs-3">
 					<label for="co_fax2" class="sr-only">FAX2</label>
-					<input type="text" class="form-control input-sm wid-90" id="co_fax2" name="co_fax2" maxlength="4" onkeypress="isNum();">
+					<input type="text" class="form-control input-sm wid-90 en_only" id="co_fax2" name="co_fax2" maxlength="4" onkeypress="isNum();">
 				</div>
 				<div class="col-xs-3">
 					<label for="co_fax3" class="sr-only">FAX3</label>
-					<input type="text" class="form-control input-sm wid-90" id="co_fax3" name="co_fax3" maxlength="4" onkeypress="isNum();">
+					<input type="text" class="form-control input-sm wid-90 en_only" id="co_fax3" name="co_fax3" maxlength="4" onkeypress="isNum();">
 				</div>
 				<div class="col-xs-3"></div>
 			</div>
@@ -194,11 +194,11 @@
 				<label for="carr_y">기초잔액 입력월 <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90" id="carr_y" name="carr_y" maxlength="4" onkeypress="isNum();" required autofocus></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90 en_only" id="carr_y" name="carr_y" maxlength="4" onkeypress="isNum();" required autofocus></div>
 				<div class="col-xs-1 text-wrap">년</div>
 				<div class="col-xs-2">
 					<label for="carr_m" class="sr-only">기초잔액 입력월2</label>
-					<input type="text" class="form-control input-sm wid-90" id="carr_m" name="carr_m" maxlength="2" onkeypress="isNum();" required autofocus>
+					<input type="text" class="form-control input-sm wid-90 en_only" id="carr_m" name="carr_m" maxlength="2" onkeypress="isNum();" required autofocus>
 				</div>
 				<div class="col-xs-6 text-wrap">월</div>
 			</div>
@@ -244,11 +244,11 @@
 				<label for="email1">E-mail(비상) <span class="red">*</span>	</label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90" id="email1" name="email1" maxlength="30" required autofocus></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90 en_only" id="email1" name="email1" maxlength="30" required autofocus></div>
 				<div class="col-xs-1 text-wrap">@</div>
 				<div class="col-xs-3">
 						<label for="email2" class="sr-only">이메일2</label>
-						<input type="text" class="form-control input-sm wid-90" id="email2" name="email2" maxlength="30" required autofocus>
+						<input type="text" class="form-control input-sm wid-90 en_only" id="email2" name="email2" maxlength="30" required autofocus>
 				</div>
 				<div class="col-xs-5">
 					<label for="email3" class="sr-only">이메일3</label>
@@ -265,11 +265,11 @@
 				<label for="calc_mail1">전자세금계산서 Email</label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90" id="calc_mail1" name="calc_mail1" maxlength="30" required autofocus></div>
+				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90 en_only" id="calc_mail1" name="calc_mail1" maxlength="30" required autofocus></div>
 				<div class="col-xs-1 text-wrap">@</div>
 				<div class="col-xs-3">
 						<label for="calc_mail2" class="sr-only">세금계산서이메일2</label>
-						<input type="text" class="form-control input-sm wid-90" id="calc_mail2" name="lcalc_mail2" maxlength="30" required autofocus>
+						<input type="text" class="form-control input-sm wid-90 en_only" id="calc_mail2" name="lcalc_mail2" maxlength="30" required autofocus>
 				</div>
 				<div class="col-xs-5">
 					<label for="calc_mail3" class="sr-only">세금계산서이메일3</label>
@@ -337,7 +337,7 @@
 				<label for="en_co_name">회사 영문명</label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-10 form-wrap">
-				<div class="col-md-6 col-xs-12"><input type="text" class="form-control input-sm wid-99" id="en_co_name" name="en_co_name" maxlength="50"></div>
+				<div class="col-md-6 col-xs-12"><input type="text" class="form-control input-sm wid-99" id="en_co_name" name="en_co_name" maxlength="50" style="ime-mode:disabled;"></div>
 				<div class="col-md-6 col-xs-12 text-wrap">기타소득 지급조서 신고가 있는 경우 입력</div>
 			</div>
 		</div>
@@ -347,7 +347,7 @@
 				<div class="col-xs-12">&nbsp;</div>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-10 form-wrap">
-				<div class="col-md-10 col-xs-12"><input type="text" class="form-control input-sm wid-100" id="en_address" name="en_address" maxlength="200"></div>
+				<div class="col-md-10 col-xs-12"><input type="text" class="form-control input-sm wid-100" id="en_address" name="en_address" maxlength="200" style="ime-mode:disabled;"></div>
 				<div class="col-md-2">&nbsp;</div>
 				<div class="col-xs-12">번지(number), 거리(street), 시(city), 도(state), 우편번호(postal code), 국가(country) 순으로 기재</div>
 				<div><?php echo validation_errors(); ?></div>

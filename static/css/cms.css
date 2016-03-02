@@ -33,6 +33,13 @@
 	.page-header .nav-pills .active a { background-color: #F3F5FC; color: #5674D5; font-weight: bold;}
 	.page-header .nav-pills .active a:hover { background-color: #E8ECF9; color: #3355CA;}
 
+	/************************************IME MODE**************************************/
+	.han { ime-mode:active; }
+	.eng { ime-mode:inactive; }
+	.en_only { ime-mode:disabled; }
+	/************************************IME MODE**************************************/
+
+
 	#sdi_sub { margin-top: -20px; padding: 18px 0 12px 20px; background-color: #F8F8F8; font-weight: bold; color: #6666D4; border-bottom-color: #B2BCDE;}
 
 	/*****************************************m5 style*******************************************/
