@@ -173,7 +173,7 @@ function bank_submit(mode){
 * param : sVal 입력스트링
 * return : Boolean True이면 숫자값
 /*=========================================*/
-function isNumber(sVal) {
+function IsNumber(sVal) {
    if(sVal.length < 1) {
        return false;
    }
@@ -190,288 +190,298 @@ function isNumber(sVal) {
    return true;
 }
 
+// 숫자만 입력 ..<input type='text' ....onkeypress='isMum();'....//
+function isNum(){
+   var key = event.keyCode;
+   var messageArea = document.getElementById("ssnMessage");
+   if(!(key==8||key==9||key==13||key==46||key==144||(key>=48&&key<=57)||key==110||key==190)){
+        alert('숫자만 입력 가능합니다');
+        event.returnValue = false;
+   }
+}
+
 
 
 function com_submit(mode){
 
 	var form = document.form1;
 
-	// if(!form.co_name.value){
-	// 	alert('회사명을 입력하세요!');
-	// 	form.co_name.focus();
-	// 	return;
-	// }
+	if(!form.co_name.value){
+		alert('회사명을 입력하세요!');
+		form.co_name.focus();
+		return;
+	}
 
-	// if(!form.co_no1.value){
-	// 	alert('사업자등록번호를 입력하세요!');
-	// 	form.co_no1.focus();
-	// 	return;
-	// }
+	if(!form.co_no1.value){
+		alert('사업자등록번호를 입력하세요!');
+		form.co_no1.focus();
+		return;
+	}
 
-	// if(form.co_no1.value) {
-	//   if(!IsNumber(form.co_no1.value)||form.co_no1.value.length<3){
- //       alert("첫 번째 사업자등록번호는 세자리 숫자이어야 합니다!");
-	// 		 form.co_no1.value="";
-	//      form.co_no1.focus();
-	//      return;
-	//   }
- //   }
+	if(form.co_no1.value) {
+		if(!IsNumber(form.co_no1.value)||form.co_no1.value.length<3){
+			alert("첫 번째 사업자등록번호는 세자리 숫자이어야 합니다!");
+			form.co_no1.value="";
+			form.co_no1.focus();
+			return;
+		}
+	}
 
-	// if(!form.co_no2.value){
-	// 	alert('사업자등록번호를 입력하세요!');
-	// 	form.co_no2.focus();
-	// 	return;
-	// }
+	if(!form.co_no2.value){
+		alert('사업자등록번호를 입력하세요!');
+		form.co_no2.focus();
+		return;
+	}
 
-	// if(form.co_no2.value) {
-	// 	if(!IsNumber(form.co_no2.name)||form.co_no2.value.length<2){
- //       alert("두 번째 사업자등록번호는 두자리 숫자이어야 합니다!");
-	// 		 form.co_no2.value="";
-	//      form.co_no2.focus();
-	// 	   return;
-	//   }
- //   }
+	if(form.co_no2.value) {
+		if(!IsNumber(form.co_no2.value)||form.co_no2.value.length<2){
+			alert("두 번째 사업자등록번호는 두자리 숫자이어야 합니다!");
+			form.co_no2.value="";
+			form.co_no2.focus();
+			return;
+		}
+	}
 
-	// if(!form.co_no3.value){
-	// 	alert('사업자등록번호를 입력하세요!');
-	// 	form.co_no3.focus();
-	// 	return;
-	// }
+	if(!form.co_no3.value){
+		alert('사업자등록번호를 입력하세요!');
+		form.co_no3.focus();
+		return;
+	}
 
-	// if(form.co_no3.value) {
-	//   if(!IsNumber(form.co_no3.name)||form.co_no3.value.length<5){
- //       alert("세 번째 사업자등록번호는 다섯자리 숫자이어야 합니다!");
-	// 		 form.co_no3.value="";
-	//      form.co_no3.focus();
-	//      return;
-	//   }
- //   }
+	if(form.co_no3.value) {
+		if(!IsNumber(form.co_no3.value)||form.co_no3.value.length<5){
+			alert("세 번째 사업자등록번호는 다섯자리 숫자이어야 합니다!");
+			form.co_no3.value="";
+			form.co_no3.focus();
+			return;
+		}
+	}
 
-	// if(!form.co_form.value){
-	// 	alert('사업자 구분을 선택하세요!');
-	// 	form.co_form.focus();
-	// 	return;
-	// }
+	if(!form.co_form.value){
+		alert('사업자 구분을 선택하세요!');
+		form.co_form.focus();
+		return;
+	}
 
-	// if(!form.ceo.value){
-	// 	alert('대표자명을 입력하세요!');
-	// 	form.ceo.focus();
-	// 	return;
-	// }
+	if(!form.ceo.value){
+		alert('대표자명을 입력하세요!');
+		form.ceo.focus();
+		return;
+	}
 
-	// if(!form.or_no1.value){
-	// 	alert('법인(주민)등록번호를 입력하세요!');
-	// 	form.or_no1.focus();
-	// 	return;
-	// }
+	if(!form.or_no1.value){
+		alert('법인(주민)등록번호를 입력하세요!');
+		form.or_no1.focus();
+		return;
+	}
 
-	// if(form.or_no1.value) {
-	//   if(!IsNumber(form.or_no1.name)||form.or_no1.value.length<6){
- //       alert("첫 번째 법인(주민)등록번호는 6자리 숫자이어야 합니다!");
-	// 		 form.or_no1.value="";
-	//      form.or_no1.focus();
-	//      return;
-	//   }
- //   }
+	if(form.or_no1.value) {
+		if(!IsNumber(form.or_no1.value)||form.or_no1.value.length<6){
+			alert("첫 번째 법인(주민)등록번호는 6자리 숫자이어야 합니다!");
+			form.or_no1.value="";
+			form.or_no1.focus();
+			return;
+		}
+	}
 
-	// if(!form.or_no2.value){
-	// 	alert('법인(주민)등록번호를 입력하세요!');
-	// 	form.or_no2.focus();
-	// 	return;
-	// }
+	if(!form.or_no2.value){
+		alert('법인(주민)등록번호를 입력하세요!');
+		form.or_no2.focus();
+		return;
+	}
 
-	// if(form.or_no2.value) {
-	//   if(!IsNumber(form.or_no2.name)||form.or_no2.value.length<7){
- //       alert("두 번째 법인(주민)등록번호는 7자리 숫자이어야 합니다!");
-	// 		 form.or_no2.value="";
-	//      form.or_no2.focus();
-	//      return;
-	//   }
- //   }
+	if(form.or_no2.value) {
+		if(!IsNumber(form.or_no2.value)||form.or_no2.value.length<7){
+			alert("두 번째 법인(주민)등록번호는 7자리 숫자이어야 합니다!");
+			form.or_no2.value="";
+			form.or_no2.focus();
+			return;
+		}
+	}
 
-	// if(!form.sur.value){
-	// 	alert('부가세 신고유형을 선택하세요!');
-	// 	form.sur.focus();
-	// 	return;
-	// }
+	if(!form.sur.value){
+		alert('부가세 신고유형을 선택하세요!');
+		form.sur.focus();
+		return;
+	}
 
-	// if(!form.biz_cond.value){
-	// 	alert('업태를 입력하세요!');
-	// 	form.biz_cond.focus();
-	// 	return;
-	// }
+	if(!form.biz_cond.value){
+		alert('업태를 입력하세요!');
+		form.biz_cond.focus();
+		return;
+	}
 
-	// if(!form.biz_even.value){
-	// 	alert('종목을 입력하세요!');
-	// 	form.biz_even.focus();
-	// 	return;
-	// }
+	if(!form.biz_even.value){
+		alert('종목을 입력하세요!');
+		form.biz_even.focus();
+		return;
+	}
 
-	// if(!form.co_phone1.value){
-	// 	alert('대표전화번호를 입력하세요!');
-	// 	form.co_phone1.focus();
-	// 	return;
-	// }
+	if(!form.co_phone1.value){
+		alert('대표전화번호를 입력하세요!');
+		form.co_phone1.focus();
+		return;
+	}
 
-	// if(form.co_phone1.value) {
-	//   if(!IsNumber(form.co_phone1.name)){
- //       alert("전화번호는 숫자이어야 합니다!");
-	// 		 form.co_phone1.value="";
-	//      form.co_phone1.focus();
-	//      return;
-	//   }
- //   }
+	if(form.co_phone1.value) {
+		if(!IsNumber(form.co_phone1.value)){
+			alert("전화번호는 숫자이어야 합니다!");
+			form.co_phone1.value="";
+			form.co_phone1.focus();
+			return;
+		}
+	}
 
-	// if(!form.co_phone2.value){
-	// 	alert('대표전화번로를 입력하세요!');
-	// 	form.co_phone2.focus();
-	// 	return;
-	// }
+	if(!form.co_phone2.value){
+		alert('대표전화번로를 입력하세요!');
+		form.co_phone2.focus();
+		return;
+	}
 
-	// if(form.co_phone2.value) {
-	//   if(!IsNumber(form.co_phone2.name)){
- //       alert("전화번호는 숫자이어야 합니다!");
-	// 		 form.co_phone2.value="";
-	//      form.co_phone2.focus();
-	//      return;
-	//   }
- //   }
+	if(form.co_phone2.value) {
+		if(!IsNumber(form.co_phone2.value)){
+			alert("전화번호는 숫자이어야 합니다!");
+			form.co_phone2.value="";
+			form.co_phone2.focus();
+			return;
+		}
+	}
 
-	// if(!form.co_phone3.value){
-	// 	alert('대표전화번로를 입력하세요!');
-	// 	form.co_phone3.focus();
-	// 	return;
-	// }
+	if(!form.co_phone3.value){
+		alert('대표전화번로를 입력하세요!');
+		form.co_phone3.focus();
+		return;
+	}
 
-	// if(form.co_phone3.value) {
-	//   if(!IsNumber(form.co_phone3.name)){
- //       alert("전화번호는 숫자이어야 합니다!");
-	// 		 form.co_phone3.value="";
-	//      form.co_phone3.focus();
-	//      return;
-	//   }
- //   }
+	if(form.co_phone3.value) {
+		if(!IsNumber(form.co_phone3.value)){
+			alert("전화번호는 숫자이어야 합니다!");
+			form.co_phone3.value="";
+			form.co_phone3.focus();
+			return;
+		}
+	}
 
-	// if(!form.co_hp1.value){
-	// 	alert('휴대전화(비상)번호를 입력하세요!');
-	// 	form.co_hp1.focus();
-	// 	return;
-	// }
+	if(!form.co_hp1.value){
+		alert('휴대전화(비상)번호를 입력하세요!');
+		form.co_hp1.focus();
+		return;
+	}
 
-	// if(!form.co_hp2.value){
-	// 	alert('휴대전화(비상)번호를 입력하세요!');
-	// 	form.co_hp2.focus();
-	// 	return;
-	// }
+	if(!form.co_hp2.value){
+		alert('휴대전화(비상)번호를 입력하세요!');
+		form.co_hp2.focus();
+		return;
+	}
 
-	// if(form.co_hp2.value) {
-	//   if(!IsNumber(form.co_hp2.name)){
- //       alert("전화번호는 숫자이어야 합니다!");
-	// 		 form.co_hp2.value="";
-	//      form.co_hp2.focus();
-	//      return;
-	//   }
- //   }
+	if(form.co_hp2.value) {
+		if(!IsNumber(form.co_hp2.value)){
+			alert("전화번호는 숫자이어야 합니다!");
+			form.co_hp2.value="";
+			form.co_hp2.focus();
+			return;
+		}
+	}
 
-	// if(!form.co_hp3.value){
-	// 	alert('휴대전화(비상)번호를 입력하세요!');
-	// 	form.co_hp3.focus();
-	// 	return;
-	// }
+	if(!form.co_hp3.value){
+		alert('휴대전화(비상)번호를 입력하세요!');
+		form.co_hp3.focus();
+		return;
+	}
 
-	// if(form.co_hp3.value) {
-	//   if(!IsNumber(form.co_hp3.name)){
- //       alert("전화번호는 숫자이어야 합니다!");
-	// 		 form.co_hp3.value="";
-	//      form.co_hp3.focus();
-	//      return;
-	//   }
- //   }
+	if(form.co_hp3.value) {
+		if(!IsNumber(form.co_hp3.value)){
+			alert("전화번호는 숫자이어야 합니다!");
+			form.co_hp3.value="";
+			form.co_hp3.focus();
+			return;
+		}
+	}
 
-	// if(!form.es_date.value){
-	// 	alert('설립일자를 입력하세요!');
-	// 	form.es_day.focus();
-	// 	return;
-	// }
+	if(!form.es_date.value){
+		alert('설립일자를 입력하세요!');
+		form.es_day.focus();
+		return;
+	}
 
-	// if(!form.op_date.value){
-	// 	alert('개업일자를 입력하세요!');
-	// 	form.op_day.focus();
-	// 	return;
-	// }
+	if(!form.op_date.value){
+		alert('개업일자를 입력하세요!');
+		form.op_day.focus();
+		return;
+	}
 
-	// if(!form.carr_y.value){
-	// 	alert('기초잔액 입력년월을 입력하세요!');
-	// 	form.carr_y.focus();
-	// 	return;
-	// }
+	if(!form.carr_y.value){
+		alert('기초잔액 입력년월을 입력하세요!');
+		form.carr_y.focus();
+		return;
+	}
 
-	// if(form.carr_y.value) {
-	//   if(/*!IsNumber(form.carr_y.name)||*/form.carr_y.value.length<4){
- //       alert("년도는 네자리 숫자이어야 합니다!");
-	// 		 form.carr_y.value="";
-	//      form.carr_y.focus();
-	//      return;
-	//   }
- //   }
+	if(form.carr_y.value) {
+		if(!IsNumber(form.carr_y.value)||form.carr_y.value.length<4){
+			alert("년도는 네자리 숫자이어야 합니다!");
+			form.carr_y.value="";
+			form.carr_y.focus();
+			return;
+		}
+	}
 
-	// if(!form.carr_m.value){
-	// 	alert('기초잔액 입력년월을 입력하세요!');
-	// 	form.carr_m.focus();
-	// 	return;
-	// }
+	if(!form.carr_m.value){
+		alert('기초잔액 입력년월을 입력하세요!');
+		form.carr_m.focus();
+		return;
+	}
 
-	// if(form.carr_m.value) {
-	//   if(!IsNumber(form.carr_m.name)){
- //       alert("기초잔액 입력월을 숫자로 입력하세요!");
-	// 		 form.carr_m.value="";
-	//      form.carr_m.focus();
-	//      return;
-	//   }
- //   }
+	if(form.carr_m.value) {
+		if(!IsNumber(form.carr_m.value)){
+			alert("기초잔액 입력월을 숫자로 입력하세요!");
+			form.carr_m.value="";
+			form.carr_m.focus();
+			return;
+		}
+	}
 
-	// if(!form.m_wo_st.value){
-	// 	alert('업무개시월을 입력하세요!');
-	// 	form.m_wo_st.focus();
-	// 	return;
-	// } else if(!form.bl_cycle.value){
-	// 	alert('결산주기를 입력하세요!');
-	// 	form.bl_cycle.focus();
-	// 	return;
-	// }
+	if(!form.m_wo_st.value){
+		alert('업무개시월을 입력하세요!');
+		form.m_wo_st.focus();
+		return;
+	} else if(!form.bl_cycle.value){
+		alert('결산주기를 입력하세요!');
+		form.bl_cycle.focus();
+		return;
+	}
 
-	// if(!form.email1.value){
-	// 	alert('이메일(비상)주소를 입력하세요!');
-	// 	form.email1.focus();
-	// 	return;
-	// }
+	if(!form.email1.value){
+		alert('이메일(비상)주소를 입력하세요!');
+		form.email1.focus();
+		return;
+	}
 
-	// if(!form.email2.value){
-	// 	alert('이메일(비상)주소를 입력하세요!');
-	// 	form.email2.focus();
-	// 	return;
-	// }
+	if(!form.email2.value){
+		alert('이메일(비상)주소를 입력하세요!');
+		form.email2.focus();
+		return;
+	}
 
-	// if(!form.tax_off1_code.value){
-	// 	alert('관할세무서를 입력하세요!');
-	// 	form.tax_off1_code.focus();
-	// 	return;
-	// }
+	if(!form.tax_off1_code.value){
+		alert('관할세무서를 입력하세요!');
+		form.tax_off1_code.focus();
+		return;
+	}
 
-	// if(!form.zipcode.value){
-	// 	alert('회사주소를 입력하세요!');
-	// 	form.zipcode.focus();
-	// 	return;
-	// }
+	if(!form.zipcode.value){
+		alert('회사주소를 입력하세요!');
+		form.zipcode.focus();
+		return;
+	}
 
 	if(mode=='com_reg') var msg = '신규등록';
 	if(mode=='com_modify') var msg = '변경등록';
 
 	var a = confirm('회사정보를 '+msg+' 하시겠습니까?')
-	if(a==true){
-		form.submit();
-	} else {
-		return;
+		if(a==true){
+			form.submit();
+		} else {
+			return;
 	}
 }
 /**************  (환경설정 > 회사정보 관리 > 회사 기본정보) E ****************/

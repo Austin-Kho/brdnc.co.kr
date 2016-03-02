@@ -3,12 +3,10 @@
         <h2>美정부, 아이폰 잠금해제 또 요청…"해제거부는 마케팅전략"</h2>
         <p>애플 "고객보안이 최우선" (샌프란시스코 AFP=연합뉴스) 팀 쿡 애플 최고경영자(CEO)는 17일(현지시간) '고객에게 드리는 메시지'를 통해 "미국 정부는 애플이 우리 고객의 보안을 위협하는 전에 없는 조처를 받아들이라고 요구해 왔다"며 "...</p>
       </div> -->
-
       <!-- <div class="page-header">
         <h1>Carousel</h1>
       </div> -->
       <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-
       	<!-- Indicators -->
         <ol class="carousel-indicators">
           <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -17,18 +15,17 @@
           <li data-target="#carousel-example-generic" data-slide-to="3"></li>
           <li data-target="#carousel-example-generic" data-slide-to="4"></li>
         </ol>
-
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
           <div class="item active">
-            <img src="/static/img/111.jpg" alt="First slide">
+            <img src="/static/img/222.jpg" alt="First slide">
             <div class="carousel-caption">
               <h3>First slide label</h3>
               <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </div>
           </div>
           <div class="item">
-            <img src="/static/img/222.jpg" alt="Second slide">
+            <img src="/static/img/111.jpg" alt="Second slide">
             <div class="carousel-caption">
               <h3>Second slide label</h3>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -65,8 +62,6 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
-
-
       <div class="page-header">
       	<!-- <h1>Wells</h1> --><!-- 영문 h1 -->
         <!-- <h3>공지사항</h3> --><!-- 한글 h3 -->
@@ -75,8 +70,6 @@
         <p>美정부, 아이폰 잠금해제 또 요청…"해제거부는 마케팅전략"// </h2>
         <p>애플 "고객보안이 최우선" (샌프란시스코 AFP=연합뉴스) 팀 쿡 애플 최고경영자(CEO)는 17일(현지시간) '고객에게 드리는 메시지'를 통해 "미국 정부는 애플이 우리 고객의 보안을 위협하는 전에 없는 조처를 받아들이라고 요구해 왔다"며 "... <?php echo extension_loaded('mcrypt') ? 'Yup' : 'Nope';  echo $this->config->base_url();?></p>
       </div>
-
-
       <!-- <div class="page-header">
         <h1>Panels</h1>
       </div> -->

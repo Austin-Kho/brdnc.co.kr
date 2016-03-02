@@ -138,7 +138,7 @@ class M5 extends CI_Controller {
 				// 라이브러리 로드
 				$this->load->library('form_validation'); // 폼 검증
 
-				// 폼 검증할 필드와 규칙 사전 정의
+				//// 폼 검증할 필드와 규칙 사전 정의
 				$this->form_validation->set_rules('co_name', '회사명', 'required');
 				$this->form_validation->set_rules('co_no1', '사업자등록번호', 'required|numeric');
 				$this->form_validation->set_rules('co_no2', '사업자등록번호', 'required|numeric');
@@ -156,31 +156,26 @@ class M5 extends CI_Controller {
 				$this->form_validation->set_rules('co_hp1', '휴대전화', 'required|numeric');
 				$this->form_validation->set_rules('co_hp2', '휴대전화', 'required|numeric');
 				$this->form_validation->set_rules('co_hp3', '휴대전화', 'required|numeric');
-				$this->form_validation->set_rules('co_fax1', '팩스번호', 'required|numeric');
-				$this->form_validation->set_rules('co_fax2', '팩스번호', 'required|numeric');
-				$this->form_validation->set_rules('co_fax3', '팩스번호', 'required|numeric');
-				$this->form_validation->set_rules('co_div1', '회사형태1', 'required');
-				$this->form_validation->set_rules('co_div2', '회사형태2', 'required');
-				$this->form_validation->set_rules('co_div3', '회사형태3', 'required');
+				$this->form_validation->set_rules('co_fax1', '팩스번호', 'numeric');
+				$this->form_validation->set_rules('co_fax2', '팩스번호', 'numeric');
+				$this->form_validation->set_rules('co_fax3', '팩스번호', 'numeric');
 				$this->form_validation->set_rules('es_date', '설립일', 'required');
 				$this->form_validation->set_rules('op_date', '개업일', 'required');
 				$this->form_validation->set_rules('carr_y', '기초잔액입력월', 'required');
 				$this->form_validation->set_rules('carr_m', '기초잔액입력월', 'required');
 				$this->form_validation->set_rules('m_wo_st', '업무개시월', 'required');
 				$this->form_validation->set_rules('bl_cycle', '결산주기', 'required');
-				$this->form_validation->set_rules('email', '이메일', 'required|alpha_numeric');
+				$this->form_validation->set_rules('email1', '이메일', 'required|alpha_numeric');
 				$this->form_validation->set_rules('emai2', '이메일', 'required|alpha_numeric');
-				$this->form_validation->set_rules('calc_mail', '세금계산서메일', 'required|alpha_numeric');
-				$this->form_validation->set_rules('calc_mai2', '세금계산서메일', 'required|alpha_numeric');
+				$this->form_validation->set_rules('calc_mail1', '세금계산서메일', 'required|alpha_numeric');
+				$this->form_validation->set_rules('calc_mail2', '세금계산서메일', 'required|alpha_numeric');
 				$this->form_validation->set_rules('tax_off1_code', '세무서1코드', 'required');
 				$this->form_validation->set_rules('tax_off1_name', '세무서1이름', 'required');
-				$this->form_validation->set_rules('tax_off2_code', '세무서2코드', 'required');
-				$this->form_validation->set_rules('tax_off2_name', '세무서2이름', 'required');
 				$this->form_validation->set_rules('zipcode', '우편번호', 'required|numeric');
 				$this->form_validation->set_rules('address1', '주소1', 'required');
 				$this->form_validation->set_rules('address2', '주소2', 'required');
-				$this->form_validation->set_rules('en_co_name', '영문회사명', 'required|alpha_numeric');
-				$this->form_validation->set_rules('en_address', '영문주소	', 'required|alpha_numeric');
+				$this->form_validation->set_rules('en_co_name', '영문회사명', 'alpha_numeric');
+				$this->form_validation->set_rules('en_address', '영문주소	', 'alpha_numeric');
 
 				echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 
@@ -247,12 +242,10 @@ class M5 extends CI_Controller {
 						'red_date' => 'now()'
 					);
 
-
 				if($com ['mode']=='com_reg') {
 					$result = $this->m5_m->com_reg($com_data);
 				}else if($com ['mode']=='com_modify') {
 					$result = $this->m5_m->com_reg($com_modify);
-					alert($result, '');
 				}
 
 				// $result = $this->m5_m->com_reg($com_data);
@@ -260,11 +253,11 @@ class M5 extends CI_Controller {
 				if($result) {
 					// 등록 성공 시
 					alert_only('회사 정보가 '.$result.'등록 되었습니다.', '/m5/config/2/1/');
-					exit;
+					//exit;
 				}else{ // 등록 실패 시
 					// 실패 시
 					alert_only('회사 정보등록이 실해하였습니다.\n 다시 시도하여 주십시요.', '/m5/config/2/1/');
-					exit;
+					//exit;
 				}
 			}
 		}

@@ -13,10 +13,12 @@ class M5_m extends CI_Model {
 		}
 	}
 	public function com_reg($com_data){
-		return $a= '신규등록';
+		//$result = $this->db->insert('cms_com_info1', $com_data);
+		//return $result;
 	}
 
 	public function com_modify($com_data){
+		alert('bb', '');
 		return $a= '수정등록';
 	}
 }
