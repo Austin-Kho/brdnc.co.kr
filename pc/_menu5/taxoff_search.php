@@ -122,7 +122,7 @@
 					<span>
 						<?
 							$back_url="&amp;tax_off=$tax_off&amp;n=$n";
-							page_avg($total_bnum,$page_num, $index_num,$start, $back_url);
+							page_avg($total_bnum,$page_num, $index_num, $start, $back_url);
 							//1. 총게시물수 2. 한페이지 페이지수 3. 한페이지목록 수 4. 시작페이지 5. 매개변수
 							}
 						?>

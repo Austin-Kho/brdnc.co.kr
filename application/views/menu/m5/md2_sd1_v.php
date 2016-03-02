@@ -288,11 +288,15 @@
 				<label for="tax_off1_code">세무서[1] <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<div class="col-xs-3">
-					<input type="text" class="form-control input-sm wid-90" id="tax_off1_code" name="tax_off1_code" aria-describedby="tax_off1_codeStatus" readonly required autofocus>
-					<span class="glyphicon glyphicon-chevron-right form-control-feedback" aria-hidden="true"></span>
+				<div class="col-xs-3 input-group">
+					<input type="text" class="form-control input-sm" id="tax_off1_code" name="tax_off1_code" readonly required autofocus>
+					<span class="input-group-btn">
+		        <button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('/popup/tax_off/', 'tax_search', 580, 582)">
+		        	&nbsp;<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+		        </button>
+		      </span>
 				</div>
-				<div class="col-xs-4">
+				<div class="col-xs-4 input-group">
 					<label for="tax_off1_name" class="sr-only">세무서1 이름</label>
 					<input type="text" class="form-control input-sm wid-90" id="tax_off1_name" name="tax_off1_name" readonly required autofocus>
 				</div>
@@ -302,8 +306,15 @@
 				<label for="tax_off2_code">세무서[2]</label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90" id=tax_off2_code"" name="tax_off2_code" readonly></div>
-				<div class="col-xs-4">
+				<div class="col-xs-3  input-group">
+					<input type="text" class="form-control input-sm" id=tax_off2_code"" name="tax_off2_code" readonly>
+					<span class="input-group-btn">
+	        <button class="btn btn-default btn-sm" type="button">
+	        	&nbsp;<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+	        </button>
+	      </span>
+				</div>
+				<div class="col-xs-4  input-group">
 					<label for="tax_off2_name" class="sr-only">세무서2 이름</label>
 					<input type="text" class="form-control input-sm wid-90" id="tax_off2_name" name="tax_off2_name" readonly>
 				</div>
@@ -316,7 +327,7 @@
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-10 form-wrap">
 				<div class="col-xs-3 col-sm-2 col-md-1">
-					<input type="button" class="btn btn-info btn-sm wid-90" value="우편번호" onclick="javascript:ZipWindow('/popup/zip_search/')">
+					<input type="button" class="btn btn-info btn-sm wid-90" value="우편번호" onclick="javascript:ZipWindow('/popup/zip_/')">
 				</div>
 				<div class="col-xs-3 col-sm-5 col-md-1">
 					<input type="text" class="form-control input-sm wid-95" id="zipcode" name="zipcode" maxlength="5" readonly required autofocus>

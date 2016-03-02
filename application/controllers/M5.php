@@ -131,9 +131,9 @@ class M5 extends CI_Controller {
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m5_2_1', $this->session->userdata['user_id']);
 
-			if( !$auth['_m5_2_1'] or $auth['_m5_2_1']==0) {
-				$this->load->view('no_auth');
-			}else{
+			if( !$auth['_m5_2_1'] or $auth['_m5_2_1']==0) { // 조회권한 없을 때
+				$this->load->view('no_auth');                 // 권한 없음 페이지 보이기
+			}else{ // 조회 이상 권한 있을 때
 
 				// 라이브러리 로드
 				$this->load->library('form_validation'); // 폼 검증
@@ -182,12 +182,12 @@ class M5 extends CI_Controller {
 				// 회사 등록 정보가 있는지 확인
 				$com_chk = $this->m5_m->is_com_chk();
 				if( !$com_chk) {
-					$com = array( // 없으면 등록권한 및 새로 등록하라는 변수 전달
+					$comd = array( // 없으면 등록권한 및 새로 등록하라는 변수 전달
 						'auth' => $auth['_m5_2_1'],
 						'mode' => 'com_reg'
 					);
 				}  else {
-					$com = array( // 있으면 등록권한, 등록회사정보 및 수정하라는 변수 전달
+					$comd = array( // 있으면 등록권한, 등록회사정보 및 수정하라는 변수 전달
 						'auth' => $auth['_m5_2_1'],
 						'com' => $com_chk,
 						'mode' => 'com_modify'
@@ -196,7 +196,7 @@ class M5 extends CI_Controller {
 
 				if($this->form_validation->run() == FALSE) { // 폼 전송 데이타가 없으면,
 					//본 페이지 로딩
-					$this->load->view('/menu/m5/md2_sd1_v', $com); // 조회권한 있고 폼 전송 데이타가 없을 때 등록권한 데이터 및 등록데이터와 함께 폼 열기
+					$this->load->view('/menu/m5/md2_sd1_v', $comd); // 조회권한 있고 폼 전송 데이타가 없을 때 등록권한 데이터 및 등록데이터와 함께 폼 열기
 				}else{
 					//폼 데이타 가공
 					$co_no = $this->input->post('co_no1')."-".$this->input->post('co_no2')."-".$this->input->post('co_no3');
@@ -242,17 +242,17 @@ class M5 extends CI_Controller {
 						'red_date' => 'now()'
 					);
 
-				if($com ['mode']=='com_reg') {
+				//if($com ['mode']=='com_reg') {
 					$result = $this->m5_m->com_reg($com_data);
-				}else if($com ['mode']=='com_modify') {
-					$result = $this->m5_m->com_reg($com_modify);
-				}
+				//}else if($com ['mode']=='com_modify') {
+					//$result = $this->m5_m->com_reg($com_modify);
+				//}
 
 				// $result = $this->m5_m->com_reg($com_data);
 
 				if($result) {
 					// 등록 성공 시
-					alert_only('회사 정보가 '.$result.'등록 되었습니다.', '/m5/config/2/1/');
+					alert_only('회사 정보가 등록 되었습니다.', '/m5/config/2/1/');
 					//exit;
 				}else{ // 등록 실패 시
 					// 실패 시

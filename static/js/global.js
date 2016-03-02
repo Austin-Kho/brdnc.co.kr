@@ -16,10 +16,10 @@ function ZipWindow(ref, z_form, a_form1, a_form2) { // ref = 파일경로, z_for
 
 // 오픈 윈도우2
 <!--
-function open_Win(ref,name,obj) {
+function open_Win(ref,name, wid, hei) {
 	var window_left = (screen.width-640)/2;
 	var window_top = (screen.height-480)/2;
-	window.open(ref,name,'width=420,height=460,scrollbars=no,status=no,top=' + window_top + ',left=' + window_left + '');
+	window.open(ref,name,'width='+wid+',height='+hei+',scrollbars=no,status=no,top=' + window_top + ',left=' + window_left + '');
 }
 
 // 쪽지창 열기
