@@ -1,12 +1,12 @@
 <!-- 5. 환경설정 -> 2. 회사정보관리 ->1. 회사정보 페이지 -->
-<form class="form-inline" id="com_reg_form" name="form1">
+<form class="form-inline" id="com_reg_form" name="form1" method="post">
 	<fieldset>
 		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap" >
 				<label for="co_name">회사명<span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<input type="text" class="form-control input-sm" id="co_name" name="co_name" maxlength="30">
+				<input type="text" class="form-control input-sm" id="co_name" name="co_name" maxlength="30" value="" required autofocus>
 			</div>
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="co_no1">사업자번호 <span class="red">*</span></label>

@@ -66,7 +66,7 @@
 	</head>
 	<body>
 <?php
-	$attributes = array('name' => 'zip_form', 'id' => 'zipsearch', 'class' => 'form-inline');
+	$attributes = array('name' => 'zip_form', 'id' => 'zipsearch', 'class' => 'form-inline', 'method' => 'post');
 	echo form_open('/popup/zip_search/', $attributes);
 ?>
 			<div class="container">
@@ -118,7 +118,7 @@
 					</div>
 					<div class="form-group col-xs-10">
 						<div class="col-xs-7">
-							<input class="form-control input-sm" type="text" name="search_text" id="search_text" value="" required autofocus>
+							<input class="form-control input-sm" type="text" name="search_text" id="search_text" value="<?php echo $this->input->post('search_text'); ?>" onclick="this.value=null" required autofocus>
 							<?php echo validation_errors(); ?>
 						</div>
 						<div class="col-xs-5">

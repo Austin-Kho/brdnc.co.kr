@@ -12,5 +12,12 @@ class M5_m extends CI_Model {
 			return FALSE;
 		}
 	}
+	public function com_reg($com_data){
+		return $a= '신규등록';
+	}
+
+	public function com_modify($com_data){
+		return $a= '수정등록';
+	}
 }
 // End of this File

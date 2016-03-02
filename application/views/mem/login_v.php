@@ -1,7 +1,6 @@
 <div class="container" style="color: #BBBBBB; width: 300px;">
-
 <?php
-	$attributes = array('name' => 'login', 'class' => 'form-signin');
+	$attributes = array('name' => 'login', 'class' => 'form-signin', 'method' => 'post');
 	echo form_open($this->config->base_url().'member/', $attributes);
 ?>
 		<div id="main_logo" style="margin: 100px 0 50px 0;">

@@ -7,13 +7,13 @@ header h1 { font-size: 15px; color: white; padding: 0; margin: 0; padding-top: 8
 .mt20 { margin-top: 20px; }
 .mt30 { margin-top: 30px; }
 .ml20 { margin-left: 20px; }
-.num { padding: 5px 20px; }
+.num { padding: 5px 20px; color: #C91C1C; }
 .well { margin: 0 10px; padding: 8px 10px; }
 .row { margin: 5px 10px; padding-top: 10px; border: 1px solid #eaeaea; }
 .zip-tb { margin: 0 10px; background-color: #E7ECEF; }
 .center { text-align: center; }
 #main-select { margin: -10px 18px 0 18px; }
-#main-select option { color: #F45000; }
+#main-select option { background-color: #EEF0F0;  }
 
 .pt6 { padding-top: 6px; }
 .pl0 { padding-left: 0; }
