@@ -291,7 +291,7 @@
 				<div class="col-xs-3 input-group">
 					<input type="text" class="form-control input-sm" id="tax_off1_code" name="tax_off1_code" readonly required autofocus>
 					<span class="input-group-btn">
-		        <button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('/popup/tax_off/', 'tax_search', 580, 582)">
+		        <button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('/popup/tax_off/', 'tax_search', 560, 586)">
 		        	&nbsp;<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
 		        </button>
 		      </span>

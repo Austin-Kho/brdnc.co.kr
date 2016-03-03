@@ -86,20 +86,20 @@
 				</div>
 				<?
 					}else{
-					$page=$_GET['page'];
-					$gb=$_REQUEST['gb'];
-					$tax_off = $_REQUEST['tax_off'];
+						$page=$_GET['page'];
+						$gb=$_REQUEST['gb'];
+						$tax_off = $_REQUEST['tax_off'];
 
-					$index_num = 6;                 // 한 페이지 표시할 목록 개수 22222222222222
-					$page_num = 10;					// 한 페이지에 표시할 페이지 수 33333
-					$start=$_REQUEST['start'];
-					if(!$start) $start = 1;              // 현재페이지 444444444
-					$s = ($start-1)*$index_num;
-					$e = $index_num;
+						$index_num = 6;                 // 한 페이지 표시할 목록 개수 22222222222222
+						$page_num = 10;					// 한 페이지에 표시할 페이지 수 33333
+						$start=$_REQUEST['start'];
+						if(!$start) $start = 1;              // 현재페이지 444444444
+						$s = ($start-1)*$index_num;
+						$e = $index_num;
 
-					$query2="SELECT code, office FROM cms_tax_office $where_add ORDER BY office LIMIT $s, $e";
-					$result2=mysql_query($query2, $connect);
-					$search_bnum=mysql_num_rows($result2);
+						$query2="SELECT code, office FROM cms_tax_office $where_add ORDER BY no LIMIT $s, $e";
+						$result2=mysql_query($query2, $connect);
+						$search_bnum=mysql_num_rows($result2);
 				?>
 				<div style="height:146px;">
 				<?

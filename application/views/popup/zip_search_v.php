@@ -110,12 +110,11 @@
 							<th class="<?php if(is_mobile()) echo 'col-xs-3'; else echo 'col-xs-2'; ?> center">우편번호</th>
 							<th class="<?php if(is_mobile()) echo 'col-xs-9'; else echo 'col-xs-10'; ?> center">주 소</th>
 						</tr>
-					</table>
-				</div>
-				<div id="main-select">
-					<select name="" class="form-control input-sm" onchange="val_put(this.value);">
+						<tr>
+							<td colspan="2">
+								<select name="" class="form-control input-sm" onchange="val_put(this.value);">
 <?php if( !$zip_rlt[1]) : ?>
-						<option value="">도로명(건물명) 주소를 검색하여 주세요.</option>
+									<option value="">도로명(건물명) 주소를 검색하여 주세요.</option>
 <?php else : ?>
 <?php $term = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'; ?>
 <?php foreach ($zip_rlt[1] as $col): ?>
@@ -128,12 +127,16 @@
 	if($col->ld_name==null && $col->sgg_bd_name!=null) $ref = "(".$col->sgg_bd_name.")";
 	if($col->ld_name!=null && $col->sgg_bd_name!=null) $ref = "(".$col->ld_name.", ".$col->sgg_bd_name.")";
 ?>
-						<option value="<?php echo $col->zipcode."|".$col->sido." ".$col->sigun." ".$col->epmn." ".$col->doro_name." ".$ij." ".$col->mb_num.$sb_num."|".$ref; ?>"><?php echo $col->zipcode.$term.$col->sido." ".$col->sigun." ".$col->epmn." ".$col->doro_name." ".$ij." ".$col->mb_num.$sb_num." ".$ref; ?></option>
+									<option value="<?php echo $col->zipcode."|".$col->sido." ".$col->sigun." ".$col->epmn." ".$col->doro_name." ".$ij." ".$col->mb_num.$sb_num."|".$ref; ?>"><?php echo $col->zipcode.$term.$col->sido." ".$col->sigun." ".$col->epmn." ".$col->doro_name." ".$ij." ".$col->mb_num.$sb_num." ".$ref; ?></option>
 <?php endforeach; ?>
-						<option value="||">해당되는 주소를 선택해주세요.</option>
+									<option value="||">해당되는 주소를 선택해주세요.</option>
 <?php endif; ?>
-					</select>
+								</select>
+							</td>
+						</tr>
+					</table>
 				</div>
+
 				<div class="desc mt30">
 					※ 상세주소 입력 후 '확인'버튼을 눌러주세요.
 				</div>
