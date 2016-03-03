@@ -24,8 +24,26 @@ class Popup_m extends CI_Model
 		return $result = array($rlt1, $rlt2);
 	}
 
-	public function tax_search() {
+	public function tax_search($search_text='', $start='', $limit='', $num='') {
+		$where = "";
+		if($search_text !='') { // 검색어가 있을 경우
+			$where = " WHERE chung LIKE '%".$search_text."%' OR office LIKE '%".$search_text."%' ";
+		}
+		$limit_query = "";
+		if($start != '' or $limit !='') {
+			$limit_query = " LIMIT ".$start.", ".$limit;
+		}
 
+		$sql = " SELECT * FROM cms_tax_office ".$where." ORDER BY no ASC ".$limit_query;
+		$qry = $this->db->query($sql);
+		$rlt1 = $qry->num_rows();
+		$rlt2 = $qry->result();
+
+		if($num=='num') {
+			return $rlt1;
+		}else{
+			return $rlt2;
+		}
 	}
 }
 // End of this File
