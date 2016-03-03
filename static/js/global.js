@@ -8,10 +8,10 @@ function bluring(){
 document.onfocusin=bluring;
 
 // 우편번호 검색창 열기
-function ZipWindow(ref, z_form, a_form1, a_form2) { // ref = 파일경로, z_form = 우편번호 폼, a_form = 주소폼)
+function ZipWindow(ref, zf, a1f, a2f) { // ref = 파일경로, z_form = 우편번호 폼, a_form = 주소폼)
 	var window_left = (screen.width-640)/2;
 	var window_top = (screen.height-480)/2;
-	window.open(ref+"?z_form="+z_form+"&a_form1="+a_form1+"&a_form2="+a_form2, "zipWin","scrollbars=no,width=580, height=586, status=no, top="+window_top+",left="+window_left);
+	window.open(ref+"?zf="+zf+"&a1f="+a1f+"&a2f="+a2f, "zipWin","scrollbars=no,width=580, height=586, status=no, top="+window_top+",left="+window_left);
 }
 
 // 오픈 윈도우2
@@ -30,12 +30,12 @@ function message_win(ref) {
   window.open(ref,"message",'width=420,height=460,scrollbars=no,status=no,top=' + window_top + ',left=' + window_left + '');
 }
 
-//팝업
-function popUp(url,name){
-	var window_left = (screen.width-640)/2;
-	var window_top = (screen.height-480)/2;
-	window.open(url,name,'width=420,height=460,scrollbars=no,status=no,top=' + window_top + ',left=' + window_left + '');
-}
+// //팝업
+// function popUp(url,name){
+// 	var window_left = (screen.width-640)/2;
+// 	var window_top = (screen.height-480)/2;
+// 	window.open(url,name,'width=420,height=460,scrollbars=no,status=no,top=' + window_top + ',left=' + window_left + '');
+// }
 // 사이즈 지정 팝업
 function popUp_size(url,name,w,h){ // 주소, 팝업명, 가로사이즈, 세로사이즈
 	var window_left = (screen.width-640)/2;

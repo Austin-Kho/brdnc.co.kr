@@ -27,9 +27,7 @@ class Tax_off extends CI_Controller
 	public function lists () {
 		// $this->output->enable_profiler(TRUE);
 
-
 		$this->load->library('pagination'); //페이지네이션 라이브러리 로딩 추가
-
 		//페이지네이션 설정///////////////////////////////////////////////////
 		$config['base_url'] = '/popup/tax_off/'; //페이징 주소
 		$config['total_rows'] = $this->popup_m->tax_search('', 'num'); //게시물의 전체 갯수
