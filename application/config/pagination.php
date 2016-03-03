@@ -9,8 +9,6 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 | $this->pagination->initialize() 함수의 호출이 불필요함.
 |
 */
-	$config['num_links'] = 3;
-
 	$config['first_link'] = "<span class='glyphicon glyphicon-triangle-left' aria-hidden='true'></span> 처음";
 	$config['first_tag_open'] = " <li>";
 	$config['first_tag_close'] = " </li>";

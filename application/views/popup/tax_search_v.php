@@ -1,4 +1,4 @@
-		<form action="/popup/tax_off/" name="taxsearch" id="taxsearch" class="form-inline" method="post">
+		<form action="/popup/tax_off/" name="taxsearch" id="taxsearch" class="form-inline">
 			<div class="container">
 				<header id="header">
 					<h1>관 할 세 무 서 검 색</h1>
