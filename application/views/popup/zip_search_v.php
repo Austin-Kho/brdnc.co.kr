@@ -1,7 +1,10 @@
 		<script type="text/javascript">
-			// $(document).ready(function(){
-			// 	$("#loading").css("display","none");
-			// });
+
+			function enter_search(form) {// 폼 button에서 엔터키를 눌렀을때 써브밋 해주는 함수
+				var keycode = window.event.keyCode;
+				if(keycode == 13) $("#addr_put").click();
+			}
+
 			function search_con () {
 				if(document.getElementById('sw1').checked == true){
 					document.getElementById('doro_name').style.display = '';
@@ -164,7 +167,7 @@
 							<td>
 								<div class="col-xs-7 pl0">
 									<label class="sr-only" for="addr2">주소2</label>
-									<input class="form-control input-sm" type="text" name="addr2" id="addr2">
+									<input class="form-control input-sm" type="text" name="addr2" id="addr2" onkeypress="enter_search(this);">
 								</div>
 								<div class="col-xs-5 pl0">
 									<label class="sr-only" for="addr3">주소3</label>
@@ -175,7 +178,7 @@
 					</table>
 				</div>
 				<footer class="center">
-					<a href="javascript:val_put2();" class="btn btn-primary btn-sm">주소입력</a>
+					<a href="javascript:val_put2();" class="btn btn-primary btn-sm" id="addr_put">주소입력</a>
 				</footer>
 			</div>
 		</form>

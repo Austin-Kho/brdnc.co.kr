@@ -3,16 +3,14 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 
 class Tax_off extends CI_Controller
 {
-	public function __construct()
-	{
+	public function __construct() {
 		parent::__construct();
 		$this->load->model('popup_m');            // 팝업 모델 로드
 		$this->load->helper('is_mobile');
 		$this->load->helper('alert');
 	}
 
-	public function _remap($method)
-	{
+	public function _remap($method) {
  		//헤더 include
     		$this->load->view('/popup/pop_header_v');
 		if( method_exists($this, $method) )
@@ -23,14 +21,13 @@ class Tax_off extends CI_Controller
 		$this->load->view('/popup/pop_footer_v');
   	}
 
-	public function index()
-	{
+	public function index() {
 		$this->lists();
 	}
 
 	public function lists () {
 		//$this->output->enable_profiler(TRUE);
-		//
+
 		$search_text = $this->input->post('search_text');
 
 		//페이지네이션 라이브러리 로딩 추가
