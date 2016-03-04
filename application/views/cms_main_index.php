@@ -14,42 +14,74 @@
           <li data-target="#carousel-example-generic" data-slide-to="2"></li>
           <li data-target="#carousel-example-generic" data-slide-to="3"></li>
           <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="5"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="6"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="7"></li>
+          <li data-target="#carousel-example-generic" data-slide-to="8"></li>
         </ol>
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
           <div class="item active">
-            <img src="/static/img/222.jpg" alt="First slide">
+            <img src="/static/img/111.jpg" alt="First slide">
             <div class="carousel-caption">
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              <h3>양우내안애 Ervache</h3>
+              <p>72Type 거실 Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </div>
           </div>
           <div class="item">
-            <img src="/static/img/111.jpg" alt="Second slide">
+            <img src="/static/img/222.jpg" alt="Second slide">
             <div class="carousel-caption">
               <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p>72Type 침실1 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
           </div>
           <div class="item">
             <img src="/static/img/333.jpg" alt="Third slide">
             <div class="carousel-caption">
               <h3>Third slide label</h3>
-              <p>Praesent commodo cursus magna, vel scelerisque nisl<br> consectetur.</p>
+              <p>72Type 주방 Praesent commodo cursus magna, vel scelerisque nisl<br> consectetur.</p>
             </div>
           </div>
           <div class="item">
             <img src="/static/img/444.jpg" alt="Third slide">
             <div class="carousel-caption">
-              <h3>...</h3>
-              <p>...</p>
+              <h3>양우내안애 Ervache</h3>
+              <p>72Type 안방 Praesent commodo cursus magna, vel scelerisque nisl<br> consectetur.</p>
             </div>
           </div>
           <div class="item">
             <img src="/static/img/555.jpg" alt="Third slide">
             <div class="carousel-caption">
-              <h3>...</h3>
-              <p>...</p>
+              <h3>양우내안애 Ervache</h3>
+              <p>72Type 욕실 Praesent commodo cursus magna, vel scelerisque nisl<br> consectetur.</p>
+            </div>
+          </div>
+          <div class="item">
+            <img src="/static/img/666.jpg" alt="Third slide">
+            <div class="carousel-caption">
+              <h3>양우내안애 Ervache</h3>
+              <p>84C Type 침실1 Praesent commodo cursus magna, vel scelerisque nisl<br> consectetur.</p>
+            </div>
+          </div>
+          <div class="item">
+            <img src="/static/img/777.jpg" alt="Third slide">
+            <div class="carousel-caption">
+              <h3>양우내안애 Ervache</h3>
+              <p>84C Type 거실 Praesent commodo cursus magna, vel scelerisque nisl<br> consectetur.</p>
+            </div>
+          </div>
+          <div class="item">
+            <img src="/static/img/888.jpg" alt="Third slide">
+            <div class="carousel-caption">
+              <h3>양우내안애 Ervache</h3>
+              <p>84C Type 주방 Praesent commodo cursus magna, vel scelerisque nisl<br> consectetur.</p>
+            </div>
+          </div>
+          <div class="item">
+            <img src="/static/img/999.jpg" alt="Third slide">
+            <div class="carousel-caption">
+              <h3>양우내안애 Ervache</h3>
+              <p>84C Type 안방 Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
           </div>
         </div>

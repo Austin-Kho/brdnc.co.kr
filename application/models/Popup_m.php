@@ -27,7 +27,7 @@ class Popup_m extends CI_Model
 	public function tax_search($search_text='', $start='', $limit='', $num='') {
 		$where = "";
 		if($search_text !='') { // 검색어가 있을 경우
-			$where = " WHERE chung LIKE '%".$search_text."%' OR office LIKE '%".$search_text."%' ";
+			$where = " WHERE office LIKE '%".$search_text."%' ";
 		}
 		$limit_query = "";
 		if($start != '' or $limit !='') {

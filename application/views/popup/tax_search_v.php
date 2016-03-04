@@ -1,4 +1,17 @@
-		<form action="/popup/tax_off/" name="taxsearch" id="taxsearch" class="form-inline">
+		<script>
+			function enter_search(form) {// 폼 button에서 엔터키를 눌렀을때 써브밋 해주는 함수
+				var keycode = window.event.keyCode;
+				if(keycode == 13) $("#search_btn").click();
+			}
+
+			function value_put(a,b,n){
+			 var form_obj=opener.document.form1;
+			eval("form_obj.tax_off"+n+"_code").value=a;
+			eval("form_obj.tax_off"+n+"_name").value=b;
+			 self.close();
+		}
+		</script>
+		<form action="" name="taxsearch" id="taxsearch" class="form-inline" method="post">
 			<div class="container">
 				<header id="header">
 					<h1>관 할 세 무 서 검 색</h1>
@@ -12,10 +25,10 @@
 					</div>
 					<div class="form-group <?php if(is_mobile()) echo 'col-xs-8'; else echo 'col-xs-9'; ?>">
 						<div class="col-xs-7">
-							<input class="form-control input-sm" type="text" name="search_text" id="search_text" value="<?php echo $this->input->post('search_text'); ?>" onclick="this.value=null">
+							<input class="form-control input-sm han" type="text" name="search_text" id="q" value="<?php echo $this->input->post('search_text'); ?>" onclick="this.value=null" onkeypress="enter_search(this);">
 						</div>
 						<div class="col-xs-5">
-							<button class="btn btn-primary btn-sm">검 색</button>
+							<button class="btn btn-primary btn-sm" id="search_btn">검 색</button>
 						</div>
 					</div>
 				</div>
@@ -31,16 +44,16 @@
 							<th class="col-xs-4 center">관할 세무서 명칭</th>
 							<th class="col-xs-4 center">전화번호</th>
 						</tr>
-<?php foreach ($tax_rlt as $lt) : ?>
+<?php foreach ($tax_off_list as $lt) : ?>
 						<tr>
 							<td class="center">
-								<a href="javascript:" onclick="value_put(<?echo $lt->code;?>,'<? echo $lt->office;?> 세무서',1);"><?php echo $lt->code; ?></a>
+								<a href="javascript:" onclick="value_put(<?php echo $lt->code;?>, '<?php echo $lt->office; ?> 세무서', 2);"><?php echo $lt->code; ?></a>
 							</td>
 							<td class="center">
-								<a href="javascript:" onclick="value_put(<?echo $lt->code;?>,'<? echo $lt->office;?> 세무서',1);"><?php echo $lt->chung; ?></a>
+								<a href="javascript:" onclick="value_put(<?php echo $lt->code;?>, '<?php echo $lt->office; ?> 세무서', 2);"><?php echo $lt->chung; ?></a>
 							</td>
-							<td>
-								<a href="javascript:" onclick="value_put(<?echo $lt->code;?>,'<? echo $lt->office;?> 세무서',1);"><?php echo $lt->office. '세무서'; ?></a>
+							<td class="pl20" style="padding-left: 20px;">
+								<a href="javascript:" onclick="value_put(<?php echo $lt->code;?>, '<?php echo $lt->office; ?> 세무서', 2);"><?php echo $lt->office. '세무서'; ?></a>
 							</td>
 							<td class="center">
 								<?php echo $lt->tel; ?>

@@ -28,10 +28,6 @@
 		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 		<script src="../include/calendar/calendar.js"></script>
 
-
-
-
-
 		<script src="../common/_menu1.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){
@@ -62,7 +58,7 @@
 
 			<article id="content">
 				<?
-					if(!$_SESSION['p_id']){
+					if( !$_SESSION['p_id']){
 				?>
 				<div style="width:1080px; height:650px; text-align:center; display: table-cell; vertical-align: middle;">
 					<p>로그인 정보가 없습니다. 다시 로그인하여 주십시요!</p>

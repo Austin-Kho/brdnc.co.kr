@@ -6,7 +6,7 @@ class Main extends CI_Controller {
 	/**
 	 *
 	 */
-	public function __construct(){
+	public function __construct() {
 		parent::__construct();
 		if(@$this->session->userdata['logged_in'] !== TRUE) {
 			echo "<meta http-equiv='Refresh' content='0; URL=".$this->config->base_url()."member/'>";
