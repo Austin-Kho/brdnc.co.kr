@@ -1,9 +1,9 @@
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="<?if( !$this->uri->segment(3) or $this->uri->segment(3)=='1') echo 'active'; else echo '';?>">
-        	<a href="<?php echo $this->config->base_url(); ?>m4/project/1/"><strong>프로젝트 관리</strong></a>
+        	<a href="<?php echo $this->config->base_url(); ?>m1/sales/1/"><strong>계 약 현 황</strong></a>
         </li>
         <li role="presentation" class="<?if( $this->uri->segment(3)=='2') echo 'active'; else echo '';?>">
-        	<a href="<?php echo $this->config->base_url(); ?>m4/project/2/"><strong>신규 프로젝트</strong></a>
+        	<a href="<?php echo $this->config->base_url(); ?>m1/sales/2/"><strong>수 납 현 황</strong></a>
         </li>
       </ul>
 <!-- ---------------------------------mdi-menu end------------------------------------ -->
@@ -16,7 +16,7 @@
 				for($i=0; $i<$len; $i++) {
 					$j = $i+1;
 ?>
-					<li role="presentation" class="<?php if(( !$this->uri->segment(4) && $j==1) or $this->uri->segment(4)==$j) echo 'active'; ?>"><a href="<?php echo $this->config->base_url(); ?>m4/project/<?php if($this->uri->segment(3)) {echo $this->uri->segment(3).'/'.$j.'/';} else {echo '1/'.$j.'/';}?>"><?php echo $s_di[0][$i]; ?></a></li>
+					<li role="presentation" class="<?php if(( !$this->uri->segment(4) && $j==1) or $this->uri->segment(4)==$j) echo 'active'; ?>"><a href="<?php echo $this->config->base_url(); ?>m1/sales/<?php if($this->uri->segment(3)) {echo $this->uri->segment(3).'/'.$j.'/';} else {echo '1/'.$j.'/';}?>"><?php echo $s_di[0][$i]; ?></a></li>
 <?
 				}
 			}else{
@@ -24,7 +24,7 @@
 				for($i=0; $i<$len; $i++) {
 					$j = $i+1;
 ?>
-					<li role="presentation" class="<?php if(( !$this->uri->segment(4) && $j==1) or $this->uri->segment(4)==$j) echo 'active'; ?>"><a href="<?php echo $this->config->base_url(); ?>m4/project/<?php if($this->uri->segment(3)) {echo $this->uri->segment(3).'/'.$j.'/';} else {echo '1/'.$j.'/';}?>"><?php echo $s_di[1][$i]; ?></a></li>
+					<li role="presentation" class="<?php if(( !$this->uri->segment(4) && $j==1) or $this->uri->segment(4)==$j) echo 'active'; ?>"><a href="<?php echo $this->config->base_url(); ?>m1/sales/<?php if($this->uri->segment(3)) {echo $this->uri->segment(3).'/'.$j.'/';} else {echo '1/'.$j.'/';}?>"><?php echo $s_di[1][$i]; ?></a></li>
 <?
 				}
 			}
@@ -57,4 +57,5 @@
  ?>
         </span>
       </div>
+      <div class="main_start"></div>
 <!-- ---------------------------------sdi-sub end------------------------------------ -->

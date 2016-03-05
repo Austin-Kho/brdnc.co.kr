@@ -33,7 +33,7 @@
 <!-- ---------------------------------sdi-menu end------------------------------------ -->
       <div class="page-header" id="sdi_sub">
         <span class="glyphicon glyphicon-book" aria-hidden="true" id="head_gly"></span>
-        <span style="margin-left: 10px;">
+        <span>
 <?php
 			if( !$this->uri->segment(3) or $this->uri->segment(3)==1) {$k = 2; } else { $k = 3; }
 			switch ($this->uri->segment(4)) {
@@ -57,4 +57,5 @@
  ?>
         </span>
       </div>
+      <div class="main_start"></div>
 <!-- ---------------------------------sdi-sub end------------------------------------ -->

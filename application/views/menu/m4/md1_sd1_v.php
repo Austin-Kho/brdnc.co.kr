@@ -4,7 +4,7 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>동호수 데이터 입력</th>
+                <th>자금 일보</th>
                 <th>Last Name</th>
                 <th>Username</th>
               </tr>

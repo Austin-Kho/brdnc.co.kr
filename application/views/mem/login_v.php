@@ -8,9 +8,9 @@
 		</div>
 		<h3 class="form-signin-heading">로그인 하세요.</h3>
 		<label for="inputEmail" class="control-label">ID</label>
-			<input type="text" name="user_id" value="<? if(get_cookie('id_r')) echo get_cookie('id'); ?>" id="inputEmail" class="form-control" placeholder="아이디" required autofocus>
+			<input type="text" name="user_id" value="<? if(get_cookie('id_r')) echo get_cookie('id'); ?>" id="inputEmail" class="form-control en_only" placeholder="아이디" required autofocus>
 		<label for="inputPassword" class="control-label">Password</label>
-			<input type="password" name="passwd" value="<?php echo set_value('passwd'); ?>" id="inputPassword" class="form-control" placeholder="비밀번호" required>
+			<input type="password" name="passwd" value="<?php echo set_value('passwd'); ?>" id="inputPassword" class="form-control en_only" placeholder="비밀번호" required>
 		<div class="checkbox">
 			<label>
 				<input type="checkbox" name="id_rem" value="rem" <?php if(get_cookie('id_r')=='rem') echo 'checked';?>> 아이디 저장하기

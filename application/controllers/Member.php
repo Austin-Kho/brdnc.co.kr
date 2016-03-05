@@ -41,7 +41,7 @@ class Member extends CI_Controller
 
 		// 라이브러리 로드
 		$this->load->library('form_validation'); // 폼 검증
-		$this->load->helper(array('cookie','url', 'alert'));  // 쿠키, 경고창 사용자 헬퍼 로딩
+		$this->load->helper(array('cookie', 'alert'));  // 쿠키, 경고창 사용자 헬퍼 로딩
 
 		// 폼 검증할 필드와 규칙 사전 정의
 		$this->form_validation->set_rules('user_id', '아이디', 'required|alpha_numeric');
@@ -68,7 +68,7 @@ class Member extends CI_Controller
 
 			if($result) {
 				if($result->request==2){
-					alert('관리자 사용 승인 후 사용이 가능합니다.\n승인 지연 시, 직접 관리자에게 문의하여 주세요.\n\nEmail : cigiko@naver.com / 전화문의 : 010-3320-0088', $this->config->base_url());
+					alert('관리자 사용 승인 후 사용이 가능합니다.\n승인 지연 시, 직접 관리자에게 문의하여 주세요.\n\nEmail : cigiko@naver.com / 전화문의 : 010-3320-0088', '/member/');
 				}else{
 					// 세션 생성
 					$newdata = array(
@@ -124,11 +124,9 @@ class Member extends CI_Controller
 	 * @return [type] [description]
 	 */
 	public function logout(){
-		$this->load->helper(array('alert', 'url'));
 		$this->session->sess_destroy();
 
 		redirect('/member/');
-		exit;
 	}
 
 	public function join() {

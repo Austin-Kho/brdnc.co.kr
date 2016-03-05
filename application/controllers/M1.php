@@ -20,7 +20,7 @@ class M1 extends CI_Controller {
 	 * @return [type] [description]
 	 */
 	public function index(){
-		$this->work();
+		$this->sales();
 	}
 
 	public function _remap($method){
@@ -34,7 +34,7 @@ class M1 extends CI_Controller {
 		$this->load->view('cms_main_footer');
 	}
 
-	public function work($mdi='', $sdi=''){
+	public function sales($mdi='', $sdi=''){
 		//$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		if( !$this->uri->segment(3)) $mdi = 1; else $mdi = $this->uri->segment(3);
@@ -42,14 +42,14 @@ class M1 extends CI_Controller {
 
 		$menu['s_di'] = array(
 			array('계약 현황', '계약 등록', '동호수 현황'), // 첫번째 하위 메뉴
-			array('상담 일지', '업무 일지', '업무 보고'),                          // 두번째 하위 메뉴
+			array('수납 현황', '수납 등록', '요약집계'),                          // 두번째 하위 메뉴
 			array('현장별 계약현황', '현장별 계약등록(수정)', '동호수 계약 현황도'), // 첫번째 하위 제목
 			array('고객 상담일지', '현장별 업무일지', '시행사 업무보고')                                  // 두번째 하위 제목
 		);
 
 
 
-		$this->load->view('menu/m1/work_v', $menu);
+		$this->load->view('menu/m1/sales_v', $menu);
 
 
 

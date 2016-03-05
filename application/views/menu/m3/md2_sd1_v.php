@@ -4,7 +4,7 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>분 개 장</th>
+                <th>현장 검토 자료</th>
                 <th>Last Name</th>
                 <th>Username</th>
               </tr>

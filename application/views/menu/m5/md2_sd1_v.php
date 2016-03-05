@@ -1,5 +1,8 @@
 <!-- 5. 환경설정 -> 2. 회사정보관리 ->1. 회사정보 페이지 -->
-<form class="form-inline" id="com_reg_form" name="form1" method="post">
+<?php
+	$attributes = array('name' => 'form1', 'id' => 'com_reg_form', 'class' => 'form-inline', 'method' => 'post');
+	echo form_open('/m5/config/2/1/', $attributes);
+?>
 	<fieldset>
 		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap" >

@@ -4,7 +4,7 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>기본정보 수정</th>
+                <th>입출금 내역</th>
                 <th>Last Name</th>
                 <th>Username</th>
               </tr>

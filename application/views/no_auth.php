@@ -1,4 +1,4 @@
-		<div class="container" style="text-align: center; padding-top: 50px; <?php if( !is_mobile()) echo 'height: 620px;'?>">
+		<div class="container" style="text-align: center; padding-top: 50px; <?php if( !$this->agent->is_mobile()) echo 'height: 620px;'?>">
 			<div class="page-header">
 				<h3>해당 페이지에 대한 조회 권한이 없습니다.</h3>
 			</div>

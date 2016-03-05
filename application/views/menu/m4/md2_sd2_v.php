@@ -4,7 +4,7 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>신규프로젝트 등록</th>
+                <th>일월계표</th>
                 <th>Last Name</th>
                 <th>Username</th>
               </tr>

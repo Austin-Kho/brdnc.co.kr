@@ -20,7 +20,7 @@ class M2 extends CI_Controller {
 	 * @return [type] [description]
 	 */
 	public function index(){
-		$this->local();
+		$this->process();
 	}
 
 	public function _remap($method){
@@ -34,20 +34,20 @@ class M2 extends CI_Controller {
 		$this->load->view('cms_main_footer');
 	}
 
-	public function local($mdi='', $sdi=''){
+	public function process($mdi='', $sdi=''){
 		//$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		if( !$this->uri->segment(3)) $mdi = 1; else $mdi = $this->uri->segment(3);
 		if( !$this->uri->segment(4)) $sdi = 1; else $sdi = $this->uri->segment(4);
 
 		$menu['s_di'] = array(
-			array('전도금 내역', '입출 등록', '전도금 현황'), // 첫번째 하위 메뉴
-			array('인원 현황', '인원 등록', '소속 관리'),                          // 두번째 하위 메뉴
-			array('현장 전도금 입출내역', '현장 전도금 입출등록', '전체 현장별 전도금 현황'), // 첫번째 하위 제목
+			array('집행 현황', '집행 등록', '사업 수지'), // 첫번째 하위 메뉴
+			array('진행 현황', '일정 관리', '프로세스'),                          // 두번째 하위 메뉴
+			array('현장별 예산집행 내역', '현장별 예산집행 등록', '현장별 사업수지 관리'), // 첫번째 하위 제목
 			array('현장별 조직 및 인원 현황', '현장별 조직 및 인원 등록', '현장 관계자 소속 관리')                                  // 두번째 하위 제목
 		);
 
-		$this->load->view('menu/m2/local_v', $menu);
+		$this->load->view('menu/m2/process_v', $menu);
 
 		// 전도금 관리 1. 전도금 내역 ////////////////////////////////////////////////////////////////////
 		if($mdi==1 && $sdi==1 ){
