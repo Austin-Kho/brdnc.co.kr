@@ -41,7 +41,7 @@ class Member extends CI_Controller
 
 		// 라이브러리 로드
 		$this->load->library('form_validation'); // 폼 검증
-		$this->load->helper(array('cookie','alert'));  // 쿠키, 경고창 사용자 헬퍼 로딩
+		$this->load->helper(array('cookie','url', 'alert'));  // 쿠키, 경고창 사용자 헬퍼 로딩
 
 		// 폼 검증할 필드와 규칙 사전 정의
 		$this->form_validation->set_rules('user_id', '아이디', 'required|alpha_numeric');
@@ -108,12 +108,12 @@ class Member extends CI_Controller
 						delete_cookie('id_r', '', '/', '');
 						delete_cookie('id', '', '/', '');
 					}
-					echo "<meta http-equiv='Refresh' content='0; URL=".$this->config->base_url()."main/'>";
+					redirect('/main/');
 					exit;
 				}
 			}else{ // 아이디 // 비번이 맞지 않을 때
 				// 실패 시
-				alert('아이디 또는 비밀번호를 확인해 주세요.', $this->config->base_url().'member/login');
+				alert('아이디 또는 비밀번호를 확인해 주세요.', '/member/login/');
 				exit;
 			}
 		}
@@ -124,12 +124,10 @@ class Member extends CI_Controller
 	 * @return [type] [description]
 	 */
 	public function logout(){
-		$this->load->helper('alert');
+		$this->load->helper(array('alert', 'url'));
 		$this->session->sess_destroy();
 
-		echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
-
-		echo "<meta http-equiv='Refresh' content='0; URL=".$this->config->base_url()."member/'>";
+		redirect('/member/');
 		exit;
 	}
 

@@ -165,17 +165,13 @@ class M5 extends CI_Controller {
 				$this->form_validation->set_rules('carr_m', '기초잔액입력월', 'required');
 				$this->form_validation->set_rules('m_wo_st', '업무개시월', 'required');
 				$this->form_validation->set_rules('bl_cycle', '결산주기', 'required');
-				$this->form_validation->set_rules('email1', '이메일', 'required|alpha_numeric');
-				$this->form_validation->set_rules('emai2', '이메일', 'required|alpha_numeric');
-				$this->form_validation->set_rules('calc_mail1', '세금계산서메일', 'required|alpha_numeric');
-				$this->form_validation->set_rules('calc_mail2', '세금계산서메일', 'required|alpha_numeric');
+				$this->form_validation->set_rules('email1', '이메일', 'required');
+				$this->form_validation->set_rules('email2', '이메일', 'required');
 				$this->form_validation->set_rules('tax_off1_code', '세무서1코드', 'required');
 				$this->form_validation->set_rules('tax_off1_name', '세무서1이름', 'required');
 				$this->form_validation->set_rules('zipcode', '우편번호', 'required|numeric');
 				$this->form_validation->set_rules('address1', '주소1', 'required');
 				$this->form_validation->set_rules('address2', '주소2', 'required');
-				$this->form_validation->set_rules('en_co_name', '영문회사명', 'alpha_numeric');
-				$this->form_validation->set_rules('en_address', '영문주소	', 'alpha_numeric');
 
 				echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 
@@ -242,22 +238,22 @@ class M5 extends CI_Controller {
 						'red_date' => 'now()'
 					);
 
-				//if($com ['mode']=='com_reg') {
+				if($comd['mode']=='com_reg') {
 					$result = $this->m5_m->com_reg($com_data);
-				//}else if($com ['mode']=='com_modify') {
-					//$result = $this->m5_m->com_reg($com_modify);
-				//}
-
-				// $result = $this->m5_m->com_reg($com_data);
+					$msg = '등록';
+				}else if($comd['mode']=='com_modify') {
+					$result = $this->m5_m->com_reg($com_modify);
+					$msg = '변경';
+				}
 
 				if($result) {
 					// 등록 성공 시
-					alert_only('회사 정보가 등록 되었습니다.', '/m5/config/2/1/');
-					//exit;
+					alert('회사 정보가 '.$msg.' 되었습니다.', '/m5/config/2/1/');
+					exit;
 				}else{ // 등록 실패 시
 					// 실패 시
-					alert_only('회사 정보등록이 실해하였습니다.\n 다시 시도하여 주십시요.', '/m5/config/2/1/');
-					//exit;
+					alert('회사 정보'.$msg.'에 실패하였습니다.\n 다시 시도하여 주십시요.', '/m5/config/2/1/');
+					exit;
 				}
 			}
 		}

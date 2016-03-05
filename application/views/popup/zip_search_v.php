@@ -167,7 +167,7 @@
 							<td>
 								<div class="col-xs-7 pl0">
 									<label class="sr-only" for="addr2">주소2</label>
-									<input class="form-control input-sm" type="text" name="addr2" id="addr2" onkeypress="enter_search(this);">
+									<input class="form-control input-sm" type="text" name="addr2" id="addr2" onkeypress="enter_search(document.addr2);">
 								</div>
 								<div class="col-xs-5 pl0">
 									<label class="sr-only" for="addr3">주소3</label>
