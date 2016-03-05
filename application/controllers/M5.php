@@ -173,7 +173,7 @@ class M5 extends CI_Controller {
 				$this->form_validation->set_rules('address1', '주소1', 'required');
 				$this->form_validation->set_rules('address2', '주소2', 'required');
 
-				echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
+				//echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 
 				// 회사 등록 정보가 있는지 확인
 				$com_chk = $this->m5_m->is_com_chk();
@@ -242,7 +242,7 @@ class M5 extends CI_Controller {
 					$result = $this->m5_m->com_reg($com_data);
 					$msg = '등록';
 				}else if($comd['mode']=='com_modify') {
-					$result = $this->m5_m->com_reg($com_modify);
+					$result = $this->m5_m->com_modify($com_data);
 					$msg = '변경';
 				}
 
