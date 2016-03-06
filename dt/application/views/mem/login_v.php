@@ -2,11 +2,11 @@
 			<div style="height:180px;"></div>
 			<article style="width:600px; height:450px; border:2px solid #96ABE5; background-color:white;">
 				<header style="width:596px; height:80px; border-bottom:2px solid #96ABE5; background-color:#D9EAF8; padding:19px 0 0 18px;">
-					<img src="/ci3/static/img/cms_main_logo.png" alt="" width="154px">
+					<img src="/dt/static/img/cms_main_logo.png" alt="" width="154px">
 				</header>
 <?php
 	$attributes = array('name' => 'login');
-	echo form_open('http://brdnc.cafe24.com/ci3/member/', $attributes);
+	echo form_open('http://brdnc.cafe24.com/dt/member/', $attributes);
 ?>
 				<fieldset>
 					<!-- <legend>로그인</legend> --><!-- 폼 캡션 -->
@@ -26,7 +26,7 @@
 						<button class="btn btn-primary btn-xs" type="submit" style="height: 60px; width: 58px;">로그인</button>
 					</div>
 					<div class="col-xs-4" style="padding: 32px 0 0 0px; width: 310px; background-color: yollow;">
-						<a class="btn btn-default btn-sm" href="/ci3/member/join/">회원가입</a>
+						<a class="btn btn-default btn-sm" href="/dt/member/join/">회원가입</a>
 					</div>
 					<div class="col-xs-4" style="padding: 10px 0 0 0px;">
 						<!-- <label class="checkbox-inline">

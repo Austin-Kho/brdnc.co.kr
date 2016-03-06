@@ -45,7 +45,7 @@ class Member extends CI_Controller
 		$this->form_validation->set_rules('user_id', '아이디', 'required|alpha_numeric');
 		$this->form_validation->set_rules('passwd', '비밀번호', 'required');
 
-		echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
+		// echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
 
 		if($this->form_validation->run() == TRUE) { // 폼 전송 데이타가 있으면,
 			$login_data = array(
@@ -58,7 +58,7 @@ class Member extends CI_Controller
 
 			if($result) {
 				if($result->request==2){
-					alert('관리자 사용 승인 후 사용이 가능합니다.\n승인 지연 시, 직접 관리자에게 문의하여 주세요.\n\nEmail : cigiko@naver.com / 전화문의 : 010-3320-0088', '/ci3');
+					alert('관리자 사용 승인 후 사용이 가능합니다.\n승인 지연 시, 직접 관리자에게 문의하여 주세요.\n\nEmail : cigiko@naver.com / 전화문의 : 010-3320-0088', '/dt');
 				}else{
 					// 세션 생성
 					$newdata = array(
@@ -69,12 +69,11 @@ class Member extends CI_Controller
 
 					$this->session->set_userdata($newdata);
 
-					echo "<meta http-equiv='Refresh' content='0; URL=/ci3/main/'>";
-					exit;
+					redirect(base_url().'main/');
 				}
 			}else{ // 아이디 // 비번이 맞지 않을 때
 				// 실패 시
-				alert('아이디 또는 비밀번호를 확인해 주세요.', '/ci3/member/login');
+				alert('아이디 또는 비밀번호를 확인해 주세요.', base_url().'member/login');
 				exit;
 			}
 		}else{ // 폼 전송 데이타가 없으면,
@@ -88,13 +87,8 @@ class Member extends CI_Controller
 	 * @return [type] [description]
 	 */
 	public function logout(){
-		$this->load->helper('alert');
 		$this->session->sess_destroy();
-
-		echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />";
-
-		echo "<meta http-equiv='Refresh' content='0; URL=/ci3/member/'>";
-		exit;
+		redirect(base_url().'member/');
 	}
 
 	public function join() {
@@ -120,7 +114,7 @@ class Member extends CI_Controller
 
 			if($result) {
 				if($result->request==2){
-					alert('관리자 사용 승인 후 사용이 가능합니다.\n승인 지연 시, 직접 관리자에게 문의하여 주세요.\n\nEmail : cigiko@naver.com / 전화문의 : 010-3320-0088', '/ci3');
+					alert('관리자 사용 승인 후 사용이 가능합니다.\n승인 지연 시, 직접 관리자에게 문의하여 주세요.\n\nEmail : cigiko@naver.com / 전화문의 : 010-3320-0088', '/dt');
 				}else{
 					// 세션 생성
 					$newdata = array(
@@ -131,12 +125,12 @@ class Member extends CI_Controller
 
 					$this->session->set_userdata($newdata);
 
-					echo "<meta http-equiv='Refresh' content='0; URL=/ci3/main/'>";
+					echo "<meta http-equiv='Refresh' content='0; URL=/dt/main/'>";
 					exit;
 				}
 			}else{
 				// 실패 시
-				alert('아이디 또는 비밀번호를 확인해 주세요.', '/ci3/member/login');
+				alert('아이디 또는 비밀번호를 확인해 주세요.', base_url().'member/login');
 				exit;
 			}
 		}else{

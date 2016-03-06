@@ -10,9 +10,9 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="/ci3/static/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/dt/static/lib/bootstrap/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="/ci3/static/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="/dt/static/js/ie10-viewport-bug-workaround.js"></script>
 
 
 
@@ -21,6 +21,6 @@
 		<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
-		<script type="text/javascript" src="/ci3/static/lib/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="/dt/static/lib/bootstrap/js/bootstrap.min.js"></script>
 	</body>
 </html>

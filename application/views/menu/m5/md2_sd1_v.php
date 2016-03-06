@@ -1,3 +1,4 @@
+		<div class="main_start"></div>
 <!-- 5. 환경설정 -> 2. 회사정보관리 ->1. 회사정보 페이지 -->
 <?php
 	$attributes = array('name' => 'form1', 'id' => 'com_reg_form', 'class' => 'form-inline', 'method' => 'post');
