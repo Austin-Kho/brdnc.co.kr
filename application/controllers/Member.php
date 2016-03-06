@@ -108,7 +108,7 @@ class Member extends CI_Controller
 						delete_cookie('id_r', '', '/', '');
 						delete_cookie('id', '', '/', '');
 					}
-					redirect('/main/');
+					redirect(base_url().'main/');
 					exit;
 				}
 			}else{ // 아이디 // 비번이 맞지 않을 때
@@ -126,7 +126,7 @@ class Member extends CI_Controller
 	public function logout(){
 		$this->session->sess_destroy();
 
-		redirect('/member/');
+		redirect(base_url().'member/');
 	}
 
 	public function join() {
@@ -163,10 +163,10 @@ class Member extends CI_Controller
 
 			if($result) {
 				// 등록 성공 시
-				alert('등록 되었습니다. \n 관리자의 승인 후 로그인 하여 주십시요.', $this->config->base_url().'member/login/');
+				alert('등록 되었습니다. \n 관리자의 승인 후 로그인 하여 주십시요.', base_url().'member/login/');
 			}else{ // 아이디 // 비번이 맞지 않을 때
 				// 실패 시
-				alert('계정등록에 실패하였습니다.\n 다시 시도하여 주십시요.', $this->config->base_url().'member/join/');
+				alert('계정등록에 실패하였습니다.\n 다시 시도하여 주십시요.', base_url().'member/join/');
 				exit;
 			}
 		} // 폼 검증 종료
@@ -236,11 +236,11 @@ class Member extends CI_Controller
 
 			if($result) {
 				// 등록 성공 시
-				alert('사용자 정보가 변경 되었습니다.', $this->config->base_url().'main/');
+				alert('사용자 정보가 변경 되었습니다.', base_url().'main/');
 				exit;
 			}else{ // 아이디 // 비번이 맞지 않을 때
 				// 실패 시
-				alert('계정정보 변경등록에 실패하였습니다.\n사용자 비밀번호를 확인하여 주십시요.', $this->config->base_url().'member/modify/');
+				alert('계정정보 변경등록에 실패하였습니다.\n사용자 비밀번호를 확인하여 주십시요.', base_url().'member/modify/');
 				exit;
 			}
 		} // 폼 검증 종료
