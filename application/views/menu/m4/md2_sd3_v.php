@@ -103,8 +103,8 @@
 
 				<div class="center"><?php echo 'pagination'; ?></div>
 				<div style="height: 56px; padding: 10px 15px; margin-top: 38px; border-width: 0 0 1px 0; border-style: solid; border-color: #B2BCDE;">
-					<div class="col-md-6" style=""><button class="btn btn-info btn-sm">신규등록</button></div>
-					<div class="col-md-6" style="text-align: right; background-color:"><button class="btn btn-warning btn-sm">선택삭제</button></div>
+					<div class="col-xs-6" style=""><button class="btn btn-info btn-sm">신규등록</button></div>
+					<div class="col-xs-6" style="text-align: right; background-color:"><button class="btn btn-warning btn-sm">선택삭제</button></div>
 				</div>
 			</div>
 		</div>
