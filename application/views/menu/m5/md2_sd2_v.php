@@ -5,7 +5,7 @@
   //echo form_open('/m5/config/2/2/', $attributes);
 ?>
   <fieldset>
-    <div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
+    <div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
 		<!-- 신규 사용자 등록자가 있을 때 처리 시작 -->
 <?
 	// $q = "select request from cms_member_table where request='2' ";

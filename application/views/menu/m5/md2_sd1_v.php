@@ -5,7 +5,7 @@
 	echo form_open('/m5/config/2/1/', $attributes);
 ?>
 	<fieldset>
-		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
+		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap" >
 				<label for="co_name">회사명<span class="red">*</span></label>
 			</div>
@@ -36,7 +36,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
+		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="ceo">
 					대표자 <span class="red">*</span>
@@ -65,7 +65,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
+		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="biz_cond">업태 <span class="red">*</span></label>
 			</div>
@@ -80,7 +80,7 @@
 				<input type="text" class="form-control input-sm han" id="biz_even" name="biz_even" maxlength="30" value="<?php if($mode=='com_reg') {echo set_value('biz_even');} else {echo $com->biz_even;} ?>" required autofocus>
 			</div>
 		</div>
-		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
+		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="co_phone1">대표전화 <span class="red">*</span></label>
 			</div>
@@ -122,7 +122,7 @@
 				<div class="col-xs-3"></div>
 			</div>
 		</div>
-		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
+		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap"><label for="co_fax1">FAX</label></div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
 				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90 en_only" id="co_fax1" name="co_fax1" maxlength="4" value="<?php if($mode=='com_reg') {echo set_value('co_fax1');} else {$p = explode('-', $com->co_fax); echo $p[0];} ?>" onkeypress="isNum();"></div>
@@ -169,7 +169,7 @@
 				<div class="col-xs-1"></div>
 			</div>
 		</div>
-		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
+		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="es_date">설립일자 <span class="red">*</span></label>
 			</div>
@@ -193,7 +193,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
+		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="carr_y">기초잔액 입력월 <span class="red">*</span></label>
 			</div>
@@ -243,7 +243,7 @@
 				<div class="col-xs-5 text-wrap">개월</div>
 			</div>
 		</div>
-		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
+		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="email1">E-mail(비상) <span class="red">*</span>	</label>
 			</div>
@@ -291,7 +291,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
+		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="tax_off1_code">세무서[1] <span class="red">*</span></label>
 			</div>
@@ -329,7 +329,7 @@
 				<div class="col-xs-5"></div>
 			</div>
 		</div>
-		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
+		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="zipcode">회사주소 <span class="red">*</span></label>
 			</div>
@@ -351,7 +351,7 @@
 				<div class="col-md-3 col-sm-12 col-xs-12 glyphicon-wrap">나머지 주소</div>
 			</div>
 		</div>
-		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?>">
+		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="en_co_name">회사 영문명</label>
 			</div>
@@ -360,7 +360,7 @@
 				<div class="col-md-6 col-xs-12 text-wrap">기타소득 지급조서 신고가 있는 경우 입력</div>
 			</div>
 		</div>
-		<div class="row <?php if( !is_mobile()) echo 'no-mobile';?> foot_form">
+		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?> foot_form">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="en_address">회사 영문주소</label>
 				<div class="col-xs-12">&nbsp;</div>

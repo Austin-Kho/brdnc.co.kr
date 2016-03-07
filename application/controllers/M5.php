@@ -15,7 +15,6 @@ class M5 extends CI_Controller {
 
 		$this->load->model('main_m'); //모델 파일 로드
 		$this->load->model('m5_m'); //모델 파일 로드
-		$this->load->helper('is_mobile'); //모바일 기기 확인 헬퍼
 		$this->load->helper('alert'); // 경고창 헤퍼 로딩
 	}
 
