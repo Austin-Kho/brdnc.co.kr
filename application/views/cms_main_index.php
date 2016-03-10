@@ -25,7 +25,7 @@
             <img src="/static/img/111.jpg" alt="First slide">
             <div class="carousel-caption">
               <h3>양우내안애 Ervache</h3>
-              <p>72Type 거실 Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              <p>72Type 거실 --- Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
             </div>
           </div>
           <div class="item">
