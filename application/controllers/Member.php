@@ -82,25 +82,25 @@ class Member extends CI_Controller
 						if( !$this->input->cookie('id_r', TRUE)) { // 실제 쿠키가 없으면 만들고
 
 							$id_r_Cookie = array(
-						     'name' => 'id_r',
-						     'value' => 'rem',
-						     'expire' => 1000000,
-						     'domain' => '.brdnc.cafe24.com',
-						     'path' => '/',
-						     'prefix' => '',
-						     'secure' => false
-						    );
-    					$this->input->set_cookie($id_r_Cookie);
+								'name' => 'id_r',
+								'value' => 'rem',
+								'expire' => 1000000,
+								'domain' => '.brdnc.cafe24.com',
+								'path' => '/',
+								'prefix' => '',
+								'secure' => false
+							);
+    							$this->input->set_cookie($id_r_Cookie);
 
-    					$id_Cookie = array(
-						     'name' => 'id',
-						     'value' => $result->user_id,
-						     'expire' => 1000000,
-						     'domain' => '.brdnc.cafe24.com',
-						     'path' => '/',
-						     'prefix' => '',
-						     'secure' => false
-						    );
+		    					$id_Cookie = array(
+								'name' => 'id',
+								'value' => $result->user_id,
+								'expire' => 1000000,
+								'domain' => '.brdnc.cafe24.com',
+								'path' => '/',
+								'prefix' => '',
+								'secure' => false
+							);
     					$this->input->set_cookie($id_Cookie);
 
 						}
