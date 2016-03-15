@@ -36,8 +36,7 @@
 							<b><font color="red">*</font> <font color="black">권한 설정할 직원 선택</font></b>
 						</div>
 						<div class="col-xs-6 col-sm-6 col-md-9">
-							<input type="radio" name="a"> (주) 바램디앤씨 &nbsp;
-							<input type="radio" name="a"> 현장 관계자 &nbsp;
+							<span>(주) 바램디앤씨</span>&nbsp;
 							 <select>
 							 	<option>선 택</option>
 							 	<option>선 택</option>
