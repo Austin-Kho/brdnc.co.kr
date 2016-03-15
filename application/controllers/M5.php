@@ -172,7 +172,6 @@ class M5 extends CI_Controller {
 				$this->form_validation->set_rules('address1', '주소1', 'required');
 				$this->form_validation->set_rules('address2', '주소2', 'required');
 
-				//echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 
 				// 회사 등록 정보가 있는지 확인
 				$com_chk = $this->m5_m->is_com_chk();
@@ -267,9 +266,22 @@ class M5 extends CI_Controller {
 			if( !$auth['_m5_2_2'] or $auth['_m5_2_2']==0) {
 				$this->load->view('no_auth');
 			}else{
+				// 폼검증 라이브러리 로드
+				$this->load->library('form_validation');
+
+				//  신규 등록 신청자가 있는 지 확인
+				$data['new_rq'] = $this->m5_m->new_rq_chk();
+				$data['auth'] = $auth;
+
+				$auth_data = array(
+					'request' => 1
+				);
+				$result = $this->m5_m->rq_perm($auth_data);
+
+
 
 				//본 페이지 로딩
-				$this->load->view('/menu/m5/md2_sd2_v');
+				$this->load->view('/menu/m5/md2_sd2_v', $data);
 			}
 		}
 	}

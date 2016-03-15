@@ -35,5 +35,17 @@ class M5_m extends CI_Model {
 		$result = $this->db->update('cms_com_info', $com_data);
 		return $result;
 	}
+
+	public function new_rq_chk() {
+		$qry = $this->db->get_where('cms_member_table', array('request' => '2'));
+		if($result = $qry->result()) {
+			return $result;
+		}else{
+			return FALSE;
+		}
+	}
+	public function rq_perm(){
+
+	}
 }
 // End of this File

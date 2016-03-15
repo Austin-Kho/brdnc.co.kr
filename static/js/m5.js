@@ -491,11 +491,11 @@ function com_submit(mode){
 /////사용자 등록 승인 거부 함수 ///////////
 		function permition(mem,sf){
 
-			var form=document.form2;
-			form.mem.value = mem;
+			//var form=document.form2;
+			//form.mem.value = mem;
 
-			if(sf=="승인") {form.sf.value ="1";}
-			if(sf=="거부") {form.sf.value ="0";}
+			//if(sf=="승인") {form.sf.value ="1";}
+			//if(sf=="거부") {form.sf.value ="0";}
 
 			if(confirm("사용자 등록을 "+sf+"하시겠습니까?")==true){
 				form.submit();

@@ -1,13 +1,12 @@
 		<div class="main_start"></div>
 		<!-- 5. 환경설정 -> 2. 회사정보관리 ->2. 사용자 권한 관리 페이지 -->
-		<?php
-		$attributes = array('name' => 'form1', 'id' => 'mem_auth', 'class' => 'form-inline', 'method' => 'post');
-		//echo form_open('/m5/config/2/2/', $attributes);
-		?>
-			<fieldset>
-				<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
-					<!-- 신규 사용자 등록자가 있을 때 처리 시작 -->
-					<!-- <div class="row" style="margin: 0 15px; border-width: 0 0 1px 0; border-style: solid; border-color: #cccccc;">
+
+		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
+			<!-- 신규 사용자 등록자가 있을 때 처리 시작 -->
+<?php if($new_rq) : ?>
+					<input type="hidden" name="mem">
+					<input type="hidden" name="sf">
+					<div class="row" style="margin: 0 15px; border-width: 0 0 1px 0; border-style: solid; border-color: #cccccc;">
 						<div class="col-md-12" style="height: 40px; padding-top: 10px;">
 							<b><font color="red">*</font> <font color="black">신규 사용자 등록 신청 건이 있습니다.</font></b>
 						</div>
@@ -19,37 +18,42 @@
 						<div class="col-md-3 center" style="height: 40px; padding-top: 10px;">등록 신청일시</div>
 						<div class="col-md-2 center" style="height: 40px; padding-top: 10px;">승인처리</div>
 					</div>
-					<div class="row" style="margin: 0 15px; border-width: 0 0 1px 0; border-style: solid; border-color: #cccccc;">
-						<div class="col-md-2 center" style="height: 40px; padding-top: 10px;">testid</div>
-						<div class="col-md-3 center" style="height: 40px; padding-top: 10px;">(주) 바램디앤씨</div>
-						<div class="col-md-2 center" style="height: 40px; padding-top: 10px;">cigiko@naver.com</div>
-						<div class="col-md-3 center" style="height: 40px; padding-top: 10px;">2016-03-13</div>
-						<div class="col-md-2 center" style="height: 40px; padding-top: 10px;">
-							<button class="btn btn-success btn-xs">승인</button>
-							<button class="btn btn-danger btn-xs">거부</button>
-						</div>
-					</div> -->
-					<!-- 신규 사용자 등록자가 있을 때 처리 종료 -->
-
-					<div class="form-group" style="height:50px; padding-top: 15px; margin:0 15px 20px 15px; background-color: #f8f8f8; border-width:0 0 1px 0; border-color:#cccccc; border-style: solid;">
-						<div class="col-xs-6 col-sm-6 col-md-3 center">
-							<b><font color="red">*</font> <font color="black">권한 설정할 직원 선택</font></b>
-						</div>
-						<div class="col-xs-6 col-sm-6 col-md-9">
-							<span>(주) 바램디앤씨</span>&nbsp;
-							 <select>
-							 	<option>선 택</option>
-							 	<option>선 택</option>
-							 	<option>선 택</option>
-							 	<option>선 택</option>
-							 </select>
-						</div>
-					<div class="col-xs-9 col-sm-9 col-md-9"></div>
-					</div>
-
+<?php foreach($new_rq as $lt) : ?>
+<?php if($auth<2) $perm_str="alert('승인(거부) 권한이 없습니다!')"; else $perm_str="permition('$lt->no',this.value);"; ?>
+			<div class="row" style="margin: 0 15px; border-width: 0 0 1px 0; border-style: solid; border-color: #cccccc;">
+				<div class="col-md-2 center" style="height: 40px; padding-top: 10px;"><?php echo $lt->user_id."-".$lt->no; ?></div>
+				<div class="col-md-3 center" style="height: 40px; padding-top: 10px;">(주) 바램디앤씨</div>
+				<div class="col-md-2 center" style="height: 40px; padding-top: 10px;"><?php echo $lt->email; ?></div>
+				<div class="col-md-3 center" style="height: 40px; padding-top: 10px;"><?php echo $lt->reg_date; ?></div>
+				<div class="col-md-2 center" style="height: 40px; padding-top: 10px;">
+					<button class="btn btn-success btn-xs" value="승인" onclick="<?php echo $perm_str; ?>">승인</button>
+					<button class="btn btn-danger btn-xs" value="거부" onclick="<?php echo $perm_str; ?>">거부</button>
 				</div>
-			</fieldset>
-		</form>
+			</div>
+<?php endforeach; ?>
+<?php endif; ?>
+			<!-- 신규 사용자 등록자가 있을 때 처리 종료 -->
+
+
+
+
+
+
+			<div class="form-group" style="height:50px; padding-top: 15px; margin:0 15px 20px 15px; background-color: #f8f8f8; border-width:0 0 1px 0; border-color:#cccccc; border-style: solid;">
+				<div class="col-xs-6 col-sm-6 col-md-3 center">
+					<b><font color="red">*</font> <font color="black">권한 설정할 직원 선택</font></b>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-9">
+					<span>(주) 바램디앤씨</span>&nbsp;
+					 <select>
+					 	<option>선 택</option>
+					 	<option>선 택</option>
+					 	<option>선 택</option>
+					 	<option>선 택</option>
+					 </select>
+				</div>
+			</div>
+		</div>
 
 
 
@@ -344,7 +348,6 @@
 				</table>
 			</div>
 		</div>
-
 		<div class="row btn-wrap" style="height:62px; padding-top: 15px; margin:0 0 50px 0; background-color: #f8f8f8; border-width:1px 0 1px 0; border-color:#CCCCCC; border-style: solid; text-align: right; padding-right: 15px;">
 			<input type="button" class="btn btn-primary btn-sm" onclick="" value="등록하기">
 		</div>
