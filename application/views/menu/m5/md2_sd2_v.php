@@ -2,22 +2,23 @@
 		<!-- 5. 환경설정 -> 2. 회사정보관리 ->2. 사용자 권한 관리 페이지 -->
 
 		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
-			<!-- 신규 사용자 등록자가 있을 때 처리 시작 -->
+		<!-- 신규 사용자 등록자가 있을 때 처리 시작 -->
 <?php if($new_rq) : ?>
-					<input type="hidden" name="mem">
-					<input type="hidden" name="sf">
-					<div class="row" style="margin: 0 15px; border-width: 0 0 1px 0; border-style: solid; border-color: #cccccc;">
-						<div class="col-md-12" style="height: 40px; padding-top: 10px;">
-							<b><font color="red">*</font> <font color="black">신규 사용자 등록 신청 건이 있습니다.</font></b>
-						</div>
-					</div>
-					<div class="row" style="background-color: #F4F4F4; margin: 0 15px; border-width: 0 0 1px 0; border-style: solid; border-color: #cccccc;">
-						<div class="col-md-2 center" style="height: 40px; padding-top: 10px;">성 명</div>
-						<div class="col-md-3 center" style="height: 40px; padding-top: 10px;">구 분</div>
-						<div class="col-md-2 center" style="height: 40px; padding-top: 10px;">Email</div>
-						<div class="col-md-3 center" style="height: 40px; padding-top: 10px;">등록 신청일시</div>
-						<div class="col-md-2 center" style="height: 40px; padding-top: 10px;">승인처리</div>
-					</div>
+	[	<form name="form2" method="post" action="com_post.php">
+			<input type="hidden" name="no">
+			<input type="hidden" name="sf">
+			<div class="row" style="margin: 0 15px; border-width: 0 0 1px 0; border-style: solid; border-color: #cccccc;">
+				<div class="col-md-12" style="height: 40px; padding-top: 10px;">
+					<b><font color="red">*</font> <font color="black">신규 사용자 등록 신청 건이 있습니다.</font></b>
+				</div>
+			</div>
+			<div class="row" style="background-color: #F4F4F4; margin: 0 15px; border-width: 0 0 1px 0; border-style: solid; border-color: #cccccc;">
+				<div class="col-md-2 center" style="height: 40px; padding-top: 10px;">성 명</div>
+				<div class="col-md-3 center" style="height: 40px; padding-top: 10px;">구 분</div>
+				<div class="col-md-2 center" style="height: 40px; padding-top: 10px;">Email</div>
+				<div class="col-md-3 center" style="height: 40px; padding-top: 10px;">등록 신청일시</div>
+				<div class="col-md-2 center" style="height: 40px; padding-top: 10px;">승인처리</div>
+			</div>
 <?php foreach($new_rq as $lt) : ?>
 <?php if($auth<2) $perm_str="alert('승인(거부) 권한이 없습니다!')"; else $perm_str="permition('$lt->no',this.value);"; ?>
 			<div class="row" style="margin: 0 15px; border-width: 0 0 1px 0; border-style: solid; border-color: #cccccc;">
@@ -31,46 +32,61 @@
 				</div>
 			</div>
 <?php endforeach; ?>
+		</form>
 <?php endif; ?>
-			<!-- 신규 사용자 등록자가 있을 때 처리 종료 -->
+		<!-- 신규 사용자 등록자가 있을 때 처리 종료 -->
 
 
-
-
-
-
-			<div class="form-group" style="height:50px; padding-top: 15px; margin:0 15px 20px 15px; background-color: #f8f8f8; border-width:0 0 1px 0; border-color:#cccccc; border-style: solid;">
-				<div class="col-xs-3 col-sm-3 col-md-2 center">
+			<div class="form-group" style="margin: 0 15px 65px; ">
+				<div class="col-xs-12 col-sm-3 col-md-2 bo-bottom" style="padding-top: 10px; height: 43px; background-color: #f8f8f8;">
 					<b><font color="red">*</font> <font color="black">권한 설정할 직원 선택</font></b>
 				</div>
-				<div class="col-xs-9 col-sm-9 col-md-10">
-					<span>(주) 바램디앤씨</span>&nbsp;
-					 <select>
-					 	<option>선 택</option>
-					 	<option>선 택</option>
-					 	<option>선 택</option>
-					 	<option>선 택</option>
-					 </select>
+				<div class="col-xs-12 col-sm-9 col-md-10 bo-bottom" style="padding-top: 10px; height: 43px; background-color: #f8f8f8;">
+					<span>(주) 바램디앤씨</span>
+					<select name="user_sel" onchange="location.href='/m5/config/2/2/?un='+this.value">
+						<option value="">선 택</option>
+<?php foreach($user_list as $lt) : ?>
+						<option value="<?php echo $lt->no; ?>" <?php if($this->input->get('un')==$lt->no) echo "selected"; ?>><?php echo $lt->name; ?></option>
+<?php endforeach; ?>
+					</select>
 				</div>
 			</div>
+<?php if($this->input->get('un')) : ?>
+			<div class="row bo-top" style="height:40px; margin:65px 15px 0; background-color:#f6f6f6;">
+				<div class="col-xs-2 center" style="padding-top:8px; text-align:center;">성 명</div>
+				<div class="col-xs-3 center" style="padding-top:8px; text-align:center;">구 분</div>
+				<div class="col-xs-3 center" style="padding-top:8px; text-align:center;">Email</div>
+				<div class="col-xs-3 center"style="padding-top:8px; text-align:center;">등록 신청일시</div>
+				<div class="col-xs-1 center" style="padding-top:8px; text-align:center;">선 택</div>
+			</div>
+			<div class="row bo-bottom" style="height:30px; margin:13px 15px 20px;">
+				<div class="col-xs-2 center" style="padding-top:0px; text-align:center;"><?php echo $sel_user->name; ?></div>
+				<div class="col-xs-3 center" style="padding-top:0px; text-align:center;">(주) 바램디앤씨</div>
+				<div class="col-xs-3 center" style="padding-top:0px; text-align:center;"><?php echo $sel_user->email; ?></div>
+				<div class="col-xs-3 center"style="padding-top:0px; text-align:center;"><?php echo $sel_user->reg_date; ?></div>
+				<div class="col-xs-1 center" style="padding-top:0px; text-align:center;"><input type="checkbox" name="user_no" value="<?php echo $sel_user->no; ?>" <? if($sel_user->no==$this->input->get('un')) echo "checked"?>></div>
+			</div>
+<?php endif; ?>
 		</div>
+
+
 
 
 
 		<div class="row">
 			<div class="col-md-12 table-responsive">
 				<table class="table auth-table">
-					<thead>
+					<!-- <thead>
 						<tr>
 							<th class="col-md-1">대분류</th>
 							<th class="col-md-1">소분류</th>
 							<th class="col-md-10" colspan="4">사용자 권한 관리</th>
 						</tr>
-					</thead>
+					</thead> -->
 					<tbody>
 						<tr>
-							<th rowspan="2">분양관리</th>
-							<td>계약현황</td>
+							<th  class="col-md-1" rowspan="2">분양관리</th>
+							<td class="col-md-1">계약현황</td>
 							<td class="col-md-2">계약현황
 								<label class="checkbox-inline">
 									<input type="checkbox" id="_m1_1_1" name="_m1_1_1">조회

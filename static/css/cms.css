@@ -22,7 +22,7 @@
 	.glyphicon-calendar{ color: #7544BD; }
 	/**************************glyphicon style*****************************/
 
-	div.container#main_container { background-color: white; }
+	div.container#main_container { background-color: white; padding: 0 15px; }
 	footer.footer { border-width:1px 0 0 0; border-color:#CCCCCC; border-style: solid; background-color: #eeeeee; margin-top: 25px;}
 
 	.nav-tabs { margin-bottom: -20px; }
@@ -36,7 +36,7 @@
 	.page-header .nav-pills .active a:hover { background-color: #E8ECF9; color: #3355CA;}
 
 	#sdi_sub { margin-top: -20px; padding: 15px 0 15px 20px; background-color: #F8F8F8; font-weight: bold; color: #6666D4; border-bottom-color: #B2BCDE; }
-	.main_start { margin-top: -10px; height: 23px; text-align: right; padding: 0px 15px 0 0; border-width:0 0 1px 0; border-style:solid; border-color:#CACAC1;}
+	.main_start { margin-top: -10px; height: 23px; text-align: right; padding: 0px 15px 0 0; border-width:0 0 1px 0; border-style:solid; border-color:#ddd;}
 
 
 
@@ -46,7 +46,7 @@
 	/*****************************************m5 style*******************************************/
 	#com_reg_form fieldset { font-size: 12px; }
 	#com_reg_form fieldset .row { margin: 0px; }
-	#com_reg_form fieldset .row.no-mobile {                       border-width:0 0 1px 0; border-style:solid; border-color:#CACAC1; }
+	#com_reg_form fieldset .row.no-mobile {                       border-width:0 0 1px 0; border-style:solid; border-color:#ddd; }
 	#com_reg_form fieldset .row.foot_form { padding-bottom: 20px; }
 	#com_reg_form fieldset .row.btn-wrap { padding: 15px 20px 0 0; text-align: right; height: 61px; border-width:0 0 1px 0; border-style:solid; border-color:#B2BCDE; background-color: #F8F8F8; margin-bottom: 25px; }
 
@@ -70,11 +70,30 @@
 	.auth-table td { text-align: right; }
 
 
-.center { text-align: center; }
-.pt6 { padding-top: 6px; }
-.pl0 { padding-left: 0; }
-.pl10 { padding-left: 10px; }
-.pl20 { padding-left: 20px; }
+	/**------------------------------------정렬----------------------------------------**/
+	.center { text-align: center; }
+	/**------------------------------------정렬----------------------------------------**/
+
+	/**------------------------------------패딩----------------------------------------**/
+	.pt6 { padding-top: 6px; }
+	.pl0 { padding-left: 0; }
+	.pl10 { padding-left: 10px; }
+	.pl20 { padding-left: 20px; }
+	/**------------------------------------패딩----------------------------------------**/
+
+	/**------------------------------------보더----------------------------------------**/
+	.bo-top { border-width:1px 0 0 0; border-style:solid; border-color:#ddd; }
+	.bo-bottom { border-width:0 0 1px 0; border-style:solid; border-color:#ddd; }
+	.bo-right { border-width:0 1px 0 0; border-style:solid; border-color:#ddd; }
+	.bo-left { border-width:0 0 0 1px; border-style:solid; border-color:#ddd; }
+	.bo-tb { border-width:1px 0; border-style:solid; border-color:#ddd; }
+	.bo-tbrl { border-width:1px; border-style:solid; border-color:#ddd; }
+
+	.mbo-top { border-width:1px 0 0 0; border-style:solid; border-color:#B2BCDE; }
+	.mbo-bottom { border-width:0 0 1px 0; border-style:solid; border-color:#B2BCDE; }
+	.mbo-right { border-width:0 1px 0 0; border-style:solid; border-color:#B2BCDE; }
+	.mbo-left { border-width:0 0 0 1px; border-style:solid; border-color:#B2BCDE; }
+	/**------------------------------------보더----------------------------------------**/
 
 
 

@@ -29,13 +29,16 @@ class M5_m extends CI_Model {
 	/**
 	 * [com_modify 회사 정보 변경(수정)등록 함수]
 	 * @param  [Array] $com_data [변경할 회사 정보]
-	 * @return [Boolean]           [변경 등록 성공 여부]
+	 * @return [Boolean]             [변경 등록 성공 여부]
 	 */
 	public function com_modify($com_data){
 		$result = $this->db->update('cms_com_info', $com_data);
 		return $result;
 	}
 
+	/**
+	 * @return [Array] [신청대기자 목록]
+	 */
 	public function new_rq_chk() {
 		$qry = $this->db->get_where('cms_member_table', array('request' => '2'));
 		if($result = $qry->result()) {
@@ -44,8 +47,30 @@ class M5_m extends CI_Model {
 			return FALSE;
 		}
 	}
-	public function rq_perm(){
+	public function rq_perm($no, $data){
+		$this->db->where('no', $no);
+		$result = $this->db->update('cms_member_table', $data);
+		return $result;
+	}
 
+	public function user_list(){
+		$this->db->select('no, name');
+		$qry = $this->db->get_where('cms_member_table', array('request' => '1'));
+		if($result = $qry->result()) {
+			return $result;
+		}else{
+			return FALSE;
+		}
+	}
+
+	public function sel_user($no){
+		$this->db->select('no, name, email, reg_date');
+		$qry = $this->db->get_where('cms_member_table', array('no' => $no));
+		if($result = $qry->row()) {
+			return $result;
+		}else{
+			return FALSE;
+		}
 	}
 }
 // End of this File

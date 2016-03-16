@@ -67,7 +67,7 @@ class Member extends CI_Controller
 			$result = $this->mem_m->login($login_data);
 
 			if($result) {
-				if($result->request==2){
+				if($result->request != 1){
 					alert('관리자 사용 승인 후 사용이 가능합니다.\n승인 지연 시, 직접 관리자에게 문의하여 주세요.\n\nEmail : cigiko@naver.com / 전화문의 : 010-3320-0088', '/member/');
 				}else{
 					// 세션 생성

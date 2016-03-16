@@ -269,21 +269,35 @@ class M5 extends CI_Controller {
 				// 폼검증 라이브러리 로드
 				$this->load->library('form_validation');
 
-				//  신규 등록 신청자가 있는 지 확인
-				$data['new_rq'] = $this->m5_m->new_rq_chk();
-				$data['auth'] = $auth;
+				// 폼 검증할 필드와 규칙 사전 정의
+				$this->form_validation->set_rules('no', '유저번호', 'required');
 
-				$auth_data = array(
-					'request' => 1
-				);
-				$result = $this->m5_m->rq_perm($auth_data);
+				if($this->form_validation->run() == FALSE) { // 폼 전송 데이타가 없으면,
 
+					$data['auth'] = $auth;   // 등록 권한
+					$data['new_rq'] = $this->m5_m->new_rq_chk();   //  신규 등록 신청자가 있는 지 확인
+					$data['user_list'] = $this->m5_m->user_list(); // 승인된 유저 목록
+					$data['sel_user'] = $this->m5_m->sel_user($this->input->get('un', TRUE)); //  선택된 유저 데이터
 
-
-				//본 페이지 로딩
-				$this->load->view('/menu/m5/md2_sd2_v', $data);
-			}
-		}
-	}
-}
+					//본 페이지 로딩
+					$this->load->view('/menu/m5/md2_sd2_v', $data);
+				}else{
+					$where_no = $this->input->post('no', TRUE);
+					$auth_data = array(
+						'request' => $this->input->post('sf', TRUE),
+						'auth_level' => 9
+					);
+					$result = $this->m5_m->rq_perm($where_no, $auth_data);
+					if($result){
+						alert('요청하신 작업이 처리 되었습니다.', '/m5/config/2/2/');
+						exit;
+					}else{
+						alert('다시 확인하여 주십시요', '/m5/config/2/2/');
+						exit;
+					}
+				}// 폼 검증 로직 종료
+			}// 조회 권한 분기 종료
+		}// 권한관리 sdi 분기 종료
+	}// config 함수 종료/
+}// 클래스 종료
 // End of this File
