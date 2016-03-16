@@ -40,10 +40,10 @@
 
 
 			<div class="form-group" style="height:50px; padding-top: 15px; margin:0 15px 20px 15px; background-color: #f8f8f8; border-width:0 0 1px 0; border-color:#cccccc; border-style: solid;">
-				<div class="col-xs-6 col-sm-6 col-md-3 center">
+				<div class="col-xs-3 col-sm-3 col-md-2 center">
 					<b><font color="red">*</font> <font color="black">권한 설정할 직원 선택</font></b>
 				</div>
-				<div class="col-xs-6 col-sm-6 col-md-9">
+				<div class="col-xs-9 col-sm-9 col-md-10">
 					<span>(주) 바램디앤씨</span>&nbsp;
 					 <select>
 					 	<option>선 택</option>
