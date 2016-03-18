@@ -6,38 +6,40 @@
 		<!-- 신규 사용자 등록자가 있을 때 처리 시작 -->
 <?php if($new_rq) : ?>
 			<form name="form2" method="post" action="/m5/config/2/2/">
-				<input type="hidden" name="no">
-				<input type="hidden" name="sf">
-				<div class="row" style="margin: 0 15px; border-width: 0 0 1px 0; border-style: solid; border-color: #ddd;">
-					<div class="col-md-12" style="height: 40px; padding-top: 10px;">
-						<b><font color="red">*</font> <font color="black">신규 사용자 등록 신청 건이 있습니다.</font></b>
+				<fieldset>
+					<input type="hidden" name="no">
+					<input type="hidden" name="sf">
+					<div class="row new_user">
+						<div class="col-md-12 str">
+							<b><font color="red">*</font> <font color="black">신규 사용자 등록 신청 건이 있습니다.</font></b>
+						</div>
 					</div>
-				</div>
-				<div class="row" style="margin: 0 15px; background-color: #F4F4F4; border-bottom: 1px solid #ddd;">
-					<div class="col-md-2 center" style="height: 40px; padding-top: 10px;">성 명</div>
-					<div class="col-md-3 center" style="height: 40px; padding-top: 10px;">구 분</div>
-					<div class="col-md-2 center" style="height: 40px; padding-top: 10px;">Email</div>
-					<div class="col-md-3 center" style="height: 40px; padding-top: 10px;">등록 신청일시</div>
-					<div class="col-md-2 center" style="height: 40px; padding-top: 10px;">승인처리</div>
-				</div>
+					<div class="row new_user bg-f8">
+						<div class="col-md-2 center str">성 명</div>
+						<div class="col-md-3 center str">구 분</div>
+						<div class="col-md-2 center str">Email</div>
+						<div class="col-md-3 center str">등록 신청일시</div>
+						<div class="col-md-2 center str">승인처리</div>
+					</div>
 <?php foreach($new_rq as $lt) : ?>
 <?php if($auth<2) $perm_str="alert('승인(거부) 권한이 없습니다!')"; else $perm_str="permition('$lt->no',this.value);"; ?>
-				<div class="row" style="margin: 0 15px; border-width: 0 0 1px 0; border-style: solid; border-color: #ddd;">
-					<div class="col-md-2 center" style="height: 40px; padding-top: 10px;"><?php echo $lt->name." (".$lt->user_id.")"; ?></div>
-					<div class="col-md-3 center" style="height: 40px; padding-top: 10px;">(주) 바램디앤씨</div>
-					<div class="col-md-2 center" style="height: 40px; padding-top: 10px;"><?php echo $lt->email; ?></div>
-					<div class="col-md-3 center" style="height: 40px; padding-top: 10px;"><?php echo $lt->reg_date; ?></div>
-					<div class="col-md-2 center" style="height: 40px; padding-top: 10px;">
-						<button class="btn btn-success btn-xs" value="승인" onclick="<?php echo $perm_str; ?>">승인</button>
-						<button class="btn btn-danger btn-xs" value="거부" onclick="<?php echo $perm_str; ?>">거부</button>
+					<div class="row new_user">
+						<div class="col-md-2 center str"><?php echo $lt->name." (".$lt->user_id.")"; ?></div>
+						<div class="col-md-3 center str">(주) 바램디앤씨</div>
+						<div class="col-md-2 center str"><?php echo $lt->email; ?></div>
+						<div class="col-md-3 center str"><?php echo $lt->reg_date; ?></div>
+						<div class="col-md-2 center str">
+							<button class="btn btn-success btn-xs" value="승인" onclick="<?php echo $perm_str; ?>">승인</button>
+							<button class="btn btn-danger btn-xs" value="거부" onclick="<?php echo $perm_str; ?>">거부</button>
+						</div>
 					</div>
-				</div>
 <?php endforeach; ?>
+				</fieldset>
 			</form>
 <?php endif; ?>
 		<!-- 신규 사용자 등록자가 있을 때 처리 종료 -->
 
-			<div class="form-group" style="margin: 0 15px 0px;">
+			<div class="form-group mg-0-15">
 				<div class="col-xs-12 col-sm-4 col-md-3 bo-bottom" style="padding-top: 10px; height: 43px; background-color: #f8f8f8;">
 					<b><font color="red">*</font> <font color="black">권한 설정할 직원 선택</font></b>
 				</div>
@@ -80,7 +82,7 @@
 					</div>
 <?php endif; ?>
 				</div>
-				<div class="row pb20" style="margin: 0;">
+				<div class="row" style="margin: 0;">
 					<div class="col-md-12 table-responsive" style="padding: 0">
 						<table class="table auth-table">
 							<tbody>
@@ -114,8 +116,8 @@
 									<td class="col-md-2" style="border-top: 1px solid #B2BCDE;"></td>
 								</tr>
 								<tr>
-									<td style="border-top: 0;"><strong>수납현황</strong></td>
-									<td style="border-top: 0;">수납현황
+									<td class="sec-td"><strong>수납현황</strong></td>
+									<td class="sec-td">수납현황
 										<label class="checkbox-inline">
 											<input type="checkbox" id="_m1_2_1" name="_m1_2_1" <?php if(isset($user_auth->_m1_2_1) && $user_auth->_m1_2_1>0) echo 'checked'; ?>>조회
 										</label>
@@ -123,7 +125,7 @@
 											<input type="checkbox" id="_m1_2_1_m" name="_m1_2_1_m" <?php if(isset($user_auth->_m1_2_1) && $user_auth->_m1_2_1>1) echo 'checked'; ?> disabled>등록
 										</label>
 									</td>
-									<td style="border-top: 0;">수납등록
+									<td class="sec-td">수납등록
 										<label class="checkbox-inline">
 											<input type="checkbox" id="_m1_2_2" name="_m1_2_2" <?php if(isset($user_auth->_m1_2_2) && $user_auth->_m1_2_2>0) echo 'checked'; ?>>조회
 										</label>
@@ -131,7 +133,7 @@
 											<input type="checkbox" id="_m1_2_2_m" name="_m1_2_2_m" <?php if(isset($user_auth->_m1_2_2) && $user_auth->_m1_2_2>1) echo 'checked'; ?>>등록
 										</label>
 									</td>
-									<td style="border-top: 0;">요약집계
+									<td class="sec-td">요약집계
 										<label class="checkbox-inline">
 											<input type="checkbox" id="_m1_2_3" name="_m1_2_3" <?php if(isset($user_auth->_m1_2_3) && $user_auth->_m1_2_3>0) echo 'checked'; ?>>조회
 										</label>
@@ -139,7 +141,7 @@
 											<input type="checkbox" id="_m1_2_3_m" name="_m1_2_3_m" <?php if(isset($user_auth->_m1_2_3) && $user_auth->_m1_2_3>1) echo 'checked'; ?> disabled>등록
 										</label>
 									</td>
-									<td style="border-top: 0;"></td>
+									<td class="sec-td"></td>
 								</tr>
 								<tr>
 									<th class="center" rowspan="2"  style="vertical-align: middle; border-right: 1px solid #ddd; background-color: #f0f0f0;">사업관리</th>
@@ -171,8 +173,8 @@
 									<td></td>
 								</tr>
 								<tr>
-									<td style="border-top: 0;"><strong>프로세스 관리</strong></td>
-									<td style="border-top: 0;">진행현황
+									<td class="sec-td"><strong>프로세스 관리</strong></td>
+									<td class="sec-td">진행현황
 										<label class="checkbox-inline">
 											<input type="checkbox" id="_m2_2_1" name="_m2_2_1" <?php if(isset($user_auth->_m2_2_1) && $user_auth->_m2_2_1>0) echo 'checked'; ?>>조회
 										</label>
@@ -180,7 +182,7 @@
 											<input type="checkbox" id="_m2_2_1_m" name="_m2_2_1_m" <?php if(isset($user_auth->_m2_2_1) && $user_auth->_m2_2_1>1) echo 'checked'; ?> disabled>등록
 										</label>
 									</td>
-									<td style="border-top: 0;">일정관리
+									<td class="sec-td">일정관리
 										<label class="checkbox-inline">
 											<input type="checkbox" id="_m2_2_2" name="_m2_2_2" <?php if(isset($user_auth->_m2_2_2) && $user_auth->_m2_2_2>0) echo 'checked'; ?>>조회
 										</label>
@@ -188,7 +190,7 @@
 											<input type="checkbox" id="_m2_2_2_m" name="_m2_2_2_m" <?php if(isset($user_auth->_m2_2_2) && $user_auth->_m2_2_2>1) echo 'checked'; ?>>등록
 										</label>
 									</td>
-									<td style="border-top: 0;">프로세스
+									<td class="sec-td">프로세스
 										<label class="checkbox-inline">
 											<input type="checkbox" id="_m2_2_3" name="_m2_2_3" <?php if(isset($user_auth->_m2_2_3) && $user_auth->_m2_2_3>0) echo 'checked'; ?>>조회
 										</label>
@@ -196,7 +198,7 @@
 											<input type="checkbox" id="_m2_2_3_m" name="_m2_2_3_m" <?php if(isset($user_auth->_m2_2_3) && $user_auth->_m2_2_3>1) echo 'checked'; ?>>등록
 										</label>
 									</td>
-									<td style="border-top: 0;"></td>
+									<td class="sec-td"></td>
 								</tr>
 								<tr>
 									<th class="center" rowspan="2" style="vertical-align: middle; border-right: 1px solid #ddd; background-color: #f0f0f0;">프로젝트</th>
@@ -221,8 +223,8 @@
 									<td></td>
 								</tr>
 								<tr>
-									<td style="border-top: 0;"><strong>신규 프로젝트</strong></td>
-									<td style="border-top: 0;">검토 프로젝트
+									<td class="sec-td"><strong>신규 프로젝트</strong></td>
+									<td class="sec-td">검토 프로젝트
 										<label class="checkbox-inline">
 											<input type="checkbox" id="_m3_2_1" name="_m3_2_1" <?php if(isset($user_auth->_m3_2_1) && $user_auth->_m3_2_1>0) echo 'checked'; ?>>조회
 										</label>
@@ -230,7 +232,7 @@
 											<input type="checkbox" id="_m3_2_1_m" name="_m3_2_1_m" <?php if(isset($user_auth->_m3_2_1) && $user_auth->_m3_2_1>1) echo 'checked'; ?>>등록
 										</label>
 									</td>
-									<td style="border-top: 0;">프로젝트 등록
+									<td class="sec-td">프로젝트 등록
 										<label class="checkbox-inline">
 											<input type="checkbox" id="_m3_2_2" name="_m3_2_2" <?php if(isset($user_auth->_m3_2_2) && $user_auth->_m3_2_2>0) echo 'checked'; ?>>조회
 										</label>
@@ -238,8 +240,8 @@
 											<input type="checkbox" id="_m3_2_2_m" name="_m3_2_2_m" <?php if(isset($user_auth->_m3_2_2) && $user_auth->_m3_2_2>1) echo 'checked'; ?>>등록
 										</label>
 									</td>
-									<td style="border-top: 0;"></td>
-									<td style="border-top: 0;"></td>
+									<td class="sec-td"></td>
+									<td class="sec-td"></td>
 								</tr>
 								<tr>
 									<th  class="center"rowspan="2" style="vertical-align: middle; border-right: 1px solid #ddd; background-color: #f0f0f0;">자금회계</th>
@@ -271,8 +273,8 @@
 									<td></td>
 								</tr>
 								<tr>
-									<td style="border-top: 0;"><strong>회계관리</strong></td>
-									<td style="border-top: 0;">분개장
+									<td class="sec-td"><strong>회계관리</strong></td>
+									<td class="sec-td">분개장
 										<label class="checkbox-inline">
 											<input type="checkbox" id="_m4_2_1" name="_m4_2_1" <?php if(isset($user_auth->_m4_2_1) && $user_auth->_m4_2_1>0) echo 'checked'; ?>>조회
 										</label>
@@ -280,7 +282,7 @@
 											<input type="checkbox" id="_m4_2_1_m" name="_m4_2_1_m" <?php if(isset($user_auth->_m4_2_1) && $user_auth->_m4_2_1>1) echo 'checked'; ?>>등록
 										</label>
 									</td>
-									<td style="border-top: 0;">일/월계표
+									<td class="sec-td">일/월계표
 										<label class="checkbox-inline">
 											<input type="checkbox" id="_m4_2_2" name="_m4_2_2" <?php if(isset($user_auth->_m4_2_2) && $user_auth->_m4_2_2>0) echo 'checked'; ?>>조회
 										</label>
@@ -288,7 +290,7 @@
 											<input type="checkbox" id="_m4_2_2_m" name="_m4_2_2_m" <?php if(isset($user_auth->_m4_2_2) && $user_auth->_m4_2_2>1) echo 'checked'; ?>>등록
 										</label>
 									</td>
-									<td style="border-top: 0;">제무제표
+									<td class="sec-td">제무제표
 										<label class="checkbox-inline">
 											<input type="checkbox" id="_m4_2_3" name="_m4_2_3" <?php if(isset($user_auth->_m4_2_3) && $user_auth->_m4_2_3>0) echo 'checked'; ?>>조회
 										</label>
@@ -296,7 +298,7 @@
 											<input type="checkbox" id="_m4_2_3_m" name="_m4_2_3_m" <?php if(isset($user_auth->_m4_2_3) && $user_auth->_m4_2_3>1) echo 'checked'; ?>>등록
 										</label>
 									</td>
-									<td style="border-top: 0;"></td>
+									<td class="sec-td"></td>
 								</tr>
 								<tr>
 									<th class="center" rowspan="2" style="vertical-align: middle; border-right: 1px solid #ddd; background-color: #f0f0f0;">환경설정</th>
@@ -335,8 +337,8 @@
 									</td>
 								</tr>
 								<tr>
-									<td style="border-top: 0;"><strong>회사정보 관리</strong></td>
-									<td style="border-top: 0;">회사 기본정보
+									<td class="sec-td"><strong>회사정보 관리</strong></td>
+									<td class="sec-td">회사 기본정보
 										<label class="checkbox-inline">
 											<input type="checkbox" id="_m5_2_1" name="_m5_2_1" <?php if(isset($user_auth->_m5_2_1) && $user_auth->_m5_2_1>0) echo 'checked'; ?>>조회
 										</label>
@@ -344,7 +346,7 @@
 											<input type="checkbox" id="_m5_2_1_m" name="_m5_2_1_m" <?php if(isset($user_auth->_m5_2_1) && $user_auth->_m5_2_1>1) echo 'checked'; ?>>등록
 										</label>
 									</td>
-									<td style="border-top: 0;">사용자권한관리
+									<td class="sec-td">사용자권한관리
 										<label class="checkbox-inline">
 											<input type="checkbox" id="_m5_2_2" name="_m5_2_2" <?php if(isset($user_auth->_m5_2_2) && $user_auth->_m5_2_2>0) echo 'checked'; ?>>조회
 										</label>
@@ -352,15 +354,15 @@
 											<input type="checkbox" id="_m5_2_2_m" name="_m5_2_2_m" <?php if(isset($user_auth->_m5_2_2) && $user_auth->_m5_2_2>1) echo 'checked'; ?>>등록
 										</label>
 									</td>
-									<td style="border-top: 0;"></td>
-									<td style="border-top: 0;"></td>
+									<td class="sec-td"></td>
+									<td class="sec-td"></td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 				</div>
 <?php if($auth<2) {$submit_str = "alert('등록 권한이 없습니다!')"; } else {$submit_str = "auth_submit('".$this->input->get('un')."');";} ?>
-				<div class="row btn-wrap" style="height:62px; padding-top: 13px; margin:0 0 30px 0; background-color: #f8f8f8; border-top:1px solid #B2BCDE; border-bottom: 1px solid #ddd; text-align: right; padding-right: 15px;">
+				<div class="row btn-wrap">
 					<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str?>" value=" 권한 설정 ">
 				</div>
 			</fieldset>

@@ -55,30 +55,33 @@
 
 
 	/*****************************************m5 style*******************************************/
-	#com_reg_form fieldset .row { margin: 0; }
-	#com_reg_form fieldset .row.btn-wrap { padding: 15px 20px 0 0; text-align: right; height: 61px; border-bottom: 1px solid #ddd; border-top: 1px solid #B2BCDE; background-color: #F8F8F8; margin-bottom: 25px; }
-	#com_reg_form fieldset .row div.form-group.label-wrap { padding: 10px 0 7px 15px; background-color: #F8F8F8; }
-	#com_reg_form fieldset .row div.form-group label { width:180px; }
+	fieldset .row { margin: 0; }
+	fieldset .row.btn-wrap { padding: 15px 20px 0 0; text-align: right; height: 62px; border-bottom: 1px solid #ddd; border-top: 1px solid #B2BCDE; background-color: #F8F8F8; margin-bottom: 25px; }
+	fieldset .row div.form-group.label-wrap { padding: 10px 0 7px 15px; background-color: #F8F8F8; }
+	fieldset .row div.form-group label { width:180px; }
+	fieldset .row div.form-group.form-wrap { padding: 3px 0 3px 10px; }
+	fieldset .row div.form-group .form-control.wid-70 { width:70%; }
+	fieldset .row div.form-group .form-control.wid-90 { width:90%; }
+	fieldset .row div.form-group .form-control.wid-95 { width:95%; }
+	fieldset .row div.form-group .form-control.wid-98 { width:98%; }
+	fieldset .row div.form-group .form-control.wid-99 { width:99%; }
+	fieldset .row div.form-group .form-control.wid-100 { width:100%; }
+	fieldset .row div.form-group .form-control { margin: 2px 0; }
+	fieldset .row div.form-group a,input.btn { margin: 2px 0; }
+	fieldset .row div.form-group div { padding: 0; }
+	fieldset .row div.form-group .glyphicon-wrap { padding: 8px 0 0 8px; }
+	fieldset .row div.form-group .text-wrap { padding-top: 8px; }
 
-
-	#com_reg_form fieldset .row div.form-group.form-wrap { padding: 3px 0 3px 10px; }
-	#com_reg_form fieldset .row div.form-group .form-control.wid-70 { width:70%; }
-	#com_reg_form fieldset .row div.form-group .form-control.wid-90 { width:90%; }
-	#com_reg_form fieldset .row div.form-group .form-control.wid-95 { width:95%; }
-	#com_reg_form fieldset .row div.form-group .form-control.wid-98 { width:98%; }
-	#com_reg_form fieldset .row div.form-group .form-control.wid-99 { width:99%; }
-	#com_reg_form fieldset .row div.form-group .form-control.wid-100 { width:100%; }
-	#com_reg_form fieldset .row div.form-group .form-control { margin: 2px 0; }
-	#com_reg_form fieldset .row div.form-group a,input.btn { margin: 2px 0; }
-	#com_reg_form fieldset .row div.form-group div { padding: 0; }
-	#com_reg_form fieldset .row div.form-group .glyphicon-wrap { padding: 8px 0 0 8px; }
-	#com_reg_form fieldset .row div.form-group .text-wrap { padding-top: 8px; }
+	fieldset .row table.table tbody tr td.sec-td { border-top: 0; }
+	fieldset .row.new_user { margin: 0 15px; border-bottom: 1px solid #ddd; }
+	fieldset .row .str { height: 40px; padding-top: 10px; }
 	/*****************************************m5 style********************************************/
 
 	.auth-table td { text-align: right; }
 
 	/**----------------------------------- 폰트컬러 -----------------------------------------**/
 	.red { color: red; }
+	.bgf8 { background-color: #f8f8f8; }
 	/**----------------------------------- 폰트컬러 -----------------------------------------**/
 
 	/**----------------------------------- 넓이 -----------------------------------------**/
@@ -94,6 +97,7 @@
 
 	/**----------------------------------- 마진 -----------------------------------------**/
 	.mg-0 { margin: 0px; }
+	.mg-0-15 { margin: 0 15px; }
 	/**----------------------------------- 마진 -----------------------------------------**/
 
 	/**------------------------------------패딩----------------------------------------**/
