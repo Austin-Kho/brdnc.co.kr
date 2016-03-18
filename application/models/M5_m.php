@@ -78,7 +78,7 @@ class M5_m extends CI_Model {
 	 * @return [Array] [선택된 사용자 데이터]
 	 */
 	public function sel_user($no){
-		$this->db->select('no, name, email, reg_date');
+		$this->db->select('no, user_id, name, email, reg_date');
 		$qry = $this->db->get_where('cms_member_table', array('no' => $no));
 		$result = $qry->row();
 		return $result;
@@ -95,10 +95,19 @@ class M5_m extends CI_Model {
 		return $result;
 	}
 
-	public function auth_update($no, $auth_dt){
-		$this->db->where('user_no', $no);
-		$result = $this->db->update('cms_mem_auth', $auth_data);
-		return $result;
+	public function auth_reg($no, $auth_data){
+		// 권한 등록 회원인지 확인
+		$this->db->select('auth_seq');
+		$qry = $this->db->get_where('cms_mem_auth', array('user_no' => $no));
+
+		if($qry->row()) {
+			$this->db->where('user_no', $no);
+			$result = $this->db->update('cms_mem_auth', $auth_data);
+			return $result;
+		}else{
+			$result = $this->db->insert('cms_mem_auth', $auth_data);
+			return $result;
+		}
 	}
 }
 // End of this File

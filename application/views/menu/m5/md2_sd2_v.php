@@ -45,18 +45,19 @@
 					<select id="user_sel" name="user_sel" onchange="location.href='/m5/config/2/2/?un='+this.value">
 						<option value="">선 택</option>
 <?php foreach($user_list as $lt) : ?>
-						<option value="<?php echo $lt->no; ?>" <?php if($this->input->get('un')==$lt->no or $this->input->post('user_no')==$lt->no) echo "selected"; ?>><?php echo $lt->name."(".$lt->user_id.")"; ?></option>
+						<option value="<?php echo $lt->no; ?>" <?php if($this->input->get('un')==$lt->no ) echo "selected"; ?>><?php echo $lt->name."(".$lt->user_id.")"; ?></option>
 <?php endforeach; ?>
 					</select>
 				</div>
 			</div>
 <?php
 	$attributes = array('name' => 'form3', 'class' => 'form-inline', 'method' => 'post');
-	echo form_open('/m5/config/2/2/', $attributes);
+	echo form_open('/m5/config/2/2/?un='.$this->input->get('un'), $attributes);
 ?>
 		<fieldset>
 
 <?php if($this->input->get('un')) : ?>
+			<input type="hidden" name="user_id" value="<?php echo $sel_user->user_id; ?>"></input>
 			<div class="row bo-top" style="height:40px; margin:65px 15px 0; background-color:#f6f6f6;">
 				<div class="col-xs-2 center" style="padding-top:8px; text-align:center;">성 명</div>
 				<div class="col-xs-3 center" style="padding-top:8px; text-align:center;">구 분</div>
@@ -366,7 +367,7 @@
 					</table>
 				</div>
 			</div>
-<?php if($auth<2) $submit_str = "alert('등록 권한이 없습니다!')";  else $submit_str = "auth_submit('".$this->input->get('un')."');"; ?>
+<?php if($auth<2) {$submit_str = "alert('등록 권한이 없습니다!')"; } else {$submit_str = "auth_submit('".$this->input->get('un')."');";} ?>
 			<div class="row btn-wrap" style="height:62px; padding-top: 15px; margin:0 0 50px 0; background-color: #f8f8f8; border-width:1px 0 1px 0; border-color:#CCCCCC; border-style: solid; text-align: right; padding-right: 15px;">
 				<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str?>" value=" 권한 설정 ">
 			</div>
