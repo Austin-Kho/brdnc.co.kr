@@ -37,6 +37,7 @@ class M5_m extends CI_Model {
 	}
 
 	/**
+	 * [new_rq_chk 신규 가입 사용자 데이터 추출 함수]
 	 * @return [Array] [신청대기자 목록]
 	 */
 	public function new_rq_chk() {
@@ -47,30 +48,57 @@ class M5_m extends CI_Model {
 			return FALSE;
 		}
 	}
+
+	/**
+	 * [rq_perm 신규 가입 사용자 승인 함수]
+	 * @param  [String]   [유저 넘버]
+	 * @param  [Array]    [사용신청대기자 승인 데이터]
+	 * @return [Boolean]  [쿼리 성공 여부]
+	 */
 	public function rq_perm($no, $data){
 		$this->db->where('no', $no);
 		$result = $this->db->update('cms_member_table', $data);
 		return $result;
 	}
 
+	/**
+	 * [user_list 승인된 사용자 리스트 불러오기 함수]
+	 * @return [Array]  [승인된 사용자 리스트 데이터]
+	 */
 	public function user_list(){
-		$this->db->select('no, name');
+		$this->db->select('no, user_id, name');
 		$qry = $this->db->get_where('cms_member_table', array('request' => '1'));
-		if($result = $qry->result()) {
-			return $result;
-		}else{
-			return FALSE;
-		}
+		$result = $qry->result();
+		return $result;
 	}
 
+	/**
+	 * [sel_user 권한 부여(수정)할 사용자 선택 함수]
+	 * @param  [String] [선택된 사용자 번호]
+	 * @return [Array] [선택된 사용자 데이터]
+	 */
 	public function sel_user($no){
 		$this->db->select('no, name, email, reg_date');
 		$qry = $this->db->get_where('cms_member_table', array('no' => $no));
-		if($result = $qry->row()) {
-			return $result;
-		}else{
-			return FALSE;
-		}
+		$result = $qry->row();
+		return $result;
+	}
+
+	/**
+	 * [user_auth 선택한 사용자의 현재 권한 데이터 추출 함수]
+	 * @param  [String] [선택된 사용자 번호]
+	 * @return [Array] [사용자 권한 데이터]
+	 */
+	public function user_auth($no){
+		$qry = $this->db->get_where('cms_mem_auth', array('user_no' => $no));
+		$result = $qry->row();
+		return $result;
+	}
+
+	public function auth_update($no, $auth_dt){
+		$this->db->where('user_no', $no);
+		$result = $this->db->update('cms_mem_auth', $auth_data);
+		return $result;
 	}
 }
 // End of this File

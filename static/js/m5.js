@@ -513,14 +513,14 @@ function com_submit(mode){
 		// }
 
 		/////////////사용자 권한 설정 전송 함수 ///////////////
-		function auth_submit(mn){
+		function auth_submit(un){
 			var form=document.form3;
-			if(!mn||mn=="0"){
+			if( !un || un==0){
 				window.alert("권한을 설정할 직원을 선택하여 주십시요!");
-				document.getElementById('mem_sel').focus();
+				document.getElementById('user_sel').focus();
 				return;
 			}
-			if(form.user_no.checked!=true){
+			if(form.user_no.checked !=true){
 				window.alert("권한을 설정할 직원을 체크하여 주십시요!");
 				form.user_no.focus();
 				return;

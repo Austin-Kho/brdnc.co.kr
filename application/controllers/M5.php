@@ -38,7 +38,7 @@ class M5 extends CI_Controller {
 	}
 
 	public function config($mdi='', $sdi=''){
-		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+		$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		if( !$this->uri->segment(3)) $mdi = 1; else $mdi = $this->uri->segment(3);
 		if( !$this->uri->segment(4)) $sdi = 1; else $sdi = $this->uri->segment(4);
@@ -278,23 +278,103 @@ class M5 extends CI_Controller {
 					$data['new_rq'] = $this->m5_m->new_rq_chk();   //  신규 등록 신청자가 있는 지 확인
 					$data['user_list'] = $this->m5_m->user_list(); // 승인된 유저 목록
 					$data['sel_user'] = $this->m5_m->sel_user($this->input->get('un', TRUE)); //  선택된 유저 데이터
+					$data['user_auth'] = $this->m5_m->user_auth($this->input->get('un', TRUE)); //  선택된 유저의 권한 데이터
 
 					//본 페이지 로딩
 					$this->load->view('/menu/m5/md2_sd2_v', $data);
 				}else{
-					$where_no = $this->input->post('no', TRUE);
-					$auth_data = array(
-						'request' => $this->input->post('sf', TRUE),
-						'auth_level' => 9
-					);
-					$result = $this->m5_m->rq_perm($where_no, $auth_data);
-					if($result){
-						alert('요청하신 작업이 처리 되었습니다.', '/m5/config/2/2/');
-						exit;
-					}else{
-						alert('다시 확인하여 주십시요', '/m5/config/2/2/');
-						exit;
+					if($this->input->post('sf')){
+						//사용자 승인//////////////////////////////////////////////
+						$where_no = $this->input->post('no', TRUE);
+						$auth_data = array(
+							'request' => $this->input->post('sf', TRUE),
+							'auth_level' => 9
+						);
+						$result = $this->m5_m->rq_perm($where_no, $auth_data);
+						if($result){
+							alert('요청하신 작업이 처리 되었습니다.', '/m5/config/2/2/');
+							exit;
+						}else{
+							alert('다시 확인하여 주십시요', '/m5/config/2/2/');
+							exit;
+						}
+						//사용자 승인//////////////////////////////////////////////
 					}
+
+					//사용자 권한 설정/////////////////////////////////////////
+					if($this->input->post('_m1_1_1')=='on'){$_m1_1_1=1;} else if($this->input->post('_m1_1_1_m')=='on') {$_m1_1_1=2;} else {$_m1_1_1=0;}
+					if($this->input->post('_m1_1_2')=='on'){$_m1_1_2=1;} else if($this->input->post('_m1_1_2_m')=='on') {$_m1_1_2=2;} else {$_m1_1_2=0;}
+					if($this->input->post('_m1_1_3')=='on'){$_m1_1_3=1;} else if($this->input->post('_m1_1_3_m')=='on'){$_m1_1_3=2;} else {$_m1_1_3=0;}
+					if($this->input->post('_m1_2_1')=='on'){$_m1_2_1=1;} else if($this->input->post('_m1_2_1_m')=='on'){$_m1_2_1=2;} else {$_m1_2_1=0;}
+					if($this->input->post('_m1_2_2')=='on'){$_m1_2_2=1;} else if($this->input->post('_m1_2_2_m')=='on'){$_m1_2_2=2;} else {$_m1_2_2=0;}
+					if($this->input->post('_m1_2_3')=='on'){$_m1_2_3=1;} else if($this->input->post('_m1_2_3_m')=='on'){$_m1_2_3=2;} else {$_m1_2_3=0;}
+
+					if($this->input->post('_m2_1_1')=='on'){$_m2_1_1=1;} else if($this->input->post('_m2_1_1_m')=='on'){$_m2_1_1=2;} else {$_m2_1_1=0;}
+					if($this->input->post('_m2_1_2')=='on'){$_m2_1_2=1;} else if($this->input->post('_m2_1_2_m')=='on'){$_m2_1_2=2;} else {$_m2_1_2=0;}
+					if($this->input->post('_m2_1_3')=='on'){$_m2_1_3=1;} else if($this->input->post('_m2_1_3_m')=='on'){$_m2_1_3=2;} else {$_m2_1_3=0;}
+					if($this->input->post('_m2_2_1')=='on'){$_m2_2_1=1;} else if($this->input->post('_m2_2_1_m')=='on'){$_m2_2_1=2;} else {$_m2_2_1=0;}
+					if($this->input->post('_m2_2_2')=='on'){$_m2_2_2=1;} else if($this->input->post('_m2_2_2_m')=='on'){$_m2_2_2=2;} else {$_m2_2_2=0;}
+					if($this->input->post('_m2_2_3')=='on'){$_m2_2_3=1;} else if($this->input->post('_m2_2_3_m')=='on'){$_m2_2_3=2;} else {$_m2_2_3=0;}
+
+					if($this->input->post('_m3_1_1')=='on'){$_m3_1_1=1;} else if($this->input->post('_m3_1_1_m')=='on'){$_m3_1_1=2;} else {$_m3_1_1=0;}
+					if($this->input->post('_m3_1_2')=='on'){$_m3_1_2=1;} else if($this->input->post('_m3_1_2_m')=='on'){$_m3_1_2=2;} else {$_m3_1_2=0;}
+					if($this->input->post('_m3_2_1')=='on'){$_m3_2_1=1;} else if($this->input->post('_m3_2_1_m')=='on'){$_m3_2_1=2;} else {$_m3_2_1=0;}
+					if($this->input->post('_m3_2_2')=='on'){$_m3_2_2=1;} else if($this->input->post('_m3_2_2_m')=='on'){$_m3_2_2=2;} else {$_m3_2_2=0;}
+
+					if($this->input->post('_m4_1_1')=='on'){$_m4_1_1=1;} else if($this->input->post('_m4_1_1_m')=='on'){$_m4_1_1=2;} else {$_m4_1_1=0;}
+					if($this->input->post('_m4_1_2')=='on'){$_m4_1_2=1;} else if($this->input->post('_m4_1_2_m')=='on'){$_m4_1_2=2;} else {$_m4_1_2=0;}
+					if($this->input->post('_m4_1_3')=='on'){$_m4_1_3=1;} else if($this->input->post('_m4_1_3_m')=='on'){$_m4_1_3=2;} else {$_m4_1_3=0;}
+					if($this->input->post('_m4_2_1')=='on'){$_m4_2_1=1;} else if($this->input->post('_m4_2_1_m')=='on'){$_m4_2_1=2;} else {$_m4_2_1=0;}
+					if($this->input->post('_m4_2_2')=='on'){$_m4_2_2=1;} else if($this->input->post('_m4_2_2_m')=='on'){$_m4_2_2=2;} else {$_m4_2_2=0;}
+					if($this->input->post('_m4_2_3')=='on'){$_m4_2_3=1;} else if($this->input->post('_m4_2_3_m')=='on'){$_m4_2_3=2;} else {$_m4_2_3=0;}
+
+					if($this->input->post('_m5_1_1')=='on'){$_m5_1_1=1;} else if($this->input->post('_m5_1_1_m')=='on'){$_m5_1_1=2;} else {$_m5_1_1=0;}
+					if($this->input->post('_m5_1_2')=='on'){$_m5_1_2=1;} else if($this->input->post('_m5_1_2_m')=='on'){$_m5_1_2=2;} else {$_m5_1_2=0;}
+					if($this->input->post('_m5_1_3')=='on'){$_m5_1_3=1;} else if($this->input->post('_m5_1_3_m')=='on'){$_m5_1_3=2;} else {$_m5_1_3=0;}
+					if($this->input->post('_m5_1_4')=='on'){$_m5_1_4=1;} else if($this->input->post('_m5_1_4_m')=='on'){$_m5_1_4=2;} else {$_m5_1_4=0;}
+					if($this->input->post('_m5_2_1')=='on'){$_m5_2_1=1;} else if($this->input->post('_m5_2_1_m')=='on'){$_m5_2_1=2;} else {$_m5_2_1=0;}
+					if($this->input->post('_m5_2_2')=='on'){$_m5_2_2=1;} else if($this->input->post('_m5_2_2_m')=='on'){$_m5_2_2=2;} else {$_m5_2_2=0;}
+
+					// $auth_dt['user_auth'] = $this->m5_m->user_auth($this->input->post('user_no', TRUE)); //  선택된 유저의 권한 데이터
+					$auth_dt = array(
+						'_m1_1_1' => $_m1_1_1,
+						'_m1_1_2' => $_m1_1_2,
+						'_m1_1_3' => $_m1_1_3,
+						'_m1_2_1' => $_m1_2_1,
+						'_m1_2_2' => $_m1_2_2,
+						'_m1_2_3' => $_m1_2_3,
+
+						'_m2_1_1' => $_m2_1_1,
+						'_m2_1_2' => $_m2_1_2,
+						'_m2_1_3' => $_m2_1_3,
+						'_m2_2_1' => $_m2_2_1,
+						'_m2_2_2' => $_m2_2_2,
+						'_m2_2_3' => $_m2_2_3,
+
+						'_m3_1_1' => $_m3_1_1,
+						'_m3_1_2' => $_m3_1_2,
+						'_m3_2_1' => $_m3_2_1,
+						'_m3_2_2' => $_m3_2_2,
+
+						'_m4_1_1' => $_m4_1_1,
+						'_m4_1_2' => $_m4_1_2,
+						'_m4_1_3' => $_m4_1_3,
+						'_m4_2_1' => $_m4_2_1,
+						'_m4_2_2' => $_m4_2_2,
+						'_m4_2_3' => $_m4_2_3,
+
+						'_m5_1_1' => $_m5_1_1,
+						'_m5_1_2' => $_m5_1_2,
+						'_m5_1_3' => $_m5_1_3,
+						'_m5_1_4' => $_m5_1_4,
+						'_m5_2_1' => $_m5_2_1,
+						'_m5_2_2' => $_m5_2_2
+					);
+					$this->load->view('/menu/m5/md2_sd2_v', $auth_dt);
+					//$auth_result = $this->m5_m->auth_update($this->input->get('un'), $auth_dt);
+					//if($auth_result) alert('요청하신 작업이 처리되었습니다.', ''); else alert('다시 시도하여 주십시요.', '');
+					//사용자 권한 설정/////////////////////////////////////////
+
 				}// 폼 검증 로직 종료
 			}// 조회 권한 분기 종료
 		}// 권한관리 sdi 분기 종료

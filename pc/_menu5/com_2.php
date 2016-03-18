@@ -176,7 +176,7 @@
 						<table border="0" width="100%" cellpadding="0" cellspacing="0">
 						<!-- 영업관리 파트 시작 -->
 						<tr valign="middle">
-							<td width="120" rowspan="2" class="top2" align="center" <?if($is_com==2) echo "bgcolor='#d8d8d8'"; else "bgcolor='#f8f8f8'";?>><font size="2" color="black"><b>영업관리</b></font></td>
+							<td width="120" rowspan="2" class="top2" align="center" bgcolor="#f8f8f8"><font size="2" color="black"><b>영업관리</b></font></td>
 							<td height="34" class="top2" align="right"><font color="black"><b onclick="auth_chk('1-1');">계약현황</b></font></td>
 							<td height="34" width="20" class="top2"><!-- <input type="checkbox" name="_m1_1" onclick="checksel();"> --></td>
 

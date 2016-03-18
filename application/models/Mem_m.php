@@ -31,41 +31,32 @@ class Mem_m extends CI_Model
 	 * @return [boolean]           [입력 성공 여부]
 	 */
 	public function join($new_data) {
+
 		////중복 정보 확인
-		$i_sql = " SELECT no FROM cms_member_table WHERE user_id = '".$new_data['user_id']."'";
-		$i_qry = $this->db->query($i_sql);
+		$this->db->select('no');
+		$i_qry = $this->db->get_where('cms_member_table', array('user_id' => $new_data['user_id']));
+		if($i_qry->row()) {alert('입력하신 아이디는 이미 등록된 아이디입니다.', ''); exit;}
 
-		$e_sql = " SELECT no FROM cms_member_table WHERE email = '".$new_data['email']."'";
-		$e_qry = $this->db->query($e_sql);
+		$e_qry = $this->db->get_where('cms_member_table', array('email' => $new_data['email']));
+		if($e_qry->row()) {alert('입력하신 이메일은 이미 등록된 이메입니다.', ''); exit;}
 
-		if($i_qry->num_rows()>0 && $e_qry->num_rows()>0) {
-			alert('입력한 아이디와 이메일이 이미 등록된 정보입니다.', '');
-			exit;
-		}else if($i_qry->num_rows()>0 && $e_qry->num_rows()==0) {
-			alert('입력한 아이디가 이미 등록된 아이디입니다.', '');
-			exit;
-		}else if($i_qry->num_rows()==0 && $e_qry->num_rows()>0) {
-			alert('입력한 이메일이 이미 등록된 이메일입니다.', '');
-			exit;
-		}else{
-			// 신규 등록처리
-			$insert_array = array(
-				'name' => $new_data['name'],
-				'user_id' => $new_data['user_id'],
-				'email' => $new_data['email'],
-				'rcv_mail' => 1,
-				'passwd' => $new_data['passwd'],
-				'request' => 2,
-				'is_company' => 1,
-				'pj_posi' => 0,
-				'auth_level' => 9,
-				'reg_date' => 'now()'
-			);
-			$result = $this->db->insert('cms_member_table', $insert_array); // 테이블명, 데이터
+		// 신규 등록처리
+		$insert_array = array(
+			'name' => $new_data['name'],
+			'user_id' => $new_data['user_id'],
+			'email' => $new_data['email'],
+			'rcv_mail' => 1,
+			'passwd' => $new_data['passwd'],
+			'request' => 2,
+			'is_company' => 1,
+			'pj_posi' => 0,
+			'auth_level' => 9,
+			'reg_date' => 'now()'
+		);
+		$result = $this->db->insert('cms_member_table', $insert_array); // 테이블명, 데이터
 
-			// 결과 반환
-			return $result;
-		}
+		// 결과 반환
+		return $result;
 	}
 
 	/**
