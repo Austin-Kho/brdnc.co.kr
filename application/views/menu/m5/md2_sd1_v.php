@@ -4,7 +4,7 @@
 	$attributes = array('name' => 'form1', 'id' => 'com_reg_form', 'class' => 'form-inline', 'method' => 'post');
 	echo form_open('/m5/config/2/1/', $attributes);
 ?>
-	<fieldset>
+	<fieldset class="font12">
 		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap" >
 				<label for="co_name">회사명<span class="red">*</span></label>
@@ -360,7 +360,7 @@
 				<div class="col-md-6 col-xs-12 text-wrap">기타소득 지급조서 신고가 있는 경우 입력</div>
 			</div>
 		</div>
-		<div class="row foot_form">
+		<div class="row pb20">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="en_address">회사 영문주소</label>
 				<div class="col-xs-12">&nbsp;</div>

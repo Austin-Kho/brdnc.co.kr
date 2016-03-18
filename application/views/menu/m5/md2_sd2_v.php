@@ -1,11 +1,11 @@
 		<div class="main_start"></div>
 		<!-- 5. 환경설정 -> 2. 회사정보관리 ->2. 사용자 권한 관리 페이지 -->
 
-		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
+		<div class="row">
 
 		<!-- 신규 사용자 등록자가 있을 때 처리 시작 -->
 <?php if($new_rq) : ?>
-			<form name="form2" method="post" action="com_post.php">
+			<form name="form2" method="post" action="/m5/config/2/2/">
 				<input type="hidden" name="no">
 				<input type="hidden" name="sf">
 				<div class="row" style="margin: 0 15px; border-width: 0 0 1px 0; border-style: solid; border-color: #ddd;">
@@ -56,7 +56,7 @@
 	$attributes = array('name' => 'form3', 'class' => 'form-inline', 'method' => 'post');
 	echo form_open('/m5/config/2/2/?un='.$this->input->get('un'), $attributes);
 ?>
-			<fieldset>
+			<fieldset class="font12">
 				<div class="row" style="padding-top: 15px;">
 <?php if($this->input->get('un')) : ?>
 					<input type="hidden" name="user_id" value="<?php echo $sel_user->user_id; ?>">
@@ -80,7 +80,7 @@
 					</div>
 <?php endif; ?>
 				</div>
-				<div class="row" style="margin: 0;">
+				<div class="row pb20" style="margin: 0;">
 					<div class="col-md-12 table-responsive" style="padding: 0">
 						<table class="table auth-table">
 							<tbody>
@@ -360,7 +360,7 @@
 					</div>
 				</div>
 <?php if($auth<2) {$submit_str = "alert('등록 권한이 없습니다!')"; } else {$submit_str = "auth_submit('".$this->input->get('un')."');";} ?>
-				<div class="row btn-wrap" style="height:62px; padding-top: 15px; margin:0 0 50px 0; background-color: #f8f8f8; border-top:1px solid #B2BCDE; border-bottom: 1px solid #ddd; text-align: right; padding-right: 15px;">
+				<div class="row btn-wrap" style="height:62px; padding-top: 13px; margin:0 0 30px 0; background-color: #f8f8f8; border-top:1px solid #B2BCDE; border-bottom: 1px solid #ddd; text-align: right; padding-right: 15px;">
 					<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str?>" value=" 권한 설정 ">
 				</div>
 			</fieldset>
