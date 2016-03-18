@@ -7,7 +7,7 @@
 	<fieldset class="font12">
 		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap" >
-				<label for="co_name">회사명<span class="red">*</span></label>
+				<label for="co_name">회사명 <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
 				<input type="text" class="form-control input-sm han" id="co_name" name="co_name" maxlength="30" value="<?php if($mode=='com_reg') {echo set_value('co_name');} else {echo $com->co_name;} ?>" required autofocus>
