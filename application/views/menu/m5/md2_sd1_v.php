@@ -360,7 +360,7 @@
 				<div class="col-md-6 col-xs-12 text-wrap">기타소득 지급조서 신고가 있는 경우 입력</div>
 			</div>
 		</div>
-		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?> foot_form">
+		<div class="row foot_form">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="en_address">회사 영문주소</label>
 				<div class="col-xs-12">&nbsp;</div>

@@ -36,7 +36,7 @@
 	.page-header .nav-pills .active a:hover { background-color: #E8ECF9; color: #3355CA;}
 
 	#sdi_sub { margin-top: -20px; padding: 15px 0 15px 20px; background-color: #F8F8F8; font-weight: bold; color: #6666D4; border-bottom-color: #B2BCDE; }
-	.main_start { margin-top: -10px; height: 23px; text-align: right; padding: 0px 15px 0 0; border-width:0 0 1px 0; border-style:solid; border-color:#ddd;}
+	.main_start { margin-top: -20px; height: 25px; text-align: right; padding: 0px 15px; border-bottom: 1px solid #ddd; }
 
 
 
@@ -48,7 +48,7 @@
 	#com_reg_form fieldset .row { margin: 0px; }
 	#com_reg_form fieldset .row.no-mobile { border-width:0 0 1px 0; border-style:solid; border-color:#ddd; }
 	#com_reg_form fieldset .row.foot_form { padding-bottom: 20px; }
-	#com_reg_form fieldset .row.btn-wrap { padding: 15px 20px 0 0; text-align: right; height: 61px; border-width:0 0 1px 0; border-style:solid; border-color:#B2BCDE; background-color: #F8F8F8; margin-bottom: 25px; }
+	#com_reg_form fieldset .row.btn-wrap { padding: 15px 20px 0 0; text-align: right; height: 61px; border-bottom: 1px solid #ddd; border-top: 1px solid #B2BCDE; background-color: #F8F8F8; margin-bottom: 25px; }
 
 	#com_reg_form fieldset .row div.form-group.label-wrap { padding: 10px 0 7px 15px; background-color: #F8F8F8; }
 	#com_reg_form fieldset .row div.form-group label { width:180px; }
