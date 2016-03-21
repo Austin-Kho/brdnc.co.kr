@@ -36,14 +36,13 @@ class Popup_m extends CI_Model
 
 		$sql = " SELECT * FROM cms_tax_office ".$where." ORDER BY no ASC ".$limit_query;
 		$qry = $this->db->query($sql);
-		$rlt1 = $qry->num_rows();
-		$rlt2 = $qry->result();
 
 		if($num=='num') {
-			return $rlt1;
+			$result = $qry->num_rows();
 		}else{
-			return $rlt2;
+			$result = $qry->result();
 		}
+		return $result;
 	}
 }
 // End of this File

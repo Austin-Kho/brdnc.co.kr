@@ -1,7 +1,7 @@
 		<div class="main_start"></div>
 		<!-- 5. 환경설정 -> 2. 회사정보관리 ->2. 사용자 권한 관리 페이지 -->
 
-		<div class="row">
+		<div class="row" >
 
 		<!-- 신규 사용자 등록자가 있을 때 처리 시작 -->
 <?php if($new_rq) : ?>
@@ -40,10 +40,10 @@
 		<!-- 신규 사용자 등록자가 있을 때 처리 종료 -->
 
 			<div class="form-group mg-0-15">
-				<div class="col-xs-12 col-sm-4 col-md-3 bo-bottom" style="padding-top: 10px; height: 43px; background-color: #f8f8f8;">
+				<div class="col-xs-12 col-sm-4 col-md-2 bo-bottom" style="padding-top: 10px; height: 43px; background-color: #f8f8f8;">
 					<b><font color="red">*</font> <font color="black">권한 설정할 직원 선택</font></b>
 				</div>
-				<div class="col-xs-12 col-sm-8 col-md-9 bo-bottom" style="padding-top: 10px; height: 43px; background-color: #f8f8f8;">
+				<div class="col-xs-12 col-sm-8 col-md-10 bo-bottom" style="padding-top: 10px; height: 43px;">
 					<span style="margin-right: 20px;">(주) 바램디앤씨</span>
 					<select id="user_sel" name="user_sel" onchange="location.href='/m5/config/2/2/?un='+this.value">
 						<option value="">선 택</option>
@@ -62,7 +62,7 @@
 				<div class="row" style="padding-top: 15px;">
 <?php if($this->input->get('un')) : ?>
 					<input type="hidden" name="user_id" value="<?php echo $sel_user->user_id; ?>">
-					<div class="row bo-tb" style="margin: 0 15px 15px;">
+					<div class="row bo-tb" style="margin: 0 0 15px;">
 						<div class="col-sm-12 col-xs-6" style="padding: 0;">
 							<div class="col-xs-12 col-sm-2 center" style="height:38px; padding-top:8px; background-color:#f6f6f6;">성 명</div>
 							<div class="col-xs-12 col-sm-3 center" style="height:38px; padding-top:8px; background-color:#f6f6f6;">구 분</div>

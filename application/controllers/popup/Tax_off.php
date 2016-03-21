@@ -26,7 +26,7 @@ class Tax_off extends CI_Controller
 	}
 
 	public function lists () {
-		$this->output->enable_profiler(TRUE);
+		// $this->output->enable_profiler(TRUE);
 
 		$search_text = $this->input->post('search_text');
 

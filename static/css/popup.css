@@ -13,6 +13,7 @@ header h1 { font-size: 15px; color: white; padding: 0; margin: 0; padding-top: 8
 .row { margin: 5px 10px; padding-top: 10px; border: 1px solid #eaeaea; }
 .zip-tb { margin: 0 10px; }
 th { background-color: #E7ECEF; }
+.center { text-align: center; }
 
 
 nav ul.pagination { margin: 0 0 20px 0; }

@@ -3,6 +3,22 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 
 class M5_m extends CI_Model {
 
+	public function com_div_list($search_text='', $start='', $limit='', $n){
+		// 검색어가 있을 경우
+		if($search_text !='') {
+			$this->db->like('div_name', $search_text);
+			$this->db->like('manager', $search_text);
+			$this->db->like('res_work', $search_text);
+		}
+		$this->db->order_by('seq', 'ASC');
+
+		if($start != '' or $limit !='')	$this->db->limit($start, $limit);
+		$qry = $this->db->get('cms_com_div');
+
+		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
+		return $result;
+	}
+
 	/**
 	 * [is_com_chk 회사 정보 등록여부 체크]
 	 * @return boolean [회사정보 등록 여부 및 정보]
@@ -55,9 +71,10 @@ class M5_m extends CI_Model {
 	 * @param  [Array]    [사용신청대기자 승인 데이터]
 	 * @return [Boolean]  [쿼리 성공 여부]
 	 */
+
 	public function rq_perm($no, $data){
-		$this->db->where('no', $no);
-		$result = $this->db->update('cms_member_table', $data);
+		// $this->db->where('no', $no);
+		$result = $this->db->update('cms_member_table', $data, array('no' => $no));
 		return $result;
 	}
 
