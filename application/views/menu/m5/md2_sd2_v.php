@@ -40,17 +40,19 @@
 		<!-- 신규 사용자 등록자가 있을 때 처리 종료 -->
 
 			<div class="form-group mg-0-15">
-				<div class="col-xs-12 col-sm-4 col-md-2 bo-bottom" style="padding-top: 10px; height: 43px; background-color: #f8f8f8;">
+				<div class="col-xs-12 col-sm-4 col-md-3 bo-bottom" style="padding-top: 10px; height: 43px; background-color: #f8f8f8;">
 					<b><font color="red">*</font> <font color="black">권한 설정할 직원 선택</font></b>
 				</div>
-				<div class="col-xs-12 col-sm-8 col-md-10 bo-bottom" style="padding-top: 10px; height: 43px;">
-					<span style="margin-right: 20px;">(주) 바램디앤씨</span>
-					<select id="user_sel" name="user_sel" onchange="location.href='/m5/config/2/2/?un='+this.value">
-						<option value="">선 택</option>
+				<div class="col-xs-12 col-sm-8 col-md-9 bo-bottom" style="height: 43px;">
+					<!-- <div class="" style="margin-right: 20px; padding-top: 10px;">(주) 바램디앤씨</div> -->
+					<div class="col-xs-12 col-sm-6 col-md-3" style="padding-top: 6px;">
+						<select class="form-control input-sm" id="user_sel" name="user_sel" onchange="location.href='/m5/config/2/2/?un='+this.value">
+							<option value="">선 택</option>
 <?php foreach($user_list as $lt) : ?>
-						<option value="<?php echo $lt->no; ?>" <?php if($this->input->get('un')==$lt->no ) echo "selected"; ?>><?php echo $lt->name."(".$lt->user_id.")"; ?></option>
+							<option value="<?php echo $lt->no; ?>" <?php if($this->input->get('un')==$lt->no ) echo "selected"; ?>><?php echo $lt->name."(".$lt->user_id.")"; ?></option>
 <?php endforeach; ?>
-					</select>
+						</select>
+					</div>
 				</div>
 			</div>
 		</div>

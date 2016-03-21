@@ -2,17 +2,24 @@
 
 			<div class="row">
 				<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 600px;'; ?>">
-					<!-- <div class="center" style="padding-top: 100px;">등록된 데이터가 없습니다.</div> -->
 					<div class="row" style="margin: 0 0 20px 0; border-bottom: 1px solid #ddd;">
 						<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">부서별</div>
-						<div class="col-md-10" style="height: 40px; padding-top: 10px;">
-							<select>
+						<div class="col-md-2" style="height: 40px; padding-top: 5px;">
+							<select class="form-control input-sm">
 								<option>전 체</option>
 								<option value=""></option>
 								<option value=""></option>
 								<option value=""></option>
 								<option value=""></option>
 							</select>
+						</div>
+						<div class="col-md-3" style="height: 40px; padding-top: 10px;"></div>
+						<div class="col-md-2" style="height: 40px; padding-top: 5px;"></div>
+						<div class="col-md-2" style="height: 40px; padding-top: 5px;">
+							<input class="form-control input-sm">
+						</div>
+						<div class="col-md-1" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
+							<button class="btn btn-primary btn-sm center"> 검 색 </button>
 						</div>
 					</div>
 					<div class="row table-responsive" style="margin: 0;">
@@ -23,11 +30,11 @@
 									<th class="col-md-1 center bo-left" style="background-color: #ecf3fe;">부서코드</th>
 									<th class="col-md-2 center bo-left" style="background-color: #ecf3fe;">부서명</th>
 									<th class="col-md-4 center bo-left" style="background-color: #ecf3fe;">담당업무</th>
-									<th class="col-md-4 center bo-left" style="background-color: #ecf3fe; border-right: 0;">비고</th>
+									<th class="col-md-4 center bo-left" style="background-color: #ecf3fe; border-right: 0;">비 고</th>
 								</tr>
 							</thead>
 							<tbody>
-<?php foreach($com_div as $lt) : ?>
+<?php foreach($list as $lt) : ?>
 								<tr>
 									<td class="center"><input type="checkbox"></td>
 									<td class="center bo-left"><?php echo $lt->div_code; ?></td>
@@ -38,6 +45,9 @@
 <?php endforeach; ?>
 							</tbody>
 						</table>
+<?php if(empty($list)) : ?>
+						<div class="center" style="padding: 100px 0;">등록된 데이터가 없습니다.</div>
+<?php endif; ?>
 					</div>
 					<div class="col-md-12 center" style="margin-top: 0px; padding: 0;">
 						<ul class="pagination pagination-sm"><?php echo $pagination; ?></ul>

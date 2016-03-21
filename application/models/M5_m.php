@@ -3,6 +3,14 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 
 class M5_m extends CI_Model {
 
+	/**
+	 * [com_div_list 등록 부서 리스트]
+	 * @param  [string] $search_text   [검색어]
+	 * @param  [string] $start       [페이지네이션 시작]
+	 * @param  [string] $limit       [페이지네이션 목록수]
+	 * @param  [String] $n           [전체리스트 수, 실제리스트 구분인자]
+	 * @return [Array]              [실제리스트 데이터]
+	 */
 	public function com_div_list($search_text='', $start='', $limit='', $n){
 		// 검색어가 있을 경우
 		if($search_text !='') {
@@ -18,6 +26,79 @@ class M5_m extends CI_Model {
 		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
 		return $result;
 	}
+
+	/**
+	 * [com_mem_list 직원 목록]
+	 * @param  string $search_text [description]
+	 * @param  string $start       [페이지네이션 시작]
+	 * @param  string $limit       [페이지네이션 목록수]
+	 * @param  [String] $n           [전체리스트 수, 실제리스트 구분인자]
+	 * @return [Array]              [실제리스트 데이터]
+	 */
+	public function com_mem_list($search_text='', $start='', $limit='', $n){
+		// 검색어가 있을 경우
+		if($search_text !='') {
+			$this->db->like('div_posi', $search_text);
+			$this->db->like('mem_name', $search_text);
+			$this->db->like('email', $search_text);
+		}
+		$this->db->order_by('seq', 'ASC');
+
+		if($start != '' or $limit !='')	$this->db->limit($start, $limit);
+		$qry = $this->db->get('cms_com_div_mem1');
+
+		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
+		return $result;
+	}
+
+	/**
+	 * [com_accounts_list 거래처 목록]
+	 * @param  string $search_text [description]
+	 * @param  string $start       [페이지네이션 시작]
+	 * @param  string $limit       [페이지네이션 목록수]
+	 * @param  [String] $n           [전체리스트 수, 실제리스트 구분인자]
+	 * @return [Array]              [실제리스트 데이터]
+	 */
+	public function com_accounts_list($search_text='', $start='', $limit='', $n){
+		// 검색어가 있을 경우
+		if($search_text !='') {
+			$this->db->like('si_name', $search_text);
+			$this->db->like('web_name', $search_text);
+			$this->db->like('res_worker', $search_text);
+		}
+		$this->db->order_by('seq', 'ASC');
+
+		if($start != '' or $limit !='')	$this->db->limit($start, $limit);
+		$qry = $this->db->get('cms_accounts1');
+
+		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
+		return $result;
+	}
+
+	/**
+	 * [bank_account_list 은행계좌 목록]
+	 * @param  string $search_text [description]
+	 * @param  string $start       [페이지네이션 시작]
+	 * @param  string $limit       [페이지네이션 목록수]
+	 * @param  [String] $n           [전체리스트 수, 실제리스트 구분인자]
+	 * @return [Array]              [실제리스트 데이터]
+	 */
+	public function bank_account_list($search_text='', $start='', $limit='', $n){
+		// 검색어가 있을 경우
+		if($search_text !='') {
+			$this->db->like('bank', $search_text);
+			$this->db->like('name', $search_text);
+			$this->db->like('holder', $search_text);
+		}
+		$this->db->order_by('no', 'ASC');
+
+		if($start != '' or $limit !='')	$this->db->limit($start, $limit);
+		$qry = $this->db->get('cms_capital_bank_account1');
+
+		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
+		return $result;
+	}
+
 
 	/**
 	 * [is_com_chk 회사 정보 등록여부 체크]
