@@ -38,7 +38,7 @@ class M5 extends CI_Controller {
 	}
 
 	public function config($mdi='', $sdi=''){
-		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+		$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		if( !$this->uri->segment(3)) $mdi = 1; else $mdi = $this->uri->segment(3);
 		if( !$this->uri->segment(4)) $sdi = 1; else $sdi = $this->uri->segment(4);
@@ -80,13 +80,9 @@ class M5 extends CI_Controller {
 				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
 				$page = $this->uri->segment($uri_segment);
 
-				$search_text = '';
+				$search_text = $this->input->post('div_search');
 
-				if($page<=1 or $search_text) {
-					$start = 0;
-				}else{
-					$start = ($page-1) * $config['per_page'];
-				}
+				if($page<=1) { $start = 0; }else{ $start = ($page-1) * $config['per_page']; }
 				$limit = $config['per_page'];
 
 				//  db [부서]데이터 불러오기

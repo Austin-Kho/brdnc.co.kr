@@ -13,10 +13,13 @@ class M5_m extends CI_Model {
 	 */
 	public function com_div_list($search_text='', $start='', $limit='', $n){
 		// 검색어가 있을 경우
+		// if($search_text->div_seq !=''){
+		// 	$this->db->where('div_name', $search_text[0]);
+		// }
 		if($search_text !='') {
 			$this->db->like('div_name', $search_text);
-			$this->db->like('manager', $search_text);
-			$this->db->like('res_work', $search_text);
+			$this->db->or_like('manager', $search_text);
+			$this->db->or_like('res_work', $search_text);
 		}
 		$this->db->order_by('seq', 'ASC');
 
