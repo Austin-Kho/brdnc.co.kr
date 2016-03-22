@@ -67,7 +67,7 @@ class M5 extends CI_Controller {
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = '/m5/config/1/1/';//.$data['n']; //페이징 주소
-				$config['total_rows'] = $this->m5_m->com_div_list('', '', '', 'num');  //게시물의 전체 갯수
+				$config['total_rows'] = $this->m5_m->com_div_list('', '', '', '', 'num');  //게시물의 전체 갯수
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = $uri_segment =5; //페이지 번호가 위치한 세그먼트
@@ -80,13 +80,17 @@ class M5 extends CI_Controller {
 				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
 				$page = $this->uri->segment($uri_segment);
 
-				$search_text = $this->input->post('div_search');
+				$st1 = $this->input->post('div_code');
+				$st2 = $this->input->post('div_search');
 
-				if($page<=1) { $start = 0; }else{ $start = ($page-1) * $config['per_page']; }
+				if($page<=1 or empty($page)) { $start = 0; }else{ $start = ($page-1) * $config['per_page']; }
 				$limit = $config['per_page'];
 
+				// db[전체부서목록] 데이터 불러오기
+				$data['all_div'] = $this->m5_m->all_div_name();
+
 				//  db [부서]데이터 불러오기
-				$data['list'] = $this->m5_m->com_div_list($search_text, $start, $limit, '');
+				$data['list'] = $this->m5_m->com_div_list($st1, $st2, $start, $limit, '');
 
 				//본 페이지 로딩
 				$this->load->view('/menu/m5/md1_sd1_v', $data);
@@ -102,13 +106,13 @@ class M5 extends CI_Controller {
 			if( !$auth['_m5_1_2'] or $auth['_m5_1_2']==0) {
 				$this->load->view('no_auth');
 			}else{
-				//페이지네이션 라이브러리 로딩 추가
+//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
 				//$data['n'] = $this->uri->segment(4);
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = '/m5/config/1/2/';//.$data['n']; //페이징 주소
-				$config['total_rows'] = $this->m5_m->com_mem_list('', '', '', 'num');  //게시물의 전체 갯수
+				$config['total_rows'] = $this->m5_m->com_div_list('', '', '', '', 'num');  //게시물의 전체 갯수
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = $uri_segment =5; //페이지 번호가 위치한 세그먼트
@@ -121,17 +125,17 @@ class M5 extends CI_Controller {
 				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
 				$page = $this->uri->segment($uri_segment);
 
-				$search_text = '';
+				$st1 = $this->input->post('div_code');
+				$st2 = $this->input->post('div_search');
 
-				if($page<=1 or $search_text) {
-					$start = 0;
-				}else{
-					$start = ($page-1) * $config['per_page'];
-				}
+				if($page<=1 or empty($page)) { $start = 0; }else{ $start = ($page-1) * $config['per_page']; }
 				$limit = $config['per_page'];
 
-				//  db [직원]데이터 불러오기
-				$data['list'] = $this->m5_m->com_mem_list($search_text, $start, $limit, '');
+				// db[전체부서목록] 데이터 불러오기
+				$data['all_div'] = $this->m5_m->all_div_name();
+
+				//  db [부서]데이터 불러오기
+				$data['list'] = $this->m5_m->com_mem_list($st1, $st2, $start, $limit, '');
 
 				//본 페이지 로딩
 				$this->load->view('/menu/m5/md1_sd2_v', $data);
@@ -153,7 +157,7 @@ class M5 extends CI_Controller {
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = '/m5/config/1/3/';//.$data['n']; //페이징 주소
-				$config['total_rows'] = $this->m5_m->com_accounts_list('', '', '', 'num');  //게시물의 전체 갯수
+				$config['total_rows'] = $this->m5_m->com_div_list('', '', '', '', 'num');  //게시물의 전체 갯수
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = $uri_segment =5; //페이지 번호가 위치한 세그먼트
@@ -166,17 +170,17 @@ class M5 extends CI_Controller {
 				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
 				$page = $this->uri->segment($uri_segment);
 
-				$search_text = '';
+				$st1 = $this->input->post('div_code');
+				$st2 = $this->input->post('div_search');
 
-				if($page<=1 or $search_text) {
-					$start = 0;
-				}else{
-					$start = ($page-1) * $config['per_page'];
-				}
+				if($page<=1 or empty($page)) { $start = 0; }else{ $start = ($page-1) * $config['per_page']; }
 				$limit = $config['per_page'];
 
-				//  db [거래처]데이터 불러오기
-				$data['list'] = $this->m5_m->com_accounts_list($search_text, $start, $limit, '');
+				// db[전체부서목록] 데이터 불러오기
+				$data['all_acc'] = $this->m5_m->all_acc_name();
+
+				//  db [부서]데이터 불러오기
+				$data['list'] = $this->m5_m->com_accounts_list($st1, $st2, $start, $limit, '');
 
 				//본 페이지 로딩
 				$this->load->view('/menu/m5/md1_sd3_v', $data);
@@ -192,13 +196,13 @@ class M5 extends CI_Controller {
 			if( !$auth['_m5_1_4'] or $auth['_m5_1_4']==0) {
 				$this->load->view('no_auth');
 			}else{
-				//페이지네이션 라이브러리 로딩 추가
+//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
 				//$data['n'] = $this->uri->segment(4);
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = '/m5/config/1/4/';//.$data['n']; //페이징 주소
-				$config['total_rows'] = $this->m5_m->bank_account_list('', '', '', 'num');  //게시물의 전체 갯수
+				$config['total_rows'] = $this->m5_m->com_div_list('', '', '', '', 'num');  //게시물의 전체 갯수
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = $uri_segment =5; //페이지 번호가 위치한 세그먼트
@@ -211,17 +215,17 @@ class M5 extends CI_Controller {
 				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
 				$page = $this->uri->segment($uri_segment);
 
-				$search_text = '';
+				$st1 = $this->input->post('div_code');
+				$st2 = $this->input->post('div_search');
 
-				if($page<=1 or $search_text) {
-					$start = 0;
-				}else{
-					$start = ($page-1) * $config['per_page'];
-				}
+				if($page<=1 or empty($page)) { $start = 1; }else{ $start = ($page) * $config['per_page']; }
 				$limit = $config['per_page'];
 
-				//  db [은행계좌]데이터 불러오기
-				$data['list'] = $this->m5_m->bank_account_list($search_text, $start, $limit, '');
+				// db[전체부서목록] 데이터 불러오기
+				$data['all_bank'] = $this->m5_m->all_bank_name();
+
+				//  db [부서]데이터 불러오기
+				$data['list'] = $this->m5_m->bank_account_list($st1, $st2, $start, $limit, '');
 
 				//본 페이지 로딩
 				$this->load->view('/menu/m5/md1_sd4_v', $data);

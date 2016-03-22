@@ -11,23 +11,30 @@ class M5_m extends CI_Model {
 	 * @param  [String] $n           [전체리스트 수, 실제리스트 구분인자]
 	 * @return [Array]              [실제리스트 데이터]
 	 */
-	public function com_div_list($search_text='', $start='', $limit='', $n){
+	public function com_div_list($st1='', $st2='', $start='', $limit='', $n){
 		// 검색어가 있을 경우
-		// if($search_text->div_seq !=''){
-		// 	$this->db->where('div_name', $search_text[0]);
-		// }
-		if($search_text !='') {
-			$this->db->like('div_name', $search_text);
-			$this->db->or_like('manager', $search_text);
-			$this->db->or_like('res_work', $search_text);
+		if($st1 !=''){	 $this->db->where('div_code', $st1); }
+		if($st2 !='') {
+			$this->db->like('div_name', $st2);
+			$this->db->or_like('manager', $st2);
+			$this->db->or_like('res_work', $st2);
 		}
 		$this->db->order_by('seq', 'ASC');
-
-		if($start != '' or $limit !='')	$this->db->limit($start, $limit);
+		if($start != '' or $limit !='')	$this->db->limit($limit, $start);
 		$qry = $this->db->get('cms_com_div');
 
 		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
 		return $result;
+	}
+
+	/**
+	 * [all_div_name 셀렉트바 전체 목록]
+	 * @return [Array] [목록]
+	 */
+	public function all_div_name(){
+		$this->db->select('div_code, div_name');
+		$qry = $this->db->get('cms_com_div');
+		return $result = $qry->result();
 	}
 
 	/**
@@ -38,16 +45,17 @@ class M5_m extends CI_Model {
 	 * @param  [String] $n           [전체리스트 수, 실제리스트 구분인자]
 	 * @return [Array]              [실제리스트 데이터]
 	 */
-	public function com_mem_list($search_text='', $start='', $limit='', $n){
+	public function com_mem_list($st1='', $st2='', $start='', $limit='', $n){
 		// 검색어가 있을 경우
-		if($search_text !='') {
+		if($st1 !=''){	 $this->db->where('div_code', $st1); }
+		if($st2 !='') {
 			$this->db->like('div_posi', $search_text);
 			$this->db->like('mem_name', $search_text);
 			$this->db->like('email', $search_text);
 		}
 		$this->db->order_by('seq', 'ASC');
 
-		if($start != '' or $limit !='')	$this->db->limit($start, $limit);
+		if($start != '' or $limit !='')	$this->db->limit($limit, $start);
 		$qry = $this->db->get('cms_com_div_mem1');
 
 		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
@@ -62,21 +70,33 @@ class M5_m extends CI_Model {
 	 * @param  [String] $n           [전체리스트 수, 실제리스트 구분인자]
 	 * @return [Array]              [실제리스트 데이터]
 	 */
-	public function com_accounts_list($search_text='', $start='', $limit='', $n){
+	public function com_accounts_list($st1='', $st2='', $start='', $limit='', $n){
 		// 검색어가 있을 경우
-		if($search_text !='') {
+		if($st1 !=''){	 $this->db->where('div_code', $st1); }
+		if($st2 !='') {
 			$this->db->like('si_name', $search_text);
 			$this->db->like('web_name', $search_text);
 			$this->db->like('res_worker', $search_text);
 		}
 		$this->db->order_by('seq', 'ASC');
 
-		if($start != '' or $limit !='')	$this->db->limit($start, $limit);
+		if($start != '' or $limit !='')	$this->db->limit($limit, $start);
 		$qry = $this->db->get('cms_accounts1');
 
 		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
 		return $result;
 	}
+
+	/**
+	 * [all_acc_name 셀렉트바 전체 목록]
+	 * @return [Array] [목록]
+	 */
+	public function all_acc_name(){
+		$this->db->select('seq, si_name');
+		$qry = $this->db->get('cms_accounts');
+		return $result = $qry->result();
+	}
+
 
 	/**
 	 * [bank_account_list 은행계좌 목록]
@@ -86,20 +106,34 @@ class M5_m extends CI_Model {
 	 * @param  [String] $n           [전체리스트 수, 실제리스트 구분인자]
 	 * @return [Array]              [실제리스트 데이터]
 	 */
-	public function bank_account_list($search_text='', $start='', $limit='', $n){
+	public function bank_account_list($st1='', $st2='', $start='', $limit='', $n) {
 		// 검색어가 있을 경우
-		if($search_text !='') {
+		if($st1 !=''){	 $this->db->where('no', $st1); }
+		if($st2 !='') {
 			$this->db->like('bank', $search_text);
 			$this->db->like('name', $search_text);
 			$this->db->like('holder', $search_text);
 		}
 		$this->db->order_by('no', 'ASC');
 
-		if($start != '' or $limit !='')	$this->db->limit($start, $limit);
-		$qry = $this->db->get('cms_capital_bank_account1');
+		if($start != '' or $limit !='')	$this->db->limit($limit, $start);
+		$qry = $this->db->get('cms_capital_bank_account');
 
 		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
 		return $result;
+	}
+
+	/**
+	 * [all_bank_name 셀렉트바 전체 목록]
+	 * @return [Array] [목록]
+	 */
+	public function all_bank_name(){
+		$this->db->select('bank_code, bank');
+		$this->db->where('bank_code!=', '');
+		$this->db->group_by('bank_code');
+
+		$qry = $this->db->get('cms_capital_bank_account');
+		return $result = $qry->result();
 	}
 
 

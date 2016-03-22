@@ -7,16 +7,15 @@
 						<div class="col-md-2" style="height: 40px; padding-top: 5px;">
 							<select class="form-control input-sm">
 								<option>전 체</option>
-								<option value=""></option>
-								<option value=""></option>
-								<option value=""></option>
-								<option value=""></option>
+<?php foreach($all_div as $lt) : ?>
+								<option value="<?php echo $lt->div_code; ?>" <?if($lt->div_code==$this->input->post('div_code')) echo "selected";?>><?php echo $lt->div_name ?></option>
+<?php endforeach; ?>
 							</select>
 						</div>
 						<div class="col-md-3" style="height: 40px; padding-top: 10px;"></div>
 						<div class="col-md-2" style="height: 40px; padding-top: 5px;"></div>
 						<div class="col-md-2" style="height: 40px; padding-top: 5px;">
-							<input class="form-control input-sm">
+							<input class="form-control input-sm" name="div_search" placeholder="(임)직원 검색">
 						</div>
 						<div class="col-md-1" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
 							<button class="btn btn-primary btn-sm center"> 검 색 </button>

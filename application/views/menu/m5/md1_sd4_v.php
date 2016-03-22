@@ -3,20 +3,19 @@
 			<div class="row">
 				<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 600px;'; ?>">
 					<div class="row" style="margin: 0 0 20px 0; border-bottom: 1px solid #ddd;">
-						<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">은행별</div>
+						<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">은별</div>
 						<div class="col-md-2" style="height: 40px; padding-top: 5px;">
-							<select class="form-control input-sm">
+							<select class="form-control input-sm" name="bank_code" onchange="submit();">
 								<option>전 체</option>
-								<option value=""></option>
-								<option value=""></option>
-								<option value=""></option>
-								<option value=""></option>
+<?php foreach($all_bank as $lt) : ?>
+								<option value="<?php echo $lt->bank_code; ?>" <?if($lt->bank_code==$this->input->post('bank_code')) echo "selected";?>><?php echo $lt->bank; ?></option>
+<?php endforeach; ?>
 							</select>
 						</div>
 						<div class="col-md-3" style="height: 40px; padding-top: 10px;"></div>
 						<div class="col-md-2" style="height: 40px; padding-top: 5px;"></div>
 						<div class="col-md-2" style="height: 40px; padding-top: 5px;">
-							<input class="form-control input-sm">
+							<input class="form-control input-sm" name="div_search" placeholder="계좌 검색">
 						</div>
 						<div class="col-md-1" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
 							<button class="btn btn-primary btn-sm center"> 검 색 </button>

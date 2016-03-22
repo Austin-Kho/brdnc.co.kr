@@ -6,10 +6,10 @@
 						<form method="post" action="">
 							<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">부서별</div>
 							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
-								<select class="form-control input-sm" name="div_search" onchange="submit();">
+								<select class="form-control input-sm" name="div_code" onchange="submit();">
 									<option value=''>전 체</option>
-<?php foreach($list as $lt) : ?>
-									<option value="<?php echo $lt->div_code; ?>" <?if($lt->div_code==$this->input->post('div_search')) echo "selected";?>><?php echo $lt->div_name ?></option>
+<?php foreach($all_div as $lt) : ?>
+									<option value="<?php echo $lt->div_code; ?>" <?if($lt->div_code==$this->input->post('div_code')) echo "selected";?>><?php echo $lt->div_name ?></option>
 <?php endforeach; ?>
 								</select>
 							</div>
@@ -38,7 +38,7 @@
 <?php foreach($list as $lt) : ?>
 								<tr>
 									<td class="center"><input type="checkbox"></td>
-									<td class="center bo-left"><?php echo $lt->div_code; ?></td>
+									<td class="center bo-left"><a href="#"><?php echo $lt->div_code; ?></a></td>
 									<td class="center bo-left"><?php echo $lt->div_name; ?></td>
 									<td class="bo-left" style="padding-left: 15px;"><?php echo $lt->res_work; ?></td>
 									<td class="bo-left" style="padding-left: 15px;"><?php echo $lt->note; ?></td>

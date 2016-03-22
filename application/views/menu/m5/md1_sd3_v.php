@@ -5,18 +5,17 @@
 					<div class="row" style="margin: 0 0 20px 0; border-bottom: 1px solid #ddd;">
 						<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">업체구분</div>
 						<div class="col-md-2" style="height: 40px; padding-top: 5px;">
-							<select class="form-control input-sm">
+							<select class="form-control input-sm" name="acc_code" onchange="submit();">
 								<option>전 체</option>
-								<option value=""></option>
-								<option value=""></option>
-								<option value=""></option>
-								<option value=""></option>
+								<option value="1">매입거래처</option>
+								<option value="2">매출거래처</option>
+								<option value="3">매입매출거래처</option>
 							</select>
 						</div>
 						<div class="col-md-3" style="height: 40px; padding-top: 10px;"></div>
 						<div class="col-md-2" style="height: 40px; padding-top: 5px;"></div>
 						<div class="col-md-2" style="height: 40px; padding-top: 5px;">
-							<input class="form-control input-sm">
+							<input class="form-control input-sm" name="div_search" placeholder="거래처 검색">
 						</div>
 						<div class="col-md-1" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
 							<button class="btn btn-primary btn-sm center"> 검 색 </button>
