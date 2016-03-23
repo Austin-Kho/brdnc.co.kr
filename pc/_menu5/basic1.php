@@ -32,22 +32,22 @@
 						</div>
 						<table width="100%" border="0" cellpadding="0" cellspacing="0">
 						<tr>
-							<td height="538" style="width:200px; border-width:1px 1px 1px 0; border-style:solid; border-color:#cccccc; background-color:#f8f8f8; padding:5px 5px 5px 5px;" valign="top">
+							<td height="538" style="width:200px; border-width:1px 1px 1px 0; border-style:solid; border-color:#cccccc; background-color:#f8f8f8; padding:5px;" valign="top">
 								<div style="height:50px; margin-bottom:6px; background-color:#eaeaf4;"></div>
-								<div style="height: 25px; padding:5px 5px 0 5px; margin:0px 5px 0 5px; border-width:1px 0 1px 0;" class="bottom">
-									<a href="<?$_SERVER['PHP_SELF']?>?m_di=1&amp;s_di=1" style="color:#000000;"><b><?=$s_di_1?></b></a>
+								<div style="height: 25px; padding:5px 5px 0 5px; margin:0 5px; border-width:1px 0;" class="bottom">
+									<a href="<?$_SERVER['PHP_SELF']?>?m_di=1&amp;s_di=1" style="color:#000;"><b><?=$s_di_1?></b></a>
 								</div>
-								<div style="height: 25px; padding:5px 5px 0 5px; margin:0 5px 0 5px;" class="bottom">
+								<div style="height: 25px; padding:5px 5px 0 5px; margin:0 5px;" class="bottom">
 									<a href="<?$_SERVER['PHP_SELF']?>?m_di=1&amp;s_di=2"><?=$s_di_2?></a>
 								</div>
-								<div style="height: 25px; padding:5px 5px 0 5px; margin:0 5px 0 5px;" class="bottom">
+								<div style="height: 25px; padding:5px 5px 0 5px; margin:0 5px;" class="bottom">
 									<a href="<?$_SERVER['PHP_SELF']?>?m_di=1&amp;s_di=3"><?=$s_di_3?></a>
 								</div>
-								<div style="height: 25px; padding:5px 5px 0 5px; margin:0 5px 0 5px;" class="bottom">
+								<div style="height: 25px; padding:5px 5px 0 5px; margin:0 5px;" class="bottom">
 									<a href="<?$_SERVER['PHP_SELF']?>?m_di=1&amp;s_di=4"><?=$s_di_4?></a>
 								</div>
 							</td>
-							<td style="width:825px; border-width:1px 0 1px 0; border-style:solid; border-color:#cccccc; padding:5px 5px 5px 5px;" valign="top">
+							<td style="width:825px; border-width:1px 0; border-style:solid; border-color:#ccc; padding:5px;" valign="top">
 								<div style="height:435px;">
 								<?
 									$ss_di = $_REQUEST['ss_di'];

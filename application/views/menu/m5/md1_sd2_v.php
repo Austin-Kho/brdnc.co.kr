@@ -12,8 +12,7 @@
 <?php endforeach; ?>
 							</select>
 						</div>
-						<div class="col-md-3" style="height: 40px; padding-top: 10px;"></div>
-						<div class="col-md-2" style="height: 40px; padding-top: 5px;"></div>
+						<div class="col-md-5" style="height: 40px; padding-top: 10px;"></div>
 						<div class="col-md-2" style="height: 40px; padding-top: 5px;">
 							<input class="form-control input-sm" name="div_search" placeholder="(임)직원 검색">
 						</div>

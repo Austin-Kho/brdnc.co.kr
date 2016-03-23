@@ -61,6 +61,8 @@ class M5 extends CI_Controller {
 			if( !$auth['_m5_1_1'] or $auth['_m5_1_1']==0) {
 				$this->load->view('no_auth');
 			}else{
+				$data['auth'] = $auth['_m5_1_1'];
+
 				//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
 				//$data['n'] = $this->uri->segment(4);
@@ -68,7 +70,7 @@ class M5 extends CI_Controller {
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = '/m5/config/1/1/';//.$data['n']; //페이징 주소
 				$config['total_rows'] = $this->m5_m->com_div_list('', '', '', '', 'num');  //게시물의 전체 갯수
-				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
+				$config['per_page'] = 2; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = $uri_segment =5; //페이지 번호가 위치한 세그먼트
 
@@ -91,6 +93,7 @@ class M5 extends CI_Controller {
 
 				//  db [부서]데이터 불러오기
 				$data['list'] = $this->m5_m->com_div_list($st1, $st2, $start, $limit, '');
+
 
 				//본 페이지 로딩
 				$this->load->view('/menu/m5/md1_sd1_v', $data);

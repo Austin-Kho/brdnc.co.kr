@@ -12,8 +12,7 @@
 <?php endforeach; ?>
 							</select>
 						</div>
-						<div class="col-md-3" style="height: 40px; padding-top: 10px;"></div>
-						<div class="col-md-2" style="height: 40px; padding-top: 5px;"></div>
+						<div class="col-md-5" style="height: 40px; padding-top: 10px;"></div>
 						<div class="col-md-2" style="height: 40px; padding-top: 5px;">
 							<input class="form-control input-sm" name="div_search" placeholder="계좌 검색">
 						</div>
@@ -26,9 +25,9 @@
 							<thead>
 								<tr>
 									<th class="col-md-1 center" style="background-color: #ecf3fe; border-left: 0;"><input type="checkbox"></th>
+									<th class="col-md-1 center bo-left" style="background-color: #ecf3fe;">계좌명칭</th>
 									<th class="col-md-2 center bo-left" style="background-color: #ecf3fe;">거래은행</th>
 									<th class="col-md-1 center bo-left" style="background-color: #ecf3fe;">은행코드</th>
-									<th class="col-md-1 center bo-left" style="background-color: #ecf3fe;">계좌별칭</th>
 									<th class="col-md-3 center bo-left" style="background-color: #ecf3fe;">계좌번호</th>
 									<th class="col-md-2 center bo-left" style="background-color: #ecf3fe;">관리부서(현장)</th>
 									<th class="col-md-2 center bo-left" style="background-color: #ecf3fe; border-right: 0;">비 고</th>
@@ -38,9 +37,9 @@
 <?php foreach($list as $lt) : ?>
 								<tr>
 									<td class="center"><input type="checkbox"></td>
+									<td class="center bo-left"><a href="#"><?php echo $lt->name; ?></a></td>
 									<td class="center bo-left"><?php echo $lt->bank; ?></td>
 									<td class="center bo-left"><?php echo $lt->bank_code; ?></td>
-									<td class="center bo-left"><?php echo $lt->name; ?></td>
 									<td class="center bo-left"><?php echo $lt->number; ?></td>
 									<td class="bo-left" style="padding-left: 15px;"><?php echo $lt->holder; ?></td>
 									<td class="bo-left" style="padding-left: 15px;"><?php echo $lt->note; ?></td>
