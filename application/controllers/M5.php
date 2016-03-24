@@ -105,9 +105,16 @@ class M5 extends CI_Controller {
 				//  db [부서]데이터 불러오기
 				$data['list'] = $this->m5_m->com_div_list($start, $limit, $st1, $st2, '');
 
+				// 폼 검증 라이브러리 로드
+				$this->load->library('form_validation'); // 폼 검증
+				//// 폼 검증할 필드와 규칙 사전 정의
+				// $this->form_validation->set_rules('co_name', '회사명', 'required');
+				if($this->form_validation->run()==FALSE) {
+					//본 페이지 로딩
+					$this->load->view('/menu/m5/md1_sd1_v', $data);
+				}else{
 
-				//본 페이지 로딩
-				$this->load->view('/menu/m5/md1_sd1_v', $data);
+				}
 			}
 
 
@@ -295,12 +302,12 @@ class M5 extends CI_Controller {
 				// 회사 등록 정보가 있는지 확인
 				$com_chk = $this->m5_m->is_com_chk();
 				if( !$com_chk) {
-					$comd = array( // 없으면 등록권한 및 새로 등록하라는 변수 전달
+					$data = array( // 없으면 등록권한 및 새로 등록하라는 변수 전달
 						'auth' => $auth['_m5_2_1'],
 						'mode' => 'com_reg'
 					);
 				}  else {
-					$comd = array( // 있으면 등록권한, 등록회사정보 및 수정하라는 변수 전달
+					$data = array( // 있으면 등록권한, 등록회사정보 및 수정하라는 변수 전달
 						'auth' => $auth['_m5_2_1'],
 						'com' => $com_chk,
 						'mode' => 'com_modify'
@@ -309,7 +316,7 @@ class M5 extends CI_Controller {
 
 				if($this->form_validation->run() == FALSE) { // 폼 전송 데이타가 없으면,
 					//본 페이지 로딩
-					$this->load->view('/menu/m5/md2_sd1_v', $comd); // 조회권한 있고 폼 전송 데이타가 없을 때 등록권한 데이터 및 등록데이터와 함께 폼 열기
+					$this->load->view('/menu/m5/md2_sd1_v', $data); // 조회권한 있고 폼 전송 데이타가 없을 때 등록권한 데이터 및 등록데이터와 함께 폼 열기
 				}else{
 					//폼 데이타 가공
 					$co_no = $this->input->post('co_no1')."-".$this->input->post('co_no2')."-".$this->input->post('co_no3');
@@ -355,10 +362,10 @@ class M5 extends CI_Controller {
 						'red_date' => 'now()'
 					);
 
-				if($comd['mode']=='com_reg') {
+				if($data['mode']=='com_reg') {
 					$result = $this->m5_m->com_reg($com_data);
 					$msg = '등록';
-				}else if($comd['mode']=='com_modify') {
+				}else if($data['mode']=='com_modify') {
 					$result = $this->m5_m->com_modify($com_data);
 					$msg = '변경';
 				}
