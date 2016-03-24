@@ -11,7 +11,7 @@ class M5_m extends CI_Model {
 	 * @param  [String] $n           [전체리스트 수, 실제리스트 구분인자]
 	 * @return [Array]              [실제리스트 데이터]
 	 */
-	public function com_div_list($st1='', $st2='', $start='', $limit='', $n){
+	public function com_div_list($start='', $limit='', $st1='', $st2='', $n){
 		// 검색어가 있을 경우
 		if($st1 !=''){	 $this->db->where('div_code', $st1); }
 		if($st2 !='') {
@@ -21,7 +21,7 @@ class M5_m extends CI_Model {
 		}
 		$this->db->order_by('seq', 'ASC');
 		if($start != '' or $limit !='')	$this->db->limit($limit, $start);
-		$qry = $this->db->get('cms_com_div');
+		$qry = $this->db->get('cms_com_div1');
 
 		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
 		return $result;
@@ -45,7 +45,7 @@ class M5_m extends CI_Model {
 	 * @param  [String] $n           [전체리스트 수, 실제리스트 구분인자]
 	 * @return [Array]              [실제리스트 데이터]
 	 */
-	public function com_mem_list($st1='', $st2='', $start='', $limit='', $n){
+	public function com_mem_list($start='', $limit='', $st1='', $st2='', $n){
 		// 검색어가 있을 경우
 		if($st1 !=''){	 $this->db->where('div_code', $st1); }
 		if($st2 !='') {
@@ -70,7 +70,7 @@ class M5_m extends CI_Model {
 	 * @param  [String] $n           [전체리스트 수, 실제리스트 구분인자]
 	 * @return [Array]              [실제리스트 데이터]
 	 */
-	public function com_accounts_list($st1='', $st2='', $start='', $limit='', $n){
+	public function com_accounts_list($start='', $limit='', $st1='', $st2='', $n){
 		// 검색어가 있을 경우
 		if($st1 !=''){	 $this->db->where('div_code', $st1); }
 		if($st2 !='') {
@@ -106,7 +106,7 @@ class M5_m extends CI_Model {
 	 * @param  [String] $n           [전체리스트 수, 실제리스트 구분인자]
 	 * @return [Array]              [실제리스트 데이터]
 	 */
-	public function bank_account_list($st1='', $st2='', $start='', $limit='', $n) {
+	public function bank_account_list($start='', $limit='', $st1='', $st2='', $n){
 		// 검색어가 있을 경우
 		if($st1 !=''){	 $this->db->where('no', $st1); }
 		if($st2 !='') {
