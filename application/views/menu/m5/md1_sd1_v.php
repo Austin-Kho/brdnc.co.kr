@@ -5,8 +5,8 @@
 				<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 600px;'; ?>">
 					<div class="row" style="margin: 0 0 20px 0; border-bottom: 1px solid #ddd;">
 						<form name="list_frm" method="post" action="">
-							<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">부서별</div>
-							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
+							<div class="col-xs-4 col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">부서별</div>
+							<div class="col-xs-8 col-md-2" style="height: 40px; padding-top: 5px;">
 								<select class="form-control input-sm" name="div_code" onchange="submit();">
 									<option value=''>전 체</option>
 <?php foreach($all_div as $lt) : ?>
@@ -14,11 +14,11 @@
 <?php endforeach; ?>
 								</select>
 							</div>
-							<div class="col-md-5" style="height: 40px; padding-top: 10px;"></div>
-							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
+							<div class="col-xs-12 col-md-5" style="height: 40px; padding-top: 10px;"></div>
+							<div class="col-xs-8 col-md-2" style="height: 40px; padding-top: 5px;">
 								<input class="form-control input-sm" name="div_search" placeholder="부서 검색">
 							</div>
-							<div class="col-md-1" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
+							<div class="col-xs-4 col-md-1" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
 								<button class="btn btn-primary btn-sm center"> 검 색 </button>
 							</div>
 						</form>
@@ -75,7 +75,6 @@
 			</div>
 
 
-
 <?php elseif($this->input->get('ss_di')==2) : ?>
 			<div class="row">
 				<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 600px;'; ?>">
@@ -90,46 +89,46 @@
 ?>
 					<fieldset class="font12">
 						<div class="row" style="border-top: 1px solid #ddd;">
-							<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap2" >
+							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="co_name">부서코드 <span class="red">*</span></label>
 							</div>
-							<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
+							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
 								<input type="text" class="form-control input-sm" id="co_name" name="co_name" maxlength="30" value="" required autofocus>
 							</div>
-							<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap2">
+							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
 								<label for="co_no1">부서명 <span class="red">*</span></label>
 							</div>
-							<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
+							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
 								<input type="text" class="form-control input-sm han" id="co_name" name="co_name" maxlength="30" value="" required autofocus>
 							</div>
 						</div>
 						<div class="row" style="border-top: 1px solid #ddd;">
-							<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap2" >
+							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="co_name">부서책임자</label>
 							</div>
-							<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
+							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
 								<input type="text" class="form-control input-sm" id="co_name" name="co_name" maxlength="30" value="" required autofocus>
 							</div>
-							<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap2">
+							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
 								<label for="co_no1">부서전화</label>
 							</div>
-							<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
+							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
 								<input type="text" class="form-control input-sm han" id="co_name" name="co_name" maxlength="30" value="" required autofocus>
 							</div>
 						</div>
 						<div class="row" style="border-top: 1px solid #ddd;">
-							<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap2" >
+							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="co_name">담당업무 <span class="red">*</span></label>
 							</div>
-							<div class="form-group col-xs-12 col-sm-8 col-md-10 form-wrap">
+							<div class="form-group col-xs-8 col-sm-8 col-md-10 form-wrap">
 								<input type="text" class="form-control input-sm" id="co_name" name="co_name" maxlength="30" value="" required autofocus>
 							</div>
 						</div>
 						<div class="row" style="border-top: 1px solid #ddd;">
-							<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap2 bo-bottom" style="height: 80px;">
+							<div class="form-group col-xs-12 col-sm-12 col-md-2 label-wrap2 bo-bottom" style="height: 80px;">
 								<label for="co_name">비 고 <span class="red">*</span></label>
 							</div>
-							<div class="form-group col-xs-12 col-sm-8 col-md-10 form-wrap bo-bottom" style="height: 80px;">
+							<div class="form-group col-xs-12 col-sm-12 col-md-10 form-wrap bo-bottom" style="height: 80px;">
 								<textarea class="form-control input-sm" rows="3" cols="114"></textarea>
 							</div>
 						</div>
