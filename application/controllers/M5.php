@@ -505,6 +505,6 @@ class M5 extends CI_Controller {
 				}// 폼 검증 로직 종료
 			}// 조회 권한 분기 종료
 		}// 권한관리 sdi 분기 종료
-	}// config 함수 종료/
+	}// config 함수 종료
 }// 클래스 종료
 // End of this File
