@@ -28,3 +28,4 @@ class Main extends CI_Controller {
 		$this->load->view('cms_main_index');
 	}
 }
+// End of this File
