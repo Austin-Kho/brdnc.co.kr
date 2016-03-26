@@ -9,8 +9,7 @@ class M4 extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		if(@$this->session->userdata['logged_in'] !== TRUE) {
-			echo "<meta http-equiv='Refresh' content='0; URL=".$this->config->base_url()."member/'>";
-			exit;
+			redirect(base_url().'member/');
 		}
 		$this->load->model('main_m'); //모델 파일 로드
 	}
