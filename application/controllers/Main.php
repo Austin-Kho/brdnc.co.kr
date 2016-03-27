@@ -29,6 +29,7 @@ class Main extends CI_Controller {
 	}
 
 	public function main() {
+		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 		$this->load->view('cms_main_index');
 	}
 

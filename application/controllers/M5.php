@@ -46,7 +46,7 @@ class M5 extends CI_Controller {
 	 * @param  string $sdi [3단계 제목]
 	 * @return [type]      [description]
 	 */
-	public function config($mdi='', $sdi=''){
+	 public function config($mdi='', $sdi=''){
 		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		$mdi = $this->uri->segment(3, 1);

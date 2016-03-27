@@ -2,18 +2,18 @@
 	html {height:100%; width:100%; margin:0; padding:0; overflow-y:scroll;}
 	body {
 		height:100%; width:100%;
-		margin:0; padding:0; border:0 outset gray;
+		/*margin: 0; padding: 0; border: 0 outset gray;*/
 		background-image : url('/static/img/bg_dot.jpg');
 	}
 
 	::selection { background-color: #005FAF; color: #FFF; }
 	::-moz-selection { background-color: #005FAF; color: #FFF; }
-	a, nav, input, li, img {outline:none; select-dummy: expression(this.hideFocus=true);}
+	a, nav, input, li, img { outline: none; select-dummy: expression(this.hideFocus=true); }
 
 	/************************************IME MODE**************************************/
-	.han { ime-mode:active; }
-	.eng { ime-mode:inactive; }
-	.en_only { ime-mode:disabled; }
+	.han { ime-mode: active; }
+	.eng { ime-mode: inactive; }
+	.en_only { ime-mode: disabled; }
 	/************************************IME MODE**************************************/
 
 	/**************************glyphicon style*****************************/
@@ -23,7 +23,7 @@
 	/**************************glyphicon style*****************************/
 
 	div.container#main_container { background-color: white; padding: 0 15px; }
-	footer.footer { border-top:1px solid #ccc; background-color: #eee; margin-top: 25px;}
+	foote .footer { border-top:1px solid #ccc; background-color: #eee; margin-top: 25px;}
 
 	.nav-tabs { margin-bottom: -20px; }
 	.nav-tabs  li a { color: #888; }
@@ -125,9 +125,3 @@
 	.mbo-tb { border-width:1px 0; border-style:solid; border-color:#B2BCDE; }
 	.mbo-tbrl { border: 1px solid #B2BCDE; }
 	/**------------------------------------보더----------------------------------------**/
-
-
-
-
-
-
