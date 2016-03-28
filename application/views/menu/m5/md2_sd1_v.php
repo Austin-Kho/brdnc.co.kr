@@ -49,13 +49,15 @@
 				<label for="or_no1">법인(주민)등록번호 <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-95 en_only" id="or_no1" name="or_no1" maxlength="6" value="<?php if($mode=='com_reg') {echo set_value('or_no1');} else {echo substr($com->or_no, 0, 6);} ?>" onkeypress="isNum();" required autofocus></div>
-      	<div class="col-xs-4">
-      		<label for="or_no2" class="sr-only">법인(주민)등록번호2 </label>
-      		<input type="text" class="form-control input-sm wid-90 en_only" id="or_no2" name="or_no2" maxlength="7" value="<?php if($mode=='com_reg') {echo set_value('or_no2');} else {echo substr($com->or_no, 7, 13);} ?>" onkeypress="isNum();" required autofocus>
-      	</div>
-      	<div class="col-xs-5">
-      		<label for="sur" class="sr-only">부가세신고주기</label>
+				<div class="col-xs-3">
+					<input type="text" class="form-control input-sm wid-95 en_only" id="or_no1" name="or_no1" maxlength="6" value="<?php if($mode=='com_reg') {echo set_value('or_no1');} else {echo substr($com->or_no, 0, 6);} ?>" onkeypress="isNum();" required autofocus>
+				</div>
+		      	<div class="col-xs-4">
+		      		<label for="or_no2" class="sr-only">법인(주민)등록번호2 </label>
+		      		<input type="text" class="form-control input-sm wid-90 en_only" id="or_no2" name="or_no2" maxlength="7" value="<?php if($mode=='com_reg') {echo set_value('or_no2');} else {echo substr($com->or_no, 7, 13);} ?>" onkeypress="isNum();" required autofocus>
+		      	</div>
+		      	<div class="col-xs-5">
+		      		<label for="sur" class="sr-only">부가세신고주기</label>
 					<select class="form-control input-sm wid-90" id="sur" name="sur" required autofocus>
 						<option value="">선택</option>
 						<option value="1" <?php if($mode=='com_reg'){echo set_select('sur', '1');}else{if($com->sur==1) echo 'selected';} ?>>부가세 분기 신고</option>

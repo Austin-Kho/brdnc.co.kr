@@ -1,24 +1,27 @@
 			<div class="main_start"></div>
 
+<?php if( !$this->input->get('ss_di') or $this->input->get('ss_di')==1) : ?>
 			<div class="row">
 				<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 600px;'; ?>">
 					<div class="row" style="margin: 0 0 20px 0; border-bottom: 1px solid #ddd;">
-						<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">부서별</div>
-						<div class="col-md-2" style="height: 40px; padding-top: 5px;">
-							<select class="form-control input-sm">
-								<option>전 체</option>
+						<form name="list_frm" method="post" action="">
+							<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">부서별</div>
+							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
+								<select class="form-control input-sm">
+									<option>전 체</option>
 <?php foreach($all_div as $lt) : ?>
-								<option value="<?php echo $lt->div_code; ?>" <?if($lt->div_code==$this->input->post('div_code')) echo "selected";?>><?php echo $lt->div_name ?></option>
+									<option value="<?php echo $lt->div_code; ?>" <?if($lt->div_code==$this->input->post('div_code')) echo "selected";?>><?php echo $lt->div_name ?></option>
 <?php endforeach; ?>
-							</select>
-						</div>
-						<div class="col-md-5" style="height: 40px; padding-top: 10px;"></div>
-						<div class="col-md-2" style="height: 40px; padding-top: 5px;">
-							<input class="form-control input-sm" name="div_search" placeholder="(임)직원 검색">
-						</div>
-						<div class="col-md-1" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
-							<button class="btn btn-primary btn-sm center"> 검 색 </button>
-						</div>
+								</select>
+							</div>
+							<div class="col-md-5" style="height: 40px; padding-top: 10px;"></div>
+							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
+								<input class="form-control input-sm" name="div_search" placeholder="(임)직원 검색">
+							</div>
+							<div class="col-md-1" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
+								<button class="btn btn-primary btn-sm center"> 검 색 </button>
+							</div>
+						</form>
 					</div>
 					<div class="row table-responsive" style="margin: 0;">
 						<table class="table table-bordered font12">
@@ -57,9 +60,146 @@
 				</div>
 				<div class="row" style="margin: 0 15px;">
 					<div class="col-md-12" style="height: 70px; padding: 26px 15px; margin: 18px 0; border-width: 0 0 1px 0; border-style: solid; border-color: #B2BCDE;">
-						<div class="col-xs-6"><button class="btn btn-success btn-sm">신규등록</button></div>
-						<div class="col-xs-6" style="text-align: right;"><button class="btn btn-danger btn-sm">선택삭제</button></div>
+<?
+	if($auth<2){
+		$submit_str="alert('등록 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
+		$del_str="alert('삭제 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
+	}else{
+		$submit_str="location.href='?ss_di=2&amp;mode=reg' ";
+		$del_str="alert('준비중..! 현재 해당 부서에 대한 수정 화면에서 개별 삭제처리만 가능합니다.')";
+	}
+?>
+						<div class="col-xs-6"><button class="btn btn-success btn-sm" onclick="<?php echo $submit_str; ?>">신규등록</button></div>
+						<div class="col-xs-6" style="text-align: right;"><button class="btn btn-danger btn-sm" onclick="<?php echo $del_str; ?>">선택삭제</button></div>
 					</div>
 				</div>
 
 			</div>
+
+
+<?php elseif($this->input->get('ss_di')==2) : ?>
+			<div class="row">
+				<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 600px;'; ?>">
+					<div style="height:20px; margin: 5px 0; background-color: #eee;"></div>
+					<div style="height: 36px; padding: 8px 0 0 10px; margin-bottom: 10px;">
+						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: green;"></span>
+						<strong>직원정보 <?php if($this->input->get('mode')=='reg') echo '신규'; else echo '수정'; ?>등록</strong>
+					</div>
+<?php
+	$attributes = array('name' => 'form1', 'class' => 'form-inline', 'method' => 'post');
+	echo form_open('/m5/config/1/1/', $attributes);
+?>
+					<fieldset class="font12">
+						<label for="mode" class="sr-only">모드</label>
+						<input type="hidden" name="mode" value="<?php echo $this->input->get('mode'); ?>">
+<?php if($this->input->get('seq')) : ?>
+						<label for="seq" class="sr-only">키</label>
+						<input type="hidden" name="seq" value="<?php echo $sel_mem->seq; ?>">
+<?php endif; ?>
+						<div class="row bo-top">
+							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
+								<label for="mem_name">(임)직원명 <span class="red">*</span></label>
+							</div>
+							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+								<input type="text" class="form-control input-sm" id="mem_name" name="mem_name" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->mem_name; ?>" required autofocus>
+							</div>
+							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
+								<label for="id_num">주민등록번호</label>
+							</div>
+							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+								<input type="text" class="form-control input-sm en_only" id="or_no1" name="or_no1" maxlength="6" value="" onkeypress="isNum();" required autofocus>
+							</div>
+						</div>
+						<div class="row bo-top">
+							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
+								<label for="manager">담당부서 <span class="red">*</span></label>
+							</div>
+							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+								<!-- <input type="text" class="form-control input-sm han" id="div_name" name="div_name" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->div_name; ?>" required autofocus> -->
+								<select name="div_seq" class="form-control input-sm">
+									<option value=""> 선 택
+									<option value="">ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
+								</select>
+							</div>
+							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
+								<label for="div_posi">직 급 <span class="red">*</span></label>
+							</div>
+							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+								<input type="text" class="form-control input-sm han" id="div_posi" name="div_posi" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->div_tel; ?>">
+							</div>
+						</div>
+						<div class="row bo-top">
+							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
+								<label for="dir_tel">직통전화</label>
+							</div>
+							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+								<input type="text" class="form-control input-sm" id="dir_tel" name="dir_tel" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->manager; ?>">
+							</div>
+							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
+								<label for="mobile">비상전화 (Mobile) <span class="red">*</span></label>
+							</div>
+							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+								<input type="text" class="form-control input-sm" id="mobile" name="mobile" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->manager; ?>">
+							</div>
+						</div>
+						<div class="row bo-top bo-bottom">
+							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
+								<label for="email">이메일 (Email) <span class="red">*</span></label>
+							</div>
+							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+								<input type="text" class="form-control input-sm han" id="email" name="email" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->div_tel; ?>">
+							</div>
+							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
+								<label for="join_date">입 사 일 <span class="red">*</span></label>
+							</div>
+							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+								<input type="text" class="form-control input-sm han" id="join_date" name="join_date" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->div_tel; ?>">
+							</div>
+						</div>
+<?php if($this->input->get('seq')) : ?>
+						<div class="row checkbox" style="padding: 10px; color: #C3BFBF;">
+							<input type="checkbox" onclick="if(this.checked==0) document.getElimentById('reti').style.display='none'; else document.getElimentById('reti').style.display=''; "> &nbsp;퇴사등록
+						</div>
+
+						<div class="row bo-top bo-bottom" id="reti" style="display: none;">
+							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
+								<label for="id_num">퇴사등록</label>
+							</div>
+							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+								<input type="text" class="form-control input-sm" id="id_num" name="id_num" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->manager; ?>">
+							</div>
+							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
+								<label for="join_date">퇴 사 일 <span class="red">*</span></label>
+							</div>
+							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+								<input type="text" class="form-control input-sm han" id="join_date" name="join_date" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->div_tel; ?>">
+							</div>
+						</div>
+<?php endif; ?>
+					</fieldset>
+				</form>
+				</div>
+				<div class="row" style="margin: 0 15px;">
+					<div class="col-md-12" style="height: 70px; padding: 26px 15px; margin: 18px 0; border-width: 0 0 1px 0; border-style: solid; border-color: #B2BCDE;">
+<?
+	if($auth<2){
+		$submit_str="alert('등록 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
+		$del_str="alert('삭제 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
+	}else{
+		$submit_str="div_submit('".$this->input->get('mode')."');";
+		$del_str="if(confirm('해당 부서정보를 삭제 하시겠습니까?')==1) location.href='?s_di=1&amp;mode=del&amp;seq=".$this->input->get('seq')."'";
+	}
+?>
+						<div class="col-xs-6">
+							<button class="btn btn-success btn-sm" onclick="<?php echo $submit_str; ?>"><?php if($this->input->get('mode')=='modify') echo '수정하기'; else echo '등록하기'; ?></button>
+							<button class="btn btn-info btn-sm" onclick="location.href='?ss_di=1' ">목록으로</button>
+						</div>
+						<div class="col-xs-6" style="text-align: right;">
+<?php if($this->input->get('mode')=='modify') : ?>
+							<button class="btn btn-danger btn-sm" onclick="<?php echo $del_str; ?>">선택삭제</button>
+<?php endif; ?>
+						</div>
+					</div>
+				</div>
+			</div>
+<?php endif; ?>
