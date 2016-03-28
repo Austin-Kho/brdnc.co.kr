@@ -4,6 +4,16 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 class M5_m extends CI_Model {
 
 	/**
+	 * [all_div_name 셀렉트바 전체 목록]
+	 * @return [Array] [목록]
+	 */
+	public function all_div_name(){
+		$this->db->select('div_code, div_name');
+		$qry = $this->db->get('cms_com_div');
+		return $result = $qry->result();
+	}
+
+	/**
 	 * [com_div_list 등록 부서 리스트]
 	 * @param  [string] $search_text   [검색어]
 	 * @param  [string] $start       [페이지네이션 시작]
@@ -13,28 +23,48 @@ class M5_m extends CI_Model {
 	 */
 	public function com_div_list($start='', $limit='', $st1='', $st2='', $n){
 		// 검색어가 있을 경우
-		if($st1 !=''){	 $this->db->where('div_code', $st1); }
+		if($st1 !=''){ $this->db->where('div_code', $st1); }
 		if($st2 !='') {
 			$this->db->like('div_name', $st2);
 			$this->db->or_like('manager', $st2);
 			$this->db->or_like('res_work', $st2);
 		}
 		$this->db->order_by('seq', 'ASC');
-		if($start != '' or $limit !='')	$this->db->limit($limit, $start);
-		$qry = $this->db->get('cms_com_div1');
+		if($st1 =='' && ($start != '' or $limit !=''))	$this->db->limit($limit, $start);
+		$qry = $this->db->get('cms_com_div');
 
 		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
 		return $result;
 	}
 
 	/**
-	 * [all_div_name 셀렉트바 전체 목록]
-	 * @return [Array] [목록]
-	 */
-	public function all_div_name(){
-		$this->db->select('div_code, div_name');
+	* [sel_div 선택한 부서 정보]
+	* @param [int]  $seq  [불러올 부서데이터의 키(seq)]
+	* @return [Array]       [불러올 부서데이터]]
+	*/
+	public function sel_div($seq) {
+		$this->db->where('seq', $seq);
 		$qry = $this->db->get('cms_com_div');
-		return $result = $qry->result();
+		return $rlt = $qry->row();
+	}
+
+	/**
+	 * [com_div_reg 부서정보 등록하기]
+	 * @return [type] [성공여부]
+	 */
+	public function com_div_reg($data) {
+		$result = $this->db->insert('cms_com_div', $data);
+		return $result;
+	}
+
+	/**
+	 * [com_div_modify 부서정보 수정하기]
+	 * @return [type] [성공여부]
+	 */
+	public function com_div_modify($data, $seq) {
+		$this->db->where('seq', $seq);
+		$result = $this->db->update('cms_com_div', $data);
+		return $result;
 	}
 
 	/**

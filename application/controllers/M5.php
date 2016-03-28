@@ -74,12 +74,16 @@ class M5 extends CI_Controller {
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m5_1_1'];
 
+				// 검색어 post 데이터
+				$st1 = $this->input->post('div_sel');
+				$st2 = $this->input->post('div_search');
+
 				//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = '/m5/config/1/1/';   //페이징 주소
-				$config['total_rows'] = $this->m5_m->com_div_list('', '', '', '', 'num');  //게시물의 전체 갯수
+				$config['total_rows'] = $this->m5_m->com_div_list('', '', $st1, $st2, 'num');  //게시물의 전체 갯수
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -94,25 +98,45 @@ class M5 extends CI_Controller {
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$data['pagination'] = $this->pagination->create_links();
 
-				// 검색어 post 데이터
-				$st1 = $this->input->post('div_code');
-				$st2 = $this->input->post('div_search');
-
 				// db[전체부서목록] 데이터 불러오기
 				$data['all_div'] = $this->m5_m->all_div_name();
 
 				//  db [부서]데이터 불러오기
 				$data['list'] = $this->m5_m->com_div_list($start, $limit, $st1, $st2, '');
 
+				// 세부 부서데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
+				if($this->input->get('seq')) $data['sel_div'] = $this->m5_m->sel_div($this->input->get('seq'));
+
 				// 폼 검증 라이브러리 로드
 				$this->load->library('form_validation'); // 폼 검증
 				//// 폼 검증할 필드와 규칙 사전 정의
-				// $this->form_validation->set_rules('co_name', '회사명', 'required');
+				$this->form_validation->set_rules('div_code', '부서코드', 'required');
+				$this->form_validation->set_rules('div_name', '부서명', 'required');
+				$this->form_validation->set_rules('res_work', '담당업무', 'required');
+
 				if($this->form_validation->run()==FALSE) {
 					//본 페이지 로딩
 					$this->load->view('/menu/m5/md1_sd1_v', $data);
 				}else{
+					$div_data = array(
+						'div_code' => $this->input->post('div_code', TRUE),
+						'div_name' => $this->input->post('div_name', TRUE),
+						'manager' => $this->input->post('manager', TRUE),
+						'div_tel' => $this->input->post('div_tel', TRUE),
+						'res_work' => $this->input->post('res_work', TRUE),
+						'note' => $this->input->post('note', TRUE)
+					);
 
+					if($this->input->post('mode')=='reg') {
+						$result = $this->m5_m->com_div_reg($div_data);
+					}else if($this->input->post('mode')=='modify') {
+						$result = $this->m5_m->com_div_modify($div_data, $this->input->post('seq'));
+					}
+					if($result){
+						alert('정상적으로 처리되었습니다.', '');
+					}else{
+						alert('다시 시도하여 주십시요.', '');
+					}
 				}
 			}
 

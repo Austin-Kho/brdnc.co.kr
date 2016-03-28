@@ -20,7 +20,7 @@ function div_submit(mode){
 	if(mode=='reg') var msg = '신규등록';
 	if(mode=='modify') var msg = '변경등록';
 
-	if(confirm("부서 정보를 "+msg+" 하시겠습니까?")==true){
+	if(confirm("부서 정보를 "+msg+" 하시겠습니까?")===true){
 		form.submit();
 	}else{
 		return;
@@ -57,7 +57,7 @@ function div_mem_submit(mode){
 	if(mode=='reg') var msg = '신규등록';
 	if(mode=='modify') var msg = '변경등록';
 
-	if(confirm("직원 정보를 "+msg+" 하시겠습니까?")==true){
+	if(confirm("직원 정보를 "+msg+" 하시겠습니까?")===true){
 		form.submit();
 	}else{
 		return;
@@ -89,7 +89,7 @@ function acc_submit(mode){
 	if(mode=='reg') var msg = '신규등록';
 	if(mode=='modify') var msg = '변경등록';
 
-	if(confirm("거래처 정보를 "+msg+" 하시겠습니까?")==true){
+	if(confirm("거래처 정보를 "+msg+" 하시겠습니까?")===true){
 		form.submit();
 	}else{
 		return;
@@ -123,7 +123,7 @@ function bank_submit(mode){
 			form.holder.focus();
 			return;
 		}
-		if(form.is_com[0].checked==0&&form.is_com[1].checked==0){
+		if(form.is_com[0].checked===0&&form.is_com[1].checked===0){
 			alert('관리 구분 항목을 선택하세요!');
 			form.is_com.focus();
 			return;
@@ -152,8 +152,8 @@ function bank_submit(mode){
 		if(mode=='modify') var msg = '변경등록';
 
 		var all_msg = '은행계좌 정보를 '+msg+' 하시겠습니까?';
-		var a = confirm(all_msg)
-		if(a==true){
+		var a = confirm(all_msg);
+		if(a===true){
 			form.submit();
 		} else {
 			return;
@@ -477,8 +477,8 @@ function com_submit(mode){
 	if(mode=='com_reg') var msg = '신규등록';
 	if(mode=='com_modify') var msg = '변경등록';
 
-	var a = confirm('회사정보를 '+msg+' 하시겠습니까?')
-		if(a==true){
+	var a = confirm('회사정보를 '+msg+' 하시겠습니까?');
+		if(a===true){
 			form.submit();
 		} else {
 			return;
@@ -497,7 +497,7 @@ function com_submit(mode){
 			if(sf=="승인") {form.sf.value ="1";}
 			if(sf=="거부") {form.sf.value ="0";}
 
-			if(confirm("사용자 등록을 "+sf+"하시겠습니까?") == true){
+			if(confirm("사용자 등록을 "+sf+"하시겠습니까?") === true){
 				form.submit();
 			}else{
 				return;
@@ -515,17 +515,17 @@ function com_submit(mode){
 		/////////////사용자 권한 설정 전송 함수 ///////////////
 		function auth_submit(un){
 			var form=document.form3;
-			if( !un || un==0){
+			if( !un || un===0){
 				window.alert("권한을 설정할 직원을 선택하여 주십시요!");
 				document.getElementById('user_sel').focus();
 				return;
 			}
-			if(form.user_no.checked !=true){
+			if(form.user_no.checked !==true){
 				window.alert("권한을 설정할 직원을 체크하여 주십시요!");
 				form.user_no.focus();
 				return;
 			}
-			if(confirm("사용자 솔루션 이용 권한을 등록(변경) 하시겠습니까?")==true){
+			if(confirm("사용자 솔루션 이용 권한을 등록(변경) 하시겠습니까?")===true){
 				form.submit();
 			}else{
 				return;
