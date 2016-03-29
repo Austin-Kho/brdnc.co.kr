@@ -47,7 +47,7 @@ class M5 extends CI_Controller {
 	 * @return [type]      [description]
 	 */
 	 public function config($mdi='', $sdi=''){
-		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+		$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
@@ -189,28 +189,37 @@ class M5 extends CI_Controller {
 
 				// 폼 검증 라이브러리 로드
 				$this->load->library('form_validation'); // 폼 검증
-				//// 폼 검증할 필드와 규칙 사전 정의
-				//$this->form_validation->set_rules('div_code', '부서코드', 'required');
-				//$this->form_validation->set_rules('div_name', '부서명', 'required');
-				//$this->form_validation->set_rules('res_work', '담당업무', 'required');
+				// 폼 검증할 필드와 규칙 사전 정의
+				$this->form_validation->set_rules('mem_name', '(임)직원명', 'required');
+				$this->form_validation->set_rules('div_name', '담당부서', 'required');
+				$this->form_validation->set_rules('div_posi', '직급(책)', 'required');
+				$this->form_validation->set_rules('mobile', '비상전화', 'required');
+				$this->form_validation->set_rules('email', '이메일', 'required');
+				$this->form_validation->set_rules('join_date', '입사일', 'required');
 
 				if($this->form_validation->run()==FALSE) {
 					//본 페이지 로딩
 					$this->load->view('/menu/m5/md1_sd2_v', $data);
 				}else{
-					// $div_data = array(
-					// 	'div_code' => $this->input->post('div_code', TRUE),
-					// 	'div_name' => $this->input->post('div_name', TRUE),
-					// 	'manager' => $this->input->post('manager', TRUE),
-					// 	'div_tel' => $this->input->post('div_tel', TRUE),
-					// 	'res_work' => $this->input->post('res_work', TRUE),
-					// 	'note' => $this->input->post('note', TRUE)
-					// );
+					if($this->input->post('is_reti')===NULL) $is_reti = 0; else $is_reti = 1;
+					$mem_data = array(
+						'com_seq' => 1,
+						'div_name' => $this->input->post('div_name', TRUE),
+						'div_posi' => $this->input->post('div_posi', TRUE),
+						'mem_name' => $this->input->post('mem_name', TRUE),
+						'dir_tel' => $this->input->post('dir_tel', TRUE),
+						'mobile' => $this->input->post('mobile', TRUE),
+						'email' => $this->input->post('email', TRUE),
+						'id_num' => $this->input->post('id_num', TRUE),
+						'join_date' => $this->input->post('join_date', TRUE),
+						'is_reti' => $is_reti,
+						'reti_date' => $this->input->post('reti_date', TRUE)
+					);
 
 					if($this->input->post('mode')=='reg') {
-						$result = $this->m5_m->com_mem_reg($div_data);
+						$result = $this->m5_m->com_mem_reg($mem_data);
 					}else if($this->input->post('mode')=='modify') {
-						$result = $this->m5_m->com_mem_modify($div_data, $this->input->post('seq'));
+						$result = $this->m5_m->com_mem_modify($mem_data, $this->input->post('seq'));
 					}
 					if($result){
 						alert('정상적으로 처리되었습니다.', '');

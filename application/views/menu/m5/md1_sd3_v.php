@@ -1,7 +1,7 @@
 			<div class="main_start"></div>
 
 			<div class="row">
-				<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 600px;'; ?>">
+				<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 490px;'; ?>">
 					<div class="row" style="margin: 0 0 20px 0; border-bottom: 1px solid #ddd;">
 						<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">업체구분</div>
 						<div class="col-md-2" style="height: 40px; padding-top: 5px;">

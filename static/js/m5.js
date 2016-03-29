@@ -39,19 +39,24 @@ function div_mem_submit(mode){
 		form.mem_name.focus();
 		return;
 	}
-	if(!form.div_seq.value){
+	if(!form.div_name.value){
 		alert('담당부서를 선택 하여 주십시요!');
-		form.div_seq.focus();
+		form.div_name.focus();
 		return;
 	}
 	if(!form.div_posi.value){
-		alert('직책을 입력 하여 주십시요!');
+		alert('직급(책)을 입력 하여 주십시요!');
 		form.div_posi.focus();
 		return;
 	}
 	if(!form.mobile.value){
 		alert('비상전화(Mobile)를 입력 하여 주십시요!');
 		form.mobile.focus();
+		return;
+	}
+	if(!form.email.value){
+		alert('이메일(Email)을 입력 하여 주십시요!');
+		form.email.focus();
 		return;
 	}
 	if(mode=='reg') var msg = '신규등록';

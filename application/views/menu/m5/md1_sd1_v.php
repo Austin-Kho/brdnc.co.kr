@@ -2,7 +2,7 @@
 
 <?php if( !$this->input->get('ss_di') or $this->input->get('ss_di')==1) : ?>
 			<div class="row">
-				<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 600px;'; ?>">
+				<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 490px;'; ?>">
 					<div class="row" style="margin: 0 0 20px 0; border-bottom: 1px solid #ddd;">
 						<form name="list_frm" method="post" action="">
 							<div class="col-xs-4 col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">부서별</div>
@@ -77,7 +77,7 @@
 
 <?php elseif($this->input->get('ss_di')==2) : ?>
 			<div class="row">
-				<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 600px;'; ?>">
+				<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 490px;'; ?>">
 					<div style="height:20px; margin: 5px 0; background-color: #eee;"></div>
 					<div style="height: 36px; padding: 8px 0 0 10px; margin-bottom: 10px;">
 						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: green;"></span>

@@ -8,7 +8,7 @@ class M5_m extends CI_Model {
 	 * @return [Array] [목록]
 	 */
 	public function all_div_name(){
-		$this->db->select('div_code, div_name');
+		$this->db->select('seq, div_code, div_name');
 		$qry = $this->db->get('cms_com_div');
 		return $result = $qry->result();
 	}
@@ -67,6 +67,12 @@ class M5_m extends CI_Model {
 		return $result;
 	}
 
+
+
+
+
+
+
 	/**
 	 * [com_mem_list 직원 목록]
 	 * @param  string $search_text [description]
@@ -77,7 +83,7 @@ class M5_m extends CI_Model {
 	 */
 	public function com_mem_list($start='', $limit='', $st1='', $st2='', $n){
 		// 검색어가 있을 경우
-		if($st1 !=''){	 $this->db->where('div_code', $st1); }
+		if($st1 !=''){	 $this->db->where('div_seq', $st1); }
 		if($st2 !='') {
 			$this->db->like('div_posi', $search_text);
 			$this->db->like('mem_name', $search_text);
@@ -91,6 +97,40 @@ class M5_m extends CI_Model {
 		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
 		return $result;
 	}
+
+	/**
+	* [sel_mem 선택한 직원 정보]
+	* @param [int]  $seq  [불러올 직원데이터의 키(seq)]
+	* @return [Array]       [불러올 직원데이터]]
+	*/
+	public function sel_mem($seq) {
+		$this->db->where('seq', $seq);
+		$qry = $this->db->get('cms_com_div_mem1');
+		return $rlt = $qry->row();
+	}
+
+	/**
+	 * [div_mem_reg 직원정보 등록하기]
+	 * @return [type] [성공여부]
+	 */
+	public function com_mem_reg($data) {
+		$result = $this->db->insert('cms_com_div_mem1', $data);
+		return $result;
+	}
+
+	/**
+	 * [div_mem_modify 직원정보 수정하기]
+	 * @return [type] [성공여부]
+	 */
+	public function com_mem_modify($data, $seq) {
+		$this->db->where('seq', $seq);
+		$result = $this->db->update('cms_com_div_mem1', $data);
+		return $result;
+	}
+
+
+
+
 
 	/**
 	 * [com_accounts_list 거래처 목록]
