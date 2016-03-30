@@ -161,7 +161,7 @@
 							<button class="btn btn-info btn-sm" onclick="location.href='?ss_di=1' ">목록으로</button>
 						</div>
 						<div class="col-xs-6" style="text-align: right;">
-<?php if($this->input->get('mode')=='modify') : ?>
+<?php if($this->input->get('seq')) : ?>
 							<button class="btn btn-danger btn-sm" onclick="<?php echo $del_str; ?>">선택삭제</button>
 <?php endif; ?>
 						</div>
