@@ -117,8 +117,8 @@ class M5_m extends CI_Model {
 	 * @return [type] [성공여부]
 	 */
 	public function com_mem_reg($data) {
-		$result = $this->db->insert('cms_com_div_mem1', $data);
-		return $result;
+		$rlt = $this->db->insert('cms_com_div_mem1', $data);
+		return $rlt;
 	}
 
 	/**
@@ -126,13 +126,13 @@ class M5_m extends CI_Model {
 	 * @return [type] [성공여부]
 	 */
 	public function com_mem_modify($data, $seq) {
-		$result = $this->db->update('cms_com_div_mem1', $data, array('seq' => $seq));
-		return $result;
+		$rlt = $this->db->update('cms_com_div_mem1', $data, array('seq' => $seq));
+		return $rlt;;
 	}
 
 	public function com_mem_del($seq) {
-		$result = $this->db->delete('cms_com_div_mem1', array('seq' => $seq));
-		return $result;
+		$rlt = $this->db->delete('cms_com_div_mem1', array('seq' => $seq));
+		return $rlt;
 	}
 
 

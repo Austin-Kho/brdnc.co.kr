@@ -1,3 +1,15 @@
+function form1_seq_del(seq) {
+	var form = document.form1;
+	form.mode.value='del';
+	form.seq.value=seq;
+	if(confirm("데이터 삭제를 계속 진행하시겠습니까?")===true) {
+		form.submit();
+	}else{
+		return;
+	}
+}
+
+
 /**************  (환경설정 > 기본정보 관리 > 부서정보 관리) S ****************/
 function div_submit(mode){
 	var form = document.form1;
