@@ -66,12 +66,7 @@ class M5_m extends CI_Model {
 		$result = $this->db->update('cms_com_div', $data);
 		return $result;
 	}
-
-
-
-
-
-
+	/////////////////////////////////////////////////////////////////
 
 	/**
 	 * [com_mem_list 직원 목록]
