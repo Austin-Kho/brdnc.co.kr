@@ -24,7 +24,7 @@
 						</form>
 					</div>
 					<div class="row table-responsive" style="margin: 0;">
-						<table class="table table-bordered font12">
+						<table class="table table-bordered table-condensed font12">
 							<thead>
 								<tr>
 									<th class="col-md-1 center" style="background-color: #ecf3fe; border-left: 0;"><input type="checkbox"></th>
@@ -193,7 +193,7 @@
 		$del_str="alert('삭제 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 	}else{
 		$submit_str="div_mem_submit('".$this->input->get('mode')."');";
-		$del_str="if(confirm('해당 부서정보를 삭제 하시겠습니까?')==1) location.href='?s_di=1&amp;mode=del&amp;seq=".$this->input->get('seq')."'";
+		$del_str="if(confirm('해당 (임)직원정보를 삭제 하시겠습니까?')==1) location.href='?s_di=1&amp;mode=del&amp;seq=".$this->input->get('seq')."'";
 	}
 ?>
 						<div class="col-xs-6">

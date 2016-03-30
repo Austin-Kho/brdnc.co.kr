@@ -61,6 +61,7 @@ function div_mem_submit(mode){
 	}
 	if(mode=='reg') var msg = '신규등록';
 	if(mode=='modify') var msg = '변경등록';
+	if(mode=='del') var msg = '삭제';
 
 	if(confirm("직원 정보를 "+msg+" 하시겠습니까?")===true){
 		form.submit();

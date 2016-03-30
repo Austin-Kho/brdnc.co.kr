@@ -31,7 +31,7 @@ class M5_m extends CI_Model {
 		}
 		$this->db->order_by('seq', 'ASC');
 		if($st1 =='' && ($start != '' or $limit !=''))	$this->db->limit($limit, $start);
-		$qry = $this->db->get('cms_com_div');
+		$qry = $this->db->get('cms_com_div1');
 
 		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
 		return $result;
@@ -44,7 +44,7 @@ class M5_m extends CI_Model {
 	*/
 	public function sel_div($seq) {
 		$this->db->where('seq', $seq);
-		$qry = $this->db->get('cms_com_div');
+		$qry = $this->db->get('cms_com_div1');
 		return $rlt = $qry->row();
 	}
 
@@ -53,7 +53,7 @@ class M5_m extends CI_Model {
 	 * @return [type] [성공여부]
 	 */
 	public function com_div_reg($data) {
-		$result = $this->db->insert('cms_com_div', $data);
+		$result = $this->db->insert('cms_com_div1', $data);
 		return $result;
 	}
 
@@ -63,11 +63,14 @@ class M5_m extends CI_Model {
 	 */
 	public function com_div_modify($data, $seq) {
 		$this->db->where('seq', $seq);
-		$result = $this->db->update('cms_com_div', $data);
+		$result = $this->db->update('cms_com_div1', $data);
 		return $result;
 	}
 
-
+	public function com_div_del($seq) {
+		$result = $this->db->delete('cms_com_div1', array('seq' => $seq));
+		return $result;
+	}
 
 
 
@@ -123,8 +126,12 @@ class M5_m extends CI_Model {
 	 * @return [type] [성공여부]
 	 */
 	public function com_mem_modify($data, $seq) {
-		$this->db->where('seq', $seq);
-		$result = $this->db->update('cms_com_div_mem1', $data);
+		$result = $this->db->update('cms_com_div_mem1', $data, array('seq' => $seq));
+		return $result;
+	}
+
+	public function com_mem_del($seq) {
+		$result = $this->db->delete('cms_com_div_mem1', array('seq' => $seq));
 		return $result;
 	}
 

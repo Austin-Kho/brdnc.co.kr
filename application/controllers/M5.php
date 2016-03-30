@@ -131,6 +131,8 @@ class M5 extends CI_Controller {
 						$result = $this->m5_m->com_div_reg($div_data);
 					}else if($this->input->post('mode')=='modify') {
 						$result = $this->m5_m->com_div_modify($div_data, $this->input->post('seq'));
+					}else if($this->input->get('mode')=='del') {
+						$result = $this->m5_m->com_div_del($this->input->get('seq'));
 					}
 					if($result){
 						alert('정상적으로 처리되었습니다.', '');
@@ -220,6 +222,8 @@ class M5 extends CI_Controller {
 						$result = $this->m5_m->com_mem_reg($mem_data);
 					}else if($this->input->post('mode')=='modify') {
 						$result = $this->m5_m->com_mem_modify($mem_data, $this->input->post('seq'));
+					}else if($this->input->get('mode')=='del') {
+						$result = $this->m5_m->com_mem_del($this->input->get('seq'));
 					}
 					if($result){
 						alert('정상적으로 처리되었습니다.', '');
