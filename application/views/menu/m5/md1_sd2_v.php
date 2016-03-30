@@ -24,7 +24,7 @@
 						</form>
 					</div>
 					<div class="row table-responsive" style="margin: 0;">
-						<table class="table table-bordered font12">
+						<table class="table table-bordered table-condensed font12">
 							<thead>
 								<tr>
 									<th class="col-md-1 center" style="background-color: #ecf3fe; border-left: 0;"><input type="checkbox"></th>
@@ -79,19 +79,20 @@
 
 <?php elseif($this->input->get('ss_di')==2) : ?>
 			<div class="row">
-				<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 490px;'; ?>">
-					<div style="height:20px; margin: 5px 0; background-color: #eee;"></div>
-					<div style="height: 36px; padding: 8px 0 0 10px; margin-bottom: 10px;">
-						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: green;"></span>
-						<strong>직원정보 <?php if($this->input->get('mode')=='reg') echo '신규'; else echo '수정'; ?>등록</strong>
-					</div>
+
 <?php
 	$attributes = array('name' => 'form1', 'class' => 'form-inline', 'method' => 'post');
 	echo form_open('/m5/config/1/2/', $attributes);
 ?>
 					<fieldset class="font12">
-						<label for="mode" class="sr-only">모드</label>
-						<input type="hidden" name="mode" value="<?php echo $this->input->get('mode'); ?>">
+						<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 490px;'; ?>">
+							<div style="height:20px; margin: 5px 0; background-color: #eee;"></div>
+							<div style="height: 36px; padding: 8px 0 0 10px; margin-bottom: 10px;">
+								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: green;"></span>
+								<strong>직원정보 <?php if($this->input->get('mode')=='reg') echo '신규'; else echo '수정'; ?>등록</strong>
+							</div>
+							<label for="mode" class="sr-only">모드</label>
+							<input type="hidden" name="mode" value="<?php echo $this->input->get('mode'); ?>">
 <?php if($this->input->get('seq')) : ?>
 						<label for="seq" class="sr-only">키</label>
 						<input type="hidden" name="seq" value="<?php echo $sel_mem->seq; ?>">
@@ -118,7 +119,7 @@
 								<select id="div_name" name="div_name" class="form-control input-sm">
 									<option value=""> 선 택
 <?php foreach($all_div as $lt) : ?>
-									<option value="<?php echo $lt->div_name; ?>" <?if($lt->div_name==$sel_mem->div_name) echo "selected";?>><?php echo $lt->div_name ?></option>
+									<option value="<?php echo $lt->div_name; ?>" <?if( !empty($sel_mem->div_name)==$lt->div_name) echo "selected";?>><?php echo $lt->div_name ?></option>
 <?php endforeach; ?>
 								</select>
 							</div>
@@ -162,7 +163,7 @@
 								</div>
 							</div>
 						</div>
-<?php // if($this->input->get('seq')) : ?>
+<?php  if($this->input->get('seq')) : ?>
 						<div class="row checkbox" style="padding: 10px; color: #C3BFBF;">
 							<input type="checkbox" name="is_reti" value="1" onclick="if(this.checked==0) document.getElementById('reti').style.display='none'; else document.getElementById('reti').style.display=''; "> &nbsp;퇴사등록
 						</div>
@@ -181,10 +182,12 @@
 								</div>
 							</div>
 						</div>
-<?php // endif; ?>
+<?php endif; ?>
+
+						</div>
 					</fieldset>
 				</form>
-				</div>
+
 				<div class="row" style="margin: 0 15px;">
 					<div class="col-md-12" style="height: 70px; padding: 26px 15px; margin: 18px 0; border-width: 0 0 1px 0; border-style: solid; border-color: #B2BCDE;">
 <?
@@ -193,7 +196,7 @@
 		$del_str="alert('삭제 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 	}else{
 		$submit_str="div_mem_submit('".$this->input->get('mode')."');";
-		$del_str="if(confirm('해당 부서정보를 삭제 하시겠습니까?')==1) location.href='?s_di=1&amp;mode=del&amp;seq=".$this->input->get('seq')."'";
+		$del_str="form1_seq_del(".$this->input->get('seq').");";
 	}
 ?>
 						<div class="col-xs-6">
@@ -201,7 +204,7 @@
 							<button class="btn btn-info btn-sm" onclick="location.href='?ss_di=1' ">목록으로</button>
 						</div>
 						<div class="col-xs-6" style="text-align: right;">
-<?php if($this->input->get('mode')=='modify') : ?>
+<?php if($this->input->get('seq')) : ?>
 							<button class="btn btn-danger btn-sm" onclick="<?php echo $del_str; ?>">선택삭제</button>
 <?php endif; ?>
 						</div>

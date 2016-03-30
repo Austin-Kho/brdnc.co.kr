@@ -1,3 +1,15 @@
+function form1_seq_del(seq) {
+	var form = document.form1;
+	form.mode.value='del';
+	form.seq.value=seq;
+	if(confirm("데이터 삭제를 계속 진행하시겠습니까?")===true) {
+		form.submit();
+	}else{
+		return;
+	}
+}
+
+
 /**************  (환경설정 > 기본정보 관리 > 부서정보 관리) S ****************/
 function div_submit(mode){
 	var form = document.form1;
@@ -61,6 +73,7 @@ function div_mem_submit(mode){
 	}
 	if(mode=='reg') var msg = '신규등록';
 	if(mode=='modify') var msg = '변경등록';
+	if(mode=='del') var msg = '삭제';
 
 	if(confirm("직원 정보를 "+msg+" 하시겠습니까?")===true){
 		form.submit();

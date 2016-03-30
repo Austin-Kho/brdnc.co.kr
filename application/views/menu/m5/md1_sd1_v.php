@@ -24,7 +24,7 @@
 						</form>
 					</div>
 					<div class="row table-responsive" style="margin: 0;">
-						<table class="table table-bordered font12">
+						<table class="table table-bordered table-condensed font12">
 							<thead>
 								<tr>
 									<th class="col-md-1 center" style="background-color: #ecf3fe; border-left: 0;"><input type="checkbox"></th>
@@ -77,70 +77,74 @@
 
 <?php elseif($this->input->get('ss_di')==2) : ?>
 			<div class="row">
-				<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 490px;'; ?>">
-					<div style="height:20px; margin: 5px 0; background-color: #eee;"></div>
-					<div style="height: 36px; padding: 8px 0 0 10px; margin-bottom: 10px;">
-						<span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: green;"></span>
-						<strong>부서정보 <?php if($this->input->get('mode')=='reg') echo '신규'; else echo '수정'; ?>등록</strong>
-					</div>
+
 <?php
 	$attributes = array('name' => 'form1', 'class' => 'form-inline', 'method' => 'post');
 	echo form_open('/m5/config/1/1/', $attributes);
 ?>
 					<fieldset class="font12">
-						<label for="mode" class="sr-only">모드</label>
-						<input type="hidden" name="mode" value="<?php echo $this->input->get('mode'); ?>">
+						<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 490px;'; ?>">
+							<div style="height:20px; margin: 5px 0; background-color: #eee;"></div>
+							<div style="height: 36px; padding: 8px 0 0 10px; margin-bottom: 10px;">
+								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: green;"></span>
+								<strong>부서정보 <?php if($this->input->get('mode')=='reg') echo '신규'; else echo '수정'; ?>등록</strong>
+							</div>
+
+								<label for="mode" class="sr-only">모드</label>
+								<input type="hidden" name="mode" value="<?php echo $this->input->get('mode'); ?>">
 <?php if($this->input->get('seq')) : ?>
-						<label for="seq" class="sr-only">키</label>
-						<input type="hidden" name="seq" value="<?php echo $sel_div->seq; ?>">
+								<label for="seq" class="sr-only">키</label>
+								<input type="hidden" name="seq" value="<?php echo $sel_div->seq; ?>">
 <?php endif; ?>
-						<div class="row" style="border-top: 1px solid #ddd;">
-							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
-								<label for="div_code">부서코드 <span class="red">*</span></label>
+								<div class="row" style="border-top: 1px solid #ddd;">
+									<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
+										<label for="div_code">부서코드 <span class="red">*</span></label>
+									</div>
+									<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+										<input type="text" class="form-control input-sm" id="div_code" name="div_code" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->div_code; ?>" required autofocus>
+									</div>
+									<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
+										<label for="div_name">부서명 <span class="red">*</span></label>
+									</div>
+									<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+										<input type="text" class="form-control input-sm han" id="div_name" name="div_name" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->div_name; ?>" required autofocus>
+									</div>
+								</div>
+								<div class="row" style="border-top: 1px solid #ddd;">
+									<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
+										<label for="manager">부서책임자</label>
+									</div>
+									<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+										<input type="text" class="form-control input-sm" id="manager" name="manager" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->manager; ?>">
+									</div>
+									<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
+										<label for="div_tel">부서전화</label>
+									</div>
+									<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+										<input type="text" class="form-control input-sm han" id="div_tel" name="div_tel" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->div_tel; ?>">
+									</div>
+								</div>
+								<div class="row" style="border-top: 1px solid #ddd;">
+									<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
+										<label for="res_work">담당업무 <span class="red">*</span></label>
+									</div>
+									<div class="form-group col-xs-8 col-sm-8 col-md-10 form-wrap">
+										<input type="text" class="form-control input-sm" id="res_work" name="res_work" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->res_work; ?>" required autofocus>
+									</div>
+								</div>
+								<div class="row" style="border-top: 1px solid #ddd;">
+									<div class="form-group col-xs-12 col-sm-12 col-md-2 label-wrap2 bo-bottom" style="height: 80px;">
+										<label for="note">비 고</label>
+									</div>
+									<div class="form-group col-xs-12 col-sm-12 col-md-10 form-wrap bo-bottom" style="height: 80px;">
+										<textarea class="form-control input-sm" id="note" name="note"  rows="3" cols="114"><?php if($this->input->get('seq')) echo $sel_div->note; ?></textarea>
+									</div>
+								</div>
 							</div>
-							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
-								<input type="text" class="form-control input-sm" id="div_code" name="div_code" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->div_code; ?>" required autofocus>
-							</div>
-							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
-								<label for="div_name">부서명 <span class="red">*</span></label>
-							</div>
-							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
-								<input type="text" class="form-control input-sm han" id="div_name" name="div_name" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->div_name; ?>" required autofocus>
-							</div>
-						</div>
-						<div class="row" style="border-top: 1px solid #ddd;">
-							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
-								<label for="manager">부서책임자</label>
-							</div>
-							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
-								<input type="text" class="form-control input-sm" id="manager" name="manager" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->manager; ?>">
-							</div>
-							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
-								<label for="div_tel">부서전화</label>
-							</div>
-							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
-								<input type="text" class="form-control input-sm han" id="div_tel" name="div_tel" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->div_tel; ?>">
-							</div>
-						</div>
-						<div class="row" style="border-top: 1px solid #ddd;">
-							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
-								<label for="res_work">담당업무 <span class="red">*</span></label>
-							</div>
-							<div class="form-group col-xs-8 col-sm-8 col-md-10 form-wrap">
-								<input type="text" class="form-control input-sm" id="res_work" name="res_work" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->res_work; ?>" required autofocus>
-							</div>
-						</div>
-						<div class="row" style="border-top: 1px solid #ddd;">
-							<div class="form-group col-xs-12 col-sm-12 col-md-2 label-wrap2 bo-bottom" style="height: 80px;">
-								<label for="note">비 고</label>
-							</div>
-							<div class="form-group col-xs-12 col-sm-12 col-md-10 form-wrap bo-bottom" style="height: 80px;">
-								<textarea class="form-control input-sm" id="note" name="note"  rows="3" cols="114"><?php if($this->input->get('seq')) echo $sel_div->note; ?></textarea>
-							</div>
-						</div>
+
 					</fieldset>
 				</form>
-				</div>
+
 				<div class="row" style="margin: 0 15px;">
 					<div class="col-md-12" style="height: 70px; padding: 26px 15px; margin: 18px 0; border-width: 0 0 1px 0; border-style: solid; border-color: #B2BCDE;">
 <?
@@ -149,7 +153,7 @@
 		$del_str="alert('삭제 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 	}else{
 		$submit_str="div_submit('".$this->input->get('mode')."');";
-		$del_str="if(confirm('해당 부서정보를 삭제 하시겠습니까?')==1) location.href='?s_di=1&amp;mode=del&amp;seq=".$this->input->get('seq')."'";
+		$del_str="form1_seq_del(".$this->input->get('seq').");";
 	}
 ?>
 						<div class="col-xs-6">
@@ -157,7 +161,7 @@
 							<button class="btn btn-info btn-sm" onclick="location.href='?ss_di=1' ">목록으로</button>
 						</div>
 						<div class="col-xs-6" style="text-align: right;">
-<?php if($this->input->get('mode')=='modify') : ?>
+<?php if($this->input->get('seq')) : ?>
 							<button class="btn btn-danger btn-sm" onclick="<?php echo $del_str; ?>">선택삭제</button>
 <?php endif; ?>
 						</div>
