@@ -11,9 +11,24 @@
 	a, nav, input, li, img { outline: none; select-dummy: expression(this.hideFocus=true); }
 
 	/************************************IME MODE**************************************/
-	.han { ime-mode: active; }
-	.eng { ime-mode: inactive; }
-	.en_only { ime-mode: disabled; }
+	.han {
+		/*ime-mode: active;*/
+		-webkit-ime-mode: active;
+		-moz-ime-mode: active;
+		-ms-ime-mode: active;
+	}
+	.eng {
+		/*ime-mode: inactive;*/
+		-webkit-ime-mode: inactive;
+		-moz-ime-mode: inactive;
+		-ms-ime-mode: inactive;
+	}
+	.en_only {
+		/*ime-mode: disabled;*/
+		-webkit-ime-mode: disabled;
+		-moz-ime-mode: disabled;
+		-ms-ime-mode: disabled ;
+	}
 	/************************************IME MODE**************************************/
 
 	/**************************glyphicon style*****************************/

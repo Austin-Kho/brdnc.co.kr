@@ -102,7 +102,7 @@
 								<label for="mem_name">(임)직원명 <span class="red">*</span></label>
 							</div>
 							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
-								<input type="text" class="form-control input-sm" id="mem_name" name="mem_name" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->mem_name; ?>" required autofocus>
+								<input type="text" class="form-control input-sm han" id="mem_name" name="mem_name" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->mem_name; ?>" required autofocus>
 							</div>
 							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="id_num">주민등록번호</label>
@@ -135,13 +135,13 @@
 								<label for="dir_tel">직통전화</label>
 							</div>
 							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
-								<input type="text" class="form-control input-sm" id="dir_tel" name="dir_tel" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->dir_tel; ?>">
+								<input type="text" class="form-control input-sm en_only" id="dir_tel" name="dir_tel" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->dir_tel; ?>">
 							</div>
 							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="mobile">비상전화 (Mobile) <span class="red">*</span></label>
 							</div>
 							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
-								<input type="text" class="form-control input-sm" id="mobile" name="mobile" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->mobile; ?>">
+								<input type="text" class="form-control input-sm en_only" id="mobile" name="mobile" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->mobile; ?>">
 							</div>
 						</div>
 						<div class="row bo-top bo-bottom">
@@ -149,7 +149,7 @@
 								<label for="email">이메일 (Email) <span class="red">*</span></label>
 							</div>
 							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
-								<input type="text" class="form-control input-sm han" id="email" name="email" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->email; ?>">
+								<input type="text" class="form-control input-sm en_only" id="email" name="email" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->email; ?>">
 							</div>
 							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
 								<label for="join_date">입 사 일 <span class="red">*</span></label>

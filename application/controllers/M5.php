@@ -83,7 +83,7 @@ class M5 extends CI_Controller {
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = '/m5/config/1/1/';   //페이징 주소
-				$config['total_rows'] = $this->m5_m->com_div_list('', '', $st1, $st2, 'num');  //게시물의 전체 갯수
+				$config['total_rows'] = $this->m5_m->com_div_list('cms_com_div', '', '', $st1, $st2, 'num');  //게시물의 전체 갯수
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -98,14 +98,16 @@ class M5 extends CI_Controller {
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$data['pagination'] = $this->pagination->create_links();
 
+				// model data ////////////////////////
+				$div_table = 'cms_com_div';
 				// db[전체부서목록] 데이터 불러오기
-				$data['all_div'] = $this->m5_m->all_div_name();
+				$data['all_div'] = $this->m5_m->all_div_name($div_table);
 
 				//  db [부서]데이터 불러오기
-				$data['list'] = $this->m5_m->com_div_list($start, $limit, $st1, $st2, '');
+				$data['list'] = $this->m5_m->com_div_list($div_table, $start, $limit, $st1, $st2, '');
 
 				// 세부 부서데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-				if($this->input->get('seq')) $data['sel_div'] = $this->m5_m->sel_div($this->input->get('seq'));
+				if($this->input->get('seq')) $data['sel_div'] = $this->m5_m->select_data_row($div_table, $this->input->get('seq'));
 
 				// 폼 검증 라이브러리 로드
 				$this->load->library('form_validation'); // 폼 검증
@@ -128,11 +130,11 @@ class M5 extends CI_Controller {
 					);
 
 					if($this->input->post('mode')=='reg') {
-						$result = $this->m5_m->com_div_reg($div_data);
+						$result = $this->m5_m->insert_data($div_table, $div_data);
 					}else if($this->input->post('mode')=='modify') {
-						$result = $this->m5_m->com_div_modify($div_data, $this->input->post('seq'));
+						$result = $this->m5_m->update_data($div_table, $div_data, $this->input->post('seq'));
 					}else if($this->input->post('mode')=='del') {
-						$result = $this->m5_m->com_div_del($this->input->post('seq'));
+						$result = $this->m5_m->delete_data($div_table, $this->input->post('seq'));
 					}
 					if($result){
 						alert('정상적으로 처리되었습니다.', '');
@@ -165,7 +167,7 @@ class M5 extends CI_Controller {
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = '/m5/config/1/2/';  //페이징 주소
-				$config['total_rows'] = $this->m5_m->com_mem_list('', '', $st1, $st2, 'num');  //게시물의 전체 갯수
+				$config['total_rows'] = $this->m5_m->com_mem_list('cms_com_div_mem', '', '', $st1, $st2, 'num');  //게시물의 전체 갯수
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -180,14 +182,17 @@ class M5 extends CI_Controller {
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$data['pagination'] = $this->pagination->create_links();
 
+				// model data ////////////////////////
+				$mem_table = 'cms_com_div_mem';
+
 				// db[전체부서목록] 데이터 불러오기
-				$data['all_div'] = $this->m5_m->all_div_name();
+				$data['all_div'] = $this->m5_m->all_div_name('cms_com_div');
 
 				//  db [직원 ]데이터 불러오기
-				$data['list'] = $this->m5_m->com_mem_list($start, $limit, $st1, $st2, '');
+				$data['list'] = $this->m5_m->com_mem_list($mem_table, $start, $limit, $st1, $st2, '');
 
 				// 세부 부서데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-				if($this->input->get('seq')) $data['sel_mem'] = $this->m5_m->sel_mem($this->input->get('seq'));
+				if($this->input->get('seq')) $data['sel_mem'] = $this->m5_m->select_data_row($mem_table, $this->input->get('seq'));
 
 				// 폼 검증 라이브러리 로드
 				$this->load->library('form_validation'); // 폼 검증
@@ -204,6 +209,7 @@ class M5 extends CI_Controller {
 					$this->load->view('/menu/m5/md1_sd2_v', $data);
 				}else{
 					if($this->input->post('is_reti')===NULL) $is_reti = 0; else $is_reti = 1;
+					if($this->input->post('reti_date')===NULL) $reti_date = 0; else $reti_date = $this->input->post('reti_date', TRUE);
 					$mem_data = array(
 						'com_seq' => 1,
 						'div_name' => $this->input->post('div_name', TRUE),
@@ -215,15 +221,15 @@ class M5 extends CI_Controller {
 						'id_num' => $this->input->post('id_num', TRUE),
 						'join_date' => $this->input->post('join_date', TRUE),
 						'is_reti' => $is_reti,
-						'reti_date' => $this->input->post('reti_date', TRUE)
+						'reti_date' => $reti_date
 					);
 
 					if($this->input->post('mode')=='reg') {
-						$result = $this->m5_m->com_mem_reg($mem_data);
+						$result = $this->m5_m->insert_data($mem_table, $mem_data);
 					}else if($this->input->post('mode')=='modify') {
-						$result = $this->m5_m->com_mem_modify($mem_data, $this->input->post('seq'));
+						$result = $this->m5_m->update_data($mem_table, $mem_data, $this->input->post('seq'));
 					}else if($this->input->post('mode')=='del') {
-						$result = $this->m5_m->com_mem_del($this->input->post('seq'));
+						$result = $this->m5_m->delete_data($mem_table, $this->input->post('seq'));
 					}
 					if($result){
 						alert('정상적으로 처리되었습니다.', '');
@@ -293,7 +299,7 @@ class M5 extends CI_Controller {
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = '/m5/config/1/4/';//.$data['n']; //페이징 주소
 				$config['total_rows'] = $this->m5_m->bank_account_list('', '', '', '', 'num')-1;  //게시물의 전체 갯수
-				$config['per_page'] = 2; // 한 페이지에 표시할 게시물 수
+				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
 
@@ -435,10 +441,10 @@ class M5 extends CI_Controller {
 					);
 
 				if($data['mode']=='com_reg') {
-					$result = $this->m5_m->com_reg($com_data);
+					$result = $this->m5_m->insert_data('cms_com_info', $com_data);
 					$msg = '등록';
 				}else if($data['mode']=='com_modify') {
-					$result = $this->m5_m->com_modify($com_data);
+					$result = $this->m5_m->update_data('cms_com_info', $com_data, 1);
 					$msg = '변경';
 				}
 

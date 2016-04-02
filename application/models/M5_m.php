@@ -3,16 +3,81 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 
 class M5_m extends CI_Model {
 
+	//공통 함수 Start//
+
+	public function select_data_list($table, $seq) {
+		$this->db->where('seq', $seq);
+		$qry = $this->db->get($table);
+		return $rlt = $qry->row();
+	}
+
 	/**
-	 * [all_div_name 셀렉트바 전체 목록]
-	 * @return [Array] [목록]
+	 * [select_data_row description]
+	 * @param  [type] $table [description]
+	 * @param  [type] $seq   [description]
+	 * @return [type]        [description]
 	 */
-	public function all_div_name(){
+	public function select_data_row($table, $seq) {
+		$this->db->where('seq', $seq);
+		$qry = $this->db->get($table);
+		return $rlt = $qry->row();
+	}
+
+	/**
+	 * [insert_data 데이터 입력함수]
+	 * @param  [String] $table [테이블명]
+	 * @param  [Array] $data  [입력할 데이터]
+	 * @return [Boolean]        [입력 성공여부]
+	 */
+	public function insert_data($table, $data) {
+		$result = $this->db->insert($table, $data);
+		return $result;
+	}
+
+	/**
+	 * [update_data 데이터 수정함수]
+	 * @param  [String] $table [테이블명]
+	 * @param  [Array] $data  [수정할 데이터]
+	 * @param  [Int] $seq   [데이터 키 값]
+	 * @return [Boolean]        [수정 성공여부]
+	 */
+	public function update_data($table, $data, $seq) {
+		$this->db->where('seq', $seq);
+		$result = $this->db->update($table, $data);
+		return $result;
+	}
+
+	/**
+	 * [delete_data 데이터 삭제함수]
+	 * @param  [String] $table [테이블명]
+	 * @param  [Int] $seq   [데이터 키 값]
+	 * @return [Boolean]        [삭제 성공여부]
+	 */
+	public function delete_data($table, $seq) {
+		$result = $this->db->delete($table, array('seq' => $seq));
+		return $result;
+	}
+
+
+
+
+	/**
+	 * [all_div_name 셀렉트바 전체 목록 불러오기]
+	 * @return [Array] [부서 목록]
+	 */
+	public function all_div_name($table){
 		$this->db->select('seq, div_code, div_name');
-		$qry = $this->db->get('cms_com_div');
+		$qry = $this->db->get($table);
 		return $result = $qry->result();
 	}
 
+	//공통 함수 End//
+
+
+
+	////////////////////////////////////////////////////////
+	// 기본 정보 관리 모델
+	////////////////////////////////////////////////////////
 	/**
 	 * [com_div_list 등록 부서 리스트]
 	 * @param  [string] $search_text   [검색어]
@@ -21,7 +86,7 @@ class M5_m extends CI_Model {
 	 * @param  [String] $n           [전체리스트 수, 실제리스트 구분인자]
 	 * @return [Array]              [실제리스트 데이터]
 	 */
-	public function com_div_list($start='', $limit='', $st1='', $st2='', $n){
+	public function com_div_list($table, $start='', $limit='', $st1='', $st2='', $n){
 		// 검색어가 있을 경우
 		if($st1 !=''){ $this->db->where('div_code', $st1); }
 		if($st2 !='') {
@@ -31,48 +96,11 @@ class M5_m extends CI_Model {
 		}
 		$this->db->order_by('seq', 'ASC');
 		if($st1 =='' && ($start != '' or $limit !=''))	$this->db->limit($limit, $start);
-		$qry = $this->db->get('cms_com_div1');
+		$qry = $this->db->get($table);
 
 		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
 		return $result;
 	}
-
-	/**
-	* [sel_div 선택한 부서 정보]
-	* @param [int]  $seq  [불러올 부서데이터의 키(seq)]
-	* @return [Array]       [불러올 부서데이터]]
-	*/
-	public function sel_div($seq) {
-		$this->db->where('seq', $seq);
-		$qry = $this->db->get('cms_com_div1');
-		return $rlt = $qry->row();
-	}
-
-	/**
-	 * [com_div_reg 부서정보 등록하기]
-	 * @return [type] [성공여부]
-	 */
-	public function com_div_reg($data) {
-		$result = $this->db->insert('cms_com_div1', $data);
-		return $result;
-	}
-
-	/**
-	 * [com_div_modify 부서정보 수정하기]
-	 * @return [type] [성공여부]
-	 */
-	public function com_div_modify($data, $seq) {
-		$this->db->where('seq', $seq);
-		$result = $this->db->update('cms_com_div1', $data);
-		return $result;
-	}
-
-	public function com_div_del($seq) {
-		$result = $this->db->delete('cms_com_div1', array('seq' => $seq));
-		return $result;
-	}
-
-
 
 
 	/**
@@ -83,7 +111,7 @@ class M5_m extends CI_Model {
 	 * @param  [String] $n           [전체리스트 수, 실제리스트 구분인자]
 	 * @return [Array]              [실제리스트 데이터]
 	 */
-	public function com_mem_list($start='', $limit='', $st1='', $st2='', $n){
+	public function com_mem_list($table, $start='', $limit='', $st1='', $st2='', $n){
 		// 검색어가 있을 경우
 		if($st1 !=''){	 $this->db->where('div_seq', $st1); }
 		if($st2 !='') {
@@ -94,48 +122,11 @@ class M5_m extends CI_Model {
 		$this->db->order_by('seq', 'ASC');
 
 		if($start != '' or $limit !='')	$this->db->limit($limit, $start);
-		$qry = $this->db->get('cms_com_div_mem1');
+		$qry = $this->db->get($table);
 
 		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
 		return $result;
 	}
-
-	/**
-	* [sel_mem 선택한 직원 정보]
-	* @param [int]  $seq  [불러올 직원데이터의 키(seq)]
-	* @return [Array]       [불러올 직원데이터]]
-	*/
-	public function sel_mem($seq) {
-		$this->db->where('seq', $seq);
-		$qry = $this->db->get('cms_com_div_mem1');
-		return $rlt = $qry->row();
-	}
-
-	/**
-	 * [div_mem_reg 직원정보 등록하기]
-	 * @return [type] [성공여부]
-	 */
-	public function com_mem_reg($data) {
-		$rlt = $this->db->insert('cms_com_div_mem1', $data);
-		return $rlt;
-	}
-
-	/**
-	 * [div_mem_modify 직원정보 수정하기]
-	 * @return [type] [성공여부]
-	 */
-	public function com_mem_modify($data, $seq) {
-		$rlt = $this->db->update('cms_com_div_mem1', $data, array('seq' => $seq));
-		return $rlt;;
-	}
-
-	public function com_mem_del($seq) {
-		$rlt = $this->db->delete('cms_com_div_mem1', array('seq' => $seq));
-		return $rlt;
-	}
-
-
-
 
 
 	/**
@@ -213,6 +204,10 @@ class M5_m extends CI_Model {
 	}
 
 
+
+	////////////////////////////////////////////////////////
+	// 회사 정보 관리 모델
+	////////////////////////////////////////////////////////
 	/**
 	 * [is_com_chk 회사 정보 등록여부 체크]
 	 * @return boolean [회사정보 등록 여부 및 정보]
@@ -226,25 +221,7 @@ class M5_m extends CI_Model {
 		}
 	}
 
-	/**
-	 * [com_reg 회사 정보 등록함수]
-	 * @param  [Array] $com_data [등록할 회사정보]
-	 * @return [Boolean]           [등록 성공여부]
-	 */
-	public function com_reg($com_data){
-		$result = $this->db->insert('cms_com_info', $com_data);
-		return $result;
-	}
 
-	/**
-	 * [com_modify 회사 정보 변경(수정)등록 함수]
-	 * @param  [Array] $com_data [변경할 회사 정보]
-	 * @return [Boolean]             [변경 등록 성공 여부]
-	 */
-	public function com_modify($com_data){
-		$result = $this->db->update('cms_com_info', $com_data);
-		return $result;
-	}
 
 	/**
 	 * [new_rq_chk 신규 가입 사용자 데이터 추출 함수]
