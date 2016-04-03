@@ -249,6 +249,9 @@ class M5 extends CI_Controller {
 			if( !$auth['_m5_1_3'] or $auth['_m5_1_3']==0) {
 				$this->load->view('no_auth');
 			}else{
+				// 조회 권한이 있는 경우
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m5_1_3'];
 				//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
 
@@ -293,6 +296,9 @@ class M5 extends CI_Controller {
 			if( !$auth['_m5_1_4'] or $auth['_m5_1_4']==0) {
 				$this->load->view('no_auth');
 			}else{
+				// 조회 권한이 있는 경우
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m5_1_4'];
 				//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
 
