@@ -7,16 +7,16 @@
 						<form name="list_frm" method="post" action="">
 							<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">부서별</div>
 							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
-								<select class="form-control input-sm">
+								<select class="form-control input-sm" name="div_sel">
 									<option>전 체</option>
 <?php foreach($all_div as $lt) : ?>
-									<option value="<?php echo $lt->div_code; ?>" <?if($lt->div_code==$this->input->post('div_code')) echo "selected";?>><?php echo $lt->div_name ?></option>
+									<option value="<?php echo $lt->div_name; ?>" <?if($lt->div_name==$this->input->post('div_sel')) echo "selected";?>><?php echo $lt->div_name ?></option>
 <?php endforeach; ?>
 								</select>
 							</div>
 							<div class="col-md-5" style="height: 40px; padding-top: 10px;"></div>
 							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
-								<input class="form-control input-sm" name="div_search" placeholder="(임)직원 검색">
+								<input class="form-control input-sm" name="mem_search" placeholder="(임)직원 검색">
 							</div>
 							<div class="col-md-1" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
 								<button class="btn btn-primary btn-sm center"> 검 색 </button>
