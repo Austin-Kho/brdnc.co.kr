@@ -252,6 +252,11 @@ class M5 extends CI_Controller {
 				// 조회 권한이 있는 경우
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m5_1_3'];
+
+				// 검색어 post 데이터
+				$st1 = $this->input->post('acc_sort');
+				$st2 = $this->input->post('acc_search');
+
 				//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
 
@@ -272,9 +277,8 @@ class M5 extends CI_Controller {
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$data['pagination'] = $this->pagination->create_links();
 
-				// 검색어 post 데이터
-				$st1 = $this->input->post('div_code');
-				$st2 = $this->input->post('div_search');
+				// model data ////////////////////////
+				$acc_table = 'cms_accounts1';
 
 				// db[전체부서목록] 데이터 불러오기
 				$data['all_acc'] = $this->m5_m->all_acc_name();
