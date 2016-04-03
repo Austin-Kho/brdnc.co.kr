@@ -121,7 +121,7 @@ function acc_submit(mode){
 function bank_submit(mode){
 		var form = document.form1;
 
-		if(!form.bank_code.value){
+		if(!form.bank.value){
 			alert('거래은행을 선택하세요!');
 			form.bank.focus();
 			return;
@@ -141,26 +141,26 @@ function bank_submit(mode){
 			form.holder.focus();
 			return;
 		}
-		if(form.is_com[0].checked===0&&form.is_com[1].checked===0){
-			alert('관리 구분 항목을 선택하세요!');
-			form.is_com.focus();
-			return;
-		}
-		if(form.is_com[0].checked==1){
-			if(!form.div_seq.value){
-				alert('관리부서를 선택하세요!');
-				form.div_seq.focus();
-				return;
-			}
-		}
-		if(form.is_com[1].checked==1){
-			if(!form.pj_seq.value){
-				alert('관리현장을 선택하세요!');
-				form.pj_seq.focus();
-				return;
-			}
-		}
-		if(!form.open_date.value){
+		// if(form.is_com[0].checked===0&&form.is_com[1].checked===0){
+		// 	alert('관리 구분 항목을 선택하세요!');
+		// 	form.is_com.focus();
+		// 	return;
+		// }
+		// if(form.is_com[0].checked==1){
+		// 	if(!form.div_seq.value){
+		// 		alert('관리부서를 선택하세요!');
+		// 		form.div_seq.focus();
+		// 		return;
+		// 	}
+		// }
+		// if(form.is_com[1].checked==1){
+		// 	if(!form.pj_seq.value){
+		// 		alert('관리현장을 선택하세요!');
+		// 		form.pj_seq.focus();
+		// 		return;
+		// 	}
+		// }
+		if( !form.open_date.value){
 			alert('계좌 개설일을 입력하세요!');
 			form.open_date.focus();
 			return;

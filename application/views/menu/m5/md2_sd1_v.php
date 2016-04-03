@@ -16,7 +16,9 @@
 				<label for="co_no1">사업자번호 <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<div class="col-xs-3"><input type="text" class="form-control input-sm wid-90 en_only" id="co_no1" name="co_no1" maxlength="3" value="<?php if($mode=='com_reg') {echo set_value('co_no1');} else {echo substr($com->co_no, 0, 3);} ?>" onkeypress="isNum();" required autofocus></div>
+				<div class="col-xs-3">
+					<input type="text" class="form-control input-sm wid-90 en_only" id="co_no1" name="co_no1" maxlength="3" value="<?php if($mode=='com_reg') {echo set_value('co_no1');} else {echo substr($com->co_no, 0, 3);} ?>" onkeypress="isNum();" required autofocus>
+				</div>
 				<div class="col-xs-2">
 					<label for="co_no2" class="sr-only">사업자번호2 </label>
 					<input type="text" class="form-control input-sm wid-90 en_only" id="co_no2" name="co_no2" maxlength="2" value="<?php if($mode=='com_reg') {echo set_value('co_no2');} else {echo substr($com->co_no, 4, 2);} ?>" onkeypress="isNum();" required autofocus>
