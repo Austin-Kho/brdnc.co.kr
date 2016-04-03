@@ -160,7 +160,7 @@ class M5 extends CI_Controller {
 
 				// 검색어 post 데이터
 				$st1 = $this->input->post('div_sel');
-				$st2 = $this->input->post('mem_search');
+				$st2 = $this->input->post('div_search');
 
 				//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
@@ -249,20 +249,12 @@ class M5 extends CI_Controller {
 			if( !$auth['_m5_1_3'] or $auth['_m5_1_3']==0) {
 				$this->load->view('no_auth');
 			}else{
-				// 조회 권한이 있는 경우
-				// 불러올 페이지에 보낼 조회 권한 데이터
-				$data['auth'] = $auth['_m5_1_3'];
-
-				// 검색어 post 데이터
-				$st1 = $this->input->post('acc_sort');
-				$st2 = $this->input->post('acc_search');
-
 				//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
 
 				//페이지네이션 설정/////////////////////////////////
-				$config['base_url'] = '/m5/config/1/3/';  //페이징 주소
-				$config['total_rows'] = $this->m5_m->com_mem_list('cms_accounts1', '', '', $st1, $st2, 'num');  //게시물의 전체 갯수
+				$config['base_url'] = '/m5/config/1/3/';//.$data['n']; //페이징 주소
+				$config['total_rows'] = $this->m5_m->com_accounts_list('', '', '', '', 'num');  //게시물의 전체 갯수
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -277,61 +269,18 @@ class M5 extends CI_Controller {
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$data['pagination'] = $this->pagination->create_links();
 
-				// model data ////////////////////////
-				$acc_table = 'cms_accounts1';
+				// 검색어 post 데이터
+				$st1 = $this->input->post('div_code');
+				$st2 = $this->input->post('div_search');
 
 				// db[전체부서목록] 데이터 불러오기
-				//$data['all_div'] = $this->m5_m->all_div_name('cms_com_div');
+				$data['all_acc'] = $this->m5_m->all_acc_name();
 
-				//  db [직원 ]데이터 불러오기
-				$data['list'] = $this->m5_m->com_mem_list($acc_table, $start, $limit, $st1, $st2, '');
+				//  db [거래처]데이터 불러오기
+				$data['list'] = $this->m5_m->com_accounts_list($start, $limit, $st1, $st2, '');
 
-				// 세부 부서데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-				if($this->input->get('seq')) $data['sel_acc'] = $this->m5_m->select_data_row($acc_table, $this->input->get('seq'));
-
-				// 폼 검증 라이브러리 로드
-				$this->load->library('form_validation'); // 폼 검증
-				// 폼 검증할 필드와 규칙 사전 정의
-				$this->form_validation->set_rules('mem_name', '(임)직원명', 'required');
-				$this->form_validation->set_rules('div_name', '담당부서', 'required');
-				$this->form_validation->set_rules('div_posi', '직급(책)', 'required');
-				$this->form_validation->set_rules('mobile', '비상전화', 'required');
-				$this->form_validation->set_rules('email', '이메일', 'required');
-				$this->form_validation->set_rules('join_date', '입사일', 'required');
-
-				if($this->form_validation->run()==FALSE) {
-					//본 페이지 로딩
-					$this->load->view('/menu/m5/md1_sd3_v', $data);
-				}else{
-					// if($this->input->post('is_reti')===NULL) $is_reti = 0; else $is_reti = 1;
-					// if($this->input->post('reti_date')===NULL) $reti_date = 0; else $reti_date = $this->input->post('reti_date', TRUE);
-					$acc_data = array(
-						'com_seq' => 1,
-						'div_name' => $this->input->post('div_name', TRUE),
-						'div_posi' => $this->input->post('div_posi', TRUE),
-						'mem_name' => $this->input->post('mem_name', TRUE),
-						'dir_tel' => $this->input->post('dir_tel', TRUE),
-						'mobile' => $this->input->post('mobile', TRUE),
-						'email' => $this->input->post('email', TRUE),
-						'id_num' => $this->input->post('id_num', TRUE),
-						'join_date' => $this->input->post('join_date', TRUE),
-						'is_reti' => $is_reti,
-						'reti_date' => $reti_date
-					);
-
-					if($this->input->post('mode')=='reg') {
-						$result = $this->m5_m->insert_data($acc_table, $mem_data);
-					}else if($this->input->post('mode')=='modify') {
-						$result = $this->m5_m->update_data($acc_table, $mem_data, $this->input->post('seq'));
-					}else if($this->input->post('mode')=='del') {
-						$result = $this->m5_m->delete_data($acc_table, $this->input->post('seq'));
-					}
-					if($result){
-						alert('정상적으로 처리되었습니다.', '');
-					}else{
-						alert('다시 시도하여 주십시요.', '');
-					}
-				}
+				//본 페이지 로딩
+				$this->load->view('/menu/m5/md1_sd3_v', $data);
 			}
 
 

@@ -113,7 +113,7 @@ class M5_m extends CI_Model {
 	 */
 	public function com_mem_list($table, $start='', $limit='', $st1='', $st2='', $n){
 		// 검색어가 있을 경우
-		if($st1 !=''){	 $this->db->where('div_name', $st1); }
+		if($st1 !=''){	 $this->db->where('div_seq', $st1); }
 		if($st2 !='') {
 			$this->db->like('div_posi', $search_text);
 			$this->db->like('mem_name', $search_text);
