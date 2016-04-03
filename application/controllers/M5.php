@@ -107,7 +107,7 @@ class M5 extends CI_Controller {
 				$data['list'] = $this->m5_m->com_div_list($div_table, $start, $limit, $st1, $st2, '');
 
 				// 세부 부서데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-				if($this->input->get('seq')) $data['sel_div'] = $this->m5_m->select_data_row($div_table, $this->input->get('seq'));
+				if($this->input->get('seq')) $data['sel_div'] = $this->m5_m->select_data_row($div_table, $where = array('seq' => $this->input->get('seq')));
 
 				// 폼 검증 라이브러리 로드
 				$this->load->library('form_validation'); // 폼 검증
@@ -132,7 +132,7 @@ class M5 extends CI_Controller {
 					if($this->input->post('mode')=='reg') {
 						$result = $this->m5_m->insert_data($div_table, $div_data);
 					}else if($this->input->post('mode')=='modify') {
-						$result = $this->m5_m->update_data($div_table, $div_data, $this->input->post('seq'));
+						$result = $this->m5_m->update_data($div_table, $div_data, $where = array('seq' => $this->input->post('seq')));
 					}else if($this->input->post('mode')=='del') {
 						$result = $this->m5_m->delete_data($div_table, $this->input->post('seq'));
 					}
@@ -192,7 +192,7 @@ class M5 extends CI_Controller {
 				$data['list'] = $this->m5_m->com_mem_list($mem_table, $start, $limit, $st1, $st2, '');
 
 				// 세부 부서데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-				if($this->input->get('seq')) $data['sel_mem'] = $this->m5_m->select_data_row($mem_table, $this->input->get('seq'));
+				if($this->input->get('seq')) $data['sel_mem'] = $this->m5_m->select_data_row($mem_table, $where = array('seq' => $this->input->get('seq')));
 
 				// 폼 검증 라이브러리 로드
 				$this->load->library('form_validation'); // 폼 검증
@@ -227,7 +227,7 @@ class M5 extends CI_Controller {
 					if($this->input->post('mode')=='reg') {
 						$result = $this->m5_m->insert_data($mem_table, $mem_data);
 					}else if($this->input->post('mode')=='modify') {
-						$result = $this->m5_m->update_data($mem_table, $mem_data, $this->input->post('seq'));
+						$result = $this->m5_m->update_data($mem_table, $mem_data, $where = array('seq' => $this->input->post('seq')));
 					}else if($this->input->post('mode')=='del') {
 						$result = $this->m5_m->delete_data($mem_table, $this->input->post('seq'));
 					}
@@ -262,7 +262,7 @@ class M5 extends CI_Controller {
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = '/m5/config/1/3/';  //페이징 주소
-				$config['total_rows'] = $this->m5_m->com_mem_list('cms_accounts1', '', '', $st1, $st2, 'num');  //게시물의 전체 갯수
+				$config['total_rows'] = $this->m5_m->com_accounts_list('cms_accounts1', '', '', $st1, $st2, 'num');  //게시물의 전체 갯수
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -284,20 +284,20 @@ class M5 extends CI_Controller {
 				//$data['all_div'] = $this->m5_m->all_div_name('cms_com_div');
 
 				//  db [직원 ]데이터 불러오기
-				$data['list'] = $this->m5_m->com_mem_list($acc_table, $start, $limit, $st1, $st2, '');
+				$data['list'] = $this->m5_m->com_accounts_list($acc_table, $start, $limit, $st1, $st2, '');
 
 				// 세부 부서데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-				if($this->input->get('seq')) $data['sel_acc'] = $this->m5_m->select_data_row($acc_table, $this->input->get('seq'));
+				if($this->input->get('seq')) $data['sel_acc'] = $this->m5_m->select_data_row($acc_table, $where = array('seq' => $this->input->get('seq')));
 
 				// 폼 검증 라이브러리 로드
 				$this->load->library('form_validation'); // 폼 검증
 				// 폼 검증할 필드와 규칙 사전 정의
-				$this->form_validation->set_rules('mem_name', '(임)직원명', 'required');
-				$this->form_validation->set_rules('div_name', '담당부서', 'required');
-				$this->form_validation->set_rules('div_posi', '직급(책)', 'required');
-				$this->form_validation->set_rules('mobile', '비상전화', 'required');
-				$this->form_validation->set_rules('email', '이메일', 'required');
-				$this->form_validation->set_rules('join_date', '입사일', 'required');
+				// $this->form_validation->set_rules('mem_name', '(임)직원명', 'required');
+				// $this->form_validation->set_rules('div_name', '담당부서', 'required');
+				// $this->form_validation->set_rules('div_posi', '직급(책)', 'required');
+				// $this->form_validation->set_rules('mobile', '비상전화', 'required');
+				// $this->form_validation->set_rules('email', '이메일', 'required');
+				// $this->form_validation->set_rules('join_date', '입사일', 'required');
 
 				if($this->form_validation->run()==FALSE) {
 					//본 페이지 로딩
@@ -306,23 +306,23 @@ class M5 extends CI_Controller {
 					// if($this->input->post('is_reti')===NULL) $is_reti = 0; else $is_reti = 1;
 					// if($this->input->post('reti_date')===NULL) $reti_date = 0; else $reti_date = $this->input->post('reti_date', TRUE);
 					$acc_data = array(
-						'com_seq' => 1,
-						'div_name' => $this->input->post('div_name', TRUE),
-						'div_posi' => $this->input->post('div_posi', TRUE),
-						'mem_name' => $this->input->post('mem_name', TRUE),
-						'dir_tel' => $this->input->post('dir_tel', TRUE),
-						'mobile' => $this->input->post('mobile', TRUE),
-						'email' => $this->input->post('email', TRUE),
-						'id_num' => $this->input->post('id_num', TRUE),
-						'join_date' => $this->input->post('join_date', TRUE),
-						'is_reti' => $is_reti,
-						'reti_date' => $reti_date
+						// 'com_seq' => 1,
+						// 'div_name' => $this->input->post('div_name', TRUE),
+						// 'div_posi' => $this->input->post('div_posi', TRUE),
+						// 'mem_name' => $this->input->post('mem_name', TRUE),
+						// 'dir_tel' => $this->input->post('dir_tel', TRUE),
+						// 'mobile' => $this->input->post('mobile', TRUE),
+						// 'email' => $this->input->post('email', TRUE),
+						// 'id_num' => $this->input->post('id_num', TRUE),
+						// 'join_date' => $this->input->post('join_date', TRUE),
+						// 'is_reti' => $is_reti,
+						// 'reti_date' => $reti_date
 					);
 
 					if($this->input->post('mode')=='reg') {
 						$result = $this->m5_m->insert_data($acc_table, $mem_data);
 					}else if($this->input->post('mode')=='modify') {
-						$result = $this->m5_m->update_data($acc_table, $mem_data, $this->input->post('seq'));
+						$result = $this->m5_m->update_data($acc_table, $mem_data, $where = array('seq' => $this->input->post('seq')));
 					}else if($this->input->post('mode')=='del') {
 						$result = $this->m5_m->delete_data($acc_table, $this->input->post('seq'));
 					}
@@ -344,19 +344,27 @@ class M5 extends CI_Controller {
 			if( !$auth['_m5_1_4'] or $auth['_m5_1_4']==0) {
 				$this->load->view('no_auth');
 			}else{
+				// 조회 권한이 있는 경우
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m5_1_4'];
+
+				// 검색어 post 데이터
+				$st1 = $this->input->post('acc_sort');
+				$st2 = $this->input->post('acc_search');
+
 				//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
 
 				//페이지네이션 설정/////////////////////////////////
-				$config['base_url'] = '/m5/config/1/4/';//.$data['n']; //페이징 주소
-				$config['total_rows'] = $this->m5_m->bank_account_list('', '', '', '', 'num')-1;  //게시물의 전체 갯수
+				$config['base_url'] = '/m5/config/1/4/';  //페이징 주소
+				$config['total_rows'] = $this->m5_m->bank_account_list('cms_capital_bank_account1', '', '', $st1, $st2, 'num');  //게시물의 전체 갯수
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
 
 				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
 				$page = $this->uri->segment($config['uri_segment']);
-				if($page<=1 or empty($page)) { $start = 1; }else{ $start = (($page-1) * $config['per_page'])+1; }
+				if($page<=1 or empty($page)) { $start = 1; }else{ $start = ($page-1) * $config['per_page']; }
 				$limit = $config['per_page'];
 
 				//페이지네이션 초기화
@@ -364,18 +372,59 @@ class M5 extends CI_Controller {
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$data['pagination'] = $this->pagination->create_links();
 
-				// 검색어 post 데이터
-				$st1 = $this->input->post('div_code');
-				$st2 = $this->input->post('div_search');
+				// model data ////////////////////////
+				$bank_table = 'cms_capital_bank_account1';
 
-				// db[전체부서목록] 데이터 불러오기
-				$data['all_bank'] = $this->m5_m->all_bank_name();
+				// db[전체은행목록] 데이터 불러오기
+				$data['com_bank'] = $this->m5_m->all_bank_name();
+				//은행 디비 전체 불러오기
+				$data['all_bank'] = $this->m5_m->select_data_list('cms_capital_bank_code');
+				$data['all_div'] = $this->m5_m->select_data_list('cms_com_div');
 
-				//  db [은행계좌]데이터 불러오기
-				$data['list'] = $this->m5_m->bank_account_list($start, $limit, $st1, $st2, '');
+				//  db [은행 ]데이터 불러오기
+				$data['list'] = $this->m5_m->bank_account_list($bank_table, $start, $limit, $st1, $st2, '');
 
-				//본 페이지 로딩
-				$this->load->view('/menu/m5/md1_sd4_v', $data);
+				// 세부 은행데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
+				if($this->input->get('seq')) $data['sel_bank'] = $this->m5_m->select_data_row($bank_table, $where = array('no' => $this->input->get('seq')));
+
+				// 폼 검증 라이브러리 로드
+				$this->load->library('form_validation'); // 폼 검증
+				// 폼 검증할 필드와 규칙 사전 정의
+				$this->form_validation->set_rules('bank', '은행명', 'required');
+				$this->form_validation->set_rules('name', '계좌별칭', 'required');
+				$this->form_validation->set_rules('number', '계좌번호', 'required');
+				$this->form_validation->set_rules('holder', '예금주', 'required');
+				$this->form_validation->set_rules('open_date', '개설일자', 'required');
+
+				if($this->form_validation->run()==FALSE) {
+					//본 페이지 로딩
+					$this->load->view('/menu/m5/md1_sd4_v', $data);
+				}else{
+					$bank_name = $this->m5_m->select_data_row('cms_capital_bank_code', $where = array('bank_code' => $this->input->post('bank_code')));
+					$bank_data = array(
+						'bank' => $bank_name->bank_name,
+						'bank_code' => $this->input->post('bank_code', TRUE),
+						'name' => $this->input->post('name', TRUE),
+						'number' => $this->input->post('number', TRUE),
+						'holder' => $this->input->post('holder', TRUE),
+						'manager' => $this->input->post('manager', TRUE),
+						'open_date' => $this->input->post('open_date', TRUE),
+						'note' => $this->input->post('note', TRUE)
+					);
+
+					if($this->input->post('mode')=='reg') {
+						$result = $this->m5_m->insert_data($bank_table, $bank_data);
+					}else if($this->input->post('mode')=='modify') {
+						$result = $this->m5_m->update_data($bank_table, $bank_data, $where = array('no' => $this->input->post('seq')));
+					}else if($this->input->post('mode')=='del') {
+						$result = $this->m5_m->delete_data($bank_table, $where = array('no' => $this->input->post('seq')));
+					}
+					if($result){
+						alert('정상적으로 처리되었습니다.', '');
+					}else{
+						alert('다시 시도하여 주십시요.', '');
+					}
+				}
 			}
 
 
