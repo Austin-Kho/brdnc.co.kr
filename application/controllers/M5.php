@@ -160,7 +160,7 @@ class M5 extends CI_Controller {
 
 				// 검색어 post 데이터
 				$st1 = $this->input->post('div_sel');
-				$st2 = $this->input->post('mem_search');
+				$st2 = $this->input->post('div_search');
 
 				//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
@@ -249,14 +249,6 @@ class M5 extends CI_Controller {
 			if( !$auth['_m5_1_3'] or $auth['_m5_1_3']==0) {
 				$this->load->view('no_auth');
 			}else{
-				// 조회 권한이 있는 경우
-				// 불러올 페이지에 보낼 조회 권한 데이터
-				$data['auth'] = $auth['_m5_1_3'];
-
-				// 검색어 post 데이터
-				$st1 = $this->input->post('acc_sort');
-				$st2 = $this->input->post('acc_search');
-
 				//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
 
@@ -277,11 +269,12 @@ class M5 extends CI_Controller {
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$data['pagination'] = $this->pagination->create_links();
 
-				// model data ////////////////////////
-				$acc_table = 'cms_accounts1';
+				// 검색어 post 데이터
+				$st1 = $this->input->post('div_code');
+				$st2 = $this->input->post('div_search');
 
 				// db[전체부서목록] 데이터 불러오기
-				//$data['all_div'] = $this->m5_m->all_div_name('cms_com_div');
+				$data['all_acc'] = $this->m5_m->all_acc_name();
 
 				//  db [직원 ]데이터 불러오기
 				$data['list'] = $this->m5_m->com_accounts_list($acc_table, $start, $limit, $st1, $st2, '');
