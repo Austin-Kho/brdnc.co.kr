@@ -24,7 +24,7 @@
 						</form>
 					</div>
 					<div class="row table-responsive" style="margin: 0;">
-						<table class="table table-bordered table-condensed font12">
+						<table class="table table-bordered table-condensed table-hover font12">
 							<thead>
 								<tr>
 									<th class="col-md-1 center" style="background-color: #ecf3fe; border-left: 0;"><input type="checkbox"></th>
