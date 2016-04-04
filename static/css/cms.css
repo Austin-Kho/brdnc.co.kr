@@ -6,9 +6,9 @@
 		background-image : url('/static/img/bg_dot.jpg');
 	}
 
-	::selection { background-color: #005FAF; color: #FFF; }
-	::-moz-selection { background-color: #005FAF; color: #FFF; }
-	a, nav, input, li, img { outline: none; select-dummy: expression(this.hideFocus=true); }
+	::selection { background-color: #FB6C05; color: #FFF; }
+	::-moz-selection { background-color: #FB6C05; color: #FFF; }
+	a, nav, input, li, img { outline:none; select-dummy: expression(this.hideFocus=true); }
 
 	/************************************IME MODE**************************************/
 	.han {
@@ -76,12 +76,6 @@
 	fieldset .row div.form-group.label-wrap2 { padding: 10px 0 8px 15px; background-color: #e1eefe; }
 	fieldset .row div.form-group label { width:180px; }
 	fieldset .row div.form-group.form-wrap { padding: 3px 10px 3px 10px; }
-	fieldset .row div.form-group .form-control.wid-70 { width:70%; }
-	fieldset .row div.form-group .form-control.wid-90 { width:90%; }
-	fieldset .row div.form-group .form-control.wid-95 { width:95%; }
-	fieldset .row div.form-group .form-control.wid-98 { width:98%; }
-	fieldset .row div.form-group .form-control.wid-99 { width:99%; }
-	fieldset .row div.form-group .form-control.wid-100 { width:100%; }
 	fieldset .row div.form-group .form-control { margin: 2px 0; }
 	fieldset .row div.form-group a,input.btn { margin: 2px 0; }
 	fieldset .row div.form-group div { padding: 0; }
@@ -102,6 +96,15 @@
 
 	/**----------------------------------- 넓이 -----------------------------------------**/
 	.wt-180 { width: 180px; }
+	.wid-70 { width:70%; }
+	.wid-75 { width:75%; }
+	.wid-80 { width:80%; }
+	.wid-85 { width:85%; }
+	.wid-90 { width:90%; }
+	.wid-95 { width:95%; }
+	.wid-98 { width:98%; }
+	.wid-99 { width:99%; }
+	.wid-100 { width:100%; }
 	/**----------------------------------- 넓이 -----------------------------------------**/
 
 	/**------------------------------------정렬----------------------------------------**/
