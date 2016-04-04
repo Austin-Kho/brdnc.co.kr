@@ -16,7 +16,7 @@
 							</div>
 							<div class="col-xs-12 col-md-5" style="height: 40px; padding-top: 10px;"></div>
 							<div class="col-xs-8 col-md-2" style="height: 40px; padding-top: 5px;">
-								<input class="form-control input-sm" name="div_search" placeholder="부서 검색">
+								<input class="form-control input-sm" name="div_search" placeholder="부서 검색" value="<?php if($this->input->post('div_search')) echo $this->input->post('div_search'); ?>">
 							</div>
 							<div class="col-xs-4 col-md-1" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
 								<button class="btn btn-primary btn-sm center"> 검 색 </button>

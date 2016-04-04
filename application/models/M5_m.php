@@ -114,9 +114,9 @@ class M5_m extends CI_Model {
 		// 검색어가 있을 경우
 		if($st1 !=''){	 $this->db->where('div_seq', $st1); }
 		if($st2 !='') {
-			$this->db->like('div_posi', $search_text);
-			$this->db->like('mem_name', $search_text);
-			$this->db->like('email', $search_text);
+			$this->db->like('div_posi', $st2);
+			$this->db->or_like('mem_name', $st2);
+			$this->db->or_like('email', $st2);
 		}
 		$this->db->order_by('seq', 'ASC');
 
@@ -127,15 +127,7 @@ class M5_m extends CI_Model {
 		return $result;
 	}
 
-	/**
-	 * [all_acc_name 셀렉트바 전체 목록]
-	 * @return [Array] [목록]
-	 */
-	public function all_acc_name(){
-		$this->db->select('seq, si_name');
-		$qry = $this->db->get('cms_accounts');
-		return $result = $qry->result();
-	}
+
 
 	/**
 	 * [com_accounts_list 거래처 목록]
@@ -149,9 +141,9 @@ class M5_m extends CI_Model {
 		// 검색어가 있을 경우
 		if($st1 !=''){	 $this->db->where('acc_cla', $st1); }
 		if($st2 !='') {
-			$this->db->like('si_name', $search_text);
-			$this->db->like('web_name', $search_text);
-			$this->db->like('res_worker', $search_text);
+			$this->db->like('si_name', $st2);
+			$this->db->or_like('web_name', $st2);
+			$this->db->or_like('res_worker', $st2);
 		}
 		$this->db->order_by('seq', 'ASC');
 
@@ -185,11 +177,12 @@ class M5_m extends CI_Model {
 	 */
 	public function bank_account_list($table, $start='', $limit='', $st1='', $st2='', $n){
 		// 검색어가 있을 경우
-		if($st1 !=''){	 $this->db->where('no', $st1); }
+		if($st1 !=''){	 $this->db->where('bank_code', $st1); }
 		if($st2 !='') {
-			$this->db->like('bank', $search_text);
-			$this->db->like('name', $search_text);
-			$this->db->like('holder', $search_text);
+			$this->db->like('bank', $st2);
+			$this->db->or_like('name', $st2);
+			$this->db->or_like('holder', $st2);
+			$this->db->or_like('note', $st2);
 		}
 		$this->db->order_by('no', 'ASC');
 

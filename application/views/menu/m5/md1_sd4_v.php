@@ -8,7 +8,7 @@
 							<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">은행별</div>
 							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
 								<select class="form-control input-sm" name="bank_code" onchange="submit();">
-									<option>전 체</option>
+									<option value="">전 체</option>
 <?php foreach($com_bank as $lt) : ?>
 									<option value="<?php echo $lt->bank_code; ?>" <?if($lt->bank_code==$this->input->post('bank_code')) echo "selected";?>><?php echo $lt->bank; ?></option>
 <?php endforeach; ?>
@@ -16,7 +16,7 @@
 							</div>
 							<div class="col-md-5" style="height: 40px; padding-top: 10px;"></div>
 							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
-								<input class="form-control input-sm" name="div_search" placeholder="계좌 검색">
+								<input class="form-control input-sm" name="bank_search" placeholder="계좌 검색" value="<?php if($this->input->post('bank_search')) echo $this->input->post('bank_search'); ?>">
 							</div>
 							<div class="col-md-1" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
 								<button class="btn btn-primary btn-sm center"> 검 색 </button>
@@ -171,7 +171,7 @@
 									<input type="text" class="form-control input-sm wid-100" id="open_date" name="open_date" maxlength="10" value="<?php if($this->input->get('seq')) echo $sel_bank->open_date; ?>" readonly onClick="cal_add(this); event.cancelBubble=true" maxlength="10" required autofocus>
 								</div>
 								<div class="col-xs-6 glyphicon-wrap">
-									<a href="javascript:" onclick="cal_add(document.getElementById('join_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+									<a href="javascript:" onclick="cal_add(document.getElementById('open_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
 								</div>
 							</div>
 						</div>
