@@ -353,28 +353,28 @@ class M5 extends CI_Controller {
 				$st1 = $this->input->post('bank_code');
 				$st2 = $this->input->post('bank_search');
 
+				// model data ////////////////////////
+				$bank_table = 'cms_capital_bank_account';
+
 				//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = '/m5/config/1/4/';  //페이징 주소
-				$config['total_rows'] = $this->m5_m->bank_account_list('cms_capital_bank_account', '', '', $st1, $st2, 'num');  //게시물의 전체 갯수
+				$config['total_rows'] = $this->m5_m->bank_account_list($bank_table, '', '', $st1, $st2, 'num');  //게시물의 전체 갯수
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
 
 				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
 				$page = $this->uri->segment($config['uri_segment']);
-				if($page<=1 or empty($page)) { $start = 1; }else{ $start = ($page-1) * $config['per_page']; }
+				if($page<=1 or empty($page)) { $start = 0; }else{ $start = ($page-1) * $config['per_page']; }
 				$limit = $config['per_page'];
 
 				//페이지네이션 초기화
 				$this->pagination->initialize($config);
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$data['pagination'] = $this->pagination->create_links();
-
-				// model data ////////////////////////
-				$bank_table = 'cms_capital_bank_account';
 
 				// db[전체은행목록] 데이터 불러오기
 				$data['com_bank'] = $this->m5_m->all_bank_name();

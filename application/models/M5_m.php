@@ -176,6 +176,7 @@ class M5_m extends CI_Model {
 	 * @return [Array]              [실제리스트 데이터]
 	 */
 	public function bank_account_list($table, $start='', $limit='', $st1='', $st2='', $n){
+		$this->db->where('name !=', '현금'); // 현금계정은 제외하고 불러옴
 		// 검색어가 있을 경우
 		if($st1 !=''){	 $this->db->where('bank_code', $st1); }
 		if($st2 !='') {
