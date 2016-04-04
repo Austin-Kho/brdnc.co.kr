@@ -47,7 +47,7 @@ class M5 extends CI_Controller {
 	 * @return [type]      [description]
 	 */
 	 public function config($mdi='', $sdi=''){
-		$this->output->enable_profiler(TRUE); //프로파일러 보기//
+		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
@@ -259,7 +259,7 @@ class M5 extends CI_Controller {
 				$st2 = $this->input->post('acc_search');
 
 				// model data ////////////////////////
-				$acc_table = 'cms_accounts1';
+				$acc_table = 'cms_accounts';
 
 				//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
