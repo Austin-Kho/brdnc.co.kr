@@ -12,6 +12,8 @@ class M2 extends CI_Controller {
 			redirect(base_url().'member/');
 		}
 		$this->load->model('main_m'); //모델 파일 로드
+		$this->load->model('m2_m'); //모델 파일 로드
+		$this->load->helper('alert'); // 경고창 헤퍼 로딩
 	}
 
 	/**
@@ -36,8 +38,8 @@ class M2 extends CI_Controller {
 	public function process($mdi='', $sdi=''){
 		//$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
-		if( !$this->uri->segment(3)) $mdi = 1; else $mdi = $this->uri->segment(3);
-		if( !$this->uri->segment(4)) $sdi = 1; else $sdi = $this->uri->segment(4);
+		$mdi = $this->uri->segment(3, 1);
+		$sdi = $this->uri->segment(4, 1);
 
 		$menu['s_di'] = array(
 			array('집행 현황', '집행 등록', '사업 수지'), // 첫번째 하위 메뉴
@@ -45,7 +47,7 @@ class M2 extends CI_Controller {
 			array('현장별 예산집행 내역', '현장별 예산집행 등록', '현장별 사업수지 관리'), // 첫번째 하위 제목
 			array('현장별 조직 및 인원 현황', '현장별 조직 및 인원 등록', '현장 관계자 소속 관리')                                  // 두번째 하위 제목
 		);
-
+		// 메뉴데이터 삽입 하여 메인 페이지 호출
 		$this->load->view('menu/m2/process_v', $menu);
 
 		// 전도금 관리 1. 전도금 내역 ////////////////////////////////////////////////////////////////////
@@ -53,12 +55,16 @@ class M2 extends CI_Controller {
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m2_1_1', $this->session->userdata['user_id']);
 
-			if( !$auth['_m2_1_1'] or $auth['_m2_1_1']==0) {
+			if( !$auth['_m2_1_1'] or $auth['_m2_1_1']==0) { // 조회 권한이 없는 경우
 				$this->load->view('no_auth');
-			}else{
+			}else{ // 조회 권한이 있는 경우
+
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m2_1_1'];
+
 
 				//본 페이지 로딩
-				$this->load->view('/menu/m2/md1_sd1_v');
+				$this->load->view('/menu/m2/md1_sd1_v', $data);
 			}
 
 
@@ -75,8 +81,11 @@ class M2 extends CI_Controller {
 				$this->load->view('no_auth');
 			}else{
 
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m2_1_2'];
+
 				//본 페이지 로딩
-				$this->load->view('/menu/m2/md1_sd2_v');
+				$this->load->view('/menu/m2/md1_sd2_v', $data);
 			}
 
 
@@ -93,8 +102,11 @@ class M2 extends CI_Controller {
 				$this->load->view('no_auth');
 			}else{
 
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m2_1_3'];
+
 				//본 페이지 로딩
-				$this->load->view('/menu/m2/md1_sd3_v');
+				$this->load->view('/menu/m2/md1_sd3_v', $data);
 			}
 
 
@@ -108,8 +120,11 @@ class M2 extends CI_Controller {
 				$this->load->view('no_auth');
 			}else{
 
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m2_2_1'];
+
 				//본 페이지 로딩
-				$this->load->view('/menu/m2/md2_sd1_v');
+				$this->load->view('/menu/m2/md2_sd1_v', $data);
 			}
 
 
@@ -125,8 +140,11 @@ class M2 extends CI_Controller {
 				$this->load->view('no_auth');
 			}else{
 
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m2_2_2'];
+
 				//본 페이지 로딩
-				$this->load->view('/menu/m2/md2_sd2_v');
+				$this->load->view('/menu/m2/md2_sd2_v', $data);
 			}
 
 
@@ -142,8 +160,12 @@ class M2 extends CI_Controller {
 				$this->load->view('no_auth');
 			}else{
 
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m2_2_3'];
+
+
 				//본 페이지 로딩
-				$this->load->view('/menu/m2/md2_sd3_v');
+				$this->load->view('/menu/m2/md2_sd3_v', $data);
 			}
 		}
 	}

@@ -12,6 +12,8 @@ class M1 extends CI_Controller {
 			redirect(base_url().'member/');
 		}
 		$this->load->model('main_m'); //모델 파일 로드
+		$this->load->model('m1_m'); //모델 파일 로드
+		$this->load->helper('alert'); // 경고창 헤퍼 로딩
 	}
 
 	/**
@@ -36,18 +38,16 @@ class M1 extends CI_Controller {
 	public function sales($mdi='', $sdi=''){
 		//$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
-		if( !$this->uri->segment(3)) $mdi = 1; else $mdi = $this->uri->segment(3);
-		if( !$this->uri->segment(4)) $sdi = 1; else $sdi = $this->uri->segment(4);
+		$mdi = $this->uri->segment(3, 1);
+		$sdi = $this->uri->segment(4, 1);
 
 		$menu['s_di'] = array(
 			array('계약 현황', '계약 등록', '동호수 현황'), // 첫번째 하위 메뉴
 			array('수납 현황', '수납 등록', '요약집계'),                          // 두번째 하위 메뉴
 			array('현장별 계약현황', '현장별 계약등록(수정)', '동호수 계약 현황도'), // 첫번째 하위 제목
-			array('고객 상담일지', '현장별 업무일지', '시행사 업무보고')                                  // 두번째 하위 제목
+			array('고객 상담일지', '현장별 업무일지', '시행사 업무보고')                 // 두번째 하위 제목
 		);
-
-
-
+		// 메뉴데이터 삽입 하여 메인 페이지 호출
 		$this->load->view('menu/m1/sales_v', $menu);
 
 
@@ -57,12 +57,16 @@ class M1 extends CI_Controller {
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m1_1_1', $this->session->userdata['user_id']);
 
-			if( !$auth['_m1_1_1'] or $auth['_m1_1_1']==0) {
+			if( !$auth['_m1_1_1'] or $auth['_m1_1_1']==0) { // 조회 권한이 없는 경우
 				$this->load->view('no_auth');
-			}else{
+			}else{ // 조회 권한이 있는 경우
+
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m1_1_1'];
+
 
 				//본 페이지 로딩
-				$this->load->view('/menu/m1/md1_sd1_v');
+				$this->load->view('/menu/m1/md1_sd1_v', $data);
 			}
 
 
@@ -80,8 +84,11 @@ class M1 extends CI_Controller {
 				$this->load->view('no_auth');
 			}else{
 
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m1_1_2'];
+
 				//본 페이지 로딩
-				$this->load->view('/menu/m1/md1_sd2_v');
+				$this->load->view('/menu/m1/md1_sd2_v', $data);
 			}
 
 
@@ -98,8 +105,11 @@ class M1 extends CI_Controller {
 				$this->load->view('no_auth');
 			}else{
 
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m1_1_3'];
+
 				//본 페이지 로딩
-				$this->load->view('/menu/m1/md1_sd3_v');
+				$this->load->view('/menu/m1/md1_sd3_v', $data);
 			}
 
 
@@ -116,8 +126,11 @@ class M1 extends CI_Controller {
 				$this->load->view('no_auth');
 			}else{
 
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m1_2_1'];
+
 				//본 페이지 로딩
-				$this->load->view('/menu/m1/md2_sd1_v');
+				$this->load->view('/menu/m1/md2_sd1_v', $data);
 			}
 
 
@@ -134,8 +147,11 @@ class M1 extends CI_Controller {
 				$this->load->view('no_auth');
 			}else{
 
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m1_2_2'];
+
 				//본 페이지 로딩
-				$this->load->view('/menu/m1/md2_sd2_v');
+				$this->load->view('/menu/m1/md2_sd2_v', $data);
 			}
 
 
@@ -152,8 +168,11 @@ class M1 extends CI_Controller {
 				$this->load->view('no_auth');
 			}else{
 
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m1_2_3'];
+
 				//본 페이지 로딩
-				$this->load->view('/menu/m1/md2_sd3_v');
+				$this->load->view('/menu/m1/md2_sd3_v', $data);
 			}
 		}
 	}

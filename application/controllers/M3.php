@@ -12,6 +12,8 @@ class M3 extends CI_Controller {
 			redirect(base_url().'member/');
 		}
 		$this->load->model('main_m'); //모델 파일 로드
+		$this->load->model('m3_m'); //모델 파일 로드
+		$this->load->helper('alert'); // 경고창 헤퍼 로딩
 	}
 
 	/**
@@ -36,8 +38,8 @@ class M3 extends CI_Controller {
 	public function project($mdi='', $sdi=''){
 		//$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
-		if( !$this->uri->segment(3)) $mdi = 1; else $mdi = $this->uri->segment(3);
-		if( !$this->uri->segment(4)) $sdi = 1; else $sdi = $this->uri->segment(4);
+		$mdi = $this->uri->segment(3, 1);
+		$sdi = $this->uri->segment(4, 1);
 
 		$menu['s_di'] = array(
 			array('데이터 등록', '데이터 수정'), // 첫번째 하위 메뉴
@@ -45,7 +47,7 @@ class M3 extends CI_Controller {
 			array('동호수 데이터 입력', '기본정보 수정'), // 첫번째 하위 제목
 			array('프로젝트 검토 현황', '신규 프로젝트 등록')                                  // 두번째 하위 제목
 		);
-
+		// 메뉴데이터 삽입 하여 메인 페이지 호출
 		$this->load->view('menu/m3/project_v', $menu);
 
 		// 프로젝트 관리 1. 데이터등록 ////////////////////////////////////////////////////////////////////
@@ -53,12 +55,15 @@ class M3 extends CI_Controller {
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m3_1_1', $this->session->userdata['user_id']);
 
-			if( !$auth['_m3_1_1'] or $auth['_m3_1_1']==0) {
+			if( !$auth['_m3_1_1'] or $auth['_m3_1_1']==0) { // 조회 권한이 없는 경우
 				$this->load->view('no_auth');
-			}else{
+			}else{ // 조회 권한이 있는 경우
+
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m3_1_1'];
 
 				//본 페이지 로딩
-				$this->load->view('/menu/m3/md1_sd1_v');
+				$this->load->view('/menu/m3/md1_sd1_v', $data);
 			}
 
 		// 프로젝트 관리 2. 데이터수정 ////////////////////////////////////////////////////////////////////
@@ -68,10 +73,13 @@ class M3 extends CI_Controller {
 
 			if( !$auth['_m3_1_2'] or $auth['_m3_1_2']==0) {
 				$this->load->view('no_auth');
-			}else{
+			}else{ // 조회 권한이 있는 경우
+
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m3_1_2'];
 
 				//본 페이지 로딩
-				$this->load->view('/menu/m3/md1_sd2_v');
+				$this->load->view('/menu/m3/md1_sd2_v', $data);
 			}
 
 
@@ -87,8 +95,11 @@ class M3 extends CI_Controller {
 				$this->load->view('no_auth');
 			}else{
 
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m3_2_1'];
+
 				//본 페이지 로딩
-				$this->load->view('/menu/m3/md2_sd1_v');
+				$this->load->view('/menu/m3/md2_sd1_v', $data);
 			}
 
 
@@ -104,8 +115,11 @@ class M3 extends CI_Controller {
 				$this->load->view('no_auth');
 			}else{
 
+				// 불러올 페이지에 보낼 조회 권한 데이터
+				$data['auth'] = $auth['_m3_2_2'];
+
 				//본 페이지 로딩
-				$this->load->view('/menu/m3/md2_sd2_v');
+				$this->load->view('/menu/m3/md2_sd2_v', $data);
 			}
 		}
 	}

@@ -66,11 +66,10 @@ class M5 extends CI_Controller {
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m5_1_1', $this->session->userdata['user_id']);
 
-			if( !$auth['_m5_1_1'] or $auth['_m5_1_1']==0) {
-				// 조회 권한이 없는 경우
+			if( !$auth['_m5_1_1'] or $auth['_m5_1_1']==0) { // 조회 권한이 없는 경우
 				$this->load->view('no_auth');
-			}else{
-				// 조회 권한이 있는 경우
+			}else{ // 조회 권한이 있는 경우
+
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m5_1_1'];
 
@@ -154,8 +153,8 @@ class M5 extends CI_Controller {
 
 			if( !$auth['_m5_1_2'] or $auth['_m5_1_2']==0) {
 				$this->load->view('no_auth');
-			}else{
-				// 조회 권한이 있는 경우
+			}else{ // 조회 권한이 있는 경우
+				
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m5_1_2'];
 

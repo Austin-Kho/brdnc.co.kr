@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit ('No direct script access allowed');
 class M5_m extends CI_Model {
 
 	//공통 함수 Start//
-
 	/**
 	 * [select_data_list 복수 데이터 불러오기]
 	 * @param  [String] $table [테이블명]
@@ -70,7 +69,6 @@ class M5_m extends CI_Model {
 		$qry = $this->db->get($table);
 		return $result = $qry->result();
 	}
-
 	//공통 함수 End//
 
 

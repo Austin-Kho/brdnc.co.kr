@@ -52,7 +52,7 @@
 
 	.sdi { font-size: 15px; display: inline; color: #233c96; }
 	#sdi_sub { margin-top: -20px; padding: 15px 0 15px 20px; background-color: #F8F8F8; border-bottom-color: #B2BCDE; }
-	.main_start { margin-top: -20px; height: 25px; text-align: right; padding: 0px 15px; border-bottom: 1px solid #ddd; }
+	.main_start { margin-top: -20px; height: 25px; text-align: right; padding: 5px 15px; border-bottom: 1px solid #ddd; font-size: 12px;}
 
 
 	/********* 폰트 사이즈 *************/
