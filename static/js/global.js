@@ -15,7 +15,6 @@ function ZipWindow(ref) { // ref = 파일경로, z_form = 우편번호 폼, a_fo
 }
 
 // 오픈 윈도우2
-<!--
 function open_Win(ref,name, wid, hei) {
 	var window_left = (screen.width-640)/2;
 	var window_top = (screen.height-480)/2;
@@ -50,8 +49,8 @@ function cngClass(obj,cng){
 
 // 기간 지우기
 function to_del(a, b){
-	if(a!=null) document.getElementById(a).value=null;
-	if(b!=null) document.getElementById(b).value=null;
+	if(a!==null) document.getElementById(a).value=null;
+	if(b!==null) document.getElementById(b).value=null;
 }
 
 // 동호수 검색 결과 정렬 순서 폼 컨트롤

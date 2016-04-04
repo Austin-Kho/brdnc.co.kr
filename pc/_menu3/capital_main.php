@@ -26,11 +26,6 @@
 		<script src="../common/global.js"></script>
 		<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 		<script src="../include/calendar/calendar.js"></script>
-
-
-
-
-
 		<script src="../common/_menu3.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function(){

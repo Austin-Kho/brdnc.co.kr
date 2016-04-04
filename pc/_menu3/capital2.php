@@ -142,9 +142,7 @@
 						<table><tr><td height="8"></td></tr></table>
 						<table border="0" width="100%" cellspacing="0" cellpadding="0">
 							<tr align="center">
-								<td width="20" height="35" bgcolor="#EAEAEA" class="tb1">
-									<input type="checkbox" disabled>
-								</td>
+								<td width="20" height="35" bgcolor="#EAEAEA" class="tb1"><input type="checkbox" disabled></td>
 								<td width="80" bgcolor="#EAEAEA" class="tb1">거래 일자</td>
 								<td width="80" bgcolor="#EAEAEA" class="tb1"> 구 분</td>
 								<td width="110" bgcolor="#EAEAEA" class="tb1"> 계정과목 <a href="javascript:" onclick="popUp_size('<?=$cms_url?>_menu3/account_m.php','account',700,800)" title="계정과목 관리"><img src="../images/set.png" height="10" border="0" alt="설정"></a></td>
