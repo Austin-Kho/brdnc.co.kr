@@ -78,12 +78,15 @@ class M5 extends CI_Controller {
 				$st1 = $this->input->post('div_sel');
 				$st2 = $this->input->post('div_search');
 
+				// model data ////////////////////////
+				$div_table = 'cms_com_div';
+
 				//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = '/m5/config/1/1/';   //페이징 주소
-				$config['total_rows'] = $this->m5_m->com_div_list('cms_com_div', '', '', $st1, $st2, 'num');  //게시물의 전체 갯수
+				$config['total_rows'] = $this->m5_m->com_div_list($div_table, '', '', $st1, $st2, 'num');  //게시물의 전체 갯수
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -98,8 +101,6 @@ class M5 extends CI_Controller {
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$data['pagination'] = $this->pagination->create_links();
 
-				// model data ////////////////////////
-				$div_table = 'cms_com_div';
 				// db[전체부서목록] 데이터 불러오기
 				$data['all_div'] = $this->m5_m->all_div_name($div_table);
 
@@ -162,12 +163,15 @@ class M5 extends CI_Controller {
 				$st1 = $this->input->post('div_sel');
 				$st2 = $this->input->post('mem_search');
 
+				// model data ////////////////////////
+				$mem_table = 'cms_com_div_mem';
+
 				//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = '/m5/config/1/2/';  //페이징 주소
-				$config['total_rows'] = $this->m5_m->com_mem_list('cms_com_div_mem', '', '', $st1, $st2, 'num');  //게시물의 전체 갯수
+				$config['total_rows'] = $this->m5_m->com_mem_list($mem_table, '', '', $st1, $st2, 'num');  //게시물의 전체 갯수
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -181,9 +185,6 @@ class M5 extends CI_Controller {
 				$this->pagination->initialize($config);
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$data['pagination'] = $this->pagination->create_links();
-
-				// model data ////////////////////////
-				$mem_table = 'cms_com_div_mem';
 
 				// db[전체부서목록] 데이터 불러오기
 				$data['all_div'] = $this->m5_m->all_div_name('cms_com_div');
@@ -257,12 +258,15 @@ class M5 extends CI_Controller {
 				$st1 = $this->input->post('acc_sort');
 				$st2 = $this->input->post('acc_search');
 
+				// model data ////////////////////////
+				$acc_table = 'cms_accounts1';
+
 				//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = '/m5/config/1/3/';  //페이징 주소
-				$config['total_rows'] = $this->m5_m->com_accounts_list('cms_accounts', '', '', $st1, $st2, 'num');  //게시물의 전체 갯수
+				$config['total_rows'] = $this->m5_m->com_accounts_list($acc_table, '', '', $st1, $st2, 'num');  //게시물의 전체 갯수
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -276,9 +280,6 @@ class M5 extends CI_Controller {
 				$this->pagination->initialize($config);
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$data['pagination'] = $this->pagination->create_links();
-
-				// model data ////////////////////////
-				$acc_table = 'cms_accounts';
 
 				//  db [거래처 ]데이터 불러오기
 				$data['list'] = $this->m5_m->com_accounts_list($acc_table, $start, $limit, $st1, $st2, '');

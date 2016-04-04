@@ -90,9 +90,11 @@ class M5_m extends CI_Model {
 		// 검색어가 있을 경우
 		if($st1 !=''){ $this->db->where('div_code', $st1); }
 		if($st2 !='') {
-			$this->db->like('div_name', $st2);
-			$this->db->or_like('manager', $st2);
-			$this->db->or_like('res_work', $st2);
+			$this->db->group_start();
+				$this->db->like('div_name', $st2);
+				$this->db->or_like('manager', $st2);
+				$this->db->or_like('res_work', $st2);
+			$this->db->group_end();
 		}
 		$this->db->order_by('seq', 'ASC');
 		if($st1 =='' && ($start != '' or $limit !=''))	$this->db->limit($limit, $start);
@@ -111,12 +113,15 @@ class M5_m extends CI_Model {
 	 * @return [Array]              [실제리스트 데이터]
 	 */
 	public function com_mem_list($table, $start='', $limit='', $st1='', $st2='', $n){
+		$this->db->where('is_reti !=', '1');
 		// 검색어가 있을 경우
-		if($st1 !=''){	 $this->db->where('div_seq', $st1); }
+		if($st1 !=''){	 $this->db->where('div_name', $st1); }
 		if($st2 !='') {
-			$this->db->like('div_posi', $st2);
-			$this->db->or_like('mem_name', $st2);
-			$this->db->or_like('email', $st2);
+			$this->db->group_start();
+				$this->db->like('div_posi', $st2);
+				$this->db->or_like('mem_name', $st2);
+				$this->db->or_like('email', $st2);
+			$this->db->group_end();
 		}
 		$this->db->order_by('seq', 'ASC');
 
@@ -141,9 +146,11 @@ class M5_m extends CI_Model {
 		// 검색어가 있을 경우
 		if($st1 !=''){	 $this->db->where('acc_cla', $st1); }
 		if($st2 !='') {
-			$this->db->like('si_name', $st2);
-			$this->db->or_like('web_name', $st2);
-			$this->db->or_like('res_worker', $st2);
+			$this->db->group_start();
+				$this->db->like('si_name', $st2);
+				$this->db->or_like('web_name', $st2);
+				$this->db->or_like('res_worker', $st2);
+			$this->db->group_end();
 		}
 		$this->db->order_by('seq', 'ASC');
 
@@ -180,10 +187,12 @@ class M5_m extends CI_Model {
 		// 검색어가 있을 경우
 		if($st1 !=''){	 $this->db->where('bank_code', $st1); }
 		if($st2 !='') {
-			$this->db->like('bank', $st2);
-			$this->db->or_like('name', $st2);
-			$this->db->or_like('holder', $st2);
-			$this->db->or_like('note', $st2);
+			$this->db->group_start();
+				$this->db->like('bank', $st2);
+				$this->db->or_like('name', $st2);
+				$this->db->or_like('holder', $st2);
+				$this->db->or_like('note', $st2);
+			$this->db->group_end();
 		}
 		$this->db->order_by('no', 'ASC');
 

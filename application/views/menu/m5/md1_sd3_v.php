@@ -8,10 +8,10 @@
 							<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">업체구분</div>
 							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
 								<select class="form-control input-sm" name="acc_sort" onchange="submit();">
-									<option>전 체</option>
-									<option value="1">매입거래처</option>
-									<option value="2">매출거래처</option>
-									<option value="3">매입매출거래처</option>
+									<option value="">전 체</option>
+									<option value="1" <?php if($this->input->post('acc_sort')==1) echo 'selected'; ?>>매입거래처</option>
+									<option value="2" <?php if($this->input->post('acc_sort')==2) echo 'selected'; ?>>매출거래처</option>
+									<option value="3" <?php if($this->input->post('acc_sort')==3) echo 'selected'; ?>>매입매출거래처</option>
 								</select>
 							</div>
 							<div class="col-md-5" style="height: 40px; padding-top: 10px;"></div>
@@ -37,12 +37,16 @@
 							</thead>
 							<tbody>
 <?php foreach($list as $lt) : ?>
+<?php if($lt->acc_cla==1) $acc_cla = '매입거래처' ?>
+<?php if($lt->acc_cla==2) $acc_cla = '매출거래처' ?>
+<?php if($lt->acc_cla==3) $acc_cla = '매입매출거래처' ?>
+<?php $tax_addr = explode("-", $lt->tax_addr); ?>
 								<tr>
 									<td class="center"><input type="checkbox"></td>
 									<td class="center bo-left"><a href="javascript:" onclick="location.href='?ss_di=2&amp;mode=modify&amp;seq=<?php echo $lt->seq; ?>'"><?php echo $lt->si_name; ?></a></td>
-									<td class="center bo-left"><?php echo $lt->acc_cla; ?></td>
+									<td class="center bo-left"><?php echo $acc_cla; ?></td>
 									<td class="bo-left" style="padding-left: 15px;"><?php echo $lt->main_tel; ?></td>
-									<td class="bo-left" style="padding-left: 15px;"><?php echo $lt->tax_addr; ?></td>
+									<td class="bo-left" style="padding-left: 15px;"><?php echo $tax_addr[0]." ".$tax_addr[1]." ".$tax_addr[2]; ?></td>
 									<td class="bo-left" style="padding-left: 15px;"><?php echo $lt->note; ?></td>
 								</tr>
 <?php endforeach; ?>
