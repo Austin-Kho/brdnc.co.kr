@@ -60,5 +60,37 @@ class M4_m extends CI_Model {
 		return $result;
 	}
 	//공통 함수 Start//
+
+	public function cash_book_list($table, $start='', $limit='', $search_con, $n) {
+		$this->db->select('seq_num, class1, class2, account, cont, acc, in_acc, inc, out_acc, exp, evidence, cms_capital_cash_book.note, worker, deal_date, name, no');
+		$where=" (com_div>0 AND ((in_acc=no AND class2<>7) OR out_acc=no) OR (com_div IS NULL AND in_acc=no AND class2=6)) ";
+
+		//검색어가 있을 경우
+		if($search_con['class1']){
+			if($search_con['class1']==1) $where.=" AND class1='1' ";
+			if($search_con['class1']==2) $where.=" AND class1='2' ";
+			if($search_con['class1']==3) $where.=" AND class1='3' ";
+		}
+		if($search_con['class2']) $where.=" AND class2='".$search_con['class2']."' ";
+		if($search_con['s_date']) $where.=" AND deal_date>='".$search_con['s_date']."' ";
+		if($search_con['e_date']) {$where.=" AND deal_date<='".$search_con['e_date']."' "; } //$e_add=" AND deal_date<='$search_con['e_date']' ";} else{$e_add="";}
+
+		if($search_con['sh_text']){
+			if($search_con['sh_con']==0) $where.=" AND (account like '%".$search_con['sh_text']."%' OR cont like '%".$search_con['sh_text']."%' OR acc like '%".$search_con['sh_text']."%' OR evidence like '%".$search_con['sh_text']."%' OR cms_capital_cash_book.worker like '%".$search_con['sh_text']."%') "; // 통합검색
+			if($search_con['sh_con']==1) $where.=" AND cont like '%".$search_con['sh_text']."%' "; // 적 요
+			if($search_con['sh_con']==2) $where.=" AND acc like '%".$search_con['sh_text']."%' "; //거래처
+			if($search_con['sh_con']==3) $where.=" AND (in_acc like '%".$search_con['sh_text']."%' OR out_acc like '%".$search_con['sh_text']."%') "; // 계정
+			if($search_con['sh_con']==4) $where.=" AND evidence like '%".$search_con['sh_text']."%' ";  //증빙서류
+		}
+		$this->db->where($where);
+
+		$this->db->order_by('deal_date', 'DESC');
+		$this->db->order_by('seq_num', 'DESC');
+		if($search_con['class1'] =='' && ($start != '' or $limit !=''))	$this->db->limit($limit, $start);
+		$qry = $this->db->get($table);
+
+		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
+		return $result;
+	}
 }
 // End of this File

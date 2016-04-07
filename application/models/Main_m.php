@@ -15,5 +15,11 @@ class Main_m extends CI_Model
 		$result = $qry->row_array();
 		return $result;
 	}
+
+      public function master_auth_chk(){
+            $this->db->select('is_admin, auth_level');
+            $qry = $this->db->get_where('cms_member_table', array('user_id'=>$this->session->userdata['user_id']));
+            return $result = $qry->result();
+      }
 }
  // End of this File

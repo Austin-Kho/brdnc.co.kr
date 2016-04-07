@@ -31,23 +31,21 @@
 			</div>
 
 
-
-
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row" style="margin: 0 0 20px 0; border-bottom: 1px solid #ddd;">
 						<form name="list_frm" method="post" action="">
 							<div class="col-md-1 center" style="background-color: #F4F4F4; height: 40px; padding: 10px 0;">구 분</div>
 							<div class="col-md-1" style="height: 40px; padding: 5px;">
-								<select class="form-control input-sm wid-100">
-									<option value="">전 체</option>
-									<option value="">입금</option>
-									<option value="">출금</option>
-									<option value="">대체</option>
+								<select class="form-control input-sm wid-100" name="class1">
+									<option value="0">전 체</option>
+									<option value="1" <?php if($this->input->post('class1')==1) echo 'selected'; ?>>입금</option>
+									<option value="2" <?php if($this->input->post('class1')==2) echo 'selected'; ?>>출금</option>
+									<option value="3" <?php if($this->input->post('class1')==3) echo 'selected'; ?>>대체</option>
 								</select>
 							</div>
 							<div class="col-md-1" style="height: 40px; padding: 5px;">
-								<select class="form-control input-sm wid-100">
+								<select class="form-control input-sm wid-100" class="class2">
 									<option value="">전 체</option>
 									<option value="">계정과목</option>
 									<option value="">적 요</option>
@@ -84,7 +82,7 @@
 								</a>
 							</div>
 							<div class="col-md-1 center" style="background-color: #F4F4F4; height: 40px; padding: 5px;">
-								<select class="form-control input-sm" name="">
+								<select class="form-control input-sm" name="search_con">
 									<option value="">통합검색</option>
 									<option value="">계정과목</option>
 									<option value="">적 요</option>
@@ -92,12 +90,12 @@
 									<option value="">입출금처</option>
 								</select>
 							</div>
-							<div class="col-md-1" style="height: 40px; padding: 5px 0 0 5px;"><input type="text" name="name" value="" class="form-control input-sm" placeholder="검색어"></div>
-							<div class="col-md-1 center" style="height: 40px; padding: 3px;"><input type="button" name="name" value="검 색" class="btn btn-info btn-sm"></div>
+							<div class="col-md-1" style="height: 40px; padding: 5px 0 0 5px;"><input type="text" name="search_text" value="" class="form-control input-sm" placeholder="검색어"></div>
+							<div class="col-md-1 center" style="height: 40px; padding: 3px;"><input type="button" name="name" value="검 색" class="btn btn-info btn-sm" onclick="submit();"></div>
 						</form>
 					</div>
 					<div class="row table-responsive" style="margin: 0;">
-						<table class="table table-bordered table-hover table-condensed">
+						<table class="table table-bordered table-hover table-condensed font12">
 							<thead>
 								<tr style="border-top: 1px solid #ddd; background-color: #EAEAEA;">
 									<th style="width: 20px;" class="center"><input type="checkbox" disabled></th>
@@ -117,82 +115,94 @@
 									<th style="width: 90px;" class="center">출금 금액</th>
 									<th style="width: 90px;" class="center">증빙 서류</th>
 
-									<? // if($auth>0){  //관리자와 자금담당에게만 출력 ?>
-									<th style="width: 35px;">수정</th>
-									<th style="width: 35px;">삭제</th>
-									<?// }?>
+<?php if($auth>0) :  ?><!-- //관리자와 자금담당에게만 출력 -->
+									<th style="width: 35px;" class="center">수정</th>
+									<th style="width: 35px;" class="center">삭제</th>
+<?php endif; ?>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td class="center"><input type="checkbox" disabled></td>
-									<td class="center" >001</td>
-									<td colspan="11"> </td>
-								</tr>
-								<tr>
-									<td class="center"><input type="checkbox" disabled></td>
-									<td class="center" >002</td>
-									<td colspan="11"> </td>
-								</tr>
-								<tr>
-									<td class="center"><input type="checkbox" disabled></td>
-									<td class="center" >003</td>
-									<td colspan="11"> </td>
-								</tr>
-								<tr>
-									<td class="center"><input type="checkbox" disabled></td>
-									<td class="center">003</td>
-									<td colspan="11"> </td>
-								</tr>
-								<tr>
-									<td class="center"><input type="checkbox" disabled></td>
-									<td class="center">003</td>
-									<td colspan="11"> </td>
-								</tr>
-								<tr>
-									<td class="center"><input type="checkbox" disabled></td>
-									<td class="center">003</td>
-									<td colspan="11"> </td>
-								</tr>
-								<tr>
-									<td class="center"><input type="checkbox" disabled></td>
-									<td class="center">003</td>
-									<td colspan="11"> </td>
-								</tr>
-								<tr>
-									<td class="center"><input type="checkbox" disabled></td>
-									<td class="center">003</td>
-									<td colspan="11"> </td>
-								</tr>
-								<tr>
-									<td class="center"><input type="checkbox" disabled></td>
-									<td class="center">003</td>
-									<td colspan="11"> </td>
-								</tr>
-								<tr>
-									<td class="center"><input type="checkbox" disabled></td>
-									<td class="center">003</td>
-									<td colspan="11"> </td>
-								</tr>
-								<tr>
-									<td class="center"><input type="checkbox" disabled></td>
-									<td class="center">003</td>
-									<td colspan="11"> </td>
-								</tr>
-								<tr>
-									<td class="center"><input type="checkbox" disabled></td>
-									<td class="center">003</td>
-									<td colspan="11"> </td>
-								</tr>
+<?php foreach($cb_list as $lt) : ?>
+<?php if($lt->class1==1) $cla1 = "<font color='#0066ff'>[입금]</font>"; ?>
+<?php if($lt->class1==2) $cla1 = "<font color='#ff3333'>[출금]</font>"; ?>
+<?php if($lt->class1==3) $cla1 = "<font color='#669900'>[대체]</font>"; ?>
 
+<?php if($lt->class2==1) $cla2 = "<font color='#0066ff'>[자산]</font>"; ?>
+<?php if($lt->class2==2) $cla2 = "<font color='#6600ff'>[부채]</font>"; ?>
+<?php if($lt->class2==3) $cla2 = "<font color='#0066ff'>[자본]</font>"; ?>
+<?php if($lt->class2==4) $cla2 = "<font color='#0066ff'>[수익]</font>"; ?>
+<?php if($lt->class2==5) $cla2 = "<font color='#ff3333'>[비용]</font>"; ?>
+<?php if($lt->class2==6) $cla2 = "<font color='#669900'>[본사]</font>"; ?>
+<?php if($lt->class2==7) $cla2 = "<font color='#009900'>[현장]</font>"; ?>
+<?php	if($lt->account==""){ $account = "-"; }else{ $account = "[".$lt->account."]"; } //계정과목 ?>
+
+<?php if($lt->inc==0) $inc = '-'; else $inc = number_format($lt->inc); ?>
+<?php if($lt->exp==0) $exp = '-'; else $exp = number_format($lt->exp); ?>
+
+<?php	if($lt->acc) {$acc=$lt->acc;}else{$acc="-";} // 거래처정보가 없을 때 ?>
+<?php
+
+	// 대체거래일 때
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	if($lt->inc==0||($lt->class1==3&&$lt->out_acc==$lt->no)){ // (수입금이 '0' 이거나 대체거래이고, 출금계정이 은행등록계좌와 같으면,
+	      $inc="-";
+	}else{
+	      $inc=number_format($lt->inc); // 수입금
+	}
+	if($lt->exp==0||($lt->class1==3&&$lt->in_acc==$lt->no)){ // 지출금이 '0' 이거나 대체거래이고 입금계정이 은행등록계좌와 같으면,
+	      $exp="-";
+	}else{
+	      $exp=number_format($lt->exp); // 지출금
+	}
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	// 대체거래일 때
+	 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	 if($lt->in_acc==0||($lt->class1==3&&$lt->out_acc==$lt->no)){ // 입금계정정보가 없거나 대체거래이고 출금계정이 은행등록계좌와 같으면,
+		 $in_acc="";
+	 }else{
+		 $in_acc=$lt->name;  // 입금계정은 계좌별칭
+	 }
+	 if($lt->out_acc==0||($lt->class1==3&&$lt->in_acc==$lt->no)){ // 출금계정정보가 없거나 대체거래이고 입금계정이 은행등록계좌와 같으면,
+		 $out_acc="";
+	 }else{
+		 $out_acc=$lt->name; // 출금계정은 계좌별칭
+	 }
+	 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	if($lt->evidence==1) $evi="증빙 없음";
+ 	if($lt->evidence==2) $evi="세금계산서";
+ 	if($lt->evidence==3) $evi="계산서";
+ 	if($lt->evidence==4) $evi="카드전표";
+ 	if($lt->evidence==5) $evi="현금영수증";
+ 	if($lt->evidence==6) $evi="간이영수증";
+?>
+								<tr>
+									<td class="center"><input type="checkbox" disabled></td>
+									<td class="center" ><?php echo $lt->deal_date; ?></td>
+									<td class="center"> <?php echo $cla1." - ".$cla2; ?></td>
+									<td class="center" style="color: #000099;"> <?php echo $account; ?></td>
+									<td class=""> <?php echo cut_string($lt->cont, 20, '..'); ?></td>
+									<td class=""><?php echo cut_string($acc, 8, '..'); ?> </td>
+									<td class="center" style="background-color: #D0FCCA;"><?php echo $in_acc; ?> </td>
+									<td class="right" style="background-color: #D0FCCA;"> <?php echo $inc; ?></td>
+									<td class="center" style="background-color: #DEEAFE;"> <?php echo $out_acc; ?></td>
+									<td class="right" style="background-color: #DEEAFE;"><?php echo $exp; ?> </td>
+									<td class="center"> <?php echo $evi; ?></td>
+<?php if($auth>0) :  ?><!-- //관리자와 자금담당에게만 출력 -->
+									<td class="center"><a href="#" class="btn btn-info btn-xs">수정</a> </td>
+									<td class="center"> <a href="#" class="btn btn-danger btn-xs">삭제</a></td>
+<?php endif; ?>
+								</tr>
+<?php endforeach; ?>
 							</tbody>
 						</table>
-<?php //  if(empty($list)) : ?>
-						<!-- <div class="center" style="padding: 100px 0;">등록된 데이터가 없습니다.</div> -->
-<?php // endif; ?>
+<?php  if(empty($cb_list)) : ?>
+						<div class="center" style="padding: 100px 0;">등록된 데이터가 없습니다.</div>
+<?php endif; ?>
 					</div>
 					<div class="col-md-12 center" style="margin-top: 0px; padding: 0;">
-						<ul class="pagination pagination-sm"><?php // echo $pagination; ?></ul>
+						<ul class="pagination pagination-sm"><?php echo $pagination; ?></ul>
 					</div>
 				</div>
 				<div class="row" style="margin: 0 15px;">
