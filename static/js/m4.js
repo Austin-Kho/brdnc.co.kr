@@ -52,17 +52,19 @@ function inoutSel(form, no, pj){ // ==capital2.php 와 capital_edit.php => form 
 	class2_id.disabled=0;
 
 	if(class1_id.value==1){   //1번째 셀렉트바 입금이면
-		class2_id.length=4;    //2번째 셀렉트바 목록 4개
-		class2_id.options[0].text = '자 산';//2-1번째 셀렉트바 텍스트 정의
-		class2_id.options[0].value = '1';//2-1번째 셀렉트바 값 정의
-		class2_id.options[1].text = '부 채';//2-2번째 셀렉트바 텍스트 정의
-		class2_id.options[1].value = '2';//2-2번째 셀렉트바 값 정의
-		class2_id.options[2].text = '자 본';//2-3번째 셀렉트바 텍스트 정의
-		class2_id.options[2].value = '3';//2-3번째 셀렉트바 값 정의
-		class2_id.options[3].text = '수 익';//2-4번째 셀렉트바 텍스트 정의
-		class2_id.options[3].value = '4';//2-4번째 셀렉트바 값 정의
+		class2_id.length=5;    //2번째 셀렉트바 목록 5개
+		class2_id.options[0].text = '선 택';//2-1번째 셀렉트바 텍스트 정의
+		class2_id.options[0].value = '0';//2-1번째 셀렉트바 값 정의
+		class2_id.options[1].text = '자 산';//2-1번째 셀렉트바 텍스트 정의
+		class2_id.options[1].value = '1';//2-1번째 셀렉트바 값 정의
+		class2_id.options[2].text = '부 채';//2-2번째 셀렉트바 텍스트 정의
+		class2_id.options[2].value = '2';//2-2번째 셀렉트바 값 정의
+		class2_id.options[3].text = '자 본';//2-3번째 셀렉트바 텍스트 정의
+		class2_id.options[3].value = '3';//2-3번째 셀렉트바 값 정의
+		class2_id.options[4].text = '수 익';//2-4번째 셀렉트바 텍스트 정의
+		class2_id.options[4].value = '4';//2-4번째 셀렉트바 값 정의
 		if(!jh_loan_id||jh_loan_id.checked===0){
-			class2_id.options[3].selected =1; // 수익을 선택하고 ///////
+			class2_id.options[4].selected =1; // 수익을 선택하고 ///////
 			if(d1_1_id)d1_1_id.style.display='none';   //자산계정 비활성
 			if(d1_2_id)d1_2_id.style.display='none';   //부채계정 비활성
 			if(d1_3_id)d1_3_id.style.display='none';   //자본계정 비활성
@@ -75,7 +77,7 @@ function inoutSel(form, no, pj){ // ==capital2.php 와 capital_edit.php => form 
 			d1_acc4_id.disabled=0;  d1_acc4_id.style.display=''; /// 수익계정 활성화
 			d1_acc5_id.disabled=1;  d1_acc5_id.style.display='none';
 		}else{
-			class2_id.options[0].selected =1; // 자산을 선택하고 ///////
+			class2_id.options[1].selected =1; // 자산을 선택하고 ///////
 			if(d1_1_id)d1_1_id.style.display='';   //자산계정 비활성
 			if(d1_2_id)d1_2_id.style.display='none';   //부채계정 비활성
 			if(d1_3_id)d1_3_id.style.display='none';   //자본계정 비활성
@@ -97,17 +99,19 @@ function inoutSel(form, no, pj){ // ==capital2.php 와 capital_edit.php => form 
 
 
 	}else if(class1_id.value==2){    //1번째 셀렉트바 출금이면
-		class2_id.length=4;
-		class2_id.options[0].text = '자 산';
-		class2_id.options[0].value = '1';
-		class2_id.options[1].text = '부 채';
-		class2_id.options[1].value = '2';
-		class2_id.options[2].text = '자 본';
-		class2_id.options[2].value = '3';
-		class2_id.options[3].text = '비 용';
-		class2_id.options[3].value = '5';
+		class2_id.length=5;
+		class2_id.options[0].text = '선 택';
+		class2_id.options[0].value = '0';
+		class2_id.options[1].text = '자 산';
+		class2_id.options[1].value = '1';
+		class2_id.options[2].text = '부 채';
+		class2_id.options[2].value = '2';
+		class2_id.options[3].text = '자 본';
+		class2_id.options[3].value = '3';
+		class2_id.options[4].text = '비 용';
+		class2_id.options[4].value = '5';
 		if(!jh_loan_id||jh_loan_id.checked===0){
-			class2_id.options[3].selected =1; // 수익을 선택하고 ///////
+			class2_id.options[4].selected =1; // 비용을 선택하고 ///////
 			if(d1_1_id)d1_1_id.style.display='none';   //자산계정 비활성
 			if(d1_2_id)d1_2_id.style.display='none';   //부채계정 비활성
 			if(d1_3_id)d1_3_id.style.display='none';   //자본계정 비활성
@@ -120,7 +124,7 @@ function inoutSel(form, no, pj){ // ==capital2.php 와 capital_edit.php => form 
 			d1_acc4_id.disabled=1;  d1_acc4_id.style.display='none';
 			d1_acc5_id.disabled=0;  d1_acc5_id.style.display='';  /// 비용계정 활성화
 		}else{
-			class2_id.options[0].selected =1; // 자산을 선택하고 ///////
+			class2_id.options[1].selected =1; // 자산을 선택하고 ///////
 			if(d1_1_id)d1_1_id.style.display='';         //자산계정 활성화
 			if(d1_2_id)d1_2_id.style.display='none';     //부채계정 비활성
 			if(d1_3_id)d1_3_id.style.display='none';     //자본계정 비활성
@@ -141,19 +145,23 @@ function inoutSel(form, no, pj){ // ==capital2.php 와 capital_edit.php => form 
 
 
 	}else if(class1_id.value==3){
-		class2_id.length=2;
+		class2_id.length=3;
 		if(pj=='pj'){
-			class2_id.options[0].text = '현 장';
-			class2_id.options[0].value = '7';
-			class2_id.options[0].selected =1; // 현장을 선택하고
-			class2_id.options[1].text = '본 사';
-			class2_id.options[1].value = '6';
-		}else{
-			class2_id.options[0].text = '본 사';
-			class2_id.options[0].value = '6';
-			class2_id.options[0].selected =1; // 본사를 선택하고
+			class2_id.options[0].text = '선 택';
+			class2_id.options[0].value = '0';
 			class2_id.options[1].text = '현 장';
 			class2_id.options[1].value = '7';
+			class2_id.options[1].selected =1; // 현장을 선택하고
+			class2_id.options[2].text = '본 사';
+			class2_id.options[2].value = '6';
+		}else{
+			class2_id.options[0].text = '선 택';
+			class2_id.options[0].value = '0';
+			class2_id.options[1].text = '본 사';
+			class2_id.options[1].value = '6';
+			class2_id.options[1].selected =1; // 본사를 선택하고
+			class2_id.options[2].text = '현 장';
+			class2_id.options[2].value = '7';
 		}
 		//////////////////////////////
 		pj_seq_id.options[0].selected =1;

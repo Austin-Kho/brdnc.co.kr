@@ -82,7 +82,7 @@
 						<tr>
 							<td width="60" height="38" class="form2" bgcolor="#F4F4F4">구 분 </td>
 							<td class="form2" width="180">
-								<select name="class1" style="width:80px;" onChange="inoutSel(this.form)">
+								<select name="class1" style="width:80px;" onChange="inoutSel(this.form);">
 									<option value="0" <?if(!$class1) echo "selected";?>> 선 택
 									<option value="1" <?if($class1==1) echo "selected";?>> 입 금
 									<option value="2" <?if($class1==2) echo "selected";?>> 출 금

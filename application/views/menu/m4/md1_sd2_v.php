@@ -34,29 +34,49 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="row" style="margin: 0 0 20px 0; border-bottom: 1px solid #ddd;">
-						<form name="list_frm" method="post" action="">
+<?php
+	$attributes = array('name' => 'cash_book_frm', 'method' => 'get');
+	echo form_open('/m4/capital/1/2/', $attributes);
+?>
 							<div class="col-md-1 center" style="background-color: #F4F4F4; height: 40px; padding: 10px 0;">구 분</div>
 							<div class="col-md-1" style="height: 40px; padding: 5px;">
-								<select class="form-control input-sm wid-100" name="class1">
-									<option value="0">전 체</option>
-									<option value="1" <?php if($this->input->post('class1')==1) echo 'selected'; ?>>입금</option>
-									<option value="2" <?php if($this->input->post('class1')==2) echo 'selected'; ?>>출금</option>
-									<option value="3" <?php if($this->input->post('class1')==3) echo 'selected'; ?>>대체</option>
+								<label for="class1" class="sr-only">구분1</label>
+								<select class="form-control input-sm wid-100" name="class1" onChange="inoutSel(this.form);">
+									<option value="0">선 택</option>
+									<option value="1" <?php if($this->input->get('class1')==1) echo 'selected'; ?>>입 금</option>
+									<option value="2" <?php if($this->input->get('class1')==2) echo 'selected'; ?>>출 금</option>
+									<option value="3" <?php if($this->input->get('class1')==3) echo 'selected'; ?>>대 체</option>
 								</select>
 							</div>
 							<div class="col-md-1" style="height: 40px; padding: 5px;">
-								<select class="form-control input-sm wid-100" class="class2">
-									<option value="">전 체</option>
-									<option value="">계정과목</option>
-									<option value="">적 요</option>
-									<option value="">거래처</option>
-									<option value="">입출금처</option>
+								<label for="class2" class="sr-only">구분2</label>
+								<select class="form-control input-sm wid-100" name="class2" onchange = "inoutSel2(this.form)" <?if(!$this->input->get('class1')&&!$this->input->get('class2')) echo "disabled";?>>
+<?php if( !$this->input->get('class1') or !$this->input->get('class2')) : ?>
+									<option value="0"> 선 택</option>
+<?php elseif($this->input->get('class1')==1) : ?>
+									<option value="0"> 선 택</option>
+									<option value="1" <?if($this->input->get('class2')==1) echo "selected";?>> 자 산</option>
+									<option value="2" <?if($this->input->get('class2')==2) echo "selected";?>> 부 채</option>
+									<option value="3" <?if($this->input->get('class2')==3) echo "selected";?>> 자 본</option>
+									<option value="4" <?if($this->input->get('class2')==4) echo "selected";?>> 수 익</option>
+<?php elseif($this->input->get('class1')==2) : ?>
+									<option value="0"> 선 택</option>
+									<option value="1" <?if($this->input->get('class2')==1) echo "selected";?>> 자 산</option>
+									<option value="2" <?if($this->input->get('class2')==2) echo "selected";?>> 부 채</option>
+									<option value="3" <?if($this->input->get('class2')==3) echo "selected";?>> 자 본</option>
+									<option value="5" <?if($this->input->get('class2')==5) echo "selected";?>> 비 용</option>
+<?php elseif($this->input->get('class1')==3) : ?>
+									<option value="0"> 선 택</option>
+									<option value="6" <?if($this->input->get('class2')==6) echo "selected";?>> 본 사</option>
+									<option value="7" <?if($this->input->get('class2')==7) echo "selected";?>> 현 장</option>
+<?php endif;?>
 								</select>
 							</div>
 							<div class="col-md-1 center" style="background-color: #F4F4F4; height: 40px; padding: 10px 0;">거래기간</div>
 							<div class="col-md-3" style="height: 40px; padding: 5px;">
 								<div class="col-xs-5" style="padding: 0px;">
-									<input type="text" class="form-control input-sm wid-95" id="s_date" name="s_date" maxlength="10" value="" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="시작일">
+									<label for="s_date" class="sr-only">시작일</label>
+									<input type="text" class="form-control input-sm wid-95" id="s_date" name="s_date" maxlength="10" value="<?php if($this->input->get('s_date')) echo $this->input->get('s_date'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="시작일">
 								</div>
 								<div class="col-xs-1 glyphicon-wrap" style="padding: 6px 0;">
 									<a href="javascript:" onclick="cal_add(document.getElementById('s_date'),this); event.cancelBubble=true">
@@ -64,7 +84,8 @@
 									</a>
 								</div>
 								<div class="col-xs-5" style="padding: 0px;">
-									<input type="text" class="form-control input-sm wid-95" id="e_date" name="e_date" maxlength="10" value="" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="종료일">
+									<label for="e_date" class="sr-only">종료일</label>
+									<input type="text" class="form-control input-sm wid-95" id="e_date" name="e_date" maxlength="10" value="<?php if($this->input->get('e_date')) echo $this->input->get('e_date'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="종료일">
 								</div>
 								<div class="col-xs-1 glyphicon-wrap" style="padding: 6px 0;">
 									<a href="javascript:" onclick="cal_add(document.getElementById('e_date'),this); event.cancelBubble=true">
@@ -82,16 +103,22 @@
 								</a>
 							</div>
 							<div class="col-md-1 center" style="background-color: #F4F4F4; height: 40px; padding: 5px;">
+								<label for="search_con" class="sr-only">검색조건</label>
 								<select class="form-control input-sm" name="search_con">
-									<option value="">통합검색</option>
-									<option value="">계정과목</option>
-									<option value="">적 요</option>
-									<option value="">거래처</option>
-									<option value="">입출금처</option>
+									<option value="0">통합검색</option>
+									<option value="1" <?php if($this->input->get('search_con')==1) echo 'selected'; ?>>계정과목</option>
+									<option value="2" <?php if($this->input->get('search_con')==2) echo 'selected'; ?>>적 요</option>
+									<option value="3" <?php if($this->input->get('search_con')==3) echo 'selected'; ?>>거래처</option>
+									<option value="4" <?php if($this->input->get('search_con')==4) echo 'selected'; ?>>입출금처</option>
 								</select>
 							</div>
-							<div class="col-md-1" style="height: 40px; padding: 5px 0 0 5px;"><input type="text" name="search_text" value="" class="form-control input-sm" placeholder="검색어"></div>
-							<div class="col-md-1 center" style="height: 40px; padding: 3px;"><input type="button" name="name" value="검 색" class="btn btn-info btn-sm" onclick="submit();"></div>
+							<div class="col-md-1" style="height: 40px; padding: 5px 0 0 5px;">
+								<label for="search_text" class="sr-only">검색어</label>
+								<input type="text" name="search_text" value="<?php if($this->input->get('search_text')) echo $this->input->get('search_text'); ?>" class="form-control input-sm" placeholder="검색어">
+							</div>
+							<div class="col-md-1 center" style="height: 40px; padding: 3px;">
+								<input type="button" value="검 색" class="btn btn-info btn-sm" onclick="submit();">
+							</div>
 						</form>
 					</div>
 					<div class="row table-responsive" style="margin: 0;">

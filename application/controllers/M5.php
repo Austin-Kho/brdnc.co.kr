@@ -154,7 +154,7 @@ class M5 extends CI_Controller {
 			if( !$auth['_m5_1_2'] or $auth['_m5_1_2']==0) {
 				$this->load->view('no_auth');
 			}else{ // 조회 권한이 있는 경우
-				
+
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m5_1_2'];
 

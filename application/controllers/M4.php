@@ -97,17 +97,15 @@ class M4 extends CI_Controller {
 				$data['auth'] = $auth['_m4_1_2'];
 				$data['m_auth'] = $m_auth;
 
-				// 검색어 post 데이터
-				$search_con = array(
-					'class1' => '',
-					'class2' => '',
-					's_date' => '',
-					'e_date' => '',
-					'sh_con' => '',
-					'sh_text' => '',
-					'start' => ''
+				// 검색어 get 데이터
+				$sh_frm = array(
+					'class1' => $this->input->get('class1', TRUE),
+					'class2' => $this->input->get('class2', TRUE),
+					's_date' => $this->input->get('s_date', TRUE),
+					'e_date' => $this->input->get('e_date', TRUE),
+					'sh_con' => $this->input->get('sh_con', TRUE),
+					'sh_text' => $this->input->get('sh_text', TRUE)
 				);
-
 
 				// model data ////////////////
 				$cb_table = 'cms_capital_cash_book, cms_capital_bank_account';
@@ -117,10 +115,11 @@ class M4 extends CI_Controller {
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = '/m4/capital/1/2/';   //페이징 주소
-				$config['total_rows'] = $this->m4_m->cash_book_list($cb_table, '', '', $search_con, 'num');  //게시물의 전체 갯수
+				$config['total_rows'] = $this->m4_m->cash_book_list($cb_table, '', '', $sh_frm, 'num');  //게시물의 전체 갯수
 				$config['per_page'] = 12; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3;  // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
+				$config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
 
 				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
 				$page = $this->uri->segment($config['uri_segment']);
@@ -132,7 +131,7 @@ class M4 extends CI_Controller {
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$data['pagination'] = $this->pagination->create_links();
 
-				$data['cb_list'] = $this->m4_m->cash_book_list($cb_table, $start, $limit, $search_con, '');
+				$data['cb_list'] = $this->m4_m->cash_book_list($cb_table, $start, $limit, $sh_frm, '');
 
 
 
