@@ -1,27 +1,30 @@
 <script type="text/javascript">
-	<!--
-		function term_put(a,b,term){
-			if(term=='d')var term="<?php echo date('Y-m-d'); ?>";
-			if(term=='w')var term="<?php echo date('Y-m-d',strtotime ('-1 weeks'));?>";
-			if(term=='m')var term="<?php echo date('Y-m-d',strtotime ('-1 months'));?>";
-			if(term=='3m')var term="<?php echo date('Y-m-d',strtotime ('-3 months'));?>";
-			document.getElementById(a).value = term;
-			document.getElementById(b).value = "<?php echo date('Y-m-d');?>";
+	function term_put(a,b,term){
+		if(term=='d')var term="<?php echo date('Y-m-d'); ?>";
+		if(term=='w')var term="<?php echo date('Y-m-d',strtotime ('-1 weeks'));?>";
+		if(term=='m')var term="<?php echo date('Y-m-d',strtotime ('-1 months'));?>";
+		if(term=='3m')var term="<?php echo date('Y-m-d',strtotime ('-3 months'));?>";
+		document.getElementById(a).value = term;
+		document.getElementById(b).value = "<?php echo date('Y-m-d');?>";
+	}
+	function to_del(code){
+		if(aa=confirm('데이터가 삭제됩니다. 계속 진행하시겠습니까?')){
+			location.href='?del_code='+code
+		}else{
+			return false;
 		}
-		function _del(code){
-			if(aa=confirm('정말 삭제하시겠습니까?')){
-				location.href='capital_del.php?del_code='+code
-			}else{
-				return false;
-			}
-		}
-	//-->
+	}
 </script>
 <?php
-	if($auth<1){ $excel_pop = "alert('출력 권한이 없습니다!');";
+	if($auth<2){ $excel_pop = "alert('출력 권한이 없습니다!');";
 	}else{
-		$url_date = urlencode('$sh_date');
-		$excel_pop = "location.href='".base_url()."excel_daily_money_report.php?sh_date=".$url_date."' ";
+		// $url_where = urlencode($add_where);
+		// $url_s_date = urlencode($s_date);
+		// $url_e_date = urlencode($e_date);
+		// $excel_pop = "location.href='excel_cash_book.php?add_where=$url_where&amp;s_date=$url_s_date&amp;e_date=$url_e_date)' ";
+		//
+		// $url_date = urlencode('$sh_date');
+		$excel_pop = "location.href='/m4/capital/1/2/?cash_book=print'";
 	}
  ?>
 			<div class="main_start">
@@ -143,7 +146,7 @@
 									<th style="width: 90px;" class="center">출금 금액</th>
 									<th style="width: 90px;" class="center">증빙 서류</th>
 
-<?php if($auth>0) :  ?><!-- //관리자와 자금담당에게만 출력 -->
+<?php if($auth>1) :  ?><!-- //마스터 관리자와 쓰기권한 있는 자금담당에게만 출력 -->
 									<th style="width: 35px;" class="center">수정</th>
 									<th style="width: 35px;" class="center">삭제</th>
 <?php endif; ?>
@@ -203,10 +206,24 @@
 									<td class="right" style="background-color: #D0FCCA;"> <?php echo $inc; ?></td>
 									<td class="center" style="background-color: #DEEAFE;"> <?php echo $out_acc; ?></td>
 									<td class="right" style="background-color: #DEEAFE;"><?php echo $exp; ?> </td>
-									<td class="center"> <?php echo $evi; ?></td>
-<?php if($auth>0) :  ?><!-- //관리자와 자금담당에게만 출력 -->
-									<td class="center"><a href="#" class="btn btn-info btn-xs">수정</a> </td>
-									<td class="center"> <a href="#" class="btn btn-danger btn-xs">삭제</a></td>
+									<td class="center"> <?php echo $evi; ?><?php echo $m_auth[0]->auth_level; ?></td>
+<?php if($auth>1) :  ?><!-- //마스터 관리자와 쓰기권한 있는 자금담당에게만 출력 -->
+									<td class="center">
+<?php if($m_auth[0]->is_admin==1 or $m_auth[0]->auth_level<=2 or ($m_auth[0]->auth_level>2&&date('Y-m-d', strtotime('-3 day'))<=$lt->deal_date)) : //관리자와 마스터 쓰기권한이 아니면 당일건에 대해서만 수정 삭제 가능 ?>
+										<a href='javascript:'class="btn btn-info btn-xs" onclick="popUp_size('/pc/_menu3/capital_edit.php?edit_code=<?php echo $lt->seq_num; ?>','capital_edit','420','500')">
+<?php else: ?>
+										<a href="javascript:" class="btn btn-default btn-xs" onclick="alert('마스터 관리자가 아니면 3일전 이후 건에 대해서만 수정/삭제 가능합니다.\n\n수정 필요 시 마스터 관리자에게 요청하여 주십시요.');">
+<?php endif; ?>
+										수정</a>
+									</td>
+									<td class="center">
+<?php if($m_auth[0]->is_admin==1 or $m_auth[0]->auth_level<=2 or ($m_auth[0]->auth_level>2&&date('Y-m-d', strtotime('-3 day'))<=$lt->deal_date)) : //관리자와 마스터 쓰기권한이 아니면 당일건에 대해서만 수정 삭제 가능 ?>
+										<a href='javascript:'class="btn btn-danger btn-xs" onclick="to_del(<?php echo $lt->seq_num; ?>);">
+<?php else: ?>
+										<a href="javascript:" class="btn btn-default btn-xs" onclick="alert('마스터 관리자가 아니면 3일전 이후 건에 대해서만 수정/삭제 가능합니다.\n\n수정 필요 시 마스터 관리자에게 요청하여 주십시요.');">
+<?php endif; ?>
+										삭제</a>
+									</td>
 <?php endif; ?>
 								</tr>
 <?php endforeach; ?>

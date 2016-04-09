@@ -48,7 +48,7 @@ class M4 extends CI_Controller {
 	 * @return [type]      [description]
 	 */
 	public function capital($mdi='', $sdi=''){
-		$this->output->enable_profiler(TRUE); //프로파일러 보기//
+		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
@@ -133,10 +133,26 @@ class M4 extends CI_Controller {
 
 				$data['cb_list'] = $this->m4_m->cash_book_list($cb_table, $start, $limit, $sh_frm, '');
 
+				if($this->input->get('del_code')) {
+					$result = $this->m4_m->delete_data('cms_capital_cash_book', array('seq_num' => $this->input->get('del_code')));
+					if($result) {
+						alert('삭제 되었습니다.', '/m4/capital/1/2/');
+					}else{
+						alert('다시 시도하여 주십시요!', '/m4/capital/1/2/');
+					}
+				}
+
+				if($this->input->get('cash_book')=='print') {
+					// Excel Cash book Print
+					$this->load->view('/excel/cash_book_v', $data);
+				}else{
+					//본 페이지 로딩
+					$this->load->view('/menu/m4/md1_sd2_v', $data);
+				}
 
 
-				//본 페이지 로딩
-				$this->load->view('/menu/m4/md1_sd2_v', $data);
+
+
 			}
 
 

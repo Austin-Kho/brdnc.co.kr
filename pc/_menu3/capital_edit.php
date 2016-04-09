@@ -6,17 +6,18 @@
 	// MySQL 연결
 	$connect=dbconn();
 
-	// 이름과 아이디에 해당하는 세션이 있는지 확인
-	if(!isset($_SESSION[p_id])||!isset($_SESSION[p_name])){
-		err_msg('로그인 정보가 없습니다. 다시 로그인해 주세요.');
-	}
-
 	$edit_code = $_REQUEST['edit_code'];
 ?>
 <!DOCTYPE HTML>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<?php
+	// 이름과 아이디에 해당하는 세션이 있는지 확인
+	// if(!isset($_SESSION[p_id])||!isset($_SESSION[p_name])){
+	// 	err_msg('로그인 정보가 없습니다. 다시 로그인해 주세요.');
+	// }
+?>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title><?=$doc_title?></title>
 	<link rel="shortcut icon" href="<?=$cms_url?>images/cms.ico">
