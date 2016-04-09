@@ -103,8 +103,8 @@ class M4 extends CI_Controller {
 					'class2' => $this->input->get('class2', TRUE),
 					's_date' => $this->input->get('s_date', TRUE),
 					'e_date' => $this->input->get('e_date', TRUE),
-					'sh_con' => $this->input->get('sh_con', TRUE),
-					'sh_text' => $this->input->get('sh_text', TRUE)
+					'sh_con' => $this->input->get('search_con', TRUE),
+					'sh_text' => $this->input->get('search_text', TRUE)
 				);
 
 				// model data ////////////////
@@ -117,7 +117,7 @@ class M4 extends CI_Controller {
 				$config['base_url'] = '/m4/capital/1/2/';   //페이징 주소
 				$config['total_rows'] = $this->m4_m->cash_book_list($cb_table, '', '', $sh_frm, 'num');  //게시물의 전체 갯수
 				$config['per_page'] = 12; // 한 페이지에 표시할 게시물 수
-				$config['num_links'] = 3;  // 링크 좌우로 보여질 페이지 수
+				$config['num_links'] = 4;  // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
 				$config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
 

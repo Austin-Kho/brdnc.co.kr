@@ -1,7 +1,7 @@
 		<div class="main_start"></div>
 <!-- 5. 환경설정 -> 2. 회사정보관리 ->1. 회사정보 페이지 -->
 <?php
-	$attributes = array('name' => 'form1', 'id' => 'com_reg_form', 'class' => 'form-inline', 'method' => 'post');
+	$attributes = array('name' => 'form1', 'id' => 'com_reg_form', 'class' => 'form-horizontal', 'method' => 'post');
 	echo form_open('/m5/config/2/1/', $attributes);
 ?>
 	<fieldset class="font12">
@@ -10,7 +10,9 @@
 				<label for="co_name">회사명 <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<input type="text" class="form-control input-sm han" id="co_name" name="co_name" maxlength="30" value="<?php if($mode=='com_reg') {echo set_value('co_name');} else {echo $com->co_name;} ?>" required autofocus>
+				<div class="col-xs-8">
+					<input type="text" class="form-control input-sm han" id="co_name" name="co_name" maxlength="30" value="<?php if($mode=='com_reg') {echo set_value('co_name');} else {echo $com->co_name;} ?>" required autofocus>
+				</div>
 			</div>
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="co_no1">사업자번호 <span class="red">*</span></label>
@@ -45,7 +47,9 @@
 				</label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<input type="text" class="form-control input-sm han" id="ceo" name="ceo" maxlength="30" value="<?php if($mode=='com_reg') {echo set_value('ceo');} else {echo $com->ceo;} ?>" required autofocus>
+				<div class="col-xs-8">
+					<input type="text" class="form-control input-sm han" id="ceo" name="ceo" maxlength="30" value="<?php if($mode=='com_reg') {echo set_value('ceo');} else {echo $com->ceo;} ?>" required autofocus>
+				</div>
 			</div>
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="or_no1">법인(주민)등록번호 <span class="red">*</span></label>
@@ -74,14 +78,18 @@
 				<label for="biz_cond">업태 <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
+				<div class="col-xs-8">
 					<input type="text" class="form-control input-sm han" id="biz_cond" name="biz_cond" maxlength="30" value="<?php if($mode=='com_reg') {echo set_value('biz_cond');} else {echo $com->biz_cond;} ?>" required autofocus>
+				</div>
 			</div>
 
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
 				<label for="biz_even">종목 <span class="red">*</span></label>
 			</div>
 			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
-				<input type="text" class="form-control input-sm han" id="biz_even" name="biz_even" maxlength="30" value="<?php if($mode=='com_reg') {echo set_value('biz_even');} else {echo $com->biz_even;} ?>" required autofocus>
+				<div class="col-xs-8">
+					<input type="text" class="form-control input-sm han" id="biz_even" name="biz_even" maxlength="30" value="<?php if($mode=='com_reg') {echo set_value('biz_even');} else {echo $com->biz_even;} ?>" required autofocus>
+				</div>
 			</div>
 		</div>
 		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
@@ -297,16 +305,16 @@
 		</div>
 		<div class="row <?php if( !$this->agent->is_mobile()) echo 'no-mobile';?>">
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
-				<label for="tax_off1_code">세무서[1] <span class="red">*</span></label>
+				<label for="tax_off1_code">세무서 [1] <span class="red">*</span></label>
 			</div>
-			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
+			<div class="form-group form-inline col-xs-12 col-sm-8 col-md-4 form-wrap">
 				<div class="col-xs-3 input-group">
 					<input type="text" class="form-control input-sm" id="tax_off1_code" name="tax_off1_code" value="<?php if($mode=='com_reg') {echo set_value('tax_off1_code');} else {echo $com->tax_off1_code; } ?>" readonly required autofocus>
 					<span class="input-group-btn">
-		        <button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('/popup/tax_off/lists/1/', 'tax_search', 500, 586)">
-		        	&nbsp;<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
-		        </button>
-		      </span>
+					      <button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('/popup/tax_off/lists/1/', 'tax_search', 500, 586)"> &nbsp;
+							<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+					      </button>
+					</span>
 				</div>
 				<div class="col-xs-4 input-group">
 					<label for="tax_off1_name" class="sr-only">세무서1 이름</label>
@@ -315,16 +323,16 @@
 				<div class="col-xs-5"></div>
 			</div>
 			<div class="form-group col-xs-12 col-sm-4 col-md-2 label-wrap">
-				<label for="tax_off2_code">세무서[2]</label>
+				<label for="tax_off2_code">세무서 [2]</label>
 			</div>
-			<div class="form-group col-xs-12 col-sm-8 col-md-4 form-wrap">
+			<div class="form-group form-inline col-xs-12 col-sm-8 col-md-4 form-wrap">
 				<div class="col-xs-3  input-group">
 					<input type="text" class="form-control input-sm" id=tax_off2_code"" name="tax_off2_code" value="<?php if($mode=='com_reg') {echo set_value('tax_off2_code');} else if($com->tax_off2_code>0) {echo $com->tax_off2_code; } ?>" readonly>
 					<span class="input-group-btn">
-	        <button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('/popup/tax_off/lists/2/', 'tax_search', 500, 586)">
-	        	&nbsp;<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
-	        </button>
-	      </span>
+				      	<button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('/popup/tax_off/lists/2/', 'tax_search', 500, 586)"> &nbsp;
+				      		<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+				      	</button>
+				      </span>
 				</div>
 				<div class="col-xs-4  input-group">
 					<label for="tax_off2_name" class="sr-only">세무서2 이름</label>

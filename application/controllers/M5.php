@@ -73,9 +73,9 @@ class M5 extends CI_Controller {
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m5_1_1'];
 
-				// 검색어 post 데이터
-				$st1 = $this->input->post('div_sel');
-				$st2 = $this->input->post('div_search');
+				// 검색어 get 데이터
+				$st1 = $this->input->get('div_sel');
+				$st2 = $this->input->get('div_search');
 
 				// model data ////////////////////////
 				$div_table = 'cms_com_div';
@@ -89,6 +89,7 @@ class M5 extends CI_Controller {
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
+				$config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
 
 				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
 				$page = $this->uri->segment($config['uri_segment']);
@@ -158,9 +159,9 @@ class M5 extends CI_Controller {
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m5_1_2'];
 
-				// 검색어 post 데이터
-				$st1 = $this->input->post('div_sel');
-				$st2 = $this->input->post('mem_search');
+				// 검색어 get 데이터
+				$st1 = $this->input->get('div_sel');
+				$st2 = $this->input->get('mem_search');
 
 				// model data ////////////////////////
 				$mem_table = 'cms_com_div_mem';
@@ -174,6 +175,7 @@ class M5 extends CI_Controller {
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
+				$config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
 
 				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
 				$page = $this->uri->segment($config['uri_segment']);
@@ -253,9 +255,9 @@ class M5 extends CI_Controller {
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m5_1_3'];
 
-				// 검색어 post 데이터
-				$st1 = $this->input->post('acc_sort');
-				$st2 = $this->input->post('acc_search');
+				// 검색어 get 데이터
+				$st1 = $this->input->get('acc_sort');
+				$st2 = $this->input->get('acc_search');
 
 				// model data ////////////////////////
 				$acc_table = 'cms_accounts';
@@ -269,6 +271,7 @@ class M5 extends CI_Controller {
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
+				$config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
 
 				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
 				$page = $this->uri->segment($config['uri_segment']);
@@ -349,9 +352,9 @@ class M5 extends CI_Controller {
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m5_1_4'];
 
-				// 검색어 post 데이터
-				$st1 = $this->input->post('bank_code');
-				$st2 = $this->input->post('bank_search');
+				// 검색어 get 데이터
+				$st1 = $this->input->get('bank_code');
+				$st2 = $this->input->get('bank_search');
 
 				// model data ////////////////////////
 				$bank_table = 'cms_capital_bank_account';
@@ -365,6 +368,7 @@ class M5 extends CI_Controller {
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
+				$config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
 
 				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
 				$page = $this->uri->segment($config['uri_segment']);

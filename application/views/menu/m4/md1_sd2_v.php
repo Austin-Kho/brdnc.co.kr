@@ -130,7 +130,8 @@
 									<th style="width: 80px;" class="center"> 구 분</th>
 									<th style="width: 110px;" class="center">
 										계정과목
-										<a href="javascript:" onclick="popUp_size('/_menu3/account_m.php','account',700,800)" title="계정과목 관리">
+										<a href="javascript:" onclick="popUp_size('/pc/_menu3/account_m.php', 'account',700,800)" title="계정과목 관리">
+										<!-- <a href="javascript:" onclick="popUp_size('/popup/capital_pop/accounts','account',700,800)" title="계정과목 관리"> -->
 											<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 										</a>
 									</th>
@@ -161,48 +162,35 @@
 <?php if($lt->class2==5) $cla2 = "<font color='#ff3333'>[비용]</font>"; ?>
 <?php if($lt->class2==6) $cla2 = "<font color='#669900'>[본사]</font>"; ?>
 <?php if($lt->class2==7) $cla2 = "<font color='#009900'>[현장]</font>"; ?>
-<?php	if($lt->account==""){ $account = "-"; }else{ $account = "[".$lt->account."]"; } //계정과목 ?>
 
-<?php if($lt->inc==0) $inc = '-'; else $inc = number_format($lt->inc); ?>
-<?php if($lt->exp==0) $exp = '-'; else $exp = number_format($lt->exp); ?>
+<?php	if($lt->account==""){ $account = "-"; }else{ $account = "[".$lt->account."]"; } //계정과목
 
-<?php	if($lt->acc) {$acc=$lt->acc;}else{$acc="-";} // 거래처정보가 없을 때 ?>
-<?php
+	if($lt->inc==0) $inc = '-'; else $inc = number_format($lt->inc);
+	if($lt->exp==0) $exp = '-'; else $exp = number_format($lt->exp);
+	if($lt->acc) {$acc=$lt->acc;}else{$acc="-";} // 거래처정보가 없을 때
 
 	// 대체거래일 때
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	if($lt->inc==0||($lt->class1==3&&$lt->out_acc==$lt->no)){ // (수입금이 '0' 이거나 대체거래이고, 출금계정이 은행등록계좌와 같으면,
-	      $inc="-";
-	}else{
-	      $inc=number_format($lt->inc); // 수입금
-	}
-	if($lt->exp==0||($lt->class1==3&&$lt->in_acc==$lt->no)){ // 지출금이 '0' 이거나 대체거래이고 입금계정이 은행등록계좌와 같으면,
-	      $exp="-";
-	}else{
-	      $exp=number_format($lt->exp); // 지출금
-	}
+	// (수입금이 '0' 이거나 대체거래이고, 출금계정이 은행등록계좌와 같으면,
+	if($lt->inc==0||($lt->class1==3&&$lt->out_acc==$lt->no)){ $inc="-"; }else{ $inc=number_format($lt->inc); }// 수입금
+	// 지출금이 '0' 이거나 대체거래이고 입금계정이 은행등록계좌와 같으면,
+	if($lt->exp==0||($lt->class1==3&&$lt->in_acc==$lt->no)){ $exp="-"; }else{ $exp=number_format($lt->exp); }// 지출금
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	// 대체거래일 때
-	 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	 if($lt->in_acc==0||($lt->class1==3&&$lt->out_acc==$lt->no)){ // 입금계정정보가 없거나 대체거래이고 출금계정이 은행등록계좌와 같으면,
-		 $in_acc="";
-	 }else{
-		 $in_acc=$lt->name;  // 입금계정은 계좌별칭
-	 }
-	 if($lt->out_acc==0||($lt->class1==3&&$lt->in_acc==$lt->no)){ // 출금계정정보가 없거나 대체거래이고 입금계정이 은행등록계좌와 같으면,
-		 $out_acc="";
-	 }else{
-		 $out_acc=$lt->name; // 출금계정은 계좌별칭
-	 }
-	 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// 입금계정정보가 없거나 대체거래이고 출금계정이 은행등록계좌와 같으면,
+	if($lt->in_acc==0||($lt->class1==3&&$lt->out_acc==$lt->no)){ $in_acc=""; }else{ $in_acc=$lt->name; } // 입금계정은 계좌별칭
+	// 출금계정정보가 없거나 대체거래이고 입금계정이 은행등록계좌와 같으면,
+	if($lt->out_acc==0||($lt->class1==3&&$lt->in_acc==$lt->no)){ $out_acc=""; }else{ $out_acc=$lt->name; } // 출금계정은 계좌별칭
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	if($lt->evidence==1) $evi="증빙 없음";
- 	if($lt->evidence==2) $evi="세금계산서";
- 	if($lt->evidence==3) $evi="계산서";
- 	if($lt->evidence==4) $evi="카드전표";
- 	if($lt->evidence==5) $evi="현금영수증";
- 	if($lt->evidence==6) $evi="간이영수증";
+	if($lt->evidence==2) $evi="세금계산서";
+	if($lt->evidence==3) $evi="계산서";
+	if($lt->evidence==4) $evi="카드전표";
+	if($lt->evidence==5) $evi="현금영수증";
+	if($lt->evidence==6) $evi="간이영수증";
 ?>
 								<tr>
 									<td class="center"><input type="checkbox" disabled></td>

@@ -4,19 +4,19 @@
 			<div class="row">
 				<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 490px;'; ?>">
 					<div class="row" style="margin: 0 0 20px 0; border-bottom: 1px solid #ddd;">
-						<form name="list_frm" method="post" action="">
+						<form name="list_frm" method="get" action="">
 							<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">부서별</div>
 							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
 								<select class="form-control input-sm" name="div_sel" onchange="submit();">
 									<option value="">전 체</option>
 <?php foreach($all_div as $lt) : ?>
-									<option value="<?php echo $lt->div_name; ?>" <?if($lt->div_name==$this->input->post('div_sel')) echo "selected";?>><?php echo $lt->div_name ?></option>
+									<option value="<?php echo $lt->div_name; ?>" <?if($lt->div_name==$this->input->get('div_sel')) echo "selected";?>><?php echo $lt->div_name ?></option>
 <?php endforeach; ?>
 								</select>
 							</div>
 							<div class="col-md-5" style="height: 40px; padding-top: 10px;"></div>
 							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
-								<input class="form-control input-sm" name="mem_search" placeholder="(임)직원 검색" value="<?php if($this->input->post('mem_search')) echo $this->input->post('mem_search'); ?>">
+								<input class="form-control input-sm" name="mem_search" placeholder="(임)직원 검색" value="<?php if($this->input->get('mem_search')) echo $this->input->get('mem_search'); ?>">
 							</div>
 							<div class="col-md-1" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
 								<button class="btn btn-primary btn-sm center"> 검 색 </button>
