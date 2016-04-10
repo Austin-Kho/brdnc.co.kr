@@ -85,5 +85,5 @@
 			</div>
 		</nav>
 
-		<div class="container theme-showcase" role="main" id="main_container">
+		<div class="container theme-showcase main_container" role="main">
 			<div style="height: 80px;"></div>

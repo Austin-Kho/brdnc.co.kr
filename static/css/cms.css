@@ -8,7 +8,7 @@
 
 	::selection { background-color: #FB6C05; color: #FFF; }
 	::-moz-selection { background-color: #FB6C05; color: #FFF; }
-	a, nav, input, li, img { outline:none; select-dummy: expression(this.hideFocus=true); }
+	/*a, nav, input, li, img { outline:none; select-dummy: expression(this.hideFocus=true); }*/
 
 	/************************************IME MODE**************************************/
 	.han {
@@ -32,13 +32,13 @@
 	/************************************IME MODE**************************************/
 
 	/**************************glyphicon style*****************************/
-	#head_gly { color: #CC0099;  margin-right: 10px; }
+	.head_gly { color: #CC0099;  margin-right: 10px; }
 	.glyphicon-book { color: #CC0099; }
 	.glyphicon-calendar{ color: #7544BD; }
 	/**************************glyphicon style*****************************/
 
-	div.container#main_container { background-color: white; padding: 0 15px; }
-	footer.footer { border-top:1px solid #ccc; background-color: #eee; margin-top: 25px;}
+	.main_container { background-color: white; padding: 0 15px; }
+	.footer { border-top:1px solid #ccc; background-color: #eee; margin-top: 25px;}
 
 	.nav-tabs { margin-bottom: -20px; }
 	.nav-tabs  li a { color: #888; }
@@ -51,7 +51,7 @@
 	.page-header .nav-pills .active a:hover { background-color: #E8ECF9; color: #3355CA;}
 
 	.sdi { font-size: 15px; display: inline; color: #233c96; }
-	#sdi_sub { margin-top: -20px; padding: 15px 0 15px 20px; background-color: #F8F8F8; border-bottom-color: #B2BCDE; }
+	.sdi_sub { margin-top: -20px; padding: 15px 0 15px 20px; background-color: #F8F8F8; border-bottom-color: #B2BCDE; }
 	.main_start { margin-top: -20px; height: 25px; text-align: right; padding: 5px 15px; border-bottom: 1px solid #ddd; font-size: 12px;}
 
 
@@ -73,14 +73,16 @@
 	fieldset .row { margin: 0; padding: 0; }
 	fieldset .btn-wrap { padding: 15px 20px 0 0; text-align: right; height: 62px; border-bottom: 1px solid #ddd; border-top: 1px solid #B2BCDE; background-color: #F8F8F8; margin-bottom: 25px; }
 	fieldset .label-wrap { padding: 10px 0 8px 15px; background-color: #F8F8F8; }
-	fieldset .row div.form-group.label-wrap2 { padding: 10px 0 8px 15px; background-color: #e1eefe; }
+	fieldset .label-wrap2 { padding: 10px 0 8px 15px; background-color: #e1eefe; }
 	fieldset label { width:180px; }
 	fieldset .form-wrap { padding: 5px 10px; }
 	fieldset .glyphicon-wrap { padding: 8px 0 0 8px; }
 	fieldset .text-wrap { padding-top: 8px; }
 
-	fieldset .row table.table tbody tr td.sec-td { border-top: 0; }
-	fieldset .row.new_user { margin: 0 15px; border-bottom: 1px solid #ddd; }
+	fieldset .row table.table .head-td { width: 120px; }
+	fieldset .row table.table .sub-td { padding-right: 10px; }
+	fieldset .sec-td { border-top: 0; }
+	fieldset .new_user { margin: 0 15px; border-bottom: 1px solid #ddd; }
 	fieldset .row .str { height: 40px; padding-top: 10px; }
 	/*****************************************m5 style********************************************/
 
@@ -112,7 +114,7 @@
 	/**------------------------------------정렬----------------------------------------**/
 
 	/**----------------------------------- 마진 -----------------------------------------**/
-	.mg-0 { margin: 0px; }
+	/*.mg-0 { margin: 0px; }*/
 	.mg-0-15 { margin: 0 15px; }
 	/**----------------------------------- 마진 -----------------------------------------**/
 

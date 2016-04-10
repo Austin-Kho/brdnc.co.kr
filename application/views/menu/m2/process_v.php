@@ -31,8 +31,8 @@
 ?>
       </div>
 <!-- ---------------------------------sdi-menu end------------------------------------ -->
-      <div class="page-header" id="sdi_sub">
-        <span class="glyphicon glyphicon-book" aria-hidden="true" id="head_gly"></span>
+      <div class="page-header sdi_sub">
+        <span class="glyphicon glyphicon-book head_gly" aria-hidden="true"></span>
          <h4 class="sdi">
 <?php
       if( !$this->uri->segment(3) or $this->uri->segment(3)==1) {$k = 2; } else { $k = 3; }
