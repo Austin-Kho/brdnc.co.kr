@@ -206,7 +206,7 @@
 									<td class="right" style="background-color: #D0FCCA;"> <?php echo $inc; ?></td>
 									<td class="center" style="background-color: #DEEAFE;"> <?php echo $out_acc; ?></td>
 									<td class="right" style="background-color: #DEEAFE;"><?php echo $exp; ?> </td>
-									<td class="center"> <?php echo $evi; ?><?php echo $m_auth[0]->auth_level; ?></td>
+									<td class="center"> <?php echo $evi; ?></td>
 <?php if($auth>1) :  ?><!-- //마스터 관리자와 쓰기권한 있는 자금담당에게만 출력 -->
 									<td class="center">
 <?php if($m_auth[0]->is_admin==1 or $m_auth[0]->auth_level<=2 or ($m_auth[0]->auth_level>2&&date('Y-m-d', strtotime('-3 day'))<=$lt->deal_date)) : //관리자와 마스터 쓰기권한이 아니면 당일건에 대해서만 수정 삭제 가능 ?>

@@ -70,17 +70,14 @@
 
 
 	/*****************************************m5 style*******************************************/
-	fieldset .row { margin: 0; }
-	fieldset .row.btn-wrap { padding: 15px 20px 0 0; text-align: right; height: 62px; border-bottom: 1px solid #ddd; border-top: 1px solid #B2BCDE; background-color: #F8F8F8; margin-bottom: 25px; }
-	fieldset .row div.form-group.label-wrap { padding: 10px 0 8px 15px; height: 41px; background-color: #F8F8F8; }
+	fieldset .row { margin: 0; padding: 0; }
+	fieldset .btn-wrap { padding: 15px 20px 0 0; text-align: right; height: 62px; border-bottom: 1px solid #ddd; border-top: 1px solid #B2BCDE; background-color: #F8F8F8; margin-bottom: 25px; }
+	fieldset .label-wrap { padding: 10px 0 8px 15px; background-color: #F8F8F8; }
 	fieldset .row div.form-group.label-wrap2 { padding: 10px 0 8px 15px; background-color: #e1eefe; }
-	fieldset .row div.form-group label { width:180px; }
-	fieldset .row div.form-group.form-wrap { padding: 3px 10px 3px 10px; }
-	fieldset .row div.form-group .form-control { margin: 2px 0; }
-	fieldset .row div.form-group a,input.btn { margin: 2px 0; }
-	fieldset .row div.form-group div { padding: 0; }
-	fieldset .row div.form-group .glyphicon-wrap { padding: 8px 0 0 8px; }
-	fieldset .row div.form-group .text-wrap { padding-top: 8px; }
+	fieldset label { width:180px; }
+	fieldset .form-wrap { padding: 5px 10px; }
+	fieldset .glyphicon-wrap { padding: 8px 0 0 8px; }
+	fieldset .text-wrap { padding-top: 8px; }
 
 	fieldset .row table.table tbody tr td.sec-td { border-top: 0; }
 	fieldset .row.new_user { margin: 0 15px; border-bottom: 1px solid #ddd; }
