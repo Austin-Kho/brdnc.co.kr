@@ -71,12 +71,13 @@ class Member extends CI_Controller
 					alert('관리자 사용 승인 후 사용이 가능합니다.\n승인 지연 시, 직접 관리자에게 문의하여 주세요.\n\nEmail : cigiko@naver.com / 전화문의 : 010-3320-0088', '/member/');
 				}else{
 					// 세션 생성
-					$newdata = array(
+					$user_data = array(
 						'user_id' => $result->user_id,
+						'name' => $result->name,
 						'email' => $result->email,
 						'logged_in' => TRUE
 					);
-					$this->session->set_userdata($newdata);
+					$this->session->set_userdata($user_data);
 
 					if($login_data['id_rem'] =='rem') {        // 쿠키 저장 체크가 되어 있으면
 						if( !$this->input->cookie('id_r', TRUE)) { // 실제 쿠키가 없으면 만들고

@@ -61,7 +61,7 @@
 						<li class="dropdown">
 <?php if(@$this->session->userdata['logged_in'] == TRUE) { ?>
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-								<span id="top_user_id"><?php  echo $this->session->userdata['user_id']; ?></span> 님<span class="caret"></span>
+								<span id="top_user_id"><?php  echo $this->session->userdata['name']; ?></span> 님<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="/member/logout/">로그아웃</a></li>
