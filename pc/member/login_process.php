@@ -41,8 +41,8 @@
 				setcookie('p_id', $user_id,  30000000+time(), "/",".".$domain[2]);
 			}
 		} else {
-			setcookie("id_rem", "", time(), '/',".".$domain[2]);
-			setcookie("p_id", "", time(), '/',".".$domain[2]);
+			setcookie("id_rem", "", 28800+time(), '/',".".$domain[2]);
+			setcookie("p_id", "", 28800+time(), '/',".".$domain[2]);
 		}
 
 		// 이동할 페이지 정보가 있을 경우

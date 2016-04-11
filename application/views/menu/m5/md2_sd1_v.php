@@ -406,7 +406,7 @@
 							<div><?php echo validation_errors(); ?></div>
 						</div>
 					</div>
-			<?php if($auth<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="com_submit('$mode');";} ?>
+<?php if($auth<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="com_submit('$mode');";} ?>
 					<div class="form-group btn-wrap" style="margin: 0;">
 						<input type="button" class="btn btn-primary btn-sm" onclick="<?=$submit_str?>" value="<?php if($mode=='com_reg') echo '등록'; else echo '수정' ?>하기">
 					</div>
