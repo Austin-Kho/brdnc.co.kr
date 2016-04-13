@@ -79,7 +79,7 @@
 			<div class="row">
 
 <?php
-	$attributes = array('name' => 'form1', 'class' => 'form-inline', 'method' => 'post');
+	$attributes = array('name' => 'form1', 'class' => '', 'method' => 'post');
 	echo form_open('/m5/config/1/1/', $attributes);
 ?>
 					<fieldset class="font12">
@@ -96,47 +96,47 @@
 								<label for="seq" class="sr-only">키</label>
 								<input type="hidden" name="seq" value="<?php echo $sel_div->seq; ?>">
 <?php endif; ?>
-								<div class="row" style="border-top: 1px solid #ddd;">
-									<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
+								<div class="row bo-top">
+									<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 										<label for="div_code">부서코드 <span class="red">*</span></label>
 									</div>
-									<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+									<div class="col-xs-8 col-sm-8 col-md-4 form-wrap">
 										<input type="text" class="form-control input-sm" id="div_code" name="div_code" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->div_code; ?>" required autofocus>
 									</div>
-									<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
+									<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 										<label for="div_name">부서명 <span class="red">*</span></label>
 									</div>
-									<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+									<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
 										<input type="text" class="form-control input-sm han" id="div_name" name="div_name" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->div_name; ?>" required autofocus>
 									</div>
 								</div>
 								<div class="row" style="border-top: 1px solid #ddd;">
-									<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
+									<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 										<label for="manager">부서책임자</label>
 									</div>
-									<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+									<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
 										<input type="text" class="form-control input-sm" id="manager" name="manager" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->manager; ?>">
 									</div>
-									<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
+									<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 										<label for="div_tel">부서전화</label>
 									</div>
-									<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+									<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
 										<input type="text" class="form-control input-sm han" id="div_tel" name="div_tel" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->div_tel; ?>">
 									</div>
 								</div>
 								<div class="row" style="border-top: 1px solid #ddd;">
-									<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
+									<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 										<label for="res_work">담당업무 <span class="red">*</span></label>
 									</div>
-									<div class="form-group col-xs-8 col-sm-8 col-md-10 form-wrap">
+									<div class=" col-xs-8 col-sm-8 col-md-10 form-wrap">
 										<input type="text" class="form-control input-sm" id="res_work" name="res_work" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->res_work; ?>" required autofocus>
 									</div>
 								</div>
 								<div class="row" style="border-top: 1px solid #ddd;">
-									<div class="form-group col-xs-12 col-sm-12 col-md-2 label-wrap2 bo-bottom" style="height: 80px;">
+									<div class=" col-xs-12 col-sm-12 col-md-2 label-wrap2 bo-bottom" style="height: 80px;">
 										<label for="note">비 고</label>
 									</div>
-									<div class="form-group col-xs-12 col-sm-12 col-md-10 form-wrap bo-bottom" style="height: 80px;">
+									<div class=" col-xs-12 col-sm-12 col-md-10 form-wrap bo-bottom" style="height: 80px;">
 										<textarea class="form-control input-sm" id="note" name="note"  rows="3" cols="114"><?php if($this->input->get('seq')) echo $sel_div->note; ?></textarea>
 									</div>
 								</div>

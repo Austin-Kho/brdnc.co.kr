@@ -98,24 +98,24 @@
 						<input type="hidden" name="seq" value="<?php echo $sel_mem->seq; ?>">
 <?php endif; ?>
 						<div class="row bo-top">
-							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
+							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="mem_name">(임)직원명 <span class="red">*</span></label>
 							</div>
-							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
 								<input type="text" class="form-control input-sm han" id="mem_name" name="mem_name" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->mem_name; ?>" required autofocus>
 							</div>
-							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
+							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="id_num">주민등록번호</label>
 							</div>
-							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
 								<input type="text" class="form-control input-sm en_only" id="id_num" name="id_num" maxlength="14" value="<?php if($this->input->get('seq')) echo $sel_mem->id_num; ?>">
 							</div>
 						</div>
 						<div class="row bo-top">
-							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
+							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 								<label for="div_seq">담당부서 <span class="red">*</span></label>
 							</div>
-							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
 								<select id="div_name" name="div_name" class="form-control input-sm">
 									<option value=""> 선 택
 <?php foreach($all_div as $lt) : ?>
@@ -123,38 +123,38 @@
 <?php endforeach; ?>
 								</select>
 							</div>
-							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
+							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 								<label for="div_posi">직 급(책) <span class="red">*</span></label>
 							</div>
-							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
 								<input type="text" class="form-control input-sm han" id="div_posi" name="div_posi" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->div_posi; ?>">
 							</div>
 						</div>
 						<div class="row bo-top">
-							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
+							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="dir_tel">직통전화</label>
 							</div>
-							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
 								<input type="text" class="form-control input-sm en_only" id="dir_tel" name="dir_tel" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->dir_tel; ?>">
 							</div>
-							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2" >
+							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="mobile">비상전화 (Mobile) <span class="red">*</span></label>
 							</div>
-							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
 								<input type="text" class="form-control input-sm en_only" id="mobile" name="mobile" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->mobile; ?>">
 							</div>
 						</div>
 						<div class="row bo-top bo-bottom">
-							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
+							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 								<label for="email">이메일 (Email) <span class="red">*</span></label>
 							</div>
-							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
 								<input type="text" class="form-control input-sm en_only" id="email" name="email" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->email; ?>">
 							</div>
-							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
+							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 								<label for="join_date">입 사 일 <span class="red">*</span></label>
 							</div>
-							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
 								<div class="col-xs-6">
 									<input type="text" class="form-control input-sm wid-100" id="join_date" name="join_date" maxlength="10" value="<?php if($this->input->get('seq')) echo $sel_mem->join_date; ?>" readonly onClick="cal_add(this); event.cancelBubble=true" maxlength="10" required autofocus>
 								</div>
@@ -170,10 +170,10 @@
 
 						<div class="row bo-top bo-bottom" id="reti" style="display: none;">
 
-							<div class="form-group col-xs-4 col-sm-4 col-md-2 label-wrap2">
+							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 								<label for="reti_date">퇴 사 일 <span class="red">*</span></label>
 							</div>
-							<div class="form-group col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
 								<div class="col-xs-6">
 									<input type="text" class="form-control input-sm wid-100" id="reti_date" name="reti_date" maxlength="10" value="<?php if($this->input->get('seq')) echo $sel_mem->reti_date; ?>" readonly onClick="cal_add(this); event.cancelBubble=true" maxlength="10" required autofocus>
 								</div>
