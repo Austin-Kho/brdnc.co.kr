@@ -330,7 +330,7 @@
 							<label for="tax_off1_code">세무서 [1] <span class="red">*</span></label>
 						</div>
 						<div class="form-inline col-xs-12 col-sm-8 col-md-4 form-wrap" style="padding-left: 23px;">
-							<div class="col-xs-3 col-sm-3 col-md-3 input-group">
+							<div class="col-xs-3 input-group">
 								<input type="text" class="form-control input-sm" id="tax_off1_code" name="tax_off1_code" value="<?php if($mode=='com_reg') {echo set_value('tax_off1_code');} else {echo $com->tax_off1_code; } ?>" readonly required autofocus>
 								<span class="input-group-btn">
 								      <button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('/popup/tax_off/lists/1/', 'tax_search', 500, 586)"> &nbsp;
@@ -338,11 +338,11 @@
 								      </button>
 								</span>
 							</div>
-							<div class="col-xs-4 col-sm-4 col-md-4 input-group">
+							<div class="col-xs-4 input-group">
 								<label for="tax_off1_name" class="sr-only">세무서1 이름</label>
 								<input type="text" class="form-control input-sm wid-90" id="tax_off1_name" name="tax_off1_name" value="<?php if($mode=='com_reg') {echo set_value('tax_off1_name');} else {echo $com->tax_off1_name; } ?>" readonly required autofocus>
 							</div>
-							<div class="col-xs-5 col-sm-5 col-md-5"></div>
+							<div class="col-xs-5"></div>
 						</div>
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap">
 							<label for="tax_off2_code">세무서 [2]</label>
@@ -368,10 +368,10 @@
 							<label for="zipcode">회사주소 <span class="red">*</span></label>
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-10 form-wrap">
-							<div class="col-xs-3 col-sm-2 col-md-1">
+							<div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
 								<input type="button" class="btn btn-info btn-sm wid-90" value="우편번호" onclick="javascript:ZipWindow('/popup/zip_/')">
 							</div>
-							<div class="col-xs-3 col-sm-5 col-md-1">
+							<div class="col-xs-3 col-sm-5 col-md-1" style="padding-right: 0;">
 								<input type="text" class="form-control input-sm wid-95" id="zipcode" name="zipcode" maxlength="5" value="<?php if($mode=='com_reg') {echo set_value('zipcode');} else {echo $com->zipcode; } ?>" readonly required autofocus>
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-4">
@@ -382,7 +382,7 @@
 								<label for="address2" class="sr-only">회사주소2</label>
 								<input type="text" class="form-control input-sm wid-98" id="address2" maxlength="100" value="<?php if($mode=='com_reg') {echo set_value('address2');} else {echo $com->address2; } ?>" name="address2">
 							</div>
-							<div class="col-md-3 col-sm-12 col-xs-12 glyphicon-wrap">나머지 주소</div>
+							<div class="col-xs-12 col-sm-12 col-md-3 glyphicon-wrap">나머지 주소</div>
 						</div>
 					</div>
 					<div class="form-group <?php if( !$this->agent->is_mobile()) echo 'bo-top';?>" style="margin: 0;">
