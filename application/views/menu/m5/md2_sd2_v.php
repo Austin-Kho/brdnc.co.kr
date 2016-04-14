@@ -86,12 +86,12 @@
 				</div>
 				<div class="row" style="margin: 0;">
 					<div class="table-responsive" style="padding: 0">
-						<table class="table auth-table">
+						<table class="table auth-table table-hover">
 							<tbody>
 								<tr>
-									<th class="head-td center bo-right" rowspan="2" style="vertical-align: middle; border-top: 1px solid #B2BCDE; background-color: #F0FBF0;">분양관리</th>
-									<td class="head-td bo-right" style="border-top: 1px solid #B2BCDE;"><strong>계약현황</strong></td>
-									<td class="sub-td" style="border-top: 1px solid #B2BCDE;">계약현황
+									<th class="head-td center bo-right mbo-top" rowspan="2" style="vertical-align: middle; background-color: #F0FBF0;">분양관리</th>
+									<td class="head-td bo-right mbo-top"><strong>계약현황</strong></td>
+									<td class="sub-td mbo-top" style="background-color: yellow;">계약현황
 										<label class="checkbox-inline">
 											<input type="checkbox" id="_m1_1_1" name="_m1_1_1" <?php if(isset($user_auth->_m1_1_1) && $user_auth->_m1_1_1>0) echo 'checked'; ?>>조회
 										</label>
