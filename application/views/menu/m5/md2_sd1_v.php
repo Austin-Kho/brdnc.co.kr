@@ -336,37 +336,54 @@
 							<label for="tax_off1_code">세무서 [1] <span class="red">*</span></label>
 						</div>
 						<div class="form-inline col-xs-12 col-sm-8 col-md-4 form-wrap" style="padding-left: 23px;">
-							<div class="col-xs-3 input-group">
-								<input type="text" class="form-control input-sm" id="tax_off1_code" name="tax_off1_code" value="<?php if($mode=='com_reg') {echo set_value('tax_off1_code');} else {echo $com->tax_off1_code; } ?>" readonly required autofocus>
-								<span class="input-group-btn">
-								      <button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('/popup/tax_off/lists/1/', 'tax_search', 500, 586)"> &nbsp;
-										<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
-								      </button>
-								</span>
-							</div>
-							<div class="col-xs-4 input-group">
-								<label for="tax_off1_name" class="sr-only">세무서1 이름</label>
-								<input type="text" class="form-control input-sm wid-90" id="tax_off1_name" name="tax_off1_name" value="<?php if($mode=='com_reg') {echo set_value('tax_off1_name');} else {echo $com->tax_off1_name; } ?>" readonly required autofocus>
-							</div>
-							<div class="col-xs-5"></div>
+
+							<table cellpadding="0" cellspacing="0" border="0">
+								<tr>
+									<td class="col-xs-2" style="padding: 0;">
+										<div class="col-xs-11 input-group">
+											<input type="text" class="form-control input-sm" id="tax_off1_code" name="tax_off1_code" value="<?php if($mode=='com_reg') {echo set_value('tax_off1_code');} else {echo $com->tax_off1_code; } ?>" readonly required autofocus>
+											<span class="input-group-btn">
+											      <button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('/popup/tax_off/lists/1/', 'tax_search', 500, 586)"> &nbsp;
+													<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+											      </button>
+											</span>
+										</div>
+									</td>
+									<td class="col-xs-3" style="padding: 0;">
+										<div class="col-xs-10 input-group">
+											<label for="tax_off1_name" class="sr-only">세무서1 이름</label>
+											<input type="text" class="form-control input-sm wid-90" id="tax_off1_name" name="tax_off1_name" value="<?php if($mode=='com_reg') {echo set_value('tax_off1_name');} else {echo $com->tax_off1_name; } ?>" readonly required autofocus>
+										</div>
+									</td>
+								</tr>
+							</table>
+							<!-- <div class="col-xs-5"></div> -->
 						</div>
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap">
 							<label for="tax_off2_code">세무서 [2]</label>
 						</div>
 						<div class="form-inline col-xs-12 col-sm-8 col-md-4 form-wrap" style="padding-left: 23px;">
-							<div class="col-xs-3  input-group">
-								<input type="text" class="form-control input-sm" id=tax_off2_code"" name="tax_off2_code" value="<?php if($mode=='com_reg') {echo set_value('tax_off2_code');} else if($com->tax_off2_code>0) {echo $com->tax_off2_code; } ?>" readonly>
-								<span class="input-group-btn">
-							      	<button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('/popup/tax_off/lists/2/', 'tax_search', 500, 586)"> &nbsp;
-							      		<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
-							      	</button>
-							      </span>
-							</div>
-							<div class="col-xs-4  input-group">
-								<label for="tax_off2_name" class="sr-only">세무서2 이름</label>
-								<input type="text" class="form-control input-sm wid-90" id="tax_off2_name" name="tax_off2_name" value="<?php if($mode=='com_reg') {echo set_value('tax_off2_name');} else {echo $com->tax_off2_name; } ?>" readonly>
-							</div>
-							<div class="col-xs-5"></div>
+							<table cellpadding="0" cellspacing="0" border="0">
+								<tr>
+									<td class="col-xs-2" style="padding: 0;">
+										<div class="col-xs-11  input-group">
+											<input type="text" class="form-control input-sm" id=tax_off2_code"" name="tax_off2_code" value="<?php if($mode=='com_reg') {echo set_value('tax_off2_code');} else if($com->tax_off2_code>0) {echo $com->tax_off2_code; } ?>" readonly>
+											<span class="input-group-btn">
+										      	<button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('/popup/tax_off/lists/2/', 'tax_search', 500, 586)"> &nbsp;
+										      		<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+										      	</button>
+										      </span>
+										</div>
+									</td>
+									<td class="col-xs-3" style="padding: 0;">
+										<div class="col-xs-10  input-group">
+											<label for="tax_off2_name" class="sr-only">세무서2 이름</label>
+											<input type="text" class="form-control input-sm wid-90" id="tax_off2_name" name="tax_off2_name" value="<?php if($mode=='com_reg') {echo set_value('tax_off2_name');} else {echo $com->tax_off2_name; } ?>" readonly>
+										</div>
+									</td>
+								</tr>
+							</table>
+							<!-- <div class="col-xs-5  input-group"></div> -->
 						</div>
 					</div>
 					<div class="form-group <?php if( !$this->agent->is_mobile()) echo 'bo-top';?>" style="margin: 0;">
