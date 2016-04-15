@@ -92,5 +92,16 @@ class M4_m extends CI_Model {
 		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
 		return $result;
 	}
+
+	public function d3_acc($d1) {
+		$this->db->select('d3_code, d3_acc_name');
+		$this->db->where(array('d1_code' =>$d1));
+		$this->db->where(array('is_sp_acc !=' => '1'));
+		$this->db->order_by('d3_code', 'ASC');
+		$qry = $this->db->get('cms_capital_account_d3');
+
+		$result = $qry->result();
+		return $result;
+	}
 }
 // End of this File

@@ -101,9 +101,7 @@
 								<a href="javascript:" onclick="term_put('s_date', 'e_date', 'w');" title="일주일"><img src="/static/img/to_week.jpg" alt="일주일"></a>
 								<a href="javascript:" onclick="term_put('s_date', 'e_date', 'm');" title="1개월"><img src="/static/img/to_month.jpg" alt="1개월"></a>
 								<a href="javascript:" onclick="term_put('s_date', 'e_date', '3m');" title="3개월"><img src="/static/img/to_3month.jpg" alt="3개월"></a>
-								<a href="javascript:" onclick="to_del('s_date', 'e_date');" title="지우기">
-									<button type="button" class="close" aria-label="Close" style="margin-left: 5px;"><span aria-hidden="true">&times;</span></button>
-								</a>
+								<button type="button" class="close" aria-label="Close" style="margin-left: 5px;" onclick="document.getElementById('s_date').value=''; document.getElementById('e_date').value='';"><span aria-hidden="true">&times;</span></button>
 							</div>
 							<div class="col-md-1 center" style="background-color: #F4F4F4; height: 40px; padding: 5px;">
 								<label for="search_con" class="sr-only">검색조건</label>
@@ -125,7 +123,6 @@
 						</form>
 					</div>
 
-					
 					<div class="row table-responsive" style="margin: 0;">
 						<table class="table table-bordered table-hover table-condensed font12">
 							<thead>
@@ -245,5 +242,4 @@
 						<div class="col-xs-6" style="text-align: right;"><button class="btn btn-danger btn-sm" onclick="<?php echo $del_str; ?>">선택삭제</button></div>
 					</div> -->
 				</div>
-
 			</div>

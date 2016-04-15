@@ -193,6 +193,13 @@ class M4 extends CI_Controller {
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m4_1_3'];
 
+				// 계정과목 데이터
+				$data['d3_d11'] = $this->m4_m->d3_acc('1');
+				$data['d3_d12'] = $this->m4_m->d3_acc('2');
+				$data['d3_d13'] = $this->m4_m->d3_acc('3');
+				$data['d3_d14'] = $this->m4_m->d3_acc('4');
+				$data['d3_d15'] = $this->m4_m->d3_acc('5');
+
 				//본 페이지 로딩
 				$this->load->view('/menu/m4/md1_sd3_v', $data);
 			}
