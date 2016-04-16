@@ -80,9 +80,9 @@
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_1" id="pj_seq_1" style="width:60px;" disabled>
 										<option value="" selected> 선 택</option>
-										<?php // for($i=0; $i<$pj_num; $i++){ ?>
-										<option value="<?php // echo $pj_seq[$i]?>"> <?php // echo $pj_name[$i]?></option>
-										<? //} ?>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 조합 대여금여부 _1 -->
@@ -92,6 +92,14 @@
 									<select name="account_1" id="d1_acc1_1" style="width:60px;" disabled>
 										<option value="0" selected>선 택</option>
 <?php foreach($d3_d11 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
+									</select>
+								</td>
+								<td class="center" id="d1_2_1" style="display: none; padding-top: 7px;"> <!-- 부채 계정 -->
+									<select name="account_1" id="d1_acc2_1" style="width:60px;" disabled>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d12 as $lt) : ?>
 										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
 <?php endforeach; ?>
 									</select>
@@ -106,6 +114,7 @@
 								</td>
 								<td class="center" id="d1_4_1" style="display:none; padding-top: 7px;"> <!-- 수익 계정 -->
 									<select name="account_1" id="d1_acc4_1" style="width:60px;" disabled>
+										<option value="0" selected>선 택</option>
 <?php foreach($d3_d14 as $lt) :?>
 										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
 <?php endforeach;?>
@@ -113,6 +122,7 @@
 								</td>
 								<td class="center" id="d1_5_1" style="display:none; padding-top: 7px;"> <!-- 비용 계정 -->
 									<select name="account_1" id="d1_acc5_1" style="width:60px;" disabled>
+										<option value="0" selected>선 택</option>
 <?php foreach($d3_d15 as $lt) :?>
 										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
 <?php endforeach;?>
@@ -126,9 +136,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="in_1" id="in_1" style="width:55px;" disabled>
 										<option value="" selected> 선 택</option>
-<?php foreach($d3_d12 as $lt) :?>
-										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
-<?php endforeach;?>
+<?php foreach($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no; ?>"> <?php echo $lt->name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 입금금액 _1 -->
@@ -137,13 +147,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_1" id="out_1" style="width:55px;" onChange="charge(1,this.value);" disabled>
 										<option value="" selected> 선 택
-<?php
-	// $query="select no, bank, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]."-".$rows[bank]?>"> <?php // echo $rows[name]?>
-<? // } ?>
+<?php foreach ($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 출금금액 _1 -->
@@ -168,18 +174,24 @@
 
 
 
+
+
+
+
+
+
 							<!-- ------------------------------------2col------------------------------------------ -->
 							<tr>
 								<td class="center"><input type="checkbox" disabled></td>
 								<!-- 구분 _2 -->
 								<td class="center" style="padding-top: 7px;">
-									<select name="class1_2"  id="class1_2" style="width:52px;" onChange="inoutSel(this.form, 1)">
+									<select name="class1_2"  id="class1_2" style="width:52px;" onChange="inoutSel(this.form, 2)">
 										<option value="" selected> 선 택
 										<option value="1"> 입 금
 										<option value="2"> 출 금
 										<option value="3"> 대 체
 									</select>
-									<select name="class2_2" id="class2_2" style="width:52px;" onChange="inoutSel2(this.form, 1)" disabled>
+									<select name="class2_2" id="class2_2" style="width:52px;" onChange="inoutSel2(this.form, 2)" disabled>
 										<option value="" selected> 선 택
 										<option value="1"> 자 산
 										<option value="2"> 부 채
@@ -194,72 +206,52 @@
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_2" id="pj_seq_2" style="width:60px;" disabled>
 										<option value="" selected> 선 택</option>
-										<?php // for($i=0; $i<$pj_num; $i++){ ?>
-										<option value="<?php // echo $pj_seq[$i]?>"> <?php // echo $pj_name[$i]?></option>
-										<? //} ?>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 조합 대여금여부 _2 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_2" id="jh_loan_2" onClick="jh_chk(1);" disabled></td>
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_2" id="jh_loan_2" onClick="jh_chk(2);" disabled></td>
 								<!-- 회계계정 _2 -->
-								<td class="center" id="d1_2_2" style="padding-top: 7px;"> <!-- 자산 계정 -->
+								<td class="center" id="d1_1_2" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_2" id="d1_acc1_2" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]; ?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d11 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
-								<td class="center" id="d1_2_2" style="display:none; padding-top: 7px;"> <!-- 부채 계정 -->
+								<td class="center" id="d1_2_2" style="display: none; padding-top: 7px;"> <!-- 부채 계정 -->
 									<select name="account_2" id="d1_acc2_2" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){ ?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d12 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<td class="center" id="d1_3_2" style="display:none; padding-top: 7px;"> <!-- 자본 계정 -->
 									<select name="account_2" id="d1_acc3_2" style="width:60px;" disabled>
-	<?
-		// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-		// $acc_rlt = mysql_query($acc_qry, $connect);
-	?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d13 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_4_2" style="display:none; padding-top: 7px;"> <!-- 수익 계정 -->
 									<select name="account_2" id="d1_acc4_2" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d14 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_5_2" style="display:none; padding-top: 7px;"> <!-- 비용 계정 -->
 									<select name="account_2" id="d1_acc5_2" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d15 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<!-- 적 요 _2 -->
@@ -270,13 +262,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="in_2" id="in_2" style="width:55px;" disabled>
 										<option value="" selected> 선 택</option>
-<?php
-	// $query="select no, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]?>"> <?php // echo $rows[name]?></option>
-<? // } ?>
+<?php foreach($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no; ?>"> <?php echo $lt->name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 입금금액 _2 -->
@@ -285,13 +273,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_2" id="out_2" style="width:55px;" onChange="charge(1,this.value);" disabled>
 										<option value="" selected> 선 택
-<?php
-	// $query="select no, bank, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]."-".$rows[bank]?>"> <?php // echo $rows[name]?>
-<? // } ?>
+<?php foreach ($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 출금금액 _2 -->
@@ -316,13 +300,13 @@
 								<td class="center"><input type="checkbox" disabled></td>
 								<!-- 구분 _3 -->
 								<td class="center" style="padding-top: 7px;">
-									<select name="class1_3"  id="class1_3" style="width:52px;" onChange="inoutSel(this.form, 1)">
+									<select name="class1_3"  id="class1_3" style="width:52px;" onChange="inoutSel(this.form, 3)">
 										<option value="" selected> 선 택
 										<option value="1"> 입 금
 										<option value="2"> 출 금
 										<option value="3"> 대 체
 									</select>
-									<select name="class2_3" id="class2_3" style="width:52px;" onChange="inoutSel2(this.form, 1)" disabled>
+									<select name="class2_3" id="class2_3" style="width:52px;" onChange="inoutSel2(this.form, 3)" disabled>
 										<option value="" selected> 선 택
 										<option value="1"> 자 산
 										<option value="2"> 부 채
@@ -337,72 +321,52 @@
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_3" id="pj_seq_3" style="width:60px;" disabled>
 										<option value="" selected> 선 택</option>
-										<?php // for($i=0; $i<$pj_num; $i++){ ?>
-										<option value="<?php // echo $pj_seq[$i]?>"> <?php // echo $pj_name[$i]?></option>
-										<? //} ?>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 조합 대여금여부 _3 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_3" id="jh_loan_3" onClick="jh_chk(1);" disabled></td>
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_3" id="jh_loan_3" onClick="jh_chk(3);" disabled></td>
 								<!-- 회계계정 _3 -->
-								<td class="center" id="d1_3_3" style="padding-top: 7px;"> <!-- 자산 계정 -->
+								<td class="center" id="d1_1_3" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_3" id="d1_acc1_3" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]; ?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d11 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
-								<td class="center" id="d1_2_3" style="display:none; padding-top: 7px;"> <!-- 부채 계정 -->
+								<td class="center" id="d1_2_3" style="display: none; padding-top: 7px;"> <!-- 부채 계정 -->
 									<select name="account_3" id="d1_acc2_3" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){ ?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d12 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<td class="center" id="d1_3_3" style="display:none; padding-top: 7px;"> <!-- 자본 계정 -->
 									<select name="account_3" id="d1_acc3_3" style="width:60px;" disabled>
-	<?
-		// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-		// $acc_rlt = mysql_query($acc_qry, $connect);
-	?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d13 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_4_3" style="display:none; padding-top: 7px;"> <!-- 수익 계정 -->
 									<select name="account_3" id="d1_acc4_3" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d14 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_5_3" style="display:none; padding-top: 7px;"> <!-- 비용 계정 -->
 									<select name="account_3" id="d1_acc5_3" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d15 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<!-- 적 요 _3 -->
@@ -413,13 +377,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="in_3" id="in_3" style="width:55px;" disabled>
 										<option value="" selected> 선 택</option>
-<?php
-	// $query="select no, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]?>"> <?php // echo $rows[name]?></option>
-<? // } ?>
+<?php foreach($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no; ?>"> <?php echo $lt->name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 입금금액 _3 -->
@@ -428,13 +388,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_3" id="out_3" style="width:55px;" onChange="charge(1,this.value);" disabled>
 										<option value="" selected> 선 택
-<?php
-	// $query="select no, bank, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]."-".$rows[bank]?>"> <?php // echo $rows[name]?>
-<? // } ?>
+<?php foreach ($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 출금금액 _3 -->
@@ -459,13 +415,13 @@
 								<td class="center"><input type="checkbox" disabled></td>
 								<!-- 구분 _4 -->
 								<td class="center" style="padding-top: 7px;">
-									<select name="class1_4"  id="class1_4" style="width:52px;" onChange="inoutSel(this.form, 1)">
+									<select name="class1_4"  id="class1_4" style="width:52px;" onChange="inoutSel(this.form, 4)">
 										<option value="" selected> 선 택
 										<option value="1"> 입 금
 										<option value="2"> 출 금
 										<option value="3"> 대 체
 									</select>
-									<select name="class2_4" id="class2_4" style="width:52px;" onChange="inoutSel2(this.form, 1)" disabled>
+									<select name="class2_4" id="class2_4" style="width:52px;" onChange="inoutSel2(this.form, 4)" disabled>
 										<option value="" selected> 선 택
 										<option value="1"> 자 산
 										<option value="2"> 부 채
@@ -480,72 +436,52 @@
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_4" id="pj_seq_4" style="width:60px;" disabled>
 										<option value="" selected> 선 택</option>
-										<?php // for($i=0; $i<$pj_num; $i++){ ?>
-										<option value="<?php // echo $pj_seq[$i]?>"> <?php // echo $pj_name[$i]?></option>
-										<? //} ?>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 조합 대여금여부 _4 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_4" id="jh_loan_4" onClick="jh_chk(1);" disabled></td>
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_4" id="jh_loan_4" onClick="jh_chk(4);" disabled></td>
 								<!-- 회계계정 _4 -->
-								<td class="center" id="d1_4_4" style="padding-top: 7px;"> <!-- 자산 계정 -->
+								<td class="center" id="d1_1_4" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_4" id="d1_acc1_4" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]; ?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d11 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
-								<td class="center" id="d1_2_4" style="display:none; padding-top: 7px;"> <!-- 부채 계정 -->
+								<td class="center" id="d1_2_4" style="display: none; padding-top: 7px;"> <!-- 부채 계정 -->
 									<select name="account_4" id="d1_acc2_4" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){ ?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d12 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<td class="center" id="d1_3_4" style="display:none; padding-top: 7px;"> <!-- 자본 계정 -->
 									<select name="account_4" id="d1_acc3_4" style="width:60px;" disabled>
-	<?
-		// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-		// $acc_rlt = mysql_query($acc_qry, $connect);
-	?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d13 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_4_4" style="display:none; padding-top: 7px;"> <!-- 수익 계정 -->
 									<select name="account_4" id="d1_acc4_4" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d14 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_5_4" style="display:none; padding-top: 7px;"> <!-- 비용 계정 -->
 									<select name="account_4" id="d1_acc5_4" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d15 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<!-- 적 요 _4 -->
@@ -556,13 +492,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="in_4" id="in_4" style="width:55px;" disabled>
 										<option value="" selected> 선 택</option>
-<?php
-	// $query="select no, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]?>"> <?php // echo $rows[name]?></option>
-<? // } ?>
+<?php foreach($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no; ?>"> <?php echo $lt->name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 입금금액 _4 -->
@@ -571,13 +503,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_4" id="out_4" style="width:55px;" onChange="charge(1,this.value);" disabled>
 										<option value="" selected> 선 택
-<?php
-	// $query="select no, bank, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]."-".$rows[bank]?>"> <?php // echo $rows[name]?>
-<? // } ?>
+<?php foreach ($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 출금금액 _4 -->
@@ -600,15 +528,15 @@
 							<!-- ------------------------------------5col------------------------------------------ -->
 							<tr>
 								<td class="center"><input type="checkbox" disabled></td>
-								<!-- 구분 _5 -->
+								<!-- 구분 _1 -->
 								<td class="center" style="padding-top: 7px;">
-									<select name="class1_5"  id="class1_5" style="width:52px;" onChange="inoutSel(this.form, 1)">
+									<select name="class1_5"  id="class1_5" style="width:52px;" onChange="inoutSel(this.form, 5)">
 										<option value="" selected> 선 택
 										<option value="1"> 입 금
 										<option value="2"> 출 금
 										<option value="3"> 대 체
 									</select>
-									<select name="class2_5" id="class2_5" style="width:52px;" onChange="inoutSel2(this.form, 1)" disabled>
+									<select name="class2_5" id="class2_5" style="width:52px;" onChange="inoutSel2(this.form, 5)" disabled>
 										<option value="" selected> 선 택
 										<option value="1"> 자 산
 										<option value="2"> 부 채
@@ -623,72 +551,52 @@
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_5" id="pj_seq_5" style="width:60px;" disabled>
 										<option value="" selected> 선 택</option>
-										<?php // for($i=0; $i<$pj_num; $i++){ ?>
-										<option value="<?php // echo $pj_seq[$i]?>"> <?php // echo $pj_name[$i]?></option>
-										<? //} ?>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 조합 대여금여부 _5 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_5" id="jh_loan_5" onClick="jh_chk(1);" disabled></td>
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_5" id="jh_loan_5" onClick="jh_chk(5);" disabled></td>
 								<!-- 회계계정 _5 -->
-								<td class="center" id="d1_5_5" style="padding-top: 7px;"> <!-- 자산 계정 -->
+								<td class="center" id="d1_1_5" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_5" id="d1_acc1_5" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]; ?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d11 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
-								<td class="center" id="d1_2_5" style="display:none; padding-top: 7px;"> <!-- 부채 계정 -->
+								<td class="center" id="d1_2_5" style="display: none; padding-top: 7px;"> <!-- 부채 계정 -->
 									<select name="account_5" id="d1_acc2_5" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){ ?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d12 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<td class="center" id="d1_3_5" style="display:none; padding-top: 7px;"> <!-- 자본 계정 -->
 									<select name="account_5" id="d1_acc3_5" style="width:60px;" disabled>
-	<?
-		// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-		// $acc_rlt = mysql_query($acc_qry, $connect);
-	?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d13 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_4_5" style="display:none; padding-top: 7px;"> <!-- 수익 계정 -->
 									<select name="account_5" id="d1_acc4_5" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d14 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_5_5" style="display:none; padding-top: 7px;"> <!-- 비용 계정 -->
 									<select name="account_5" id="d1_acc5_5" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d15 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<!-- 적 요 _5 -->
@@ -699,13 +607,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="in_5" id="in_5" style="width:55px;" disabled>
 										<option value="" selected> 선 택</option>
-<?php
-	// $query="select no, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]?>"> <?php // echo $rows[name]?></option>
-<? // } ?>
+<?php foreach($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no; ?>"> <?php echo $lt->name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 입금금액 _5 -->
@@ -714,13 +618,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_5" id="out_5" style="width:55px;" onChange="charge(1,this.value);" disabled>
 										<option value="" selected> 선 택
-<?php
-	// $query="select no, bank, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]."-".$rows[bank]?>"> <?php // echo $rows[name]?>
-<? // } ?>
+<?php foreach ($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 출금금액 _5 -->
@@ -745,13 +645,13 @@
 								<td class="center"><input type="checkbox" disabled></td>
 								<!-- 구분 _6 -->
 								<td class="center" style="padding-top: 7px;">
-									<select name="class1_6"  id="class1_6" style="width:52px;" onChange="inoutSel(this.form, 1)">
+									<select name="class1_6"  id="class1_6" style="width:52px;" onChange="inoutSel(this.form, 6)">
 										<option value="" selected> 선 택
 										<option value="1"> 입 금
 										<option value="2"> 출 금
 										<option value="3"> 대 체
 									</select>
-									<select name="class2_6" id="class2_6" style="width:52px;" onChange="inoutSel2(this.form, 1)" disabled>
+									<select name="class2_6" id="class2_6" style="width:52px;" onChange="inoutSel2(this.form, 6)" disabled>
 										<option value="" selected> 선 택
 										<option value="1"> 자 산
 										<option value="2"> 부 채
@@ -766,72 +666,52 @@
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_6" id="pj_seq_6" style="width:60px;" disabled>
 										<option value="" selected> 선 택</option>
-										<?php // for($i=0; $i<$pj_num; $i++){ ?>
-										<option value="<?php // echo $pj_seq[$i]?>"> <?php // echo $pj_name[$i]?></option>
-										<? //} ?>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 조합 대여금여부 _6 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_6" id="jh_loan_6" onClick="jh_chk(1);" disabled></td>
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_6" id="jh_loan_6" onClick="jh_chk(6);" disabled></td>
 								<!-- 회계계정 _6 -->
-								<td class="center" id="d1_6_6" style="padding-top: 7px;"> <!-- 자산 계정 -->
+								<td class="center" id="d1_1_6" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_6" id="d1_acc1_6" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]; ?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d11 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
-								<td class="center" id="d1_2_6" style="display:none; padding-top: 7px;"> <!-- 부채 계정 -->
+								<td class="center" id="d1_2_6" style="display: none; padding-top: 7px;"> <!-- 부채 계정 -->
 									<select name="account_6" id="d1_acc2_6" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){ ?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d12 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<td class="center" id="d1_3_6" style="display:none; padding-top: 7px;"> <!-- 자본 계정 -->
 									<select name="account_6" id="d1_acc3_6" style="width:60px;" disabled>
-	<?
-		// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-		// $acc_rlt = mysql_query($acc_qry, $connect);
-	?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d13 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_4_6" style="display:none; padding-top: 7px;"> <!-- 수익 계정 -->
 									<select name="account_6" id="d1_acc4_6" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d14 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_5_6" style="display:none; padding-top: 7px;"> <!-- 비용 계정 -->
 									<select name="account_6" id="d1_acc5_6" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d15 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<!-- 적 요 _6 -->
@@ -842,13 +722,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="in_6" id="in_6" style="width:55px;" disabled>
 										<option value="" selected> 선 택</option>
-<?php
-	// $query="select no, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]?>"> <?php // echo $rows[name]?></option>
-<? // } ?>
+<?php foreach($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no; ?>"> <?php echo $lt->name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 입금금액 _6 -->
@@ -857,13 +733,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_6" id="out_6" style="width:55px;" onChange="charge(1,this.value);" disabled>
 										<option value="" selected> 선 택
-<?php
-	// $query="select no, bank, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]."-".$rows[bank]?>"> <?php // echo $rows[name]?>
-<? // } ?>
+<?php foreach ($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 출금금액 _6 -->
@@ -888,13 +760,13 @@
 								<td class="center"><input type="checkbox" disabled></td>
 								<!-- 구분 _7 -->
 								<td class="center" style="padding-top: 7px;">
-									<select name="class1_7"  id="class1_7" style="width:52px;" onChange="inoutSel(this.form, 1)">
+									<select name="class1_7"  id="class1_7" style="width:52px;" onChange="inoutSel(this.form, 7)">
 										<option value="" selected> 선 택
 										<option value="1"> 입 금
 										<option value="2"> 출 금
 										<option value="3"> 대 체
 									</select>
-									<select name="class2_7" id="class2_7" style="width:52px;" onChange="inoutSel2(this.form, 1)" disabled>
+									<select name="class2_7" id="class2_7" style="width:52px;" onChange="inoutSel2(this.form, 7)" disabled>
 										<option value="" selected> 선 택
 										<option value="1"> 자 산
 										<option value="2"> 부 채
@@ -909,72 +781,52 @@
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_7" id="pj_seq_7" style="width:60px;" disabled>
 										<option value="" selected> 선 택</option>
-										<?php // for($i=0; $i<$pj_num; $i++){ ?>
-										<option value="<?php // echo $pj_seq[$i]?>"> <?php // echo $pj_name[$i]?></option>
-										<? //} ?>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 조합 대여금여부 _7 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_7" id="jh_loan_7" onClick="jh_chk(1);" disabled></td>
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_7" id="jh_loan_7" onClick="jh_chk(7);" disabled></td>
 								<!-- 회계계정 _7 -->
-								<td class="center" id="d1_7_7" style="padding-top: 7px;"> <!-- 자산 계정 -->
+								<td class="center" id="d1_1_7" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_7" id="d1_acc1_7" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]; ?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d11 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
-								<td class="center" id="d1_2_7" style="display:none; padding-top: 7px;"> <!-- 부채 계정 -->
+								<td class="center" id="d1_2_7" style="display: none; padding-top: 7px;"> <!-- 부채 계정 -->
 									<select name="account_7" id="d1_acc2_7" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){ ?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d12 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<td class="center" id="d1_3_7" style="display:none; padding-top: 7px;"> <!-- 자본 계정 -->
 									<select name="account_7" id="d1_acc3_7" style="width:60px;" disabled>
-	<?
-		// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-		// $acc_rlt = mysql_query($acc_qry, $connect);
-	?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d13 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_4_7" style="display:none; padding-top: 7px;"> <!-- 수익 계정 -->
 									<select name="account_7" id="d1_acc4_7" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d14 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_5_7" style="display:none; padding-top: 7px;"> <!-- 비용 계정 -->
 									<select name="account_7" id="d1_acc5_7" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d15 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<!-- 적 요 _7 -->
@@ -985,13 +837,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="in_7" id="in_7" style="width:55px;" disabled>
 										<option value="" selected> 선 택</option>
-<?php
-	// $query="select no, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]?>"> <?php // echo $rows[name]?></option>
-<? // } ?>
+<?php foreach($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no; ?>"> <?php echo $lt->name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 입금금액 _7 -->
@@ -1000,13 +848,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_7" id="out_7" style="width:55px;" onChange="charge(1,this.value);" disabled>
 										<option value="" selected> 선 택
-<?php
-	// $query="select no, bank, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]."-".$rows[bank]?>"> <?php // echo $rows[name]?>
-<? // } ?>
+<?php foreach ($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 출금금액 _7 -->
@@ -1031,13 +875,13 @@
 								<td class="center"><input type="checkbox" disabled></td>
 								<!-- 구분 _8 -->
 								<td class="center" style="padding-top: 7px;">
-									<select name="class1_8"  id="class1_8" style="width:52px;" onChange="inoutSel(this.form, 1)">
+									<select name="class1_8"  id="class1_8" style="width:52px;" onChange="inoutSel(this.form, 8)">
 										<option value="" selected> 선 택
 										<option value="1"> 입 금
 										<option value="2"> 출 금
 										<option value="3"> 대 체
 									</select>
-									<select name="class2_8" id="class2_8" style="width:52px;" onChange="inoutSel2(this.form, 1)" disabled>
+									<select name="class2_8" id="class2_8" style="width:52px;" onChange="inoutSel2(this.form, 8)" disabled>
 										<option value="" selected> 선 택
 										<option value="1"> 자 산
 										<option value="2"> 부 채
@@ -1052,72 +896,52 @@
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_8" id="pj_seq_8" style="width:60px;" disabled>
 										<option value="" selected> 선 택</option>
-										<?php // for($i=0; $i<$pj_num; $i++){ ?>
-										<option value="<?php // echo $pj_seq[$i]?>"> <?php // echo $pj_name[$i]?></option>
-										<? //} ?>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 조합 대여금여부 _8 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_8" id="jh_loan_8" onClick="jh_chk(1);" disabled></td>
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_8" id="jh_loan_8" onClick="jh_chk(8);" disabled></td>
 								<!-- 회계계정 _8 -->
-								<td class="center" id="d1_8_8" style="padding-top: 7px;"> <!-- 자산 계정 -->
+								<td class="center" id="d1_1_8" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_8" id="d1_acc1_8" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]; ?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d11 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
-								<td class="center" id="d1_2_8" style="display:none; padding-top: 7px;"> <!-- 부채 계정 -->
+								<td class="center" id="d1_2_8" style="display: none; padding-top: 7px;"> <!-- 부채 계정 -->
 									<select name="account_8" id="d1_acc2_8" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){ ?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d12 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<td class="center" id="d1_3_8" style="display:none; padding-top: 7px;"> <!-- 자본 계정 -->
 									<select name="account_8" id="d1_acc3_8" style="width:60px;" disabled>
-	<?
-		// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-		// $acc_rlt = mysql_query($acc_qry, $connect);
-	?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d13 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_4_8" style="display:none; padding-top: 7px;"> <!-- 수익 계정 -->
 									<select name="account_8" id="d1_acc4_8" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d14 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_5_8" style="display:none; padding-top: 7px;"> <!-- 비용 계정 -->
 									<select name="account_8" id="d1_acc5_8" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d15 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<!-- 적 요 _8 -->
@@ -1128,13 +952,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="in_8" id="in_8" style="width:55px;" disabled>
 										<option value="" selected> 선 택</option>
-<?php
-	// $query="select no, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]?>"> <?php // echo $rows[name]?></option>
-<? // } ?>
+<?php foreach($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no; ?>"> <?php echo $lt->name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 입금금액 _8 -->
@@ -1143,13 +963,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_8" id="out_8" style="width:55px;" onChange="charge(1,this.value);" disabled>
 										<option value="" selected> 선 택
-<?php
-	// $query="select no, bank, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]."-".$rows[bank]?>"> <?php // echo $rows[name]?>
-<? // } ?>
+<?php foreach ($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 출금금액 _8 -->
@@ -1174,13 +990,13 @@
 								<td class="center"><input type="checkbox" disabled></td>
 								<!-- 구분 _9 -->
 								<td class="center" style="padding-top: 7px;">
-									<select name="class1_9"  id="class1_9" style="width:52px;" onChange="inoutSel(this.form, 1)">
+									<select name="class1_9"  id="class1_9" style="width:52px;" onChange="inoutSel(this.form, 9)">
 										<option value="" selected> 선 택
 										<option value="1"> 입 금
 										<option value="2"> 출 금
 										<option value="3"> 대 체
 									</select>
-									<select name="class2_9" id="class2_9" style="width:52px;" onChange="inoutSel2(this.form, 1)" disabled>
+									<select name="class2_9" id="class2_9" style="width:52px;" onChange="inoutSel2(this.form, 9)" disabled>
 										<option value="" selected> 선 택
 										<option value="1"> 자 산
 										<option value="2"> 부 채
@@ -1195,72 +1011,52 @@
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_9" id="pj_seq_9" style="width:60px;" disabled>
 										<option value="" selected> 선 택</option>
-										<?php // for($i=0; $i<$pj_num; $i++){ ?>
-										<option value="<?php // echo $pj_seq[$i]?>"> <?php // echo $pj_name[$i]?></option>
-										<? //} ?>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 조합 대여금여부 _9 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_9" id="jh_loan_9" onClick="jh_chk(1);" disabled></td>
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_9" id="jh_loan_9" onClick="jh_chk(9);" disabled></td>
 								<!-- 회계계정 _9 -->
-								<td class="center" id="d1_9_9" style="padding-top: 7px;"> <!-- 자산 계정 -->
+								<td class="center" id="d1_1_9" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_9" id="d1_acc1_9" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]; ?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d11 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
-								<td class="center" id="d1_2_9" style="display:none; padding-top: 7px;"> <!-- 부채 계정 -->
+								<td class="center" id="d1_2_9" style="display: none; padding-top: 7px;"> <!-- 부채 계정 -->
 									<select name="account_9" id="d1_acc2_9" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){ ?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d12 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<td class="center" id="d1_3_9" style="display:none; padding-top: 7px;"> <!-- 자본 계정 -->
 									<select name="account_9" id="d1_acc3_9" style="width:60px;" disabled>
-	<?
-		// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-		// $acc_rlt = mysql_query($acc_qry, $connect);
-	?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d13 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_4_9" style="display:none; padding-top: 7px;"> <!-- 수익 계정 -->
 									<select name="account_9" id="d1_acc4_9" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d14 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_5_9" style="display:none; padding-top: 7px;"> <!-- 비용 계정 -->
 									<select name="account_9" id="d1_acc5_9" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d15 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<!-- 적 요 _9 -->
@@ -1271,13 +1067,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="in_9" id="in_9" style="width:55px;" disabled>
 										<option value="" selected> 선 택</option>
-<?php
-	// $query="select no, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]?>"> <?php // echo $rows[name]?></option>
-<? // } ?>
+<?php foreach($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no; ?>"> <?php echo $lt->name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 입금금액 _9 -->
@@ -1286,13 +1078,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_9" id="out_9" style="width:55px;" onChange="charge(1,this.value);" disabled>
 										<option value="" selected> 선 택
-<?php
-	// $query="select no, bank, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]."-".$rows[bank]?>"> <?php // echo $rows[name]?>
-<? // } ?>
+<?php foreach ($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 출금금액 _9 -->
@@ -1317,13 +1105,13 @@
 								<td class="center"><input type="checkbox" disabled></td>
 								<!-- 구분 _10 -->
 								<td class="center" style="padding-top: 7px;">
-									<select name="class1_10"  id="class1_10" style="width:52px;" onChange="inoutSel(this.form, 1)">
+									<select name="class1_10"  id="class1_10" style="width:52px;" onChange="inoutSel(this.form, 10)">
 										<option value="" selected> 선 택
 										<option value="1"> 입 금
 										<option value="2"> 출 금
 										<option value="3"> 대 체
 									</select>
-									<select name="class2_10" id="class2_10" style="width:52px;" onChange="inoutSel2(this.form, 1)" disabled>
+									<select name="class2_10" id="class2_10" style="width:52px;" onChange="inoutSel2(this.form, 10)" disabled>
 										<option value="" selected> 선 택
 										<option value="1"> 자 산
 										<option value="2"> 부 채
@@ -1338,72 +1126,52 @@
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_10" id="pj_seq_10" style="width:60px;" disabled>
 										<option value="" selected> 선 택</option>
-										<?php // for($i=0; $i<$pj_num; $i++){ ?>
-										<option value="<?php // echo $pj_seq[$i]?>"> <?php // echo $pj_name[$i]?></option>
-										<? //} ?>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 조합 대여금여부 _10 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_10" id="jh_loan_10" onClick="jh_chk(1);" disabled></td>
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_10" id="jh_loan_10" onClick="jh_chk(10);" disabled></td>
 								<!-- 회계계정 _10 -->
-								<td class="center" id="d1_10_10" style="padding-top: 7px;"> <!-- 자산 계정 -->
+								<td class="center" id="d1_1_10" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_10" id="d1_acc1_10" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]; ?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d11 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
-								<td class="center" id="d1_2_10" style="display:none; padding-top: 7px;"> <!-- 부채 계정 -->
+								<td class="center" id="d1_2_10" style="display: none; padding-top: 7px;"> <!-- 부채 계정 -->
 									<select name="account_10" id="d1_acc2_10" style="width:60px;" disabled>
-<?php
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){ ?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d12 as $lt) : ?>
+										<option value="<?php echo $lt->d3_acc_name; ?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<td class="center" id="d1_3_10" style="display:none; padding-top: 7px;"> <!-- 자본 계정 -->
 									<select name="account_10" id="d1_acc3_10" style="width:60px;" disabled>
-	<?
-		// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-		// $acc_rlt = mysql_query($acc_qry, $connect);
-	?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"; ?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d13 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_4_10" style="display:none; padding-top: 7px;"> <!-- 수익 계정 -->
 									<select name="account_10" id="d1_acc4_10" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d14 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<td class="center" id="d1_5_10" style="display:none; padding-top: 7px;"> <!-- 비용 계정 -->
 									<select name="account_10" id="d1_acc5_10" style="width:60px;" disabled>
-<?
-	// $acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-	// $acc_rlt = mysql_query($acc_qry, $connect);
-?>
-										<option value="" selected>선 택</option>
-										<?php // while($acc_rows = mysql_fetch_array($acc_rlt)){?>
-										<option value="<?php // echo $acc_rows[d3_acc_name]?>"> <?php // echo $acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?></option>
-										<?// }?>
+										<option value="0" selected>선 택</option>
+<?php foreach($d3_d15 as $lt) :?>
+										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
+<?php endforeach;?>
 									</select>
 								</td>
 								<!-- 적 요 _10 -->
@@ -1414,13 +1182,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="in_10" id="in_10" style="width:55px;" disabled>
 										<option value="" selected> 선 택</option>
-<?php
-	// $query="select no, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]?>"> <?php // echo $rows[name]?></option>
-<? // } ?>
+<?php foreach($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no; ?>"> <?php echo $lt->name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 입금금액 _10 -->
@@ -1429,13 +1193,9 @@
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_10" id="out_10" style="width:55px;" onChange="charge(1,this.value);" disabled>
 										<option value="" selected> 선 택
-<?php
-	// $query="select no, bank, name from cms_capital_bank_account ";
-	// $result=mysql_query($query, $connect);
-	// while($rows=mysql_fetch_array($result)){
-?>
-										<option value="<?php // echo $rows[no]."-".$rows[bank]?>"> <?php // echo $rows[name]?>
-<? // } ?>
+<?php foreach ($in_out as $lt) : ?>
+										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 출금금액 _10 -->
@@ -1454,7 +1214,11 @@
 									</select>
 								</td>
 							</tr>
-							<!-- ------------------------------------1col------------------------------------------ -->
+							<!-- ------------------------------------10col------------------------------------------ -->
+
+
+
+
 
 
 						</tbody>

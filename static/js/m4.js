@@ -27,10 +27,10 @@ function inoutSel(form, no, pj){ // ==capital2.php 와 capital_edit.php => form 
 	var out_str = "out_"; var out = out_str+no;  // 출금처
 	var exp_str = "exp_"; var exp = exp_str+no;  // 출금액
 
-	var class1_id = document.getElementById(class1); if(!no) var class1_id = form.class1;
-	var class2_id = document.getElementById(class2); if(!no) var class2_id = form.class2;
-	var pj_seq_id = document.getElementById(pj_seq); if(!no) var pj_seq_id = form.any_jh;
-	var jh_loan_id = document.getElementById(jh_loan); if(!no) var jh_loan_id = form.is_jh;
+	var class1_id = document.getElementById(class1); if( !no) var class1_id = form.class1;
+	var class2_id = document.getElementById(class2); if( !no) var class2_id = form.class2;
+	var pj_seq_id = document.getElementById(pj_seq); if( !no) var pj_seq_id = form.any_jh;
+	var jh_loan_id = document.getElementById(jh_loan); if( !no) var jh_loan_id = form.is_jh;
 
 	var d1_1_id = document.getElementById(d1_1);
 	var d1_2_id = document.getElementById(d1_2);
@@ -38,11 +38,11 @@ function inoutSel(form, no, pj){ // ==capital2.php 와 capital_edit.php => form 
 	var d1_4_id = document.getElementById(d1_4);
 	var d1_5_id = document.getElementById(d1_5);
 
-	var d1_acc1_id = document.getElementById(d1_acc1); if(!no) var d1_acc1_id = document.getElementById('d1_1');
-	var d1_acc2_id = document.getElementById(d1_acc2); if(!no) var d1_acc2_id = document.getElementById('d1_2');
-	var d1_acc3_id = document.getElementById(d1_acc3); if(!no) var d1_acc3_id = document.getElementById('d1_3');
-	var d1_acc4_id = document.getElementById(d1_acc4); if(!no) var d1_acc4_id = document.getElementById('d1_4');
-	var d1_acc5_id = document.getElementById(d1_acc5); if(!no) var d1_acc5_id = document.getElementById('d1_5');
+	var d1_acc1_id = document.getElementById(d1_acc1); if( !no) var d1_acc1_id = document.getElementById('d1_1');
+	var d1_acc2_id = document.getElementById(d1_acc2); if( !no) var d1_acc2_id = document.getElementById('d1_2');
+	var d1_acc3_id = document.getElementById(d1_acc3); if( !no) var d1_acc3_id = document.getElementById('d1_3');
+	var d1_acc4_id = document.getElementById(d1_acc4); if( !no) var d1_acc4_id = document.getElementById('d1_4');
+	var d1_acc5_id = document.getElementById(d1_acc5); if( !no) var d1_acc5_id = document.getElementById('d1_5');
 
 	var in_id = document.getElementById(iin);  if(!no) var in_id = form.ina;
 	var inc_id = document.getElementById(inc); if(!no) var inc_id = form.inc;
@@ -63,7 +63,7 @@ function inoutSel(form, no, pj){ // ==capital2.php 와 capital_edit.php => form 
 		class2_id.options[3].value = '3';//2-3번째 셀렉트바 값 정의
 		class2_id.options[4].text = '수 익';//2-4번째 셀렉트바 텍스트 정의
 		class2_id.options[4].value = '4';//2-4번째 셀렉트바 값 정의
-		if(!jh_loan_id||jh_loan_id.checked===0){
+		if( !jh_loan_id || jh_loan_id.checked==0){
 			class2_id.options[4].selected =1; // 수익을 선택하고 ///////
 			if(d1_1_id)d1_1_id.style.display='none';   //자산계정 비활성
 			if(d1_2_id)d1_2_id.style.display='none';   //부채계정 비활성
@@ -78,10 +78,10 @@ function inoutSel(form, no, pj){ // ==capital2.php 와 capital_edit.php => form 
 			d1_acc5_id.disabled=1;  d1_acc5_id.style.display='none';
 		}else{
 			class2_id.options[1].selected =1; // 자산을 선택하고 ///////
-			if(d1_1_id)d1_1_id.style.display='';   //자산계정 비활성
+			if(d1_1_id)d1_1_id.style.display='';   //자산계정 활성
 			if(d1_2_id)d1_2_id.style.display='none';   //부채계정 비활성
 			if(d1_3_id)d1_3_id.style.display='none';   //자본계정 비활성
-			if(d1_4_id)d1_4_id.style.display='none';       //수익계정 활성화
+			if(d1_4_id)d1_4_id.style.display='none';   //수익계정 비활성
 			if(d1_5_id)d1_5_id.style.display='none';   //비용계정 비활성
 
 			d1_acc1_id.disabled=0;  d1_acc1_id.style.display='';
@@ -110,7 +110,7 @@ function inoutSel(form, no, pj){ // ==capital2.php 와 capital_edit.php => form 
 		class2_id.options[3].value = '3';
 		class2_id.options[4].text = '비 용';
 		class2_id.options[4].value = '5';
-		if(!jh_loan_id||jh_loan_id.checked===0){
+		if(!jh_loan_id||jh_loan_id.checked==0){
 			class2_id.options[4].selected =1; // 비용을 선택하고 ///////
 			if(d1_1_id)d1_1_id.style.display='none';   //자산계정 비활성
 			if(d1_2_id)d1_2_id.style.display='none';   //부채계정 비활성

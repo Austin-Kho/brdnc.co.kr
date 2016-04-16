@@ -103,5 +103,19 @@ class M4_m extends CI_Model {
 		$result = $qry->result();
 		return $result;
 	}
+
+	public function pj_dt() {
+		$this->db->select('seq, pj_name');
+		$this->db->where('is_end !=', '1');
+		$this->db->order_by('start_date DESC', 'seq ASC');
+		$qry = $this->db->get('cms_project1_info');
+		$result = $qry->result();
+		return $result;
+	}
+
+	public function aaa() {
+		$query="select no, name from cms_capital_bank_account ";
+		$query="select no, bank, name from cms_capital_bank_account ";
+	}
 }
 // End of this File

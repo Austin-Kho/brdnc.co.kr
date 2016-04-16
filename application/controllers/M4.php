@@ -200,6 +200,11 @@ class M4 extends CI_Controller {
 				$data['d3_d14'] = $this->m4_m->d3_acc('4');
 				$data['d3_d15'] = $this->m4_m->d3_acc('5');
 
+				// 현장 데이터
+				$data['pj_dt'] = $this->m4_m->pj_dt();
+				// 입출금처
+				$data['in_out'] = $this->m4_m->select_data_list('cms_capital_bank_account');
+
 				//본 페이지 로딩
 				$this->load->view('/menu/m4/md1_sd3_v', $data);
 			}
