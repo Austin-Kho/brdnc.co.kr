@@ -165,7 +165,7 @@
 <?php if($lt->class2==6) $cla2 = "<font color='#669900'>[본사]</font>"; ?>
 <?php if($lt->class2==7) $cla2 = "<font color='#009900'>[현장]</font>"; ?>
 
-<?php	if($lt->account==""){ $account = "-"; }else{ $account = "[".$lt->account."]"; } //계정과목
+<?php	if($lt->account=="" || $lt->account=='0'){ $account = "-"; }else{ $account = "[".$lt->account."]"; } //계정과목
 
 	if($lt->inc==0) $inc = '-'; else $inc = number_format($lt->inc);
 	if($lt->exp==0) $exp = '-'; else $exp = number_format($lt->exp);

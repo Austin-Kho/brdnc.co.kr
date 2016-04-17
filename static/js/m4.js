@@ -530,7 +530,7 @@ function inout_frm_chk(com){
 		}
 	}
 
-	var aaa=confirm('거래내용을 등록하시겠습니까?');
+	var aaa=confirm('거래내용을 등록하시겠습니까???');
 	if(aaa==true){
 		form.submit();
 	}

@@ -1,7 +1,7 @@
 			<div class="main_start"></div>
 <?php
 	$attributes = array('name' => 'inout_frm', 'method' => 'post');
-	echo form_open('/m4/capital/1/2/', $attributes);
+	echo form_open('/m4/capital/1/3/', $attributes);
 ?>
 				<label class="sr-only"><input type="hidden" name="cont_1_h" value=""></label> <!-- 수수료 발생 시 - 적요_1 -->
 				<label class="sr-only"><input type="hidden" name="cont_2_h" value=""></label> <!-- 수수료 발생 시 - 적요_2 -->
@@ -30,7 +30,7 @@
 					<div class="col-xs-2 col-md-2 center" style="background-color: #F4F4F4; height: 40px; padding: 10px;">담당자</div>
 					<div class="col-xs-3 col-md-2" style="height: 40px; padding-top: 10px;"><?php  echo $this->session->userdata['name']; ?></div>
 				</div>
-
+<?php echo validation_errors(); ?>
 
 				<div class="row table-responsive" style="margin: 0;">
 					<table class="table table-bordered table-condensed font12">
@@ -79,7 +79,7 @@
 								<!-- 현장코드 _1 -->
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_1" id="pj_seq_1" style="width:60px;" disabled>
-										<option value="" selected> 선 택</option>
+										<option value="0" selected> 선 택</option>
 <?php foreach($pj_dt as $lt) : ?>
 										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
@@ -146,9 +146,9 @@
 								<!--출금처 _1 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_1" id="out_1" style="width:55px;" onChange="charge(1,this.value);" disabled>
-										<option value="" selected> 선 택
+										<option value="1-1" selected> 선 택
 <?php foreach ($in_out as $lt) : ?>
-										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
+										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php //echo $lt->name; ?><?php echo $lt->no."-".$lt->bank; ?>
 <?php endforeach; ?>
 									</select>
 								</td>
@@ -205,7 +205,7 @@
 								<!-- 현장코드 _2 -->
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_2" id="pj_seq_2" style="width:60px;" disabled>
-										<option value="" selected> 선 택</option>
+										<option value="0" selected> 선 택</option>
 <?php foreach($pj_dt as $lt) : ?>
 										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
@@ -272,7 +272,7 @@
 								<!--출금처 _2 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_2" id="out_2" style="width:55px;" onChange="charge(2,this.value);" disabled>
-										<option value="" selected> 선 택
+										<option value="1-1" selected> 선 택
 <?php foreach ($in_out as $lt) : ?>
 										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
 <?php endforeach; ?>
@@ -320,7 +320,7 @@
 								<!-- 현장코드 _3 -->
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_3" id="pj_seq_3" style="width:60px;" disabled>
-										<option value="" selected> 선 택</option>
+										<option value="0" selected> 선 택</option>
 <?php foreach($pj_dt as $lt) : ?>
 										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
@@ -387,7 +387,7 @@
 								<!--출금처 _3 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_3" id="out_3" style="width:55px;" onChange="charge(3,this.value);" disabled>
-										<option value="" selected> 선 택
+										<option value="1-1" selected> 선 택
 <?php foreach ($in_out as $lt) : ?>
 										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
 <?php endforeach; ?>
@@ -435,7 +435,7 @@
 								<!-- 현장코드 _4 -->
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_4" id="pj_seq_4" style="width:60px;" disabled>
-										<option value="" selected> 선 택</option>
+										<option value="0" selected> 선 택</option>
 <?php foreach($pj_dt as $lt) : ?>
 										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
@@ -502,7 +502,7 @@
 								<!--출금처 _4 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_4" id="out_4" style="width:55px;" onChange="charge(4,this.value);" disabled>
-										<option value="" selected> 선 택
+										<option value="1-1" selected> 선 택
 <?php foreach ($in_out as $lt) : ?>
 										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
 <?php endforeach; ?>
@@ -550,7 +550,7 @@
 								<!-- 현장코드 _5 -->
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_5" id="pj_seq_5" style="width:60px;" disabled>
-										<option value="" selected> 선 택</option>
+										<option value="0" selected> 선 택</option>
 <?php foreach($pj_dt as $lt) : ?>
 										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
@@ -617,7 +617,7 @@
 								<!--출금처 _5 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_5" id="out_5" style="width:55px;" onChange="charge(5,this.value);" disabled>
-										<option value="" selected> 선 택
+										<option value="1-1" selected> 선 택
 <?php foreach ($in_out as $lt) : ?>
 										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
 <?php endforeach; ?>
@@ -665,7 +665,7 @@
 								<!-- 현장코드 _6 -->
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_6" id="pj_seq_6" style="width:60px;" disabled>
-										<option value="" selected> 선 택</option>
+										<option value="0" selected> 선 택</option>
 <?php foreach($pj_dt as $lt) : ?>
 										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
@@ -732,7 +732,7 @@
 								<!--출금처 _6 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_6" id="out_6" style="width:55px;" onChange="charge(6,this.value);" disabled>
-										<option value="" selected> 선 택
+										<option value="1-1" selected> 선 택
 <?php foreach ($in_out as $lt) : ?>
 										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
 <?php endforeach; ?>
@@ -780,7 +780,7 @@
 								<!-- 현장코드 _7 -->
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_7" id="pj_seq_7" style="width:60px;" disabled>
-										<option value="" selected> 선 택</option>
+										<option value="0" selected> 선 택</option>
 <?php foreach($pj_dt as $lt) : ?>
 										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
@@ -847,7 +847,7 @@
 								<!--출금처 _7 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_7" id="out_7" style="width:55px;" onChange="charge(7,this.value);" disabled>
-										<option value="" selected> 선 택
+										<option value="1-1" selected> 선 택
 <?php foreach ($in_out as $lt) : ?>
 										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
 <?php endforeach; ?>
@@ -895,7 +895,7 @@
 								<!-- 현장코드 _8 -->
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_8" id="pj_seq_8" style="width:60px;" disabled>
-										<option value="" selected> 선 택</option>
+										<option value="0" selected> 선 택</option>
 <?php foreach($pj_dt as $lt) : ?>
 										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
@@ -962,7 +962,7 @@
 								<!--출금처 _8 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_8" id="out_8" style="width:55px;" onChange="charge(8,this.value);" disabled>
-										<option value="" selected> 선 택
+										<option value="1-1" selected> 선 택
 <?php foreach ($in_out as $lt) : ?>
 										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
 <?php endforeach; ?>
@@ -1010,7 +1010,7 @@
 								<!-- 현장코드 _9 -->
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_9" id="pj_seq_9" style="width:60px;" disabled>
-										<option value="" selected> 선 택</option>
+										<option value="0" selected> 선 택</option>
 <?php foreach($pj_dt as $lt) : ?>
 										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
@@ -1077,7 +1077,7 @@
 								<!--출금처 _9 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_9" id="out_9" style="width:55px;" onChange="charge(9,this.value);" disabled>
-										<option value="" selected> 선 택
+										<option value="1-1" selected> 선 택
 <?php foreach ($in_out as $lt) : ?>
 										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
 <?php endforeach; ?>
@@ -1125,7 +1125,7 @@
 								<!-- 현장코드 _10 -->
 								<td class="center" style="padding-top: 7px;">
 									<select name="pj_seq_10" id="pj_seq_10" style="width:60px;" disabled>
-										<option value="" selected> 선 택</option>
+										<option value="0" selected> 선 택</option>
 <?php foreach($pj_dt as $lt) : ?>
 										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
@@ -1192,7 +1192,7 @@
 								<!--출금처 _10 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_10" id="out_10" style="width:55px;" onChange="charge(10,this.value);" disabled>
-										<option value="" selected> 선 택
+										<option value="1-1" selected> 선 택
 <?php foreach ($in_out as $lt) : ?>
 										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
 <?php endforeach; ?>
@@ -1226,8 +1226,8 @@
 				</div>
 </form>
 				<div class="row" style="margin: 0;">
-<?php // if($auth<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="com_submit('$mode');";} ?>
+<?php if($auth<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="inout_frm_chk('com');";} ?>
 					<div class="form-group btn-wrap" style="margin: 0;">
-						<input type="button" class="btn btn-primary btn-sm" onclick="<?php //echo $submit_str?>" value="거래등록">
+						<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="거래등록">
 					</div>
 				</div>
