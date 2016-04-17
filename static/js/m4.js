@@ -565,16 +565,16 @@ function charge(no,obj){
 	var form=document.inout_frm;
 	var nobj = obj.split("-");
 
-	if(no==1){	if(nobj[0]==1||!obj){	form.char1_1.disabled=1;	}else{	form.char1_1.disabled=0;	}	}
-	if(no==2){	if(nobj[0]==1||!obj){	form.char1_2.disabled=1;	}else{	form.char1_2.disabled=0;	}	}
-	if(no==3){	if(nobj[0]==1||!obj){	form.char1_3.disabled=1;	}else{	form.char1_3.disabled=0;	}	}
-	if(no==4){	if(nobj[0]==1||!obj){	form.char1_4.disabled=1;	}else{	form.char1_4.disabled=0;	}	}
-	if(no==5){	if(nobj[0]==1||!obj){	form.char1_5.disabled=1;	}else{	form.char1_5.disabled=0;	}	}
-	if(no==6){	if(nobj[0]==1||!obj){	form.char1_6.disabled=1;	}else{	form.char1_6.disabled=0;	}	}
-	if(no==7){	if(nobj[0]==1||!obj){	form.char1_7.disabled=1;	}else{	form.char1_7.disabled=0;	}	}
-	if(no==8){	if(nobj[0]==1||!obj){	form.char1_8.disabled=1;	}else{	form.char1_8.disabled=0;	}	}
-	if(no==9){	if(nobj[0]==1||!obj){	form.char1_9.disabled=1;	}else{	form.char1_9.disabled=0;	}	}
-	if(no==10){	if(nobj[0]==1||!obj){	form.char1_10.disabled=1;   }else{	form.char1_10.disabled=0;   }   }
+	if(no==1){	if(nobj[0]<=1 || !obj){	form.char1_1.disabled=1; form.char2_1.disabled=1; form.char1_1.checked=0; form.char2_1.value=''; }else{	form.char1_1.disabled=0;	}	}
+	if(no==2){	if(nobj[0]==1 || !obj){	form.char1_2.disabled=1; form.char2_2.disabled=1; form.char1_2.checked=0; form.char2_2.value=''; }else{	form.char1_2.disabled=0;	}	}
+	if(no==3){	if(nobj[0]==1 || !obj){	form.char1_3.disabled=1; form.char2_3.disabled=1; form.char1_3.checked=0; form.char2_3.value=''; }else{	form.char1_3.disabled=0;	}	}
+	if(no==4){	if(nobj[0]==1 || !obj){	form.char1_4.disabled=1; form.char2_4.disabled=1; form.char1_4.checked=0; form.char2_4.value=''; }else{	form.char1_4.disabled=0;	}	}
+	if(no==5){	if(nobj[0]==1 || !obj){	form.char1_5.disabled=1; form.char2_5.disabled=1; form.char1_5.checked=0; form.char2_5.value=''; }else{	form.char1_5.disabled=0;	}	}
+	if(no==6){	if(nobj[0]==1 || !obj){	form.char1_6.disabled=1; form.char2_6.disabled=1; form.char1_6.checked=0; form.char2_6.value=''; }else{	form.char1_6.disabled=0;	}	}
+	if(no==7){	if(nobj[0]==1 || !obj){	form.char1_7.disabled=1; form.char2_7.disabled=1; form.char1_7.checked=0; form.char2_7.value=''; }else{	form.char1_7.disabled=0;	}	}
+	if(no==8){	if(nobj[0]==1 || !obj){	form.char1_8.disabled=1; form.char2_8.disabled=1; form.char1_8.checked=0; form.char2_8.value=''; }else{	form.char1_8.disabled=0;	}	}
+	if(no==9){	if(nobj[0]==1 || !obj){	form.char1_9.disabled=1; form.char2_9.disabled=1; form.char1_9.checked=0; form.char2_9.value=''; }else{	form.char1_9.disabled=0;	}	}
+	if(no==10){	if(nobj[0]==1 || !obj){	form.char1_10.disabled=1;  form.char2_10.disabled=1; form.char1_10.checked=0; form.char2_10.value='';  }else{	form.char1_10.disabled=0;   }   }
 }
 
 // 수수료 체크박스
