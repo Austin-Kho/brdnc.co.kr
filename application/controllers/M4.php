@@ -87,9 +87,14 @@ class M4 extends CI_Controller {
 				// 설정일 입금 내역
 				$data['da_in'] = $this->m4_m->select_data_lt("cms_capital_cash_book", "account, cont, acc, inc, note", "(com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='".$data['sh_date']."'", "", "seq_num");
 
-				//
+				// $aaq="SELECT SUM(inc) AS total_inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='$sh_date'";
+				$data['da_in_total'] = $this->m4_m->da_in_total('cms_capital_cash_book', $data['sh_date']);
+
 				// $da_ex_qry="SELECT account, cont, acc, exp, note FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='$sh_date' order by seq_num";
 				$data['da_ex'] = $this->m4_m->select_data_lt("cms_capital_cash_book", "account, cont, acc, exp, note", "(com_div>0) AND (class1='2' or class1='3') AND deal_date='".$data['sh_date']."'", "", "seq_num");
+
+				// $bbq="SELECT SUM(exp) AS total_exp FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='$sh_date'";
+				$data['da_ex_total'] = $this->m4_m->da_ex_total('cms_capital_cash_book', $data['sh_date']);
 
 				//본 페이지 로딩
 				$this->load->view('/menu/m4/md1_sd1_v', $data);

@@ -74,6 +74,21 @@ class M4_m extends CI_Model {
 	}
 	//공통 함수 Start//
 
+
+	public function da_in_total($table, $sh_date) {
+		$sql = "SELECT SUM(inc) AS total_inc FROM ".$table." WHERE (com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='".$sh_date."'";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
+	// $bbq="SELECT SUM(exp) AS total_exp FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='$sh_date'";
+	public function da_ex_total($table, $sh_date) {
+		$sql = "SELECT SUM(exp) AS total_exp FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='".$sh_date."'";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
+
 	public function cash_book_list($table, $start='', $limit='', $sh_frm, $n) {
 		$this->db->select('seq_num, class1, class2, account, cont, acc, in_acc, inc, out_acc, exp, evidence, cms_capital_cash_book.note, worker, deal_date, name, no');
 		$where=" (com_div>0 AND ((in_acc=no AND class2<>7) OR out_acc=no) OR (com_div IS NULL AND in_acc=no AND class2=6)) ";

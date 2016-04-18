@@ -278,45 +278,36 @@
 							<td class="center" width="200">적 요</td>
 							<td class="center" width="100">금 액</td>
 							<td class="center" width="100">계정과목</td>
-							<td class="center" width="200">비 고 <?php var_dump($da_in); ?> </td>
+							<td class="center" width="200">비 고</td>
 						</tr>
-						<?
-							// $da_in_qry="SELECT account, cont, acc, inc, note FROM cms_capital_cash_book WHERE (com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='$sh_date' order by seq_num";
-							// $da_in_rlt=mysql_query($da_in_qry, $connect);
-							//
-							$in_num = $da_in['num'];
-							if($in_num<2) $num=2; else $num=$in_num; // 행수 설정;
-
-							for($i=0;$i<=$num;$i++){
-							// 	$da_in_rows=mysql_fetch_array($da_in_rlt);
-							// 	if($da_in_rows[inc]==0){ $income="";}else{$income=number_format($da_in_rows[inc]);}
-							if(empty($da_in['result'][$i]->acc)) $da_in_acc = '&nbsp;'; else $da_in_acc = $da_in['result'][$i]->acc;
-						?>
+<?
+	$in_num = $da_in['num'];
+	if($in_num<2) $num=2; else $num=$in_num; // 행수 설정;
+?>
+<?php	for($i=0;$i<=$num;$i++):
+		if(empty($da_in['result'][$i]->acc)) $da_in_acc = '&nbsp;'; else $da_in_acc = $da_in['result'][$i]->acc;
+		if(empty($da_in['result'][$i]->cont)) $da_in_cont = '&nbsp;'; else $da_in_cont = $da_in['result'][$i]->cont;
+		if(empty($da_in['result'][$i]->inc) OR $da_in['result'][$i]->inc==0){ $income = "";}else{$income = number_format($da_in['result'][$i]->inc);}
+		if(empty($da_in['result'][$i]->account)) $da_in_account = '&nbsp;'; else $da_in_account = $da_in['result'][$i]->account;
+		if(empty($da_in['result'][$i]->note)) $da_in_note = '&nbsp;'; else $da_in_note = $da_in['result'][$i]->note;
+?>
 						<tr>
-							<td><?php echo cut_string($da_in_acc,16,"")?></td>
-
-
-
-							<td><?php // echo cut_string($da_in_rows[cont],20,"")?></td>
-							<td class="right"><?php // echo $income?></td>
-							<td class="center"><?php // echo cut_string($da_in_rows[account],10,"")?></td>
-							<td class="center"><?php // echo cut_string($da_in_rows[note],20,"")?></td>
+							<td><?php echo cut_string($da_in_acc,16,""); ?></td>
+							<td><?php echo cut_string($da_in_cont,20,""); ?></td>
+							<td class="right"><?php echo $income; ?></td>
+							<td class="center"><?php echo cut_string($da_in_account,10,"")?></td>
+							<td class="center"><?php echo cut_string($da_in_note,20,"")?></td>
 						</tr>
-						<? } ?>
+<?php endfor; ?>
 						<tr bgcolor="#f6f6f6">
-						<?
-							// $aaq="SELECT SUM(inc) AS total_inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='$sh_date'";
-							// $aar=mysql_query($aaq, $connect);
-							// $aaro=mysql_fetch_array($aar);
-						?>
 							<td class="center" colspan="2">입 금 합 계</td>
-							<td class="right"><font color="#0066ff"><?php // if($aaro[total_inc]==0){echo "-";}else{echo number_format($aaro[total_inc]);}?></font></td>
+							<td class="right"><font color="#0066ff"><?php if($da_in_total[0]->total_inc==0){echo "-";}else{echo number_format($da_in_total[0]->total_inc);}?></font></td>
 							<td class="center"></td>
 							<td class="center"></td>
 						</tr>
+					</table>
 
-
-						<tr><td height="15"></td></tr>
+					<table class="table table-bordered table-hover table-condensed font12">
 						<!-- 출금 내역 -->
 						<tr bgcolor="#f5f5f5">
 							<td colspan="5"> <b>출 금 내 역</b> </td>
@@ -326,39 +317,33 @@
 							<td class="center">적 요</td>
 							<td class="center">금 액</td>
 							<td class="center">계정과목</td>
-							<td class="center">비 고 <?php var_dump($da_ex); ?> </td>
+							<td class="center">비 고</td>
 						</tr>
-						<?
-							// $da_ex_qry="SELECT account, cont, acc, exp, note FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='$sh_date' order by seq_num";
-							// $da_ex_rlt=mysql_query($da_ex_qry, $connect);
-							//
-							$ex_num = $da_in['num'];
-							if($ex_num<4) $num = 4; else $num = $ex_num;
-							//
-							for($i=0;$i<=$num;$i++){
-							// 	$da_ex_rows=mysql_fetch_array($da_ex_rlt);
-							// 	if($da_ex_rows[exp]==0){ $exp="";}else{$exp=number_format($da_ex_rows[exp]);}
-						?>
+<?
+	$ex_num = $da_in['num'];
+	if($ex_num<4) $num = 4; else $num = $ex_num;
+
+	for($i=0;$i<=$num;$i++):
+		if(empty($da_ex['result'][$i]->acc)) $da_ex_acc = ''; else $da_ex_acc = $da_ex['result'][$i]->acc;
+		if(empty($da_ex['result'][$i]->cont)) $da_ex_cont = ''; else $da_ex_cont = $da_ex['result'][$i]->cont;
+		if(empty($da_ex['result'][$i]->exp) OR $da_ex['result'][$i]->exp==0){ $exp = ""; }else{ $exp = number_format($da_ex['result'][$i]->exp); }
+		if(empty($da_ex['result'][$i]->account)) $da_ex_account = ''; else $da_ex_account = $da_ex['result'][$i]->account;
+		if(empty($da_ex['result'][$i]->note)) $da_ex_note = ''; else $da_ex_note = $da_ex['result'][$i]->note;
+?>
 						<tr>
-							<td><?php // echo cut_string($da_ex_rows[acc],16,"")?>a</td>
-							<td><?php // echo cut_string($da_ex_rows[cont],20,"")?>a</td>
-							<td class="right"><?php // echo $exp?>a</td>
-							<td class="center"><?php // echo cut_string($da_ex_rows[account],10,"")?>a</td>
-							<td class="center"><?php // echo cut_string($da_ex_rows[note],20,"")?>a</td>
+							<td><?php echo cut_string($da_ex_acc,16,"")?></td>
+							<td><?php echo cut_string($da_ex_cont,20,"")?></td>
+							<td class="right"><?php echo $exp?></td>
+							<td class="center"><?php echo cut_string($da_ex_account,10,"")?></td>
+							<td class="center"><?php echo cut_string($da_ex_note,20,"")?></td>
 						</tr>
-						<? } ?>
+<?php endfor; ?>
 						<tr bgcolor="#f6f6f6">
-						<?
-							// $bbq="SELECT SUM(exp) AS total_exp FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='$sh_date'";
-							// $bbr=mysql_query($bbq, $connect);
-							// $bbro=mysql_fetch_array($bbr);
-						?>
 							<td class="center" colspan="2">출 금 합 계</td>
-							<td class="right"><font color="#ff3300"><?php // if($bbro[total_exp]==0){echo "-";}else{echo number_format($bbro[total_exp]);}?></font></td>
+							<td class="right"><font color="#ff3300"><?php if($da_ex_total[0]->total_exp==0){echo "-";}else{echo number_format($da_ex_total[0]->total_exp); }?></font></td>
 							<td class="center"></td>
 							<td class="center"></td>
 						</tr>
 					</table>
-
 				</div>
 			</div>
