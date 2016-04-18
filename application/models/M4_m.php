@@ -15,6 +15,19 @@ class M4_m extends CI_Model {
 		return $rlt = $qry->result();
 	}
 
+	public function select_data_lt($table, $sel='', $where, $group='', $order='') {
+		if($sel !='') { $this->db->select($sel); }
+		if($where !='') { $this->db->where($where); }
+		if($group !='') { $this->db->group_by($group); }
+		if($order !='') { $this->db->order_by($order); }
+		$qry = $this->db->get($table);
+		$rlt = array(
+			'num' => $qry->num_rows(),
+			'result' => $qry->result()
+		);
+		return $rlt;
+	}
+
 	/**
 	 * [select_data_row  단수 데이터 불러오기]
 	 * @param  [String] $table [테이블명]

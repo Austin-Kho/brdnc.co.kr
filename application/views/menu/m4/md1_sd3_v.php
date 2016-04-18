@@ -33,9 +33,9 @@
 <?php echo validation_errors(); ?>
 
 				<div class="row table-responsive" style="margin: 0;">
-					<table class="table table-bordered table-condensed font12">
+					<table class="table table-condensed table-hover font12" style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;">
 						<thead>
-							<tr>
+							<tr style="background-color: #EAEAEA;">
 								<th style="20px" class="center"><input type="checkbox" disabled></td>
 								<th style="120px" class="center">구 분 <font color="red">*</font></td>
 								<th style="55px" class="center">현 장 <font color="red">*</font></td>
@@ -148,7 +148,7 @@
 									<select name="out_1" id="out_1" style="width:55px;" onChange="charge(1,this.value);" disabled>
 										<option value="1-1" selected> 선 택
 <?php foreach ($in_out as $lt) : ?>
-										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php //echo $lt->name; ?><?php echo $lt->no."-".$lt->bank; ?>
+										<option value="<?php echo $lt->no."-".$lt->bank; ?>"> <?php echo $lt->name; ?>
 <?php endforeach; ?>
 									</select>
 								</td>
@@ -169,17 +169,6 @@
 								</td>
 							</tr>
 							<!-- ------------------------------------1col------------------------------------------ -->
-
-
-
-
-
-
-
-
-
-
-
 							<!-- ------------------------------------2col------------------------------------------ -->
 							<tr>
 								<td class="center"><input type="checkbox" disabled></td>
@@ -1215,19 +1204,13 @@
 								</td>
 							</tr>
 							<!-- ------------------------------------10col------------------------------------------ -->
-
-
-
-
-
-
 						</tbody>
 					</table>
-				</div>
 </form>
-				<div class="row" style="margin: 0;">
+					<div class="row" style="margin: 0 0 92px 0;">
 <?php if($auth<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="inout_frm_chk('com');";} ?>
-					<div class="form-group btn-wrap" style="margin: 0;">
-						<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="거래등록">
+						<div class="form-group btn-wrap" style="margin: 0;">
+							<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="거래등록">
+						</div>
 					</div>
 				</div>
