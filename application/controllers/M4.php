@@ -48,7 +48,7 @@ class M4 extends CI_Controller {
 	 * @return [type]      [description]
 	 */
 	public function capital($mdi='', $sdi=''){
-		$this->output->enable_profiler(TRUE); //프로파일러 보기//
+		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
@@ -143,30 +143,30 @@ class M4 extends CI_Controller {
 				}
 
 				if($this->input->get('cash_book')=='print') {
-					// Excel Cash book Print
-					// redirect(base_url().'static/lib/excel/excel_cash_book.php');
-					$where=" (com_div>0 AND ((in_acc=no AND class2<>7) OR out_acc=no) OR (com_div IS NULL AND in_acc=no AND class2=6)) ";
-					//검색어가 있을 경우
-					if($sh_frm['class1']){
-						if($sh_frm['class1']==1) $where.=" AND class1='1' ";
-						if($sh_frm['class1']==2) $where.=" AND class1='2' ";
-						if($sh_frm['class1']==3) $where.=" AND class1='3' ";
-					}
-					if($sh_frm['class2']) $where.=" AND class2='".$sh_frm['class2']."' ";
-					if($sh_frm['s_date']) $where.=" AND deal_date>='".$sh_frm['s_date']."' ";
-					if($sh_frm['e_date']) {$where.=" AND deal_date<='".$sh_frm['e_date']."' "; } //$e_add=" AND deal_date<='$sh_frm['e_date']' ";} else{$e_add="";}
-
-					if($sh_frm['sh_text']){
-						if($sh_frm['sh_con']==0) $where.=" AND (account like '%".$sh_frm['sh_text']."%' OR cont like '%".$sh_frm['sh_text']."%' OR acc like '%".$sh_frm['sh_text']."%' OR evidence like '%".$sh_frm['sh_text']."%' OR cms_capital_cash_book.worker like '%".$sh_frm['sh_text']."%') "; // 통합검색
-						if($sh_frm['sh_con']==1) $where.=" AND account like '%".$sh_frm['sh_text']."%' "; // 계정과목
-						if($sh_frm['sh_con']==2) $where.=" AND cont like '%".$sh_frm['sh_text']."%' "; //적요
-						if($sh_frm['sh_con']==3) $where.=" AND acc like '%".$sh_frm['sh_text']."%' "; // 거래처
-						if($sh_frm['sh_con']==4) $where.=" AND (in_acc like '%".$sh_frm['sh_text']."%' OR out_acc like '%".$sh_frm['sh_text']."%')  ";  //입출금처
-					}
-					$a['where'] = $where;
-					$this->load->view('/popup/a', $a);
-					//$this->db->where($where);
-					//(base_url().'pc/_menu3/excel_cash_book.php?add_where='.$where);
+					// // Excel Cash book Print
+					// // redirect(base_url().'static/lib/excel/excel_cash_book.php');
+					// $where=" (com_div>0 AND ((in_acc=no AND class2<>7) OR out_acc=no) OR (com_div IS NULL AND in_acc=no AND class2=6)) ";
+					// //검색어가 있을 경우
+					// if($sh_frm['class1']){
+					// 	if($sh_frm['class1']==1) $where.=" AND class1='1' ";
+					// 	if($sh_frm['class1']==2) $where.=" AND class1='2' ";
+					// 	if($sh_frm['class1']==3) $where.=" AND class1='3' ";
+					// }
+					// if($sh_frm['class2']) $where.=" AND class2='".$sh_frm['class2']."' ";
+					// if($sh_frm['s_date']) $where.=" AND deal_date>='".$sh_frm['s_date']."' ";
+					// if($sh_frm['e_date']) {$where.=" AND deal_date<='".$sh_frm['e_date']."' "; } //$e_add=" AND deal_date<='$sh_frm['e_date']' ";} else{$e_add="";}
+					//
+					// if($sh_frm['sh_text']){
+					// 	if($sh_frm['sh_con']==0) $where.=" AND (account like '%".$sh_frm['sh_text']."%' OR cont like '%".$sh_frm['sh_text']."%' OR acc like '%".$sh_frm['sh_text']."%' OR evidence like '%".$sh_frm['sh_text']."%' OR cms_capital_cash_book.worker like '%".$sh_frm['sh_text']."%') "; // 통합검색
+					// 	if($sh_frm['sh_con']==1) $where.=" AND account like '%".$sh_frm['sh_text']."%' "; // 계정과목
+					// 	if($sh_frm['sh_con']==2) $where.=" AND cont like '%".$sh_frm['sh_text']."%' "; //적요
+					// 	if($sh_frm['sh_con']==3) $where.=" AND acc like '%".$sh_frm['sh_text']."%' "; // 거래처
+					// 	if($sh_frm['sh_con']==4) $where.=" AND (in_acc like '%".$sh_frm['sh_text']."%' OR out_acc like '%".$sh_frm['sh_text']."%')  ";  //입출금처
+					// }
+					// $a['where'] = $where;
+					// $this->load->view('/popup/a', $a);
+					// //$this->db->where($where);
+					// //(base_url().'pc/_menu3/excel_cash_book.php?add_where='.$where);
 				}else{
 					//본 페이지 로딩
 					$this->load->view('/menu/m4/md1_sd2_v', $data);
