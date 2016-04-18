@@ -80,6 +80,67 @@ class M4 extends CI_Controller {
 
 				// 은행계좌 데이터
 				$data['bank_acc'] = $this->m4_m->select_data_lt('cms_capital_bank_account', '', '', '');
+				for($i=0; $i<=$data['bank_acc']['num']; $i++) {
+					$no = $data['bank_acc']['result'][$i]->no;
+						
+				}
+
+				// 	 $in_qry="SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND in_acc='$d_rows[no]' AND deal_date<='$sh_date' "; // 계정별 설정일까지 총 수입
+				// 	 $in_rlt=mysql_query($in_qry,$connect);
+				// 	 $in_row=mysql_fetch_array($in_rlt);
+				// $data['accum_in'] = $this->main_m->sql_result("SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND in_acc='$d_rows[no]' AND deal_date<='".$data['sh_date'] ."'");
+				//
+				// 	 $in_qry1="SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND in_acc='$d_rows[no]' AND deal_date='$sh_date' "; // 계정별 설정당일 수입
+				// 	 $in_rlt1=mysql_query($in_qry1,$connect);
+				// 	 $in_row1=mysql_fetch_array($in_rlt1);
+				//
+				// 	 $ex_qry="SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND out_acc='$d_rows[no]' AND deal_date<='$sh_date' "; // 계정별 설정일까지 총 지출
+				// 	 $ex_rlt=mysql_query($ex_qry,$connect);
+				// 	 $ex_row=mysql_fetch_array($ex_rlt);
+				//
+				// 	 $ex_qry1="SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND out_acc='$d_rows[no]' AND deal_date='$sh_date' "; // 계정별 설정당일 지출
+				// 	 $ex_rlt1=mysql_query($ex_qry1,$connect);
+				// 	 $ex_row1=mysql_fetch_array($ex_rlt1);
+				//
+				// 	 if(!$d_rows[name]){   // 입출금 계정이 없으면
+				// 		 $balance=""; // 최종 금일 시재(잔고)
+				// 	 }else	if($in_row[inc]==$ex_row[exp]){ // 계정별 총 입금과 지출이 동일하면
+				// 		 $balance="-"; // 최종 금일 시재(잔고)
+				// 	 }else{ // 그렇지 않으면
+				// 		 $balance=number_format($in_row[inc]-$ex_row[exp]); // 계정별 최종 금일 시재(잔고)
+				//   }
+				//
+				// 	 if(!$d_rows[name]){   // 설정 당일 수입 구하기-> 입출금 계정이 없으면
+				// 		 $d_inc=""; // 해당 계정 당일 입금(증가)
+				// 	 }else	if($in_row1[inc]==0){ //
+				// 		 $d_inc="-"; // 해당 계정 당일 입금(증가)
+				// 	 }else{
+				// 		 $d_inc=number_format($in_row1[inc]); // 해당 계정 당일 입금(증가)
+				// 	 }
+				// 	 if(!$d_rows[name]){   // 설정 당일 지출 구하기
+				// 		 $d_exp=""; // 해당 계정 당일 출금 (감소)
+				// 	 }else	if($ex_row1[exp]==0){
+				// 		 $d_exp="-"; // 해당 계정 당일 출금 (감소)
+				// 	 }else{
+				// 		 $d_exp=number_format($ex_row1[exp]);  // 해당 계정 당일 출금 (감소)
+				// 	 }
+				//
+				// 	 if(!$d_rows[name]){  // 전일 잔액 구하기
+				// 		 $y_bal="";
+				// 	 }else if(($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]==0){
+				// 		 $y_bal="-";
+				// 	 }else{
+				// 		 $y_bal=number_format(($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]);
+				// 	 }
+				//
+				// 	 $total_y_ba+=($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]; // 토탈 전일 잔액
+				// 	 if($i>0) $yk_total_y_ba += ($in_row[inc]-$ex_row[exp])+$ex_row1[exp]-$in_row1[inc]; // 보통예금 토탈 전일 잔액
+				// 	 $total_d_inc+=$in_row1[inc]; // 금일 입금(증가)
+				// 	 if($i>0) $yk_total_d_inc+=$in_row1[inc]; // 보통예금 금일 입금(증가)
+				// 	 $total_d_exp+=$ex_row1[exp]; //금일 출금(감소)
+				// 	 if($i>0) $yk_total_d_exp+=$ex_row1[exp]; //보통예금 금일 출금(감소)
+				// 	 $total_ba+=$in_row[inc]-$ex_row[exp]; // 금일 잔액
+				// 	 if($i>0) $yk_total_ba+=$in_row[inc]-$ex_row[exp]; // 보통예금 금일 잔액
 
 				// 조합 대여금 데이터
 				$data['jh_data'] = $this->m4_m->select_data_lt('cms_capital_cash_book', 'any_jh', 'any_jh<>0', 'any_jh');

@@ -21,5 +21,38 @@ class Main_m extends CI_Model
             $qry = $this->db->get_where('cms_member_table', array('user_id'=>$this->session->userdata['user_id']));
             return $result = $qry->result();
       }
+
+      /**
+       * [sql_result sql인자로 데이터 추출 함수]
+       * @param  [String] $sql [sql 인자]
+       * @return [Array]      [추출한 데이터]
+       */
+      public function sql_result($sql) {
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
+      /**
+       * [sql_num_rows sql 인자로 데이터 수 추출 함수]
+       * @param  [String] $sql [sql 인자]
+       * @return [Array]      [추출한 데이터 수]
+       */
+      public function sql_num_rows($sql) {
+		$qry = $this->db->query($sql);
+		return $qry->num_rows();
+	}
+
+      /**
+       * [sql_num_result sql 인자로 데이터 수와 데이터 추출]
+       * @param  [String] $sql [sql 인자]
+       * @return [Array]      [추출한 데이터 수와 데이터 다중배열]
+       */
+      public function sql_num_result($sql) {
+		$qry = $this->db->query($sql);
+		return array(
+                  'num' => $qry->num_rows(),
+                  'result' => $qry->result()
+            );
+	}
 }
  // End of this File
