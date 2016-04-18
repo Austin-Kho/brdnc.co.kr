@@ -15,6 +15,19 @@ class M4_m extends CI_Model {
 		return $rlt = $qry->result();
 	}
 
+	public function select_data_lt($table, $sel='', $where, $group='', $order='') {
+		if($sel !='') { $this->db->select($sel); }
+		if($where !='') { $this->db->where($where); }
+		if($group !='') { $this->db->group_by($group); }
+		if($order !='') { $this->db->order_by($order); }
+		$qry = $this->db->get($table);
+		$rlt = array(
+			'num' => $qry->num_rows(),
+			'result' => $qry->result()
+		);
+		return $rlt;
+	}
+
 	/**
 	 * [select_data_row  단수 데이터 불러오기]
 	 * @param  [String] $table [테이블명]
@@ -60,6 +73,21 @@ class M4_m extends CI_Model {
 		return $result;
 	}
 	//공통 함수 Start//
+
+
+	public function da_in_total($table, $sh_date) {
+		$sql = "SELECT SUM(inc) AS total_inc FROM ".$table." WHERE (com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='".$sh_date."'";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
+	// $bbq="SELECT SUM(exp) AS total_exp FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='$sh_date'";
+	public function da_ex_total($table, $sh_date) {
+		$sql = "SELECT SUM(exp) AS total_exp FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='".$sh_date."'";
+		$qry = $this->db->query($sql);
+		return $qry->result();
+	}
+
 
 	public function cash_book_list($table, $start='', $limit='', $sh_frm, $n) {
 		$this->db->select('seq_num, class1, class2, account, cont, acc, in_acc, inc, out_acc, exp, evidence, cms_capital_cash_book.note, worker, deal_date, name, no');

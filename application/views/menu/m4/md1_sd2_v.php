@@ -201,10 +201,10 @@
 									<td class="center" style="color: #000099;"> <?php echo $account; ?></td>
 									<td class=""> <?php echo cut_string($lt->cont, 20, '..'); ?></td>
 									<td class=""><?php echo cut_string($acc, 8, '..'); ?> </td>
-									<td class="center" style="background-color: #D0FCCA;"><?php echo $in_acc; ?> </td>
-									<td class="right" style="background-color: #D0FCCA;"> <?php echo $inc; ?></td>
-									<td class="center" style="background-color: #DEEAFE;"> <?php echo $out_acc; ?></td>
-									<td class="right" style="background-color: #DEEAFE;"><?php echo $exp; ?> </td>
+									<td class="center" style="background-color: #ECFEE9;"><?php echo $in_acc; ?> </td>
+									<td class="right" style="background-color: #ECFEE9;"> <?php echo $inc; ?></td>
+									<td class="center" style="background-color: #EEF4FF;"> <?php echo $out_acc; ?></td>
+									<td class="right" style="background-color: #EEF4FF;"><?php echo $exp; ?> </td>
 									<td class="center"> <?php echo $evi; ?></td>
 <?php if($auth>1) :  ?><!-- //마스터 관리자와 쓰기권한 있는 자금담당에게만 출력 -->
 									<td class="center">
@@ -236,7 +236,7 @@
 						<ul class="pagination pagination-sm"><?php echo $pagination; ?></ul>
 					</div>
 				</div>
-				<div class="row" style="margin: 0 15px;">
+				<div class="row" style="margin: 0 15px 43px;">
 					<!-- <div class="col-md-12" style="height: 70px; padding: 26px 15px; margin: 18px 0; border-width: 0 0 1px 0; border-style: solid; border-color: #B2BCDE;">
 						<div class="col-xs-6"><button class="btn btn-success btn-sm" onclick="<?php echo $submit_str; ?>">신규등록</button></div>
 						<div class="col-xs-6" style="text-align: right;"><button class="btn btn-danger btn-sm" onclick="<?php echo $del_str; ?>">선택삭제</button></div>
