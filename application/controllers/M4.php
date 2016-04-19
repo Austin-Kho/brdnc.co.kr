@@ -80,10 +80,17 @@ class M4 extends CI_Controller {
 
 				// 은행계좌 데이터
 				$data['bank_acc'] = $this->m4_m->select_data_lt('cms_capital_bank_account', '', '', '');
-				for($i=0; $i<=$data['bank_acc']['num']; $i++) {
-					$no = $data['bank_acc']['result'][$i]->no;
-						
+				$data['b_acc'] = $this->main_m->sql_result('SELECT no FROM cms_capital_bank_account ORDER BY no');
+				foreach($data['b_acc'] as $lt) {
+					$data['cum_in'] = $this->main_m->sql_result("SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND in_acc='".$lt->no."' AND deal_date<='".$data['sh_date']."' ");
+					$data['date_in'] = $this->main_m->sql_result("SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND in_acc='".$lt->no."' AND deal_date ='".$data['sh_date']."' ");
+					$data['cum_ex'] = $this->main_m->sql_result("SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND out_acc='".$lt->no."' AND deal_date<='".$data['sh_date']."' ");
+					$data['date_ex'] = $this->main_m->sql_result("SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND out_acc='".$lt->no."' AND deal_date ='".$data['sh_date']."' ");
 				}
+				// for($i=0; $i<=$data['bank_acc']['num']; $i++) {
+				// 	//$no = $data['bank_acc']['result'][$i]->no;
+				//
+				// }
 
 				// 	 $in_qry="SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND in_acc='$d_rows[no]' AND deal_date<='$sh_date' "; // 계정별 설정일까지 총 수입
 				// 	 $in_rlt=mysql_query($in_qry,$connect);

@@ -73,16 +73,16 @@
 					<tr>
 						<?php echo $td_str?>
 						<td width="185" style="<?php if($i==0) echo $hk_bgcolor?>"><?php echo $bank_acc_name; ?></td><!-- 계정 명 -->
-						<td class="right" style="<?php if($i==0) echo $hk_bgcolor?>"><?php // echo $y_bal?></td> <!-- 전일 잔액 -->
-						<td class="right" style="<?php if($i==0) echo $hk_bgcolor?>"><?php // echo $d_inc?></td> <!-- 당일 입금 -->
-						<td class="right" style="<?php if($i==0) echo $hk_bgcolor?>"><?php // echo $d_exp?></td> <!-- 당일 출금 -->
-						<td class="right" style="<?php if($i==0) echo $hk_bgcolor?>;"><?php // echo $balance?></td> <!-- 금일 잔액 -->
+						<td class="right" style="<?php if($i==0) echo $hk_bgcolor?>"><?php // echo $y_bal?><?php var_dump($cum_in); ?></td> <!-- 전일 잔액 -->
+						<td class="right" style="<?php if($i==0) echo $hk_bgcolor?>"><?php // echo $d_inc?><?php var_dump($date_in); ?></td> <!-- 당일 입금 -->
+						<td class="right" style="<?php if($i==0) echo $hk_bgcolor?>"><?php // echo $d_exp?><?php var_dump($cum_ex); ?></td> <!-- 당일 출금 -->
+						<td class="right" style="<?php if($i==0) echo $hk_bgcolor?>;"><?php // echo $balance?><?php var_dump($date_in); ?></td> <!-- 금일 잔액 -->
 					</tr>
 					<?
 						} // 현금 / 보통예금 수만큼 반복 for문 종료
 					?>
 					<tr bgcolor="#f6f6f6">
-						<td class="center" colspan="2">보통예금(가용자금) 계 <?php var_dump($bank_acc['result']); ?></td>
+						<td class="center" colspan="2">보통예금(가용자금) 계 <?php //var_dump($bank_acc['result']); ?><?php //var_dump($b_acc); ?><?php var_dump($cum_in."<br>".$date_in."<br>".$cum_ex."<br>".$date_ex); ?></td>
 						<td class="right"><?php // if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($yk_total_y_ba==0){echo "-";}else{echo number_format($yk_total_y_ba);}?></td>
 						<td class="right"><font color="#0066ff"><?php // if($total_d_inc==0){echo "-";}else{echo  number_format($yk_total_d_inc);}?></font></td>
 						<td class="right"><font color="#ff3300"><?php // if($total_d_exp==0){echo "-";}else{echo number_format($yk_total_d_exp);}?></font></td>
