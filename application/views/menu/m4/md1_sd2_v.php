@@ -16,16 +16,13 @@
 	}
 </script>
 <?php
-	if($auth<2){ $excel_pop = "alert('출력 권한이 없습니다!');";
-	}else{
-		// $url_where = urlencode($add_where);
-		// $url_s_date = urlencode($s_date);
-		// $url_e_date = urlencode($e_date);
-		// $excel_pop = "location.href='excel_cash_book.php?add_where=$url_where&amp;s_date=$url_s_date&amp;e_date=$url_e_date)' ";
-		//
-		// $url_date = urlencode('$sh_date');
-		$excel_pop = "location.href='/m4/capital/1/2/?cash_book=print'";
-	}
+	// $url_where = urlencode($add_where);
+	// $url_s_date = urlencode($s_date);
+	// $url_e_date = urlencode($e_date);
+	// $excel_pop = "location.href='excel_cash_book.php?add_where=$url_where&amp;s_date=$url_s_date&amp;e_date=$url_e_date)' ";
+	//
+	// $url_date = urlencode('$sh_date');
+	$excel_pop = "location.href='/m4/capital/1/2/?cash_book=print'";
  ?>
 			<div class="main_start">
 				<a href="javascript:" onclick="<?php echo $excel_pop; ?>">
