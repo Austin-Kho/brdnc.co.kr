@@ -1,35 +1,26 @@
-<script type="text/javascript">
-	function term_put(a,b,term){
-		if(term=='d')var term="<?php echo date('Y-m-d'); ?>";
-		if(term=='w')var term="<?php echo date('Y-m-d',strtotime ('-1 weeks'));?>";
-		if(term=='m')var term="<?php echo date('Y-m-d',strtotime ('-1 months'));?>";
-		if(term=='3m')var term="<?php echo date('Y-m-d',strtotime ('-3 months'));?>";
-		document.getElementById(a).value = term;
-		document.getElementById(b).value = "<?php echo date('Y-m-d');?>";
-	}
-	function to_del(code){
-		if(aa=confirm('데이터가 삭제됩니다. 계속 진행하시겠습니까?')){
-			location.href='?del_code='+code
-		}else{
-			return false;
-		}
-	}
-</script>
-<?php
-	// $url_where = urlencode($add_where);
-	// $url_s_date = urlencode($s_date);
-	// $url_e_date = urlencode($e_date);
-	// $excel_pop = "location.href='excel_cash_book.php?add_where=$url_where&amp;s_date=$url_s_date&amp;e_date=$url_e_date)' ";
-	//
-	// $url_date = urlencode('$sh_date');
-	$excel_pop = "location.href='/m4/capital/1/2/?cash_book=print'";
- ?>
+			<script type="text/javascript">
+				function term_put(a,b,term){
+					if(term=='d')var term="<?php echo date('Y-m-d'); ?>";
+					if(term=='w')var term="<?php echo date('Y-m-d',strtotime ('-1 weeks'));?>";
+					if(term=='m')var term="<?php echo date('Y-m-d',strtotime ('-1 months'));?>";
+					if(term=='3m')var term="<?php echo date('Y-m-d',strtotime ('-3 months'));?>";
+					document.getElementById(a).value = term;
+					document.getElementById(b).value = "<?php echo date('Y-m-d');?>";
+				}
+				function to_del(code){
+					if(aa=confirm('데이터가 삭제됩니다. 계속 진행하시겠습니까?')){
+						location.href='?del_code='+code
+					}else{
+						return false;
+					}
+				}
+			</script>
+
 			<div class="main_start">
-				<a href="javascript:" onclick="<?php echo $excel_pop; ?>">
+				<a href="/excel_file/daily_money_report?sh_date=">
 					<img src="/static/img/excel_icon.jpg" height="10" border="0" alt="EXCEL 아이콘" /> EXCEL로 출력
 				</a>
 			</div>
-
 
 			<div class="row">
 				<div class="col-md-12">

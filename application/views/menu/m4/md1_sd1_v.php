@@ -1,14 +1,5 @@
-<?php
-	// $url_where = urlencode($add_where);
-	// $url_s_date = urlencode($s_date);
-	// $url_e_date = urlencode($e_date);
-	// $excel_pop = "location.href='excel_cash_book.php?add_where=$url_where&amp;s_date=$url_s_date&amp;e_date=$url_e_date)' ";
-	//
-	// $url_date = urlencode('$sh_date');
-	$excel_pop = "location.href='/m4/capital/1/1/?daily_report=print'";
- ?>
 			<div class="main_start">
-				<a href="javascript:" onclick="<?php echo $excel_pop; ?>">
+				<a href="/excel_file/daily_money_report?sh_date=<?php echo $sh_date; ?>">
 					<img src="/static/img/excel_icon.jpg" height="10" border="0" alt="EXCEL 아이콘" /> EXCEL로 출력
 				</a>
 			</div>

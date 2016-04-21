@@ -1206,11 +1206,11 @@
 							<!-- ------------------------------------10col------------------------------------------ -->
 						</tbody>
 					</table>
-</form>
-					<div class="row" style="margin: 0 0 92px 0;">
-<?php if($auth<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="inout_frm_chk('com');";} ?>
-						<div class="form-group btn-wrap" style="margin: 0;">
-							<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="거래등록">
-						</div>
-					</div>
 				</div>
+			</form>
+			<div class="row" style="margin: 0 0 92px 0;">
+<?php if($auth<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="inout_frm_chk('com');";} ?>
+				<div class="form-group btn-wrap" style="margin: 0;">
+					<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="거래등록">
+				</div>
+			</div>
