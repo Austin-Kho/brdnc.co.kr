@@ -47,8 +47,6 @@ class Member extends CI_Controller
 		$this->form_validation->set_rules('user_id', '아이디', 'required|alpha_numeric');
 		$this->form_validation->set_rules('passwd', '비밀번호', 'required');
 
-		//echo "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
-
 		if($this->form_validation->run() == FALSE) { // 폼 전송 데이타가 없으면,
 
 			// view 파일 -> 쓰기 form 호출
@@ -109,8 +107,8 @@ class Member extends CI_Controller
 						delete_cookie('id_r', '', '/', '');
 						delete_cookie('id', '', '/', '');
 					}
-					if($this->input->get('returnURL')===FALSE) $returnURL = "/"; else  $returnURL = $this->input->get('returnURL');
-					redirect($returnURL);
+					//if($this->input->get('returnURL')==FALSE) $returnURL = "main"; else  $returnURL = $this->input->get('returnURL');
+					redirect('/main/');
 					exit;
 				}
 			}else{ // 아이디 // 비번이 맞지 않을 때
