@@ -141,12 +141,12 @@ class M4 extends CI_Controller {
 
 
 				// Excel_pop
-				if($this->input->get('daily_report')=='print') {
-					redirect('/a.php');
-				}else{
-					//본 페이지 로딩
-					$this->load->view('/menu/m4/md1_sd1_v', $data);
-				}
+				// if($this->input->get('daily_report')=='print') {
+				// 	redirect('/a.php');
+				// }else{
+				// 	//본 페이지 로딩
+				 	$this->load->view('/menu/m4/md1_sd1_v', $data);
+				// }
 			}
 
 

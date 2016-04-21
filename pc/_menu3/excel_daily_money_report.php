@@ -20,13 +20,15 @@ Header("Expires: 0");
     $month = date_format($d_obj, "m");
     $day = date_format($d_obj, "d");
     $week = date_format($d_obj, "w"); // 0~6
-    if($week==0) $daily = "일요일";
-    if($week==1) $daily = "월요일";
-    if($week==2) $daily = "화요일";
-    if($week==3) $daily = "수요일";
-    if($week==4) $daily = "목요일";
-    if($week==5) $daily = "금요일";
-    if($week==6) $daily = "토요일";
+		switch ($week) {
+			case '0':	$daily = "일요일";	break;
+			case '1':	$daily = "월요일";	break;
+			case '2':	$daily = "화요일";	break;
+			case '3':	$daily = "수요일";	break;
+			case '4':	$daily = "목요일";	break;
+			case '5':	$daily = "금요일";	break;
+			case '6':	$daily = "토요일";	break;
+		}
 ?>
 <meta http-equiv="Content-Type" content="application/vnd.ms-excel;charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge"
