@@ -25,14 +25,14 @@
 					</div>
 					<div class="row table-responsive" style="margin: 0;">
 						<table class="table table-bordered table-condensed table-hover font12">
-							<thead>
+							<thead style="background-color: #F2F2F9;">
 								<tr>
-									<th class="col-md-1 center" style="background-color: #ecf3fe; border-left: 0;"><input type="checkbox"></th>
-									<th class="col-md-2 center bo-left" style="background-color: #ecf3fe;">상호(회사명)</th>
-									<th class="col-md-1 center bo-left" style="background-color: #ecf3fe;">업체구분</th>
-									<th class="col-md-2 center bo-left" style="background-color: #ecf3fe;">전화번호</th>
-									<th class="col-md-4 center bo-left" style="background-color: #ecf3fe;">주 소</th>
-									<th class="col-md-2 center bo-left" style="background-color: #ecf3fe; border-right: 0;">비 고</th>
+									<th class="col-md-1 center"><input type="checkbox"></th>
+									<th class="col-md-2 center bo-left">상호(회사명)</th>
+									<th class="col-md-1 center bo-left">업체구분</th>
+									<th class="col-md-2 center bo-left">전화번호</th>
+									<th class="col-md-4 center bo-left">주 소</th>
+									<th class="col-md-2 center bo-left">비 고</th>
 								</tr>
 							</thead>
 							<tbody>

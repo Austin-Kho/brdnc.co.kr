@@ -25,15 +25,15 @@
 					</div>
 					<div class="row table-responsive" style="margin: 0;">
 						<table class="table table-bordered table-condensed table-hover font12">
-							<thead>
+							<thead style="background-color: #F2F2F9;">
 								<tr>
-									<th class="col-md-1 center" style="background-color: #ecf3fe; border-left: 0;"><input type="checkbox"></th>
-									<th class="col-md-2 center bo-left" style="background-color: #ecf3fe;">(임)직원명</th>
-									<th class="col-md-2 center bo-left" style="background-color: #ecf3fe;">담당부서</th>
-									<th class="col-md-1 center bo-left" style="background-color: #ecf3fe;">직 급</th>
-									<th class="col-md-2 center bo-left" style="background-color: #ecf3fe;">직통전화</th>
-									<th class="col-md-2 center bo-left" style="background-color: #ecf3fe;">비상전화(Mobile)</th>
-									<th class="col-md-2 center bo-left" style="background-color: #ecf3fe; border-right: 0;">이메일(Email)</th>
+									<th class="col-md-1 center"><input type="checkbox"></th>
+									<th class="col-md-2 center bo-left">(임)직원명</th>
+									<th class="col-md-2 center bo-left">담당부서</th>
+									<th class="col-md-1 center bo-left">직 급</th>
+									<th class="col-md-2 center bo-left">직통전화</th>
+									<th class="col-md-2 center bo-left">비상전화(Mobile)</th>
+									<th class="col-md-2 center bo-left">이메일(Email)</th>
 								</tr>
 							</thead>
 							<tbody>

@@ -25,15 +25,15 @@
 					</div>
 					<div class="row table-responsive" style="margin: 0;">
 						<table class="table table-bordered table-condensed table-hover font12">
-							<thead>
+							<thead style="background-color: #F2F2F9;">
 								<tr>
-									<th class="col-md-1 center" style="background-color: #ecf3fe; border-left: 0;"><input type="checkbox"></th>
-									<th class="col-md-1 center bo-left" style="background-color: #ecf3fe;">계좌명칭</th>
-									<th class="col-md-2 center bo-left" style="background-color: #ecf3fe;">거래은행</th>
-									<th class="col-md-1 center bo-left" style="background-color: #ecf3fe;">은행코드</th>
-									<th class="col-md-3 center bo-left" style="background-color: #ecf3fe;">계좌번호</th>
-									<th class="col-md-2 center bo-left" style="background-color: #ecf3fe;">관리부서(현장)</th>
-									<th class="col-md-2 center bo-left" style="background-color: #ecf3fe; border-right: 0;">비 고</th>
+									<th class="col-md-1 center"><input type="checkbox"></th>
+									<th class="col-md-1 center bo-left">계좌명칭</th>
+									<th class="col-md-2 center bo-left">거래은행</th>
+									<th class="col-md-1 center bo-left">은행코드</th>
+									<th class="col-md-3 center bo-left">계좌번호</th>
+									<th class="col-md-2 center bo-left">관리부서(현장)</th>
+									<th class="col-md-2 center bo-left">비 고</th>
 								</tr>
 							</thead>
 							<tbody>
