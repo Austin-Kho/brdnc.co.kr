@@ -107,8 +107,8 @@ class Member extends CI_Controller
 						delete_cookie('id_r', '', '/', '');
 						delete_cookie('id', '', '/', '');
 					}
-					//if($this->input->get('returnURL')==FALSE) $returnURL = "main"; else  $returnURL = $this->input->get('returnURL');
-					redirect('/main/');
+					if( !$this->input->post('returnURL') OR $this->input->post('returnURL')=='') $returnURL = "main"; else  $returnURL = $this->input->post('returnURL');
+					redirect(rawurldecode($returnURL));
 					exit;
 				}
 			}else{ // 아이디 // 비번이 맞지 않을 때
