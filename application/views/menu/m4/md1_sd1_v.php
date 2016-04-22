@@ -79,13 +79,12 @@
 	if($i==0) $td_str2="<td class='center bo-bottom' rowspan='$col_num'>조합대여금</td>";
 	if($i>0) $td_str2="";
 
-	// if(empty($jh_data['result'][$i]->any_jh)) $jh_name = '&nbsp;'; else $jh_name = $jh_data['result'][$i]->any_jh;
 	if(empty($jh_name[$i][$i])) $jh_name = '&nbsp;'; else $jh_name = $jh_name[$i][$i]->pj_name;
 
-	if(empty($jh_cum_in[$i][0]->inc)) $jh_cum_inc = "0"; else $jh_cum_inc = $jh_cum_in[$i][0]->inc;
-	if(empty($jh_date_in[$i][0]->inc)) $jh_date_inc = "0"; else $jh_date_inc = $jh_date_in[$i][0]->inc;
-	if(empty($jh_cum_ex[$i][0]->exp)) $jh_cum_exp = "0"; else $jh_cum_exp = $jh_cum_ex[$i][0]->exp;
-	if(empty($jh_date_ex[$i][0]->exp)) $jh_date_exp = "0"; else $jh_date_exp = $jh_cum_ex[$i][0]->exp;
+	if(empty($jh_cum_in[$i][$i]->inc)) $jh_cum_inc = "0"; else $jh_cum_inc = $jh_cum_in[$i][$i]->inc;
+	if(empty($jh_date_in[$i][$i]->inc)) $jh_date_inc = "0"; else $jh_date_inc = $jh_date_in[$i][$i]->inc;
+	if(empty($jh_cum_ex[$i][$i]->exp)) $jh_cum_exp = "0"; else $jh_cum_exp = $jh_cum_ex[$i][$i]->exp;
+	if(empty($jh_date_ex[$i][$i]->exp)) $jh_date_exp = "0"; else $jh_date_exp = $jh_cum_ex[$i][$i]->exp;
 
 	$jh_balance = $jh_cum_exp-$jh_cum_inc; // 계정별 최종 금일 시재(잔고)
 	$jh_y_bal = $jh_cum_exp-$jh_cum_inc+$jh_date_exp-$jh_date_inc;

@@ -25,10 +25,10 @@ class Daily_money_report extends CI_Controller {
 		// 자금일보 출력 일자
 		$sh_date = $this->input->get('sh_date', TRUE);
 		$d_obj = date_create($sh_date);
-    $year = date_format($d_obj, "Y");
-    $month = date_format($d_obj, "m");
-    $day = date_format($d_obj, "d");
-    $week = date_format($d_obj, "w"); // 0~6
+		$year = date_format($d_obj, "Y");
+		$month = date_format($d_obj, "m");
+		$day = date_format($d_obj, "d");
+		$week = date_format($d_obj, "w"); // 0~6
 		switch ($week) {
 			case '0':	$daily = "일요일";	break;
 			case '1':	$daily = "월요일";	break;
@@ -39,15 +39,14 @@ class Daily_money_report extends CI_Controller {
 			case '6':	$daily = "토요일";	break;
 		}
 		// 은행계좌 데이터
-		$data['bank_acc'] = $this->m4_m->select_data_lt('cms_capital_bank_account', '', '', '');
-		//$data['b_acc'] = $this->main_m->sql_result('SELECT no, name FROM cms_capital_bank_account ORDER BY no');
+		$bank_acc = $this->m4_m->select_data_lt('cms_capital_bank_account', '', '', '');
 
 		// 은행 계좌별 전일 잔고 및 금일 출납, 잔고 구하기 데이터
-		for($i=0; $i<$data['bank_acc']['num']; $i++) {
-			$data['cum_in'][$i] = $this->main_m->sql_result("SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND in_acc='".$data['bank_acc']['result'][$i]->no."' AND deal_date<='".$sh_date."' ");
-			$data['date_in'][$i] = $this->main_m->sql_result("SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND in_acc='".$data['bank_acc']['result'][$i]->no."' AND deal_date ='".$sh_date."' ");
-			$data['cum_ex'][$i] = $this->main_m->sql_result("SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND out_acc='".$data['bank_acc']['result'][$i]->no."' AND deal_date<='".$sh_date."' ");
-			$data['date_ex'][$i] = $this->main_m->sql_result("SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND out_acc='".$data['bank_acc']['result'][$i]->no."' AND deal_date ='".$sh_date."' ");
+		for($i=0; $i<$bank_acc['num']; $i++) {
+			$cum_in[$i] = $this->main_m->sql_result("SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND in_acc='".$bank_acc['result'][$i]->no."' AND deal_date<='".$sh_date."' ");
+			$date_in[$i] = $this->main_m->sql_result("SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND in_acc='".$bank_acc['result'][$i]->no."' AND deal_date ='".$sh_date."' ");
+			$cum_ex[$i] = $this->main_m->sql_result("SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND out_acc='".$bank_acc['result'][$i]->no."' AND deal_date<='".$sh_date."' ");
+			$date_ex[$i] = $this->main_m->sql_result("SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND out_acc='".$bank_acc['result'][$i]->no."' AND deal_date ='".$sh_date."' ");
 		}
 
 		// 회사 현금자산 설정일 전일잔고 및 금일 출납, 잔고 구하기 데이터
@@ -55,128 +54,47 @@ class Daily_money_report extends CI_Controller {
 		$date_inc = $this->main_m->sql_result("SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND deal_date ='".$sh_date."' ");
 		$date_exp = $this->main_m->sql_result("SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND deal_date ='".$sh_date."' ");
 		$cum_exp = $this->main_m->sql_result("SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND deal_date<='".$sh_date."' ");
-		$data['yd_tot'] = $cum_inc[0]->inc-$cum_exp[0]->exp-$date_inc[0]->inc+$date_exp[0]->exp;
-		$data['td_inc'] = $date_inc[0]->inc;
-		$data['td_exp'] = $date_exp[0]->exp;
-		$data['td_tot'] = $cum_inc[0]->inc-$cum_exp[0]->exp;
-
-
+		$yd_tot = $cum_inc[0]->inc-$cum_exp[0]->exp-$date_inc[0]->inc+$date_exp[0]->exp;
+		if($date_inc[0]->inc==0) $td_inc = '-'; else $td_inc = $date_inc[0]->inc;
+		if($date_exp[0]->exp==0) $td_exp = '-'; else $td_exp = $date_exp[0]->exp;
+		$td_tot = $cum_inc[0]->inc-$cum_exp[0]->exp;
 
 		// 조합 대여금 데이터
-		$data['jh_data'] = $this->m4_m->select_data_lt('cms_capital_cash_book', 'any_jh', 'any_jh<>0', 'any_jh');
-		for($i=0; $i<$data['jh_data']['num']; $i++){
-			$data['jh_name'][$i] = $this->main_m->sql_result(" SELECT pj_name FROM cms_project1_info WHERE seq = '".$data['jh_data']['result'][$i]->any_jh."' ORDER BY seq ");//조합명
-			$data['jh_cum_in'][$i] = $this->main_m->sql_result(" SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND any_jh = '".$data['jh_data']['result'][$i]->any_jh."' AND deal_date<='".$sh_date."' "); //총 회수금
-			$data['jh_date_in'][$i] = $this->main_m->sql_result(" SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND any_jh = '".$data['jh_data']['result'][$i]->any_jh."' AND deal_date='".$sh_date."' "); // 당일 회수
-			$data['jh_cum_ex'][$i] = $this->main_m->sql_result(" SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND any_jh ='".$data['jh_data']['result'][$i]->any_jh."' AND deal_date<='".$sh_date."' "); // 총 대여금
-			$data['jh_date_ex'][$i] = $this->main_m->sql_result(" SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND any_jh = '".$data['jh_data']['result'][$i]->any_jh."' AND deal_date='".$sh_date."' "); // 당일 대여
+		$jh_data = $this->m4_m->select_data_lt('cms_capital_cash_book', 'any_jh', 'any_jh<>0', 'any_jh');
+		for($i=0; $i<$jh_data['num']; $i++){
+			$jh_name[$i] = $this->main_m->sql_result(" SELECT pj_name FROM cms_project1_info WHERE seq = '".$jh_data['result'][$i]->any_jh."' ORDER BY seq ");//조합명
+			$jh_cum_in[$i] = $this->main_m->sql_result(" SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND any_jh = '".$jh_data['result'][$i]->any_jh."' AND deal_date<='".$sh_date."' "); //총 회수금
+			$jh_date_in[$i] = $this->main_m->sql_result(" SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND any_jh = '".$jh_data['result'][$i]->any_jh."' AND deal_date='".$sh_date."' "); // 당일 회수
+			$jh_cum_ex[$i] = $this->main_m->sql_result(" SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND any_jh ='".$jh_data['result'][$i]->any_jh."' AND deal_date<='".$sh_date."' "); // 총 대여금
+			$jh_date_ex[$i] = $this->main_m->sql_result(" SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND any_jh = '".$jh_data['result'][$i]->any_jh."' AND deal_date='".$sh_date."' "); // 당일 대여
 		}
 
-		// 회사 현금자산 설정일 전일잔고 및 금일 출납, 잔고 구하기 데이터
+		// 조합 대여금 자산 설정일 전일잔고 및 금일 출납, 잔고 구하기 데이터
 		$jh_cum_inc = $this->main_m->sql_result(" SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND deal_date<='".$sh_date."' "); //총 회수금
 		$jh_date_inc = $this->main_m->sql_result(" SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND deal_date='".$sh_date."' "); // 당일 회수
 		$jh_cum_exp = $this->main_m->sql_result(" SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND deal_date<='".$sh_date."' "); // 총 대여금
 		$jh_date_exp = $this->main_m->sql_result(" SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND deal_date='".$sh_date."' "); // 당일 대여
 
-		$data['jh_yd_tot'] = $jh_cum_inc[0]->inc-$jh_cum_exp[0]->exp-$jh_date_inc[0]->inc+$jh_date_exp[0]->exp;
-		$data['jh_td_inc'] = $jh_date_inc[0]->inc;
-		$data['jh_td_exp'] = $jh_date_exp[0]->exp;
-		$data['jh_td_tot'] = $jh_cum_inc[0]->inc-$jh_cum_exp[0]->exp;
+		$jh_yd_tot = $jh_cum_inc[0]->inc-$jh_cum_exp[0]->exp-$jh_date_inc[0]->inc+$jh_date_exp[0]->exp;
+		$jh_td_inc = $jh_date_inc[0]->inc;
+		$jh_td_exp = $jh_date_exp[0]->exp;
+		$jh_td_tot = $jh_cum_inc[0]->inc-$jh_cum_exp[0]->exp;
 
 		// 설정일 입금 내역
-		$data['da_in'] = $this->m4_m->select_data_lt("cms_capital_cash_book", "account, cont, acc, inc, note", "(com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='".$sh_date."'", "", "seq_num");
+		$da_in = $this->m4_m->select_data_lt("cms_capital_cash_book", "account, cont, acc, inc, note", "(com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='".$sh_date."'", "", "seq_num");
 		// 설정일까지 입금 내역
-		$data['da_in_total'] = $this->m4_m->da_in_total('cms_capital_cash_book', $sh_date);
+		$da_in_total = $this->m4_m->da_in_total('cms_capital_cash_book', $sh_date);
 		// 설정일 출금내역
-		$data['da_ex'] = $this->m4_m->select_data_lt("cms_capital_cash_book", "account, cont, acc, exp, note", "(com_div>0) AND (class1='2' or class1='3') AND deal_date='".$sh_date."'", "", "seq_num");
+		$da_ex = $this->m4_m->select_data_lt("cms_capital_cash_book", "account, cont, acc, exp, note", "(com_div>0) AND (class1='2' or class1='3') AND deal_date='".$sh_date."'", "", "seq_num");
 		// 설정일까지 출금내역
-		$data['da_ex_total'] = $this->m4_m->da_ex_total('cms_capital_cash_book', $sh_date);
-
-
+		$da_ex_total = $this->m4_m->da_ex_total('cms_capital_cash_book', $sh_date);
 
 		// 워크시트에서 1번째는 활성화
 		$this->excel->setActiveSheetIndex(0);
 		// 워크시트 이름 지정
-		$this->excel->getActiveSheet()->setTitle('자금일보');
+		$this->excel->getActiveSheet()->setTitle('자금일보('.$sh_date.')');
 
 
-
-		/*
-	* 셀 컨트롤
-	*/
-	// $this->excel->setActiveSheetIndex(0)->setCellValue("A1", "셀값"); // 셀 갑 입력
-	// $this->excel->getActiveSheet()->mergeCells('A1:C1'); // 셀 합치기
-	// $this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(6); // 셀 가로크기
-	// $this->excel->getActiveSheet()->getRowDimension(1)->setRowHeight(25); // 셀 높이
-	// $this->excel->getActiveSheet()->getStyle('A1:C1')->getNumberFormat()->setFormatCode('#,##0'); // 셀 숫자형 변환 (1000 -> 1,000)
-
-	//
-	// //개별 적용
-	// $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true); // 셀의 text를 굵게
-	// $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13); // 셀의 textsize를 13으로
-	//
-	// // 보더 스타일 지정
-	// $defaultBorder = array(
-	// 	'style' => PHPExcel_Style_Border::BORDER_THIN,
-	// 	'color' => array('rgb'=>'000000')
-	// );
-	// $headBorder = array(
-	// 	'borders' => array(
-	// 		'bottom' => $defaultBorder,
-	// 		'left'   => $defaultBorder,
-	// 		'top'    => $defaultBorder,
-	// 		'right'  => $defaultBorder
-	// 	)
-	// );
-	//
-	// // 다중 셀 보더 스타일 적용
-	// foreach(range('A','C') as $i => $cell){
-	// $this->excel->getActiveSheet()->getStyle($cell.'1')->applyFromArray( $headBorder );
-	// }
-	//
-	// //줄바꿈 허용
-	// $this->excel->getActiveSheet()->getStyle('G1')->getAlignment()->setWrapText(true);
-	// $this->excel->getActiveSheet()->getStyle('K6')->getAlignment()->setWrapText(true);
-	// $this->excel->getActiveSheet()->getStyle('K8')->getAlignment()->setWrapText(true);
-	//
-	// // 배경색 적용
-	// $this->excel->getActiveSheet()->duplicateStyleArray(
-	// array(
-	// 'fill' => array(
-	// 'type'  => PHPExcel_Style_Fill::FILL_SOLID,
-	// 'color' => array('rgb'=>'F3F3F3')
-	// )
-	// ),
-	// 'A1:C1'
-	// );
-	//
-	// // 셀 정렬 (다른방식)
-	// $this->excel->getActiveSheet()->getStyle('A1')
-	// ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-	//
-	// $this->excel->getActiveSheet()->getStyle('A1:C1')
-	// ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-	// //테두리
-	// //셀 전체(윤곽선 + 안쪽)
-	// $this->excel->getActiveSheet()->getStyle('B2:C3')->getBorders()
-	// ->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-	//
-	// //윤곽선
-	// $this->excel->getActiveSheet()->getStyle('B5:C6')->getBorders()
-	// ->getOutline()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-	//
-	// //안쪽
-	// $this->excel->getActiveSheet()->getStyle('B8:C9')->getBorders()
-	// ->getInside()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-	//
-	// //세로선
-	// $this->excel->getActiveSheet()->getStyle('B11:D13')->getBorders()
-	// ->getVertical()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-	//
-	// //가로선
-	// $this->excel->getActiveSheet()->getStyle('B15:D17')->getBorders()
-	// ->getHorizontal()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 
 		// 본문 내용 ---------------------------------------------------------------//
 		$this->excel->getActiveSheet()->getColumnDimension("A")->setWidth(10); // A열의 셀 넓이 설정
@@ -221,15 +139,11 @@ class Daily_money_report extends CI_Controller {
 		$this->excel->getActiveSheet()->mergeCells('D5:E5');
 		$this->excel->getActiveSheet()->mergeCells('H5:I5');
 		$this->excel->getActiveSheet()->mergeCells('J5:K5');
-		$this->excel->getActiveSheet()->mergeCells('B6:C6');
-		$this->excel->getActiveSheet()->mergeCells('D6:E6');
-		$this->excel->getActiveSheet()->mergeCells('F6:G6');
-		$this->excel->getActiveSheet()->mergeCells('D6:E6');
-		$this->excel->getActiveSheet()->mergeCells('H6:I6');
-		$this->excel->getActiveSheet()->mergeCells('J6:K6');
 
+		$sum_1st = $bank_acc['num']+7;
 		$this->excel->getActiveSheet()->getStyle('A5:K5')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('FFEAEAEA');
 		$this->excel->getActiveSheet()->getStyle('A6:K6')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('FFFCFDF2');
+		$this->excel->getActiveSheet()->getStyle('A'.$sum_1st.':K'.$sum_1st)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('FFFCFDF2');
 
 		$this->excel->getActiveSheet()->getStyle('A1:F3')->getBorders()->getOutline()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 		$this->excel->getActiveSheet()->getStyle('G1:G3')->getBorders()->getOutline()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
@@ -241,8 +155,6 @@ class Daily_money_report extends CI_Controller {
 		$this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);// A1의 폰트를 변경 합니다.
 		$this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);// A1의 글씨를 볼드로 변경합니다.
 
-
-
 		$this->excel->getActiveSheet()->setCellValue('G1', '결');
 		$this->excel->getActiveSheet()->setCellValue('G2', '재');
 		$this->excel->getActiveSheet()->getStyle('G1:G2')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_BOTTOM);
@@ -251,20 +163,101 @@ class Daily_money_report extends CI_Controller {
 		$this->excel->getActiveSheet()->setCellValue('I1', '전무');
 		$this->excel->getActiveSheet()->setCellValue('J1', '대표이사');
 		$this->excel->getActiveSheet()->setCellValue('K1', '회장');
-
-		$this->excel->getActiveSheet()->setCellValue('A3', '2016년 04월 21일 목요일');
+		$this->excel->getActiveSheet()->setCellValue('A3', $year.'년 '.$month.'월 '.$day.'일 '.$daily);
 		$this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 		$this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setIndent(4);
 
-
 		$this->excel->getActiveSheet()->setCellValue('A4', '■ 자 금 현 황');
 		$this->excel->getActiveSheet()->getStyle('A4')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-
 		$this->excel->getActiveSheet()->setCellValue('K4', '(단위 : 원)');
 		$this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 
+		$this->excel->getActiveSheet()->setCellValue('A5', '구 분');
+		$this->excel->getActiveSheet()->setCellValue('D5', '전일잔액');
+		$this->excel->getActiveSheet()->setCellValue('F5', '입금(증가)');
+		$this->excel->getActiveSheet()->setCellValue('H5', '출금(감소)');
+		$this->excel->getActiveSheet()->setCellValue('J5', '금일잔액');
 
+		$this->excel->getActiveSheet()->getStyle('D6:K'.($bank_acc['num']+7))->getNumberFormat()->setFormatCode('#,##0'); // 셀 숫자형 변환 (1000 -> 1,000)
+		$this->excel->getActiveSheet()->getStyle('D6:K'.($bank_acc['num']+7))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+		for($i=0; $i<=$bank_acc['num']; $i++): // 현금계정 + 은행계좌 수 만큼 반복 한다.
+			if(empty($bank_acc['result'][$i]->name)) $bank_acc_name = ''; else $bank_acc_name = $bank_acc['result'][$i]->name;
+			if(empty($cum_in[$i][0]->inc)) $cum_inc = "0"; else $cum_inc = $cum_in[$i][0]->inc;
+			if($i==$bank_acc['num']) $date_inc=''; else if(empty($date_in[$i][0]->inc)) $date_inc = "-"; else $date_inc = $date_in[$i][0]->inc;
+			if(empty($cum_ex[$i][0]->exp)) $cum_exp = "0"; else $cum_exp = $cum_ex[$i][0]->exp;
+			if($i==$bank_acc['num']) $date_exp=''; else if(empty($date_ex[$i][0]->exp)) $date_exp = "-"; else $date_exp = $date_ex[$i][0]->exp;
 
+			if($i==$bank_acc['num']) $balance = ''; else if($cum_inc-$cum_exp==0) $balance = '-'; else  $balance = $cum_inc-$cum_exp; // 계정별 최종 금일 시재(잔고)
+			if($i==$bank_acc['num']) $y_bal = ''; else if($cum_inc-$cum_exp+$date_exp-$date_inc==0) $y_bal = '-'; else $y_bal = $cum_inc-$cum_exp+$date_exp-$date_inc;
+
+			if($i==0) $this->excel->getActiveSheet()->setCellValue('A6', '현 금');
+			if($i==1) {
+				$this->excel->getActiveSheet()->mergeCells('A7:A'.($bank_acc['num']+6));
+				$this->excel->getActiveSheet()->setCellValue('A7', '보통예금');
+			}
+			$this->excel->getActiveSheet()->mergeCells('B'.($i+6).':C'.($i+6));
+			$this->excel->getActiveSheet()->mergeCells('D'.($i+6).':E'.($i+6));
+			$this->excel->getActiveSheet()->mergeCells('F'.($i+6).':G'.($i+6));
+			$this->excel->getActiveSheet()->mergeCells('H'.($i+6).':I'.($i+6));
+			$this->excel->getActiveSheet()->mergeCells('J'.($i+6).':K'.($i+6));
+
+			$this->excel->getActiveSheet()->setCellValue('B'.($i+6), $bank_acc_name);
+			$this->excel->getActiveSheet()->setCellValue('D'.($i+6), $y_bal);
+			$this->excel->getActiveSheet()->setCellValue('F'.($i+6), $date_inc);
+			$this->excel->getActiveSheet()->setCellValue('H'.($i+6), $date_exp);
+			$this->excel->getActiveSheet()->setCellValue('J'.($i+6), $balance);
+		endfor; // 현금 / 보통예금 수만큼 반복 for문 종료
+
+		$this->excel->getActiveSheet()->mergeCells('A'.$sum_1st.':C'.$sum_1st);
+		$this->excel->getActiveSheet()->mergeCells('D'.$sum_1st.':E'.$sum_1st);
+		$this->excel->getActiveSheet()->mergeCells('F'.$sum_1st.':G'.$sum_1st);
+		$this->excel->getActiveSheet()->mergeCells('H'.$sum_1st.':I'.$sum_1st);
+		$this->excel->getActiveSheet()->mergeCells('J'.$sum_1st.':K'.$sum_1st);
+		$this->excel->getActiveSheet()->setCellValue('A'.$sum_1st, '현금성자산 계');
+		$this->excel->getActiveSheet()->setCellValue('D'.$sum_1st, $yd_tot);
+		$this->excel->getActiveSheet()->setCellValue('F'.$sum_1st, $td_inc);
+		$this->excel->getActiveSheet()->setCellValue('H'.$sum_1st, $td_exp);
+		$this->excel->getActiveSheet()->setCellValue('J'.$sum_1st, $td_tot);
+
+		$this->excel->getActiveSheet()->setCellValue('A20', $jh_name[0][0]->pj_name);
+
+		$col_num = $jh_data['num']+1; // 대여회수 거래 조합 프로젝트 수 +1
+		for($i=0; $i<=$jh_data['num']; $i++) : // 거래 조합 프로젝트 수 +1 만큼 반복
+			if(empty($jh_name[$i][$i]->pj_name)) $jhname = ''; else $jhname = $jh_name[$i][$i]->pj_name;
+			if(empty($jh_cum_in[$i][$i]->inc)) $jh_cum_inc = "0"; else $jh_cum_inc = $jh_cum_in[$i][$i]->inc;
+			if(empty($jh_date_in[$i][$i]->inc)) $jh_date_inc = "0"; else $jh_date_inc = $jh_date_in[$i][$i]->inc;
+			if(empty($jh_cum_ex[$i][$i]->exp)) $jh_cum_exp = "0"; else $jh_cum_exp = $jh_cum_ex[$i][$i]->exp;
+			if(empty($jh_date_ex[$i][$i]->exp)) $jh_date_exp = "0"; else $jh_date_exp = $jh_cum_ex[$i][$i]->exp;
+
+			$jh_balance = $jh_cum_exp-$jh_cum_inc; // 계정별 최종 금일 시재(잔고)
+			$jh_y_bal = $jh_cum_exp-$jh_cum_inc+$jh_date_exp-$jh_date_inc;
+
+			if($i==0) {
+				$this->excel->getActiveSheet()->mergeCells('A'.($sum_1st+1).':A'.($sum_1st+$col_num));
+				$this->excel->getActiveSheet()->setCellValue('A'.($sum_1st+1), '조합대여금');
+			}
+			$this->excel->getActiveSheet()->mergeCells('B'.($i+$sum_1st+1).':C'.($i+$sum_1st+1));
+			$this->excel->getActiveSheet()->mergeCells('D'.($i+$sum_1st+1).':E'.($i+$sum_1st+1));
+			$this->excel->getActiveSheet()->mergeCells('F'.($i+$sum_1st+1).':G'.($i+$sum_1st+1));
+			$this->excel->getActiveSheet()->mergeCells('H'.($i+$sum_1st+1).':I'.($i+$sum_1st+1));
+			$this->excel->getActiveSheet()->mergeCells('J'.($i+$sum_1st+1).':K'.($i+$sum_1st+1));
+
+			$this->excel->getActiveSheet()->setCellValue('B'.($sum_1st+1), $jhname);
+			$this->excel->getActiveSheet()->setCellValue('D'.($sum_1st+1), $jh_y_bal);
+			$this->excel->getActiveSheet()->setCellValue('F'.($sum_1st+1), $jh_date_exp);
+			$this->excel->getActiveSheet()->setCellValue('H'.($sum_1st+1), $jh_date_inc);
+			$this->excel->getActiveSheet()->setCellValue('J'.($sum_1st+1), $jh_balance);
+		endfor; // 조합 구하기 for 문 종료
+		// $this->excel->getActiveSheet()->mergeCells('A'.$sum_1st+1+$col_num.':C'.$sum_1st+1+$col_num);
+		// $this->excel->getActiveSheet()->mergeCells('D'.$sum_1st.':E'.$sum_1st+1+$col_num);
+		// $this->excel->getActiveSheet()->mergeCells('F'.$sum_1st+1+$col_num.':G'.$sum_1st+1+$col_num);
+		// $this->excel->getActiveSheet()->mergeCells('H'.$sum_1st+1+$col_num.':I'.$sum_1st+1+$col_num);
+		// $this->excel->getActiveSheet()->mergeCells('J'.$sum_1st+1+$col_num.':K'.$sum_1st+1+$col_num);
+		// $this->excel->getActiveSheet()->setCellValue('A'.$sum_1st+1+$col_num, '조합대여금 계');
+		// $this->excel->getActiveSheet()->setCellValue('D'.$sum_1st+1+$col_num, $yd_tot);
+		// $this->excel->getActiveSheet()->setCellValue('F'.$sum_1st+1+$col_num, $td_inc);
+		// $this->excel->getActiveSheet()->setCellValue('H'.$sum_1st+1+$col_num, $td_exp);
+		// $this->excel->getActiveSheet()->setCellValue('J'.$sum_1st+1+$col_num, $td_tot);
 
 		// 본문 내용 ---------------------------------------------------------------//
 
@@ -277,6 +270,82 @@ class Daily_money_report extends CI_Controller {
 		$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
 		// 서버에 파일을 쓰지 않고 바로 다운로드 받습니다.
 		$objWriter->save('php://output');
+
+
+		/** 셀 컨트롤**/
+		// $this->excel->setActiveSheetIndex(0)->setCellValue("A1", "셀값"); // 셀 갑 입력
+		// $this->excel->getActiveSheet()->mergeCells('A1:C1'); // 셀 합치기
+		// $this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(6); // 셀 가로크기
+		// $this->excel->getActiveSheet()->getRowDimension(1)->setRowHeight(25); // 셀 높이
+		// $this->excel->getActiveSheet()->getStyle('A1:C1')->getNumberFormat()->setFormatCode('#,##0'); // 셀 숫자형 변환 (1000 -> 1,000)
+
+		//
+		// 개별 적용
+		// $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true); // 셀의 text를 굵게
+		// $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13); // 셀의 textsize를 13으로
+		//
+		//  보더 스타일 지정
+		// $defaultBorder = array(
+		// 	'style' => PHPExcel_Style_Border::BORDER_THIN,
+		// 	'color' => array('rgb'=>'000000')
+		// );
+		// $headBorder = array(
+		// 	'borders' => array(
+		// 		'bottom' => $defaultBorder,
+		// 		'left'   => $defaultBorder,
+		// 		'top'    => $defaultBorder,
+		// 		'right'  => $defaultBorder
+		// 	)
+		// );
+		//
+		// 다중 셀 보더 스타일 적용
+		// foreach(range('A','C') as $i => $cell){
+		// 	$this->excel->getActiveSheet()->getStyle($cell.'1')->applyFromArray( $headBorder );
+		// }
+		//
+		// 줄바꿈 허용
+		// $this->excel->getActiveSheet()->getStyle('G1')->getAlignment()->setWrapText(true);
+		// $this->excel->getActiveSheet()->getStyle('K6')->getAlignment()->setWrapText(true);
+		// $this->excel->getActiveSheet()->getStyle('K8')->getAlignment()->setWrapText(true);
+		//
+		// // 배경색 적용
+		// $this->excel->getActiveSheet()->duplicateStyleArray(
+		// array(
+		// 'fill' => array(
+		// 'type'  => PHPExcel_Style_Fill::FILL_SOLID,
+		// 'color' => array('rgb'=>'F3F3F3')
+		// )
+		// ),
+		// 'A1:C1'
+		// );
+		//
+		// // 셀 정렬 (다른방식)
+		// $this->excel->getActiveSheet()->getStyle('A1')
+		// ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+		//
+		// $this->excel->getActiveSheet()->getStyle('A1:C1')
+		// ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+
+		// //테두리
+		// //셀 전체(윤곽선 + 안쪽)
+		// $this->excel->getActiveSheet()->getStyle('B2:C3')->getBorders()
+		// ->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+		//
+		// //윤곽선
+		// $this->excel->getActiveSheet()->getStyle('B5:C6')->getBorders()
+		// ->getOutline()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+		//
+		// //안쪽
+		// $this->excel->getActiveSheet()->getStyle('B8:C9')->getBorders()
+		// ->getInside()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+		//
+		// //세로선
+		// $this->excel->getActiveSheet()->getStyle('B11:D13')->getBorders()
+		// ->getVertical()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+		//
+		// //가로선
+		// $this->excel->getActiveSheet()->getStyle('B15:D17')->getBorders()
+		// ->getHorizontal()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 	}
 }
 // End of File
