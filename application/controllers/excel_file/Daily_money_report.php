@@ -179,12 +179,6 @@ class Daily_money_report extends CI_Controller {
 	// ->getHorizontal()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 
 		// 본문 내용 ---------------------------------------------------------------//
-		$this->excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(15); // 전체 기본 셀 높이 설정
-		$this->excel->getActiveSheet()->getRowDimension(1)->setRowHeight(19.5); // 1행의 셀 높이 설정
-		$this->excel->getActiveSheet()->getRowDimension(2)->setRowHeight(37.5); // 2행의 셀 높이 설정
-		$this->excel->getActiveSheet()->getRowDimension(3)->setRowHeight(22.5); // 3행의 셀 높이 설정
-		$this->excel->getActiveSheet()->getRowDimension(4)->setRowHeight(33.75); // 4행의 셀 높이 설정
-
 		$this->excel->getActiveSheet()->getColumnDimension("A")->setWidth(10); // A열의 셀 넓이 설정
 		$this->excel->getActiveSheet()->getColumnDimension("B")->setWidth(7); // A열의 셀 넓이 설정
 		$this->excel->getActiveSheet()->getColumnDimension("C")->setWidth(7); // A열의 셀 넓이 설정
@@ -196,32 +190,78 @@ class Daily_money_report extends CI_Controller {
 		$this->excel->getActiveSheet()->getColumnDimension("I")->setWidth(9); // A열의 셀 넓이 설정
 		$this->excel->getActiveSheet()->getColumnDimension("J")->setWidth(9); // A열의 셀 넓이 설정
 		$this->excel->getActiveSheet()->getColumnDimension("K")->setWidth(9); // A열의 셀 넓이 설정
-		$this->excel->getActiveSheet()->duplicateStyleArray(array('font' => array('size' => 9),'alignment' => array('vertical'   => PHPExcel_Style_Alignment::VERTICAL_CENTER)),'A:K'); // 글꼴 및 정렬
 
-		$this->excel->getActiveSheet()->setCellValue('A1', '[주] 바램디앤씨 자금일보');// A1의 내용을 입력 합니다.
-		$this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);// A1의 폰트를 변경 합니다.
-		$this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);// A1의 글씨를 볼드로 변경합니다.
+		$this->excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(15); // 전체 기본 셀 높이 설정
+		$this->excel->getActiveSheet()->getRowDimension(1)->setRowHeight(19.5); // 1행의 셀 높이 설정
+		$this->excel->getActiveSheet()->getRowDimension(2)->setRowHeight(37.5); // 2행의 셀 높이 설정
+		$this->excel->getActiveSheet()->getRowDimension(3)->setRowHeight(22.5); // 3행의 셀 높이 설정
+		$this->excel->getActiveSheet()->getRowDimension(4)->setRowHeight(33.75); // 4행의 셀 높이 설정
+
+		$this->excel->getActiveSheet()->duplicateStyleArray( // 전체 글꼴 및 정렬
+			array(
+				'font' => array('size' => 9),
+				'alignment' => array(
+					'vertical'   => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+					'horizontal'   => PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+				)
+			),
+			'A:K'
+		);
+
 		$this->excel->getActiveSheet()->mergeCells('A1:F2');// A1부터 D1까지 셀을 합칩니다.
-		$this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);// A1의 컬럼에서 가운데 쓰기를 합니다.
-		$this->excel->getActiveSheet()->setCellValue('G1', '결')
-																	->setCellValue('G2', '재')
-																	->getStyle('G1:G2')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_BOTTOM);
-		$this->excel->getActiveSheet()->getStyle('G1:G2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-																	// 'vertical'   => PHPExcel_Style_Alignment::VERTICAL_CENTER
-																	//->mergeCells('G1:G3')
-		$this->excel->getActiveSheet()->setCellValue('H1', '담당');
-		$this->excel->getActiveSheet()->setCellValue('I1', '전무');
-		$this->excel->getActiveSheet()->setCellValue('J1', '대표이사');
-		$this->excel->getActiveSheet()->setCellValue('K1', '회장');
-		$this->excel->getActiveSheet()->getStyle('H1:K1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
 		$this->excel->getActiveSheet()->mergeCells('A3:F3');
-		$this->excel->getActiveSheet()->setCellValue('A3', '2016년 04월 21일 목요일');
-		$this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
-		$this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setIndent(4);
 		$this->excel->getActiveSheet()->mergeCells('H2:H3');
 		$this->excel->getActiveSheet()->mergeCells('I2:I3');
 		$this->excel->getActiveSheet()->mergeCells('J2:J3');
 		$this->excel->getActiveSheet()->mergeCells('K2:K3');
+		$this->excel->getActiveSheet()->mergeCells('A4:J4');
+		$this->excel->getActiveSheet()->mergeCells('A5:C5');
+		$this->excel->getActiveSheet()->mergeCells('D5:E5');
+		$this->excel->getActiveSheet()->mergeCells('F5:G5');
+		$this->excel->getActiveSheet()->mergeCells('D5:E5');
+		$this->excel->getActiveSheet()->mergeCells('H5:I5');
+		$this->excel->getActiveSheet()->mergeCells('J5:K5');
+		$this->excel->getActiveSheet()->mergeCells('B6:C6');
+		$this->excel->getActiveSheet()->mergeCells('D6:E6');
+		$this->excel->getActiveSheet()->mergeCells('F6:G6');
+		$this->excel->getActiveSheet()->mergeCells('D6:E6');
+		$this->excel->getActiveSheet()->mergeCells('H6:I6');
+		$this->excel->getActiveSheet()->mergeCells('J6:K6');
+
+		$this->excel->getActiveSheet()->getStyle('A5:K5')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('FFEAEAEA');
+		$this->excel->getActiveSheet()->getStyle('A6:K6')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('FFFCFDF2');
+
+		$this->excel->getActiveSheet()->getStyle('A1:F3')->getBorders()->getOutline()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+		$this->excel->getActiveSheet()->getStyle('G1:G3')->getBorders()->getOutline()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+		$this->excel->getActiveSheet()->getStyle('H1:K3')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+		$this->excel->getActiveSheet()->getStyle('A4:K4')->getBorders()->getOutline()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+		$this->excel->getActiveSheet()->getStyle('A5:K13')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+
+		$this->excel->getActiveSheet()->setCellValue('A1', '[주] 바램디앤씨 자금일보');// A1의 내용을 입력 합니다.
+		$this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);// A1의 폰트를 변경 합니다.
+		$this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);// A1의 글씨를 볼드로 변경합니다.
+
+
+
+		$this->excel->getActiveSheet()->setCellValue('G1', '결');
+		$this->excel->getActiveSheet()->setCellValue('G2', '재');
+		$this->excel->getActiveSheet()->getStyle('G1:G2')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_BOTTOM);
+
+		$this->excel->getActiveSheet()->setCellValue('H1', '담당');
+		$this->excel->getActiveSheet()->setCellValue('I1', '전무');
+		$this->excel->getActiveSheet()->setCellValue('J1', '대표이사');
+		$this->excel->getActiveSheet()->setCellValue('K1', '회장');
+
+		$this->excel->getActiveSheet()->setCellValue('A3', '2016년 04월 21일 목요일');
+		$this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+		$this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setIndent(4);
+
+
+		$this->excel->getActiveSheet()->setCellValue('A4', '■ 자 금 현 황');
+		$this->excel->getActiveSheet()->getStyle('A4')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+
+		$this->excel->getActiveSheet()->setCellValue('K4', '(단위 : 원)');
+		$this->excel->getActiveSheet()->getStyle('A3')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 
 
 
