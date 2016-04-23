@@ -120,10 +120,10 @@ class M4 extends CI_Controller {
 				$jh_cum_exp = $this->main_m->sql_result(" SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND deal_date<='".$data['sh_date']."' "); // 총 대여금
 				$jh_date_exp = $this->main_m->sql_result(" SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND deal_date='".$data['sh_date']."' "); // 당일 대여
 
-				$data['jh_yd_tot'] = $jh_cum_inc[0]->inc-$jh_cum_exp[0]->exp-$jh_date_inc[0]->inc+$jh_date_exp[0]->exp;
+				$data['jh_yd_tot'] = ($jh_cum_exp[0]->exp-$jh_cum_inc[0]->inc)+($jh_date_exp[0]->exp-$jh_date_inc[0]->inc);
 				$data['jh_td_inc'] = $jh_date_inc[0]->inc;
 				$data['jh_td_exp'] = $jh_date_exp[0]->exp;
-				$data['jh_td_tot'] = $jh_cum_inc[0]->inc-$jh_cum_exp[0]->exp;
+				$data['jh_td_tot'] = $jh_cum_exp[0]->exp-$jh_cum_inc[0]->inc;
 
 
 

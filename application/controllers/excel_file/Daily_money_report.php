@@ -11,6 +11,7 @@ class Daily_money_report extends CI_Controller {
 		$this->load->model('m4_m'); //모델 파일 로드
 		// PHPExcel 라이브러리 로드
 		$this->load->library('excel');
+		$this->load->helper('cut_string');
 	}
 
 	/**
@@ -75,10 +76,10 @@ class Daily_money_report extends CI_Controller {
 		$jh_cum_exp = $this->main_m->sql_result(" SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND deal_date<='".$sh_date."' "); // 총 대여금
 		$jh_date_exp = $this->main_m->sql_result(" SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND deal_date='".$sh_date."' "); // 당일 대여
 
-		$jh_yd_tot = $jh_cum_inc[0]->inc-$jh_cum_exp[0]->exp-$jh_date_inc[0]->inc+$jh_date_exp[0]->exp;
+		$jh_yd_tot = ($jh_cum_exp[0]->exp-$jh_cum_inc[0]->inc)+($jh_date_exp[0]->exp-$jh_date_inc[0]->inc);
 		$jh_td_inc = $jh_date_inc[0]->inc;
 		$jh_td_exp = $jh_date_exp[0]->exp;
-		$jh_td_tot = $jh_cum_inc[0]->inc-$jh_cum_exp[0]->exp;
+		$jh_td_tot = $jh_cum_exp[0]->exp-$jh_cum_inc[0]->inc;
 
 		// 설정일 입금 내역
 		$da_in = $this->m4_m->select_data_lt("cms_capital_cash_book", "account, cont, acc, inc, note", "(com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='".$sh_date."'", "", "seq_num");
@@ -97,6 +98,15 @@ class Daily_money_report extends CI_Controller {
 
 
 		// 본문 내용 ---------------------------------------------------------------//
+		$sum_1st = $bank_acc['num']+7;
+		$col_num = $jh_data['num']+1; // 대여회수 거래 조합 프로젝트 수 +1
+		$sum_2nd = $sum_1st+$col_num+1;
+		$in_num = $da_in['num'];
+		if($in_num<2) $numn=2; else $numn=$in_num; // 입금 내역 행수 설정;
+		$sum_3rd = $sum_2nd+$numn+5;
+		$ex_num = $da_ex['num'];
+		if($ex_num<4) $numx = 4; else $numx = $ex_num; // 출금 내역 행수 설정
+
 		$this->excel->getActiveSheet()->getColumnDimension("A")->setWidth(10); // A열의 셀 넓이 설정
 		$this->excel->getActiveSheet()->getColumnDimension("B")->setWidth(7); // A열의 셀 넓이 설정
 		$this->excel->getActiveSheet()->getColumnDimension("C")->setWidth(7); // A열의 셀 넓이 설정
@@ -109,11 +119,12 @@ class Daily_money_report extends CI_Controller {
 		$this->excel->getActiveSheet()->getColumnDimension("J")->setWidth(9); // A열의 셀 넓이 설정
 		$this->excel->getActiveSheet()->getColumnDimension("K")->setWidth(9); // A열의 셀 넓이 설정
 
-		$this->excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(15); // 전체 기본 셀 높이 설정
+		$this->excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(19.5); // 전체 기본 셀 높이 설정
 		$this->excel->getActiveSheet()->getRowDimension(1)->setRowHeight(19.5); // 1행의 셀 높이 설정
 		$this->excel->getActiveSheet()->getRowDimension(2)->setRowHeight(37.5); // 2행의 셀 높이 설정
 		$this->excel->getActiveSheet()->getRowDimension(3)->setRowHeight(22.5); // 3행의 셀 높이 설정
 		$this->excel->getActiveSheet()->getRowDimension(4)->setRowHeight(33.75); // 4행의 셀 높이 설정
+		$this->excel->getActiveSheet()->getRowDimension($sum_2nd+1)->setRowHeight(33.75); // 4행의 셀 높이 설정
 
 		$this->excel->getActiveSheet()->duplicateStyleArray( // 전체 글꼴 및 정렬
 			array(
@@ -139,17 +150,25 @@ class Daily_money_report extends CI_Controller {
 		$this->excel->getActiveSheet()->mergeCells('D5:E5');
 		$this->excel->getActiveSheet()->mergeCells('H5:I5');
 		$this->excel->getActiveSheet()->mergeCells('J5:K5');
+		$this->excel->getActiveSheet()->mergeCells('A'.($sum_2nd+1).':K'.($sum_2nd+1));
+		$this->excel->getActiveSheet()->mergeCells('A'.($sum_2nd+2).':K'.($sum_2nd+2));
+		$this->excel->getActiveSheet()->mergeCells('A'.($sum_3rd+1).':K'.($sum_3rd+1));
+		$this->excel->getActiveSheet()->mergeCells('A'.($sum_3rd+2).':K'.($sum_3rd+2));
 
-		$sum_1st = $bank_acc['num']+7;
 		$this->excel->getActiveSheet()->getStyle('A5:K5')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('FFEAEAEA');
 		$this->excel->getActiveSheet()->getStyle('A6:K6')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('FFFCFDF2');
 		$this->excel->getActiveSheet()->getStyle('A'.$sum_1st.':K'.$sum_1st)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('FFFCFDF2');
+		$this->excel->getActiveSheet()->getStyle('A'.$sum_2nd.':K'.$sum_2nd)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('FFFCFDF2');
+		$this->excel->getActiveSheet()->getStyle('A'.($sum_2nd+3).':K'.($sum_2nd+3))->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('FFEAEAEA');
+		$this->excel->getActiveSheet()->getStyle('A'.($sum_3rd).':K'.($sum_3rd))->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('FFFCFDF2');
+		$this->excel->getActiveSheet()->getStyle('A'.($sum_3rd+3).':K'.($sum_3rd+3))->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('FFEAEAEA');
+		$this->excel->getActiveSheet()->getStyle('A'.($sum_3rd+$numx+5).':K'.($sum_3rd+$numx+5))->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setARGB('FFFCFDF2');
 
 		$this->excel->getActiveSheet()->getStyle('A1:F3')->getBorders()->getOutline()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 		$this->excel->getActiveSheet()->getStyle('G1:G3')->getBorders()->getOutline()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 		$this->excel->getActiveSheet()->getStyle('H1:K3')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 		$this->excel->getActiveSheet()->getStyle('A4:K4')->getBorders()->getOutline()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-		$this->excel->getActiveSheet()->getStyle('A5:K13')->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+		$this->excel->getActiveSheet()->getStyle('A5:K'.$sum_2nd)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 
 		$this->excel->getActiveSheet()->setCellValue('A1', '[주] 바램디앤씨 자금일보');// A1의 내용을 입력 합니다.
 		$this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);// A1의 폰트를 변경 합니다.
@@ -178,8 +197,6 @@ class Daily_money_report extends CI_Controller {
 		$this->excel->getActiveSheet()->setCellValue('H5', '출금(감소)');
 		$this->excel->getActiveSheet()->setCellValue('J5', '금일잔액');
 
-		$this->excel->getActiveSheet()->getStyle('D6:K'.($bank_acc['num']+7))->getNumberFormat()->setFormatCode('#,##0'); // 셀 숫자형 변환 (1000 -> 1,000)
-		$this->excel->getActiveSheet()->getStyle('D6:K'.($bank_acc['num']+7))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 		for($i=0; $i<=$bank_acc['num']; $i++): // 현금계정 + 은행계좌 수 만큼 반복 한다.
 			if(empty($bank_acc['result'][$i]->name)) $bank_acc_name = ''; else $bank_acc_name = $bank_acc['result'][$i]->name;
 			if(empty($cum_in[$i][0]->inc)) $cum_inc = "0"; else $cum_inc = $cum_in[$i][0]->inc;
@@ -213,24 +230,22 @@ class Daily_money_report extends CI_Controller {
 		$this->excel->getActiveSheet()->mergeCells('F'.$sum_1st.':G'.$sum_1st);
 		$this->excel->getActiveSheet()->mergeCells('H'.$sum_1st.':I'.$sum_1st);
 		$this->excel->getActiveSheet()->mergeCells('J'.$sum_1st.':K'.$sum_1st);
+
 		$this->excel->getActiveSheet()->setCellValue('A'.$sum_1st, '현금성자산 계');
 		$this->excel->getActiveSheet()->setCellValue('D'.$sum_1st, $yd_tot);
 		$this->excel->getActiveSheet()->setCellValue('F'.$sum_1st, $td_inc);
 		$this->excel->getActiveSheet()->setCellValue('H'.$sum_1st, $td_exp);
 		$this->excel->getActiveSheet()->setCellValue('J'.$sum_1st, $td_tot);
 
-		$this->excel->getActiveSheet()->setCellValue('A20', $jh_name[0][0]->pj_name);
-
-		$col_num = $jh_data['num']+1; // 대여회수 거래 조합 프로젝트 수 +1
 		for($i=0; $i<=$jh_data['num']; $i++) : // 거래 조합 프로젝트 수 +1 만큼 반복
-			if(empty($jh_name[$i][$i]->pj_name)) $jhname = ''; else $jhname = $jh_name[$i][$i]->pj_name;
-			if(empty($jh_cum_in[$i][$i]->inc)) $jh_cum_inc = "0"; else $jh_cum_inc = $jh_cum_in[$i][$i]->inc;
-			if(empty($jh_date_in[$i][$i]->inc)) $jh_date_inc = "0"; else $jh_date_inc = $jh_date_in[$i][$i]->inc;
-			if(empty($jh_cum_ex[$i][$i]->exp)) $jh_cum_exp = "0"; else $jh_cum_exp = $jh_cum_ex[$i][$i]->exp;
-			if(empty($jh_date_ex[$i][$i]->exp)) $jh_date_exp = "0"; else $jh_date_exp = $jh_cum_ex[$i][$i]->exp;
+			if(empty($jh_name[$i][$i])) $jhname = ''; else $jhname = $jh_name[$i][$i]->pj_name;
+			if(empty($jh_cum_in[$i][$i]->inc)) $jh_cum_inc = ""; else if($jh_cum_in[$i][$i]->inc==0)$jh_cum_inc = '-'; else $jh_cum_inc = $jh_cum_in[$i][$i]->inc;
+			if($i==$jh_data['num']) $jh_date_inc=""; else if($jh_date_in[$i][$i]->inc==0) $jh_date_inc = "-"; else $jh_date_inc = $jh_date_in[$i][$i]->inc;
+			if(empty($jh_cum_ex[$i][$i]->exp)) $jh_cum_exp = ""; else if($jh_cum_ex[$i][$i]->exp==0) $jh_cum_exp = '-'; else $jh_cum_exp = $jh_cum_ex[$i][$i]->exp;
+			if($i==$jh_data['num']) $jh_date_exp=""; else if($jh_date_ex[$i][$i]->exp==0) $jh_date_exp = "-"; else $jh_date_exp = $jh_date_ex[$i][$i]->exp;
 
-			$jh_balance = $jh_cum_exp-$jh_cum_inc; // 계정별 최종 금일 시재(잔고)
-			$jh_y_bal = $jh_cum_exp-$jh_cum_inc+$jh_date_exp-$jh_date_inc;
+			if($i==$jh_data['num']) $jh_balance = ''; else $jh_balance = $jh_cum_exp-$jh_cum_inc; // 계정별 최종 금일 시재(잔고)
+			if($i==$jh_data['num']) $jh_y_bal = ''; else $jh_y_bal = $jh_cum_exp-$jh_cum_inc+$jh_date_exp-$jh_date_inc;
 
 			if($i==0) {
 				$this->excel->getActiveSheet()->mergeCells('A'.($sum_1st+1).':A'.($sum_1st+$col_num));
@@ -242,22 +257,121 @@ class Daily_money_report extends CI_Controller {
 			$this->excel->getActiveSheet()->mergeCells('H'.($i+$sum_1st+1).':I'.($i+$sum_1st+1));
 			$this->excel->getActiveSheet()->mergeCells('J'.($i+$sum_1st+1).':K'.($i+$sum_1st+1));
 
-			$this->excel->getActiveSheet()->setCellValue('B'.($sum_1st+1), $jhname);
-			$this->excel->getActiveSheet()->setCellValue('D'.($sum_1st+1), $jh_y_bal);
-			$this->excel->getActiveSheet()->setCellValue('F'.($sum_1st+1), $jh_date_exp);
-			$this->excel->getActiveSheet()->setCellValue('H'.($sum_1st+1), $jh_date_inc);
-			$this->excel->getActiveSheet()->setCellValue('J'.($sum_1st+1), $jh_balance);
+			$this->excel->getActiveSheet()->setCellValue('B'.($i+$sum_1st+1), cut_string($jhname, 8, ''));
+			$this->excel->getActiveSheet()->setCellValue('D'.($i+$sum_1st+1), $jh_y_bal);
+			$this->excel->getActiveSheet()->setCellValue('F'.($i+$sum_1st+1), $jh_date_exp);
+			$this->excel->getActiveSheet()->setCellValue('H'.($i+$sum_1st+1), $jh_date_inc);
+			$this->excel->getActiveSheet()->setCellValue('J'.($i+$sum_1st+1), $jh_balance);
 		endfor; // 조합 구하기 for 문 종료
-		// $this->excel->getActiveSheet()->mergeCells('A'.$sum_1st+1+$col_num.':C'.$sum_1st+1+$col_num);
-		// $this->excel->getActiveSheet()->mergeCells('D'.$sum_1st.':E'.$sum_1st+1+$col_num);
-		// $this->excel->getActiveSheet()->mergeCells('F'.$sum_1st+1+$col_num.':G'.$sum_1st+1+$col_num);
-		// $this->excel->getActiveSheet()->mergeCells('H'.$sum_1st+1+$col_num.':I'.$sum_1st+1+$col_num);
-		// $this->excel->getActiveSheet()->mergeCells('J'.$sum_1st+1+$col_num.':K'.$sum_1st+1+$col_num);
-		// $this->excel->getActiveSheet()->setCellValue('A'.$sum_1st+1+$col_num, '조합대여금 계');
-		// $this->excel->getActiveSheet()->setCellValue('D'.$sum_1st+1+$col_num, $yd_tot);
-		// $this->excel->getActiveSheet()->setCellValue('F'.$sum_1st+1+$col_num, $td_inc);
-		// $this->excel->getActiveSheet()->setCellValue('H'.$sum_1st+1+$col_num, $td_exp);
-		// $this->excel->getActiveSheet()->setCellValue('J'.$sum_1st+1+$col_num, $td_tot);
+
+		$this->excel->getActiveSheet()->mergeCells('A'.$sum_2nd.':C'.$sum_2nd);
+		$this->excel->getActiveSheet()->mergeCells('D'.$sum_2nd.':E'.$sum_2nd);
+		$this->excel->getActiveSheet()->mergeCells('F'.$sum_2nd.':G'.$sum_2nd);
+		$this->excel->getActiveSheet()->mergeCells('H'.$sum_2nd.':I'.$sum_2nd);
+		$this->excel->getActiveSheet()->mergeCells('J'.$sum_2nd.':K'.$sum_2nd);
+
+		$this->excel->getActiveSheet()->setCellValue('A'.$sum_2nd, '조합대여금 계');
+		$this->excel->getActiveSheet()->setCellValue('D'.$sum_2nd, $jh_yd_tot);
+		$this->excel->getActiveSheet()->setCellValue('F'.$sum_2nd, $jh_td_exp);
+		$this->excel->getActiveSheet()->setCellValue('H'.$sum_2nd, $jh_td_inc);
+		$this->excel->getActiveSheet()->setCellValue('J'.$sum_2nd, $jh_td_tot);
+
+		$this->excel->getActiveSheet()->getStyle('D6:K'.($bank_acc['num']+$col_num+8))->getNumberFormat()->setFormatCode('#,##0'); // 셀 숫자형 변환 (1000 -> 1,000)
+		$this->excel->getActiveSheet()->getStyle('D6:K'.($bank_acc['num']+$col_num+8))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+
+		$this->excel->getActiveSheet()->setCellValue('A'.($sum_2nd+1), '■ 금 일 수 지 현 황');
+		$this->excel->getActiveSheet()->setCellValue('A'.($sum_2nd+2), '입 금 내 역');
+		$this->excel->getActiveSheet()->getStyle('A'.($sum_2nd+1).':A'.($sum_2nd+2))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+
+		$this->excel->getActiveSheet()->mergeCells('A'.($sum_2nd+3).':B'.($sum_2nd+3));
+		$this->excel->getActiveSheet()->mergeCells('C'.($sum_2nd+3).':E'.($sum_2nd+3));
+		$this->excel->getActiveSheet()->mergeCells('G'.($sum_2nd+3).':H'.($sum_2nd+3));
+		$this->excel->getActiveSheet()->mergeCells('I'.($sum_2nd+3).':K'.($sum_2nd+3));
+
+		$this->excel->getActiveSheet()->setCellValue('A'.($sum_2nd+3), '거래처');
+		$this->excel->getActiveSheet()->setCellValue('C'.($sum_2nd+3), '적 요');
+		$this->excel->getActiveSheet()->setCellValue('F'.($sum_2nd+3), '금 액');
+		$this->excel->getActiveSheet()->setCellValue('G'.($sum_2nd+3), '계정과목');
+		$this->excel->getActiveSheet()->setCellValue('I'.($sum_2nd+3), '비 고');
+
+
+		for($i=0;$i<=$numn;$i++) :
+			if(empty($da_in['result'][$i]->acc)) $da_in_acc = ''; else $da_in_acc = $da_in['result'][$i]->acc;
+			if(empty($da_in['result'][$i]->cont)) $da_in_cont = ''; else $da_in_cont = $da_in['result'][$i]->cont;
+			if(empty($da_in['result'][$i]->inc) OR $da_in['result'][$i]->inc==0){ $income = "";}else{$income = number_format($da_in['result'][$i]->inc);}
+			if(empty($da_in['result'][$i]->account)) $da_in_account = ''; else $da_in_account = $da_in['result'][$i]->account;
+			if(empty($da_in['result'][$i]->note)) $da_in_note = ''; else $da_in_note = $da_in['result'][$i]->note;
+
+			$this->excel->getActiveSheet()->mergeCells('A'.($i+$sum_2nd+4).':B'.($i+$sum_2nd+4));
+			$this->excel->getActiveSheet()->mergeCells('C'.($i+$sum_2nd+4).':E'.($i+$sum_2nd+4));
+			$this->excel->getActiveSheet()->mergeCells('G'.($i+$sum_2nd+4).':H'.($i+$sum_2nd+4));
+			$this->excel->getActiveSheet()->mergeCells('I'.($i+$sum_2nd+4).':K'.($i+$sum_2nd+4));
+
+			$this->excel->getActiveSheet()->setCellValue('A'.($i+$sum_2nd+4), cut_string($da_in_acc,16,""));
+			$this->excel->getActiveSheet()->setCellValue('C'.($i+$sum_2nd+4), cut_string($da_in_cont,20,""));
+			$this->excel->getActiveSheet()->getStyle('A'.($i+$sum_2nd+4).':C'.($i+$sum_2nd+4))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+			$this->excel->getActiveSheet()->setCellValue('F'.($i+$sum_2nd+4), $income);
+			$this->excel->getActiveSheet()->getStyle('F'.($i+$sum_2nd+4))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+			$this->excel->getActiveSheet()->setCellValue('G'.($i+$sum_2nd+4), cut_string($da_in_account,10,""));
+			$this->excel->getActiveSheet()->setCellValue('I'.($i+$sum_2nd+4), cut_string($da_in_note,20,""));
+		endfor;
+
+		$this->excel->getActiveSheet()->mergeCells('A'.$sum_3rd.':E'.$sum_3rd);
+		$this->excel->getActiveSheet()->mergeCells('G'.$sum_3rd.':H'.$sum_3rd);
+		$this->excel->getActiveSheet()->mergeCells('I'.$sum_3rd.':K'.$sum_3rd);
+
+		$this->excel->getActiveSheet()->setCellValue('A'.$sum_3rd, '입금합계');
+		$this->excel->getActiveSheet()->setCellValue('F'.$sum_3rd, $da_in_total[0]->total_inc);
+		$this->excel->getActiveSheet()->getStyle('F'.$sum_3rd)->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+		$this->excel->getActiveSheet()->getStyle('F'.($sum_2nd+4).':F'.$sum_3rd)->getNumberFormat()->setFormatCode('#,##0'); // 셀 숫자형 변환 (1000 -> 1,000)
+
+
+		$this->excel->getActiveSheet()->setCellValue('A'.($sum_3rd+2), '출 금 내 역');
+		$this->excel->getActiveSheet()->getStyle('A'.($sum_3rd+2))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+
+		$this->excel->getActiveSheet()->mergeCells('A'.($sum_3rd+3).':B'.($sum_3rd+3));
+		$this->excel->getActiveSheet()->mergeCells('C'.($sum_3rd+3).':E'.($sum_3rd+3));
+		$this->excel->getActiveSheet()->mergeCells('G'.($sum_3rd+3).':H'.($sum_3rd+3));
+		$this->excel->getActiveSheet()->mergeCells('I'.($sum_3rd+3).':K'.($sum_3rd+3));
+
+		$this->excel->getActiveSheet()->setCellValue('A'.($sum_3rd+3), '거래처');
+		$this->excel->getActiveSheet()->setCellValue('C'.($sum_3rd+3), '적 요');
+		$this->excel->getActiveSheet()->setCellValue('F'.($sum_3rd+3), '금 액');
+		$this->excel->getActiveSheet()->setCellValue('G'.($sum_3rd+3), '계정과목');
+		$this->excel->getActiveSheet()->setCellValue('I'.($sum_3rd+3), '비 고');
+
+
+
+		for($i=0;$i<=$numx;$i++):
+			if(empty($da_ex['result'][$i]->acc)) $da_ex_acc = ''; else $da_ex_acc = $da_ex['result'][$i]->acc;
+			if(empty($da_ex['result'][$i]->cont)) $da_ex_cont = ''; else $da_ex_cont = $da_ex['result'][$i]->cont;
+			if(empty($da_ex['result'][$i]->exp) OR $da_ex['result'][$i]->exp==0){ $exp = ""; }else{ $exp = number_format($da_ex['result'][$i]->exp); }
+			if(empty($da_ex['result'][$i]->account)) $da_ex_account = ''; else $da_ex_account = $da_ex['result'][$i]->account;
+			if(empty($da_ex['result'][$i]->note)) $da_ex_note = ''; else $da_ex_note = $da_ex['result'][$i]->note;
+
+			$this->excel->getActiveSheet()->mergeCells('A'.($i+$sum_3rd+4).':B'.($i+$sum_3rd+4));
+			$this->excel->getActiveSheet()->mergeCells('C'.($i+$sum_3rd+4).':E'.($i+$sum_3rd+4));
+			$this->excel->getActiveSheet()->mergeCells('G'.($i+$sum_3rd+4).':H'.($i+$sum_3rd+4));
+			$this->excel->getActiveSheet()->mergeCells('I'.($i+$sum_3rd+4).':K'.($i+$sum_3rd+4));
+
+			$this->excel->getActiveSheet()->setCellValue('A'.($i+$sum_3rd+4), cut_string($da_ex_acc,16,""));
+			$this->excel->getActiveSheet()->setCellValue('C'.($i+$sum_3rd+4), cut_string($da_ex_cont,20,""));
+			$this->excel->getActiveSheet()->getStyle('A'.($i+$sum_3rd+4).':C'.($i+$sum_3rd+4))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+			$this->excel->getActiveSheet()->setCellValue('F'.($i+$sum_3rd+4), $exp);
+			$this->excel->getActiveSheet()->getStyle('F'.($i+$sum_3rd+4))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+			$this->excel->getActiveSheet()->setCellValue('G'.($i+$sum_3rd+4), cut_string($da_ex_account,10,""));
+			$this->excel->getActiveSheet()->setCellValue('I'.($i+$sum_3rd+4), cut_string($da_ex_note,20,""));
+		endfor;
+		$this->excel->getActiveSheet()->mergeCells('A'.($sum_3rd+$numx+5).':E'.($sum_3rd+$numx+5));
+		$this->excel->getActiveSheet()->mergeCells('G'.($sum_3rd+$numx+5).':H'.($sum_3rd+$numx+5));
+		$this->excel->getActiveSheet()->mergeCells('I'.($sum_3rd+$numx+5).':K'.($sum_3rd+$numx+5));
+
+		$this->excel->getActiveSheet()->setCellValue('A'.($sum_3rd+$numx+5), '출금합계');
+		$this->excel->getActiveSheet()->setCellValue('F'.($sum_3rd+$numx+5), $da_ex_total[0]->total_exp);
+		$this->excel->getActiveSheet()->getStyle('F'.($sum_3rd+$numx+5))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+		$this->excel->getActiveSheet()->getStyle('F'.($sum_3rd+4).':F'.($sum_3rd+$numx+5))->getNumberFormat()->setFormatCode('#,##0'); // 셀 숫자형 변환 (1000 -> 1,000)
+		$this->excel->getActiveSheet()->getStyle('A'.($sum_2nd+1).':K'.($sum_3rd+$numx+5))->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+
 
 		// 본문 내용 ---------------------------------------------------------------//
 
@@ -270,82 +384,6 @@ class Daily_money_report extends CI_Controller {
 		$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
 		// 서버에 파일을 쓰지 않고 바로 다운로드 받습니다.
 		$objWriter->save('php://output');
-
-
-		/** 셀 컨트롤**/
-		// $this->excel->setActiveSheetIndex(0)->setCellValue("A1", "셀값"); // 셀 갑 입력
-		// $this->excel->getActiveSheet()->mergeCells('A1:C1'); // 셀 합치기
-		// $this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(6); // 셀 가로크기
-		// $this->excel->getActiveSheet()->getRowDimension(1)->setRowHeight(25); // 셀 높이
-		// $this->excel->getActiveSheet()->getStyle('A1:C1')->getNumberFormat()->setFormatCode('#,##0'); // 셀 숫자형 변환 (1000 -> 1,000)
-
-		//
-		// 개별 적용
-		// $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true); // 셀의 text를 굵게
-		// $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(13); // 셀의 textsize를 13으로
-		//
-		//  보더 스타일 지정
-		// $defaultBorder = array(
-		// 	'style' => PHPExcel_Style_Border::BORDER_THIN,
-		// 	'color' => array('rgb'=>'000000')
-		// );
-		// $headBorder = array(
-		// 	'borders' => array(
-		// 		'bottom' => $defaultBorder,
-		// 		'left'   => $defaultBorder,
-		// 		'top'    => $defaultBorder,
-		// 		'right'  => $defaultBorder
-		// 	)
-		// );
-		//
-		// 다중 셀 보더 스타일 적용
-		// foreach(range('A','C') as $i => $cell){
-		// 	$this->excel->getActiveSheet()->getStyle($cell.'1')->applyFromArray( $headBorder );
-		// }
-		//
-		// 줄바꿈 허용
-		// $this->excel->getActiveSheet()->getStyle('G1')->getAlignment()->setWrapText(true);
-		// $this->excel->getActiveSheet()->getStyle('K6')->getAlignment()->setWrapText(true);
-		// $this->excel->getActiveSheet()->getStyle('K8')->getAlignment()->setWrapText(true);
-		//
-		// // 배경색 적용
-		// $this->excel->getActiveSheet()->duplicateStyleArray(
-		// array(
-		// 'fill' => array(
-		// 'type'  => PHPExcel_Style_Fill::FILL_SOLID,
-		// 'color' => array('rgb'=>'F3F3F3')
-		// )
-		// ),
-		// 'A1:C1'
-		// );
-		//
-		// // 셀 정렬 (다른방식)
-		// $this->excel->getActiveSheet()->getStyle('A1')
-		// ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-		//
-		// $this->excel->getActiveSheet()->getStyle('A1:C1')
-		// ->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-		// //테두리
-		// //셀 전체(윤곽선 + 안쪽)
-		// $this->excel->getActiveSheet()->getStyle('B2:C3')->getBorders()
-		// ->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-		//
-		// //윤곽선
-		// $this->excel->getActiveSheet()->getStyle('B5:C6')->getBorders()
-		// ->getOutline()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-		//
-		// //안쪽
-		// $this->excel->getActiveSheet()->getStyle('B8:C9')->getBorders()
-		// ->getInside()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-		//
-		// //세로선
-		// $this->excel->getActiveSheet()->getStyle('B11:D13')->getBorders()
-		// ->getVertical()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-		//
-		// //가로선
-		// $this->excel->getActiveSheet()->getStyle('B15:D17')->getBorders()
-		// ->getHorizontal()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 	}
 }
 // End of File

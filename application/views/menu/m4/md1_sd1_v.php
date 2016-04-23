@@ -102,10 +102,10 @@
 						<td class="center" colspan="2">
 							조합대여금 계
 						</td>
-						<td class="right"><?php // if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($tot_y_jh_ba==0){echo "-";}else{echo number_format($tot_y_jh_ba);}?></td>
-						<td class="right"><font color="#ff3300"><?php // if($tot_d_jh_exp==0){echo "-";}else{echo  number_format($tot_d_jh_exp);}?></font></td>
-						<td class="right"><font color="#0066ff"><?php // if($tot_d_jh_inc==0){echo "-";}else{echo number_format($tot_d_jh_inc);}?></font></td>
-						<td class="right"><font color="#000099"><?php // if($auth_row[group]>$auth_level){echo "조회 권한 없음";}else if($tot_jh_ba==0){echo "-";}else{echo number_format($tot_jh_ba);}?></font></td>
+						<td class="right"><?php  if($jh_yd_tot==0){echo "-";}else{echo number_format($jh_yd_tot);}?></td>
+						<td class="right"><font color="#ff3300"><?php if($jh_td_exp==0){echo "-";}else{echo  number_format($jh_td_exp);}?></font></td>
+						<td class="right"><font color="#0066ff"><?php if($jh_td_inc==0){echo "-";}else{echo number_format($jh_td_inc);}?></font></td>
+						<td class="right"><font color="#000099"><?php if($jh_td_tot==0){echo "-";}else{echo number_format($jh_td_tot);}?></font></td>
 					</tr>
 					<!-- -----------------------------------------대여금 집계 종료------------------------------------ -->
 				</table>
@@ -133,9 +133,9 @@
 						<td class="center" width="100">계정과목</td>
 						<td class="center" width="200">비 고</td>
 					</tr>
-<?
-$in_num = $da_in['num'];
-if($in_num<2) $num=2; else $num=$in_num; // 행수 설정;
+<?php
+	$in_num = $da_in['num'];
+	if($in_num<2) $num=2; else $num=$in_num; // 행수 설정;
 ?>
 <?php	for($i=0;$i<=$num;$i++):
 	if(empty($da_in['result'][$i]->acc)) $da_in_acc = '&nbsp;'; else $da_in_acc = $da_in['result'][$i]->acc;
@@ -173,7 +173,7 @@ if($in_num<2) $num=2; else $num=$in_num; // 행수 설정;
 						<td class="center">비 고</td>
 					</tr>
 <?
-$ex_num = $da_in['num'];
+$ex_num = $da_ex['num'];
 if($ex_num<4) $num = 4; else $num = $ex_num;
 
 for($i=0;$i<=$num;$i++):
