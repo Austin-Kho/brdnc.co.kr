@@ -81,12 +81,11 @@ class M4_m extends CI_Model {
 		return $qry->result();
 	}
 
-	// $bbq="SELECT SUM(exp) AS total_exp FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='$sh_date'";
 	public function da_ex_total($table, $sh_date) {
 		$sql = "SELECT SUM(exp) AS total_exp FROM cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='".$sh_date."'";
 		$qry = $this->db->query($sql);
 		return $qry->result();
-	}	
+	}
 
 
 	public function cash_book_list($table, $start='', $limit='', $sh_frm, $n) {

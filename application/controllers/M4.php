@@ -50,7 +50,7 @@ class M4 extends CI_Controller {
 	 * @return [type]      [description]
 	 */
 	public function capital($mdi='', $sdi=''){
-		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+		$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
@@ -163,7 +163,6 @@ class M4 extends CI_Controller {
 			if( !$auth['_m4_1_2'] or $auth['_m4_1_2']==0) {
 				$this->load->view('no_auth');
 			}else{
-
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m4_1_2'];
 				$data['m_auth'] = $m_auth;
@@ -212,34 +211,65 @@ class M4 extends CI_Controller {
 						alert('다시 시도하여 주십시요!', '/m4/capital/1/2/');
 					}
 				}
+				if($this->input->get('excel_pop')=='cash_book'){
+					// 본문 내용 ---------------------------------------------------------------//
+					// $this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
+					// $this->excel->getActiveSheet()->getColumnDimension('B')->setWidth(12);
+					// $this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(13);
+					// $this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
+					// $this->excel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+					// $this->excel->getActiveSheet()->getColumnDimension('F')->setWidth(8);
+					// $this->excel->getActiveSheet()->getColumnDimension('G')->setWidth(12);
+					// $this->excel->getActiveSheet()->getColumnDimension('H')->setWidth(8);
+					// $this->excel->getActiveSheet()->getColumnDimension('I')->setWidth(12);
+					// $this->excel->getActiveSheet()->getColumnDimension('J')->setWidth(10);
+					// $this->excel->getActiveSheet()->getColumnDimension('K')->setWidth(10);
+					// $this->excel->getActiveSheet()->getColumnDimension('L')->setWidth(30);
 
-				if($this->input->get('cash_book')=='print') {
-					// // Excel Cash book Print
-					// // redirect(base_url().'static/lib/excel/excel_cash_book.php');
-					// $where=" (com_div>0 AND ((in_acc=no AND class2<>7) OR out_acc=no) OR (com_div IS NULL AND in_acc=no AND class2=6)) ";
-					// //검색어가 있을 경우
-					// if($sh_frm['class1']){
-					// 	if($sh_frm['class1']==1) $where.=" AND class1='1' ";
-					// 	if($sh_frm['class1']==2) $where.=" AND class1='2' ";
-					// 	if($sh_frm['class1']==3) $where.=" AND class1='3' ";
-					// }
-					// if($sh_frm['class2']) $where.=" AND class2='".$sh_frm['class2']."' ";
-					// if($sh_frm['s_date']) $where.=" AND deal_date>='".$sh_frm['s_date']."' ";
-					// if($sh_frm['e_date']) {$where.=" AND deal_date<='".$sh_frm['e_date']."' "; } //$e_add=" AND deal_date<='$sh_frm['e_date']' ";} else{$e_add="";}
+					// $this->excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(15); // 전체 기본 셀 높이 설정
+					// $this->excel->getActiveSheet()->getRowDimension(1)->setRowHeight(30); // 1행의 셀 높이 설정
+
+					// $this->excel->getActiveSheet()->duplicateStyleArray( // 전체 글꼴 및 정렬
+					// 	array(
+					// 		'font' => array('size' => 9),
+					// 		'alignment' => array(
+					// 			'vertical'   => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+					// 			'horizontal'   => PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+					// 		)
+					// 	),
+					// 	'A:L'
+					// );
+					// $this->excel->getActiveSheet()->setCellValue("A1", '자금 출납부'); // 셀 갑 입력
+					// $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);// A1의 폰트를 변경 합니다.
+					// $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);// A1의 글씨를 볼드로 변경합니다.
 					//
-					// if($sh_frm['sh_text']){
-					// 	if($sh_frm['sh_con']==0) $where.=" AND (account like '%".$sh_frm['sh_text']."%' OR cont like '%".$sh_frm['sh_text']."%' OR acc like '%".$sh_frm['sh_text']."%' OR evidence like '%".$sh_frm['sh_text']."%' OR cms_capital_cash_book.worker like '%".$sh_frm['sh_text']."%') "; // 통합검색
-					// 	if($sh_frm['sh_con']==1) $where.=" AND account like '%".$sh_frm['sh_text']."%' "; // 계정과목
-					// 	if($sh_frm['sh_con']==2) $where.=" AND cont like '%".$sh_frm['sh_text']."%' "; //적요
-					// 	if($sh_frm['sh_con']==3) $where.=" AND acc like '%".$sh_frm['sh_text']."%' "; // 거래처
-					// 	if($sh_frm['sh_con']==4) $where.=" AND (in_acc like '%".$sh_frm['sh_text']."%' OR out_acc like '%".$sh_frm['sh_text']."%')  ";  //입출금처
-					// }
-					// $a['where'] = $where;
-					// $this->load->view('/popup/a', $a);
-					// //$this->db->where($where);
-					// //(base_url().'pc/_menu3/excel_cash_book.php?add_where='.$where);
+					// $this->excel->getActiveSheet()->mergeCells('A1:K1');
+					// $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+
+					// $this->excel->getActiveSheet()->setCellValue('A2', '거래일자');
+					// $this->excel->getActiveSheet()->setCellValue('B2', '구 분');
+					// $this->excel->getActiveSheet()->setCellValue('C2', '계정과목');
+					// $this->excel->getActiveSheet()->setCellValue('D2', '적 요');
+					// $this->excel->getActiveSheet()->setCellValue('E2', '거 래 처');
+					// $this->excel->getActiveSheet()->setCellValue('F2', '입금처');
+					// $this->excel->getActiveSheet()->setCellValue('G2', '입금금액');
+					// $this->excel->getActiveSheet()->setCellValue('H2', '지출처');
+					// $this->excel->getActiveSheet()->setCellValue('I2', '지출금액');
+					// $this->excel->getActiveSheet()->setCellValue('J2', '현금시재');
+					// $this->excel->getActiveSheet()->setCellValue('K2', '예금잔고');
+					// $this->excel->getActiveSheet()->setCellValue('L2', '비 고');
+
+					// 본문 내용 ---------------------------------------------------------------//
+					$filename='cash_book.xlsx'; // 엑셀 파일 이름
+					header('Content-Type: application/vnd.ms-excel'); //mime 타입
+					header('Content-Disposition: attachment;filename="'.$filename.'"'); // 브라우저에서 받을 파일 이름
+					header('Cache-Control: max-age=0'); //no cache
+
+					// Excel5 포맷으로 저장 엑셀 2007 포맷으로 저장하고 싶은 경우 'Excel2007'로 변경합니다.
+					$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
+					// 서버에 파일을 쓰지 않고 바로 다운로드 받습니다.
+					$objWriter->save('php://output');
 				}else{
-					//본 페이지 로딩
 					$this->load->view('/menu/m4/md1_sd2_v', $data);
 				}
 			}
