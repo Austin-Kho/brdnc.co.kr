@@ -34,8 +34,8 @@
 	$attributes = array('name' => 'cash_book_frm', 'method' => 'get');
 	echo form_open('/m4/capital/1/2/', $attributes);
 ?>
-							<div class="col-xs-12 col-md-1 center" style="background-color: #F4F4F4; height: 40px; padding: 10px 0;">구 분</div>
-							<div class="col-xs-5 col-sm-6 col-md-1" style="height: 40px; padding: 5px;">
+							<div class="col-xs-12 col-sm-2 col-md-1 center" style="height: 40px; background-color: #F4F4F4; padding: 10px 0;">구 분</div>
+							<div class="col-xs-6 col-sm-5 col-md-1" style="height: 40px; padding: 5px;">
 								<label for="class1" class="sr-only">구분1</label>
 								<select class="form-control input-sm" name="class1" onChange="inoutSel(this.form);">
 									<option value="0">선 택</option>
@@ -44,7 +44,7 @@
 									<option value="3" <?php if($this->input->get('class1')==3) echo 'selected'; ?>>대 체</option>
 								</select>
 							</div>
-							<div class="col-xs-5 col-sm-6 col-md-1" style="height: 40px; padding: 5px;">
+							<div class="col-xs-6 col-sm-5 col-md-1" style="height: 40px; padding: 5px;">
 								<label for="class2" class="sr-only">구분2</label>
 								<select class="form-control input-sm" name="class2" onchange = "inoutSel2(this.form)" <?if(!$this->input->get('class1')&&!$this->input->get('class2')) echo "disabled";?>>
 <?php if( !$this->input->get('class1') or !$this->input->get('class2')) : ?>
@@ -68,35 +68,36 @@
 <?php endif;?>
 								</select>
 							</div>
-							<div class="col-xs-12 col-md-1 center" style="background-color: #F4F4F4; height: 40px; padding: 10px 0;">거래기간</div>
-							<div class="col-xs-12 col-md-3" style="height: 40px; padding: 5px;">
-								<div class="col-xs-5" style="padding: 0px;">
+							<div class="col-xs-12 col-sm-2 col-md-1 center" style="height: 40px; background-color: #F4F4F4; padding: 10px 0;">거래기간</div>
+							<div class="col-xs-12 col-sm-6 col-md-3" style="height: 40px; padding: 5px 0 0 5px;">
+								<div class="col-xs-5 col-sm-5" style="padding: 0px;">
 									<label for="s_date" class="sr-only">시작일</label>
 									<input type="text" class="form-control input-sm wid-95" id="s_date" name="s_date" maxlength="10" value="<?php if($this->input->get('s_date')) echo $this->input->get('s_date'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="시작일">
 								</div>
-								<div class="col-xs-1 glyphicon-wrap" style="padding: 6px 0;">
+								<div class="col-xs-1 col-sm-1 glyphicon-wrap" style="padding: 6px 0;">
 									<a href="javascript:" onclick="cal_add(document.getElementById('s_date'),this); event.cancelBubble=true">
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
 									</a>
 								</div>
-								<div class="col-xs-5" style="padding: 0px;">
+								<div class="col-xs-5 col-sm-5" style="padding: 0px;">
 									<label for="e_date" class="sr-only">종료일</label>
 									<input type="text" class="form-control input-sm wid-95" id="e_date" name="e_date" maxlength="10" value="<?php if($this->input->get('e_date')) echo $this->input->get('e_date'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="종료일">
 								</div>
-								<div class="col-xs-1 glyphicon-wrap" style="padding: 6px 0;">
+								<div class="col-xs-1 col-sm-1 glyphicon-wrap" style="padding: 6px 0;">
 									<a href="javascript:" onclick="cal_add(document.getElementById('e_date'),this); event.cancelBubble=true">
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
 									</a>
 								</div>
 							</div>
-							<div class="col-xs-12 col-md-2" style="padding: 9px 6px 0 0; text-align: right;">
+							<div class="col-xs-12 col-sm-4 col-md-2" style="height: 40px; padding: 10px 5px; text-align: right;">
 								<a href="javascript:" onclick="term_put('s_date', 'e_date', 'd');" title="오늘"><img src="/static/img/to_today.jpg" alt="오늘"></a>
 								<a href="javascript:" onclick="term_put('s_date', 'e_date', 'w');" title="일주일"><img src="/static/img/to_week.jpg" alt="일주일"></a>
 								<a href="javascript:" onclick="term_put('s_date', 'e_date', 'm');" title="1개월"><img src="/static/img/to_month.jpg" alt="1개월"></a>
 								<a href="javascript:" onclick="term_put('s_date', 'e_date', '3m');" title="3개월"><img src="/static/img/to_3month.jpg" alt="3개월"></a>
-								<button type="button" class="close" aria-label="Close" style="margin-left: 5px;" onclick="document.getElementById('s_date').value=''; document.getElementById('e_date').value='';"><span aria-hidden="true">&times;</span></button>
+								<button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="document.getElementById('s_date').value=''; document.getElementById('e_date').value='';"><span aria-hidden="true">&times;</span></button>
 							</div>
-							<div class="col-xs-5 col-sm-5 col-md-1 center" style="background-color: #F4F4F4; height: 40px; padding: 5px;">
+
+							<div class="col-xs-5 col-sm-2 col-md-1 center" style="height: 40px; background-color: #F4F4F4; padding: 5px;">
 								<label for="search_con" class="sr-only">검색조건</label>
 								<select class="form-control input-sm" name="search_con">
 									<option value="0">통합검색</option>
@@ -106,7 +107,7 @@
 									<option value="4" <?php if($this->input->get('search_con')==4) echo 'selected'; ?>>입출금처</option>
 								</select>
 							</div>
-							<div class="col-xs-5 col-sm-5 col-md-1" style="height: 40px; padding: 5px 0 0 5px;">
+							<div class="col-xs-5 col-sm-8 col-md-1" style="height: 40px; padding: 5px 0 0 5px;">
 								<label for="search_text" class="sr-only">검색어</label>
 								<input type="text" name="search_text" value="<?php if($this->input->get('search_text')) echo $this->input->get('search_text'); ?>" class="form-control input-sm" placeholder="검색어">
 							</div>
