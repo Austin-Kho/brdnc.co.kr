@@ -96,7 +96,6 @@
 								<a href="javascript:" onclick="term_put('s_date', 'e_date', '3m');" title="3개월"><img src="/static/img/to_3month.jpg" alt="3개월"></a>
 								<button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="document.getElementById('s_date').value=''; document.getElementById('e_date').value='';"><span aria-hidden="true">&times;</span></button>
 							</div>
-
 							<div class="col-xs-5 col-sm-2 col-md-1 center" style="height: 40px; background-color: #F4F4F4; padding: 5px;">
 								<label for="search_con" class="sr-only">검색조건</label>
 								<select class="form-control input-sm" name="search_con">
