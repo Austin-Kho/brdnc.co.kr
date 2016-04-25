@@ -46,14 +46,14 @@ Header("Expires: 0");
 			<td width="100" bgcolor="#EAEAEA">비 고</td>
 	</tr>
 <?
-	if($s_date){$s_add=" AND deal_date<'$s_date' ";}else{$s_add="  AND deal_date<'2000-01-01'  ";} // 시작일이 있으면 시작일 이후 없으면 2000-01-01부터 시작
+	if($s_date){$s_add=" AND deal_date<'$s_date' ";}else{$s_add="  AND deal_date<'2010-01-01'  ";} // 시작일이 있으면 시작일 이후 없으면 2000-01-01부터 시작
 
 	$query1="SELECT seq_num, class1, class2, account, cont, acc, in_acc, inc, out_acc, exp, evidence, cms_capital_cash_book.note, worker, deal_date, name, no
 			    FROM cms_capital_cash_book, cms_capital_bank_account
 			    $add_where
 			    ORDER BY deal_date, seq_num";
 	$result1=mysql_query($query1, $connect);
-	for($i=0; $rows1=mysql_fetch_array($result1); $i++){
+	for($i=0; $rows1=@mysql_fetch_array($result1); $i++){
 
 		 if($rows1[out_acc]==1||($rows1[class1]==3&&$rows1[out_acc]==1)) $cash_hand-=$rows1[exp];
 		 if($rows1[class1]==3&&$rows1[out_acc]==1&&$rows1[in_acc]==$rows1[no]) $cash_hand = $cash_hand+$rows1[exp];
@@ -126,50 +126,50 @@ Header("Expires: 0");
 	</tr>
 <?
 	 }
-	 mysql_free_result($result1);
+	 @mysql_free_result($result1);
 ?>
 </table>
-<p>
+<!-- <p>
 <table border=1>
-<tr  style="font-size:9pt;">
+<tr  style="font-size:9pt;"> -->
 <?
-	$cash1=" SELECT SUM(inc) AS in_total FROM cms_capital_cash_book  WHERE (com_div>0 AND in_acc='1' AND class2<>8) OR (com_div IS NULL AND in_acc=1 AND class2=7) $e_add  "; // 현금수입금 합계 구하기
-	$ca_qry1=mysql_query( $cash1, $connect);
-	$ca_row1=mysql_fetch_array($ca_qry1);
-	$cash2="SELECT SUM(exp) AS out_total FROM cms_capital_cash_book  WHERE (com_div>0) AND out_acc='1' $e_add "; // 현금지출금 합계 구하기
-	$ca_qry2=mysql_query( $cash2, $connect);
-	$ca_row2=mysql_fetch_array($ca_qry2);
-
-	$b_bal1="SELECT SUM(inc) AS in_total FROM cms_capital_cash_book  WHERE (com_div>0 AND in_acc>'1' AND class2<>8) OR (com_div IS NULL AND in_acc>1 AND class2=7)  $e_add   "; // 계좌수입금 합계 구하기
-	$b_qry1=mysql_query($b_bal1, $connect);
-	$b_row1=mysql_fetch_array($b_qry1);
-	$b_bal2="SELECT SUM(exp) AS out_total FROM cms_capital_cash_book  WHERE (com_div>0) AND out_acc>'1'  $e_add   "; // 계좌지출금 합계 구하기
-	$b_qry2=mysql_query($b_bal2, $connect);
-	$b_row2=mysql_fetch_array($b_qry2);
-
-	$dept1=" SELECT SUM(inc) AS in_total FROM cms_capital_cash_book  WHERE (com_div>0) AND class2='2' $e_add   "; // 차용금 합계 구하기
-	$de_qry1=mysql_query( $dept1, $connect);
-	$de_row1=mysql_fetch_array($de_qry1);
-	$dept2=" SELECT SUM(exp) AS out_total FROM cms_capital_cash_book  WHERE (com_div>0) AND class2='5'  $e_add   "; // 상환금 합계 구하기
-	$de_qry2=mysql_query( $dept2, $connect);
-	$de_row2=mysql_fetch_array($de_qry2);
-
-	$loan1=" SELECT SUM(exp) AS in_total FROM cms_capital_cash_book  WHERE (com_div>0) AND class2='6'  $e_add   "; // 대여금 합계 구하기
-	$lo_qry1=mysql_query( $loan1, $connect);
-	$lo_row1=mysql_fetch_array($lo_qry1);
-	$loan2=" SELECT SUM(inc) AS out_total FROM cms_capital_cash_book  WHERE (com_div>0) AND class2='3'  $e_add   "; // 회수금 합계 구하기
-	$lo_qry2=mysql_query( $loan2, $connect);
-	$lo_row2=mysql_fetch_array($lo_qry2);
-
-	$cash_hand = number_format($ca_row1[in_total]-$ca_row2[out_total])." 원"; // 현금시재
-	$bank_balance=number_format($b_row1[in_total]-$b_row2[out_total])." 원"; // 계좌잔고
-	// $dept=number_format($de_row1[in_total]-$de_row2[out_total])." 원"; // 차용금 잔고
-	// $loan=number_format($lo_row1[in_total]-$lo_row2[out_total])." 원"; // 대여금 잔고
-	if($bank_balance==0) $bank_balance="-";
-	if($cash_hand==0) $cash_hand="-";
-	if($dept==0) $dept="-";
-	if($loan==0) $loan="-";
+	// $cash1=" SELECT SUM(inc) AS in_total FROM cms_capital_cash_book  WHERE (com_div>0 AND in_acc='1' AND class2<>8) OR (com_div IS NULL AND in_acc=1 AND class2=7) $e_add  "; // 현금수입금 합계 구하기
+	// $ca_qry1=mysql_query( $cash1, $connect);
+	// $ca_row1=mysql_fetch_array($ca_qry1);
+	// $cash2="SELECT SUM(exp) AS out_total FROM cms_capital_cash_book  WHERE (com_div>0) AND out_acc='1' $e_add "; // 현금지출금 합계 구하기
+	// $ca_qry2=mysql_query( $cash2, $connect);
+	// $ca_row2=mysql_fetch_array($ca_qry2);
+	//
+	// $b_bal1="SELECT SUM(inc) AS in_total FROM cms_capital_cash_book  WHERE (com_div>0 AND in_acc>'1' AND class2<>8) OR (com_div IS NULL AND in_acc>1 AND class2=7)  $e_add   "; // 계좌수입금 합계 구하기
+	// $b_qry1=mysql_query($b_bal1, $connect);
+	// $b_row1=mysql_fetch_array($b_qry1);
+	// $b_bal2="SELECT SUM(exp) AS out_total FROM cms_capital_cash_book  WHERE (com_div>0) AND out_acc>'1'  $e_add   "; // 계좌지출금 합계 구하기
+	// $b_qry2=mysql_query($b_bal2, $connect);
+	// $b_row2=mysql_fetch_array($b_qry2);
+	//
+	// $dept1=" SELECT SUM(inc) AS in_total FROM cms_capital_cash_book  WHERE (com_div>0) AND class2='2' $e_add   "; // 차용금 합계 구하기
+	// $de_qry1=mysql_query( $dept1, $connect);
+	// $de_row1=mysql_fetch_array($de_qry1);
+	// $dept2=" SELECT SUM(exp) AS out_total FROM cms_capital_cash_book  WHERE (com_div>0) AND class2='5'  $e_add   "; // 상환금 합계 구하기
+	// $de_qry2=mysql_query( $dept2, $connect);
+	// $de_row2=mysql_fetch_array($de_qry2);
+	//
+	// $loan1=" SELECT SUM(exp) AS in_total FROM cms_capital_cash_book  WHERE (com_div>0) AND class2='6'  $e_add   "; // 대여금 합계 구하기
+	// $lo_qry1=mysql_query( $loan1, $connect);
+	// $lo_row1=mysql_fetch_array($lo_qry1);
+	// $loan2=" SELECT SUM(inc) AS out_total FROM cms_capital_cash_book  WHERE (com_div>0) AND class2='3'  $e_add   "; // 회수금 합계 구하기
+	// $lo_qry2=mysql_query( $loan2, $connect);
+	// $lo_row2=mysql_fetch_array($lo_qry2);
+	//
+	// $cash_hand = number_format($ca_row1[in_total]-$ca_row2[out_total])." 원"; // 현금시재
+	// $bank_balance=number_format($b_row1[in_total]-$b_row2[out_total])." 원"; // 계좌잔고
+	// // $dept=number_format($de_row1[in_total]-$de_row2[out_total])." 원"; // 차용금 잔고
+	// // $loan=number_format($lo_row1[in_total]-$lo_row2[out_total])." 원"; // 대여금 잔고
+	// if($bank_balance==0) $bank_balance="-";
+	// if($cash_hand==0) $cash_hand="-";
+	// if($dept==0) $dept="-";
+	// if($loan==0) $loan="-";
 ?>
-	<td height="50" bgcolor="#ffffcc" align="center" colspan="12"> 현금시재 : <?= $cash_hand?> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 예금잔고: <?=$bank_balance?> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 차입금잔고 : <?=$dept?> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 대여금잔고 : <?=$loan?> </td>
-</tr>
-</table>
+	<!-- <td height="50" bgcolor="#ffffcc" align="center" colspan="12"> 현금시재 : <?= $cash_hand?> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 예금잔고: <?=$bank_balance?> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 차입금잔고 : <?=$dept?> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 대여금잔고 : <?=$loan?> </td> -->
+<!-- </tr>
+</table> -->

@@ -26,131 +26,155 @@ class Cash_book extends CI_Controller {
 
 		// 검색변수 데이터 --------------------------------------------------------//
 		$sh_frm = array(
-			'class1' => $this->input->get('class1', TRUE),
-			'class2' => $this->input->get('class2', TRUE),
-			's_date' => $this->input->get('s_date', TRUE),
-			'e_date' => $this->input->get('e_date', TRUE),
-			'sh_con' => $this->input->get('search_con', TRUE),
-			'sh_text' => $this->input->get('search_text', TRUE)
+			'class1' => $this->input->get('class1'),
+			'class2' => $this->input->get('class2'),
+			's_date' => $this->input->get('s_date'),
+			'e_date' => $this->input->get('e_date'),
+			'sh_con' => $this->input->get('search_con'),
+			'sh_text' => $this->input->get('search_text')
 		);
+		$where=" (com_div>0 AND ((in_acc=no AND class2<>7) OR out_acc=no) OR (com_div IS NULL AND in_acc=no AND class2=6)) ";
+
+		//검색어가 있을 경우
+		if($sh_frm['class1']){
+			if($sh_frm['class1']==1) $where.=" AND class1='1' ";
+			if($sh_frm['class1']==2) $where.=" AND class1='2' ";
+			if($sh_frm['class1']==3) $where.=" AND class1='3' ";
+		}
+		if($sh_frm['class2']) $where.=" AND class2='".$sh_frm['class2']."' ";
+		if($sh_frm['s_date']) $where.=" AND deal_date>='".$sh_frm['s_date']."' ";
+		if($sh_frm['e_date']) {$where.=" AND deal_date<='".$sh_frm['e_date']."' "; } //$e_add=" AND deal_date<='$sh_frm['e_date']' ";} else{$e_add="";}
+
+		if($sh_frm['sh_text']){
+			if($sh_frm['sh_con']==0) $where.=" AND (account like '%".$sh_frm['sh_text']."%' OR cont like '%".$sh_frm['sh_text']."%' OR acc like '%".$sh_frm['sh_text']."%' OR evidence like '%".$sh_frm['sh_text']."%' OR cms_capital_cash_book.worker like '%".$sh_frm['sh_text']."%') "; // 통합검색
+			if($sh_frm['sh_con']==1) $where.=" AND account like '%".$sh_frm['sh_text']."%' "; // 계정과목
+			if($sh_frm['sh_con']==2) $where.=" AND cont like '%".$sh_frm['sh_text']."%' "; //적요
+			if($sh_frm['sh_con']==3) $where.=" AND acc like '%".$sh_frm['sh_text']."%' "; // 거래처
+			if($sh_frm['sh_con']==4) $where.=" AND (in_acc like '%".$sh_frm['sh_text']."%' OR out_acc like '%".$sh_frm['sh_text']."%')  ";  //입출금처
+		}
 		// 검색변수 데이터 --------------------------------------------------------//
 
 		// 검색결과 데이터 --------------------------------------------------------//
-		$cb_table = 'cms_capital_cash_book, cms_capital_bank_account';
-		$list_num = $this->m4_m->cash_book_list($cb_table, '', '', $sh_frm, 'num');
-		$cb_list = $this->m4_m->cash_book_list($cb_table, '', '', $sh_frm, '');
+		$list_num = $this->m4_m->cash_book_list('cms_capital_cash_book, cms_capital_bank_account', $where, '', '', $sh_frm, 'num', '');
+		$cb_list = $this->m4_m->cash_book_list('cms_capital_cash_book, cms_capital_bank_account', $where, '', '', $sh_frm, '', 'ex');
 		// 검색결과 데이터 --------------------------------------------------------//
 
 
 		// 본문 내용 ---------------------------------------------------------------//
-		$this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
-		$this->excel->getActiveSheet()->getColumnDimension('B')->setWidth(12);
-		$this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(13);
-		$this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
-		$this->excel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
-		$this->excel->getActiveSheet()->getColumnDimension('F')->setWidth(8);
-		$this->excel->getActiveSheet()->getColumnDimension('G')->setWidth(12);
-		$this->excel->getActiveSheet()->getColumnDimension('H')->setWidth(8);
-		$this->excel->getActiveSheet()->getColumnDimension('I')->setWidth(12);
-		$this->excel->getActiveSheet()->getColumnDimension('J')->setWidth(10);
-		$this->excel->getActiveSheet()->getColumnDimension('K')->setWidth(10);
-		$this->excel->getActiveSheet()->getColumnDimension('L')->setWidth(30);
+		if($cb_list) :
+			$this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
+			$this->excel->getActiveSheet()->getColumnDimension('B')->setWidth(12);
+			$this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(13);
+			$this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
+			$this->excel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
+			$this->excel->getActiveSheet()->getColumnDimension('F')->setWidth(8);
+			$this->excel->getActiveSheet()->getColumnDimension('G')->setWidth(12);
+			$this->excel->getActiveSheet()->getColumnDimension('H')->setWidth(8);
+			$this->excel->getActiveSheet()->getColumnDimension('I')->setWidth(12);
+			$this->excel->getActiveSheet()->getColumnDimension('J')->setWidth(10);
+			$this->excel->getActiveSheet()->getColumnDimension('K')->setWidth(10);
+			$this->excel->getActiveSheet()->getColumnDimension('L')->setWidth(30);
 
-		$this->excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(15); // 전체 기본 셀 높이 설정
-		$this->excel->getActiveSheet()->getRowDimension(1)->setRowHeight(30); // 1행의 셀 높이 설정
+			$this->excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(15); // 전체 기본 셀 높이 설정
+			$this->excel->getActiveSheet()->getRowDimension(1)->setRowHeight(30); // 1행의 셀 높이 설정
 
-		$this->excel->getActiveSheet()->duplicateStyleArray( // 전체 글꼴 및 정렬
-			array(
-				'font' => array('size' => 9),
-				'alignment' => array(
-					'vertical'   => PHPExcel_Style_Alignment::VERTICAL_CENTER,
-					'horizontal'   => PHPExcel_Style_Alignment::HORIZONTAL_CENTER
-				)
-			),
-			'A:L'
-		);
+			$this->excel->getActiveSheet()->duplicateStyleArray( // 전체 글꼴 및 정렬
+				array(
+					'font' => array('size' => 9),
+					'alignment' => array(
+						'vertical'   => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+						'horizontal'   => PHPExcel_Style_Alignment::HORIZONTAL_CENTER
+					)
+				),
+				'A:L'
+			);
 
-		$this->excel->getActiveSheet()->setCellValue("A1", '자금 출납부'); // 셀 갑 입력
-		$this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);// A1의 폰트를 변경 합니다.
-		$this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);// A1의 글씨를 볼드로 변경합니다.
+			$this->excel->getActiveSheet()->setCellValue("A1", '[주] 바램디앤씨 자금 출납기록'); // 셀 갑 입력
+			$this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);// A1의 폰트를 변경 합니다.
+			$this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);// A1의 글씨를 볼드로 변경합니다.
 
-		$this->excel->getActiveSheet()->mergeCells('A1:E1');
-		$this->excel->getActiveSheet()->getStyle('A2:L2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+			$this->excel->getActiveSheet()->mergeCells('A1:E1');
+			$this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
 
-		$this->excel->getActiveSheet()->setCellValue('A2', '거래일자');
-		$this->excel->getActiveSheet()->setCellValue('B2', '구 분');
-		$this->excel->getActiveSheet()->setCellValue('C2', '계정과목');
-		$this->excel->getActiveSheet()->setCellValue('D2', '적 요');
-		$this->excel->getActiveSheet()->setCellValue('E2', '거 래 처');
-		$this->excel->getActiveSheet()->setCellValue('F2', '입금처');
-		$this->excel->getActiveSheet()->setCellValue('G2', '입금금액');
-		$this->excel->getActiveSheet()->setCellValue('H2', '지출처');
-		$this->excel->getActiveSheet()->setCellValue('I2', '지출금액');
-		$this->excel->getActiveSheet()->setCellValue('J2', '현금시재');
-		$this->excel->getActiveSheet()->setCellValue('K2', '예금잔고');
-		$this->excel->getActiveSheet()->setCellValue('L2', '비 고');
-		$this->excel->getActiveSheet()->getStyle('A2:L2')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+			$this->excel->getActiveSheet()->setCellValue('A2', '거래일자');
+			$this->excel->getActiveSheet()->setCellValue('B2', '구 분');
+			$this->excel->getActiveSheet()->setCellValue('C2', '계정과목');
+			$this->excel->getActiveSheet()->setCellValue('D2', '적 요');
+			$this->excel->getActiveSheet()->setCellValue('E2', '거 래 처');
+			$this->excel->getActiveSheet()->setCellValue('F2', '입금처');
+			$this->excel->getActiveSheet()->setCellValue('G2', '입금금액');
+			$this->excel->getActiveSheet()->setCellValue('H2', '지출처');
+			$this->excel->getActiveSheet()->setCellValue('I2', '지출금액');
+			$this->excel->getActiveSheet()->setCellValue('J2', '현금시재');
+			$this->excel->getActiveSheet()->setCellValue('K2', '예금잔고');
+			$this->excel->getActiveSheet()->setCellValue('L2', '비 고');
 
-		for($i=0; $i<$list_num; $i++) :
-			switch ($cb_list[0]->class1) {
-				case '1': $cla1 = '[입금]'; break;
-				case '2': $cla1 = '[출금]'; break;
-				case '3': $cla1 = '[대체]'; break;
+
+			$this->excel->getActiveSheet()->getStyle('G3:G'.($list_num+2))->getNumberFormat()->setFormatCode('#,##0'); // 셀 숫자형 변환 (1000 -> 1,000)
+			$this->excel->getActiveSheet()->getStyle('I3:K'.($list_num+2))->getNumberFormat()->setFormatCode('#,##0'); // 셀 숫자형 변환 (1000 -> 1,000)
+			$this->excel->getActiveSheet()->getStyle('D3:D'.($list_num+2))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+			$this->excel->getActiveSheet()->getStyle('G3:G'.($list_num+2))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+			$this->excel->getActiveSheet()->getStyle('I3:K'.($list_num+2))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+			$this->excel->getActiveSheet()->getStyle('L3:L'.($list_num+2))->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
+
+			function c1($c1){
+				switch ($c1) {
+					case '1': $c1 = "[입금]"; break;
+					case '2': $c1 = "[출금]"; break;
+					case '3': $c1 = "[대체]"; break;
+				}
+				return $c1;
 			}
-			switch ($cb_list[0]->class2) {
-				case '1': $cla2 = '[자산]'; break;
-				case '2': $cla2 = '[부채]'; break;
-				case '3': $cla2 = '[자본]'; break;
-				case '4': $cla2 = '[수익]'; break;
-				case '5': $cla2 = '[비용]'; break;
-				case '6': $cla2 = '[본사]'; break;
-				case '7': $cla2 = '[현장]'; break;
-			}
-
-			if($cb_list[0]->account=="" || $cb_list[0]->account=='0'){ $account = "-"; }else{ $account = "[".$cb_list[0]->account."]"; } //계정과목
-			if($cb_list[0]->inc==0) $inc = '-'; else $inc = $cb_list[0]->inc;
-			if($cb_list[0]->exp==0) $exp = '-'; else $exp = $cb_list[0]->exp;
-			if($cb_list->acc) $acc=$cb_list->acc; else $acc="-"; // 거래처정보가 없을 때
-
-			// 대체거래일 때
-			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			// (수입금이 '0' 이거나 대체거래이고, 출금계정이 은행등록계좌와 같으면,
-			if($cb_list->inc==0||($cb_list->class1==3&&$cb_list->out_acc==$cb_list->no)){ $inc="-"; }else{ $inc=number_format($cb_list->inc); }// 수입금
-			// 지출금이 '0' 이거나 대체거래이고 입금계정이 은행등록계좌와 같으면,
-			if($cb_list->exp==0||($cb_list->class1==3&&$cb_list->in_acc==$cb_list->no)){ $exp="-"; }else{ $exp=number_format($cb_list->exp); }// 지출금
-			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-			// 대체거래일 때
-			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			// 입금계정정보가 없거나 대체거래이고 출금계정이 은행등록계좌와 같으면,
-			if($cb_list->in_acc==0||($cb_list->class1==3&&$cb_list->out_acc==$cb_list->no)){ $in_acc=""; }else{ $in_acc=$cb_list->name; } // 입금계정은 계좌별칭
-			// 출금계정정보가 없거나 대체거래이고 입금계정이 은행등록계좌와 같으면,
-			if($cb_list->out_acc==0||($cb_list->class1==3&&$cb_list->in_acc==$cb_list->no)){ $out_acc=""; }else{ $out_acc=$cb_list->name; } // 출금계정은 계좌별칭
-			///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-			switch ($cb_list->evidence) {
-				case '1': $evi="증빙 없음"; break;
-				case '2': $evi="세금계산서"; break;
-				case '3': $evi="계산서"; break;
-				case '4': $evi="카드전표"; break;
-				case '5': $evi="현금영수증"; break;
-				case '6': $evi="간이영수증"; break;
+			function c2($c2){
+				switch ($c2) {
+					case '1': $c2 = "[자산]"; break;
+					case '2': $c2 = "[부채]"; break;
+					case '3': $c2 = "[자본]"; break;
+					case '4': $c2 = "[수익]"; break;
+					case '5': $c2 = "[비용]"; break;
+					case '6': $c2 = "[본사]"; break;
+					case '7': $c2 = "[현장]"; break;
+				}
+				return $c2;
 			}
 
-			$this->excel->setActiveSheetIndex(0)->setCellValue("A".($i+3), $cb_list->deal_date);
-			$this->excel->setActiveSheetIndex(0)->setCellValue("B".($i+3), $cla1." - ".$cla2);
-			$this->excel->setActiveSheetIndex(0)->setCellValue("C".($i+3), $account);
-			$this->excel->setActiveSheetIndex(0)->setCellValue("D".($i+3), cut_string($cb_list->cont, 20, '..'));
-			$this->excel->setActiveSheetIndex(0)->setCellValue("E".($i+3), cut_string($acc, 8, '..'));
-			$this->excel->setActiveSheetIndex(0)->setCellValue("F".($i+3), $in_acc);
-			$this->excel->setActiveSheetIndex(0)->setCellValue("G".($i+3), $inc);
-			$this->excel->setActiveSheetIndex(0)->setCellValue("H".($i+3), $out_acc);
-			$this->excel->setActiveSheetIndex(0)->setCellValue("I".($i+3), $exp);
-			// $this->excel->setActiveSheetIndex(0)->setCellValue("J".($i+3), $cash_hand);
-			// $this->excel->setActiveSheetIndex(0)->setCellValue("K".($i+3), $bank_balance);
-			$this->excel->setActiveSheetIndex(0)->setCellValue("L".($i+3), $cb_list->note);
+			// $b_acc = $this->main_m->sql_result(' SELECT no, name FROM cms_capital_bank_account ORDER BY no ');
 
-		endfor;
+
+
+			for($i=0; $i<$list_num; $i++) :
+				if($cb_list[$i]->inc==0) $inc = "-"; else $inc = $cb_list[$i]->inc;
+				if($cb_list[$i]->exp==0) $exp = "-"; else $exp = $cb_list[$i]->exp;
+
+				if($cb_list[$i]->account=="" || $cb_list[$i]->account=='0'){ $account = "-"; }else{ $account = "[".$cb_list[$i]->account."]"; } //계정과목
+
+				// 수입 지출 구하기
+				// (수입금이 '0' 이거나 대체거래이고, 출금계정이 은행등록계좌와 같으면,
+				if($cb_list[$i]->inc==0||($cb_list[$i]->class1==3&&$cb_list[$i]->out_acc==$cb_list[$i]->no)){ $inc="-"; }else{ $inc=number_format($cb_list[$i]->inc); }// 수입금
+				// 지출금이 '0' 이거나 대체거래이고 입금계정이 은행등록계좌와 같으면,
+				if($cb_list[$i]->exp==0||($cb_list[$i]->class1==3&&$cb_list[$i]->in_acc==$cb_list[$i]->no)){ $exp="-"; }else{ $exp=number_format($cb_list[$i]->exp); }// 지출금
+
+				// 입금처 출금처 구하기
+				// 입금계정정보가 없거나 대체거래이고 출금계정이 은행등록계좌와 같으면,
+				if($cb_list[$i]->in_acc==0||($cb_list[$i]->class1==3&&$cb_list[$i]->out_acc==$cb_list[$i]->no)){ $in_acc=""; }else{ $in_acc=$cb_list[$i]->name; } // 입금계정은 계좌별칭
+				// 출금계정정보가 없거나 대체거래이고 입금계정이 은행등록계좌와 같으면,
+				if($cb_list[$i]->out_acc==0||($cb_list[$i]->class1==3&&$cb_list[$i]->in_acc==$cb_list[$i]->no)){ $out_acc=""; }else{ $out_acc=$cb_list[$i]->name; } // 출금계정은 계좌별칭
+
+				$this->excel->getActiveSheet()->setCellValue('A'.($i+3), $cb_list[$i]->deal_date);
+				$this->excel->getActiveSheet()->setCellValue('B'.($i+3), c1($cb_list[$i]->class1).'-'.c2($cb_list[$i]->class2));
+				$this->excel->getActiveSheet()->setCellValue('C'.($i+3), $account);
+				$this->excel->getActiveSheet()->setCellValue('D'.($i+3), cut_string($cb_list[$i]->cont, 16, '..'));
+				$this->excel->getActiveSheet()->setCellValue('E'.($i+3), cut_string($cb_list[$i]->acc, 10, '..'));
+				$this->excel->getActiveSheet()->setCellValue('F'.($i+3), $in_acc);
+				$this->excel->getActiveSheet()->setCellValue('G'.($i+3), $inc);
+				$this->excel->getActiveSheet()->setCellValue('H'.($i+3), $out_acc);
+				$this->excel->getActiveSheet()->setCellValue('I'.($i+3), $exp);
+				$this->excel->getActiveSheet()->setCellValue('J'.($i+3), '');
+				$this->excel->getActiveSheet()->setCellValue('K'.($i+3), '');
+				$this->excel->getActiveSheet()->setCellValue('L'.($i+3), $cb_list[$i]->note);
+			endfor;
+		endif;
+
 
 
 		// 본문 내용 ---------------------------------------------------------------//

@@ -15,9 +15,14 @@
 					}
 				}
 			</script>
-
+<?php
+	$url_where = urlencode($where);
+	$url_s_date = urlencode($this->input->get('s_date'));
+	$url_e_date = urlencode($this->input->get('e_date'));
+?>
 			<div class="main_start">
-				<a href="?excel_pop=cash_book">
+				<a href="/pc/_menu3/excel_cash_book.php?add_where=<?php echo $url_where;?>&amp;s_date=<?php echo $url_s_date;?>&amp;e_date=<?php echo $url_e_date;?>">
+				<!-- <a href="/excel_file/cash_book?class1=<?php echo $this->input->get('class1'); ?>&class2=<?php echo $this->input->get('class2'); ?>&s_date=<?php echo $this->input->get('s_date'); ?>&e_date=<?php echo $this->input->get('e_date'); ?>&sh_con=<?php echo $this->input->get('search_con'); ?>&sh_text=<?php echo $this->input->get('search_text'); ?>"> -->
 					<img src="/static/img/excel_icon.jpg" height="10" border="0" alt="EXCEL 아이콘" /> EXCEL로 출력
 				</a>
 			</div>
@@ -158,7 +163,7 @@
 	if($lt->exp==0) $exp = '-'; else $exp = number_format($lt->exp);
 	if($lt->acc) {$acc=$lt->acc;}else{$acc="-";} // 거래처정보가 없을 때
 
-	// 대체거래일 때
+	// 수입 지출 구하기
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// (수입금이 '0' 이거나 대체거래이고, 출금계정이 은행등록계좌와 같으면,
 	if($lt->inc==0||($lt->class1==3&&$lt->out_acc==$lt->no)){ $inc="-"; }else{ $inc=number_format($lt->inc); }// 수입금
@@ -166,7 +171,7 @@
 	if($lt->exp==0||($lt->class1==3&&$lt->in_acc==$lt->no)){ $exp="-"; }else{ $exp=number_format($lt->exp); }// 지출금
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	// 대체거래일 때
+	// 입금처 출금처 구하기
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// 입금계정정보가 없거나 대체거래이고 출금계정이 은행등록계좌와 같으면,
 	if($lt->in_acc==0||($lt->class1==3&&$lt->out_acc==$lt->no)){ $in_acc=""; }else{ $in_acc=$lt->name; } // 입금계정은 계좌별칭
@@ -220,7 +225,7 @@
 <?php endif; ?>
 					</div>
 					<div class="col-md-12 center" style="margin-top: 0px; padding: 0;">
-						<ul class="pagination pagination-sm"><?php echo $pagination; ?></ul>
+						<ul class="pagination pagination-sm"><?php echo $pagination;?></ul>
 					</div>
 				</div>
 				<div class="row" style="margin: 0 15px 43px;">

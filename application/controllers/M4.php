@@ -140,13 +140,8 @@ class M4 extends CI_Controller {
 				$data['da_ex_total'] = $this->m4_m->da_ex_total('cms_capital_cash_book', $data['sh_date']);
 
 
-				// Excel_pop
-				// if($this->input->get('daily_report')=='print') {
-				// 	redirect('/a.php');
-				// }else{
-				// 	//본 페이지 로딩
-				 	$this->load->view('/menu/m4/md1_sd1_v', $data);
-				// }
+				//본 페이지 로딩
+				$this->load->view('/menu/m4/md1_sd1_v', $data);
 			}
 
 
@@ -176,6 +171,25 @@ class M4 extends CI_Controller {
 					'sh_con' => $this->input->get('search_con', TRUE),
 					'sh_text' => $this->input->get('search_text', TRUE)
 				);
+				$data['where']=" (com_div>0 AND ((in_acc=no AND class2<>7) OR out_acc=no) OR (com_div IS NULL AND in_acc=no AND class2=6)) ";
+
+				//검색어가 있을 경우
+				if($sh_frm['class1']){
+					if($sh_frm['class1']==1) $data['where'].=" AND class1='1' ";
+					if($sh_frm['class1']==2) $data['where'].=" AND class1='2' ";
+					if($sh_frm['class1']==3) $data['where'].=" AND class1='3' ";
+				}
+				if($sh_frm['class2']) $data['where'].=" AND class2='".$sh_frm['class2']."' ";
+				if($sh_frm['s_date']) $data['where'].=" AND deal_date>='".$sh_frm['s_date']."' ";
+				if($sh_frm['e_date']) {$data['where'].=" AND deal_date<='".$sh_frm['e_date']."' "; } //$e_add=" AND deal_date<='$sh_frm['e_date']' ";} else{$e_add="";}
+
+				if($sh_frm['sh_text']){
+					if($sh_frm['sh_con']==0) $data['where'].=" AND (account like '%".$sh_frm['sh_text']."%' OR cont like '%".$sh_frm['sh_text']."%' OR acc like '%".$sh_frm['sh_text']."%' OR evidence like '%".$sh_frm['sh_text']."%' OR cms_capital_cash_book.worker like '%".$sh_frm['sh_text']."%') "; // 통합검색
+					if($sh_frm['sh_con']==1) $data['where'].=" AND account like '%".$sh_frm['sh_text']."%' "; // 계정과목
+					if($sh_frm['sh_con']==2) $data['where'].=" AND cont like '%".$sh_frm['sh_text']."%' "; //적요
+					if($sh_frm['sh_con']==3) $data['where'].=" AND acc like '%".$sh_frm['sh_text']."%' "; // 거래처
+					if($sh_frm['sh_con']==4) $data['where'].=" AND (in_acc like '%".$sh_frm['sh_text']."%' OR out_acc like '%".$sh_frm['sh_text']."%')  ";  //입출금처
+				}
 
 				// model data ////////////////
 				$cb_table = 'cms_capital_cash_book, cms_capital_bank_account';
@@ -185,7 +199,7 @@ class M4 extends CI_Controller {
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = '/m4/capital/1/2/';   //페이징 주소
-				$config['total_rows'] = $this->m4_m->cash_book_list($cb_table, '', '', $sh_frm, 'num');  //게시물의 전체 갯수
+				$config['total_rows'] = $this->m4_m->cash_book_list($cb_table, $data['where'], '', '', $sh_frm, 'num');  //게시물의 전체 갯수
 				$config['per_page'] = 12; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 4;  // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -201,7 +215,7 @@ class M4 extends CI_Controller {
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$data['pagination'] = $this->pagination->create_links();
 
-				$data['cb_list'] = $this->m4_m->cash_book_list($cb_table, $start, $limit, $sh_frm, '');
+				$data['cb_list'] = $this->m4_m->cash_book_list($cb_table, $data['where'], $start, $limit, $sh_frm, '', '');
 
 				if($this->input->get('del_code')) {
 					$result = $this->m4_m->delete_data('cms_capital_cash_book', array('seq_num' => $this->input->get('del_code')));
