@@ -1,254 +1,121 @@
       <div class="main_start">&nbsp;</div>
-      <div class="row">
-        <div class="col-md-6">
-          <table class="table">
-            <thead>
+
+			<div class="row font12" style="margin: 0; padding: 0;">
+				<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
+<?php
+$attributes = array('name' => 'form1', 'method' => 'get');
+echo form_open('/m3/project/1/1/', $attributes);
+?>
+						<div class="col-xs-12 col-sm-4 col-md-2 center" style="background-color: #F4F4F4; padding: 9px 0 10px;">계약년도</div>
+						<div class=" form-wrap col-xs-12 col-sm-8 col-md-2" style="padding: 3px;">
+							<label for="class1" class="sr-only">구분1</label>
+							<select class="form-control input-sm" name="class1" onChange="inoutSel(this.form);">
+								<option value="0">선 택</option>
+								<option value="1" <?php if($this->input->get('class1')==1) echo 'selected'; ?>>입 금</option>
+								<option value="2" <?php if($this->input->get('class1')==2) echo 'selected'; ?>>출 금</option>
+								<option value="3" <?php if($this->input->get('class1')==3) echo 'selected'; ?>>대 체</option>
+							</select>
+						</div>
+
+						<div class="col-xs-12 col-sm-4 col-md-2 center" style="background-color: #F4F4F4; padding: 9px 0 10px;">미등록현장 [<span style="color: #0c04ab;">신규등록</span>]</div>
+						<div class="form-wrap col-xs-12 col-sm-8 col-md-2" style="padding: 3px;">
+							<label for="class1" class="sr-only">구분1</label>
+							<select class="form-control input-sm" name="class1" onChange="inoutSel(this.form);">
+								<option value="0">선 택</option>
+								<option value="1" <?php if($this->input->get('class1')==1) echo 'selected'; ?>>입 금</option>
+								<option value="2" <?php if($this->input->get('class1')==2) echo 'selected'; ?>>출 금</option>
+								<option value="3" <?php if($this->input->get('class1')==3) echo 'selected'; ?>>대 체</option>
+							</select>
+						</div>
+
+						<div class="col-xs-12 col-sm-4 col-md-2 center" style="background-color: #F4F4F4; padding: 9px 0 10px;">기등록현장 [<span style="color: #be032a;">데이터수정</span>]</div>
+						<div class="form-wrap col-xs-12 col-sm-8 col-md-2" style="padding: 3px;">
+							<label for="class1" class="sr-only">구분1</label>
+							<select class="form-control input-sm" name="class1" onChange="inoutSel(this.form);">
+								<option value="0">선 택</option>
+								<option value="1" <?php if($this->input->get('class1')==1) echo 'selected'; ?>>입 금</option>
+								<option value="2" <?php if($this->input->get('class1')==2) echo 'selected'; ?>>출 금</option>
+								<option value="3" <?php if($this->input->get('class1')==3) echo 'selected'; ?>>대 체</option>
+							</select>
+						</div>
+					</form>
+				</div>
+
+
+				<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
+					<div class="col-xs-4 col-sm-4 col-md-2 center" style="background-color: #F4F4F4; padding: 9px 0;">프로젝트 명</div>
+					<div class="col-xs-8 col-sm-8 col-md-4" style="padding: 9px;">
+						<span style="color: #0c04ab;"><?php echo '현장명';?></span>
+					</div>
+
+					<div class="col-xs-4 col-sm-4 col-md-2 center" style="background-color: #F4F4F4; padding: 9px 0;">프로젝트 종류</div>
+					<div class="col-xs-8 col-sm-8 col-md-4" style="padding: 9px;">
+						<span style="color: #0c04ab;"><?php echo '현장종류';?></span>
+					</div>
+				</div>
+
+				<div class="row" style="margin: 0;">
+					<div class="col-xs-12" style="padding: 9px 0 9px 15px;"><strong><span class="red">*</span> 라인(동) 별 데이터 등록</strong></div>
+				</div>
+
+				<div class="row table-responsive" style="margin: 0 0 20px 0;">
+					<table class="table">
+            <thead class="bo-top" style="background-color: #F0F0E8;">
               <tr>
                 <th>#</th>
-                <th>동호수 데이터 입력</th>
+                <th>기본정보 수정</th>
                 <th>Last Name</th>
                 <th>Username</th>
+								<th>Username</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="bo-bottom">
               <tr>
                 <td>1</td>
                 <td>Mark</td>
                 <td>Otto</td>
                 <td>@mdo</td>
+								<td>@mdo</td>
               </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-md-6">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
+							<tr>
                 <td>1</td>
                 <td>Mark</td>
                 <td>Otto</td>
                 <td>@mdo</td>
+								<td>@mdo</td>
               </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6">
-          <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td rowspan="2">1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@TwBootstrap</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-md-6">
-          <table class="table table-condensed">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
+							<tr>
                 <td>1</td>
                 <td>Mark</td>
                 <td>Otto</td>
                 <td>@mdo</td>
+								<td>@mdo</td>
               </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
+							<tr>
+                <td>1</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+								<td>@mdo</td>
               </tr>
-              <tr>
-                <td>3</td>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
+							<tr>
+                <td>1</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+								<td>@mdo</td>
               </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+							<tr>
+                <td>1</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+								<td>@mdo</td>
+              </tr>
+						</tbody>
+					</table>
+				</div>
 
 
-      <div class="page-header">
-        <h1>Panels</h1>
-      </div>
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
-            </div>
-            <div class="panel-body">
-              Panel content
-            </div>
-          </div>
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
-            </div>
-            <div class="panel-body">
-              Panel content
-            </div>
-          </div>
-        </div><!-- /.col-sm-4 -->
-        <div class="col-sm-4">
-          <div class="panel panel-success">
-            <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
-            </div>
-            <div class="panel-body">
-              Panel content
-            </div>
-          </div>
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
-            </div>
-            <div class="panel-body">
-              Panel content
-            </div>
-          </div>
-        </div><!-- /.col-sm-4 -->
-        <div class="col-sm-4">
-          <div class="panel panel-warning">
-            <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
-            </div>
-            <div class="panel-body">
-              Panel content
-            </div>
-          </div>
-          <div class="panel panel-danger">
-            <div class="panel-heading">
-              <h3 class="panel-title">Panel title</h3>
-            </div>
-            <div class="panel-body">
-              Panel content
-            </div>
-          </div>
-        </div><!-- /.col-sm-4 -->
-      </div>
 
-
-      <div class="page-header">
-        <h1>Badges</h1>
-      </div>
-      <p>
-        <a href="#">Inbox <span class="badge">42</span></a>
-      </p>
-      <ul class="nav nav-pills" role="tablist">
-        <li role="presentation" class="active"><a href="#">Home <span class="badge">42</span></a></li>
-        <li role="presentation"><a href="#">Profile</a></li>
-        <li role="presentation"><a href="#">Messages <span class="badge">3</span></a></li>
-      </ul>
-
-
-      <div class="page-header">
-        <h1>List groups</h1>
-      </div>
-      <div class="row">
-        <div class="col-sm-4">
-          <ul class="list-group">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-          </ul>
-        </div><!-- /.col-sm-4 -->
-        <div class="col-sm-4">
-          <div class="list-group">
-            <a href="#" class="list-group-item active">
-              Cras justo odio
-            </a>
-            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-            <a href="#" class="list-group-item">Morbi leo risus</a>
-            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-            <a href="#" class="list-group-item">Vestibulum at eros</a>
-          </div>
-        </div><!-- /.col-sm-4 -->
-        <div class="col-sm-4">
-          <div class="list-group">
-            <a href="#" class="list-group-item active">
-              <h4 class="list-group-item-heading">List group item heading</h4>
-              <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-            </a>
-            <a href="#" class="list-group-item">
-              <h4 class="list-group-item-heading">List group item heading</h4>
-              <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-            </a>
-            <a href="#" class="list-group-item">
-              <h4 class="list-group-item-heading">List group item heading</h4>
-              <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-            </a>
-          </div>
-        </div><!-- /.col-sm-4 -->
       </div>

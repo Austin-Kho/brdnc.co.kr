@@ -1,7 +1,7 @@
       <div class="main_start">&nbsp;</div>
 <!-- 3. 프로젝트 -> 2. 신규 프로젝트 ->1. 신규 등록 -->
       <div class="row" style="margin: 0; padding: 0;">
-				<form class="" action="index.html" method="post">
+				<form name="form1" class="" action="" method="post">
 					<fieldset class="font12">
 						<div class="form-group">
 							<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
@@ -41,11 +41,11 @@
 								</div>
 								<div class="col-xs-12 col-sm-6 col-md-4">
 									<label for="address1" class="sr-only">회사주소1</label>
-									<input type="text" class="form-control input-sm wid-98" id="address1" name="address1" maxlength="100" value="" readonly required autofocus>
+									<input type="text" class="form-control input-sm" id="address1" name="address1" maxlength="100" value="" readonly required autofocus>
 								</div>
 								<div class="col-xs-12 col-sm-6 col-md-3">
 									<label for="address2" class="sr-only">회사주소2</label>
-									<input type="text" class="form-control input-sm wid-98" id="address2" maxlength="100" value="" name="address2">
+									<input type="text" class="form-control input-sm" id="address2" maxlength="100" value="" name="address2">
 								</div>
 								<div class="col-xs-12 col-sm-12 col-md-3 glyphicon-wrap">나머지 주소</div>
 							</div>
@@ -203,15 +203,53 @@
 
 						<div class="form-group">
 							<div class="col-xs-12 col-sm-12 col-md-12 form-wrap bo-top">
-								<div class="col-xs-12 col-sm-8">
-
+								<div class="col-xs-12 col-sm-8 font13" style="padding: 18px 0 5px 15px; color: #d60740">
+									<strong>타입 등록</strong>
 								</div>
 							</div>
 						</div>
 
 						<div class="form-group">
 							<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
-								<label for="co_name">법정 주차대수 <span class="red">*</span></label>
+								<label for="co_name">타입별 정보등록 <span class="red">*</span></label>
+							</div>
+							<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
+								<div class="col-xs-3 col-sm-2" style="padding-right: 0;">
+									<input type="text" class="form-control input-sm han" id="co_name" name="co_name" maxlength="30" value="" required autofocus placeholder="타입">
+								</div>
+								<div class="col-xs-3 col-sm-2" style="padding-right: 0;">
+									<input type="color" class="form-control input-sm han" id="co_name" name="co_name" maxlength="30" value="" required autofocus placeholder="컬러">
+								</div>
+								<div class="col-xs-3 col-sm-2" style="padding-right: 0;">
+									<input type="text" class="form-control input-sm han" id="co_name" name="co_name" maxlength="30" value="" required autofocus placeholder="수량">
+								</div>
+								<div class="col-xs-3 col-sm-2" style="padding-right: 0;">
+									<select class="form-control input-sm" id="co_form" name="co_form" required autofocus>
+										<option value="0">단위</option>
+										<option value="1">세대</option>
+										<option value="2">실</option>
+										<option value="3">호</option>
+										<option value="4">㎡(면적)</option>
+									</select>
+								</div>
+								<div class="col-xs-12 col-sm-4 form-inline" style="padding: 10px 0 0 8px;">
+									<input type="checkbox" class="checkbox" id="co_name" name="co_name" maxlength="30" value="" required autofocus placeholder="수량"><span> 타입추가</span>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<div class="col-xs-12 col-sm-12 col-md-12 form-wrap bo-top">
+								<div class="col-xs-12 col-sm-8 font13" style="padding: 18px 0 5px 15px; color: #d60740">
+									<strong>추가 정보</strong>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
+								<label for="co_name">토지 매입비 <span class="red">*</span></label>
 							</div>
 							<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 								<div class="col-xs-12 col-sm-8">
@@ -219,7 +257,7 @@
 								</div>
 							</div>
 							<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
-								<label for="co_no1">계획 주차대수 <span class="red">*</span></label>
+								<label for="co_no1">평당 건축비 <span class="red">*</span></label>
 							</div>
 							<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 								<div class="col-xs-12 col-sm-8">
@@ -232,9 +270,100 @@
 									</select>
 								</div>
 							</div>
+
+							<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
+								<label for="co_name">설계 용역비 <span class="red">*</span></label>
+							</div>
+							<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
+								<div class="col-xs-12 col-sm-8">
+									<input type="text" class="form-control input-sm han" id="co_name" name="co_name" maxlength="30" value="" required autofocus>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
+								<label for="co_no1">감리 용역비 <span class="red">*</span></label>
+							</div>
+							<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
+								<div class="col-xs-12 col-sm-8">
+									<label for="co_form" class="sr-only">사업자종류 </label>
+									<select class="form-control input-sm" id="co_form" name="co_form" required autofocus>
+										<option value="">선택</option>
+										<option value="1">법인</option>
+										<option value="2">개인(일반)</option>
+										<option value="3">개인(간이)</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
+								<label for="co_name">시행사 초기투자금 <span class="red">*</span></label>
+							</div>
+							<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
+								<div class="col-xs-12 col-sm-8">
+									<input type="text" class="form-control input-sm han" id="co_name" name="co_name" maxlength="30" value="" required autofocus>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
+								<label for="co_no1">시행사 세대당 이윤 <span class="red">*</span></label>
+							</div>
+							<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
+								<div class="col-xs-12 col-sm-8">
+									<label for="co_form" class="sr-only">사업자종류 </label>
+									<select class="form-control input-sm" id="co_form" name="co_form" required autofocus>
+										<option value="">선택</option>
+										<option value="1">법인</option>
+										<option value="2">개인(일반)</option>
+										<option value="3">개인(간이)</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
+								<label for="co_name">브릿지 차입규모 <span class="red">*</span></label>
+							</div>
+							<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
+								<div class="col-xs-12 col-sm-8">
+									<input type="text" class="form-control input-sm han" id="co_name" name="co_name" maxlength="30" value="" required autofocus>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
+								<label for="co_no1">PF 차입규모 <span class="red">*</span></label>
+							</div>
+							<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
+								<div class="col-xs-12 col-sm-8">
+									<label for="co_form" class="sr-only">사업자종류 </label>
+									<select class="form-control input-sm" id="co_form" name="co_form" required autofocus>
+										<option value="">선택</option>
+										<option value="1">법인</option>
+										<option value="2">개인(일반)</option>
+										<option value="3">개인(간이)</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
+								<label for="co_name">공사 소요기간 <span class="red">*</span></label>
+							</div>
+							<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
+								<div class="col-xs-12 col-sm-8">
+									<input type="text" class="form-control input-sm han" id="co_name" name="co_name" maxlength="30" value="" required autofocus>
+								</div>
+							</div>
+							<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
+								<label for="co_no1">사업 개시월 <span class="red">*</span></label>
+							</div>
+							<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
+								<div class="col-xs-12 col-sm-8">
+									<label for="co_form" class="sr-only">사업자종류 </label>
+									<select class="form-control input-sm" id="co_form" name="co_form" required autofocus>
+										<option value="">선택</option>
+										<option value="1">법인</option>
+										<option value="2">개인(일반)</option>
+										<option value="3">개인(간이)</option>
+									</select>
+								</div>
+							</div>
+
 						</div>
-
-
 
 					</fieldset>
 				</form>
