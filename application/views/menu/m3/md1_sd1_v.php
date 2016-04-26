@@ -6,7 +6,7 @@
 $attributes = array('name' => 'form1', 'method' => 'get');
 echo form_open('/m3/project/1/1/', $attributes);
 ?>
-						<div class="col-xs-12 col-sm-4 col-md-2 center" style="background-color: #F4F4F4; padding: 9px 0 10px;">계약년도</div>
+						<div class="col-xs-12 col-sm-4 col-md-2 center" style="background-color: #F4F4F4; padding: 9px 0;">사업 개시년도</div>
 						<div class=" form-wrap col-xs-12 col-sm-8 col-md-2" style="padding: 3px;">
 							<label for="class1" class="sr-only">구분1</label>
 							<select class="form-control input-sm" name="class1" onChange="inoutSel(this.form);">
@@ -17,7 +17,7 @@ echo form_open('/m3/project/1/1/', $attributes);
 							</select>
 						</div>
 
-						<div class="col-xs-12 col-sm-4 col-md-2 center" style="background-color: #F4F4F4; padding: 9px 0 10px;">미등록현장 [<span style="color: #0c04ab;">신규등록</span>]</div>
+						<div class="col-xs-12 col-sm-4 col-md-2 center" style="background-color: #F4F4F4; padding: 9px 0;">미등록현장 [<span style="color: #0c04ab;">신규등록</span>]</div>
 						<div class="form-wrap col-xs-12 col-sm-8 col-md-2" style="padding: 3px;">
 							<label for="class1" class="sr-only">구분1</label>
 							<select class="form-control input-sm" name="class1" onChange="inoutSel(this.form);">
@@ -28,7 +28,7 @@ echo form_open('/m3/project/1/1/', $attributes);
 							</select>
 						</div>
 
-						<div class="col-xs-12 col-sm-4 col-md-2 center" style="background-color: #F4F4F4; padding: 9px 0 10px;">기등록현장 [<span style="color: #be032a;">데이터수정</span>]</div>
+						<div class="col-xs-12 col-sm-4 col-md-2 center" style="background-color: #F4F4F4; padding: 9px 0;">기등록현장 [<span style="color: #be032a;">데이터수정</span>]</div>
 						<div class="form-wrap col-xs-12 col-sm-8 col-md-2" style="padding: 3px;">
 							<label for="class1" class="sr-only">구분1</label>
 							<select class="form-control input-sm" name="class1" onChange="inoutSel(this.form);">

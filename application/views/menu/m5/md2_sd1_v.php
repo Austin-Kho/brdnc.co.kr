@@ -397,15 +397,15 @@
 							<div class="col-xs-3 col-sm-5 col-md-1" style="padding-right: 0;">
 								<input type="text" class="form-control input-sm" id="zipcode" name="zipcode" maxlength="5" value="<?php if($mode=='com_reg') {echo set_value('zipcode');} else {echo $com->zipcode; } ?>" readonly required autofocus>
 							</div>
-							<div class="col-xs-12 col-sm-6 col-md-4">
+							<div class="col-xs-12 col-sm-6 col-md-4" style="padding-right: 0;">
 								<label for="address1" class="sr-only">회사주소1</label>
-								<input type="text" class="form-control input-sm wid-98" id="address1" name="address1" maxlength="100" value="<?php if($mode=='com_reg') {echo set_value('address1');} else {echo $com->address1; } ?>" readonly required autofocus>
+								<input type="text" class="form-control input-sm" id="address1" name="address1" maxlength="100" value="<?php if($mode=='com_reg') {echo set_value('address1');} else {echo $com->address1; } ?>" readonly required autofocus>
 							</div>
-							<div class="col-xs-12 col-sm-6 col-md-3">
+							<div class="col-xs-12 col-sm-6 col-md-3" style="padding-right: 0;">
 								<label for="address2" class="sr-only">회사주소2</label>
-								<input type="text" class="form-control input-sm wid-98" id="address2" maxlength="100" value="<?php if($mode=='com_reg') {echo set_value('address2');} else {echo $com->address2; } ?>" name="address2">
+								<input type="text" class="form-control input-sm" id="address2" maxlength="100" value="<?php if($mode=='com_reg') {echo set_value('address2');} else {echo $com->address2; } ?>" name="address2">
 							</div>
-							<div class="col-xs-12 col-sm-12 col-md-3 glyphicon-wrap">나머지 주소</div>
+							<div class="col-xs-12 col-sm-12 col-md-3 glyphicon-wrap" style="padding: 12px 12px 5px 15px;">나머지 주소</div>
 						</div>
 					</div>
 					<div class="form-group <?php if( !$this->agent->is_mobile()) echo 'bo-top';?>" style="margin: 0;">
@@ -413,8 +413,8 @@
 							<label for="en_co_name">회사 영문명</label>
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-10 form-wrap">
-							<div class="col-md-6 col-xs-12"><input type="text" class="form-control input-sm wid-99 en_only" id="en_co_name" name="en_co_name" maxlength="50" value="<?php if($mode=='com_reg') {echo set_value('en_co_name');} else {echo $com->en_co_name; } ?>"></div>
-							<div class="col-md-6 col-xs-12 text-wrap">기타소득 지급조서 신고가 있는 경우 입력</div>
+							<div class="col-md-6 col-xs-12" style="padding-right: 0;"><input type="text" class="form-control input-sm en_only" id="en_co_name" name="en_co_name" maxlength="50" value="<?php if($mode=='com_reg') {echo set_value('en_co_name');} else {echo $com->en_co_name; } ?>"></div>
+							<div class="col-md-6 col-xs-12 text-wrap" style="padding: 12px 12px 5px 15px;">기타소득 지급조서 신고가 있는 경우 입력</div>
 						</div>
 					</div>
 					<div class="form-group pb20" style="margin: 0;">

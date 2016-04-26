@@ -39,15 +39,15 @@
 								<div class="col-xs-3 col-sm-5 col-md-1" style="padding-right: 0;">
 									<input type="text" class="form-control input-sm" id="zipcode" name="zipcode" maxlength="5" value="" readonly required autofocus>
 								</div>
-								<div class="col-xs-12 col-sm-6 col-md-4">
+								<div class="col-xs-12 col-sm-6 col-md-4" style="padding-right: 0;">
 									<label for="address1" class="sr-only">회사주소1</label>
 									<input type="text" class="form-control input-sm" id="address1" name="address1" maxlength="100" value="" readonly required autofocus>
 								</div>
-								<div class="col-xs-12 col-sm-6 col-md-3">
+								<div class="col-xs-12 col-sm-6 col-md-3" style="padding-right: 0;">
 									<label for="address2" class="sr-only">회사주소2</label>
 									<input type="text" class="form-control input-sm" id="address2" maxlength="100" value="" name="address2">
 								</div>
-								<div class="col-xs-12 col-sm-12 col-md-3 glyphicon-wrap">나머지 주소</div>
+								<div class="col-xs-12 col-sm-12 col-md-3 glyphicon-wrap" style="padding: 11px;">나머지 주소</div>
 							</div>
 						</div>
 
@@ -349,7 +349,7 @@
 								</div>
 							</div>
 							<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
-								<label for="co_no1">사업 개시월 <span class="red">*</span></label>
+								<label for="co_no1">사업 개시 월 <span class="red">*</span></label>
 							</div>
 							<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 								<div class="col-xs-12 col-sm-8">
