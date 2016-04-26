@@ -50,7 +50,7 @@ class M4 extends CI_Controller {
 	 * @return [type]      [description]
 	 */
 	public function capital($mdi='', $sdi=''){
-		$this->output->enable_profiler(TRUE); //프로파일러 보기//
+		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
