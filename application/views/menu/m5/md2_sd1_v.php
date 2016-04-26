@@ -350,9 +350,9 @@
 										</div>
 									</td>
 									<td class="col-xs-3" style="padding: 0;">
-										<div class="col-xs-10">
+										<div class="col-xs-10" style="padding-left: 0;">
 											<label for="tax_off1_name" class="sr-only">세무서1 이름</label>
-											<input type="text" class="form-control input-sm wid-90" id="tax_off1_name" name="tax_off1_name" value="<?php if($mode=='com_reg') {echo set_value('tax_off1_name');} else {echo $com->tax_off1_name; } ?>" readonly required autofocus>
+											<input type="text" class="form-control input-sm" id="tax_off1_name" name="tax_off1_name" value="<?php if($mode=='com_reg') {echo set_value('tax_off1_name');} else {echo $com->tax_off1_name; } ?>" readonly required autofocus>
 										</div>
 									</td>
 								</tr>
@@ -376,9 +376,9 @@
 										</div>
 									</td>
 									<td class="col-xs-3" style="padding: 0;">
-										<div class="col-xs-10">
+										<div class="col-xs-10" style="padding-left: 0;">
 											<label for="tax_off2_name" class="sr-only">세무서2 이름</label>
-											<input type="text" class="form-control input-sm wid-90" id="tax_off2_name" name="tax_off2_name" value="<?php if($mode=='com_reg') {echo set_value('tax_off2_name');} else {echo $com->tax_off2_name; } ?>" readonly>
+											<input type="text" class="form-control input-sm" id="tax_off2_name" name="tax_off2_name" value="<?php if($mode=='com_reg') {echo set_value('tax_off2_name');} else {echo $com->tax_off2_name; } ?>" readonly>
 										</div>
 									</td>
 								</tr>
