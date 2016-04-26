@@ -6,7 +6,7 @@
 		<!-- 신규 사용자 등록자가 있을 때 처리 시작 -->
 <?php if($new_rq) : ?>
 			<form name="form2" method="post" action="/m5/config/2/2/">
-				<fieldset>
+				<fieldset style="margin-bottom: 15px;">
 					<input type="hidden" name="no">
 					<input type="hidden" name="sf">
 					<div class="row new_user">
@@ -14,7 +14,7 @@
 							<b><font color="red">*</font> <font color="black">신규 사용자 등록 신청 건이 있습니다.</font></b>
 						</div>
 					</div>
-					<div class="row new_user bg-f8">
+					<div class="row new_user" style="background-color:#94FB8B">
 						<div class="col-md-2 center str">성 명</div>
 						<div class="col-md-3 center str">구 분</div>
 						<div class="col-md-2 center str">Email</div>

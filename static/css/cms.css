@@ -89,7 +89,7 @@
 	fieldset .row table.table .sub-td { padding-right: 10px; }
 	fieldset .sec-td { border-top: 0; }
 	fieldset .new_user { margin: 0 15px; border-bottom: 1px solid #ddd; }
-	fieldset .row .str { height: 40px; padding-top: 10px; }
+	fieldset .row .str { padding: 10px;  }
 	/*****************************************m5 style********************************************/
 
 	.auth-table td { text-align: right; }

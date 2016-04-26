@@ -335,7 +335,7 @@
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap">
 							<label for="tax_off1_code">세무서 [1] <span class="red">*</span></label>
 						</div>
-						<div class="form-inline col-xs-12 col-sm-8 col-md-4 form-wrap" style="padding-left: 23px;">
+						<div class="form-inline col-xs-12 col-sm-8 col-md-4 form-wrap" style="padding-left: 15px;">
 
 							<table cellpadding="0" cellspacing="0" border="0">
 								<tr>
@@ -350,7 +350,7 @@
 										</div>
 									</td>
 									<td class="col-xs-3" style="padding: 0;">
-										<div class="col-xs-10 input-group">
+										<div class="col-xs-10">
 											<label for="tax_off1_name" class="sr-only">세무서1 이름</label>
 											<input type="text" class="form-control input-sm wid-90" id="tax_off1_name" name="tax_off1_name" value="<?php if($mode=='com_reg') {echo set_value('tax_off1_name');} else {echo $com->tax_off1_name; } ?>" readonly required autofocus>
 										</div>
@@ -362,7 +362,7 @@
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap">
 							<label for="tax_off2_code">세무서 [2]</label>
 						</div>
-						<div class="form-inline col-xs-12 col-sm-8 col-md-4 form-wrap" style="padding-left: 23px;">
+						<div class="form-inline col-xs-12 col-sm-8 col-md-4 form-wrap" style="padding-left: 15px;">
 							<table cellpadding="0" cellspacing="0" border="0">
 								<tr>
 									<td class="col-xs-2" style="padding: 0;">
@@ -376,7 +376,7 @@
 										</div>
 									</td>
 									<td class="col-xs-3" style="padding: 0;">
-										<div class="col-xs-10  input-group">
+										<div class="col-xs-10">
 											<label for="tax_off2_name" class="sr-only">세무서2 이름</label>
 											<input type="text" class="form-control input-sm wid-90" id="tax_off2_name" name="tax_off2_name" value="<?php if($mode=='com_reg') {echo set_value('tax_off2_name');} else {echo $com->tax_off2_name; } ?>" readonly>
 										</div>

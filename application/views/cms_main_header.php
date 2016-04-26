@@ -5,8 +5,8 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-		<meta name="description" content="">
-		<meta name="author" content="">
+		<meta name="description" content="(주)바램디앤씨 관리프로그램">
+		<meta name="author" content="(주)바램디앤씨">
 		<link rel="shortcut icon" href="<?php echo $this->config->base_url(); ?>static/img/cms.ico">
 		<title>[주]바램디앤씨 관리시스템</title>
 		<!-- Bootstrap core CSS -->
