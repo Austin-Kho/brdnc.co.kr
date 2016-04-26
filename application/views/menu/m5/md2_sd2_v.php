@@ -40,12 +40,12 @@
 		<!-- 신규 사용자 등록자가 있을 때 처리 종료 -->
 
 			<div class="form-group mg-0-15">
-				<div class="col-xs-4 col-sm-4 col-md-2 bo-bottom" style="padding-top: 10px; height: 43px; background-color: #f8f8f8;">
+				<div class="col-xs-12 col-sm-4 col-md-2 bo-top" style="padding-top: 9px; height: 40px; background-color: #f8f8f8;">
 					<b><font color="red">*</font> <font color="black">권한 설정 직원 선택</font></b>
 				</div>
-				<div class="col-xs-8 col-sm-8 col-md-10 bo-bottom" style="height: 43px;">
+				<div class="col-xs-12 col-sm-8 col-md-10 bo-top" style="height: 40px;">
 					<!-- <div class="" style="margin-right: 20px; padding-top: 10px;">(주) 바램디앤씨</div> -->
-					<div class="col-xs-12 col-sm-6 col-md-3" style="padding-top: 6px;">
+					<div class="col-xs-12 col-sm-6 col-md-3" style="padding-top: 4px;">
 						<select class="form-control input-sm" id="user_sel" name="user_sel" onchange="location.href='/m5/config/2/2/?un='+this.value">
 							<option value="">선 택</option>
 <?php foreach($user_list as $lt) : ?>
@@ -61,7 +61,7 @@
 	echo form_open('/m5/config/2/2/?un='.$this->input->get('un'), $attributes);
 ?>
 			<fieldset class="font12">
-				<div class="row" style="padding-top: 15px;">
+				<div class="row bo-top" style="padding-top: 15px;">
 <?php if($this->input->get('un')) : ?>
 					<input type="hidden" name="user_id" value="<?php echo $sel_user->user_id; ?>">
 					<div class="row bo-tb" style="margin: 0 0 15px;">
@@ -231,7 +231,7 @@
 								</tr>
 								<tr>
 									<td class="sec-td bo-right"><strong>신규 프로젝트</strong></td>
-									<td class="sec-td">검토 프로젝트
+									<td class="sec-td">신규 PJ 등록
 										<!-- <label class="checkbox-inline"> -->
 											<input type="checkbox" id="_m3_2_1" name="_m3_2_1" <?php if(isset($user_auth->_m3_2_1) && $user_auth->_m3_2_1>0) echo 'checked'; ?>> 조회
 										<!-- </label> -->
@@ -239,7 +239,7 @@
 											<input type="checkbox" id="_m3_2_1_m" name="_m3_2_1_m" <?php if(isset($user_auth->_m3_2_1) && $user_auth->_m3_2_1>1) echo 'checked'; ?>> 등록
 										<!-- </label> -->
 									</td>
-									<td class="sec-td">프로젝트 등록
+									<td class="sec-td">예비 검토 PJ
 										<!-- <label class="checkbox-inline"> -->
 											<input type="checkbox" id="_m3_2_2" name="_m3_2_2" <?php if(isset($user_auth->_m3_2_2) && $user_auth->_m3_2_2>0) echo 'checked'; ?>> 조회
 										<!-- </label> -->

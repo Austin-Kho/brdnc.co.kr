@@ -31,7 +31,7 @@
 
 			<div class="row">
 				<div class="col-md-12">
-					<div class="row" style="margin: 0 0 20px 0; border-bottom: 1px solid #ddd;">
+					<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
 <?php
 	$attributes = array('name' => 'cash_book_frm', 'method' => 'get');
 	echo form_open('/m4/capital/1/2/', $attributes);

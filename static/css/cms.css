@@ -52,7 +52,7 @@
 
 	.sdi { font-size: 15px; display: inline; color: #233c96; }
 	.sdi_sub { margin-top: -20px; padding: 15px 0 15px 20px; background-color: #F8F8F8; border-bottom-color: #B2BCDE; }
-	.main_start { margin-top: -20px; height: 25px; text-align: right; padding: 5px 15px; border-bottom: 1px solid #ddd; font-size: 12px;}
+	.main_start { margin-top: -20px; height: 25px; text-align: right; padding: 5px 15px; font-size: 12px;}
 
 
 	/********* 폰트 사이즈 *************/
@@ -72,10 +72,10 @@
 	/*****************************************m5 style*******************************************/
 	fieldset .row { margin: 0; }
 	.btn-wrap { padding: 15px 20px 0 0; text-align: right; height: 62px; border-bottom: 1px solid #ddd; border-top: 1px solid #B2BCDE; background-color: #F8F8F8; margin-bottom: 25px; }
-	fieldset .label-wrap { padding: 10px 0 8px 15px; background-color: #F8F8F8; }
+	fieldset .label-wrap { padding: 10px 0 8px 15px; background-color: #F8F8F8; height: 40px; }
 	fieldset .label-wrap2 { padding: 10px 0 8px 15px; background-color: #e1eefe; }
 	fieldset label { width:180px; }
-	fieldset .form-wrap { padding: 5px 10px; }
+	fieldset .form-wrap { padding: 5px 10px; height: 40px; }
 	fieldset .glyphicon-wrap { padding: 8px 0 0 8px; }
 	fieldset .text-wrap { padding-top: 8px; }
 
