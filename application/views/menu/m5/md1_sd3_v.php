@@ -6,20 +6,21 @@
 					<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
 						<form name="list_frm" method="get" action="">
 							<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">업체구분</div>
-							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
-								<select class="form-control input-sm" name="acc_sort" onchange="submit();">
-									<option value="">전 체</option>
-									<option value="1" <?php if($this->input->get('acc_sort')==1) echo 'selected'; ?>>매입거래처</option>
-									<option value="2" <?php if($this->input->get('acc_sort')==2) echo 'selected'; ?>>매출거래처</option>
-									<option value="3" <?php if($this->input->get('acc_sort')==3) echo 'selected'; ?>>매입매출거래처</option>
-								</select>
+							<div class="col-md-7" style="height: 40px; padding-top: 5px;">
+								<div class="col-md-3" style="padding: 0;">
+									<select class="form-control input-sm" name="acc_sort" onchange="submit();">
+										<option value="">전 체</option>
+										<option value="1" <?php if($this->input->get('acc_sort')==1) echo 'selected'; ?>>매입거래처</option>
+										<option value="2" <?php if($this->input->get('acc_sort')==2) echo 'selected'; ?>>매출거래처</option>
+										<option value="3" <?php if($this->input->get('acc_sort')==3) echo 'selected'; ?>>매입매출거래처</option>
+									</select>
+								</div>
 							</div>
-							<div class="col-md-5" style="height: 40px; padding-top: 10px;"></div>
 							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
 								<input class="form-control input-sm" name="acc_search" placeholder="거래처 검색" value="<?php if($this->input->get('acc_search')) echo $this->input->get('acc_search'); ?>">
 							</div>
-							<div class="col-md-1" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
-								<button class="btn btn-primary btn-sm center"> 검 색 </button>
+							<div class="col-md-1 right" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
+								<button class="btn btn-primary btn-sm"> 검 색 </button>
 							</div>
 						</form>
 					</div>
@@ -82,7 +83,7 @@
 			<div class="row">
 
 <?php
-	$attributes = array('name' => 'form1', 'class' => 'form-inline', 'method' => 'post');
+	$attributes = array('name' => 'form1', 'class' => 'form-horizontal', 'method' => 'post');
 	echo form_open('/m5/config/1/3/', $attributes);
 ?>
 					<fieldset class="font12">
@@ -102,13 +103,13 @@
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="si_name">상호(회사명) <span class="red">*</span></label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm han" id="si_name" name="si_name" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_acc->si_name; ?>" required autofocus>
 							</div>
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="acc_cla">거래처구분 <span class="red">*</span></label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<select class="form-control input-sm" name="acc_cla">
 									<option value="0">전 체</option>
 									<option value="1" <?php if($this->input->get('seq')&&$sel_acc->acc_cla =='1') echo 'selected'; ?>>매입거래처</option>
@@ -121,13 +122,13 @@
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 								<label for="main_tel">대표전화 <span class="red">*</span></label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm han" id="main_tel" name="main_tel" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_acc->main_tel; ?>">
 							</div>
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 								<label for="main_fax">대표팩스</label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm han" id="main_fax" name="main_fax" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_acc->main_fax; ?>">
 							</div>
 						</div>
@@ -135,13 +136,13 @@
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="main_web">홈페이지 주소</label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm en_only" id="main_web" name="main_web" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_acc->main_web; ?>">
 							</div>
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="web_name">웹 사이트명</label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm en_only" id="web_name" name="web_name" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_acc->web_name; ?>">
 							</div>
 						</div>
@@ -149,13 +150,13 @@
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="res_div">담당 부서</label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm en_only" id="res_div" name="res_div" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_acc->res_div; ?>">
 							</div>
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="res_worker">담당 직원</label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm en_only" id="res_worker" name="res_worker" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_acc->res_worker; ?>">
 							</div>
 						</div>
@@ -163,13 +164,13 @@
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 								<label for="res_mobile">모바일폰</label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm en_only" id="res_mobile" name="res_mobile" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_acc->res_mobile; ?>">
 							</div>
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 								<label for="res_email">담당 이메일</label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm han" id="res_email" name="res_email" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_acc->res_email; ?>">
 							</div>
 						</div>
@@ -182,13 +183,13 @@
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="tax_no">사업자등록번호</label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm en_only" id="tax_no" name="tax_no" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_acc->tax_no; ?>">
 							</div>
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="tax_ceo">대표자</label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm en_only" id="tax_ceo" name="tax_ceo" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_acc->tax_ceo; ?>">
 							</div>
 						</div>
@@ -196,19 +197,19 @@
 							<div class=" col-xs-12 col-sm-4 col-md-2 label-wrap2" >
 								<label for="zipcode">주 소</label>
 							</div>
-							<div class=" col-xs-12 col-sm-8 col-md-10 form-wrap">
+							<div class=" col-xs-12 col-sm-8 col-md-10 form-wrap2">
 <?php if($this->input->get('seq')) $tax_addr = explode("-", $sel_acc->tax_addr); ?>
-								<div class="col-xs-3 col-sm-2 col-md-1">
+								<div class="col-xs-3 col-sm-2 col-md-1" style="padding: 0;">
 									<input type="button" class="btn btn-info btn-sm wid-90" value="우편번호" onclick="javascript:ZipWindow('/popup/zip_/')">
 								</div>
-								<div class="col-xs-3 col-sm-5 col-md-1">
+								<div class="col-xs-3 col-sm-5 col-md-1" style="padding: 0;">
 									<input type="text" class="form-control input-sm wid-95" id="zipcode" name="zipcode" maxlength="5" readonly required autofocus value="<?php if($this->input->get('seq')) echo $tax_addr[0]; ?>">
 								</div>
-								<div class="col-xs-12 col-sm-6 col-md-4">
+								<div class="col-xs-12 col-sm-6 col-md-4" style="padding: 0;">
 									<label for="address1" class="sr-only">회사주소1</label>
 									<input type="text" class="form-control input-sm wid-98" id="address1" name="address1" maxlength="100" readonly required autofocus value="<?php if($this->input->get('seq')) echo $tax_addr[1]; ?>">
 								</div>
-								<div class="col-xs-12 col-sm-6 col-md-3">
+								<div class="col-xs-12 col-sm-6 col-md-3" style="padding: 0;">
 									<label for="address2" class="sr-only">회사주소2</label>
 									<input type="text" class="form-control input-sm wid-98" id="address2" maxlength="100" name="address2" value="<?php if($this->input->get('seq')) echo $tax_addr[2]; ?>">
 								</div>
@@ -219,13 +220,13 @@
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="tax_uptae">업 태</label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm en_only" id="tax_uptae" name="tax_uptae" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_acc->tax_uptae; ?>">
 							</div>
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="tax_jongmok">종 목</label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm en_only" id="tax_jongmok" name="tax_jongmok" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_acc->tax_jongmok; ?>">
 							</div>
 						</div>
@@ -233,13 +234,13 @@
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="tax_worker">셰금계산서 담당자</label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm en_only" id="tax_worker" name="tax_worker" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_acc->tax_worker; ?>">
 							</div>
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="tax_email">세금계산서 이메일</label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm en_only" id="tax_email" name="tax_email" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_acc->tax_email; ?>">
 							</div>
 						</div>
@@ -248,7 +249,7 @@
 							<div class=" col-xs-12 col-sm-12 col-md-2 label-wrap2" style="height: 80px;">
 								<label for="note">비 고</label>
 							</div>
-							<div class=" col-xs-12 col-sm-12 col-md-10 form-wrap" style="height: 80px;">
+							<div class=" col-xs-12 col-sm-12 col-md-10 form-wrap2" style="height: 80px;">
 								<textarea class="form-control input-sm" id="note" name="note"  rows="3" cols="114"><?php if($this->input->get('seq')) echo $sel_acc->note; ?></textarea>
 							</div>
 						</div>

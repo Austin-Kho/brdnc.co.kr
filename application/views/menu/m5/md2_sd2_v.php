@@ -90,7 +90,7 @@
 							<tbody>
 								<tr>
 									<th class="head-td center bo-right mbo-top" rowspan="2" style="width: 100px; vertical-align: middle; background-color: #F0FBF0;">분양관리</th>
-									<td class="head-td bo-right mbo-top" style="width: 100px;"><strong>계약현황</strong></td>
+									<td class="head-td bo-right mbo-top" style="width: 100px;"><strong>계약관리</strong></td>
 									<td class="sub-td mbo-top" style="width: 200px;">계약현황
 										<!-- <label class="checkbox-inline"> -->
 											<input type="checkbox" id="_m1_1_1" name="_m1_1_1" <?php if(isset($user_auth->_m1_1_1) && $user_auth->_m1_1_1>0) echo 'checked'; ?>> 조회
@@ -119,7 +119,7 @@
 									<td class="sub-td mbo-top" style="width: 80px;"></td>
 								</tr>
 								<tr>
-									<td class="sec-td bo-right"><strong>수납현황</strong></td>
+									<td class="sec-td bo-right"><strong>수납관리</strong></td>
 									<td class="sec-td">수납현황
 										<!-- <label class="checkbox-inline"> -->
 											<input type="checkbox" id="_m1_2_1" name="_m1_2_1" <?php if(isset($user_auth->_m1_2_1) && $user_auth->_m1_2_1>0) echo 'checked'; ?>> 조회
@@ -253,7 +253,7 @@
 								</tr>
 								<tr>
 									<th  class="center bo-right"rowspan="2" style="vertical-align: middle; background-color: #F0FBF0;">자금회계</th>
-									<td class="bo-right"><strong>자금현황</strong></td>
+									<td class="bo-right"><strong>자금관리</strong></td>
 									<td>자금일보
 										<!-- <label class="checkbox-inline"> -->
 											<input type="checkbox" id="_m4_1_1" name="_m4_1_1" <?php if(isset($user_auth->_m4_1_1) && $user_auth->_m4_1_1>0) echo 'checked'; ?>> 조회
@@ -329,7 +329,7 @@
 											<input type="checkbox" id="_m5_1_2_m" name="_m5_1_2_m" <?php if(isset($user_auth->_m5_1_2) && $user_auth->_m5_1_2>1) echo 'checked'; ?>> 등록
 										<!-- </label> -->
 									</td>
-									<td>거래처정보관리
+									<td>거래처정보 관리
 										<!-- <label class="checkbox-inline"> -->
 											<input type="checkbox" id="_m5_1_3" name="_m5_1_3" <?php if(isset($user_auth->_m5_1_3) && $user_auth->_m5_1_3>0) echo 'checked'; ?>> 조회
 										<!-- </label> -->

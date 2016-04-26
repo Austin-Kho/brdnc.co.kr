@@ -6,20 +6,21 @@
 					<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
 						<form name="list_frm" method="get" action="">
 							<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">은행별</div>
-							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
-								<select class="form-control input-sm" name="bank_code" onchange="submit();">
-									<option value="">전 체</option>
-<?php foreach($com_bank as $lt) : ?>
-									<option value="<?php echo $lt->bank_code; ?>" <?if($lt->bank_code==$this->input->get('bank_code')) echo "selected";?>><?php echo $lt->bank; ?></option>
-<?php endforeach; ?>
-								</select>
+							<div class="col-md-7" style="height: 40px; padding-top: 5px;">
+								<div class="col-md-3" style="padding: 0;">
+									<select class="form-control input-sm" name="bank_code" onchange="submit();">
+										<option value="">전 체</option>
+	<?php foreach($com_bank as $lt) : ?>
+										<option value="<?php echo $lt->bank_code; ?>" <?if($lt->bank_code==$this->input->get('bank_code')) echo "selected";?>><?php echo $lt->bank; ?></option>
+	<?php endforeach; ?>
+									</select>
+								</div>
 							</div>
-							<div class="col-md-5" style="height: 40px; padding-top: 10px;"></div>
 							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
 								<input class="form-control input-sm" name="bank_search" placeholder="계좌 검색" value="<?php if($this->input->get('bank_search')) echo $this->input->get('bank_search'); ?>">
 							</div>
-							<div class="col-md-1" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
-								<button class="btn btn-primary btn-sm center"> 검 색 </button>
+							<div class="col-md-1 right" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
+								<button class="btn btn-primary btn-sm"> 검 색 </button>
 							</div>
 						</form>
 					</div>
@@ -103,7 +104,7 @@
 								<div class="col-xs-4 col-sm-4 col-md-2 label-wrap2">
 									<label for="bank">거래은행 <span class="red">*</span></label>
 								</div>
-								<div class="col-xs-8 col-sm-8 col-md-4 form-wrap">
+								<div class="col-xs-8 col-sm-8 col-md-4 form-wrap2">
 									<div class="col-xs-7 col-md-5" style="padding-left: 0;">
 										<select class="form-control input-sm" name="bank" onchange="this.form.bank_code.value=this.value;">
 											<option value=''>전 체</option>
@@ -119,7 +120,7 @@
 								<div class="col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 									<label for="name">계좌별칭 <span class="red">*</span></label>
 								</div>
-								<div class="col-xs-8 col-sm-8 col-md-4 form-wrap">
+								<div class="col-xs-8 col-sm-8 col-md-4 form-wrap2">
 									<input type="text" class="form-control input-sm en_only" id="name" name="name" maxlength="14" value="<?php if($this->input->get('seq')) echo $sel_bank->name; ?>">
 								</div>
 							</div>
@@ -127,13 +128,13 @@
 								<div class="col-xs-4 col-sm-4 col-md-2 label-wrap2">
 									<label for="number">계좌번호 <span class="red">*</span></label>
 								</div>
-								<div class="col-xs-8 col-sm-8 col-md-4 form-wrap">
+								<div class="col-xs-8 col-sm-8 col-md-4 form-wrap2">
 									<input type="text" class="form-control input-sm han" id="number" name="number" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_bank->number; ?>">
 								</div>
 								<div class="col-xs-4 col-sm-4 col-md-2 label-wrap2">
 									<label for="holder">예금주 <span class="red">*</span></label>
 								</div>
-								<div class="col-xs-8 col-sm-8 col-md-4 form-wrap">
+								<div class="col-xs-8 col-sm-8 col-md-4 form-wrap2">
 									<input type="text" class="form-control input-sm han" id="holder" name="holder" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_bank->holder; ?>">
 								</div>
 							</div>
@@ -141,13 +142,13 @@
 								<div class="col-xs-4 col-sm-4 col-md-2 label-wrap2">
 									<label for="dir_tel">관리 구분 <span class="red">*</span></label>
 								</div>
-								<div class="col-xs-8 col-sm-8 col-md-4 form-wrap checkbox" style="margin-bottom: 0">
-						      <label><input type="checkbox" name="is_com" value="1" checked>  본사 관리계좌</label>
+								<div class="col-xs-8 col-sm-8 col-md-4 form-wrap2 checkbox" style="margin-bottom: 0">
+						      		<label style="padding-bottom: 13px;"><input type="checkbox" name="is_com" value="1" checked>  본사 관리계좌</label>
 								</div>
 								<div class="col-xs-4 col-sm-4 col-md-2 label-wrap2">
 									<label for="mobile">관리 부서 <span class="red">*</span></label>
 								</div>
-								<div class="col-xs-8 col-sm-8 col-md-4 form-wrap">
+								<div class="col-xs-8 col-sm-8 col-md-4 form-wrap2">
 									<div class="col-xs12 col-sm-8 col-md-6" style="padding-left: 0;">
 										<select class="form-control input-sm" name="div_seq">
 											<option value=''>전 체</option>
@@ -162,13 +163,13 @@
 								<div class="col-xs-4 col-sm-4 col-md-2 label-wrap2">
 									<label for="manager">관리책임자</label>
 								</div>
-								<div class="col-xs-8 col-sm-8 col-md-4 form-wrap">
+								<div class="col-xs-8 col-sm-8 col-md-4 form-wrap2">
 									<input type="text" class="form-control input-sm en_only" id="manager" name="manager" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_bank->manager; ?>">
 								</div>
 								<div class="col-xs-4 col-sm-4 col-md-2 label-wrap2">
 									<label for="open_date">개설일자 <span class="red">*</span></label>
 								</div>
-								<div class="col-xs-8 col-sm-8 col-md-4 form-wrap">
+								<div class="col-xs-8 col-sm-8 col-md-4 form-wrap2">
 									<div class="col-xs-10 col-sm-8 col-md-6" style="padding-left: 0;">
 										<input type="text" class="form-control input-sm wid-100" id="open_date" name="open_date" maxlength="10" value="<?php if($this->input->get('seq')) echo $sel_bank->open_date; ?>" readonly onClick="cal_add(this); event.cancelBubble=true" maxlength="10" required autofocus>
 									</div>
@@ -186,7 +187,7 @@
 								<div class="col-xs-12 col-sm-12 col-md-2 label-wrap2 bo-bottom" style="height: 90px;">
 									<label for="note">비 고 (거래계좌 정보 등)</label>
 								</div>
-								<div class="col-xs-12 col-sm-12 col-md-10 form-wrap bo-bottom" style="height: 90px; padding: 10px;">
+								<div class="col-xs-12 col-sm-12 col-md-10 form-wrap2 bo-bottom" style="height: 90px;">
 									<textarea class="form-control input-sm" id="note" name="note"  rows="3" cols="114"><?php if($this->input->get('seq')) echo $sel_bank->note; ?></textarea>
 								</div>
 							</div>

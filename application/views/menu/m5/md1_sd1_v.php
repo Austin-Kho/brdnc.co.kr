@@ -5,21 +5,22 @@
 				<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 490px;'; ?>">
 					<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
 						<form name="list_frm" method="get" action="">
-							<div class="col-xs-4 col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">부서별</div>
-							<div class="col-xs-8 col-md-2" style="height: 40px; padding-top: 5px;">
-								<select class="form-control input-sm" name="div_sel" onchange="submit();">
-									<option value=''>전 체</option>
-<?php foreach($all_div as $lt) : ?>
-									<option value="<?php echo $lt->div_code; ?>" <?if($lt->div_code==$this->input->get('div_sel')) echo "selected";?>><?php echo $lt->div_name ?></option>
-<?php endforeach; ?>
-								</select>
+							<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">부서별</div>
+							<div class="col-md-7" style="height: 40px; padding-top: 5px;">
+								<div class="col-md-3" style="padding: 0;">
+									<select class="form-control input-sm" name="div_sel" onchange="submit();">
+										<option value=''>전 체</option>
+	<?php foreach($all_div as $lt) : ?>
+										<option value="<?php echo $lt->div_code; ?>" <?if($lt->div_code==$this->input->get('div_sel')) echo "selected";?>><?php echo $lt->div_name ?></option>
+	<?php endforeach; ?>
+									</select>
+								</div>
 							</div>
-							<div class="col-xs-12 col-md-5" style="height: 40px; padding-top: 10px;"></div>
-							<div class="col-xs-8 col-md-2" style="height: 40px; padding-top: 5px;">
+							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
 								<input class="form-control input-sm" name="div_search" placeholder="부서 검색" value="<?php if($this->input->get('div_search')) echo $this->input->get('div_search'); ?>">
 							</div>
-							<div class="col-xs-4 col-md-1" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
-								<button class="btn btn-primary btn-sm center"> 검 색 </button>
+							<div class="col-md-1 right" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
+								<button class="btn btn-primary btn-sm"> 검 색 </button>
 							</div>
 						</form>
 					</div>
@@ -100,13 +101,13 @@
 									<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 										<label for="div_code">부서코드 <span class="red">*</span></label>
 									</div>
-									<div class="col-xs-8 col-sm-8 col-md-4 form-wrap">
+									<div class="col-xs-8 col-sm-8 col-md-4 form-wrap2">
 										<input type="text" class="form-control input-sm" id="div_code" name="div_code" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->div_code; ?>" required autofocus>
 									</div>
 									<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 										<label for="div_name">부서명 <span class="red">*</span></label>
 									</div>
-									<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+									<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 										<input type="text" class="form-control input-sm han" id="div_name" name="div_name" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->div_name; ?>" required autofocus>
 									</div>
 								</div>
@@ -114,13 +115,13 @@
 									<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 										<label for="manager">부서책임자</label>
 									</div>
-									<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+									<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 										<input type="text" class="form-control input-sm" id="manager" name="manager" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->manager; ?>">
 									</div>
 									<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 										<label for="div_tel">부서전화</label>
 									</div>
-									<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+									<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 										<input type="text" class="form-control input-sm han" id="div_tel" name="div_tel" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->div_tel; ?>">
 									</div>
 								</div>
@@ -128,7 +129,7 @@
 									<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 										<label for="res_work">담당업무 <span class="red">*</span></label>
 									</div>
-									<div class=" col-xs-8 col-sm-8 col-md-10 form-wrap">
+									<div class=" col-xs-8 col-sm-8 col-md-10 form-wrap2">
 										<input type="text" class="form-control input-sm" id="res_work" name="res_work" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_div->res_work; ?>" required autofocus>
 									</div>
 								</div>
@@ -136,7 +137,7 @@
 									<div class=" col-xs-12 col-sm-12 col-md-2 label-wrap2 bo-bottom" style="height: 80px;">
 										<label for="note">비 고</label>
 									</div>
-									<div class=" col-xs-12 col-sm-12 col-md-10 form-wrap bo-bottom" style="height: 80px;">
+									<div class=" col-xs-12 col-sm-12 col-md-10 form-wrap2 bo-bottom" style="height: 80px;">
 										<textarea class="form-control input-sm" id="note" name="note"  rows="3" cols="114"><?php if($this->input->get('seq')) echo $sel_div->note; ?></textarea>
 									</div>
 								</div>

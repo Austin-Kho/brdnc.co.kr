@@ -56,7 +56,7 @@
 						<li class="<?if( !strpos($this->uri->segment(1), '1')) echo ''; else echo 'active';?>"><a href="/m1/">분양관리</a></li>
 						<li class="<?if( !strpos($this->uri->segment(1), '2')) echo ''; else echo 'active';?>"><a href="/m2/">사업관리</a></li>
 						<li class="<?if( !strpos($this->uri->segment(1), '3')) echo ''; else echo 'active';?>"><a href="/m3/">프로젝트</a></li>
-						<li class="<?if( !strpos($this->uri->segment(1), '4')) echo ''; else echo 'active';?>"><a href="/m4/">자금관리</a></li>
+						<li class="<?if( !strpos($this->uri->segment(1), '4')) echo ''; else echo 'active';?>"><a href="/m4/">자금회계</a></li>
 						<li class="<?if( !strpos($this->uri->segment(1), '5')) echo ''; else echo 'active';?>"><a href="/m5/">환경설정</a></li>
 						<li class="dropdown">
 <?php if(@$this->session->userdata['logged_in'] == TRUE) { ?>

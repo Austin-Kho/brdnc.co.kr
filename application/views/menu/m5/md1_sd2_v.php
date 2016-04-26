@@ -6,20 +6,21 @@
 					<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
 						<form name="list_frm" method="get" action="">
 							<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">부서별</div>
-							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
-								<select class="form-control input-sm" name="div_sel" onchange="submit();">
-									<option value="">전 체</option>
+							<div class="col-md-7" style="height: 40px; padding-top: 5px;">
+								<div class="col-md-3" style="padding: 0;">
+									<select class="form-control input-sm" name="div_sel" onchange="submit();">
+										<option value="">전 체</option>
 <?php foreach($all_div as $lt) : ?>
-									<option value="<?php echo $lt->div_name; ?>" <?if($lt->div_name==$this->input->get('div_sel')) echo "selected";?>><?php echo $lt->div_name ?></option>
+										<option value="<?php echo $lt->div_name; ?>" <?if($lt->div_name==$this->input->get('div_sel')) echo "selected";?>><?php echo $lt->div_name ?></option>
 <?php endforeach; ?>
-								</select>
+									</select>
+								</div>
 							</div>
-							<div class="col-md-5" style="height: 40px; padding-top: 10px;"></div>
 							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
 								<input class="form-control input-sm" name="mem_search" placeholder="(임)직원 검색" value="<?php if($this->input->get('mem_search')) echo $this->input->get('mem_search'); ?>">
 							</div>
-							<div class="col-md-1" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
-								<button class="btn btn-primary btn-sm center"> 검 색 </button>
+							<div class="col-md-1 right" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
+								<button class="btn btn-primary btn-sm"> 검 색 </button>
 							</div>
 						</form>
 					</div>
@@ -81,7 +82,7 @@
 			<div class="row">
 
 <?php
-	$attributes = array('name' => 'form1', 'class' => 'form-inline', 'method' => 'post');
+	$attributes = array('name' => 'form1', 'class' => 'form-horizontal', 'method' => 'post');
 	echo form_open('/m5/config/1/2/', $attributes);
 ?>
 					<fieldset class="font12">
@@ -101,13 +102,13 @@
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="mem_name">(임)직원명 <span class="red">*</span></label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm han" id="mem_name" name="mem_name" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->mem_name; ?>" required autofocus>
 							</div>
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="id_num">주민등록번호</label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm en_only" id="id_num" name="id_num" maxlength="14" value="<?php if($this->input->get('seq')) echo $sel_mem->id_num; ?>">
 							</div>
 						</div>
@@ -115,7 +116,7 @@
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 								<label for="div_seq">담당부서 <span class="red">*</span></label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<select id="div_name" name="div_name" class="form-control input-sm">
 									<option value=""> 선 택
 <?php foreach($all_div as $lt) : ?>
@@ -126,7 +127,7 @@
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 								<label for="div_posi">직 급(책) <span class="red">*</span></label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm han" id="div_posi" name="div_posi" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->div_posi; ?>">
 							</div>
 						</div>
@@ -134,13 +135,13 @@
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="dir_tel">직통전화</label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm en_only" id="dir_tel" name="dir_tel" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->dir_tel; ?>">
 							</div>
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="mobile">비상전화 (Mobile) <span class="red">*</span></label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm en_only" id="mobile" name="mobile" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->mobile; ?>">
 							</div>
 						</div>
@@ -148,17 +149,17 @@
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 								<label for="email">이메일 (Email) <span class="red">*</span></label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
 								<input type="text" class="form-control input-sm en_only" id="email" name="email" maxlength="30" value="<?php if($this->input->get('seq')) echo $sel_mem->email; ?>">
 							</div>
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 								<label for="join_date">입 사 일 <span class="red">*</span></label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
-								<div class="col-xs-6">
-									<input type="text" class="form-control input-sm wid-100" id="join_date" name="join_date" maxlength="10" value="<?php if($this->input->get('seq')) echo $sel_mem->join_date; ?>" readonly onClick="cal_add(this); event.cancelBubble=true" maxlength="10" required autofocus>
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
+								<div class="col-xs-10" style="padding-left: 0;">
+									<input type="text" class="form-control input-sm wid-100" id="join_date" name="join_date" maxlength="10" value="<?php if($this->input->get('seq')) echo $sel_mem->join_date; ?>" readonly onClick="cal_add(this); event.cancelBubble=true" required autofocus>
 								</div>
-								<div class="col-xs-6 glyphicon-wrap">
+								<div class="col-xs-2 glyphicon-wrap">
 									<a href="javascript:" onclick="cal_add(document.getElementById('join_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
 								</div>
 							</div>
@@ -173,11 +174,11 @@
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
 								<label for="reti_date">퇴 사 일 <span class="red">*</span></label>
 							</div>
-							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap">
-								<div class="col-xs-6">
+							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
+								<div class="col-xs-10">
 									<input type="text" class="form-control input-sm wid-100" id="reti_date" name="reti_date" maxlength="10" value="<?php if($this->input->get('seq')) echo $sel_mem->reti_date; ?>" readonly onClick="cal_add(this); event.cancelBubble=true" maxlength="10" required autofocus>
 								</div>
-								<div class="col-xs-6 glyphicon-wrap">
+								<div class="col-xs-2 glyphicon-wrap">
 									<a href="javascript:" onclick="cal_add(document.getElementById('reti_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
 								</div>
 							</div>

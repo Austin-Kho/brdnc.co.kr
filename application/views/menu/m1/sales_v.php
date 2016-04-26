@@ -1,9 +1,9 @@
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="<?if( !$this->uri->segment(3) or $this->uri->segment(3)=='1') echo 'active'; else echo '';?>">
-        	<a href="<?php echo $this->config->base_url(); ?>m1/sales/1/"><strong>계 약 현 황</strong></a>
+        	<a href="<?php echo $this->config->base_url(); ?>m1/sales/1/"><strong>계 약 관 리</strong></a>
         </li>
         <li role="presentation" class="<?if( $this->uri->segment(3)=='2') echo 'active'; else echo '';?>">
-        	<a href="<?php echo $this->config->base_url(); ?>m1/sales/2/"><strong>수 납 현 황</strong></a>
+        	<a href="<?php echo $this->config->base_url(); ?>m1/sales/2/"><strong>수 납 관 리</strong></a>
         </li>
       </ul>
 <!-- ---------------------------------mdi-menu end------------------------------------ -->

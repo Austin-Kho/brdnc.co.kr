@@ -75,12 +75,17 @@
 	fieldset .row { margin: 0; }
 	.btn-wrap { padding: 15px 20px 15px 0; text-align: right; border-bottom: 1px solid #ddd; border-top: 1px solid #B2BCDE; background-color: #F8F8F8; margin-bottom: 25px; }
 	fieldset .label-wrap { padding: 13px 0 4px 15px; background-color: #F8F8F8; }
-	fieldset .label-wrap2 { padding: 10px 0 5px 15px; background-color: #e1eefe; }
+	fieldset .label-wrap2 { padding: 10px 0 7px 15px; background-color: #F5F9FE; }
 	fieldset label { width:180px; }
 	fieldset .form-wrap { padding: 0; }
 	fieldset .form-wrap input { margin: 5px 0; }
 	fieldset .form-wrap select { margin: 5px 0; }
 	fieldset .form-wrap button { margin: 5px 0; }
+	fieldset .form-wrap2 { padding: 0 10px; }
+	fieldset .form-wrap2 input { margin: 5px 0; }
+	fieldset .form-wrap2 select { margin: 5px 0; }
+	fieldset .form-wrap2 textarea { margin: 5px 0; }
+	fieldset .form-wrap2 button { margin: 5px 0; }
 
 	fieldset .glyphicon-wrap { padding: 8px 0 0 8px; }
 	fieldset .text-wrap { padding-top: 8px; }
