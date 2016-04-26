@@ -19,6 +19,7 @@ Header("Expires: 0");
 	$s_date = stripslashes($_REQUEST['s_date']);
 	$e_date = stripslashes($_REQUEST['e_date']);
 	$m4 = stripslashes($_REQUEST['m4']);
+	$sc = stripslashes($_REQUEST['sc']);
 	if($m4=='ok') $where = ' WHERE '.$add_where; else $where = $add_where;
 
 	if(!$e_date){
@@ -55,45 +56,42 @@ Header("Expires: 0");
 			    $where
 			    ORDER BY deal_date, seq_num";
 	$result1=mysql_query($query1, $connect);
-	echo $where;
+	// echo $where;
+
+
 	for($i=0; $rows1=mysql_fetch_array($result1); $i++){
+		if($sc==0){
+			if($i==0){
+				// 현금 최초 시재 구한다.
+				$c_in_qry = " SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE in_acc = '1' AND deal_date < '".$rows1[deal_date]."'" ;
+				$c_in_rlt = mysql_query($c_in_qry);
+				$c_in_row = mysql_fetch_array($c_in_rlt);
 
-		if($i==0) {
-			// 현금 최초 시재 구한다.
-			$c_in_qry = " SELECT SUM(inc) AS total_inc FROM cms_capital_cash_book WHERE seq_num < ".$rows1['seq_num']." in_acc == 1 AND deal_date <= ".$rows1[deal_date];
-			$c_in_rlt = mysql_query($c_in_qry);
-			$c_in_row = mysql_fetch_array($c_in_rlt);
-			echo $c_in_qry;
+				$c_ex_qry = " SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE out_acc = '1' AND deal_date < '".$rows1[deal_date]."'";
+				$c_ex_rlt = mysql_query($c_ex_qry);
+				$c_ex_row = mysql_fetch_array($c_ex_rlt);
 
-			$c_ex_qry = " SELECT SUM(exp) AS total_exp FROM cms_capital_cash_book WHERE seq_num < ".$rows1['seq_num']." in_acc==1 deal_date <= ".$rows1[deal_date];
-			$c_ex_rlt = mysql_query($c_ex_qry);
-			$c_ex_row = mysql_fetch_array($c_ex_rlt);
+				$fcash = $c_in_row[inc]-$c_ex_row[exp];
 
-			$cash_hand = $c_in_row[total_inc]-$c_ex_row[total_exp];
+				// 예금 최초 시재 구한다.
+				$b_in_qry = " SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE in_acc > '1' AND deal_date < '".$rows1[deal_date]."'";
+				$b_in_rlt = mysql_query($b_in_qry);
+				$b_in_row = mysql_fetch_array($b_in_rlt);
 
-			// 예금 최초 시재 구한다.
-			$b_in_qry = " SELECT SUM(inc) AS total_inc FROM cms_capital_cash_book WHERE seq_num < ".$rows1['seq_num']." in_acc > 1 AND deal_date <= ".$rows1[deal_date];
-			$b_in_rlt = mysql_query($b_in_qry);
-			$b_in_row = mysql_fetch_array($b_in_rlt);
+				$b_ex_qry = " SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE out_acc > '1' AND deal_date < '".$rows1[deal_date]."'";
+				$b_ex_rlt = mysql_query($b_ex_qry);
+				$b_ex_row = mysql_fetch_array($b_ex_rlt);
 
-			$b_ex_qry = " SELECT SUM(exp) AS total_exp FROM cms_capital_cash_book WHERE seq_num < ".$rows1['seq_num']." in_acc>1 deal_date <= ".$rows1[deal_date];
-			$b_ex_rlt = mysql_query($b_ex_qry);
-			$b_ex_row = mysql_fetch_array($b_ex_rlt);
+				$fbank = $b_in_row[inc]-$b_ex_row[exp];
 
-			$bank_balance = $b_in_row[total_inc]-$b_ex_row[total_exp];
-		}else{
-			if($rows1[in_acc]==1||($rows1[class1]==3&&$rows1[in_acc]==1)) $cash_hand+=$rows1[inc];
-			if($rows1[class1]==3&&$rows1[in_acc]==1&&$rows1[out_acc]==$rows1[no]) $cash_hand = $cash_hand-$rows1[inc];
-			if($rows1[out_acc]==1||($rows1[class1]==3&&$rows1[out_acc]==1)) $cash_hand-=$rows1[exp];
-			if($rows1[class1]==3&&$rows1[out_acc]==1&&$rows1[in_acc]==$rows1[no]) $cash_hand = $cash_hand+$rows1[exp];
+				$cash_hand = '=SUMIF(F3,"현금",G3)-SUMIF(H3,"현금",I3)+'.$fcash;
+				$bank_balance = '=SUMIF(F3,"<>현금",G3)-SUMIF(H3,"<>현금",I3)+'.$fbank;
 
-			if($rows1[in_acc]>1||($rows1[class1]==3&&$rows1[in_acc]>1)) $bank_balance+=$rows1[inc];
-			if($rows1[class1]==3&&$rows1[in_acc]>1&&$rows1[out_acc]==$rows1[no]) $bank_balance = $bank_balance-$rows1[inc];
-			if($rows1[out_acc]>1||($rows1[class1]==3&&$rows1[out_acc]>1)) $bank_balance-=$rows1[exp];
-			if($rows1[class1]==3&&$rows1[out_acc]>1&&$rows1[in_acc]==$rows1[no]) $bank_balance = $bank_balance+$rows1[exp];
+			}else if($i>0){
+				$cash_hand = '=J'.($i+2).'+SUMIF(F'.($i+3).',"현금",G'.($i+3).')-SUMIF(H'.($i+3).',"현금",I'.($i+3).')';
+				$bank_balance = '=K'.($i+2).'+SUMIF(F'.($i+3).',"<>현금",G'.($i+3).')-SUMIF(H'.($i+3).',"<>현금",I'.($i+3).')';
+			}
 		}
-
-
 
 
 		switch ($rows1[class1]) {
@@ -110,17 +108,17 @@ Header("Expires: 0");
 			case '6': $cla2="<font color='#009900'>[본사]</font>"; break;
 			case '7': $cla2="<font color='#669900'>[현장]</font>"; break;
 		}
-
 		$cla = $cla1."-".$cla2;
+
 		if($rows1[account]==""){ $account = "-"; }else{ $account = "[".$rows1[account]."]"; }
 
-		if($rows1[inc]==0||($rows1[class1]==3&&$rows1[out_acc]==$rows1[no])){ $inc="-"; }else{ $inc=number_format($rows1[inc]); }
-		if($rows1[exp]==0||($rows1[class1]==3&&$rows1[in_acc]==$rows1[no])){ $exp="-"; }else{ $exp=number_format($rows1[exp]); }
+		if($rows1[inc]==0||($rows1[class1]==3&&$rows1[out_acc]==$rows1[no])){ $inc=""; }else{ $inc=number_format($rows1[inc]); }
+		if($rows1[exp]==0||($rows1[class1]==3&&$rows1[in_acc]==$rows1[no])){ $exp=""; }else{ $exp=number_format($rows1[exp]); }
 
 		if($rows1[acc]) {$acc=$rows1[acc];}else{$acc="-";}
 
 		if($rows1[in_acc]==0||($rows1[class1]==3&&$rows1[out_acc]==$rows1[no])){ $in_acc=""; }else{ $in_acc=$rows1[name]; }
-		 if($rows1[out_acc]==0||($rows1[class1]==3&&$rows1[in_acc]==$rows1[no])){ $out_acc=""; }else{ $out_acc=$rows1[name]; }
+		if($rows1[out_acc]==0||($rows1[class1]==3&&$rows1[in_acc]==$rows1[no])){ $out_acc=""; }else{ $out_acc=$rows1[name]; }
 ?>
 	<tr  style="font-size:9pt;">
 		<td align="center" height="30"><?=$rows1[deal_date]?></td>
@@ -132,8 +130,8 @@ Header("Expires: 0");
 		<td align="right" height="30" bgcolor="#ECECFF"><?=$inc?></td>
 		<td align="center" height="30" bgcolor="#FFF0F0"><?=$out_acc?></td>
 		<td align="right" height="30" bgcolor="#FFF0F0"><?=$exp?></td>
-		<td align="right" height="30"><?=number_format($cash_hand)?></td>
-		<td align="right" height="30"><?=number_format($bank_balance)?></td>
+		<td align="right" height="30"><? if($sc==0) echo $cash_hand;?></td>
+		<td align="right" height="30"><? if($sc==0) echo $bank_balance;?></td>
 		<td align="right" height="30"><?=$rows1[note]?></td>
 	</tr>
 <?
