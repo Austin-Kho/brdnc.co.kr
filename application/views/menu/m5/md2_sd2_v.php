@@ -1,4 +1,4 @@
-		<div class="main_start"></div>
+		<div class="main_start">&nbsp;</div>
 		<!-- 5. 환경설정 -> 2. 회사정보관리 ->2. 사용자 권한 관리 페이지 -->
 
 		<div class="row" >

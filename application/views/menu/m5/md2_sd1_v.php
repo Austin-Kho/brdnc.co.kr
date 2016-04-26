@@ -1,7 +1,7 @@
-		<div class="main_start"></div>
+		<div class="main_start">&nbsp;</div>
 <!-- 5. 환경설정 -> 2. 회사정보관리 ->1. 회사정보 페이지 -->
-		<div class="row" style="margin: 0;">
-			<div class="col-xs-4 col-sm-4 col-md-2 bo-top bo-bottom" style="padding-top: 10px; height: 40px; background-color: #f8f8f8;">
+		<div class="row" style="margin: 0; padding: 0;">
+			<div class="col-xs-4 col-sm-4 col-md-2 bo-top bo-bottom" style="padding-top: 10px; margin-bottom: 20px; height: 40px; background-color: #f8f8f8;">
 				<b>회사 정보</b>
 			</div>
 			<div class="col-xs-8 col-sm-8 col-md-10 bo-top bo-bottom" style="height: 40px;">
@@ -9,20 +9,20 @@
 				<!-- <div class="col-xs-12 col-sm-6 col-md-3" style="padding-top: 6px;">
 					<select class="form-control input-sm" id="user_sel" name="user_sel" onchange="location.href='/m5/config/2/2/?un='+this.value">
 						<option value="">선 택</option>
-		<?php foreach($user_list as $lt) : ?>
+<?php foreach($user_list as $lt) : ?>
 						<option value="<?php echo $lt->no; ?>" <?php if($this->input->get('un')==$lt->no ) echo "selected"; ?>><?php echo $lt->name."(".$lt->user_id.")"; ?></option>
-		<?php endforeach; ?>
+<?php endforeach; ?>
 					</select>
 				</div> -->
 			</div>
 		</div>
 
-		<div class="row" style="margin: 20px 0 0 0; padding: 0;">
+		<div class="row" style="margin: 0; padding: 0;">
 <?php
 	$attributes = array('name' => 'form1', 'id' => 'com_reg_form', 'class' => 'form-horizontal', 'method' => 'post');
 	echo form_open('/m5/config/2/1/', $attributes);
 ?>
-				<fieldset class="font12" style="padding: 0;">
+				<fieldset class="font12">
 
 					<div class="form-group <?php if( !$this->agent->is_mobile()) echo 'bo-top';?>" style="margin: 0;">
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap" >

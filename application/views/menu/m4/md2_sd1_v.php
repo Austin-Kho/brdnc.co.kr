@@ -1,4 +1,4 @@
-			<div class="main_start">dd</div>
+			<div class="main_start">&nbsp;</div>
 			<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
 				<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">부서별</div>
 				<div class="col-md-10" style="height: 40px; padding-top: 10px;">

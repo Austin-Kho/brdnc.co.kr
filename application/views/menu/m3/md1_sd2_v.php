@@ -1,4 +1,4 @@
-      <div class="main_start"></div>
+      <div class="main_start">&nbsp;</div>
       <div class="row">
         <div class="col-md-6">
           <table class="table">

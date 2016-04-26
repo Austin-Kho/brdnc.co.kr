@@ -1,4 +1,4 @@
-			<div class="main_start"></div>
+			<div class="main_start">&nbsp;</div>
 <?php
 	$attributes = array('name' => 'inout_frm', 'method' => 'post');
 	echo form_open('/m4/capital/1/3/', $attributes);

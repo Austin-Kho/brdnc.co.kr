@@ -1,4 +1,4 @@
-			<div class="main_start"></div>
+			<div class="main_start">&nbsp;</div>
 
 <?php if( !$this->input->get('ss_di') or $this->input->get('ss_di')==1) : ?>
 			<div class="row">
