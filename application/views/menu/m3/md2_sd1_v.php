@@ -9,20 +9,24 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-12 col-sm-8">
-							<input type="text" class="form-control input-sm han" id="pj_name" name="pj_name" maxlength="30" value="" required autofocus>
+							<input type="text" class="form-control input-sm han" id="pj_name" name="pj_name" maxlength="30" value="" required autofocus placeholder="프로젝트 명">
 						</div>
 					</div>
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
-						<label for="co_no1">프로젝트 종류 <span class="red">*</span></label>
+						<label for="sort">프로젝트 종류 <span class="red">*</span></label>
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-12 col-sm-8">
-							<label for="co_form" class="sr-only">사업자종류 </label>
-							<select class="form-control input-sm" id="co_form" name="co_form" required autofocus>
+							<select class="form-control input-sm" id="sort" name="sort" required autofocus>
 								<option value="">선택</option>
-								<option value="1">법인</option>
-								<option value="2">개인(일반)</option>
-								<option value="3">개인(간이)</option>
+                                                <option value="1"> 아파트(일반분양)</option>
+                                                <option value="2"> 아파트(조합)</option>
+                                                <option value="3"> 주상복합(아파트)</option>
+                                                <option value="4"> 주상복합(오피스텔)</option>
+                                                <option value="5"> 도시형생활주택</option>
+                                                <option value="6"> 근린생활시설</option>
+                                                <option value="7"> 레저(숙박)시설</option>
+                                                <option value="8"> 기 타</option>
 							</select>
 						</div>
 					</div>
@@ -30,13 +34,14 @@
 
 				<div class="form-group">
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
-						<label for="co_name">대지위치(주소) <span class="red">*</span></label>
+						<label>대지위치(주소) <span class="red">*</span></label>
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
 						<div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
 							<input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="javascript:ZipWindow('/popup/zip_/')">
 						</div>
 						<div class="col-xs-3 col-sm-5 col-md-1" style="padding-right: 0;">
+                                          <label for="zipcode" class="sr-only">우편번호</label>
 							<input type="text" class="form-control input-sm" id="zipcode" name="zipcode" maxlength="5" value="" readonly required autofocus>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-4" style="padding-right: 0;">
@@ -53,25 +58,20 @@
 
 				<div class="form-group">
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
-						<label for="co_name">대지 매입면적 <span class="red">*</span></label>
+						<label for="buy_land_extent">대지 매입면적 <span class="red">*</span></label>
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-12 col-sm-8">
-							<input type="text" class="form-control input-sm han" id="co_name" name="co_name" maxlength="30" value="" required autofocus>
+							<input type="text" class="form-control input-sm han" id="buy_land_extent" name="buy_land_extent" maxlength="30" value="" required autofocus placeholder="대지 매입면적 (㎡)">
 						</div>
 					</div>
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
-						<label for="co_no1">계획 대지면적 <span class="red">*</span></label>
+						<label for="scheme_land_extent">계획 대지면적 <span class="red">*</span></label>
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-12 col-sm-8">
 							<label for="co_form" class="sr-only">사업자종류 </label>
-							<select class="form-control input-sm" id="co_form" name="co_form" required autofocus>
-								<option value="">선택</option>
-								<option value="1">법인</option>
-								<option value="2">개인(일반)</option>
-								<option value="3">개인(간이)</option>
-							</select>
+							<input type="text" class="form-control input-sm han" id="scheme_land_extent" name="scheme_land_extent" maxlength="30" value="" required autofocus placeholder="계획 대지면적 (㎡)">
 						</div>
 					</div>
 				</div>
