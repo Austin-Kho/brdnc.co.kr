@@ -26,6 +26,9 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-workspace
 *.sublime-project
 
+## Atom sftp files
+*.ftpconfig
+
 /application/config/database.php
 /application/config/config.php
 
