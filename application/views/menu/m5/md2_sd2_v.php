@@ -136,7 +136,7 @@
 											<input type="checkbox" id="_m1_2_2_m" name="_m1_2_2_m" <?php if(isset($user_auth->_m1_2_2) && $user_auth->_m1_2_2>1) echo 'checked'; ?>> 등록
 										<!-- </label> -->
 									</td>
-									<td class="sec-td">요약집계
+									<td class="sec-td">수납약정
 										<!-- <label class="checkbox-inline"> -->
 											<input type="checkbox" id="_m1_2_3" name="_m1_2_3" <?php if(isset($user_auth->_m1_2_3) && $user_auth->_m1_2_3>0) echo 'checked'; ?>> 조회
 										<!-- </label> -->
