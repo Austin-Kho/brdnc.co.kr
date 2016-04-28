@@ -15,5 +15,11 @@
 		<script src="/static/js/docs.min.js"></script>
 		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 		<!-- <script src="<?php echo $this->config->base_url(); ?>static/js/ie10-viewport-bug-workaround.js"></script> -->
+		<script type="text/javascript">
+			$(document).ready(function() {
+		      	$('[data-toggle="tooltip"]').tooltip();
+				$('[data-toggle="popover"]').popover();				
+			});
+		</script>
 	</body>
 </html>
