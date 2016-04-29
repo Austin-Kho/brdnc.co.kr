@@ -1,7 +1,10 @@
     <div class="main_start">&nbsp;</div>
 <!-- 3. 프로젝트 -> 2. 신규 프로젝트 ->1. 신규 등록 -->
     <div class="row" style="margin: 0; padding: 0;">
-		<form name="form1" class="" action="" method="post">
+<?php
+	$attributes = array('name' => 'form1', 'class' => '', 'method' => 'post');
+	echo form_open('/m3/project/2/1/', $attributes);
+?>
 			<fieldset class="font12">
 				<div class="form-group"><!-- 프로젝트명/종류 -->
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
@@ -9,7 +12,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-12 col-sm-8">
-							<input type="text" class="form-control input-sm han" id="pj_name" name="pj_name" maxlength="30" value="" required autofocus placeholder="프로젝트 명">
+							<input type="text" class="form-control input-sm han" id="pj_name" name="pj_name" maxlength="30" value="<?php echo set_value('pj_name'); ?>" required autofocus placeholder="프로젝트 명">
 						</div>
 					</div>
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
@@ -19,14 +22,14 @@
 						<div class="col-xs-12 col-sm-8">
 							<select class="form-control input-sm" id="sort" name="sort" required autofocus>
 								<option value="">선택</option>
-				                <option value="1"> 아파트(일반분양)</option>
-				                <option value="2"> 아파트(조합)</option>
-				                <option value="3"> 주상복합(아파트)</option>
-				                <option value="4"> 주상복합(오피스텔)</option>
-				                <option value="5"> 도시형생활주택</option>
-				                <option value="6"> 근린생활시설</option>
-				                <option value="7"> 레저(숙박)시설</option>
-				                <option value="8"> 기 타</option>
+				                <option value="1" <?php echo set_select('sort', '1'); ?>> 아파트(일반분양)</option>
+				                <option value="2" <?php echo set_select('sort', '2'); ?>> 아파트(조합)</option>
+				                <option value="3" <?php echo set_select('sort', '3'); ?>> 주상복합(아파트)</option>
+				                <option value="4" <?php echo set_select('sort', '4'); ?>> 주상복합(오피스텔)</option>
+				                <option value="5" <?php echo set_select('sort', '5'); ?>> 도시형생활주택</option>
+				                <option value="6" <?php echo set_select('sort', '6'); ?>> 근린생활시설</option>
+				                <option value="7" <?php echo set_select('sort', '7'); ?>> 레저(숙박)시설</option>
+				                <option value="8" <?php echo set_select('sort', '8'); ?>> 기 타</option>
 							</select>
 						</div>
 					</div>
@@ -42,15 +45,15 @@
 						</div>
 						<div class="col-xs-3 col-sm-5 col-md-1" style="padding-right: 0;">
               				<label for="zipcode" class="sr-only">우편번호</label>
-							<input type="text" class="form-control input-sm en_only" id="zipcode" name="zipcode" maxlength="5" value="" readonly required autofocus>
+							<input type="text" class="form-control input-sm en_only" id="zipcode" name="zipcode" maxlength="5" value="<?php echo set_value('zipcode'); ?>" readonly required autofocus>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-4" style="padding-right: 0;">
 							<label for="address1" class="sr-only">회사주소1</label>
-							<input type="text" class="form-control input-sm han" id="address1" name="address1" maxlength="100" value="" readonly required autofocus>
+							<input type="text" class="form-control input-sm han" id="address1" name="address1" maxlength="100" value="<?php echo set_value('address1'); ?>" readonly required autofocus>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-4" style="padding-right: 0;">
 							<label for="address2" class="sr-only">회사주소2</label>
-							<input type="text" class="form-control input-sm han" id="address2" maxlength="100" value="" name="address2" placeholder="나머지 주소">
+							<input type="text" class="form-control input-sm han" id="address2" maxlength="93" value="<?php echo set_value('address2'); ?>" name="address2" placeholder="나머지 주소">
 						</div>
 						<!-- <div class="col-xs-12 col-sm-12 col-md-3 glyphicon-wrap" style="padding: 11px;">나머지 주소</div> -->
 					</div>
@@ -62,7 +65,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="buy_land_extent" name="buy_land_extent" maxlength="10" value="" required autofocus placeholder="대지 매입면적 (㎡)">
+							<input type="text" class="form-control input-sm en_only" id="buy_land_extent" name="buy_land_extent" maxlength="10" value="<?php echo set_value('buy_land_extent'); ?>" required autofocus placeholder="대지 매입면적 (㎡)">
 						</div>
                                     <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
 					</div>
@@ -71,7 +74,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="scheme_land_extent" name="scheme_land_extent" maxlength="10" value="" required autofocus placeholder="계획 대지면적 (㎡)">
+							<input type="text" class="form-control input-sm en_only" id="scheme_land_extent" name="scheme_land_extent" maxlength="10" value="<?php echo set_value('scheme_land_extent'); ?>" required autofocus placeholder="계획 대지면적 (㎡)">
 						</div>
                                     <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
 					</div>
@@ -83,7 +86,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-12 col-sm-8">
-							<input type="text" class="form-control input-sm han" id="build_size" name="build_size" maxlength="30" value="" placeholder="건축 규모 (동수/최고층 등)">
+							<input type="text" class="form-control input-sm han" id="build_size" name="build_size" maxlength="60" value="<?php echo set_value('build_size'); ?>" placeholder="건축 규모 (동수/최고층 등)">
 						</div>
 					</div>
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
@@ -91,7 +94,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="num_unit" name="num_unit" maxlength="6" value="" required autofocus placeholder="세대(호/실) 수">
+							<input type="text" class="form-control input-sm en_only" id="num_unit" name="num_unit" maxlength="6" value="<?php echo set_value('num_unit'); ?>" required autofocus placeholder="세대(호/실) 수">
 						</div>
                                     <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>세대(호/실)</span></div>
 					</div>
@@ -103,18 +106,18 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="build_area" name="build_area" maxlength="10" value=""  placeholder="건축 면적 (㎡)">
+							<input type="text" class="form-control input-sm en_only" id="build_area" name="build_area" maxlength="10" value="<?php echo set_value('build_area'); ?>"  placeholder="건축 면적 (㎡)">
 						</div>
-                                    <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
+                        <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
 					</div>
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
 						<label for="gr_floor_area">총 연면적 <span class="red">*</span></label>
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="gr_floor_area" name="gr_floor_area" maxlength="10" value="" required autofocus placeholder="총 연면적 (㎡)">
+							<input type="text" class="form-control input-sm en_only" id="gr_floor_area" name="gr_floor_area" maxlength="10" value="<?php echo set_value('gr_floor_area'); ?>" required autofocus placeholder="총 연면적 (㎡)">
 						</div>
-                                    <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
+                        <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
 					</div>
 				</div>
 
@@ -124,18 +127,18 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="on_floor_area" name="on_floor_area" maxlength="10" value="" required autofocus placeholder="지상 연면적 (㎡)">
+							<input type="text" class="form-control input-sm en_only" id="on_floor_area" name="on_floor_area" maxlength="10" value="<?php echo set_value('on_floor_area'); ?>" required autofocus placeholder="지상 연면적 (㎡)">
 						</div>
-                                    <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
+                        <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
 					</div>
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
-						<label for="co_no1">지하 연면적 <span class="red">*</span></label>
+						<label for="ba_floor_area">지하 연면적 <span class="red">*</span></label>
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="ba_floor_area" name="ba_floor_area" maxlength="10" value="" required autofocus placeholder="지하 연면적 (㎡)">
+							<input type="text" class="form-control input-sm en_only" id="ba_floor_area" name="ba_floor_area" maxlength="10" value="<?php echo set_value('ba_floor_area'); ?>" required autofocus placeholder="지하 연면적 (㎡)">
 						</div>
-                                    <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
+                        <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
 					</div>
 				</div>
 
@@ -145,7 +148,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="floor_ar_rat" name="floor_ar_rat" maxlength="6" value="" required autofocus placeholder="용적율 (%)">
+							<input type="text" class="form-control input-sm en_only" id="floor_ar_rat" name="floor_ar_rat" maxlength="8" value="<?php echo set_value('floor_ar_rat'); ?>" required autofocus placeholder="용적율 (%)">
 						</div>
                                     <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>%</span></div>
 					</div>
@@ -154,9 +157,9 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="bu_to_la_rat" name="bu_to_la_rat" maxlength="6" value=""  placeholder="건폐율 (%)">
+							<input type="text" class="form-control input-sm en_only" id="bu_to_la_rat" name="bu_to_la_rat" maxlength="8" value="<?php echo set_value('bu_to_la_rat'); ?>"  placeholder="건폐율 (%)">
 						</div>
-                                    <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>%</span></div>
+                        <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>%</span></div>
 					</div>
 				</div>
 
@@ -166,18 +169,18 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="law_num_parking" name="law_num_parking" maxlength="6" value=""  placeholder="법정 주차대수">
+							<input type="text" class="form-control input-sm en_only" id="law_num_parking" name="law_num_parking" maxlength="6" value="<?php echo set_value('law_num_parking'); ?>"  placeholder="법정 주차대수">
 						</div>
-                                    <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>대</span></div>
+                        <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>대</span></div>
 					</div>
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
 						<label for="plan_num_parking">계획 주차대수</label>
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="plan_num_parking" name="plan_num_parking" maxlength="6" value=""  placeholder="계획 주차대수">
+							<input type="text" class="form-control input-sm en_only" id="plan_num_parking" name="plan_num_parking" maxlength="6" value="<?php echo set_value('plan_num_parking'); ?>"  placeholder="계획 주차대수">
 						</div>
-                                    <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>대</span></div>
+                        <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>대</span></div>
 					</div>
 				</div>
 
@@ -195,26 +198,26 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_1" name="type_name_1" maxlength="10" value="" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_1" name="type_name_1" maxlength="10" value="<?php echo set_value('type_name_1'); ?>" required autofocus placeholder="타입">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_color_1" class="sr-only">컬러</span></label>
-							<input type="color" class="form-control input-sm en_only" id="type_color_1" name="type_color_1" maxlength="7" value=""  placeholder="컬러">
+							<input type="color" class="form-control input-sm en_only" id="type_color_1" name="type_color_1" maxlength="7" value="<?php echo set_value('type_color_1'); ?>"  placeholder="컬러">
 						</div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_quantity_1" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_1" name="type_quantity_1" maxlength="5" value="" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_1" name="type_quantity_1" maxlength="5" value="<?php echo set_value('type_quantity_1'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_q_unit_1" class="sr-only">단위</span></label>
-							<select class="form-control input-sm" id="type_q_unit_1" name="type_q_unit_1">
+							<label for="count_unit_1" class="sr-only">단위</span></label>
+							<select class="form-control input-sm" id="count_unit_1" name="count_unit_1">
 								<option value="0">단위</option>
-								<option value="1">세대</option>
-								<option value="2">실</option>
-								<option value="3">호</option>
-								<option value="4">㎡(면적)</option>
+								<option value="1" <?php echo set_select('count_unit_1', '1'); ?>>세대</option>
+								<option value="2" <?php echo set_select('count_unit_1', '2'); ?>>실</option>
+								<option value="3" <?php echo set_select('count_unit_1', '3'); ?>>호</option>
+								<option value="4" <?php echo set_select('count_unit_1', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
 						<div class="col-xs-2">
@@ -233,26 +236,26 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_2" name="type_name_2" maxlength="10" value="" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_2" name="type_name_2" maxlength="10" value="<?php echo set_value('type_name_2'); ?>" required autofocus placeholder="타입">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_color_2" class="sr-only">컬러</span></label>
-							<input type="color" class="form-control input-sm en_only" id="type_color_2" name="type_color_2" maxlength="7" value=""  placeholder="컬러">
+							<input type="color" class="form-control input-sm en_only" id="type_color_2" name="type_color_2" maxlength="7" value="<?php echo set_value('type_color_2'); ?>"  placeholder="컬러">
 						</div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_quantity_2" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_2" name="type_quantity_2" maxlength="5" value="" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_2" name="type_quantity_2" maxlength="5" value="<?php echo set_value('type_quantity_2'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_q_unit_2" class="sr-only">단위</span></label>
-							<select class="form-control input-sm" id="type_q_unit_2" name="type_q_unit_2">
+							<label for="count_unit_2" class="sr-only">단위</span></label>
+							<select class="form-control input-sm" id="count_unit_2" name="count_unit_2">
 								<option value="0">단위</option>
-								<option value="1">세대</option>
-								<option value="2">실</option>
-								<option value="3">호</option>
-								<option value="4">㎡(면적)</option>
+								<option value="1" <?php echo set_select('count_unit_2', '1'); ?>>세대</option>
+								<option value="2" <?php echo set_select('count_unit_2', '2'); ?>>실</option>
+								<option value="3" <?php echo set_select('count_unit_2', '3'); ?>>호</option>
+								<option value="4" <?php echo set_select('count_unit_2', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
 						<div class="col-xs-2">
@@ -271,26 +274,26 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_3" name="type_name_3" maxlength="10" value="" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_3" name="type_name_3" maxlength="10" value="<?php echo set_value('type_name_3'); ?>" required autofocus placeholder="타입">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_color_3" class="sr-only">컬러</span></label>
-							<input type="color" class="form-control input-sm en_only" id="type_color_3" name="type_color_3" maxlength="7" value=""  placeholder="컬러">
+							<input type="color" class="form-control input-sm en_only" id="type_color_3" name="type_color_3" maxlength="7" value="<?php echo set_value('type_color_3'); ?>"  placeholder="컬러">
 						</div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_quantity_3" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_3" name="type_quantity_3" maxlength="5" value="" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_3" name="type_quantity_3" maxlength="5" value="<?php echo set_value('type_quantity_3'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_q_unit_3" class="sr-only">단위</span></label>
-							<select class="form-control input-sm" id="type_q_unit_3" name="type_q_unit_3">
+							<label for="count_unit_3" class="sr-only">단위</span></label>
+							<select class="form-control input-sm" id="count_unit_3" name="count_unit_3">
 								<option value="0">단위</option>
-								<option value="1">세대</option>
-								<option value="2">실</option>
-								<option value="3">호</option>
-								<option value="4">㎡(면적)</option>
+								<option value="1" <?php echo set_select('sort', '1'); ?>>세대</option>
+								<option value="2" <?php echo set_select('sort', '1'); ?>>실</option>
+								<option value="3" <?php echo set_select('sort', '1'); ?>>호</option>
+								<option value="4" <?php echo set_select('sort', '1'); ?>>㎡(면적)</option>
 							</select>
 						</div>
 						<div class="col-xs-2">
@@ -309,26 +312,26 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_4" name="type_name_4" maxlength="10" value="" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_4" name="type_name_4" maxlength="10" value="<?php echo set_value('type_name_4'); ?>" required autofocus placeholder="타입">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_color_4" class="sr-only">컬러</span></label>
-							<input type="color" class="form-control input-sm en_only" id="type_color_4" name="type_color_4" maxlength="7" value=""  placeholder="컬러">
+							<input type="color" class="form-control input-sm en_only" id="type_color_4" name="type_color_4" maxlength="7" value="<?php echo set_value('type_color_4'); ?>"  placeholder="컬러">
 						</div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_quantity_4" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_4" name="type_quantity_4" maxlength="5" value="" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_4" name="type_quantity_4" maxlength="5" value="<?php echo set_value('type_quantity_4'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_q_unit_4" class="sr-only">단위</span></label>
-							<select class="form-control input-sm" id="type_q_unit_4" name="type_q_unit_4">
+							<label for="count_unit_4" class="sr-only">단위</span></label>
+							<select class="form-control input-sm" id="count_unit_4" name="count_unit_4">
 								<option value="0">단위</option>
-								<option value="1">세대</option>
-								<option value="2">실</option>
-								<option value="3">호</option>
-								<option value="4">㎡(면적)</option>
+								<option value="1" <?php echo set_select('count_unit_4', '1'); ?>>세대</option>
+								<option value="2" <?php echo set_select('count_unit_4', '2'); ?>>실</option>
+								<option value="3" <?php echo set_select('count_unit_4', '3'); ?>>호</option>
+								<option value="4" <?php echo set_select('count_unit_4', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
 						<div class="col-xs-2">
@@ -347,26 +350,26 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_5" name="type_name_5" maxlength="10" value="" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_5" name="type_name_5" maxlength="10" value="<?php echo set_value('type_name_5'); ?>" required autofocus placeholder="타입">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_color_5" class="sr-only">컬러</span></label>
-							<input type="color" class="form-control input-sm en_only" id="type_color_5" name="type_color_5" maxlength="7" value=""  placeholder="컬러">
+							<input type="color" class="form-control input-sm en_only" id="type_color_5" name="type_color_5" maxlength="7" value="<?php echo set_value('type_color_5'); ?>"  placeholder="컬러">
 						</div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_quantity_5" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_5" name="type_quantity_5" maxlength="5" value="" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_5" name="type_quantity_5" maxlength="5" value="<?php echo set_value('type_quantity_5'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_q_unit_5" class="sr-only">단위</span></label>
-							<select class="form-control input-sm" id="type_q_unit_5" name="type_q_unit_5">
+							<label for="count_unit_5" class="sr-only">단위</span></label>
+							<select class="form-control input-sm" id="count_unit_5" name="count_unit_5">
 								<option value="0">단위</option>
-								<option value="1">세대</option>
-								<option value="2">실</option>
-								<option value="3">호</option>
-								<option value="4">㎡(면적)</option>
+								<option value="1" <?php echo set_select('count_unit_5', '1'); ?>>세대</option>
+								<option value="2" <?php echo set_select('count_unit_5', '2'); ?>>실</option>
+								<option value="3" <?php echo set_select('count_unit_5', '3'); ?>>호</option>
+								<option value="4" <?php echo set_select('count_unit_5', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
 						<div class="col-xs-2">
@@ -385,26 +388,26 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_6" name="type_name_6" maxlength="10" value="" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_6" name="type_name_6" maxlength="10" value="<?php echo set_value('type_name_6'); ?>" required autofocus placeholder="타입">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_color_6" class="sr-only">컬러</span></label>
-							<input type="color" class="form-control input-sm en_only" id="type_color_6" name="type_color_6" maxlength="7" value=""  placeholder="컬러">
+							<input type="color" class="form-control input-sm en_only" id="type_color_6" name="type_color_6" maxlength="7" value="<?php echo set_value('type_color_6'); ?>"  placeholder="컬러">
 						</div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_quantity_6" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_6" name="type_quantity_6" maxlength="5" value="" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_6" name="type_quantity_6" maxlength="5" value="<?php echo set_value('type_quantity_6'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_q_unit_6" class="sr-only">단위</span></label>
-							<select class="form-control input-sm" id="type_q_unit_6" name="type_q_unit_6">
+							<label for="count_unit_6" class="sr-only">단위</span></label>
+							<select class="form-control input-sm" id="count_unit_6" name="count_unit_6">
 								<option value="0">단위</option>
-								<option value="1">세대</option>
-								<option value="2">실</option>
-								<option value="3">호</option>
-								<option value="4">㎡(면적)</option>
+								<option value="1" <?php echo set_select('count_unit_6', '1'); ?>>세대</option>
+								<option value="2" <?php echo set_select('count_unit_6', '2'); ?>>실</option>
+								<option value="3" <?php echo set_select('count_unit_6', '3'); ?>>호</option>
+								<option value="4" <?php echo set_select('count_unit_6', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
 						<div class="col-xs-2">
@@ -423,26 +426,26 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_7" name="type_name_7" maxlength="10" value="" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_7" name="type_name_7" maxlength="10" value="<?php echo set_value('type_name_7'); ?>" required autofocus placeholder="타입">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_color_7" class="sr-only">컬러</span></label>
-							<input type="color" class="form-control input-sm en_only" id="type_color_7" name="type_color_7" maxlength="7" value=""  placeholder="컬러">
+							<input type="color" class="form-control input-sm en_only" id="type_color_7" name="type_color_7" maxlength="7" value="<?php echo set_value('type_color_7'); ?>"  placeholder="컬러">
 						</div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_quantity_7" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_7" name="type_quantity_7" maxlength="5" value="" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_7" name="type_quantity_7" maxlength="5" value="<?php echo set_value('type_quantity_7'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_q_unit_7" class="sr-only">단위</span></label>
-							<select class="form-control input-sm" id="type_q_unit_7" name="type_q_unit_7">
+							<label for="count_unit_7" class="sr-only">단위</span></label>
+							<select class="form-control input-sm" id="count_unit_7" name="count_unit_7">
 								<option value="0">단위</option>
-								<option value="1">세대</option>
-								<option value="2">실</option>
-								<option value="3">호</option>
-								<option value="4">㎡(면적)</option>
+								<option value="1" <?php echo set_select('count_unit_7', '1'); ?>>세대</option>
+								<option value="2" <?php echo set_select('count_unit_7', '2'); ?>>실</option>
+								<option value="3" <?php echo set_select('count_unit_7', '3'); ?>>호</option>
+								<option value="4" <?php echo set_select('count_unit_7', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
 						<div class="col-xs-2">
@@ -461,26 +464,26 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_8" name="type_name_8" maxlength="10" value="" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_8" name="type_name_8" maxlength="10" value="<?php echo set_value('type_name_8'); ?>" required autofocus placeholder="타입">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_color_8" class="sr-only">컬러</span></label>
-							<input type="color" class="form-control input-sm en_only" id="type_color_8" name="type_color_8" maxlength="7" value=""  placeholder="컬러">
+							<input type="color" class="form-control input-sm en_only" id="type_color_8" name="type_color_8" maxlength="7" value="<?php echo set_value('type_color_8'); ?>"  placeholder="컬러">
 						</div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_quantity_8" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_8" name="type_quantity_8" maxlength="5" value="" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_8" name="type_quantity_8" maxlength="5" value="<?php echo set_value('type_quantity_8'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_q_unit_8" class="sr-only">단위</span></label>
-							<select class="form-control input-sm" id="type_q_unit_8" name="type_q_unit_8">
+							<label for="count_unit_8" class="sr-only">단위</span></label>
+							<select class="form-control input-sm" id="count_unit_8" name="count_unit_8">
 								<option value="0">단위</option>
-								<option value="1">세대</option>
-								<option value="2">실</option>
-								<option value="3">호</option>
-								<option value="4">㎡(면적)</option>
+								<option value="1" <?php echo set_select('count_unit_8', '1'); ?>>세대</option>
+								<option value="2" <?php echo set_select('count_unit_8', '2'); ?>>실</option>
+								<option value="3" <?php echo set_select('count_unit_8', '3'); ?>>호</option>
+								<option value="4" <?php echo set_select('count_unit_8', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
 						<div class="col-xs-2">
@@ -499,26 +502,26 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_9" name="type_name_9" maxlength="10" value="" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_9" name="type_name_9" maxlength="10" value="<?php echo set_value('type_name_9'); ?>" required autofocus placeholder="타입">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_color_9" class="sr-only">컬러</span></label>
-							<input type="color" class="form-control input-sm en_only" id="type_color_9" name="type_color_9" maxlength="7" value=""  placeholder="컬러">
+							<input type="color" class="form-control input-sm en_only" id="type_color_9" name="type_color_9" maxlength="7" value="<?php echo set_value('type_color_9'); ?>"  placeholder="컬러">
 						</div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_quantity_9" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_9" name="type_quantity_9" maxlength="5" value="" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_9" name="type_quantity_9" maxlength="5" value="<?php echo set_value('type_quantity_9'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
                         <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_q_unit_9" class="sr-only">단위</span></label>
-							<select class="form-control input-sm" id="type_q_unit_9" name="type_q_unit_9">
+							<label for="count_unit_9" class="sr-only">단위</span></label>
+							<select class="form-control input-sm" id="count_unit_9" name="count_unit_9">
 								<option value="0">단위</option>
-								<option value="1">세대</option>
-								<option value="2">실</option>
-								<option value="3">호</option>
-								<option value="4">㎡(면적)</option>
+								<option value="1" <?php echo set_select('count_unit_9', '1'); ?>>세대</option>
+								<option value="2" <?php echo set_select('count_unit_9', '2'); ?>>실</option>
+								<option value="3" <?php echo set_select('count_unit_9', '3'); ?>>호</option>
+								<option value="4" <?php echo set_select('count_unit_9', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
 						<div class="col-xs-2">
@@ -537,26 +540,26 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_10" name="type_name_10" maxlength="10" value="" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_10" name="type_name_10" maxlength="10" value="<?php echo set_value('type_name_10'); ?>" required autofocus placeholder="타입">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_color_10" class="sr-only">컬러</span></label>
-							<input type="color" class="form-control input-sm en_only" id="type_color_10" name="type_color_10" maxlength="7" value=""  placeholder="컬러">
+							<input type="color" class="form-control input-sm en_only" id="type_color_10" name="type_color_10" maxlength="7" value="<?php echo set_value('type_color_10'); ?>"  placeholder="컬러">
 						</div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_quantity_10" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_10" name="type_quantity_10" maxlength="5" value="" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_10" name="type_quantity_10" maxlength="5" value="<?php echo set_value('type_quantity_10'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
                             <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_q_unit_10" class="sr-only">단위</span></label>
-							<select class="form-control input-sm" id="type_q_unit_10" name="type_q_unit_10">
+							<label for="count_unit_10" class="sr-only">단위</span></label>
+							<select class="form-control input-sm" id="count_unit_10" name="count_unit_10">
 								<option value="0">단위</option>
-								<option value="1">세대</option>
-								<option value="2">실</option>
-								<option value="3">호</option>
-								<option value="4">㎡(면적)</option>
+								<option value="1" <?php echo set_select('count_unit_10', '1'); ?>>세대</option>
+								<option value="2" <?php echo set_select('count_unit_10', '2'); ?>>실</option>
+								<option value="3" <?php echo set_select('count_unit_10', '3'); ?>>호</option>
+								<option value="4" <?php echo set_select('count_unit_10', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
 						<div class="col-xs-2">
@@ -575,26 +578,26 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_11" name="type_name_11" maxlength="10" value="" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_11" name="type_name_11" maxlength="10" value="<?php echo set_value('type_name_11'); ?>" required autofocus placeholder="타입">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_color_11" class="sr-only">컬러</span></label>
-							<input type="color" class="form-control input-sm en_only" id="type_color_11" name="type_color_11" maxlength="7" value=""  placeholder="컬러">
+							<input type="color" class="form-control input-sm en_only" id="type_color_11" name="type_color_11" maxlength="7" value="<?php echo set_value('type_color_11'); ?>"  placeholder="컬러">
 						</div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_quantity_11" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_11" name="type_quantity_11" maxlength="5" value="" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_11" name="type_quantity_11" maxlength="5" value="<?php echo set_value('type_quantity_11'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
                                     <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_q_unit_11" class="sr-only">단위</span></label>
-							<select class="form-control input-sm" id="type_q_unit_11" name="type_q_unit_11">
+							<label for="count_unit_11" class="sr-only">단위</span></label>
+							<select class="form-control input-sm" id="count_unit_11" name="count_unit_11">
 								<option value="0">단위</option>
-								<option value="1">세대</option>
-								<option value="2">실</option>
-								<option value="3">호</option>
-								<option value="4">㎡(면적)</option>
+								<option value="1" <?php echo set_select('count_unit_11', '1'); ?>>세대</option>
+								<option value="2" <?php echo set_select('count_unit_11', '2'); ?>>실</option>
+								<option value="3" <?php echo set_select('count_unit_11', '3'); ?>>호</option>
+								<option value="4" <?php echo set_select('count_unit_11', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
 						<div class="col-xs-2"></div>
@@ -617,7 +620,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="land_cost" name="land_cost" maxlength="10" value="" placeholder="토지 매입비 (단위:천원)">
+							<input type="text" class="form-control input-sm en_only" id="land_cost" name="land_cost" maxlength="10" value="<?php echo set_value('land_cost'); ?>" placeholder="토지 매입비 (단위:천원)">
 						</div>
                         <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
 					</div>
@@ -626,7 +629,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="build_cost" name="build_cost" maxlength="5" value="" placeholder="평당 건축비 (단위:천원)">
+							<input type="text" class="form-control input-sm en_only" id="build_cost" name="build_cost" maxlength="5" value="<?php echo set_value('build_cost'); ?>" placeholder="평당 건축비 (단위:천원)">
 						</div>
                     	<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
 					</div>
@@ -638,7 +641,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm  en_only" id="arc_design_cost" name="arc_design_cost" maxlength="8" value="" placeholder="설계 용역비 (단위:천원)">
+							<input type="text" class="form-control input-sm  en_only" id="arc_design_cost" name="arc_design_cost" maxlength="8" value="<?php echo set_value('arc_design_cost'); ?>" placeholder="설계 용역비 (단위:천원)">
 						</div>
                         <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
 					</div>
@@ -647,7 +650,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm  en_only" id="supervision_cost" name="supervision_cost" maxlength="8" value="" placeholder="감리 용역비 (단위:천원)">
+							<input type="text" class="form-control input-sm  en_only" id="supervision_cost" name="supervision_cost" maxlength="8" value="<?php echo set_value('supervision_cost'); ?>" placeholder="감리 용역비 (단위:천원)">
 						</div>
                         <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
 					</div>
@@ -658,7 +661,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm  en_only" id="initial_inves" name="initial_inves" maxlength="10" value="" placeholder="시행사 초기 투자금 (단위:천원)">
+							<input type="text" class="form-control input-sm  en_only" id="initial_inves" name="initial_inves" maxlength="10" value="<?php echo set_value('initial_inves'); ?>" placeholder="시행사 초기 투자금 (단위:천원)">
 						</div>
                         <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
 					</div>
@@ -667,7 +670,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm  en_only" id="dev_agency_charge" name="dev_agency_charge" maxlength="5" value="" placeholder="시행대행 용역비 (단위:천원)">
+							<input type="text" class="form-control input-sm  en_only" id="dev_agency_charge" name="dev_agency_charge" maxlength="5" value="<?php echo set_value('dev_agency_charge'); ?>" placeholder="시행대행 용역비 (단위:천원)">
 						</div>
                         <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
 					</div>
@@ -678,7 +681,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm  en_only" id="bridge_loan" name="bridge_loan" maxlength="10" value="" placeholder="브리지 차입규모 (단위:천원)">
+							<input type="text" class="form-control input-sm  en_only" id="bridge_loan" name="bridge_loan" maxlength="10" value="<?php echo set_value('bridge_loan'); ?>" placeholder="브리지 차입규모 (단위:천원)">
 						</div>
                         <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
 					</div>
@@ -687,7 +690,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm  en_only" id="pf_loan" name="pf_loan" maxlength="10" value="" placeholder="PF 차입규모 (단위:천원)">
+							<input type="text" class="form-control input-sm  en_only" id="pf_loan" name="pf_loan" maxlength="10" value="<?php echo set_value('pf_loan'); ?>" placeholder="PF 차입규모 (단위:천원)">
 						</div>
                         <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
 					</div>
@@ -698,7 +701,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm  en_only" id="con_lead_time" name="con_lead_time" maxlength="4" value="" placeholder="공사 소요기간 (개월)">
+							<input type="text" class="form-control input-sm  en_only" id="con_lead_time" name="con_lead_time" maxlength="4" value="<?php echo set_value('con_lead_time'); ?>" placeholder="공사 소요기간 (개월)">
 						</div>
                         <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>개월</span></div>
 					</div>
@@ -707,23 +710,23 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-5 col-sm-4">
-							<input type="text" class="form-control input-sm en_only" id="biz_start_year" name="biz_start_year" maxlength="4" value="" placeholder="YYYY">
+							<input type="text" class="form-control input-sm en_only" id="biz_start_year" name="biz_start_year" maxlength="4" value="<?php echo set_value('biz_start_year'); ?>" placeholder="YYYY">
 						</div>
                         <div class="col-xs-1" style="padding: 11px 0;"><span>년</span></div>
                         <div class="col-xs-4 col-sm-3">
                         	<label for="biz_start_month" class="sr-only">사업개시 월</span></label>
-							<input type="text" class="form-control input-sm en_only" id="biz_start_month" name="biz_start_month" maxlength="2" value="" placeholder="MM">
+							<input type="text" class="form-control input-sm en_only" id="biz_start_month" name="biz_start_month" maxlength="2" value="<?php echo set_value('biz_start_month'); ?>" placeholder="MM">
 						</div>
                         <div class="col-xs-1 col-sm-2" style="padding: 11px 0;"><span>월</span></div>
 					</div>
 				</div>
-				<div class="form-group"><!-- 토지매입비/평당건축비 -->
+				<div class="form-group" style="color: red;"><!-- 토지매입비/평당건축비 -->
                     <?php echo validation_errors('<div class="error">', '</div>'); ?>&nbsp;
                 </div>
 
 <?php if($auth<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="con_formck();";} ?>
 				<div class="form-group btn-wrap" style="margin: 0;">
-					<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="등록하기">
+					<input type="button" class="btn btn-primary btn-sm" onclick="submit();<?php // echo $submit_str; ?>" value="등록하기">
 				</div>
 			</fieldset>
 		</form>

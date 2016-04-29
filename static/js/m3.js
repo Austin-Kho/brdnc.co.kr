@@ -33,7 +33,7 @@ function type_reg(frm,val, no, n){  // 체크박스 // 넘버  id="type_10"
 	var type=document.getElementById(type_n);
 	var ckbox=document.getElementById(ck_n);
 
-	if(val.checked==true){
+	if(val.checked===true){
 		type.style.display="";
 		if(!n)ckbox.disabled=true;
 	}else{
@@ -82,7 +82,7 @@ function con_formck(){
 	}
 
 	if(!form.address1.value){
-		alert('현장 주소를 입력하여 주세요!');
+		alert('대지위치(주소)를 입력하여 주세요!');
 		form.zipcode1.focus();
 		return;
 	}
@@ -178,7 +178,7 @@ function con_formck(){
 		return;
 	}
 	var s2_sub=confirm('프로젝트 정보를 등록/수정하시겠습니까?');
-	if(s2_sub==true){
+	if(s2_sub===true){
 		form.submit();
 	}
 }
@@ -192,7 +192,7 @@ function select_ch(obj){
 }
 
 function reg_end(){
-	if(confirm("해당 프로젝트의 데이터 등록을 마감하시겠습니까?\n\n마감 후에는 데이터 수정만 가능합니다.")==true){ // 확인 시
+	if(confirm("해당 프로젝트의 데이터 등록을 마감하시겠습니까?\n\n마감 후에는 데이터 수정만 가능합니다.")===true){ // 확인 시
 		location.href="progress_post.php?mode=end&is_data_reg=1"; // 해당 프로젝트 seq 정보 확인하여 붙여줄 것 -> &seq=seq
 	}else{ // 취소 시
 		return;
@@ -271,7 +271,7 @@ function pj_data_put_0(){
 function dong_reg_bc(self){
 	var form=document.form1;
 
-	if(self.checked==true){
+	if(self.checked===true){
 
 		if(!form.dong_1.value){
 		alert("동을 입력하십시요!");
