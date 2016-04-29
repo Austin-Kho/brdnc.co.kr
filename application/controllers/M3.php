@@ -172,13 +172,53 @@ class M3 extends CI_Controller {
 				}else{
 					//폼 데이타 가공
 					$local_addr = $this->input->post('zipcode')."|".$this->input->post('address1')."|".$this->input->post('address2');
-					$type_name = '';//$this->input->post('or_no1')."-".$this->input->post('or_no2');
-					$type_color = '';//$this->input->post('co_phone1').'-'.$this->input->post('co_phone2').'-'.$this->input->post('co_phone3');
-					$type_quantity = '';//$this->input->post('co_hp1').'-'.$this->input->post('co_hp2').'-'.$this->input->post('co_hp3');
-					$count_unit = '';//$this->input->post('co_fax1').'-'.$this->input->post('co_fax2').'-'.$this->input->post('co_fax3');
+					$type_name = $this->input->post('type_name_1', TRUE);
+					if($this->input->post('type_name_2', TRUE)) $type_name .="-".$this->input->post('type_name_2', TRUE);
+					if($this->input->post('type_name_3', TRUE)) $type_name .="-".$this->input->post('type_name_3', TRUE);
+					if($this->input->post('type_name_4', TRUE)) $type_name .="-".$this->input->post('type_name_4', TRUE);
+					if($this->input->post('type_name_5', TRUE)) $type_name .="-".$this->input->post('type_name_5', TRUE);
+					if($this->input->post('type_name_6', TRUE)) $type_name .="-".$this->input->post('type_name_6', TRUE);
+					if($this->input->post('type_name_7', TRUE)) $type_name .="-".$this->input->post('type_name_7', TRUE);
+					if($this->input->post('type_name_8', TRUE)) $type_name .="-".$this->input->post('type_name_8', TRUE);
+					if($this->input->post('type_name_9', TRUE)) $type_name .="-".$this->input->post('type_name_9', TRUE);
+					if($this->input->post('type_name_10', TRUE)) $type_name .="-".$this->input->post('type_name_10', TRUE);
+					if($this->input->post('type_name_11', TRUE)) $type_name .="-".$this->input->post('type_name_11', TRUE);
+					$type_color = $this->input->post('type_color_1', TRUE);
+					if($this->input->post('type_color_2', TRUE)) $type_color .="-".$this->input->post('type_color_2', TRUE);
+					if($this->input->post('type_color_3', TRUE)) $type_color .="-".$this->input->post('type_color_3', TRUE);
+					if($this->input->post('type_color_4', TRUE)) $type_color .="-".$this->input->post('type_color_4', TRUE);
+					if($this->input->post('type_color_5', TRUE)) $type_color .="-".$this->input->post('type_color_5', TRUE);
+					if($this->input->post('type_color_6', TRUE)) $type_color .="-".$this->input->post('type_color_6', TRUE);
+					if($this->input->post('type_color_7', TRUE)) $type_color .="-".$this->input->post('type_color_7', TRUE);
+					if($this->input->post('type_color_8', TRUE)) $type_color .="-".$this->input->post('type_color_8', TRUE);
+					if($this->input->post('type_color_9', TRUE)) $type_color .="-".$this->input->post('type_color_9', TRUE);
+					if($this->input->post('type_color_10', TRUE)) $type_color .="-".$this->input->post('type_color_10', TRUE);
+					if($this->input->post('type_color_11', TRUE)) $type_color .="-".$this->input->post('type_color_11', TRUE);
+					$type_quantity = $this->input->post('type_quantity_1', TRUE);
+					if($this->input->post('type_quantity_2', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_2', TRUE);
+					if($this->input->post('type_quantity_3', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_3', TRUE);
+					if($this->input->post('type_quantity_4', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_4', TRUE);
+					if($this->input->post('type_quantity_5', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_5', TRUE);
+					if($this->input->post('type_quantity_6', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_6', TRUE);
+					if($this->input->post('type_quantity_7', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_7', TRUE);
+					if($this->input->post('type_quantity_8', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_8', TRUE);
+					if($this->input->post('type_quantity_9', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_9', TRUE);
+					if($this->input->post('type_quantity_10', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_10', TRUE);
+					if($this->input->post('type_quantity_11', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_11', TRUE);
+					$count_unit = $this->input->post('count_unit_1', TRUE);
+					if($this->input->post('count_unit_2', TRUE)) $count_unit .="-".$this->input->post('count_unit_2', TRUE);
+					if($this->input->post('count_unit_3', TRUE)) $count_unit .="-".$this->input->post('count_unit_3', TRUE);
+					if($this->input->post('count_unit_4', TRUE)) $count_unit .="-".$this->input->post('count_unit_4', TRUE);
+					if($this->input->post('count_unit_5', TRUE)) $count_unit .="-".$this->input->post('count_unit_5', TRUE);
+					if($this->input->post('count_unit_6', TRUE)) $count_unit .="-".$this->input->post('count_unit_6', TRUE);
+					if($this->input->post('count_unit_7', TRUE)) $count_unit .="-".$this->input->post('count_unit_7', TRUE);
+					if($this->input->post('count_unit_8', TRUE)) $count_unit .="-".$this->input->post('count_unit_8', TRUE);
+					if($this->input->post('count_unit_9', TRUE)) $count_unit .="-".$this->input->post('count_unit_9', TRUE);
+					if($this->input->post('count_unit_10', TRUE)) $count_unit .="-".$this->input->post('count_unit_10', TRUE);
+					if($this->input->post('count_unit_11', TRUE)) $count_unit .="-".$this->input->post('count_unit_11', TRUE);
 					$biz_start_ym = $this->input->post('biz_start_year').'-'.$this->input->post('biz_start_month');
 
-					$com_data = array(
+					$new_pj_data = array(
 						'pj_name' => $this->input->post('pj_name', TRUE),
 						'sort' => $this->input->post('sort', TRUE),
 						'local_addr' => $local_addr,
@@ -195,7 +235,7 @@ class M3 extends CI_Controller {
 						'law_num_parking' => $this->input->post('law_num_parking', TRUE),
 						'plan_num_parking' => $this->input->post('plan_num_parking', TRUE),
 						'type_name' => $type_name,
-						'type_color' => $type_color,
+						'type_quantity' => $type_color,
 						'type_quantity' => $type_quantity,
 						'count_unit' => $count_unit,
 						'land_cost' => $this->input->post('land_cost', TRUE),
@@ -211,7 +251,15 @@ class M3 extends CI_Controller {
 						'reg_date' => 'now()'
 					);
 
-					alert('처리되었습니다.', '/m3/project/2/1/');
+					$result = $this->m3_m->insert_data('cms_project_info', $new_pj_data);
+
+					if($result) { // 등록 성공 시
+						alert('회사 정보가  등록되었습니다.', '/m3/project/2/1/');
+						exit;
+					}else{   // 등록 실패 시
+						alert('회사 정보 등록에 실패하였습니다.\n 다시 시도하여 주십시요.', '/m3/project/2/1/');
+						exit;
+					}
 				}
 			}
 
