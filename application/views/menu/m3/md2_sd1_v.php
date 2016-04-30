@@ -726,7 +726,7 @@
 
 <?php if($auth<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="con_formck();";} ?>
 				<div class="form-group btn-wrap" style="margin: 0;">
-					<input type="button" class="btn btn-primary btn-sm" onclick="submit();<?php // echo $submit_str; ?>" value="등록하기">
+					<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="등록하기">
 				</div>
 			</fieldset>
 		</form>
