@@ -254,15 +254,14 @@ class M3 extends CI_Controller {
 					$result = $this->m3_m->insert_data('cms_project_info', $new_pj_data);
 
 					if($result) { // 등록 성공 시
-						alert('회사 정보가  등록되었습니다.', '/m3/project/2/1/');
+						alert('프로젝트 정보가  등록되었습니다.', '/m3/project/2/1/');
 						exit;
 					}else{   // 등록 실패 시
-						alert('회사 정보 등록에 실패하였습니다.\n 다시 시도하여 주십시요.', '/m3/project/2/1/');
+						alert('데이터베이스 오류가 발생하였습니다..', '/m3/project/2/1/');
 						exit;
 					}
 				}
 			}
-
 
 
 
