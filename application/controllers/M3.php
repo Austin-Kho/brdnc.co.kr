@@ -111,7 +111,7 @@ class M3 extends CI_Controller {
 				$this->form_validation->set_rules('scheme_land_extent', '계획 대지면적', 'required|numeric|max_length[10]');
 				$this->form_validation->set_rules('build_size', '건축 규모', 'max_length[60]');
 				$this->form_validation->set_rules('num_unit', '세대(호/실) 수', 'required|numeric|max_length[6]');
-				$this->form_validation->set_rules('build_area', '건축 면적', 'required|numeric|max_length[10]');
+				$this->form_validation->set_rules('build_area', '건축 면적', 'numeric|max_length[10]');
 				$this->form_validation->set_rules('gr_floor_area', '총 연면적', 'required|numeric|max_length[10]');
 				$this->form_validation->set_rules('on_floor_area', '지상 연면적', 'required|numeric|max_length[10]');
 				$this->form_validation->set_rules('ba_floor_area', '지하 연면적', 'required|numeric|max_length[10]');

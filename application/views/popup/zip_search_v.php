@@ -119,6 +119,7 @@
 <?php if( !$zip_rlt[1]) : ?>
 									<option value="">도로명(건물명) 주소를 검색하여 주세요.</option>
 <?php else : ?>
+									<option value="" selected>해당되는 주소를 선택해주세요.</option>
 <?php $term = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'; ?>
 <?php foreach ($zip_rlt[1] as $col): ?>
 <?php
@@ -132,7 +133,6 @@
 ?>
 									<option value="<?php echo $col->zipcode."|".$col->sido." ".$col->sigun." ".$col->epmn." ".$col->doro_name." ".$ij." ".$col->mb_num.$sb_num."|".$ref; ?>"><?php echo $col->zipcode.$term.$col->sido." ".$col->sigun." ".$col->epmn." ".$col->doro_name." ".$ij." ".$col->mb_num.$sb_num." ".$ref; ?></option>
 <?php endforeach; ?>
-									<option value="||">해당되는 주소를 선택해주세요.</option>
 <?php endif; ?>
 								</select>
 							</td>
