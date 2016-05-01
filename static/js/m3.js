@@ -80,103 +80,145 @@ function con_formck(){
 		form.sort.focus();
 		return;
 	}
-
-	if(!form.address1.value){
+	if(!form.zipcode.value){
 		alert('대지위치(주소)를 입력하여 주세요!');
-		form.zipcode1.focus();
+		form.zipcode.focus();
 		return;
 	}
-	if(!form.type_1.value){
+	if(!form.buy_land_extent.value){
+		alert('대지 매입면적을 입력하여 주세요!');
+		form.buy_land_extent.focus();
+		return;
+	}
+	if(!form.scheme_land_extent.value){
+		alert('계획 대지면적을 입력하여 주세요!');
+		form.scheme_land_extent.focus();
+		return;
+	}
+	if(!form.num_unit.value){
+		alert('세대(호/실) 수를 입력하여 주세요!');
+		form.num_unit.focus();
+		return;
+	}
+	if(!form.gr_floor_area.value){
+		alert('총 연면적을 입력하여 주세요!');
+		form.gr_floor_area.focus();
+		return;
+	}
+	if(!form.on_floor_area.value){
+		alert('지상 연면적을 입력하여 주세요!');
+		form.on_floor_area.focus();
+		return;
+	}
+	if(!form.ba_floor_area.value){
+		alert('지하 연면적을 입력하여 주세요!');
+		form.ba_floor_area.focus();
+		return;
+	}
+	if(!form.floor_ar_rat.value){
+		alert('용적율을 입력하여 주세요!');
+		form.floor_ar_rat.focus();
+		return;
+	}
+
+
+
+
+	if(!form.type_name_1.value){
 		alert('최소한 하나 이상의 타입정보를 입력하여야 합니다!');
-		form.type_1.focus();
+		form.type_name_1.focus();
 		return;
 	}
 	//////////////////////////////////////////////////
-	if(form.type_1.value){
-		if(!form.total_count_1.value){
+	if(form.type_name_1.value){
+		if(!form.type_quantity_1.value){
 			alert('해당 TYPE 의 전체물량 정보를 입력하여 주세요');
-			form.total_count_1.focus();
+			form.type_quantity_1.focus();
 			return;
 		}
 	}
 	//////////////////////////////////////////////////
-	if(form.type_2.value){
-		if(!form.total_count_2.value){
+	if(form.type_name_2.value){
+		if(!form.type_quantity_2.value){
 			alert('해당 TYPE 의 전체물량 정보를 입력하여 주세요');
-			form.total_count_2.focus();
+			form.type_quantity_2.focus();
 			return;
 		}
 	}
 	//////////////////////////////////////////////////
-	if(form.type_3.value){
-		if(!form.total_count_3.value){
+	if(form.type_name_3.value){
+		if(!form.type_quantity_3.value){
 			alert('해당 TYPE 의 전체물량 정보를 입력하여 주세요');
-			form.total_count_3.focus();
+			form.type_quantity_3.focus();
 			return;
 		}
 	}
 	//////////////////////////////////////////////////
-	if(form.type_4.value){
-		if(!form.total_count_4.value){
+	if(form.type_name_4.value){
+		if(!form.type_quantity_4.value){
 			alert('해당 TYPE 의 전체물량 정보를 입력하여 주세요');
-			form.total_count_4.focus();
+			form.type_quantity_4.focus();
 			return;
 		}
 	}
 	//////////////////////////////////////////////////
-	if(form.type_5.value){
-		if(!form.total_count_5.value){
+	if(form.type_name_5.value){
+		if(!form.type_quantity_5.value){
 			alert('해당 TYPE 의 전체물량 정보를 입력하여 주세요');
-			form.total_count_5.focus();
+			form.type_quantity_5.focus();
 			return;
 		}
 	}
 	//////////////////////////////////////////////////
-	if(form.type_6.value){
-		if(!form.total_count_6.value){
+	if(form.type_name_6.value){
+		if(!form.type_quantity_6.value){
 			alert('해당 TYPE 의 전체물량 정보를 입력하여 주세요');
-			form.total_count_6.focus();
+			form.type_quantity_6.focus();
 			return;
 		}
 	}
 	//////////////////////////////////////////////////
-	if(form.type_7.value){
-		if(!form.total_count_7.value){
+	if(form.type_name_7.value){
+		if(!form.type_quantity_7.value){
 			alert('해당 TYPE 의 전체물량 정보를 입력하여 주세요');
-			form.total_count_7.focus();
+			form.type_quantity_7.focus();
 			return;
 		}
 	}
 	//////////////////////////////////////////////////
-	if(form.type_8.value){
-		if(!form.total_count_8.value){
+	if(form.type_name_8.value){
+		if(!form.type_quantity_8.value){
 			alert('해당 TYPE 의 전체물량 정보를 입력하여 주세요');
-			form.total_count_8.focus();
+			form.type_quantity_8.focus();
 			return;
 		}
 	}
 	//////////////////////////////////////////////////
-	if(form.type_9.value){
-		if(!form.total_count_9.value){
+	if(form.type_name_9.value){
+		if(!form.type_quantity_9.value){
 			alert('해당 TYPE 의 전체물량 정보를 입력하여 주세요');
-			form.total_count_9.focus();
+			form.type_quantity_9.focus();
 			return;
 		}
 	}
 	//////////////////////////////////////////////////
-	if(form.type_10.value){
-		if(!form.total_count_10.value){
+	if(form.type_name_10.value){
+		if(!form.type_quantity_10.value){
 			alert('해당 TYPE 의 전체물량 정보를 입력하여 주세요');
-			form.total_count_10.focus();
+			form.type_quantity_10.focus();
 			return;
 		}
 	}
 	//////////////////////////////////////////////////
-	if(!form.start_date.value){
-		alert('수행 개시일을 입력하여 주세요!');
-		form.start_date.focus();
-		return;
+	if(form.type_name_11.value){
+		if(!form.type_quantity_11.value){
+			alert('해당 TYPE 의 전체물량 정보를 입력하여 주세요');
+			form.type_quantity_11.focus();
+			return;
+		}
 	}
+	//////////////////////////////////////////////////
+	
 	var s2_sub=confirm('프로젝트 정보를 등록/수정하시겠습니까?');
 	if(s2_sub===true){
 		form.submit();

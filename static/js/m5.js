@@ -186,40 +186,6 @@ function bank_submit(mode){
 /**************  (환경설정 > 회사정보 관리 > 회사 기본정보) S ****************/
 ///// 회사 정보 등록 시/////////////////////////////////////////////////////////////////////
 
-/*=========================================*
-* 입력값이 숫자인지를 확인한다
-* param : sVal 입력스트링
-* return : Boolean True이면 숫자값
-/*=========================================*/
-function IsNumber(sVal) {
-   if(sVal.length < 1) {
-       return false;
-   }
-
-   for(i=0; i<sVal.length; i++) {
-       iBit = parseInt(sVal.substring(i,i+1));     //문자(Char)를 숫자로 변경
-
-       if(('0' < iBit) || ('9' > iBit)) {
-           //alert(i+':'+iBit+':'+'Mun');
-       } else {
-           return false;
-       }
-   }
-   return true;
-}
-
-// 숫자만 입력 ..<input type='text' ....onkeypress='isMum();'....//
-function isNum(){
-   var key = event.keyCode;
-   var messageArea = document.getElementById("ssnMessage");
-   if(!(key==8||key==9||key==13||key==46||key==144||(key>=48&&key<=57)||key==110||key==190)){
-        alert('숫자만 입력 가능합니다');
-        event.returnValue = false;
-   }
-}
-
-
-
 function com_submit(mode){
 
 	var form = document.form1;

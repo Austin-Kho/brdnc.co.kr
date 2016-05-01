@@ -76,6 +76,16 @@ function iNum(obj){
 	// onkeyDown 으로 호출 -> 절대 숫자키만 입력 가능
 }
 
+// 숫자만 입력 ..<input type='text' ....onkeypress='isMum();'....//
+function isNum(){
+   var key = event.keyCode;
+   var messageArea = document.getElementById("ssnMessage");
+   if(!(key==8||key==9||key==13||key==46||key==144||(key>=48&&key<=57)||key==110||key==190)){
+        alert('숫자만 입력 가능합니다');
+        event.returnValue = false;
+   }
+}
+
 // 숫자인지 체크
 function numChk(chk_frm){
 
