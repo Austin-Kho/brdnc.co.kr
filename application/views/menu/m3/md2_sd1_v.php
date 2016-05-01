@@ -21,16 +21,16 @@
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-12 col-sm-8">
 							<select class="form-control input-sm" id="sort" name="sort" required autofocus>
-								<option value="">선택</option>
-      				                  <option value="1" <?php echo set_select('sort', '1'); ?>> 아파트(일반분양)</option>
-      				                  <option value="2" <?php echo set_select('sort', '2'); ?>> 아파트(조합)</option>
-      				                  <option value="3" <?php echo set_select('sort', '3'); ?>> 주상복합(아파트)</option>
-      				                  <option value="4" <?php echo set_select('sort', '4'); ?>> 주상복합(오피스텔)</option>
-      				                  <option value="5" <?php echo set_select('sort', '5'); ?>> 도시형생활주택</option>
-      				                  <option value="6" <?php echo set_select('sort', '6'); ?>> 근린생활시설</option>
-      				                  <option value="7" <?php echo set_select('sort', '7'); ?>> 레저(숙박)시설</option>
-      				                  <option value="8" <?php echo set_select('sort', '8'); ?>> 기 타</option>
-      						</select>
+									<option value="">선택</option>
+	    			                <option value="1" <?php echo set_select('sort', '1'); ?>> 아파트(일반분양)</option>
+	    			                <option value="2" <?php echo set_select('sort', '2'); ?>> 아파트(조합)</option>
+	    			                <option value="3" <?php echo set_select('sort', '3'); ?>> 주상복합(아파트)</option>
+	    			                <option value="4" <?php echo set_select('sort', '4'); ?>> 주상복합(오피스텔)</option>
+	    			                <option value="5" <?php echo set_select('sort', '5'); ?>> 도시형생활주택</option>
+	    			                <option value="6" <?php echo set_select('sort', '6'); ?>> 근린생활시설</option>
+	    			                <option value="7" <?php echo set_select('sort', '7'); ?>> 레저(숙박)시설</option>
+	    			                <option value="8" <?php echo set_select('sort', '8'); ?>> 기 타</option>
+    						</select>
 						</div>
 					</div>
 				</div>
