@@ -17,11 +17,81 @@ class Main_m extends CI_Model
 		return $result;
 	}
 
-    public function master_auth_chk(){
+	/**
+	 * [master_auth_chk 마스터 권한 확인]
+	 * @return [Array] [결과 데이터]
+	 */
+	public function master_auth_chk(){
         $this->db->select('is_admin, auth_level');
         $qry = $this->db->get_where('cms_member_table', array('user_id'=>$this->session->userdata['user_id']));
-        return $result = $qry->result();
+        return $result = $qry->row();
     }
+
+	/**************************************************************************************/
+	/**
+	 * [select_data_row  단수 데이터 불러오기]
+	 * @param  [String] $table [테이블명]
+	 * @param  [Array] $where [필터링 '키'=>값]
+	 * @return [Array]        [추출 데이터]
+	 */
+	public function select_data_row($table, $where) {
+		$qry = $this->db->get_where($table, $where);
+		return $rlt = $qry->row();
+	}
+
+	/**
+	 * [select_data_list 복수 데이터 불러오기]
+	 * @param  [String] $table [테이블명]
+	 * @param  [Array] $where [필터링 '키'=>값]
+	 * @return [Array]        [추출 데이터]
+	 */
+	public function select_data_list($table, $where='') {
+		if($where!='') $this->db->where($where);
+		$qry = $this->db->get($table);
+		return $rlt = $qry->result();
+	}
+
+	/**
+	 * [select_data_num 데이터 수 가져오기]
+	 * @param  [String] $table [테이블명]
+	 * @param  string $where [검색조건]
+	 * @return [Array]        [추출 데이터]
+	 */
+	public function select_data_num($table, $where=''){
+		if($where!='') $this->db->where($where);
+		$qry = $this->db->get($table);
+		return $rlt = $qry->num_rows();
+	}
+
+	/**
+	 * [select_data_opt description]
+	 * @param  [type] $table [description]
+	 * @param  string $where [description]
+	 * @param  string $opt   [description]
+	 * @return [type]        [description]
+	 */
+	public function select_data_opt($table, $where='', $opt=''){
+		if($where!='') $this->db->where($where);
+		$qry = $this->db->get($table);
+		switch ($opt) {
+			case '1': $val = $qry->row(); break;
+			case '2': $val = $qry->result(); break;
+			case '3': $val = $qry->num_rows(); break;
+			case '4': $val = array('result' => $qry->result(), 'num' => $qry->num_rows()); break;
+			default: $val = $qry->result(); break;
+		}
+		return $val;
+	}
+
+	/**
+	 * [sql_row sql 인자로 단수데이터 추출 함수]
+	 * @param  [type] $sql [sql 인자]
+	 * @return [type]      [추출한 데이터]
+	 */
+	public function sql_row($sql){
+		$qry = $this->db->query($sql);
+		return $qry->row();
+	}
 
     /**
      * [sql_result sql인자로 데이터 추출 함수]
@@ -55,27 +125,24 @@ class Main_m extends CI_Model
             'result' => $qry->result()
         );
 	}
-	/**
-	 * [select_data_list 복수 데이터 불러오기]
-	 * @param  [String] $table [테이블명]
-	 * @param  [Array] $where [필터링 '키'=>값]
-	 * @return [Boolean]        [성공 여부]
-	 */
-	public function select_data_list($table) {
-		$qry = $this->db->get($table);
-		return $rlt = $qry->result();
-	}
 
 	/**
-	 * [select_data_row  단수 데이터 불러오기]
-	 * @param  [String] $table [테이블명]
-	 * @param  [Array] $where [필터링 '키'=>값]
-	 * @return [Boolean]        [성공 여부]
+	 * [sql_sel_opt sql 인자로 데이터 추출 // 추출방식 옵션 적용]
+	 * @param  [type] $sql [sql 인자]
+	 * @param  [type] $opt [1. row 2. result 3. num_rows 4. result + num_rows]
+	 * @return [type]      [추출한 데이터]
 	 */
-	public function select_data_row($table, $where) {
-		$qry = $this->db->get_where($table, $where);
-		return $rlt = $qry->row();
+	public function sql_sel_opt($sql, $opt){
+		$qry = $this->db->query($sql);
+		switch ($opt) {
+			case '1': $ret_val = $qry->row(); break;
+			case '2': $ret_val = $qry->result(); break;
+			case '3': $ret_val = $qry->num_rows(); break;
+			case '4': $ret_val = array('result' => $qry->result(), 'num' => $qry->num_rows()); break;
+		}
+		return $ret_val;
 	}
+	/**************************************************************************************/
 
 	/**
 	 * [insert_data 데이터 입력함수]

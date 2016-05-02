@@ -6,7 +6,7 @@
 				<div class="col-xs-4 col-sm-3 col-md-2 center" style="background-color: #F4F4F4; padding: 10px; 0">사업 개시년도</div>
 				<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
 					<div class="col-xs-12 col-sm-8" style="padding: 0px;">
-						<label for="sh_date" class="sr-only">사업 개시년도</label>
+						<label for="yr" class="sr-only">사업 개시년도</label>
 						<select class="form-control input-sm" name="yr" onchange="submit();">
 							<option value=""> 전 체
 <?php
@@ -23,7 +23,7 @@
 				<div class="col-xs-4 col-sm-3 col-md-2 center" style="background-color: #F4F4F4; padding: 10px; 0">프로젝트 선택</div>
 				<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
 					<div class="col-xs-12 col-sm-8" style="padding: 0px;">
-						<label for="sh_date" class="sr-only">사업 개시년도</label>
+						<label for="project" class="sr-only">사업 개시년도</label>
 						<select class="form-control input-sm" name="project" onchange="submit();">
 							<option value=""> 전 체
 <?php foreach($all_pj as $lt) : ?>

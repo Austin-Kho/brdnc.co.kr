@@ -58,7 +58,7 @@
 ?>
 					<tr>
 						<?php echo $td_str?>
-						<td width="185" style="<?php if($i==0) echo $hk_bgcolor?>"><?php echo $bank_acc_name; ?></td><!-- 계정 명 -->
+						<td class="center" width="185" style="<?php if($i==0) echo $hk_bgcolor?>"><?php echo $bank_acc_name; ?></td><!-- 계정 명 -->
 						<td class="right" style="<?php if($i==0) echo $hk_bgcolor?>"><?php if($i==$bank_acc['num']) echo ''; else if($y_bal==0) echo "-"; else echo number_format($y_bal);?></td> <!-- 전일 잔액 -->
 						<td class="right" style="<?php if($i==0) echo $hk_bgcolor?>"><?php if($i==$bank_acc['num']) echo ''; else if($date_inc==0) echo "-"; else echo number_format($date_inc);?></td> <!-- 당일 입금 -->
 						<td class="right" style="<?php if($i==0) echo $hk_bgcolor?>"><?php if($i==$bank_acc['num']) echo ''; else if($date_exp==0) echo "-"; else echo number_format($date_exp);?></td> <!-- 당일 출금 -->

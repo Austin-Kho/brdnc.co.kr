@@ -36,7 +36,7 @@ class M3 extends CI_Controller {
 	}
 
 	public function project($mdi='', $sdi=''){
-		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+		$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
@@ -61,6 +61,40 @@ class M3 extends CI_Controller {
 
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m3_1_1'];
+
+				$where=" WHERE is_data_reg = '0' ";
+				if($this->input->get('yr')>1) $where.=" AND biz_start_ym LIKE '".$this->input->get('yr')."%' ";
+				$data['new_pj'] = $this->main_m->sql_result(" SELECT * FROM cms_project_info ".$where." ORDER BY biz_start_ym DESC  ");
+
+				$where=" WHERE is_data_reg = '1' ";
+				if($this->input->get('yr')>1) $where.=" AND biz_start_ym LIKE '".$this->input->get('yr')."%' ";
+				$data['reg_pj'] = $this->main_m->sql_result(" SELECT * FROM cms_project_info ".$where." ORDER BY biz_start_ym DESC ");
+
+				if($this->input->get('new_pj')) $data['pre_pj_seq'] = $this->input->get('new_pj'); // 신규 등록인지
+				if($this->input->get('reg_pj')) $data['pre_pj_seq'] = $this->input->get('reg_pj'); // 등록 수정인지
+				$where = '';
+				if( !empty($data['pre_pj_seq'])) {
+					$where = " WHERE seq = '".$data['pre_pj_seq']."'  ";
+					$data['project'] = $this->main_m->sql_row(" SELECT pj_name, sort, data_cr, type_name FROM cms_project_info ".$where);
+					switch ($data['project']->sort) {
+						case '1': $data['sort']="아파트(일반분양)"; break;
+						case '2': $data['sort']="아파트(조합)"; break;
+						case '3': $data['sort']="주상복합(아파트)"; break;
+						case '4': $data['sort']="주상복합(오피스텔)"; break;
+						case '5': $data['sort']="도시형생활주택"; break;
+						case '6': $data['sort']="근린생활시설"; break;
+						case '7': $data['sort']="레저(숙박)시설"; break;
+						case '8': $data['sort']="기 타"; break;
+						default: $data['sort']=""; break;
+					}
+				}
+				// 현재 몇동 몇라인 만 표시 쿼리 // 향후 미니멈 몇층부터 맥시멈 몇층까지 해당라인에 등록된 데이타 몇개 까지 표시할 것
+				// $chk_qry = "SELECT dong, ho FROM cms_project2_indi_table, cms_project1_info WHERE pj_seq = '$pre_pj_seq' AND pj_seq = cms_project1_info.seq AND is_data_reg != 1 ORDER BY reg_time DESC";
+				// $chk_rlt = mysql_query($chk_qry, $connect);
+				// $chk_row = mysql_fetch_array($chk_rlt);
+				// $total_n = mysql_num_rows($chk_rlt);
+				// $line = substr($chk_row[ho], -2, 2);
+
 
 				//본 페이지 로딩
 				$this->load->view('/menu/m3/md1_sd1_v', $data);

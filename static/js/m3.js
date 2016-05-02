@@ -5,7 +5,7 @@ function data_move(mode,seq){
 	if(mode=="re_reg") var msg="재등록 처리";
 	if(mode=="end") var msg="등록마감 처리";
 	if(confirm(msg+" 하시겠습니까?")===true){
-		location.href='progress_post.php?mode='+mode+'&seq='+seq;
+		location.href='?mode='+mode+'&seq='+seq;
 	}else{
 		return;
 	}
@@ -218,7 +218,7 @@ function con_formck(){
 		}
 	}
 	//////////////////////////////////////////////////
-	
+
 	var s2_sub=confirm('프로젝트 정보를 등록/수정하시겠습니까?');
 	if(s2_sub===true){
 		form.submit();

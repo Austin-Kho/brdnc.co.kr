@@ -202,7 +202,7 @@
 									<td class="center"> <?php echo $evi; ?></td>
 <?php if($auth>1) :  ?><!-- //마스터 관리자와 쓰기권한 있는 자금담당에게만 출력 -->
 									<td class="center">
-<?php if($m_auth[0]->is_admin==1 or $m_auth[0]->auth_level<=2 or ($m_auth[0]->auth_level>2&&date('Y-m-d', strtotime('-3 day'))<=$lt->deal_date)) : //관리자와 마스터 쓰기권한이 아니면 당일건에 대해서만 수정 삭제 가능 ?>
+<?php if($m_auth->is_admin==1 or $m_auth->auth_level<=2 or ($m_auth->auth_level>2&&date('Y-m-d', strtotime('-3 day'))<=$lt->deal_date)) : //관리자와 마스터 쓰기권한이 아니면 당일건에 대해서만 수정 삭제 가능 ?>
 										<a href='javascript:'class="btn btn-info btn-xs" onclick="popUp_size('/pc/_menu3/capital_edit.php?edit_code=<?php echo $lt->seq_num; ?>','capital_edit','420','500')">
 <?php else: ?>
 										<a href="javascript:" class="btn btn-default btn-xs" onclick="alert('마스터 관리자가 아니면 3일전 이후 건에 대해서만 수정/삭제 가능합니다.\n\n수정 필요 시 마스터 관리자에게 요청하여 주십시요.');">
@@ -210,7 +210,7 @@
 										수정</a>
 									</td>
 									<td class="center">
-<?php if($m_auth[0]->is_admin==1 or $m_auth[0]->auth_level<=2 or ($m_auth[0]->auth_level>2&&date('Y-m-d', strtotime('-3 day'))<=$lt->deal_date)) : //관리자와 마스터 쓰기권한이 아니면 당일건에 대해서만 수정 삭제 가능 ?>
+<?php if($m_auth->is_admin==1 or $m_auth->auth_level<=2 or ($m_auth->auth_level>2&&date('Y-m-d', strtotime('-3 day'))<=$lt->deal_date)) : //관리자와 마스터 쓰기권한이 아니면 당일건에 대해서만 수정 삭제 가능 ?>
 										<a href='javascript:'class="btn btn-danger btn-xs" onclick="to_del(<?php echo $lt->seq_num; ?>);">
 <?php else: ?>
 										<a href="javascript:" class="btn btn-default btn-xs" onclick="alert('마스터 관리자가 아니면 3일전 이후 건에 대해서만 수정/삭제 가능합니다.\n\n수정 필요 시 마스터 관리자에게 요청하여 주십시요.');">
