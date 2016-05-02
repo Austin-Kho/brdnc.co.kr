@@ -36,7 +36,7 @@ class M3 extends CI_Controller {
 	}
 
 	public function project($mdi='', $sdi=''){
-		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+		$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
@@ -80,8 +80,33 @@ class M3 extends CI_Controller {
 
 				$where = "";
 				if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
+
+				// 페이지네이션 라이브러리 로딩 추가
+				$this->load->library('pagination');
+
+				//페이지네이션 설정/////////////////////////////////
+				$config['base_url'] = '/m3/project/1/2/';   //페이징 주소
+				$config['total_rows'] = $this->main_m->sql_num_rows(' SELECT * FROM cms_project_info '.$where.' ORDER BY biz_start_ym DESC ');  //게시물의 전체 갯수
+				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
+				$config['num_links'] = 4;  // 링크 좌우로 보여질 페이지 수
+				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
+				$config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
+
+				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
+				$page = $this->uri->segment($config['uri_segment']);
+				if($page<=1 or empty($page)) { $start = 0; }else{ $start = ($page-1) * $config['per_page']; }
+				$limit = $config['per_page'];
+
+				//페이지네이션 초기화
+				$this->pagination->initialize($config);
+				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
+				$data['pagination'] = $this->pagination->create_links();
+
+				if($start != '' or $limit !='')	$limit = " LIMIT ".$start.", ".$limit." ";
+
 				// 등록된 프로젝트 데이터
-				$data['all_pj'] = $this->main_m->sql_result(' SELECT * FROM cms_project_info '.$where.' ORDER BY biz_start_ym DESC ');
+				$data['all_pj'] = $this->main_m->sql_result(' SELECT * FROM cms_project_info '.$where.' ORDER BY biz_start_ym DESC '.$limit);
+
 				if($this->input->get('project')) $data['project'] = $this->main_m->sql_result(' SELECT * FROM cms_project_info WHERE seq = '.$this->input->get('project'));
 
 				// 라이브러리 로드

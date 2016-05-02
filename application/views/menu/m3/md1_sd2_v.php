@@ -7,8 +7,8 @@
 				<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
 					<div class="col-xs-12 col-sm-8" style="padding: 0px;">
 						<label for="sh_date" class="sr-only">사업 개시년도</label>
-						<select class="form-control input-sm" name="yr" onchange="submit();" disabled>
-							<option value="1"> 전 체
+						<select class="form-control input-sm" name="yr" onchange="submit();">
+							<option value=""> 전 체
 <?php
 	$start_year = "2014";
 	// if(!$yr) $yr=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
@@ -37,7 +37,7 @@
 
 <?php if( !$this->input->get('project')) :  ?>
 
-		<div class="row table-responsive font12" style="margin: 0; padding: 0; height: 500px;">
+		<div class="row table-responsive font12" style="margin: 0; padding: 0; height: 573px;">
 			<div class="form-group"><!-- 타입등록/제목 -->
 				<div class="col-xs-12 form-wrap">
 					<div class="col-xs-12 col-sm-8 font13" style="padding: 10px 0 8px;">
@@ -45,7 +45,7 @@
 					</div>
 				</div>
 			</div>
-			<table class="table">
+			<table class="table bo-bottom">
 				<tr align="center" style="background-color: #e3e7e0;">
 					<td> NO.</td>
 					<td> 프로젝트(현장) 명</td>
@@ -80,7 +80,11 @@
 				</tr>
 <?php endforeach; ?>
 			</table>
+			<div class="col-md-12 center" style="margin-top: 0px; padding: 0;">
+				<ul class="pagination pagination-sm"><?php echo $pagination;?></ul>
+			</div>
 		</div>
+
 
 <?php else :
 	$addr = explode("|",$project[0]->local_addr);

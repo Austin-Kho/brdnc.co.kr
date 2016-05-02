@@ -227,53 +227,6 @@ class M4 extends CI_Controller {
 				}
 				if($this->input->get('excel_pop')=='cash_book'){
 					// 본문 내용 ---------------------------------------------------------------//
-					// $this->excel->getActiveSheet()->getColumnDimension('A')->setWidth(10);
-					// $this->excel->getActiveSheet()->getColumnDimension('B')->setWidth(12);
-					// $this->excel->getActiveSheet()->getColumnDimension('C')->setWidth(13);
-					// $this->excel->getActiveSheet()->getColumnDimension('D')->setWidth(25);
-					// $this->excel->getActiveSheet()->getColumnDimension('E')->setWidth(20);
-					// $this->excel->getActiveSheet()->getColumnDimension('F')->setWidth(8);
-					// $this->excel->getActiveSheet()->getColumnDimension('G')->setWidth(12);
-					// $this->excel->getActiveSheet()->getColumnDimension('H')->setWidth(8);
-					// $this->excel->getActiveSheet()->getColumnDimension('I')->setWidth(12);
-					// $this->excel->getActiveSheet()->getColumnDimension('J')->setWidth(10);
-					// $this->excel->getActiveSheet()->getColumnDimension('K')->setWidth(10);
-					// $this->excel->getActiveSheet()->getColumnDimension('L')->setWidth(30);
-
-					// $this->excel->getActiveSheet()->getDefaultRowDimension()->setRowHeight(15); // 전체 기본 셀 높이 설정
-					// $this->excel->getActiveSheet()->getRowDimension(1)->setRowHeight(30); // 1행의 셀 높이 설정
-
-					// $this->excel->getActiveSheet()->duplicateStyleArray( // 전체 글꼴 및 정렬
-					// 	array(
-					// 		'font' => array('size' => 9),
-					// 		'alignment' => array(
-					// 			'vertical'   => PHPExcel_Style_Alignment::VERTICAL_CENTER,
-					// 			'horizontal'   => PHPExcel_Style_Alignment::HORIZONTAL_CENTER
-					// 		)
-					// 	),
-					// 	'A:L'
-					// );
-					// $this->excel->getActiveSheet()->setCellValue("A1", '자금 출납부'); // 셀 갑 입력
-					// $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);// A1의 폰트를 변경 합니다.
-					// $this->excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);// A1의 글씨를 볼드로 변경합니다.
-					//
-					// $this->excel->getActiveSheet()->mergeCells('A1:K1');
-					// $this->excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-
-					// $this->excel->getActiveSheet()->setCellValue('A2', '거래일자');
-					// $this->excel->getActiveSheet()->setCellValue('B2', '구 분');
-					// $this->excel->getActiveSheet()->setCellValue('C2', '계정과목');
-					// $this->excel->getActiveSheet()->setCellValue('D2', '적 요');
-					// $this->excel->getActiveSheet()->setCellValue('E2', '거 래 처');
-					// $this->excel->getActiveSheet()->setCellValue('F2', '입금처');
-					// $this->excel->getActiveSheet()->setCellValue('G2', '입금금액');
-					// $this->excel->getActiveSheet()->setCellValue('H2', '지출처');
-					// $this->excel->getActiveSheet()->setCellValue('I2', '지출금액');
-					// $this->excel->getActiveSheet()->setCellValue('J2', '현금시재');
-					// $this->excel->getActiveSheet()->setCellValue('K2', '예금잔고');
-					// $this->excel->getActiveSheet()->setCellValue('L2', '비 고');
-
-					// 본문 내용 ---------------------------------------------------------------//
 					$filename='cash_book.xlsx'; // 엑셀 파일 이름
 					header('Content-Type: application/vnd.ms-excel'); //mime 타입
 					header('Content-Disposition: attachment;filename="'.$filename.'"'); // 브라우저에서 받을 파일 이름
