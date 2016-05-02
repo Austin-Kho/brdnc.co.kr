@@ -42,10 +42,10 @@ class M3 extends CI_Controller {
 		$sdi = $this->uri->segment(4, 1);
 
 		$menu['s_di'] = array(
-			array('데이터 등록', '기본정보 수정'), // 첫번째 하위 메뉴
-			array('신규 등록', '예비 검토'),    // 두번째 하위 메뉴
+			array('데이터 등록', '데이터 수정'), // 첫번째 하위 메뉴
+			array('신규 등록', '예비 검토'),       // 두번째 하위 메뉴
 			array('세부 데이터 입력<현재 구축 진행 중>', '프로젝트 기본정보 수정'),   // 첫번째 하위 제목
-			array('신규 프로젝트 등록', '프로젝트 검토 현황<현재 구축 진행 중>') // 두번째 하위 제목
+			array('신규 프로젝트 등록', '프로젝트 검토 현황<현재 구축 진행 중>')        // 두번째 하위 제목
 		);
 		// 메뉴데이터 삽입 하여 메인 페이지 호출
 		$this->load->view('menu/m3/project_v', $menu);
@@ -237,13 +237,13 @@ class M3 extends CI_Controller {
 
 					$result = $this->main_m->update_data('cms_project_info', $update_pj_data, $where = array('seq' => $this->input->post('project')));
 
-					// if($result) { // 등록 성공 시
-					// 	alert('프로젝트 정보가  수정되었습니다.', '/m3/project/1/2/?project='.$this->input->post('project'));
-					// 	exit;
-					// }else{   // 등록 실패 시
-					// 	alert('데이터베이스 오류가 발생하였습니다..', '/m3/project/1/2/');
-					// 	exit;
-					// }
+					if($result) { // 등록 성공 시
+						alert('프로젝트 정보가  수정되었습니다.', '/m3/project/1/2/?project='.$this->input->post('project'));
+						exit;
+					}else{   // 등록 실패 시
+						alert('데이터베이스 오류가 발생하였습니다..', '/m3/project/1/2/');
+						exit;
+					}
 				}
 			}
 

@@ -159,7 +159,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm en_only" id="buy_land_extent" name="buy_land_extent" onkeydown="isNum();" maxlength="10" value="<?php if($this->input->post('buy_land_extent')) echo set_value('buy_land_extent'); else echo $project[0]->buy_land_extent; ?>" required autofocus placeholder="대지 매입면적 (㎡)">
+								<input type="text" class="form-control input-sm en_only" id="buy_land_extent" name="buy_land_extent" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('buy_land_extent')) echo set_value('buy_land_extent'); else echo $project[0]->buy_land_extent; ?>" required autofocus placeholder="대지 매입면적 (㎡)">
 							</div>
 										<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
 						</div>
@@ -168,7 +168,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm en_only" id="scheme_land_extent" name="scheme_land_extent" onkeydown="isNum();" maxlength="10" value="<?php if($this->input->post('scheme_land_extent')) echo set_value('scheme_land_extent'); else echo $project[0]->scheme_land_extent; ?>" required autofocus placeholder="계획 대지면적 (㎡)">
+								<input type="text" class="form-control input-sm en_only" id="scheme_land_extent" name="scheme_land_extent" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('scheme_land_extent')) echo set_value('scheme_land_extent'); else echo $project[0]->scheme_land_extent; ?>" required autofocus placeholder="계획 대지면적 (㎡)">
 							</div>
 										<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
 						</div>
@@ -188,7 +188,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm en_only" id="num_unit" name="num_unit" onkeydown="isNum();" maxlength="6" value="<?php if($this->input->post('num_unit')) echo set_value('num_unit'); else echo $project[0]->num_unit; ?>" required autofocus placeholder="세대(호/실) 수">
+								<input type="text" class="form-control input-sm en_only" id="num_unit" name="num_unit" onkeydown="onlyNum(this);" maxlength="6" value="<?php if($this->input->post('num_unit')) echo set_value('num_unit'); else echo $project[0]->num_unit; ?>" required autofocus placeholder="세대(호/실) 수">
 							</div>
 										<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>세대(호/실)</span></div>
 						</div>
@@ -200,7 +200,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm en_only" id="build_area" name="build_area" onkeydown="isNum();" maxlength="10" value="<?php if($this->input->post('build_area')) echo set_value('build_area'); else echo $project[0]->build_area; ?>"  placeholder="건축 면적 (㎡)">
+								<input type="text" class="form-control input-sm en_only" id="build_area" name="build_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('build_area')) echo set_value('build_area'); else echo $project[0]->build_area; ?>"  placeholder="건축 면적 (㎡)">
 							</div>
 							<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
 						</div>
@@ -209,7 +209,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm en_only" id="gr_floor_area" name="gr_floor_area" onkeydown="isNum();" maxlength="10" value="<?php if($this->input->post('gr_floor_area')) echo set_value('gr_floor_area'); else echo $project[0]->gr_floor_area; ?>" required autofocus placeholder="총 연면적 (㎡)">
+								<input type="text" class="form-control input-sm en_only" id="gr_floor_area" name="gr_floor_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('gr_floor_area')) echo set_value('gr_floor_area'); else echo $project[0]->gr_floor_area; ?>" required autofocus placeholder="총 연면적 (㎡)">
 							</div>
 							<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
 						</div>
@@ -221,7 +221,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm en_only" id="on_floor_area" name="on_floor_area" onkeydown="isNum();" maxlength="10" value="<?php if($this->input->post('on_floor_area')) echo set_value('on_floor_area'); else echo $project[0]->on_floor_area; ?>" required autofocus placeholder="지상 연면적 (㎡)">
+								<input type="text" class="form-control input-sm en_only" id="on_floor_area" name="on_floor_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('on_floor_area')) echo set_value('on_floor_area'); else echo $project[0]->on_floor_area; ?>" required autofocus placeholder="지상 연면적 (㎡)">
 							</div>
 							<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
 						</div>
@@ -230,7 +230,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm en_only" id="ba_floor_area" name="ba_floor_area" onkeydown="isNum();" maxlength="10" value="<?php if($this->input->post('ba_floor_area')) echo set_value('ba_floor_area'); else echo $project[0]->ba_floor_area; ?>" required autofocus placeholder="지하 연면적 (㎡)">
+								<input type="text" class="form-control input-sm en_only" id="ba_floor_area" name="ba_floor_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('ba_floor_area')) echo set_value('ba_floor_area'); else echo $project[0]->ba_floor_area; ?>" required autofocus placeholder="지하 연면적 (㎡)">
 							</div>
 							<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
 						</div>
@@ -263,7 +263,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm en_only" id="law_num_parking" name="law_num_parking" onkeydown="isNum();" maxlength="6" value="<?php if($this->input->post('law_num_parking')) echo set_value('law_num_parking'); else echo $project[0]->law_num_parking; ?>"  placeholder="법정 주차대수">
+								<input type="text" class="form-control input-sm en_only" id="law_num_parking" name="law_num_parking" onkeydown="onlyNum(this);" maxlength="6" value="<?php if($this->input->post('law_num_parking')) echo set_value('law_num_parking'); else echo $project[0]->law_num_parking; ?>"  placeholder="법정 주차대수">
 							</div>
 							<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>대</span></div>
 						</div>
@@ -272,7 +272,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm en_only" id="plan_num_parking" name="plan_num_parking" onkeydown="isNum();" maxlength="6" value="<?php if($this->input->post('plan_num_parking')) echo set_value('plan_num_parking'); else echo $project[0]->plan_num_parking; ?>"  placeholder="계획 주차대수">
+								<input type="text" class="form-control input-sm en_only" id="plan_num_parking" name="plan_num_parking" onkeydown="onlyNum(this);" maxlength="6" value="<?php if($this->input->post('plan_num_parking')) echo set_value('plan_num_parking'); else echo $project[0]->plan_num_parking; ?>"  placeholder="계획 주차대수">
 							</div>
 							<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>대</span></div>
 						</div>
@@ -297,11 +297,11 @@
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_color_1" class="sr-only">컬러</span></label>
-								<input type="color" class="form-control input-sm en_only" id="type_color_1" name="type_color_1" maxlength="7" value="<?php if($this->input->post('type_color_1')) echo set_value('type_color_1'); else if($t_count>0) echo $type_color[0]; ?>"  placeholder="컬러">
+								<input type="color" class="form-control input-sm en_only" id="type_color_1" name="type_color_1" maxlength="7" value="<?php if($this->input->post('type_color_1')) echo set_value('type_color_1'); else if($t_count>0) echo $type_color[0]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>0) echo $type_color[0]; ?>">
 							</div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_quantity_1" class="sr-only">수량</span></label>
-								<input type="text" class="form-control input-sm en_only" id="type_quantity_1" name="type_quantity_1" onkeydown="isNum();" maxlength="5" value="<?php if($this->input->post('type_quantity_1')) echo set_value('type_quantity_1'); else if($t_count>0) echo $type_quantity[0]; ?>" required autofocus placeholder="타입별 단위 수량">
+								<input type="text" class="form-control input-sm en_only" id="type_quantity_1" name="type_quantity_1" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_1')) echo set_value('type_quantity_1'); else if($t_count>0) echo $type_quantity[0]; ?>" required autofocus placeholder="타입별 단위 수량">
 							</div>
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
@@ -335,11 +335,11 @@
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_color_2" class="sr-only">컬러</span></label>
-								<input type="color" class="form-control input-sm en_only" id="type_color_2" name="type_color_2" maxlength="7" value="<?php if($this->input->post('type_color_2')) echo set_value('type_color_2'); else if($t_count>1) echo $type_color[1]; ?>"  placeholder="컬러">
+								<input type="color" class="form-control input-sm en_only" id="type_color_2" name="type_color_2" maxlength="7" value="<?php if($this->input->post('type_color_2')) echo set_value('type_color_2'); else if($t_count>1) echo $type_color[1]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>1) echo $type_color[1]; ?>">
 							</div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_quantity_2" class="sr-only">수량</span></label>
-								<input type="text" class="form-control input-sm en_only" id="type_quantity_2" name="type_quantity_2" onkeydown="isNum();" maxlength="5" value="<?php if($this->input->post('type_quantity_2')) echo set_value('type_quantity_2'); else if($t_count>1) echo $type_quantity[1]; ?>" required autofocus placeholder="타입별 단위 수량">
+								<input type="text" class="form-control input-sm en_only" id="type_quantity_2" name="type_quantity_2" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_2')) echo set_value('type_quantity_2'); else if($t_count>1) echo $type_quantity[1]; ?>" required autofocus placeholder="타입별 단위 수량">
 							</div>
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
@@ -373,11 +373,11 @@
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_color_3" class="sr-only">컬러</span></label>
-								<input type="color" class="form-control input-sm en_only" id="type_color_3" name="type_color_3" maxlength="7" value="<?php if($this->input->post('type_color_3')) echo set_value('type_color_3'); else if($t_count>2) echo $type_color[2]; ?>"  placeholder="컬러">
+								<input type="color" class="form-control input-sm en_only" id="type_color_3" name="type_color_3" maxlength="7" value="<?php if($this->input->post('type_color_3')) echo set_value('type_color_3'); else if($t_count>2) echo $type_color[2]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>2) echo $type_color[2]; ?>">
 							</div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_quantity_3" class="sr-only">수량</span></label>
-								<input type="text" class="form-control input-sm en_only" id="type_quantity_3" name="type_quantity_3" onkeydown="isNum();" maxlength="5" value="<?php if($this->input->post('type_quantity_3')) echo set_value('type_quantity_3'); else if($t_count>2) echo $type_quantity[2]; ?>" required autofocus placeholder="타입별 단위 수량">
+								<input type="text" class="form-control input-sm en_only" id="type_quantity_3" name="type_quantity_3" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_3')) echo set_value('type_quantity_3'); else if($t_count>2) echo $type_quantity[2]; ?>" required autofocus placeholder="타입별 단위 수량">
 							</div>
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
@@ -411,11 +411,11 @@
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_color_4" class="sr-only">컬러</span></label>
-								<input type="color" class="form-control input-sm en_only" id="type_color_4" name="type_color_4" maxlength="7" value="<?php if($this->input->post('type_color_4')) echo set_value('type_color_4'); else if($t_count>3) echo $type_color[3]; ?>"  placeholder="컬러">
+								<input type="color" class="form-control input-sm en_only" id="type_color_4" name="type_color_4" maxlength="7" value="<?php if($this->input->post('type_color_4')) echo set_value('type_color_4'); else if($t_count>3) echo $type_color[3]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>3) echo $type_color[3]; ?>">
 							</div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_quantity_4" class="sr-only">수량</span></label>
-								<input type="text" class="form-control input-sm en_only" id="type_quantity_4" name="type_quantity_4" onkeydown="isNum();" maxlength="5" value="<?php if($this->input->post('type_quantity_4')) echo set_value('type_quantity_4'); else if($t_count>3) echo $type_quantity[3]; ?>" required autofocus placeholder="타입별 단위 수량">
+								<input type="text" class="form-control input-sm en_only" id="type_quantity_4" name="type_quantity_4" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_4')) echo set_value('type_quantity_4'); else if($t_count>3) echo $type_quantity[3]; ?>" required autofocus placeholder="타입별 단위 수량">
 							</div>
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
@@ -449,11 +449,11 @@
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_color_5" class="sr-only">컬러</span></label>
-								<input type="color" class="form-control input-sm en_only" id="type_color_5" name="type_color_5" maxlength="7" value="<?php if($this->input->post('type_color_5')) echo set_value('type_color_5'); else if($t_count>4) echo $type_color[4]; ?>"  placeholder="컬러">
+								<input type="color" class="form-control input-sm en_only" id="type_color_5" name="type_color_5" maxlength="7" value="<?php if($this->input->post('type_color_5')) echo set_value('type_color_5'); else if($t_count>4) echo $type_color[4]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>4) echo $type_color[4]; ?>">
 							</div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_quantity_5" class="sr-only">수량</span></label>
-								<input type="text" class="form-control input-sm en_only" id="type_quantity_5" name="type_quantity_5" onkeydown="isNum();" maxlength="5" value="<?php if($this->input->post('type_quantity_5')) echo set_value('type_quantity_5'); else if($t_count>4) echo $type_quantity[4]; ?>" required autofocus placeholder="타입별 단위 수량">
+								<input type="text" class="form-control input-sm en_only" id="type_quantity_5" name="type_quantity_5" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_5')) echo set_value('type_quantity_5'); else if($t_count>4) echo $type_quantity[4]; ?>" required autofocus placeholder="타입별 단위 수량">
 							</div>
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
@@ -487,11 +487,11 @@
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_color_6" class="sr-only">컬러</span></label>
-								<input type="color" class="form-control input-sm en_only" id="type_color_6" name="type_color_6" maxlength="7" value="<?php if($this->input->post('type_color_6')) echo set_value('type_color_6'); else if($t_count>5) echo $type_color[5]; ?>"  placeholder="컬러">
+								<input type="color" class="form-control input-sm en_only" id="type_color_6" name="type_color_6" maxlength="7" value="<?php if($this->input->post('type_color_6')) echo set_value('type_color_6'); else if($t_count>5) echo $type_color[5]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>5) echo $type_color[5]; ?>">
 							</div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_quantity_6" class="sr-only">수량</span></label>
-								<input type="text" class="form-control input-sm en_only" id="type_quantity_6" name="type_quantity_6" onkeydown="isNum();" maxlength="5" value="<?php if($this->input->post('type_quantity_6')) echo set_value('type_quantity_6'); else if($t_count>5) echo $type_quantity[5]; ?>" required autofocus placeholder="타입별 단위 수량">
+								<input type="text" class="form-control input-sm en_only" id="type_quantity_6" name="type_quantity_6" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_6')) echo set_value('type_quantity_6'); else if($t_count>5) echo $type_quantity[5]; ?>" required autofocus placeholder="타입별 단위 수량">
 							</div>
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
@@ -525,11 +525,11 @@
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_color_7" class="sr-only">컬러</span></label>
-								<input type="color" class="form-control input-sm en_only" id="type_color_7" name="type_color_7" maxlength="7" value="<?php if($this->input->post('type_color_7')) echo set_value('type_color_7'); else if($t_count>6) echo $type_color[6]; ?>"  placeholder="컬러">
+								<input type="color" class="form-control input-sm en_only" id="type_color_7" name="type_color_7" maxlength="7" value="<?php if($this->input->post('type_color_7')) echo set_value('type_color_7'); else if($t_count>6) echo $type_color[6]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>6) echo $type_color[6]; ?>">
 							</div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_quantity_7" class="sr-only">수량</span></label>
-								<input type="text" class="form-control input-sm en_only" id="type_quantity_7" name="type_quantity_7" onkeydown="isNum();" maxlength="5" value="<?php if($this->input->post('type_quantity_7')) echo set_value('type_quantity_7'); else if($t_count>6) echo $type_quantity[6]; ?>" required autofocus placeholder="타입별 단위 수량">
+								<input type="text" class="form-control input-sm en_only" id="type_quantity_7" name="type_quantity_7" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_7')) echo set_value('type_quantity_7'); else if($t_count>6) echo $type_quantity[6]; ?>" required autofocus placeholder="타입별 단위 수량">
 							</div>
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
@@ -563,11 +563,11 @@
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_color_8" class="sr-only">컬러</span></label>
-								<input type="color" class="form-control input-sm en_only" id="type_color_8" name="type_color_8" maxlength="7" value="<?php if($this->input->post('type_color_8')) echo set_value('type_color_8'); else if($t_count>7) echo $type_color[7]; ?>"  placeholder="컬러">
+								<input type="color" class="form-control input-sm en_only" id="type_color_8" name="type_color_8" maxlength="7" value="<?php if($this->input->post('type_color_8')) echo set_value('type_color_8'); else if($t_count>7) echo $type_color[7]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>7) echo $type_color[7]; ?>">
 							</div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_quantity_8" class="sr-only">수량</span></label>
-								<input type="text" class="form-control input-sm en_only" id="type_quantity_8" name="type_quantity_8" onkeydown="isNum();" maxlength="5" value="<?php if($this->input->post('type_quantity_8')) echo set_value('type_quantity_8'); else if($t_count>7) echo $type_quantity[7]; ?>" required autofocus placeholder="타입별 단위 수량">
+								<input type="text" class="form-control input-sm en_only" id="type_quantity_8" name="type_quantity_8" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_8')) echo set_value('type_quantity_8'); else if($t_count>7) echo $type_quantity[7]; ?>" required autofocus placeholder="타입별 단위 수량">
 							</div>
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
@@ -601,11 +601,11 @@
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_color_9" class="sr-only">컬러</span></label>
-								<input type="color" class="form-control input-sm en_only" id="type_color_9" name="type_color_9" maxlength="7" value="<?php if($this->input->post('type_color_9')) echo set_value('type_color_9'); else if($t_count>8) echo $type_color[8]; ?>"  placeholder="컬러">
+								<input type="color" class="form-control input-sm en_only" id="type_color_9" name="type_color_9" maxlength="7" value="<?php if($this->input->post('type_color_9')) echo set_value('type_color_9'); else if($t_count>8) echo $type_color[8]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>8) echo $type_color[8]; ?>">
 							</div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_quantity_9" class="sr-only">수량</span></label>
-								<input type="text" class="form-control input-sm en_only" id="type_quantity_9" name="type_quantity_9" onkeydown="isNum();" maxlength="5" value="<?php if($this->input->post('type_quantity_9')) echo set_value('type_quantity_9'); else if($t_count>8) echo $type_quantity[8]; ?>" required autofocus placeholder="타입별 단위 수량">
+								<input type="text" class="form-control input-sm en_only" id="type_quantity_9" name="type_quantity_9" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_9')) echo set_value('type_quantity_9'); else if($t_count>8) echo $type_quantity[8]; ?>" required autofocus placeholder="타입별 단위 수량">
 							</div>
 							<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
@@ -639,11 +639,11 @@
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_color_10" class="sr-only">컬러</span></label>
-								<input type="color" class="form-control input-sm en_only" id="type_color_10" name="type_color_10" maxlength="7" value="<?php if($this->input->post('type_color_10')) echo set_value('type_color_10'); else if($t_count>9) echo $type_color[9]; ?>"  placeholder="컬러">
+								<input type="color" class="form-control input-sm en_only" id="type_color_10" name="type_color_10" maxlength="7" value="<?php if($this->input->post('type_color_10')) echo set_value('type_color_10'); else if($t_count>9) echo $type_color[9]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>9) echo $type_color[9]; ?>">
 							</div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_quantity_10" class="sr-only">수량</span></label>
-								<input type="text" class="form-control input-sm en_only" id="type_quantity_10" name="type_quantity_10" onkeydown="isNum();" maxlength="5" value="<?php if($this->input->post('type_quantity_10')) echo set_value('type_quantity_10'); else if($t_count>10) echo $type_quantity[10]; ?>" required autofocus placeholder="타입별 단위 수량">
+								<input type="text" class="form-control input-sm en_only" id="type_quantity_10" name="type_quantity_10" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_10')) echo set_value('type_quantity_10'); else if($t_count>10) echo $type_quantity[10]; ?>" required autofocus placeholder="타입별 단위 수량">
 							</div>
 								<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
@@ -677,11 +677,11 @@
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_color_11" class="sr-only">컬러</span></label>
-								<input type="color" class="form-control input-sm en_only" id="type_color_11" name="type_color_11" maxlength="7" value="<?php if($this->input->post('type_color_11')) echo set_value('type_color_11'); else if($t_count>10) echo $type_color[10]; ?>"  placeholder="컬러">
+								<input type="color" class="form-control input-sm en_only" id="type_color_11" name="type_color_11" maxlength="7" value="<?php if($this->input->post('type_color_11')) echo set_value('type_color_11'); else if($t_count>10) echo $type_color[10]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>10) echo $type_color[10]; ?>">
 							</div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 								<label for="type_quantity_11" class="sr-only">수량</span></label>
-								<input type="text" class="form-control input-sm en_only" id="type_quantity_11" name="type_quantity_11" onkeydown="isNum();" maxlength="5" value="<?php if($this->input->post('type_quantity_11')) echo set_value('type_quantity_11'); else if($t_count>11) echo $type_quantity[11]; ?>" required autofocus placeholder="타입별 단위 수량">
+								<input type="text" class="form-control input-sm en_only" id="type_quantity_11" name="type_quantity_11" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_11')) echo set_value('type_quantity_11'); else if($t_count>11) echo $type_quantity[11]; ?>" required autofocus placeholder="타입별 단위 수량">
 							</div>
 										<div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
 							<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
@@ -714,7 +714,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm en_only" id="land_cost" name="land_cost" onkeydown="isNum();" maxlength="10" value="<?php if($this->input->post('land_cost')) echo set_value('land_cost'); else echo $project[0]->land_cost; ?>" placeholder="토지 매입비 (단위:천원)">
+								<input type="text" class="form-control input-sm en_only" id="land_cost" name="land_cost" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('land_cost')) echo set_value('land_cost'); else echo $project[0]->land_cost; ?>" placeholder="토지 매입비 (단위:천원)">
 							</div>
 							<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
 						</div>
@@ -723,7 +723,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm en_only" id="build_cost" name="build_cost" onkeydown="isNum();" maxlength="5" value="<?php if($this->input->post('build_cost')) echo set_value('build_cost'); else echo $project[0]->build_cost; ?>" placeholder="평당 건축비 (단위:천원)">
+								<input type="text" class="form-control input-sm en_only" id="build_cost" name="build_cost" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('build_cost')) echo set_value('build_cost'); else echo $project[0]->build_cost; ?>" placeholder="평당 건축비 (단위:천원)">
 							</div>
 							<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
 						</div>
@@ -735,7 +735,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm  en_only" id="arc_design_cost" name="arc_design_cost" onkeydown="isNum();" maxlength="8" value="<?php if($this->input->post('arc_design_cost')) echo set_value('arc_design_cost'); else echo $project[0]->arc_design_cost; ?>" placeholder="설계 용역비 (단위:천원)">
+								<input type="text" class="form-control input-sm  en_only" id="arc_design_cost" name="arc_design_cost" onkeydown="onlyNum(this);" maxlength="8" value="<?php if($this->input->post('arc_design_cost')) echo set_value('arc_design_cost'); else echo $project[0]->arc_design_cost; ?>" placeholder="설계 용역비 (단위:천원)">
 							</div>
 							<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
 						</div>
@@ -744,7 +744,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm  en_only" id="supervision_cost" name="supervision_cost" onkeydown="isNum();" maxlength="8" value="<?php if($this->input->post('supervision_cost')) echo set_value('supervision_cost'); else echo $project[0]->supervision_cost; ?>" placeholder="감리 용역비 (단위:천원)">
+								<input type="text" class="form-control input-sm  en_only" id="supervision_cost" name="supervision_cost" onkeydown="onlyNum(this);" maxlength="8" value="<?php if($this->input->post('supervision_cost')) echo set_value('supervision_cost'); else echo $project[0]->supervision_cost; ?>" placeholder="감리 용역비 (단위:천원)">
 							</div>
 							<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
 						</div>
@@ -755,7 +755,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm  en_only" id="initial_inves" name="initial_inves" onkeydown="isNum();" maxlength="10" value="<?php if($this->input->post('initial_inves')) echo set_value('initial_inves'); else echo $project[0]->initial_inves; ?>" placeholder="시행사 초기 투자금 (단위:천원)">
+								<input type="text" class="form-control input-sm  en_only" id="initial_inves" name="initial_inves" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('initial_inves')) echo set_value('initial_inves'); else echo $project[0]->initial_inves; ?>" placeholder="시행사 초기 투자금 (단위:천원)">
 							</div>
 							<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
 						</div>
@@ -764,7 +764,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm  en_only" id="dev_agency_charge" name="dev_agency_charge" onkeydown="isNum();" maxlength="5" value="<?php if($this->input->post('dev_agency_charge')) echo set_value('dev_agency_charge'); else echo $project[0]->dev_agency_charge; ?>" placeholder="시행대행 용역비 (단위:천원)">
+								<input type="text" class="form-control input-sm  en_only" id="dev_agency_charge" name="dev_agency_charge" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('dev_agency_charge')) echo set_value('dev_agency_charge'); else echo $project[0]->dev_agency_charge; ?>" placeholder="시행대행 용역비 (단위:천원)">
 							</div>
 							<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
 						</div>
@@ -775,7 +775,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm  en_only" id="bridge_loan" name="bridge_loan" onkeydown="isNum();" maxlength="10" value="<?php if($this->input->post('bridge_loan')) echo set_value('bridge_loan'); else echo $project[0]->bridge_loan; ?>" placeholder="브리지 차입규모 (단위:천원)">
+								<input type="text" class="form-control input-sm  en_only" id="bridge_loan" name="bridge_loan" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('bridge_loan')) echo set_value('bridge_loan'); else echo $project[0]->bridge_loan; ?>" placeholder="브리지 차입규모 (단위:천원)">
 							</div>
 							<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
 						</div>
@@ -784,7 +784,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm  en_only" id="pf_loan" name="pf_loan" onkeydown="isNum();" maxlength="10" value="<?php if($this->input->post('pf_loan')) echo set_value('pf_loan'); else echo $project[0]->pf_loan; ?>" placeholder="PF 차입규모 (단위:천원)">
+								<input type="text" class="form-control input-sm  en_only" id="pf_loan" name="pf_loan" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('pf_loan')) echo set_value('pf_loan'); else echo $project[0]->pf_loan; ?>" placeholder="PF 차입규모 (단위:천원)">
 							</div>
 							<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
 						</div>
@@ -795,7 +795,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-10 col-sm-8">
-								<input type="text" class="form-control input-sm  en_only" id="con_lead_time" name="con_lead_time" onkeydown="isNum();" maxlength="4" value="<?php if($this->input->post('con_lead_time')) echo set_value('con_lead_time'); else echo $project[0]->con_lead_time; ?>" placeholder="공사 소요기간 (개월)">
+								<input type="text" class="form-control input-sm  en_only" id="con_lead_time" name="con_lead_time" onkeydown="onlyNum(this);" maxlength="4" value="<?php if($this->input->post('con_lead_time')) echo set_value('con_lead_time'); else echo $project[0]->con_lead_time; ?>" placeholder="공사 소요기간 (개월)">
 							</div>
 							<div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>개월</span></div>
 						</div>
@@ -804,12 +804,12 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 							<div class="col-xs-5 col-sm-4">
-								<input type="text" class="form-control input-sm en_only" id="biz_start_year" name="biz_start_year" onkeydown="isNum();" maxlength="4" value="<?php if($this->input->post('biz_start_year')) echo set_value('biz_start_year'); else echo $biz_start_ym[0]; ?>" placeholder="YYYY">
+								<input type="text" class="form-control input-sm en_only" id="biz_start_year" name="biz_start_year" onkeydown="onlyNum(this);" maxlength="4" value="<?php if($this->input->post('biz_start_year')) echo set_value('biz_start_year'); else echo $biz_start_ym[0]; ?>" placeholder="YYYY">
 							</div>
 							<div class="col-xs-1" style="padding: 11px 0;"><span>년</span></div>
 							<div class="col-xs-4 col-sm-3">
 								<label for="biz_start_month" class="sr-only">사업개시 월</span></label>
-								<input type="text" class="form-control input-sm en_only" id="biz_start_month" name="biz_start_month" onkeydown="isNum();" maxlength="2" value="<?php if($this->input->post('biz_start_month')) echo set_value('biz_start_month'); else echo $biz_start_ym[1]; ?>" placeholder="MM">
+								<input type="text" class="form-control input-sm en_only" id="biz_start_month" name="biz_start_month" onkeydown="onlyNum(this);" maxlength="2" value="<?php if($this->input->post('biz_start_month')) echo set_value('biz_start_month'); else echo $biz_start_ym[1]; ?>" placeholder="MM">
 							</div>
 							<div class="col-xs-1 col-sm-2" style="padding: 11px 0;"><span>월</span></div>
 						</div>

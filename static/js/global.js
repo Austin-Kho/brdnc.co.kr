@@ -101,14 +101,16 @@ function numChk(chk_frm){
 }
 
 // 숫자로만 입력
-function onlyNumber1(form_name){
-   for(var i=0; i < form_name.value.length; i++) {
-	     var chr = form_name.value.substr(i,1);
-		 if(chr < '0' || chr > '9') {
-		    alert("숫자 또는 소숫점 자리로만 입력하셔야 합니다!");
-			form_name.focus();
-			form_name.value="";
-		 }
+function onlyNum(form_name){
+   for(var i=0; i<form_name.value.length; i++) {
+	    var chr = form_name.value.substr(i, 1);
+		if(chr!=='.'){
+			if(chr < '0' || chr > '9') {
+				alert("숫자 또는 소숫점 자리로만 입력하셔야 합니다!");
+				form_name.focus();
+				form_name.value="";
+			}
+		}
    }
 }
 
