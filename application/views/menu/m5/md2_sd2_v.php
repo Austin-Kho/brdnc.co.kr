@@ -379,3 +379,8 @@
 				</div>
 			</fieldset>
 		</form>
+<?php if( !$this->agent->is_mobile() && !$new_rq && !$this->input->get('un')) : ?>
+	<div class="" style="height: 104px;">
+
+	</div>
+<?php endif; ?>
