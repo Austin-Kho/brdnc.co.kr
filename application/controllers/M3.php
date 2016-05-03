@@ -88,38 +88,54 @@ class M3 extends CI_Controller {
 						default: $data['sort']=""; break;
 					}
 				}
-				if($this->input->get('new_pj')) $data['reg_chk'] = $this->main_m->sql_num_result(" SELECT dong, ho FROM cms_project22_indi_table, cms_project11_info WHERE pj_seq = '".$data['pre_pj_seq']."' AND pj_seq = cms_project11_info.seq AND is_data_reg != 1 ORDER BY reg_time DESC ");
+				if($this->input->get('new_pj')) { // 최근 동록한 동과 라인 총 등록 수량 구하기
+					$data['reg_chk'] = $this->main_m->sql_num_result(" SELECT dong, ho FROM cms_project22_indi_table, cms_project11_info WHERE pj_seq = '".$data['pre_pj_seq']."' AND pj_seq = cms_project11_info.seq AND is_data_reg != 1 ORDER BY reg_time DESC ");
+				}
+				if($data['pre_pj_seq']){
+					$type_sel_qry = "";
+					if($this->input->get('type')) $type_sel_qry .= " AND type = '".$this->input->get('type')."' ";
+					$data['reg_dong'] = $this->main_m->sql_result(" SELECT dong FROM cms_project22_indi_table WHERE pj_seq = '".$data['pre_pj_seq']."' ".$type_sel_qry." GROUP BY dong  ");
+					//$data['reg_dong_ho'] = $this->main_m->sql_result(" SELECT pj_seq, dong, ho ");
+				}
+
+
 
 				// 라이브러리 로드
 				$this->load->library('form_validation'); // 폼 검증
 
-				if($this->input->post('mode')=='reg'){ // 데이터 등록 모드
-					$this->form_validation->set_rules('dong_1', '동1', 'required|max_length[8]');
-					$this->form_validation->set_rules('dong_2', '동2', 'max_length[8]');
-					$this->form_validation->set_rules('dong_3', '동3', 'max_length[8]');
-					$this->form_validation->set_rules('dong_4', '동4', 'max_length[8]');
-					$this->form_validation->set_rules('dong_5', '동5', 'max_length[8]');
-					$this->form_validation->set_rules('dong_6', '동6', 'max_length[8]');
-					$this->form_validation->set_rules('line_2', '라인1', 'required|max_length[2]|numeric');
-					$this->form_validation->set_rules('line_2', '라인2', 'max_length[2]|numeric');
-					$this->form_validation->set_rules('line_3', '라인3', 'max_length[2]|numeric');
-					$this->form_validation->set_rules('line_4', '라인4', 'max_length[2]|numeric');
-					$this->form_validation->set_rules('line_5', '라인5', 'max_length[2]|numeric');
-					$this->form_validation->set_rules('line_6', '라인6', 'max_length[2]|numeric');
-					$this->form_validation->set_rules('type_1', '타입1', 'required');
-					$this->form_validation->set_rules('min_floor_3', '최저층1', 'required|max_length[3]|numeric');
-					$this->form_validation->set_rules('min_floor_3', '최저층2', 'max_length[3]|numeric');
-					$this->form_validation->set_rules('min_floor_3', '최저층3', 'max_length[3]|numeric');
-					$this->form_validation->set_rules('min_floor_3', '최저층4', 'max_length[3]|numeric');
-					$this->form_validation->set_rules('min_floor_3', '최저층5', 'max_length[3]|numeric');
-					$this->form_validation->set_rules('min_floor_3', '최저층6', 'max_length[3]|numeric');
-					$this->form_validation->set_rules('max_floor_3', '최고층1', 'required|max_length[3]|numeric');
-					$this->form_validation->set_rules('max_floor_3', '최고층2', 'max_length[3]|numeric');
-					$this->form_validation->set_rules('max_floor_3', '최고층3', 'max_length[3]|numeric');
-					$this->form_validation->set_rules('max_floor_3', '최고층4', 'max_length[3]|numeric');
-					$this->form_validation->set_rules('max_floor_3', '최고층5', 'max_length[3]|numeric');
-					$this->form_validation->set_rules('max_floor_3', '최고층6', 'max_length[3]|numeric');
+				$this->form_validation->set_rules('dong_1', '동1', 'required|max_length[8]');
+				$this->form_validation->set_rules('dong_2', '동2', 'max_length[8]');
+				$this->form_validation->set_rules('dong_3', '동3', 'max_length[8]');
+				$this->form_validation->set_rules('dong_4', '동4', 'max_length[8]');
+				$this->form_validation->set_rules('dong_5', '동5', 'max_length[8]');
+				$this->form_validation->set_rules('dong_6', '동6', 'max_length[8]');
+				$this->form_validation->set_rules('line_2', '라인1', 'required|max_length[2]|numeric');
+				$this->form_validation->set_rules('line_2', '라인2', 'max_length[2]|numeric');
+				$this->form_validation->set_rules('line_3', '라인3', 'max_length[2]|numeric');
+				$this->form_validation->set_rules('line_4', '라인4', 'max_length[2]|numeric');
+				$this->form_validation->set_rules('line_5', '라인5', 'max_length[2]|numeric');
+				$this->form_validation->set_rules('line_6', '라인6', 'max_length[2]|numeric');
+				$this->form_validation->set_rules('type_1', '타입1', 'required');
+				$this->form_validation->set_rules('min_floor_3', '최저층1', 'required|max_length[3]|numeric');
+				$this->form_validation->set_rules('min_floor_3', '최저층2', 'max_length[3]|numeric');
+				$this->form_validation->set_rules('min_floor_3', '최저층3', 'max_length[3]|numeric');
+				$this->form_validation->set_rules('min_floor_3', '최저층4', 'max_length[3]|numeric');
+				$this->form_validation->set_rules('min_floor_3', '최저층5', 'max_length[3]|numeric');
+				$this->form_validation->set_rules('min_floor_3', '최저층6', 'max_length[3]|numeric');
+				$this->form_validation->set_rules('max_floor_3', '최고층1', 'required|max_length[3]|numeric');
+				$this->form_validation->set_rules('max_floor_3', '최고층2', 'max_length[3]|numeric');
+				$this->form_validation->set_rules('max_floor_3', '최고층3', 'max_length[3]|numeric');
+				$this->form_validation->set_rules('max_floor_3', '최고층4', 'max_length[3]|numeric');
+				$this->form_validation->set_rules('max_floor_3', '최고층5', 'max_length[3]|numeric');
+				$this->form_validation->set_rules('max_floor_3', '최고층6', 'max_length[3]|numeric');
 
+
+
+				if($this->form_validation->run() == FALSE) {
+					//본 페이지 로딩
+					$this->load->view('/menu/m3/md1_sd1_v', $data);
+				}else{
+					// 동 데이터
 					$dong = array ($this->input->post('dong_1', TRUE), $this->input->post('dong_2', TRUE), $this->input->post('dong_3', TRUE), $this->input->post('dong_4', TRUE), $this->input->post('dong_5', TRUE), $this->input->post('dong_6', TRUE));
 					// 라인 데이터
 					$line_1 = str_pad($this->input->post('line_1', TRUE), 2, "0", STR_PAD_LEFT);
@@ -129,7 +145,9 @@ class M3 extends CI_Controller {
 					$line_5 = str_pad($this->input->post('line_5', TRUE), 2, "0", STR_PAD_LEFT);
 					$line_6 = str_pad($this->input->post('line_6', TRUE), 2, "0", STR_PAD_LEFT);
 					$line = array($line_1, $line_2, $line_3, $line_4, $line_5, $line_6);
+					// 타입 데이터
 					$type = array($this->input->post('type_1', TRUE), $this->input->post('type_2', TRUE), $this->input->post('type_3', TRUE), $this->input->post('type_4', TRUE), $this->input->post('type_5', TRUE), $this->input->post('type_6', TRUE));
+					// 층 데이터
 					$min_floor = array($this->input->post('min_floor_1', TRUE), $this->input->post('min_floor_2', TRUE), $this->input->post('min_floor_3', TRUE), $this->input->post('min_floor_4', TRUE), $this->input->post('min_floor_5', TRUE), $this->input->post('min_floor_6', TRUE));
 					$max_floor = array($this->input->post('max_floor_1', TRUE), $this->input->post('max_floor_2', TRUE), $this->input->post('max_floor_3', TRUE), $this->input->post('max_floor_4', TRUE), $this->input->post('max_floor_5', TRUE), $this->input->post('max_floor_6', TRUE));
 
@@ -154,44 +172,43 @@ class M3 extends CI_Controller {
 					if($this->input->post('hold_6', TRUE)=="on") $hold_6 = 1; else $hold_6 = 0;
 					$hold = array($hold_1, $hold_2, $hold_3, $hold_4, $hold_5, $hold_6);
 
-					############# DB INSERT. #############
-					for($j=0; $j<6; $j++){
-						if($min_floor[$j]&&$max_floor[$j]){ //[$j] // 일괄 등록 층에 대한 쿼리 실행
+					if($this->input->get('mode')=='reg'){ // 데이터 등록 모드
 
-							$fl_range[$j] = range($min_floor[$j], $max_floor[$j], 1);
-							$fn[$j]= count($fl_range[$j]);  // 입력된 층의 개수
+						############# DB INSERT. #############
+						for($j=0; $j<6; $j++){
+							if($min_floor[$j]&&$max_floor[$j]){ //[$j] // 일괄 등록 층에 대한 쿼리 실행
 
-							for($i=0; $i<$fn[$j]; $i++){
-								$ho[$j] = $fl_range[$j][$i].$line[$j];
-								$floor = $fl_range[$j][$i];
-								$bat_data = array(
-									'pj_seq' => $this->input->post('pj_seq'),
-									'type' => $type[$j],
-									'dong' => $dong[$j],
-									'ho' => $ho[$j],
-									'floor' =>$floor,
-									'line' => $line[$j],
-									'is_hold' => $hold[$j],
-									'reg_time' => 'now()'
-								);
-								$bat_insert = $this->main_m->insert_data('cms_project22_indi_table', $bat_data);
-								if(!$bat_insert) alert('데이터베이스 오류가 발생하였습니다.', '');
+								$fl_range[$j] = range($min_floor[$j], $max_floor[$j], 1);
+								$fn[$j]= count($fl_range[$j]);  // 입력된 층의 개수
+
+								for($i=0; $i<$fn[$j]; $i++){
+									$ho[$j] = $fl_range[$j][$i].$line[$j];
+									$floor = $fl_range[$j][$i];
+									$bat_data = array(
+										'pj_seq' => $this->input->post('pj_seq'),
+										'type' => $type[$j],
+										'dong' => $dong[$j],
+										'ho' => $ho[$j],
+										'floor' =>$floor,
+										'line' => $line[$j],
+										'is_hold' => $hold[$j],
+										'reg_time' => 'now()'
+									);
+									$bat_insert = $this->main_m->insert_data('cms_project22_indi_table', $bat_data);
+									if(!$bat_insert) alert('데이터베이스 오류가 발생하였습니다.', '');
+								}
 							}
 						}
+						alert('정상적으로 프로젝트 데이터 정보가 등록 되었습니다.', '');
+
+					}else if($this->input->get('mode')=='end'){// 데이터 등록 마감
+
+					}else if($this->input->get('mode')=='re_reg'){ // 데이터 재등록
+
+					}else if($this->input->get('mode')=='individual_reg'){ // 개별 등록 수정일 경우
+
 					}
-					alert('정상적으로 프로젝트 데이터 정보가 등록 되었습니다.', '');
-
-				}else if($this->input->post('mode')=='end'){// 데이터 등록 마감
-
-				}else if($this->input->post('mode')=='re_reg'){ // 데이터 재등록
-
-				}else if($this->input->post('mode')=='individual_reg'){ // 개별 등록 수정일 경우
-
 				}
-
-
-				//본 페이지 로딩
-				$this->load->view('/menu/m3/md1_sd1_v', $data);
 			}
 
 		// 프로젝트 관리 2. 기본정보 수정 ////////////////////////////////////////////////////////////////////
