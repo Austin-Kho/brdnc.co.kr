@@ -96,7 +96,7 @@
 											<input type="checkbox" id="_m1_1_1" name="_m1_1_1" <?php if(isset($user_auth->_m1_1_1) && $user_auth->_m1_1_1>0) echo 'checked'; ?>> 조회
 										<!-- </label> -->
 										<!-- <label class="checkbox-inline"> -->
-											<input type="checkbox" id="_m1_1_1_m" name="_m1_1_1_m" <?php if(isset($user_auth->_m1_1_1) && $user_auth->_m1_1_1>1) echo 'checked'; ?> disabled> 등록
+											<input type="checkbox" id="_m1_1_1_m" name="_m1_1_1_m" <?php if(isset($user_auth->_m1_1_1) && $user_auth->_m1_1_1>1) echo 'checked'; ?>> 등록
 										<!-- </label> -->
 									</td>
 									<td class="sub-td mbo-top" style="width: 200px;">계약등록
@@ -112,7 +112,7 @@
 											<input type="checkbox" id="_m1_1_3" name="_m1_1_3" <?php if(isset($user_auth->_m1_1_3) && $user_auth->_m1_1_3>0) echo 'checked'; ?>> 조회
 										<!-- </label> -->
 										<!-- <label class="checkbox-inline"> -->
-											<input type="checkbox" id="_m1_1_3_m" name="_m1_1_3_m" <?php if(isset($user_auth->_m1_1_3) && $user_auth->_m1_1_3>1) echo 'checked'; ?> disabled> 등록
+											<input type="checkbox" id="_m1_1_3_m" name="_m1_1_3_m" <?php if(isset($user_auth->_m1_1_3) && $user_auth->_m1_1_3>1) echo 'checked'; ?>> 등록
 										<!-- </label> -->
 									</td>
 									<td class="sub-td mbo-top" style="width: 200px;"></td>
@@ -125,7 +125,7 @@
 											<input type="checkbox" id="_m1_2_1" name="_m1_2_1" <?php if(isset($user_auth->_m1_2_1) && $user_auth->_m1_2_1>0) echo 'checked'; ?>> 조회
 										<!-- </label> -->
 										<!-- <label class="checkbox-inline"> -->
-											<input type="checkbox" id="_m1_2_1_m" name="_m1_2_1_m" <?php if(isset($user_auth->_m1_2_1) && $user_auth->_m1_2_1>1) echo 'checked'; ?> disabled> 등록
+											<input type="checkbox" id="_m1_2_1_m" name="_m1_2_1_m" <?php if(isset($user_auth->_m1_2_1) && $user_auth->_m1_2_1>1) echo 'checked'; ?>> 등록
 										<!-- </label> -->
 									</td>
 									<td class="sec-td">수납등록
@@ -141,7 +141,7 @@
 											<input type="checkbox" id="_m1_2_3" name="_m1_2_3" <?php if(isset($user_auth->_m1_2_3) && $user_auth->_m1_2_3>0) echo 'checked'; ?>> 조회
 										<!-- </label> -->
 										<!-- <label class="checkbox-inline"> -->
-											<input type="checkbox" id="_m1_2_3_m" name="_m1_2_3_m" <?php if(isset($user_auth->_m1_2_3) && $user_auth->_m1_2_3>1) echo 'checked'; ?> disabled> 등록
+											<input type="checkbox" id="_m1_2_3_m" name="_m1_2_3_m" <?php if(isset($user_auth->_m1_2_3) && $user_auth->_m1_2_3>1) echo 'checked'; ?>> 등록
 										<!-- </label> -->
 									</td>
 									<td class="sec-td"></td>
@@ -155,7 +155,7 @@
 											<input type="checkbox" id="_m2_1_1" name="_m2_1_1" <?php if(isset($user_auth->_m2_1_1) && $user_auth->_m2_1_1>0) echo 'checked'; ?>> 조회
 										<!-- </label> -->
 										<!-- <label class="checkbox-inline"> -->
-											<input type="checkbox" id="_m2_1_1_m" name="_m2_1_1_m" <?php if(isset($user_auth->_m2_1_1) && $user_auth->_m2_1_1>1) echo 'checked'; ?> disabled> 등록
+											<input type="checkbox" id="_m2_1_1_m" name="_m2_1_1_m" <?php if(isset($user_auth->_m2_1_1) && $user_auth->_m2_1_1>1) echo 'checked'; ?>> 등록
 										<!-- </label> -->
 									</td>
 									<td>집행등록
@@ -184,7 +184,7 @@
 											<input type="checkbox" id="_m2_2_1" name="_m2_2_1" <?php if(isset($user_auth->_m2_2_1) && $user_auth->_m2_2_1>0) echo 'checked'; ?>> 조회
 										<!-- </label> -->
 										<!-- <label class="checkbox-inline"> -->
-											<input type="checkbox" id="_m2_2_1_m" name="_m2_2_1_m" <?php if(isset($user_auth->_m2_2_1) && $user_auth->_m2_2_1>1) echo 'checked'; ?> disabled> 등록
+											<input type="checkbox" id="_m2_2_1_m" name="_m2_2_1_m" <?php if(isset($user_auth->_m2_2_1) && $user_auth->_m2_2_1>1) echo 'checked'; ?>> 등록
 										<!-- </label> -->
 									</td>
 									<td class="sec-td">일정관리
@@ -259,7 +259,7 @@
 											<input type="checkbox" id="_m4_1_1" name="_m4_1_1" <?php if(isset($user_auth->_m4_1_1) && $user_auth->_m4_1_1>0) echo 'checked'; ?>> 조회
 										<!-- </label> -->
 										<!-- <label class="checkbox-inline"> -->
-											<input type="checkbox" id="_m4_1_1_m" name="_m4_1_1_m" <?php if(isset($user_auth->_m4_1_1) && $user_auth->_m4_1_1>1) echo 'checked'; ?> disabled> 등록
+											<input type="checkbox" id="_m4_1_1_m" name="_m4_1_1_m" <?php if(isset($user_auth->_m4_1_1) && $user_auth->_m4_1_1>1) echo 'checked'; ?>> 등록
 										<!-- </label> -->
 									</td>
 									<td>입출금 내역
