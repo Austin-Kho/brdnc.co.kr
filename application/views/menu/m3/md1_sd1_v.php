@@ -49,7 +49,7 @@
 				</form>
 
 <?php
-	$attributes = array('name' => 'form1', 'method' => 'post');
+	$attributes = array('name' => 'form1', 'method' => 'post', 'class' => 'form-inline');
 	echo form_open('/m3/project/1/1/', $attributes);
 ?><!-- 메인폼(form1) 시작 -->
 				<!------------------------------------동호수 별 입력 시작--------------------------------------------->
@@ -78,90 +78,137 @@
 					<div class="row" style="margin: 0;">
 						<div class="col-xs-12" style="padding: 9px 0 9px 15px;"><strong><span class="red">*</span> 라인(동) 별 데이터 등록</strong></div>
 					</div>
-<?php //if($a=='a') : ?>
+
+<?php if( !empty($reg_chk)) :
+	if($reg_chk['num']!=0)$line = substr($reg_chk['result'][0]->ho, -2, 2);
+?>
 					<div class="row" style="margin: 0;">
-						<div class="col-xs-10" style="padding: 9px  5px 9px 15px;">
-							최근 등록 정보 : <font color="#cc0000"><?// =$chk_row[dong]?>동 <?//=$line?>호 라인 (총 <?//=$total_n?> 세대 등록)</font>
+						<div class="col-xs-12 col-sm-5 col-md-4" style="padding: 9px  5px 9px 15px;">
+							최근 등록 정보 : <font color="#cc0000"><?php if(($reg_chk['num']==0)) {echo "등록세대 없음";} else {echo $reg_chk['result'][0]->dong; ?>동 <?php echo $line; ?>호 라인 (총 <?php echo $reg_chk['num']; ?> 세대 등록)<?php } ?></font>
 						</div>
-						<div class="col-xs-2" style="padding: 6px;" data-toggle="tooltip" data-placement="left" title=" 해당 프로젝트에 대한 데이터를 모두 등록한 후에 등록마감 처리하여 주십시요! "><input type="button" class="btn btn-warning btn-xs" value="등록마감" onclick="data_move('end','<?//=$new_pj?>');"></div>
+<?php if($reg_chk['num']!=0) : ?>
+						<div class="col-xs-3 col-sm-7 col-md-8" style="padding: 6px;" data-toggle="tooltip" data-placement="left" title="  프로젝트의 동호데이터 등록 완료 시 등록마감 처리하여 주십시요! "><input type="button" class="btn btn-warning btn-xs" value="등록마감" onclick="data_move('end','<?//=$new_pj?>');"></div>
+<?php endif; ?>
 					</div>
-<?php //endif; ?>
+<?php endif; ?>
 					<div class="row table-responsive" style="margin: 0 0 20px 0;">
-						<table class="table">
-				            <thead class="bo-top" style="background-color: #F0F0E8;">
-					            <tr>
-					                <th class="center" style="width: 210px">동 등록</th>
+						<table class="table table-bordered table-hover table-condensed">
+							<thead class="bo-top">
+								<tr style="background-color: #F0F0E8;">
+									<th class="center" style="width: 210px">동 등록</th>
 					                <th class="center" style="width: 130px">라인 등록</th>
 					                <th class="center" style="width: 150px">타입(Type) 등록</th>
 					                <th class="center" style="width: 323px">층 등록 (등록 라인에 해당하는 층 등록)</th>
  									<th class="center" style="width: 110px">예외 (홀딩) 세대</th>
-				            	</tr>
-				            </thead>
+								</tr>
+							</thead>
 				            <tbody class="bo-bottom">
+<?php
+	if(isset($pre_pj_seq)){
+		$type=explode("-", $project->type_name);
+		$t_count=count($type);
+	}
+	echo "<div style='color: blue;'>".validation_errors()."</div>";
+?>
 								<!-- =============================================== line batch 1 start ================================================ -->
 								<tr>
-					                <td><input type="text" name="dong_1" class="" size="5">동<input type="checkbox" class="checkbox" name="dong_ik" onclick="dong_reg_bc(this);">일괄등록</td>
-									<td><input type="text" name="line_1" class="">호 라인</td>
-					                <td>
-										<div class="col-xs-8">
-											<select name="type_1" class="form-control input-sm">
-												<option value="" selected> 선택
-												<?
-													// if($p_row[type_name]){
-													// 	for($i=0; $i<$t_count; $i++){
-												?>
-												<option value="<?//=$type[$i]?>"> <?//=$type[$i]?>
-												<? //}} ?>
-											</select>
-										</div>
-										<div class="col-xs-4"> TYPE</div>
+					                <td style="padding-left: 15px;"> <div class="checkbox"><input type="text" name="dong_1" size="3" maxlength="5"> 동 <label><input type="checkbox" name="dong_ik" onclick="dong_reg_bc(this);"> 일괄등록</label></div></td>
+									<td class="center"><input type="text" name="line_1" maxlength="2" size="3" onkeydown="onlyNum(this);" class="en_only"> 호 라인 </td>
+					                <td class="center">
+										<select name="type_1" style="width: 65px; height: 25px;">
+											<option value="" selected> 선택
+<?php if(isset($pre_pj_seq)) : foreach($type as $lt) : ?>
+											<option value="<?php echo $lt; ?>"> <?php echo $lt; ?>
+<?php endforeach; endif; ?>
+										</select> TYPE
 					                </td>
-					                <td>
-										<div class="col-xs-3"><input type="text" name="min_floor_1" class="form-control input-sm"></div>
-										<div class="col-xs-3"> 층 부터 ~ </div>
-										<div class="col-xs-3"><input type="text" name="max_floor_1" class="form-control input-sm"></div>
-										<div class="col-xs-3"> 층 (일괄 등록)</div>
-
-									</td>
-									<td><input type="checkbox" name="hold_1"></td>
+					                <td class="center"><input type="text" name="min_floor_1" size="3" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 부터 ~ <input type="text" name="max_floor_1" size="3" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 (일괄 등록)</td>
+									<td class="center"><div class="checkbox"><label><input type="checkbox" name="hold_1">  제외</label></div></td>
 					            </tr>
 								<!-- =============================================== line batch 1 end ================================================ -->
+								<!-- =============================================== line batch 2 start ================================================ -->
+								<tr>
+					                <td style="padding-left: 15px;"><input type="text" name="dong_2" size="3" maxlength="5"> 동 </td>
+									<td class="center"><input type="text" name="line_2" maxlength="2" size="3" onkeydown="onlyNum(this);" class="en_only"> 호 라인 </td>
+					                <td class="center">
+										<select name="type_2" style="width: 65px; height: 25px;">
+											<option value="" selected> 선택
+<?php if(isset($pre_pj_seq)) : foreach($type as $lt) : ?>
+											<option value="<?php echo $lt; ?>"> <?php echo $lt; ?>
+<?php endforeach; endif; ?>
+										</select> TYPE
+					                </td>
+					                <td class="center"><input type="text" name="min_floor_2" size="3" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 부터 ~ <input type="text" name="max_floor_2" size="3" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 (일괄 등록)</td>
+									<td class="center"><div class="checkbox"><label><input type="checkbox" name="hold_2"> 제외</label></div></td>
+					            </tr>
+								<!-- =============================================== line batch 2 end ================================================ -->
+								<!-- =============================================== line batch 3 start ================================================ -->
+								<tr>
+					                <td style="padding-left: 15px;"><input type="text" name="dong_3" size="3" maxlength="5"> 동 </td>
+									<td class="center"><input type="text" name="line_3" maxlength="2" size="3" onkeydown="onlyNum(this);" class="en_only"> 호 라인 </td>
+					                <td class="center">
+										<select name="type_3" style="width: 65px; height: 25px;">
+											<option value="" selected> 선택
+<?php if(isset($pre_pj_seq)) : foreach($type as $lt) : ?>
+											<option value="<?php echo $lt; ?>"> <?php echo $lt; ?>
+<?php endforeach; endif; ?>
+										</select> TYPE
+					                </td>
+					                <td class="center"><input type="text" name="min_floor_3" size="3" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 부터 ~ <input type="text" name="max_floor_3" size="3" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 (일괄 등록)</td>
+									<td class="center"><div class="checkbox"><label><input type="checkbox" name="hold_3"> 제외</label></div></td>
+					            </tr>
+								<!-- =============================================== line batch 3 end ================================================ -->
+								<!-- =============================================== line batch 4 start ================================================ -->
+								<tr>
+					                <td style="padding-left: 15px;"><input type="text" name="dong_4" size="3" maxlength="5"> 동 </td>
+									<td class="center"><input type="text" name="line_4" maxlength="2" size="3" onkeydown="onlyNum(this);" class="en_only"> 호 라인 </td>
+					                <td class="center">
+										<select name="type_4" style="width: 65px; height: 25px;">
+											<option value="" selected> 선택
+<?php if(isset($pre_pj_seq)) : foreach($type as $lt) : ?>
+											<option value="<?php echo $lt; ?>"> <?php echo $lt; ?>
+<?php endforeach; endif; ?>
+										</select> TYPE
+					                </td>
+					                <td class="center"><input type="text" name="min_floor_4" size="3" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 부터 ~ <input type="text" name="max_floor_4" size="3" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 (일괄 등록)</td>
+									<td class="center"><div class="checkbox"><label><input type="checkbox" name="hold_4"> 제외</label></div></td>
+					            </tr>
+								<!-- =============================================== line batch 4 end ================================================ -->
+								<!-- =============================================== line batch 5 start ================================================ -->
+								<tr>
+					                <td style="padding-left: 15px;"><input type="text" name="dong_5" size="3" maxlength="5"> 동 </td>
+									<td class="center"><input type="text" name="line_5" maxlength="2" size="3" onkeydown="onlyNum(this);" class="en_only"> 호 라인 </td>
+					                <td class="center">
+										<select name="type_5" style="width: 65px; height: 25px;">
+											<option value="" selected> 선택
+<?php if(isset($pre_pj_seq)) : foreach($type as $lt) : ?>
+											<option value="<?php echo $lt; ?>"> <?php echo $lt; ?>
+<?php endforeach; endif; ?>
+										</select> TYPE
+					                </td>
+					                <td class="center"><input type="text" name="min_floor_5" size="3" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 부터 ~ <input type="text" name="max_floor_5" size="3" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 (일괄 등록)</td>
+									<td class="center"><div class="checkbox"><label><input type="checkbox" name="hold_5"> 제외</label></div></td>
+					            </tr>
+								<!-- =============================================== line batch 5 end ================================================ -->
+								<!-- =============================================== line batch 6 start ================================================ -->
+								<tr>
+					                <td style="padding-left: 15px;"><input type="text" name="dong_6" size="3" maxlength="5"> 동 </td>
+									<td class="center"><input type="text" name="line_6" maxlength="2" size="3" onkeydown="onlyNum(this);" class="en_only"> 호 라인 </td>
+					                <td class="center">
+										<select name="type_6" style="width: 65px; height: 25px;">
+											<option value="" selected> 선택
+<?php if(isset($pre_pj_seq)) : foreach($type as $lt) : ?>
+											<option value="<?php echo $lt; ?>"> <?php echo $lt; ?>
+<?php endforeach; endif; ?>
+										</select> TYPE
+					                </td>
+					                <td class="center"><input type="text" name="min_floor_6" size="3" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 부터 ~ <input type="text" name="max_floor_6" size="3" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 (일괄 등록)</td>
+									<td class="center"><div class="checkbox"><label><input type="checkbox" name="hold_6"> 제외</label></div></td>
+					            </tr>
+								<!-- =============================================== line batch 6 end ================================================ -->
 
-								<tr>
-					                <td>1</td>
-					                <td>Mark</td>
-					                <td>Otto</td>
-					                <td>@mdo</td>
-									<td>@mdo</td>
-					            </tr>
-								<tr>
-					                <td>1</td>
-					                <td>Mark</td>
-					                <td>Otto</td>
-					                <td>@mdo</td>
-									<td>@mdo</td>
-					            </tr>
-								<tr>
-					                <td>1</td>
-					                <td>Mark</td>
-					                <td>Otto</td>
-					                <td>@mdo</td>
-									<td>@mdo</td>
-					            </tr>
-								<tr>
-					                <td>1</td>
-					                <td>Mark</td>
-					                <td>Otto</td>
-					                <td>@mdo</td>
-									<td>@mdo</td>
-					            </tr>
-								<tr>
-					                <td>1</td>
-					                <td>Mark</td>
-					                <td>Otto</td>
-					                <td>@mdo</td>
-									<td>@mdo</td>
-					            </tr>
+
+
 							</tbody>
 						</table>
 					</div>
@@ -184,4 +231,67 @@
 				</form>
 				<!------------------------------------동호수 별 입력 종료----------------------------------------------->
 
+
+
+				<!------------------------------------동호수 데이터 불러오기 시작----------------------------------------------->
+<?php
+	$attributes = array('method' => 'post');
+	echo form_open('/m3/project/1/1/', $attributes);
+?>
+				<!-- <input type="hidden" name="new_pj" value="<?=$new_pj?>">
+				<input type="hidden" name="reg_pj" value="<?=$reg_pj?>"> -->
+				<label for="pj_seq" class="sr-only">모드</label><input type="hidden" name="pj_seq" value="<?php if(isset($pre_pj_seq)) echo $pre_pj_seq; ?>">
+				<label for="pj_sort" class="sr-only">모드</label><input type="hidden" name="pj_sort" value="<?php if(isset($pre_pj_seq)) echo $project->sort; ?>">
+				<div class="row" style="margin: 0;">
+					<div class="col-md-1" style="background-color: red;">
+						<select name="type_6" style="width: 65px; height: 22px;">
+							<option value="" selected> 타입별</option>
+<?php // if(isset($pre_pj_seq)) : foreach($type as $lt) : ?>
+							<option value="<?php echo $lt; ?>"> <?php echo $lt; ?></option>
+<?php // endforeach; endif; ?>
+						</select>
+					</div>
+					<div class="col-md-1">
+						<select name="type_6" style="width: 65px; height: 22px;">
+							<option value="" selected> 동 별</option>
+<?php // if(isset($pre_pj_seq)) : foreach($type as $lt) : ?>
+							<option value="<?php echo $lt; ?>"> <?php echo $lt; ?>
+<?php // endforeach; endif; ?>
+						</select>
+					</div>
+					<div class="col-md-1"><label><input type="checkbox" name="hold_6">등록 순</label></div>
+					<div class="col-md-1">
+						<select name="type_6" style="width: 65px; height: 22px;">
+							<option value="" selected> 표시개수
+<?php // if(isset($pre_pj_seq)) : foreach($type as $lt) : ?>
+							<option value="<?php echo $lt; ?>"> <?php echo $lt; ?>
+<?php // endforeach; endif; ?>
+						</select>
+					</div>
+					<div class="col-md-3">동별 정렬(오름차순 <input type="radio"> 내림차순 <input type="radio">)</div>
+					<div class="col-md-3">호별 정렬(오름차순 <input type="radio"> 내림차순 <input type="radio">)</div>
+					<div class="col-md-1"><input type="button" class="btn btn-success btn-xs" value="검 색"></div>
+				</div>
+				<div class="row" style="margin: 0;">
+					<table class="table table-hover table-condensed">
+						<thead>
+							<tr>
+								<td>
+									d
+								</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									aa
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+
+				</form>
+				<!------------------------------------동호수 데이터 불러오기 시작----------------------------------------------->
     		</div>

@@ -33,8 +33,8 @@
 <?php echo validation_errors(); ?>
 
 				<div class="row table-responsive" style="margin: 0;">
-					<table class="table table-condensed table-hover font12" style="border-top: 1px solid #ddd; border-bottom: 1px solid #ddd;">
-						<thead>
+					<table class="table table-condensed table-hover font12">
+						<thead class="bo-top">
 							<tr style="background-color: #EAEAEA;">
 								<th style="20px" class="center"><input type="checkbox" disabled></td>
 								<th style="120px" class="center">구 분 <font color="red">*</font></td>

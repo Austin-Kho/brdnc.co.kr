@@ -305,7 +305,10 @@ function pj_data_put_0(){
 	}
 	if(form.min_floor_6.value){	if(!form.max_floor_6.value){ alert("입력할 층의 범위를 지정 하십시요!"); form.max_floor_6.focus(); return;}}
 	if(form.max_floor_6.value){	if(!form.min_floor_6.value){ alert("입력할 층의 범위를 지정 하십시요!"); form.min_floor_6.focus(); return;}}
-	form.submit();
+	var a=confirm('해당 동호수 정보를 등록하시겠습니까?');
+	if(a===true){
+		form.submit();
+	}
 }
 
 
