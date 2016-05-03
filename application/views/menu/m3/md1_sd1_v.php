@@ -281,7 +281,7 @@
 								</select>
 							</div>
 							<div class="col-xs-12 col-sm-3 col-md-1 center" style="height: 40px; background-color: #F4F4F4; padding: 12px 0;">데이터 정렬</div>
-							<div class="col-xs-12 col-sm-1 col-md-1 hidden-xs" style="height: 40px; padding: 0 0 0 5px;">
+							<div class="col-sm-1 col-md-1 hidden-xs" style="height: 40px; padding: 0 0 0 5px;">
 								<div class="checkbox">
 									<label><input type="checkbox" name="reg_order"> 등록 순</label>
 								</div>
@@ -292,7 +292,12 @@
 							<div class="col-xs-6 col-sm-4 col-md-2" style="height: 40px; padding: 10px 5px;">
 								호별 ( <label class="radio-inline"><input type="radio" name="ho_sc">오름차순</label>  <label class="radio-inline"><input type="radio" name="ho_sc">내림차순</label> )
 							</div>
-							<div class="col-xs-12 col-sm-12 col-md-2 right" style="height: 40px; padding: 5px;">
+							<div class="col-xs-6 col-md-1" style="height: 40px; padding: 0 0 0 5px;">
+								<div class="checkbox">
+									<label><input type="checkbox" name="sh_extend" onclick="if(this.checked===true)alert('준비중!')"> 검색 확장</label>
+								</div>
+							</div>
+							<div class="col-xs-6 col-md-1 right" style="height: 40px; padding: 5px;">
 								<input type="button" value="검 색" class="btn btn-info btn-sm" onclick="submit();">
 							</div>
 						</div>
