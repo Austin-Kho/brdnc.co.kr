@@ -64,16 +64,18 @@ class M3 extends CI_Controller {
 
 				$where=" WHERE is_data_reg = '0' ";
 				if($this->input->get('yr')>1) $where.=" AND biz_start_ym LIKE '".$this->input->get('yr')."%' ";
-				$data['new_pj'] = $this->main_m->sql_result(" SELECT * FROM cms_project11_info ".$where." ORDER BY biz_start_ym DESC  ");
+				$data['new_pj_list'] = $this->main_m->sql_result(" SELECT * FROM cms_project11_info ".$where." ORDER BY biz_start_ym DESC  ");
 
 				$where=" WHERE is_data_reg = '1' ";
 				if($this->input->get('yr')>1) $where.=" AND biz_start_ym LIKE '".$this->input->get('yr')."%' ";
-				$data['reg_pj'] = $this->main_m->sql_result(" SELECT * FROM cms_project11_info ".$where." ORDER BY biz_start_ym DESC ");
+				$data['reg_pj_list'] = $this->main_m->sql_result(" SELECT * FROM cms_project11_info ".$where." ORDER BY biz_start_ym DESC ");
 
-				if($this->input->get('new_pj')) $data['pre_pj_seq'] = $this->input->get('new_pj'); // 신규 등록인지
-				if($this->input->get('reg_pj')) $data['pre_pj_seq'] = $this->input->get('reg_pj'); // 등록 수정인지
-				$where = '';
-				if( !empty($data['pre_pj_seq'])) {
+				if($this->input->get('new_pj') OR $this->input->get('reg_pj')){
+					if($this->input->get('new_pj') && !$this->input->get('reg_pj')){
+						$data['pre_pj_seq'] = $this->input->get('new_pj'); // 신규 등록인지
+					}else if($this->input->get('reg_pj') && !$this->input->get('new_pj')){
+						$data['pre_pj_seq'] = $this->input->get('reg_pj'); // 기등록 프로젝트인지
+					}
 					$where = " WHERE seq = '".$data['pre_pj_seq']."'  ";
 					$data['project'] = $this->main_m->sql_row(" SELECT pj_name, sort, data_cr, type_name FROM cms_project11_info ".$where);
 					switch ($data['project']->sort) {
@@ -87,18 +89,18 @@ class M3 extends CI_Controller {
 						case '8': $data['sort']="기 타"; break;
 						default: $data['sort']=""; break;
 					}
-				}
-				if($this->input->get('new_pj')) { // 최근 동록한 동과 라인 총 등록 수량 구하기
-					$data['reg_chk'] = $this->main_m->sql_num_result(" SELECT dong, ho FROM cms_project22_indi_table, cms_project11_info WHERE pj_seq = '".$data['pre_pj_seq']."' AND pj_seq = cms_project11_info.seq AND is_data_reg != 1 ORDER BY reg_time DESC ");
-				}
-				if($data['pre_pj_seq']){
-					$type_sel_qry = "";
-					if($this->input->get('type')) $type_sel_qry .= " AND type = '".$this->input->get('type')."' ";
-					$data['reg_dong'] = $this->main_m->sql_result(" SELECT dong FROM cms_project22_indi_table WHERE pj_seq = '".$data['pre_pj_seq']."' ".$type_sel_qry." GROUP BY dong  ");
-					//$data['reg_dong_ho'] = $this->main_m->sql_result(" SELECT pj_seq, dong, ho ");
-				}
+					if($this->input->get('new_pj')) { // 최근 동록한 동과 라인 총 등록 수량 구하기
+						$data['reg_chk'] = $this->main_m->sql_num_result(" SELECT dong, ho FROM cms_project22_indi_table, cms_project11_info WHERE pj_seq = '".$data['pre_pj_seq']."' AND pj_seq = cms_project11_info.seq AND is_data_reg != 1 ORDER BY cms_project22_indi_table.seq DESC ");
+					}
+					if($data['pre_pj_seq']){
+						$add_where = "";
+						if($this->input->get('type')) $add_where .= " AND type = '".$this->input->get('type')."' ";
+						$data['reg_dong'] = $this->main_m->sql_result(" SELECT dong FROM cms_project22_indi_table WHERE pj_seq = '".$data['pre_pj_seq']."' ".$add_where." GROUP BY dong  ");
+						if($this->input->get('dong')) $add_where .= " AND dong = '".$this->input->get('dong')."' ";
 
-
+						$data['reg_dong_ho'] = $this->main_m->sql_result(" SELECT pj_seq, pj_name, type, dong, ho, type_name, type_color, is_hold FROM  cms_project22_indi_table, cms_project11_info WHERE pj_seq = ".$data['pre_pj_seq']." AND pj_seq=cms_project11_info.seq ".$add_where." ORDER BY cms_project22_indi_table.seq DESC ");
+					}
+				}
 
 				// 라이브러리 로드
 				$this->load->library('form_validation'); // 폼 검증
@@ -128,7 +130,6 @@ class M3 extends CI_Controller {
 				$this->form_validation->set_rules('max_floor_3', '최고층4', 'max_length[3]|numeric');
 				$this->form_validation->set_rules('max_floor_3', '최고층5', 'max_length[3]|numeric');
 				$this->form_validation->set_rules('max_floor_3', '최고층6', 'max_length[3]|numeric');
-
 
 
 				if($this->form_validation->run() == FALSE) {
@@ -172,7 +173,7 @@ class M3 extends CI_Controller {
 					if($this->input->post('hold_6', TRUE)=="on") $hold_6 = 1; else $hold_6 = 0;
 					$hold = array($hold_1, $hold_2, $hold_3, $hold_4, $hold_5, $hold_6);
 
-					if($this->input->get('mode')=='reg'){ // 데이터 등록 모드
+					if($this->input->post('mode')=='reg'){ // 데이터 등록 모드
 
 						############# DB INSERT. #############
 						for($j=0; $j<6; $j++){
@@ -199,7 +200,7 @@ class M3 extends CI_Controller {
 								}
 							}
 						}
-						alert('정상적으로 프로젝트 데이터 정보가 등록 되었습니다.', '');
+						alert('정상적으로 프로젝트 데이터 정보가 등록 되었습니다.', "?mode=".$this->input->post('mode')."&amp;new_pj=".$this->input->post('new_pj')."&amp;reg_pj=".$this->input->post('reg_pj')." ");
 
 					}else if($this->input->get('mode')=='end'){// 데이터 등록 마감
 
@@ -339,16 +340,16 @@ class M3 extends CI_Controller {
 					if($this->input->post('type_name_10', TRUE)) $type_name .="-".$this->input->post('type_name_10', TRUE);
 					if($this->input->post('type_name_11', TRUE)) $type_name .="-".$this->input->post('type_name_11', TRUE);
 					$type_color = $this->input->post('type_color_1', TRUE);
-					if($this->input->post('type_color_2', TRUE)) $type_color .="-".$this->input->post('type_color_2', TRUE);
-					if($this->input->post('type_color_3', TRUE)) $type_color .="-".$this->input->post('type_color_3', TRUE);
-					if($this->input->post('type_color_4', TRUE)) $type_color .="-".$this->input->post('type_color_4', TRUE);
-					if($this->input->post('type_color_5', TRUE)) $type_color .="-".$this->input->post('type_color_5', TRUE);
-					if($this->input->post('type_color_6', TRUE)) $type_color .="-".$this->input->post('type_color_6', TRUE);
-					if($this->input->post('type_color_7', TRUE)) $type_color .="-".$this->input->post('type_color_7', TRUE);
-					if($this->input->post('type_color_8', TRUE)) $type_color .="-".$this->input->post('type_color_8', TRUE);
-					if($this->input->post('type_color_9', TRUE)) $type_color .="-".$this->input->post('type_color_9', TRUE);
-					if($this->input->post('type_color_10', TRUE)) $type_color .="-".$this->input->post('type_color_10', TRUE);
-					if($this->input->post('type_color_11', TRUE)) $type_color .="-".$this->input->post('type_color_11', TRUE);
+					if($this->input->post('type_color_2', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_2', TRUE);
+					if($this->input->post('type_color_3', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_3', TRUE);
+					if($this->input->post('type_color_4', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_4', TRUE);
+					if($this->input->post('type_color_5', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_5', TRUE);
+					if($this->input->post('type_color_6', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_6', TRUE);
+					if($this->input->post('type_color_7', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_7', TRUE);
+					if($this->input->post('type_color_8', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_8', TRUE);
+					if($this->input->post('type_color_9', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_9', TRUE);
+					if($this->input->post('type_color_10', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_10', TRUE);
+					if($this->input->post('type_color_11', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_11', TRUE);
 					$type_quantity = $this->input->post('type_quantity_1', TRUE);
 					if($this->input->post('type_quantity_2', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_2', TRUE);
 					if($this->input->post('type_quantity_3', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_3', TRUE);
@@ -519,16 +520,16 @@ class M3 extends CI_Controller {
 					if($this->input->post('type_name_10', TRUE)) $type_name .="-".$this->input->post('type_name_10', TRUE);
 					if($this->input->post('type_name_11', TRUE)) $type_name .="-".$this->input->post('type_name_11', TRUE);
 					$type_color = $this->input->post('type_color_1', TRUE);
-					if($this->input->post('type_color_2', TRUE)) $type_color .="-".$this->input->post('type_color_2', TRUE);
-					if($this->input->post('type_color_3', TRUE)) $type_color .="-".$this->input->post('type_color_3', TRUE);
-					if($this->input->post('type_color_4', TRUE)) $type_color .="-".$this->input->post('type_color_4', TRUE);
-					if($this->input->post('type_color_5', TRUE)) $type_color .="-".$this->input->post('type_color_5', TRUE);
-					if($this->input->post('type_color_6', TRUE)) $type_color .="-".$this->input->post('type_color_6', TRUE);
-					if($this->input->post('type_color_7', TRUE)) $type_color .="-".$this->input->post('type_color_7', TRUE);
-					if($this->input->post('type_color_8', TRUE)) $type_color .="-".$this->input->post('type_color_8', TRUE);
-					if($this->input->post('type_color_9', TRUE)) $type_color .="-".$this->input->post('type_color_9', TRUE);
-					if($this->input->post('type_color_10', TRUE)) $type_color .="-".$this->input->post('type_color_10', TRUE);
-					if($this->input->post('type_color_11', TRUE)) $type_color .="-".$this->input->post('type_color_11', TRUE);
+					if($this->input->post('type_color_2', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_2', TRUE);
+					if($this->input->post('type_color_3', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_3', TRUE);
+					if($this->input->post('type_color_4', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_4', TRUE);
+					if($this->input->post('type_color_5', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_5', TRUE);
+					if($this->input->post('type_color_6', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_6', TRUE);
+					if($this->input->post('type_color_7', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_7', TRUE);
+					if($this->input->post('type_color_8', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_8', TRUE);
+					if($this->input->post('type_color_9', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_9', TRUE);
+					if($this->input->post('type_color_10', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_10', TRUE);
+					if($this->input->post('type_color_11', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_11', TRUE);
 					$type_quantity = $this->input->post('type_quantity_1', TRUE);
 					if($this->input->post('type_quantity_2', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_2', TRUE);
 					if($this->input->post('type_quantity_3', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_3', TRUE);
