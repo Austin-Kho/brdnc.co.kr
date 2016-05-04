@@ -7,9 +7,9 @@
 	$connect=dbconn();
 
 	// 이름과 아이디에 해당하는 세션이 있는지 확인
-	if(!isset($_SESSION[p_id])||!isset($_SESSION[p_name])){
-		err_msg('로그인 정보가 없습니다. 다시 로그인해 주세요.');
-	}
+	// if(!isset($_SESSION[p_id])||!isset($_SESSION[p_name])){
+	// 	err_msg('로그인 정보가 없습니다. 다시 로그인해 주세요.');
+	// }
 
 	$data = $_REQUEST['data']; // 데이터 정보 // 일련번호
 	$info = $_REQUEST['info']; // 현장 정보

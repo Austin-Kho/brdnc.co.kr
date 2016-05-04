@@ -30,7 +30,7 @@
 							<label for="new_pj" class="sr-only">구분1</label>
 							<select class="form-control input-sm" name="new_pj" onchange="select_ch('reg');">
 								<option value="">선 택</option>
-<?php foreach($new_pj as $lt) : ?>
+<?php foreach($new_pj_list as $lt) : ?>
 								<option value="<?php echo $lt->seq; ?>" <?php if($this->input->get('new_pj')==$lt->seq) echo 'selected'; ?>><?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
 							</select>
@@ -38,11 +38,11 @@
 
 						<div class="col-xs-12 col-sm-4 col-md-2 center" style="background-color: #F4F4F4; padding: 9px 0;">기등록현장 [<span style="color: #be032a;">데이터수정</span>]</div>
 						<div class="col-xs-12 col-sm-8 col-md-2" style="padding: 3px 5px;">
-							<label for="reg_pj" class="sr-only">구분1</label>
-							<select class="form-control input-sm" name="reg_pj" onchange="select_ch('modify');">
+							<label for="end_pj" class="sr-only">구분1</label>
+							<select class="form-control input-sm" name="end_pj" onchange="select_ch('modify');">
 								<option value="">선 택</option>
-<?php foreach($reg_pj as $lt) : ?>
-								<option value="<?php echo $lt->seq; ?>" <?php if($this->input->get('reg_pj')==$lt->seq) echo 'selected'; ?>><?php echo $lt->pj_name; ?></option>
+<?php foreach($end_pj_list as $lt) : ?>
+								<option value="<?php echo $lt->seq; ?>" <?php if($this->input->get('end_pj')==$lt->seq) echo 'selected'; ?>><?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
 							</select>
 						</div>
@@ -51,15 +51,17 @@
 
 <?php
 	$attributes = array('name' => 'form1', 'method' => 'post', 'class' => 'form-inline');
-	echo form_open('/m3/project/1/1/', $attributes);
+	echo form_open('', $attributes);
 ?><!-- 메인폼(form1) 시작 -->
 				<!------------------------------------동호수 별 입력 시작--------------------------------------------->
 					<label for="mode" class="sr-only">모드</label><input type="hidden" name="mode" value="<?php echo $this->input->get('mode'); ?>">
+					<label for="new_pj" class="sr-only">모드</label><input type="hidden" name="new_pj" value="<?php echo $this->input->get('new_pj'); ?>">
+					<label for="end_pj" class="sr-only">모드</label><input type="hidden" name="end_pj" value="<?php echo $this->input->get('end_pj'); ?>">
 					<label for="pj_seq" class="sr-only">모드</label><input type="hidden" name="pj_seq" value="<?php if(isset($pre_pj_seq)) echo $pre_pj_seq; ?>">
 					<label for="pj_sort" class="sr-only">모드</label><input type="hidden" name="pj_sort" value="<?php if(isset($pre_pj_seq)) echo $project->sort; ?>">
 
 					<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
-						<div class="col-xs-4 col-sm-4 col-md-2 center" style="background-color: #F4F4F4; padding: 9px 0;">프로젝트 명</div>
+						<div class="col-xs-4 col-sm-4 col-md-2 center" style="background-color: #F4F4F4; padding: 9px 0;">프로젝트 명 <?php $pre_pj_seq; ?></div>
 						<div class="col-xs-8 col-sm-8 col-md-4" style="padding: 9px;">
 							<span style="color: #000099;"><?php if(isset($pre_pj_seq)) echo $project->pj_name;?>&nbsp;</span>
 						</div>
@@ -67,17 +69,17 @@
 						<div class="col-xs-5 col-sm-6 col-md-3" style="padding: 9px;">
 							<span style="color: #000099;"><?php if(isset($pre_pj_seq)) echo $sort;?>&nbsp;</span>
 						</div>
-<?php if($this->input->get('reg_pj')) : // 등록 수정이면
+<?php if($this->input->get('end_pj')) : // 등록 수정이면
 						?>
 						<div class="col-xs-3 col-sm-2 col-md-1" style="padding: 6px;">
-							<input type="button" class="btn btn-success btn-xs" value=" 재 등록 " onclick="data_move('re_reg','<?php echo $this->input->get('reg_pj');?>');">
+							<input type="button" class="btn btn-success btn-xs" value=" 재 등록 " onclick="data_move('re_reg','<?php echo $this->input->get('end_pj');?>');">
 						</div>
 <?php endif; ?>
 					</div>
 
 
 					<div class="row" style="margin: 0;">
-						<div class="col-xs-12" style="padding: 9px 0 9px 15px;"><strong><span class="red">*</span> 라인(동) 별 데이터 등록</strong></div>
+						<div class="col-xs-10" style="padding: 9px 0 9px 15px;"><strong><span class="red">*</span> 라인(동) 별 데이터 등록</strong></div>
 					</div>
 
 <?php if( !empty($reg_chk)) :
@@ -88,7 +90,9 @@
 							최근 등록 정보 : <font color="#cc0000"><?php if(($reg_chk['num']==0)) {echo "등록세대 없음";} else {echo $reg_chk['result'][0]->dong; ?>동 <?php echo $line; ?>호 라인 (총 <?php echo $reg_chk['num']; ?> 세대 등록)<?php } ?></font>
 						</div>
 <?php if($reg_chk['num']!=0) : ?>
-						<div class="col-xs-3 col-sm-7 col-md-8" style="padding: 6px;" data-toggle="tooltip" data-placement="left" title="  프로젝트의 동호데이터 등록 완료 시 등록마감 처리하여 주십시요! "><input type="button" class="btn btn-warning btn-xs" value="등록마감" onclick="data_move('end','<?//=$new_pj?>');"></div>
+						<div class="col-xs-3 col-sm-7 col-md-8" style="padding: 6px;" data-toggle="tooltip" data-placement="left" title="  프로젝트의 동호데이터 등록 완료 시 등록마감 처리하여 주십시요! ">
+							<input type="button" class="btn btn-warning btn-xs" value="등록마감" onclick="data_move('end', '<?php echo $this->input->get('new_pj'); ?>');">
+						</div>
 <?php endif; ?>
 					</div>
 <?php endif; ?>
@@ -233,15 +237,15 @@
 				<!------------------------------------동호수 별 입력 종료----------------------------------------------->
 
 
-<?php if($this->input->get('new_pj') OR $this->input->get('reg_pj')) : ?>
+<?php if($this->input->get('new_pj') OR $this->input->get('end_pj')) : ?>
 				<!------------------------------------동호수 데이터 불러오기 시작----------------------------------------------->
 <?php
-	$attributes = array('method' => 'get');
+	$attributes = array('method' => 'get', 'name'=>'data_sh');
 	echo form_open('/m3/project/1/1/', $attributes);
 ?>
 				<label for="mode" class="sr-only">모드</label><input type="hidden" name="mode" value="<?php echo $this->input->get('mode'); ?>">
 				<label for="new_pj" class="sr-only">모드</label><input type="hidden" name="new_pj" value="<?php echo $this->input->get('new_pj'); ?>">
-				<label for="reg_pj" class="sr-only">모드</label><input type="hidden" name="reg_pj" value="<?php echo $this->input->get('reg_pj'); ?>">
+				<label for="end_pj" class="sr-only">모드</label><input type="hidden" name="end_pj" value="<?php echo $this->input->get('end_pj'); ?>">
 
 
 
@@ -283,14 +287,16 @@
 							<div class="col-xs-12 col-sm-3 col-md-1 center" style="height: 40px; background-color: #F4F4F4; padding: 12px 0;">데이터 정렬</div>
 							<div class="col-sm-1 col-md-1 hidden-xs" style="height: 40px; padding: 0 0 0 5px;">
 								<div class="checkbox">
-									<label><input type="checkbox" name="reg_order"> 등록 순</label>
+									<label><input type="checkbox" name="order_reg" id="order_reg" <?php if($this->input->get('order_reg')=="on") echo "checked"; ?> onclick="order_chk(this, '1');"> 등록 순</label>
 								</div>
 							</div>
-							<div class="col-xs-6 col-sm-4 col-md-2" style="height: 40px; padding: 10px 5px;">
-								동별 ( <label class="radio-inline"><input type="radio" name="dong_sc">오름차순</label> <label class="radio-inline"><input type="radio" name="dong_sc">내림차순</label> )
+							<div class="col-xs-6 col-sm-4 col-md-2" style="height: 40px; padding: 10px 5px;">동: (
+								<label class="radio-inline"><input type="radio" name="dong_sc" id="dong_sc1" value="1" <?php if($this->input->get('dong_sc')=="1") echo "checked"; ?> onclick="order_chk(this, '2');">오름차순</label>
+								<label class="radio-inline"><input type="radio" name="dong_sc" id="dong_sc2" value="2" <?php if($this->input->get('dong_sc')=="2") echo "checked"; ?> onclick="order_chk(this, '2');">내림차순</label>)
 							</div>
-							<div class="col-xs-6 col-sm-4 col-md-2" style="height: 40px; padding: 10px 5px;">
-								호별 ( <label class="radio-inline"><input type="radio" name="ho_sc">오름차순</label>  <label class="radio-inline"><input type="radio" name="ho_sc">내림차순</label> )
+							<div class="col-xs-6 col-sm-4 col-md-2" style="height: 40px; padding: 10px 5px;">호: (
+								<label class="radio-inline"><input type="radio" name="ho_sc" id="ho_sc1" value="1" <?php if($this->input->get('ho_sc')=="1") echo "checked"; ?> onclick="order_chk(this, '2');">오름차순</label>
+								<label class="radio-inline"><input type="radio" name="ho_sc" id="ho_sc2" value="2" <?php if($this->input->get('ho_sc')=="2") echo "checked"; ?> onclick="order_chk(this, '2');">내림차순</label>)
 							</div>
 							<div class="col-xs-6 col-md-1" style="height: 40px; padding: 0 0 0 5px;">
 								<div class="checkbox">
@@ -319,22 +325,56 @@
 							</tr>
 						</thead>
 						<tbody class="bo-bottom">
+<?php
+	if(empty($reg_dong_ho)) :
+?>
 							<tr>
-								<td class="center">프로젝트 명</td>
-								<td class="center">동</td>
-								<td class="center">호수</td>
-								<td class="center">타입(Type)</td>
-								<td class="center">홀딩 여부</td>
-								<td class="center">수정</td>
-								<td class="center">삭제</td>
+								<td class="center" colspan="7">등록된 데이터가 없습니다.</td>
 							</tr>
+<?php
+	else :
+		$tn = explode("-", $reg_dong_ho[0]->type_name);
+		$tc = explode("-", $reg_dong_ho[0]->type_color);
+
+
+		foreach($reg_dong_ho as $lt) :
+			switch ($lt->is_hold) {
+				case '1': $hold_str = "분양제외 세대"; break;
+				default: $hold_str = "분양대상 세대"; break;
+			}
+			for($i=0; $i<count($tn); $i++){
+				switch ($lt->type) {
+					case $tn[$i]: $t_color = $tc[$i]; break;
+				}
+			}
+
+?>
+							<tr>
+								<td class="center"><?php echo $lt->pj_name; ?></td>
+								<td class="center"><?php echo $lt->dong; ?></td>
+								<td class="center"><?php echo $lt->ho; ?></td>
+								<td class="center"><span style="padding: 3px; background-color: <?php echo $t_color; ?>"><?php echo $lt->type; ?> 타입</span></td>
+								<td class="center"><?php echo $hold_str; ?></td>
+<?php if($auth<2) $modi_str = "alert('수정/등록 권한이 없습니다.')"; else $modi_str = "alert('준비 중입니다.');"; //"popUp('/pc/_menu4/progress1_edit.php?data=".$lt->seq."&info=".$lt->pj_seq."','progress1_edit')"; ?>
+								<td class="center"><a href='javascript:'class="btn btn-info btn-xs" onclick="<?php echo $modi_str; ?>">수정</a></td>
+<?php if($auth<2) $del_str = "alert('등록/삭제 권한이 없습니다.')"; else $del_str = "alert('준비 중입니다.');"; ?>
+								<td class="center"><a href="javascript:" class="btn btn-danger btn-xs" onclick="<?php echo $del_str; ?>">삭제</a></td>
+							</tr>
+<?php endforeach; endif; ?>
 						</tbody>
 					</table>
+
+
+
+
+
+
+
 
 				</div>
 				<div class="row" style="margin: 0;">
 					<div class="col-md-12 center" style="margin-top: 0px; padding: 0;">
-						<ul class="pagination pagination-sm"><?php // echo $pagination; ?></ul>
+						<ul class="pagination pagination-sm"><?php echo $pagination; ?></ul>
 					</div>
 				</div>
 

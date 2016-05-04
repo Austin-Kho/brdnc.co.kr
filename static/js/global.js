@@ -29,12 +29,12 @@ function message_win(ref) {
   window.open(ref,"message",'width=420,height=460,scrollbars=no,status=no,top=' + window_top + ',left=' + window_left + '');
 }
 
-// //팝업
-// function popUp(url,name){
-// 	var window_left = (screen.width-640)/2;
-// 	var window_top = (screen.height-480)/2;
-// 	window.open(url,name,'width=420,height=460,scrollbars=no,status=no,top=' + window_top + ',left=' + window_left + '');
-// }
+//팝업
+function popUp(url,name){
+	var window_left = (screen.width-640)/2;
+	var window_top = (screen.height-480)/2;
+	window.open(url,name,'width=420,height=460,scrollbars=no,status=no,top=' + window_top + ',left=' + window_left + '');
+}
 // 사이즈 지정 팝업
 function popUp_size(url,name,w,h){ // 주소, 팝업명, 가로사이즈, 세로사이즈
 	var window_left = (screen.width-640)/2;

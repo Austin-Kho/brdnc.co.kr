@@ -227,7 +227,7 @@ function con_formck(){
 
 function select_ch(obj){
 	var form=document.pj_data_reg;
-	if(obj=='reg') {form.reg_pj.value="";}
+	if(obj=='reg') {form.end_pj.value="";}
 	if(obj=='modify') {form.new_pj.value="";}
 	form.mode.value=obj;
 	form.submit();
@@ -312,8 +312,18 @@ function pj_data_put_0(){
 }
 
 
+function order_chk(frm, n){  // 프로젝트 데이트 등록 후 동호수 데이터 검색 시  정렬 관련 JS
+	if(n=='1' && frm.checked===true) {
+		document.getElementById('dong_sc1').checked=false;
+		document.getElementById('ho_sc1').checked=false;
+		document.getElementById('dong_sc2').checked=false;
+		document.getElementById('ho_sc2').checked=false;
+	}else if(n=='2'){
+		document.getElementById('order_reg').checked=false;
+	}
+}
 
-function dong_reg_bc(self){
+function dong_reg_bc(self){ //
 	var form=document.form1;
 
 	if(self.checked===true){
