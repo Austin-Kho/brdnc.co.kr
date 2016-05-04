@@ -209,7 +209,7 @@
 								<tr>
 									<th class="center bo-right" rowspan="2" style="vertical-align: middle; background-color: #F0FBF0;">프로젝트</th>
 									<td class="bo-right"><strong>프로젝트 관리</strong></td>
-									<td>데이터 등록
+									<td>동호수 등록
 										<!-- <label class="checkbox-inline"> -->
 											<input type="checkbox" id="_m3_1_1" name="_m3_1_1" <?php if(isset($user_auth->_m3_1_1) && $user_auth->_m3_1_1>0) echo 'checked'; ?>> 조회
 										<!-- </label> -->
@@ -217,7 +217,7 @@
 											<input type="checkbox" id="_m3_1_1_m" name="_m3_1_1_m" <?php if(isset($user_auth->_m3_1_1) && $user_auth->_m3_1_1>1) echo 'checked'; ?>> 등록
 										<!-- </label> -->
 									</td>
-									<td>데이터 수정
+									<td>기본정보 관리
 										<!-- <label class="checkbox-inline"> -->
 											<input type="checkbox" id="_m3_1_2" name="_m3_1_2" <?php if(isset($user_auth->_m3_1_2) && $user_auth->_m3_1_2>0) echo 'checked'; ?>> 조회
 										<!-- </label> -->
