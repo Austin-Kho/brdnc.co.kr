@@ -1,7 +1,7 @@
     <div class="main_start">&nbsp;</div>
 	<!-- Button trigger modal -->
 	<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">modalTest</button>
-	<a href="" onclick="$('#myModal').modal(toggle);" class="btn btn-success btn-sm">modalTest</a>
+	<!-- <a href="" onclick="$('#myModal').modal('toggle');" class="btn btn-success btn-sm">modalTest</a> -->
 
 	<!-- Modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
