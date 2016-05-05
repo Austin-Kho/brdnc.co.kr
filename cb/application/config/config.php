@@ -56,8 +56,10 @@ $config['uri_segment_post_type'] ='A';
  * 서브에 설치하는 경우 올바른 예 ) http://www.test.com/subdir/
  * 서브에 설치하는 경우 잘못된 예 ) http://www.test.com/subdir/index.php
  */
-$config['base_url'] = '';
-if (empty($config['base_url'])) exit("&dollar;config&lsqb;&apos;base_url&apos;&rsqb;  need to be set up in application/config/config.php");  // base_url 의 값을 입력하신 후에는 여기 if 문 자체를 주석처리해도 좋습니다
+$config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTP'] == "on") ? "https" : "http");
+$config['base_url'] .= "://".$_SERVER['HTTP_HOST'];
+$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+// if (empty($config['base_url'])) exit("&dollar;config&lsqb;&apos;base_url&apos;&rsqb;  need to be set up in application/config/config.php");  // base_url 의 값을 입력하신 후에는 여기 if 문 자체를 주석처리해도 좋습니다
 
 /*
 |--------------------------------------------------------------------------
