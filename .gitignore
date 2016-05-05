@@ -32,6 +32,9 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 /application/config/database.php
 /application/config/config.php
 
+/cb/application/config/database.php
+/cb/application/config/config.php
+
 .gitignore
 br/php/auth.php
 br/php/config.php
