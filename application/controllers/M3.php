@@ -150,10 +150,10 @@ class M3 extends CI_Controller {
 							}
 						}else if($this->input->get('ho_sc')=="2"){
 							$order = " ORDER BY ho DESC  ";
-							if($this->input->get('ho_sc')=="1"){
-								$order .= " , ho ASC  ";
-							}else if($this->input->get('ho_sc')=="2"){
-								$order .= " , ho DESC  ";
+							if($this->input->get('dong_sc')=="1"){
+								$order .= " , dong ASC  ";
+							}else if($this->input->get('dong_sc')=="2"){
+								$order .= " , dong DESC  ";
 							}
 						}
 						$data['reg_dong_ho'] = $this->main_m->sql_result(" SELECT cms_project22_indi_table.seq, pj_seq, pj_name, type, dong, ho, type_name, type_color, is_hold FROM  cms_project22_indi_table, cms_project11_info WHERE pj_seq = ".$data['pre_pj_seq']." AND pj_seq=cms_project11_info.seq ".$add_where." ".$order." ".$limit);

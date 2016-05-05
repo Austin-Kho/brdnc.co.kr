@@ -1,5 +1,5 @@
       <div class="main_start">&nbsp;</div>
-      <div class="row">
+      <!-- <div class="row">
         <div class="col-md-6">
           <table class="table">
             <thead>
@@ -135,7 +135,7 @@
           </table>
         </div>
       </div>
-
+ -->
 
       <div class="page-header">
         <h1>Panels</h1>
