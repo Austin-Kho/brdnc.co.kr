@@ -29,7 +29,7 @@
 		function _inputChk(){
 
 		var form = document.form1;
-		
+
 		if(!form.brand.value){
 			alert('브랜드명을 입력하세요!');
 			form.brand.focus();
@@ -62,9 +62,9 @@
 				<td align="center" height="32" background="../img/bg.jpg">
 				<font color="#4C63BD" style="font-size:11pt"><b>중분류(BRAND) 등록</b></font>
 				</td>
-			</tr>			
+			</tr>
 			<tr bgcolor="ffffff">
-				<td style="padding:13 0 0 0px">				
+				<td style="padding:13 0 0 0px">
 				<table border="0" align="center" width="96%" height="100%" cellspacing="0" cellpadding="0">
 				<tr height="10">
 					<td></td>
@@ -84,24 +84,24 @@
 						<td style="padding:25 0 0 16px"> 카테고리 </td>
 						<td style="padding:25 0 0 0px"> <font color="#5f7da3"><b><?=$category?></b></font> </td>
 					</tr>
-					<tr>					
+					<tr>
 						<td style="padding:25 0 0 16px"> 브랜드명 <font color="#ff0000">*</font></td>
 						<td style="padding:25 0 0 0px">
 							<input type="text" name="brand" size="40" class="inputStyle2" style="height:20px" onmouseover="cngClass(this,'inputStyle22')" onmouseout="cngClass(this,'inputStyle2');">
 						</td>
-					</tr>				
-					<tr>					
+					</tr>
+					<tr>
 						<td style="padding:12 0 23 16px; border-width: 0 0 1 0px; border-color:#CFCFCF; border-style: solid;"> 노트(한글명)</td>
 						<td style="padding:12 0 23 0px; border-width: 0 0 1 0; border-color:#CFCFCF; border-style: solid;">
 							<textarea name="note" rows="8" cols="38" class="inputStyle2" onmouseover="cngClass(this,'inputStyle22')" onmouseout="cngClass(this,'inputStyle2');"></textarea>
 						</td>
-					</tr>					
+					</tr>
 					<tr align="center">
 						<input type="hidden" name="total_bnum" value="<?=$search_bnum?>">
 					</tr>
-					</table>					
+					</table>
 					</td>
-				</tr>									
+				</tr>
 				<tr>
 					<td valign="top" align="center">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
