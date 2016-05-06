@@ -53,11 +53,15 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="<?if( !strpos($this->uri->segment(1), '1')) echo ''; else echo 'active';?>"><a href="/m1/">분양관리</a></li>
-						<li class="<?if( !strpos($this->uri->segment(1), '2')) echo ''; else echo 'active';?>"><a href="/m2/">사업관리</a></li>
-						<li class="<?if( !strpos($this->uri->segment(1), '3')) echo ''; else echo 'active';?>"><a href="/m3/">프로젝트</a></li>
-						<li class="<?if( !strpos($this->uri->segment(1), '4')) echo ''; else echo 'active';?>"><a href="/m4/">자금회계</a></li>
-						<li class="<?if( !strpos($this->uri->segment(1), '5')) echo ''; else echo 'active';?>"><a href="/m5/">환경설정</a></li>
+						<li class="<?php if( !strpos($this->uri->segment(1), '1')) echo ''; else echo 'active';?>"><a href="/m1/">분양관리</a></li>
+						<li class="<?php if( !strpos($this->uri->segment(1), '2')) echo ''; else echo 'active';?>"><a href="/m2/">사업관리</a></li>
+						<li class="<?php if( !strpos($this->uri->segment(1), '3')) echo ''; else echo 'active';?>"><a href="/m3/">프로젝트</a></li>
+						<li class="<?php if( !strpos($this->uri->segment(1), '4')) echo ''; else echo 'active';?>"><a href="/m4/">자금회계</a></li>
+						<li class="<?php if( !strpos($this->uri->segment(1), '5')) echo ''; else echo 'active';?>"><a href="/m5/">환경설정</a></li>
+<?php if($this->session->userdata['user_id']=='cigiko') : ?> <!-- 향후 cigiko 부분을 최고관리자 변수로 교체할 것 -->
+						<li class="<?php if($this->uri->segment(1) !="admin") echo ''; else echo 'active';?>"> <a href="/admin/"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 관리자</a></li>
+<?php endif; ?>
+
 						<li class="dropdown">
 <?php if(@$this->session->userdata['logged_in'] == TRUE) { ?>
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Main extends CI_Controller {
 
 	/**
-	 * [__construct description]
+	 * [__construct 로그인 유실 시 현재 페이지 정보를 가지고 로그인 페이지로]
 	 */
 	public function __construct() {
 		parent::__construct();
