@@ -1,0 +1,155 @@
+/************************ 레이 아웃 div CSS ************************/
+	html {height:100%; width:100%; margin:0; padding:0; overflow-y:scroll;}
+	body {
+		height:100%; width:100%;
+		/*margin: 0; padding: 0; border: 0 outset gray;*/
+		background-image : url('/acm/static/img/bg_dot.jpg');
+	}
+
+	::selection { background-color: #FB6C05; color: #FFF; }
+	::-moz-selection { background-color: #FB6C05; color: #FFF; }
+	/*a, nav, input, li, img { outline:none; select-dummy: expression(this.hideFocus=true); }*/
+
+	/************************************IME MODE**************************************/
+	.han {
+		/*ime-mode: active;*/
+		-webkit-ime-mode: active;
+		-moz-ime-mode: active;
+		-ms-ime-mode: active;
+	}
+	.eng {
+		/*ime-mode: inactive;*/
+		-webkit-ime-mode: inactive;
+		-moz-ime-mode: inactive;
+		-ms-ime-mode: inactive;
+	}
+	.en_only {
+		/*ime-mode: disabled;*/
+		-webkit-ime-mode: disabled;
+		-moz-ime-mode: disabled;
+		-ms-ime-mode: disabled ;
+	}
+	/************************************IME MODE**************************************/
+
+	/**************************glyphicon style*****************************/
+	.head_gly { color: #CC0099;  margin-right: 10px; }
+	.glyphicon-book { color: #CC0099; }
+	.glyphicon-calendar{ color: #7544BD; }
+	/**************************glyphicon style*****************************/
+
+	.main_container { background-color: white; padding: 0 15px; }
+	.footer { border-top:1px solid #ccc; background-color: #eee; margin-top: 25px;}
+
+	.nav-tabs { margin-bottom: -20px; }
+	.nav-tabs  li a { color: #888; }
+	.nav-tabs  li a:hover { color: #5F5F5F; }
+	.nav-tabs  li.active a { color: #556086; }
+
+	.page-header .nav-pills a {  margin-top: 3px; width: 110px; text-align: center; color: #7C87AC;}
+	.page-header .nav-pills a:hover { background-color: #F3F3F3; font-weight: bold; color: #6C78A2;}
+	.page-header .nav-pills .active a { background-color: #F3F5FC; color: #5674D5; font-weight: bold;}
+	.page-header .nav-pills .active a:hover { background-color: #E8ECF9; color: #3355CA;}
+
+	.sdi { font-size: 15px; display: inline; color: #233c96; }
+	.sdi_sub { margin-top: -20px; padding: 15px 0 15px 20px; background-color: #F8F8F8; border-bottom-color: #B2BCDE; }
+	.main_start { margin-top: -20px; text-align: right; padding: 5px 15px 3px; font-size: 12px;}
+
+
+	/********* 폰트 사이즈 *************/
+	.font10 { font-size: 10px; }
+	.font11 { font-size: 11px; }
+	.font12 { font-size: 12px; }
+	.font13 { font-size: 13px; }
+	.font14 { font-size: 14px; }
+	.font15 { font-size: 15px; }
+	/********* 폰트 사이즈 *************/
+
+
+
+	/*********** 모바열 여부 ***********/
+	.no-mobile { border-bottom: 1px solid #ddd; }
+	/*********** 모바열 여부 ***********/
+
+
+	/*****************************************m5 style*******************************************/
+	fieldset .row { margin: 0; }
+	.btn-wrap { padding: 15px 20px 15px 0; text-align: right; border-bottom: 1px solid #ddd; border-top: 1px solid #B2BCDE; background-color: #F8F8F8; margin-bottom: 25px; }
+	fieldset .label-wrap { padding: 13px 0 4px 15px; background-color: #F8F8F8; }
+	fieldset .label-wrap2 { padding: 10px 0 7px 15px; background-color: #F5F9FE; }
+	fieldset label { width:180px; }
+	fieldset .form-wrap { padding: 0; }
+	fieldset .form-wrap input { margin: 5px 0; }
+	fieldset .form-wrap select { margin: 5px 0; }
+	fieldset .form-wrap button { margin: 5px 0; }
+	fieldset .form-wrap2 { padding: 0 10px; }
+	fieldset .form-wrap2 input { margin: 5px 0; }
+	fieldset .form-wrap2 select { margin: 5px 0; }
+	fieldset .form-wrap2 textarea { margin: 5px 0; }
+	fieldset .form-wrap2 button { margin: 5px 0; }
+
+	fieldset .glyphicon-wrap { padding: 8px 0 0 8px; }
+	fieldset .text-wrap { padding-top: 8px; }
+
+	fieldset .row table.table .head-td { width: 120px; }
+	fieldset .row table.table .sub-td { padding-right: 10px; }
+	fieldset .sec-td { border-top: 0; }
+	fieldset .new_user { margin: 0 15px; border-bottom: 1px solid #ddd; }
+	fieldset .row .str { padding: 10px;  }
+	/*****************************************m5 style********************************************/
+
+	.auth-table td { text-align: right; }
+
+	/**----------------------------------- 폰트컬러 -----------------------------------------**/
+	.red { color: red; }
+	.bgf8 { background-color: #f8f8f8; }
+	/**----------------------------------- 폰트컬러 -----------------------------------------**/
+
+	/**----------------------------------- 넓이 -----------------------------------------**/
+	.wt-180 { width: 180px; }
+	.wid-70 { width:70%; }
+	.wid-75 { width:75%; }
+	.wid-80 { width:80%; }
+	.wid-85 { width:85%; }
+	.wid-90 { width:90%; }
+	.wid-95 { width:95%; }
+	.wid-98 { width:98%; }
+	.wid-99 { width:99%; }
+	.wid-100 { width:100%; }
+	/**----------------------------------- 넓이 -----------------------------------------**/
+
+	/**------------------------------------정렬----------------------------------------**/
+	.center { text-align: center; }
+	.right { text-align: right; }
+	.left { text-align: left; }
+	.middle { vertical-align: middle; }
+	/**------------------------------------정렬----------------------------------------**/
+
+	/**----------------------------------- 마진 -----------------------------------------**/
+	/*.mg-0 { margin: 0px; }*/
+	.mg-0-15 { margin: 0 15px; }
+	/**----------------------------------- 마진 -----------------------------------------**/
+
+	/**------------------------------------패딩----------------------------------------**/
+	.pt6 { padding-top: 6px; }
+	.pl0 { padding-left: 0; }
+	.pl10 { padding-left: 10px; }
+	.pl20 { padding-left: 20px; }
+
+	.pb20 { padding-bottom: 20px; }
+	/**------------------------------------패딩----------------------------------------**/
+
+	/**------------------------------------보더----------------------------------------**/
+	.bo-top { border-top: 1px solid #ddd; }
+	.bo-bottom { border-bottom: 1px solid #ddd; }
+	.bo-right { border-right: 1px solid #ddd; }
+	.bo-left { border-left: 1px solid #ddd; }
+	.bo-tb { border-width:1px 0; border-style:solid; border-color:#ddd; }
+	.bo-tbrl { border: 1px solid #ddd; }
+
+	.mbo-top { border-top: 1px solid #B2BCDE; }
+	.mbo-bottom { border-bottom: 1px solid #B2BCDE; }
+	.mbo-right { border-right: 1px solid #B2BCDE; }
+	.mbo-left { border-left: 1px solid #B2BCDE; }
+	.mbo-tb { border-width:1px 0; border-style:solid; border-color:#B2BCDE; }
+	.mbo-tbrl { border: 1px solid #B2BCDE; }
+	/**------------------------------------보더----------------------------------------**/
