@@ -193,7 +193,7 @@
 									<td class="center" ><?php echo $lt->deal_date; ?></td>
 									<td class="center"> <?php echo $cla1." - ".$cla2; ?></td>
 									<td class="center" style="color: #000099;"> <?php echo $account; ?></td>
-									<td class=""> <?php echo cut_string($lt->cont, 20, '..'); ?></td>
+									<td class=""> <?php echo cut_string($lt->cont, 18, '..'); ?></td>
 									<td class=""><?php echo cut_string($acc, 7, '..'); ?> </td>
 									<td class="center" style="background-color: #ECFEE9;"><?php echo $in_acc; ?> </td>
 									<td class="right" style="background-color: #ECFEE9;"> <?php echo $inc; ?></td>
