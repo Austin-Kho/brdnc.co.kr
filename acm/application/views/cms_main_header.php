@@ -58,16 +58,15 @@
 						<li class="<?php if( !strpos($this->uri->segment(1), '3')) echo ''; else echo 'active';?>"><a href=<?php echo $this->config->base_url()."m3/"; ?>>프로젝트</a></li>
 						<li class="<?php if( !strpos($this->uri->segment(1), '4')) echo ''; else echo 'active';?>"><a href=<?php echo $this->config->base_url()."m4/"; ?>>자금회계</a></li>
 						<li class="<?php if( !strpos($this->uri->segment(1), '5')) echo ''; else echo 'active';?>"><a href=<?php echo $this->config->base_url()."m5/"; ?>>환경설정</a></li>
-<?php if($this->session->userdata['user_id']=='cigiko') : ?> <!-- 향후 cigiko 부분을 최고관리자 변수로 교체할 것 -->
-						<li class="<?php if($this->uri->segment(1) !="admin") echo ''; else echo 'active';?>"> <a href=<?php echo $this->config->base_url()."admin/"; ?>><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> 관리자</a></li>
-<?php endif; ?>
-
 						<li class="dropdown">
 <?php if(@$this->session->userdata['logged_in'] == TRUE) : ?>
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 								<span id="top_user_id"><?php  echo $this->session->userdata['name']; ?></span> 님<span class="caret"></span>
 							</a>
 							<ul class="dropdown-menu" role="menu">
+<?php if($this->session->userdata['user_id']=='cigiko') : ?> <!-- 향후 cigiko 부분을 최고관리자 변수로 교체할 것 -->
+								<li><a href="<?php echo $this->config->base_url();?>admin/">관리자 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
+<?php endif; ?>
 								<li><a href="<?php echo $this->config->base_url();?>member/logout/">로그아웃</a></li>
 								<li><a href="<?php echo $this->config->base_url();?>member/modify/">정보수정</a></li>
 								<li><a href="javascript:" onclick="alert('준비 중입니다!');">공지사항</a></li>
