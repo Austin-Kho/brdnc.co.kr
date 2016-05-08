@@ -311,7 +311,7 @@
 				</div>
 
 				</form>
-				<div class="row" style="margin: 0;">
+				<div class="row table-responsive" style="margin: 0;">
 					<table class="table table-hover">
 						<thead class="bo-top" style="background-color: #F4F4F4;">
 							<tr>
