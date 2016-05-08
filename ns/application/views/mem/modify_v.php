@@ -25,5 +25,5 @@
 		<span style="color: yellow;"><p><?php echo validation_errors(); ?></p></span>
 		<button class="btn btn-lg btn-primary btn-block" type="submit" style="margin: 20px 0 8px 0;">변경등록</button>
 	</form>
-	<a href="javascript:history.go(-1);" style="color: #BBBBBB;" style="padding: 15px 0 60px 0;">돌아가기</a>
+	<a href="<?php echo base_url(); ?>" style="color: #BBBBBB;" style="padding: 15px 0 60px 0;">메인으로</a>
 </div> <!-- /container -->

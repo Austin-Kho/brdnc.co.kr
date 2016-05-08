@@ -1,7 +1,7 @@
 <div class="container" style="color: #BBBBBB; width: 300px;">
 <?php
 	$attributes = array('name' => 'join', 'class' => 'form-signup', 'method' => 'post');
-	echo form_open($this->config->base_url().'member/join/', $attributes);
+	echo form_open($this->config->base_url('member/join/'), $attributes);
 ?>
 		<div id="main_logo" style="margin: 100px 0 50px 0;">
 			<img src="<?php echo $this->config->base_url(); ?>static/img/cms_main_logo_.png" alt="" style="cursor: pointer;">
@@ -20,5 +20,5 @@
 		<span style="color: yellow;"><p><?php echo validation_errors(); ?></p></span>
 		<button class="btn btn-lg btn-primary btn-block en_only" type="submit" style="margin: 20px 0 8px 0;">등록하기</button>
 	</form>
-	<a href="<?php echo $this->config->base_url(); ?>member/login/" style="color: #BBBBBB;" style="padding: 15px 0 60px 0;">돌아가기</a>
+	<a href="<?php echo $this->config->base_url('member/login/'); ?>" style="color: #BBBBBB;" style="padding: 15px 0 60px 0;">돌아가기</a>
 </div> <!-- /container -->

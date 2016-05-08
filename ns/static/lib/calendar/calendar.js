@@ -5,12 +5,12 @@
 
 var g_target;
 var g_cal_Day;     // 폼에 날짜 값이 없을 경우 '오늘' 또는 날짜 값이 있을 경우 '해당 날짜' 의 값을 가지는 변수
-var g_cssAddr = "/acm/static/lib/calendar/calendar.css";
+var g_cssAddr = "/ns/static/lib/calendar/calendar.css";
 
-var back_url = "/acm/static/img/to_left.jpg";
-var back_url_ = "/acm/static/img/to_left_.jpg";
-var next_url = "/acm/static/img/to_right.jpg";
-var next_url_ = "/acm/static/img/to_right_.jpg";
+var back_url = "/ns/static/img/to_left.jpg";
+var back_url_ = "/ns/static/img/to_left_.jpg";
+var next_url = "/ns/static/img/to_right.jpg";
+var next_url_ = "/ns/static/img/to_right_.jpg";
 
 var sel_width=184;                                                     //div 넓이
 

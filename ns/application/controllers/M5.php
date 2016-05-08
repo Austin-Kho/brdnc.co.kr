@@ -572,7 +572,7 @@ class M5 extends CI_Controller {
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m5_2_2', $this->session->userdata['user_id']);
 
-			if( !$auth['_m5_2_2'] or $auth['_m5_2_2']==0) {
+			if(( !$auth['_m5_2_2'] or $auth['_m5_2_2']==0) && $this->session->userdata['is_admin']!=1) {
 				$this->load->view('no_auth');
 			}else{
 				// 폼검증 라이브러리 로드

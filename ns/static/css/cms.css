@@ -3,7 +3,7 @@
 	body {
 		height:100%; width:100%;
 		/*margin: 0; padding: 0; border: 0 outset gray;*/
-		background-image : url('/acm/static/img/bg_dot.jpg');
+		background-image : url('/ns/static/img/bg_dot.jpg');
 	}
 
 	::selection { background-color: #FB6C05; color: #FFF; }
