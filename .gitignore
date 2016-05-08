@@ -25,18 +25,21 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.stTheme.cache
 *.sublime-workspace
 *.sublime-project
+sftp-config.json
 
 ## Atom sftp files
 *.ftpconfig
 
+## CodeIgniter config File
 /application/config/database.php
 /application/config/config.php
 
-/cb/application/config/database.php
-/cb/application/config/config.php
+*/application/config/database.php
+*/application/config/config.php
+
+## old cms system config File
+*/php/auth.php
+*/php/config.php
+*/setup/config_set.php
 
 .gitignore
-br/php/auth.php
-br/php/config.php
-br/setup/config_set.php
-sftp-config.json

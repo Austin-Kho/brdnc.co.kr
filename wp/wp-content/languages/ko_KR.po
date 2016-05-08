@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the 4.5.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-05-02 03:21:50+0000\n"
+"PO-Revision-Date: 2016-05-08 02:07:38+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1105,7 +1105,7 @@ msgstr "메뉴 옵션"
 
 #: wp-login.php:734
 msgid "Registration confirmation will be emailed to you."
-msgstr "가입 확인용 이메일이 발송되었습니다."
+msgstr "가입 확인용 이메일이 발송될 것입니다."
 
 #: wp-includes/script-loader.php:392
 msgid "Hide"
