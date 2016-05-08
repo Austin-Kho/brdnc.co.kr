@@ -25,7 +25,8 @@ class Main extends CB_Controller
      */
     protected $helpers = array('form', 'array');
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
 
         /**
@@ -38,8 +39,9 @@ class Main extends CB_Controller
     /**
      * 전체 메인 페이지입니다
      */
-    public function index() {
-        // 이벤트 라이브러리를 로딩합니다.
+    public function index()
+    {
+        // 이벤트 라이브러리를 로딩합니다
         $eventname = 'event_main_index';
         $this->load->event($eventname);
 

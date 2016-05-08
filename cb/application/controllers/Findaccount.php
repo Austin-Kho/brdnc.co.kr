@@ -10,7 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 
 /**
- * 회원정보 찾기에 관련되는 controller 입니다.
+ * 회원정보 찾기에 관련도니 controller 입니다.
  */
 class Findaccount extends CB_Controller
 {

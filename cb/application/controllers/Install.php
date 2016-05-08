@@ -28,7 +28,7 @@ class Install extends CI_Controller
         $this->load->helper(array('array', 'form'));
 
         ini_set('display_errors', 0);
-        if (version_compare(PHP_VERSION, '5.2', '>=')) {
+        if (version_compare(PHP_VERSION, '5.3', '>=')) {
             error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED & ~E_STRICT & ~E_USER_NOTICE & ~E_USER_DEPRECATED);
         } else {
             error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
@@ -106,14 +106,14 @@ class Install extends CI_Controller
         $install_avaiable = true;
         $view['title1'] = 'PHP VERSION';
         $phpversion = phpversion();
-        if (version_compare($phpversion, '5.2.0') >= 0) {
+        if (version_compare($phpversion, '5.3.0') >= 0) {
             $view['content1'] = '<span class="bold color_blue">' . $phpversion . '</span>';
         } else {
             $view['content1'] = '<span class="bold color_red">' . $phpversion . '</span>';
             $install_avaiable = false;
-            $message .= 'PHP Version 을 5.2.0 이상으로 업그레이드 한 후에 설치가 가능합니다<br />';
+            $message .= 'PHP Version 을 5.3.0 이상으로 업그레이드 한 후에 설치가 가능합니다<br />';
         }
-        $view['desc1'] = 'PHP version 5.2.0 or newer is recommended.';
+        $view['desc1'] = 'PHP version 5.3.0 or newer is recommended.';
 
         $view['title2'] = 'GD Support';
         if (extension_loaded('gd') && function_exists('gd_info')) {
@@ -246,8 +246,8 @@ class Install extends CI_Controller
             $view['content1'] = '<span class="bold color_blue">설정완료</span>';
         } else {
             $install_avaiable = false;
-            //$view['content1'] = '<span class="bold color_red">비어있음</span>';
-            //$message .= 'application/config/config.php 의 &dollar;config[\'encryption_key\'] 에 내용을 입력해주세요, 현재 그 값이 비어있습니다. 한번 입력하신 값은 변경하지 말아주세요. 패스워드 암호화에 사용됩니다<br />';
+            $view['content1'] = '<span class="bold color_red">비어있음</span>';
+            $message .= 'application/config/config.php 의 &dollar;config[\'encryption_key\'] 에 내용을 입력해주세요, 현재 그 값이 비어있습니다. 한번 입력하신 값은 변경하지 말아주세요. 패스워드 암호화에 사용됩니다<br />';
         }
 
         $view['title2'] = 'base_url';
@@ -2094,7 +2094,7 @@ class Install extends CI_Controller
             'mll_userid' => array(
                 'type' => 'VARCHAR',
                 'constraint' => '255',
-                'default' => '',
+                'default' => '', 
             ),
             'mll_datetime' => array(
                 'type' => 'DATETIME',
@@ -2263,7 +2263,7 @@ class Install extends CI_Controller
         }
         $this->db->query('ALTER TABLE ' . $this->db->dbprefix . 'member_userid ADD UNIQUE KEY `mem_userid` (`mem_userid`)');
 
-
+        
         // menu table
         $this->dbforge->add_field(array(
             'men_id' => array(

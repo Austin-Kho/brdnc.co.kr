@@ -16,24 +16,27 @@ class Login extends CB_Controller
 {
 
     /**
-     * 모델을 로딩합니다.
+     * 모델을 로딩합니다
      */
     protected $models = array();
 
     /**
-     * 헬퍼를 로딩합니다.
+     * 헬퍼를 로딩합니다
      */
     protected $helpers = array('form', 'array', 'string');
 
-    function __construct() {
+    function __construct()
+    {
         parent::__construct();
+
     }
 
 
     /**
      * 로그인 페이지입니다
      */
-    public function index() {
+    public function index()
+    {
         // 이벤트 라이브러리를 로딩합니다
         $eventname = 'event_login_index';
         $this->load->event($eventname);
@@ -229,9 +232,9 @@ class Login extends CB_Controller
      */
     public function _check_id_pw($password, $userid)
     {
-        // if ( ! function_exists('password_hash')) {
-        //     $this->load->helper('password');
-        // }
+         if ( ! function_exists('password_hash')) {
+            $this->load->helper('password');
+        }
 
         $max_login_try_count = (int) $this->cbconfig->item('max_login_try_count');
         $max_login_try_limit_second = (int) $this->cbconfig->item('max_login_try_limit_second');
@@ -245,7 +248,8 @@ class Login extends CB_Controller
                 'mll_datetime > ' => strtotime(ctimestamp() - 86400 * 30),
             );
             $this->load->model('Member_login_log_model');
-            $logindata = $this->Member_login_log_model->get('', $select, $where, '', '', 'mll_id', 'DESC');
+            $logindata = $this->Member_login_log_model
+                ->get('', $select, $where, '', '', 'mll_id', 'DESC');
 
             if ($logindata && is_array($logindata)) {
                 foreach ($logindata as $key => $val) {
