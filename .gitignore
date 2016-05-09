@@ -1,13 +1,15 @@
+## CodeIgniter config File
+## /application/config/database.php
+## /application/config/config.php
+*/application/config/database.php
+*/application/config/config.php
 .DS_Store
-
 application/cache/*
 !application/cache/index.html
 !application/cache/.htaccess
-
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
-
 user_guide_src/build/*
 user_guide_src/cilexer/build/*
 user_guide_src/cilexer/dist/*
@@ -30,12 +32,8 @@ sftp-config.json
 ## Atom sftp files
 *.ftpconfig
 
-## CodeIgniter config File
-/application/config/database.php
-/application/config/config.php
-
-*/application/config/database.php
-*/application/config/config.php
+## wp
+wp/wp-content/uploads/*
 
 ## old cms system config File
 */php/auth.php
