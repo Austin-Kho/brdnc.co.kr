@@ -9,7 +9,7 @@ class M2 extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		if(@$this->session->userdata['logged_in'] !== TRUE) {
-			redirect(base_url('member').'?returnURL='.rawurlencode(current_url()));
+			redirect(base_url('member').'?returnURL='.rawurlencode(base_url(uri_string())));
 		}
 		$this->load->model('main_m'); //모델 파일 로드
 		$this->load->model('m2_m'); //모델 파일 로드
