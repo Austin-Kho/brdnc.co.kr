@@ -63,10 +63,11 @@ class Mem_m extends CI_Model
 			'request' => 2,
 			'is_company' => 1,
 			'pj_posi' => 0,
-			'auth_level' => 9,
-			'reg_date' => 'now()'
+			'auth_level' => 9
 		);
-		$result = $this->db->insert('cms_member_table', $insert_array); // 테이블명, 데이터
+		$this->db->set($insert_array);
+		$this->db->set('reg_date', 'now()', false);
+		$result = $this->db->insert('cms_member_table'); // 테이블명, 데이터
 
 		// 결과 반환
 		return $result;
