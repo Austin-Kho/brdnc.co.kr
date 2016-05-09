@@ -1,7 +1,7 @@
 /************************************우편번호 검색페이지********************************************/
-.container { border: 1px solid #99B0FF; margin: 3px; height: 580px; padding: 0; }
-header { background-color: #382531; margin: 3px; text-align: center; padding: 1px; height: 38px; border: 1px solid #222; }
-header h1 { font-size: 15px; color: white; padding: 0; margin: 0; padding-top: 8px; font-weight: bold; }
+.container { border: 1px solid #99B0FF; padding: 0; background-color: #FFF;}
+header { background-color: #382531; margin: 5px; text-align: center; padding: 20px 0; border: 1px solid #222; }
+h1 { font-size: 17px; color: white; padding: 0; margin: 0; padding-top: 8px; font-weight: bold; }
 .desc { padding: 5px 20px; color: #4687CE; }
 .ft { float: left; }
 
@@ -16,5 +16,5 @@ th { background-color: #E7ECEF; }
 .center { text-align: center; }
 
 
-nav ul.pagination { margin: 0 0 20px 0; }
-footer { padding: 5px 10px; margin-bottom: 10xp; }
+.pagination { margin: 0 0 20px 0; }
+footer { padding: 15px; }

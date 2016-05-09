@@ -166,7 +166,7 @@
 						</div>
 <?php  if($this->input->get('seq')) : ?>
 						<div class="row checkbox" style="padding: 10px; color: #C3BFBF;">
-							<input type="checkbox" name="is_reti" value="1" onclick="if(this.checked==0) document.getElementById('reti').style.display='none'; else document.getElementById('reti').style.display=''; "> &nbsp;퇴사등록
+							<label><input type="checkbox" name="is_reti" value="1" onclick="if(this.checked==0) document.getElementById('reti').style.display='none'; else document.getElementById('reti').style.display=''; "> &nbsp;퇴사등록</label>
 						</div>
 
 						<div class="row bo-top bo-bottom" id="reti" style="display: none;">

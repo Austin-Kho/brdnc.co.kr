@@ -127,7 +127,7 @@
 									<th style="width: 80px;" class="center"> 구 분</th>
 									<th style="width: 110px;" class="center">
 										계정과목
-										<a href="javascript:" onclick="popUp_size('/pc/_menu3/account_m.php', 'account',700,800)" title="계정과목 관리">
+										<a href="javascript:" onclick="popUp_size('/os/_menu3/account_m.php', 'account',700,800)" title="계정과목 관리">
 											<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 										</a>
 									</th>
@@ -203,7 +203,7 @@
 <?php if($auth>1) :  ?><!-- //마스터 관리자와 쓰기권한 있는 자금담당에게만 출력 -->
 									<td class="center">
 <?php if($m_auth->is_admin==1 or $m_auth->auth_level<=2 or ($m_auth->auth_level>2&&date('Y-m-d', strtotime('-3 day'))<=$lt->deal_date)) : //관리자와 마스터 쓰기권한이 아니면 당일건에 대해서만 수정 삭제 가능 ?>
-										<a href='javascript:'class="btn btn-info btn-xs" onclick="popUp_size('/pc/_menu3/capital_edit.php?edit_code=<?php echo $lt->seq_num; ?>','capital_edit','420','500')">
+										<a href='javascript:'class="btn btn-info btn-xs" onclick="popUp_size('<?php echo base_url('/popup/capital_pop/cash_book/'.$lt->seq_num); ?>','cash_book','500','686')">
 <?php else: ?>
 										<a href="javascript:" class="btn btn-default btn-xs" onclick="alert('마스터 관리자가 아니면 3일전 이후 건에 대해서만 수정/삭제 가능합니다.\n\n수정 필요 시 마스터 관리자에게 요청하여 주십시요.');">
 <?php endif; ?>

@@ -36,7 +36,7 @@ class Tax_off extends CI_Controller
 		$this->load->library('pagination');
 
 		//페이지네이션 설정/////////////////////////////////
-		$config['base_url'] = '/popup/tax_off/lists/'.$data['n'].'/'; //페이징 주소
+		$config['base_url'] = base_url('/popup/tax_off/lists/'.$data['n']); //페이징 주소
 		$config['total_rows'] = $this->popup_m->tax_search($search_text, '', '', 'num'); //게시물의 전체 갯수
 		$config['per_page'] = 6; //한 페이지에 표시할 게시물 수
 		$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수

@@ -12,6 +12,7 @@
 		<!-- Bootstrap core CSS -->
 		<link rel="stylesheet" href="<?php echo base_url(); ?>static/lib/bootstrap/css/bootstrap.min.css" media="screen">
 		<!-- Custom styles for this template -->
+		<link rel="stylesheet" href="<?php echo base_url(); ?>static/css/cms.css">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>static/css/popup.css">
 		<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -24,4 +25,4 @@
 		<script src="<?php echo base_url(); ?>static/lib/calendar/calendar.js"></script>
 		<script src="<?php echo base_url(); ?>static/js/global.js"></script>
 	</head>
-	<body>
+	<body onclick="cal_del();">

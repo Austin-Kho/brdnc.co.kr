@@ -343,7 +343,7 @@
 										<div class="col-xs-11 input-group">
 											<input type="text" class="form-control input-sm" id="tax_off1_code" name="tax_off1_code" value="<?php if($mode=='com_reg') {echo set_value('tax_off1_code');} else {echo $com->tax_off1_code; } ?>" readonly required autofocus>
 											<span class="input-group-btn">
-											      <button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('/popup/tax_off/lists/1/', 'tax_search', 500, 586)"> &nbsp;
+											      <button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('<?php echo base_url('popup/tax_off/lists/1/'); ?>', 'tax_search', 500, 616)"> &nbsp;
 													<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
 											      </button>
 											</span>
@@ -369,7 +369,7 @@
 										<div class="col-xs-11  input-group">
 											<input type="text" class="form-control input-sm" id=tax_off2_code"" name="tax_off2_code" value="<?php if($mode=='com_reg') {echo set_value('tax_off2_code');} else if($com->tax_off2_code>0) {echo $com->tax_off2_code; } ?>" readonly>
 											<span class="input-group-btn">
-										      	<button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('/popup/tax_off/lists/2/', 'tax_search', 500, 586)"> &nbsp;
+										      	<button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('<?php echo base_url('/popup/tax_off/lists/2/'); ?>', 'tax_search', 500, 616)"> &nbsp;
 										      		<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
 										      	</button>
 										      </span>
@@ -392,7 +392,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-10 form-wrap">
 							<div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-								<input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="javascript:ZipWindow('/popup/zip_/')">
+								<input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="javascript:ZipWindow('<?php echo base_url('/popup/zip_/'); ?>')">
 							</div>
 							<div class="col-xs-3 col-sm-5 col-md-1" style="padding-right: 0;">
 								<input type="text" class="form-control input-sm" id="zipcode" name="zipcode" maxlength="5" value="<?php if($mode=='com_reg') {echo set_value('zipcode');} else {echo $com->zipcode; } ?>" readonly required autofocus>
