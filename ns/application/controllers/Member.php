@@ -99,8 +99,9 @@ class Member extends CI_Controller
 	 * @return [type] [description]
 	 */
 	public function logout(){
+		$return = $this->input->get('returnURL');
 		$this->session->sess_destroy();
-		redirect(base_url('member'));
+		redirect(base_url('member').'?returnURL='.rawurlencode($return));
 	}
 
 	public function join() {

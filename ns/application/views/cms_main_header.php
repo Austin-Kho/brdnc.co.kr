@@ -71,7 +71,7 @@
 <?php if($this->session->userdata['is_admin']==1) : ?>
 								<li><a href="<?php echo $this->config->base_url('admin');?>">관리자 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
 <?php endif; ?>
-								<li><a href="<?php echo $this->config->base_url();?>member/logout/">로그아웃</a></li>
+								<li><a href="<?php echo $this->config->base_url()."member/logout?returnURL=".rawurlencode(current_url());?>">로그아웃</a></li>
 								<li><a href="<?php echo $this->config->base_url();?>member/modify/">정보수정</a></li>
 								<li><a href="javascript:" onclick="alert('준비 중입니다!');">공지사항</a></li>
 <?php   else :  ?>
