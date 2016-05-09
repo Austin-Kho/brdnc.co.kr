@@ -85,7 +85,7 @@ class Member extends CI_Controller
 						delete_cookie('id_r');
 						delete_cookie('id');
 					}
-					if( !$this->input->post('returnURL') OR $this->input->post('returnURL')=='') $returnURL = "main"; else  $returnURL = $this->input->post('returnURL');
+					if( !$this->input->post('returnURL') OR $this->input->post('returnURL')=='') $returnURL = base_url(); else  $returnURL = $this->input->post('returnURL');
 					redirect(rawurldecode($returnURL));
 				}
 			}else{
