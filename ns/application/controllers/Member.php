@@ -7,6 +7,10 @@ class Member extends CI_Controller
 		parent::__construct();
 		$this->load->model('mem_m');
 		$this->load->helper('form');
+
+		if( !function_exists('password_hash')){ // 패스워드 해쉬 파일이 없을 경우 패스워드 헬퍼 호출
+			$this->load->helper('password');
+		}
 	}
 
 	/**
@@ -57,10 +61,6 @@ class Member extends CI_Controller
 			// 일단 유저 데이터를 불러온다
 			$user = $this->mem_m->user_chk($this->input->post('user_data', TRUE));
 
-			// 패스워드 해쉬 파일이 없을 경우 패스워드 헬퍼 호출
-			if( !function_exists('password_hash')){
-				$this->load->helper('password');
-			}
 			// 유저 정보가 있고 패스워드가 맞는 경우
 			if( !empty($user) && password_verify($this->input->post('passwd'), $user->passwd)){
 				if($user->request != 1 && $user->is_admin!=1){// 승인전 비관리자 회원인 경우 안내
@@ -175,10 +175,6 @@ class Member extends CI_Controller
 
 		}else{ // 폼 전송 데이타가 있으면,
 
-			// 패스워드 해쉬 파일이 없을 경우 패스워드 헬퍼 호출
-			if( !function_exists('password_hash')){
-				$this->load->helper('password');
-			}
 			// 유저정보가 있고, 패스워드가 맞는 경우
 			if( !empty($data['user']) && password_verify($this->input->post('passwd'), $data['user']->passwd)){
 				$modify_data = array(
