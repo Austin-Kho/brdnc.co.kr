@@ -76,32 +76,14 @@ class Member extends CI_Controller
 					);
 					$this->session->set_userdata($user_data);
 
-					if($login_data['id_rem'] =='rem') {        // 쿠키 저장 체크가 되어 있으면
-						if( !$this->input->cookie('id_r', TRUE)) { // 실제 쿠키가 없으면 만들고
-							$id_r_Cookie = array(
-								'name' => 'id_r',
-								'value' => 'rem',
-								'expire' => 1000000,
-								'domain' => '.brdnc.cafe24.com',
-								'path' => '/',
-								'prefix' => '',
-								'secure' => false
-							);
-    					$this->input->set_cookie($id_r_Cookie);
-		    			$id_Cookie = array(
-								'name' => 'id',
-								'value' => $this->input->post('user_data'),
-								'expire' => 1000000,
-								'domain' => '.brdnc.cafe24.com',
-								'path' => '/',
-								'prefix' => '',
-								'secure' => false
-							);
-    					$this->input->set_cookie($id_Cookie);
+					if($this->input->post('id_rem') =='rem') {        // 쿠키 저장 체크가 되어 있으면
+						if( !get_cookie('id_r')) { // 실제 쿠키가 없으면 만들고
+	    					set_cookie('id_r', 'rem', 1000000);
+	    					set_cookie('id', $this->input->post('user_data'), 1000000);
 						}
 					}else{   // 쿠키 저장 체크가 되어 있지 않으면 ,쿠키를 파괴하라
-						delete_cookie('id_r', '', '/', '');
-						delete_cookie('id', '', '/', '');
+						delete_cookie('id_r');
+						delete_cookie('id');
 					}
 					if( !$this->input->post('returnURL') OR $this->input->post('returnURL')=='') $returnURL = "main"; else  $returnURL = $this->input->post('returnURL');
 					redirect(rawurldecode($returnURL));

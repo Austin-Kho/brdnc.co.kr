@@ -109,7 +109,7 @@
         <div class="col-sm-8">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h3 class="panel-title">첫번 째 제목 <?php echo base_url('member').'/?returnURL='.rawurlencode(current_url()); ?></h3>
+              <h3 class="panel-title"><a href="/os/">구 CMS 바로가기</a></h3>
             </div>
             <div class="panel-body">
               첫번 째 내용
