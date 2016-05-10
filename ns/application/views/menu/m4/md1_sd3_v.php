@@ -15,7 +15,7 @@
 				<label class="sr-only"><input type="hidden" name="cont_10_h" value=""></label> <!-- 수수료 발생 시 - 적요_10 -->
 
 				<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
-					<div class="col-xs-4 col-md-2 center" style="background-color: #F4F4F4;  padding: 10px; 0">거래일자</div>
+					<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px; 0">거래일자</div>
 					<div class="col-xs-8 col-md-6" style=" padding: 4px;">
 						<div class="col-xs-10 col-md-3" style="padding: 1px 0px;">
 							<label for="deal_date" class="sr-only">시작일</label>
@@ -27,7 +27,7 @@
 							</a>
 						</div>
 					</div>
-					<div class="col-xs-4 col-md-2 center" style="background-color: #F4F4F4;  padding: 10px;">담당자</div>
+					<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">담당자</div>
 					<div class="col-xs-8 col-md-2" style=" padding-top: 10px;"><?php  echo $this->session->userdata['name']; ?></div>
 				</div>
 <?php echo validation_errors(); ?>

@@ -36,7 +36,7 @@
 	$attributes = array('name' => 'cash_book_frm', 'method' => 'get');
 	echo form_open(base_url().'m4/capital/1/2/', $attributes);
 ?>
-							<div class="col-xs-12 col-sm-2 col-md-1 center" style="height: 40px; background-color: #F4F4F4; padding: 10px 0;">구 분</div>
+							<div class="col-xs-12 col-sm-2 col-md-1 center point-sub" style="height: 40px; padding: 10px 0;">구 분</div>
 							<div class="col-xs-6 col-sm-5 col-md-1" style="height: 40px; padding: 5px;">
 								<label for="class1" class="sr-only">구분1</label>
 								<select class="form-control input-sm" name="class1" onChange="inoutSel(this.form);">
@@ -70,7 +70,7 @@
 <?php endif;?>
 								</select>
 							</div>
-							<div class="col-xs-12 col-sm-2 col-md-1 center" style="height: 40px; background-color: #F4F4F4; padding: 10px 0;">거래기간</div>
+							<div class="col-xs-12 col-sm-2 col-md-1 center point-sub" style="height: 40px; padding: 10px 0;">거래기간</div>
 							<div class="col-xs-12 col-sm-6 col-md-3" style="height: 40px; padding: 5px 0 0 5px;">
 								<div class="col-xs-5 col-sm-5" style="padding: 0px;">
 									<label for="s_date" class="sr-only">시작일</label>
@@ -98,7 +98,7 @@
 								<a href="javascript:" onclick="term_put('s_date', 'e_date', '3m');" title="3개월"><img src="<?php echo base_url(); ?>static/img/to_3month.jpg" alt="3개월"></a>
 								<button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="document.getElementById('s_date').value=''; document.getElementById('e_date').value='';"><span aria-hidden="true">&times;</span></button>
 							</div>
-							<div class="col-xs-5 col-sm-2 col-md-1 center" style="height: 40px; background-color: #F4F4F4; padding: 5px;">
+							<div class="col-xs-5 col-sm-2 col-md-1 center point-sub" style="height: 40px; padding: 5px;">
 								<label for="search_con" class="sr-only">검색조건</label>
 								<select class="form-control input-sm" name="search_con">
 									<option value="0">통합검색</option>
