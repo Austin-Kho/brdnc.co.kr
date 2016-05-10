@@ -5,7 +5,7 @@
 				<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 490px;'; ?>">
 					<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
 						<form name="list_frm" method="get" action="">
-							<div class="col-md-2" style="background-color: #F4F4F4; height: 40px; padding-top: 10px;">부서별</div>
+							<div class="point-sub col-md-2" style="height: 40px; padding-top: 10px;">부서별</div>
 							<div class="col-md-7" style="height: 40px; padding-top: 5px;">
 								<div class="col-md-3" style="padding: 0;">
 									<select class="form-control input-sm" name="div_sel" onchange="submit();">

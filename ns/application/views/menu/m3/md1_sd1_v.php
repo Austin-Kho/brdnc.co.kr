@@ -96,7 +96,7 @@
 <?php endif; ?>
 					</div>
 <?php endif; ?>
-					<div class="row table-responsive" style="margin: 0 0 20px 0;">
+					<div class="row table-responsive" style="padding: 0; margin: 0 0 20px 0;">
 						<table class="table table-bordered table-hover table-condensed">
 							<thead class="bo-top">
 								<tr style="background-color: #F0F0E8;">
@@ -117,7 +117,7 @@
 ?>
 								<!-- =============================================== line batch 1 start ================================================ -->
 								<tr>
-					                <td style="padding-left: 15px;"> <div class="checkbox"><input type="text" name="dong_1" size="5" maxlength="5"> 동 <label><input type="checkbox" name="dong_ik" onclick="dong_reg_bc(this);"> 일괄등록</label></div></td>
+					                <td style="padding-left: 15px;"> <div class="checkbox" style="margin: 0;"><input type="text" name="dong_1" size="5" maxlength="5"> 동 <label><input type="checkbox" name="dong_ik" onclick="dong_reg_bc(this);"> 일괄등록</label></div></td>
 									<td class="center"><input type="text" name="line_1" maxlength="2" size="5" onkeydown="onlyNum(this);" class="en_only"> 호 라인 </td>
 					                <td class="center">
 										<select name="type_1" style="width: 65px;">
@@ -128,7 +128,7 @@
 										</select> TYPE
 					                </td>
 					                <td class="center"><input type="text" name="min_floor_1" size="5" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 부터 ~ <input type="text" name="max_floor_1" size="5" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 (일괄 등록)</td>
-									<td class="center"><div class="checkbox"><label><input type="checkbox" name="hold_1">  분양제외</label></div></td>
+									<td class="center"><div class="checkbox" style="margin: 0;"><label><input type="checkbox" name="hold_1">  분양제외</label></div></td>
 					            </tr>
 								<!-- =============================================== line batch 1 end ================================================ -->
 								<!-- =============================================== line batch 2 start ================================================ -->
@@ -144,7 +144,7 @@
 										</select> TYPE
 					                </td>
 					                <td class="center"><input type="text" name="min_floor_2" size="5" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 부터 ~ <input type="text" name="max_floor_2" size="5" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 (일괄 등록)</td>
-									<td class="center"><div class="checkbox"><label><input type="checkbox" name="hold_2"> 분양제외</label></div></td>
+									<td class="center"><div class="checkbox" style="margin: 0;"><label><input type="checkbox" name="hold_2"> 분양제외</label></div></td>
 					            </tr>
 								<!-- =============================================== line batch 2 end ================================================ -->
 								<!-- =============================================== line batch 3 start ================================================ -->
@@ -160,7 +160,7 @@
 										</select> TYPE
 					                </td>
 					                <td class="center"><input type="text" name="min_floor_3" size="5" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 부터 ~ <input type="text" name="max_floor_3" size="5" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 (일괄 등록)</td>
-									<td class="center"><div class="checkbox"><label><input type="checkbox" name="hold_3"> 분양제외</label></div></td>
+									<td class="center"><div class="checkbox" style="margin: 0;"><label><input type="checkbox" name="hold_3"> 분양제외</label></div></td>
 					            </tr>
 								<!-- =============================================== line batch 3 end ================================================ -->
 								<!-- =============================================== line batch 4 start ================================================ -->
@@ -176,7 +176,7 @@
 										</select> TYPE
 					                </td>
 					                <td class="center"><input type="text" name="min_floor_4" size="5" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 부터 ~ <input type="text" name="max_floor_4" size="5" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 (일괄 등록)</td>
-									<td class="center"><div class="checkbox"><label><input type="checkbox" name="hold_4"> 분양제외</label></div></td>
+									<td class="center"><div class="checkbox" style="margin: 0;"><label><input type="checkbox" name="hold_4"> 분양제외</label></div></td>
 					            </tr>
 								<!-- =============================================== line batch 4 end ================================================ -->
 								<!-- =============================================== line batch 5 start ================================================ -->
@@ -192,7 +192,7 @@
 										</select> TYPE
 					                </td>
 					                <td class="center"><input type="text" name="min_floor_5" size="5" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 부터 ~ <input type="text" name="max_floor_5" size="5" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 (일괄 등록)</td>
-									<td class="center"><div class="checkbox"><label><input type="checkbox" name="hold_5"> 분양제외</label></div></td>
+									<td class="center"><div class="checkbox" style="margin: 0;"><label><input type="checkbox" name="hold_5"> 분양제외</label></div></td>
 					            </tr>
 								<!-- =============================================== line batch 5 end ================================================ -->
 								<!-- =============================================== line batch 6 start ================================================ -->
@@ -208,7 +208,7 @@
 										</select> TYPE
 					                </td>
 					                <td class="center"><input type="text" name="min_floor_6" size="5" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 부터 ~ <input type="text" name="max_floor_6" size="5" maxlength="3" onkeydown="onlyNum(this);" class="en_only"> 층 (일괄 등록)</td>
-									<td class="center"><div class="checkbox"><label><input type="checkbox" name="hold_6"> 분양제외</label></div></td>
+									<td class="center"><div class="checkbox" style="margin: 0;"><label><input type="checkbox" name="hold_6"> 분양제외</label></div></td>
 					            </tr>
 								<!-- =============================================== line batch 6 end ================================================ -->
 
@@ -286,7 +286,7 @@
 							</div>
 							<div class="col-xs-12 col-sm-3 col-md-1 center" style="height: 40px; background-color: #F4F4F4; padding: 12px 0;">데이터 정렬</div>
 							<div class="col-sm-1 col-md-1 hidden-xs" style="height: 40px; padding: 0 0 0 5px;">
-								<div class="checkbox">
+								<div class="checkbox" style="margin: 0;">
 									<label><input type="checkbox" name="order_reg" id="order_reg" <?php if($this->input->get('order_reg')=="on") echo "checked"; ?> onclick="order_chk(this, '1');"> 등록 순</label>
 								</div>
 							</div>
@@ -299,7 +299,7 @@
 								<label class="radio-inline"><input type="radio" name="ho_sc" id="ho_sc2" value="2" <?php if($this->input->get('ho_sc')=="2") echo "checked"; ?> onclick="order_chk(this, '2');">내림차순</label>)
 							</div>
 							<div class="col-xs-6 col-md-1" style="height: 40px; padding: 0 0 0 5px;">
-								<div class="checkbox">
+								<div class="checkbox" style="margin: 0;">
 									<label><input type="checkbox" name="sh_extend" onclick="if(this.checked===true)alert('준비중!')"> 검색 확장</label>
 								</div>
 							</div>
@@ -311,7 +311,7 @@
 				</div>
 
 				</form>
-				<div class="row" style="margin: 0;">
+				<div class="row table-responsive" style="padding: 0; margin: 0;">
 					<table class="table table-hover">
 						<thead class="bo-top" style="background-color: #F4F4F4;">
 							<tr>
