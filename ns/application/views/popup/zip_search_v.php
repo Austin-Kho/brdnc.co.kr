@@ -50,7 +50,7 @@
 					<h1>주 소 검 색</h1>
 				</header><!-- /header -->
 				<div class="desc">※ 찾고자 하는 도로명주소 또는 건물명을 선택해 주세요.</div>
-				<div class="well">
+				<div class="well" style="padding: 13px; margin-bottom: 20px;">
 					<label class="sr-only" for="sw1">도로명주소 검색</label>
 					<span>
 						<input type="radio" name="sh_what" id="sw1" value="1" onclick="search_con();" <?php if( !$this->input->post('sh_what') or $this->input->post('sh_what') == '1') echo 'checked'; ?>> 도로명주소 검색</input>
@@ -60,11 +60,11 @@
 						<input type="radio" name="sh_what" id="sw2" value="2" onclick="search_con();" <?php if($this->input->post('sh_what') == '2') echo 'checked'; ?>> 건물명 검색</input>
 					</span>
 				</div>
-				<div class="row">
-					<div class="form-group <?php if(is_mobile()) echo 'col-xs-3'; else echo 'col-xs-2'; ?>">
+				<div class="row"  style="padding-top: 0;">
+					<div class="form-group <?php if(is_mobile()) echo 'col-xs-3'; else echo 'col-xs-2'; ?>" style="border-top: 0;">
 						<label for="sido">시 / 도</label>
 					</div>
-					<div class="form-group <?php if(is_mobile()) echo 'col-xs-9'; else echo 'col-xs-10'; ?>">
+					<div class="form-group <?php if(is_mobile()) echo 'col-xs-9'; else echo 'col-xs-10'; ?>" style="border-top: 0;">
 						<div class="col-xs-7">
 							<select name="sido" class="form-control input-sm">
 								<option value="su" <?php if($this->input->post('sido')=='su') echo 'selected'; ?>>서울특별시</option>
