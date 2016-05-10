@@ -89,7 +89,7 @@ class M4_m extends CI_Model {
 
 
 	public function cash_book_list($table, $where, $start='', $limit='', $sh_frm, $n, $ex='') {
-		$this->db->select('seq_num, class1, class2, account, cont, acc, in_acc, inc, out_acc, exp, evidence, cms_capital_cash_book.note, worker, deal_date, name, no');
+		$this->db->select('seq_num, class1, class2, account, cont, acc, in_acc, inc, out_acc, exp, evidence, cms_capital_cash_book.note AS memo, worker, deal_date, name, no');
 
 		$this->db->where($where);
 

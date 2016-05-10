@@ -187,14 +187,16 @@
 	if($lt->evidence==4) $evi="카드전표";
 	if($lt->evidence==5) $evi="현금영수증";
 	if($lt->evidence==6) $evi="간이영수증";
+
+	$memo = ($lt->memo) ? $memo = " // 비고 : ".$lt->memo : '';
 ?>
 								<tr>
 									<td class="center"><input type="checkbox" disabled></td>
 									<td class="center" ><?php echo $lt->deal_date; ?></td>
 									<td class="center"> <?php echo $cla1." - ".$cla2; ?></td>
 									<td class="center" style="color: #000099;"> <?php echo $account; ?></td>
-									<td class=""> <?php echo cut_string($lt->cont, 18, '..'); ?></td>
-									<td class=""><?php echo cut_string($acc, 7, '..'); ?> </td>
+									<td class=""><div data-toggle="tooltip" data-placement="right" title="<?php echo $lt->cont.$memo; ?>" style="cursor: pointer;"><?php echo cut_string($lt->cont, 18, '..'); ?></div></td>
+									<td class=""><div data-toggle="tooltip" data-placement="right" title="<?php echo $lt->acc.$memo; ?>" style="cursor: pointer;"><?php echo cut_string($acc, 7, '..'); ?> </td>
 									<td class="center" style="background-color: #ECFEE9;"><?php echo $in_acc; ?> </td>
 									<td class="right" style="background-color: #ECFEE9;"> <?php echo $inc; ?></td>
 									<td class="center" style="background-color: #EEF4FF;"> <?php echo $out_acc; ?></td>
