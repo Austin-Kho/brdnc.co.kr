@@ -9,7 +9,7 @@
 		</div>
 		<h3 class="form-signin-heading">로그인 하세요.</h3>
 		<label for="user_data" class="control-label">ID</label>
-			<input type="text" name="user_data" value="<?php if(get_cookie('id_r')) echo get_cookie('user_data'); ?>" id="user_data" class="form-control en_only" placeholder="아이디 또는 이메일" required autofocus>
+			<input type="text" name="user_data" value="<?php if(get_cookie('id_r')) echo get_cookie('id'); ?>" id="user_data" class="form-control en_only" placeholder="아이디 또는 이메일" required autofocus>
 		<label for="passwd" class="control-label">Password</label>
 			<input type="password" name="passwd" value="<?php echo set_value('passwd'); ?>" id="passwd" class="form-control en_only" placeholder="비밀번호" required>
 		<div class="checkbox">
