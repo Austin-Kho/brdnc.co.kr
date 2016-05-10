@@ -223,7 +223,7 @@
 						<div class="col-xs-2">
                             <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                                 <label>
-            						<input type="checkbox" class="checkbox" name="ck2_1" id="ck2_1" onclick="type_reg('2',this,1);">
+            						<input type="checkbox" name="ck2_1" id="ck2_1" onclick="type_reg('2',this,1);">
                                     <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
                                 </label>
                             </div>
@@ -261,7 +261,7 @@
 						<div class="col-xs-2">
                             <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                                 <label>
-            						<input type="checkbox" class="checkbox" name="ck2_2" id="ck2_2" onclick="type_reg('2',this,2);">
+            						<input type="checkbox" name="ck2_2" id="ck2_2" onclick="type_reg('2',this,2);">
                                     <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
                                 </label>
                             </div>
@@ -299,7 +299,7 @@
 						<div class="col-xs-2">
                             <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                                 <label>
-            						<input type="checkbox" class="checkbox" name="ck2_3" id="ck2_3" onclick="type_reg('2',this,3);">
+            						<input type="checkbox" name="ck2_3" id="ck2_3" onclick="type_reg('2',this,3);">
                                     <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
                                 </label>
                             </div>
@@ -337,7 +337,7 @@
 						<div class="col-xs-2">
                             <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                                 <label>
-            						<input type="checkbox" class="checkbox" name="ck2_4" id="ck2_4" onclick="type_reg('2',this,4);">
+            						<input type="checkbox" name="ck2_4" id="ck2_4" onclick="type_reg('2',this,4);">
                                     <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
                                 </label>
                             </div>
@@ -375,7 +375,7 @@
 						<div class="col-xs-2">
                             <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                                 <label>
-            						<input type="checkbox" class="checkbox" name="ck2_5" id="ck2_5" onclick="type_reg('2',this,5);">
+            						<input type="checkbox" name="ck2_5" id="ck2_5" onclick="type_reg('2',this,5);">
                                     <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
                                 </label>
                             </div>
@@ -413,7 +413,7 @@
 						<div class="col-xs-2">
                             <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                                 <label>
-            						<input type="checkbox" class="checkbox" name="ck2_6" id="ck2_6" onclick="type_reg('2',this,6);">
+            						<input type="checkbox" name="ck2_6" id="ck2_6" onclick="type_reg('2',this,6);">
                                     <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
                                 </label>
                             </div>
@@ -451,7 +451,7 @@
 						<div class="col-xs-2">
                             <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                                 <label>
-            						<input type="checkbox" class="checkbox" name="ck2_7" id="ck2_7" onclick="type_reg('2',this,7);">
+            						<input type="checkbox" name="ck2_7" id="ck2_7" onclick="type_reg('2',this,7);">
                                     <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
                                 </label>
                             </div>
@@ -489,7 +489,7 @@
 						<div class="col-xs-2">
                             <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                                 <label>
-            						<input type="checkbox" class="checkbox" name="ck2_8" id="ck2_8" onclick="type_reg('2',this,8);">
+            						<input type="checkbox" name="ck2_8" id="ck2_8" onclick="type_reg('2',this,8);">
                                     <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
                                 </label>
                             </div>
@@ -527,7 +527,7 @@
 						<div class="col-xs-2">
                             <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                                 <label>
-            						<input type="checkbox" class="checkbox" name="ck2_9" id="ck2_9" onclick="type_reg('2',this,9);">
+            						<input type="checkbox" name="ck2_9" id="ck2_9" onclick="type_reg('2',this,9);">
                                     <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
                                 </label>
                             </div>
@@ -565,7 +565,7 @@
 						<div class="col-xs-2">
                             <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                                 <label>
-            						<input type="checkbox" class="checkbox" name="ck2_10" id="ck2_10" onclick="type_reg('2',this,10);">
+            						<input type="checkbox" name="ck2_10" id="ck2_10" onclick="type_reg('2',this,10);">
                                     <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
                                 </label>
                             </div>

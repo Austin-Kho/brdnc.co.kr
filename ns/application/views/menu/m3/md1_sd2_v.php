@@ -321,7 +321,7 @@
 							<div class="col-xs-2">
 								<div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
 									<label>
-										<input type="checkbox" class="checkbox" name="ck2_1" id="ck2_1" onclick="type_reg('2',this,1);" <?php if( !empty($type_name[1])){echo " checked ";} if( !empty($type_name[2])){echo " disabled ";}?>>
+										<input type="checkbox" name="ck2_1" id="ck2_1" onclick="type_reg('2',this,1);" <?php if( !empty($type_name[1])){echo " checked ";} if( !empty($type_name[2])){echo " disabled ";}?>>
 										<a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
 									</label>
 								</div>
@@ -359,7 +359,7 @@
 							<div class="col-xs-2">
 								<div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
 									<label>
-										<input type="checkbox" class="checkbox" name="ck2_2" id="ck2_2" onclick="type_reg('2',this,2);" <?php if( !empty($type_name[2])){echo " checked ";} if( !empty($type_name[3])){echo " disabled ";}?>>
+										<input type="checkbox" name="ck2_2" id="ck2_2" onclick="type_reg('2',this,2);" <?php if( !empty($type_name[2])){echo " checked ";} if( !empty($type_name[3])){echo " disabled ";}?>>
 										<a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
 									</label>
 								</div>
@@ -397,7 +397,7 @@
 							<div class="col-xs-2">
 								<div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
 									<label>
-										<input type="checkbox" class="checkbox" name="ck2_3" id="ck2_3" onclick="type_reg('2',this,3);" <?php if( !empty($type_name[3])){echo " checked ";} if( !empty($type_name[4])){echo " disabled ";}?>>
+										<input type="checkbox" name="ck2_3" id="ck2_3" onclick="type_reg('2',this,3);" <?php if( !empty($type_name[3])){echo " checked ";} if( !empty($type_name[4])){echo " disabled ";}?>>
 										<a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
 									</label>
 								</div>
@@ -435,7 +435,7 @@
 							<div class="col-xs-2">
 								<div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
 									<label>
-										<input type="checkbox" class="checkbox" name="ck2_4" id="ck2_4" onclick="type_reg('2',this,4);" <?php if( !empty($type_name[4])){echo " checked ";} if( !empty($type_name[5])){echo " disabled ";}?>>
+										<input type="checkbox" name="ck2_4" id="ck2_4" onclick="type_reg('2',this,4);" <?php if( !empty($type_name[4])){echo " checked ";} if( !empty($type_name[5])){echo " disabled ";}?>>
 										<a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
 									</label>
 								</div>
@@ -473,7 +473,7 @@
 							<div class="col-xs-2">
 								<div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
 									<label>
-										<input type="checkbox" class="checkbox" name="ck2_5" id="ck2_5" onclick="type_reg('2',this,5);" <?php if( !empty($type_name[5])){echo " checked ";} if( !empty($type_name[6])){echo " disabled ";}?>>
+										<input type="checkbox" name="ck2_5" id="ck2_5" onclick="type_reg('2',this,5);" <?php if( !empty($type_name[5])){echo " checked ";} if( !empty($type_name[6])){echo " disabled ";}?>>
 										<a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
 									</label>
 								</div>
@@ -511,7 +511,7 @@
 							<div class="col-xs-2">
 								<div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
 									<label>
-										<input type="checkbox" class="checkbox" name="ck2_6" id="ck2_6" onclick="type_reg('2',this,6);" <?php if( !empty($type_name[6])){echo " checked ";} if( !empty($type_name[7])){echo " disabled ";}?>>
+										<input type="checkbox" name="ck2_6" id="ck2_6" onclick="type_reg('2',this,6);" <?php if( !empty($type_name[6])){echo " checked ";} if( !empty($type_name[7])){echo " disabled ";}?>>
 										<a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
 									</label>
 								</div>
@@ -549,7 +549,7 @@
 							<div class="col-xs-2">
 								<div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
 									<label>
-										<input type="checkbox" class="checkbox" name="ck2_7" id="ck2_7" onclick="type_reg('2',this,7);" <?php if( !empty($type_name[7])){echo " checked ";} if( !empty($type_name[8])){echo " disabled ";}?>>
+										<input type="checkbox" name="ck2_7" id="ck2_7" onclick="type_reg('2',this,7);" <?php if( !empty($type_name[7])){echo " checked ";} if( !empty($type_name[8])){echo " disabled ";}?>>
 										<a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
 									</label>
 								</div>
@@ -587,7 +587,7 @@
 							<div class="col-xs-2">
 								<div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
 									<label>
-										<input type="checkbox" class="checkbox" name="ck2_8" id="ck2_8" onclick="type_reg('2',this,8);" <?php if( !empty($type_name[8])){echo " checked ";} if( !empty($type_name[9])){echo " disabled ";}?>>
+										<input type="checkbox" name="ck2_8" id="ck2_8" onclick="type_reg('2',this,8);" <?php if( !empty($type_name[8])){echo " checked ";} if( !empty($type_name[9])){echo " disabled ";}?>>
 										<a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
 									</label>
 								</div>
@@ -625,14 +625,14 @@
 							<div class="col-xs-2">
 								<div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
 									<label>
-										<input type="checkbox" class="checkbox" name="ck2_9" id="ck2_9" onclick="type_reg('2',this,9);" <?php if( !empty($type_name[9])){echo " checked ";} if( !empty($type_name[10])){echo " disabled ";}?>>
+										<input type="checkbox" name="ck2_9" id="ck2_9" onclick="type_reg('2',this,9);" <?php if( !empty($type_name[9])){echo " checked ";} if( !empty($type_name[10])){echo " disabled ";}?>>
 										<a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
 									</label>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="form-group" id="type2_40" style="<?php if($t_count<10) echo "display:none";?>"><!-- 타입10정보등록 -->
+					<div class="form-group" id="type2_10" style="<?php if($t_count<10) echo "display:none";?>"><!-- 타입10정보등록 -->
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
 							<label for="type_name_10">타입별 정보등록(10) <span class="red">*</span></label>
 						</div>
@@ -663,7 +663,7 @@
 							<div class="col-xs-2">
 								<div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
 									<label>
-										<input type="checkbox" class="checkbox" name="ck2_10" id="ck2_10" onclick="type_reg('2',this,10);" <?php if( !empty($type_name[10])){echo " checked ";} ?>>
+										<input type="checkbox" name="ck2_10" id="ck2_10" onclick="type_reg('2',this,10);" <?php if( !empty($type_name[10])){echo " checked ";} ?>>
 										<a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
 									</label>
 								</div>
