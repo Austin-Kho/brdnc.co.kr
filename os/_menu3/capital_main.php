@@ -55,7 +55,7 @@
 	</head>
 
 	<body onclick="cal_del();">
-		<div id="loading" style="padding-top:530px;"><img src="../images/loading.gif"><br>loading...</div>
+		<!-- <div id="loading" style="padding-top:530px;"><img src="../images/loading.gif"><br>loading...</div> -->
 		<div id="wrap">
 			<header><!-- <div id="header"> -->
 				<? include '../include/top_nav.php'; ?>

@@ -7,8 +7,8 @@
 					</div>
 					<!-- ===== subject table end ===== -->
 					<?
-						$_m3_1_3_rlt = mysql_query("select _m3_1_3 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$_m3_1_3_row = mysql_fetch_array($_m3_1_3_rlt);
+						$_m3_1_3_rlt = mysqli_query($connect, "select _m3_1_3 from cms_mem_auth where user_id='$_SESSION[p_id]' ");
+						$_m3_1_3_row = mysqli_fetch_array($_m3_1_3_rlt);
 
 						if(!$_m3_1_3_row[_m3_1_3]||$_m3_1_3_row[_m3_1_3]==0){
 					?>
@@ -45,9 +45,9 @@
 								<?
 									// 현장 목록 가져오기
 									$pj_qry = "SELECT seq, pj_name FROM cms_project1_info WHERE is_end!='1' ORDER BY start_date DESC, seq DESC";
-									$pj_rlt = mysql_query($pj_qry, $connect);
-									$pj_num = mysql_num_rows($pj_rlt);
-									for($i=0; $pj_rows = mysql_fetch_array($pj_rlt); $i++){
+									$pj_rlt = mysqli_query($connect, $pj_qry);
+									$pj_num = mysqli_num_rows($pj_rlt);
+									for($i=0; $pj_rows = mysqli_fetch_array($pj_rlt); $i++){
 										$pj_seq[$i]= $pj_rows[seq];
 										$pj_name[$i]= $pj_rows[pj_name];
 									}
@@ -116,10 +116,10 @@
 											<select name="account_1" id="d1_acc1_1" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -128,10 +128,10 @@
 											<select name="account_1" id="d1_acc2_1" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -140,10 +140,10 @@
 											<select name="account_1" id="d1_acc3_1" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -152,10 +152,10 @@
 											<select name="account_1" id="d1_acc4_1" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -164,10 +164,10 @@
 											<select name="account_1" id="d1_acc5_1" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -182,8 +182,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select no, name from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -197,8 +197,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select no, bank, name from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]."-".$rows[bank]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -249,10 +249,10 @@
 											<select name="account_2" id="d1_acc1_2" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -261,10 +261,10 @@
 											<select name="account_2" id="d1_acc2_2" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -273,10 +273,10 @@
 											<select name="account_2" id="d1_acc3_2" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -285,10 +285,10 @@
 											<select name="account_2" id="d1_acc4_2" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -297,10 +297,10 @@
 											<select name="account_2" id="d1_acc5_2" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -315,8 +315,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -330,8 +330,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]."-".$rows[bank]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -382,10 +382,10 @@
 											<select name="account_3" id="d1_acc1_3" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -394,10 +394,10 @@
 											<select name="account_3" id="d1_acc2_3" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -406,10 +406,10 @@
 											<select name="account_3" id="d1_acc3_3" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -418,10 +418,10 @@
 											<select name="account_3" id="d1_acc4_3" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -430,10 +430,10 @@
 											<select name="account_3" id="d1_acc5_3" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -448,8 +448,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -463,8 +463,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]."-".$rows[bank]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -516,10 +516,10 @@
 											<select name="account_4" id="d1_acc1_4" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -528,10 +528,10 @@
 											<select name="account_4" id="d1_acc2_4" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -540,10 +540,10 @@
 											<select name="account_4" id="d1_acc3_4" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -552,10 +552,10 @@
 											<select name="account_4" id="d1_acc4_4" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -564,10 +564,10 @@
 											<select name="account_4" id="d1_acc5_4" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -582,8 +582,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -597,8 +597,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]."-".$rows[bank]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -649,10 +649,10 @@
 											<select name="account_5" id="d1_acc1_5" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -661,10 +661,10 @@
 											<select name="account_5" id="d1_acc2_5" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -673,10 +673,10 @@
 											<select name="account_5" id="d1_acc3_5" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -685,10 +685,10 @@
 											<select name="account_5" id="d1_acc4_5" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -697,10 +697,10 @@
 											<select name="account_5" id="d1_acc5_5" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -715,8 +715,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -730,8 +730,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]."-".$rows[bank]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -782,10 +782,10 @@
 											<select name="account_6" id="d1_acc1_6" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -794,10 +794,10 @@
 											<select name="account_6" id="d1_acc2_6" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -806,10 +806,10 @@
 											<select name="account_6" id="d1_acc3_6" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -818,10 +818,10 @@
 											<select name="account_6" id="d1_acc4_6" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -830,10 +830,10 @@
 											<select name="account_6" id="d1_acc5_6" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -848,8 +848,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -863,8 +863,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]."-".$rows[bank]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -915,10 +915,10 @@
 											<select name="account_7" id="d1_acc1_7" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -927,10 +927,10 @@
 											<select name="account_7" id="d1_acc2_7" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -939,10 +939,10 @@
 											<select name="account_7" id="d1_acc3_7" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -951,10 +951,10 @@
 											<select name="account_7" id="d1_acc4_7" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -963,10 +963,10 @@
 											<select name="account_7" id="d1_acc5_7" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -981,8 +981,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -996,8 +996,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]."-".$rows[bank]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -1048,10 +1048,10 @@
 											<select name="account_8" id="d1_acc1_8" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -1060,10 +1060,10 @@
 											<select name="account_8" id="d1_acc2_8" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -1072,10 +1072,10 @@
 											<select name="account_8" id="d1_acc3_8" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -1084,10 +1084,10 @@
 											<select name="account_8" id="d1_acc4_8" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -1096,10 +1096,10 @@
 											<select name="account_8" id="d1_acc5_8" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -1114,8 +1114,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -1129,8 +1129,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]."-".$rows[bank]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -1181,10 +1181,10 @@
 											<select name="account_9" id="d1_acc1_9" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -1193,10 +1193,10 @@
 											<select name="account_9" id="d1_acc2_9" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -1205,10 +1205,10 @@
 											<select name="account_9" id="d1_acc3_9" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -1217,10 +1217,10 @@
 											<select name="account_9" id="d1_acc4_9" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -1229,10 +1229,10 @@
 											<select name="account_9" id="d1_acc5_9" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -1247,8 +1247,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -1262,8 +1262,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]."-".$rows[bank]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -1314,10 +1314,10 @@
 											<select name="account_10" id="d1_acc1_10" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -1326,10 +1326,10 @@
 											<select name="account_10" id="d1_acc2_10" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -1338,10 +1338,10 @@
 											<select name="account_10" id="d1_acc3_10" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -1350,10 +1350,10 @@
 											<select name="account_10" id="d1_acc4_10" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -1362,10 +1362,10 @@
 											<select name="account_10" id="d1_acc5_10" style="width:60px;" disabled>
 											<?
 												$acc_qry = "SELECT d3_code, d3_acc_name FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc <>'1' ORDER BY d3_code ASC";
-												$acc_rlt = mysql_query($acc_qry, $connect);
+												$acc_rlt = mysqli_query($connect, $acc_qry);
 											?>
 												<option value="" selected> 선 택
-												<?while($acc_rows = mysql_fetch_array($acc_rlt)){?>
+												<?while($acc_rows = mysqli_fetch_array($acc_rlt)){?>
 												<option value="<?=$acc_rows[d3_acc_name]?>"> <?=$acc_rows[d3_acc_name]."(".$acc_rows[d3_code].")"?>
 												<?}?>
 											</select>
@@ -1380,8 +1380,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]?>"> <?=$rows[name]?>
 											<? } ?>
@@ -1395,8 +1395,8 @@
 											<option value="" selected> 선 택
 											<?
 												$query="select * from cms_capital_bank_account ";
-												$result=mysql_query($query, $connect);
-												while($rows=mysql_fetch_array($result)){
+												$result=mysqli_query($connect, $query);
+												while($rows=mysqli_fetch_array($result)){
 											?>
 											<option value="<?=$rows[no]."-".$rows[bank]?>"> <?=$rows[name]?>
 											<? } ?>

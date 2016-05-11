@@ -7,8 +7,8 @@
 					</div>
 					<!-- =====subject table end ===== -->
 					<?
-						$_m3_1_2_rlt = mysql_query("SELECT _m3_1_2 FROM cms_mem_auth WHERE user_id='$_SESSION[p_id]' ", $connect);
-						$_m3_1_2_row = mysql_fetch_array($_m3_1_2_rlt);
+						$_m3_1_2_rlt = mysqli_query($connect, "SELECT _m3_1_2 FROM cms_mem_auth WHERE user_id='$_SESSION[p_id]' ");
+						$_m3_1_2_row = mysqli_fetch_array($_m3_1_2_rlt);
 
 						if(!$_m3_1_2_row[_m3_1_2]||$_m3_1_2_row[_m3_1_2]==0){
 					?>
@@ -30,8 +30,8 @@
 						<div style="height:18px; text-align:right; padding:0 20px 2px 0; margin-top:10px;" class="form2">
 							<?
 								$auth_qry = "SELECT * FROM cms_member_table WHERE user_id='$_SESSION[p_id]' ";
-								$auth_rlt = mysql_query($auth_qry, $connect);
-								$auth_row= mysql_fetch_array($auth_rlt);
+								$auth_rlt = mysqli_query($connect, $auth_qry);
+								$auth_row= mysqli_fetch_array($auth_rlt);
 
 								// 이 페이지 쓰기 권한 설정하기
 								$auth_level=2; // 이페이지 마스터 쓰기 권한 레벨
@@ -164,8 +164,8 @@
 							<?
 								$query="SELECT seq_num FROM cms_capital_cash_book, cms_capital_bank_account ".$add_where;
 
-								$result=mysql_query($query, $connect);
-								$total_bnum=mysql_num_rows($result);     // 총 게시물 수   11111111111111111111
+								$result=mysqli_query($connect, $query);
+								$total_bnum=mysqli_num_rows($result);     // 총 게시물 수   11111111111111111111
 								mysqli_free_result($result);
 
 								$index_num = 12;                 // 한 페이지 표시할 목록 개수 22222222222222
@@ -187,9 +187,9 @@
 										   $add_where
 										   ORDER BY deal_date desc, seq_num DESC
 										   LIMIT $s, $e";
-								$result1=mysql_query($query1, $connect);
+								$result1=mysqli_query($connect, $query1);
 
-								for($i=0; $rows1=mysql_fetch_array($result1); $i++){
+								for($i=0; $rows1=mysqli_fetch_array($result1); $i++){
 									 $bunho=$total_bnum-($i+$cline)+1;
 									 if($rows1[class1]==1) $cla1="<font color='#0066ff'>[입금]</font>";
 									 if($rows1[class1]==2) $cla1="<font color='#ff3333'>[출금]</font>";
@@ -295,32 +295,32 @@
 							<tr align="center">
 							<?
 								$cash1=" SELECT SUM(inc) AS in_total FROM cms_capital_cash_book  WHERE (com_div>0 AND in_acc='1' AND class2<>8) OR (com_div IS NULL AND in_acc=1 AND class2=7) $e_add  "; // 현금수입금 합계 구하기
-								$ca_qry1=mysql_query( $cash1, $connect);
-								$ca_row1=mysql_fetch_array($ca_qry1);
+								$ca_qry1=mysqli_query($connect, $cash1);
+								$ca_row1=mysqli_fetch_array($ca_qry1);
 								$cash2="SELECT SUM(exp) AS out_total FROM cms_capital_cash_book  WHERE (com_div>0) AND out_acc='1' $e_add "; // 현금지출금 합계 구하기
-								$ca_qry2=mysql_query( $cash2, $connect);
-								$ca_row2=mysql_fetch_array($ca_qry2);
+								$ca_qry2=mysqli_query($connect,  $cash2);
+								$ca_row2=mysqli_fetch_array($ca_qry2);
 
 								$b_bal1="SELECT SUM(inc) AS in_total FROM cms_capital_cash_book  WHERE (com_div>0 AND in_acc>'1' AND class2<>8) OR (com_div IS NULL AND in_acc>1 AND class2=7)  $e_add   "; // 계좌수입금 합계 구하기
-								$b_qry1=mysql_query($b_bal1, $connect);
-								$b_row1=mysql_fetch_array($b_qry1);
+								$b_qry1=mysqli_query($connect, $b_bal1);
+								$b_row1=mysqli_fetch_array($b_qry1);
 								$b_bal2="SELECT SUM(exp) AS out_total FROM cms_capital_cash_book  WHERE (com_div>0) AND out_acc>'1'  $e_add   "; // 계좌지출금 합계 구하기
-								$b_qry2=mysql_query($b_bal2, $connect);
-								$b_row2=mysql_fetch_array($b_qry2);
+								$b_qry2=mysqli_query($connect, $b_bal2);
+								$b_row2=mysqli_fetch_array($b_qry2);
 
 								$dept1=" SELECT SUM(inc) AS in_total FROM cms_capital_cash_book  WHERE (com_div>0) AND class2='2' $e_add   "; // 차용금 합계 구하기
-								$de_qry1=mysql_query( $dept1, $connect);
-								$de_row1=mysql_fetch_array($de_qry1);
+								$de_qry1=mysqli_query($connect, $dept1);
+								$de_row1=mysqli_fetch_array($de_qry1);
 								$dept2=" SELECT SUM(exp) AS out_total FROM cms_capital_cash_book  WHERE (com_div>0) AND class2='5'  $e_add   "; // 상환금 합계 구하기
-								$de_qry2=mysql_query( $dept2, $connect);
-								$de_row2=mysql_fetch_array($de_qry2);
+								$de_qry2=mysqli_query($connect, $dept2);
+								$de_row2=mysqli_fetch_array($de_qry2);
 
 								$loan1=" SELECT SUM(exp) AS in_total FROM cms_capital_cash_book  WHERE (com_div>0) AND class2='6'  $e_add   "; // 대여금 합계 구하기
-								$lo_qry1=mysql_query( $loan1, $connect);
-								$lo_row1=mysql_fetch_array($lo_qry1);
+								$lo_qry1=mysqli_query($connect, $loan1);
+								$lo_row1=mysqli_fetch_array($lo_qry1);
 								$loan2=" SELECT SUM(inc) AS out_total FROM cms_capital_cash_book  WHERE (com_div>0) AND class2='3'  $e_add   "; // 회수금 합계 구하기
-								$lo_qry2=mysql_query( $loan2, $connect);
-								$lo_row2=mysql_fetch_array($lo_qry2);
+								$lo_qry2=mysqli_query($connect, $loan2);
+								$lo_row2=mysqli_fetch_array($lo_qry2);
 
 								$cash_hand = number_format($ca_row1[in_total]-$ca_row2[out_total])." 원"; // 현금시재
 								$bank_balance=number_format($b_row1[in_total]-$b_row2[out_total])." 원"; // 계좌잔고
