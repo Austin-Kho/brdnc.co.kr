@@ -143,15 +143,17 @@ class Main_m extends CI_Model
 		return $ret_val;
 	}
 	/**************************************************************************************/
-
 	/**
-	 * [insert_data 데이터 입력함수]
+	 * [insert_data 데이터 입력 함수]
 	 * @param  [String] $table [테이블명]
 	 * @param  [Array] $data  [입력할 데이터]
-	 * @return [Boolean]        [입력 성공여부]
+	 * @param  string $now_field   [mysql now() 함수 입력할 필드명]
+	 * @return [Boolean]        [입력성공 여부]
 	 */
-	public function insert_data($table, $data) {
-		$result = $this->db->insert($table, $data);
+	public function insert_data($table, $data, $now_field='') {
+		$this->db->set($data);
+		if($now_field!='') $this->db->set($now_field, 'now()', false);
+		$result = $this->db->insert($table);
 		return $result;
 	}
 

@@ -64,11 +64,11 @@ class M3 extends CI_Controller {
 
 				$where=" WHERE is_data_reg = '0' ";
 				if($this->input->get('yr')>1) $where.=" AND biz_start_ym LIKE '".$this->input->get('yr')."%' ";
-				$data['new_pj_list'] = $this->main_m->sql_result(" SELECT * FROM cms_project11_info ".$where." ORDER BY biz_start_ym DESC  ");
+				$data['new_pj_list'] = $this->main_m->sql_result(" SELECT * FROM cms_project ".$where." ORDER BY biz_start_ym DESC  ");
 
 				$where=" WHERE is_data_reg = '1' ";
 				if($this->input->get('yr')>1) $where.=" AND biz_start_ym LIKE '".$this->input->get('yr')."%' ";
-				$data['end_pj_list'] = $this->main_m->sql_result(" SELECT * FROM cms_project11_info ".$where." ORDER BY biz_start_ym DESC ");
+				$data['end_pj_list'] = $this->main_m->sql_result(" SELECT * FROM cms_project ".$where." ORDER BY biz_start_ym DESC ");
 
 				if($this->input->get('new_pj') OR $this->input->get('end_pj')){
 					if($this->input->get('new_pj') && !$this->input->get('end_pj')){
@@ -77,7 +77,7 @@ class M3 extends CI_Controller {
 						$data['pre_pj_seq'] = $this->input->get('end_pj'); // 기등록 프로젝트인지
 					}
 					$where = " WHERE seq = '".$data['pre_pj_seq']."'  ";
-					$data['project'] = $this->main_m->sql_row(" SELECT pj_name, sort, data_cr, type_name FROM cms_project11_info ".$where);
+					$data['project'] = $this->main_m->sql_row(" SELECT pj_name, sort, data_cr, type_name FROM cms_project ".$where);
 					switch ($data['project']->sort) {
 						case '1': $data['sort']="아파트(일반분양)"; break;
 						case '2': $data['sort']="아파트(조합)"; break;
@@ -90,12 +90,12 @@ class M3 extends CI_Controller {
 						default: $data['sort']=""; break;
 					}
 					if($this->input->get('new_pj')) { // 최근 동록한 동과 라인 총 등록 수량 구하기
-						$data['reg_chk'] = $this->main_m->sql_num_result(" SELECT dong, ho FROM cms_project22_indi_table, cms_project11_info WHERE pj_seq = '".$data['pre_pj_seq']."' AND pj_seq = cms_project11_info.seq AND is_data_reg != 1 ORDER BY cms_project22_indi_table.seq DESC ");
+						$data['reg_chk'] = $this->main_m->sql_num_result(" SELECT dong, ho FROM cms_project_all_housing_unit, cms_project WHERE pj_seq = '".$data['pre_pj_seq']."' AND pj_seq = cms_project.seq AND is_data_reg != 1 ORDER BY cms_project_all_housing_unit.seq DESC ");
 					}
 					if($data['pre_pj_seq']){
 						$add_where = "";
 						if($this->input->get('type')) $add_where .= " AND type = '".$this->input->get('type')."' ";
-						$data['reg_dong'] = $this->main_m->sql_result(" SELECT dong FROM cms_project22_indi_table WHERE pj_seq = '".$data['pre_pj_seq']."' ".$add_where." GROUP BY dong  ");
+						$data['reg_dong'] = $this->main_m->sql_result(" SELECT dong FROM cms_project_all_housing_unit WHERE pj_seq = '".$data['pre_pj_seq']."' ".$add_where." GROUP BY dong  ");
 						if($this->input->get('dong')) $add_where .= " AND dong = '".$this->input->get('dong')."' ";
 
 						//페이지네이션 라이브러리 로딩 추가
@@ -103,7 +103,7 @@ class M3 extends CI_Controller {
 
 						//페이지네이션 설정/////////////////////////////////
 						$config['base_url'] = base_url('m3/project/1/1');   //페이징 주소
-						$config['total_rows'] = $this->main_m->sql_num_rows(" SELECT pj_seq, pj_name, type, dong, ho, type_name, type_color, is_hold FROM  cms_project22_indi_table, cms_project11_info WHERE pj_seq = ".$data['pre_pj_seq']." AND pj_seq=cms_project11_info.seq ".$add_where." ORDER BY cms_project22_indi_table.seq DESC ");  //게시물의 전체 갯수
+						$config['total_rows'] = $this->main_m->sql_num_rows(" SELECT pj_seq, pj_name, type, dong, ho, type_name, type_color, is_hold FROM  cms_project_all_housing_unit, cms_project WHERE pj_seq = ".$data['pre_pj_seq']." AND pj_seq=cms_project.seq ".$add_where." ORDER BY cms_project_all_housing_unit.seq DESC ");  //게시물의 전체 갯수
 						if( !$this->input->get('num')) $config['per_page'] = 10;  else $config['per_page'] = $this->input->get('num'); // 한 페이지에 표시할 게시물 수
 						$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 						$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -121,10 +121,10 @@ class M3 extends CI_Controller {
 
 						if($start != '' or $limit !='')	$limit = " LIMIT ".$start.", ".$limit." ";
 
-						$order = " ORDER BY cms_project22_indi_table.seq DESC  ";
+						$order = " ORDER BY cms_project_all_housing_unit.seq DESC  ";
 
 						if($this->input->get('order_reg') OR $this->input->get('order_reg')=="on"){
-							$order = " ORDER BY cms_project22_indi_table.seq ASC ";
+							$order = " ORDER BY cms_project_all_housing_unit.seq ASC ";
 						}
 						if($this->input->get('dong_sc')=="1"){
 							$order = " ORDER BY dong ASC  ";
@@ -156,7 +156,7 @@ class M3 extends CI_Controller {
 								$order .= " , dong DESC  ";
 							}
 						}
-						$data['reg_dong_ho'] = $this->main_m->sql_result(" SELECT cms_project22_indi_table.seq, pj_seq, pj_name, type, dong, ho, type_name, type_color, is_hold FROM  cms_project22_indi_table, cms_project11_info WHERE pj_seq = ".$data['pre_pj_seq']." AND pj_seq=cms_project11_info.seq ".$add_where." ".$order." ".$limit);
+						$data['reg_dong_ho'] = $this->main_m->sql_result(" SELECT cms_project_all_housing_unit.seq, pj_seq, pj_name, type, dong, ho, type_name, type_color, is_hold FROM  cms_project_all_housing_unit, cms_project WHERE pj_seq = ".$data['pre_pj_seq']." AND pj_seq=cms_project.seq ".$add_where." ".$order." ".$limit);
 					}
 				}
 
@@ -198,13 +198,13 @@ class M3 extends CI_Controller {
 					if($this->input->get('mode')=='end'){// 데이터 등록 마감
 						$end_dt = array('is_data_reg'=>'1');
 						$end_wr = array('seq'=>$this->input->get('seq'));
-						$pj_end = $this->main_m->update_data('cms_project11_info', $end_dt, $end_wr);
+						$pj_end = $this->main_m->update_data('cms_project', $end_dt, $end_wr);
 						if($pj_end) alert('정상적으로 데이터 등록 마감 처리 되었습니다.', base_url('m3/project/1/1'));
 
 					}else if($this->input->get('mode')=='re_reg'){ // 데이터 재등록
 						$rereg_dt = array('is_data_reg'=>'0');
 						$rereg_wr = array('seq'=>$this->input->get('seq'));
-						$pj_rereg = $this->main_m->update_data('cms_project11_info', $rereg_dt, $rereg_wr);
+						$pj_rereg = $this->main_m->update_data('cms_project', $rereg_dt, $rereg_wr);
 						if($pj_rereg) alert('정상적으로 마감 취소(재등록) 처리 되었습니다.', base_url('m3/project/1/1'));
 
 					}else if($this->input->get('mode')=='individual_reg'){ // 개별 등록 수정일 경우
@@ -235,7 +235,7 @@ class M3 extends CI_Controller {
 							for($i=0; $i<$fn[$j]; $i++){
 								$ho[$j] = $fl_range[$j][$i].$line[$j];
 								//기존에 등록되어 있는 동호수가 있는지 체크
-								$ck_rlt = $this->main_m->sql_result(" SELECT seq FROM cms_project22_indi_table WHERE pj_seq='".$this->input->post('pj_seq')."' AND dong='".$dong[$j]."' AND	ho ='".$ho[$j]."' ");
+								$ck_rlt = $this->main_m->sql_result(" SELECT seq FROM cms_project_all_housing_unit WHERE pj_seq='".$this->input->post('pj_seq')."' AND dong='".$dong[$j]."' AND	ho ='".$ho[$j]."' ");
 								if($ck_rlt) alert('이미 등록되어 있는 동호수와 중복되는 동호수가 있습니다.', '');
 							}
 						}
@@ -270,7 +270,7 @@ class M3 extends CI_Controller {
 										'is_hold' => $hold[$j],
 										'reg_time' => 'now()'
 									);
-									$bat_insert = $this->main_m->insert_data('cms_project22_indi_table', $bat_data);
+									$bat_insert = $this->main_m->insert_data('cms_project_all_housing_unit', $bat_data);
 									if(!$bat_insert) alert('데이터베이스 오류가 발생하였습니다.', base_url('m3/project/1/1/'));
 								}
 							}
@@ -300,7 +300,7 @@ class M3 extends CI_Controller {
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = base_url('m3/project/1/2/');   //페이징 주소
-				$config['total_rows'] = $this->main_m->sql_num_rows(' SELECT * FROM cms_project11_info '.$where.' ORDER BY biz_start_ym DESC ');  //게시물의 전체 갯수
+				$config['total_rows'] = $this->main_m->sql_num_rows(' SELECT * FROM cms_project '.$where.' ORDER BY biz_start_ym DESC ');  //게시물의 전체 갯수
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 4;  // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -319,9 +319,9 @@ class M3 extends CI_Controller {
 				if($start != '' or $limit !='')	$limit = " LIMIT ".$start.", ".$limit." ";
 
 				// 등록된 프로젝트 데이터
-				$data['all_pj'] = $this->main_m->sql_result(' SELECT * FROM cms_project11_info '.$where.' ORDER BY biz_start_ym DESC '.$limit);
+				$data['all_pj'] = $this->main_m->sql_result(' SELECT * FROM cms_project '.$where.' ORDER BY biz_start_ym DESC '.$limit);
 
-				if($this->input->get('project')) $data['project'] = $this->main_m->sql_result(' SELECT * FROM cms_project11_info WHERE seq = '.$this->input->get('project'));
+				if($this->input->get('project')) $data['project'] = $this->main_m->sql_result(' SELECT * FROM cms_project WHERE seq = '.$this->input->get('project'));
 
 				// 라이브러리 로드
 				$this->load->library('form_validation'); // 폼 검증
@@ -474,7 +474,7 @@ class M3 extends CI_Controller {
 						'biz_start_ym' => $biz_start_ym
 					);
 
-					$result = $this->main_m->update_data('cms_project11_info', $update_pj_data, $where = array('seq' => $this->input->post('project')));
+					$result = $this->main_m->update_data('cms_project', $update_pj_data, $where = array('seq' => $this->input->post('project')));
 
 					if($result) { // 등록 성공 시
 						alert('프로젝트 정보가  수정되었습니다.', base_url('m3/project/1/2/?project='.$this->input->post('project')));
@@ -651,11 +651,10 @@ class M3 extends CI_Controller {
 						'bridge_loan' => $this->input->post('bridge_loan', TRUE),
 						'pf_loan' => $this->input->post('pf_loan', TRUE),
 						'con_lead_time' => $this->input->post('con_lead_time', TRUE),
-						'biz_start_ym' => $biz_start_ym,
-						'reg_date' => 'now()'
+						'biz_start_ym' => $biz_start_ym
 					);
 
-					$result = $this->m3_m->insert_data('cms_project11_info', $new_pj_data);
+					$result = $this->main_m->insert_data('cms_project', $new_pj_data, 'reg_date');
 
 					if($result) { // 등록 성공 시
 						alert('프로젝트 정보가  등록되었습니다.', base_url('m3/project/2/1/'));

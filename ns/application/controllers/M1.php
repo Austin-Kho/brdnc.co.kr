@@ -111,7 +111,7 @@ class M1 extends CI_Controller {
 				$where = "";
 				if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
 				// 등록된 프로젝트 데이터
-				$data['all_pj'] = $this->main_m->sql_result(' SELECT * FROM cms_project11_info '.$where.' ORDER BY biz_start_ym DESC ');
+				$data['all_pj'] = $this->main_m->sql_result(' SELECT * FROM cms_project '.$where.' ORDER BY biz_start_ym DESC ');
 
 
 

@@ -64,7 +64,7 @@
 
 				//기존에 등록되어 있는 동호수가 있는지 체크
 				$ck_qry = "SELECT seq
-					FROM cms_project2_indi_table
+					FROM cms_project_all_housing_unit
 					WHERE pj_seq='$pj_seq' AND dong='$dong[$j]' AND	ho ='$ho[$j]'";
 				$ck_rlt = mysql_query($ck_qry, $connect);
 				$ck_row = mysql_fetch_array($ck_rlt);
@@ -100,7 +100,7 @@
 					$ho[$j] = $fl_range[$j][$i].$line[$j];
 					$floor = $fl_range[$j][$i];
 
-					$bat_qry="INSERT INTO `cms_project2_indi_table` ( `pj_seq`, `diff_no`, `type`, `dong`, `ho`, `floor`, `line`, `is_hold`, `reg_time`)
+					$bat_qry="INSERT INTO `cms_project_all_housing_unit` ( `pj_seq`, `diff_no`, `type`, `dong`, `ho`, `floor`, `line`, `is_hold`, `reg_time`)
 									        VALUES('$pj_seq', '$diff_no', '$type[$j]', '$dong[$j]', '$ho[$j]', '$floor', '$line[$j]', '$hold[$j]', now())";
 
 					//echo $bat_qry."<br>";
@@ -156,7 +156,7 @@
 		//$pay = $_REQUEST['pay'];
 		//$is_except = $_REQUEST['is_except'];
 
-		$query1 =" UPDATE cms_project2_indi_table SET dong = '$dong',
+		$query1 =" UPDATE cms_project_all_housing_unit SET dong = '$dong',
 					        				          ho = '$ho',
 											          type = '$type'
 				   WHERE seq = '$data' ";

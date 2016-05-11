@@ -153,7 +153,7 @@
 							</div>
 							<?
 								// 현재 몇동 몇라인 만 표시 쿼리 // 향후 미니멈 몇층부터 맥시멈 몇층까지 해당라인에 등록된 데이타 몇개 까지 표시할 것
-								$chk_qry = "SELECT dong, ho FROM cms_project2_indi_table, cms_project1_info WHERE pj_seq = '$pre_pj_seq' AND pj_seq = cms_project1_info.seq AND is_data_reg != 1 ORDER BY reg_time DESC";
+								$chk_qry = "SELECT dong, ho FROM cms_project_all_housing_unit, cms_project1_info WHERE pj_seq = '$pre_pj_seq' AND pj_seq = cms_project1_info.seq AND is_data_reg != 1 ORDER BY reg_time DESC";
 								$chk_rlt = mysql_query($chk_qry, $connect);
 								$chk_row = mysql_fetch_array($chk_rlt);
 								$total_n = mysql_num_rows($chk_rlt);
@@ -424,7 +424,7 @@
 											} else {
 												$type_sel_qry = " AND type = '$type_data_' ";
 											}
-											$query = "SELECT dong FROM cms_project2_indi_table WHERE pj_seq = '$pj_seq' $type_sel_qry GROUP BY dong";
+											$query = "SELECT dong FROM cms_project_all_housing_unit WHERE pj_seq = '$pj_seq' $type_sel_qry GROUP BY dong";
 											$result = mysql_query($query, $connect);
 											while($rows = mysql_fetch_array($result)){
 										?>
@@ -439,7 +439,7 @@
 									<select name="type_data_" style="width:70px;" onchange="submit();">
 										<option value="" <?if(!$type_data_) echo "selected";?>> 선 택
 										<?
-											$query = "SELECT type FROM cms_project2_indi_table WHERE pj_seq = '$pj_seq' GROUP BY type ORDER BY type";
+											$query = "SELECT type FROM cms_project_all_housing_unit WHERE pj_seq = '$pj_seq' GROUP BY type ORDER BY type";
 											$result = mysql_query($query, $connect);
 											while($rows = mysql_fetch_array($result)){
 										?>
@@ -500,7 +500,7 @@
 							if(!$limit||$limit==1) $limit_q = " LIMIT 30 ";
 							if($limit==2) $limit_q = "";
 
-							$query = "SELECT seq, type, dong, ho FROM cms_project2_indi_table $where $priority $limit_q";
+							$query = "SELECT seq, type, dong, ho FROM cms_project_all_housing_unit $where $priority $limit_q";
 							$result = mysql_query($query, $connect);
 							while($rows = mysql_fetch_array($result)){
 								if($rows[is_except]==1) $except_str = "<font color='#939593'>기분양 세대</font>"; else $except_str = "<font color='#000033'>분양대상 세대</font>";

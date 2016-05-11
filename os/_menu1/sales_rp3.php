@@ -106,10 +106,10 @@
 
 							<!-- 이부분 쿼리 향후 다시 작업 할 것 -->
 							<?
-								// 공공급세대 및 유보세대 구하기
+								// 공급세대 및 유보세대 구하기
 								$data_qry = "SELECT COUNT(*) AS total,
 														 SUM(is_hold) AS hold
-											   FROM cms_project2_indi_table WHERE pj_seq='$pj_list' ";
+											   FROM cms_project_all_housing_unit WHERE pj_seq='$pj_list' ";
 								$data_rlt = mysqli_query($connect, $data_qry);
 								$data_row = mysqli_fetch_array($data_rlt);
 
@@ -191,12 +191,12 @@
 						<?
 							}
 							//
-							$max_rlt = mysqli_query($connect, "SELECT MAX(ho) AS max_ho FROM cms_project2_indi_table WHERE pj_seq='$pj_list' "); // 해당 단지 최 고층 구하기
+							$max_rlt = mysqli_query($connect, "SELECT MAX(ho) AS max_ho FROM cms_project_all_housing_unit WHERE pj_seq='$pj_list' "); // 해당 단지 최 고층 구하기
 							$max_row = mysqli_fetch_array($max_rlt);
 							if(strlen($max_row[max_ho])==3) $max_floor = substr($max_row[max_ho], -3,1);
 							if(strlen($max_row[max_ho])==4) $max_floor = substr($max_row[max_ho], -4,2);
 
-							$dong_qry = " SELECT dong FROM cms_project2_indi_table WHERE pj_seq='$pj_list' GROUP BY dong ";  // 해당 단지 동 수 및 리스트 구하기
+							$dong_qry = " SELECT dong FROM cms_project_all_housing_unit WHERE pj_seq='$pj_list' GROUP BY dong ";  // 해당 단지 동 수 및 리스트 구하기
 							$dong_rlt = mysqli_query($connect, $dong_qry);
 							$num_rows = mysqli_num_rows($dong_rlt);
 							while($dong_rows = mysqli_fetch_array($dong_rlt)){ // 해당 동 만큼 반복
@@ -208,7 +208,7 @@
 						<?
 								for($j=0; $j<$max_floor; $j++){ // 최고층 수만큼 반복
 									$ho_qry = "SELECT MIN(RIGHT(ho,2)) AS st_line, MAX(RIGHT(ho,2)) AS dong_line
-												 FROM cms_project2_indi_table WHERE pj_seq='$pj_list' AND dong='$dong_rows[dong]' "; // 각 동별 라인수 구하기
+												 FROM cms_project_all_housing_unit WHERE pj_seq='$pj_list' AND dong='$dong_rows[dong]' "; // 각 동별 라인수 구하기
 									$ho_rlt = mysqli_query($connect, $ho_qry);
 									$ho_rows = mysqli_fetch_array($ho_rlt);  // 반복하기 위한 각 동별 라인 수
 									$floor_num = $max_floor-$j; // 층수
@@ -229,7 +229,7 @@
 										// $ho_ck_qry = "SELECT pj_ho, type_ho, is_except, is_pro_cont, is_contract, pro_contractor, pro_cont_date, contractor, cont_date
 										//				 FROM cms_project_data WHERE pj_seq='$pj_list' AND pj_dong='$dong_rows[pj_dong]' AND pj_ho='$ho_num' ";
 										$ho_ck_qry = "SELECT type, ho, is_hold
-														 FROM cms_project2_indi_table WHERE pj_seq='$pj_list' AND dong='$dong_rows[dong]' AND ho='$ho_num' ";
+														 FROM cms_project_all_housing_unit WHERE pj_seq='$pj_list' AND dong='$dong_rows[dong]' AND ho='$ho_num' ";
 										$ho_ck_rlt = mysqli_query($connect, $ho_ck_qry);
 										$ho_ck_row = mysqli_fetch_array($ho_ck_rlt);
 
