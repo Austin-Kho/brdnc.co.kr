@@ -267,10 +267,9 @@ class M3 extends CI_Controller {
 										'ho' => $ho[$j],
 										'floor' =>$floor,
 										'line' => $line[$j],
-										'is_hold' => $hold[$j],
-										'reg_time' => 'now()'
+										'is_hold' => $hold[$j]
 									);
-									$bat_insert = $this->main_m->insert_data('cms_project_all_housing_unit', $bat_data);
+									$bat_insert = $this->main_m->insert_data('cms_project_all_housing_unit', $bat_data, 'reg_time');
 									if(!$bat_insert) alert('데이터베이스 오류가 발생하였습니다.', base_url('m3/project/1/1/'));
 								}
 							}
