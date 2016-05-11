@@ -61,7 +61,7 @@
 	</tr>
 <?
 	 }
-	 mysql_free_result($result1);
+	 mysqli_free_result($result1);
 ?>
 <tr>
 		<td bgcolor="#EAEAEA"> 합 계 </td>

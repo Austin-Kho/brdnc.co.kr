@@ -12,8 +12,8 @@
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	$member_query = "SELECT is_admin, is_company, pj_seq, pj_where, pj_posi, auth_level FROM cms_member_table WHERE user_id = '$_SESSION[p_id]' ";
-	$member_result = mysql_query($member_query, $connect);
-	$member_row = mysql_fetch_array($member_result);
+	$member_result = mysqli_query($connect, $member_query);
+	$member_row = mysqli_fetch_array($member_result);
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ?>
 <!DOCTYPE HTML>
@@ -49,7 +49,7 @@
 		</script>
 	</head>
 	<body onclick="cal_del();">
-		<div id="loading" style="padding-top:530px;"><img src="../images/loading.gif"><br>loading...</div>
+		<!-- <div id="loading" style="padding-top:530px;"><img src="../images/loading.gif"><br>loading...</div> -->
 		<div id="wrap">
 			<header><!-- <div id="header"> -->
 				<? include '../include/top_nav.php'; ?>

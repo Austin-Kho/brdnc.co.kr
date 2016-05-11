@@ -75,9 +75,9 @@
 
 
 										$query="SELECT seq FROM cms_work_coun_log $add_where ORDER BY seq DESC";
-										$result=mysql_query($query, $connect);
-										$total_bnum=mysql_num_rows($result);     // 총 게시물 수   11111111111111111111
-										mysql_free_result($result);
+										$result=mysqli_query($connect, $query);
+										$total_bnum=mysqli_num_rows($result);     // 총 게시물 수   11111111111111111111
+										mysqli_free_result($result);
 										if($total_bnum==0){
 										*/////////
 									?>
@@ -93,8 +93,8 @@
 										$e = $index_num;
 
 										$query = "SELECT * FROM cms_work_coun_log $add_where ORDER BY coun_date DESC LIMIT $s, $e";
-										$result = mysql_query($query, $connect);
-										while($rows = mysql_fetch_array($result)){
+										$result = mysqli_query($connect, $query);
+										while($rows = mysqli_fetch_array($result)){
 									*/
 									?>
 									<!-- <div style="clear:left; float:left; width:25px; height:24px; padding-top:4px; border-width:0 1px 1px 0; border-style:solid; border-color:#dddddd; text-align:center;"><input type="checkbox" name="seq[]" value="<?$rows[seq]?>"></div>

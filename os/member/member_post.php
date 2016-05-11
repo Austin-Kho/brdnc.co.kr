@@ -18,7 +18,7 @@
 
 	$user_id=$_POST['user_id'];
 	if($admin_id==$user_id) $is_admin=1; // 콘피그 아이디와 같은 아이디 일경우 is_admin = 1 로 처리
-	$passwd=md5($_POST['passwd']);
+	$passwd=password_hash($_POST['passwd'], PASSWORD_BCRYPT);
 	$name=$_POST['name'];
 	$email1=$_POST['email1'];
 	$email2=$_POST['email2'];

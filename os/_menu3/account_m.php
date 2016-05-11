@@ -135,7 +135,7 @@
 					</div>
 					<?
 						}//d2 계정 나열 종료
-						mysql_free_result($d3_rlt);
+						mysqli_free_result($d3_rlt);
 					?>
 				</div>
 
@@ -172,7 +172,7 @@
 					</div>
 					<?
 						}//d2 계정 나열 종료
-						mysql_free_result($d3_rlt);
+						mysqli_free_result($d3_rlt);
 					?>
 				</div>
 
@@ -211,7 +211,7 @@
 					</div>
 					<?
 						}//d2 계정 나열 종료
-						mysql_free_result($d3_rlt);
+						mysqli_free_result($d3_rlt);
 					?>
 				</div>
 
@@ -250,7 +250,7 @@
 					</div>
 					<?
 						}//d2 계정 나열 종료
-						mysql_free_result($d3_rlt);
+						mysqli_free_result($d3_rlt);
 					?>
 				</div>
 
@@ -288,7 +288,7 @@
 					</div>
 					<?
 						}//d2 계정 나열 종료
-						mysql_free_result($d3_rlt);
+						mysqli_free_result($d3_rlt);
 					?>
 				</div>
 				</form>

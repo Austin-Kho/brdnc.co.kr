@@ -105,7 +105,7 @@
 					$query="SELECT mnum FROM cms_message_info WHERE receiveid_fk='$_SESSION[p_id]' AND receive_del='N'";
 					$result=mysql_query($query, $connect);
 					$total_bnum=mysql_num_rows($result);     // 총 게시물 수   11111111111111111111
-					mysql_free_result($result);
+					mysqli_free_result($result);
 					if($total_bnum==0){
 				?>
 				<div style="clear:left; height:80px; border-width: 0 0 1px 0; border-color:#CFCFCF; border-style: solid; text-align:center; padding-top:50px; margin-bottom:10px;">받은 쪽지가 없습니다.</div>
@@ -140,7 +140,7 @@
 				</div>
 				<?
 					}
-					mysql_free_result($result2);
+					mysqli_free_result($result2);
 				?>
 				<div style="height:35; text-align:center; padding-top:10px;">
 					<span>

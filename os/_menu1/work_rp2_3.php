@@ -4,20 +4,20 @@
 									<?
 										$seq = $_REQUEST['seq'];
 										$qry = "SELECT * FROM cms_work_log WHERE seq='$seq'";
-										$rlt = mysql_query($qry, $connect);
-										$row = mysql_fetch_array($rlt);
+										$rlt = mysqli_query($connect, $qry);
+										$row = mysqli_fetch_array($rlt);
 
 										$pj_where = explode("-", $row[pj_where]);
 
 										//현장명 구하기
-										$pj_name_rlt = mysql_query("SELECT pj_name FROM cms_project1_info WHERE seq='$row[pj_seq]' ", $connect);
-										$pj_name_row = mysql_fetch_array($pj_name_rlt);
+										$pj_name_rlt = mysqli_query($connect, "SELECT pj_name FROM cms_project1_info WHERE seq='$row[pj_seq]' ");
+										$pj_name_row = mysqli_fetch_array($pj_name_rlt);
 										// 소속본부 구하기
-										$headq_rlt = mysql_query("SELECT headq FROM cms_resource_headq WHERE seq='$pj_where[0]' ", $connect);
-										$headq_row = mysql_fetch_array($headq_rlt);
+										$headq_rlt = mysqli_query($connect, "SELECT headq FROM cms_resource_headq WHERE seq='$pj_where[0]' ");
+										$headq_row = mysqli_fetch_array($headq_rlt);
 										// 소속 팀 구하기
-										$team_rlt = mysql_query("SELECT team FROM cms_resource_team WHERE seq='$pj_where[1]' ", $connect);
-										$team_row = mysql_fetch_array($team_rlt);
+										$team_rlt = mysqli_query($connect, "SELECT team FROM cms_resource_team WHERE seq='$pj_where[1]' ");
+										$team_row = mysqli_fetch_array($team_rlt);
 
 										/***************** 당일청계약 내용 *******************/
 										$co_sort = explode("/", $row[co_sort]);
@@ -51,19 +51,19 @@
 									<div style="height:18px; background-color:#e8e8e8; margin-bottom:2px;"></div>
 									<?
 										$move_q = "SELECT MAX(work_date) AS x, MIN(work_date) AS n FROM cms_work_log WHERE pj_seq='$row[pj_seq]' AND pj_where='$row[pj_where]' ";
-										$move_rlt = mysql_query($move_q, $connect);
-										$move_row = mysql_fetch_array($move_rlt);
+										$move_rlt = mysqli_query($connect, $move_q);
+										$move_row = mysqli_fetch_array($move_rlt);
 
 										$cd = strtotime($row[work_date]);
 										$pre_date = date('Y-m-d', mktime(0,0,0,date('m',$cd),date('d',$cd)-1,date('Y',$cd)));
 										$nex_date = date('Y-m-d', mktime(0,0,0,date('m',$cd),date('d',$cd)+1,date('Y',$cd)));
 
 										// 어제 업무일지 seq 구하기
-										$pre_rlt = mysql_query("SELECT seq FROM cms_work_log WHERE pj_seq='$row[pj_seq]' AND pj_where='$row[pj_where]' AND work_date='$pre_date' ", $connect);
-										$pre_row = mysql_fetch_array($pre_rlt);
+										$pre_rlt = mysqli_query($connect, "SELECT seq FROM cms_work_log WHERE pj_seq='$row[pj_seq]' AND pj_where='$row[pj_where]' AND work_date='$pre_date' ");
+										$pre_row = mysqli_fetch_array($pre_rlt);
 										// 내일 업무일지 seq 구하기
-										$nex_rlt = mysql_query("SELECT seq FROM cms_work_log WHERE pj_seq='$row[pj_seq]' AND pj_where='$row[pj_where]' AND work_date='$nex_date' ", $connect);
-										$nex_row = mysql_fetch_array($nex_rlt);
+										$nex_rlt = mysqli_query($connect, "SELECT seq FROM cms_work_log WHERE pj_seq='$row[pj_seq]' AND pj_where='$row[pj_where]' AND work_date='$nex_date' ");
+										$nex_row = mysqli_fetch_array($nex_rlt);
 									?>
 									<div style="clear:left; float:left; width:50px; height:31px; padding-top:5px; text-align:center;">
 										<input type="button" value="Pre" onclick="location.href='sales_main.php?m_di=2&amp;s_di=2&amp;ss_di=3&amp;pj_list=<?=$pj_list?>&amp;headq=<?=$pj_where[0]?>&amp;team=<?=$pj_where[1]?>&amp;seq=<?=$pre_row[seq]?>' " <?if(trim($move_row[n])==trim($row[work_date])) echo "disabled";?>>

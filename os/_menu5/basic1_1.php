@@ -65,7 +65,7 @@
 										$query="SELECT seq FROM cms_com_div $add_where ORDER BY seq";
 										$result=mysql_query($query, $connect);
 										$total_bnum=mysql_num_rows($result);     // 총 게시물 수   11111111111111111111
-										mysql_free_result($result);
+										mysqli_free_result($result);
 										if($total_bnum==0){
 									?>
 									<div style="clear:left; height:80px; text-align:center; padding-top:50px; margin-bottom:10px;">등록된 데이터가 없습니다.</div>

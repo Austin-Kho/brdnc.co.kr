@@ -37,7 +37,7 @@
 												while($d_rows = mysql_fetch_array($d_rlt)){
 											?>
 											<option value="<?=$d_rows[seq]?>" <?if($d_rows[seq]==$row[div_seq]&&$d_rows[seq]<>0) echo "selected";?>><?=$d_rows[div_name]?>
-											<? } mysql_free_result($d_rlt);?>
+											<? } mysqli_free_result($d_rlt);?>
 										</select>
 									</div>
 									<div style="float:left; width:135px; height:26px; padding:5px 0 0 15px; border-width:0 1px 1px 0;" class="blue_title">직 급 <font color="red">*</font></div>

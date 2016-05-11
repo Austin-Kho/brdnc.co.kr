@@ -81,7 +81,7 @@
 						while($rows=mysql_fetch_array($result)){
 							 $total_ba+=$rows[inc]-$rows[exp];
 						}
-						if($result) mysql_free_result($result);
+						if($result) mysqli_free_result($result);
 
 						$index_num = 5;                 // 한 페이지 표시할 목록 개수 22222222222222
 						$page_num = 10;								  // 한 페이지에 표시할 페이지 수 33333
@@ -123,7 +123,7 @@
 				</div>
 					<?
 						}
-						mysql_free_result($result1);
+						mysqli_free_result($result1);
 					?>
 				<div style="height:35; text-align:center; padding-top:10px;">
 					<span>

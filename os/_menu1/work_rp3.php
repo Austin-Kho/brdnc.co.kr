@@ -7,8 +7,8 @@
 					</div>
 					<!-- ============================= subject table end ============================= -->
 					<?
-						$_m1_2_3_rlt = mysql_query("select _m1_2_3 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$_m1_2_3_row = mysql_fetch_array($_m1_2_3_rlt);
+						$_m1_2_3_rlt = mysqli_query($connect, "select _m1_2_3 from cms_mem_auth where user_id='$_SESSION[p_id]' ");
+						$_m1_2_3_row = mysqli_fetch_array($_m1_2_3_rlt);
 
 						if(!$_m1_2_3_row[_m1_2_3]||$_m1_2_3_row[_m1_2_3]==0){
 					?>
@@ -69,8 +69,8 @@
 											$where=" WHERE start_date LIKE '$year_frm%' ";
 										}
 										$qry = "SELECT seq, pj_name FROM cms_project1_info $where ORDER BY start_date DESC ";
-										$rlt = mysql_query($qry, $connect);
-										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
+										$rlt = mysqli_query($connect, $qry);
+										for($i=0; $rows=mysqli_fetch_array($rlt); $i++){
 									?>
 									<option value="<?=$rows[seq]?>" <?if($pj_list==$rows[seq]) echo "selected"; ?>><?=$rows[pj_name]?>
 									<? } ?>
@@ -84,8 +84,8 @@
 									<option value="" <?if(!$headq) echo "selected"?>> 선 택
 									<?
 										$qry = "SELECT seq, headq FROM cms_resource_headq WHERE pj_seq='$pj_list' ORDER BY seq ";
-										$rlt = mysql_query($qry, $connect);
-										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
+										$rlt = mysqli_query($connect, $qry);
+										for($i=0; $rows=mysqli_fetch_array($rlt); $i++){
 									?>
 									<option value="<?=$rows[seq]?>" <?if($headq==$rows[seq]) echo "selected"; ?>><?=$rows[headq]?>
 									<? } ?>
@@ -99,8 +99,8 @@
 									<!-- <option value="" <?if(!$team) echo "selected"?>> 선 택
 									<?
 										$qry = "SELECT seq, team FROM cms_resource_team WHERE pj_seq='$pj_list' AND headq_seq='$headq' ORDER BY seq ";
-										$rlt = mysql_query($qry, $connect);
-										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
+										$rlt = mysqli_query($connect, $qry);
+										for($i=0; $rows=mysqli_fetch_array($rlt); $i++){
 									?>
 									<option value="<?=$rows[seq]?>" <?if($team==$rows[seq]) echo "selected"; ?>><?=$rows[team]?>
 									<? } ?>
@@ -113,13 +113,13 @@
 								<select name="worker" onchange="submit();" class="inputstyle2" style="height:22px; width:80px;"> --><!-- ==================================== 담당사용자 리스트 ===================================== -->
 									<!-- <option value="" <?if(!$worker) echo "selected"?>> 선 택
 									<?
-										$p_rlt = mysql_query("SELECT headq, team FROM cms_resource_headq, cms_resource_team WHERE cms_resource_headq.seq='$headq' AND cms_resource_team.seq='$team' ", $connect);
-										$p_row = mysql_fetch_array($p_rlt);
+										$p_rlt = mysqli_query($connect, "SELECT headq, team FROM cms_resource_headq, cms_resource_team WHERE cms_resource_headq.seq='$headq' AND cms_resource_team.seq='$team' ");
+										$p_row = mysqli_fetch_array($p_rlt);
 										$position = trim($p_row[headq])."-".trim($p_row[team]);
 
 										$qry = "SELECT user_id, name FROM cms_member_table WHERE pj_seq='$pj_list' AND pj_where='$position' ORDER BY no";
-										$rlt = mysql_query($qry, $connect);
-										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
+										$rlt = mysqli_query($connect, $qry);
+										for($i=0; $rows=mysqli_fetch_array($rlt); $i++){
 									?>
 									<option value="<?=$rows[user_id]?>" <?if($worker==$rows[user_id]) echo "selected"; ?>><?=$rows[name]?>
 									<? } ?>
@@ -141,15 +141,15 @@
 							<div style="float:left; width:120px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">
 								<font color='#cc0000'>*</font> 프로젝트 명
 							<?
-								$result = mysql_query("SELECT seq, pj_name FROM cms_project1_info, cms_member_table WHERE seq=pj_seq AND user_id='$_SESSION[p_id]' ", $connect);
-								$row = mysql_fetch_array($result);
+								$result = mysqli_query($connect, "SELECT seq, pj_name FROM cms_project1_info, cms_member_table WHERE seq=pj_seq AND user_id='$_SESSION[p_id]' ");
+								$row = mysqli_fetch_array($result);
 							?>
 							</div>
 							<div style="float:left; width:260px; height:26px; padding:9px 0px 0 0px; text-align:center;"><? echo "<font color='#cc0000'>*</font> <b>".$row[pj_name]."</b>";?></div>
 							<div style="float:left; width:120px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">소 속</div>
 							<?
-								$w_rlt = mysql_query("SELECT headq, team FROM cms_resource_headq, cms_resource_team WHERE cms_resource_headq.seq='$headq' AND cms_resource_team.seq='$team' ", $connect);
-								$w_row = mysql_fetch_array($w_rlt);
+								$w_rlt = mysqli_query($connect, "SELECT headq, team FROM cms_resource_headq, cms_resource_team WHERE cms_resource_headq.seq='$headq' AND cms_resource_team.seq='$team' ");
+								$w_row = mysqli_fetch_array($w_rlt);
 							?>
 							<div style="float:left; width:160px; height:26px; padding:9px 0px 0 0px; text-align:center;"><?=$w_row[headq]?> <font color="#0066ff">▶</font> <?=$w_row[team]?></div>
 							<div style="float:left; width:128px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">담당자</div>

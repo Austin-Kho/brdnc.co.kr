@@ -10,7 +10,7 @@
 	if(!isset($_SESSION[p_id])||!isset($_SESSION[p_name])){
 		err_msg('로그인 정보가 없습니다. 다시 로그인해 주세요.');
 	}
-	$category= $_REQUEST['category'];	
+	$category= $_REQUEST['category'];
 	$fn = $_REQUEST['fn'];
 	$frm=$_REQUEST['frm'];
 ?>
@@ -24,7 +24,7 @@
 	<script language="JavaScript" src="../common/global.js"></script>
 	<script type="text/javascript">
 	<!--
-		
+
 		function value_put(obj){
 			 var fn = '<?=$fn?>';
 			 var form_obj=eval("opener.document.<?=$frm?>."+fn);
@@ -68,15 +68,15 @@
 				<td align="center" height="32" background="../img/bg.jpg">
 				<font color="#4C63BD" style="font-size:11pt"><b>중분류(BRAND) 관리</b></font>
 				</td>
-			</tr>			
+			</tr>
 			<tr bgcolor="ffffff">
-				<td style="padding:13 0 0 0px">				
+				<td style="padding:13 0 0 0px">
 				<table border="0" align="center" width="96%" height="100%" cellspacing="0" cellpadding="0">
 				<tr height="10">
 					<td></td>
 				</tr>
 				<tr height="28">
-					<td>					
+					<td>
 					<table border="0" width="100%" height="100%" cellspacing="0" cellpadding="0">
 					<tr align="center" height="35">
 						<td width="100%" bgcolor="#EAEAEA" style="border-width: 1 0 1 0; border-color:#CFCFCF; border-style: solid;" colspan="4">
@@ -88,7 +88,7 @@
 								<td align="right">
 									<?
 										$qry="select classify from cms_stock_1st_classify ORDER BY no asc";
-										$rst=mysql_query($qry, $connect);	
+										$rst=mysql_query($qry, $connect);
 									?>
 									<select name="category" OnChange="sel_chn(this.value)" <?if($frm=='in_stock_frm') echo "disabled";?>>
 									<?
@@ -107,7 +107,7 @@
 					</tr>
 					<tr>
 						<td colspan="4" align="center" style="padding:8 0 8 0px">
-							<input type="text" name="br_serch" size="30" class="inputStyle2" style="height:20px" onmouseover="cngClass(this,'inputStyle22')" onmouseout="cngClass(this,'inputStyle2');"> 
+							<input type="text" name="br_serch" size="30" class="inputStyle2" style="height:20px" onmouseover="cngClass(this,'inputStyle22')" onmouseout="cngClass(this,'inputStyle2');">
 							<input type="button" value=" 검 색 " onclick="submit();" class= "inputStyle1">
 						</td>
 					</tr>
@@ -118,7 +118,7 @@
 						<td width="70%" style="border-width: 1 0 1 0; border-color:#CFCFCF; border-style: solid;">삭제</td>
 					</tr>
 					<?
-						$total_bnum = $_REQUEST['total_bnum'];			
+						$total_bnum = $_REQUEST['total_bnum'];
 						// $category = $_REQUEST['category'];
 
 						$query="select * from cms_stock_2nd_classify where 1st_classify='$category' ";
@@ -126,15 +126,15 @@
 						if(!$total_bnum) {
 							 $total_bnum = mysql_num_rows($result);
 						}     // 총 게시물 수   11111111111111111111
-						mysql_free_result($result);
-						
+						mysqli_free_result($result);
+
 						$page=$_GET['page'];
 						$gb=$_REQUEST['gb'];
 						// $category = $_REQUEST['category'];
 
 						$index_num = 6;                 // 한 페이지 표시할 목록 개수 22222222222222
 						$page_num = 10;								  // 한 페이지에 표시할 페이지 수 33333
-						$start=$_REQUEST['start'];	
+						$start=$_REQUEST['start'];
 						if(!$start) $start = 1;              // 현재페이지 444444444
 						$s = ($start-1)*$index_num;
 						$e = $index_num;
@@ -163,11 +163,11 @@
 					</tr>
 					<?
 						}
-						mysql_free_result($result2);
+						mysqli_free_result($result2);
 					?>
 					</table>
 					</td>
-				</tr>									
+				</tr>
 				<tr>
 					<td valign="top" align="center">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">

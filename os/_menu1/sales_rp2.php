@@ -7,8 +7,8 @@
 					</div>
 					<!-- ============================= subject table end ============================= -->
 					<?
-						$_m1_1_2_rlt = mysql_query("select _m1_1_2 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$_m1_1_2_row = mysql_fetch_array($_m1_1_2_rlt);
+						$_m1_1_2_rlt = mysqli_query($connect, "select _m1_1_2 from cms_mem_auth where user_id='$_SESSION[p_id]' ");
+						$_m1_1_2_row = mysqli_fetch_array($_m1_1_2_rlt);
 
 						if(!$_m1_1_2_row[_m1_1_2]||$_m1_1_2_row[_m1_1_2]==0){
 					?>
@@ -35,8 +35,8 @@
 							if(!$pj_list) $pj_list = 1;
 							$data_cr=$_REQUEST['data_cr'];
 
-							$result=mysql_query("SELECT data_cr FROM cms_project1_info WHERE seq='$pj_list' ", $connect);
-							$row=mysql_fetch_array($result);
+							$result=mysqli_query($connect, "SELECT data_cr FROM cms_project1_info WHERE seq='$pj_list' ");
+							$row=mysqli_fetch_array($result);
 							$data_cr = $row[data_cr];
 						?>
 						<form method="post" name="set1" action="">
@@ -51,8 +51,8 @@
 							<!-- ============ 본사 직원일 때 프로젝트 선택 가능 시작 ============  -->
 							<?
 								if($member_row[is_company]==1){
-								$pj_rlt = mysql_query("SELECT seq FROM cms_project1_info ORDER BY seq DESC LIMIT 1", $connect);
-								$pj_row = mysql_fetch_array($pj_rlt);
+								$pj_rlt = mysqli_query($connect, "SELECT seq FROM cms_project1_info ORDER BY seq DESC LIMIT 1");
+								$pj_row = mysqli_fetch_array($pj_rlt);
 								$year_frm=$_REQUEST['year_frm'];
 							?>
 							<div style="float:left;  width:120px; height:28px; padding-top:7px; background-color:#F4F4F4; text-align:center; color:#000000;">년도 별</div>
@@ -77,8 +77,8 @@
 											$where=" WHERE start_date LIKE '$year_frm%' ";
 										}
 										$qry = "SELECT * FROM cms_project1_info $where ORDER BY start_date DESC ";
-										$rlt = mysql_query($qry, $connect);
-										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
+										$rlt = mysqli_query($connect, $qry);
+										for($i=0; $rows=mysqli_fetch_array($rlt); $i++){
 									?>
 									<option value="<?=$rows[seq]?>" <?if($pj_list==$rows[seq]) echo "selected"; ?>><?=$rows[pj_name]?>
 									<? } ?>
@@ -97,15 +97,15 @@
 							<div style="float:left; width:120px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">
 								<font color='#cc0000'>*</font> 프로젝트 명
 							<?
-								$result = mysql_query("SELECT seq, pj_name FROM cms_project1_info, cms_member_table WHERE seq=pj_seq AND user_id='$_SESSION[p_id]' ", $connect);
-								$row = mysql_fetch_array($result);
+								$result = mysqli_query("SELECT seq, pj_name FROM cms_project1_info, cms_member_table WHERE seq=pj_seq AND user_id='$_SESSION[p_id]' ", $connect);
+								$row = mysqli_fetch_array($result);
 							?>
 							</div>
 							<div style="float:left; width:260px; height:26px; padding:9px 0px 0 0px; text-align:center;"><? echo "<font color='#cc0000'>*</font> <b>".$row[pj_name]."</b>";?></div>
 							<div style="float:left; width:120px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">소 속</div>
 							<?
-								$w_rlt = mysql_query("SELECT headq, team FROM cms_resource_headq, cms_resource_team WHERE cms_resource_headq.seq='$headq' AND cms_resource_team.seq='$team' ", $connect);
-								$w_row = mysql_fetch_array($w_rlt);
+								$w_rlt = mysqli_query($connect, "SELECT headq, team FROM cms_resource_headq, cms_resource_team WHERE cms_resource_headq.seq='$headq' AND cms_resource_team.seq='$team' ");
+								$w_row = mysqli_fetch_array($w_rlt);
 							?>
 							<div style="float:left; width:160px; height:26px; padding:9px 0px 0 0px; text-align:center;"><?=$w_row[headq]?> <font color="#0066ff">▶</font> <?=$w_row[team]?></div>
 							<div style="float:left; width:128px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">담당자</div>
@@ -128,8 +128,8 @@
 
 							if($mode=="modi"){ // 계약물건 정보 수정일 때
 								$mo_qry = "SELECT * FROM cms_project_data WHERE pj_seq='$pj_list' AND con_no='$con_no' LIMIT 1";
-								$mo_rlt = mysql_query($mo_qry, $connect);
-								$mo_row = mysql_fetch_array($mo_rlt);
+								$mo_rlt = mysqli_query($mo_qry, $connect);
+								$mo_row = mysqli_fetch_array($mo_rlt);
 
 								if(!$cont_sort1){ // 거래구분을 손대지 않았으면
 									if($mo_row[cancel]==1){ // 해지물건인 경우
@@ -179,8 +179,8 @@
 										if($mode=="modi")  $where_add .= " AND con_no = '$mo_row[con_no]' ";
 
 										$diff_qry = "SELECT diff_no FROM cms_project_data $where_add GROUP BY diff_no ORDER BY diff_no ";
-										$diff_rlt = mysql_query($diff_qry, $connect);
-										while($diff_rows = mysql_fetch_array($diff_rlt)){
+										$diff_rlt = mysqli_query($connect, $diff_qry);
+										while($diff_rows = mysqli_fetch_array($diff_rlt)){
 									?>
 									<option value="<?=$diff_rows[diff_no]?>" <?if($diff_no==$diff_rows[diff_no]) echo 'selected'?>><?=$diff_rows[diff_no]." 차"?>
 									<? } ?>
@@ -201,8 +201,8 @@
 										if($mode=="modi")  $where_add .= " AND con_no = '$mo_row[con_no]' ";
 
 										$type_qry = "SELECT type_ho FROM cms_project_data $where_add GROUP BY type_ho ORDER BY type_ho ";
-										$type_rlt = mysql_query($type_qry, $connect);
-										while($type_rows = mysql_fetch_array($type_rlt)){
+										$type_rlt = mysqli_query($connect, $type_qry);
+										while($type_rows = mysqli_fetch_array($type_rlt)){
 									?>
 									<option value="<?=$type_rows[type_ho]?>" <?if($type==$type_rows[type_ho]) echo 'selected'?>><?=$type_rows[type_ho]?>
 									<? } ?>
@@ -221,8 +221,8 @@
 										if(!$mode&&$cont_sort1==2&&$cont_sort3==4) $where_add .= " AND is_contract=1 ";
 
 										$dong_qry="SELECT pj_dong FROM cms_project_data $where_add GROUP BY pj_dong ORDER BY pj_dong ";
-										$dong_rlt = mysql_query($dong_qry, $connect);
-										while($dong_rows = mysql_fetch_array($dong_rlt)){
+										$dong_rlt = mysqli_query($connect, $dong_qry);
+										while($dong_rows = mysqli_fetch_array($dong_rlt)){
 									?>
 									<option value="<?=$dong_rows[pj_dong]?>"  <?if($dong==$dong_rows[pj_dong]) echo 'selected'?>><?=$dong_rows[pj_dong]?>동
 									<? } ?>
@@ -240,8 +240,8 @@
 										if(!$mode&&$cont_sort1==2&&$cont_sort3==4) $where_add .= " AND is_contract=1 ";
 
 										$ho_qry="SELECT pj_ho FROM cms_project_data $where_add ORDER BY pj_ho DESC ";
-										$ho_rlt = mysql_query($ho_qry, $connect);
-										while($ho_rows = mysql_fetch_array($ho_rlt)){
+										$ho_rlt = mysqli_query($connect, $ho_qry);
+										while($ho_rows = mysqli_fetch_array($ho_rlt)){
 									?>
 									<option value="<?=$ho_rows[pj_ho]?>"  <?if($ho==$ho_rows[pj_ho]) echo 'selected'?>><?=$ho_rows[pj_ho]?>호
 									<? } ?>
@@ -261,8 +261,8 @@
 										if($mode=="modi")  $where_add .= " AND con_no = '$mo_row[con_no]' ";
 
 										$con_qry="SELECT con_no FROM cms_project_data $where_add ORDER BY con_no LIMIT 15";
-										$con_rlt = mysql_query($con_qry, $connect);
-										while($con_rows = mysql_fetch_array($con_rlt)){
+										$con_rlt = mysqli_query($connect, $con_qry);
+										while($con_rows = mysqli_fetch_array($con_rlt)){
 									?>
 									<option value="<?=$con_rows[con_no]?>"  <?if($con_no==$con_rows[con_no]) echo 'selected'?>><?=$con_rows[con_no]?>
 									<? } ?>
@@ -292,8 +292,8 @@
 						<?
 							if($data_cr==0) $query = "SELECT * FROM cms_project_data WHERE pj_seq='$pj_list' AND type_ho='$type' AND pj_dong='$dong' AND pj_ho='$ho' ";// 동호수별 관리일 때
 							if($data_cr==1) $query = "SELECT * FROM cms_project_data WHERE pj_seq='$pj_list' AND con_no='$con_no' "; /////////////////////////////////////// 계약관리번호별 관리일 때
-							$c_result = mysql_query($query, $connect);
-							$cont_row = mysql_fetch_array($c_result);
+							$c_result = mysqli_query($connect, $query);
+							$cont_row = mysqli_fetch_array($c_result);
 
 							if($cont_row[is_except]==1){
 								$condition = "<font color='#000000'>기 분양 세대</font>";
@@ -503,8 +503,8 @@
 										$where_add = " WHERE 1=1 ";
 										if($pj_list) $where_add.=" AND pj_seq='$pj_list' ";
 										$qry = "SELECT seq, headq FROM cms_resource_headq $where_add GROUP BY headq ORDER BY headq";
-										$rlt = mysql_query($qry, $connect);
-										while($row = mysql_fetch_array($rlt)){
+										$rlt = mysqli_query($connect, $qry);
+										while($row = mysqli_fetch_array($rlt)){
 									?>
 									<option value="<?=$row[headq]?>" <?if($row[headq]==$worker_where[0]) echo "selected";?>><?=$row[headq]?>
 									<? } ?>
@@ -517,8 +517,8 @@
 										$where_add = " WHERE 1=1 ";
 										if($pj_list) $where_add.=" AND pj_seq='$pj_list' ";
 										$qry = "SELECT seq, team FROM cms_resource_team $where_add GROUP BY team ORDER BY team";
-										$rlt = mysql_query($qry, $connect);
-										while($row = mysql_fetch_array($rlt)){
+										$rlt = mysqli_query($connect, $qry);
+										while($row = mysqli_fetch_array($rlt)){
 									?>
 									<option value="<?=$row[team]?>" <?if($row[team]==$worker_where[1]) echo "selected";?>><?=$row[team]?>
 									<? } ?>

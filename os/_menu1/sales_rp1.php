@@ -7,8 +7,8 @@
 					</div>
 					<!-- ============================= subject table end ============================= -->
 					<?
-						$_m1_1_1_rlt = mysql_query("select _m1_1_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$_m1_1_1_row = mysql_fetch_array($_m1_1_1_rlt);
+						$_m1_1_1_rlt = mysqli_query($connect, "select _m1_1_1 from cms_mem_auth where user_id='$_SESSION[p_id]' ");
+						$_m1_1_1_row = mysqli_fetch_array($_m1_1_1_rlt);
 
 						if(!$_m1_1_1_row[_m1_1_1]||$_m1_1_1_row[_m1_1_1]==0){ // 이 페이지 조회 권한 없을 때
 					?>
@@ -25,8 +25,8 @@
 					<?
 						}else{
 							$auth_qry = "SELECT * FROM cms_member_table WHERE user_id='$_SESSION[p_id]' ";
-							$auth_rlt = mysql_query($auth_qry, $connect);
-							$auth_row= mysql_fetch_array($auth_rlt);
+							$auth_rlt = mysqli_query($connect, $auth_qry);
+							$auth_row= mysqli_fetch_array($auth_rlt);
 
 							// 이 페이지 쓰기 권한 설정하기
 							$auth_level=2; // 이페이지 마스터 쓰기 권한 레벨
@@ -48,8 +48,8 @@
 							<!-- ============ 본사 직원일 때 프로젝트 선택 가능 시작 ============  -->
 							<?
 								if($member_row[is_company]==1){
-								$pj_rlt = mysql_query("SELECT seq FROM cms_project1_info ORDER BY seq DESC LIMIT 1", $connect);
-								$pj_row = mysql_fetch_array($pj_rlt);
+								$pj_rlt = mysqli_query($connect, "SELECT seq FROM cms_project1_info ORDER BY seq DESC LIMIT 1");
+								$pj_row = mysqli_fetch_array($pj_rlt);
 								$year_frm=$_REQUEST['year_frm'];
 								$pj_list=$_REQUEST['pj_list'];
 								if(!$pj_list) $pj_list = 1;
@@ -76,8 +76,8 @@
 											$where=" WHERE start_date LIKE '$year_frm%' ";
 										}
 										$qry = "SELECT * FROM cms_project1_info $where ORDER BY start_date DESC ";
-										$rlt = mysql_query($qry, $connect);
-										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
+										$rlt = mysqli_query($connect, $qry);
+										for($i=0; $rows=mysqli_fetch_array($rlt); $i++){
 									?>
 									<option value="<?=$rows[seq]?>" <?if($pj_list==$rows[seq]) echo "selected"; ?>><?=$rows[pj_name]?>
 									<? } ?>
@@ -96,15 +96,15 @@
 							<div style="float:left; width:120px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">
 								<font color='#cc0000'>*</font> 프로젝트 명
 							<?
-								$result = mysql_query("SELECT seq, pj_name FROM cms_project1_info, cms_member_table WHERE seq=pj_seq AND user_id='$_SESSION[p_id]' ", $connect);
-								$row = mysql_fetch_array($result);
+								$result = mysqli_query($connect, "SELECT seq, pj_name FROM cms_project1_info, cms_member_table WHERE seq=pj_seq AND user_id='$_SESSION[p_id]' ");
+								$row = mysqli_fetch_array($result);
 							?>
 							</div>
 							<div style="float:left; width:260px; height:26px; padding:9px 0px 0 0px; text-align:center;"><? echo "<font color='#cc0000'>*</font> <b>".$row[pj_name]."</b>";?></div>
 							<div style="float:left; width:120px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">소 속</div>
 							<?
-								$w_rlt = mysql_query("SELECT headq, team FROM cms_resource_headq, cms_resource_team WHERE cms_resource_headq.seq='$headq' AND cms_resource_team.seq='$team' ", $connect);
-								$w_row = mysql_fetch_array($w_rlt);
+								$w_rlt = mysqli_query($connect, "SELECT headq, team FROM cms_resource_headq, cms_resource_team WHERE cms_resource_headq.seq='$headq' AND cms_resource_team.seq='$team' ");
+								$w_row = mysqli_fetch_array($w_rlt);
 							?>
 							<div style="float:left; width:160px; height:26px; padding:9px 0px 0 0px; text-align:center;"><?=$w_row[headq]?> <font color="#0066ff">▶</font> <?=$w_row[team]?></div>
 							<div style="float:left; width:128px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">담당자</div>
@@ -147,8 +147,8 @@
 							<div style="float:left; width:100px;">분양율(청약+계약)</div>
 						</div>
 						<?
-							$result=mysql_query("SELECT pj_name, data_cr,type_name, type_color FROM cms_project1_info WHERE seq='$pj_list' ", $connect);
-							$row=mysql_fetch_array($result);
+							$result=mysqli_query($connect, "SELECT pj_name, data_cr,type_name, type_color FROM cms_project1_info WHERE seq='$pj_list' ");
+							$row=mysqli_fetch_array($result);
 							$data_cr = $row[data_cr];
 							$type_name = explode("-", $row[type_name]);
 							$type_color = explode("-", $row[type_color]);
@@ -167,8 +167,8 @@
 
 								<?
 									$query = "SELECT type_ho FROM cms_project_data WHERE pj_seq = '$pj_list' GROUP BY type_ho ORDER BY type_ho";
-									$result = mysql_query($query, $connect);
-									while($rows = mysql_fetch_array($result)){
+									$result = mysqli_query($connect, $query);
+									while($rows = mysqli_fetch_array($result)){
 								?>
 								<table width="100%" border="0" cellpadding="0" cellspacing="0">
 								<tr>
@@ -176,8 +176,8 @@
 									<td>
 								<?
 										$sort_qry = "SELECT sa_sort FROM cms_project_data WHERE pj_seq = '$pj_list' AND type_ho = '$rows[type_ho]' GROUP BY sa_sort ORDER BY sa_sort";
-										$sort_rlt = mysql_query($sort_qry, $connect);
-										while($sort_rows = mysql_fetch_array($sort_rlt)){
+										$sort_rlt = mysqli_query($connect, $sort_qry);
+										while($sort_rows = mysqli_fetch_array($sort_rlt)){
 											if($sort_rows[sa_sort]==0) $sort = "조합";
 											if($sort_rows[sa_sort]==1) $sort = "<font color='0000ff'>일반</font>";
 								?>
@@ -187,14 +187,14 @@
 										<td>
 								<?
 											$diff_qry = "SELECT diff_no FROM cms_project_data WHERE pj_seq = '$pj_list' AND sa_sort = '$sort_rows[sa_sort]' GROUP BY diff_no ORDER BY diff_no";
-											$diff_rlt = mysql_query($diff_qry, $connect);
+											$diff_rlt = mysqli_query($connect, $diff_qry);
 
-											while($diff_rows = mysql_fetch_array($diff_rlt)){
+											while($diff_rows = mysqli_fetch_array($diff_rlt)){
 												$sub_qry = "SELECT COUNT(*) AS sedae, SUM(is_except) AS is_except, SUM(is_pro_cont) AS pro_cont, SUM(is_contract) AS contract
 														FROM cms_project_data
 														WHERE pj_seq = '$pj_list' AND type_ho = '$rows[type_ho]' AND sa_sort = '$sort_rows[sa_sort]' AND diff_no = '$diff_rows[diff_no]' ";
-												$sub_rlt = mysql_query($sub_qry, $connect);
-												$sub_row = mysql_fetch_array($sub_rlt);
+												$sub_rlt = mysqli_query($connect, $sub_qry);
+												$sub_row = mysqli_fetch_array($sub_rlt);
 
 												$sale_num = $sub_row[sedae]-$sub_row[is_except];
 												if($sale_num==0){
@@ -222,8 +222,8 @@
 						<?
 							$tot_qry = "SELECT COUNT(*) AS sedae, SUM(is_except) AS is_except, SUM(is_pro_cont) AS pro_con, SUM(is_contract) AS contract
 											FROM cms_project_data WHERE pj_seq = '$pj_list' ";
-							$tot_rlt = mysql_query($tot_qry, $connect);
-							$tot_row = mysql_fetch_array($tot_rlt);
+							$tot_rlt = mysqli_query($connect, $tot_qry);
+							$tot_row = mysqli_fetch_array($tot_rlt);
 							$tot_sale_num = $tot_row[sedae]-$tot_row[is_except];
 							if($tot_row[pro_con]==0) $rate_pro=0; else $rate_pro= $tot_row[pro_con]/$tot_sale_num*100;          // 총 청약수
 							if($tot_row[contract]==0) $rate_con=0; else $rate_con= $tot_row[contract]/$tot_sale_num*100;         // 총 계약수
@@ -291,8 +291,8 @@
 								}
 								$query1 = "SELECT * FROM cms_project_data $where ORDER BY $orderby $limit_qry ";
 
-								$result1 = mysql_query($query1, $connect);
-								$data_num=mysql_num_rows($result1);
+								$result1 = mysqli_query($connect, $query1);
+								$data_num=mysqli_num_rows($result1);
 
 								/////////////////////////////////////////////////EXCEL 출력 소스
 								if($_m1_1_1_row[_m1_1_1]<1){
@@ -343,8 +343,8 @@
 											$type_sel_qry = " AND type_ho = '$type_data_' ";
 										}
 										$query = "SELECT pj_dong FROM cms_project_data WHERE pj_seq = '$pj_list' $type_sel_qry GROUP BY pj_dong";
-										$result = mysql_query($query, $connect) or die (mysql_error());
-										while($rows = mysql_fetch_array($result)){
+										$result = mysqli_query($connect, $query) or die (mysql_error());
+										while($rows = mysqli_fetch_array($result)){
 									?>
 									<option value="<?=$rows[pj_dong]?>" <?if($dong_data_==$rows[pj_dong]) echo "selected";?>> <?=$rows[pj_dong]?>
 									<? } ?>
@@ -364,8 +364,8 @@
 											$type_sel_qry = " AND type_ho = '$type_data_' ";
 										}
 										$query = "SELECT diff_no FROM cms_project_data WHERE pj_seq = '$pj_list' $type_sel_qry GROUP BY diff_no";
-										$result = mysql_query($query, $connect) or die (mysql_error());
-										while($rows = mysql_fetch_array($result)){
+										$result = mysqli_query($connect, $query) or die (mysql_error());
+										while($rows = mysqli_fetch_array($result)){
 									?>
 									<option value="<?=$rows[diff_no]?>" <?if($diff_data_==$rows[diff_no]) echo "selected";?>> <?=$rows[diff_no]."차"?>
 									<? } ?>
@@ -380,8 +380,8 @@
 									<option value="" selected> 선 택
 									<?
 										$query = "SELECT type_ho FROM cms_project_data WHERE pj_seq = '$pj_list' GROUP BY type_ho ORDER BY type_ho";
-										$result = mysql_query($query, $connect);
-										while($rows = mysql_fetch_array($result)){
+										$result = mysqli_query($connect, $query);
+										while($rows = mysqli_fetch_array($result)){
 									?>
 									<option value="<?=$rows[type_ho]?>" <?if($type_data_==$rows[type_ho]) echo "selected";?>> <?=$rows[type_ho]?>
 									<? } ?>
@@ -439,8 +439,8 @@
 																   SUM(last_pay_1) AS lp_1, SUM(last_pay_2) AS lp_2, SUM(last_pay_3) AS lp_3
 																   FROM cms_project_data WHERE pj_seq = '$pj_list' ";
 
-								$cash_rlt = mysql_query($cash_qry, $connect);
-								$cash_row = mysql_fetch_array($cash_rlt);
+								$cash_rlt = mysqli_query($connect, $cash_qry);
+								$cash_row = mysqli_fetch_array($cash_rlt);
 
 								$charge_total = $cash_row[cha_1]+$cash_row[cha_2]+$cash_row[cha_3]+$cash_row[cha_4];
 								$pay_total = $cash_row[de_11]+$cash_row[de_12]+$cash_row[de_13]+$cash_row[de_21]+$cash_row[de_22]+$cash_row[de_23]+$cash_row[de_31]+$cash_row[de_32]+$cash_row[de_33]+$cash_row[mp_11]+$cash_row[mp_21]+$cash_row[mp_31]+$cash_row[mp_21]+$cash_row[mp_22]+$cash_row[mp_23]+$cash_row[mp_31]+$cash_row[mp_32]+$cash_row[mp_33]+$cash_row[mp_41]+$cash_row[mp_42]+$cash_row[mp_43]+$cash_row[mp_51]+$cash_row[mp_52]+$cash_row[mp_53]+$cash_row[mp_61]+$cash_row[mp_62]+$cash_row[mp_63]+$cash_row[mp_71]+$cash_row[mp_72]+$cash_row[mp_73]+$cash_row[lp_1]+$cash_row[lp_2]+$cash_row[lp_3];
@@ -642,7 +642,7 @@
 							<?
 								}
 								if($data_cr==0){ // 동호수 관리프로젝트 //////////////////////////////////////////////////////////////////////////////////////////
-									for($i=0; $rows1 = mysql_fetch_array($result1); $i++){
+									for($i=0; $rows1 = mysqli_fetch_array($result1); $i++){
 										if($rows1[is_except]==1) { // 기분양 세대인 경우
 											$bgcolor=" background-color:#d1d1d1; ";
 										}else if($rows1[is_contract]==1) { // 계약상태 물건인 경우
@@ -921,7 +921,7 @@
 							<?
 									}
 								}
-								mysql_free_result($result1);
+								mysqli_free_result($result1);
 							?>
 						</div>
 						<!-------디브 스크롤 엔드------->

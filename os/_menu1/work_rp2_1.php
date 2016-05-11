@@ -72,9 +72,9 @@
 										if($e_date) $add_where.=" AND work_date<='$e_date' ";
 
 										$query="SELECT seq FROM cms_work_log $add_where ";
-										$result=mysql_query($query, $connect);
-										$total_bnum=mysql_num_rows($result);     // 총 게시물 수   11111111111111111111
-										mysql_free_result($result);
+										$result=mysqli_query($connect, $query);
+										$total_bnum=mysqli_num_rows($result);     // 총 게시물 수   11111111111111111111
+										mysqli_free_result($result);
 										if($total_bnum==0){
 									?>
 									<div style="clear:left; height:80px; text-align:center; padding-top:50px; margin-bottom:10px;">등록된 데이터가 없습니다.</div>
@@ -88,12 +88,12 @@
 										$e = $index_num;
 
 										$query = "SELECT seq, work_date, pj_seq, pj_where, writer, d_sale_act FROM cms_work_log $add_where ORDER BY work_date DESC LIMIT $s, $e";
-										$result = mysql_query($query, $connect);
-										while($rows = mysql_fetch_array($result)){
+										$result = mysqli_fetch_array($connect, $query);
+										while($rows = mysqli_fetch_array($result)){
 											$pj_where = explode("-", $rows[pj_where]);
 											$qry = "SELECT pj_name, headq, team, name FROM cms_project1_info, cms_resource_headq, cms_resource_team, cms_member_table WHERE cms_project1_info.seq='$rows[pj_seq]' AND cms_resource_headq.seq='$pj_where[0]' AND cms_resource_team.seq='$pj_where[1]' AND user_id='$rows[writer]' ";
-											$rlt = mysql_query($qry, $connect);
-											$dt_row = mysql_fetch_array($rlt);
+											$rlt = mysqli_fetch_array($connect, $qry);
+											$dt_row = mysqli_fetch_array($rlt);
 									?>
 									<div style="clear:left; width:30px; border-width:0 1px 1px 0; text-align:center;" class="bor_ddd"><input type="checkbox" name="seq[]" value="<?$rows[seq]?>"></div>
 									<div style="width:100px; border-width:0 1px 1px 0; text-align:center;" class="bor_ddd">

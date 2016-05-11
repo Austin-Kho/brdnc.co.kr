@@ -16,10 +16,10 @@
 			 <?
 			 	// 아직 확인하지 않은 쪽지 수 파악
 		   	$t_qry4="select count(mnum) as cnt_1 from cms_message_info where receiveid_fk='$_SESSION[p_id]' And receive_del='N' And receive_chk='N'";
-			  $t_res4=mysql_query($t_qry4, $connect);
-			  $t_rows4=mysql_fetch_array($t_res4);
+			  $t_res4=mysqli_query($connect, $t_qry4);
+			  $t_rows4=mysqli_fetch_array($t_res4);
 
-			  mysql_free_result($t_res4);
+			  mysqli_free_result($t_res4);
 
 			  if($t_rows4[cnt_1]==0){
 				  $bt_msg="images/bt_msg_0.gif";

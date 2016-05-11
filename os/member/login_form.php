@@ -73,19 +73,20 @@
 			<div style="border-bottom:1px solid #d0d0d0; margin-right:50px; height:120px; padding:8px 0 5px 0;">
 				<?
 							$noti_qry="SELECT * FROM cms_board_post ORDER BY post_id DESC LIMIT 0, 5";
-							$noti_rlt=mysql_query($noti_qry, $connect);
-							for($i=0; $noti_rows=mysql_fetch_array($noti_rlt); $i++){
-								 if($noti_rows[division]==1) $division="<b>[안내사항]</b>";
-								 if($noti_rows[division]==2) $division="<b>[일반공지]</b>";
-								 if($noti_rows[division]==3) $division="<b>[변경공지]</b>";
-								 if($noti_rows[division]==4) $division="<b>[기타공지]</b>";
+							$noti_rlt=mysqli_query($connect, $noti_qry);
+							if($noti_rows=mysqli_fetch_array($noti_rlt)){
+								for($i=0; $noti_rows=mysqli_fetch_array($noti_rlt); $i++){
+									 if($noti_rows[division]==1) $division="<b>[안내사항]</b>";
+									 if($noti_rows[division]==2) $division="<b>[일반공지]</b>";
+									 if($noti_rows[division]==3) $division="<b>[변경공지]</b>";
+									 if($noti_rows[division]==4) $division="<b>[기타공지]</b>";
 				?>
 				<div style="clear:left; height:24px;">
 					<div style="float:left; padding-left:5px;"><font color="#000000"><?=$division?></font></div>
 					<div style="float:left; width:360px; padding-left:5px;"><a href="#"><?=rg_cut_string($noti_rows[subject],38,"..")?></a></div>
 					<div style="float:left; text-align:right;"><?=date('Y-m-d',$noti_rows[reg_date])?></div>
 				</div>
-				<? } ?>
+				<? } }?>
 			</div>
 			</div>
 		</div>

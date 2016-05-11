@@ -78,7 +78,7 @@
 					if(!$total_bnum) {
 						 $total_bnum = mysql_num_rows($result);
 					}     // 총 게시물 수   11111111111111111111
-					mysql_free_result($result);
+					mysqli_free_result($result);
 					if($total_bnum==0){
 				?>
 				<div style="height:60px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid; text-align:center; padding-top:35px;">
@@ -114,7 +114,7 @@
 					</div>
 				<?
 					}
-					mysql_free_result($result2);
+					mysqli_free_result($result2);
 				?>
 				</div>
 				</form>

@@ -100,7 +100,7 @@ Header("Expires: 0");
 	</tr>
 <?
 		}
-		mysql_free_result($result1);
+		mysqli_free_result($result1);
 	}else if($data_cr==1){ // 계약 번호별 관리일 때
 ?>
 	<tr align="center" height="45">
@@ -540,7 +540,7 @@ Header("Expires: 0");
 	</tr>
 <?
 		}
-		mysql_free_result($result1);
+		mysqli_free_result($result1);
 	} // 계약서별 관리일 때 종료
 ?>
 </table>

@@ -49,15 +49,15 @@
 				<td align="center" height="32" background="../img/bg.jpg">
 				<font color="#4C63BD" style="font-size:11pt"><b>입고 거래처 관리</b></font>
 				</td>
-			</tr>			
+			</tr>
 			<tr bgcolor="ffffff">
-				<td style="padding:13 0 0 0px">				
+				<td style="padding:13 0 0 0px">
 				<table border="0" align="center" width="96%" height="100%" cellspacing="0" cellpadding="0">
 				<tr height="10">
 					<td></td>
 				</tr>
 				<tr height="28">
-					<td>					
+					<td>
 					<table border="0" width="100%" height="100%" cellspacing="0" cellpadding="0">
 					<tr align="center" height="35">
 						<td width="100%" bgcolor="#EAEAEA" style="border-width: 1 0 1 0; border-color:#CFCFCF; border-style: solid;" colspan="5">
@@ -67,7 +67,7 @@
 					<tr>
 						<form name="form1" action="<?=$_SERVER['PHP_SELF']?>">
 							<td colspan="5" align="center" style="padding:8 0 8 0px">
-							<input type="text" name="accounts_in" size="30" class="inputStyle2" style="height:20px" onmouseover="cngClass(this,'inputStyle22')" onmouseout="cngClass(this,'inputStyle2');"> 
+							<input type="text" name="accounts_in" size="30" class="inputStyle2" style="height:20px" onmouseover="cngClass(this,'inputStyle22')" onmouseout="cngClass(this,'inputStyle2');">
 							<input type="button" value=" 검 색 " onClick="submit();" class= "inputStyle1">
 						</td>
 					</tr>
@@ -87,16 +87,16 @@
 						if(!$total_bnum) {
 							 $total_bnum = mysql_num_rows($result);
 						}     // 총 게시물 수   11111111111111111111
-						mysql_free_result($result);
-						
+						mysqli_free_result($result);
+
 						$page=$_GET['page'];
 						$gb=$_REQUEST['gb'];
 						$accounts_in = $_REQUEST['accounts_in'];
-						
+
 
 						$index_num = 7;                 // 한 페이지 표시할 목록 개수 22222222222222
 						$page_num = 10;								  // 한 페이지에 표시할 페이지 수 33333
-						$start=$_REQUEST['start'];	
+						$start=$_REQUEST['start'];
 						if(!$start) $start = 1;              // 현재페이지 444444444
 						$s = ($start-1)*$index_num;
 						$e = $index_num;
@@ -141,11 +141,11 @@
 					</tr>
 					<?
 						}
-						mysql_free_result($result2);
+						mysqli_free_result($result2);
 					?>
 					</table>
 					</td>
-				</tr>									
+				</tr>
 				<tr>
 					<td valign="top" align="center">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">

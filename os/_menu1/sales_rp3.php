@@ -7,8 +7,8 @@
 					</div>
 					<!-- ============================= subject table end ============================= -->
 					<?
-						$_m1_1_3_rlt = mysql_query("select _m1_1_3 from cms_mem_auth where user_id='$_SESSION[p_id]' ", $connect);
-						$_m1_1_3_row = mysql_fetch_array($_m1_1_3_rlt);
+						$_m1_1_3_rlt = mysqli_query($connect, "select _m1_1_3 from cms_mem_auth where user_id='$_SESSION[p_id]' ");
+						$_m1_1_3_row = mysqli_fetch_array($_m1_1_3_rlt);
 
 						if(!$_m1_1_3_row[_m1_1_3]||$_m1_1_3_row[_m1_1_3]==0){
 					?>
@@ -35,8 +35,8 @@
 							<!-- ============ 본사 직원일 때 프로젝트 선택 가능 시작 ============  -->
 							<?
 								if($member_row[is_company]==1){
-								$pj_rlt = mysql_query("SELECT seq FROM cms_project1_info ORDER BY seq DESC LIMIT 1", $connect);
-								$pj_row = mysql_fetch_array($pj_rlt);
+								$pj_rlt = mysqli_query($connect, "SELECT seq FROM cms_project1_info ORDER BY seq DESC LIMIT 1");
+								$pj_row = mysqli_fetch_array($pj_rlt);
 								$year_frm=$_REQUEST['year_frm'];
 								$pj_list=$_REQUEST['pj_list'];
 								if(!$pj_list) $pj_list = 1;
@@ -63,8 +63,8 @@
 											$where=" WHERE start_date LIKE '$year_frm%' ";
 										}
 										$qry = "SELECT * FROM cms_project1_info $where ORDER BY start_date DESC ";
-										$rlt = mysql_query($qry, $connect);
-										for($i=0; $rows=mysql_fetch_array($rlt); $i++){
+										$rlt = mysqli_query($connect, $qry);
+										for($i=0; $rows=mysqli_fetch_array($rlt); $i++){
 									?>
 									<option value="<?=$rows[seq]?>" <?if($pj_list==$rows[seq]) echo "selected"; ?>><?=$rows[pj_name]?>
 									<? } ?>
@@ -84,15 +84,15 @@
 							<div style="float:left; width:120px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">
 								<font color='#cc0000'>*</font> 프로젝트 명
 							<?
-								$result = mysql_query("SELECT seq, pj_name FROM cms_project1_info, cms_member_table WHERE seq=pj_seq AND user_id='$_SESSION[p_id]' ", $connect);
-								$row = mysql_fetch_array($result);
+								$result = mysqli_query($connect, "SELECT seq, pj_name FROM cms_project1_info, cms_member_table WHERE seq=pj_seq AND user_id='$_SESSION[p_id]' ");
+								$row = mysqli_fetch_array($result);
 							?>
 							</div>
 							<div style="float:left; width:260px; height:26px; padding:9px 0px 0 0px; text-align:center;"><? echo "<font color='#cc0000'>*</font> <b>".$row[pj_name]."</b>";?></div>
 							<div style="float:left; width:120px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">소 속</div>
 							<?
-								$w_rlt = mysql_query("SELECT headq, team FROM cms_resource_headq, cms_resource_team WHERE cms_resource_headq.seq='$headq' AND cms_resource_team.seq='$team' ", $connect);
-								$w_row = mysql_fetch_array($w_rlt);
+								$w_rlt = mysqli_query($connect, "SELECT headq, team FROM cms_resource_headq, cms_resource_team WHERE cms_resource_headq.seq='$headq' AND cms_resource_team.seq='$team' ");
+								$w_row = mysqli_fetch_array($w_rlt);
 							?>
 							<div style="float:left; width:160px; height:26px; padding:9px 0px 0 0px; text-align:center;"><?=$w_row[headq]?> <font color="#0066ff">▶</font> <?=$w_row[team]?></div>
 							<div style="float:left; width:128px; height:26px; padding-top:9px; color:black; text-align:center; background-color:#F4F4F4;">담당자</div>
@@ -110,15 +110,15 @@
 								$data_qry = "SELECT COUNT(*) AS total,
 														 SUM(is_hold) AS hold
 											   FROM cms_project2_indi_table WHERE pj_seq='$pj_list' ";
-								$data_rlt = mysql_query($data_qry, $connect);
-								$data_row = mysql_fetch_array($data_rlt);
+								$data_rlt = mysqli_query($connect, $data_qry);
+								$data_row = mysqli_fetch_array($data_rlt);
 
 								// 청약세대 구하기
 								$data_qry1 = "SELECT SUM(is_pro_cont) AS pro_cont,
 														 				 SUM(is_contract) AS contract
 											   FROM cms_project_data WHERE pj_seq='$pj_list' ";
-								$data_rlt1 = mysql_query($data_qry1, $connect);
-								$data_row1 = mysql_fetch_array($data_rlt1);
+								$data_rlt1 = mysqli_query($connect, $data_qry1);
+								$data_row1 = mysqli_fetch_array($data_rlt1);
 
 
 
@@ -131,8 +131,8 @@
 
 							<!-- 타입컬러 범례 1열 표시 시작 -->
 							<?
-								$color_rlt = mysql_query("SELECT type_name, type_color FROM cms_project1_info WHERE seq='$pj_list' ", $connect); // 타입별 컬러 구하기
-								$color_row = mysql_fetch_array($color_rlt);
+								$color_rlt = mysqli_query($connect, "SELECT type_name, type_color FROM cms_project1_info WHERE seq='$pj_list' "); // 타입별 컬러 구하기
+								$color_row = mysqli_fetch_array($color_rlt);
 								$type = explode("-", $color_row[type_name]);
 								$color = explode("-", $color_row[type_color]);
 								if(count($type)<=6) $roof_num = count($type); else $roof_num = 6;
@@ -191,15 +191,15 @@
 						<?
 							}
 							//
-							$max_rlt = mysql_query("SELECT MAX(ho) AS max_ho FROM cms_project2_indi_table WHERE pj_seq='$pj_list' ", $connect); // 해당 단지 최 고층 구하기
-							$max_row = mysql_fetch_array($max_rlt);
+							$max_rlt = mysqli_query($connect, "SELECT MAX(ho) AS max_ho FROM cms_project2_indi_table WHERE pj_seq='$pj_list' "); // 해당 단지 최 고층 구하기
+							$max_row = mysqli_fetch_array($max_rlt);
 							if(strlen($max_row[max_ho])==3) $max_floor = substr($max_row[max_ho], -3,1);
 							if(strlen($max_row[max_ho])==4) $max_floor = substr($max_row[max_ho], -4,2);
 
 							$dong_qry = " SELECT dong FROM cms_project2_indi_table WHERE pj_seq='$pj_list' GROUP BY dong ";  // 해당 단지 동 수 및 리스트 구하기
-							$dong_rlt = mysql_query($dong_qry, $connect);
-							$num_rows = mysql_num_rows($dong_rlt);
-							while($dong_rows = mysql_fetch_array($dong_rlt)){ // 해당 동 만큼 반복
+							$dong_rlt = mysqli_query($connect, $dong_qry);
+							$num_rows = mysqli_num_rows($dong_rlt);
+							while($dong_rows = mysqli_fetch_array($dong_rlt)){ // 해당 동 만큼 반복
 						?>
 						<div style="float:left; margin-top:15px;">
 						<table border="0" cellpadding="0" cellspacing="0">
@@ -209,8 +209,8 @@
 								for($j=0; $j<$max_floor; $j++){ // 최고층 수만큼 반복
 									$ho_qry = "SELECT MIN(RIGHT(ho,2)) AS st_line, MAX(RIGHT(ho,2)) AS dong_line
 												 FROM cms_project2_indi_table WHERE pj_seq='$pj_list' AND dong='$dong_rows[dong]' "; // 각 동별 라인수 구하기
-									$ho_rlt = mysql_query($ho_qry, $connect);
-									$ho_rows = mysql_fetch_array($ho_rlt);  // 반복하기 위한 각 동별 라인 수
+									$ho_rlt = mysqli_query($connect, $ho_qry);
+									$ho_rows = mysqli_fetch_array($ho_rlt);  // 반복하기 위한 각 동별 라인 수
 									$floor_num = $max_floor-$j; // 층수
 
 									for($i=0; $i<$ho_rows[dong_line]; $i++){ // 라인수 만큼 반복
@@ -230,8 +230,8 @@
 										//				 FROM cms_project_data WHERE pj_seq='$pj_list' AND pj_dong='$dong_rows[pj_dong]' AND pj_ho='$ho_num' ";
 										$ho_ck_qry = "SELECT type, ho, is_hold
 														 FROM cms_project2_indi_table WHERE pj_seq='$pj_list' AND dong='$dong_rows[dong]' AND ho='$ho_num' ";
-										$ho_ck_rlt = mysql_query($ho_ck_qry, $connect);
-										$ho_ck_row = mysql_fetch_array($ho_ck_rlt);
+										$ho_ck_rlt = mysqli_query($connect, $ho_ck_qry);
+										$ho_ck_row = mysqli_fetch_array($ho_ck_rlt);
 
 										/////////////////////////////////////// 동호수 표시칸 css S //////////////////////////////////////////
 										if($ho_ck_row) {   // div 번호에 해당 호수가 있으면,

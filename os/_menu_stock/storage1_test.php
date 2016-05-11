@@ -38,7 +38,7 @@
 													  GROUP BY style, color having st_qty>0 $add_arr ";
 	$result1=mysql_query($query1, $connect);
 	for($i=0; $rows1=mysql_fetch_array($result1); $i++){
-		 if($rows1[division]==1) $div="<font color='#ff3366'>[입고]</font>"; 
+		 if($rows1[division]==1) $div="<font color='#ff3366'>[입고]</font>";
 		 if($rows1[division]==2) $div="<font color='#3366cc'>[출고]</font>";
 		 if($rows1[classify]==1) $cla="매입입고";
 		 if($rows1[classify]==2) $cla="반품입고";
@@ -49,7 +49,7 @@
 		 if($rows1[classify]==7) $cla="수탁반납";
 		 if($rows1[classify]==8) $cla="위탁출고";
 		 if($rows1[classify]==9) $cla="재고조정";
- 
+
 		 if($rows1[division]==1&&$rows1[classify]<>2) $price=$rows1[price_in];
  		 if($rows1[division]==2||$rows1[classify]==2) $price=$rows1[price_out];
 ?>
@@ -67,6 +67,6 @@
 	</tr>
 <?
 	 }
-	 mysql_free_result($result1);
+	 mysqli_free_result($result1);
 ?>
 </table>

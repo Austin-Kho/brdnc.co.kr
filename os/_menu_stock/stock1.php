@@ -171,7 +171,7 @@
 													GROUP BY style, color having st_qty>0";
 							$result=mysql_query($query, $connect);
 							$total_bnum=mysql_num_rows($result);     // 총 게시물 수   11111111111111111111
-							mysql_free_result($result);
+							mysqli_free_result($result);
 
 							$page=$_GET['page'];
 							$gb=$_REQUEST['gb'];
@@ -216,7 +216,7 @@
 						</tr>
 						<?
 							 }}
-							 mysql_free_result($result1);
+							 mysqli_free_result($result1);
 						?>
 						<tr>
 							<td height="32" align="center" colspan="11">

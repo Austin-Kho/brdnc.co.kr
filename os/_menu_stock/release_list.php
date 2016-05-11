@@ -10,7 +10,7 @@
 	if(!isset($_SESSION[p_id])||!isset($_SESSION[p_name])){
 		err_msg('로그인 정보가 없습니다. 다시 로그인해 주세요.');
 	}
-	
+
 	$fn = $_REQUEST['fn'];
 	$category = $_REQUEST['category'];
 	$brand = $_REQUEST['brand'];
@@ -21,11 +21,11 @@
 			 $total_pages = ceil($total_post/$index_num);											          // 총 페이지 수
 			 $pages=$total_pages;
 			 if($pages>$page_num) $pages = $page_num;
-			 
+
 			 $a=ceil($start/$page_num)*$page_num-($page_num-1);
 			 $b=$total_pages;
 			 if($b>($a+$page_num-1)) $b=$a+$page_num-1;
-       
+
 			 $pre=$page_num*ceil($start/$page_num)-($page_num*2)+1;
 			 $nex=ceil($start/$page_num)*$page_num+1;
 			 if($pre<1) $pre =1;
@@ -34,7 +34,7 @@
 			 $brand=urlencode($_REQUEST['brand']);
 			 $accounts=$_REQUEST['accounts'];
 			 $_search = $_REQUEST['_search'];
-       
+
 			 if($start==1 ){
 					echo "<a href='#'><img src='http://cigiko.cafe24.com/cms/images/btn_fir_2.gif' width=14 border=0></a>";
 			 } else {
@@ -62,7 +62,7 @@
 			 } else {
 					echo "<a href='$_SERVER[PHP_SELF]?start=$total_pages&accounts=$accounts&brand=$brand&_search=$_search'><img src='http://cigiko.cafe24.com/cms/images/btn_las_1.gif' width=14 border=0></a>";
 			 }
-		}	
+		}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -73,7 +73,7 @@
 	<link rel="stylesheet" href="../common/cms.css">
 	<script language="JavaScript" src="../common/global.js"></script>
 	<script type="text/javascript">
-	<!--		
+	<!--
 		function value_put(obj1,obj2,obj3,obj4,obj5,obj6,obj7,obj8,obj9){
 			 var form_obj = opener.document.in_stock_frm;
 
@@ -184,8 +184,8 @@
 							 var div_n = document.getElementById('p_img_div');
 							 var img_n = document.getElementById('p_img');
 
-							 img_n.src=img_src;					
-							 div_n.style.display="block";							
+							 img_n.src=img_src;
+							 div_n.style.display="block";
 						}
 						function imgOut(img_src){
 							 var div_n = document.getElementById('p_img_div');
@@ -214,7 +214,7 @@
 					<td></td>
 				</tr>
 				<tr height="28">
-					<td>					
+					<td>
 					<table border="0" width="100%" height="100%" cellspacing="0" cellpadding="0">
 					<tr align="center" height="35">
 						<td width="100%" bgcolor="#EAEAEA" style="border-width: 1 0 1 0; border-color:#CFCFCF; border-style: solid;" colspan="8">
@@ -243,10 +243,10 @@
 								<td> 거래처 : </td>
 								<td align="left">
 									<?
-										$qry1="SELECT accounts, st_date, si_name 
-													 FROM cms_stock_main, cms_accounts 
-													 WHERE division = '2' AND accounts=code AND si_name<>'LOSS' 
-													 GROUP BY si_name 
+										$qry1="SELECT accounts, st_date, si_name
+													 FROM cms_stock_main, cms_accounts
+													 WHERE division = '2' AND accounts=code AND si_name<>'LOSS'
+													 GROUP BY si_name
 													 ORDER BY st_date DESC";
 										$rst1=mysql_query($qry1, $connect);
 									?>
@@ -267,7 +267,7 @@
 					</tr>
 					<tr>
 						<td colspan="7" align="center" style="padding:8 0 8 0px">
-							<input type="text" name="_search" size="30" class="inputStyle2" style="height:20px" onmouseover="cngClass(this,'inputStyle22')" onmouseout="cngClass(this,'inputStyle2');"> 
+							<input type="text" name="_search" size="30" class="inputStyle2" style="height:20px" onmouseover="cngClass(this,'inputStyle22')" onmouseout="cngClass(this,'inputStyle2');">
 							<input type="button" value=" 검 색 " onclick="submit();" class= "inputStyle1">
 						</td>
 					</tr>
@@ -286,7 +286,7 @@
 						$add_where="";
 
 						$add_where.="where 1=1";
-						
+
 						if($brand) $add_where.=" AND brand='$brand' ";
 						if($accounts) $add_where.=" AND accounts='$accounts' ";
 						if($_search) $add_where.=" AND (category like '%$_search%' or brand like '%$_search%' or style like '%$_search%' or color like '%$_search%') ";
@@ -296,18 +296,18 @@
 						// $query="select * from cms_main_stock $add_where";
 						$result=mysql_query($query, $connect);
 						$total_bnum=mysql_num_rows($result);     // 총 게시물 수   11111111111111111111
-						mysql_free_result($result);
-						
+						mysqli_free_result($result);
+
 						$page=$_GET['page'];
 						$gb=$_REQUEST['gb'];
-	
+
 						$index_num = 8;                 // 한 페이지 표시할 목록 개수 22222222222222
 						$page_num = 10;								  // 한 페이지에 표시할 페이지 수 33333
-						$start=$_REQUEST['start'];	
+						$start=$_REQUEST['start'];
 						if(!$start) $start = 1;              // 현재페이지 444444444
 						$s = ($start-1)*$index_num;
 						$e = $index_num;
-	
+
 						$query1 = "select * from cms_stock_main,cms_accounts $add_where and division='2' and accounts=code order	by st_date desc, seq_num desc limit $s, $e";
 						$result1=mysql_query($query1, $connect);
 						for($i=0; $rows1=mysql_fetch_array($result1); $i++){
@@ -336,11 +336,11 @@
 					</tr>
 					<?
 						}
-						mysql_free_result($result1);
+						mysqli_free_result($result1);
 					?>
 					</table>
 					</td>
-				</tr>									
+				</tr>
 				<tr>
 					<td valign="top" align="center">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">

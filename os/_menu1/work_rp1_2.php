@@ -8,8 +8,8 @@
 										if($mode=='modify'){
 											$seq = $_REQUEST['seq'];
 											$qry = "SELECT * FROM cms_work_coun_log WHERE seq='$seq'";
-											$rlt = mysql_query($qry, $connect);
-											$row = mysql_fetch_array($rlt);
+											$rlt = mysqli_query($connect, $qry);
+											$row = mysqli_fetch_array($rlt);
 											$sub_str = "추가등록";
 										}else{
 											$sub_str = "등록하기";

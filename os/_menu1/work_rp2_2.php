@@ -5,22 +5,22 @@
 										if($mode=='modify'){ // 수정인 경우 해당 데이터 가져 오기
 											$seq = $_REQUEST['seq'];
 											$qry = "SELECT * FROM cms_work_log WHERE seq='$seq'";
-											$rlt = mysql_query($qry, $connect);
-											$row = mysql_fetch_array($rlt);
+											$rlt = mysqli_query($connect, $qry);
+											$row = mysqli_fetch_array($rlt);
 											$sub_str = "저장하기";
 											$w_date = $row[work_date];
 
 											$pj_where = explode("-", $row[pj_where]);
 
 											//현장명 구하기
-											$pj_name_rlt = mysql_query("SELECT pj_name FROM cms_project1_info WHERE seq='$row[pj_seq]' ", $connect);
-											$pj_name_row = mysql_fetch_array($pj_name_rlt);
+											$pj_name_rlt = mysqli_query($connect, "SELECT pj_name FROM cms_project1_info WHERE seq='$row[pj_seq]' ");
+											$pj_name_row = mysqli_fetch_array($pj_name_rlt);
 											// 소속본부 구하기
-											$headq_rlt = mysql_query("SELECT headq FROM cms_resource_headq WHERE seq='$pj_where[0]' ", $connect);
-											$headq_row = mysql_fetch_array($headq_rlt);
+											$headq_rlt = mysqli_query($connect, "SELECT headq FROM cms_resource_headq WHERE seq='$pj_where[0]' ");
+											$headq_row = mysqli_fetch_array($headq_rlt);
 											// 소속 팀 구하기
-											$team_rlt = mysql_query("SELECT team FROM cms_resource_team WHERE seq='$pj_where[1]' ", $connect);
-											$team_row = mysql_fetch_array($team_rlt);
+											$team_rlt = mysqli_query($connect, "SELECT team FROM cms_resource_team WHERE seq='$pj_where[1]' ");
+											$team_row = mysqli_fetch_array($team_rlt);
 											/***************** 당일청계약 내용 *******************/
 											$co_sort = explode("/", $row[co_sort]);
 											$c_cust_name = explode("/", $row[c_cust_name]);
@@ -43,8 +43,8 @@
 
 										}else{
 											// 현장명 구하기
-											$pj_name_rlt = mysql_query("SELECT pj_name FROM cms_project1_info WHERE seq='$pj_list' ", $connect);
-											$pj_name_row = mysql_fetch_array($pj_name_rlt);
+											$pj_name_rlt = mysqli_query($connect, "SELECT pj_name FROM cms_project1_info WHERE seq='$pj_list' ");
+											$pj_name_row = mysqli_fetch_array($pj_name_rlt);
 
 											$sub_str = "등록하기";
 											$w_date = date('Y-m-d');

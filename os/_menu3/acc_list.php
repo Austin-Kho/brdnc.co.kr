@@ -98,7 +98,7 @@
 					$query="SELECT no FROM cms_capital_bank_account $where_add ";
 					$result=mysql_query($query, $connect);
 					$total_bnum = mysql_num_rows($result);	// 총 게시물 수   11111111111111111111
-					mysql_free_result($result);
+					mysqli_free_result($result);
 					if($total_bnum==0){
 				?>
 				<div style="height:60px; border-width: 0 0 1px 0; border-color:#eaeaea; border-style: solid; text-align:center; padding-top:35px;">
@@ -158,7 +158,7 @@
 				</div>
 				<?
 						}
-						mysql_free_result($result2);
+						mysqli_free_result($result2);
 				?>
 				</form>
 				<div style="height:35; text-align:center; padding-top:10px;">

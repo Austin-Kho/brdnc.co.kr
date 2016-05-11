@@ -166,7 +166,7 @@
 
 								$result=mysql_query($query, $connect);
 								$total_bnum=mysql_num_rows($result);     // 총 게시물 수   11111111111111111111
-								mysql_free_result($result);
+								mysqli_free_result($result);
 
 								$index_num = 12;                 // 한 페이지 표시할 목록 개수 22222222222222
 								$page_num = 10;								  // 한 페이지에 표시할 페이지 수 33333
@@ -277,7 +277,7 @@
 							</tr>
 							<?
 								 }
-								if($result1) mysql_free_result($result1);
+								if($result1) mysqli_free_result($result1);
 							?>
 							<tr>
 								<td height="32" align="center" colspan="13">

@@ -204,7 +204,7 @@
 								$qry = "SELECT seq FROM cms_resource_team_member $where";
 								$rlt = mysql_query($qry, $connect);
 								$total_bnum=mysql_num_rows($rlt);     // 총 게시물 수   11111111111111111111
-								mysql_free_result($rlt);
+								mysqli_free_result($rlt);
 
 								$page=$_GET['page'];
 								$gb=$_REQUEST['gb'];
@@ -271,7 +271,7 @@
 							</div>
 							<?
 								}
-								mysql_free_result($result1);
+								mysqli_free_result($result1);
 							?>
 							</td>
 						</tr>

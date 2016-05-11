@@ -79,9 +79,9 @@
 										}
 
 										$query="SELECT seq FROM cms_work_coun_log $add_where";
-										$result=mysql_query($query, $connect);
-										$total_bnum=mysql_num_rows($result);     // 총 게시물 수   11111111111111111111
-										mysql_free_result($result);
+										$result=mysqli_query($connect, $query);
+										$total_bnum=mysqli_num_rows($result);     // 총 게시물 수   11111111111111111111
+										mysqli_free_result($result);
 										if($total_bnum==0){
 									?>
 									<div style="clear:left; height:80px; text-align:center; padding-top:50px; margin-bottom:10px;">등록된 데이터가 없습니다.</div>
@@ -95,8 +95,8 @@
 										$e = $index_num;
 
 										$query = "SELECT seq, coun_date, cust_name, cust_tel1, content, memo FROM cms_work_coun_log $add_where ORDER BY coun_date DESC LIMIT $s, $e";
-										$result = mysql_query($query, $connect);
-										while($rows = mysql_fetch_array($result)){
+										$result = mysqli_query($connect, $query);
+										while($rows = mysqli_fetch_array($result)){
 									?>
 									<div style="clear:left; width:25px; padding-top:4px; border-width:0 1px 1px 0; text-align:center;" class="bor_ddd"><input type="checkbox" name="seq[]" value="<?$rows[seq]?>"></div>
 									<div style="width:100px; padding-top:4px; border-width:0 1px 1px 0; text-align:center;" class="bor_ddd"><?=$rows[coun_date]?></div>
