@@ -48,10 +48,10 @@
 									$excel_pop = "alert('출력 권한이 없습니다!');";
 								}else{
 									$url_date = urlencode($sh_date);
-									$excel_pop = "location.href='excel_daily_money_report.php?sh_date=$url_date' ";
+									$excel_pop = "location.href='excel_daily_money_report.php?sh_date=$url_date' ";									
 								}
 							?>
-							<a href="javascript:" onClick="<?=$excel_pop?>"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> 자금일보 출력</a>
+							<a href="javascript:" onClick="<?php echo $excel_pop?>"><img src="../images/excel_icon.jpg" height="10" border="0" alt="" /> 자금일보 출력</a>
 							<!-- --------------------------------------------------------------------------------------------------------------------------- -->
 							</div>
 							<form method="post" name="d_cash_book_frm" action="<?=$_SERVER['PHP_SELF']?>">
