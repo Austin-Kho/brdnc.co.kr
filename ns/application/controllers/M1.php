@@ -113,6 +113,31 @@ class M1 extends CI_Controller {
 				// 등록된 프로젝트 데이터
 				$data['all_pj'] = $this->main_m->sql_result(' SELECT * FROM cms_project '.$where.' ORDER BY biz_start_ym DESC ');
 
+				$project = $data['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 아이디
+
+				// 공급세대 및 유보세대 청약 계약세대 구하기
+				$data['summary_tb'] = $this->main_m->sql_row(" SELECT COUNT(*) AS total, SUM(is_hold) AS hold, SUM(is_application) AS acn, SUM(is_contract) AS cont FROM cms_project_all_housing_unit WHERE pj_seq='$project'  ");
+
+				// 타입 관련 데이터 구하기
+				$type = $this->main_m->sql_row(" SELECT type_name, type_color FROM cms_project WHERE seq='$project' ");
+				$data['type'] = array(
+					'name' => explode("-", $type->type_name),
+					'color' => explode("-", $type->type_color)
+				);
+
+				// 해당 단지 최 고층 구하기
+				$max_fl = $this->main_m->sql_row(" SELECT MAX(ho) AS max_ho FROM cms_project_all_housing_unit WHERE pj_seq='$project' ");
+				if(strlen($max_fl->max_ho)==3) $data['max_floor'] = substr($max_fl->max_ho, -3,1);
+				if(strlen($max_fl->max_ho)==4) $data['max_floor'] = substr($max_fl->max_ho, -4,2);
+
+				// 해당 단지 동 수 및 리스트 구하기
+				$data['dong_data'] = $this->main_m->sql_result(" SELECT dong FROM cms_project_all_housing_unit WHERE pj_seq='$project' GROUP BY dong ");
+
+				// 동별 라인수 '$dong_rows[dong]' ????여기까지
+				// function line_num($dong){
+				// 	$data['line_num'] = $this->main_m->sql_result(" SELECT MIN(RIGHT(ho,2)) AS st_line, MAX(RIGHT(ho,2)) AS dong_line FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$dong_rows[dong]' ");
+				// }
+
 
 
 				//본 페이지 로딩
