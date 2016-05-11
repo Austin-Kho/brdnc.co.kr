@@ -108,6 +108,13 @@ class M1 extends CI_Controller {
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m1_1_3'];
 
+				$where = "";
+				if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
+				// 등록된 프로젝트 데이터
+				$data['all_pj'] = $this->main_m->sql_result(' SELECT * FROM cms_project11_info '.$where.' ORDER BY biz_start_ym DESC ');
+
+
+
 				//본 페이지 로딩
 				$this->load->view('/menu/m1/md1_sd3_v', $data);
 			}
