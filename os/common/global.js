@@ -19,11 +19,10 @@ function img_over(n){
   img[4]=tm_img4;
 
   for(i=0; i<=4; i++){
-
     if(n==i){
-      img[n].src="http://brdnc.cafe24.com/zpc/images/t_menu_"+(n+1)+"_.png";
+      img[n].src="/os/images/t_menu_"+(n+1)+"_.png";
 	  } else {
-      img[i].src="http://brdnc.cafe24.com/zpc/images/t_menu_"+(i+1)+".png";
+      img[i].src="/os/images/t_menu_"+(i+1)+".png";
     }
   }
 }
@@ -32,9 +31,9 @@ function img_over(n){
 function img_out(page_no){
   for(i=0; i<=4; i++){
     if((i+1)==page_no){
-      img[i].src="http://brdnc.cafe24.com/zpc/images/t_menu_"+(i+1)+"_.png";
+      img[i].src="/os/images/t_menu_"+(i+1)+"_.png";
     } else {
-      img[i].src="http://brdnc.cafe24.com/zpc/images/t_menu_"+(i+1)+".png";
+      img[i].src="/os/images/t_menu_"+(i+1)+".png";
     }
   }
 }
@@ -59,8 +58,8 @@ function cngClass(obj,cng){
 
 // 기간 지우기
 function to_del(a, b){
-	if(a!=null) document.getElementById(a).value=null;
-	if(b!=null) document.getElementById(b).value=null;
+	if(a!==null) document.getElementById(a).value=null;
+	if(b!==null) document.getElementById(b).value=null;
 }
 
 // 동호수 검색 결과 정렬 순서 폼 컨트롤
@@ -113,7 +112,6 @@ function onlyNumber1(form_name){
 }
 
 // 오픈 윈도우2
-<!--
 function open_Win(ref,name,obj) {
 	var window_left = (screen.width-640)/2;
 	var window_top = (screen.height-480)/2;
