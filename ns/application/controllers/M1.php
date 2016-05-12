@@ -44,7 +44,7 @@ class M1 extends CI_Controller {
 		$menu['s_di'] = array(
 			array('계약 현황', '계약 등록', '동호수 현황'), // 첫번째 하위 메뉴
 			array('수납 현황', '수납 등록', '수납약정'),     // 두번째 하위 메뉴
-			array('프로젝트별 계약현황<구축 작업 전>', '프로젝트별 계약등록(수정)<구축 작업 전>', '동호수 계약 현황표<구축 작업 전>'),  // 첫번째 하위 제목
+			array('프로젝트별 계약현황<구축 작업 전>', '프로젝트별 계약등록(수정)<구축 작업 진행 중>', '동호수 계약 현황표'),  // 첫번째 하위 제목
 			array('분양대금 수납 현황<구축 작업 전>', '분양대금 수납 등록<구축 작업 전>', '프로젝트 타입별 수납약정 관리<구축 작업 전>')   // 두번째 하위 제목
 		);
 		// 메뉴데이터 삽입 하여 메인 페이지 호출
@@ -87,13 +87,38 @@ class M1 extends CI_Controller {
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m1_1_2'];
 
-				$where = "";
-				if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
 				// 등록된 프로젝트 데이터
+				$where = "";
+				if($this->input->post('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->post('yr')."%' ";
 				$data['all_pj'] = $this->main_m->sql_result(' SELECT * FROM cms_project '.$where.' ORDER BY biz_start_ym DESC ');
-				$project = $data['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
+				$project = $data['project'] = $this->input->post('project'); // 선택한 프로젝트 고유식별 값(아이디)
+
+				// 차수 데이터 불러오기 -----향후 약정 디비 만들면서 구현
 
 
+
+				// 타입 데이터 불러오기
+				$where_add = " WHERE pj_seq='$project' ";
+				if( !$this->input->get('mode') && $this->input->post('cont_sort1')==1&&($this->input->post('cont_sort2')==1)) $where_add .= " AND is_application='0' AND is_contract='0' ";
+				if( !$this->input->get('mode') && $this->input->post('cont_sort1')==1&&($this->input->post('cont_sort2')==2)) $where_add .= " AND is_contract='0' ";
+				if( !$this->input->get('mode') && $this->input->post('cont_sort1')==2&&$this->input->post('cont_sort3')==3) $where_add .= " AND is_application='1' ";
+				if( !$this->input->get('mode') && $this->input->post('cont_sort1')==2&&$this->input->post('cont_sort3')==4) $where_add .= " AND is_contract='1' ";
+				if($this->input->get('mode')=="modi")  $where_add .= " AND con_no = '$mo_row[con_no]' ";
+
+				$data['type'] = $this->main_m->sql_result("SELECT type FROM cms_project_all_housing_unit $where_add GROUP BY type ORDER BY type");
+
+				// 동 데이터 불러오기
+				$tp = $this->input->post('type');
+				if($this->input->post('type')) $where_add .= " AND type='$tp' ";
+				$data['dong'] = $this->main_m->sql_result("SELECT dong FROM cms_project_all_housing_unit $where_add GROUP BY dong ORDER BY dong");
+
+				// 호수 데이터 불러오기
+				$dg = $this->input->post('dong');
+				if($this->input->post('dong')) $where_add .= " AND dong='$dg' ";
+				$data['ho'] = $this->main_m->sql_result("SELECT ho FROM cms_project_all_housing_unit $where_add GROUP BY ho ORDER BY ho");
+
+				// 타입 동호수 텍스트
+				$data['dong_ho'] = ($this->input->post('type') && $this->input->post('dong') && $this->input->post('ho')) ? "<font color='#900640'>[".$this->input->post('type')." 타입]</font> &nbsp;".$this->input->post('dong') ." <font color='#525050'>동</font> ". $this->input->post('ho')." <font color='#525050'>호</font>" : "<font color='#525050'>등록 할 동호수를 먼저 선택하세요.</font>";
 
 
 				//본 페이지 로딩

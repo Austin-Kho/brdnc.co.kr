@@ -15,7 +15,7 @@
 							<select class="form-control input-sm" name="yr" onchange="submit();">
 								<option value=""> 전 체</option>
 <?php
-	$start_year = "2014";
+	$start_year = "2015";
 	// if(!$yr) $yr=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
 	$year=range($start_year,date('Y'));
 	for($i=(count($year)-1); $i>=0; $i--) :
@@ -286,7 +286,7 @@
 							</div>
 							<div class="col-xs-12 col-sm-3 col-md-1 center" style="height: 40px; background-color: #F4F4F4; padding: 12px 0;">데이터 정렬</div>
 							<div class="col-sm-1 col-md-1 hidden-xs" style="height: 40px; padding: 0 0 0 5px;">
-								<div class="checkbox" style="margin: 0;">
+								<div class="checkbox" style="margin: 0; padding-top: 10px;">
 									<label><input type="checkbox" name="order_reg" id="order_reg" <?php if($this->input->get('order_reg')=="on") echo "checked"; ?> onclick="order_chk(this, '1');"> 등록 순</label>
 								</div>
 							</div>
@@ -299,7 +299,7 @@
 								<label class="radio-inline"><input type="radio" name="ho_sc" id="ho_sc2" value="2" <?php if($this->input->get('ho_sc')=="2") echo "checked"; ?> onclick="order_chk(this, '2');">내림차순</label>)
 							</div>
 							<div class="col-xs-6 col-md-1" style="height: 40px; padding: 0 0 0 5px;">
-								<div class="checkbox" style="margin: 0;">
+								<div class="checkbox" style="margin: 0; padding-top: 10px;">
 									<label><input type="checkbox" name="sh_extend" onclick="if(this.checked===true)alert('준비중!')"> 검색 확장</label>
 								</div>
 							</div>
@@ -339,7 +339,7 @@
 
 		foreach($reg_dong_ho as $lt) :
 			switch ($lt->is_hold) {
-				case '1': $hold_str = "분양제외 세대"; break;
+				case '1': $hold_str = "<font color='red'>분양제외 세대</font>"; break;
 				default: $hold_str = "분양대상 세대"; break;
 			}
 			for($i=0; $i<count($tn); $i++){
@@ -354,7 +354,7 @@
 								<td class="center"><?php echo $lt->dong; ?></td>
 								<td class="center"><?php echo $lt->ho; ?></td>
 								<td class="center"><span style="padding: 3px; background-color: <?php echo $t_color; ?>"><?php echo $lt->type; ?> 타입</span></td>
-								<td class="center"><?php echo $hold_str; ?></td>
+								<td class="center" style="<?php if($lt->is_hold==1) echo 'cursor: pointer;' ?>"><div data-toggle="tooltip" title="<?php echo $lt->hold_reason; ?>"><?php echo $hold_str; ?></div></td>
 <?php if($auth<2) $modi_str = "alert('수정/등록 권한이 없습니다.')"; else $modi_str = "alert('준비 중입니다.');"; //"popUp('/pc/_menu4/progress1_edit.php?data=".$lt->seq."&info=".$lt->pj_seq."','progress1_edit')"; ?>
 								<td class="center"><a href='javascript:'class="btn btn-info btn-xs" onclick="<?php echo $modi_str; ?>">수정</a></td>
 <?php if($auth<2) $del_str = "alert('등록/삭제 권한이 없습니다.')"; else $del_str = "alert('준비 중입니다.');"; ?>

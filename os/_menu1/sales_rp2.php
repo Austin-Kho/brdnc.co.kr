@@ -35,7 +35,7 @@
 							if(!$pj_list) $pj_list = 1;
 							$data_cr=$_REQUEST['data_cr'];
 
-							$result=mysqli_query($connect, "SELECT data_cr FROM cms_project1_info WHERE seq='$pj_list' ");
+							$result=mysqli_query($connect, "SELECT data_cr FROM cms_project WHERE seq='$pj_list' ");
 							$row=mysqli_fetch_array($result);
 							$data_cr = $row[data_cr];
 						?>
@@ -51,7 +51,7 @@
 							<!-- ============ 본사 직원일 때 프로젝트 선택 가능 시작 ============  -->
 							<?
 								if($member_row[is_company]==1){
-								$pj_rlt = mysqli_query($connect, "SELECT seq FROM cms_project1_info ORDER BY seq DESC LIMIT 1");
+								$pj_rlt = mysqli_query($connect, "SELECT seq FROM cms_project ORDER BY seq DESC LIMIT 1");
 								$pj_row = mysqli_fetch_array($pj_rlt);
 								$year_frm=$_REQUEST['year_frm'];
 							?>

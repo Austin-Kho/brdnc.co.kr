@@ -156,7 +156,7 @@ class M3 extends CI_Controller {
 								$order .= " , dong DESC  ";
 							}
 						}
-						$data['reg_dong_ho'] = $this->main_m->sql_result(" SELECT cms_project_all_housing_unit.seq, pj_seq, pj_name, type, dong, ho, type_name, type_color, is_hold FROM  cms_project_all_housing_unit, cms_project WHERE pj_seq = ".$data['pre_pj_seq']." AND pj_seq=cms_project.seq ".$add_where." ".$order." ".$limit);
+						$data['reg_dong_ho'] = $this->main_m->sql_result(" SELECT cms_project_all_housing_unit.seq, pj_seq, pj_name, type, dong, ho, type_name, type_color, is_hold, hold_reason FROM  cms_project_all_housing_unit, cms_project WHERE pj_seq = ".$data['pre_pj_seq']." AND pj_seq=cms_project.seq ".$add_where." ".$order." ".$limit);
 					}
 				}
 
