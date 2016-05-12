@@ -103,7 +103,8 @@ class M1 extends CI_Controller {
 				if( !$this->input->get('mode') && $this->input->post('cont_sort1')==1&&($this->input->post('cont_sort2')==2)) $where_add .= " AND is_contract='0' ";
 				if( !$this->input->get('mode') && $this->input->post('cont_sort1')==2&&$this->input->post('cont_sort3')==3) $where_add .= " AND is_application='1' ";
 				if( !$this->input->get('mode') && $this->input->post('cont_sort1')==2&&$this->input->post('cont_sort3')==4) $where_add .= " AND is_contract='1' ";
-				if($this->input->get('mode')=="modi")  $where_add .= " AND con_no = '$mo_row[con_no]' ";
+				// 청약 / 계약 분기 후 각 해당 데이터 Key 값 가져온다.
+				//if($this->input->get('mode')=="modi")  $where_add .= " AND con_no = '$mo_row[con_no]' ";
 
 				$data['type'] = $this->main_m->sql_result("SELECT type FROM cms_project_all_housing_unit $where_add GROUP BY type ORDER BY type");
 
@@ -118,7 +119,7 @@ class M1 extends CI_Controller {
 				$data['ho'] = $this->main_m->sql_result("SELECT ho FROM cms_project_all_housing_unit $where_add GROUP BY ho ORDER BY ho");
 
 				// 타입 동호수 텍스트
-				$data['dong_ho'] = ($this->input->post('type') && $this->input->post('dong') && $this->input->post('ho')) ? "<font color='#900640'>[".$this->input->post('type')." 타입]</font> &nbsp;".$this->input->post('dong') ." <font color='#525050'>동</font> ". $this->input->post('ho')." <font color='#525050'>호</font>" : "<font color='#525050'>등록 할 동호수를 먼저 선택하세요.</font>";
+				$data['dong_ho'] = ($this->input->post('type') && $this->input->post('dong') && $this->input->post('ho')) ? "<font color='#900640'>[".$this->input->post('type')." 타입]</font> &nbsp;".$this->input->post('dong') ." <font color='#817F7F'>동</font> ". $this->input->post('ho')." <font color='#817F7F'>호</font>" : "<font color='#B0AEAE'>등록 할 동호수를 먼저 선택하세요.</font>";
 
 
 				//본 페이지 로딩

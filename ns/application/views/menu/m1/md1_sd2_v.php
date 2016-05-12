@@ -4,6 +4,23 @@
 		<!-- ===================계약물건 검색 시작================== -->
 		<form method="post" name="set1" action="<?php echo current_url(); ?>">
 			<div class="row bo-top bo-bottom font12" style="margin: 0;">
+				<div class="row bo-bottom font12" style="margin: 0;">
+					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">처리 구분 <span class="red">*</span></div>
+					<div class="col-xs-8 col-sm-9 col-md-6" style="padding: 4px 15px;">
+						<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 0; padding-top: 5px;">
+							<label><input type="radio" name="mode" value="new"
+								<?php if(( !$this->input->post('mode') OR $this->input->post('mode')=="new") &&
+								$this->input->get('mode')!="modi") echo "checked"; if($this->input->get('mode')=="modi") echo "disabled"; ?> onclick="submit();">
+								신규
+							</label>
+						</div>
+						<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 0; padding-top: 5px;">
+							<label><input type="radio" name="mode" value="modi" <?php if($this->input->post('mode')=="modi" OR $this->input->get('mode')=="modi") echo "checked"; ?> onclick="submit();">수정</label>
+						</div>
+					</div>
+				</div>
+
+
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
@@ -125,7 +142,7 @@
 			</div>
 
 			<div class="row bo-top bo-bottom font12" style="margin: 0 0 15px;">
-				<div class="col-xs-12 font14 bold" style="padding: 10px 50px; background-color: #F5F2C5; color: #0A0E80"> <?php echo $dong_ho; ?>&nbsp;</div>
+				<div class="col-xs-12 font14" style="padding: 10px 50px; background-color: #F5F2C5; color: #0A0E80"> <?php echo $dong_ho; ?>&nbsp;</div>
 			</div>
 		</form>
 		<!-- ===================계약물건 검색 종료================== -->
@@ -192,8 +209,6 @@
 						<input type="text" class="form-control input-sm" name="name" value="">
 					</div>
 				</div>
-
-
 			</div>
 
 			<div class="row bo-bottom font12" style="margin: 0;">
