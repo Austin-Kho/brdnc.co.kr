@@ -1,5 +1,5 @@
 		<div class="main_start">&nbsp;</div>
-		<!-- 3. 프로젝트 -> 1. 프로젝트 관리 ->2. 기본정보 수정 -->
+		<!-- 1. 분양관리 -> 1. 계약 관리 ->3. 동호수 현황 -->
 		<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
 			<form method="get" name="pj_sel" action="<?php echo current_url(); ?>">
 
