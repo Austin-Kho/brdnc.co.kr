@@ -118,8 +118,8 @@ class M4_m extends CI_Model {
 	public function pj_dt() {
 		$this->db->select('seq, pj_name');
 		$this->db->where('is_end !=', '1');
-		$this->db->order_by('start_date DESC', 'seq ASC');
-		$qry = $this->db->get('cms_project1_info');
+		$this->db->order_by('biz_start_ym DESC', 'seq ASC');
+		$qry = $this->db->get('cms_project');
 		$result = $qry->result();
 		return $result;
 	}

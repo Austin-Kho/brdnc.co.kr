@@ -211,6 +211,8 @@
 												 FROM cms_project_all_housing_unit WHERE pj_seq='$pj_list' AND dong='$dong_rows[dong]' "; // 각 동별 라인수 구하기
 									$ho_rlt = mysqli_query($connect, $ho_qry);
 									$ho_rows = mysqli_fetch_array($ho_rlt);  // 반복하기 위한 각 동별 라인 수
+
+
 									$floor_num = $max_floor-$j; // 층수
 
 									for($i=0; $i<$ho_rows[dong_line]; $i++){ // 라인수 만큼 반복
@@ -235,14 +237,14 @@
 
 										/////////////////////////////////////// 동호수 표시칸 css S //////////////////////////////////////////
 										if($ho_ck_row) {   // div 번호에 해당 호수가 있으면,
-											$bor_col = "border-color:#cccccc;";
+											$bor_col = "border-color:#ccc;";
 											$div_col = "background-color:".$type_color[$ho_ck_row[type]].";";
 										}else {
 											if($ho_num<400){ // 호수가 없는 4층 이하(피로티)인 경우
 												$bor_col = "border-color:#c3c3c3;";
 												$div_col = "background-color:#c3c3c3;";
 											}else{
-												$bor_col = "border-color:#FFFFFF;";
+												$bor_col = "border-color:#FFF;";
 												$div_col = "";
 											}
 										}
@@ -291,7 +293,6 @@
 						<?
 							}
 						?>
-						<!-- <input type="button" value="dd" onclick="location.href='sales_imsi_del.php?pj_seq=<?=$pj_list?>' "> 전체 데이터 지우기 버튼 -->
 						</td>
 					</tr>
 					</table>

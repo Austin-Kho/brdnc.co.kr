@@ -107,7 +107,7 @@ class M4 extends CI_Controller {
 				// 조합 대여금 데이터
 				$data['jh_data'] = $this->m4_m->select_data_lt('cms_capital_cash_book', 'any_jh', 'any_jh<>0', 'any_jh');
 				for($i=0; $i<$data['jh_data']['num']; $i++){
-					$data['jh_name'][$i] = $this->main_m->sql_result(" SELECT pj_name FROM cms_project1_info WHERE seq = '".$data['jh_data']['result'][$i]->any_jh."' ORDER BY seq ");//조합명
+					$data['jh_name'][$i] = $this->main_m->sql_result(" SELECT pj_name FROM cms_project WHERE seq = '".$data['jh_data']['result'][$i]->any_jh."' ORDER BY seq ");//조합명
 					$data['jh_cum_in'][$i] = $this->main_m->sql_result(" SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND any_jh = '".$data['jh_data']['result'][$i]->any_jh."' AND deal_date<='".$data['sh_date']."' "); //총 회수금
 					$data['jh_date_in'][$i] = $this->main_m->sql_result(" SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND any_jh = '".$data['jh_data']['result'][$i]->any_jh."' AND deal_date='".$data['sh_date']."' "); // 당일 회수
 					$data['jh_cum_ex'][$i] = $this->main_m->sql_result(" SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND any_jh ='".$data['jh_data']['result'][$i]->any_jh."' AND deal_date<='".$data['sh_date']."' "); // 총 대여금

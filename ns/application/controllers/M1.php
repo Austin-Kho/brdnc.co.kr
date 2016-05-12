@@ -36,7 +36,7 @@ class M1 extends CI_Controller {
 	}
 
 	public function sales($mdi='', $sdi=''){
-		//$this->output->enable_profiler(TRUE); //프로파일러 보기//
+		$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
@@ -113,7 +113,7 @@ class M1 extends CI_Controller {
 				// 등록된 프로젝트 데이터
 				$data['all_pj'] = $this->main_m->sql_result(' SELECT * FROM cms_project '.$where.' ORDER BY biz_start_ym DESC ');
 
-				$project = $data['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 아이디
+				$project = $data['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
 
 				// 공급세대 및 유보세대 청약 계약세대 구하기
 				$data['summary_tb'] = $this->main_m->sql_row(" SELECT COUNT(*) AS total, SUM(is_hold) AS hold, SUM(is_application) AS acn, SUM(is_contract) AS cont FROM cms_project_all_housing_unit WHERE pj_seq='$project'  ");
@@ -131,12 +131,13 @@ class M1 extends CI_Controller {
 				if(strlen($max_fl->max_ho)==4) $data['max_floor'] = substr($max_fl->max_ho, -4,2);
 
 				// 해당 단지 동 수 및 리스트 구하기
-				$data['dong_data'] = $this->main_m->sql_result(" SELECT dong FROM cms_project_all_housing_unit WHERE pj_seq='$project' GROUP BY dong ");
+				$dong_data = $data['dong_data'] = $this->main_m->sql_result(" SELECT dong FROM cms_project_all_housing_unit WHERE pj_seq='$project' GROUP BY dong ");
 
-				// 동별 라인수 '$dong_rows[dong]' ????여기까지
-				// function line_num($dong){
-				// 	$data['line_num'] = $this->main_m->sql_result(" SELECT MIN(RIGHT(ho,2)) AS st_line, MAX(RIGHT(ho,2)) AS dong_line FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$dong_rows[dong]' ");
-				// }
+				// 각 동별 라인 수 구하기   //$line_num[6]->to_line
+				for($j=0; $j<count($data['dong_data']); $j++) :
+					$d = $dong_data[$j]->dong;
+					$line_num = $data['line_num'][$j] = $this->main_m->sql_row(" SELECT MIN(RIGHT(ho,2)) AS from_line, MAX(RIGHT(ho,2)) AS to_line FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$d' ");
+				endfor;
 
 
 

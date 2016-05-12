@@ -37,7 +37,7 @@ class Capital_pop extends CI_Controller
 		$data['acnt5'] = $this->main_m->sql_result(" SELECT * FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc !='1' ORDER BY d3_code ASC ");
 
 		// 현장목록 가져오기
-		$data['pj'] = $this->main_m->sql_result(" SELECT seq, pj_name FROM cms_project1_info WHERE is_end!='1' ORDER BY start_date DESC, seq DESC ");
+		$data['pj'] = $this->main_m->sql_result(" SELECT seq, pj_name FROM cms_project WHERE is_end!='1' ORDER BY biz_start_ym DESC, seq DESC ");
 
 		// 입출금 계좌 가져오기 select * from cms_capital_bank_account
 		$data['bank_acc'] =  $this->main_m->sql_result(" select * from cms_capital_bank_account ");
