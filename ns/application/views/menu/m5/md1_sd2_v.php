@@ -156,10 +156,10 @@
 								<label for="join_date">입 사 일 <span class="red">*</span></label>
 							</div>
 							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-								<div class="col-xs-10" style="padding-left: 0;">
+								<div class="col-xs-10" style="padding-left: 0; padding-right: 0;">
 									<input type="text" class="form-control input-sm wid-100" id="join_date" name="join_date" maxlength="10" value="<?php if($this->input->get('seq')) echo $sel_mem->join_date; ?>" readonly onClick="cal_add(this); event.cancelBubble=true" required autofocus>
 								</div>
-								<div class="col-xs-2 glyphicon-wrap">
+								<div class="col-xs-2 glyphicon-wrap" style="padding-top: 11px;">
 									<a href="javascript:" onclick="cal_add(document.getElementById('join_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
 								</div>
 							</div>
@@ -175,10 +175,10 @@
 								<label for="reti_date">퇴 사 일 <span class="red">*</span></label>
 							</div>
 							<div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-								<div class="col-xs-10">
+								<div class="col-xs-10" style="padding: 0;">
 									<input type="text" class="form-control input-sm wid-100" id="reti_date" name="reti_date" maxlength="10" value="<?php if($this->input->get('seq')) echo $sel_mem->reti_date; ?>" readonly onClick="cal_add(this); event.cancelBubble=true" maxlength="10" required autofocus>
 								</div>
-								<div class="col-xs-2 glyphicon-wrap">
+								<div class="col-xs-2 glyphicon-wrap" style="padding-top: 11px;">
 									<a href="javascript:" onclick="cal_add(document.getElementById('reti_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
 								</div>
 							</div>
@@ -192,21 +192,21 @@
 				<div class="row" style="margin: 0 15px;">
 					<div class="col-md-12" style="height: 70px; padding: 26px 15px; margin: 18px 0; border-width: 0 0 1px 0; border-style: solid; border-color: #B2BCDE;">
 <?
-	if($auth<2){
+	if($auth<2) :
 		$submit_str="alert('등록 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
 		$del_str="alert('삭제 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
-	}else{
+	else :
 		$submit_str="div_mem_submit('".$this->input->get('mode')."');";
 		$del_str="form1_seq_del(".$this->input->get('seq').");";
-	}
+	endif;
 ?>
-						<div class="col-xs-6">
+						<div class="col-xs-8">
 							<button class="btn btn-success btn-sm" onclick="<?php echo $submit_str; ?>"><?php if($this->input->get('mode')=='modify') echo '수정하기'; else echo '등록하기'; ?></button>
 							<button class="btn btn-info btn-sm" onclick="location.href='?ss_di=1' ">목록으로</button>
 						</div>
-						<div class="col-xs-6" style="text-align: right;">
+						<div class="col-xs-4" style="text-align: right;">
 <?php if($this->input->get('seq')) : ?>
-							<button class="btn btn-danger btn-sm" onclick="<?php echo $del_str; ?>">선택삭제</button>
+							<button class="btn btn-danger btn-sm" onclick="<?php echo $del_str; ?>">삭제하기</button>
 <?php endif; ?>
 						</div>
 					</div>

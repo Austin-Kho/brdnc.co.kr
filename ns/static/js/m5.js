@@ -2,7 +2,7 @@ function form1_seq_del(seq) {
 	var form = document.form1;
 	form.mode.value='del';
 	form.seq.value=seq;
-	if(confirm("데이터 삭제를 계속 진행하시겠습니까?")===true) {
+	if(confirm("해당 데이터가 삭제됩니다. 계속 진행하시겠습니까?")===true) {
 		form.submit();
 	}else{
 		return;
