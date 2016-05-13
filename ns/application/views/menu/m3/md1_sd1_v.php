@@ -254,7 +254,7 @@
 					<div class="col-md-12">
 						<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
 							<div class="col-xs-12 col-sm-3 col-md-1 center" style="height: 40px; background-color: #F4F4F4; padding: 12px 0;">검색 조건</div>
-							<div class="col-xs-4 col-sm-3 col-md-1" style="height: 40px; padding: 5px;">
+							<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
 								<label for="type" class="sr-only">구분1</label>
 								<select class="form-control input-sm" name="type">
 									<option value=""> 타입별</option>
@@ -263,7 +263,7 @@
 <?php endforeach; endif; ?>
 								</select>
 							</div>
-							<div class="col-xs-4 col-sm-3 col-md-1" style="height: 40px; padding: 5px;">
+							<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
 								<label for="dong" class="sr-only">구분1</label>
 								<select class="form-control input-sm" name="dong">
 									<option value=""> 동 별</option>
@@ -272,10 +272,10 @@
 <?php endforeach; endif; ?>
 								</select>
 							</div>
-							<div class="col-xs-4 col-sm-3 col-md-1" style="height: 40px; padding: 5px;">
+							<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
 								<label for="num" class="sr-only">구분1</label>
 								<select class="form-control input-sm" name="num">
-									<option value=""> 표시개수</option>
+									<option value="">표시개수</option>
 									<option value="5" <?php if($this->input->get('num')==5) echo "selected"; ?>> 5개</option>
 									<option value="10" <?php if($this->input->get('num')==10) echo "selected"; ?>> 10개</option>
 									<option value="15" <?php if($this->input->get('num')==15) echo "selected"; ?>> 15개</option>
@@ -284,26 +284,32 @@
 									<option value="30" <?php if($this->input->get('num')==30) echo "selected"; ?>> 30개</option>
 								</select>
 							</div>
+							<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
+								<label for="condi" class="sr-only">구분1</label>
+								<select class="form-control input-sm" name="condi">
+									<option value="">상태 전체</option>
+									<option value="1" <?php if($this->input->get('condi')==1) echo "selected"; ?>>정상</option>
+									<option value="2" <?php if($this->input->get('condi')==2) echo "selected"; ?>>청약</option>
+									<option value="3" <?php if($this->input->get('condi')==3) echo "selected"; ?>>계약</option>
+									<option value="4" <?php if($this->input->get('condi')==4) echo "selected"; ?>>홀딩</option>
+								</select>
+							</div>
 							<div class="col-xs-12 col-sm-3 col-md-1 center" style="height: 40px; background-color: #F4F4F4; padding: 12px 0;">데이터 정렬</div>
-							<div class="col-sm-1 col-md-1 hidden-xs" style="height: 40px; padding: 0 0 0 5px;">
+							<div class="col-sm-2 col-md-1 hidden-xs" style="height: 40px; padding: 0 0 0 5px;">
 								<div class="checkbox" style="margin: 0; padding-top: 10px;">
 									<label><input type="checkbox" name="order_reg" id="order_reg" <?php if($this->input->get('order_reg')=="on") echo "checked"; ?> onclick="order_chk(this, '1');"> 등록 순</label>
 								</div>
 							</div>
-							<div class="col-xs-6 col-sm-4 col-md-2" style="height: 40px; padding: 10px 5px;">동: (
-								<label class="radio-inline"><input type="radio" name="dong_sc" id="dong_sc1" value="1" <?php if($this->input->get('dong_sc')=="1") echo "checked"; ?> onclick="order_chk(this, '2');">오름차순</label>
-								<label class="radio-inline"><input type="radio" name="dong_sc" id="dong_sc2" value="2" <?php if($this->input->get('dong_sc')=="2") echo "checked"; ?> onclick="order_chk(this, '2');">내림차순</label>)
+							<div class="col-xs-12 col-sm-4 col-md-3" style="height: 40px; padding: 10px 5px;">동호 별 : (
+								<label class="radio-inline"><input type="radio" name="dong_ho_sc1" id="dong_ho_sc1" value="1" <?php if($this->input->get('dong_sc')=="1") echo "checked"; ?> onclick="order_chk(this, '2');">오름차순</label>
+								<label class="radio-inline"><input type="radio" name="dong_ho_sc1" id="dong_ho_sc2" value="2" <?php if($this->input->get('dong_sc')=="2") echo "checked"; ?> onclick="order_chk(this, '2');">내림차순</label> )
 							</div>
-							<div class="col-xs-6 col-sm-4 col-md-2" style="height: 40px; padding: 10px 5px;">호: (
-								<label class="radio-inline"><input type="radio" name="ho_sc" id="ho_sc1" value="1" <?php if($this->input->get('ho_sc')=="1") echo "checked"; ?> onclick="order_chk(this, '2');">오름차순</label>
-								<label class="radio-inline"><input type="radio" name="ho_sc" id="ho_sc2" value="2" <?php if($this->input->get('ho_sc')=="2") echo "checked"; ?> onclick="order_chk(this, '2');">내림차순</label>)
-							</div>
-							<div class="col-xs-6 col-md-1" style="height: 40px; padding: 0 0 0 5px;">
+							<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 0 0 0 5px;">
 								<div class="checkbox" style="margin: 0; padding-top: 10px;">
 									<label><input type="checkbox" name="sh_extend" onclick="if(this.checked===true)alert('준비중!')"> 검색 확장</label>
 								</div>
 							</div>
-							<div class="col-xs-6 col-md-1 right" style="height: 40px; padding: 5px;">
+							<div class="col-xs-6 col-sm-12 col-md-1 right" style="height: 40px; padding: 5px;">
 								<input type="button" value="검 색" class="btn btn-info btn-sm" onclick="submit();">
 							</div>
 						</div>
@@ -319,6 +325,7 @@
 								<td class="center">동</td>
 								<td class="center">호수</td>
 								<td class="center">타입(Type)</td>
+								<td class="center">상태</td>
 								<td class="center">홀딩 여부</td>
 								<td class="center">수정</td>
 								<td class="center">삭제</td>
@@ -336,7 +343,6 @@
 		$tn = explode("-", $reg_dong_ho[0]->type_name);
 		$tc = explode("-", $reg_dong_ho[0]->type_color);
 
-
 		foreach($reg_dong_ho as $lt) :
 			switch ($lt->is_hold) {
 				case '1': $hold_str = "<font color='red'>분양제외 세대</font>"; break;
@@ -347,15 +353,20 @@
 					case $tn[$i]: $t_color = $tc[$i]; break;
 				}
 			}
-
+			if($lt->is_application==1):	$condi = "<font color='#3a5ba7'><b>청약</b></font>";
+			elseif($lt->is_contract==1): $condi = "<font color='#ba0c0c'><b>계약</b></font>";
+			elseif($lt->is_hold==1) : $condi = "<font color='#728a7d'><b>홀딩</b></font>";
+			else : $condi = "정상";
+			endif;
 ?>
 							<tr>
 								<td class="center"><?php echo $lt->pj_name; ?></td>
 								<td class="center"><?php echo $lt->dong; ?></td>
 								<td class="center"><?php echo $lt->ho; ?></td>
 								<td class="center"><span style="padding: 3px; background-color: <?php echo $t_color; ?>"><?php echo $lt->type; ?> 타입</span></td>
+								<td class="center"><?php echo $condi; ?></td>
 								<td class="center" style="<?php if($lt->is_hold==1) echo 'cursor: pointer;' ?>"><div data-toggle="tooltip" title="<?php echo $lt->hold_reason; ?>"><?php echo $hold_str; ?></div></td>
-<?php if($auth<2) $modi_str = "alert('수정/등록 권한이 없습니다.')"; else $modi_str = "alert('준비 중입니다.');"; //"popUp('/pc/_menu4/progress1_edit.php?data=".$lt->seq."&info=".$lt->pj_seq."','progress1_edit')"; ?>
+<?php if($auth<2) $modi_str = "alert('수정/등록 권한이 없습니다.')"; else $modi_str = "popUp_size('".base_url('/popup/project_data/data_modi/'.$lt->pj_seq."/".$lt->seq)."','cash_book','500','620')"; ?>
 								<td class="center"><a href='javascript:'class="btn btn-info btn-xs" onclick="<?php echo $modi_str; ?>">수정</a></td>
 <?php if($auth<2) $del_str = "alert('등록/삭제 권한이 없습니다.')"; else $del_str = "alert('준비 중입니다.');"; ?>
 								<td class="center"><a href="javascript:" class="btn btn-danger btn-xs" onclick="<?php echo $del_str; ?>">삭제</a></td>
@@ -363,14 +374,6 @@
 <?php endforeach; endif; ?>
 						</tbody>
 					</table>
-
-
-
-
-
-
-
-
 				</div>
 				<div class="row" style="margin: 0;">
 					<div class="col-md-12 center" style="margin-top: 0px; padding: 0;">
@@ -378,7 +381,6 @@
 					</div>
 				</div>
 
-
-				<!------------------------------------동호수 데이터 불러오기 시작----------------------------------------------->
+				<!------------------------------------동호수 데이터 불러오기 종료----------------------------------------------->
 <?php endif; ?>
     		</div>

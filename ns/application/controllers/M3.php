@@ -98,6 +98,15 @@ class M3 extends CI_Controller {
 						$data['reg_dong'] = $this->main_m->sql_result(" SELECT dong FROM cms_project_all_housing_unit WHERE pj_seq = '".$data['pre_pj_seq']."' ".$add_where." GROUP BY dong  ");
 						if($this->input->get('dong')) $add_where .= " AND dong = '".$this->input->get('dong')."' ";
 
+						// 상태에 따른 검색 소스
+						switch ($this->input->get('condi')) {
+							case '1': $add_where .= " AND is_application='0' AND is_contract='0' AND is_hold='0' "; break;
+							case '2': $add_where .= " AND is_application='1' "; break;
+							case '3': $add_where .= " AND is_contract='1' "; break;
+							case '4': $add_where .= " AND is_hold='1' "; break;
+							default: $add_where .= ""; break;
+						}
+
 						//페이지네이션 라이브러리 로딩 추가
 						$this->load->library('pagination');
 
@@ -126,37 +135,13 @@ class M3 extends CI_Controller {
 						if($this->input->get('order_reg') OR $this->input->get('order_reg')=="on"){
 							$order = " ORDER BY cms_project_all_housing_unit.seq ASC ";
 						}
-						if($this->input->get('dong_sc')=="1"){
-							$order = " ORDER BY dong ASC  ";
-							if($this->input->get('ho_sc')=="1"){
-								$order .= " , ho ASC  ";
-							}else if($this->input->get('ho_sc')=="2"){
-								$order .= " , ho DESC  ";
-							}
-						}else if($this->input->get('dong_sc')=="2"){
-							$order = " ORDER BY dong DESC  ";
-							if($this->input->get('ho_sc')=="1"){
-								$order .= " , ho ASC  ";
-							}else if($this->input->get('ho_sc')=="2"){
-								$order .= " , ho DESC  ";
-							}
+
+						if($this->input->get('dong_ho_sc1')=="1"){
+							$order = " ORDER BY dong ASC , ho ASC  ";
+						}else if($this->input->get('dong_ho_sc1')=="2"){
+							$order = " ORDER BY dong DESC , ho DESC    ";
 						}
-						if($this->input->get('ho_sc')=="1"){
-							$order = " ORDER BY ho ASC  ";
-							if($this->input->get('dong_sc')=="1"){
-								$order .= " , dong ASC  ";
-							}else if($this->input->get('dong_sc')=="2"){
-								$order .= " , dong DESC  ";
-							}
-						}else if($this->input->get('ho_sc')=="2"){
-							$order = " ORDER BY ho DESC  ";
-							if($this->input->get('dong_sc')=="1"){
-								$order .= " , dong ASC  ";
-							}else if($this->input->get('dong_sc')=="2"){
-								$order .= " , dong DESC  ";
-							}
-						}
-						$data['reg_dong_ho'] = $this->main_m->sql_result(" SELECT cms_project_all_housing_unit.seq, pj_seq, pj_name, type, dong, ho, type_name, type_color, is_hold, hold_reason FROM  cms_project_all_housing_unit, cms_project WHERE pj_seq = ".$data['pre_pj_seq']." AND pj_seq=cms_project.seq ".$add_where." ".$order." ".$limit);
+						$data['reg_dong_ho'] = $this->main_m->sql_result(" SELECT cms_project_all_housing_unit.seq, pj_seq, pj_name, type, dong, ho, type_name, type_color, is_hold, hold_reason, is_application, is_contract FROM  cms_project_all_housing_unit, cms_project WHERE pj_seq = ".$data['pre_pj_seq']." AND pj_seq=cms_project.seq ".$add_where." ".$order." ".$limit);
 					}
 				}
 
@@ -267,7 +252,8 @@ class M3 extends CI_Controller {
 										'ho' => $ho[$j],
 										'floor' =>$floor,
 										'line' => $line[$j],
-										'is_hold' => $hold[$j]
+										'is_hold' => $hold[$j],
+										'reg_worker' => $this->session->userdata['name']
 									);
 									$bat_insert = $this->main_m->insert_data('cms_project_all_housing_unit', $bat_data, 'reg_time');
 									if(!$bat_insert) alert('데이터베이스 오류가 발생하였습니다.', base_url('m3/project/1/1/'));
