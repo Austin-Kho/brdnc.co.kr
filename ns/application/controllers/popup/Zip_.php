@@ -8,7 +8,6 @@ class Zip_ extends CI_Controller
 		$this->load->helper('is_mobile');
 		$this->load->library('form_validation'); // 폼 검증 라이브러리 로드
 		$this->load->model('popup_m');            //  모델 로드
-		$this->load->helper('alert');
 	}
 
 	public function _remap($method) {

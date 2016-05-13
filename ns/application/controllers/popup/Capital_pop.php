@@ -7,7 +7,6 @@ class Capital_pop extends CI_Controller
 		parent::__construct();
 		$this->load->model('main_m');
 		$this->load->model('popup_m');            // 팝업 모델 로드
-		$this->load->helper('alert');
 	}
 
 	// public function index() {

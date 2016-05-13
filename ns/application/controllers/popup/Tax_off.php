@@ -7,7 +7,6 @@ class Tax_off extends CI_Controller
 		parent::__construct();
 		$this->load->model('popup_m');            // 팝업 모델 로드
 		$this->load->helper('is_mobile');
-		$this->load->helper('alert');
 	}
 
 	public function _remap($method) {

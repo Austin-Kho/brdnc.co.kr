@@ -23,7 +23,7 @@
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">프로젝트 선택</div>
 				<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
 					<div class="col-xs-12 col-sm-8" style="padding: 0px;">
-						<label for="project" class="sr-only">사업 개시년도</label>
+						<label for="project" class="sr-only">프로젝트 선택</label>
 						<select class="form-control input-sm" name="project" onchange="submit();">
 							<option value=""> 전 체
 <?php foreach($all_pj as $lt) : ?>
@@ -126,7 +126,7 @@
 						endif;
 					endif;
 					if($db_ho !==null) : // 상태 색상 지정
-						if($db_ho->is_hold==1) : $condi_col = "background-color: #555353;";
+						if($db_ho->is_hold==1) : $condi_col = "background-color: #728a7d;";
 						elseif($db_ho->is_application==1) : $condi_col = "background-color: #3a5ba7;"; // 청약 시
 						elseif($db_ho->is_contract==1) : $condi_col = "background-color: #ba0c0c;"; // 계약 시
 						else : $condi_col = "";
@@ -147,11 +147,6 @@
 						</table>
 					<div class="col-xs-12 center" style="border: 1px solid #3e3e3e; padding: 8px; background-color: #597284; color: #FFF; font-weight: bold;"><?php echo $dong_data[$a]->dong."동"?></div>
 				</div>
-
 <?php endfor; ?>
-
-
-
-
 <?php endif; ?>
 		</div>
