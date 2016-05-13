@@ -119,7 +119,10 @@ class M1 extends CI_Controller {
 				$data['ho'] = $this->main_m->sql_result("SELECT ho FROM cms_project_all_housing_unit $where_add GROUP BY ho ORDER BY ho");
 
 				// 타입 동호수 텍스트
-				$data['dong_ho'] = ($this->input->post('type') && $this->input->post('dong') && $this->input->post('ho')) ? "<font color='#900640'>[".$this->input->post('type')." 타입]</font> &nbsp;".$this->input->post('dong') ." <font color='#817F7F'>동</font> ". $this->input->post('ho')." <font color='#817F7F'>호</font>" : "<font color='#6f6d6d'>등록 할 동호수를 먼저 선택하세요.</font>";
+				$data['dong_ho'] =
+				($this->input->post('type') && $this->input->post('dong') && $this->input->post('ho'))
+				? "<span class='glyphicon glyphicon-home' aria-hidden='true' style='padding-right: 10px;'></span><font color='#b81681'><b>[".$this->input->post('type')." 타입]</font> &nbsp;".$this->input->post('dong') ." <font color='#817F7F'>동</font> ". $this->input->post('ho')." <font color='#817F7F'>호</b></font>"
+				: "";
 
 
 				//본 페이지 로딩

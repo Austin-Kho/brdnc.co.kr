@@ -92,8 +92,8 @@
 			<div class="row center" style="padding: 3px; color: #8f8f91;">
 				<div class="col-xs-3 col-sm-3">최초 등록일</div>
 				<div class="col-xs-3 col-sm-3">최초 등록자</div>
-				<div class="col-xs-3 col-sm-3">마지막 수정일</div>
-				<div class="col-xs-3 col-sm-3">마지막 수정자</div>
+				<div class="col-xs-3 col-sm-3">최종 수정일</div>
+				<div class="col-xs-3 col-sm-3">최종 수정자</div>
 			</div>
 			<div class="row center" style="padding: 3px; margin-bottom: 10px; color: #8f8f91;">
 				<div class="col-xs-3 col-sm-3"><?php echo mb_substr($modi_data->reg_time, 0, 10); ?></div>

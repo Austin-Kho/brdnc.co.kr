@@ -7,14 +7,11 @@
 				<div class="row bo-bottom font12" style="margin: 0;">
 					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">처리 구분 <span class="red">*</span></div>
 					<div class="col-xs-8 col-sm-9 col-md-6" style="padding: 4px 15px;">
-						<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 0; padding-top: 5px;">
-							<label><input type="radio" name="mode" value="new"
-								<?php if(( !$this->input->post('mode') OR $this->input->post('mode')=="new") &&
-								$this->input->get('mode')!="modi") echo "checked"; if($this->input->get('mode')=="modi") echo "disabled"; ?> onclick="submit();">
-								신규
-							</label>
+						<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 0; padding-top: 5px; padding-right: 0;">
+							<label><input type="radio" name="mode" value="new" <?php if(( !$this->input->post('mode') OR $this->input->post('mode')=="new") && $this->input->get('mode')!="modi") echo "checked";
+								if($this->input->get('mode')=="modi") echo "disabled"; ?> onclick="submit();">신규</label>
 						</div>
-						<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 0; padding-top: 5px;">
+						<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 0; padding-top: 5px; padding-right: 0;">
 							<label><input type="radio" name="mode" value="modi" <?php if($this->input->post('mode')=="modi" OR $this->input->get('mode')=="modi") echo "checked"; ?> onclick="submit();">수정</label>
 						</div>
 					</div>
@@ -26,7 +23,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="yr" class="sr-only">사업 개시년도</label>
 						<select class="form-control input-sm" name="yr" onchange="submit();">
-							<option value=""> 전 체</option>
+							<option value=""> 선 택</option>
 <?php
 	$start_year = "2015";
 	$year=range($start_year,date('Y'));
@@ -42,7 +39,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="project" class="sr-only">프로젝트 선택</label>
 						<select class="form-control input-sm" name="project" onchange="submit();">
-							<option value=""> 전 체</option>
+							<option value=""> 선 택</option>
 <?php foreach($all_pj as $lt) : ?>
 							<option value="<?php echo $lt->seq; ?>" <?php if($this->input->post('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
@@ -57,7 +54,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="diff_no" class="sr-only">차수</label>
 						<select class="form-control input-sm" name="diff_no" onchange="submit();">
-							<option value=""> 전 체</option>
+							<option value=""> 선 택</option>
 <?php if($diff_no) : ?>
 <?php foreach($diff_no as $lt) : ?>
 							<option value="<?php echo $lt->seq; ?>" <?php if($this->input->post('diff_no')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?></option>
@@ -71,26 +68,31 @@
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">거래 구분 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-6" style="padding: 4px 15px;">
 
-					<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 5px 0 0;">
+
+					<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 5px 0; padding-right: 0;">
 						<label><input type="radio" name="cont_sort1" id="cont_sort1" value="1" <?php if( !$this->input->post('cont_sort1') OR $this->input->post('cont_sort1')=='1') echo "checked";?>  onclick="submit();">계약</label>
 					</div>
-					<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 5px 0 0;">
+					<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 5px 0; padding-right: 0;">
 						<label><input type="radio" name="cont_sort1" id="cont_sort1" value="2" <?php if($this->input->post('cont_sort1')=='2') echo "checked";?> onclick="submit();">해지</label>
 					</div>
+
+
+
+
 <?php if( !$this->input->post('cont_sort1') OR $this->input->post('cont_sort1')=='1') : ?>
 					<div class="col-xs-4 col-sm-6 col-md-4" style="padding: 0px;">
 						<label for="cont_sort2" class="sr-only">거래구분</label>
 						<select class="form-control input-sm" name="cont_sort2" onchange="submit();">
-							<option value=""> 전 체</option>
+							<option value=""> 선 택</option>
 							<option value="1" <?php if($this->input->post('cont_sort2')=="1") echo "selected"; ?>>청약(가계약)</option>
 							<option value="2" <?php if($this->input->post('cont_sort2')=="2") echo "selected"; ?>>계약(정계약)</option>
 						</select>
 					</div>
 <?php elseif($this->input->post('cont_sort1')=='2') : ?>
-					<div class="col-xs-4 col-sm-6 col-md-4" style="padding: 0px;">
+					<div class="col-xs-12 col-sm-6 col-md-4" style="padding: 0px;">
 						<label for="cont_sort3" class="sr-only">거래구분</label>
 						<select class="form-control input-sm" name="cont_sort3" onchange="submit();">
-							<option value=""> 전 체</option>
+							<option value=""> 선 택</option>
 							<option value="3" <?php if($this->input->post('cont_sort3')=="3") echo "selected"; ?>>청약해지</option>
 							<option value="4" <?php if($this->input->post('cont_sort3')=="4") echo "selected"; ?>>계약해지</option>
 						</select>
@@ -106,7 +108,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="type" class="sr-only">타입</label>
 						<select class="form-control input-sm" name="type" onchange="submit();">
-							<option value=""> 전 체</option>
+							<option value=""> 선 택</option>
 <?php foreach($type as $lt) : ?>
 							<option value="<?php echo $lt->type; ?>" <?php if($lt->type==$this->input->post('type')) echo "selected"; ?>><?php echo $lt->type; ?></option>
 <?php endforeach; ?>
@@ -119,7 +121,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="dong" class="sr-only">동</label>
 						<select class="form-control input-sm" name="dong" onchange="submit();">
-							<option value=""> 전 체</option>
+							<option value=""> 선 택</option>
 <?php foreach($dong as $lt) : ?>
 							<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->post('dong')) echo "selected"; ?>><?php echo $lt->dong; ?></option>
 <?php endforeach; ?>
@@ -132,7 +134,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="ho" class="sr-only">호수</label>
 						<select class="form-control input-sm" name="ho" onchange="submit();" <?php if( !$this->input->post('dong')) echo "disabled"; ?>>
-							<option value=""> 전 체</option>
+							<option value=""> 선 택</option>
 <?php foreach($ho as $lt) : ?>
 							<option value="<?php echo $lt->ho; ?>" <?php if($lt->ho==$this->input->post('ho')) echo "selected"; ?>><?php echo $lt->ho; ?></option>
 <?php endforeach; ?>
@@ -142,7 +144,7 @@
 			</div>
 
 			<div class="row bo-top bo-bottom font12" style="margin: 0 0 15px;">
-				<div class="col-xs-12 font14" style="padding: 10px 50px; background-color: #F5F2C5; color: #0A0E80"> <?php echo $dong_ho; ?>&nbsp;</div>
+				<div class="col-xs-12 font14" style="padding: 10px 50px; background-color: #F5F2C5; color: #0A0E80"><?php echo $dong_ho; ?>&nbsp;</div>
 			</div>
 		</form>
 		<!-- ===================계약물건 검색 종료================== -->
@@ -168,13 +170,20 @@
 						<input type="text" class="form-control input-sm" name="name" value="">
 					</div>
 				</div>
-
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">체결(처리) 일자 <span class="red">*</span></div>
+<?php
+	if($this->input->post('cont_sort2')==1) : $deal_date_label = "청약일자";
+	elseif($this->input->post('cont_sort2')==2) : $deal_date_label = "계약일자";
+	elseif($this->input->post('cont_sort3')==3) : $deal_date_label = "청약해지일자";
+	elseif($this->input->post('cont_sort3')==4) : $deal_date_label = "계약해지일자";
+	else : $deal_date_label = "청약일자";
+	endif;
+?>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0"><?php echo $deal_date_label; ?> <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="dong" class="sr-only">동</label>
 						<select class="form-control input-sm" name="dong" onchange="submit();">
-							<option value=""> 전 체</option>
+							<option value=""> 선 택</option>
 <?php foreach($dong as $lt) : ?>
 							<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->post('dong')) echo "selected"; ?>><?php echo $lt->dong; ?></option>
 <?php endforeach; ?>
@@ -192,7 +201,7 @@
 					</div>
 				</div>
 
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">연락처 [2] <span class="red">*</span></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">연락처 [2]</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="dong" class="sr-only">동</label>
@@ -200,6 +209,95 @@
 					</div>
 				</div>
 			</div>
+<?php if( !$this->input->post('cont_sort2') OR $this->input->post('cont_sort2')=="1") : // 청약 등록 시?>
+			<div class="row bo-bottom font12" style="margin: 0;">
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약 예정일 <span class="red">*</span></div>
+				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<label for="type" class="sr-only">타입</label>
+						<input type="text" class="form-control input-sm" name="name" value="">
+					</div>
+				</div>
+
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">청약금 <span class="red">*</span></div>
+
+				<div class="col-xs-3 col-sm-4 col-md-2" style="padding: 4px 15px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<label for="dong" class="sr-only">동</label>
+						<input type="text" class="form-control input-sm" name="name" value="">
+					</div>
+				</div>
+				<div class="col-xs-3 col-sm-4 col-md-2" style="padding: 4px 15px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<label for="dong" class="sr-only">동</label>
+						<select class="form-control input-sm" name="dong" onchange="submit();">
+							<option value=""> 선 택</option>
+<?php foreach($dong as $lt) : ?>
+							<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->post('dong')) echo "selected"; ?>><?php echo $lt->dong; ?></option>
+<?php endforeach; ?>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-2 col-sm-1 col-md-2" style="padding: 10px 0">입금계정</div>
+			</div>
+<?php elseif($this->input->post('cont_sort2')=="2") : // 계약 등록 시 ?>
+
+			<div class="row bo-bottom font12" style="margin: 0;">
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="height: 60px; padding: 10px; 0">청약 내역 <span class="red">*</span></div>
+				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
+					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">일자 : 2016-06-01</div>
+					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">입금 : 5,000,000 원</div>
+					<!-- <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">성명 :  홍길동</div> -->
+					<div class="col-xs-6 col-sm-4 col-md-3" style="padding: 4px 0px;">계정 : 신탁 (대행비)</div>
+				</div>
+			</div>
+
+			<div class="row bo-bottom font12" style="margin: 0;">
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약금 <span class="red">*</span></div>
+				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<label for="dong" class="sr-only">동</label>
+						<input type="text" class="form-control input-sm" name="name" value="">
+					</div>
+				</div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">입금 계정 <span class="red">*</span></div>
+				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<label for="dong" class="sr-only">동</label>
+						<select class="form-control input-sm" name="dong" onchange="submit();">
+							<option value=""> 선 택</option>
+<?php foreach($dong as $lt) : ?>
+							<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->post('dong')) echo "selected"; ?>><?php echo $lt->dong; ?></option>
+<?php endforeach; ?>
+						</select>
+					</div>
+				</div>
+			</div>
+
+			<div class="row bo-bottom font12" style="margin: 0;">
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">업무대행비 <span class="red">*</span></div>
+				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<label for="dong" class="sr-only">동</label>
+						<input type="text" class="form-control input-sm" name="name" value="">
+					</div>
+				</div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">입금계정 <span class="red">*</span></div>
+				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<label for="dong" class="sr-only">동</label>
+						<select class="form-control input-sm" name="dong" onchange="submit();">
+							<option value=""> 선 택</option>
+<?php foreach($dong as $lt) : ?>
+							<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->post('dong')) echo "selected"; ?>><?php echo $lt->dong; ?></option>
+<?php endforeach; ?>
+						</select>
+					</div>
+				</div>
+			</div>
+
+
+
 
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">주민등록 주소 <span class="red">*</span></div>
@@ -222,85 +320,25 @@
 			</div>
 
 			<div class="row bo-bottom font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약 고객명 <span class="red">*</span></div>
-				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
-					<div class="col-xs-12" style="padding: 0px;">
-						<label for="type" class="sr-only">타입</label>
-						<select class="form-control input-sm" name="type" onchange="submit();">
-							<option value=""> 전 체</option>
-<?php foreach($type as $lt) : ?>
-							<option value="<?php echo $lt->type; ?>" <?php if($lt->type==$this->input->post('type')) echo "selected"; ?>><?php echo $lt->type; ?></option>
-<?php endforeach; ?>
-						</select>
-					</div>
-				</div>
-
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">체결(처리) 일자 <span class="red">*</span></div>
-				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
-					<div class="col-xs-12" style="padding: 0px;">
-						<label for="dong" class="sr-only">동</label>
-						<select class="form-control input-sm" name="dong" onchange="submit();">
-							<option value=""> 전 체</option>
-<?php foreach($dong as $lt) : ?>
-							<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->post('dong')) echo "selected"; ?>><?php echo $lt->dong; ?></option>
-<?php endforeach; ?>
-						</select>
-					</div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="height: 125px; padding: 10px; 0">미비서류 항목</div>
+				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px;">
+					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="name" value="">각서9종</label></div>
+					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="hold_2"> 주민등본</label></div>
+					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="hold_2"> 주민초본</label></div>
+					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="hold_2"> 가족관계증명</label></div>
+					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="hold_2"> 인감증명</label></div>
+					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="hold_2"> 사용인감</label></div>
+					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="hold_2"> 신분증</label></div>
+					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="hold_2"> 배우자등본</label></div>
 				</div>
 			</div>
-
+<?php endif; ?>
 			<div class="row bo-bottom font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약 고객명 <span class="red">*</span></div>
-				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0; height: 75px;">비 고</div>
+				<div class="col-xs-8 col-sm-9 col-md-6" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="type" class="sr-only">타입</label>
-						<select class="form-control input-sm" name="type" onchange="submit();">
-							<option value=""> 전 체</option>
-<?php foreach($type as $lt) : ?>
-							<option value="<?php echo $lt->type; ?>" <?php if($lt->type==$this->input->post('type')) echo "selected"; ?>><?php echo $lt->type; ?></option>
-<?php endforeach; ?>
-						</select>
-					</div>
-				</div>
-
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">체결(처리) 일자 <span class="red">*</span></div>
-				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
-					<div class="col-xs-12" style="padding: 0px;">
-						<label for="dong" class="sr-only">동</label>
-						<select class="form-control input-sm" name="dong" onchange="submit();">
-							<option value=""> 전 체</option>
-<?php foreach($dong as $lt) : ?>
-							<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->post('dong')) echo "selected"; ?>><?php echo $lt->dong; ?></option>
-<?php endforeach; ?>
-						</select>
-					</div>
-				</div>
-			</div>
-
-			<div class="row bo-bottom font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약 고객명 <span class="red">*</span></div>
-				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
-					<div class="col-xs-12" style="padding: 0px;">
-						<label for="type" class="sr-only">타입</label>
-						<select class="form-control input-sm" name="type" onchange="submit();">
-							<option value=""> 전 체</option>
-<?php foreach($type as $lt) : ?>
-							<option value="<?php echo $lt->type; ?>" <?php if($lt->type==$this->input->post('type')) echo "selected"; ?>><?php echo $lt->type; ?></option>
-<?php endforeach; ?>
-						</select>
-					</div>
-				</div>
-
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">체결(처리) 일자 <span class="red">*</span></div>
-				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
-					<div class="col-xs-12" style="padding: 0px;">
-						<label for="dong" class="sr-only">동</label>
-						<select class="form-control input-sm" name="dong" onchange="submit();">
-							<option value=""> 전 체</option>
-<?php foreach($dong as $lt) : ?>
-							<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->post('dong')) echo "selected"; ?>><?php echo $lt->dong; ?></option>
-<?php endforeach; ?>
-						</select>
+						<textarea class="form-control input-sm" id="hold_reason" name="hold_reason"  rows="3"></textarea>
 					</div>
 				</div>
 			</div>
