@@ -8,7 +8,13 @@
 
 	::selection { background-color: #FB6C05; color: #FFF; }
 	::-moz-selection { background-color: #FB6C05; color: #FFF; }
-	/*a, nav, input, li, img { outline:none; select-dummy: expression(this.hideFocus=true); }*/
+	a { outline:none; select-dummy: expression(this.hideFocus=true); }
+	a { outline:none; }
+	* : focus { outline: none; }
+	a, img{
+border:0;
+outline:none;
+}
 
 	/************************************IME MODE**************************************/
 	.han {
@@ -98,7 +104,7 @@
 	fieldset .row .str { padding: 10px;  }
 	/*****************************************m5 style********************************************/
 
-	.auth-table td { text-align: left; padding: 0 20px; width: 50px; }
+	.auth-table td { text-align: left; padding: 0 20px; }
 	.auth-table .form-inline { width: 80px; }
 
 	/**----------------------------------- 폰트컬러 -----------------------------------------**/
