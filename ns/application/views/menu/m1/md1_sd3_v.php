@@ -39,21 +39,21 @@
 			<div class="col-xs-12 col-sm-5" style="padding: 10px;">
 				<table class="table table-bordered table-condensed" style="margin-bottom: 0;">
 					<tr>
-						<td class="center" style="width: 100px; background-color: #EAEDF4;">총 세대수</td>
+						<td class="center" style="width: 100px; background-color: #EBF0FB;">총 세대수</td>
 						<td class="right" style="width: 120px;"><?php echo number_format($summary_tb->total); ?> 세대</td>
-						<td class="center" style="width: 100px; background-color: #EAEDF4; color: #787878">홀딩 세대</td>
+						<td class="center" style="width: 100px; background-color: #EFF0F2; color: #787878">홀딩 세대</td>
 						<td class="right" style="width: 120px; background-color: #F6F4F9; color: #787878;"><?php echo number_format($summary_tb->hold); ?> 세대</td>
 					</tr>
 					<tr>
-						<td class="center" style="background-color: #EDFBB4;">청약 세대</td>
+						<td class="center" style="background-color: #F5FBDE;">청약 세대</td>
 						<td class="right" style="color: #10c227;"><?php echo number_format($summary_tb->acn); ?> 세대</td>
-						<td class="center" style="background-color: #DADFFE;">계약 세대</td>
+						<td class="center" style="background-color: #E6E9F9;">계약 세대</td>
 						<td class="right" style="color: #0066FF;"><?php echo number_format($summary_tb->cont); ?> 세대</td>
 					</tr>
 					<tr>
-						<td class="center" style="background-color: #C0D2FE;">합 계</td>
+						<td class="center" style="background-color: #DDE5F9;">합 계</td>
 						<td class="right" style="color: #0000CD;"><?php echo number_format($summary_tb->acn+$summary_tb->cont); ?> 세대</td>
-						<td class="center" style="background-color: #FEE1EE;">잔여 세대</td>
+						<td class="center" style="background-color: #F5EAEF;">잔여 세대</td>
 						<td class="right" style="color: #DD1C78;"><?php echo number_format($summary_tb->total-$summary_tb->acn-$summary_tb->cont); ?> 세대</td>
 					</tr>
 				</table>
@@ -73,6 +73,7 @@
 <?php if( !$summary_tb->total OR $summary_tb->total==0) : ?>
 			<div class="center" style="padding: 50px; <?php if( !$this-> agent->is_mobile()) echo 'height: 380px;'; ?>">등록된 데이터가 없습니다.</div>
 <?php else :
+			$base_a = mt_rand(0, 2); // 베이스컬러 첫번 째 난수
 			for($a=0; $a<count($dong_data); $a++): // 전체 동 수 만큼 반복
 ?>
 				<div style="float:left; margin:10px;">
@@ -111,7 +112,7 @@
 					$div_col = ($db_ho !==null) ? "background-color:".$type_color[$now_type].";" : '';
 					$bo_col = ($db_ho !==null) ? "border-color: #ccc" : "border-color: #fff";
 					$bo_wid = ($j==0) ? "border-width: 1px 1px 0 1px;" : "border-width: 1px 1px 0 0;";
-					$piloti = ($floor_no<4 && $db_ho===null) ? "background-color: #ccc" : "";// 피로티일 때 셀 색상
+					$piloti = ($floor_no<4 && $db_ho===null) ? "background-color: #B8B5B5" : "";// 피로티일 때 셀 색상
 					if($floor_no>4) : // 보더 색상 지정
 						if($db_ho===null && $db_ho_r !==null):
 							$bo_col = ($j==0) ? "border-color: #fff #ccc #ccc #fff;" : "border-color: #fff #ccc;";
@@ -134,6 +135,11 @@
 					else:
 						$condi_col = "";
 					endif;
+					$base_col = array(
+						array('#5D5D8E','#5A5B93',' #4D568B', '#544983', '#534A96', '#524C8B'),
+						array('#9F4664','#9C3D5F',' #992C50', '#AB3164', '#9D3646', '#A3305A'),
+						array('#554F50','#515C51',' #50515B', '#524747', '#525B55', '#534B53')
+					);
 ?>
 									<div style="<?php echo $clear_css; ?> float:left; <?php echo $div_pointer; ?> border: 1px solid #ddd; <?php echo $bo_wid." ".$bo_col." ".$piloti; ?>">
 										<div style="width:30px; height:14px; text-align:center; font-size:9px; color:#333; padding: 1px 0; <?php echo $div_col; ?>"  data-toggle="tooltip" title="<?php echo $now_type; ?>">
@@ -145,7 +151,7 @@
 								</td>
 							</tr>
 						</table>
-					<div class="col-xs-12 center" style="border: 1px solid #3e3e3e; padding: 8px; background-color: #597284; color: #FFF; font-weight: bold;"><?php echo $dong_data[$a]->dong."동"?></div>
+					<div class="col-xs-12 center" style="border: 1px solid #3e3e3e; padding: 8px; background-color: <?php echo $base_col[$base_a][mt_rand(0, 5)]; ?>; color: #FFF; font-weight: bold;"><?php echo $dong_data[$a]->dong."동"?></div>
 				</div>
 <?php endfor; ?>
 <?php endif; ?>
