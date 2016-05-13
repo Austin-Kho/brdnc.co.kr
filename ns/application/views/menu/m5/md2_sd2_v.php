@@ -89,7 +89,7 @@
 						<table class="table auth-table table-hover">
 							<tbody>
 								<tr>
-									<th class="head-td center bo-right mbo-top" style="vertical-align: middle; background-color: #F0FBF0; width: 100px;"><div style="width: 90px;">분양관리</div></th>
+									<th class="head-td center bo-right mbo-top" style="vertical-align: middle; background-color: #FBF9F0; width: 100px;"><div style="width: 90px;">분양관리</div></th>
 									<td class="head-td bo-right mbo-top  bgf8" style="vertical-align: middle; padding: 0 0 0 10px;"><div style="width: 80px;"><strong>계약관리</strong></div></td>
 									<td class=" mbo-top">계약현황
 										<div class="checkbox" style="margin: 0; width: 80px;">
@@ -145,7 +145,7 @@
 									<td class="sec-td"></td>
 								</tr>
 								<tr>
-									<th class="center bo-right" style="vertical-align: middle; background-color: #F0FBF0;"><div style="width: 90px;">사업관리</div></th>
+									<th class="center bo-right" style="vertical-align: middle; background-color: #FBF9F0;"><div style="width: 90px;">사업관리</div></th>
 									<td class="bo-right bgf8" style="vertical-align: middle; padding: 0 0 0 10px;"><div style="width: 80px;"><strong>예산집행 관리</strong></div></td>
 									<td>집행현황
 										<div class="checkbox" style="margin: 0; width: 80px;">
@@ -201,7 +201,7 @@
 									<td class="sec-td"></td>
 								</tr>
 								<tr>
-									<th class="center bo-right" style="vertical-align: middle; background-color: #F0FBF0;"><div style="width: 90px;">프로젝트</div></th>
+									<th class="center bo-right" style="vertical-align: middle; background-color: #FBF9F0;"><div style="width: 90px;">프로젝트</div></th>
 									<td class="bo-right bgf8" style="vertical-align: middle; padding: 0 0 0 10px;"><div style="width: 80px;"><strong>프로젝트 관리</strong></div></td>
 									<td>동호수 등록
 										<div class="checkbox" style="margin: 0; width: 80px;">
@@ -243,7 +243,7 @@
 									<td class="sec-td"></td>
 								</tr>
 								<tr>
-									<th  class="center bo-right"style="vertical-align: middle; background-color: #F0FBF0;"><div style="width: 90px;">자금회계</div></th>
+									<th  class="center bo-right"style="vertical-align: middle; background-color: #FBF9F0;"><div style="width: 90px;">본사관리</div></th>
 									<td class="bo-right bgf8" style="vertical-align: middle; padding: 0 0 0 10px;"><div style="width: 80px;"><strong>자금관리</strong></div></td>
 									<td>자금일보
 										<div class="checkbox" style="margin: 0; width: 80px;">
@@ -271,8 +271,8 @@
 									</td>
 									<td></td>
 
-									<td class="sec-td bo-right bo-left bgf8" style="vertical-align: middle; padding: 0 0 0 10px;"><div style="width: 80px;"><strong>회계관리</strong></div></td>
-									<td class="sec-td">분 개 장
+									<td class="sec-td bo-right bo-left bgf8" style="vertical-align: middle; padding: 0 0 0 10px;"><div style="width: 80px;"><strong>인사총무</strong></div></td>
+									<td class="sec-td">인사급여
 										<div class="checkbox" style="margin: 0; width: 80px;">
 											<label><input type="checkbox" id="_m4_2_1" name="_m4_2_1" <?php if(isset($user_auth->_m4_2_1) && $user_auth->_m4_2_1>0) echo 'checked'; ?>> 조회</label>
 										</div>
@@ -280,7 +280,7 @@
 											<label><input type="checkbox" id="_m4_2_1_m" name="_m4_2_1_m" <?php if(isset($user_auth->_m4_2_1) && $user_auth->_m4_2_1>1) echo 'checked'; ?>> 등록</label>
 										</div>
 									</td>
-									<td class="sec-td">일/월계표
+									<td class="sec-td">총무관리
 										<div class="checkbox" style="margin: 0; width: 80px;">
 											<label><input type="checkbox" id="_m4_2_2" name="_m4_2_2" <?php if(isset($user_auth->_m4_2_2) && $user_auth->_m4_2_2>0) echo 'checked'; ?>> 조회</label>
 										</div>
@@ -288,7 +288,7 @@
 											<label><input type="checkbox" id="_m4_2_2_m" name="_m4_2_2_m" <?php if(isset($user_auth->_m4_2_2) && $user_auth->_m4_2_2>1) echo 'checked'; ?>> 등록</label>
 										</div>
 									</td>
-									<td class="sec-td">제무제표
+									<td class="sec-td">기타관리
 										<div class="checkbox" style="margin: 0; width: 80px;">
 											<label><input type="checkbox" id="_m4_2_3" name="_m4_2_3" <?php if(isset($user_auth->_m4_2_3) && $user_auth->_m4_2_3>0) echo 'checked'; ?>> 조회</label>
 										</div>
@@ -299,7 +299,7 @@
 									<td class="sec-td"></td>
 								</tr>
 								<tr>
-									<th class="center bo-right" style="vertical-align: middle; background-color: #F0FBF0;"><div style="width: 90px;">환경설정</div></th>
+									<th class="center bo-right" style="vertical-align: middle; background-color: #FBF9F0;"><div style="width: 90px;">환경설정</div></th>
 									<td class="bo-right bgf8" style="vertical-align: middle; padding: 0 0 0 10px;"><div style="width: 80px;"><strong>기본정보 관리</strong></div></td>
 									<td>부서정보 관리
 										<div class="checkbox" style="margin: 0; width: 80px;">
