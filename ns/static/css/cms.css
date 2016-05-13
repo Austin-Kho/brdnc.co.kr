@@ -45,10 +45,10 @@
 	.nav-tabs  li a:hover { color: #5F5F5F; }
 	.nav-tabs  li.active a { color: #556086; }
 
-	.page-header .nav-pills a {  margin-top: 3px; width: 110px; text-align: center; color: #7C87AC;}
-	.page-header .nav-pills a:hover { background-color: #F3F3F3; font-weight: bold; color: #6C78A2;}
-	.page-header .nav-pills .active a { background-color: #F3F5FC; color: #5674D5; font-weight: bold;}
-	.page-header .nav-pills .active a:hover { background-color: #E8ECF9; color: #3355CA;}
+	.page-header .nav-pills a {  margin-top: 3px; padding: 8px 0; width: 100px; text-align: center; color: #7C87AC; }
+	.page-header .nav-pills a:hover { background-color: #F3F3F3; font-weight: bold; color: #6C78A2; }
+	.page-header .nav-pills .active a { background-color: #F3F5FC; color: #0E0D1B; font-weight: bold; }
+	.page-header .nav-pills .active a:hover { background-color: #E8ECF9; color: #5E657E; }
 
 	.sdi { font-size: 15px; display: inline; color: #233c96; }
 	.sdi_sub { margin-top: -20px; padding: 15px 0 15px 20px; background-color: #F8F8F8; border-bottom-color: #B2BCDE; }
