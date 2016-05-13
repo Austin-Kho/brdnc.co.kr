@@ -96,7 +96,7 @@
 											<label><input type="checkbox" id="_m1_1_1" name="_m1_1_1" <?php if(isset($user_auth->_m1_1_1) && $user_auth->_m1_1_1>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m1_1_1_m" name="_m1_1_1_m" <?php if(isset($user_auth->_m1_1_1) && $user_auth->_m1_1_1>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m1_1_1_m" name="_m1_1_1_m" <?php if(isset($user_auth->_m1_1_1) && $user_auth->_m1_1_1>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td class=" mbo-top" >계약등록
@@ -104,7 +104,7 @@
 											<label><input type="checkbox" id="_m1_1_2" name="_m1_1_2" <?php if(isset($user_auth->_m1_1_2) && $user_auth->_m1_1_2>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m1_1_2_m" name="_m1_1_2_m" <?php if(isset($user_auth->_m1_1_2) && $user_auth->_m1_1_2>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m1_1_2_m" name="_m1_1_2_m" <?php if(isset($user_auth->_m1_1_2) && $user_auth->_m1_1_2>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td class=" mbo-top" >동호수 현황
@@ -112,7 +112,7 @@
 											<label><input type="checkbox" id="_m1_1_3" name="_m1_1_3" <?php if(isset($user_auth->_m1_1_3) && $user_auth->_m1_1_3>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m1_1_3_m" name="_m1_1_3_m" <?php if(isset($user_auth->_m1_1_3) && $user_auth->_m1_1_3>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m1_1_3_m" name="_m1_1_3_m" <?php if(isset($user_auth->_m1_1_3) && $user_auth->_m1_1_3>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td class=" mbo-top" ></td>
@@ -123,7 +123,7 @@
 											<label><input type="checkbox" id="_m1_2_1" name="_m1_2_1" <?php if(isset($user_auth->_m1_2_1) && $user_auth->_m1_2_1>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m1_2_1_m" name="_m1_2_1_m" <?php if(isset($user_auth->_m1_2_1) && $user_auth->_m1_2_1>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m1_2_1_m" name="_m1_2_1_m" <?php if(isset($user_auth->_m1_2_1) && $user_auth->_m1_2_1>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td class="sec-td" >수납등록
@@ -131,7 +131,7 @@
 											<label><input type="checkbox" id="_m1_2_2" name="_m1_2_2" <?php if(isset($user_auth->_m1_2_2) && $user_auth->_m1_2_2>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m1_2_2_m" name="_m1_2_2_m" <?php if(isset($user_auth->_m1_2_2) && $user_auth->_m1_2_2>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m1_2_2_m" name="_m1_2_2_m" <?php if(isset($user_auth->_m1_2_2) && $user_auth->_m1_2_2>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td class="sec-td" >수납약정
@@ -139,7 +139,7 @@
 											<label><input type="checkbox" id="_m1_2_3" name="_m1_2_3" <?php if(isset($user_auth->_m1_2_3) && $user_auth->_m1_2_3>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m1_2_3_m" name="_m1_2_3_m" <?php if(isset($user_auth->_m1_2_3) && $user_auth->_m1_2_3>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m1_2_3_m" name="_m1_2_3_m" <?php if(isset($user_auth->_m1_2_3) && $user_auth->_m1_2_3>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td class="sec-td"></td>
@@ -152,23 +152,23 @@
 											<label><input type="checkbox" id="_m2_1_1" name="_m2_1_1" <?php if(isset($user_auth->_m2_1_1) && $user_auth->_m2_1_1>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m2_1_1_m" name="_m2_1_1_m" <?php if(isset($user_auth->_m2_1_1) && $user_auth->_m2_1_1>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m2_1_1_m" name="_m2_1_1_m" <?php if(isset($user_auth->_m2_1_1) && $user_auth->_m2_1_1>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
-									<td>집행등록
+									<td>집행관리
 										<div class="checkbox" style="margin: 0; width: 80px;">
 											<label><input type="checkbox" id="_m2_1_2" name="_m2_1_2" <?php if(isset($user_auth->_m2_1_2) && $user_auth->_m2_1_2>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m2_1_2_m" name="_m2_1_2_m" <?php if(isset($user_auth->_m2_1_2) && $user_auth->_m2_1_2>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m2_1_2_m" name="_m2_1_2_m" <?php if(isset($user_auth->_m2_1_2) && $user_auth->_m2_1_2>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
-									<td>사업수지
+									<td>수지관리
 										<div class="checkbox" style="margin: 0; width: 80px;">
 											<label><input type="checkbox" id="_m2_1_3" name="_m2_1_3" <?php if(isset($user_auth->_m2_1_3) && $user_auth->_m2_1_3>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m2_1_3_m" name="_m2_1_3_m" <?php if(isset($user_auth->_m2_1_3) && $user_auth->_m2_1_3>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m2_1_3_m" name="_m2_1_3_m" <?php if(isset($user_auth->_m2_1_3) && $user_auth->_m2_1_3>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td></td>
@@ -179,7 +179,7 @@
 											<label><input type="checkbox" id="_m2_2_1" name="_m2_2_1" <?php if(isset($user_auth->_m2_2_1) && $user_auth->_m2_2_1>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m2_2_1_m" name="_m2_2_1_m" <?php if(isset($user_auth->_m2_2_1) && $user_auth->_m2_2_1>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m2_2_1_m" name="_m2_2_1_m" <?php if(isset($user_auth->_m2_2_1) && $user_auth->_m2_2_1>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td class="sec-td">일정관리
@@ -187,7 +187,7 @@
 											<label><input type="checkbox" id="_m2_2_2" name="_m2_2_2" <?php if(isset($user_auth->_m2_2_2) && $user_auth->_m2_2_2>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m2_2_2_m" name="_m2_2_2_m" <?php if(isset($user_auth->_m2_2_2) && $user_auth->_m2_2_2>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m2_2_2_m" name="_m2_2_2_m" <?php if(isset($user_auth->_m2_2_2) && $user_auth->_m2_2_2>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td class="sec-td">프로세스
@@ -195,7 +195,7 @@
 											<label><input type="checkbox" id="_m2_2_3" name="_m2_2_3" <?php if(isset($user_auth->_m2_2_3) && $user_auth->_m2_2_3>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m2_2_3_m" name="_m2_2_3_m" <?php if(isset($user_auth->_m2_2_3) && $user_auth->_m2_2_3>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m2_2_3_m" name="_m2_2_3_m" <?php if(isset($user_auth->_m2_2_3) && $user_auth->_m2_2_3>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td class="sec-td"></td>
@@ -208,15 +208,15 @@
 											<label><input type="checkbox" id="_m3_1_1" name="_m3_1_1" <?php if(isset($user_auth->_m3_1_1) && $user_auth->_m3_1_1>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m3_1_1_m" name="_m3_1_1_m" <?php if(isset($user_auth->_m3_1_1) && $user_auth->_m3_1_1>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m3_1_1_m" name="_m3_1_1_m" <?php if(isset($user_auth->_m3_1_1) && $user_auth->_m3_1_1>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
-									<td>기본정보 관리
+									<td>프로젝트 목록
 										<div class="checkbox" style="margin: 0; width: 80px;">
 											<label><input type="checkbox" id="_m3_1_2" name="_m3_1_2" <?php if(isset($user_auth->_m3_1_2) && $user_auth->_m3_1_2>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m3_1_2_m" name="_m3_1_2_m" <?php if(isset($user_auth->_m3_1_2) && $user_auth->_m3_1_2>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m3_1_2_m" name="_m3_1_2_m" <?php if(isset($user_auth->_m3_1_2) && $user_auth->_m3_1_2>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td></td>
@@ -228,15 +228,15 @@
 											<label><input type="checkbox" id="_m3_2_1" name="_m3_2_1" <?php if(isset($user_auth->_m3_2_1) && $user_auth->_m3_2_1>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m3_2_1_m" name="_m3_2_1_m" <?php if(isset($user_auth->_m3_2_1) && $user_auth->_m3_2_1>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m3_2_1_m" name="_m3_2_1_m" <?php if(isset($user_auth->_m3_2_1) && $user_auth->_m3_2_1>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
-									<td class="sec-td">예비 검토 PJ
+									<td class="sec-td">예비  PJ 검토
 										<div class="checkbox" style="margin: 0; width: 80px;">
 											<label><input type="checkbox" id="_m3_2_2" name="_m3_2_2" <?php if(isset($user_auth->_m3_2_2) && $user_auth->_m3_2_2>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m3_2_2_m" name="_m3_2_2_m" <?php if(isset($user_auth->_m3_2_2) && $user_auth->_m3_2_2>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m3_2_2_m" name="_m3_2_2_m" <?php if(isset($user_auth->_m3_2_2) && $user_auth->_m3_2_2>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td class="sec-td"></td>
@@ -250,7 +250,7 @@
 											<label><input type="checkbox" id="_m4_1_1" name="_m4_1_1" <?php if(isset($user_auth->_m4_1_1) && $user_auth->_m4_1_1>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m4_1_1_m" name="_m4_1_1_m" <?php if(isset($user_auth->_m4_1_1) && $user_auth->_m4_1_1>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m4_1_1_m" name="_m4_1_1_m" <?php if(isset($user_auth->_m4_1_1) && $user_auth->_m4_1_1>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td>입출금 내역
@@ -258,7 +258,7 @@
 											<label><input type="checkbox" id="_m4_1_2" name="_m4_1_2" <?php if(isset($user_auth->_m4_1_2) && $user_auth->_m4_1_2>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m4_1_2_m" name="_m4_1_2_m" <?php if(isset($user_auth->_m4_1_2) && $user_auth->_m4_1_2>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m4_1_2_m" name="_m4_1_2_m" <?php if(isset($user_auth->_m4_1_2) && $user_auth->_m4_1_2>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td>입출금 등록
@@ -266,7 +266,7 @@
 											<label><input type="checkbox" id="_m4_1_3" name="_m4_1_3" <?php if(isset($user_auth->_m4_1_3) && $user_auth->_m4_1_3>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m4_1_3_m" name="_m4_1_3_m" <?php if(isset($user_auth->_m4_1_3) && $user_auth->_m4_1_3>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m4_1_3_m" name="_m4_1_3_m" <?php if(isset($user_auth->_m4_1_3) && $user_auth->_m4_1_3>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td></td>
@@ -277,7 +277,7 @@
 											<label><input type="checkbox" id="_m4_2_1" name="_m4_2_1" <?php if(isset($user_auth->_m4_2_1) && $user_auth->_m4_2_1>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m4_2_1_m" name="_m4_2_1_m" <?php if(isset($user_auth->_m4_2_1) && $user_auth->_m4_2_1>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m4_2_1_m" name="_m4_2_1_m" <?php if(isset($user_auth->_m4_2_1) && $user_auth->_m4_2_1>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td class="sec-td">총무관리
@@ -285,7 +285,7 @@
 											<label><input type="checkbox" id="_m4_2_2" name="_m4_2_2" <?php if(isset($user_auth->_m4_2_2) && $user_auth->_m4_2_2>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m4_2_2_m" name="_m4_2_2_m" <?php if(isset($user_auth->_m4_2_2) && $user_auth->_m4_2_2>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m4_2_2_m" name="_m4_2_2_m" <?php if(isset($user_auth->_m4_2_2) && $user_auth->_m4_2_2>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td class="sec-td">기타관리
@@ -293,7 +293,7 @@
 											<label><input type="checkbox" id="_m4_2_3" name="_m4_2_3" <?php if(isset($user_auth->_m4_2_3) && $user_auth->_m4_2_3>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m4_2_3_m" name="_m4_2_3_m" <?php if(isset($user_auth->_m4_2_3) && $user_auth->_m4_2_3>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m4_2_3_m" name="_m4_2_3_m" <?php if(isset($user_auth->_m4_2_3) && $user_auth->_m4_2_3>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td class="sec-td"></td>
@@ -306,7 +306,7 @@
 											<label><input type="checkbox" id="_m5_1_1" name="_m5_1_1" <?php if(isset($user_auth->_m5_1_1) && $user_auth->_m5_1_1>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m5_1_1_m" name="_m5_1_1_m" <?php if(isset($user_auth->_m5_1_1) && $user_auth->_m5_1_1>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m5_1_1_m" name="_m5_1_1_m" <?php if(isset($user_auth->_m5_1_1) && $user_auth->_m5_1_1>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td>직원정보 관리
@@ -314,7 +314,7 @@
 											<label><input type="checkbox" id="_m5_1_2" name="_m5_1_2" <?php if(isset($user_auth->_m5_1_2) && $user_auth->_m5_1_2>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m5_1_2_m" name="_m5_1_2_m" <?php if(isset($user_auth->_m5_1_2) && $user_auth->_m5_1_2>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m5_1_2_m" name="_m5_1_2_m" <?php if(isset($user_auth->_m5_1_2) && $user_auth->_m5_1_2>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td>거래처정보 관리
@@ -322,7 +322,7 @@
 											<label><input type="checkbox" id="_m5_1_3" name="_m5_1_3" <?php if(isset($user_auth->_m5_1_3) && $user_auth->_m5_1_3>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m5_1_3_m" name="_m5_1_3_m" <?php if(isset($user_auth->_m5_1_3) && $user_auth->_m5_1_3>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m5_1_3_m" name="_m5_1_3_m" <?php if(isset($user_auth->_m5_1_3) && $user_auth->_m5_1_3>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td>은행계좌 관리
@@ -330,7 +330,7 @@
 											<label><input type="checkbox" id="_m5_1_4" name="_m5_1_4" <?php if(isset($user_auth->_m5_1_4) && $user_auth->_m5_1_4>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m5_1_4_m" name="_m5_1_4_m" <?php if(isset($user_auth->_m5_1_4) && $user_auth->_m5_1_4>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m5_1_4_m" name="_m5_1_4_m" <?php if(isset($user_auth->_m5_1_4) && $user_auth->_m5_1_4>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 
@@ -340,7 +340,7 @@
 											<label><input type="checkbox" id="_m5_2_1" name="_m5_2_1" <?php if(isset($user_auth->_m5_2_1) && $user_auth->_m5_2_1>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m5_2_1_m" name="_m5_2_1_m" <?php if(isset($user_auth->_m5_2_1) && $user_auth->_m5_2_1>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m5_2_1_m" name="_m5_2_1_m" <?php if(isset($user_auth->_m5_2_1) && $user_auth->_m5_2_1>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td class="sec-td">사용자권한관리
@@ -348,7 +348,7 @@
 											<label><input type="checkbox" id="_m5_2_2" name="_m5_2_2" <?php if(isset($user_auth->_m5_2_2) && $user_auth->_m5_2_2>0) echo 'checked'; ?>> 조회</label>
 										</div>
 										<div class="checkbox" style="margin: 0; width: 80px;">
-											<label><input type="checkbox" id="_m5_2_2_m" name="_m5_2_2_m" <?php if(isset($user_auth->_m5_2_2) && $user_auth->_m5_2_2>1) echo 'checked'; ?>> 등록</label>
+											<label><input type="checkbox" id="_m5_2_2_m" name="_m5_2_2_m" <?php if(isset($user_auth->_m5_2_2) && $user_auth->_m5_2_2>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
 									<td class="sec-td"></td>
