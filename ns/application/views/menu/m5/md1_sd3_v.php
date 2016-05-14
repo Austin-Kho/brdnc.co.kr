@@ -200,7 +200,7 @@
 							<div class=" col-xs-12 col-sm-8 col-md-10 form-wrap2">
 <?php if($this->input->get('seq')) $tax_addr = explode("-", $sel_acc->tax_addr); ?>
 								<div class="col-xs-3 col-sm-2 col-md-1" style="padding: 0;">
-									<input type="button" class="btn btn-info btn-sm wid-90" value="우편번호" onclick="javascript:ZipWindow('<?php echo base_url('/popup/zip_/'); ?>')">
+									<input type="button" class="btn btn-info btn-sm wid-90" value="우편번호" onclick="javascript:ZipWindow('<?php echo base_url('/popup/zip_/zipcode/1'); ?>')">
 								</div>
 								<div class="col-xs-3 col-sm-5 col-md-1" style="padding: 0;">
 									<input type="text" class="form-control input-sm wid-95" id="zipcode" name="zipcode" maxlength="5" readonly required autofocus value="<?php if($this->input->get('seq')) echo $tax_addr[0]; ?>">

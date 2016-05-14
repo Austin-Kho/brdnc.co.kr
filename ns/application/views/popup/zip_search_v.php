@@ -1,64 +1,74 @@
-		<script type="text/javascript">
+<script type="text/javascript">
+<!--
 
-			function enter_search(form) {// 폼 button에서 엔터키를 눌렀을때 써브밋 해주는 함수
-				var keycode = window.event.keyCode;
-				if(keycode == 13) $("#addr_put").click();
-			}
+	function enter_search(form) {      // 폼 button에서 엔터키를 눌렀을때 써브밋 해주는 함수
+		var keycode = window.event.keyCode;
+		if(keycode == 13) $("#addr_put").click();
+	}
 
-			function search_con () {
-				if(document.getElementById('sw1').checked == true){
-					document.getElementById('doro_name').style.display = '';
-					document.getElementById('build_name').style.display = 'none';
-				}else if(document.getElementById('sw2').checked == true){
-					document.getElementById('doro_name').style.display = 'none';
-					document.getElementById('build_name').style.display = '';
-				}
-			}
+	function search_con () {
+		if(document.getElementById('sw1').checked == true){
+			document.getElementById('doro_name').style.display = '';
+			document.getElementById('build_name').style.display = 'none';
+		}else if(document.getElementById('sw2').checked == true){
+			document.getElementById('doro_name').style.display = 'none';
+			document.getElementById('build_name').style.display = '';
+		}
+	}
 
-			function val_put(val) {
-				var arr = val.split("|");
-				document.getElementById('zipcode').value = arr[0];
-				document.getElementById('addr1').value = arr[1];
-				document.getElementById('addr3').value = arr[2];
-				document.getElementById('addr2').focus();
-			}
+	function val_put1(val) {
+		var arr = val.split("|");
+		document.getElementById('zipcode').value = arr[0];
+		document.getElementById('addr1').value = arr[1];
+		document.getElementById('addr3').value = arr[2];
+		document.getElementById('addr2').focus();
+	}
 
-			function val_put2(zip, adr1, adr2){ // zip = 우편번호, adr = 주소
-				var form=opener.document.form1;
-				var zip = document.getElementById('zipcode').value;
-				var adr1 = document.getElementById('addr1').value;
-				var adr2 = document.getElementById('addr2').value+" "+document.getElementById('addr3').value;
+	function val_put2(no){
 
-				a = eval("form."+"zipcode"); // opener의 우편번호 폼 이름
-				b = eval("form."+"address1"); // opener의 기본주소 폼 이름
-				c = eval("form."+"address2"); // opener의 나머지주소 폼 이름
+		var form=opener.document.form1;
 
-				a.value=zip;
-				b.value=adr1;
-				c.value=adr2;
-				c.focus();
+		var zip = document.getElementById('zipcode').value;
+		var adr1 = document.getElementById('addr1').value;
+		var adr2 = document.getElementById('addr2').value+" "+document.getElementById('addr3').value;
 
-				self.close();
-			}
-		</script>
+		if( !no || no=='1'){
+			a = eval("form."+"zipcode"); // opener의 우편번호 폼 이름
+			b = eval("form."+"address1"); // opener의 기본주소 폼 이름
+			c = eval("form."+"address2"); // opener의 나머지주소 폼 이름
+		}else if(no=='2'){
+			a = eval("form."+"zipcode_"); // opener의 우편번호 폼 이름
+			b = eval("form."+"address1_"); // opener의 기본주소 폼 이름
+			c = eval("form."+"address2_"); // opener의 나머지주소 폼 이름
+		}
+
+		a.value=zip;
+		b.value=adr1;
+		c.value=adr2;
+		c.focus();
+
+		self.close();
+
+	}
+// -->
+</script>
+
 <?php
 	$attributes = array('name' => 'zip_form', 'id' => 'zipsearch', 'class' => 'form-inline', 'method' => 'post');
-	echo form_open('/popup/zip_/', $attributes);
+	echo form_open('/popup/zip_/zipcode/'.$num, $attributes);
 ?>
 			<div class="container">
 				<header id="header">
 					<h1>주 소 검 색</h1>
 				</header><!-- /header -->
 				<div class="desc">※ 찾고자 하는 도로명주소 또는 건물명을 선택해 주세요.</div>
-				<div class="well" style="padding: 13px; margin-bottom: 20px;">
-					<label class="sr-only" for="sw1">도로명주소 검색</label>
-					<span>
-						<input type="radio" name="sh_what" id="sw1" value="1" onclick="search_con();" <?php if( !$this->input->post('sh_what') or $this->input->post('sh_what') == '1') echo 'checked'; ?>> 도로명주소 검색</input>
-					</span>
-					<label class="sr-only" for="sw2">건물명 검색</label>
-					<span class="ml20">
-						<input type="radio" name="sh_what" id="sw2" value="2" onclick="search_con();" <?php if($this->input->post('sh_what') == '2') echo 'checked'; ?>> 건물명 검색</input>
-					</span>
+				<div class="well row" style="padding: 13px; margin-bottom: 20px;">
+					<div class="radio col-xs-4" style="margin: 0;">
+						<label><input type="radio" name="sh_what" id="sw1" value="1" onclick="search_con();" <?php if( !$this->input->post('sh_what') or $this->input->post('sh_what') == '1') echo 'checked'; ?>> 도로명주소 검색</label>
+					</div>
+					<div class="radio col-xs-4" style="margin: 0;">
+						<label><input type="radio" name="sh_what" id="sw2" value="2" onclick="search_con();" <?php if($this->input->post('sh_what') == '2') echo 'checked'; ?>> 건물명 검색</label>
+					</div>
 				</div>
 				<div class="row"  style="padding-top: 0;">
 					<div class="form-group <?php if(is_mobile()) echo 'col-xs-3'; else echo 'col-xs-2'; ?>" style="border-top: 0;">
@@ -105,7 +115,7 @@
 
 				<div class="mt20">
 					<div class="desc pull-left">※ 해당되는 주소를 선택해주세요.</div>
-					<div class="num text-right"><?php if(isset($zip_rlt[0])) echo "(".$zip_rlt[0]." 건)" ?>&nbsp;</div>
+					<div class="num text-right"><?php if( isset($zip_rlt[0])) echo "(".$zip_rlt[0]." 건)" ?>&nbsp;</div>
 				</div>
 				<div class="zip-tb">
 					<table class="table table-bordered table-condensed">
@@ -115,7 +125,7 @@
 						</tr>
 						<tr>
 							<td colspan="2">
-								<select name="" class="form-control input-sm" onchange="val_put(this.value);">
+								<select name="" class="form-control input-sm" onchange="val_put1(this.value);">
 <?php if( !$zip_rlt[1]) : ?>
 									<option value="">도로명(건물명) 주소를 검색하여 주세요.</option>
 <?php else : ?>
@@ -125,7 +135,6 @@
 <?php
 	if($col->is_jiha==1) $ij = '지하'; else $ij = '';
 	if($col->sb_num==null or $col->sb_num==0) $sb_num=''; else $sb_num = '-'.$col->sb_num;
-
 	$ref = '';
 	if($col->ld_name!=null && $col->sgg_bd_name==null) $ref = "(".$col->ld_name.")";
 	if($col->ld_name==null && $col->sgg_bd_name!=null) $ref = "(".$col->sgg_bd_name.")";
@@ -177,8 +186,8 @@
 						</tr>
 					</table>
 				</div>
-				<footer class="center">
-					<a href="javascript:val_put2();" class="btn btn-primary btn-sm" id="addr_put">주소입력</a>
+				<footer class="center" style="margin-bottom: 20px;">
+					<a href="javascript:val_put2(<?php echo $num; ?>);" class="btn btn-primary btn-sm" id="addr_put">주소입력</a>
 				</footer>
 			</div>
 		</form>

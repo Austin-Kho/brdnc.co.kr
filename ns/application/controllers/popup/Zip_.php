@@ -10,40 +10,38 @@ class Zip_ extends CI_Controller
 		$this->load->model('popup_m');            //  모델 로드
 	}
 
-	public function _remap($method) {
- 		//헤더 include
-    $this->load->view('/popup/pop_header_v');
-		if( method_exists($this, $method) )	{
-			$this->{"{$method}"}();
-		}
-		//푸터 include
-		$this->load->view('/popup/pop_footer_v');
-  }
-
 	public function index(){
-		$this->lists();
+		$this->zipcode();
 	}
 
-	public function lists () {
-		// $this->output->enable_profiler(TRUE);
+	public function zipcode($no)
+	{
+		$this->output->enable_profiler(TRUE);
+		$this->load->view('/popup/pop_header_v');
+
+		$data['num'] = $no;
 
 		// 폼 검증할 필드와 규칙 사전 정의
 		$this->form_validation->set_rules('search_text', '도로(건물)명', 'required');
 
 		if($this->form_validation->run() == FALSE) { // 폼 전송 데이타가 없으면,
 
-			$this->load->view('/popup/zip_search_v');
+			$this->load->view('/popup/zip_search_v', $data);
+			$this->load->view('/popup/pop_footer_v');
 		}else{
+
 
 			$zip_data = array(
 				'sh_what' => $this->input->post('sh_what', TRUE), // 도로명 건물명 여부
-				'sido' => $this->input->post('sido', TRUE),           // 시도
+				'sido' => $this->input->post('sido', TRUE),             // 시도
 				'search_text' => $this->input->post('search_text',  TRUE) // 검색어
 			);
+			$data['zip_rlt'] = $this->popup_m->zip_search($zip_data);
 
-			$result['zip_rlt'] = $this->popup_m->zip_search($zip_data);
+			if( !$data['zip_rlt']) alert('데이터베이스 에러입니다.', '');
 
-			$this->load->view('/popup/zip_search_v', $result);
+			$this->load->view('/popup/zip_search_v', $data);
+			$this->load->view('/popup/pop_footer_v');
 		}
 	}
 }

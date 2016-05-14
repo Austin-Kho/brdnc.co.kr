@@ -11,7 +11,7 @@
 
 
 						<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 0; padding-top: 5px; padding-right: 0;">
-							<label><input type="radio" name="mode" value="new" <?php if(( !$this->input->post('mode') OR $this->input->post('mode')=="new") && ($this->input->get('mode')!="modi" && $this->input->post('mode')!="modi")) echo "checked";
+							<label><input type="radio" name="mode" value="new" <?php if(( !$this->input->post('mode') OR $this->input->post('mode')=="new")) echo "checked";
 								if($this->input->get('mode')=="modi") echo "disabled"; ?> onclick="submit();">신규</label>
 						</div>
 
@@ -73,8 +73,6 @@
 				</div>
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">거래 구분 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-6" style="padding: 4px 15px;">
-
-
 					<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 5px 0; padding-right: 0;">
 						<label><input type="radio" name="cont_sort1" id="cont_sort1" value="1" <?php if( !$this->input->post('cont_sort1') OR $this->input->post('cont_sort1')=='1') echo "checked";?>  onclick="submit();">계약</label>
 					</div>
@@ -129,7 +127,7 @@
 						<select class="form-control input-sm" name="dong" onchange="submit();">
 							<option value=""> 선 택</option>
 <?php foreach($dong as $lt) : ?>
-							<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->post('dong')) echo "selected"; ?>><?php echo $lt->dong; ?></option>
+							<option value="" <?php if($lt->dong==$this->input->post('dong')) echo "selected"; ?>></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -172,8 +170,8 @@
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약 고객명 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="type" class="sr-only">타입</label>
-						<input type="text" class="form-control input-sm" name="name" value="">
+						<label for="customer" class="sr-only">계약자명</label>
+						<input type="text" class="form-control input-sm" name="customer" value="">
 					</div>
 				</div>
 <?php
@@ -187,12 +185,10 @@
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0"><?php echo $deal_date_label; ?> <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="dong" class="sr-only">동</label>
-						<select class="form-control input-sm" name="dong" onchange="submit();">
+						<label for="deal_date" class="sr-only">체결일자</label>
+						<select class="form-control input-sm" name="deal_date" onchange="submit();">
 							<option value=""> 선 택</option>
-<?php foreach($dong as $lt) : ?>
-							<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->post('dong')) echo "selected"; ?>><?php echo $lt->dong; ?></option>
-<?php endforeach; ?>
+							<option value="">ss</option>
 						</select>
 					</div>
 				</div>
@@ -202,16 +198,16 @@
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">연락처 [1] <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="type" class="sr-only">타입</label>
-						<input type="text" class="form-control input-sm" name="name" value="">
+						<label for="tel_1" class="sr-only">연락처1</label>
+						<input type="text" class="form-control input-sm" name="tel_1" value="">
 					</div>
 				</div>
 
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">연락처 [2]</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="dong" class="sr-only">동</label>
-						<input type="text" class="form-control input-sm" name="name" value="">
+						<label for="tel_2" class="sr-only">연락처2</label>
+						<input type="text" class="form-control input-sm" name="tel_2" value="">
 					</div>
 				</div>
 			</div>
@@ -220,8 +216,8 @@
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약 예정일 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="type" class="sr-only">타입</label>
-						<input type="text" class="form-control input-sm" name="name" value="">
+						<label for="cont_sche" class="sr-only">계약예정일</label>
+						<input type="text" class="form-control input-sm" name="cont_sche" value="">
 					</div>
 				</div>
 
@@ -229,18 +225,16 @@
 
 				<div class="col-xs-3 col-sm-4 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="dong" class="sr-only">동</label>
-						<input type="text" class="form-control input-sm" name="name" value="">
+						<label for="app_money" class="sr-only">청약금</label>
+						<input type="text" class="form-control input-sm" name="app_money" value="">
 					</div>
 				</div>
 				<div class="col-xs-3 col-sm-4 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="dong" class="sr-only">동</label>
-						<select class="form-control input-sm" name="dong" onchange="submit();">
+						<label for="app_acc" class="sr-only">입금계정</label>
+						<select class="form-control input-sm" name="app_acc" onchange="submit();">
 							<option value=""> 선 택</option>
-<?php foreach($dong as $lt) : ?>
-							<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->post('dong')) echo "selected"; ?>><?php echo $lt->dong; ?></option>
-<?php endforeach; ?>
+							<option value=""></option>
 						</select>
 					</div>
 				</div>
@@ -253,74 +247,106 @@
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
 					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">일자 : 2016-06-01</div>
 					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">입금 : 5,000,000 원</div>
-					<!-- <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">성명 :  홍길동</div> -->
 					<div class="col-xs-6 col-sm-4 col-md-3" style="padding: 4px 0px;">계정 : 신탁 (대행비)</div>
 				</div>
 			</div>
 
 			<div class="row bo-bottom font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약금 <span class="red">*</span></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약금 [1] <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="dong" class="sr-only">동</label>
-						<input type="text" class="form-control input-sm" name="name" value="">
+						<label for="dep_1" class="sr-only">계약금2</label>
+						<input type="text" class="form-control input-sm" name="dep_1" value="">
 					</div>
 				</div>
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">입금 계정 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="dong" class="sr-only">동</label>
-						<select class="form-control input-sm" name="dong" onchange="submit();">
+						<label for="dep_acc_1" class="sr-only">계약금입금계정1</label>
+						<select class="form-control input-sm" name="dep_acc_1" onchange="submit();">
 							<option value=""> 선 택</option>
-<?php foreach($dong as $lt) : ?>
-							<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->post('dong')) echo "selected"; ?>><?php echo $lt->dong; ?></option>
-<?php endforeach; ?>
+							<option value="">aa</option>
 						</select>
 					</div>
 				</div>
 			</div>
 
 			<div class="row bo-bottom font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">업무대행비 <span class="red">*</span></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약금 [2]</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="dong" class="sr-only">동</label>
-						<input type="text" class="form-control input-sm" name="name" value="">
+						<label for="dep_2" class="sr-only">계약금2</label>
+						<input type="text" class="form-control input-sm" name="dep_2" value="">
 					</div>
 				</div>
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">입금계정 <span class="red">*</span></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">입금 계정 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="dong" class="sr-only">동</label>
-						<select class="form-control input-sm" name="dong" onchange="submit();">
+						<label for="dep_acc_2" class="sr-only">계약금입금계정2</label>
+						<select class="form-control input-sm" name="dep_acc_2" onchange="submit();">
 							<option value=""> 선 택</option>
-<?php foreach($dong as $lt) : ?>
-							<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->post('dong')) echo "selected"; ?>><?php echo $lt->dong; ?></option>
-<?php endforeach; ?>
+							<option value="">aa</option>
 						</select>
 					</div>
 				</div>
 			</div>
+
+
+
+
+
+
+
+
+
+
 
 
 
 
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">주민등록 주소 <span class="red">*</span></div>
-				<div class="col-xs-8 col-sm-9 col-md-6" style="padding: 4px 15px;">
+				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 0px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="type" class="sr-only">타입</label>
-						<input type="text" class="form-control input-sm" name="name" value="">
+
+						<div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+							<input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="javascript:ZipWindow('<?php echo base_url('/popup/zip_/zipcode/1'); ?>')">
+						</div>
+						<div class="col-xs-3 col-sm-5 col-md-1" style="padding-right: 0;">
+							<label for="zipcode" class="sr-only">우편번호</label>
+							<input type="text" class="form-control input-sm en_only" id="zipcode" name="zipcode" maxlength="5" value="<?php if($this->input->post('zipcode')) echo set_value('zipcode'); //else echo $addr[0]; ?>" readonly required autofocus>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-4" style="padding-right: 0;">
+							<label for="address1" class="sr-only">계약자주소1</label>
+							<input type="text" class="form-control input-sm han" id="address1" name="address1" maxlength="100" value="<?php if($this->input->post('address1')) echo set_value('address1'); //else echo $addr[1]; ?>" readonly required autofocus>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-4" style="padding-right: 0;">
+							<label for="address2" class="sr-only">계약자주소2</label>
+							<input type="text" class="form-control input-sm han" id="address2" name="address2" maxlength="93" value="<?php if($this->input->post('address2')) echo set_value('address2'); //else echo $addr[2]; ?>" placeholder="나머지 주소">
+						</div>
 					</div>
 				</div>
 			</div>
 
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">우편송부 주소  <span class="red">*</span></div>
-				<div class="col-xs-8 col-sm-9 col-md-6" style="padding: 4px 15px;">
+				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 0;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="type" class="sr-only">타입</label>
-						<input type="text" class="form-control input-sm" name="name" value="">
+						<div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+							<input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="javascript:ZipWindow('<?php echo base_url('/popup/zip_/zipcode/2'); ?>')">
+						</div>
+						<div class="col-xs-3 col-sm-5 col-md-1" style="padding-right: 0;">
+							<label for="zipcode_" class="sr-only">우편번호</label>
+							<input type="text" class="form-control input-sm en_only" id="zipcode2" name="zipcode_" maxlength="5" value="<?php if($this->input->post('zipcode_')) echo set_value('zipcode_'); //else echo $addr[0]; ?>" readonly required autofocus>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-4" style="padding-right: 0;">
+							<label for="address1_" class="sr-only">계약자주소11</label>
+							<input type="text" class="form-control input-sm han" id="address1_" name="address1_" maxlength="100" value="<?php if($this->input->post('address1_')) echo set_value('address1_'); //else echo $addr[1]; ?>" readonly required autofocus>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-4" style="padding-right: 0;">
+							<label for="address2_" class="sr-only">계약자주소22</label>
+							<input type="text" class="form-control input-sm han" id="address2_" name="address2_" maxlength="93" value="<?php if($this->input->post('address2_')) echo set_value('address2_'); //else echo $addr[2]; ?>" placeholder="나머지 주소">
+						</div>
 					</div>
 				</div>
 			</div>

@@ -390,7 +390,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-10 form-wrap">
 							<div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-								<input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="javascript:ZipWindow('<?php echo base_url('/popup/zip_/'); ?>')">
+								<input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="javascript:ZipWindow('<?php echo base_url('/popup/zip_/zipcode/1'); ?>')">
 							</div>
 							<div class="col-xs-3 col-sm-5 col-md-1" style="padding-right: 0;">
 								<input type="text" class="form-control input-sm" id="zipcode" name="zipcode" maxlength="5" value="<?php if($mode=='com_reg') {echo set_value('zipcode');} else {echo $com->zipcode; } ?>" readonly required autofocus>
