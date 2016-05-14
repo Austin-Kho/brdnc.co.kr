@@ -2,22 +2,28 @@
 		<!-- 1. 분양관리 -> 1. 계약 관리 ->2. 계약 등록 -->
 
 		<!-- ===================계약물건 검색 시작================== -->
-		<form method="post" name="set1" action="<?php echo current_url(); ?>">
+		<form method="post" name="set1" action="/ns/m1/sales/1/2">
 			<div class="row bo-top bo-bottom font12" style="margin: 0;">
 				<div class="row bo-bottom font12" style="margin: 0;">
 					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">처리 구분 <span class="red">*</span></div>
 					<div class="col-xs-8 col-sm-9 col-md-6" style="padding: 4px 15px;">
+
+
+
 						<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 0; padding-top: 5px; padding-right: 0;">
-							<label><input type="radio" name="mode" value="new" <?php if(( !$this->input->post('mode') OR $this->input->post('mode')=="new") && $this->input->get('mode')!="modi") echo "checked";
+							<label><input type="radio" name="mode" value="new" <?php if(( !$this->input->post('mode') OR $this->input->post('mode')=="new") && ($this->input->get('mode')!="modi" && $this->input->post('mode')!="modi")) echo "checked";
 								if($this->input->get('mode')=="modi") echo "disabled"; ?> onclick="submit();">신규</label>
 						</div>
+
+
+
 						<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 0; padding-top: 5px; padding-right: 0;">
 							<label><input type="radio" name="mode" value="modi" <?php if($this->input->post('mode')=="modi" OR $this->input->get('mode')=="modi") echo "checked"; ?> onclick="submit();">수정</label>
 						</div>
+
+
 					</div>
 				</div>
-
-
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
