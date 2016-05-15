@@ -22,7 +22,7 @@
 ?>
 				<fieldset class="font12">
 
-					<div class="form-group <?php if( !$this->agent->is_mobile()) echo 'bo-top';?>" style="margin: 0;">
+					<div class="form-group bo-top" style="margin: 0;">
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap" >
 							<label for="co_name">회사명 <span class="red">*</span></label>
 						</div>
@@ -58,7 +58,7 @@
 						</div>
 					</div>
 
-					<div class="form-group <?php if( !$this->agent->is_mobile()) echo 'bo-top';?>" style="margin: 0;">
+					<div class="form-group bo-top" style="margin: 0;">
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap">
 							<label for="ceo">
 								대표자 <span class="red">*</span>
@@ -93,7 +93,7 @@
 					</div>
 
 
-					<div class="form-group <?php if( !$this->agent->is_mobile()) echo 'bo-top';?>" style="margin: 0;">
+					<div class="form-group bo-top" style="margin: 0;">
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap">
 							<label for="biz_cond">업태 <span class="red">*</span></label>
 						</div>
@@ -112,7 +112,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="form-group <?php if( !$this->agent->is_mobile()) echo 'bo-top';?>" style="margin: 0;">
+					<div class="form-group bo-top" style="margin: 0;">
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap">
 							<label for="co_phone1">대표전화 <span class="red">*</span></label>
 						</div>
@@ -156,7 +156,7 @@
 							<div class="col-xs-3"></div>
 						</div>
 					</div>
-					<div class="form-group <?php if( !$this->agent->is_mobile()) echo 'bo-top';?>" style="margin: 0;">
+					<div class="form-group bo-top" style="margin: 0;">
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap"><label for="co_fax1">FAX</label></div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap">
 							<div class="col-xs-3" style="padding-right: 0;">
@@ -205,7 +205,7 @@
 							<div class="col-xs-1"></div>
 						</div>
 					</div>
-					<div class="form-group <?php if( !$this->agent->is_mobile()) echo 'bo-top';?>" style="margin: 0;">
+					<div class="form-group bo-top" style="margin: 0;">
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap">
 							<label for="es_date">설립일자 <span class="red">*</span></label>
 						</div>
@@ -229,7 +229,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="form-group <?php if( !$this->agent->is_mobile()) echo 'bo-top';?>" style="margin: 0;">
+					<div class="form-group bo-top" style="margin: 0;">
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap">
 							<label for="carr_y">기초잔액 입력월 <span class="red">*</span></label>
 						</div>
@@ -281,7 +281,7 @@
 							<div class="col-xs-5 text-wrap">개월</div>
 						</div>
 					</div>
-					<div class="form-group <?php if( !$this->agent->is_mobile()) echo 'bo-top';?>" style="margin: 0;">
+					<div class="form-group bo-top" style="margin: 0;">
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap">
 							<label for="email1">E-mail(비상) <span class="red">*</span>	</label>
 						</div>
@@ -329,7 +329,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="form-group <?php if( !$this->agent->is_mobile()) echo 'bo-top';?>" style="margin: 0;">
+					<div class="form-group bo-top" style="margin: 0;">
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap">
 							<label for="tax_off1_code">세무서 [1] <span class="red">*</span></label>
 						</div>
@@ -384,7 +384,7 @@
 							<!-- <div class="col-xs-5  input-group"></div> -->
 						</div>
 					</div>
-					<div class="form-group <?php if( !$this->agent->is_mobile()) echo 'bo-top';?>" style="margin: 0;">
+					<div class="form-group bo-top" style="margin: 0;">
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap">
 							<label for="zipcode">회사주소 <span class="red">*</span></label>
 						</div>
@@ -406,7 +406,7 @@
 							<div class="col-xs-12 col-sm-12 col-md-3 glyphicon-wrap" style="padding: 12px 12px 5px 15px;">나머지 주소</div>
 						</div>
 					</div>
-					<div class="form-group <?php if( !$this->agent->is_mobile()) echo 'bo-top';?>" style="margin: 0;">
+					<div class="form-group bo-top" style="margin: 0;">
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap">
 							<label for="en_co_name">회사 영문명</label>
 						</div>

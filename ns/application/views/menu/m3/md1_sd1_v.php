@@ -9,8 +9,8 @@
 					<label for="mode" class="sr-only">모드</label>
 					<input type="hidden" name="mode">
 					<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
-						<div class="col-xs-12 col-sm-4 col-md-2 center point-sub" style="padding: 9px 0;">사업 개시년도</div>
-						<div class="col-xs-12 col-sm-8 col-md-2" style="padding: 3px 5px;">
+						<div class="col-xs-6 col-sm-4 col-md-2 center point-sub" style="padding: 9px 0;">사업 개시년도</div>
+						<div class="col-xs-6 col-sm-8 col-md-2" style="padding: 3px 5px;">
 							<label for="yr" class="sr-only">사업 개시년도</label>
 							<select class="form-control input-sm" name="yr" onchange="submit();">
 								<option value=""> 전 체</option>
@@ -25,8 +25,8 @@
 							</select>
 						</div>
 
-						<div class="col-xs-12 col-sm-4 col-md-2 center point-sub" style="padding: 9px 0;">미등록현장 [<span style="color: #0c04ab;">신규등록</span>]</div>
-						<div class="col-xs-12 col-sm-8 col-md-2" style="padding: 3px 5px;">
+						<div class="col-xs-6 col-sm-4 col-md-2 center point-sub" style="padding: 9px 0;">미등록현장 [<span style="color: #0c04ab;">신규등록</span>]</div>
+						<div class="col-xs-6 col-sm-8 col-md-2" style="padding: 3px 5px;">
 							<label for="new_pj" class="sr-only">구분1</label>
 							<select class="form-control input-sm" name="new_pj" onchange="select_ch('reg');">
 								<option value="">선 택</option>
@@ -36,8 +36,8 @@
 							</select>
 						</div>
 
-						<div class="col-xs-12 col-sm-4 col-md-2 center point-sub" style="padding: 9px 0;">기등록현장 [<span style="color: #be032a;">데이터수정</span>]</div>
-						<div class="col-xs-12 col-sm-8 col-md-2" style="padding: 3px 5px;">
+						<div class="col-xs-6 col-sm-4 col-md-2 center point-sub" style="padding: 9px 0;">기등록현장 [<span style="color: #be032a;">데이터수정</span>]</div>
+						<div class="col-xs-6 col-sm-8 col-md-2" style="padding: 3px 5px;">
 							<label for="end_pj" class="sr-only">구분1</label>
 							<select class="form-control input-sm" name="end_pj" onchange="select_ch('modify');">
 								<option value="">선 택</option>
