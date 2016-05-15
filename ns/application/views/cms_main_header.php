@@ -53,15 +53,11 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="<?php if( !strpos($this->uri->segment(1), '1')) echo ''; else echo 'active';?>"><a href=<?php echo $this->config->base_url()."m1/"; ?>>분양관리</a></li>
-						<li class="<?php if( !strpos($this->uri->segment(1), '2')) echo ''; else echo 'active';?>"><a href=<?php echo $this->config->base_url()."m2/"; ?>>사업관리</a></li>
-						<li class="<?php if( !strpos($this->uri->segment(1), '3')) echo ''; else echo 'active';?>"><a href=<?php echo $this->config->base_url()."m3/"; ?>>프로젝트</a></li>
-						<li class="<?php if( !strpos($this->uri->segment(1), '4')) echo ''; else echo 'active';?>"><a href=<?php echo $this->config->base_url()."m4/"; ?>>본사관리</a></li>
-						<li class="<?php if( !strpos($this->uri->segment(1), '5')) echo ''; else echo 'active';?>"><a href=<?php echo $this->config->base_url()."m5/"; ?>>환경설정</a></li>
-
-
-
-
+						<li class="<?php if( !strpos($this->uri->segment(1), '1')) echo ''; else echo 'active';?>"><a href=<?php echo $this->config->base_url('m1'); ?>>분양관리</a></li>
+						<li class="<?php if( !strpos($this->uri->segment(1), '2')) echo ''; else echo 'active';?>"><a href=<?php echo $this->config->base_url('m2'); ?>>사업관리</a></li>
+						<li class="<?php if( !strpos($this->uri->segment(1), '3')) echo ''; else echo 'active';?>"><a href=<?php echo $this->config->base_url('m3'); ?>>프로젝트</a></li>
+						<li class="<?php if( !strpos($this->uri->segment(1), '4')) echo ''; else echo 'active';?>"><a href=<?php echo $this->config->base_url('m4'); ?>>본사관리</a></li>
+						<li class="<?php if( !strpos($this->uri->segment(1), '5')) echo ''; else echo 'active';?>"><a href=<?php echo $this->config->base_url('m5'); ?>>환경설정</a></li>
 						<li class="dropdown">
 <?php if(@$this->session->userdata['logged_in'] == TRUE) : ?>
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

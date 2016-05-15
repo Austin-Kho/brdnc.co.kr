@@ -1,9 +1,9 @@
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="<?if( !$this->uri->segment(3) or $this->uri->segment(3)=='1') echo 'active'; else echo '';?>">
-        	<a href="<?php echo $this->config->base_url(); ?>m5/config/1/"><strong>기본 정보관리</strong></a>
+        	<a href="<?php echo $this->config->base_url('m5/config/1'); ?>"><strong>기본 정보관리</strong></a>
         </li>
         <li role="presentation" class="<?if( $this->uri->segment(3)=='2') echo 'active'; else echo '';?>">
-        	<a href="<?php echo $this->config->base_url(); ?>m5/config/2/"><strong>회사 정보관리</strong></a>
+        	<a href="<?php echo $this->config->base_url('m5/config/2'); ?>"><strong>회사 정보관리</strong></a>
         </li>
       </ul>
 <!-- ---------------------------------mdi-menu end------------------------------------ -->
@@ -16,7 +16,9 @@
 				for($i=0; $i<$len; $i++) :
 					$j = $i+1;
 ?>
-					<li role="presentation" class="<?php if(( !$this->uri->segment(4) && $j==1) or $this->uri->segment(4)==$j) echo 'active'; ?>"><a href="<?php echo $this->config->base_url(); ?>m5/config/<?php if($this->uri->segment(3)) {echo $this->uri->segment(3).'/'.$j.'/';} else {echo '1/'.$j.'/';}?>"><?php echo $s_di[0][$i]; ?></a></li>
+					<li role="presentation" class="<?php if(( !$this->uri->segment(4) && $j==1) or $this->uri->segment(4)==$j) echo 'active'; ?>">
+						<a href="<?php echo $this->config->base_url('m5/config'); ?>/<?php if($this->uri->segment(3)) {echo $this->uri->segment(3).'/'.$j.'/';} else {echo '1/'.$j;}?>"><?php echo $s_di[0][$i]; ?></a>
+					</li>
 <?
 				endfor;
 			else :
@@ -24,7 +26,9 @@
 				for($i=0; $i<$len; $i++) :
 					$j = $i+1;
 ?>
-					<li role="presentation" class="<?php if(( !$this->uri->segment(4) && $j==1) or $this->uri->segment(4)==$j) echo 'active'; ?>"><a href="<?php echo $this->config->base_url(); ?>m5/config/<?php if($this->uri->segment(3)) {echo $this->uri->segment(3).'/'.$j.'/';} else {echo '1/'.$j.'/';}?>"><?php echo $s_di[1][$i]; ?></a></li>
+					<li role="presentation" class="<?php if(( !$this->uri->segment(4) && $j==1) or $this->uri->segment(4)==$j) echo 'active'; ?>">
+						<a href="<?php echo $this->config->base_url('m5/config'); ?>/<?php if($this->uri->segment(3)) {echo $this->uri->segment(3).'/'.$j.'/';} else {echo '1/'.$j;}?>"><?php echo $s_di[1][$i]; ?></a>
+					</li>
 <?
 				endfor;
 			endif;
