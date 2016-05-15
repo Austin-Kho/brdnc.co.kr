@@ -1,4 +1,3 @@
-<!--
 /********************상담일지 등록 시작*******************/
 function coun_log_sub(mode){
 	var form = document.form1;
@@ -220,16 +219,19 @@ function work_log_sub(is_com, str){
 
 
 /********************계약등록 시작*******************/
-function cont_check(is_com){
+function cont_check(){
 	var form1 = document.set1;
 	var form2 = document.form1;
 
-	if(is_com=='1'){
-		if(!form1.pj_list.value){
-			alert('프로젝트를 선택하여 주십시요!');
-			form1.pj_list.focus();
-			return;
-		}
+	if( !form1.project.value || form1.project.value===''){
+		alert('프로젝트를 선택하여 주십시요!');
+		form1.project.focus();
+		return;
+	}
+	if( !form1.diff_no.value || form1.diff_no.value===''){
+		alert('차수구분을 선택하여 주십시요!');
+		form1.diff_no.focus();
+		return;
 	}
 	if(form1.cont_sort1[0].checked==1){ // 계약 진행시
 		if(!form1.cont_sort2.value){
@@ -250,7 +252,7 @@ function cont_check(is_com){
 		form1.type.focus();
 		return;
 	}
-	if(form1.dong&&!form1.dong.value){
+	if(form1.dong&& !form1.dong.value){
 		alert('동 정보를 선택하여 주십시요!');
 		form1.dong.focus();
 		return;
@@ -324,27 +326,34 @@ function cont_check(is_com){
 		return;
 	}
 }
+function cont_sort(no){
+	var form = document.form1;
+	if(no=='1') form.cont_sort3.options[0].selected =true;
+	if(no=='2') form.cont_sort2.options[0].selected =true;
+	form.submit();
+}
+
 function same_addr(){
 	var form = document.form1;
-	if(form.sa_addr.checked==true){
-		if(form.dm_zip.value||form.dm_addr1.value||form.dm_addr2.value){
-			if(confirm('우편송부 주소를 주민등록 주소로 교체하시겠습니까?')==true){
-				form.dm_zip.value = form.id_zip.value;
-				form.dm_addr1.value = form.id_addr1.value;
-				form.dm_addr2.value = form.id_addr2.value;
+	if(form.sa_addr.checked===true){
+		if(form.zipcode_.value||form.address1_.value||form.address2_.value){
+			if(confirm('우편송부 주소를 주민등록 주소로 교체하시겠습니까?')===true){
+				form.zipcode_.value = form.zipcode.value;
+				form.address1_.value = form.address1.value;
+				form.address2_.value = form.address2.value;
 			}else{
 				form.sa_addr.checked = false;
 				return;
 			}
 		}else{
-			form.dm_zip.value = form.id_zip.value;
-			form.dm_addr1.value = form.id_addr1.value;
-			form.dm_addr2.value = form.id_addr2.value;
+			form.zipcode_.value = form.zipcode.value;
+			form.address1_.value = form.address1.value;
+			form.address2_.value = form.address2.value;
 		}
 	}else{
-		form.dm_zip.value = '';
-		form.dm_addr1.value = '';
-		form.dm_addr2.value = '';
+		form.zipcode_.value = '';
+		form.address1_.value = '';
+		form.address2_.value = '';
 	}
 }
 
