@@ -234,14 +234,14 @@
 
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">청약금 <span class="red">*</span></div>
-				<div class="col-xs-5 col-sm-5 col-md-2" style="padding: 4px 15px;">
+				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="app_money" class="sr-only">청약금</label>
 						<input type="text" class="form-control input-sm" name="app_money" value="<?php if( !empty($app_data) && $app_data->app_money!=0) echo $app_data->app_money; else echo set_value('app_money'); ?>" <?php echo $disabled; ?>>
 					</div>
 				</div>
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">입금 계정 <span class="red">*</span></div>
-				<div class="col-xs-3 col-sm-4 col-md-2" style="padding: 4px 15px;">
+				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="app_acc" class="sr-only">입금계정</label>
 						<select class="form-control input-sm" name="app_acc" <?php echo $disabled; ?>>
@@ -285,13 +285,13 @@
 	if(empty($app_data)) : $due_date = set_value('due_date');
 	else : $due_date = $app_data->due_date;
 	endif;
+
+	if(( !$this->input->get('cont_sort2') && !$this->input->get('cont_sort3')) OR ($this->input->get('cont_sort2')!=2 && $this->input->get('cont_sort3')!=4)) :
 ?>
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub <?php if(!((( !$this->input->get('cont_sort2') && !$this->input->get('cont_sort3')) OR ($this->input->get('cont_sort2')!=2 && $this->input->get('cont_sort3')!=4)))) echo 'hidden-xs hidden-sm'; ?>" style="padding: 10px; 0">
-					<?php if(( !$this->input->get('cont_sort2') && !$this->input->get('cont_sort3')) OR ($this->input->get('cont_sort2')!=2 && $this->input->get('cont_sort3')!=4)) {?>계약 예정일<?php } ?>&nbsp;
-				</div>
-				<div class="col-xs-8 col-sm-9 col-md-2 <?php if(!((( !$this->input->get('cont_sort2') && !$this->input->get('cont_sort3')) OR ($this->input->get('cont_sort2')!=2 && $this->input->get('cont_sort3')!=4)))) echo 'hidden-xs hidden-sm'; ?>" style="padding: 4px 15px;">
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약 예정일</div>
+				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-<?php if(( !$this->input->get('cont_sort2') && !$this->input->get('cont_sort3')) OR ($this->input->get('cont_sort2')!=2 && $this->input->get('cont_sort3')!=4)) :?>
+
 						<label for="due_date" class="sr-only">계약 예정일</label>
 						<div class="col-xs-10" style="padding: 0;">
 							<input type="text" name="due_date" id="due_date" class="form-control input-sm" value="<?php echo $due_date; ?>" onclick="cal_add(this); event.cancelBubble=true"  readonly>
@@ -299,9 +299,17 @@
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
 							<a href="javascript:" onclick="cal_add(document.getElementById('due_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
 						</div>
-<?php endif; ?>
 					</div>
 				</div>
+<?php else : ?>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; ">계약 일련번호</div>
+				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<label for="cont_code" class="sr-only">계약 일련번호</label>
+						<input type="text" class="form-control input-sm" name="cont_code" value="" <?php echo $disabled; ?>>
+					</div>
+				</div>
+<?php endif; ?>
 			</div>
 
 
