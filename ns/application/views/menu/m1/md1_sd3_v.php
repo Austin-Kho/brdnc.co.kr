@@ -25,9 +25,9 @@
 					<div class="col-xs-12 col-sm-8" style="padding: 0px;">
 						<label for="project" class="sr-only">프로젝트 선택</label>
 						<select class="form-control input-sm" name="project" onchange="submit();">
-							<option value=""> 전 체
+							<option value="0"> 전 체
 <?php foreach($all_pj as $lt) : ?>
-							<option value="<?php echo $lt->seq; ?>" <?php if($this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?>
+							<option value="<?php echo $lt->seq; ?>" <?php if(( !$this->input->post('project') && $lt->seq=='1') OR $this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?>
 <?php endforeach; ?>
 						</select>
 					</div>
