@@ -49,7 +49,7 @@
 								<th style="50px" class="center">출금금액 <font color="red">*</font></td>
 								<th style="110px" class="center">이체수수료 <font color="red">*</font></td>
 								<th style="70px" class="center">증빙서류 <font color="red">*</font></td>
-								<th style="100px" class="center">비 고 <font color="red">*</font></td>
+								<th style="80px" class="center">비 고 <font color="red">*</font></td>
 							</tr>
 						</thead>
 						<tbody>
@@ -130,7 +130,7 @@
 									</select>
 								</td>
 								<!-- 적 요 _1 -->
-								<td class="center"><input type="text" name="cont_1" size="20"></td>
+								<td class="center"><input type="text" name="cont_1" size="17"></td>
 								<!-- 거 래 처 _1 -->
 								<td class="center"><input type="text" name="acc_1" size="10"></td>
 								<!-- 입금처 _1 -->
@@ -168,7 +168,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_1" size="20"></td>
+								<td class="center"><input type="text" name="note_1" size="17"></td>
 							</tr>
 							<!-- ------------------------------------1col------------------------------------------ -->
 							<!-- ------------------------------------2col------------------------------------------ -->
@@ -246,7 +246,7 @@
 									</select>
 								</td>
 								<!-- 적 요 _2 -->
-								<td class="center"><input type="text" name="cont_2" size="20"></td>
+								<td class="center"><input type="text" name="cont_2" size="17"></td>
 								<!-- 거 래 처 _2 -->
 								<td class="center"><input type="text" name="acc_2" size="10"></td>
 								<!-- 입금처 _2 -->
@@ -284,7 +284,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_2" size="20"></td>
+								<td class="center"><input type="text" name="note_2" size="17"></td>
 							</tr>
 							<!-- ------------------------------------2col------------------------------------------ -->
 							<!-- ------------------------------------3col------------------------------------------ -->
@@ -362,7 +362,7 @@
 									</select>
 								</td>
 								<!-- 적 요 _3 -->
-								<td class="center"><input type="text" name="cont_3" size="20"></td>
+								<td class="center"><input type="text" name="cont_3" size="17"></td>
 								<!-- 거 래 처 _3 -->
 								<td class="center"><input type="text" name="acc_3" size="10"></td>
 								<!-- 입금처 _3 -->
@@ -400,7 +400,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_3" size="20"></td>
+								<td class="center"><input type="text" name="note_3" size="17"></td>
 							</tr>
 							<!-- ------------------------------------3col------------------------------------------ -->
 							<!-- ------------------------------------4col------------------------------------------ -->
@@ -478,7 +478,7 @@
 									</select>
 								</td>
 								<!-- 적 요 _4 -->
-								<td class="center"><input type="text" name="cont_4" size="20"></td>
+								<td class="center"><input type="text" name="cont_4" size="17"></td>
 								<!-- 거 래 처 _4 -->
 								<td class="center"><input type="text" name="acc_4" size="10"></td>
 								<!-- 입금처 _4 -->
@@ -516,7 +516,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_4" size="20"></td>
+								<td class="center"><input type="text" name="note_4" size="17"></td>
 							</tr>
 							<!-- ------------------------------------4col------------------------------------------ -->
 							<!-- ------------------------------------5col------------------------------------------ -->
@@ -594,7 +594,7 @@
 									</select>
 								</td>
 								<!-- 적 요 _5 -->
-								<td class="center"><input type="text" name="cont_5" size="20"></td>
+								<td class="center"><input type="text" name="cont_5" size="17"></td>
 								<!-- 거 래 처 _5 -->
 								<td class="center"><input type="text" name="acc_5" size="10"></td>
 								<!-- 입금처 _5 -->
@@ -632,7 +632,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_5" size="20"></td>
+								<td class="center"><input type="text" name="note_5" size="17"></td>
 							</tr>
 							<!-- ------------------------------------5col------------------------------------------ -->
 							<!-- ------------------------------------6col------------------------------------------ -->
@@ -710,7 +710,7 @@
 									</select>
 								</td>
 								<!-- 적 요 _6 -->
-								<td class="center"><input type="text" name="cont_6" size="20"></td>
+								<td class="center"><input type="text" name="cont_6" size="17"></td>
 								<!-- 거 래 처 _6 -->
 								<td class="center"><input type="text" name="acc_6" size="10"></td>
 								<!-- 입금처 _6 -->
@@ -748,7 +748,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_6" size="20"></td>
+								<td class="center"><input type="text" name="note_6" size="17"></td>
 							</tr>
 							<!-- ------------------------------------6col------------------------------------------ -->
 							<!-- ------------------------------------7col------------------------------------------ -->
@@ -826,7 +826,7 @@
 									</select>
 								</td>
 								<!-- 적 요 _7 -->
-								<td class="center"><input type="text" name="cont_7" size="20"></td>
+								<td class="center"><input type="text" name="cont_7" size="17"></td>
 								<!-- 거 래 처 _7 -->
 								<td class="center"><input type="text" name="acc_7" size="10"></td>
 								<!-- 입금처 _7 -->
@@ -864,7 +864,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_7" size="20"></td>
+								<td class="center"><input type="text" name="note_7" size="17"></td>
 							</tr>
 							<!-- ------------------------------------7col------------------------------------------ -->
 							<!-- ------------------------------------8col------------------------------------------ -->
@@ -942,7 +942,7 @@
 									</select>
 								</td>
 								<!-- 적 요 _8 -->
-								<td class="center"><input type="text" name="cont_8" size="20"></td>
+								<td class="center"><input type="text" name="cont_8" size="17"></td>
 								<!-- 거 래 처 _8 -->
 								<td class="center"><input type="text" name="acc_8" size="10"></td>
 								<!-- 입금처 _8 -->
@@ -980,7 +980,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_8" size="20"></td>
+								<td class="center"><input type="text" name="note_8" size="17"></td>
 							</tr>
 							<!-- ------------------------------------8col------------------------------------------ -->
 							<!-- ------------------------------------9col------------------------------------------ -->
@@ -1058,7 +1058,7 @@
 									</select>
 								</td>
 								<!-- 적 요 _9 -->
-								<td class="center"><input type="text" name="cont_9" size="20"></td>
+								<td class="center"><input type="text" name="cont_9" size="17"></td>
 								<!-- 거 래 처 _9 -->
 								<td class="center"><input type="text" name="acc_9" size="10"></td>
 								<!-- 입금처 _9 -->
@@ -1096,7 +1096,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_9" size="20"></td>
+								<td class="center"><input type="text" name="note_9" size="17"></td>
 							</tr>
 							<!-- ------------------------------------9col------------------------------------------ -->
 							<!-- ------------------------------------10col------------------------------------------ -->
@@ -1174,7 +1174,7 @@
 									</select>
 								</td>
 								<!-- 적 요 _10 -->
-								<td class="center"><input type="text" name="cont_10" size="20"></td>
+								<td class="center"><input type="text" name="cont_10" size="17"></td>
 								<!-- 거 래 처 _10 -->
 								<td class="center"><input type="text" name="acc_10" size="10"></td>
 								<!-- 입금처 _10 -->
@@ -1212,7 +1212,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_10" size="20"></td>
+								<td class="center"><input type="text" name="note_10" size="17"></td>
 							</tr>
 							<!-- ------------------------------------10col------------------------------------------ -->
 						</tbody>
