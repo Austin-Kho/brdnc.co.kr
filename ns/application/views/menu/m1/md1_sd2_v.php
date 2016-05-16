@@ -3,33 +3,34 @@
 
 		<!-- ===================계약물건 검색 시작================== -->
 		<form method="get" name="set1" action="/ns/m1/sales/1/2">
-			<label><input type="hidden" name="ret" value="<?php echo $this->input->get('ret'); ?>"></label>
 			<div class="row bo-top bo-bottom font12" style="margin: 0;">
 				<div class="row bo-bottom font12" style="margin: 0;">
 					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">처리 구분 <span class="red">*</span></div>
-					<div class="col-xs-8 col-sm-9 col-md-6" style="padding: 4px 15px;">
-						<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 0; padding-top: 5px; padding-right: 0;">
-							<label><input type="radio" name="mode" value="1" <?php if( !$this->input->get('ret')) echo "checked";// if( !$this->input->get('mode') OR $this->input->get('mode')=="1") echo "checked"; ?> onclick="location.href='<?php echo base_url('m1/sales/1/2?mode=1') ?>'" disabled>신규</label>
+					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+						<div class="col-xs-4 col-sm-3 col-md-6 radio" style="margin: 0; padding: 5px; padding-right: 0;">
+							<label>
+								<input type="radio" name="mode" value="1" <?php if(( !$this->input->get('mode') OR $this->input->get('mode')=='1') && $this->input->get('cont_sort1')!='2' && empty($is_reg)) echo "checked"; ?> onclick="location.href='<?php echo base_url('m1/sales/1/2?mode=1') ?>'">신규
+							</label>
 						</div>
-						<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 0; padding-top: 5px; padding-right: 0;">
-							<label><input type="radio" name="mode" value="2" <?php if($this->input->get('ret')==1) echo "checked";// if($this->input->get('mode')=="2") echo "checked"; ?> onclick="submit();" disabled>변경</label>
+						<div class="col-xs-4 col-sm-3 col-md-6 radio" style="margin: 0; padding-top: 5px; padding-right: 0;">
+							<label><input type="radio" name="mode" value="2" <?php if($this->input->get('mode')=="2" OR $this->input->get('cont_sort1')=='2' OR (!empty($is_reg))) echo "checked"; ?> onclick="submit();">변경</label>
 						</div>
 					</div>
-				</div>
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
-				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
-					<div class="col-xs-12" style="padding: 0px;">
-						<label for="yr" class="sr-only">사업 개시년도</label>
-						<select class="form-control input-sm" name="yr" onchange="submit();" disabled>
-							<option value=""> 선 택</option>
-<?php
-	$start_year = "2015";
-	$year=range($start_year,date('Y'));
-	for($i=(count($year)-1); $i>=0; $i--) :
-?>
-							<option value="<?php echo $year[$i]?>" <?php if($this->input->get('yr')==$year[$i]) echo "selected"; ?>><?php echo $year[$i]."년"?></option>
-<?php endfor; ?>
-						</select>
+					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
+					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+						<div class="col-xs-12" style="padding: 0px;">
+							<label for="yr" class="sr-only">사업 개시년도</label>
+							<select class="form-control input-sm" name="yr" onchange="submit();" disabled>
+								<option value=""> 선 택</option>
+	<?php
+		$start_year = "2015";
+		$year=range($start_year,date('Y'));
+		for($i=(count($year)-1); $i>=0; $i--) :
+	?>
+								<option value="<?php echo $year[$i]?>" <?php if($this->input->get('yr')==$year[$i]) echo "selected"; ?>><?php echo $year[$i]."년"?></option>
+	<?php endfor; ?>
+							</select>
+						</div>
 					</div>
 				</div>
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">프로젝트 선택 <span class="red">*</span></div>
@@ -44,27 +45,15 @@
 						</select>
 					</div>
 				</div>
-			</div>
-			<div class="row bo-bottom font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">차수 구분 <span class="red">*</span></div>
-				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
-					<div class="col-xs-12" style="padding: 0px;">
-						<label for="diff_no" class="sr-only">차수</label>
-						<select class="form-control input-sm" name="diff_no">
-							<option value=""> 선 택</option>
-<?php foreach($diff_no as $lt) : ?>
-							<option value="<?php echo $lt->diff_no; ?>" <?php if($this->input->get('diff_no')==$lt->diff_no) echo "selected"; ?>><?php echo $lt->diff_name; ?></option>
-<?php endforeach; ?>
-						</select>
-					</div>
-				</div>
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">거래 구분 <span class="red">*</span></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">등록 구분 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-6" style="padding: 4px 15px;">
 					<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 5px 0; padding-right: 0;">
 						<label><input type="radio" name="cont_sort1" id="cont_sort1" value="1" <?php if( !$this->input->get('cont_sort1') OR $this->input->get('cont_sort1')=='1') echo "checked";?>  onclick="submit();">계약</label>
 					</div>
 					<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 5px 0; padding-right: 0;">
-						<label><input type="radio" name="cont_sort1" id="cont_sort1" value="2" <?php if($this->input->get('cont_sort1')=='2') echo "checked";?> onclick="submit();">해지</label>
+						<label>
+							<input type="radio" name="cont_sort1" id="cont_sort1" value="2" <?php if($this->input->get('cont_sort1')=='2') echo "checked";?> onclick="submit();" <?php if( !$this->input->get('mode') OR $this->input->get('mode')==1) echo "disabled"; ?> >해지
+						</label>
 					</div>
 <?php if( !$this->input->get('cont_sort1') OR $this->input->get('cont_sort1')=='1') : ?>
 					<div class="col-xs-4 col-sm-6 col-md-4" style="padding: 0px;">
@@ -130,22 +119,27 @@
 			</div>
 
 			<div class="row bo-top bo-bottom font12" style="margin: 0 0 15px;">
-				<div class="col-xs-12 font14" style="padding: 10px 50px; background-color: #F5F2C5; color: #0b071f"><?php echo $dong_ho; ?>&nbsp;</div>
+				<div class="col-xs-12 font14" style="padding: 10px 50px; background-color: #F5F2C5; color: #0b071f"><?php echo $dong_ho; ?>&nbsp;<?php echo validation_errors('<div class="error">', '</div>'); ?></div>
 			</div>
 		</form>
 		<!-- ===================계약물건 검색 종료================== -->
 
+
+<?php $disabled = (($this->input->get('cont_sort2') OR $this->input->get('cont_sort3')) && $this->input->get('ho')) ? "" : "disabled"; ?>
+
 		<!-- ===================계약내용 기록 시작================== -->
-		<form method="post" name="form1" action="<?php echo base_url(uri_string()); ?>">
+		<form method="post" name="form1" action="<?php echo current_url(); ?>">
+			<input type="hidden" name="mode" value="<?php if( !empty($is_reg)) echo '2'; else echo '1'; ?>">
 			<input type="hidden" name="project" value="<?php echo $this->input->get('project'); ?>">
 			<input type="hidden" name="diff_no" value="<?php echo $this->input->get('diff_no'); ?>">
 			<input type="hidden" name="cont_sort1" value="<?php echo $this->input->get('cont_sort1'); ?>"><!-- 계약(1) 해지(2) 여부 -->
 			<input type="hidden" name="cont_sort2" value="<?php echo $this->input->get('cont_sort2'); ?>"><!-- 청약(1) 계약(2) 여부 -->
 			<input type="hidden" name="cont_sort3" value="<?php echo $this->input->get('cont_sort3'); ?>"><!-- 청약해지(1) 계약해지(2) 여부 -->
+<?php $unit_seq = (!empty($is_reg)) ? $is_reg->seq : ''; ?>
+			<input type="hidden" name="unit_seq" value="<?php echo $unit_seq; ?>">
 			<input type="hidden" name="type" value="<?php echo $this->input->get('type'); ?>">
 			<input type="hidden" name="dong" value="<?php echo $this->input->get('dong'); ?>">
 			<input type="hidden" name="ho" value="<?php echo $this->input->get('ho'); ?>">
-			<!-- <input type="hidden" name="cont_code" value="<?php echo $this->input->get('cont_code'); ?>"> -->
 
 <?php if($this->input->get('cont_sort2')=="1" && !empty($app_data1)) : // 청약 등록 시 ?>
 			<div class="row bo-top font12" style="margin: 0;">
@@ -168,10 +162,10 @@
 			<div class="row bo-top font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="height: 60px; padding: 10px; 0">청약 내역 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
-<?php if( !empty($app_data1)) :  ?>
-					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">일자 : <?php echo $app_data1->app_date; ?></div>
-					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">입금 : <?php echo $app_data1->app_money; ?></div>
-					<div class="col-xs-6 col-sm-4 col-md-3" style="padding: 4px 0px;">계정 : <?php echo $app_data1->app_acc; ?></div>
+<?php if( !empty($app_data)) :  ?>
+					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">일자 : <?php echo $app_data->app_date; ?></div>
+					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">입금 : <?php echo $app_data->app_money; ?></div>
+					<div class="col-xs-6 col-sm-4 col-md-3" style="padding: 4px 0px;">계좌 : <?php echo $app_data->app_acc; ?></div>
 <?php else : ?>
 					<div class="col-xs-12" style="padding: 4px 0px;">등록된 청약 데이터 없습니다. 신규 계약 정보를 입력하세요.</div>
 <?php endif; ?>
@@ -188,48 +182,74 @@
 			</div>
 <?php endif; ?>
 			<div class="row bo-top bo-bottom font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약 고객명 <span class="red">*</span></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">차수 구분 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="custom_name" class="sr-only">계약자명</label>
-						<input type="text" class="form-control input-sm" name="custom_name" value="">
-					</div>
-				</div>
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">청약금 <span class="red">*</span></div>
-				<div class="col-xs-3 col-sm-4 col-md-2" style="padding: 4px 15px;">
-					<div class="col-xs-12" style="padding: 0px;">
-						<label for="app_money" class="sr-only">청약금</label>
-						<input type="text" class="form-control input-sm" name="app_money" value="">
-					</div>
-				</div>
-				<div class="col-xs-3 col-sm-4 col-md-2" style="padding: 4px 15px;">
-					<div class="col-xs-12" style="padding: 0px;">
-						<label for="app_acc" class="sr-only">입금계정</label>
-						<select class="form-control input-sm" name="app_acc">
+						<label for="diff_no" class="sr-only">차수</label>
+						<select class="form-control input-sm" name="diff_no" <?php echo $disabled; ?>>
 							<option value=""> 선 택</option>
-<?php foreach ($dep_acc as $lt) : ?>
-							<option value="<?php echo $lt->seq ?>"><?php echo $lt->acc_nick; ?></option>
+<?php foreach($diff_no as $lt) : ?>
+							<option value="<?php echo $lt->diff_no; ?>" <?php if($app_data->app_diff==$lt->diff_no) echo "selected"; ?>><?php echo $lt->diff_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
 				</div>
-				<div class="col-xs-2 col-sm-1 col-md-2" style="padding: 10px 0">입금계정</div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약 고객명 <span class="red">*</span></div>
+				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+					<div class="col-xs-12" style="padding: 0px;">
+<?php
+	if(empty($app_data) && empty($cont_data2)) : $custom_name = set_value('custom_name');
+	elseif( !empty($app_data)) : $custom_name = $app_data->applicant;
+	else : $custom_name = $cont_data2->contractor_name;
+	endif;
+?>
+						<label for="custom_name" class="sr-only">계약자명</label>
+						<input type="text" class="form-control input-sm" name="custom_name" value="<?php echo $custom_name; ?>" <?php echo $disabled; ?>>
+					</div>
+				</div>
 			</div>
 
-
+<?php
+	if(empty($app_data) && empty($cont_data2)) : $tel_1 = set_value('tel_1'); $tel_2 = set_value('tel_2');
+	elseif( !empty($app_data)) : $tel_1 = $app_data->app_tel1; $tel_2 = $app_data->app_tel2;
+	else : $tel_1 = $cont_data2->cont_tel1; $tel_2 = $cont_data2->cont_tel2;
+	endif;
+?>
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">연락처 [1] <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="tel_1" class="sr-only">연락처1</label>
-						<input type="text" class="form-control input-sm" name="tel_1" value="">
+						<input type="text" class="form-control input-sm" name="tel_1" value="<?php echo $tel_1; ?>" <?php echo $disabled; ?>>
 					</div>
 				</div>
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">연락처 [2]</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="tel_2" class="sr-only">연락처2</label>
-						<input type="text" class="form-control input-sm" name="tel_2" value="">
+						<input type="text" class="form-control input-sm" name="tel_2" value="<?php echo $tel_2; ?>" <?php echo $disabled; ?>>
+					</div>
+				</div>
+			</div>
+
+			<div class="row bo-bottom font12" style="margin: 0;">
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">청약금 <span class="red">*</span></div>
+				<div class="col-xs-5 col-sm-5 col-md-2" style="padding: 4px 15px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<label for="app_money" class="sr-only">청약금</label>
+						<input type="text" class="form-control input-sm" name="app_money" value="<?php if( !empty($app_data) && $app_data->app_money!=0) echo $app_data->app_money; else echo set_value('app_money'); ?>" <?php echo $disabled; ?>>
+					</div>
+				</div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">입금 계정 <span class="red">*</span></div>
+				<div class="col-xs-3 col-sm-4 col-md-2" style="padding: 4px 15px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<label for="app_acc" class="sr-only">입금계정</label>
+						<select class="form-control input-sm" name="app_acc" <?php echo $disabled; ?>>
+							<option value="">입금계좌</option>
+<?php foreach ($dep_acc as $lt) : ?>
+							<option value="<?php echo $lt->seq ?>" <?php if($lt->seq==$app_data->app_acc) echo "selected"; ?>><?php echo $lt->acc_nick; ?></option>
+<?php endforeach; ?>
+						</select>
 					</div>
 				</div>
 			</div>
@@ -242,6 +262,11 @@
 	elseif($this->input->get('cont_sort3')==4) : $conclu_date_label = "계약해지일자";
 	else : $conclu_date_label = "청약일자";
 	endif;
+
+	if(empty($app_data) && empty($cont_data2)) : $conclu_date = set_value('conclu_date');
+	elseif( !empty($app_data)) : $conclu_date = $app_data->app_date;
+	else : $conclu_date = $cont_data2->initial_cont_date;
+	endif;
 ?>
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0"><?php echo $conclu_date_label; ?> <span class="red">*</span></div>
@@ -249,38 +274,38 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="conclu_date" class="sr-only">체결일자</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="conclu_date" id="conclu_date" class="form-control input-sm" value="" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="conclu_date" id="conclu_date" class="form-control input-sm" value="<?php echo $conclu_date; ?>" onclick="cal_add(this); event.cancelBubble=true"  readonly>
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
 							<a href="javascript:" onclick="cal_add(document.getElementById('conclu_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
 						</div>
 					</div>
 				</div>
-
-
+<?php
+	if(empty($app_data)) : $due_date = set_value('due_date');
+	else : $due_date = $app_data->due_date;
+	endif;
+?>
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub <?php if(!((( !$this->input->get('cont_sort2') && !$this->input->get('cont_sort3')) OR ($this->input->get('cont_sort2')!=2 && $this->input->get('cont_sort3')!=4)))) echo 'hidden-xs hidden-sm'; ?>" style="padding: 10px; 0">
 					<?php if(( !$this->input->get('cont_sort2') && !$this->input->get('cont_sort3')) OR ($this->input->get('cont_sort2')!=2 && $this->input->get('cont_sort3')!=4)) {?>계약 예정일<?php } ?>&nbsp;
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2 <?php if(!((( !$this->input->get('cont_sort2') && !$this->input->get('cont_sort3')) OR ($this->input->get('cont_sort2')!=2 && $this->input->get('cont_sort3')!=4)))) echo 'hidden-xs hidden-sm'; ?>" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 <?php if(( !$this->input->get('cont_sort2') && !$this->input->get('cont_sort3')) OR ($this->input->get('cont_sort2')!=2 && $this->input->get('cont_sort3')!=4)) :?>
-						<label for="cont_due_date" class="sr-only">계약 예정일</label>
+						<label for="due_date" class="sr-only">계약 예정일</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_due_date" id="cont_due_date" class="form-control input-sm" value="" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="due_date" id="due_date" class="form-control input-sm" value="<?php echo $due_date; ?>" onclick="cal_add(this); event.cancelBubble=true"  readonly>
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
-							<a href="javascript:" onclick="cal_add(document.getElementById('cont_due_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+							<a href="javascript:" onclick="cal_add(document.getElementById('due_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
 						</div>
 <?php endif; ?>
 					</div>
 				</div>
-
-<!-- 청약시 는 계약 예정일 -->
-
-
-
-
 			</div>
+
+
+
 <?php if($this->input->get('cont_sort2')=="2" OR $this->input->get('cont_sort3')==4) : // 계약 등록 시 ?>
 
 			<div class="row bo-bottom font12" style="margin: 0;">
@@ -288,14 +313,14 @@
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="deposit_1" class="sr-only">계약금[1]</label>
-						<input type="text" class="form-control input-sm" name="deposit_1" value="">
+						<input type="text" class="form-control input-sm" name="deposit_1" value="" <?php echo $disabled; ?>>
 					</div>
 				</div>
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">입금 계정 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="dep_acc_1" class="sr-only">계약금입금계정1</label>
-						<select class="form-control input-sm" name="dep_acc_1">
+						<select class="form-control input-sm" name="dep_acc_1" <?php echo $disabled; ?>>
 							<option value=""> 선 택</option>
 <?php foreach ($dep_acc as $lt) : ?>
 							<option value="<?php echo $lt->seq ?>"><?php echo $lt->acc_nick; ?></option>
@@ -309,14 +334,14 @@
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="deposit_2" class="sr-only">계약금[2]</label>
-						<input type="text" class="form-control input-sm" name="deposit_2" value="">
+						<input type="text" class="form-control input-sm" name="deposit_2" value="" <?php echo $disabled; ?>>
 					</div>
 				</div>
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">입금 계정 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="dep_acc_2" class="sr-only">계약금입금계정2</label>
-						<select class="form-control input-sm" name="dep_acc_2">
+						<select class="form-control input-sm" name="dep_acc_2" <?php echo $disabled; ?>>
 							<option value=""> 선 택</option>
 <?php foreach ($dep_acc as $lt) : ?>
 							<option value="<?php echo $lt->seq ?>"><?php echo $lt->acc_nick; ?></option>
@@ -345,7 +370,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-4" style="padding-right: 0;">
 							<label for="address2" class="sr-only">계약자주소2</label>
-							<input type="text" class="form-control input-sm han" id="address2" name="address2" style="margin: 4px 0;" maxlength="93" value="<?php if($this->input->post('address2')) echo set_value('address2'); //else echo $addr[2]; ?>" placeholder="나머지 주소">
+							<input type="text" class="form-control input-sm han" id="address2" name="address2" style="margin: 4px 0;" maxlength="93" value="<?php if($this->input->post('address2')) echo set_value('address2'); //else echo $addr[2]; ?>" placeholder="나머지 주소" <?php echo $disabled; ?>>
 						</div>
 					</div>
 				</div>
@@ -371,7 +396,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-4" style="padding-right: 0;">
 							<label for="address2_" class="sr-only">계약자주소22</label>
-							<input type="text" class="form-control input-sm han" id="address2_" name="address2_"  style="margin: 4px 0;" maxlength="93" value="<?php if($this->input->post('address2_')) echo set_value('address2_'); //else echo $addr[2]; ?>" placeholder="나머지 주소">
+							<input type="text" class="form-control input-sm han" id="address2_" name="address2_"  style="margin: 4px 0;" maxlength="93" value="<?php if($this->input->post('address2_')) echo set_value('address2_'); //else echo $addr[2]; ?>" placeholder="나머지 주소" <?php echo $disabled; ?>>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-2 checkbox" style="margin: 0; padding: 9px;">
 							<label><input type="checkbox" name="sa_addr" onclick="same_addr();"> 위와 같음</label>
@@ -385,14 +410,14 @@
 					<div class="" style="height: 30px;">&nbsp;</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px;">
-					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_1" value="1">계약서[각서9종]</label></div>
-					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_2" value="1"> 주민등본</label></div>
-					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_3" value="1"> 주민초본</label></div>
-					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_4" value="1"> 가족관계증명</label></div>
-					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_5" value="1"> 인감증명</label></div>
-					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_6" value="1"> 사용인감</label></div>
-					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_7" value="1"> 신분증</label></div>
-					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_8" value="1"> 배우자등본</label></div>
+					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_1" value="1" <?php echo $disabled; ?>>계약서[각서9종]</label></div>
+					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_2" value="1" <?php echo $disabled; ?>> 주민등본</label></div>
+					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_3" value="1" <?php echo $disabled; ?>> 주민초본</label></div>
+					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_4" value="1" <?php echo $disabled; ?>> 가족관계증명</label></div>
+					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_5" value="1" <?php echo $disabled; ?>> 인감증명</label></div>
+					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_6" value="1" <?php echo $disabled; ?>> 사용인감</label></div>
+					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_7" value="1" <?php echo $disabled; ?>> 신분증</label></div>
+					<div class="col-xs-6 col-sm-3 col-md-2 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_8" value="1" <?php echo $disabled; ?>> 배우자등본</label></div>
 				</div>
 			</div>
 <?php endif; ?>
@@ -401,7 +426,7 @@
 				<div class="col-xs-8 col-sm-9 col-md-6" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="note" class="sr-only">타입</label>
-						<textarea class="form-control input-sm" id="note" name="note"  rows="3"><?php echo $this->input->post('incom_doc_1')."-".$this->input->post('incom_doc_2')."-".$this->input->post('incom_doc_3')."-".$this->input->post('incom_doc_4')."-".$this->input->post('incom_doc_5')."-".$this->input->post('incom_doc_6')."-".$this->input->post('incom_doc_7')."-".$this->input->post('incom_doc_8'); ?></textarea>
+						<textarea class="form-control input-sm" id="note" name="note"  rows="3" <?php echo $disabled; ?>></textarea>
 					</div>
 				</div>
 			</div>
@@ -409,5 +434,5 @@
 
 <?php if($auth<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="cont_check();";} ?>
 		<div class="form-group btn-wrap" style="margin: <?php echo $mg = ((( !$this->input->get('cont_sort2') && !$this->input->get('cont_sort3')) OR ($this->input->get('cont_sort2')!=2 && $this->input->get('cont_sort3')!=4)))? '130px' :' 30px'; ?> 0 0 0;">
-			<input type="button" class="btn btn-primary btn-sm" onclick="document.form1.submit();<?//=$submit_str?>" value="등록 하기">
+			<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str?>" value="등록 하기">
 		</div>

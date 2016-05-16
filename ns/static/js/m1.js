@@ -31,7 +31,7 @@ function coun_log_sub(mode){
 	if(mode=='reg') var msg = '신규등록';
 	if(mode=='modify') var msg = '추가등록';
 
-	if(confirm("상담내용을 "+msg+" 하시겠습니까?")==true){
+	if(confirm("상담내용을 "+msg+" 하시겠습니까?")===true){
 		form.submit();
 	}else{
 		return;
@@ -210,7 +210,7 @@ function work_log_sub(is_com, str){
 		form.n_sale_plan.focus();
 		return;
 	}
-	if(confirm("등록 후 작성일자 익일까지만 수정 가능합니다.\n\n["+date+"] 업무일지를 "+str+" 하시겠습니까?")==true) form.submit(); else return;
+	if(confirm("등록 후 작성일자 익일까지만 수정 가능합니다.\n\n["+date+"] 업무일지를 "+str+" 하시겠습니까?")===true) form.submit(); else return;
 }
 /********************업무일지 등록 종료*******************/
 
@@ -228,21 +228,16 @@ function cont_check(){
 		form1.project.focus();
 		return;
 	}
-	if( !form1.diff_no.value || form1.diff_no.value===''){
-		alert('차수구분을 선택하여 주십시요!');
-		form1.diff_no.focus();
-		return;
-	}
 	if(form1.cont_sort1[0].checked==1){ // 계약 진행시
 		if(!form1.cont_sort2.value){
-			alert('거래구분을 선택하여 주십시요!');
+			alert('세부 등록 구분을 선택하여 주십시요!');
 			form1.cont_sort2.focus();
 			return;
 		}
 	}
 	if(form1.cont_sort1[1].checked==1){ // 해지 진행시
 		if(!form1.cont_sort3.value){
-			alert('거래구분을 선택하여 주십시요!');
+			alert('세부 등록 구분을 선택하여 주십시요!');
 			form1.cont_sort3.focus();
 			return;
 		}
@@ -262,19 +257,14 @@ function cont_check(){
 		form1.ho.focus();
 		return;
 	}
-	if(form1.con_no&&!form1.con_no.value){
-		alert('계약관리번호를 선택하여 주십시요!');
-		form1.con_no.focus();
+	if( !form2.diff_no.value || form2.diff_no.value===''){
+		alert('차수구분을 선택하여 주십시요!');
+		form2.diff_no.focus();
 		return;
 	}
-	if(!form1.cont_sort3&&!form2.cust_name.value){
+	if(!form1.cont_sort3&&!form2.custom_name.value){
 		alert('계약 고객명을 입력하여 주십시요!');
-		form2.cust_name.focus();
-		return;
-	}
-	if(!form1.cont_sort3&&!form2.cont_date.value){
-		alert('거래일자를 입력하여 주십시요!');
-		form2.cont_date.focus();
+		form2.custom_name.focus();
 		return;
 	}
 	if(!form1.cont_sort3&&!form2.tel_1.value){
@@ -282,50 +272,46 @@ function cont_check(){
 		form2.tel_1.focus();
 		return;
 	}
-
-	if(!form1.cont_sort3&&form1.cont_sort2.value==1){
-		if(form2.due_date.value=='0000-00-00'){
-			alert('계약 예정일을 입력하여 주십시요!');
-			form2.due_date.focus();
+	if(!form1.cont_sort3&&!form2.app_money.value){
+		alert('청약금을 입력하여 주십시요!');
+		form2.app_money.focus();
+		return;
+	}
+	if(!form1.cont_sort3&&!form2.app_acc.value){
+		alert('청약금 입금 계좌를 선택하여 주십시요!');
+		form2.app_acc.focus();
+		return;
+	}
+	if(!form1.cont_sort3&&!form2.conclu_date.value){
+		alert('거래일자를 입력하여 주십시요!');
+		form2.conclu_date.focus();
+		return;
+	}
+	// if(!form1.cont_sort3&&form1.cont_sort2.value==1){
+	// 	if(form2.due_date.value=='0000-00-00'){
+	// 		alert('계약 예정일을 입력하여 주십시요!');
+	// 		form2.due_date.focus();
+	// 		return;
+	// 	}
+	// }
+	//
+	if(form1.cont_sort2){
+		if(form1.cont_sort2.value=='1') var cont_sort = "청약(가계약)";
+		if(form1.cont_sort2.value=='2') var cont_sort = "계약(정계약)";
+	}else if(form1.cont_sort3){
+		if(form1.cont_sort3.value=='3') var cont_sort = "청약 해지";
+		if(form1.cont_sort3.value=='4') var cont_sort = "계약 해지";
+	}
+	if(form2.dong&&form2.ho){
+		var conf_str = '거래 구분 : '+cont_sort+'\n계약 고객 : '+form2.custom_name.value+'\n거래 일자 : '+form2.conclu_date.value+'\n해당 호수 : '+form2.dong.value+'동 '+form2.ho.value+'호\n\n상기 내용을 등록 하시겠습니까?';
+		if(confirm(conf_str)===true){
+			form2.submit();
+		}else{
 			return;
 		}
 	}
-	/*
-	if(!form2.headq.value){
-		alert('담당직원의 소속본부를 선택하여 주십시요!');
-		form2.headq.focus();
-		return;
-	}
-	if(!form2.team.value){
-		alert('담당직원의 소속팀을 선택하여 주십시요!');
-		form2.team.focus();
-		return;
-	}
-	*/
-	if(!form1.cont_sort3&&!form2.worker.value){
-		alert('담당직원의 이름을 입력하여 주십시요!');
-		form2.worker.focus();
-		return;
-	}
-	if(form1.cont_sort2){
-		if(form1.cont_sort2.value==1) var cont_sort = "청약(가계약)";
-		if(form1.cont_sort2.value==2) var cont_sort = "계약(정계약)";
-	}else if(form1.cont_sort3){
-		if(form1.cont_sort3.value==3) var cont_sort = "청약 해지";
-		if(form1.cont_sort3.value==4) var cont_sort = "계약 해지";
-	}
-	if(form1.dong&&form1.ho){
-		var conf_str = '거래 구분 : '+cont_sort+'\n계약 고객 : '+form2.cust_name.value+'\n거래 일자 : '+form2.cont_date.value+'\n해당 호수 : '+form1.dong.value+'동 '+form1.ho.value+'호\n\n상기 내용을 등록 하시겠습니까?';
-	}else if(form1.con_no){
-		var conf_str = '거래 구분 : '+cont_sort+'\n계약 고객 : '+form2.cust_name.value+'\n거래 일자 : '+form2.cont_date.value+'\n계약관리번호 : '+form1.con_no.value+'\n\n상기 내용을 등록 하시겠습니까?';
-	}
-
-	if(confirm(conf_str)==true){
-		form2.submit();
-	}else{
-		return;
-	}
 }
+
 function cont_sort(no){
 	var form = document.form1;
 	if(no=='1') form.cont_sort3.options[0].selected =true;
@@ -359,22 +345,22 @@ function same_addr(){
 
 function frm_view(){
 	var form = document.form1;
-	if(form.de_2c.checked==true){document.getElementById("de_2").style.display = "block";}else{document.getElementById("de_2").style.display = "none";}
-	if(form.de_3c.checked==true){document.getElementById("de_3").style.display = "block";}else{document.getElementById("de_3").style.display = "none";}
-	if(form.de_4c.checked==true){document.getElementById("de_4").style.display = "block";}else{document.getElementById("de_4").style.display = "none";}
-	if(form.mp_1c.checked==true){document.getElementById("mp_1").style.display = "block";}else{document.getElementById("mp_1").style.display = "none";}
-	if(form.mp_2c.checked==true){document.getElementById("mp_2").style.display = "block";}else{document.getElementById("mp_2").style.display = "none";}
-	if(form.mp_3c.checked==true){document.getElementById("mp_3").style.display = "block";}else{document.getElementById("mp_3").style.display = "none";}
-	if(form.mp_4c.checked==true){document.getElementById("mp_4").style.display = "block";}else{document.getElementById("mp_4").style.display = "none";}
-	if(form.mp_5c.checked==true){document.getElementById("mp_5").style.display = "block";}else{document.getElementById("mp_5").style.display = "none";}
-	if(form.mp_6c.checked==true){document.getElementById("mp_6").style.display = "block";}else{document.getElementById("mp_6").style.display = "none";}
-	if(form.mp_7c.checked==true){document.getElementById("mp_7").style.display = "block";}else{document.getElementById("mp_7").style.display = "none";}
-	if(form.lp_c.checked==true){document.getElementById("lp").style.display = "block";}else{document.getElementById("lp").style.display = "none";}
+	if(form.de_2c.checked===true){document.getElementById("de_2").style.display = "block";}else{document.getElementById("de_2").style.display = "none";}
+	if(form.de_3c.checked===true){document.getElementById("de_3").style.display = "block";}else{document.getElementById("de_3").style.display = "none";}
+	if(form.de_4c.checked===true){document.getElementById("de_4").style.display = "block";}else{document.getElementById("de_4").style.display = "none";}
+	if(form.mp_1c.checked===true){document.getElementById("mp_1").style.display = "block";}else{document.getElementById("mp_1").style.display = "none";}
+	if(form.mp_2c.checked===true){document.getElementById("mp_2").style.display = "block";}else{document.getElementById("mp_2").style.display = "none";}
+	if(form.mp_3c.checked===true){document.getElementById("mp_3").style.display = "block";}else{document.getElementById("mp_3").style.display = "none";}
+	if(form.mp_4c.checked===true){document.getElementById("mp_4").style.display = "block";}else{document.getElementById("mp_4").style.display = "none";}
+	if(form.mp_5c.checked===true){document.getElementById("mp_5").style.display = "block";}else{document.getElementById("mp_5").style.display = "none";}
+	if(form.mp_6c.checked===true){document.getElementById("mp_6").style.display = "block";}else{document.getElementById("mp_6").style.display = "none";}
+	if(form.mp_7c.checked===true){document.getElementById("mp_7").style.display = "block";}else{document.getElementById("mp_7").style.display = "none";}
+	if(form.lp_c.checked===true){document.getElementById("lp").style.display = "block";}else{document.getElementById("lp").style.display = "none";}
 }
 
 function dong_ho_put(){
 	var form = document.form1;
-	if(form.dongho_put.checked==true){
+	if(form.dongho_put.checked===true){
 		document.getElementById("dong").style.display = "block";
 		document.getElementById("ho").style.display = "block";
 	}else{
