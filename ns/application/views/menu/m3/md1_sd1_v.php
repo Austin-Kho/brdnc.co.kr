@@ -301,8 +301,8 @@
 								</div>
 							</div>
 							<div class="col-xs-12 col-sm-4 col-md-3" style="height: 40px; padding: 10px 5px;">동호 별 : (
-								<label class="radio-inline"><input type="radio" name="dong_ho_sc1" id="dong_ho_sc1" value="1" <?php if($this->input->get('dong_sc')=="1") echo "checked"; ?> onclick="order_chk(this, '2');">오름차순</label>
-								<label class="radio-inline"><input type="radio" name="dong_ho_sc1" id="dong_ho_sc2" value="2" <?php if($this->input->get('dong_sc')=="2") echo "checked"; ?> onclick="order_chk(this, '2');">내림차순</label> )
+								<label class="radio-inline"><input type="radio" name="dong_ho_sc1" id="dong_ho_sc1" value="1" <?php if($this->input->get('dong_ho_sc1')=="1") echo "checked"; ?> onclick="order_chk(this, '2');">오름차순</label>
+								<label class="radio-inline"><input type="radio" name="dong_ho_sc1" id="dong_ho_sc2" value="2" <?php if($this->input->get('dong_ho_sc1')=="2") echo "checked"; ?> onclick="order_chk(this, '2');">내림차순</label> )
 							</div>
 							<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 0 0 0 5px;">
 								<div class="checkbox" style="margin: 0; padding-top: 10px;">
