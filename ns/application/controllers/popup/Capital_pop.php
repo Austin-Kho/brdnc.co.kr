@@ -51,6 +51,7 @@ class Capital_pop extends CI_Controller
 		$this->form_validation->set_rules('cont', '적요', 'trim|required');
 		$this->form_validation->set_rules('inc', '입금금액', 'trim|numeric');
 		$this->form_validation->set_rules('exp', '출금금액', 'trim|numeric');
+		$this->form_validation->set_rules('note', '비고', 'trim|max_length[200]');
 
 		if($this->form_validation->run()==FALSE) {
 			//본 페이지 로딩

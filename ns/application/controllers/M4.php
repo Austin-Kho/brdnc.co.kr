@@ -507,6 +507,19 @@ class M4 extends CI_Controller {
 					// 증빙서류
 					$evi = array($this->input->post('evi_1', TRUE), $this->input->post('evi_2', TRUE), $this->input->post('evi_3', TRUE), $this->input->post('evi_4', TRUE), $this->input->post('evi_5', TRUE), $this->input->post('evi_6', TRUE), $this->input->post('evi_7', TRUE), $this->input->post('evi_8', TRUE), $this->input->post('evi_9', TRUE), $this->input->post('evi_10', TRUE));
 
+					// 비고
+					$note = array(
+						$this->input->post('note_1', TRUE),
+						$this->input->post('note_2', TRUE),
+						$this->input->post('note_3', TRUE),
+						$this->input->post('note_4', TRUE),
+						$this->input->post('note_5', TRUE),
+						$this->input->post('note_6', TRUE),
+						$this->input->post('note_7', TRUE),
+						$this->input->post('note_8', TRUE),
+						$this->input->post('note_9', TRUE),
+						$this->input->post('note_10', TRUE)
+					);
 					// 수수료 체크 여부 확인
 					$char1 = array($this->input->post('char1_1', TRUE), $this->input->post('char1_2', TRUE), $this->input->post('char1_3', TRUE), $this->input->post('char1_4', TRUE), $this->input->post('char1_5', TRUE), $this->input->post('char1_6', TRUE), $this->input->post('char1_7', TRUE), $this->input->post('char1_8', TRUE), $this->input->post('char1_9', TRUE), $this->input->post('char1_10', TRUE));
 
@@ -558,6 +571,7 @@ class M4 extends CI_Controller {
 								'out_acc' => $out1[$i],
 								'exp' => $exp[$i],
 								'evidence' => $evi[$i],
+								'note' => $note[$i],
 								'worker' => $worker,
 								'deal_date' => $deal_date
 							);
