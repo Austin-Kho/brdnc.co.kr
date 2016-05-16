@@ -37,11 +37,11 @@
 						<thead class="bo-top">
 							<tr style="background-color: #EAEAEA;">
 								<th style="20px" class="center"><input type="checkbox" disabled></td>
-								<th style="120px" class="center">구 분 <font color="red">*</font></td>
+								<th style="100px" class="center">구 분 <font color="red">*</font></td>
 								<th style="55px" class="center">현 장 <font color="red">*</font></td>
 								<th style="55px" class="center">조합대여</td>
 								<th style="75px" class="center">계정과목 <font color="red">*</font> <a href="javascript:" onclick="popUp_size('/os/_menu3/account_m.php','account',700,800)" title="계정과목 관리"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td>
-								<th style="120px" class="center">적 요 <font color="red">*</font></td>
+								<th style="100px" class="center">적 요 <font color="red">*</font></td>
 								<th style="70px" class="center">거 래 처</td>
 								<th style="60px" class="center">입금처 <font color="red">*</font> <a href="javascript:" onclick="popUp('/os/_menu3/acc_list.php?fn=1&amp;frm=out_stock_frm','bank_acc')" title="은행계좌 관리"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td>
 								<th style="50px" class="center">입금금액 <font color="red">*</font></td>
@@ -49,7 +49,7 @@
 								<th style="50px" class="center">출금금액 <font color="red">*</font></td>
 								<th style="110px" class="center">이체수수료 <font color="red">*</font></td>
 								<th style="70px" class="center">증빙서류 <font color="red">*</font></td>
-								<th style="80px" class="center">비 고 <font color="red">*</font></td>
+								<th style="100px" class="center">비 고 <font color="red">*</font></td>
 							</tr>
 						</thead>
 						<tbody>
