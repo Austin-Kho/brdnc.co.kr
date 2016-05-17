@@ -136,9 +136,9 @@
 			<input type="hidden" name="cont_sort1" value="<?php echo $this->input->get('cont_sort1'); ?>"><!-- 계약(1) 해지(2) 여부 -->
 			<input type="hidden" name="cont_sort2" value="<?php echo $this->input->get('cont_sort2'); ?>"><!-- 청약(1) 계약(2) 여부 -->
 			<input type="hidden" name="cont_sort3" value="<?php echo $this->input->get('cont_sort3'); ?>"><!-- 청약해지(1) 계약해지(2) 여부 -->
-<?php $unit_seq = ( !empty($unit_seq)) ? $$unit_seq->seq : ""; ?>
+<?php $unit_seq = ( !empty($unit_seq)) ? $unit_seq->seq : ""; ?>
 			<input type="hidden" name="unit_seq" value="<?php echo $unit_seq; ?>">
-<?php $unit_dong_ho = ( !empty($unit_dong_ho)) ? $unit_dong_ho : ""; ?>			
+<?php $unit_dong_ho = ( !empty($unit_dong_ho)) ? $unit_dong_ho : ""; ?>
 			<input type="hidden" name="unit_dong_ho" value="<?php echo $unit_dong_ho; ?>">
 			<input type="hidden" name="type" value="<?php echo $this->input->get('type'); ?>">
 			<input type="hidden" name="dong" value="<?php echo $this->input->get('dong'); ?>">
