@@ -311,7 +311,7 @@
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_code" class="sr-only">계약 일련번호</label>
-						<input type="text" class="form-control input-sm" name="cont_code" value="" <?php echo $disabled; ?>">
+						<input type="text" class="form-control input-sm" name="cont_code" value="" <?php echo $disabled; ?>>
 					</div>
 				</div>
 <?php endif; ?>
