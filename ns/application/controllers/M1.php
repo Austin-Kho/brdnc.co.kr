@@ -222,7 +222,6 @@ class M1 extends CI_Controller {
 							$app_put = array_merge($app_arr, $add_arr);
 							$where = array('pj_seq'=>$project, 'unit_type' =>$this->input->post('type'), 'unit_ding_ho'=>$dongho);
 							$result = $this->main_m->update_data('cms_sales_application', $app_put, $where); // 청약관리 테이블 데이터 입력
-
 							if( !$result){
 								alert('데이터베이스 에러입니다.', base_url(uri_string()));
 							}

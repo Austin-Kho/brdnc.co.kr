@@ -252,7 +252,7 @@
 						<select class="form-control input-sm" name="app_acc" <?php echo $disabled; ?> <?php echo $disabled; if($this->input->get('cont_sort2')==2 OR $this->input->get('cont_sort2')==4) echo "readonly"; ?>>
 							<option value="">입금계좌</option>
 <?php foreach ($dep_acc as $lt) : ?>
-							<option value="<?php echo $lt->seq ?>" <?php if($lt->seq==$app_data->app_acc) echo "selected"; ?>><?php echo $lt->acc_nick; ?></option>
+							<option value="<?php echo $lt->seq ?>" <?php if( !empty($app_data)){ if($lt->seq==$app_data->app_acc) echo "selected"; } ?>><?php echo $lt->acc_nick; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
