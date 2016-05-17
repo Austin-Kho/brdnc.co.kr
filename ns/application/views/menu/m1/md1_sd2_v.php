@@ -85,7 +85,7 @@
 						<label for="type" class="sr-only">타입</label>
 						<select class="form-control input-sm" name="type" onchange="submit();">
 							<option value=""> 선 택</option>
-<?php foreach($type as $lt) : ?>
+<?php foreach($type_list as $lt) : ?>
 							<option value="<?php echo $lt->type; ?>" <?php if($lt->type==$this->input->get('type')) echo "selected"; ?>><?php echo $lt->type; ?></option>
 <?php endforeach; ?>
 						</select>
@@ -97,7 +97,7 @@
 						<label for="dong" class="sr-only">동</label>
 						<select class="form-control input-sm" name="dong" onchange="submit();">
 							<option value=""> 선 택</option>
-<?php foreach($dong as $lt) : ?>
+<?php foreach($dong_list as $lt) : ?>
 							<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->get('dong')) echo "selected"; ?>><?php echo $lt->dong; ?></option>
 <?php endforeach; ?>
 						</select>
@@ -110,7 +110,7 @@
 						<label for="ho" class="sr-only">호수</label>
 						<select class="form-control input-sm" name="ho" onchange="submit();" <?php if( !$this->input->get('dong')) echo "disabled"; ?>>
 							<option value=""> 선 택</option>
-<?php foreach($ho as $lt) : ?>
+<?php foreach($ho_list as $lt) : ?>
 							<option value="<?php echo $lt->ho; ?>" <?php if($lt->ho==$this->input->get('ho')) echo "selected"; ?>><?php echo $lt->ho; ?></option>
 <?php endforeach; ?>
 						</select>
@@ -129,14 +129,17 @@
 
 		<!-- ===================계약내용 기록 시작================== -->
 		<form method="post" name="form1" action="<?php echo current_url(); ?>">
+
 			<input type="hidden" name="mode" value="<?php if( !empty($is_reg)) echo '2'; else echo '1'; ?>">
+
 			<input type="hidden" name="project" value="<?php echo $this->input->get('project'); ?>">
-			<input type="hidden" name="diff_no" value="<?php echo $this->input->get('diff_no'); ?>">
 			<input type="hidden" name="cont_sort1" value="<?php echo $this->input->get('cont_sort1'); ?>"><!-- 계약(1) 해지(2) 여부 -->
 			<input type="hidden" name="cont_sort2" value="<?php echo $this->input->get('cont_sort2'); ?>"><!-- 청약(1) 계약(2) 여부 -->
 			<input type="hidden" name="cont_sort3" value="<?php echo $this->input->get('cont_sort3'); ?>"><!-- 청약해지(1) 계약해지(2) 여부 -->
-<?php $unit_seq = (!empty($is_reg)) ? $is_reg->seq : ''; ?>
+<?php $unit_seq = ( !empty($unit_seq)) ? $$unit_seq->seq : ""; ?>
 			<input type="hidden" name="unit_seq" value="<?php echo $unit_seq; ?>">
+<?php $unit_dong_ho = ( !empty($unit_dong_ho)) ? $unit_dong_ho : ""; ?>			
+			<input type="hidden" name="unit_dong_ho" value="<?php echo $unit_dong_ho; ?>">
 			<input type="hidden" name="type" value="<?php echo $this->input->get('type'); ?>">
 			<input type="hidden" name="dong" value="<?php echo $this->input->get('dong'); ?>">
 			<input type="hidden" name="ho" value="<?php echo $this->input->get('ho'); ?>">
@@ -161,13 +164,15 @@
 <?php if($this->input->get('cont_sort2')=="2") : // 계약 등록 시 ?>
 			<div class="row bo-top font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="height: 60px; padding: 10px; 0">청약 내역 <span class="red">*</span></div>
-				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
+				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe; background-color: #f8f9cc;">
 <?php if( !empty($app_data)) :  ?>
 					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">일자 : <?php echo $app_data->app_date; ?></div>
-					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">입금 : <?php echo $app_data->app_money; ?></div>
-					<div class="col-xs-6 col-sm-4 col-md-3" style="padding: 4px 0px;">계좌 : <?php echo $app_data->app_acc; ?></div>
+					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">입금 : <?php echo number_format($app_data->app_money)." 원"; ?></div>
+					<div class="col-xs-6 col-sm-4 col-md-3" style="padding: 4px 0px;">계좌 : <?php if( !empty($dep_acc[($app_data->app_acc-1)]->acc_nick)) echo $dep_acc[($app_data->app_acc-1)]->acc_nick; ?></div>
+					<div class="col-xs-12 hidden-xs" style="padding: 4px 0px;">&nbsp;</div>
 <?php else : ?>
-					<div class="col-xs-12" style="padding: 4px 0px;">등록된 청약 데이터 없습니다. 신규 계약 정보를 입력하세요.</div>
+					<div class="col-xs-12" style="padding: 8px 0px;">등록된 청약 데이터 없습니다. 신규 계약 정보를 입력하세요.</div>
+					<div class="col-xs-12 hidden-xs" style="padding: 1px;">&nbsp;</div>
 <?php endif; ?>
 				</div>
 			</div>
@@ -189,7 +194,7 @@
 						<select class="form-control input-sm" name="diff_no" <?php echo $disabled; ?>>
 							<option value=""> 선 택</option>
 <?php foreach($diff_no as $lt) : ?>
-							<option value="<?php echo $lt->diff_no; ?>" <?php if($app_data->app_diff==$lt->diff_no) echo "selected"; ?>><?php echo $lt->diff_name; ?></option>
+							<option value="<?php echo $lt->diff_no; ?>" <?php if( !empty($app_data->app_diff)) { if($app_data->app_diff==$lt->diff_no) echo "selected"; } ?>><?php echo $lt->diff_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -237,14 +242,14 @@
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="app_money" class="sr-only">청약금</label>
-						<input type="text" class="form-control input-sm" name="app_money" value="<?php if( !empty($app_data) && $app_data->app_money!=0) echo $app_data->app_money; else echo set_value('app_money'); ?>" <?php echo $disabled; ?>>
+						<input type="text" class="form-control input-sm" name="app_money" value="<?php if( !empty($app_data) && $app_data->app_money!=0) echo $app_data->app_money; else echo set_value('app_money'); ?>" <?php echo $disabled; if($this->input->get('cont_sort2')==2 OR $this->input->get('cont_sort2')==4) echo "readonly"; ?>>
 					</div>
 				</div>
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">입금 계정 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="app_acc" class="sr-only">입금계정</label>
-						<select class="form-control input-sm" name="app_acc" <?php echo $disabled; ?>>
+						<select class="form-control input-sm" name="app_acc" <?php echo $disabled; ?> <?php echo $disabled; if($this->input->get('cont_sort2')==2 OR $this->input->get('cont_sort2')==4) echo "readonly"; ?>>
 							<option value="">입금계좌</option>
 <?php foreach ($dep_acc as $lt) : ?>
 							<option value="<?php echo $lt->seq ?>" <?php if($lt->seq==$app_data->app_acc) echo "selected"; ?>><?php echo $lt->acc_nick; ?></option>
@@ -306,7 +311,7 @@
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_code" class="sr-only">계약 일련번호</label>
-						<input type="text" class="form-control input-sm" name="cont_code" value="" <?php echo $disabled; ?>>
+						<input type="text" class="form-control input-sm" name="cont_code" value="" <?php echo $disabled; ?>">
 					</div>
 				</div>
 <?php endif; ?>
