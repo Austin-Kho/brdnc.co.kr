@@ -139,17 +139,17 @@ class M1 extends CI_Controller {
 
 				// 청약 또는 계약 체결된 동호수인지 확인
 				if($now_ho){
-					$dongho = $data['unit_dong_ho'] = $now_dong."-".$now_ho; // 동호(1005-2012 형식)
+					$dongho = $data['unit_dong_ho'] = $now_dong."-".$now_ho; // 동호(1005-2002 형식)
 
 					//  등록할 동호수 유닛 데이터
-					$unit_seq = $data['unit_seq'] =  $this->main_m->sql_row(" SELECT seq, dong, ho, is_application, is_contract FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND type='$now_type' AND dong='$now_dong' AND ho='$now_ho' ");
+					$unit_seq = $data['unit_seq'] =  $this->main_m->sql_row(" SELECT * FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND type='$now_type' AND dong='$now_dong' AND ho='$now_ho' ");
 
 					// 청약 또는 계약 유닛인지 확인
 					if($unit_seq->is_application=='1') { // 청약 물건이면
-						$app_data = $data['app_data'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_application WHERE pj_seq='$project' AND disposal_div='0' AND unit_type='$now_type' AND unit_dong_ho='$dongho' "); // 청약 데이터
+						$app_data = $data['is_reg']['app_data'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_application WHERE pj_seq='$project' AND disposal_div='0' AND unit_type='$now_type' AND unit_dong_ho='$dongho' "); // 청약 데이터
 					}else if($unit_seq->is_contract=='1'){ // 계약 물건이면
-						$cont_data1 = $data['cont_data1'] = $this->main_m->sql_row("  SELECT * FROM cms_sales_contract WHERE pj_seq='$project' AND type='$now_type' AND unit_dong_ho='$dongho' "); // 계약 데이터
-						$cont_data2 = $data['cont_data2'] = $this->main_m->sql_row("  SELECT * FROM cms_sales_contractor WHERE pj_seq='$project' AND type='$now_type' AND cont_dong_ho='$dongho' "); // 계약자 데이터
+						$cont_data1 = $data['is_reg']['cont_data1'] = $this->main_m->sql_row("  SELECT * FROM cms_sales_contract WHERE pj_seq='$project' AND type='$now_type' AND unit_dong_ho='$dongho' "); // 계약 데이터
+						$cont_data2 = $data['is_reg']['cont_data2'] = $this->main_m->sql_row("  SELECT * FROM cms_sales_contractor WHERE pj_seq='$project' AND type='$now_type' AND cont_dong_ho='$dongho' "); // 계약자 데이터
 					}
 				}
 
@@ -205,7 +205,7 @@ class M1 extends CI_Controller {
 							'due_date' => $this->input->post('due_date', TRUE),
 							'note' => $this->input->post('note', TRUE)
 						);
-						if($this->input->post('mode')=='1' && empty($app_data)){ // 신규 청약 등록 일 때
+						if($this->input->post('mode')=='1'){ // 신규 청약 등록 일 때
 							$add_arr = array('ini_reg_worker' => $this->session->userdata('name'));
 							$app_put = array_merge($app_arr, $add_arr);
 							$result = $this->main_m->insert_data('cms_sales_application', $app_put, 'ini_reg_date'); // 청약관리 테이블 데이터 입력
@@ -217,16 +217,16 @@ class M1 extends CI_Controller {
 								$result2 = $this->main_m->update_data('cms_project_all_housing_unit', array('is_application'=>'1'), $where); // 동호수 테이블 청약상태로 변경
 								if( !$result2) alert('데이터베이스 에러입니다.', base_url(uri_string()));
 							}
-						}else if($this->input->post('mode')=='2' && !empty($app_data)){ // 기존 청약정보 수정일 때
+						}else if($this->input->post('mode')=='2'){ // 기존 청약정보 수정일 때
 							$add_arr = array('last_modi_date' => date('Y-m-d'), 'last_modi_worker' => $this->session->userdata('name'));
 							$app_put = array_merge($app_arr, $add_arr);
-							$where = array('pj_seq'=>$project, 'unit_type' =>$this->input->post('type'), 'unit_ding_ho'=>$dongho);
+							$where = array('pj_seq'=>$project, 'unit_type' =>$this->input->post('type'), 'unit_dong_ho'=>$this->input->post('unit_dong_ho'));
 							$result = $this->main_m->update_data('cms_sales_application', $app_put, $where); // 청약관리 테이블 데이터 입력
 							if( !$result){
 								alert('데이터베이스 에러입니다.', base_url(uri_string()));
 							}
 						}
-						alert('청약 정보 입력이 정상 처리되었습니다.', base_url(uri_string()));
+						alert('청약 정보 입력이 정상 처리되었습니다.', base_url('m1/sales/1/2')."?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$this->input->post('project')."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho'));
 
 /////////////////////////////////////////////// 여기까지 완료 ^^
 					}else if($this->input->post('cont_sort2')=='1'){ // 계약일 때
