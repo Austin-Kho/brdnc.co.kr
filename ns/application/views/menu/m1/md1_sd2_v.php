@@ -187,7 +187,8 @@
 	endif;
 
 	if(empty($is_reg['app_data']) && empty($is_reg['cont_data2'])) : $conclu_date = set_value('conclu_date');
-	elseif( !empty($is_reg['app_data'])) : $conclu_date = $is_reg['app_data']->app_date;
+	elseif( !empty($is_reg['app_data']) && $this->input->get('cont_sort2')==1) : $conclu_date = $is_reg['app_data']->app_date;
+	elseif( !empty($is_reg['app_data']) && $this->input->get('cont_sort2')==2) : $conclu_date = "";
 	else : $conclu_date = $is_reg['cont_data2']->initial_cont_date;
 	endif;
 ?>
