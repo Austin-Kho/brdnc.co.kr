@@ -148,13 +148,15 @@ class M1 extends CI_Controller {
 					if($unit_seq->is_application=='1') { // 청약 물건이면
 						$app_data = $data['is_reg']['app_data'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_application WHERE pj_seq='$project' AND disposal_div='0' AND unit_type='$now_type' AND unit_dong_ho='$dongho' "); // 청약 데이터
 					}else if($unit_seq->is_contract=='1'){ // 계약 물건이면
-						$cont_data1 = $data['is_reg']['cont_data1'] = $this->main_m->sql_row("  SELECT * FROM cms_sales_contract WHERE pj_seq='$project' AND type='$now_type' AND unit_dong_ho='$dongho' "); // 계약 데이터
+						$cont_where = " WHERE pj_seq='$project' AND type='$now_type' AND unit_dong_ho='$dongho' ";
+						$cont_query = "  SELECT * FROM cms_sales_contract, cms_sales_contractor ".$cont_where;
+						$cont_data = $data['is_reg']['cont_data'] = $this->main_m->sql_row($cont_query); // 계약 데이터
 						$cont_data2 = $data['is_reg']['cont_data2'] = $this->main_m->sql_row("  SELECT * FROM cms_sales_contractor WHERE pj_seq='$project' AND type='$now_type' AND cont_dong_ho='$dongho' "); // 계약자 데이터
 					}
 				}
 
 				// 차수 데이터 불러오기
-				$data['diff_no'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_diff  WHERE pj_seq='$project' ORDER BY diff_no ");
+				$data['diff_no'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_con_diff  WHERE pj_seq='$project' ORDER BY diff_no ");
 
 				// 분양대금 수납 계정
 				$data['dep_acc'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_bank_acc WHERE pj_seq='$project' ORDER BY seq ");
@@ -199,10 +201,10 @@ class M1 extends CI_Controller {
 							'app_in_acc' => $this->input->post('app_in_acc', TRUE),
 							'app_in_date' => $this->input->post('app_in_date', TRUE),
 							'app_in_who' => $this->input->post('app_in_who', TRUE),
-							'app_diff' => $this->input->post('diff_no', TRUE),
 							'unit_seq' => $this->input->post('unit_seq', TRUE),
 							'unit_type' => $this->input->post('type', TRUE),
 							'unit_dong_ho' => $this->input->post('unit_dong_ho', TRUE),
+							'app_diff' => $this->input->post('diff_no', TRUE),
 							'app_date' => $this->input->post('conclu_date', TRUE),
 							'due_date' => $this->input->post('due_date', TRUE),
 							'note' => $this->input->post('note', TRUE)
