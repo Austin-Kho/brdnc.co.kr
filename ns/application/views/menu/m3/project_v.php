@@ -33,6 +33,7 @@
 				endfor;
 			endif;
 ?>
+		</ul>
       </div>
 <!-- ---------------------------------sdi-menu end------------------------------------ -->
       <div class="page-header sdi_sub">
