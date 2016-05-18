@@ -257,7 +257,7 @@ function cont_check(){
 		form1.ho.focus();
 		return;
 	}
-	if( !form2.diff_no.value || form2.diff_no.value===''){
+	if( !form1.cont_sort3 && !form2.diff_no.value){
 		alert('차수구분을 선택하여 주십시요!');
 		form2.diff_no.focus();
 		return;
@@ -272,14 +272,14 @@ function cont_check(){
 		form2.tel_1.focus();
 		return;
 	}
-	if(!form1.cont_sort3&&!form2.app_money.value){
+	if(!form1.cont_sort3&&!form2.app_in_mon.value){
 		alert('청약금을 입력하여 주십시요!');
-		form2.app_money.focus();
+		form2.app_in_mon.focus();
 		return;
 	}
-	if(!form1.cont_sort3&&!form2.app_acc.value){
+	if(!form1.cont_sort3&&!form2.app_in_acc.value){
 		alert('청약금 입금 계좌를 선택하여 주십시요!');
-		form2.app_acc.focus();
+		form2.app_in_acc.focus();
 		return;
 	}
 	if(!form1.cont_sort3&&!form2.conclu_date.value){
@@ -287,14 +287,6 @@ function cont_check(){
 		form2.conclu_date.focus();
 		return;
 	}
-	// if(!form1.cont_sort3&&form1.cont_sort2.value==1){
-	// 	if(form2.due_date.value=='0000-00-00'){
-	// 		alert('계약 예정일을 입력하여 주십시요!');
-	// 		form2.due_date.focus();
-	// 		return;
-	// 	}
-	// }
-	//
 	if(form1.cont_sort2){
 		if(form1.cont_sort2.value=='1') var cont_sort = "청약(가계약)";
 		if(form1.cont_sort2.value=='2') var cont_sort = "계약(정계약)";

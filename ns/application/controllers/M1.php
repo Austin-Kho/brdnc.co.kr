@@ -170,7 +170,7 @@ class M1 extends CI_Controller {
 				$this->form_validation->set_rules('dong', '동', 'trim|required');
 				$this->form_validation->set_rules('ho', '호수', 'trim|required');
 				$this->form_validation->set_rules('custom_name', '청/계약자명', 'trim|required');
-				$this->form_validation->set_rules('app_money', '청약금', 'trim|numeric');
+				$this->form_validation->set_rules('app_in_mon', '청약금', 'trim|numeric');
 				$this->form_validation->set_rules('tel_1', '연락처[1]', 'trim|required');
 				$this->form_validation->set_rules('conclu_date', '청/계약일', 'trim|required');
 				$this->form_validation->set_rules('deposit_1', '계약금1', 'trim|numeric');
@@ -195,8 +195,10 @@ class M1 extends CI_Controller {
 							'applicant' => $this->input->post('custom_name', TRUE),
 							'app_tel1' => $this->input->post('tel_1', TRUE),
 							'app_tel2' => $this->input->post('tel_2', TRUE),
-							'app_money' => $this->input->post('app_money', TRUE),
-							'app_acc' => $this->input->post('app_acc', TRUE),
+							'app_in_mon' => $this->input->post('app_in_mon', TRUE),
+							'app_in_acc' => $this->input->post('app_in_acc', TRUE),
+							'app_in_date' => $this->input->post('app_in_date', TRUE),
+							'app_in_who' => $this->input->post('app_in_who', TRUE),
 							'app_diff' => $this->input->post('diff_no', TRUE),
 							'unit_seq' => $this->input->post('unit_seq', TRUE),
 							'unit_type' => $this->input->post('type', TRUE),

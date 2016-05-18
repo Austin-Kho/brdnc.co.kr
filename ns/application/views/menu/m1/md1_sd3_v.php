@@ -145,7 +145,7 @@
 										<div style="width:30px; height:14px; text-align:center; font-size:9px; color:#333; padding: 1px 0; <?php echo $div_col; ?>"  data-toggle="tooltip" title="<?php echo $now_type; ?>">
 											<span><?php echo $now_ho; ?></span>
 										</div>
-										<div style="width:30px; height:14px; text-align:center; font-size:9px; font-weight: bold; color: #fff; <?php echo $condi_col; ?>"><?php echo $condi;?></div>
+										<div style="width:30px; height:14px; text-align:center; font-size:9px; color: #fff; <?php echo $condi_col; ?>"><?php echo $condi;?></div>
 									</div>
 <?php endfor;  endfor; ?>
 								</td>

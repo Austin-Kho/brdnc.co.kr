@@ -59,7 +59,7 @@
 ?>
 			<div class="container">
 				<header id="header">
-					<h1>주 소 검 색</h1>
+					<h1>도 로 명 주 소  &nbsp; 검 색</h1>
 				</header><!-- /header -->
 				<div class="desc">※ 찾고자 하는 도로명주소 또는 건물명을 선택해 주세요.</div>
 				<div class="well row" style="padding: 13px; margin-bottom: 20px;">
