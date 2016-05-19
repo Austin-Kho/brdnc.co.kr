@@ -247,7 +247,7 @@
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_code" class="sr-only">계약 일련번호</label>
-						<input type="text" class="form-control input-sm" name="cont_code" value="<?php echo $cont_code; ?>" <?php echo $disabled; ?>>
+						<input type="text" class="form-control input-sm" name="cont_code" value="<?php echo $cont_code; ?>" maxlength="12" <?php echo $disabled; ?>>
 					</div>
 				</div>
 <?php endif; ?>
@@ -277,7 +277,7 @@
 	endif;
 ?>
 						<label for="custom_name" class="sr-only">계약자명</label>
-						<input type="text" class="form-control input-sm" name="custom_name" value="<?php echo $custom_name; ?>" <?php echo $disabled; ?>>
+						<input type="text" class="form-control input-sm" name="custom_name" value="<?php echo $custom_name; ?>" maxlength="20" <?php echo $disabled; ?>>
 					</div>
 				</div>
 			</div>
@@ -293,14 +293,14 @@
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="tel_1" class="sr-only">연락처1</label>
-						<input type="text" class="form-control input-sm" name="tel_1" value="<?php echo $tel_1; ?>" <?php echo $disabled; ?>>
+						<input type="text" class="form-control input-sm" name="tel_1" value="<?php echo $tel_1; ?>" maxlength="20" <?php echo $disabled; ?>>
 					</div>
 				</div>
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">연락처 [2]</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="tel_2" class="sr-only">연락처2</label>
-						<input type="text" class="form-control input-sm" name="tel_2" value="<?php echo $tel_2; ?>" <?php echo $disabled; ?>>
+						<input type="text" class="form-control input-sm" name="tel_2" value="<?php echo $tel_2; ?>"  maxlength="20"  <?php echo $disabled; ?>>
 					</div>
 				</div>
 			</div>
@@ -318,7 +318,7 @@
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="app_in_mon" class="sr-only">청약금</label>
-						<input type="text" class="form-control input-sm" name="app_in_mon" placeholder="청약금" value="<?php echo $app_in_mon; ?>" <?php echo $disabled; if($this->input->get('cont_sort2')==2 OR $this->input->get('cont_sort2')==4) echo "readonly"; ?>>
+						<input type="text" class="form-control input-sm en_only" name="app_in_mon" onkeyPress ='iNum(this)' placeholder="청약금" value="<?php echo $app_in_mon; ?>" <?php echo $disabled; if($this->input->get('cont_sort2')==2 OR $this->input->get('cont_sort2')==4) echo "readonly"; ?>>
 					</div>
 				</div>
 
@@ -382,7 +382,7 @@
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="deposit_1" class="sr-only">계약금[1]</label>
-						<input type="text" class="form-control input-sm" name="deposit_1" value="<?php echo $deposit_1; ?>" placeholder="분담금 [단위:원]" <?php echo $disabled; ?>>
+						<input type="text" class="form-control input-sm en_only" name="deposit_1" value="<?php echo $deposit_1; ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]" <?php echo $disabled; ?>>
 					</div>
 				</div>
 
@@ -438,7 +438,7 @@
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="deposit_2" class="sr-only">계약금[2]</label>
-						<input type="text" class="form-control input-sm" name="deposit_2" value="<?php echo $deposit_2; ?>" placeholder="대행비 [단위:원]"  <?php echo $disabled; ?>>
+						<input type="text" class="form-control input-sm en_only" name="deposit_2" value="<?php echo $deposit_2; ?>" onkeyPress ='iNum(this)'  placeholder="대행비 [단위:원]"  <?php echo $disabled; ?>>
 					</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">

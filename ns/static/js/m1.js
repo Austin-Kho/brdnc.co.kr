@@ -312,7 +312,7 @@ function cont_check(){
 		form2.app_in_who.focus();
 		return;
 	}
-	if(!form1.cont_sort3 && form1.cont_sort2.value!=='1' && typeof(form2.app_in_mon)!='undefined' && (form2.app_in_mon.value) && !form2.app_pay_sche.value){
+	if(!form1.cont_sort3 && form1.cont_sort2.value!='1' && typeof(form2.app_in_mon)!='undefined' && (form2.app_in_mon.value) && !form2.app_pay_sche.value){
 		alert('청약금 납부회차를 선택하여 주십시요!');
 		form2.app_pay_sche.focus();
 		return;

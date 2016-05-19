@@ -179,7 +179,8 @@ class M1 extends CI_Controller {
 				$this->form_validation->set_rules('type', '타입', 'trim|required');
 				$this->form_validation->set_rules('dong', '동', 'trim|required');
 				$this->form_validation->set_rules('ho', '호수', 'trim|required');
-				$this->form_validation->set_rules('custom_name', '청/계약자명', 'trim|required');
+				$this->form_validation->set_rules('cont_code', '계약일련번호', 'trim|max_length[12]');
+				$this->form_validation->set_rules('custom_name', '청/계약자명', 'trim|required|max_length[20]');
 				$this->form_validation->set_rules('app_in_mon', '청약금', 'trim|numeric');
 				$this->form_validation->set_rules('tel_1', '연락처[1]', 'trim|required');
 				$this->form_validation->set_rules('conclu_date', '청/계약일', 'trim|required');
