@@ -312,9 +312,59 @@ function cont_check(){
 		form2.app_in_who.focus();
 		return;
 	}
-	if(!form1.cont_sort3 && typeof(form2.app_in_mon)!='undefined' && (form2.app_in_mon.value) && !form2.app_pay_sche.value){
+	if(!form1.cont_sort3 && form1.cont_sort2.value!=='1' && typeof(form2.app_in_mon)!='undefined' && (form2.app_in_mon.value) && !form2.app_pay_sche.value){
 		alert('청약금 납부회차를 선택하여 주십시요!');
-		form2.app_in_who.focus();
+		form2.app_pay_sche.focus();
+		return;
+	}
+	if(form1.cont_sort2.value=='2'&& !form2.deposit_1.value){
+		alert("계약금 항목을 입력하세요.");
+		form2.deposit_1.focus();
+		return;
+	}
+	if(form1.cont_sort2.value=='2'&& form2.deposit_1.value&& !form2.dep_acc_1.value){
+		alert("계약금 입금 계좌를 선택하세요.");
+		form2.dep_acc_1.focus();
+		return;
+	}
+	if(form1.cont_sort2.value=='2'&& form2.deposit_1.value&& !form2.cont_in_date1.value){
+		alert("계약금 입금 일자를 선택하세요.");
+		form2.cont_in_date1.focus();
+		return;
+	}
+	if(form1.cont_sort2.value=='2'&& form2.deposit_1.value&& !form2.cont_in_who1.value){
+		alert("계약금 실제 납부자 명을 입력하세요.");
+		form2.cont_in_who1.focus();
+		return;
+	}
+	if(form1.cont_sort2.value=='2'&& form2.deposit_1.value&& !form2.cont_pay_sche1.value){
+		alert("금회 납부 처리 회차를 선택하세요.");
+		form2.cont_pay_sche1.focus();
+		return;
+	}
+	if(form1.cont_sort2.value=='2'&& form2.deposit_2.value&& !form2.dep_acc_2.value){
+		alert("계약금 입금 계좌를 선택하세요.");
+		form2.dep_acc_2.focus();
+		return;
+	}
+	if(form1.cont_sort2.value=='2'&& form2.deposit_2.value&& !form2.cont_in_date2.value){
+		alert("계약금 입금 일자를 선택하세요.");
+		form2.cont_in_date2.focus();
+		return;
+	}
+	if(form1.cont_sort2.value=='2'&& form2.deposit_2.value&& !form2.cont_in_who2.value){
+		alert("계약금 실제 납부자 명을 입력하세요.");
+		form2.cont_in_who2.focus();
+		return;
+	}
+	if(form1.cont_sort2.value=='2'&& form2.deposit_2.value&& !form2.cont_pay_sche2.value){
+		alert("금회 납부 처리 회차를 선택하세요.");
+		form2.cont_pay_sche2.focus();
+		return;
+	}
+	if(form1.cont_sort2.value=='2'&& !form2.zipcode.value){
+		alert("계약자 주소 항목을 입력하세요.");
+		form2.zipcode.focus();
 		return;
 	}
 

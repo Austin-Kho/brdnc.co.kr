@@ -166,9 +166,9 @@ class M1 extends CI_Controller {
 				}
 
 				// 수납 관리 테이블 정보 가져오기
-				if($cont_data) $data['received1'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='1' ");
-				if($cont_data) $data['received2'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='2' ");
-				if($cont_data) $data['received3'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='3' ");
+				if( !empty($cont_data)) $data['received1'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='1' ");
+				if( !empty($cont_data)) $data['received2'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='2' ");
+				if( !empty($cont_data)) $data['received3'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='3' ");
 
 
 				// 라이브러리 로드

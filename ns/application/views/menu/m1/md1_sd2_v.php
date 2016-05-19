@@ -159,8 +159,9 @@
 
 <?php if($this->input->get('cont_sort2')=="2") : // 계약 등록 처리 시 ?>
 			<div class="row bo-top font12" style="margin: 0;">
+<?php if( !empty($is_reg['app_data'])) $dicol = "#f8f9cc;"; if( !empty($is_reg['cont_data'])) $dicol = "#E0E7FB;";   ?>
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="height: 60px; padding: 10px; 0">현재 상태 <span class="red">*</span></div>
-				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe; background-color: #f8f9cc;">
+				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe; background-color: <?php echo $dicol; ?>">
 <?php if( !empty($is_reg['app_data'])) : // 현재 청약상태 호수이면  ?>
 					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">청약 : <?php echo $is_reg['app_data']->app_date; ?></div>
 					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">입금 : <?php echo number_format($is_reg['app_data']->app_in_mon)." 원"; ?></div>
@@ -320,19 +321,14 @@
 						<input type="text" class="form-control input-sm" name="app_in_mon" placeholder="청약금" value="<?php echo $app_in_mon; ?>" <?php echo $disabled; if($this->input->get('cont_sort2')==2 OR $this->input->get('cont_sort2')==4) echo "readonly"; ?>>
 					</div>
 				</div>
-<?php
-	// if( empty($is_reg['app_data']) && empty($received1)) : $app_in_mon = set_value('app_in_mon');
-	// elseif( !empty($is_reg['app_data'])) : $app_in_mon =$is_reg['app_data']->app_in_mon;
-	// else : $app_in_mon = $received1->paid_amount;
-	// endif;
-?>
+
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="app_in_acc" class="sr-only">입금계좌</label>
 						<select class="form-control input-sm" name="app_in_acc" <?php echo $disabled; ?> <?php echo $disabled; if($this->input->get('cont_sort2')==2 OR $this->input->get('cont_sort2')==4) echo "readonly"; ?>>
 							<option value="">입금계좌</option>
 <?php foreach ($dep_acc as $lt) : ?>
-							<option value="<?php echo $lt->seq ?>" <?php if( !empty($is_reg['app_data'])){ if($lt->seq==$is_reg['app_data']->app_in_acc) echo "selected"; } ?>><?php echo $lt->acc_nick; ?></option>
+							<option value="<?php echo $lt->seq; ?>" <?php if( (!empty($is_reg['app_data']->app_in_acc)&&$lt->seq==$is_reg['app_data']->app_in_acc) OR (!empty($received1->paid_acc)&&$received1->paid_acc==$lt->seq)) : echo "selected"; else:  echo set_select('app_in_acc', $lt->seq); endif; ?>><?php echo $lt->acc_nick; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -361,7 +357,7 @@
 						<select class="form-control input-sm" name="app_pay_sche">
 							<option value="">납부회차</option>
 <?php foreach ($pay_schedule as $lt) : ?>
-							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received1)){ if($lt->pay_code==$received1->pay_sche_code) echo "selected"; } ?>><?php echo $lt->pay_name; ?></option>
+							<option value="<?php echo $lt->pay_code; ?>" <?php if( !empty($received1)&&$lt->pay_code==$received1->pay_sche_code){ echo "selected"; }else{ set_select('app_pay_sche', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -379,32 +375,34 @@
 					<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div>
 				</div>
 <?php
-	if(empty($is_reg['cont_data'])) : $deposit_1 = set_value('tel_1');
-	else : $deposit_1 = $is_reg['cont_data']->cont_tel1;
+	if(empty($received1)) : $deposit_1 = set_value('$deposit_1');
+	else : $deposit_1 = $received1->paid_amount;
 	endif;
 ?>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="deposit_1" class="sr-only">계약금[1]</label>
-						<input type="text" class="form-control input-sm" name="deposit_1" value="" placeholder="분담금 [단위:원]" <?php echo $disabled; ?>>
+						<input type="text" class="form-control input-sm" name="deposit_1" value="<?php echo $deposit_1; ?>" placeholder="분담금 [단위:원]" <?php echo $disabled; ?>>
 					</div>
 				</div>
+
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="dep_acc_1" class="sr-only">계약금입금계정1</label>
 						<select class="form-control input-sm" name="dep_acc_1" <?php echo $disabled; ?>>
 							<option value="">입금계좌</option>
 <?php foreach ($dep_acc as $lt) : ?>
-							<option value="<?php echo $lt->seq ?>"><?php echo $lt->acc_nick; ?></option>
+							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received2->paid_acc)&&$received2->paid_acc==$lt->seq) echo "selected"; else echo set_select('dep_acc_1', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
 				</div>
+
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date1" class="sr-only">입금일</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date1" id="cont_in_date1" class="form-control input-sm" value="<?php //if( !empty($is_reg['app_data'])) echo $is_reg['app_data']->app_in_date; else echo set_value('app_in_date'); ?>" placeholder="입금일" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="cont_in_date1" id="cont_in_date1" class="form-control input-sm" value="<?php if( !empty($received2)) echo $received2->paid_date; else echo set_value('cont_in_date1'); ?>" placeholder="입금일" onclick="cal_add(this); event.cancelBubble=true"  readonly>
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
 							<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date1'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
@@ -414,7 +412,7 @@
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_who1" class="sr-only">입금자</label>
-						<input type="text" class="form-control input-sm" name="cont_in_who1" placeholder="입금자" value="<?php //if( !empty($is_reg['app_data']) && $is_reg['app_data']->app_in_who!="") echo $is_reg['app_data']->app_in_who; else echo set_value('app_in_who'); ?>">
+						<input type="text" class="form-control input-sm" name="cont_in_who1" placeholder="입금자" value="<?php if( !empty($received2)) echo $received2->paid_who; else echo set_value('cont_in_who1'); ?>">
 					</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
@@ -423,20 +421,24 @@
 						<select class="form-control input-sm" name="cont_pay_sche1">
 							<option value="">납부회차</option>
 <?php foreach ($pay_schedule as $lt) : ?>
-							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received2)){ if($lt->pay_code==$received2->pay_sche_code) echo "selected"; } ?>><?php echo $lt->pay_name; ?></option>
+							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received2)&&$lt->pay_code==$received2->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche1', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
 				</div>
 			</div>
-
+<?php
+	if(empty($received2)) : $deposit_2 = set_value('$deposit_2');
+	else : $deposit_2 = $received2->paid_amount;
+	endif;
+?>
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약금 [2] &nbsp;
 				<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="deposit_2" class="sr-only">계약금[2]</label>
-						<input type="text" class="form-control input-sm" name="deposit_2" value="" placeholder="대행비 [단위:원]"  <?php echo $disabled; ?>>
+						<input type="text" class="form-control input-sm" name="deposit_2" value="<?php echo $deposit_2; ?>" placeholder="대행비 [단위:원]"  <?php echo $disabled; ?>>
 					</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
@@ -445,7 +447,7 @@
 						<select class="form-control input-sm" name="dep_acc_2" <?php echo $disabled; ?>>
 							<option value="">입금계좌</option>
 <?php foreach ($dep_acc as $lt) : ?>
-							<option value="<?php echo $lt->seq ?>"><?php echo $lt->acc_nick; ?></option>
+							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received3->paid_acc)&&$received3->paid_acc==$lt->seq) echo "selected"; else set_select('dep_acc_2', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -454,7 +456,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date2" class="sr-only">입금일</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date2" id="cont_in_date2" class="form-control input-sm" value="<?php //if( !empty($is_reg['app_data'])) echo $is_reg['app_data']->app_in_date; else echo set_value('app_in_date'); ?>" placeholder="입금일" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="cont_in_date2" id="cont_in_date2" class="form-control input-sm" value="<?php if( !empty($received3)) echo $received3->paid_date; else echo set_value('cont_in_date2'); ?>" placeholder="입금일" onclick="cal_add(this); event.cancelBubble=true"  readonly>
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
 							<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date2'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
@@ -464,7 +466,7 @@
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_who2" class="sr-only">입금자</label>
-						<input type="text" class="form-control input-sm" name="cont_in_who2" placeholder="입금자" value="<?php //if( !empty($is_reg['app_data']) && $is_reg['app_data']->app_in_who!="") echo $is_reg['app_data']->app_in_who; else echo set_value('app_in_who'); ?>">
+						<input type="text" class="form-control input-sm" name="cont_in_who2" placeholder="입금자" value="<?php if( !empty($received3)) echo $received3->paid_who; else echo set_value('cont_in_who2'); ?>">
 					</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
@@ -473,14 +475,14 @@
 						<select class="form-control input-sm" name="cont_pay_sche2" >
 							<option value="">납부회차</option>
 <?php foreach ($pay_schedule as $lt) : ?>
-							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received3)){ if($lt->pay_code==$received3->pay_sche_code) echo "selected"; } ?>><?php echo $lt->pay_name; ?></option>
+							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received3)&&$lt->pay_code==$received3->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche2', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
 				</div>
 			</div>
 
-
+<?php if( !empty($is_reg['cont_data'])) $addr1 = explode("|", $is_reg['cont_data']->cont_addr1); ?>
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">주민등록 주소 <span class="red">*</span>
 					<div class="visible-xs" style="height: 39px;">&nbsp;</div>
@@ -493,20 +495,21 @@
 						</div>
 						<div class="col-xs-4 col-sm-3 col-md-1" style="padding-right: 0;">
 							<label for="zipcode" class="sr-only">우편번호</label>
-							<input type="text" class="form-control input-sm en_only" id="zipcode" name="zipcode" style="margin: 4px 0;" maxlength="5" value="<?php if($this->input->post('zipcode')) echo set_value('zipcode'); //else echo $addr[0]; ?>" readonly required autofocus>
+							<input type="text" class="form-control input-sm en_only" id="zipcode" name="zipcode" style="margin: 4px 0;" maxlength="5" value="<?php if( !empty($addr1)) echo $addr1[0]; else echo set_value('zipcode');  ?>" readonly required autofocus>
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4" style="padding-right: 0;">
 							<label for="address1" class="sr-only">계약자주소1</label>
-							<input type="text" class="form-control input-sm han" id="address1" name="address1" style="margin: 4px 0;" maxlength="100" value="<?php if($this->input->post('address1')) echo set_value('address1'); //else echo $addr[1]; ?>" readonly required autofocus>
+							<input type="text" class="form-control input-sm han" id="address1" name="address1" style="margin: 4px 0;" maxlength="100" value="<?php if( !empty($addr1)) echo $addr1[1]; else echo set_value('address1');  ?>" readonly required autofocus>
 						</div>
 						<div class="col-xs-12 col-sm-4" style="padding-right: 0;">
 							<label for="address2" class="sr-only">계약자주소2</label>
-							<input type="text" class="form-control input-sm han" id="address2" name="address2" style="margin: 4px 0;" maxlength="93" value="<?php if($this->input->post('address2')) echo set_value('address2'); //else echo $addr[2]; ?>" placeholder="나머지 주소" <?php echo $disabled; ?>>
+							<input type="text" class="form-control input-sm han" id="address2" name="address2" style="margin: 4px 0;" maxlength="93" value="<?php if( !empty($addr1)) echo $addr1[2]; else echo set_value('address2');  ?>" placeholder="나머지 주소" <?php echo $disabled; ?>>
 						</div>
 					</div>
 				</div>
 			</div>
 
+<?php if( !empty($is_reg['cont_data'])) $addr2 = explode("|", $is_reg['cont_data']->cont_addr2); ?>
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">우편송부 주소  <span class="red">*</span>
 					<div class="visible-xs" style="height: 39px;">&nbsp;</div>
@@ -519,15 +522,15 @@
 						</div>
 						<div class="col-xs-4 col-sm-3 col-md-1" style="padding-right: 0;">
 							<label for="zipcode_" class="sr-only">우편번호</label>
-							<input type="text" class="form-control input-sm en_only" id="zipcode_" name="zipcode_"  style="margin: 4px 0;" maxlength="5" value="<?php if($this->input->post('zipcode_')) echo set_value('zipcode_'); //else echo $addr[0]; ?>" readonly required autofocus>
+							<input type="text" class="form-control input-sm en_only" id="zipcode_" name="zipcode_"  style="margin: 4px 0;" maxlength="5" value="<?php if( !empty($addr2)) echo $addr2[0]; else echo set_value('zipcode_');  ?>" readonly required autofocus>
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4" style="padding-right: 0;">
 							<label for="address1_" class="sr-only">계약자주소11</label>
-							<input type="text" class="form-control input-sm han" id="address1_" name="address1_"  style="margin: 4px 0;" maxlength="100" value="<?php if($this->input->post('address1_')) echo set_value('address1_'); //else echo $addr[1]; ?>" readonly required autofocus>
+							<input type="text" class="form-control input-sm han" id="address1_" name="address1_"  style="margin: 4px 0;" maxlength="100" value="<?php if( !empty($addr2)) echo $addr2[1]; else echo set_value('address1_');  ?>" readonly required autofocus>
 						</div>
 						<div class="col-xs-12 col-sm-4" style="padding-right: 0;">
 							<label for="address2_" class="sr-only">계약자주소22</label>
-							<input type="text" class="form-control input-sm han" id="address2_" name="address2_"  style="margin: 4px 0;" maxlength="93" value="<?php if($this->input->post('address2_')) echo set_value('address2_'); //else echo $addr[2]; ?>" placeholder="나머지 주소" <?php echo $disabled; ?>>
+							<input type="text" class="form-control input-sm han" id="address2_" name="address2_"  style="margin: 4px 0;" maxlength="93" value="<?php if( !empty($addr2)) echo $addr2[2]; else echo set_value('address2_');  ?>" placeholder="나머지 주소" <?php echo $disabled; ?>>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-2 checkbox" style="margin: 0; padding: 9px;">
 							<label><input type="checkbox" name="sa_addr" onclick="same_addr();"> 위와 같음</label>
@@ -540,15 +543,16 @@
 					<div class="visible-xs" style="height: 60px;">&nbsp;</div>
 					<div class="" style="height: 30px;">&nbsp;</div>
 				</div>
+<?php if( !empty($is_reg['cont_data'])) $inc_doc = explode("-", $is_reg['cont_data']->incom_doc); ?>
 				<div class="col-xs-8 col-sm-9 col-md-8" style="padding: 4px 15px;">
-					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_1" value="1" <?php echo $disabled; ?>> 각서9종</label></div>
-					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_2" value="1" <?php echo $disabled; ?>> 주민등본</label></div>
-					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_3" value="1" <?php echo $disabled; ?>> 주민초본</label></div>
-					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_4" value="1" <?php echo $disabled; ?>> 가족관계증명</label></div>
-					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_5" value="1" <?php echo $disabled; ?>> 인감증명</label></div>
-					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_6" value="1" <?php echo $disabled; ?>> 사용인감</label></div>
-					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_7" value="1" <?php echo $disabled; ?>> 신분증</label></div>
-					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_8" value="1" <?php echo $disabled; ?>> 배우자등본</label></div>
+					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_1" value="1" <?php echo $disabled; if( !empty($is_reg['cont_data'])&&$inc_doc[0]=='1') echo "checked";  ?>> 각서9종</label></div>
+					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_2" value="1" <?php echo $disabled; if( !empty($is_reg['cont_data'])&&$inc_doc[1]=='1') echo "checked"; ?>> 주민등본</label></div>
+					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_3" value="1" <?php echo $disabled; if( !empty($is_reg['cont_data'])&&$inc_doc[2]=='1') echo "checked"; ?>> 주민초본</label></div>
+					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_4" value="1" <?php echo $disabled; if( !empty($is_reg['cont_data'])&&$inc_doc[3]=='1') echo "checked"; ?>> 가족관계증명</label></div>
+					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_5" value="1" <?php echo $disabled; if( !empty($is_reg['cont_data'])&&$inc_doc[4]=='1') echo "checked"; ?>> 인감증명</label></div>
+					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_6" value="1" <?php echo $disabled; if( !empty($is_reg['cont_data'])&&$inc_doc[5]=='1') echo "checked"; ?>> 사용인감</label></div>
+					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_7" value="1" <?php echo $disabled; if( !empty($is_reg['cont_data'])&&$inc_doc[6]=='1') echo "checked"; ?>> 신분증</label></div>
+					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_8" value="1" <?php echo $disabled; if( !empty($is_reg['cont_data'])&&$inc_doc[7]=='1') echo "checked"; ?>> 배우자등본</label></div>
 				</div>
 			</div>
 <?php endif;
