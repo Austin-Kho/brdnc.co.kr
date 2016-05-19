@@ -125,8 +125,12 @@
 			<input type="hidden" name="type" value="<?php echo $this->input->get('type'); ?>">
 			<input type="hidden" name="dong" value="<?php echo $this->input->get('dong'); ?>">
 			<input type="hidden" name="ho" value="<?php echo $this->input->get('ho'); ?>">
-<?php $unit_seq = ( !empty($unit_seq)) ? $unit_seq->seq : ""; ?>
-			<input type="hidden" name="unit_seq" value="<?php echo $unit_seq; ?>">
+<?php $unitseq = ( !empty($unit_seq)) ? $unit_seq->seq : ""; ?>
+			<input type="hidden" name="unit_seq" value="<?php echo $unitseq; ?>">
+<?php $unit_is_app = ( !empty($unit_seq)) ? $unit_seq->is_application : ""; ?>
+			<input type="hidden" name="unit_is_app" value="<?php echo $unit_is_app; ?>">
+<?php $unit_is_cont = ( !empty($unit_seq)) ? $unit_seq->is_contract : ""; ?>
+			<input type="hidden" name="unit_is_cont" value="<?php echo $unit_is_cont; ?>">
 <?php $unit_dong_ho = ( !empty($unit_dong_ho)) ? $unit_dong_ho : ""; ?>
 			<input type="hidden" name="unit_dong_ho" value="<?php echo $unit_dong_ho; ?>">
 
@@ -137,7 +141,7 @@
 			<div class="row bo-top font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">처리 구분 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
-					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" name="incom_doc_1" onclick="if(this.checked==1) location.href='?mode=2&cont_sort1=1&cont_sort2=2&project=1&type=72&dong=902&ho=1002'">계약전환</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" onclick="app_tr_cont(this);">계약전환</label></div>
 				</div>
 			</div>
 <?php endif; ?>
@@ -145,19 +149,27 @@
 			<div class="row bo-top font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">처리 구분 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
-					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" name="incom_doc_1" value="1">해지신청</label></div>
-					<div class="col-xs-6 col-sm-4 col-md-3 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" name="incom_doc_1" value="1">환불완료</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox">해지신청</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-3 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox">환불완료</label></div>
 				</div>
 			</div>
 <?php endif; ?>
+
+
+
 <?php if($this->input->get('cont_sort2')=="2") : // 계약 등록 처리 시 ?>
 			<div class="row bo-top font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="height: 60px; padding: 10px; 0">청약 내역 <span class="red">*</span></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="height: 60px; padding: 10px; 0">현재 상태 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe; background-color: #f8f9cc;">
 <?php if( !empty($is_reg['app_data'])) : // 현재 청약상태 호수이면  ?>
-					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">일자 : <?php echo $is_reg['app_data']->app_date; ?></div>
+					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">청약 : <?php echo $is_reg['app_data']->app_date; ?></div>
 					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">입금 : <?php echo number_format($is_reg['app_data']->app_in_mon)." 원"; ?></div>
 					<div class="col-xs-6 col-sm-4 col-md-3" style="padding: 4px 0px;">계좌 : <?php if( !empty($dep_acc[($is_reg['app_data']->app_in_acc-1)]->acc_nick)) echo $dep_acc[($is_reg['app_data']->app_in_acc-1)]->acc_nick; ?></div>
+					<div class="col-xs-12 hidden-xs" style="padding: 4px 0px;">&nbsp;</div>
+<?php elseif( !empty($is_reg['cont_data'])) : // 현재 청약상태 호수이면  ?>
+					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">계약 : <?php echo $is_reg['cont_data']->cont_date; ?></div>
+					<!-- <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">입금 : <?php echo number_format($is_reg['app_data']->app_in_mon)." 원"; ?></div> -->
+					<!-- <div class="col-xs-6 col-sm-4 col-md-3" style="padding: 4px 0px;">계좌 : <?php if( !empty($dep_acc[($is_reg['app_data']->app_in_acc-1)]->acc_nick)) echo $dep_acc[($is_reg['app_data']->app_in_acc-1)]->acc_nick; ?></div> -->
 					<div class="col-xs-12 hidden-xs" style="padding: 4px 0px;">&nbsp;</div>
 <?php else : // 신규 계약 등록 처리 시 ?>
 					<div class="col-xs-12" style="padding: 8px 0px;">등록된 청약 데이터 없습니다. 신규 계약 정보를 입력하세요.</div>
@@ -186,17 +198,17 @@
 	else : $conclu_date_label = "청약일자";
 	endif;
 
-	if(empty($is_reg['app_data']) && empty($is_reg['cont_data2'])) : $conclu_date = set_value('conclu_date');
-	elseif( !empty($is_reg['app_data']) && $this->input->get('cont_sort2')==1) : $conclu_date = $is_reg['app_data']->app_date;
-	elseif( !empty($is_reg['app_data']) && $this->input->get('cont_sort2')==2) : $conclu_date = "";
-	else : $conclu_date = $is_reg['cont_data2']->initial_cont_date;
+	if(empty($is_reg['app_data']) && empty($is_reg['cont_data'])) : $conclu_date = set_value('conclu_date');
+	elseif( !empty($is_reg['app_data']) && ($this->input->get('cont_sort2')==1 OR  $this->input->get('cont_sort3')==3)) : $conclu_date = $is_reg['app_data']->app_date;  // 청약 데이터 있고 청약이나 청약해지
+	elseif( !empty($is_reg['app_data']) && ($this->input->get('cont_sort2')==2 OR  $this->input->get('cont_sort3')==4)) : $conclu_date = "";  // 청약 데이터 있고 계약이나 계약 해지
+	else : $conclu_date = $is_reg['cont_data']->cont_date;
 	endif;
 ?>
 			<div class="row bo-top font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0"><?php echo $conclu_date_label; ?> <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="conclu_date" class="sr-only">체결일자</label>
+						<label for="conclu_date" class="sr-only">거래일자</label>
 						<div class="col-xs-10" style="padding: 0;">
 							<input type="text" name="conclu_date" id="conclu_date" class="form-control input-sm" value="<?php echo $conclu_date; ?>" onclick="cal_add(this); event.cancelBubble=true"  readonly>
 						</div>
@@ -244,8 +256,9 @@
 						<label for="diff_no" class="sr-only">차수</label>
 						<select class="form-control input-sm" name="diff_no" <?php echo $disabled; ?>>
 							<option value=""> 선 택</option>
-<?php foreach($diff_no as $lt) : ?>
-							<option value="<?php echo $lt->diff_no; ?>" <?php if( !empty($is_reg['app_data']->app_diff)) { if($is_reg['app_data']->app_diff==$lt->diff_no) echo "selected"; } ?>><?php echo $lt->diff_name; ?></option>
+<?php foreach($diff_no as $lt) :
+	if( !empty($is_reg['app_data']->app_diff)) : $now_diff = $is_reg['app_data']->app_diff; elseif( !empty($is_reg['cont_data']->cont_diff)) : $now_diff = $is_reg['cont_data']->cont_diff; else : $now_diff = ''; endif; ?>
+							<option value="<?php echo $lt->diff_no; ?>" <?php if($now_diff==$lt->diff_no) echo "selected"; ?>><?php echo $lt->diff_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -254,9 +267,9 @@
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 <?php
-	if(empty($is_reg['app_data']) && empty($is_reg['cont_data2'])) : $custom_name = set_value('custom_name');
+	if(empty($is_reg['app_data']) && empty($is_reg['cont_data'])) : $custom_name = set_value('custom_name');
 	elseif( !empty($is_reg['app_data'])) : $custom_name = $is_reg['app_data']->applicant;
-	else : $custom_name = $is_reg['cont_data2']->contractor_name;
+	else : $custom_name = $is_reg['cont_data']->contractor;
 	endif;
 ?>
 						<label for="custom_name" class="sr-only">계약자명</label>
@@ -266,9 +279,9 @@
 			</div>
 
 <?php
-	if(empty($is_reg['app_data']) && empty($is_reg['cont_data2'])) : $tel_1 = set_value('tel_1'); $tel_2 = set_value('tel_2');
+	if(empty($is_reg['app_data']) && empty($is_reg['cont_data'])) : $tel_1 = set_value('tel_1'); $tel_2 = set_value('tel_2');
 	elseif( !empty($is_reg['app_data'])) : $tel_1 = $is_reg['app_data']->app_tel1; $tel_2 = $is_reg['app_data']->app_tel2;
-	else : $tel_1 = $is_reg['cont_data2']->cont_tel1; $tel_2 = $is_reg['cont_data2']->cont_tel2;
+	else : $tel_1 = $is_reg['cont_data']->cont_tel1; $tel_2 = $is_reg['cont_data']->cont_tel2;
 	endif;
 ?>
 			<div class="row bo-bottom font12" style="margin: 0;">
@@ -287,11 +300,10 @@
 					</div>
 				</div>
 			</div>
-
+<?php if( !($this->input->get('cont_sort2')=='2' && empty($is_reg['app_data']))): // 계약등록 시 청약 데이터가 없는 신규 등록인 경우만 제외하고 ->?>
 			<div class="row bo-bottom font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">
-					청약금 <span class="red">*</span>
-					<div class="point-sub hidden-md hidden-lg" style="height: 116px;">&nbsp;</div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">청약금 <span class="red">*</span>
+					<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
@@ -328,7 +340,21 @@
 						<input type="text" class="form-control input-sm" name="app_in_who" placeholder="입금자" value="<?php if( !empty($is_reg['app_data']) && $is_reg['app_data']->app_in_who!="") echo $is_reg['app_data']->app_in_who; else echo set_value('app_in_who'); ?>" <?php echo $disabled; if($this->input->get('cont_sort2')==2 OR $this->input->get('cont_sort2')==4) echo "readonly"; ?>>
 					</div>
 				</div>
+<?php if($this->input->get('cont_sort2')==='2') : ?>
+				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<label for="app_pay_sche" class="sr-only">납부회차</label>
+						<select class="form-control input-sm" name="app_pay_sche">
+							<option value="">납부회차</option>
+<?php foreach ($pay_schedule as $lt) : ?>
+							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($is_reg['cont_data'])){ if($lt->pay_code==$is_reg['cont_data']->last_paid_sche) echo "selected"; } ?>><?php echo $lt->pay_name; ?></option>
+<?php endforeach; ?>
+						</select>
+					</div>
+				</div>
+<?php endif; ?>
 			</div>
+<?php endif; ?>
 
 
 
@@ -340,7 +366,7 @@
 
 
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약금 [1] <span class="red">*</span>
-					<div class="point-sub hidden-md hidden-lg" style="height: 116px;">&nbsp;</div>
+					<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
@@ -376,12 +402,22 @@
 						<input type="text" class="form-control input-sm" name="cont_in_who1" placeholder="입금자" value="<?php //if( !empty($is_reg['app_data']) && $is_reg['app_data']->app_in_who!="") echo $is_reg['app_data']->app_in_who; else echo set_value('app_in_who'); ?>">
 					</div>
 				</div>
-
-
+				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<label for="cont_pay_sche1" class="sr-only">납부회차</label>
+						<select class="form-control input-sm" name="cont_pay_sche1">
+							<option value="">납부회차</option>
+<?php foreach ($pay_schedule as $lt) : ?>
+							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($is_reg['cont_data'])){ if($lt->pay_code==$is_reg['cont_data']->last_paid_sche) echo "selected"; } ?>><?php echo $lt->pay_name; ?></option>
+<?php endforeach; ?>
+						</select>
+					</div>
+				</div>
 			</div>
+
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약금 [2] &nbsp;
-				<div class="point-sub hidden-md hidden-lg" style="height: 116px;">&nbsp;</div></div>
+				<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="deposit_2" class="sr-only">계약금[2]</label>
@@ -416,7 +452,20 @@
 						<input type="text" class="form-control input-sm" name="cont_in_who2" placeholder="입금자" value="<?php //if( !empty($is_reg['app_data']) && $is_reg['app_data']->app_in_who!="") echo $is_reg['app_data']->app_in_who; else echo set_value('app_in_who'); ?>">
 					</div>
 				</div>
+				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<label for="cont_pay_sche2" class="sr-only">납부회차</label>
+						<select class="form-control input-sm" name="cont_pay_sche2" >
+							<option value="">납부회차</option>
+<?php foreach ($pay_schedule as $lt) : ?>
+							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($is_reg['cont_data'])){ if($lt->pay_code==$is_reg['cont_data']->last_paid_sche) echo "selected"; } ?>><?php echo $lt->pay_name; ?></option>
+<?php endforeach; ?>
+						</select>
+					</div>
+				</div>
 			</div>
+
+
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">주민등록 주소 <span class="red">*</span>
 					<div class="visible-xs" style="height: 39px;">&nbsp;</div>
@@ -455,7 +504,7 @@
 						</div>
 						<div class="col-xs-4 col-sm-3 col-md-1" style="padding-right: 0;">
 							<label for="zipcode_" class="sr-only">우편번호</label>
-							<input type="text" class="form-control input-sm en_only" id="zipcode2" name="zipcode_"  style="margin: 4px 0;" maxlength="5" value="<?php if($this->input->post('zipcode_')) echo set_value('zipcode_'); //else echo $addr[0]; ?>" readonly required autofocus>
+							<input type="text" class="form-control input-sm en_only" id="zipcode_" name="zipcode_"  style="margin: 4px 0;" maxlength="5" value="<?php if($this->input->post('zipcode_')) echo set_value('zipcode_'); //else echo $addr[0]; ?>" readonly required autofocus>
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4" style="padding-right: 0;">
 							<label for="address1_" class="sr-only">계약자주소11</label>
@@ -489,9 +538,9 @@
 			</div>
 <?php endif;
 
-	if(empty($is_reg['app_data']) && empty($is_reg['cont_data2'])) : $note = set_value('note');
+	if(empty($is_reg['app_data']) && empty($is_reg['cont_data'])) : $note = set_value('note');
 	elseif( !empty($is_reg['app_data'])) : $note = $is_reg['app_data']->note;
-	else : $note = $is_reg['cont_data1']->note;
+	else : $note = $is_reg['cont_data']->note;
 	endif;
 ?>
 			<div class="row bo-bottom font12" style="margin: 0;">

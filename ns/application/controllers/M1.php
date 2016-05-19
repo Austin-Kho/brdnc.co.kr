@@ -146,12 +146,11 @@ class M1 extends CI_Controller {
 
 					// 청약 또는 계약 유닛인지 확인
 					if($unit_seq->is_application=='1') { // 청약 물건이면
-						$app_data = $data['is_reg']['app_data'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_application WHERE pj_seq='$project' AND disposal_div='0' AND unit_type='$now_type' AND unit_dong_ho='$dongho' "); // 청약 데이터
+						$app_data = $data['is_reg']['app_data'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_application WHERE unit_seq='$unit_seq->seq' AND disposal_div='0' "); // 청약 데이터
 					}else if($unit_seq->is_contract=='1'){ // 계약 물건이면
-						$cont_where = " WHERE pj_seq='$project' AND type='$now_type' AND unit_dong_ho='$dongho' ";
+						$cont_where = " WHERE unit_seq='$unit_seq->seq' AND is_transfer='0' AND is_rescission='0' AND cms_sales_contract.seq=cont_seq  ";
 						$cont_query = "  SELECT * FROM cms_sales_contract, cms_sales_contractor ".$cont_where;
-						$cont_data = $data['is_reg']['cont_data'] = $this->main_m->sql_row($cont_query); // 계약 데이터
-						$cont_data2 = $data['is_reg']['cont_data2'] = $this->main_m->sql_row("  SELECT * FROM cms_sales_contractor WHERE pj_seq='$project' AND type='$now_type' AND cont_dong_ho='$dongho' "); // 계약자 데이터
+						$cont_data = $data['is_reg']['cont_data'] = $this->main_m->sql_row($cont_query); // 계약 및 계약자 데이터
 					}
 				}
 
@@ -161,6 +160,10 @@ class M1 extends CI_Controller {
 				// 분양대금 수납 계정
 				$data['dep_acc'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_bank_acc WHERE pj_seq='$project' ORDER BY seq ");
 
+				// 계약 등록 시 당회 납부 회차 데이터 가져오기
+				if($this->input->get('cont_sort2')=='2'){
+					$data['pay_schedule'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' ORDER BY seq ");
+				}
 
 
 				// 라이브러리 로드
@@ -197,19 +200,19 @@ class M1 extends CI_Controller {
 							'applicant' => $this->input->post('custom_name', TRUE),
 							'app_tel1' => $this->input->post('tel_1', TRUE),
 							'app_tel2' => $this->input->post('tel_2', TRUE),
-							'app_in_mon' => $this->input->post('app_in_mon', TRUE),
-							'app_in_acc' => $this->input->post('app_in_acc', TRUE),
-							'app_in_date' => $this->input->post('app_in_date', TRUE),
-							'app_in_who' => $this->input->post('app_in_who', TRUE),
+							'app_date' => $this->input->post('conclu_date', TRUE),
+							'due_date' => $this->input->post('due_date', TRUE),
 							'unit_seq' => $this->input->post('unit_seq', TRUE),
 							'unit_type' => $this->input->post('type', TRUE),
 							'unit_dong_ho' => $this->input->post('unit_dong_ho', TRUE),
 							'app_diff' => $this->input->post('diff_no', TRUE),
-							'app_date' => $this->input->post('conclu_date', TRUE),
-							'due_date' => $this->input->post('due_date', TRUE),
+							'app_in_mon' => $this->input->post('app_in_mon', TRUE),
+							'app_in_acc' => $this->input->post('app_in_acc', TRUE),
+							'app_in_date' => $this->input->post('app_in_date', TRUE),
+							'app_in_who' => $this->input->post('app_in_who', TRUE),
 							'note' => $this->input->post('note', TRUE)
 						);
-						if($this->input->post('mode')=='1'){ // 신규 청약 등록 일 때
+						if($this->input->post('mode')=='1' && $this->input->post('unit_is_app')=='0'){ // 신규 청약 등록 일 때
 							$add_arr = array('ini_reg_worker' => $this->session->userdata('name'));
 							$app_put = array_merge($app_arr, $add_arr);
 							$result = $this->main_m->insert_data('cms_sales_application', $app_put, 'ini_reg_date'); // 청약관리 테이블 데이터 입력
@@ -221,22 +224,23 @@ class M1 extends CI_Controller {
 								$result2 = $this->main_m->update_data('cms_project_all_housing_unit', array('is_application'=>'1'), $where); // 동호수 테이블 청약상태로 변경
 								if( !$result2) alert('데이터베이스 에러입니다.', base_url(uri_string()));
 							}
-						}else if($this->input->post('mode')=='2'){ // 기존 청약정보 수정일 때
+						}else if($this->input->post('mode')=='2' && $this->input->post('unit_is_app')=='1'){ // 기존 청약정보 수정일 때
 							$add_arr = array('last_modi_date' => date('Y-m-d'), 'last_modi_worker' => $this->session->userdata('name'));
 							$app_put = array_merge($app_arr, $add_arr);
-							$where = array('pj_seq'=>$project, 'unit_type' =>$this->input->post('type'), 'unit_dong_ho'=>$this->input->post('unit_dong_ho'));
+							$where = array('pj_seq'=>$this->input->post('project'), 'unit_type' =>$this->input->post('type'), 'unit_dong_ho'=>$this->input->post('unit_dong_ho'));
 							$result = $this->main_m->update_data('cms_sales_application', $app_put, $where); // 청약관리 테이블 데이터 입력
 							if( !$result){
 								alert('데이터베이스 에러입니다.', base_url(uri_string()));
 							}
 						}
-						alert('청약 정보 입력이 정상 처리되었습니다.', base_url('m1/sales/1/2')."?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$this->input->post('project')."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho'));
+						$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$this->input->post('project')."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
+						alert('청약 정보 입력이 정상 처리되었습니다.', base_url('m1/sales/1/2').$ret_url);
 
 
-					}else if($this->input->post('cont_sort2')=='1'){ // 계약일 때
+					}else if($this->input->post('cont_sort2')=='2'){ // 계약일 때
 						//price_seq 데이터 가공
-						$pj = $this->input->post('project');
-						$con_fl = $this->main_m->sql_result(" SELECT * FROM cms_sales_con_floor WHERE pj_seq='$pj' ORDER BY seq ");
+						$pj = $this->input->post('project'); // 프로젝트 아이디
+						$con_fl = $this->main_m->sql_result(" SELECT * FROM cms_sales_con_floor WHERE pj_seq='$pj' ORDER BY seq "); // 층별 조건 객체배열
 						if(strlen($this->input->post('ho'))==3) { // 현재 층수 구하기
 							$now_floor = substr($this->input->post('ho'), 0, 1);
 						}else if(strlen($this->input->post('ho'))==4){
@@ -245,7 +249,6 @@ class M1 extends CI_Controller {
 						foreach($con_fl as $lt) { // 층수조건 아이디 (con_floor_seq) 구하기
 							$a = explode("-", $lt->floor_range);
 							if($now_floor>=$a[0] && $now_floor<=$a[1]) $con_floor_seq = $lt->seq;
-							return;
 						}
 
 						$pr_where = array(
@@ -270,87 +273,153 @@ class M1 extends CI_Controller {
 							'ini_reg_worker' => $this->session->userdata('name')
 						);
 
-						if($this->input->post('mode')=='1'){  // 신규 계약일 때
-						//    -- 계약 및 계약자 관리 테이블 인서트
-							$result[0] = $this->main_m->insert_data('cms_sales_contract', $cont_arr1, 'ini_reg_date');
+						if($this->input->post('unit_is_cont')=='1'){  // 신규 계약일 때
+//   1. 계약관리 테이블에 해당 데이터를 인서트한다.
+							//$result[0] = $this->main_m->insert_data('cms_sales_contract', $cont_arr1, 'ini_reg_date');
 
-							if( !$result[0]){
-								alert('데이터베이스 에러입니다.1', base_url(uri_string()));
-							}
+							// if( !$result[0]){
+							// 	alert('데이터베이스 에러입니다.1', base_url(uri_string()));
+							// }
+
+
 							$pj = $this->input->post('project', TRUE);
-							$un = $his->input->post('unit_seq', TRUE);
+							$un = $this->input->post('unit_seq', TRUE);
 							$cont_seq = $this->main_m->sql_row(" SELECT seq FROM cms_sales_contract WHERE pj_seq='$pj' AND unit_seq='$un' ");
+							$addr_id = $this->input->post('zipcode')."|".$this->input->post('address1')."|".$this->input->post('address2');
+							$addr_dm = $this->input->post('zipcode_')."|".$this->input->post('address1_')."|".$this->input->post('address2_');
+							$idoc1 = $this->input->post('incom_doc_1');
+							$idoc2 = $this->input->post('incom_doc_2');
+							$idoc3 = $this->input->post('incom_doc_3');
+							$idoc4 = $this->input->post('incom_doc_4');
+							$idoc5 = $this->input->post('incom_doc_5');
+							$idoc6 = $this->input->post('incom_doc_6');
+							$idoc7 = $this->input->post('incom_doc_7');
+							$idoc8 = $this->input->post('incom_doc_8');
+							$incom_doc = $idoc1."-".$idoc2."-".$idoc3."-".$idoc4."-".$idoc5."-".$idoc6."-".$idoc7."-".$idoc8;
+
 							$cont_arr2 = array( // 계약자 테이블 입력 데이터
-								'cont_seq' => $cont_seq,
-								'contractor' => $this->input->post('project', TRUE),
-								'cont_tel1' => '',
-								'cont_tel2' => '',
-								'cont_addr1' => '',
-								'cont_addr2' => '',
-								'cont_date' => '',
-								'incom_doc' => '',
+								'cont_seq' => $cont_seq->seq,
+								'contractor' => $this->input->post('custom_name', TRUE),
+								'cont_tel1' =>  $this->input->post('tel_1', TRUE),
+								'cont_tel2' =>  $this->input->post('tel_2', TRUE),
+								'cont_addr1' =>  $addr_id,
+								'cont_addr2' =>  $addr_dm,
+								'cont_date' =>  $this->input->post('conclu_date', TRUE),
+								'incom_doc' =>  $incom_doc,
 								'ini_reg_worker' => $this->session->userdata('name')
 							);
-							$result[1] = $this->main_m->insert_data('cms_sales_contractor', $cont_arr2, 'ini_reg_date');
 
-							if( !$result[1]) {
-								alert('데이터베이스 에러입니다.2', '');
-							}
+//   2. 계약자관리 테이블에 해당 데이터를 인서트한다.
+							//$result[1] = $this->main_m->insert_data('cms_sales_contractor', $cont_arr2, 'ini_reg_date');
+
+							// if( !$result[1]) {
+							// 	alert('데이터베이스 에러입니다.2', '');
+							// }
+
+//   컬럼 삭제 // 추후 필요 시 소스 부활 시킬 것.
 							// 계약자 테이블 seq 구해서 계약 테이블 입력
-							$contractor_seq = $this->main_m->sql_row(" SELECT seq FROM cms_sales_contractor WHERE cont_seq='$cont_seq' ");
-							$result[2] = $this->main_m->insert_data('cms_sales_contract', array('contractor_seq' => $contractor_seq));
+							//$contractor = $this->main_m->sql_row(" SELECT seq FROM cms_sales_contractor WHERE cont_seq='$cont_seq->seq' ");
+							// $result[2] = $this->main_m->insert_data('cms_sales_contract', array('contractor_seq' => $contractor->seq));
+							// if( !$result[2]) {
+							// 	alert('데이터베이스 에러입니다.3', base_url(uri_string()));
+							// }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////여기까지 작업 진행 중
+// 현재 1. 계약테이블 2. 계약자 테이블 입력 완료
 
-							if( !$result[2]) {
-								alert('데이터베이스 에러입니다.3', base_url(uri_string()));
-							}
 
-							if(1==1){
-								$cont_arr3 = array( // 수납 테이블 입력 데이터
-									'cont_seq' => $cont_seq,
-									'pay_sche_seq' => $pay_sche_seq,
-									'pay_payment' => $pay_payment,
-									'paid_amount' => '',
-									'paid_acc' => '',
-									'paid_date' => '',
-									'paid_who' => '',
-									'reg_worker' => $this->session->userdata('name')
+
+// 쳥약 테이블에 있던 데이타면 처리 구분 업데이트 하고  청약금 데이터 ->수납 데이터 테이블로 인서트
+// 그렇지 않으면 현재 계약금 수납 데이터만 -> 수납 데이터 테이블로 인서트
+
+							if($this->input->post('unit_is_app')=='1'){ // 청약 상태인 데이터 이면
+
+// 청약 테이블 계약전환 처리
+								$dis_data = array(
+									'disposal_div'=> '1',
+									'disposal_date' => date('Y-m-d'),
+									'last_modi_date'=> date('Y-m-d'),
+									'last_modi_worker' =>$this->session->userdata('name')
 								);
-								$result[3] = $this->main_m->insert_data('cms_sales_ received', $cont_arr3, 'reg_date');
-								if( !$result[3]) {
-									alert('데이터베이스 에러입니다.4', base_url(uri_string()));
+								// $result[4] = $this->main_m->update_data('cms_sales_application', $dis_data, array('unit_seq'=>$this->input->post('unit_seq'))); // 청약 테이블 계약전환 처리
+								// if( !$result[4]) {
+								// 	alert('데이터베이스 에러입니다.5', base_url(uri_string()));
+								// }
+
+
+								if( !empty($this->input->post('app_in_mon', TRUE))){
+									$cont_arr3 = array( // 청약금 -> 수납 테이블 입력 데이터
+										'cont_seq' => $cont_seq->seq,
+										// 'pay_sche_code' => $this->input->get('app_pay_sche', TRUE), // 당회 납부 회차
+										'paid_amount' => $this->input->post('app_in_mon', TRUE), // 납부한 금액
+										'paid_acc' => $this->input->post('app_in_acc', TRUE),
+										'paid_date' => $this->input->post('app_in_date', TRUE),
+										'paid_who' => $this->input->post('app_in_who', TRUE),
+										'reg_worker' => $this->session->userdata('name')
+									);
+	// 청약금 데이터 -> 수납 데이터로 입력
+									$result[5] = $this->main_m->insert_data('cms_sales_received', $cont_arr3, 'reg_date');
+									if( !$result[5]) {
+										alert('데이터베이스 에러입니다.6', base_url(uri_string()));
+									}
 								}
 							}
-							if(2==2){
-								$cont_arr4 = array( // 수납 테이블 입력 데이터
-									'cont_seq' => $cont_seq,
-									'pay_sche_seq' => $pay_sche_seq,
-									'pay_payment' => $pay_payment,
-									'paid_amount' => '',
-									'paid_acc' => '',
-									'paid_date' => '',
-									'paid_who' => '',
-									'reg_date' => '',
-									'reg_worker' => $this->session->userdata('name')
-								);
-								$result[4] = $this->main_m->insert_data('cms_sales_received', $cont_arr4, 'reg_date');
-								if( !$result[4]) {
-									alert('데이터베이스 에러입니다.5', base_url(uri_string()));
-								}
-							}
+
+// 동호수 관리 테이블 인서트
+
+// 동호수 관리 테이블 인서트
 							// 2. 동호수 관리 테이블 입력
-							$where = array('type'=>$this->input->post('type'), 'dong'=>$this->input->post('dong'), 'ho'=>$this->input->post('ho'));
-							$result[5] = $this->main_m->update_data('cms_project_all_housing_unit', array('is_contract'=>'1'), $where); // 동호수 테이블 계약상태로 변경
-							if( !$result[5]) {
-								alert('데이터베이스 에러입니다.6', base_url(uri_string()));
-							}else{
-								$udh = $this->input->post('unit_dong_ho', TRUE);
-								alert($udh.'의 계약 정보입력이 정상처리되었습니다.', base_url(uri_string()));
+							// $where = array('type'=>$this->input->post('type'), 'dong'=>$this->input->post('dong'), 'ho'=>$this->input->post('ho'));
+							// $result[3] = $this->main_m->update_data('cms_project_all_housing_unit', array('is_application'=>'0', 'is_contract'=>'1'), $where); // 동호수 테이블 계약상태로 변경
+							// if( !$result[3]) {
+							// 	alert('데이터베이스 에러입니다.4', base_url(uri_string()));
+							// }
+
+
+							// 계약금 입금 정보 - >수납 테이블로 입력 처리
+							if($this->input->post('deposit_1') && $this->input->post('deposit_1')!='0'){ // 계약금 1 (분담금 // 또는 일반 분양대금) 입력정보 있을때 처리
+								$cont_arr4 = array( // 수납 테이블 입력 데이터
+									'cont_seq' => $cont_seq->seq,
+									'pay_sche_code' => $this->input->get('cont_pay_sche1', TRUE), // 당회 납부 회차
+									'paid_amount' => $this->input->post('deposit_1', TRUE), // 납부한 금액
+									'paid_acc' => $this->input->post('dep_acc_1', TRUE),
+									'paid_date' => $this->input->post('cont_in_date1', TRUE),
+									'paid_who' => $this->input->post('cont_in_who1', TRUE),
+									'reg_worker' => $this->session->userdata('name')
+								);
+
+// 계약금 데이터1 -> 수납 데이터로 입력
+								$result[6] = $this->main_m->insert_data('cms_sales_received', $cont_arr4, 'reg_date');
+								if( !$result[6]) {
+									alert('데이터베이스 에러입니다.7', base_url(uri_string()));
+								}
+								alert("테스트 중입니다!", '');
 							}
+							if($this->input->post('deposit_2') && $this->input->post('deposit_2')!='0'){ // 계약금 2 (대행비 // 또는 일반 분양대금) 입력정보 있을때 처리
+								$cont_arr4 = array( // 수납 테이블 입력 데이터
+									'cont_seq' => $cont_seq->seq,
+									'pay_sche_code' => $this->input->get('cont_pay_sche2', TRUE), // 당회 납부 회차
+									'paid_amount' => $this->input->post('deposit_2', TRUE), // 납부한 금액
+									'paid_acc' => $this->input->post('dep_acc_2', TRUE),
+									'paid_date' => $this->input->post('cont_in_date2', TRUE),
+									'paid_who' => $this->input->post('cont_in_who2', TRUE),
+									'reg_worker' => $this->session->userdata('name')
+								);
+// 계약금 데이터2 -> 수납 데이터로 입력
+								// $result[7] = $this->main_m->insert_data('cms_sales_received', $cont_arr4, 'reg_date');
+								// if( !$result[7]) {
+								// 	alert('데이터베이스 에러입니다.8', base_url(uri_string()));
+								// }
+							}
+
+							$udh = $this->input->post('unit_dong_ho', TRUE);
+							alert($udh.'의 계약 정보입력이 정상처리되었습니다.', base_url(uri_string()));
+
+
 
 
 						//////여기까지 작업 진행 중 ~~~~~!!!!!
 
-						}else if($this->input->post('mode')=='2'){ // 기존 청약정보 수정일 때
+					}else if($this->input->post('unit_is_cont')=='1'){ // 기존 계약정보 수정일 때
 
 						//    -- 계약 및 계약자 관리 테이블 인서트
 						//    -- 청약 관리테이블 -> 계약 전환 처리 업데이트

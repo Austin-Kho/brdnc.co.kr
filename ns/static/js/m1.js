@@ -219,6 +219,15 @@ function work_log_sub(is_com, str){
 
 
 /********************계약등록 시작*******************/
+// 청약 수정 화면에서 계약 전환 시 함수
+function app_tr_cont(chk){
+	var form = document.set1;
+	if(chk.checked===true){
+		form.cont_sort2.value='2';
+		form.submit();
+	}
+}
+
 function cont_check(){
 	var form1 = document.set1;
 	var form2 = document.form1;
@@ -229,14 +238,19 @@ function cont_check(){
 		return;
 	}
 	if(form1.cont_sort1[0].checked==1){ // 계약 진행시
-		if(!form1.cont_sort2.value){
+		if(!form1.cont_sort2.value || form1.cont_sort2.value==='0'){
 			alert('세부 등록 구분을 선택하여 주십시요!');
 			form1.cont_sort2.focus();
 			return;
 		}
 	}
 	if(form1.cont_sort1[1].checked==1){ // 해지 진행시
-		if(!form1.cont_sort3.value){
+		if(!form1.cont_sort3.value || form1.cont_sort3.value==='0'){
+			alert('세부 등록 구분을 선택하여 주십시요!');
+			form1.cont_sort3.focus();
+			return;
+		}
+		if(!form1.cont_sort3.value || form1.cont_sort3.value==='0'){
 			alert('세부 등록 구분을 선택하여 주십시요!');
 			form1.cont_sort3.focus();
 			return;
@@ -257,6 +271,11 @@ function cont_check(){
 		form1.ho.focus();
 		return;
 	}
+	if(!form1.cont_sort3&&!form2.conclu_date.value){
+		alert('거래일자를 입력하여 주십시요!');
+		form2.conclu_date.focus();
+		return;
+	}
 	if( !form1.cont_sort3 && !form2.diff_no.value){
 		alert('차수구분을 선택하여 주십시요!');
 		form2.diff_no.focus();
@@ -272,21 +291,33 @@ function cont_check(){
 		form2.tel_1.focus();
 		return;
 	}
-	if(!form1.cont_sort3&&!form2.app_in_mon.value){
+	//alert(form2.app_in_mon.value);
+	if( !form1.cont_sort3 && form1.cont_sort2==1 && ( !form2.app_in_mon.value || form2.app_in_mon.value==='')){
 		alert('청약금을 입력하여 주십시요!');
 		form2.app_in_mon.focus();
 		return;
 	}
-	if(!form1.cont_sort3&&!form2.app_in_acc.value){
+	if(!form1.cont_sort3 && form1.cont_sort2==1 &&  form2.app_in_mon.value && !form2.app_in_acc.value){
 		alert('청약금 입금 계좌를 선택하여 주십시요!');
 		form2.app_in_acc.focus();
 		return;
 	}
-	if(!form1.cont_sort3&&!form2.conclu_date.value){
-		alert('거래일자를 입력하여 주십시요!');
-		form2.conclu_date.focus();
+	if(!form1.cont_sort3 && form1.cont_sort2==1 &&  form2.app_in_mon.value && form2.app_in_date.value==='0000-00-00'){
+		alert('청약금 입금 일자를 입력하여 주십시요!');
+		form2.app_in_date.focus();
 		return;
 	}
+	if(!form1.cont_sort3 && form1.cont_sort2==1 &&  form2.app_in_mon.value && !form2.app_in_who.value){
+		alert('청약금 입금자명을 입력하여 주십시요!');
+		form2.app_in_who.focus();
+		return;
+	}
+	if(!form1.cont_sort3 && typeof(form2.app_in_mon)!='undefined' && (form2.app_in_mon.value) && !form2.app_pay_sche.value){
+		alert('청약금 납부회차를 선택하여 주십시요!');
+		form2.app_in_who.focus();
+		return;
+	}
+
 	if(form1.cont_sort2){
 		if(form1.cont_sort2.value=='1') var cont_sort = "청약(가계약)";
 		if(form1.cont_sort2.value=='2') var cont_sort = "계약(정계약)";
