@@ -237,17 +237,20 @@
 						</div>
 					</div>
 				</div>
-<?php else : ?>
+<?php else :
+	if(empty($is_reg['cont_data'])) : $cont_code = set_value('custom_name');
+	else : $cont_code = $is_reg['cont_data']->cont_code;
+	endif;
+?>
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; ">계약 일련번호</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_code" class="sr-only">계약 일련번호</label>
-						<input type="text" class="form-control input-sm" name="cont_code" value="" <?php echo $disabled; ?>>
+						<input type="text" class="form-control input-sm" name="cont_code" value="<?php echo $cont_code; ?>" <?php echo $disabled; ?>>
 					</div>
 				</div>
 <?php endif; ?>
 			</div>
-
 
 			<div class="row bo-top bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">차수 구분 <span class="red">*</span></div>
@@ -305,13 +308,24 @@
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">청약금 <span class="red">*</span>
 					<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div>
 				</div>
+<?php
+	if( empty($is_reg['app_data']) && empty($received1)) : $app_in_mon = set_value('app_in_mon');
+	elseif( !empty($is_reg['app_data'])) : $app_in_mon =$is_reg['app_data']->app_in_mon;
+	else : $app_in_mon = $received1->paid_amount;
+	endif;
+?>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="app_in_mon" class="sr-only">청약금</label>
-						<input type="text" class="form-control input-sm" name="app_in_mon" placeholder="청약금" value="<?php if( !empty($is_reg['app_data']) && $is_reg['app_data']->app_in_mon!=0) echo $is_reg['app_data']->app_in_mon; else echo set_value('app_in_mon'); ?>" <?php echo $disabled; if($this->input->get('cont_sort2')==2 OR $this->input->get('cont_sort2')==4) echo "readonly"; ?>>
+						<input type="text" class="form-control input-sm" name="app_in_mon" placeholder="청약금" value="<?php echo $app_in_mon; ?>" <?php echo $disabled; if($this->input->get('cont_sort2')==2 OR $this->input->get('cont_sort2')==4) echo "readonly"; ?>>
 					</div>
 				</div>
-
+<?php
+	// if( empty($is_reg['app_data']) && empty($received1)) : $app_in_mon = set_value('app_in_mon');
+	// elseif( !empty($is_reg['app_data'])) : $app_in_mon =$is_reg['app_data']->app_in_mon;
+	// else : $app_in_mon = $received1->paid_amount;
+	// endif;
+?>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="app_in_acc" class="sr-only">입금계좌</label>
@@ -347,7 +361,7 @@
 						<select class="form-control input-sm" name="app_pay_sche">
 							<option value="">납부회차</option>
 <?php foreach ($pay_schedule as $lt) : ?>
-							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($is_reg['cont_data'])){ if($lt->pay_code==$is_reg['cont_data']->last_paid_sche) echo "selected"; } ?>><?php echo $lt->pay_name; ?></option>
+							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received1)){ if($lt->pay_code==$received1->pay_sche_code) echo "selected"; } ?>><?php echo $lt->pay_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -360,14 +374,15 @@
 
 
 <?php if($this->input->get('cont_sort2')=="2" OR $this->input->get('cont_sort3')==4) : // 계약 등록 시 ?>
-
 			<div class="row bo-bottom font12" style="margin: 0;">
-
-
-
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약금 [1] <span class="red">*</span>
 					<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div>
 				</div>
+<?php
+	if(empty($is_reg['cont_data'])) : $deposit_1 = set_value('tel_1');
+	else : $deposit_1 = $is_reg['cont_data']->cont_tel1;
+	endif;
+?>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="deposit_1" class="sr-only">계약금[1]</label>
@@ -408,7 +423,7 @@
 						<select class="form-control input-sm" name="cont_pay_sche1">
 							<option value="">납부회차</option>
 <?php foreach ($pay_schedule as $lt) : ?>
-							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($is_reg['cont_data'])){ if($lt->pay_code==$is_reg['cont_data']->last_paid_sche) echo "selected"; } ?>><?php echo $lt->pay_name; ?></option>
+							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received2)){ if($lt->pay_code==$received2->pay_sche_code) echo "selected"; } ?>><?php echo $lt->pay_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -458,7 +473,7 @@
 						<select class="form-control input-sm" name="cont_pay_sche2" >
 							<option value="">납부회차</option>
 <?php foreach ($pay_schedule as $lt) : ?>
-							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($is_reg['cont_data'])){ if($lt->pay_code==$is_reg['cont_data']->last_paid_sche) echo "selected"; } ?>><?php echo $lt->pay_name; ?></option>
+							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received3)){ if($lt->pay_code==$received3->pay_sche_code) echo "selected"; } ?>><?php echo $lt->pay_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
