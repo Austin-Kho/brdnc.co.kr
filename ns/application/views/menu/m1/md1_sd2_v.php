@@ -161,7 +161,7 @@
 			<div class="row bo-top font12" style="margin: 0;">
 <?php if( !empty($is_reg['app_data'])) $dicol = "#f8f9cc;"; if( !empty($is_reg['cont_data'])) $dicol = "#E0E7FB;";   ?>
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="height: 60px; padding: 10px; 0">현재 상태 <span class="red">*</span></div>
-				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe; background-color: <?php echo $dicol; ?>">
+				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe; background-color: <?php if( !empty($dicol)) echo $dicol; ?>">
 <?php if( !empty($is_reg['app_data'])) : // 현재 청약상태 호수이면  ?>
 					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">청약 : <?php echo $is_reg['app_data']->app_date; ?></div>
 					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">입금 : <?php echo number_format($is_reg['app_data']->app_in_mon)." 원"; ?></div>

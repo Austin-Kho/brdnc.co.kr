@@ -98,8 +98,8 @@
 					$now_type = ($db_ho !==null) ? $db_ho->type : ''; // 해당 타입
 					if($db_ho !==null) : // 세대 상태
 						if($db_ho->is_hold==1) : $condi = "홀딩";
-						elseif($db_ho->is_application==1) : $condi = "청약";
-						elseif($db_ho->is_contract==1) : $condi = "계약";
+						elseif($db_ho->is_application==1) : $condi = "청약"; //$app_data = $this->main_m->sql_row(" SELECT  applicant, app_date FROM cms_sales_application WHERE unit_seq='$db_ho->seq' ");
+						elseif($db_ho->is_contract==1) : $condi = "계약";  //$cont_data = $this->main_m->sql_row(" SELECT  contractor, cms_sales_contract.cont_date FROM cms_sales_contract, cms_sales_contractor WHERE unit_seq='$db_ho->seq' AND cms_sales_contract.seq=cont_seq ");
 						else : $condi = "";
 						endif;
 					else:
@@ -142,10 +142,10 @@
 					);
 ?>
 									<div style="<?php echo $clear_css; ?> float:left; <?php echo $div_pointer; ?> border: 1px solid #ddd; <?php echo $bo_wid." ".$bo_col." ".$piloti; ?>">
-										<div style="width:30px; height:14px; text-align:center; font-size:9px; color:#333; padding: 1px 0; <?php echo $div_col; ?>"  data-toggle="tooltip" title="<?php echo $now_type; ?>">
+										<div style="width:30px; height:14px; text-align:center; font-size:9px; color:#333; padding: 1px 0; <?php echo $div_col; ?>">
 											<span><?php echo $now_ho; ?></span>
 										</div>
-										<div style="width:30px; height:14px; text-align:center; font-size:9px; color: #fff; <?php echo $condi_col; ?>"><?php echo $condi;?></div>
+										<div style="width:30px; height:14px; text-align:center; font-size:9px; color: #fff; <?php echo $condi_col; ?>"><span  data-toggle="tooltip" title="<?php //echo $tooltip; ?>"><?php echo $condi;?></span></div>
 									</div>
 <?php endfor;  endfor; ?>
 								</td>
