@@ -98,8 +98,8 @@
 					$now_type = ($db_ho !==null) ? $db_ho->type : ''; // 해당 타입
 					if($db_ho !==null) : // 세대 상태
 						if($db_ho->is_hold==1) : $condi = "홀딩";
-						elseif($db_ho->is_application==1) : $condi = "청약"; //$app_data = $this->main_m->sql_row(" SELECT  applicant, app_date FROM cms_sales_application WHERE unit_seq='$db_ho->seq' ");
-						elseif($db_ho->is_contract==1) : $condi = "계약";  //$cont_data = $this->main_m->sql_row(" SELECT  contractor, cms_sales_contract.cont_date FROM cms_sales_contract, cms_sales_contractor WHERE unit_seq='$db_ho->seq' AND cms_sales_contract.seq=cont_seq ");
+						elseif($db_ho->is_application==1) : $condi = "청약"; $app_data = $this->main_m->sql_row(" SELECT  applicant, app_date FROM cms_sales_application WHERE unit_seq='$db_ho->seq' ");
+						elseif($db_ho->is_contract==1) : $condi = "계약";  $cont_data = $this->main_m->sql_row(" SELECT  contractor, cms_sales_contract.cont_date FROM cms_sales_contract, cms_sales_contractor WHERE unit_seq='$db_ho->seq' AND cms_sales_contract.seq=cont_seq ");
 						else : $condi = "";
 						endif;
 					else:
@@ -128,8 +128,8 @@
 					endif;
 					if($db_ho !==null) : // 상태 색상 지정
 						if($db_ho->is_hold==1) : $condi_col = "background-color: #728a7d;";
-						elseif($db_ho->is_application==1) : $condi_col = "background-color: #3a5ba7;"; // 청약 시
-						elseif($db_ho->is_contract==1) : $condi_col = "background-color: #ba0c0c;"; // 계약 시
+						elseif($db_ho->is_application==1) : $condi_col = "background-color: #2ba220;"; // 청약 시
+						elseif($db_ho->is_contract==1) : $condi_col = "background-color: #8b3838;"; // 계약 시
 						else : $condi_col = "";
 						endif;
 					else:

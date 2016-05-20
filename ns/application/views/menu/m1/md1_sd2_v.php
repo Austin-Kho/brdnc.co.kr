@@ -310,9 +310,9 @@
 					<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div>
 				</div>
 <?php
-	if( empty($is_reg['app_data']) && empty($received1)) : $app_in_mon = set_value('app_in_mon');
+	if( empty($is_reg['app_data']) && empty($receiv_app)) : $app_in_mon = set_value('app_in_mon');
 	elseif( !empty($is_reg['app_data'])) : $app_in_mon =$is_reg['app_data']->app_in_mon;
-	else : $app_in_mon = $received1->paid_amount;
+	else : $app_in_mon = $receiv_app->paid_amount;
 	endif;
 ?>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
@@ -328,7 +328,7 @@
 						<select class="form-control input-sm" name="app_in_acc" <?php echo $disabled; ?> <?php echo $disabled; if($this->input->get('cont_sort2')==2 OR $this->input->get('cont_sort2')==4) echo "readonly"; ?>>
 							<option value="">입금계좌</option>
 <?php foreach ($dep_acc as $lt) : ?>
-							<option value="<?php echo $lt->seq; ?>" <?php if( (!empty($is_reg['app_data']->app_in_acc)&&$lt->seq==$is_reg['app_data']->app_in_acc) OR (!empty($received1->paid_acc)&&$received1->paid_acc==$lt->seq)) : echo "selected"; else:  echo set_select('app_in_acc', $lt->seq); endif; ?>><?php echo $lt->acc_nick; ?></option>
+							<option value="<?php echo $lt->seq; ?>" <?php if( (!empty($is_reg['app_data']->app_in_acc)&&$lt->seq==$is_reg['app_data']->app_in_acc) OR (!empty($receiv_app->paid_acc)&&$receiv_app->paid_acc==$lt->seq)) : echo "selected"; else:  echo set_select('app_in_acc', $lt->seq); endif; ?>><?php echo $lt->acc_nick; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -357,7 +357,7 @@
 						<select class="form-control input-sm" name="app_pay_sche">
 							<option value="">납부회차</option>
 <?php foreach ($pay_schedule as $lt) : ?>
-							<option value="<?php echo $lt->pay_code; ?>" <?php if( !empty($received1)&&$lt->pay_code==$received1->pay_sche_code){ echo "selected"; }else{ set_select('app_pay_sche', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
+							<option value="<?php echo $lt->pay_code; ?>" <?php if( !empty($receiv_app)&&$lt->pay_code==$receiv_app->pay_sche_code){ echo "selected"; }else{ set_select('app_pay_sche', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -392,7 +392,7 @@
 						<select class="form-control input-sm" name="dep_acc_1" <?php echo $disabled; ?>>
 							<option value="">입금계좌</option>
 <?php foreach ($dep_acc as $lt) : ?>
-							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received2->paid_acc)&&$received2->paid_acc==$lt->seq) echo "selected"; else echo set_select('dep_acc_1', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
+							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received1->paid_acc)&&$received1->paid_acc==$lt->seq) echo "selected"; else echo set_select('dep_acc_1', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -402,7 +402,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date1" class="sr-only">입금일</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date1" id="cont_in_date1" class="form-control input-sm" value="<?php if( !empty($received2)) echo $received2->paid_date; else echo set_value('cont_in_date1'); ?>" placeholder="입금일" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="cont_in_date1" id="cont_in_date1" class="form-control input-sm" value="<?php if( !empty($received1)) echo $received1->paid_date; else echo set_value('cont_in_date1'); ?>" placeholder="입금일" onclick="cal_add(this); event.cancelBubble=true"  readonly>
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
 							<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date1'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
@@ -412,7 +412,7 @@
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_who1" class="sr-only">입금자</label>
-						<input type="text" class="form-control input-sm" name="cont_in_who1" placeholder="입금자" value="<?php if( !empty($received2)) echo $received2->paid_who; else echo set_value('cont_in_who1'); ?>">
+						<input type="text" class="form-control input-sm" name="cont_in_who1" placeholder="입금자" value="<?php if( !empty($received1)) echo $received1->paid_who; else echo set_value('cont_in_who1'); ?>">
 					</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
@@ -421,7 +421,7 @@
 						<select class="form-control input-sm" name="cont_pay_sche1">
 							<option value="">납부회차</option>
 <?php foreach ($pay_schedule as $lt) : ?>
-							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received2)&&$lt->pay_code==$received2->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche1', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
+							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received1)&&$lt->pay_code==$received1->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche1', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -447,7 +447,7 @@
 						<select class="form-control input-sm" name="dep_acc_2" <?php echo $disabled; ?>>
 							<option value="">입금계좌</option>
 <?php foreach ($dep_acc as $lt) : ?>
-							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received3->paid_acc)&&$received3->paid_acc==$lt->seq) echo "selected"; else set_select('dep_acc_2', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
+							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received2->paid_acc)&&$received2->paid_acc==$lt->seq) echo "selected"; else set_select('dep_acc_2', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -456,7 +456,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date2" class="sr-only">입금일</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date2" id="cont_in_date2" class="form-control input-sm" value="<?php if( !empty($received3)) echo $received3->paid_date; else echo set_value('cont_in_date2'); ?>" placeholder="입금일" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="cont_in_date2" id="cont_in_date2" class="form-control input-sm" value="<?php if( !empty($received2)) echo $received2->paid_date; else echo set_value('cont_in_date2'); ?>" placeholder="입금일" onclick="cal_add(this); event.cancelBubble=true"  readonly>
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
 							<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date2'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
@@ -466,7 +466,7 @@
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_who2" class="sr-only">입금자</label>
-						<input type="text" class="form-control input-sm" name="cont_in_who2" placeholder="입금자" value="<?php if( !empty($received3)) echo $received3->paid_who; else echo set_value('cont_in_who2'); ?>">
+						<input type="text" class="form-control input-sm" name="cont_in_who2" placeholder="입금자" value="<?php if( !empty($received2)) echo $received2->paid_who; else echo set_value('cont_in_who2'); ?>">
 					</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
@@ -475,7 +475,7 @@
 						<select class="form-control input-sm" name="cont_pay_sche2" >
 							<option value="">납부회차</option>
 <?php foreach ($pay_schedule as $lt) : ?>
-							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received3)&&$lt->pay_code==$received3->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche2', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
+							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received2)&&$lt->pay_code==$received2->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche2', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
