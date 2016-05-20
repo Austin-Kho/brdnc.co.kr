@@ -24,14 +24,14 @@ class Popup_m extends CI_Model
 		if($data['sh_what'] == 1) { // 도로명주소 검색 시
 			for($i=0; $i<count($search_text); $i++){
 				if($i==0) $where = " ((epmn LIKE '%$search_text[0]%') OR (doro_name LIKE '%$search_text[0]%') OR (ld_name LIKE '%$search_text[0]%') OR (lr_name LIKE '%$search_text[0]%') OR (ad_name LIKE '%$search_text[0]%')) ";
-				if($i==1) $where .= " AND (mb_num=$search_text[1] OR ml_num=$search_text[1]) ";
+				if($i==1 && $search_text[1]!=="") $where .= " AND (mb_num=$search_text[1] OR ml_num=$search_text[1]) ";
 			}
 		} // 도로명 검색 (법정읍면동/lemd_name/법정리/lr_name/도로명/doro_name/행정동/ad_name)
 
 		if($data['sh_what'] == 2) { // 건물명 검색 시
 			for($i=0; $i<count($search_text); $i++){
 				if($i==0) $where = "(sgg_bd_name LIKE '%$search_text[0]%')";
-				if($i==1) $where .= " AND (mb_num=$search_text[1])  ";
+				if($i==1 && $search_text[1]!=="") $where .= " AND (mb_num=$search_text[1])  ";
 			}
 
 		} // 건물명 검색 (건축물대장/abd_name/상세건물명/dbd_name/시군구용건물명/sgg_bdn)

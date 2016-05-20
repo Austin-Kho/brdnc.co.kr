@@ -16,7 +16,7 @@ class Zip_ extends CI_Controller
 
 	public function zipcode($no)
 	{
-		$this->output->enable_profiler(TRUE);
+		// $this->output->enable_profiler(TRUE);
 		$this->load->view('/popup/pop_header_v');
 
 		$data['num'] = $no;
