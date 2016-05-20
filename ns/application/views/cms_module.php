@@ -258,12 +258,12 @@
         <h1>Badges</h1>
       </div>
       <p>
-        <a href="#">Inbox <span class="badge">42</span></a>
+        <a href="">Inbox <span class="badge">42</span></a>
       </p>
       <ul class="nav nav-pills" role="tablist">
-        <li role="presentation" class="active"><a href="#">Home <span class="badge">42</span></a></li>
-        <li role="presentation"><a href="#">Profile</a></li>
-        <li role="presentation"><a href="#">Messages <span class="badge">3</span></a></li>
+        <li role="presentation" class="active"><a href="">Home <span class="badge">42</span></a></li>
+        <li role="presentation"><a href="">Profile</a></li>
+        <li role="presentation"><a href="">Messages <span class="badge">3</span></a></li>
       </ul>
 
 
@@ -271,13 +271,13 @@
         <h1>Dropdown menus</h1>
       </div>
       <div class="dropdown theme-dropdown clearfix">
-        <a id="dropdownMenu1" href="#" class="sr-only dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+        <a id="dropdownMenu1" href="" class="sr-only dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-          <li class="active" role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+          <li class="active" role="presentation"><a role="menuitem" tabindex="-1" href="">Action</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="">Another action</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="">Something else here</a></li>
           <li role="presentation" class="divider"></li>
-          <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+          <li role="presentation"><a role="menuitem" tabindex="-1" href="">Separated link</a></li>
         </ul>
       </div>
 
@@ -286,14 +286,14 @@
         <h1>Navs</h1>
       </div>
       <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#">Home</a></li>
-        <li role="presentation"><a href="#">Profile</a></li>
-        <li role="presentation"><a href="#">Messages</a></li>
+        <li role="presentation" class="active"><a href="">Home22</a></li>
+        <li role="presentation"><a href="">Profile</a></li>
+        <li role="presentation"><a href="">Messages</a></li>
       </ul>
       <ul class="nav nav-pills" role="tablist">
-        <li role="presentation" class="active"><a href="#">Home</a></li>
-        <li role="presentation"><a href="#">Profile</a></li>
-        <li role="presentation"><a href="#">Messages</a></li>
+        <li role="presentation" class="active"><a href="">Home11</a></li>
+        <li role="presentation"><a href="">Profile</a></li>
+        <li role="presentation"><a href="">Messages</a></li>
       </ul>
 
 
@@ -310,23 +310,23 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
+            <a class="navbar-brand" href="">Project name</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
+              <li class="active"><a href="">Home</a></li>
               <li><a href="#about">About</a></li>
               <li><a href="#contact">Contact</a></li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
+                  <li><a href="">Action</a></li>
+                  <li><a href="">Another action</a></li>
+                  <li><a href="">Something else here</a></li>
                   <li class="divider"></li>
                   <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
+                  <li><a href="">Separated link</a></li>
+                  <li><a href="">One more separated link</a></li>
                 </ul>
               </li>
             </ul>
@@ -343,23 +343,23 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Project name</a>
+            <a class="navbar-brand" href="">Project name</a>
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
+              <li class="active"><a href="">Home</a></li>
               <li><a href="#about">About</a></li>
               <li><a href="#contact">Contact</a></li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
+                  <li><a href="">Action</a></li>
+                  <li><a href="">Another action</a></li>
+                  <li><a href="">Something else here</a></li>
                   <li class="divider"></li>
                   <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
+                  <li><a href="">Separated link</a></li>
+                  <li><a href="">One more separated link</a></li>
                 </ul>
               </li>
             </ul>
@@ -428,26 +428,26 @@
         </div><!-- /.col-sm-4 -->
         <div class="col-sm-4">
           <div class="list-group">
-            <a href="#" class="list-group-item active">
+            <a href="" class="list-group-item active">
               Cras justo odio
             </a>
-            <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-            <a href="#" class="list-group-item">Morbi leo risus</a>
-            <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-            <a href="#" class="list-group-item">Vestibulum at eros</a>
+            <a href="" class="list-group-item">Dapibus ac facilisis in</a>
+            <a href="" class="list-group-item">Morbi leo risus</a>
+            <a href="" class="list-group-item">Porta ac consectetur ac</a>
+            <a href="" class="list-group-item">Vestibulum at eros</a>
           </div>
         </div><!-- /.col-sm-4 -->
         <div class="col-sm-4">
           <div class="list-group">
-            <a href="#" class="list-group-item active">
+            <a href="" class="list-group-item active">
               <h4 class="list-group-item-heading">List group item heading</h4>
               <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
             </a>
-            <a href="#" class="list-group-item">
+            <a href="" class="list-group-item">
               <h4 class="list-group-item-heading">List group item heading</h4>
               <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
             </a>
-            <a href="#" class="list-group-item">
+            <a href="" class="list-group-item">
               <h4 class="list-group-item-heading">List group item heading</h4>
               <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
             </a>
