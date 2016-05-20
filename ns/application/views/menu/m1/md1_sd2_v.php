@@ -155,8 +155,8 @@
 			<div class="row bo-top font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">처리 구분 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
-					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" name="is_cancel" value="1">해지신청</label></div>
-					<div class="col-xs-6 col-sm-4 col-md-3 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" name="is_refund" value="1">환불완료</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 0 4px 10px;"><label><input type="checkbox" name="is_cancel" value="1">해지신청</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-3 checkbox" style="margin: 0; padding: 4px 0 4px 10px;"><label><input type="checkbox" name="is_refund" value="1">환불완료</label></div>
 				</div>
 			</div>
 <?php endif; ?>

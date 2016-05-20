@@ -271,6 +271,7 @@ function cont_check(){
 		form1.ho.focus();
 		return;
 	}
+
 	if(!form1.cont_sort3&&!form2.conclu_date.value){
 		alert('거래일자를 입력하여 주십시요!');
 		form2.conclu_date.focus();
@@ -291,87 +292,98 @@ function cont_check(){
 		form2.tel_1.focus();
 		return;
 	}
-	//alert(form2.app_in_mon.value);
-	if( !form1.cont_sort3 && form1.cont_sort2==1 && ( !form2.app_in_mon.value || form2.app_in_mon.value==='')){
-		alert('청약금을 입력하여 주십시요!');
-		form2.app_in_mon.focus();
-		return;
-	}
-	if(!form1.cont_sort3 && form1.cont_sort2==1 &&  form2.app_in_mon.value && !form2.app_in_acc.value){
-		alert('청약금 입금 계좌를 선택하여 주십시요!');
-		form2.app_in_acc.focus();
-		return;
-	}
-	if(!form1.cont_sort3 && form1.cont_sort2==1 &&  form2.app_in_mon.value && form2.app_in_date.value==='0000-00-00'){
-		alert('청약금 입금 일자를 입력하여 주십시요!');
-		form2.app_in_date.focus();
-		return;
-	}
-	if(!form1.cont_sort3 && form1.cont_sort2==1 &&  form2.app_in_mon.value && !form2.app_in_who.value){
-		alert('청약금 입금자명을 입력하여 주십시요!');
-		form2.app_in_who.focus();
-		return;
-	}
-	if(!form1.cont_sort3 && form1.cont_sort2.value!='1' && typeof(form2.app_in_mon)!='undefined' && (form2.app_in_mon.value) && !form2.app_pay_sche.value){
-		alert('청약금이 귀속할 납부회차를 선택하여 주십시요!');
-		form2.app_pay_sche.focus();
-		return;
-	}
-	if( !form1.cont_sort3 && form1.cont_sort2.value=='2'&& !form2.deposit_1.value){
-		alert("계약금 항목을 입력하세요.");
-		form2.deposit_1.focus();
-		return;
-	}
-	if( !form1.cont_sort3 && form1.cont_sort2.value=='2'&& form2.deposit_1.value&& !form2.dep_acc_1.value){
-		alert("계약금 입금 계좌를 선택하세요.");
-		form2.dep_acc_1.focus();
-		return;
-	}
-	if( !form1.cont_sort3 && form1.cont_sort2.value=='2'&& form2.deposit_1.value&& !form2.cont_in_date1.value){
-		alert("계약금 입금 일자를 선택하세요.");
-		form2.cont_in_date1.focus();
-		return;
-	}
-	if( !form1.cont_sort3 && form1.cont_sort2.value=='2'&& form2.deposit_1.value&& !form2.cont_in_who1.value){
-		alert("계약금 실제 납부자 명을 입력하세요.");
-		form2.cont_in_who1.focus();
-		return;
-	}
-	if( !form1.cont_sort3 && form1.cont_sort2.value=='2'&& form2.deposit_1.value&& !form2.cont_pay_sche1.value){
-		alert("금회 납부 처리 회차를 선택하세요.");
-		form2.cont_pay_sche1.focus();
-		return;
-	}
-	if( !form1.cont_sort3 && form1.cont_sort2.value=='2'&& form2.deposit_2.value&& !form2.dep_acc_2.value){
-		alert("계약금 입금 계좌를 선택하세요.");
-		form2.dep_acc_2.focus();
-		return;
-	}
-	if( !form1.cont_sort3 && form1.cont_sort2.value=='2'&& form2.deposit_2.value&& !form2.cont_in_date2.value){
-		alert("계약금 입금 일자를 선택하세요.");
-		form2.cont_in_date2.focus();
-		return;
-	}
-	if( !form1.cont_sort3 && form1.cont_sort2.value=='2'&& form2.deposit_2.value&& !form2.cont_in_who2.value){
-		alert("계약금 실제 납부자 명을 입력하세요.");
-		form2.cont_in_who2.focus();
-		return;
-	}
-	if( !form1.cont_sort3 && form1.cont_sort2.value=='2'&& form2.deposit_2.value&& !form2.cont_pay_sche2.value){
-		alert("금회 납부 처리 회차를 선택하세요.");
-		form2.cont_pay_sche2.focus();
-		return;
-	}
-	if( !form1.cont_sort3 && form1.cont_sort2.value=='2'&& !form2.zipcode.value){
-		alert("계약자 주소 항목을 입력하세요.");
-		form2.zipcode.focus();
-		return;
-	}
 
-	if(form1.cont_sort3.value=='3' && (form2.is_cancel.checked===false && form2.is_refund.checked===false)){
-		alert("해지 또는 환불 여부를 체크하여 주십시요.");
-		form2.is_cancel.focus();
-		return;
+	if(typeof(form1.cont_sort2)!='undefined'  && form1.cont_sort2.value=='1') {
+		if( !form2.app_in_mon.value){
+			alert('청약금을 입력하여 주십시요!');
+			form2.app_in_mon.focus();
+			return;
+		}
+		if( !form2.app_in_acc.value){
+			alert('청약금 입금 계좌를 선택하여 주십시요!');
+			form2.app_in_acc.focus();
+			return;
+		}
+		if( !form2.app_in_date.value || form2.app_in_date.value==='0000-00-00'){
+			alert('청약금 입금 일자를 입력하여 주십시요!');
+			form2.app_in_date.focus();
+			return;
+		}
+		if( !form2.app_in_who.value){
+			alert('청약금 입금자명을 입력하여 주십시요!');
+			form2.app_in_who.focus();
+			return;
+		}
+
+	}else if(typeof(form1.cont_sort2)!='undefined' &&  form1.cont_sort2.value=='2'){
+
+		if( typeof(form2.app_in_mon)!='undefined' && form2.app_in_mon.value && !form2.app_pay_sche.value){
+			alert('청약금이 귀속할 납부회차를 선택하여 주십시요!');
+			form2.app_pay_sche.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& !form2.deposit_1.value){
+			alert("계약금 항목을 입력하세요.");
+			form2.deposit_1.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_1.value&& !form2.dep_acc_1.value){
+			alert("계약금 입금 계좌를 선택하세요.");
+			form2.dep_acc_1.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_1.value&& !form2.cont_in_date1.value){
+			alert("계약금 입금 일자를 선택하세요.");
+			form2.cont_in_date1.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_1.value&& !form2.cont_in_who1.value){
+			alert("계약금 실제 납부자 명을 입력하세요.");
+			form2.cont_in_who1.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_1.value&& !form2.cont_pay_sche1.value){
+			alert("금회 납부 처리 회차를 선택하세요.");
+			form2.cont_pay_sche1.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_2.value&& !form2.dep_acc_2.value){
+			alert("계약금 입금 계좌를 선택하세요.");
+			form2.dep_acc_2.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_2.value&& !form2.cont_in_date2.value){
+			alert("계약금 입금 일자를 선택하세요.");
+			form2.cont_in_date2.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_2.value&& !form2.cont_in_who2.value){
+			alert("계약금 실제 납부자 명을 입력하세요.");
+			form2.cont_in_who2.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_2.value&& !form2.cont_pay_sche2.value){
+			alert("금회 납부 처리 회차를 선택하세요.");
+			form2.cont_pay_sche2.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& !form2.zipcode.value){
+			alert("계약자 주소 항목을 입력하세요.");
+			form2.zipcode.focus();
+			return;
+		}
+	}else if(typeof(form1.cont_sort3)!='undefined' && form1.cont_sort3.value=='3'){
+		if(form2.is_cancel.checked===false && form2.is_refund.checked===false){
+			alert("해지 또는 환불 여부를 체크하여 주십시요.");
+			form2.is_cancel.focus();
+			return;
+		}
+	}else if(typeof(form1.cont_sort3)!='undefined'  && form1.cont_sort3.value=='4'){
+		if(form2.is_cancel.checked===false && form2.is_refund.checked===false){
+			alert("해지 또는 환불 여부를 체크하여 주십시요.");
+			form2.is_cancel.focus();
+			return;
+		}
 	}
 
 	if(form1.cont_sort2){
@@ -381,7 +393,7 @@ function cont_check(){
 		if(form1.cont_sort3.value=='3') var cont_sort = "청약 해지";
 		if(form1.cont_sort3.value=='4') var cont_sort = "계약 해지";
 	}
-	if(form2.dong&&form2.ho){
+	if(form2.dong && form2.ho){
 		var conf_str = '거래 구분 : '+cont_sort+'\n계약 고객 : '+form2.custom_name.value+'\n거래 일자 : '+form2.conclu_date.value+'\n해당 호수 : '+form2.dong.value+'동 '+form2.ho.value+'호\n\n상기 내용을 등록 하시겠습니까?';
 		if(confirm(conf_str)===true){
 			form2.submit();

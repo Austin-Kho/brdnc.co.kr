@@ -36,7 +36,7 @@ class M1 extends CI_Controller {
 	}
 
 	public function sales($mdi='', $sdi=''){
-		$this->output->enable_profiler(TRUE); //프로파일러 보기//
+		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
@@ -44,7 +44,7 @@ class M1 extends CI_Controller {
 		$menu['s_di'] = array(
 			array('계약 현황', '계약 등록', '동호수 현황'), // 첫번째 하위 메뉴
 			array('수납 현황', '수납 등록', '수납약정'),     // 두번째 하위 메뉴
-			array('프로젝트별 계약현황 [구축 작업 전]', '프로젝트별 계약등록(수정) 구축 [작업 진행 중]', '동호수 계약 현황표'),  // 첫번째 하위 제목
+			array('프로젝트별 계약현황 [구축 작업 전]', '프로젝트별 계약등록(수정)', '동호수 계약 현황표'),  // 첫번째 하위 제목
 			array('분양대금 수납 현황 [구축 작업 전]', '분양대금 수납 등록 [구축 작업 전]', '프로젝트 타입별 수납약정 관리 [구축 작업 전]')   // 두번째 하위 제목
 		);
 		// 메뉴데이터 삽입 하여 메인 페이지 호출
