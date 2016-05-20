@@ -54,6 +54,7 @@ class M1 extends CI_Controller {
 
 		// 계약현황 1. 계약현황 ////////////////////////////////////////////////////////////////////
 		if($mdi==1 && $sdi==1 ){
+			$this->output->enable_profiler(TRUE); //프로파일러 보기//
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m1_1_1', $this->session->userdata['user_id']);
 
@@ -539,6 +540,7 @@ class M1 extends CI_Controller {
 
 		// 1. 수납관리 1. 수납현황 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==1) {
+			$this->output->enable_profiler(TRUE); //프로파일러 보기//
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m1_2_1', $this->session->userdata['user_id']);
 
@@ -560,6 +562,7 @@ class M1 extends CI_Controller {
 
 		// 1. 수납관리 2. 수납등록 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==2) {
+			$this->output->enable_profiler(TRUE); //프로파일러 보기//
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m1_2_2', $this->session->userdata['user_id']);
 
@@ -581,6 +584,7 @@ class M1 extends CI_Controller {
 
 		// 1. 수납관리 3. 수납약정 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==3) {
+			$this->output->enable_profiler(TRUE); //프로파일러 보기//
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m1_2_3', $this->session->userdata['user_id']);
 
