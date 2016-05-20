@@ -133,6 +133,12 @@
 			<input type="hidden" name="unit_is_cont" value="<?php echo $unit_is_cont; ?>">
 <?php $unit_dong_ho = ( !empty($unit_dong_ho)) ? $unit_dong_ho : ""; ?>
 			<input type="hidden" name="unit_dong_ho" value="<?php echo $unit_dong_ho; ?>">
+<?php $ctator_seq = ( !empty($is_reg['cont_data'])) ? $is_reg['cont_data']->contractor_seq : ""; ?>
+			<input type="hidden" name="contractor_seq" value="<?php echo $ctator_seq; ?>">
+<?php $received_1 = ( !empty($received1)) ? $received1->seq : ""; // 계약금 폼1 입력 데이터 ?>
+			<input type="hidden" name="received1" value="<?php echo $received_1; ?>">
+<?php $received_2 = ( !empty($received2)) ? $received2->seq : ""; // 계약금 폼2 입력 데이터?>
+			<input type="hidden" name="received2" value="<?php echo $received_2; ?>">
 
 
 
@@ -149,8 +155,8 @@
 			<div class="row bo-top font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">처리 구분 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
-					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox">해지신청</label></div>
-					<div class="col-xs-6 col-sm-4 col-md-3 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox">환불완료</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" name="is_cancel" value="1">해지신청</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-3 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" name="is_refund" value="1">환불완료</label></div>
 				</div>
 			</div>
 <?php endif; ?>
