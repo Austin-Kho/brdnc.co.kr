@@ -228,11 +228,8 @@
 						<div class="center" style="padding: 100px 0;">등록된 데이터가 없습니다.</div>
 <?php endif; ?>
 					</div>
-					<div class="col-md-12 center" style="margin-top: 0px; padding: 0;">
+					<div class="col-md-12 center" style="margin: 0 0 18px; padding: 0;">
 						<ul class="pagination pagination-sm"><?php echo $pagination;?></ul>
 					</div>
-				</div>
-				<div class="row" style="margin: 0 15px 43px;">
-
 				</div>
 			</div>
