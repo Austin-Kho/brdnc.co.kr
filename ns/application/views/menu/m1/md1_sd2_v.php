@@ -570,7 +570,7 @@
 ?>
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0; height: 75px;">비 고</div>
-				<div class="col-xs-8 col-sm-9 col-md-6" style="padding: 4px 15px;">
+				<div class="col-xs-8 col-sm-9 col-md-8" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="note" class="sr-only">타입</label>
 						<textarea class="form-control input-sm" id="note" name="note"  rows="3" <?php echo $disabled; ?>><?php echo $note; ?></textarea>
