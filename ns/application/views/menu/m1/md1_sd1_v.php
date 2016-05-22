@@ -50,9 +50,9 @@
     <div class="row font12" style="margin: 0; padding: 0;">
         <div class="col-md-12"><h4><span class="label label-info">1. 요약 집계</span></h4></div>
 <?php if(empty($all_pj)) : ?>
-		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 50px;">조회할 프로젝트를 선택하여 주십시요.</div>
+		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 50px 0;">조회할 프로젝트를 선택하여 주십시요.</div>
 <?php elseif($all_pj && empty($tp_name)) : ?>
-		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 50px;">등록된 데이터가 없습니다.</div>
+		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 50px 0;">등록된 데이터가 없습니다.</div>
 <?php else : ?>
 		<div class="col-xs-12 table-responsive" style="padding: 0;">
 			<table class="table table-bordered table-hover table-condensed">
@@ -104,7 +104,7 @@
 	<div class="row font12" style="margin: 0; padding: 0;">
         <div class="col-md-12"><h4><span class="label label-success">2. 청약 현황</span></h4></div>
 <?php if(empty($app_data)) : ?>
-		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 20px;">등록된 데이터가 없습니다.</div>
+		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 20px 0;">등록된 데이터가 없습니다.</div>
 <?php else : ?>
 		<div class="col-xs-12 table-responsive" style="padding: 0;">
 			<table class="table table-bordered table-hover table-condensed">
@@ -239,7 +239,7 @@ echo form_open(base_url(uri_string()), $attributes);
 		<!-- <div class="col-md-12">검색</div> -->
 		<!-- <div class="col-md-12">검색</div> -->
 <?php if(empty($cont_data)) : ?>
-		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 120px;">등록된 데이터가 없습니다.</div>
+		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 120px 0;">등록된 데이터가 없습니다.</div>
 <?php else : ?>
 		<div class="col-xs-12 table-responsive" style="padding: 0;">
 			<table class="table table-bordered table-hover table-condensed">
