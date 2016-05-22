@@ -54,7 +54,7 @@ class M1 extends CI_Controller {
 
 		// 계약현황 1. 계약현황 ////////////////////////////////////////////////////////////////////
 		if($mdi==1 && $sdi==1 ){
-			$this->output->enable_profiler(TRUE); //프로파일러 보기//
+			// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m1_1_1', $this->session->userdata['user_id']);
 
@@ -293,7 +293,7 @@ class M1 extends CI_Controller {
 							}else{
 								// 2. 동호수 관리 테이블 입력
 								$where = array('type'=>$this->input->post('type'), 'dong'=>$this->input->post('dong'), 'ho'=>$this->input->post('ho'));
-								$result2 = $this->main_m->update_data('cms_project_all_housing_unit', array('is_application'=>'1'), $where); // 동호수 테이블 청약상태로 변경
+								$result2 = $this->main_m->update_data('cms_project_all_housing_unit', array('is_application'=>'1', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('name')), $where); // 동호수 테이블 청약상태로 변경
 								if( !$result2) alert('데이터베이스 에러입니다.', base_url(uri_string()));
 							}
 						}else if($this->input->post('mode')=='2' && $this->input->post('unit_is_app')=='1'){ // 기존 청약정보 수정일 때
@@ -463,7 +463,7 @@ class M1 extends CI_Controller {
 								}
 							}
 // 6. 동호수 관리 테이블 입력 청약->계약으로 업데이트
-								$result[5] = $this->main_m->update_data('cms_project_all_housing_unit', array('is_contract'=>'1'), array('seq'=>$un)); // 동호수 테이블 계약상태로 변경
+								$result[5] = $this->main_m->update_data('cms_project_all_housing_unit', array('is_contract'=>'1', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('name')), array('seq'=>$un)); // 동호수 테이블 계약상태로 변경
 								if( !$result[5]) {
 									alert('데이터베이스 에러입니다.6', base_url(uri_string()));
 								}
