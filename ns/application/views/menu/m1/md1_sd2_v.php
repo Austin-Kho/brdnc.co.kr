@@ -507,7 +507,7 @@
 							<label for="address1" class="sr-only">계약자주소1</label>
 							<input type="text" class="form-control input-sm han" id="address1" name="address1" style="margin: 4px 0;" maxlength="100" value="<?php if( !empty($addr1)) echo $addr1[1]; else echo set_value('address1');  ?>" readonly required autofocus>
 						</div>
-						<div class="col-xs-12 col-sm-4" style="padding-right: 0;">
+						<div class="col-xs-12 col-sm-4 col-md-3" style="padding-right: 0;">
 							<label for="address2" class="sr-only">계약자주소2</label>
 							<input type="text" class="form-control input-sm han" id="address2" name="address2" style="margin: 4px 0;" maxlength="93" value="<?php if( !empty($addr1)) echo $addr1[2]; else echo set_value('address2');  ?>" placeholder="나머지 주소" <?php echo $disabled; ?>>
 						</div>
@@ -534,7 +534,7 @@
 							<label for="address1_" class="sr-only">계약자주소11</label>
 							<input type="text" class="form-control input-sm han" id="address1_" name="address1_"  style="margin: 4px 0;" maxlength="100" value="<?php if( !empty($addr2)) echo $addr2[1]; else echo set_value('address1_');  ?>" readonly required autofocus>
 						</div>
-						<div class="col-xs-12 col-sm-4" style="padding-right: 0;">
+						<div class="col-xs-12 col-sm-4 col-md-3" style="padding-right: 0;">
 							<label for="address2_" class="sr-only">계약자주소22</label>
 							<input type="text" class="form-control input-sm han" id="address2_" name="address2_"  style="margin: 4px 0;" maxlength="93" value="<?php if( !empty($addr2)) echo $addr2[2]; else echo set_value('address2_');  ?>" placeholder="나머지 주소" <?php echo $disabled; ?>>
 						</div>
