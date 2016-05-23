@@ -11,7 +11,11 @@
 			document.getElementById(b).value = "<?php echo date('Y-m-d');?>";
 		}
 	</script>
-
+<?php
+for($i=0; $i<count($tp_name); $i++) :
+	$type_color[$tp_name[$i]->type] = $tp_color[$i];
+endfor;
+?>
 	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
 		<form method="get" name="pj_sel" action="<?php echo current_url(); ?>">
 
@@ -122,10 +126,6 @@
 				</thead>
 				<tbody class="bo-bottom center">
 <?php
-for($i=0; $i<count($tp_name); $i++) :
-	$type_color[$tp_name[$i]->type] = $tp_color[$i];
-endfor;
-
 foreach($app_data as $lt) :
 	switch ($lt->disposal_div) :
 		case '1': $condi = "<font color='#0D069F'>계약전환</font>"; break;
@@ -136,7 +136,7 @@ foreach($app_data as $lt) :
 	$unit_dh = explode("-", $lt->unit_dong_ho);
 	$app_edit_link = ($lt->disposal_div=='0') ? "<a href='/ns/m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=1&project=".$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>" : "";
 	$app_edit = ($lt->disposal_div=='0') ? "</a>" : "";
-	$new_span = ($lt->app_date<=date('Y-m-d', strtotime('+3 day')))  ? "<span style='background-color: #AB0327; color: #fff; font-size: 10px;'>&nbsp;New </span>&nbsp; " : "";
+	$new_span = ($lt->app_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #AB0327; color: #fff; font-size: 10px;'>&nbsp;New </span>&nbsp; " : "";
 ?>
 					<tr>
 						<td><span style="background-color: <?php echo $type_color[$lt->unit_type] ?>;">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></span></td>
@@ -276,12 +276,12 @@ foreach ($cont_data as $lt) :
 	$addr = $adr2[0]." ".$adr2[1];
 	$unit_dh = explode("-", $lt->unit_dong_ho);
 	$cont_edit_link = "<a href='/ns/m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=2&project=".$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>" ;
-	$new_span = ($lt->cont_date<=date('Y-m-d', strtotime('+3 day')))  ? "<span style='background-color: #2A41DB; color: #fff; font-size: 10px;'>&nbsp;New </span>&nbsp; " : "";
+	$new_span = ($lt->cont_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #2A41DB; color: #fff; font-size: 10px;'>&nbsp;New </span>&nbsp; " : "";
 ?>
 					<tr>
 						<td><?php echo $cont_edit_link.$lt->cont_code."</a>"; ?></td>
 						<td><?php echo $nd->diff_name; ?></td>
-						<td><span style="background-color: <?php echo $type_color[$lt->unit_type] ?>;">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></td>
+						<td><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></td>
 						<td><?php echo $cont_edit_link.$lt->unit_dong_ho."</a>"; ?></td>
 						<td><?php echo $cont_edit_link.$lt->contractor."</a>"; ?></td>
 						<td><?php echo $lt->cont_tel1; ?></td>
