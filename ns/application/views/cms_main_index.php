@@ -76,7 +76,7 @@
 <h1>Panels</h1>
 </div> -->
 <div class="row">
-	<div class="col-sm-4">
+	<div class="col-sm-6">
 		<div class="panel panel-info">
 			<div class="panel-heading"><h3 class="panel-title">동춘1구역 최근 3일간 청약 · 계약 건수</h3></div>
 			<div class="panel-body">
@@ -90,8 +90,6 @@
 				<div class="col-xs-5 right font12" style="padding: 0;"><a href="">계약 관리 바로가기</a></div>
 			</div>
 		</div>
-	</div>
-	<div class="col-sm-4">
 		<div class="panel panel-default">
 			<div class="panel-heading"><h3 class="panel-title">동춘1구역 청약 · 계약 현황</h3></div>
 			<div class="panel-body">
@@ -106,8 +104,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-4">
-		<div class="panel panel-success">
+	<div class="col-sm-6">
+		<div class="panel panel-default">
 			<div class="panel-heading"><h3 class="panel-title">동춘1분담금 총 납부현황</h3></div>
 			<div class="panel-body">
 				<div class="col-xs-6" style="padding: 0;">분담금 : </div>
@@ -118,13 +116,43 @@
 				<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($agent_cost->agent_cost)." 원"; ?></div>
 			</div>
 		</div>
+		<div class="panel panel-info">
+			<div class="panel-heading"><h3 class="panel-title">동춘1 계좌 별 납부현황 [1]</h3></div>
+			<div class="panel-body">
+				<div class="col-xs-6" style="padding: 0;">신탁계좌[신청금] : </div>
+				<div class="col-xs-6 right" style="padding: 0;"><?php echo number_format($receive->receive)." 원"; ?></div>
+			</div>
+			<div class="panel-body">
+				<div class="col-xs-6" style="padding: 0;">신탁계좌[분담금] : </div>
+				<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($agent_cost->agent_cost)." 원"; ?></div>
+			</div>
+			<div class="panel-body">
+				<div class="col-xs-6" style="padding: 0;">신탁계좌[대행비] : </div>
+				<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($agent_cost->agent_cost)." 원"; ?></div>
+			</div>
+		</div>
+		<div class="panel panel-success">
+			<div class="panel-heading"><h3 class="panel-title">동춘1 계좌 별 납부현황 [2]</h3></div>
+			<div class="panel-body">
+				<div class="col-xs-6" style="padding: 0;">바램계좌[외환] : </div>
+				<div class="col-xs-6 right" style="padding: 0;"><?php echo number_format($receive->receive)." 원"; ?></div>
+			</div>
+			<div class="panel-body">
+				<div class="col-xs-6" style="padding: 0;">바램계좌[국민] : </div>
+				<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($agent_cost->agent_cost)." 원"; ?></div>
+			</div>
+			<div class="panel-body">
+				<div class="col-xs-6" style="padding: 0;">바램계좌[신한] : </div>
+				<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($agent_cost->agent_cost)." 원"; ?></div>
+			</div>
+		</div>
 	</div>
 </div>
 
 <!-- <div class="page-header">
 <h1>Tables</h1>
 </div> -->
-<div class="row">
+<!-- <div class="row">
 <div class="col-md-12">
 <table class="table">
 <thead>
@@ -251,7 +279,7 @@
 <li class="list-group-item">Porta ac consectetur ac</li>
 <li class="list-group-item">Vestibulum at eros</li>
 </ul>
-</div><!-- /.col-sm-4 -->
+</div>
 <div class="col-sm-4">
 <div class="list-group">
 <a href="#" class="list-group-item active">
@@ -262,7 +290,7 @@ Cras justo odio
 <a href="#" class="list-group-item">Porta ac consectetur ac</a>
 <a href="#" class="list-group-item">Vestibulum at eros</a>
 </div>
-</div><!-- /.col-sm-4 -->
+</div>
 <div class="col-sm-4">
 <div class="list-group">
 <a href="#" class="list-group-item active">
@@ -279,4 +307,4 @@ Cras justo odio
 </a>
 </div>
 </div>
-</div>
+</div> -->
