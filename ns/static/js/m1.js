@@ -1,230 +1,139 @@
-/********************상담일지 등록 시작*******************/
-function coun_log_sub(mode){
-	var form = document.form1;
-
-	if(!form1.cust_name.value){
-		alert('고객명을 입력하여 주십시요!');
-		form1.cust_name.focus();
-		return;
-	}
-	if(!form1.coun_date.value){
-		alert('상담일자를 입력하여 주십시요!');
-		form1.coun_date.focus();
-		return;
-	}
-	if(!form1.cust_tel1.value){
-		alert('연락처1 항목을 입력하여 주십시요!');
-		form1.cust_tel1.focus();
-		return;
-	}
-	if(!form1.coun_route.value){
-		alert('상담경로를 선택하여 주십시요!');
-		form1.coun_route.focus();
-		return;
-	}
-	if(!form1.content.value){
-		alert('상담내용을 입력하여 주십시요!');
-		form1.content.focus();
-		return;
-	}
-
-	if(mode=='reg') var msg = '신규등록';
-	if(mode=='modify') var msg = '추가등록';
-
-	if(confirm("상담내용을 "+msg+" 하시겠습니까?")===true){
-		form.submit();
-	}else{
-		return;
-	}
-}
-/********************상담일지 등록 종료*******************/
-
-
-
-/********************업무일지 등록 시작*******************/
-////////////청약 계약 입력폼 추가 함수///
-function cont_add(self,no,frm){
-	var add_num= eval(no-2);
-	if(frm==1){
-		var obj = eval("document.getElementById('cont_"+no+"')");
-		var add = eval("document.getElementById('add_"+add_num+"')");
-		if(self.checked==1){      //자신을 체크 하였을 경우
-			obj.style.display="";  // 다음 디브를 보이게 하고
-			if(add_num>0) add.disabled=1;       // 자신보다 바로 전 체크박스를 비활성
-		}else{
-			obj.style.display="none";
-			if(add_num>0) add.disabled=0;
-		}
-	}
-	if(frm==2){
-		var obj = eval("document.getElementById('coun_"+no+"')");
-		var add = eval("document.getElementById('add_c_"+add_num+"')");
-		if(self.checked==1){
-			obj.style.display="";
-			if(add_num>0) add.disabled=1;
-		}else{
-			obj.style.display="none";
-			if(add_num>0) add.disabled=0;
-		}
-	}
-	if(frm==3){
-		var obj = eval("document.getElementById('tomo_"+no+"')");
-		var add = eval("document.getElementById('add_t_"+add_num+"')");
-		if(self.checked==1){
-			obj.style.display="";
-			if(add_num>0) add.disabled=1;
-		}else{
-			obj.style.display="none";
-			if(add_num>0) add.disabled=0;
-		}
-	}
-}
-/////////// 업무일지 서브밋 함수 ///////////////
-function work_log_sub(is_com, str){
-	var form=document.form1;
-	var date=form.work_date.value;
-
-	if(is_com==1){ // 본사 직원일 경우 해당 프로젝트 및 소속 선택
-		if(!document.is_com_sel.pj_list.value){
-			alert("프로젝트를 선택하여 주십시요!");
-			document.is_com_sel.pj_list.focus();
-			return;
-		}
-		if(!document.is_com_sel.headq.value){
-			alert("소속본부를 선택하여 주십시요!");
-			document.is_com_sel.headq.focus();
-			return;
-		}
-		if(!document.is_com_sel.team.value){
-			alert("소속 팀을 선택하여 주십시요!");
-			document.is_com_sel.team.focus();
-			return;
-		}
-	}
-	if(!form.work_date.value){
-		alert("작성일자를 입력하여 주십시요!");
-		form.work_date.focus();
-		return;
-	}
-	if(!form.work_num.value){
-		alert("출근인원을 입력하여 주십시요!");
-		form.work_num.focus();
-		return;
-	}
-
-	var co_sort = [form.co_sort_1, form.co_sort_2, form.co_sort_3, form.co_sort_4, form.co_sort_5, form.co_sort_6, form.co_sort_7, form.co_sort_8, form.co_sort_9, form.co_sort_10, form.co_sort_11, form.co_sort_12];
-	var c_cust_name = [form.c_cust_name_1, form.c_cust_name_2, form.c_cust_name_3, form.c_cust_name_4, form.c_cust_name_5, form.c_cust_name_6, form.c_cust_name_7, form.c_cust_name_8, form.c_cust_name_9, form.c_cust_name_10, form.c_cust_name_11, form.c_cust_name_12];
-	var dong = [form.dong_1, form.dong_2, form.dong_3, form.dong_4, form.dong_5, form.dong_6, form.dong_7, form.dong_8, form.dong_9, form.dong_10, form.dong_11, form.dong_12];
-	var ho = [form.ho_1, form.ho_2, form.ho_3, form.ho_4, form.ho_5, form.ho_6, form.ho_7, form.ho_8, form.ho_9, form.ho_10, form.ho_11, form.ho_12];
-	var due_date = [form.due_date_1, form.due_date_2, form.due_date_3, form.due_date_4, form.due_date_5, form.due_date_6, form.due_date_7, form.due_date_8, form.due_date_9, form.due_date_10, form.due_date_11, form.due_date_12];
-	var c_worker = [form.c_worker_1, form.c_worker_2, form.c_worker_3, form.c_worker_4, form.c_worker_5, form.c_worker_6, form.c_worker_7, form.c_worker_8, form.c_worker_9, form.c_worker_10, form.c_worker_11, form.c_worker_12];
-
-	for(var i=0; i<12; i++){
-		if(co_sort[i].value||c_cust_name[i].value||dong[i].value||ho[i].value||due_date[i].value||c_worker[i].value){
-			if(!co_sort[i].value){
-				alert("해당 구분을 선택하여 주십시요!");
-				co_sort[i].focus();
-				return;
-			}
-			if(!c_cust_name[i].value){
-				alert("해당 고객명을 입력하여 주십시요!");
-				c_cust_name[i].focus();
-				return;
-			}
-			if(!dong[i].value){
-				alert("해당 동을 입력하여 주십시요!");
-				dong[i].focus();
-				return;
-			}
-			if(!ho[i].value){
-				alert("해당 호를 입력하여 주십시요!");
-				ho[i].focus();
-				return;
-			}
-			if(co_sort[i].value==1&&!due_date[i].value){
-				alert("계약 예정일을 입력하여 주십시요!");
-				due_date[i].focus();
-				return;
-			}
-			if(!c_worker[i].value){
-				alert("해당 담당자를 입력하여 주십시요!");
-				c_worker[i].focus();
-				return;
-			}
-		}
-	}
-
-	var d_cust_name = [form.d_cust_name_1, form.d_cust_name_2, form.d_cust_name_3, form.d_cust_name_4, form.d_cust_name_5, form.d_cust_name_6, form.d_cust_name_7, form.d_cust_name_8, form.d_cust_name_9, form.d_cust_name_10, form.d_cust_name_11, form.d_cust_name_12];
-	var d_content = [form.d_content_1, form.d_content_2, form.d_content_3, form.d_content_4, form.d_content_5, form.d_content_6, form.d_content_7, form.d_content_8, form.d_content_9, form.d_content_10, form.d_content_11, form.d_content_12];
-	var d_worker = [form.d_worker_1, form.d_worker_2, form.d_worker_3, form.d_worker_4, form.d_worker_5, form.d_worker_6, form.d_worker_7, form.d_worker_8, form.d_worker_9, form.d_worker_10, form.d_worker_11, form.d_worker_12];
-
-	for(var i=0; i<12; i++){
-		if(d_cust_name[i].value||d_content[i].value||d_worker[i].value){
-			if(!d_cust_name[i].value){
-				alert("해당 고객명을 선택하여 주십시요!");
-				d_cust_name[i].focus();
-				return;
-			}
-			if(!d_content[i].value){
-				alert("해당 진행사항을 입력하여 주십시요!");
-				d_content[i].focus();
-				return;
-			}
-			if(!d_worker[i].value){
-				alert("해당 담당자를 입력하여 주십시요!");
-				d_worker[i].focus();
-				return;
-			}
-		}
-	}
-	if(!form.d_sale_act.value){
-		alert("당일 홍보 영업활동을 입력하여 주십시요!");
-		form.d_sale_act.focus();
-		return;
-	}
-	var n_cust_name = [form.n_cust_name_1, form.n_cust_name_2, form.n_cust_name_3, form.n_cust_name_4, form.n_cust_name_5, form.n_cust_name_6, form.n_cust_name_7, form.n_cust_name_8, form.n_cust_name_9, form.n_cust_name_10, form.n_cust_name_11, form.n_cust_name_12];
-	var n_content = [form.n_content_1, form.n_content_2, form.n_content_3, form.n_content_4, form.n_content_5, form.n_content_6, form.n_content_7, form.n_content_8, form.n_content_9, form.n_content_10, form.n_content_11, form.n_content_12];
-	var n_worker = [form.n_worker_1, form.n_worker_2, form.n_worker_3, form.n_worker_4, form.n_worker_5, form.n_worker_6, form.n_worker_7, form.n_worker_8, form.n_worker_9, form.n_worker_10, form.n_worker_11, form.n_worker_12];
-
-	for(var i=0; i<12; i++){
-		if(n_cust_name[i].value||n_content[i].value||n_worker[i].value){
-			if(!n_cust_name[i].value){
-				alert("해당 고객명을 선택하여 주십시요!");
-				n_cust_name[i].focus();
-				return;
-			}
-			if(!n_content[i].value){
-				alert("해당 진행내용 등을 입력하여 주십시요!");
-				n_content[i].focus();
-				return;
-			}
-			if(!n_worker[i].value){
-				alert("해당 담당자를 입력하여 주십시요!");
-				n_worker[i].focus();
-				return;
-			}
-		}
-	}
-	if(!form.n_sale_plan.value){
-		alert("익일 영업계획을 입력하여 주십시요!");
-		form.n_sale_plan.focus();
-		return;
-	}
-	if(confirm("등록 후 작성일자 익일까지만 수정 가능합니다.\n\n["+date+"] 업무일지를 "+str+" 하시겠습니까?")===true) form.submit(); else return;
-}
-/********************업무일지 등록 종료*******************/
-
-
-
-
 
 /********************계약등록 시작*******************/
-// 청약 수정 화면에서 계약 전환 시 함수
-function app_tr_cont(chk){
-	var form = document.set1;
-	if(chk.checked===true){
-		form.cont_sort2.value='2';
-		form.submit();
+/////////타입 등록 체크박스 추가 함수
+function type_reg(frm,val, no, n){  // 체크박스 // 넘버  id="type_10"
+	if(frm=='1'){
+		var str1="type1_";
+		var str2="ck1_";
+	}
+	if(frm=='2'){
+		var str1="type2_";
+		var str2="ck2_";
+	}
+	if(frm=='3'){
+		var str1="floor_";
+		var str2="fc_";
+	}
+	var np=parseInt(no)+1;
+	var nm=parseInt(no)-1;
+	var type_n=str1+np;
+	var ck_n=str2+nm;
+
+	var type=document.getElementById(type_n);
+	var ckbox=document.getElementById(ck_n);
+
+	if(val.checked===true){
+		type.style.display="";
+		if(!n)ckbox.disabled=true;
+	}else{
+		type.style.display="none";
+		if(!n)ckbox.disabled=false;
+	}
+}/////////타입 등록 체크박스 추가 함수
+function type_reg(frm,val, no, n){  // 체크박스 // 넘버  id="type_10"
+	if(frm=='1'){
+		var str1="type1_";
+		var str2="ck1_";
+	}
+	if(frm=='2'){
+		var str1="type2_";
+		var str2="ck2_";
+	}
+	if(frm=='3'){
+		var str1="floor_";
+		var str2="fc_";
+	}
+	var np=parseInt(no)+1;
+	var nm=parseInt(no)-1;
+	var type_n=str1+np;
+	var ck_n=str2+nm;
+
+	var type=document.getElementById(type_n);
+	var ckbox=document.getElementById(ck_n);
+
+	if(val.checked===true){
+		type.style.display="";
+		if(!n)ckbox.disabled=true;
+	}else{
+		type.style.display="none";
+		if(!n)ckbox.disabled=false;
+	}
+}/////////타입 등록 체크박스 추가 함수
+function type_reg(frm,val, no, n){  // 체크박스 // 넘버  id="type_10"
+	if(frm=='1'){
+		var str1="type1_";
+		var str2="ck1_";
+	}
+	if(frm=='2'){
+		var str1="type2_";
+		var str2="ck2_";
+	}
+	if(frm=='3'){
+		var str1="floor_";
+		var str2="fc_";
+	}
+	var np=parseInt(no)+1;
+	var nm=parseInt(no)-1;
+	var type_n=str1+np;
+	var ck_n=str2+nm;
+
+	var type=document.getElementById(type_n);
+	var ckbox=document.getElementById(ck_n);
+
+	if(val.checked===true){
+		type.style.display="";
+		if(!n)ckbox.disabled=true;
+	}else{
+		type.style.display="none";
+		if(!n)ckbox.disabled=false;
+	}
+}/////////타입 등록 체크박스 추가 함수
+function type_reg(frm,val, no, n){  // 체크박스 // 넘버  id="type_10"
+	if(frm=='1'){
+		var str1="type1_";
+		var str2="ck1_";
+	}
+	if(frm=='2'){
+		var str1="type2_";
+		var str2="ck2_";
+	}
+	if(frm=='3'){
+		var str1="floor_";
+		var str2="fc_";
+	}
+	var np=parseInt(no)+1;
+	var nm=parseInt(no)-1;
+	var type_n=str1+np;
+	var ck_n=str2+nm;
+
+	var type=document.getElementById(type_n);
+	var ckbox=document.getElementById(ck_n);
+
+	if(val.checked===true){
+		type.style.display="";
+		if(!n)ckbox.disabled=true;
+	}else{
+		type.style.display="none";
+		if(!n)ckbox.disabled=false;
+	}
+}/////////타입 등록 체크박스 추가 함수
+function receive_add(val, no, n){  // 체크박스 // 넘버  id="receive_10"
+	var str1="rec_";
+	var str2="chk_";
+	var np=parseInt(no)+1;
+	var nm=parseInt(no)-1;
+	var rec_n=str1+np;
+	var chk_n=str2+nm;
+
+	var receiv=document.getElementById(rec_n);
+	var ckbox=document.getElementById(chk_n);
+
+	if(val.checked===true){
+		receiv.style.display="";
+		if(!n)ckbox.disabled=true;
+	}else{
+		receiv.style.display="none";
+		if(!n)ckbox.disabled=false;
 	}
 }
 
@@ -365,6 +274,106 @@ function cont_check(){
 		if(form1.cont_sort2.value=='2'&& form2.deposit_2.value&& !form2.cont_pay_sche2.value){
 			alert("금회 납부 처리 회차를 선택하세요.");
 			form2.cont_pay_sche2.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_3.value&& !form2.dep_acc_3.value){
+			alert("계약금 입금 계좌를 선택하세요.");
+			form2.dep_acc_3.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_3.value&& !form2.cont_in_date3.value){
+			alert("계약금 입금 일자를 선택하세요.");
+			form2.cont_in_date3.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_3.value&& !form2.cont_in_who3.value){
+			alert("계약금 실제 납부자 명을 입력하세요.");
+			form2.cont_in_who3.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_3.value&& !form2.cont_pay_sche3.value){
+			alert("금회 납부 처리 회차를 선택하세요.");
+			form2.cont_pay_sche3.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_4.value&& !form2.dep_acc_4.value){
+			alert("계약금 입금 계좌를 선택하세요.");
+			form2.dep_acc_4.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_4.value&& !form2.cont_in_date4.value){
+			alert("계약금 입금 일자를 선택하세요.");
+			form2.cont_in_date4.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_4.value&& !form2.cont_in_who4.value){
+			alert("계약금 실제 납부자 명을 입력하세요.");
+			form2.cont_in_who4.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_4.value&& !form2.cont_pay_sche4.value){
+			alert("금회 납부 처리 회차를 선택하세요.");
+			form2.cont_pay_sche4.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_5.value&& !form2.dep_acc_5.value){
+			alert("계약금 입금 계좌를 선택하세요.");
+			form2.dep_acc_5.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_5.value&& !form2.cont_in_date5.value){
+			alert("계약금 입금 일자를 선택하세요.");
+			form2.cont_in_date5.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_5.value&& !form2.cont_in_who5.value){
+			alert("계약금 실제 납부자 명을 입력하세요.");
+			form2.cont_in_who5.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_5.value&& !form2.cont_pay_sche5.value){
+			alert("금회 납부 처리 회차를 선택하세요.");
+			form2.cont_pay_sche5.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_6.value&& !form2.dep_acc_6.value){
+			alert("계약금 입금 계좌를 선택하세요.");
+			form2.dep_acc_6.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_6.value&& !form2.cont_in_date6.value){
+			alert("계약금 입금 일자를 선택하세요.");
+			form2.cont_in_date6.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_6.value&& !form2.cont_in_who6.value){
+			alert("계약금 실제 납부자 명을 입력하세요.");
+			form2.cont_in_who6.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_6.value&& !form2.cont_pay_sche6.value){
+			alert("금회 납부 처리 회차를 선택하세요.");
+			form2.cont_pay_sche6.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_7.value&& !form2.dep_acc_7.value){
+			alert("계약금 입금 계좌를 선택하세요.");
+			form2.dep_acc_7.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_7.value&& !form2.cont_in_date7.value){
+			alert("계약금 입금 일자를 선택하세요.");
+			form2.cont_in_date7.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_7.value&& !form2.cont_in_who7.value){
+			alert("계약금 실제 납부자 명을 입력하세요.");
+			form2.cont_in_who7.focus();
+			return;
+		}
+		if(form1.cont_sort2.value=='2'&& form2.deposit_7.value&& !form2.cont_pay_sche7.value){
+			alert("금회 납부 처리 회차를 선택하세요.");
+			form2.cont_pay_sche7.focus();
 			return;
 		}
 		if(form1.cont_sort2.value=='2'&& !form2.zipcode.value){

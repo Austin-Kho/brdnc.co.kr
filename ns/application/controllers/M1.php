@@ -236,8 +236,14 @@ class M1 extends CI_Controller {
 
 				// 수납 관리 테이블 정보 가져오기
 				if( !empty($cont_data)) $data['receiv_app'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='1' ");
-				if( !empty($cont_data)) $data['received1'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='2' ");
-				if( !empty($cont_data)) $data['received2'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='3' ");
+				if( !empty($cont_data)) $data['received']['1'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='2' ");
+				if( !empty($cont_data)) $data['received']['2'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='3' ");
+				if( !empty($cont_data)) $data['received']['3'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='4' ");
+				if( !empty($cont_data)) $data['received']['4'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='5' ");
+				if( !empty($cont_data)) $data['received']['5'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='6' ");
+				if( !empty($cont_data)) $data['received']['6'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='7' ");
+				if( !empty($cont_data)) $data['received']['7'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='8' ");
+				if( !empty($cont_data)) $data['rec_num'] = $this->main_m->sql_num_rows(" SELECT seq FROM cms_sales_received WHERE cont_seq='$cont_data->seq' ");
 
 
 				// 라이브러리 로드
@@ -255,6 +261,11 @@ class M1 extends CI_Controller {
 				$this->form_validation->set_rules('conclu_date', '청/계약일', 'trim|required');
 				$this->form_validation->set_rules('deposit_1', '계약금1', 'trim|numeric');
 				$this->form_validation->set_rules('deposit_2', '계약금2', 'trim|numeric');
+				$this->form_validation->set_rules('deposit_3', '계약금3', 'trim|numeric');
+				$this->form_validation->set_rules('deposit_4', '계약금4', 'trim|numeric');
+				$this->form_validation->set_rules('deposit_5', '계약금5', 'trim|numeric');
+				$this->form_validation->set_rules('deposit_6', '계약금6', 'trim|numeric');
+				$this->form_validation->set_rules('deposit_7', '계약금7', 'trim|numeric');
 				$this->form_validation->set_rules('zipcode', '우편변호1', 'trim|numeric|max_length[5]');
 				$this->form_validation->set_rules('address1', '메인주소1', 'trim|max_length[100]');
 				$this->form_validation->set_rules('address2', '세부주소1', 'trim|max_length[50]');
@@ -420,6 +431,71 @@ class M1 extends CI_Controller {
 							'reg_worker' => $this->session->userdata('name')
 						);
 						/******************************계약금 2 폼 데이터******************************/
+						/******************************계약금 3 폼 데이터******************************/
+						$cont_arr5 = array( // 수납 테이블 입력 데이터
+							'pj_seq' => $this->input->post('project', TRUE),
+							'cont_seq' => $cont_seq->seq,
+							'pay_sche_code' => $this->input->post('cont_pay_sche3', TRUE), // 당회 납부 회차
+							'paid_amount' => $this->input->post('deposit_3', TRUE), // 납부한 금액
+							'paid_acc' => $this->input->post('dep_acc_3', TRUE),
+							'paid_date' => $this->input->post('cont_in_date3', TRUE),
+							'paid_who' => $this->input->post('cont_in_who3', TRUE),
+							'cont_form_code' => '4',
+							'reg_worker' => $this->session->userdata('name')
+						);
+						/******************************계약금 3 폼 데이터******************************/
+						/******************************계약금 4 폼 데이터******************************/
+						$cont_arr6 = array( // 수납 테이블 입력 데이터
+							'pj_seq' => $this->input->post('project', TRUE),
+							'cont_seq' => $cont_seq->seq,
+							'pay_sche_code' => $this->input->post('cont_pay_sche4', TRUE), // 당회 납부 회차
+							'paid_amount' => $this->input->post('deposit_4', TRUE), // 납부한 금액
+							'paid_acc' => $this->input->post('dep_acc_4', TRUE),
+							'paid_date' => $this->input->post('cont_in_date4', TRUE),
+							'paid_who' => $this->input->post('cont_in_who4', TRUE),
+							'cont_form_code' => '5',
+							'reg_worker' => $this->session->userdata('name')
+						);
+						/******************************계약금 4 폼 데이터******************************/
+						/******************************계약금 5 폼 데이터******************************/
+						$cont_arr7 = array( // 수납 테이블 입력 데이터
+							'pj_seq' => $this->input->post('project', TRUE),
+							'cont_seq' => $cont_seq->seq,
+							'pay_sche_code' => $this->input->post('cont_pay_sche5', TRUE), // 당회 납부 회차
+							'paid_amount' => $this->input->post('deposit_5', TRUE), // 납부한 금액
+							'paid_acc' => $this->input->post('dep_acc_5', TRUE),
+							'paid_date' => $this->input->post('cont_in_date5', TRUE),
+							'paid_who' => $this->input->post('cont_in_who5', TRUE),
+							'cont_form_code' => '6',
+							'reg_worker' => $this->session->userdata('name')
+						);
+						/******************************계약금 5 폼 데이터******************************/
+						/******************************계약금 6 폼 데이터******************************/
+						$cont_arr8 = array( // 수납 테이블 입력 데이터
+							'pj_seq' => $this->input->post('project', TRUE),
+							'cont_seq' => $cont_seq->seq,
+							'pay_sche_code' => $this->input->post('cont_pay_sche6', TRUE), // 당회 납부 회차
+							'paid_amount' => $this->input->post('deposit_6', TRUE), // 납부한 금액
+							'paid_acc' => $this->input->post('dep_acc_6', TRUE),
+							'paid_date' => $this->input->post('cont_in_date6', TRUE),
+							'paid_who' => $this->input->post('cont_in_who6', TRUE),
+							'cont_form_code' => '7',
+							'reg_worker' => $this->session->userdata('name')
+						);
+						/******************************계약금 6 폼 데이터******************************/
+						/******************************계약금 7 폼 데이터******************************/
+						$cont_arr9 = array( // 수납 테이블 입력 데이터
+							'pj_seq' => $this->input->post('project', TRUE),
+							'cont_seq' => $cont_seq->seq,
+							'pay_sche_code' => $this->input->post('cont_pay_sche7', TRUE), // 당회 납부 회차
+							'paid_amount' => $this->input->post('deposit_7', TRUE), // 납부한 금액
+							'paid_acc' => $this->input->post('dep_acc_7', TRUE),
+							'paid_date' => $this->input->post('cont_in_date7', TRUE),
+							'paid_who' => $this->input->post('cont_in_who7', TRUE),
+							'cont_form_code' => '8',
+							'reg_worker' => $this->session->userdata('name')
+						);
+						/******************************계약금 7 폼 데이터******************************/
 
 
 						if($this->input->post('unit_is_cont')=='0'){  // 신규 계약일 때
@@ -492,6 +568,46 @@ class M1 extends CI_Controller {
 									alert('데이터베이스 에러입니다.8', base_url(uri_string()));
 								}
 							}
+
+// 9. 계약금 데이터3 -> 수납 데이터로 입력
+							if($this->input->post('deposit_3') && $this->input->post('deposit_3')!='0'){ // 계약금 3 (대행비 // 또는 일반 분양대금) 입력정보 있을때 처리
+								$result[8] = $this->main_m->insert_data('cms_sales_received', $cont_arr5, 'reg_date');
+								if( !$result[8]) {
+									alert('데이터베이스 에러입니다.9', base_url(uri_string()));
+								}
+							}
+
+// 10. 계약금 데이터4 -> 수납 데이터로 입력
+							if($this->input->post('deposit_4') && $this->input->post('deposit_4')!='0'){ // 계약금 3 (대행비 // 또는 일반 분양대금) 입력정보 있을때 처리
+								$result[9] = $this->main_m->insert_data('cms_sales_received', $cont_arr6, 'reg_date');
+								if( !$result[9]) {
+									alert('데이터베이스 에러입니다.10', base_url(uri_string()));
+								}
+							}
+
+// 11. 계약금 데이터5 -> 수납 데이터로 입력
+							if($this->input->post('deposit_5') && $this->input->post('deposit_5')!='0'){ // 계약금 3 (대행비 // 또는 일반 분양대금) 입력정보 있을때 처리
+								$result[10] = $this->main_m->insert_data('cms_sales_received', $cont_arr7, 'reg_date');
+								if( !$result[10]) {
+									alert('데이터베이스 에러입니다.11', base_url(uri_string()));
+								}
+							}
+
+// 12. 계약금 데이터6 -> 수납 데이터로 입력
+							if($this->input->post('deposit_6') && $this->input->post('deposit_6')!='0'){ // 계약금 3 (대행비 // 또는 일반 분양대금) 입력정보 있을때 처리
+								$result[11] = $this->main_m->insert_data('cms_sales_received', $cont_arr8, 'reg_date');
+								if( !$result[11]) {
+									alert('데이터베이스 에러입니다.12', base_url(uri_string()));
+								}
+							}
+
+// 13. 계약금 데이터7 -> 수납 데이터로 입력
+							if($this->input->post('deposit_7') && $this->input->post('deposit_7')!='0'){ // 계약금 3 (대행비 // 또는 일반 분양대금) 입력정보 있을때 처리
+								$result[12] = $this->main_m->insert_data('cms_sales_received', $cont_arr9, 'reg_date');
+								if( !$result[12]) {
+									alert('데이터베이스 에러입니다.13', base_url(uri_string()));
+								}
+							}
 							$udh = $this->input->post('unit_dong_ho', TRUE);
 							alert($udh.'의 계약 정보입력이 정상처리되었습니다.', base_url("m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=2&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho')." "));
 
@@ -530,6 +646,46 @@ class M1 extends CI_Controller {
 								$result[6] =$this->main_m->update_data('cms_sales_received', $cont_arr4, array('seq'=>$this->input->post('received2')));
 								if( !$result[6]) {
 									alert('데이터베이스 에러입니다.7', base_url(uri_string()));
+								}
+							}
+
+// 5. 계약금 데이터3 -> 수납 데이터로 입력
+							if($this->input->post('deposit_3') && $this->input->post('deposit_3')!='0'){ // 계약금 3 (대행비 // 또는 일반 분양대금) 입력정보 있을때 처리
+								$result[7] =$this->main_m->update_data('cms_sales_received', $cont_arr5, array('seq'=>$this->input->post('received3')));
+								if( !$result[7]) {
+									alert('데이터베이스 에러입니다.8', base_url(uri_string()));
+								}
+							}
+
+// 6. 계약금 데이터4 -> 수납 데이터로 입력
+							if($this->input->post('deposit_4') && $this->input->post('deposit_4')!='0'){ // 계약금 4 (대행비 // 또는 일반 분양대금) 입력정보 있을때 처리
+								$result[8] =$this->main_m->update_data('cms_sales_received', $cont_arr6, array('seq'=>$this->input->post('received4')));
+								if( !$result[8]) {
+									alert('데이터베이스 에러입니다.9', base_url(uri_string()));
+								}
+							}
+
+// 7. 계약금 데이터5 -> 수납 데이터로 입력
+							if($this->input->post('deposit_5') && $this->input->post('deposit_5')!='0'){ // 계약금 5 (대행비 // 또는 일반 분양대금) 입력정보 있을때 처리
+								$result[9] =$this->main_m->update_data('cms_sales_received', $cont_arr7, array('seq'=>$this->input->post('received5')));
+								if( !$result[9]) {
+									alert('데이터베이스 에러입니다.10', base_url(uri_string()));
+								}
+							}
+
+// 8. 계약금 데이터6 -> 수납 데이터로 입력
+							if($this->input->post('deposit_6') && $this->input->post('deposit_6')!='0'){ // 계약금 6 (대행비 // 또는 일반 분양대금) 입력정보 있을때 처리
+								$result[10] =$this->main_m->update_data('cms_sales_received', $cont_arr8, array('seq'=>$this->input->post('received6')));
+								if( !$result[10]) {
+									alert('데이터베이스 에러입니다.11', base_url(uri_string()));
+								}
+							}
+
+// 9. 계약금 데이터7 -> 수납 데이터로 입력
+							if($this->input->post('deposit_7') && $this->input->post('deposit_7')!='0'){ // 계약금 7 (대행비 // 또는 일반 분양대금) 입력정보 있을때 처리
+								$result[11] =$this->main_m->update_data('cms_sales_received', $cont_arr9, array('seq'=>$this->input->post('received7')));
+								if( !$result[11]) {
+									alert('데이터베이스 에러입니다.12', base_url(uri_string()));
 								}
 							}
 							$udh = $this->input->post('unit_dong_ho', TRUE);
