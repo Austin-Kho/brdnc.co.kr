@@ -81,8 +81,8 @@ endfor;
 						<td style="background-color: <?php echo $tp_color[$i].";"; ?>"><?php echo $tp_name[$i]->type; ?></td>
 						<td class="right"><?php echo $summary[$i]->type_num." 세대"; ?></td>
 						<td class="right"><?php echo $summary[$i]->hold." 세대"; ?></td>
-						<td class="right"><?php echo $summary[$i]->app." 건"; ?></td>
-						<td class="right"><?php echo $summary[$i]->cont." 건"; ?></td>
+						<td class="right" style="color: #273169;"><?php echo $summary[$i]->app." 건"; ?></td>
+						<td class="right" style="color: #a60202;"><?php echo $summary[$i]->cont." 건"; ?></td>
 						<td class="right"><?php echo number_format(($summary[$i]->cont/$summary[$i]->type_num*100), 2)." %" ?></td>
 						<td class="right"><?php echo number_format((($summary[$i]->app+$summary[$i]->cont)/$summary[$i]->type_num*100), 2)." %" ?></td>
 					</tr>
@@ -94,8 +94,8 @@ endfor;
 						<td></td>
 						<td><?php echo $sum_all->unit_num." 세대"; ?></td>
 						<td><?php echo $sum_all->hold." 세대"; ?></td>
-						<td><?php echo $sum_all->app." 건"; ?></td>
-						<td><?php echo $sum_all->cont." 건"; ?></td>
+						<td style="color: #273169; font-weight: bold;"><?php echo $sum_all->app." 건"; ?></td>
+						<td style="color: #a60202; font-weight: bold;"><?php echo $sum_all->cont." 건"; ?></td>
 						<td><?php echo number_format(($sum_all->cont/$sum_all->unit_num*100), 2)." %" ?></td>
 						<td><?php echo number_format((($sum_all->app+$sum_all->cont)/$sum_all->unit_num*100), 2)." %" ?></td>
 					</tr>
@@ -176,7 +176,7 @@ echo form_open(base_url(uri_string()), $attributes);
 				</div>
 				<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
 					<label for="type" class="sr-only">타입별</label>
-					<select class="form-control input-sm" name="type">
+					<select class="form-control input-sm" name="type" onchange="submit();">
 						<option value=""> 타입별</option>
 <?php foreach($sc_cont_type as $lt) : ?>
 						<option value="<?php echo $lt->unit_type; ?>" <?php if($lt->unit_type == $this->input->get('type')) echo "selected"; ?>> <?php echo $lt->unit_type; ?></option>
@@ -281,7 +281,7 @@ foreach ($cont_data as $lt) :
 					<tr>
 						<td><?php echo $cont_edit_link.$lt->cont_code."</a>"; ?></td>
 						<td><?php echo $nd->diff_name; ?></td>
-						<td><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></td>
+						<td class="center"><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></td>
 						<td><?php echo $cont_edit_link.$lt->unit_dong_ho."</a>"; ?></td>
 						<td><?php echo $cont_edit_link.$lt->contractor."</a>"; ?></td>
 						<td><?php echo $lt->cont_tel1; ?></td>
