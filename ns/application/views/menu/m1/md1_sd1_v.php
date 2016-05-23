@@ -74,7 +74,7 @@ endfor;
 				</thead>
 				<tbody class="bo-bottom center">
 <?php for($i=0; $i<count($summary); $i++) :
-	if($i==0) $first_td = "<td rowspan='".count($summary)."'>".$pj_info->pj_name."</td>"; else $first_td = "";
+	if($i==0) $first_td = "<td rowspan='".count($summary)."' style='background-color:#FFF;'>".$pj_info->pj_name."</td>"; else $first_td = "";
 ?>
 					<tr>
 						<?php echo $first_td; ?>
@@ -294,7 +294,7 @@ foreach ($cont_data as $lt) :
 			</table>
 		</div>
 <?php endif; ?>
-		<div class="col-md-12 center" style="margin-top: 0px; padding: 0;">
+		<div class="col-xs-12 center" style="margin-top: 0px; padding: 0;">
 			<ul class="pagination pagination-sm"><?php echo $pagination; ?></ul>
 		</div>
     </div>
