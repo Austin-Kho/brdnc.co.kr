@@ -311,6 +311,9 @@
 				</div>
 			</div>
 <?php if( !($this->input->get('cont_sort2')=='2' && empty($is_reg['app_data']))): // 계약등록 시 청약 데이터가 없는 신규 등록인 경우만 제외하고 ->?>
+
+
+
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">청약금 <span class="red">*</span>
 					<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div>
@@ -351,9 +354,19 @@
 					</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
-					<div class="col-xs-12" style="padding: 0px;">
+					<div class="col-xs-12" style="padding: 0;">
 						<label for="app_in_who" class="sr-only">입금자</label>
-						<input type="text" class="form-control input-sm" name="app_in_who" placeholder="입금자" value="<?php if( !empty($is_reg['app_data']) && $is_reg['app_data']->app_in_who!="") echo $is_reg['app_data']->app_in_who; else echo set_value('app_in_who'); ?>" <?php echo $disabled; if($this->input->get('cont_sort2')==2 OR $this->input->get('cont_sort2')==4) echo "readonly"; ?>>
+						<div class="col-xs-10 col-md-8" style="padding: 0;">
+							<input type="text" class="form-control input-sm" name="app_in_who" placeholder="입금자" value="<?php if( !empty($is_reg['app_data']) && $is_reg['app_data']->app_in_who!="") echo $is_reg['app_data']->app_in_who; else echo set_value('app_in_who'); ?>" <?php echo $disabled; if($this->input->get('cont_sort2')==2 OR $this->input->get('cont_sort2')==4) echo "readonly"; ?>>
+						</div>
+						<div class="col-xs-2 col-md-4">
+							<div class="checkbox"  style="margin: 0; padding: 4px 0;" data-toggle="tooltip" title="입력란 추가하기">
+								<label>
+									<input type="checkbox" name="ck2_1" id="ck2_1" onclick="type_reg('2',this,1);" <?php if( !empty($type_name[1])){echo " checked ";} if( !empty($type_name[2])){echo " disabled ";}?>>
+									<a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
+								</label>
+							</div>
+						</div>
 					</div>
 				</div>
 <?php if($this->input->get('cont_sort2')==='2') : ?>
@@ -370,6 +383,11 @@
 				</div>
 <?php endif; ?>
 			</div>
+
+
+
+
+
 <?php endif; ?>
 
 

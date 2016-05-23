@@ -13,7 +13,6 @@ class M1 extends CI_Controller {
 		}
 		$this->load->model('main_m'); //모델 파일 로드
 		$this->load->model('m1_m'); //모델 파일 로드
-		$this->load->helper('alert'); // 경고창 헤퍼 로딩
 	}
 
 	/**
@@ -89,19 +88,33 @@ class M1 extends CI_Controller {
 				$data['app_data'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_application WHERE pj_seq='$project' AND disposal_div='0' OR disposal_div='2' OR ((disposal_div='1' OR disposal_div='3') AND disposal_date>='$dis_date') ORDER BY app_date DESC, seq DESC ");
 
 				// 계약 데이터 필터링(타입, 동 별)
+
 				$data['sc_cont_type'] = $this->main_m->sql_result(" SELECT unit_type FROM cms_sales_contract GROUP BY unit_type ORDER BY unit_type ");
-				$data['sc_cont_dong'] = $this->main_m->sql_result(" SELECT unit_dong FROM cms_sales_contract GROUP BY unit_dong ORDER BY unit_dong ");
+				if($this->input->get('type')) {
+					$data['sc_cont_dong'] = $this->main_m->sql_result(" SELECT unit_dong FROM cms_sales_contract WHERE unit_type='".$this->input->get('type')."' GROUP BY unit_dong ORDER BY unit_dong ");
+				}else {
+					$data['sc_cont_dong'] = $this->main_m->sql_result(" SELECT unit_dong FROM cms_sales_contract GROUP BY unit_dong ORDER BY unit_dong ");
+				}
+
+				// 계약 데이터 검색 필터링
+				$cont_query = "  SELECT *, cms_sales_contractor.seq AS contractor_seq  ";
+				$cont_query .= " FROM cms_sales_contract, cms_sales_contractor  ";
+				$cont_query .= " WHERE pj_seq='$project' AND is_transfer='0' AND is_rescission='0' AND cms_sales_contract.seq = cont_seq ";
+				if( !empty($this->input->get('type'))) {$tp = $this->input->get('type'); $cont_query .= " AND unit_type='$tp' ";}
+				if( !empty($this->input->get('dong'))) {$dn = $this->input->get('dong'); $cont_query .= " AND unit_dong='$dn' ";}
+				if( !empty($this->input->get('s_date'))) {$sd = $this->input->get('s_date'); $cont_query .= " AND cms_sales_contract.cont_date>='$sd' ";}
+				if( !empty($this->input->get('e_date'))) {$ed = $this->input->get('e_date'); $cont_query .= " AND cms_sales_contract.cont_date<='$ed' ";}
 
 				//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = base_url('m1/sales/1/1');   //페이징 주소
-				$config['total_rows'] = $this->main_m->sql_num_rows(" SELECT seq FROM  cms_sales_contract WHERE is_rescission='0' ");  //게시물의 전체 갯수
+				$config['total_rows'] = $this->main_m->sql_num_rows($cont_query);  //게시물의 전체 갯수
 				if( !$this->input->get('num')) $config['per_page'] = 10;  else $config['per_page'] = $this->input->get('num'); // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
-				$config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
+				$config['reuse_query_string'] = TRUE;    //http://example.com/index.php/test/page/20?query=search%term
 
 				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
 				$page = $this->uri->segment($config['uri_segment']);
@@ -113,17 +126,10 @@ class M1 extends CI_Controller {
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$data['pagination'] = $this->pagination->create_links();
 
+
+
+
 				// 계약 데이터 가져오기
-				$cont_query = "  SELECT *, cms_sales_contractor.seq AS contractor_seq  ";
-				$cont_query .= " FROM cms_sales_contract, cms_sales_contractor  ";
-				$cont_query .= " WHERE pj_seq='$project' AND is_transfer='0' AND is_rescission='0' AND cms_sales_contract.seq = cont_seq ";
-				if( !empty($this->input->get('type'))) {$tp = $this->input->get('type'); $cont_query .= " AND unit_type='$tp' ";}
-				if( !empty($this->input->get('dong'))) {$dn = $this->input->get('dong'); $cont_query .= " AND unit_dong='$dn' ";}
-				if( !empty($this->input->get('s_date'))) {$sd = $this->input->get('s_date'); $cont_query .= " AND cms_sales_contract.cont_date>='$sd' ";}
-				if( !empty($this->input->get('e_date'))) {$ed = $this->input->get('e_date'); $cont_query .= " AND cms_sales_contract.cont_date<='$ed' ";}
-
-
-
 				$cont_query .= " ORDER BY cms_sales_contract.cont_date DESC, cms_sales_contract.seq DESC ";
 				if($start != '' or $limit !='')	$cont_query .= " LIMIT ".$start.", ".$limit." ";
 				$data['cont_data'] = $this->main_m->sql_result($cont_query); // 계약 및 계약자 데이터
@@ -390,6 +396,7 @@ class M1 extends CI_Controller {
 						/******************************계약자 테이블 데이터******************************/
 						/******************************계약금 1 폼 데이터******************************/
 						$cont_arr3 = array( // 수납 테이블 입력 데이터
+							'pj_seq' => $this->input->post('project', TRUE),
 							'cont_seq' => $cont_seq->seq,
 							'pay_sche_code' => $this->input->post('cont_pay_sche1', TRUE), // 당회 납부 회차
 							'paid_amount' => $this->input->post('deposit_1', TRUE), // 납부한 금액
@@ -402,6 +409,7 @@ class M1 extends CI_Controller {
 						/******************************계약금 1 폼 데이터******************************/
 						/******************************계약금 2 폼 데이터******************************/
 						$cont_arr4 = array( // 수납 테이블 입력 데이터
+							'pj_seq' => $this->input->post('project', TRUE),
 							'cont_seq' => $cont_seq->seq,
 							'pay_sche_code' => $this->input->post('cont_pay_sche2', TRUE), // 당회 납부 회차
 							'paid_amount' => $this->input->post('deposit_2', TRUE), // 납부한 금액
@@ -447,6 +455,7 @@ class M1 extends CI_Controller {
 // 5. 청약금 데이터 -> 수납 데이터로 입력
 								if( !empty($this->input->post('app_in_mon', TRUE))){
 									$app_mon = array( // 청약금 -> 수납 테이블 입력 데이터
+										'pj_seq' => $this->input->post('project', TRUE),
 										'cont_seq' => $cont_seq->seq,
 										'pay_sche_code' => $this->input->post('app_pay_sche', TRUE), // 당회 납부 회차
 										'paid_amount' => $this->input->post('app_in_mon', TRUE), // 납부한 금액
