@@ -241,18 +241,20 @@ echo form_open(base_url(uri_string()), $attributes);
 <?php if(empty($cont_data)) : ?>
 		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 120px 0;">등록된 데이터가 없습니다.</div>
 <?php else : ?>
+		<div class="col-xs-12 right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;"><?php echo "[ 결과 : ".$total_rows." 건 ]"; ?></div>
 		<div class="col-xs-12 table-responsive" style="padding: 0;">
 			<table class="table table-bordered table-hover table-condensed">
 				<thead class="bo-top center bgf8">
 					<tr>
-						<td width="10%">계약 일련번호</td>
-						<td width="10%">차 수</td>
-						<td width="10%">타 입</td>
-						<td width="10%">동 호 수</td>
-						<td width="10%">계 약 자</td>
+						<td width="8%">계약 일련번호</td>
+						<td width="8%">차 수</td>
+						<td width="7%">타 입</td>
+						<td width="8%">동 호 수</td>
+						<td width="8%">계 약 자</td>
 						<td width="10%">연락처 [1]</td>
-						<td width="10%">계약 일자</td>
-						<td width="18%">미비 서류</td>
+						<td width="8%">계약 일자</td>
+						<td width="15%">미비 서류</td>
+						<td width="18%">비 고</td>
 						<td width="12%">계약자 거주지</td>
 					</tr>
 				</thead>
@@ -286,7 +288,8 @@ foreach ($cont_data as $lt) :
 						<td><?php echo $cont_edit_link.$lt->contractor."</a>"; ?></td>
 						<td><?php echo $lt->cont_tel1; ?></td>
 						<td><?php echo $new_span." ".$lt->cont_date; ?></span></td>
-						<td style="color: red;"><?php echo $incom_doc; ?></td>
+						<td style="color: red;"><?php echo cut_string($incom_doc, 15, ".."); ?></td>
+						<td><div style="cursor: pointer;" data-toggle="tooltip" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 20, ".."); ?></div></td>
 						<td><?php echo $addr; ?></td>
 					</tr>
 <?php endforeach; ?>

@@ -13,6 +13,7 @@ class M1 extends CI_Controller {
 		}
 		$this->load->model('main_m'); //모델 파일 로드
 		$this->load->model('m1_m'); //모델 파일 로드
+		$this->load->helper('cut_string'); // 문자열 자르기 헬퍼 로드
 	}
 
 	/**
@@ -44,7 +45,7 @@ class M1 extends CI_Controller {
 			array('계약 현황', '계약 등록', '동호수 현황'), // 첫번째 하위 메뉴
 			array('수납 현황', '수납 등록', '수납약정'),	 // 두번째 하위 메뉴
 			array('프로젝트별 계약현황', '프로젝트별 계약등록(수정)', '동호수 계약 현황표'),  // 첫번째 하위 제목
-			array('분양대금 수납 현황 [구축 작업 전]', '분양대금 수납 등록 [구축 작업 전]', '프로젝트 타입별 수납약정 관리 [구축 작업 전]')   // 두번째 하위 제목
+			array('분양대금 수납 현황 ---------- [구축 작업 전]', '분양대금 수납 등록 ---------- [구축 작업 전]', '프로젝트 타입별 수납약정 관리 ---------- [구축 작업 전]')   // 두번째 하위 제목
 		);
 		// 메뉴데이터 삽입 하여 메인 페이지 호출
 		$this->load->view('menu/m1/sales_v', $menu);
@@ -110,7 +111,7 @@ class M1 extends CI_Controller {
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = base_url('m1/sales/1/1');   //페이징 주소
-				$config['total_rows'] = $this->main_m->sql_num_rows($cont_query);  //게시물의 전체 갯수
+				$config['total_rows'] = $data['total_rows'] = $this->main_m->sql_num_rows($cont_query);  //게시물의 전체 갯수
 				if( !$this->input->get('num')) $config['per_page'] = 10;  else $config['per_page'] = $this->input->get('num'); // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
