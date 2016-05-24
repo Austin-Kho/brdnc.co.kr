@@ -62,7 +62,7 @@ class M1 extends CI_Controller {
 			}else{ // 조회 권한이 있는 경우
 
 				// 불러올 페이지에 보낼 조회 권한 데이터
-				$data['auth'] = $auth['_m1_1_1'];				
+				$data['auth'] = $auth['_m1_1_1'];
 
 				$where = "";
 				if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
@@ -778,6 +778,14 @@ class M1 extends CI_Controller {
 
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m1_2_1'];
+
+				$where = "";
+				if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
+				// 등록된 프로젝트 데이터
+				$data['all_pj'] = $this->main_m->sql_result(' SELECT * FROM cms_project '.$where.' ORDER BY biz_start_ym DESC ');
+				$project = $data['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
+
+
 
 				//본 페이지 로딩
 				$this->load->view('/menu/m1/md2_sd1_v', $data);
