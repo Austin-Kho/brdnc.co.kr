@@ -37,15 +37,27 @@ class Main extends CI_Controller {
 	public function main() {
 		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
+		$say_num = $this->main_m->sql_num_rows(" SELECT seq FROM cms_wise_saying ");
+		$now_num = mt_rand(1, $say_num);
+		$data['saying'] = $this->main_m->sql_row(" SELECT * FROM cms_wise_saying WHERE seq='$now_num' ");
+
 		$config_date = date('Y-m-d', strtotime('-3 day'));
-		$data['app_3day'] = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_application WHERE disposal_div='0' AND app_date>='$config_date' ");
-		$data['cont_3day'] = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_contract WHERE is_rescission='0' AND cont_date>='$config_date' ");
+		$data['app_3day'] = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_application WHERE disposal_div='0' AND app_date>='$config_date' "); // 최근 3일 청약 건수
+		$data['cont_3day'] = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_contract WHERE is_rescission='0' AND cont_date>='$config_date' "); // 최근 3일 계약 건수
 
-		$data['app_num'] = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_application WHERE disposal_div='0' ");
-		$data['cont_num'] = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_contract WHERE is_rescission='0' ");
+		$data['app_num'] = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_application WHERE disposal_div='0' "); // 전체 청약 건수
+		$data['cont_num'] = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_contract WHERE is_rescission='0' "); // 전체 계약 건수
 
-		$data['receive'] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS receive FROM cms_sales_received WHERE pj_seq='1' AND pay_sche_code!='2' AND pay_sche_code!='4' ");
-		$data['agent_cost'] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS agent_cost FROM cms_sales_received WHERE pj_seq='1' AND pay_sche_code='2' OR pay_sche_code='4' ");
+		$data['receive'] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS receive FROM cms_sales_received WHERE pj_seq='1' AND pay_sche_code!='2' AND pay_sche_code!='4' "); // 분담금 수납금 총액
+		$data['agent_cost'] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS agent_cost FROM cms_sales_received WHERE pj_seq='1' AND pay_sche_code='2' OR pay_sche_code='4' "); // 대행비 수납금 총액
+
+		$data['rec'][0] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='1' "); // 현금수표계좌 수납금 총액
+		$data['rec'][1] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='2' "); // 신탁[신청금]계좌 수납금 총액
+		$data['rec'][2] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='3' "); // 신탁[분담금]계좌 수납금 총액
+		$data['rec'][3] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='4' "); // 신탁[대행금]계좌 수납금 총액
+		$data['rec'][4] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='5' "); // 바램[외환]계좌 수납금 총액
+		$data['rec'][5] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='6' "); // 바램[국민]계좌 수납금 총액
+		$data['rec'][6] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='7' "); // 바램[신한]계좌 수납금 총액
 
 		$this->load->view('cms_main_index', $data);
 	}

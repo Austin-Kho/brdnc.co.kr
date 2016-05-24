@@ -62,7 +62,7 @@ class M1 extends CI_Controller {
 			}else{ // 조회 권한이 있는 경우
 
 				// 불러올 페이지에 보낼 조회 권한 데이터
-				$data['auth'] = $auth['_m1_1_1'];
+				$data['auth'] = $auth['_m1_1_1'];				
 
 				$where = "";
 				if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";

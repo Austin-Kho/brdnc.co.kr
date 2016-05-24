@@ -129,7 +129,7 @@
 					if($db_ho !==null) : // 상태 색상 지정
 						if($db_ho->is_hold==1) : $condi_col = "background-color: #728a7d;";
 						elseif($db_ho->is_application==1) : $condi_col = "background-color: #0f9c02;"; // 청약 시
-						elseif($db_ho->is_contract==1) : $condi_col = "background-color: #0714CB;"; // 계약 시
+						elseif($db_ho->is_contract==1) : $condi_col = "background-color: #272c75;"; // 계약 시
 						else : $condi_col = "";
 						endif;
 					else:

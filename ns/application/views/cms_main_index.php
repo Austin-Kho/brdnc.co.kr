@@ -69,81 +69,113 @@
 	<!-- <h3>공지사항</h3> --><!-- 한글 h3 -->
 </div>
 <div class="well hidden-xs">
-	<p>美정부, 아이폰 잠금해제 또 요청…"해제거부는 마케팅전략"// </h2>
-	<p>애플 "고객보안이 최우선" (샌프란시스코 AFP=연합뉴스) 팀 쿡 애플 최고경영자(CEO)는 17일(현지시간) '고객에게 드리는 메시지'를 통해 "미국 정부는 애플이 우리 고객의 보안을 위협하는 전에 없는 조처를 받아들이라고 요구해 왔다"며 "... <?php echo extension_loaded('mcrypt') ? 'Yup' : 'Nope';  ?></p>
+	<blockquote  style="margin: 0;">
+		<p><?php echo $saying->saying_han; ?></p>
+		<footer><?php echo $saying->saying_en; ?></footer>
+	</blockquote>
 </div>
 <!-- <div class="page-header">
 <h1>Panels</h1>
 </div> -->
 <div class="row">
-	<div class="col-sm-6">
-		<div class="panel panel-info">
-			<div class="panel-heading"><h3 class="panel-title">동춘1구역 최근 3일간 청약 · 계약 건수</h3></div>
-			<div class="panel-body">
-				<div class="col-xs-4" style="padding: 0;">신규 청약 건 : </div>
-				<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($app_3day->num)." 건" ?></div>
-				<div class="col-xs-5 right font12" style="padding: 0;"><a href="">청약 관리 바로가기</a></div>
-			</div>
-			<div class="panel-body">
-				<div class="col-xs-4" style="padding: 0;">신규 계약 건 : </div>
-				<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($cont_3day->num)." 건" ?></div>
-				<div class="col-xs-5 right font12" style="padding: 0;"><a href="">계약 관리 바로가기</a></div>
+	<div class="col-xs-12" style="padding: 0;">
+		<div class="col-xs-12 col-sm-6">
+			<div class="panel panel-info">
+				<div class="panel-heading"><h3 class="panel-title">동춘1구역 최근 3일간 청약 · 계약 건수</h3></div>
+				<div class="panel-body">
+					<div class="col-xs-4" style="padding: 0;">신규 청약 건 : </div>
+					<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($app_3day->num)." 건" ?></div>
+					<div class="col-xs-5 right font12" style="padding: 0;"><a href="/ns/m1/sales/1/2">청약 관리 바로가기</a></div>
+				</div>
+				<div class="panel-body">
+					<div class="col-xs-4" style="padding: 0;">신규 계약 건 : </div>
+					<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($cont_3day->num)." 건" ?></div>
+					<div class="col-xs-5 right font12" style="padding: 0;"><a href="/ns/m1/sales/1/2?cont_sort2=2">계약 관리 바로가기</a></div>
+				</div>
 			</div>
 		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading"><h3 class="panel-title">동춘1구역 청약 · 계약 현황</h3></div>
-			<div class="panel-body">
-				<div class="col-xs-4" style="padding: 0;">전체 청약 건 : </div>
-				<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($app_num->num)." 건" ?></div>
-				<div class="col-xs-5 right font12" style="padding: 0;"><a href="">청약 관리 바로가기</a></div>
-			</div>
-			<div class="panel-body">
-				<div class="col-xs-4" style="padding: 0;">전체 계약 건 : </div>
-				<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($cont_num->num)." 건" ?></div>
-				<div class="col-xs-5 right font12" style="padding: 0;"><a href="">계약 관리 바로가기</a></div>
+		<div class="col-xs-12 col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading"><h3 class="panel-title">동춘1구역 청약 · 계약 현황</h3></div>
+				<div class="panel-body">
+					<div class="col-xs-4" style="padding: 0;">전체 청약 건 : </div>
+					<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($app_num->num)." 건" ?></div>
+					<div class="col-xs-5 right font12" style="padding: 0;"><a href="/ns/m1">청약 리스트로 →</a></div>
+				</div>
+				<div class="panel-body">
+					<div class="col-xs-4" style="padding: 0;">전체 계약 건 : </div>
+					<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($cont_num->num)." 건" ?></div>
+					<div class="col-xs-5 right font12" style="padding: 0;"><a href="/ns/m1">계약 리스트로 →</a></div>
+				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-sm-6">
-		<div class="panel panel-default">
-			<div class="panel-heading"><h3 class="panel-title">동춘1분담금 총 납부현황</h3></div>
-			<div class="panel-body">
-				<div class="col-xs-6" style="padding: 0;">분담금 : </div>
-				<div class="col-xs-6 right" style="padding: 0;"><?php echo number_format($receive->receive)." 원"; ?></div>
-			</div>
-			<div class="panel-body">
-				<div class="col-xs-6" style="padding: 0;">대행비 : </div>
-				<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($agent_cost->agent_cost)." 원"; ?></div>
-			</div>
-		</div>
-		<div class="panel panel-info">
-			<div class="panel-heading"><h3 class="panel-title">동춘1 계좌 별 납부현황 [1]</h3></div>
-			<div class="panel-body">
-				<div class="col-xs-6" style="padding: 0;">신탁계좌[신청금] : </div>
-				<div class="col-xs-6 right" style="padding: 0;"><?php echo number_format($receive->receive)." 원"; ?></div>
-			</div>
-			<div class="panel-body">
-				<div class="col-xs-6" style="padding: 0;">신탁계좌[분담금] : </div>
-				<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($agent_cost->agent_cost)." 원"; ?></div>
-			</div>
-			<div class="panel-body">
-				<div class="col-xs-6" style="padding: 0;">신탁계좌[대행비] : </div>
-				<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($agent_cost->agent_cost)." 원"; ?></div>
+	<div class="col-xs-12" style="padding: 0;">
+		<div class="col-xs-12 col-sm-6 col-md-4">
+			<div class="panel panel-default">
+				<div class="panel-heading"><h3 class="panel-title">동춘1분담금 총 납부현황</h3></div>
+				<div class="panel-body">
+					<div class="col-xs-6" style="padding: 0;">분담금 : </div>
+					<div class="col-xs-6 right" style="padding: 0;"><?php echo number_format($receive->receive)." 원"; ?></div>
+				</div>
+				<div class="panel-body">
+					<div class="col-xs-6" style="padding: 0;">대행비 : </div>
+					<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($agent_cost->agent_cost)." 원"; ?></div>
+				</div>
+				<div class="panel-body">
+					<div class="col-xs-6" style="padding: 0;">합 계 : </div>
+					<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($receive->receive+$agent_cost->agent_cost)." 원"; ?></div>
+				</div>
+				<div class="panel-body">
+					<div class="col-xs-6" style="padding: 0;">수납관리 바로가기 : </div>
+					<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($receive->receive+$agent_cost->agent_cost)." 원"; ?></div>
+				</div>
 			</div>
 		</div>
-		<div class="panel panel-success">
-			<div class="panel-heading"><h3 class="panel-title">동춘1 계좌 별 납부현황 [2]</h3></div>
-			<div class="panel-body">
-				<div class="col-xs-6" style="padding: 0;">바램계좌[외환] : </div>
-				<div class="col-xs-6 right" style="padding: 0;"><?php echo number_format($receive->receive)." 원"; ?></div>
+		<div class="col-xs-12 col-sm-6 col-md-4">
+			<div class="panel panel-info">
+				<div class="panel-heading"><h3 class="panel-title">동춘1 계좌 별 납부현황 [1]</h3></div>
+				<div class="panel-body">
+					<div class="col-xs-6" style="padding: 0;">신탁계좌[신청금] : </div>
+					<div class="col-xs-6 right" style="padding: 0;"><?php echo number_format($rec[1]->rec)." 원"; ?></div>
+				</div>
+				<div class="panel-body">
+					<div class="col-xs-6" style="padding: 0;">신탁계좌[분담금] : </div>
+					<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($rec[2]->rec)." 원"; ?></div>
+				</div>
+				<div class="panel-body">
+					<div class="col-xs-6" style="padding: 0;">신탁계좌[대행비] : </div>
+					<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($rec[3]->rec)." 원"; ?></div>
+				</div>
+				<div class="panel-body">
+					<div class="col-xs-6" style="padding: 0;">합 계 : </div>
+					<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($rec[1]->rec+$rec[2]->rec+$rec[3]->rec)." 원"; ?></div>
+				</div>
 			</div>
-			<div class="panel-body">
-				<div class="col-xs-6" style="padding: 0;">바램계좌[국민] : </div>
-				<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($agent_cost->agent_cost)." 원"; ?></div>
-			</div>
-			<div class="panel-body">
-				<div class="col-xs-6" style="padding: 0;">바램계좌[신한] : </div>
-				<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($agent_cost->agent_cost)." 원"; ?></div>
+		</div>
+		<div class="col-xs-12 col-sm-6 col-md-4">
+			<div class="panel panel-success">
+				<div class="panel-heading"><h3 class="panel-title">동춘1 계좌 별 납부현황 [2]</h3></div>
+				<div class="panel-body">
+					<div class="col-xs-6" style="padding: 0;">바램계좌[외환] : </div>
+					<div class="col-xs-6 right" style="padding: 0;"><?php echo number_format($rec[4]->rec)." 원"; ?></div>
+				</div>
+				<div class="panel-body">
+					<div class="col-xs-6" style="padding: 0;">바램계좌[국민] : </div>
+					<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($rec[5]->rec)." 원"; ?></div>
+				</div>
+				<div class="panel-body">
+					<div class="col-xs-6" style="padding: 0;">바램계좌[신한] : </div>
+					<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($rec[6]->rec)." 원"; ?></div>
+				</div>
+				<div class="panel-body">
+					<div class="col-xs-6" style="padding: 0;">현금수표수납 : </div>
+					<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($rec[0]->rec)." 원"; ?></div>
+				</div>
+				<div class="panel-body">
+					<div class="col-xs-6" style="padding: 0;">합 계 : </div>
+					<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($rec[0]->rec+$rec[4]->rec+$rec[5]->rec+$rec[6]->rec)." 원"; ?></div>
+				</div>
 			</div>
 		</div>
 	</div>
