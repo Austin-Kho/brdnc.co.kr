@@ -7,22 +7,28 @@
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 		<meta name="description" content="(주)바램디앤씨 관리프로그램">
 		<meta name="author" content="(주)바램디앤씨">
-		<link rel="shortcut icon" href="<?php echo $this->config->base_url();?>static/img/cms.ico">
+<?php if(strpos( $this->agent->mobile(), "Apple")!==FALSE) : ?>
+		<link rel="apple-touch-icon" href="<?php echo $this->config->base_url('static/img/apple-touch-icon.png');?>"/>
+<?php elseif(strpos( $this->agent->mobile(), "Android")!==FALSE) : ?>
+		<link rel="apple-touch-icon" href="<?php echo $this->config->base_url('static/img/android_icon.png');?>"/>
+<?php else : ?>
+		<link rel="shortcut icon" href="<?php echo $this->config->base_url('static/img/cms.ico');?>"/>
+<?php endif; ?>
 		<title>[주]바램디앤씨 관리시스템</title>
 		<!-- Bootstrap core CSS -->
-		<link rel="stylesheet" href="<?php echo $this->config->base_url();?>static/lib/bootstrap/css/bootstrap.min.css" media="screen">
+		<link rel="stylesheet" href="<?php echo $this->config->base_url('static/lib/bootstrap/css/bootstrap.min.css');?>" media="screen">
 		<!-- Custom styles for this template -->
-		<link rel="stylesheet" href="<?php echo $this->config->base_url();?>static/css/cms.css">
+		<link rel="stylesheet" href="<?php echo $this->config->base_url('static/css/cms.css');?>">
 		<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 		<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-		<script src="<?php echo $this->config->base_url();?>static/js/ie-emulation-modes-warning.js"></script>
+		<script src="<?php echo $this->config->base_url('static/js/ie-emulation-modes-warning.js');?>"></script>
 		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></scrit>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		<script src="<?php echo $this->config->base_url();?>static/lib/calendar/calendar.js"></script>
-		<script src="<?php echo $this->config->base_url();?>static/js/global.js"></script>
+		<script src="<?php echo $this->config->base_url('static/lib/calendar/calendar.js');?>"></script>
+		<script src="<?php echo $this->config->base_url('static/js/global.js');?>"></script>
 <?php
 	switch ($this->uri->segment(1)) {
 		case 'm1': $menu_js = 'm1.js';	break;
@@ -32,7 +38,7 @@
 		case 'm5': $menu_js = 'm5.js';	break;
 	}
 ?>
-		<script src="<?php echo $this->config->base_url();?>static/js/<?php echo $menu_js;?>"></script>
+		<script src="<?php echo $this->config->base_url('static/js')."/".$menu_js;?>"></script>
 	</head>
 
 	<body role="document" onclick="cal_del();">
