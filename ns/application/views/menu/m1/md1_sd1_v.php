@@ -288,8 +288,8 @@ foreach ($cont_data as $lt) :
 						<td><?php echo $cont_edit_link.$lt->contractor."</a>"; ?></td>
 						<td><?php echo $lt->cont_tel1; ?></td>
 						<td><?php echo $new_span." ".$lt->cont_date; ?></span></td>
-						<td style="color: red;"><?php echo cut_string($incom_doc, 15, ".."); ?></td>
-						<td><div style="cursor: pointer;" data-toggle="tooltip" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 20, ".."); ?></div></td>
+						<td><div style="cursor: pointer; color: red;" data-toggle="tooltip" data-placement="left" title="<?php echo $incom_doc; ?>"><?php echo cut_string($incom_doc, 13, ".."); ?></div></td>
+						<td><div style="cursor: pointer;" data-toggle="tooltip" data-placement="left" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 20, ".."); ?></div></td>
 						<td><?php echo $addr; ?></td>
 					</tr>
 <?php endforeach; ?>
