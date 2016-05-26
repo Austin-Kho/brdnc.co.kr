@@ -59,6 +59,9 @@ class Main extends CI_Controller {
 		$data['rec'][5] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='6' "); // 바램[국민]계좌 수납금 총액
 		$data['rec'][6] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='7' "); // 바램[신한]계좌 수납금 총액
 
+		$data['current_rec1'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_received WHERE pj_seq='1' ORDER BY seq DESC LIMIT 0, 5 "); // 최근 입금 거래 데이터1
+		$data['current_rec2'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_received WHERE pj_seq='1' ORDER BY seq DESC LIMIT 5, 5 "); // 최근 입금 거래 데이터2
+
 		$this->load->view('cms_main_index', $data);
 	}
 

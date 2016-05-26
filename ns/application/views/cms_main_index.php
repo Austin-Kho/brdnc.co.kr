@@ -65,8 +65,8 @@
 	</a>
 </div>
 <div class="page-header">
-	<!-- <h1>Wells</h1> --><!-- 영문 h1 -->
-	<!-- <h3>공지사항</h3> --><!-- 한글 h3 -->
+	<!-- <h1>Wells</h1><!-- 영문 h1-->
+	<!-- <h3>공지사항</h3><!-- 한글 h3-->
 </div>
 <div class="well hidden-xs">
 	<blockquote  style="margin: 0;">
@@ -81,26 +81,21 @@
 	<div class="col-xs-12" style="padding: 0;">
 		<div class="col-xs-12 col-sm-6">
 			<div class="panel panel-info">
-				<div class="panel-heading"><h3 class="panel-title">동춘1구역 최근 3일간 청약 · 계약 건수</h3></div>
-				<div class="panel-body">
-					<div class="col-xs-4" style="padding: 0;">신규 청약 건 : </div>
-					<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($app_3day->num)." 건" ?></div>
-					<div class="col-xs-5 right font12" style="padding: 0;"><a href="/ns/m1/sales/1/2">청약 관리 바로가기</a></div>
-				</div>
-				<div class="panel-body">
-					<div class="col-xs-4" style="padding: 0;">신규 계약 건 : </div>
-					<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($cont_3day->num)." 건" ?></div>
-					<div class="col-xs-5 right font12" style="padding: 0;"><a href="/ns/m1/sales/1/2?cont_sort2=2">계약 관리 바로가기</a></div>
-				</div>
-			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6">
-			<div class="panel panel-default">
 				<div class="panel-heading"><h3 class="panel-title">동춘1구역 청약 · 계약 현황</h3></div>
+				<div class="panel-body">
+					<div class="col-xs-4" style="padding: 0;">신규 청약 건 ( 최근 3일 ) : </div>
+					<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($app_3day->num)." 건" ?></div>
+					<div class="col-xs-5 right font12" style="padding: 0;"></div>
+				</div>
+				<div class="panel-body">
+					<div class="col-xs-4" style="padding: 0;">신규 계약 건 ( 최근 3일 ) : </div>
+					<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($cont_3day->num)." 건" ?></div>
+					<div class="col-xs-5 right font12" style="padding: 0;"><a href="/ns/m1/sales/1/2?cont_sort2=2">계약 관리 Page로 →</a></div>
+				</div>
 				<div class="panel-body">
 					<div class="col-xs-4" style="padding: 0;">전체 청약 건 : </div>
 					<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($app_num->num)." 건" ?></div>
-					<div class="col-xs-5 right font12" style="padding: 0;"><a href="/ns/m1">청약 리스트로 →</a></div>
+					<div class="col-xs-5 right font12" style="padding: 0;"></div>
 				</div>
 				<div class="panel-body">
 					<div class="col-xs-4" style="padding: 0;">전체 계약 건 : </div>
@@ -109,9 +104,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="col-xs-12" style="padding: 0;">
-		<div class="col-xs-12 col-sm-6 col-md-4">
+		<div class="col-xs-12 col-sm-6">
 			<div class="panel panel-default">
 				<div class="panel-heading"><h3 class="panel-title">동춘1분담금 총 납부현황</h3></div>
 				<div class="panel-body">
@@ -127,13 +120,15 @@
 					<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($receive->receive+$agent_cost->agent_cost)." 원"; ?></div>
 				</div>
 				<div class="panel-body">
-					<div class="col-xs-6" style="padding: 0;">수납관리 바로가기 : </div>
-					<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($receive->receive+$agent_cost->agent_cost)." 원"; ?></div>
+					<div class="col-xs-6" style="padding: 0;"></div>
+					<div class="col-xs-6 right" style="padding: 0;"><a href="/ns/m1/sales/2/1">수납관리 바로가기</a></div>
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4">
-			<div class="panel panel-info">
+	</div>
+	<div class="col-xs-12" style="padding: 0;">
+		<div class="col-xs-12 col-sm-6">
+			<div class="panel panel-default">
 				<div class="panel-heading"><h3 class="panel-title">동춘1 계좌 별 납부현황 [1]</h3></div>
 				<div class="panel-body">
 					<div class="col-xs-6" style="padding: 0;">신탁계좌[신청금] : </div>
@@ -151,9 +146,13 @@
 					<div class="col-xs-6" style="padding: 0;">합 계 : </div>
 					<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($rec[1]->rec+$rec[2]->rec+$rec[3]->rec)." 원"; ?></div>
 				</div>
+				<div class="panel-body">
+					<div class="col-xs-6" style="padding: 0;"></div>
+					<div class="col-xs-6 right" style="padding: 0;"><a href="/ns/m1/sales/2/1">수납관리 바로가기</a></div>
+				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4">
+		<div class="col-xs-12 col-sm-6">
 			<div class="panel panel-success">
 				<div class="panel-heading"><h3 class="panel-title">동춘1 계좌 별 납부현황 [2]</h3></div>
 				<div class="panel-body">
@@ -179,164 +178,35 @@
 			</div>
 		</div>
 	</div>
-</div>
 
-<!-- <div class="page-header">
-<h1>Tables</h1>
-</div> -->
-<!-- <div class="row">
-<div class="col-md-12">
-<table class="table">
-<thead>
-<tr>
-<th>#</th>
-<th>First Name</th>
-<th>Last Name</th>
-<th>Username</th>
-<th>date-time</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>Mark</td>
-<td>Otto</td>
-<td>@mdo</td>
-<td>Otto</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Jacob</td>
-<td>Thornton</td>
-<td>@fat</td>
-<td>Username</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Larry</td>
-<td>the Bird</td>
-<td>@twitter</td>
-<td>Username</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 
-<div class="row">
-<div class="col-md-6">
-<table class="table table-bordered">
-<thead>
-<tr>
-<th>#</th>
-<th>First Name</th>
-<th>Last Name</th>
-<th>Username</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td rowspan="2">1</td>
-<td>Mark</td>
-<td>Otto</td>
-<td>@mdo</td>
-</tr>
-<tr>
-<td>Mark</td>
-<td>Otto</td>
-<td>@TwBootstrap</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Jacob</td>
-<td>Thornton</td>
-<td>@fat</td>
-</tr>
-<tr>
-<td>3</td>
-<td colspan="2">Larry the Bird</td>
-<td>@twitter</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="col-md-6">
-<table class="table table-condensed">
-<thead>
-<tr>
-<th>#</th>
-<th>First Name</th>
-<th>Last Name</th>
-<th><p><a href="#">Inbox <span class="badge">42</span></a></p></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>Mark</td>
-<td>Otto</td>
-<td>@mdo</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Jacob</td>
-<td>Thornton</td>
-<td>@fat</td>
-</tr>
-<tr>
-<td>3</td>
-<td colspan="2">Larry the Bird</td>
-<td>@twitter</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
 
-<ul class="nav nav-pills" role="tablist">
-<li role="presentation" class="active"><a href="#">Home <span class="badge">42</span></a></li>
-<li role="presentation"><a href="#">Profile</a></li>
-<li role="presentation"><a href="#">Messages <span class="badge">3</span></a></li>
-</ul>
 
-<div class="page-header">
-<h4>List groups</h4>
+
+	<div class="col-xs-12" style="padding: 0;">
+		<div class="col-xs-12 col-sm-6">
+			<div class="panel panel-info">
+				<div class="panel-heading"><h3 class="panel-title">동춘1 최근 입금 거래 현황 [1]</h3></div>
+<?php foreach($current_rec1 as $lt) :  ?>
+				<div class="panel-body">
+					<div class="col-xs-4" style="padding: 0;"><?php echo $lt->paid_who; ?></div>
+					<div class="col-xs-4" style="padding: 0;"><?php echo $lt->paid_date; ?></div>
+					<div class="col-xs-4 right" style="padding: 0;"><?php echo number_format($lt->paid_amount)." 원"; ?></div>
+				</div>
+<?php endforeach; ?>
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-6">
+			<div class="panel panel-danger">
+				<div class="panel-heading"><h3 class="panel-title">동춘1 최근 입금 거래 현황 [2]</h3></div>
+<?php foreach($current_rec2 as $lt) :  ?>
+				<div class="panel-body">
+					<div class="col-xs-4" style="padding: 0;"><?php echo $lt->paid_who; ?></div>
+					<div class="col-xs-4" style="padding: 0;"><?php echo $lt->paid_date; ?></div>
+					<div class="col-xs-4 right" style="padding: 0;"><?php echo number_format($lt->paid_amount)." 원"; ?></div>
+				</div>
+<?php endforeach; ?>
+			</div>
+		</div>
+	</div>
 </div>
-<div class="row">
-<div class="col-sm-4">
-<ul class="list-group">
-<li class="list-group-item">Cras justo odio</li>
-<li class="list-group-item">Dapibus ac facilisis in</li>
-<li class="list-group-item">Morbi leo risus</li>
-<li class="list-group-item">Porta ac consectetur ac</li>
-<li class="list-group-item">Vestibulum at eros</li>
-</ul>
-</div>
-<div class="col-sm-4">
-<div class="list-group">
-<a href="#" class="list-group-item active">
-Cras justo odio
-</a>
-<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-<a href="#" class="list-group-item">Morbi leo risus</a>
-<a href="#" class="list-group-item">Porta ac consectetur ac</a>
-<a href="#" class="list-group-item">Vestibulum at eros</a>
-</div>
-</div>
-<div class="col-sm-4">
-<div class="list-group">
-<a href="#" class="list-group-item active">
-<h4 class="list-group-item-heading">List group item heading</h4>
-<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-</a>
-<a href="#" class="list-group-item">
-<h4 class="list-group-item-heading">List group item heading</h4>
-<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-</a>
-<a href="#" class="list-group-item">
-<h4 class="list-group-item-heading">List group item heading</h4>
-<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-</a>
-</div>
-</div>
-</div> -->
