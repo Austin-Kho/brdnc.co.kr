@@ -41,9 +41,9 @@ class Main extends CI_Controller {
 		$now_num = mt_rand(1, $say_num);
 		$data['saying'] = $this->main_m->sql_row(" SELECT * FROM cms_wise_saying WHERE seq='$now_num' ");
 
-		$config_date = date('Y-m-d', strtotime('-3 day'));
-		$data['app_3day'] = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_application WHERE disposal_div='0' AND app_date>='$config_date' "); // 최근 3일 청약 건수
-		$data['cont_3day'] = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_contract WHERE is_rescission='0' AND cont_date>='$config_date' "); // 최근 3일 계약 건수
+		$config_date = date('Y-m-d', strtotime('-7 day'));
+		$data['app_7day'] = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_application WHERE disposal_div='0' AND app_date>='$config_date' "); // 최근 7일 청약 건수
+		$data['cont_7day'] = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_contract WHERE is_rescission='0' AND cont_date>='$config_date' "); // 최근 7일 계약 건수
 
 		$data['app_num'] = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_application WHERE disposal_div='0' "); // 전체 청약 건수
 		$data['cont_num'] = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_contract WHERE is_rescission='0' "); // 전체 계약 건수
@@ -59,8 +59,8 @@ class Main extends CI_Controller {
 		$data['rec'][5] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='6' "); // 바램[국민]계좌 수납금 총액
 		$data['rec'][6] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='7' "); // 바램[신한]계좌 수납금 총액
 
-		$data['current_rec1'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_received WHERE pj_seq='1' ORDER BY seq DESC LIMIT 0, 5 "); // 최근 입금 거래 데이터1
-		$data['current_rec2'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_received WHERE pj_seq='1' ORDER BY seq DESC LIMIT 5, 5 "); // 최근 입금 거래 데이터2
+		$data['current_rec1'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_received WHERE pj_seq='1' ORDER BY paid_date DESC, seq DESC LIMIT 0, 5 "); // 최근 입금 거래 데이터1
+		$data['current_rec2'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_received WHERE pj_seq='1' ORDER BY paid_date DESC, seq DESC LIMIT 5, 5 "); // 최근 입금 거래 데이터2
 
 		$this->load->view('cms_main_index', $data);
 	}

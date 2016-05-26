@@ -77,30 +77,30 @@
 <!-- <div class="page-header">
 <h1>Panels</h1>
 </div> -->
-<div class="row">
+<div class="row font13">
 	<div class="col-xs-12" style="padding: 0;">
 		<div class="col-xs-12 col-sm-6">
-			<div class="panel panel-info">
+			<div class="panel panel-success">
 				<div class="panel-heading"><h3 class="panel-title">동춘1구역 청약 · 계약 현황</h3></div>
 				<div class="panel-body">
-					<div class="col-xs-4" style="padding: 0;">신규 청약 건 ( 최근 3일 ) : </div>
-					<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($app_3day->num)." 건" ?></div>
-					<div class="col-xs-5 right font12" style="padding: 0;"></div>
+					<div class="col-xs-5" style="padding: 0;">신규 청약 건 (최근 7일) : </div>
+					<div class="col-xs-3 right" style="padding: 0; color: #3404D6;"><?php echo number_format($app_7day->num)." 건" ?></div>
+					<div class="col-xs-4 right " style="padding: 0;"></div>
 				</div>
 				<div class="panel-body">
-					<div class="col-xs-4" style="padding: 0;">신규 계약 건 ( 최근 3일 ) : </div>
-					<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($cont_3day->num)." 건" ?></div>
-					<div class="col-xs-5 right font12" style="padding: 0;"><a href="/ns/m1/sales/1/2?cont_sort2=2">계약 관리 Page로 →</a></div>
+					<div class="col-xs-5" style="padding: 0;">신규 계약 건 (최근 7일) : </div>
+					<div class="col-xs-3 right" style="padding: 0; color: #3404D6;"><?php echo number_format($cont_7day->num)." 건" ?></div>
+					<div class="col-xs-4 right " style="padding: 0;"><a href="/ns/m1/sales/1/2?cont_sort2=2">계약 관리페이지 →</a></div>
 				</div>
 				<div class="panel-body">
-					<div class="col-xs-4" style="padding: 0;">전체 청약 건 : </div>
+					<div class="col-xs-5" style="padding: 0;">전체 청약 건 : </div>
 					<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($app_num->num)." 건" ?></div>
-					<div class="col-xs-5 right font12" style="padding: 0;"></div>
+					<div class="col-xs-4 right " style="padding: 0;"></div>
 				</div>
 				<div class="panel-body">
-					<div class="col-xs-4" style="padding: 0;">전체 계약 건 : </div>
+					<div class="col-xs-5" style="padding: 0;">전체 계약 건 : </div>
 					<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($cont_num->num)." 건" ?></div>
-					<div class="col-xs-5 right font12" style="padding: 0;"><a href="/ns/m1">계약 리스트로 →</a></div>
+					<div class="col-xs-4 right " style="padding: 0;"><a href="/ns/m1">계약 리스트로 →</a></div>
 				</div>
 			</div>
 		</div>
@@ -108,11 +108,11 @@
 			<div class="panel panel-default">
 				<div class="panel-heading"><h3 class="panel-title">동춘1분담금 총 납부현황</h3></div>
 				<div class="panel-body">
-					<div class="col-xs-6" style="padding: 0;">분담금 : </div>
+					<div class="col-xs-6" style="padding: 0;">조합 분담금 : </div>
 					<div class="col-xs-6 right" style="padding: 0;"><?php echo number_format($receive->receive)." 원"; ?></div>
 				</div>
 				<div class="panel-body">
-					<div class="col-xs-6" style="padding: 0;">대행비 : </div>
+					<div class="col-xs-6" style="padding: 0;">업무 대행비 : </div>
 					<div class="col-xs-6 right" style="padding: 0;"><?php echo  number_format($agent_cost->agent_cost)." 원"; ?></div>
 				</div>
 				<div class="panel-body">
@@ -185,7 +185,7 @@
 
 	<div class="col-xs-12" style="padding: 0;">
 		<div class="col-xs-12 col-sm-6">
-			<div class="panel panel-success">
+			<div class="panel panel-info">
 				<div class="panel-heading"><h3 class="panel-title">동춘1 최근 입금 거래 현황 [1]</h3></div>
 <?php foreach($current_rec1 as $lt) :  ?>
 				<div class="panel-body">
@@ -197,7 +197,7 @@
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-6">
-			<div class="panel panel-danger">
+			<div class="panel panel-info">
 				<div class="panel-heading"><h3 class="panel-title">동춘1 최근 입금 거래 현황 [2]</h3></div>
 <?php foreach($current_rec2 as $lt) :  ?>
 				<div class="panel-body">
