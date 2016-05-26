@@ -43,9 +43,9 @@ class M1 extends CI_Controller {
 
 		$menu['s_di'] = array(
 			array('계약 현황', '계약 등록', '동호수 현황'), // 첫번째 하위 메뉴
-			array('수납 현황', '수납 등록', '수납약정'),	 // 두번째 하위 메뉴
+			array('수납 현황', '수납 등록', '설정 관리'),	 // 두번째 하위 메뉴
 			array('프로젝트별 계약현황', '프로젝트별 계약등록(수정)', '동호수 계약 현황표'),  // 첫번째 하위 제목
-			array('분양대금 수납 현황 ---------- [구축 작업 전]', '분양대금 수납 등록 ---------- [구축 작업 전]', '프로젝트 타입별 수납약정 관리 ---------- [구축 작업 전]')   // 두번째 하위 제목
+			array('분양대금 수납 현황 ---------- [구축 작업 전]', '분양대금 수납 등록 ---------- [구축 작업 진행 중]', '프로젝트 타입별 수납약정 관리 ---------- [구축 작업 진행 중]')   // 두번째 하위 제목
 		);
 
 		// 등록된 프로젝트 데이터
@@ -810,12 +810,11 @@ class M1 extends CI_Controller {
 					$cont_data = $data['cont_data'] = $this->main_m->sql_row($cont_query); // 계약 및 계약자 데이터
 
 					// 수납 데이터
-					$data['received'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' ");
-					$data['total_paid'] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS total_paid FROM cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' ");
-
-					// 수납 약정
-					$pay_sche = $data['pay_sche'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' "); // 약정 회차					
+					$data['received'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' "); // 계약자별 수납데이터
+					$data['total_paid'] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS total_paid FROM cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' "); // 계약자별 총 수납액
 				}
+				// 수납 약정
+				$pay_sche = $data['pay_sche'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' "); // 약정 회차
 
 				$data['contractor_info'] = ($this->input->get('ho')) ? "<font color='#9f0404'><span class='glyphicon glyphicon-import' aria-hidden='true' style='padding-right: 10px;'></span></font><b>[".$unit->type." 타입] &nbsp;".$now_dong ." 동 ". $now_ho." 호 - 계약자 : ".$cont_data->contractor."</b>" : "";
 
@@ -845,6 +844,15 @@ class M1 extends CI_Controller {
 
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m1_2_3'];
+
+
+
+				// 6. 회차별 납입가 설정
+				$data['pay_sche'] = $this->main_m->sql_result(" SELECT seq, pay_name FROM cms_sales_pay_sche  WHERE pj_seq='$project' ");
+				$data['diff_no'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_con_diff WHERE pj_seq='$project' ORDER BY diff_no "); // 분양차수 선택 셀렉트바
+				$data['sche_name'] = $this->main_m->sql_result(" SELECT pay_name FROM cms_sales_pay_sche WHERE pj_seq='$project' AND pay_sort='".$this->input->get('pay_sort')."' ORDER BY pay_code ");
+				$data['diff'] = $this->main_m->sql_row(" SELECT diff_name FROM cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='".$this->input->get('diff_no')."' "); // 차수명
+				$data['type_name'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_con_type WHERE pj_seq='$project' ORDER BY seq ");
 
 				//본 페이지 로딩
 				$this->load->view('/menu/m1/md2_sd3_v', $data);

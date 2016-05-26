@@ -86,10 +86,10 @@ for($i=(count($year)-1); $i>=0; $i--) :
 	$paid_sche = $this->main_m->sql_row(" SELECT pay_name FROM cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$lt->pay_sche_code' ");
 	$paid_acc = $this->main_m->sql_row(" SELECT acc_nick FROM cms_sales_bank_acc WHERE pj_seq='$project' AND seq='$lt->paid_acc' ");
 ?>
-						<tr>
+						<tr style="background-color: #F9FAD9;">
 							<td><?php echo $lt->paid_date; ?></td>
 							<td><?php echo $paid_sche->pay_name; ?></td>
-							<td class="right" style="color: #2050fa;"><?php echo number_format($lt->paid_amount); ?></td>
+							<td class="right" style="color: #0427A4;"><?php echo number_format($lt->paid_amount); ?></td>
 							<td><?php echo $paid_acc->acc_nick ; ?></td>
 							<td><?php echo $lt->paid_who; ?></td>
 						</tr>
@@ -100,7 +100,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 						<tr>
 							<td>합 계</td>
 							<td></td>
-							<td class="right" style="color: #2050fa; font-weight: bold;"><?php if( !empty($total_paid)) echo number_format($total_paid->total_paid); ?></td>
+							<td class="right" style="color: #0427A4; font-weight: bold;"><?php if( !empty($total_paid)) echo number_format($total_paid->total_paid); ?></td>
 							<td></td>
 							<td></td>
 						</tr>
@@ -160,10 +160,9 @@ for($i=(count($year)-1); $i>=0; $i--) :
 					</div>
 				</div>
 			</div>
-
 <?php if( !$this->input->get('ho')) : ?>
 			<div class="row">
-				<div class="col-sm-12 center" style="padding: 93px 0;">등록할 동 호수를 선택하여 주세요.</div>
+				<div class="col-sm-12 center" style="padding: 70px 0  86px;">등록할 동 호수를 선택하여 주세요.</div>
 			</div>
 <?php endif; ?>
 
@@ -190,21 +189,29 @@ for($i=(count($year)-1); $i>=0; $i--) :
 					<tbody>
 <?php
 foreach($pay_sche as $lt) :
-$due_date = (($lt->pay_code=='2' OR $lt->pay_code=='3') && !empty($cont_data)) ? date('Y-m-d', strtotime('+1 month', strtotime($cont_data->cont_date))) : '';
+	if(($lt->pay_code=='3' OR $lt->pay_code=='4') && !empty($cont_data)) :
+		$due_date = date('Y-m-d', strtotime('+1 month', strtotime($cont_data->cont_date)));
+	elseif($lt->pay_code>'3' && !empty($cont_data->pay_due_date)) :
+		$due_date = $cont_data->pay_due_date;
+	else :
+		$due_date = "";
+	endif;
+	if( !empty($cont_data)) $ppsche = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS pps FROM cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' AND pay_sche_code='$lt->pay_code' ");
+	$paid_per_sche = (empty($ppsche->pps) OR $ppsche->pps=='0') ? "-" : number_format($ppsche->pps); // 수납금액
 // $pay_data = $this->main_m->sql_result(" SELECT * FROM cms_sales_payment WHERE pj_seq='$project' AND price_seq='$cont_data->price_seq' AND pay_sche_seq='$lt->seq' "); // 회차별 약정 금액
 // $payment = ( !empty($pay_data)) ? $pay_data->payment : "";
 ?>
-						<tr>
+						<tr class="<?php if(empty($cont_data)) echo "active"; ?>">
 							<td style="color: <?php if(date('Y-md')>$due_date) echo '#d00202' ?>;"><?php echo $due_date; ?></td>
 							<td><?php echo $lt->pay_name; ?></td>
-							<td><?php // echo $payment; ?></td>
-							<td></td>
-							<td></td>
+							<td><?php // echo $payment; ?>10,000,000</td>
+							<td class="right" style="color: #0427A4;"><?php echo $paid_per_sche; ?></td>
+							<td>10,000,000</td>
 						</tr>
 <?php endforeach; ?>
 					</tbody>
 					<tfoot>
-						<tr>
+						<tr class="active">
 							<td>합 계</td>
 							<td></td>
 							<td></td>
