@@ -153,7 +153,7 @@
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-6">
-			<div class="panel panel-success">
+			<div class="panel panel-warning">
 				<div class="panel-heading"><h3 class="panel-title">동춘1 계좌 별 납부현황 [2]</h3></div>
 				<div class="panel-body">
 					<div class="col-xs-6" style="padding: 0;">바램계좌[외환] : </div>
@@ -185,7 +185,7 @@
 
 	<div class="col-xs-12" style="padding: 0;">
 		<div class="col-xs-12 col-sm-6">
-			<div class="panel panel-info">
+			<div class="panel panel-success">
 				<div class="panel-heading"><h3 class="panel-title">동춘1 최근 입금 거래 현황 [1]</h3></div>
 <?php foreach($current_rec1 as $lt) :  ?>
 				<div class="panel-body">

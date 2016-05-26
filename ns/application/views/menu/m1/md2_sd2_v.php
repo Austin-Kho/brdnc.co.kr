@@ -1,8 +1,8 @@
     <div class="main_start">&nbsp;</div>
     <!-- 1. 분양관리 -> 2. 수납 관리 ->2. 수납 등록 -->
 
-	<div class="row bo-top bo-bottom font12" style="margin: 0;">
-		<form method="get" name="pj_sel" action="<?php echo current_url(); ?>">
+	<form method="get" name="pj_sel" action="<?php echo current_url(); ?>">
+		<div class="row bo-top bo-bottom font12" style="margin: 0;">
 			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
 			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 				<div class="col-xs-12" style="padding: 0px;">
@@ -60,8 +60,160 @@ for($i=(count($year)-1); $i>=0; $i--) :
 					</select>
 				</div>
 			</div>
-		</form>
-	</div>
-	<div class="row bo-top bo-bottom font12" style="margin: 0 0 15px;">
-		<div class="col-xs-12 font14" style="padding: 10px 50px; background-color: #ebedfc; color: #0b071f"><?php echo $contractor_info; ?>&nbsp;</div>
+		</div>
+		<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
+			<div class="col-xs-12 font14" style="padding: 0;"><p class="bg-info" style="padding: 13px 50px; margin: 0;"><?php echo $contractor_info; ?>&nbsp;</p></div>
+		</div>
+	</form>
+
+
+	<div class="row font12" style="margin: 0; padding: 0;">
+		<div class="col-sm-12 col-sm-12 col-md-7" style="padding: 0 10px;">
+			<div class="col-sm-12 table-responsive" style="padding: 0;">
+				<table class="table table-bordered  table-hover table-condensed center">
+					<thead>
+						<tr class="active">
+							<td>수납일자</td>
+							<td>회차구분</td>
+							<td>수납금액</td>
+							<td>수납계좌</td>
+							<td>입금자</td>
+						</tr>
+					</thead>
+					<tbody>
+<?php if($this->input->get('ho')) : ?>
+<?php foreach($received as $lt):
+	$paid_sche = $this->main_m->sql_row(" SELECT pay_name FROM cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$lt->pay_sche_code' ");
+	$paid_acc = $this->main_m->sql_row(" SELECT acc_nick FROM cms_sales_bank_acc WHERE pj_seq='$project' AND seq='$lt->paid_acc' ");
+?>
+						<tr>
+							<td><?php echo $lt->paid_date; ?></td>
+							<td><?php echo $paid_sche->pay_name; ?></td>
+							<td class="right" style="color: #2050fa;"><?php echo number_format($lt->paid_amount); ?></td>
+							<td><?php echo $paid_acc->acc_nick ; ?></td>
+							<td><?php echo $lt->paid_who; ?></td>
+						</tr>
+<?php endforeach; ?>
+<?php endif; ?>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td>합 계</td>
+							<td></td>
+							<td class="right" style="color: #2050fa; font-weight: bold;"><?php if( !empty($total_paid)) echo number_format($total_paid->total_paid); ?></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+			<div class="row" style="margin: 0; padding: 0;">
+				<div class="col-sm-12 bo-top" style="padding: 0;">
+					<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">수납일자</div>
+					<div class="col-xs-8 col-md-4" style="padding: 0;">
+						<label for="rec_date" class="sr-only">입금일</label>
+						<div class="col-xs-10" style="padding: 4px;">
+							<input type="text" name="rec_date" id="rec_date" class="form-control input-sm" value="<?php if( !empty($received['4'])) echo $received['4']->paid_date; else echo set_value('rec_date'); ?>" placeholder="입금일" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+						</div>
+						<div class="col-xs-2" style="padding: 10px 5px;">
+							<a href="javascript:" onclick="cal_add(document.getElementById('rec_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row" style="margin: 0; padding: 0;">
+				<div class="col-sm-12 bo-top" style="padding: 0;">
+					<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">회차구분</div>
+					<div class="col-xs-8 col-md-4" style="padding:  4px;">
+						<label for="pay_sche" class="sr-only">납부회차</label>
+						<select class="form-control input-sm" name="pay_sche">
+							<option value="">납부회차</option>
+<?php //foreach ($pay_schedule as $lt) : ?>
+							<option value="<?php //echo $lt->pay_code ?>" <?php //if( !empty($received['4'])&&$lt->pay_code==$received['4']->pay_sche_code){ echo "selected"; }else{ set_select('pay_sche', $lt->pay_code); } ?>><?php //echo $lt->pay_name; ?></option>
+<?php //endforeach; ?>
+						</select>
+					</div>
+					<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">수납금액</div>
+					<div class="col-xs-8 col-md-4" style="padding: 4px;">
+						<label for="receive" class="sr-only">계약금</label>
+						<input type="text" class="form-control input-sm en_only" name="receive" value="<?php //echo $receive; ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]">
+					</div>
+				</div>
+			</div>
+
+			<div class="row" style="margin: 0; padding: 0;">
+				<div class="col-sm-12 bo-top  bo-bottom" style="padding: 0; margin-bottom: 20px;">
+					<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">수납계좌</div>
+					<div class="col-xs-8 col-md-4" style="padding: 4px;">
+						<label for="dep_acc_4" class="sr-only">계약금입금계정4</label>
+						<select class="form-control input-sm" name="dep_acc_4">
+							<option value="">입금계좌</option>
+	<?php foreach ($dep_acc as $lt) : ?>
+							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received['4']->paid_acc)&&$received['4']->paid_acc==$lt->seq) echo "selected"; else set_select('dep_acc_4', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
+	<?php endforeach; ?>
+						</select>
+					</div>
+					<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">입금자</div>
+					<div class="col-xs-8 col-md-4" style="padding: 4px;">
+						<label for="receive" class="sr-only">계약금</label>
+						<input type="text" class="form-control input-sm en_only" name="receive" value="<?php //echo $receive; ?>" onkeyPress ='iNum(this)'  placeholder="입금자">
+					</div>
+				</div>
+			</div>
+
+<?php if( !$this->input->get('ho')) : ?>
+			<div class="row">
+				<div class="col-sm-12 center" style="padding: 93px 0;">등록할 동 호수를 선택하여 주세요.</div>
+			</div>
+<?php endif; ?>
+
+<?php if($auth<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="cont_check();";} ?>
+			<div class="form-group btn-wrap" style="margin: ;">
+				<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str?>" value="등록 하기">
+			</div>
+		</div>
+
+
+
+		<div class="col-sm-12 col-sm-12 col-md-5" style="padding: 0 10px;">
+			<div class="col-xs-12 table-responsive" style="padding: 0;">
+				<table class="table table-bordered  table-hover table-condensed center">
+					<thead>
+						<tr class="active">
+							<td>약정일자</td>
+							<td>구 분</td>
+							<td>약정금액</td>
+							<td>수납금액</td>
+							<td>미(과오)납</td>
+						</tr>
+					</thead>
+					<tbody>
+<?php
+foreach($pay_sche as $lt) :
+$due_date = (($lt->pay_code=='2' OR $lt->pay_code=='3') && !empty($cont_data)) ? date('Y-m-d', strtotime('+1 month', strtotime($cont_data->cont_date))) : '';
+// $pay_data = $this->main_m->sql_result(" SELECT * FROM cms_sales_payment WHERE pj_seq='$project' AND price_seq='$cont_data->price_seq' AND pay_sche_seq='$lt->seq' "); // 회차별 약정 금액
+// $payment = ( !empty($pay_data)) ? $pay_data->payment : "";
+?>
+						<tr>
+							<td style="color: <?php if(date('Y-md')>$due_date) echo '#d00202' ?>;"><?php echo $due_date; ?></td>
+							<td><?php echo $lt->pay_name; ?></td>
+							<td><?php // echo $payment; ?></td>
+							<td></td>
+							<td></td>
+						</tr>
+<?php endforeach; ?>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td>합 계</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+	<?php // endif; ?>
+					</tfoot>
+				</table>
+			</div>
+		</div>
 	</div>

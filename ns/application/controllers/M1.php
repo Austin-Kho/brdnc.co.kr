@@ -794,10 +794,35 @@ class M1 extends CI_Controller {
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m1_2_2'];
 
+
 				$now_dong = $this->input->get('dong');
-				$data['dong_list'] = $this->main_m->sql_result(" SELECT dong FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND is_contract='1' GROUP BY dong ORDER BY dong ");
-				$data['ho_list'] = $this->main_m->sql_result(" SELECT ho FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$now_dong' AND is_contract='1' GROUP BY ho ORDER BY ho ");
-				$data['contractor_info'] =
+				$now_ho = $this->input->get('ho');
+				$data['dong_list'] = $this->main_m->sql_result(" SELECT dong FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND is_contract='1' GROUP BY dong ORDER BY dong "); // 동 리스트
+				$data['ho_list'] = $this->main_m->sql_result(" SELECT ho FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$now_dong' AND is_contract='1' GROUP BY ho ORDER BY ho "); // 호 리스트
+				$unit = $data['unit'] = $this->main_m->sql_row(" SELECT * FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$now_dong' AND ho='$now_ho' AND is_contract='1' ");  // 선택한 동호수 유닛
+
+				// $now_dongho = $now_dong."-".$now_ho;
+				// $cont_data = $this->main_m->sql_row(" SELECT * FROM cms_sales_contract, cms_sales_contractor WHERE pj_seq='$project' AND unit_dong_ho='$now_dongho' ");
+
+				if( !empty($unit->seq)){
+					$cont_where = " WHERE unit_seq='$unit->seq' AND is_transfer='0' AND is_rescission='0' AND cms_sales_contract.seq=cont_seq  ";
+					$cont_query = "  SELECT *, cms_sales_contractor.seq AS contractor_seq FROM cms_sales_contract, cms_sales_contractor ".$cont_where;
+					$cont_data = $data['cont_data'] = $this->main_m->sql_row($cont_query); // 계약 및 계약자 데이터
+
+					// 수납 데이터
+					$data['received'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' ");
+					$data['total_paid'] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS total_paid FROM cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' ");
+
+					// 수납 약정
+					$pay_sche = $data['pay_sche'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' "); // 약정 회차					
+				}
+
+				$data['contractor_info'] = ($this->input->get('ho')) ? "<font color='#9f0404'><span class='glyphicon glyphicon-import' aria-hidden='true' style='padding-right: 10px;'></span></font><b>[".$unit->type." 타입] &nbsp;".$now_dong ." 동 ". $now_ho." 호 - 계약자 : ".$cont_data->contractor."</b>" : "";
+
+
+
+
+
 
 				//본 페이지 로딩
 				$this->load->view('/menu/m1/md2_sd2_v', $data);
