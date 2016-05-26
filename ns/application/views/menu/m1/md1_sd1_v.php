@@ -251,9 +251,9 @@ echo form_open(base_url(uri_string()), $attributes);
 						<td width="7%">타 입</td>
 						<td width="8%">동 호 수</td>
 						<td width="8%">계 약 자</td>
-						<td width="10%">연락처 [1]</td>
-						<td width="8%">계약 일자</td>
-						<td width="13%">미비 서류</td>
+						<td width="9%">연락처 [1]</td>
+						<td width="10%">계약 일자</td>
+						<td width="12%">미비 서류</td>
 						<td width="20%">비 고</td>
 						<td width="12%">계약자 거주지</td>
 					</tr>

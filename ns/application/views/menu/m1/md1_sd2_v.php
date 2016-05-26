@@ -85,7 +85,7 @@
 							<select class="form-control input-sm" name="dong" onchange="submit();">
 								<option value=""> 선 택</option>
 	<?php foreach($dong_list as $lt) : ?>
-								<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->get('dong')) echo "selected"; ?>><?php echo $lt->dong; ?></option>
+								<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->get('dong')) echo "selected"; ?>><?php echo $lt->dong." 동"; ?></option>
 	<?php endforeach; ?>
 							</select>
 						</div>
@@ -98,14 +98,14 @@
 							<select class="form-control input-sm" name="ho" onchange="submit();" <?php if( !$this->input->get('dong')) echo "disabled"; ?>>
 								<option value=""> 선 택</option>
 	<?php foreach($ho_list as $lt) : ?>
-								<option value="<?php echo $lt->ho; ?>" <?php if($lt->ho==$this->input->get('ho')) echo "selected"; ?>><?php echo $lt->ho; ?></option>
+								<option value="<?php echo $lt->ho; ?>" <?php if($lt->ho==$this->input->get('ho')) echo "selected"; ?>><?php echo $lt->ho." 호"; ?></option>
 	<?php endforeach; ?>
 							</select>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row bo-top bo-bottom font12" style="margin: 0 0 15px;">
+			<div class="row bo-bottom font12" style="margin: 0 0 15px;">
 				<div class="col-xs-12 font14" style="padding: 10px 50px; background-color: #F5F2C5; color: #0b071f"><?php echo $dong_ho; ?>&nbsp;<?php echo validation_errors('<div class="error">', '</div>'); ?></div>
 			</div>
 		</form>

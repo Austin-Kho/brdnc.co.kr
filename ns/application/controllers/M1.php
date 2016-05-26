@@ -47,6 +47,13 @@ class M1 extends CI_Controller {
 			array('프로젝트별 계약현황', '프로젝트별 계약등록(수정)', '동호수 계약 현황표'),  // 첫번째 하위 제목
 			array('분양대금 수납 현황 ---------- [구축 작업 전]', '분양대금 수납 등록 ---------- [구축 작업 전]', '프로젝트 타입별 수납약정 관리 ---------- [구축 작업 전]')   // 두번째 하위 제목
 		);
+
+		// 등록된 프로젝트 데이터
+		$where = "";
+		if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
+		$data['all_pj'] = $this->main_m->sql_result(' SELECT * FROM cms_project '.$where.' ORDER BY biz_start_ym DESC ');
+		$project = $data['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
+
 		// 메뉴데이터 삽입 하여 메인 페이지 호출
 		$this->load->view('menu/m1/sales_v', $menu);
 
@@ -64,12 +71,6 @@ class M1 extends CI_Controller {
 
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m1_1_1'];
-
-				$where = "";
-				if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
-				// 등록된 프로젝트 데이터
-				$data['all_pj'] = $this->main_m->sql_result(' SELECT * FROM cms_project '.$where.' ORDER BY biz_start_ym DESC ');
-				$project = $data['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
 
 
 				// . 프로젝트명, 타입 정보 구하기
@@ -157,11 +158,6 @@ class M1 extends CI_Controller {
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m1_1_2'];
 
-				// 등록된 프로젝트 데이터
-				$where = "";
-				if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
-				$data['all_pj'] = $this->main_m->sql_result(' SELECT * FROM cms_project '.$where.' ORDER BY biz_start_ym DESC ');
-				$project = $data['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
 
 				$where_add = " WHERE pj_seq='$project' "; // 프로젝트 지정 쿼리
 
@@ -523,7 +519,7 @@ class M1 extends CI_Controller {
 									alert('데이터베이스 에러입니다.3', base_url(uri_string()));
 								}
 
-// 4. 동호수 관리 테이블 입력 청약->계약으로 업데이트
+// 4. 동호수 관리 테이블 입력 청약->OFF
 								$result[3] = $this->main_m->update_data('cms_project_all_housing_unit', array('is_application'=>'0'), array('seq'=>$un)); // 동호수 테이블 계약상태로 변경
 								if( !$result[3]) {
 									alert('데이터베이스 에러입니다.4', base_url(uri_string()));
@@ -548,7 +544,7 @@ class M1 extends CI_Controller {
 									}
 								}
 							}
-// 6. 동호수 관리 테이블 입력 청약->계약으로 업데이트
+// 6. 동호수 관리 테이블 입력 계약->On
 								$result[5] = $this->main_m->update_data('cms_project_all_housing_unit', array('is_contract'=>'1', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('name')), array('seq'=>$un)); // 동호수 테이블 계약상태로 변경
 								if( !$result[5]) {
 									alert('데이터베이스 에러입니다.6', base_url(uri_string()));
@@ -620,7 +616,7 @@ class M1 extends CI_Controller {
 
 
 //   1. 계약관리 테이블에 해당 데이터를 업데이트한다.
-							$add_arr1 = array('	last_modi_worker' => $this->session->userdata('name'));
+							$add_arr1 = array('last_modi_date' => date('Y-m-d'), 'last_modi_worker' => $this->session->userdata('name'));
 							$cont_arr11 = array_merge($cont_arr1, $add_arr1);
 							$result[0] = $this->main_m->update_data('cms_sales_contract', $cont_arr11, array('seq'=>$cont_seq->seq, 'unit_seq'=>$un));
 							if( !$result[0]){
@@ -726,12 +722,6 @@ class M1 extends CI_Controller {
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m1_1_3'];
 
-				$where = "";
-				if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
-				// 등록된 프로젝트 데이터
-				$data['all_pj'] = $this->main_m->sql_result(' SELECT * FROM cms_project '.$where.' ORDER BY biz_start_ym DESC ');
-				$project = $data['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
-
 				// 공급세대 및 유보세대 청약 계약세대 구하기
 				$data['summary_tb'] = $this->main_m->sql_row(" SELECT COUNT(*) AS total, SUM(is_hold) AS hold, SUM(is_application) AS acn, SUM(is_contract) AS cont FROM cms_project_all_housing_unit WHERE pj_seq='$project'  ");
 
@@ -780,12 +770,6 @@ class M1 extends CI_Controller {
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m1_2_1'];
 
-				$where = "";
-				if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
-				// 등록된 프로젝트 데이터
-				$data['all_pj'] = $this->main_m->sql_result(' SELECT * FROM cms_project '.$where.' ORDER BY biz_start_ym DESC ');
-				$project = $data['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
-
 
 
 				//본 페이지 로딩
@@ -809,6 +793,11 @@ class M1 extends CI_Controller {
 
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m1_2_2'];
+
+				$now_dong = $this->input->get('dong');
+				$data['dong_list'] = $this->main_m->sql_result(" SELECT dong FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND is_contract='1' GROUP BY dong ORDER BY dong ");
+				$data['ho_list'] = $this->main_m->sql_result(" SELECT ho FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$now_dong' AND is_contract='1' GROUP BY ho ORDER BY ho ");
+				$data['contractor_info'] =
 
 				//본 페이지 로딩
 				$this->load->view('/menu/m1/md2_sd2_v', $data);
