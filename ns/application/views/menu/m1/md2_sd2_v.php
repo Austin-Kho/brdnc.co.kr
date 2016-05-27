@@ -199,15 +199,14 @@ foreach($pay_sche as $lt) :
 	endif;
 	if( !empty($cont_data)) $ppsche = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS pps FROM cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' AND pay_sche_code='$lt->pay_code' ");
 	$paid_per_sche = (empty($ppsche->pps) OR $ppsche->pps=='0') ? "-" : number_format($ppsche->pps); // 수납금액
-// $pay_data = $this->main_m->sql_result(" SELECT * FROM cms_sales_payment WHERE pj_seq='$project' AND price_seq='$cont_data->price_seq' AND pay_sche_seq='$lt->seq' "); // 회차별 약정 금액
-// $payment = ( !empty($pay_data)) ? $pay_data->payment : "";
+	$payment = $this->main_m->sql_row(" SELECT * FROM cms_sales_payment WHERE pj_seq='$project' AND price_seq='$cont_data->price_seq' AND pay_sche_seq='$lt->seq' "); // 약정금액
 ?>
 						<tr class="<?php if(empty($cont_data)) echo "active"; ?>">
 							<td style="color: <?php if(date('Y-md')>$due_date) echo '#d00202' ?>;"><?php echo $due_date; ?></td>
 							<td><?php echo $lt->pay_name; ?></td>
-							<td><?php // echo $payment; ?>10,000,000</td>
+							<td class="right"><?php echo number_format($payment->payment); ?></td>
 							<td class="right" style="color: #0427A4;"><?php echo $paid_per_sche; ?></td>
-							<td>10,000,000</td>
+							<td class="right"><?php echo number_format($payment->payment-$ppsche->pps); ?></td>
 						</tr>
 <?php endforeach; ?>
 					</tbody>
