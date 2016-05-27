@@ -916,7 +916,7 @@ class M1 extends CI_Controller {
 
 				// 6. 회차별 납입가 설정
 				// price - 데이터 불러오기
-				$data['price'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_price, cms_sales_con_floor WHERE pj_seq='$project' AND con_floor_seq=cms_sales_con_floor.seq  ORDER BY seq ");
+				$data['price'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_price, cms_sales_con_floor WHERE cms_sales_price.pj_seq='$project' AND con_floor_seq=cms_sales_con_floor.seq  ORDER BY cms_sales_price.seq ");
 				$data['pr_diff'] = $this->main_m->sql_result(" SELECT diff_name, COUNT(	con_diff_seq) AS num_diff FROM cms_sales_price, cms_sales_con_diff WHERE cms_sales_price.pj_seq='$project' AND cms_sales_price.con_diff_seq=cms_sales_con_diff.seq "); // 차수
 				$data['pr_type'] = $this->main_m->sql_result(" SELECT COUNT(con_diff_seq) AS num_type FROM cms_sales_price WHERE pj_seq='$project' GROUP BY con_type_seq ");
 				$data['pay_sche'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' AND pay_sort='".$this->input->get('pay_sort')."' ORDER BY pay_code ");

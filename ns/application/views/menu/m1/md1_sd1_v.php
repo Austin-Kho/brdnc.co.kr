@@ -139,7 +139,7 @@ foreach($app_data as $lt) :
 	$new_span = ($lt->app_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #AB0327; color: #fff; font-size: 10px;'>&nbsp;New </span>&nbsp; " : "";
 ?>
 					<tr>
-						<td><span style="background-color: <?php echo $type_color[$lt->unit_type] ?>;">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></span></td>
+						<td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type] ?>;">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></span></td>
 						<td ><?php echo $app_edit_link.$lt->unit_dong_ho.$app_edit; ?></td>
 						<td><?php echo $app_edit_link.$lt->applicant.$app_edit; ?></td>
 						<td class="right"><?php echo number_format($lt->app_in_mon)." 원"; ?></td>
@@ -241,7 +241,7 @@ echo form_open(base_url(uri_string()), $attributes);
 <?php if(empty($cont_data)) : ?>
 		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 120px 0;">등록된 데이터가 없습니다.</div>
 <?php else : ?>
-		<div class="col-xs-12 right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;"><?php echo "[ 결과 : ".$total_rows." 건 ]"; ?></div>
+		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;"><?php echo "[ 결과 : ".$total_rows." 건 ]"; ?></div>
 		<div class="col-xs-12 table-responsive" style="padding: 0;">
 			<table class="table table-bordered table-hover table-condensed">
 				<thead class="bo-top center bgf8">
@@ -283,13 +283,13 @@ foreach ($cont_data as $lt) :
 					<tr>
 						<td><?php echo $cont_edit_link.$lt->cont_code."</a>"; ?></td>
 						<td><?php echo $nd->diff_name; ?></td>
-						<td><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></td>
+						<td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></td>
 						<td><?php echo $cont_edit_link.$lt->unit_dong_ho."</a>"; ?></td>
 						<td><?php echo $cont_edit_link.$lt->contractor."</a>"; ?></td>
 						<td><?php echo $lt->cont_tel1; ?></td>
 						<td><?php echo $new_span." ".$lt->cont_date; ?></span></td>
 						<td><div style="cursor: pointer; color: red;" data-toggle="tooltip" data-placement="left" title="<?php echo $incom_doc; ?>"><?php echo cut_string($incom_doc, 13, ".."); ?></div></td>
-						<td><div style="cursor: pointer;" data-toggle="tooltip" data-placement="left" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 20, ".."); ?></div></td>
+						<td class="left"><div style="cursor: pointer;" data-toggle="tooltip" data-placement="left" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 23, ".."); ?></div></td>
 						<td><?php echo $addr; ?></td>
 					</tr>
 <?php endforeach; ?>
