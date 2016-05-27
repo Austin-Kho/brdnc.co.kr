@@ -916,11 +916,10 @@ class M1 extends CI_Controller {
 
 				// 6. 회차별 납입가 설정
 				// price - 데이터 불러오기
-				$data['price'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_price, cms_sales_con_floor WHERE cms_sales_price.pj_seq='$project' AND con_floor_seq=cms_sales_con_floor.seq  ORDER BY cms_sales_price.seq ");
+				$price = $data['price'] = $this->main_m->sql_result(" SELECT *, cms_sales_price.seq AS pr_seq FROM cms_sales_price, cms_sales_con_floor WHERE cms_sales_price.pj_seq='$project' AND con_floor_seq=cms_sales_con_floor.seq  ORDER BY cms_sales_price.seq ");
+				$pay_sche = $data['pay_sche'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' AND pay_sort='".$this->input->get('pay_sort')."' ORDER BY pay_code ");
 				$data['pr_diff'] = $this->main_m->sql_result(" SELECT diff_name, COUNT(	con_diff_seq) AS num_diff FROM cms_sales_price, cms_sales_con_diff WHERE cms_sales_price.pj_seq='$project' AND cms_sales_price.con_diff_seq=cms_sales_con_diff.seq "); // 차수
 				$data['pr_type'] = $this->main_m->sql_result(" SELECT COUNT(con_diff_seq) AS num_type FROM cms_sales_price WHERE pj_seq='$project' GROUP BY con_type_seq ");
-				$data['pay_sche'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' AND pay_sort='".$this->input->get('pay_sort')."' ORDER BY pay_code ");
-
 
 
 
@@ -929,30 +928,40 @@ class M1 extends CI_Controller {
 				$this->load->library('form_validation'); // 폼 검증
 
 				// 6. 회차별 납입가 설정
-
+				for($i=0; $i<count($price); $i++) :
+					for($j=0; $j<count($pay_sche); $j++) :
+						$this->form_validation->set_rules("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq, "납부액_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq, 'trim|numeric|required');
+					endfor;
+				endfor;
 
 				if($this->form_validation->run() == FALSE) : // 폼검증 안했거나 통과 못했을 경우
-
-					// alert('통과 못 했어요ㅜㅜ', '');
 
 					//본 페이지 로딩
 					$this->load->view('/menu/m1/md2_sd3_v', $data);
 				else : // 폼검증 통과 시
 
+					for($i=0; $i<count($price); $i++) :
+						for($j=0; $j<count($pay_sche); $j++) :
+							$pmt_data = array(
+								'pj_seq' => $project,
+								'price_seq' => $price[$i]->pr_seq,
+								'pay_sche_seq' => $pay_sche[$j]->seq,
+								'payment' => $this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq),
+								'reg_date' => date('Y-m-d'),
+								'reg_worker' => $this->session->userdata('name')
+							);
+							if(empty($this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h")) OR ($this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h"))=='0') {
+								$result[$j] = $this->main_m->insert_data('cms_sales_payment', $pmt_data);
+								if( !$result[$j]) {alert('데이터베이스 에러입니다.1', '');}
+							}elseif(($this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h"))=='1') {
+								$result[$j] = $this->main_m->update_data('cms_sales_payment', $pmt_data, array('pj_seq'=>$project, 'price_seq'=>$price[$i]->pr_seq, 'pay_sche_seq'=>$pay_sche[$j]->seq));
+								if( !$result[$j]) {alert('데이터베이스 에러입니다.2', '');}
+							}
+						endfor;
+					endfor;
 
-
-
-					alert('통과', '');
-
-
-
-
-
+					alert('정상 처리 되었습니다.', '');
 				endif; // 폼검증 통과 시 종료
-
-
-
-
 			}
 		}
 	}

@@ -80,31 +80,31 @@
 
 <?php if( !$this->input->get('reg_sort') OR $this->input->get('reg_sort')==='1') : //1. 분양 차수 설정?>
 	<div class="row font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14" style="padding: 220px 0;">1. 분양 차수 설정</div>
+		<div class="col-xs-12 font14"  style="padding-bottom: 440px;">1. 분양 차수 설정</div>
 	</div>
 <!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-1. 분양 차수 설정 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
 
 <?php elseif($this->input->get('reg_sort')==='2') : //2. 납입 회차 설정 ?>
 	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14" style="padding: 220px 0;">2. 납입 회차 설정</div>
+		<div class="col-xs-12 font14"  style="padding-bottom: 440px;">2. 납입 회차 설정</div>
 	</div>
 <!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-2. 납입 회차 설정 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
 
 <?php elseif($this->input->get('reg_sort')==='3') : //3. 층별 조건 설정 ?>
 	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14" style="padding: 220px 0;">3. 층별 조건 설정</div>
+		<div class="col-xs-12 font14"  style="padding-bottom: 440px;">3. 층별 조건 설정</div>
 	</div>
 <!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-3. 층별 조건 설정 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
 
 <?php elseif($this->input->get('reg_sort')==='4') : //4. 향별 조건 설정 ?>
 	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14" style="padding: 220px 0;">4. 향별 조건 설정</div>
+		<div class="col-xs-12 font14"  style="padding-bottom: 440px;">4. 향별 조건 설정</div>
 	</div>
 <!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-4. 향별 조건 설정 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
 
 <?php elseif($this->input->get('reg_sort')==='5') : //5. 조건별 분양가 설정 ?>
 	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14" style="padding: 220px 0;">5. 조건별 분양가 설정</div>
+		<div class="col-xs-12 font14"  style="padding-bottom: 440px;">5. 조건별 분양가 설정</div>
 	</div>
 <!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-5. 조건별 분양가 설정 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
 
@@ -138,13 +138,11 @@ if( !$this->input->get('pay_sort'))  : $msg = "회차구분을 선택하여 주�
 	</div>
 <?php else : ?>
 	<form class="" action="" method="post">
-		<input type="hidden" name="name" value="">
-
 		<div class="row font12" style="margin: 0; padding: 0;">
 			<div class="col-xs-12 table-responsive" style="padding: 0;">
 				<table class="table table-bordered center">
 					<thead>
-						<tr>
+						<tr class="active">
 							<td width="3%">No.</td>
 							<td width="5%">타입</td>
 							<td width="8%">층별</td>
@@ -162,10 +160,20 @@ if( !$this->input->get('pay_sort'))  : $msg = "회차구분을 선택하여 주�
 						<tr>
 							<?php echo $diff_td; ?>
 							<?php echo $type_td; ?>
-							<td><?php echo $price[$i]->con_floor_seq; ?></td>
+							<td><?php echo $price[$i]->floor_name; ?></td>
 							<td class="right"><?php echo number_format($price[$i]->unit_price); ?></td>
-<?php for($j=0; $j<count($pay_sche); $j++) :  ?>
-							<td style="background-color: ; padding: 3px;"><input type="text" name="name" value="<?php echo ($i+1)."-".($j+1); ?>" size="10"></td>
+<?php
+for($j=0; $j<count($pay_sche); $j++) :
+	$pmt = $this->main_m->sql_row(" SELECT * FROM cms_sales_payment WHERE pj_seq='$project' AND price_seq='".$price[$i]->pr_seq."' AND pay_sche_seq='".$pay_sche[$j]->seq."' ");
+?>
+							<td style="background-color: ; padding: 3px;">
+								<div style="color: #B00447;"><?php echo form_error("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq); ?>
+									<input type="text" name="<?php echo "pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq; ?>"
+									value="<?php if( !empty($pmt)) echo $pmt->payment; else echo set_value("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq) ?>"
+									size="15" placeholder="회차별 납부액">
+									<input type="hidden" name="<?php echo "pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h"; ?>" value="<?php if( !empty($pmt)) echo "1"; else "0"; ?>">
+								</div>
+							</td>
 <?php endfor; ?>
 						</tr>
 <?php endfor; ?>
