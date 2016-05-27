@@ -146,7 +146,7 @@ foreach($app_data as $lt) :
 						<td><?php echo $new_span." ".$lt->app_date; ?></td>
 						<td><?php echo $condi; ?></td>
 						<td><?php if($lt->disposal_date && $lt->disposal_date!="0000-00-00")echo $lt->disposal_date; ?></td>
-						<td class="left"><?php echo $lt->note; ?></td>
+						<td class="left"><div style="cursor: pointer;" data-toggle="tooltip" data-placement="left" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 38, ".."); ?></div></td>
 					</tr>
 <?php endforeach; ?>
 				</tbody>
@@ -193,13 +193,13 @@ echo form_open(base_url(uri_string()), $attributes);
 					</select>
 				</div>
 				<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
-					<label for="condi" class="sr-only">상태별</label>
-					<select class="form-control input-sm" name="condi" disabled>
-						<option value="">상태 전체</option>
-						<option value="1" <?php if($this->input->get('condi')==1) echo "selected"; ?>>정상</option>
-						<option value="2" <?php if($this->input->get('condi')==2) echo "selected"; ?>>청약</option>
-						<option value="3" <?php if($this->input->get('condi')==3) echo "selected"; ?>>계약</option>
-						<option value="4" <?php if($this->input->get('condi')==4) echo "selected"; ?>>홀딩</option>
+					<label for="order" class="sr-only">정 렬</label>
+					<select class="form-control input-sm" name="order">
+						<option value="">정렬 순서</option>
+						<option value="1" <?php if($this->input->get('order')==1) echo "selected"; ?>>일련번호 순</option>
+						<option value="2" <?php if($this->input->get('order')==2) echo "selected"; ?>>일련번호 역순</option>
+						<!-- <option value="3" <?php if($this->input->get('order')==3) echo "selected"; ?>>계약</option> -->
+						<!-- <option value="4" <?php if($this->input->get('order')==4) echo "selected"; ?>>홀딩</option> -->
 					</select>
 				</div>
 				<div class="col-xs-12 col-sm-2 col-md-1 center bgf8" style="height: 40px; padding: 10px 0;">계약 기간</div>

@@ -185,8 +185,6 @@
 					<div class="col-xs-12 hidden-xs" style="padding: 4px 0px;">&nbsp;</div>
 <?php elseif( !empty($is_reg['cont_data'])) : // 현재 청약상태 호수이면  ?>
 					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">계약 : <?php echo $is_reg['cont_data']->cont_date; ?></div>
-					<!-- <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">입금 : <?php echo number_format($is_reg['app_data']->app_in_mon)." 원"; ?></div> -->
-					<!-- <div class="col-xs-6 col-sm-4 col-md-3" style="padding: 4px 0px;">계좌 : <?php if( !empty($dep_acc[($is_reg['app_data']->app_in_acc-1)]->acc_nick)) echo $dep_acc[($is_reg['app_data']->app_in_acc-1)]->acc_nick; ?></div> -->
 					<div class="col-xs-12 hidden-xs" style="padding: 4px 0px;">&nbsp;</div>
 <?php else : // 신규 계약 등록 처리 시 ?>
 					<div class="col-xs-12" style="padding: 8px 0px;">등록된 청약 데이터 없습니다. 신규 계약 정보를 입력하세요.</div>
@@ -199,8 +197,8 @@
 			<div class="row bo-top font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">처리 구분 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
-					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" name="incom_doc_1" value="1">해지신청</label></div>
-					<div class="col-xs-6 col-sm-4 col-md-3 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" name="incom_doc_1" value="1">환불완료</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" name="incom_doc_1" value="1" <?php if(empty($is_reg['app_data']) && $is_reg['app_data']->disposal_div>1) echo "checked"; ?>>해지신청</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-3 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" name="incom_doc_1" value="1" <?php if(empty($is_reg['app_data']) && $is_reg['app_data']->disposal_div>2) echo "checked"; ?>>환불완료</label></div>
 				</div>
 			</div>
 <?php endif; ?>
@@ -227,7 +225,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="conclu_date" class="sr-only">거래일자</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="conclu_date" id="conclu_date" class="form-control input-sm" value="<?php echo $conclu_date; ?>" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="conclu_date" id="conclu_date" class="form-control input-sm" value="<?php echo $conclu_date; ?>" onclick="cal_add(this); event.cancelBubble=true" placeholder="0000-00-00">
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
 							<a href="javascript:" onclick="cal_add(document.getElementById('conclu_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
@@ -247,7 +245,7 @@
 
 						<label for="due_date" class="sr-only">계약 예정일</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="due_date" id="due_date" class="form-control input-sm" value="<?php echo $due_date; ?>" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="due_date" id="due_date" class="form-control input-sm" value="<?php echo $due_date; ?>" onclick="cal_add(this); event.cancelBubble=true"  placeholder="0000-00-00">
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
 							<a href="javascript:" onclick="cal_add(document.getElementById('due_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
@@ -335,7 +333,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="app_in_date" class="sr-only">입금일</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="app_in_date" id="app_in_date" class="form-control input-sm" value="<?php if( !empty($is_reg['app_data'])) echo $is_reg['app_data']->app_in_date; else echo set_value('app_in_date'); ?>" placeholder="입금일" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="app_in_date" id="app_in_date" class="form-control input-sm" value="<?php if( !empty($is_reg['app_data'])) echo $is_reg['app_data']->app_in_date; else echo set_value('app_in_date'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true"  readonly>
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
 							<a href="javascript:" onclick="cal_add(document.getElementById('app_in_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
@@ -395,7 +393,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date1" class="sr-only">입금일</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date1" id="cont_in_date1" class="form-control input-sm" value="<?php if( !empty($received['1'])) echo $received['1']->paid_date; else echo set_value('cont_in_date1'); ?>" placeholder="입금일" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="cont_in_date1" id="cont_in_date1" class="form-control input-sm" value="<?php if( !empty($received['1'])) echo $received['1']->paid_date; else echo set_value('cont_in_date1'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
 							<input type="hidden" name="deposit_1_" value="<?php  if( !empty($received['1'])) echo "1"; else "0"; ?>">
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
@@ -450,7 +448,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date2" class="sr-only">입금일</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date2" id="cont_in_date2" class="form-control input-sm" value="<?php if( !empty($received['2'])) echo $received['2']->paid_date; else echo set_value('cont_in_date2'); ?>" placeholder="입금일" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="cont_in_date2" id="cont_in_date2" class="form-control input-sm" value="<?php if( !empty($received['2'])) echo $received['2']->paid_date; else echo set_value('cont_in_date2'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
 							<input type="hidden" name="deposit_2_" value="<?php  if( !empty($received['2'])) echo "1"; else "0"; ?>">
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
@@ -515,7 +513,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date3" class="sr-only">입금일</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date3" id="cont_in_date3" class="form-control input-sm" value="<?php if( !empty($received['3'])) echo $received['3']->paid_date; else echo set_value('cont_in_date3'); ?>" placeholder="입금일" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="cont_in_date3" id="cont_in_date3" class="form-control input-sm" value="<?php if( !empty($received['3'])) echo $received['3']->paid_date; else echo set_value('cont_in_date3'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
 							<input type="hidden" name="deposit_3_" value="<?php  if( !empty($received['3'])) echo "1"; else "0"; ?>">
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
@@ -581,7 +579,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date4" class="sr-only">입금일</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date4" id="cont_in_date4" class="form-control input-sm" value="<?php if( !empty($received['4'])) echo $received['4']->paid_date; else echo set_value('cont_in_date4'); ?>" placeholder="입금일" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="cont_in_date4" id="cont_in_date4" class="form-control input-sm" value="<?php if( !empty($received['4'])) echo $received['4']->paid_date; else echo set_value('cont_in_date4'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
 							<input type="hidden" name="deposit_4_" value="<?php  if( !empty($received['4'])) echo "1"; else "0"; ?>">
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
@@ -647,7 +645,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date5" class="sr-only">입금일</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date5" id="cont_in_date5" class="form-control input-sm" value="<?php if( !empty($received['5'])) echo $received['5']->paid_date; else echo set_value('cont_in_date5'); ?>" placeholder="입금일" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="cont_in_date5" id="cont_in_date5" class="form-control input-sm" value="<?php if( !empty($received['5'])) echo $received['5']->paid_date; else echo set_value('cont_in_date5'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
 							<input type="hidden" name="deposit_5_" value="<?php  if( !empty($received['5'])) echo "1"; else "0"; ?>">
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
@@ -713,7 +711,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date6" class="sr-only">입금일</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date6" id="cont_in_date6" class="form-control input-sm" value="<?php if( !empty($received['6'])) echo $received['6']->paid_date; else echo set_value('cont_in_date6'); ?>" placeholder="입금일" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="cont_in_date6" id="cont_in_date6" class="form-control input-sm" value="<?php if( !empty($received['6'])) echo $received['6']->paid_date; else echo set_value('cont_in_date6'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
 							<input type="hidden" name="deposit_6_" value="<?php  if( !empty($received['6'])) echo "1"; else "0"; ?>">
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
@@ -779,7 +777,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date7" class="sr-only">입금일</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date7" id="cont_in_date7" class="form-control input-sm" value="<?php if( !empty($received['7'])) echo $received['7']->paid_date; else echo set_value('cont_in_date7'); ?>" placeholder="입금일" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="cont_in_date7" id="cont_in_date7" class="form-control input-sm" value="<?php if( !empty($received['7'])) echo $received['7']->paid_date; else echo set_value('cont_in_date7'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
 							<input type="hidden" name="deposit_7_" value="<?php  if( !empty($received['7'])) echo "1"; else "0"; ?>">
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
