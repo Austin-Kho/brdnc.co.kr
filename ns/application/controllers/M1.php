@@ -61,7 +61,7 @@ class M1 extends CI_Controller {
 
 		// 계약현황 1. 계약현황 ////////////////////////////////////////////////////////////////////
 		if($mdi==1 && $sdi==1 ){
-			// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+			$this->output->enable_profiler(TRUE); //프로파일러 보기//
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m1_1_1', $this->session->userdata['user_id']);
 
@@ -132,7 +132,9 @@ class M1 extends CI_Controller {
 
 
 				// 계약 데이터 가져오기
-				$cont_query .= " ORDER BY cms_sales_contract.cont_date DESC, cms_sales_contract.seq DESC ";
+				if( !$this->input->get('order')) $cont_query .= " ORDER BY cms_sales_contract.cont_date DESC, cms_sales_contract.seq DESC ";
+				if($this->input->get('order')=='1') $cont_query .= " ORDER BY cont_code ";
+				if($this->input->get('order')=='2') $cont_query .= " ORDER BY cont_code DESC ";
 				if($start != '' or $limit !='')	$cont_query .= " LIMIT ".$start.", ".$limit." ";
 				$data['cont_data'] = $this->main_m->sql_result($cont_query); // 계약 및 계약자 데이터
 
@@ -630,57 +632,85 @@ class M1 extends CI_Controller {
 								alert('데이터베이스 에러입니다.2', '');
 							}
 
-// 3. 계약금 데이터1 -> 수납 데이터로 입력
+// 3. 계약금 데이터1 -> 수납 데이터로 수정
 							if($this->input->post('deposit_1') && $this->input->post('deposit_1')!='0'){ // 계약금 1 (분담금 // 또는 일반 분양대금) 입력정보 있을때 처리
-								$result[5] = $this->main_m->update_data('cms_sales_received', $cont_arr3, array('seq'=>$this->input->post('received1')));
+								if($this->input->post('deposit_1_')=='1'){
+									$result[5] = $this->main_m->update_data('cms_sales_received', $cont_arr3, array('seq'=>$this->input->post('received1')));
+								}else{
+									$result[5] = $this->main_m->insert_data('cms_sales_received', $cont_arr3);
+								}
 								if( !$result[5]) {
 									alert('데이터베이스 에러입니다.6', base_url(uri_string()));
 								}
 							}
 
-// 4. 계약금 데이터2 -> 수납 데이터로 입력
+// 4. 계약금 데이터2 -> 수납 데이터로 수정
 							if($this->input->post('deposit_2') && $this->input->post('deposit_2')!='0'){ // 계약금 2 (대행비 // 또는 일반 분양대금) 입력정보 있을때 처리
-								$result[6] =$this->main_m->update_data('cms_sales_received', $cont_arr4, array('seq'=>$this->input->post('received2')));
+								if($this->input->post('deposit_2_')=='1'){
+									$result[6] =$this->main_m->update_data('cms_sales_received', $cont_arr4, array('seq'=>$this->input->post('received2')));
+								}else{
+									$result[6] = $this->main_m->insert_data('cms_sales_received', $cont_arr4);
+								}
 								if( !$result[6]) {
 									alert('데이터베이스 에러입니다.7', base_url(uri_string()));
 								}
 							}
 
-// 5. 계약금 데이터3 -> 수납 데이터로 입력
+// 5. 계약금 데이터3 -> 수납 데이터로 수정
 							if($this->input->post('deposit_3') && $this->input->post('deposit_3')!='0'){ // 계약금 3 (대행비 // 또는 일반 분양대금) 입력정보 있을때 처리
-								$result[7] =$this->main_m->update_data('cms_sales_received', $cont_arr5, array('seq'=>$this->input->post('received3')));
+								if($this->input->post('deposit_3_')=='1'){
+									$result[7] =$this->main_m->update_data('cms_sales_received', $cont_arr5, array('seq'=>$this->input->post('received3')));
+								}else{
+									$result[7] = $this->main_m->insert_data('cms_sales_received', $cont_arr5);
+								}
 								if( !$result[7]) {
 									alert('데이터베이스 에러입니다.8', base_url(uri_string()));
 								}
 							}
 
-// 6. 계약금 데이터4 -> 수납 데이터로 입력
+// 6. 계약금 데이터4 -> 수납 데이터로 수정
 							if($this->input->post('deposit_4') && $this->input->post('deposit_4')!='0'){ // 계약금 4 (대행비 // 또는 일반 분양대금) 입력정보 있을때 처리
-								$result[8] =$this->main_m->update_data('cms_sales_received', $cont_arr6, array('seq'=>$this->input->post('received4')));
+								if($this->input->post('deposit_4_')=='1'){
+									$result[8] =$this->main_m->update_data('cms_sales_received', $cont_arr6, array('seq'=>$this->input->post('received4')));
+								}else{
+									$result[8] = $this->main_m->insert_data('cms_sales_received', $cont_arr6);
+								}
 								if( !$result[8]) {
 									alert('데이터베이스 에러입니다.9', base_url(uri_string()));
 								}
 							}
 
-// 7. 계약금 데이터5 -> 수납 데이터로 입력
+// 7. 계약금 데이터5 -> 수납 데이터로 수정
 							if($this->input->post('deposit_5') && $this->input->post('deposit_5')!='0'){ // 계약금 5 (대행비 // 또는 일반 분양대금) 입력정보 있을때 처리
-								$result[9] =$this->main_m->update_data('cms_sales_received', $cont_arr7, array('seq'=>$this->input->post('received5')));
+								if($this->input->post('deposit_5_')=='1'){
+									$result[9] =$this->main_m->update_data('cms_sales_received', $cont_arr7, array('seq'=>$this->input->post('received5')));
+								}else{
+									$result[9] = $this->main_m->insert_data('cms_sales_received', $cont_arr7);
+								}
 								if( !$result[9]) {
 									alert('데이터베이스 에러입니다.10', base_url(uri_string()));
 								}
 							}
 
-// 8. 계약금 데이터6 -> 수납 데이터로 입력
+// 8. 계약금 데이터6 -> 수납 데이터로 수정
 							if($this->input->post('deposit_6') && $this->input->post('deposit_6')!='0'){ // 계약금 6 (대행비 // 또는 일반 분양대금) 입력정보 있을때 처리
-								$result[10] =$this->main_m->update_data('cms_sales_received', $cont_arr8, array('seq'=>$this->input->post('received6')));
+								if($this->input->post('deposit_6_')=='1'){
+									$result[10] =$this->main_m->update_data('cms_sales_received', $cont_arr8, array('seq'=>$this->input->post('received6')));
+								}else{
+									$result[10] = $this->main_m->insert_data('cms_sales_received', $cont_arr8);
+								}
 								if( !$result[10]) {
 									alert('데이터베이스 에러입니다.11', base_url(uri_string()));
 								}
 							}
 
-// 9. 계약금 데이터7 -> 수납 데이터로 입력
+// 9. 계약금 데이터7 -> 수납 데이터로 수정
 							if($this->input->post('deposit_7') && $this->input->post('deposit_7')!='0'){ // 계약금 7 (대행비 // 또는 일반 분양대금) 입력정보 있을때 처리
-								$result[11] =$this->main_m->update_data('cms_sales_received', $cont_arr9, array('seq'=>$this->input->post('received7')));
+								if($this->input->post('deposit_7_')=='1'){
+									$result[11] =$this->main_m->update_data('cms_sales_received', $cont_arr9, array('seq'=>$this->input->post('received7')));
+								}else{
+									$result[11] = $this->main_m->insert_data('cms_sales_received', $cont_arr9);
+								}
 								if( !$result[11]) {
 									alert('데이터베이스 에러입니다.12', base_url(uri_string()));
 								}
@@ -848,14 +878,44 @@ class M1 extends CI_Controller {
 
 
 				// 6. 회차별 납입가 설정
-				$data['pay_sche'] = $this->main_m->sql_result(" SELECT seq, pay_name FROM cms_sales_pay_sche  WHERE pj_seq='$project' ");
-				$data['diff_no'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_con_diff WHERE pj_seq='$project' ORDER BY diff_no "); // 분양차수 선택 셀렉트바
-				$data['sche_name'] = $this->main_m->sql_result(" SELECT pay_name FROM cms_sales_pay_sche WHERE pj_seq='$project' AND pay_sort='".$this->input->get('pay_sort')."' ORDER BY pay_code ");
-				$data['diff'] = $this->main_m->sql_row(" SELECT diff_name FROM cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='".$this->input->get('diff_no')."' "); // 차수명
-				$data['type_name'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_con_type WHERE pj_seq='$project' ORDER BY seq ");
+				// price - 데이터 불러오기
+				$data['price'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_price, cms_sales_con_floor WHERE pj_seq='$project' AND con_floor_seq=cms_sales_con_floor.seq  ORDER BY seq ");
+				$data['pr_diff'] = $this->main_m->sql_result(" SELECT diff_name, COUNT(	con_diff_seq) AS num_diff FROM cms_sales_price, cms_sales_con_diff WHERE cms_sales_price.pj_seq='$project' AND cms_sales_price.con_diff_seq=cms_sales_con_diff.seq "); // 차수
+				$data['pr_type'] = $this->main_m->sql_result(" SELECT COUNT(con_diff_seq) AS num_type FROM cms_sales_price WHERE pj_seq='$project' GROUP BY con_type_seq ");
+				$data['pay_sche'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' AND pay_sort='".$this->input->get('pay_sort')."' ORDER BY pay_code ");
 
-				//본 페이지 로딩
-				$this->load->view('/menu/m1/md2_sd3_v', $data);
+
+
+
+
+				// 라이브러리 로드
+				$this->load->library('form_validation'); // 폼 검증
+
+				// 6. 회차별 납입가 설정
+
+
+				if($this->form_validation->run() == FALSE) : // 폼검증 안했거나 통과 못했을 경우
+
+					// alert('통과 못 했어요ㅜㅜ', '');
+
+					//본 페이지 로딩
+					$this->load->view('/menu/m1/md2_sd3_v', $data);
+				else : // 폼검증 통과 시
+
+
+
+
+					alert('통과', '');
+
+
+
+
+
+				endif; // 폼검증 통과 시 종료
+
+
+
+
 			}
 		}
 	}
