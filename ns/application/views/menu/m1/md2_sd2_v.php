@@ -90,7 +90,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 						<tr style="background-color: #F9FAD9;">
 							<td><?php echo $lt->paid_date; ?></td>
 							<td><?php echo $paid_sche->pay_name; ?></td>
-							<td class="right" style="color: #0427A4;"><?php echo number_format($lt->paid_amount); ?></td>
+							<td class="right"><a href="?modi=1&project=<?php echo $project; ?>&dong=<?php echo $this->input->get('dong'); ?>&ho=<?php echo $this->input->get('ho'); ?>&rec_seq=<?php echo $lt->seq; ?>" data-toggle="tooltip" title="입력 내용 수정하기"><?php echo number_format($lt->paid_amount); ?></a></td>
 							<td><?php echo $paid_acc_nick->acc_nick ; ?></td>
 							<td><?php echo $lt->paid_who; ?></td>
 						</tr>
@@ -110,17 +110,20 @@ for($i=(count($year)-1); $i>=0; $i--) :
 			</div>
 
 			<form class="" name="form2" action="<?php echo current_url(); ?>" method="post">
+				<input type="hidden" name="modi" value="<?php echo $this->input->get('modi'); ?>">
 				<input type="hidden" name="dong" value="<?php echo $this->input->get('dong'); ?>">
 				<input type="hidden" name="ho" value="<?php echo $this->input->get('ho'); ?>">
 <?php $cont_seq = ( !empty($cont_data)) ? $cont_data->seq : ""; // 계약 아이디 ?>
 				<input type="hidden" name="cont_seq" value="<?php echo $cont_seq; ?>">
+<?php $rec_seq = ( !empty($this->input->get('rec_seq'))) ? $this->input->get('rec_seq') : ""; // 계약 아이디 ?>
+				<input type="hidden" name="rec_seq" value="<?php echo $rec_seq; ?>">
 				<div class="row" style="margin: 0; padding: 0;">
 					<div class="col-sm-12 bo-top" style="padding: 0;">
 						<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">수납일자</div>
 						<div class="col-xs-8 col-md-4" style="padding: 0;">
 							<label for="paid_date" class="sr-only">수납일자</label>
 							<div class="col-xs-10" style="padding: 4px;">
-								<input type="text" name="paid_date" id="paid_date" class="form-control input-sm" value="<?php echo set_value('paid_date'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
+								<input type="text" name="paid_date" id="paid_date" class="form-control input-sm" value="<?php if($this->input->get('modi')=='1') echo $modi_rec->paid_date; else echo set_value('paid_date'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
 							</div>
 							<div class="col-xs-2" style="padding: 10px 5px;">
 								<a href="javascript:" onclick="cal_add(document.getElementById('paid_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
@@ -136,14 +139,14 @@ for($i=(count($year)-1); $i>=0; $i--) :
 							<select class="form-control input-sm" name="pay_sche_code">
 								<option value="">납부회차</option>
 <?php foreach ($pay_sche_code as $lt) : ?>
-								<option value="<?php echo $lt->pay_code ?>" <?php echo set_select('pay_sche_code', $lt->pay_code); ?>><?php echo $lt->pay_name; ?></option>
+								<option value="<?php echo $lt->pay_code; ?>" <?php if($this->input->get('modi')=='1' && $modi_rec->pay_sche_code==$lt->pay_code) echo "selected"; else echo set_select('pay_sche_code', $lt->pay_code); ?>><?php echo $lt->pay_name; ?></option>
 <?php endforeach; ?>
 							</select>
 						</div>
 						<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">수납금액</div>
 						<div class="col-xs-8 col-md-4" style="padding: 4px;">
 							<label for="paid_amount" class="sr-only">수납금액</label>
-							<input type="text" class="form-control input-sm en_only" name="paid_amount" value="<?php echo set_value('paid_amount'); ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]">
+							<input type="text" class="form-control input-sm en_only" name="paid_amount" value="<?php if($this->input->get('modi')=='1') echo $modi_rec->paid_amount; else echo set_value('paid_amount'); ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]">
 						</div>
 					</div>
 				</div>
@@ -156,14 +159,14 @@ for($i=(count($year)-1); $i>=0; $i--) :
 							<select class="form-control input-sm" name="paid_acc">
 								<option value="">입금계좌</option>
 <?php foreach ($paid_acc as $lt) : ?>
-								<option value="<?php echo $lt->seq ?>" <?php echo set_select('paid_acc', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
+								<option value="<?php echo $lt->seq ?>" <?php if($this->input->get('modi')=='1' && $modi_rec->paid_acc==$lt->seq) echo "selected"; echo set_select('paid_acc', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
 <?php endforeach; ?>
 							</select>
 						</div>
 						<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">입금자</div>
 						<div class="col-xs-8 col-md-4" style="padding: 4px;">
 							<label for="paid_who" class="sr-only">입금자</label>
-							<input type="text" class="form-control input-sm" name="paid_who" value="<?php echo set_value('paid_who'); ?>" placeholder="입금자">
+							<input type="text" class="form-control input-sm" name="paid_who" value="<?php if($this->input->get('modi')=='1') echo $modi_rec->paid_who; else echo set_value('paid_who'); ?>" placeholder="입금자">
 						</div>
 					</div>
 				</div>
@@ -174,6 +177,9 @@ for($i=(count($year)-1); $i>=0; $i--) :
 	<?php endif; ?>
 	<?php if($auth<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="receive_chk();";} ?>
 				<div class="form-group btn-wrap" style="margin: ;">
+<?php if($this->input->get('modi')=='1') : ?>
+					<input type="button" class="btn btn-warning btn-sm" onclick="location.href='<?php echo base_url('m1/sales/2/2').'?modi=0&project='.$project.'&dong='.$this->input->get('dong').'&ho='.$this->input->get('ho'); ?>'"  value="지우기">
+<?php endif; ?>
 					<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str?>" value="등록 하기">
 				</div>
 			</form>

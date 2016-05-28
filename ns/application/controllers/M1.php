@@ -874,7 +874,7 @@ class M1 extends CI_Controller {
 					$cont_data = $data['cont_data'] = $this->main_m->sql_row($cont_query); // 계약 및 계약자 데이터
 
 					// 수납 데이터
-					$data['received'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' "); // 계약자별 수납데이터
+					$data['received'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' ORDER BY paid_date, seq "); // 계약자별 수납데이터
 					$data['total_paid'] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS total_paid FROM cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' "); // 계약자별 총 수납액
 				}
 				// 수납 약정
@@ -883,6 +883,8 @@ class M1 extends CI_Controller {
 
 				// 수납 계좌
 				$data['paid_acc'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_bank_acc WHERE pj_seq='$project' ");
+				// 수정 시 수납 데이터
+				$data['modi_rec'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_received WHERE seq='".$this->input->get('rec_seq')."' ");
 
 				// 라이브러리 로드
 				$this->load->library('form_validation'); // 폼 검증
@@ -910,7 +912,12 @@ class M1 extends CI_Controller {
 						'reg_date' => date('Y-m-d'),
 						'reg_worker' => $this->session->userdata('name')
 					);
-					$result = $this->main_m->insert_data('cms_sales_received', $ins_data);
+					if($this->input->post('modi')=='1'){
+						$result = $this->main_m->update_data('cms_sales_received', $ins_data, array('seq' => $this->input->post('rec_seq'))); // 수정 모드일 경우
+					}else{
+						$result = $this->main_m->insert_data('cms_sales_received', $ins_data); // 입력 모드일 경우
+					}
+
 					if( !$result) alert("데이터베이스 에러입니다.", '');
 
 					alert("수납내역이 정상 입력 되었습니다.", base_url('m1/sales/2/2?project='.$project.'&dong='.$this->input->post('dong').'&ho='.$this->input->post('ho')));

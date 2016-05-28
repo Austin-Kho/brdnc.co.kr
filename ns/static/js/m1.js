@@ -515,7 +515,8 @@ function receive_chk(){
 		form2.paid_who.focus();
 		return;
 	}
-	if(confirm('수납 내역을 등록하시겠습니까?')===true) {
+	var msg = ( !form2.modi.value  || form2.modi.value==='0') ? "신규 수납내역을 등록" : "수납 내역을 변경 등록";
+	if(confirm(msg+'하시겠습니까?')===true) {
 		form2.submit();
 	}
 }
