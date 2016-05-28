@@ -182,7 +182,7 @@ for($j=0; $j<count($pay_sche); $j++) :
 			</div>
 		</div>
 <?php endif; ?>
-<?php if($auth<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="submit();";} ?>
+<?php if($auth<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="if(confirm('납입금 내역을 등록하시겠습니까?')===true) submit();";} ?>
 		<div class="form-group btn-wrap" style="margin: ;">
 			<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str?>" value="등록 하기">
 		</div>

@@ -868,9 +868,6 @@ class M1 extends CI_Controller {
 				$data['ho_list'] = $this->main_m->sql_result(" SELECT ho FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$now_dong' AND is_contract='1' GROUP BY ho ORDER BY ho "); // 호 리스트
 				$unit = $data['unit'] = $this->main_m->sql_row(" SELECT * FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$now_dong' AND ho='$now_ho' AND is_contract='1' ");  // 선택한 동호수 유닛
 
-				// $now_dongho = $now_dong."-".$now_ho;
-				// $cont_data = $this->main_m->sql_row(" SELECT * FROM cms_sales_contract, cms_sales_contractor WHERE pj_seq='$project' AND unit_dong_ho='$now_dongho' ");
-
 				if( !empty($unit->seq)){
 					$cont_where = " WHERE unit_seq='$unit->seq' AND is_transfer='0' AND is_rescission='0' AND cms_sales_contract.seq=cont_seq  ";
 					$cont_query = "  SELECT *, cms_sales_contractor.seq AS contractor_seq FROM cms_sales_contract, cms_sales_contractor ".$cont_where;
@@ -881,12 +878,43 @@ class M1 extends CI_Controller {
 					$data['total_paid'] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS total_paid FROM cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' "); // 계약자별 총 수납액
 				}
 				// 수납 약정
-				$pay_sche = $data['pay_sche'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' "); // 약정 회차
+				$pay_sche_code = $data['pay_sche_code'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' "); // 약정 회차
 				$data['contractor_info'] = ( !empty($this->input->get('ho'))) ? "<font color='#9f0404'><span class='glyphicon glyphicon-import' aria-hidden='true' style='padding-right: 10px;'></span></font><b>[".$unit->type." 타입] &nbsp;".$now_dong ." 동 ". $now_ho." 호 - 계약자 : ".$cont_data->contractor."</b>" : "";
 
+				// 수납 계좌
+				$data['paid_acc'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_bank_acc WHERE pj_seq='$project' ");
 
-				//본 페이지 로딩
-				$this->load->view('/menu/m1/md2_sd2_v', $data);
+				// 라이브러리 로드
+				$this->load->library('form_validation'); // 폼 검증
+
+				$this->form_validation->set_rules('paid_date', '수납일자', 'trim|exact_length[10]|required');
+				$this->form_validation->set_rules('pay_sche_code', '수납회차', 'trim|required');
+				$this->form_validation->set_rules('paid_amount', '수납금액', 'trim|numeric|required');
+				$this->form_validation->set_rules('paid_acc', '수납계좌', 'trim|required');
+				$this->form_validation->set_rules('paid_who', '입금자', 'trim|required|max_length[20]');
+
+				if($this->form_validation->run() == FALSE) {
+
+					//본 페이지 로딩
+					$this->load->view('/menu/m1/md2_sd2_v', $data);
+				}else{
+
+					$ins_data = array(
+						'pj_seq' => $project,
+						'cont_seq' => $this->input->post('cont_seq'),
+						'pay_sche_code' => $this->input->post('pay_sche_code'),
+						'paid_amount' => $this->input->post('paid_amount'),
+						'paid_acc' => $this->input->post('paid_acc'),
+						'paid_date' => $this->input->post('paid_date'),
+						'paid_who' => $this->input->post('paid_who'),
+						'reg_date' => date('Y-m-d'),
+						'reg_worker' => $this->session->userdata('name')
+					);
+					$result = $this->main_m->insert_data('cms_sales_received', $ins_data);
+					if( !$result) alert("데이터베이스 에러입니다.", '');
+
+					alert("수납내역이 정상 입력 되었습니다.", base_url('m1/sales/2/2?project='.$project.'&dong='.$this->input->post('dong').'&ho='.$this->input->post('ho')));
+				}
 			}
 
 

@@ -469,4 +469,53 @@ function dong_ho_put(){
 	}
 }
 /********************계약등록 종료*******************/
-//-->
+
+/********************수납등록 시작 ******************/
+// 수납 등록 폼 체크 함수
+function receive_chk(){
+	var form1 = document.form1;
+	var form2 = document.form2;
+	if( !form1.project.value) {
+		alert("프로젝트를 선택하여 주세요.");
+		form1.project.focus();
+		return;
+	}
+	if( !form1.dong.value){
+		alert("수납 입력할 동을 선택하여 주세요.");
+		form1.dong.focus();
+		return;
+	}
+	if( !form1.ho.value){
+		alert("수납 입력할 호를 선택하여 주세요.");
+		form1.ho.focus();
+		return;
+	}
+	if( !form2.paid_date.value){
+		alert("수납일자를 입력하여 주세요.");
+		form2.paid_date.focus();
+		return;
+	}
+	if( !form2.pay_sche_code.value){
+		alert("수납회차를 선택하여 주세요.");
+		form2.pay_sche_code.focus();
+		return;
+	}
+	if( !form2.paid_amount.value){
+		alert("수납금액을 입력하여 주세요.");
+		form2.paid_amount.focus();
+		return;
+	}
+	if( !form2.paid_acc.value){
+		alert("수납계좌를 선택하여 주세요.");
+		form2.paid_acc.focus();
+		return;
+	}
+	if( !form2.paid_who.value){
+		alert("입금자명을 선택하여 주세요.");
+		form2.paid_who.focus();
+		return;
+	}
+	if(confirm('수납 내역을 등록하시겠습니까?')===true) {
+		form2.submit();
+	}
+}
