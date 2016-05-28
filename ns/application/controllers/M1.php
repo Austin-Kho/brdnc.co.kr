@@ -45,7 +45,7 @@ class M1 extends CI_Controller {
 			array('계약 현황', '계약 등록', '동호수 현황'), // 첫번째 하위 메뉴
 			array('수납 현황', '수납 등록', '설정 관리'),	 // 두번째 하위 메뉴
 			array('프로젝트별 계약현황', '프로젝트별 계약등록(수정)', '동호수 계약 현황표'),  // 첫번째 하위 제목
-			array('분양대금 수납 현황 ---------- [구축 작업 전]', '분양대금 수납 등록', '프로젝트 타입별 수납약정 관리 ---------- [구축 작업 진행 중]')   // 두번째 하위 제목
+			array('분양대금 수납 현황 ---------- [구축 작업 진행 중]', '분양대금 수납 등록', '프로젝트 타입별 수납약정 관리 ---------- [일부 완성]')   // 두번째 하위 제목
 		);
 
 		// 등록된 프로젝트 데이터
@@ -837,6 +837,22 @@ class M1 extends CI_Controller {
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m1_2_1'];
 
+				// 납부 회차 데이터
+				$pay_sche = $data['pay_sche'] = $this->main_m->sql_result( "SELECT seq, pay_name FROM  cms_sales_pay_sche WHERE pj_seq='$project' ORDER BY pay_code " );
+
+				// price seq 전체 가져오기
+				$price = $data['price'] = $this->main_m->sql_result(" SELECT seq, unit_price FROM cms_sales_price WHERE pj_seq='$project' ORDER BY seq ");
+
+				//계약 통계 계산
+				$data['total_sum'] = 0;
+				$data['sche_sum'] = 0;
+				for ($i=0; $i<count($price); $i++) {
+					$cont_sum = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_contract WHERE price_seq='".$price[$i]->seq."' ");
+					$data['total_sum'] += $price[$i]->unit_price*$cont_sum->num; // 현재 분양 총 매출액
+				}
+
+
+
 
 
 				//본 페이지 로딩
@@ -850,7 +866,7 @@ class M1 extends CI_Controller {
 
 		// 1. 수납관리 2. 수납등록 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==2) {
-			$this->output->enable_profiler(TRUE); //프로파일러 보기//
+			// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m1_2_2', $this->session->userdata['user_id']);
 
@@ -931,7 +947,7 @@ class M1 extends CI_Controller {
 
 		// 1. 수납관리 3. 수납약정 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==3) {
-			$this->output->enable_profiler(TRUE); //프로파일러 보기//
+			// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m1_2_3', $this->session->userdata['user_id']);
 
