@@ -179,8 +179,11 @@ for($i=(count($year)-1); $i>=0; $i--) :
 				<div class="form-group btn-wrap" style="margin: ;">
 <?php if($this->input->get('modi')=='1') : ?>
 					<input type="button" class="btn btn-warning btn-sm" onclick="location.href='<?php echo base_url('m1/sales/2/2').'?modi=0&project='.$project.'&dong='.$this->input->get('dong').'&ho='.$this->input->get('ho'); ?>'"  value="지우기">
-<?php endif; ?>
-					<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str?>" value="등록 하기">
+<?php endif;
+	$btn_val = ($this->input->get('modi')=='1') ? "변경 등록" : "신규 등록";
+?>
+
+					<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str?>" value="<?php echo $btn_val; ?>">
 				</div>
 			</form>
 		</div>
