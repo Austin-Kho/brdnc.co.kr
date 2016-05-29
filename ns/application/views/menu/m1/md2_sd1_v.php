@@ -1,5 +1,15 @@
     <div class="main_start">&nbsp;</div>
 	<!-- 1. 분양관리 -> 2. 수납 관리 ->1. 수납 현황 -->
+	<script type="text/javascript">
+		function term_put(a,b,term){
+			if(term=='d')var term="<?php echo date('Y-m-d'); ?>";
+			if(term=='w')var term="<?php echo date('Y-m-d',strtotime ('-1 weeks'));?>";
+			if(term=='m')var term="<?php echo date('Y-m-d',strtotime ('-1 months'));?>";
+			if(term=='3m')var term="<?php echo date('Y-m-d',strtotime ('-3 months'));?>";
+			document.getElementById(a).value = term;
+			document.getElementById(b).value = "<?php echo date('Y-m-d');?>";
+		}
+	</script>
 
 	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
 		<form method="get" name="pj_sel" action="<?php echo current_url(); ?>">
@@ -37,404 +47,165 @@
 	</div>
 
 	<div class="row font12" style="margin: 0; padding: 0;">
-        <div class="col-md-12" style="padding: 0;">
-			<div class="col-xs-4 col-sm-3 col-md-2"><h4><span class="label label-info">1. 수납현황</span></h4></div
-			<div class="col-xs-8 col-sm-5 col-md-2">
-				<label for="view_sort" class="sr-only">프로젝트 선택</label>
-				<select class="form-control input-sm" name="view_sort" onchange="submit();" style="margin: 5px 0;">
-					<option value="0"> 전 체
-					<option value="1" <?php if( !$this->input->get('view_sort') OR $this->input->get('view_sort')=='1') echo "selected"; ?>>월 별</option>
-					<option value="2" <?php if($this->input->get('view_sort')=='2') echo "selected"; ?>>일 별</option>
-				</select>
-			</div>
-		</div>
+        <div class="col-xs-5 col-sm-7 col-md-9"><h4><span class="label label-info">요약 집계</span></h4></div>
+		<div class="col-xs-3 col-sm-2 col-md-1"><a href="javascript:" onclick="alert('준비 중..!');"><h5><span class="label label-default">약정별 수납현황</span></h5></a></div>
+		<div class="col-xs-3 col-sm-2 col-md-1"><a href="javascript:" onclick="alert('준비 중..!');"><h5><span class="label label-default">총 괄 집 계 현 황</span></h5></a></div>
+
+
 <?php if(empty($all_pj)) : ?>
 		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 50px 0;">조회할 프로젝트를 선택하여 주십시요.</div>
-<?php // elseif($all_pj && empty($tp_name)) : ?>
-		<!-- <div class="col-xs-12 center bo-top bo-bottom" style="padding: 50px 0;">등록된 데이터가 없습니다.</div> -->
+<?php elseif($all_pj && empty($rec_data)) : ?>
+		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 50px 0;">등록된 데이터가 없습니다.</div>
 <?php else : ?>
 		<div class="col-xs-12 table-responsive" style="padding: 0;">
-			<table class="table table-bordered table-hover table-condensed font12">
-				<thead class="bo-top center bgf8">
-					<tr>
-						<td>구 분</td>
-<?php for($i=0; $i<count($pay_sche); $i++): ?>
-						<td><?php echo $pay_sche[$i]->pay_name; ?></td>
-<?php endfor; ?>
-						<td>계</td>
+			<table class="table table-bordered table-hover table-condensed">
+				<thead>
+					<tr class= "active center">
+						<td>프로젝트 명</td>
+						<td>총 매출액</td>
+						<td>분양금액</td>
+						<td>수납금액</td>
+						<td>할인금액</td>
+						<td>연체금액</td>
+						<td>실수납금액</td>
+						<td>미수금액</td>
 					</tr>
 				</thead>
-				<tbody class="bo-bottom center">
-
-					<tr class="right" style="background-color: #F0FCCE;">
-						<td class="center">총 분양금</td>
-<?php
-for($i=0; $i<count($pay_sche); $i++) :
-	$sche_sum = 0;
-	foreach($price as $lt) : // 조건 루프
-		$cont_sche_pay = $this->main_m->sql_row(" SELECT payment FROM cms_sales_payment WHERE pj_seq='$project' AND price_seq='".$lt->seq."' AND pay_sche_seq='".$pay_sche[$i]->seq."' ");
-		$cont_num = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_contract WHERE price_seq='".$lt->seq."' "); // 가격조건별 계약건수
-		$sche_sum += $cont_sche_pay->payment*$cont_num->num;
-	endforeach;
-?>
-						<td><?php echo number_format($sche_sum); ?></td>
-<?php endfor; ?>
-						<td><?php echo number_format($total_sum); ?></td>
-					</tr>
-
-<?php for($j=0; $j<9; $j++):
-	if($j==0) $sub = "미 분양금";
-	if($j==1) $sub = "할인료";
-	if($j>1 && $j<6) {$sub = "2016-05"; $bgcol = "";} else {$bgcol = "style='background-color: #F0FCCE;'";}
-	if($j==6) $sub = "연체료";
-	if($j==7) $sub = "수납금액";
-	if($j==8) $sub = "미수금";
-	// 계약세대 회차별 납부 총액
-	//$data['yc_total_per_sche'] = $this->main_m->sql_result(" SELECT * FROM ");
-	// 미계약 세대 회차별 납부 총액
-	//$data['nc_total_per_sche'] = $this->main_m->sql_result();
-?>
-					<tr class="right" <?php echo $bgcol; ?>>
-						<td class="center"><?php echo $sub; ?></td>
-<?php for($i=0; $i<count($pay_sche); $i++): ?>
-						<td><?php //echo $pay_sche[$i]->pay_name; ?></td>
-<?php endfor; ?>
-						<td class="right"><?php //echo number_format($total_sum); ?></td>
-					</tr>
-<?php endfor; ?>
-				</tbody>
-				<tfoot class="right bgf8">
-					<tr class="right">
-						<td class="center">합 계</td>
-<?php for($i=0; $i<count($pay_sche); $i++): ?>
-						<td><?php //echo $pay_sche[$i]->pay_name; ?></td>
-<?php endfor; ?>
-						<td>9,391,820,000</td>
-					</tr>
-				</tfoot>
-			</table>
-		</div>
-
-		<div class="col-md-12" style="padding: 0;">
-			<div class="col-xs-2"><h4><span class="label label-info">2. 총괄집계표</span></h4></div>
-		</div>
-		<div class="col-xs-12 table-responsive" style="padding: 0;">
-			<table class="table table-bordered table-hover table-condensed font10">
-				<thead class="bo-top center bgf8">
-					<tr>
-						<td width="9%" colspan="3">구 분</td>
-						<td>계약금1차</td>
-						<td>계약금2차</td>
-						<td>토지분담1차</td>
-						<td>토지분담2차</td>
-						<td>중도금1차</td>
-						<td>중도금2차</td>
-						<td>중도금3차</td>
-						<td>중도금4차</td>
-						<td>중도금5차</td>
-						<td>중도금6차</td>
-						<td>중도금7차</td>
-						<td>잔 금</td>
-						<td>계</td>
-					</tr>
-				</thead>
-				<tbody class="bo-bottom center">
-
-					<tr class="right">
-						<td class="center" colspan="3">기본약정일</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td>187,729,340,000</td>
+<?php $com_fac = 2400640000; // 상가 매출액?>
+				<tbody>
+					<tr class="active right">
+						<td class="left"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> 동춘1구역지역주택조합</td>
+						<td style="font-weight: bold;"><?php echo number_format($total_pmt->total+$com_fac); ?></td>
+						<td style="font-weight: bold;"><?php echo number_format($sell_data->sell_total); ?></td>
+						<td style="font-weight: bold; color: #060EC8;"><?php echo number_format($rec_data->rec_total); ?></td>
+						<td style="font-weight: bold; color: #C30505;">-</td>
+						<td style="font-weight: bold; color: #060EC8;">-</td>
+						<td style="font-weight: bold; color: #060EC8;"><?php echo number_format($rec_data->rec_total); ?></td>
+						<td style="font-weight: bold; color: #C30505;"><?php echo number_format($sell_data->sell_total-$rec_data->rec_total); ?></td>
 					</tr>
 					<tr class="right">
-						<td class="center" rowspan="4" width="2%">분양</td>
-						<td class="center" colspan='2'>분양 ( 496 )</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td style="background-color: ;">1</td>
-						<td class="right"></td>
-						<td class="right"></td>
-						<td class="right" style="color: #273169;"></td>
-						<td class="right" style="color: #a60202;"></td>
-						<td></td>
-						<td class="right"></td>
-						<td class="right"></td>
+						<td class="left" style="padding-left: 20px;"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> 아파트</td>
+						<td><?php echo number_format($total_pmt->total); ?></td>
+						<td><?php echo number_format($sell_data->sell_total); ?></td>
+						<td style="color: #060EC8;"><?php echo number_format($rec_data->rec_total); ?></td>
+						<td style="color: #C30505;">-</td>
+						<td style="color: #060EC8;">-</td>
+						<td style="color: #060EC8;"><?php echo number_format($rec_data->rec_total); ?></td>
+						<td style="color: #C30505;"><?php echo number_format($sell_data->sell_total-$rec_data->rec_total); ?></td>
 					</tr>
 					<tr class="right">
-						<td class="center" colspan='2'>미분양 ( 100 )</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td style="background-color: ;">1</td>
-						<td class="right"></td>
-						<td class="right"></td>
-						<td class="right" style="color: #273169;"></td>
-						<td class="right" style="color: #a60202;"></td>
-						<td></td>
-						<td class="right"></td>
-						<td class="right"></td>
-					</tr>
-					<tr class="right">
-						<td class="center" colspan='2'>총계 ( 596 )</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td style="background-color: ;">1</td>
-						<td class="right"></td>
-						<td class="right"></td>
-						<td class="right" style="color: #273169;"></td>
-						<td class="right" style="color: #a60202;"></td>
-						<td></td>
-						<td class="right"></td>
-						<td class="right"></td>
-					</tr>
-					<tr class="right">
-						<td class="center" colspan='2'>분양율</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td style="background-color: ;">1</td>
-						<td class="right"></td>
-						<td class="right"></td>
-						<td class="right" style="color: #273169;"></td>
-						<td class="right" style="color: #a60202;"></td>
-						<td></td>
-						<td class="right"></td>
-						<td class="right"></td>
-					</tr>
-					<tr class="right">
-						<td class="center" rowspan="5">입금</td>
-						<td class="center" colspan='2'>입금액</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td style="background-color: ;">1</td>
-						<td class="right"></td>
-						<td class="right"></td>
-						<td class="right" style="color: #273169;"></td>
-						<td class="right" style="color: #a60202;"></td>
-						<td></td>
-						<td class="right"></td>
-						<td class="right"></td>
-					</tr>
-					<tr class="right">
-						<td class="center" colspan='2'>할인액</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td style="background-color: ;">1</td>
-						<td class="right"></td>
-						<td class="right"></td>
-						<td class="right" style="color: #273169;"></td>
-						<td class="right" style="color: #a60202;"></td>
-						<td></td>
-						<td class="right"></td>
-						<td class="right"></td>
-					</tr>
-					<tr class="right">
-						<td class="center" colspan='2'>연체료</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td style="background-color: ;">1</td>
-						<td class="right"></td>
-						<td class="right"></td>
-						<td class="right" style="color: #273169;"></td>
-						<td class="right" style="color: #a60202;"></td>
-						<td></td>
-						<td class="right"></td>
-						<td class="right"></td>
-					</tr>
-					<tr class="right">
-						<td class="center" colspan='2'>실수납액</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td style="background-color: ;">1</td>
-						<td class="right"></td>
-						<td class="right"></td>
-						<td class="right" style="color: #273169;"></td>
-						<td class="right" style="color: #a60202;"></td>
-						<td></td>
-						<td class="right"></td>
-						<td class="right"></td>
-					</tr>
-					<tr class="right">
-						<td class="center" colspan='2'>납입율</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td style="background-color: ;">1</td>
-						<td class="right"></td>
-						<td class="right"></td>
-						<td class="right" style="color: #273169;"></td>
-						<td class="right" style="color: #a60202;"></td>
-						<td></td>
-						<td class="right"></td>
-						<td class="right"></td>
-					</tr>
-					<tr class="right">
-						<td class="center" rowspan="8">미수금</td>
-						<td class="center" rowspan="5" width="2%">기간도래</td>
-						<td class="center">약정금액</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td style="background-color: ;">1</td>
-						<td class="right"></td>
-						<td class="right"></td>
-						<td class="right" style="color: #273169;"></td>
-						<td class="right" style="color: #a60202;"></td>
-						<td></td>
-						<td class="right"></td>
-						<td class="right"></td>
-					</tr>
-					<tr class="right">
-						<td class="center">미수금</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td style="background-color: ;">1</td>
-						<td class="right"></td>
-						<td class="right"></td>
-						<td class="right" style="color: #273169;"></td>
-						<td class="right" style="color: #a60202;"></td>
-						<td></td>
-						<td class="right"></td>
-						<td class="right"></td>
-					</tr>
-					<tr class="right">
-						<td class="center">미수율</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td style="background-color: ;">1</td>
-						<td class="right"></td>
-						<td class="right"></td>
-						<td class="right" style="color: #273169;"></td>
-						<td class="right" style="color: #a60202;"></td>
-						<td></td>
-						<td class="right"></td>
-						<td class="right"></td>
-					</tr>
-					<tr class="right">
-						<td class="center">연체료</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td style="background-color: ;">1</td>
-						<td class="right"></td>
-						<td class="right"></td>
-						<td class="right" style="color: #273169;"></td>
-						<td class="right" style="color: #a60202;"></td>
-						<td></td>
-						<td class="right"></td>
-						<td class="right"></td>
-					</tr>
-					<tr class="right">
-						<td class="center">소 계</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td style="background-color: ;">1</td>
-						<td class="right"></td>
-						<td class="right"></td>
-						<td class="right" style="color: #273169;"></td>
-						<td class="right" style="color: #a60202;"></td>
-						<td></td>
-						<td class="right"></td>
-						<td class="right"></td>
-					</tr>
-					<tr class="right">
-						<td class="center" colspan='2'>기간미도래</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td style="background-color: ;">1</td>
-						<td class="right"></td>
-						<td class="right"></td>
-						<td class="right" style="color: #273169;"></td>
-						<td class="right" style="color: #a60202;"></td>
-						<td></td>
-						<td class="right"></td>
-						<td class="right"></td>
-					</tr>
-					<tr class="right">
-						<td class="center" colspan='2'>총 계</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td style="background-color: ;">1</td>
-						<td class="right"></td>
-						<td class="right"></td>
-						<td class="right" style="color: #273169;"></td>
-						<td class="right" style="color: #a60202;"></td>
-						<td></td>
-						<td class="right"></td>
-						<td class="right"></td>
-					</tr>
-					<tr class="right">
-						<td class="center" colspan='2'>총미수율</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td>1</td>
-						<td style="background-color: ;">1</td>
-						<td class="right"></td>
-						<td class="right"></td>
-						<td class="right" style="color: #273169;"></td>
-						<td class="right" style="color: #a60202;"></td>
-						<td></td>
-						<td class="right"></td>
-						<td class="right"></td>
+						<td class="left" style="padding-left: 20px;"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> 단지내상가</td>
+						<td><?php echo number_format($com_fac); ?></td>
+						<td>-</td>
+						<td style="color: #060EC8;">-</td>
+						<td style="color: #C30505;">-</td>
+						<td style="color: #060EC8;">-</td>
+						<td style="color: #060EC8;">-</td>
+						<td style="color: #C30505;">-</td>
 					</tr>
 				</tbody>
 			</table>
-
 		</div>
 <?php endif; ?>
     </div>
+
+	<div class="row font12" style="margin: 0; padding: 0;">
+        <div class="col-md-12"><h4><span class="label label-success">최근 수납현황</span></h4></div>
+		<div class="col-md-12 bo-top bo-bottom" style="padding: 0; margin: 0 0 20px 0;">
+<?php
+$attributes = array('name' => 'form1', 'method' => 'get');
+echo form_open(base_url(uri_string()), $attributes);
+?>
+				<div class="col-xs-12 col-sm-2 col-md-1 center bgf8" style="height: 40px; padding: 10px 0;">검색 조건</div>
+				<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
+					<label for="con_pay_sche" class="sr-only">회차별</label>
+					<select class="form-control input-sm" name="con_pay_sche">
+						<option value=""> 회차 전체</option>
+<?php foreach($pay_sche as $lt) : ?>
+						<option value="<?php echo $lt->pay_code; ?>" <?php if($lt->pay_code == $this->input->get('con_pay_sche')) echo "selected"; ?>> <?php echo $lt->pay_name; ?></option>
+<?php endforeach; ?>
+					</select>
+				</div>
+				<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
+					<label for="con_paid_acc" class="sr-only">계좌별</label>
+					<select class="form-control input-sm" name="con_paid_acc">
+						<option value=""> 계좌 전체</option>
+<?php foreach($paid_acc as $lt) : ?>
+						<option value="<?php echo $lt->seq; ?>" <?php if($lt->seq==$this->input->get('con_paid_acc')) echo "selected"; ?>> <?php echo $lt->acc_nick; ?></option>
+<?php endforeach; ?>
+					</select>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-md-2" style="height: 40px; padding: 5px;">
+					<div class="alert alert-info right" role="alert" style="padding: 6px;"><?php echo "Total : ".number_format($rec->total_amount)." 원" ?></div>
+				</div>
+				<div class="col-xs-12 col-sm-2 col-md-1 center bgf8" style="height: 40px; padding: 10px 0;">계약 기간</div>
+				<div class="col-xs-12 col-sm-6 col-md-3" style="height: 40px; padding: 5px 0 0 5px;">
+					<div class="col-xs-5 col-sm-5" style="padding: 0px;">
+						<label for="s_date" class="sr-only">시작일</label>
+						<input type="text" class="form-control input-sm wid-95" id="s_date" name="s_date" maxlength="10" value="<?php if($this->input->get('s_date')) echo $this->input->get('s_date'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="시작일">
+					</div>
+					<div class="col-xs-1 col-sm-1 glyphicon-wrap" style="padding: 6px 0;">
+						<a href="javascript:" onclick="cal_add(document.getElementById('s_date'),this); event.cancelBubble=true">
+							<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+						</a>
+					</div>
+					<div class="col-xs-5 col-sm-5" style="padding: 0px;">
+						<label for="e_date" class="sr-only">종료일</label>
+						<input type="text" class="form-control input-sm wid-95" id="e_date" name="e_date" maxlength="10" value="<?php if($this->input->get('e_date')) echo $this->input->get('e_date'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="종료일">
+					</div>
+					<div class="col-xs-1 col-sm-1 glyphicon-wrap" style="padding: 6px 0;">
+						<a href="javascript:" onclick="cal_add(document.getElementById('e_date'),this); event.cancelBubble=true">
+							<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+						</a>
+					</div>
+				</div>
+				<div class="col-xs-10 col-sm-4 col-md-2" style="height: 40px; padding: 10px 5px; text-align: right;">
+					<a href="javascript:" onclick="term_put('s_date', 'e_date', 'd');" title="오늘"><img src="<?php echo base_url(); ?>static/img/to_today.jpg" alt="오늘"></a>
+					<a href="javascript:" onclick="term_put('s_date', 'e_date', 'w');" title="일주일"><img src="<?php echo base_url(); ?>static/img/to_week.jpg" alt="일주일"></a>
+					<a href="javascript:" onclick="term_put('s_date', 'e_date', 'm');" title="1개월"><img src="<?php echo base_url(); ?>static/img/to_month.jpg" alt="1개월"></a>
+					<a href="javascript:" onclick="term_put('s_date', 'e_date', '3m');" title="3개월"><img src="<?php echo base_url(); ?>static/img/to_3month.jpg" alt="3개월"></a>
+					<button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="document.getElementById('s_date').value=''; document.getElementById('e_date').value='';"><span aria-hidden="true">&times;</span></button>
+				</div>
+				<div class="col-xs-2 col-sm-2 col-md-1 center" style="height: 40px; padding: 5px;">
+					<input type="button" value="검 색" class="btn btn-info btn-sm" onclick="submit();">
+				</div>
+			</form>
+		</div>
+
+
+
+
+		<div class="col-xs-12 table-responsive" style="padding: 0;">
+			<table class="table table-bordered table-hover table-condensed">
+				<thead>
+					<tr class= "active center">
+						<td>수납일자</td>
+						<td>납입회차</td>
+						<td>수납금액</td>
+						<td>입금자</td>
+						<td>입금계좌</td>
+						<td>타입</td>
+						<td>동호수</td>
+					</tr>
+				</thead>
+				<tbody>
+<?php foreach($rec_list as $lt) :
+	$dong_ho = explode("-", $lt->unit_dong_ho);
+?>
+					<tr class="center">
+						<td><?php echo $lt->paid_date; ?></td>
+						<td><?php echo $lt->pay_name; ?></td>
+						<td class="right"><a href="<?php echo  base_url('m1/sales/2/2').'?modi=1&project='.$project.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1].'&rec_seq='.$lt->seq; ?>"><?php echo number_format($lt->paid_amount); ?></a></td>
+						<td><?php echo $lt->paid_who; ?></td>
+						<td><?php echo $lt->acc_nick; ?></td>
+						<td><?php echo $lt->paid_date; ?></td>
+						<td><?php echo $lt->paid_date; ?></td>
+					</tr>
+<?php endforeach; ?>
+				</tbody>
+			</table>
+		</div>
+		<div class="col-xs-12 center" style="margin-top: 0px; padding: 0;">
+			<ul class="pagination pagination-sm"><?php echo $pagination; ?></ul>
+		</div>
+	</div>

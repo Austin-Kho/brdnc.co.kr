@@ -66,6 +66,7 @@ class Main extends CI_Controller {
 	}
 
 	public function module() {
+		$data[] = '';
 		$this->load->view('cms_module', $data);
 		//$this->load->view('no_auth');
 	}

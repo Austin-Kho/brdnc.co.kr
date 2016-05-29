@@ -45,7 +45,7 @@ class M1 extends CI_Controller {
 			array('계약 현황', '계약 등록', '동호수 현황'), // 첫번째 하위 메뉴
 			array('수납 현황', '수납 등록', '설정 관리'),	 // 두번째 하위 메뉴
 			array('프로젝트별 계약현황', '프로젝트별 계약등록(수정)', '동호수 계약 현황표'),  // 첫번째 하위 제목
-			array('분양대금 수납 현황 ---------- [구축 작업 진행 중]', '분양대금 수납 등록', '프로젝트 타입별 수납약정 관리 ---------- [일부 완성]')   // 두번째 하위 제목
+			array('분양대금 수납 현황', '분양대금 수납 등록', '프로젝트 타입별 수납약정 관리 ---------- [일부 완성]')   // 두번째 하위 제목
 		);
 
 		// 등록된 프로젝트 데이터
@@ -127,8 +127,6 @@ class M1 extends CI_Controller {
 				$this->pagination->initialize($config);
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$data['pagination'] = $this->pagination->create_links();
-
-
 
 
 				// 계약 데이터 가져오기
@@ -837,22 +835,79 @@ class M1 extends CI_Controller {
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m1_2_1'];
 
-				// 납부 회차 데이터
-				$pay_sche = $data['pay_sche'] = $this->main_m->sql_result( "SELECT seq, pay_name FROM  cms_sales_pay_sche WHERE pj_seq='$project' ORDER BY pay_code " );
+				// 총 약정금액
+				$data['total_pmt'] = $this->main_m->sql_row(" SELECT SUM(unit_price * unit_num) AS total FROM cms_sales_price WHERE pj_seq='$project' ");
+				// 분양 금액 구하기
+				$data['sell_data'] = $this->main_m->sql_row(" SELECT SUM(unit_price) AS sell_total FROM cms_sales_contract, cms_sales_price WHERE cms_sales_contract.pj_seq='$project' AND price_seq=cms_sales_price.seq ");
 
-				// price seq 전체 가져오기
-				$price = $data['price'] = $this->main_m->sql_result(" SELECT seq, unit_price FROM cms_sales_price WHERE pj_seq='$project' ORDER BY seq ");
+				// 필터링 위한 데이터
+				$data['pay_sche'] = $this->main_m->sql_result(" SELECT pay_code, pay_name FROM cms_sales_pay_sche WHERE pj_seq='$project' ORDER BY pay_code ");
+				$data['paid_acc'] = $this->main_m->sql_result(" SELECT seq, acc_nick FROM cms_sales_bank_acc WHERE pj_seq='$project' ORDER BY seq ");
 
-				//계약 통계 계산
-				$data['total_sum'] = 0;
-				$data['sche_sum'] = 0;
-				for ($i=0; $i<count($price); $i++) {
-					$cont_sum = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_contract WHERE price_seq='".$price[$i]->seq."' ");
-					$data['total_sum'] += $price[$i]->unit_price*$cont_sum->num; // 현재 분양 총 매출액
-				}
+				// 수납데이터
+				$data['rec_data'] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec_total FROM cms_sales_received WHERE pj_seq='$project' ");
 
 
+				// 수납 데이터 검색 필터링
+				$rec_query = " SELECT cms_sales_received.seq, paid_amount, paid_date, paid_who, acc_nick, pay_name, unit_dong_ho ";
+				$amount_qry = " SELECT SUM(paid_amount) AS total_amount FROM cms_sales_received WHERE pj_seq='$project'  ";
+				$w_qry = "";
 
+				$rec_query .= " FROM cms_sales_received, cms_sales_pay_sche, cms_sales_bank_acc, cms_sales_contract ";
+				$rec_query .= " WHERE cms_sales_received.pj_seq='$project' AND cms_sales_pay_sche.pj_seq='$project'  AND pay_sche_code=cms_sales_pay_sche.pay_code AND paid_acc=cms_sales_bank_acc.seq AND cont_seq=cms_sales_contract.seq ";
+				if( !empty($this->input->get('con_pay_sche'))) { $rec_query .= " AND pay_sche_code='".$this->input->get('con_pay_sche')."' ";}
+				if( !empty($this->input->get('con_paid_acc'))) { $rec_query .= " AND paid_acc='".$this->input->get('con_paid_acc')."' ";}
+				if( !empty($this->input->get('s_date'))) { $rec_query .= " AND paid_date>='".$this->input->get('s_date')."' ";}
+				if( !empty($this->input->get('e_date'))) { $rec_query .= " AND paid_date<='".$this->input->get('e_date')."' ";}
+
+				if( !empty($this->input->get('con_pay_sche'))) { $w_qry = " AND pay_sche_code='".$this->input->get('con_pay_sche')."' ";}
+				if( !empty($this->input->get('con_paid_acc'))) { $w_qry .= " AND paid_acc='".$this->input->get('con_paid_acc')."' ";}
+				if( !empty($this->input->get('s_date'))) { $w_qry .= " AND paid_date>='".$this->input->get('s_date')."' ";}
+				if( !empty($this->input->get('e_date'))) { $w_qry .= " AND paid_date<='".$this->input->get('e_date')."' ";}
+
+
+				//페이지네이션 라이브러리 로딩 추가
+				$this->load->library('pagination');
+
+				//페이지네이션 설정/////////////////////////////////
+				$config['base_url'] = base_url('m1/sales/2/1');   //페이징 주소
+				$config['total_rows'] = $data['total_rows'] = $this->main_m->sql_num_rows($rec_query);  //게시물의 전체 갯수
+				if( !$this->input->get('num')) $config['per_page'] = 10;  else $config['per_page'] = $this->input->get('num'); // 한 페이지에 표시할 게시물 수
+				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
+				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
+				$config['reuse_query_string'] = TRUE;    //http://example.com/index.php/test/page/20?query=search%term
+
+				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
+				$page = $this->uri->segment($config['uri_segment']);
+				if($page<=1 or empty($page)) { $start = 0; }else{ $start = ($page-1) * $config['per_page']; }
+				$limit = $config['per_page'];
+
+				//페이지네이션 초기화
+				$this->pagination->initialize($config);
+				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
+				$data['pagination'] = $this->pagination->create_links();
+
+
+				// 수납 데이터 가져오기
+				$rec_query .= "ORDER BY paid_date DESC, cms_sales_received.seq DESC ";
+				if($start != '' or $limit !='')	$rec_query .= " LIMIT ".$start.", ".$limit." ";
+				$data['rec_list'] = $this->main_m->sql_result($rec_query); // 수납 및 계약자 데이터
+				$data['rec'] = $this->main_m->sql_row($amount_qry.$w_qry); // 총 수납액 구하기
+
+
+				// // 납부 회차 데이터
+				// $pay_sche = $data['pay_sche'] = $this->main_m->sql_result( "SELECT seq, pay_name FROM  cms_sales_pay_sche WHERE pj_seq='$project' ORDER BY pay_code " );
+				//
+				// // price seq 전체 가져오기
+				// $price = $data['price'] = $this->main_m->sql_result(" SELECT seq, unit_price FROM cms_sales_price WHERE pj_seq='$project' ORDER BY seq ");
+				//
+				// //계약 통계 계산
+				// $data['total_sum'] = 0;
+				// $data['sche_sum'] = 0;
+				// for ($i=0; $i<count($price); $i++) {
+				// 	$cont_sum = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_contract WHERE price_seq='".$price[$i]->seq."' ");
+				// 	$data['total_sum'] += $price[$i]->unit_price*$cont_sum->num; // 현재 분양 총 매출액
+				// }
 
 
 				//본 페이지 로딩

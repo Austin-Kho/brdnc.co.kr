@@ -182,7 +182,6 @@ for($i=(count($year)-1); $i>=0; $i--) :
 <?php endif;
 	$btn_val = ($this->input->get('modi')=='1') ? "변경 등록" : "신규 등록";
 ?>
-
 					<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str?>" value="<?php echo $btn_val; ?>">
 				</div>
 			</form>
