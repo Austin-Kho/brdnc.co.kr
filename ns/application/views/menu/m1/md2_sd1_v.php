@@ -136,7 +136,7 @@ echo form_open(base_url(uri_string()), $attributes);
 					</select>
 				</div>
 				<div class="col-xs-12 col-sm-4 col-md-2" style="height: 40px; padding: 5px;">
-					<div class="alert alert-info right" role="alert" style="padding: 6px;"><?php echo "Total : ".number_format($rec->total_amount)." 원" ?></div>
+					<div class="alert alert-info right" role="alert" style="padding: 6px;"><?php echo "수납 합계 : ".number_format($rec->total_amount)." 원" ?></div>
 				</div>
 				<div class="col-xs-12 col-sm-2 col-md-1 center bgf8" style="height: 40px; padding: 10px 0;">계약 기간</div>
 				<div class="col-xs-12 col-sm-6 col-md-3" style="height: 40px; padding: 5px 0 0 5px;">
@@ -205,6 +205,9 @@ echo form_open(base_url(uri_string()), $attributes);
 				</tbody>
 			</table>
 		</div>
+<?php if(empty($rec_list)) :  ?>
+		<div class="col-xs-12 center" style="margin-top: 0px; padding: 80px 0;">등록된 데이터가 없습니다.</div>
+<?php endif; ?>
 		<div class="col-xs-12 center" style="margin-top: 0px; padding: 0;">
 			<ul class="pagination pagination-sm"><?php echo $pagination; ?></ul>
 		</div>
