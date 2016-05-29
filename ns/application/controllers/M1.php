@@ -228,7 +228,7 @@ class M1 extends CI_Controller {
 
 				// 계약 등록 시 당회 납부 회차 데이터 가져오기
 				if($this->input->get('cont_sort2')=='2'){
-					$data['pay_schedule'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code<5 ORDER BY seq ");
+					$data['pay_schedule'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code<3 ORDER BY seq ");
 				}
 
 				// 수납 관리 테이블 정보 가져오기

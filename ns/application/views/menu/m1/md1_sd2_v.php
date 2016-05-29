@@ -366,9 +366,9 @@
 <?php if($this->input->get('cont_sort2')==='2') : ?>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="app_pay_sche" class="sr-only">납부회차</label>
+						<label for="app_pay_sche" class="sr-only">납부구분</label>
 						<select class="form-control input-sm" name="app_pay_sche">
-							<option value="">납부회차</option>
+							<option value="">납부구분</option>
 <?php foreach ($pay_schedule as $lt) : ?>
 							<option value="<?php echo $lt->pay_code; ?>" <?php if( !empty($receiv_app)&&$lt->pay_code==$receiv_app->pay_sche_code){ echo "selected"; }else{ set_select('app_pay_sche', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
 <?php endforeach; ?>
@@ -426,9 +426,9 @@
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="cont_pay_sche1" class="sr-only">납부회차</label>
+						<label for="cont_pay_sche1" class="sr-only">납부구분</label>
 						<select class="form-control input-sm" name="cont_pay_sche1" <?php echo $disabled; ?>>
-							<option value="">납부회차</option>
+							<option value="">납부구분</option>
 <?php foreach ($pay_schedule as $lt) : ?>
 							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['1'])&&$lt->pay_code==$received['1']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche1', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
 <?php endforeach; ?>
@@ -481,10 +481,10 @@
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="cont_pay_sche2" class="sr-only">납부회차</label>
+						<label for="cont_pay_sche2" class="sr-only">납부구분</label>
 						<div class="col-xs-10 col-md-8" style="padding: 0;">
 							<select class="form-control input-sm" name="cont_pay_sche2" <?php echo $disabled; ?>>
-								<option value="">납부회차</option>
+								<option value="">납부구분</option>
 	<?php foreach ($pay_schedule as $lt) : ?>
 								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['2'])&&$lt->pay_code==$received['2']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche2', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
 	<?php endforeach; ?>
@@ -546,10 +546,10 @@
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="cont_pay_sche3" class="sr-only">납부회차</label>
+						<label for="cont_pay_sche3" class="sr-only">납부구분</label>
 						<div class="col-xs-10 col-md-8" style="padding: 0;">
 							<select class="form-control input-sm" name="cont_pay_sche3" <?php echo $disabled; ?>>
-								<option value="">납부회차</option>
+								<option value="">납부구분</option>
 	<?php foreach ($pay_schedule as $lt) : ?>
 								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['3'])&&$lt->pay_code==$received['3']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche3', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
 	<?php endforeach; ?>
@@ -612,10 +612,10 @@
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="cont_pay_sche4" class="sr-only">납부회차</label>
+						<label for="cont_pay_sche4" class="sr-only">납부구분</label>
 						<div class="col-xs-10 col-md-8" style="padding: 0;">
 							<select class="form-control input-sm" name="cont_pay_sche4" <?php echo $disabled; ?>>
-								<option value="">납부회차</option>
+								<option value="">납부구분</option>
 	<?php foreach ($pay_schedule as $lt) : ?>
 								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['4'])&&$lt->pay_code==$received['4']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche4', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
 	<?php endforeach; ?>
@@ -678,10 +678,10 @@
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="cont_pay_sche5" class="sr-only">납부회차</label>
+						<label for="cont_pay_sche5" class="sr-only">납부구분</label>
 						<div class="col-xs-10 col-md-8" style="padding: 0;">
 							<select class="form-control input-sm" name="cont_pay_sche5" <?php echo $disabled; ?>>
-								<option value="">납부회차</option>
+								<option value="">납부구분</option>
 	<?php foreach ($pay_schedule as $lt) : ?>
 								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['5'])&&$lt->pay_code==$received['5']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche5', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
 	<?php endforeach; ?>
@@ -744,10 +744,10 @@
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="cont_pay_sche6" class="sr-only">납부회차</label>
+						<label for="cont_pay_sche6" class="sr-only">납부구분</label>
 						<div class="col-xs-10 col-md-8" style="padding: 0;">
 							<select class="form-control input-sm" name="cont_pay_sche6" <?php echo $disabled; ?>>
-								<option value="">납부회차</option>
+								<option value="">납부구분</option>
 	<?php foreach ($pay_schedule as $lt) : ?>
 								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['6'])&&$lt->pay_code==$received['6']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche6', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
 	<?php endforeach; ?>
@@ -810,9 +810,9 @@
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<label for="cont_pay_sche7" class="sr-only">납부회차</label>
+						<label for="cont_pay_sche7" class="sr-only">납부구분</label>
 						<select class="form-control input-sm" name="cont_pay_sche7" <?php echo $disabled; ?>>
-							<option value="">납부회차</option>
+							<option value="">납부구분</option>
 <?php foreach ($pay_schedule as $lt) : ?>
 							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['7'])&&$lt->pay_code==$received['7']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche7', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
 <?php endforeach; ?>
