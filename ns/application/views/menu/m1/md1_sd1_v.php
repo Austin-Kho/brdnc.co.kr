@@ -248,20 +248,35 @@ echo form_open(base_url(uri_string()), $attributes);
 					<tr>
 						<td width="8%">계약 일련번호</td>
 						<td width="8%">차 수</td>
-						<td width="7%">타 입</td>
-						<td width="8%">동 호 수</td>
-						<td width="8%">계 약 자</td>
+						<td width="6%">타 입</td>
+						<td width="7%">동 호 수</td>
+						<td width="6%">계 약 자</td>
 						<td width="9%">연락처 [1]</td>
-						<td width="10%">계약 일자</td>
-						<td width="12%">미비 서류</td>
-						<td width="20%">비 고</td>
-						<td width="12%">계약자 거주지</td>
+						<td width="9%">계약 일자</td>
+						<td width="8%">총 납입금</td>
+						<td width="6%">계약 완납</td>
+						<td width="9%">미비 서류</td>
+						<td width="14%">비 고</td>
+						<td width="10%">계약자 거주지</td>
 					</tr>
 				</thead>
 				<tbody class="bo-bottom center">
 <?php
 foreach ($cont_data as $lt) :
 	$nd = $this->main_m->sql_row(" SELECT diff_name FROM cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$lt->cont_diff' ");
+	$total_rec = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS received FROM cms_sales_received WHERE pj_seq='$project' AND cont_seq='$lt->seq' ");
+
+	$deposit1 = $this->main_m->sql_row(" SELECT SUM(payment) AS payment FROM cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<3 ");
+	$deposit2 = $this->main_m->sql_row(" SELECT SUM(payment) AS payment FROM cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<5 ");
+	if($total_rec->received>=$deposit2->payment){
+		$is_paid_ok = "<span style='color: #2205D0;'>2차 완납</span>";
+	}elseif($total_rec->received>=$deposit1->payment){
+		$is_paid_ok = "<span style='color: #03A719;'>1차 완납</span>";
+	}else{
+		$is_paid_ok = "<span style='color: #CD0505;'>미납</span>";
+	}
+
+
 	$idoc = explode("-", $lt->incom_doc); // 미비 서류
 	$incom_doc = "";
 	if($idoc[0]==1) $incom_doc .= " 각서9종/";
@@ -273,12 +288,13 @@ foreach ($cont_data as $lt) :
 	if($idoc[6]==1) $incom_doc .= " 신분증/";
 	if($idoc[7]==1) $incom_doc .= " 배우자등본/";
 
+	$dong_ho = explode("-", $lt->unit_dong_ho);
 	$adr1 = ($lt->cont_addr2) ? explode("|", $lt->cont_addr2) : explode("|", $lt->cont_addr1);
 	$adr2 = explode(" ", $adr1[1]);
 	$addr = $adr2[0]." ".$adr2[1];
 	$unit_dh = explode("-", $lt->unit_dong_ho);
 	$cont_edit_link = "<a href='/ns/m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=2&project=".$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>" ;
-	$new_span = ($lt->cont_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #2A41DB; color: #fff; font-size: 10px;'>&nbsp;New </span>&nbsp; " : "";
+	$new_span = ($lt->cont_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #2A41DB; color: #fff; font-size: 10px;'>&nbsp;N </span>&nbsp; " : "";
 ?>
 					<tr>
 						<td><?php echo $cont_edit_link.$lt->cont_code."</a>"; ?></td>
@@ -288,8 +304,10 @@ foreach ($cont_data as $lt) :
 						<td><?php echo $cont_edit_link.$lt->contractor."</a>"; ?></td>
 						<td><?php echo $lt->cont_tel1; ?></td>
 						<td><?php echo $new_span." ".$lt->cont_date; ?></span></td>
-						<td><div style="cursor: pointer; color: red;" data-toggle="tooltip" data-placement="left" title="<?php echo $incom_doc; ?>"><?php echo cut_string($incom_doc, 13, ".."); ?></div></td>
-						<td class="left"><div style="cursor: pointer;" data-toggle="tooltip" data-placement="left" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 23, ".."); ?></div></td>
+						<td class="right"><a href="<?php echo base_url('m1/sales/2/2')."?project=".$project."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>"><?php echo number_format($total_rec->received); ?></a></td>
+						<td><?php echo $is_paid_ok; ?></td>
+						<td><div style="cursor: pointer; color: red;" data-toggle="tooltip" data-placement="left" title="<?php echo $incom_doc; ?>"><?php echo cut_string($incom_doc, 10, ".."); ?></div></td>
+						<td class="left"><div style="cursor: pointer;" data-toggle="tooltip" data-placement="left" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 15, ".."); ?></div></td>
 						<td><?php echo $addr; ?></td>
 					</tr>
 <?php endforeach; ?>

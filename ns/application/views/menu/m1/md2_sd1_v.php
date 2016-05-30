@@ -138,7 +138,7 @@ echo form_open(base_url(uri_string()), $attributes);
 				<div class="col-xs-12 col-sm-4 col-md-2" style="height: 40px; padding: 5px;">
 					<div class="alert alert-info right" role="alert" style="padding: 6px;"><?php echo "수납 합계 : ".number_format($rec->total_amount)." 원" ?></div>
 				</div>
-				<div class="col-xs-12 col-sm-2 col-md-1 center bgf8" style="height: 40px; padding: 10px 0;">계약 기간</div>
+				<div class="col-xs-12 col-sm-2 col-md-1 center bgf8" style="height: 40px; padding: 10px 0;">수납 기간</div>
 				<div class="col-xs-12 col-sm-6 col-md-3" style="height: 40px; padding: 5px 0 0 5px;">
 					<div class="col-xs-5 col-sm-5" style="padding: 0px;">
 						<label for="s_date" class="sr-only">시작일</label>
