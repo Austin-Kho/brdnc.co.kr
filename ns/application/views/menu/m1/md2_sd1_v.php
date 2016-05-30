@@ -189,7 +189,16 @@ echo form_open(base_url(uri_string()), $attributes);
 					</tr>
 				</thead>
 				<tbody>
-<?php foreach($rec_list as $lt) :
+<?php
+$tp = $this->main_m->sql_row("SELECT type_name, type_color FROM cms_project WHERE seq='$project' ");
+$tn = explode("-", $tp->type_name);
+$tc = explode("-", $tp->type_color);
+
+for($i=0; $i<count($tn); $i++) :
+	$type_color[$tn[$i]] = $tc[$i];
+endfor;
+
+foreach($rec_list as $lt) :
 	$dong_ho = explode("-", $lt->unit_dong_ho);
 ?>
 					<tr class="center">
@@ -198,8 +207,8 @@ echo form_open(base_url(uri_string()), $attributes);
 						<td class="right"><a href="<?php echo  base_url('m1/sales/2/2').'?modi=1&project='.$project.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1].'&rec_seq='.$lt->seq; ?>"><?php echo number_format($lt->paid_amount); ?></a></td>
 						<td><?php echo $lt->paid_who; ?></td>
 						<td><?php echo $lt->acc_nick; ?></td>
-						<td><?php echo $lt->paid_date; ?></td>
-						<td><?php echo $lt->paid_date; ?></td>
+						<td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span> <?php echo $lt->unit_type; ?></td>
+						<td><?php echo $lt->unit_dong_ho; ?></td>
 					</tr>
 <?php endforeach; ?>
 				</tbody>

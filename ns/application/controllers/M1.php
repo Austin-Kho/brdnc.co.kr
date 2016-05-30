@@ -849,7 +849,7 @@ class M1 extends CI_Controller {
 
 
 				// 수납 데이터 검색 필터링
-				$rec_query = " SELECT cms_sales_received.seq, paid_amount, paid_date, paid_who, acc_nick, pay_name, unit_dong_ho ";
+				$rec_query = " SELECT cms_sales_received.seq, paid_amount, paid_date, paid_who, acc_nick, pay_name, unit_type, unit_dong_ho ";
 				$amount_qry = " SELECT SUM(paid_amount) AS total_amount FROM cms_sales_received WHERE pj_seq='$project'  ";
 				$w_qry = "";
 
