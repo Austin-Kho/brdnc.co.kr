@@ -70,19 +70,21 @@ for($i=(count($year)-1); $i>=0; $i--) :
 				</div>
 			</div>
 
-			<div class="col-xs-12 col-sm-12 col-md-4" style="padding: 8px; 0">
 <?php if($this->input->get('who_name') && empty($now_who)): ?>
+			<div class="col-xs-12 col-sm-12 col-md-4" style="padding: 8px; 0">
 				<div class="col-xs-12 center" style="padding-top: 5px;">조회 결과가 없습니다.</div>
+			</div>
 <?php elseif( !empty($now_who)) : ?>
-				<div class="col-xs-11" style="padding-top: 4px; margin: 0;">
+			<div class="col-xs-11 col-sm-11 col-md-3" style="padding: 12px 10px 6px; margin: 0;">
 <?php foreach($now_who as $lt) :
  $dong_ho = explode("-", $lt->unit_dong_ho);
  echo "<a href='".base_url('m1/sales/2/2?project='.$project.'&who_name='.$this->input->get('who_name').'&dong='.$dong_ho[0].'&ho='.$dong_ho[1])."'>".$lt->paid_who."</a>";
 ?>&nbsp;<?php endforeach; ?>
-				</div>
-				<div class="col-xs-1" style="padding: 0px; margin-top: -10;"><button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="location.href='<?php echo base_url('m1/sales/2/2?project='.$project.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1]) ?>'"><span aria-hidden="true">&times;</span></button></div>
-<?php endif; ?>
 			</div>
+			<div class="col-xs-1" style="padding: 8px;">
+				<button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="location.href='<?php echo base_url('m1/sales/2/2?project='.$project.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1]) ?>'"><span aria-hidden="true">&times;</span></button>
+			</div>
+<?php endif; ?>
 		</div>
 		<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
 			<div class="col-xs-12 font14" style="padding: 0;"><p class="bg-info" style="padding: 13px 20px; margin: 0;"><?php echo $contractor_info; ?>&nbsp;</p></div>
