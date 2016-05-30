@@ -824,7 +824,7 @@ class M1 extends CI_Controller {
 
 		// 1. 수납관리 1. 수납현황 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==1) {
-			$this->output->enable_profiler(TRUE); //프로파일러 보기//
+			// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m1_2_1', $this->session->userdata['user_id']);
 
@@ -1002,7 +1002,7 @@ class M1 extends CI_Controller {
 
 		// 1. 수납관리 3. 수납약정 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==3) {
-			// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+			$this->output->enable_profiler(TRUE); //프로파일러 보기//
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m1_2_3', $this->session->userdata['user_id']);
 
@@ -1013,11 +1013,22 @@ class M1 extends CI_Controller {
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m1_2_3'];
 
+				// 1. 분양 차수 설정
+
+				// 2. 납입 회차 설정
+
+				// 3. 층별 조건 설정
+
+				// 4. 향별 조건 설정
+
+				// 5. 조건별 분양가 설정
+
 				// 6. 회차별 납입가 설정
 				// price - 데이터 불러오기
-				$price = $data['price'] = $this->main_m->sql_result(" SELECT *, cms_sales_price.seq AS pr_seq FROM cms_sales_price, cms_sales_con_floor WHERE cms_sales_price.pj_seq='$project' AND con_floor_seq=cms_sales_con_floor.seq  ORDER BY cms_sales_price.seq ");
+				$price = $data['price'] = $this->main_m->sql_result(" SELECT *, cms_sales_price.seq AS pr_seq FROM cms_sales_price, cms_sales_con_floor WHERE cms_sales_price.pj_seq='$project' AND con_diff_seq='".$this->input->get('con_diff')."' AND con_floor_seq=cms_sales_con_floor.seq  ORDER BY cms_sales_price.seq ");
 				$pay_sche = $data['pay_sche'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' AND pay_sort='".$this->input->get('pay_sort')."' ORDER BY pay_code ");
-				$data['pr_diff'] = $this->main_m->sql_result(" SELECT diff_name, COUNT(	con_diff_seq) AS num_diff FROM cms_sales_price, cms_sales_con_diff WHERE cms_sales_price.pj_seq='$project' AND cms_sales_price.con_diff_seq=cms_sales_con_diff.seq "); // 차수
+				$data['con_diff'] = $this->main_m->sql_result(" SELECT seq, diff_no, diff_name FROM cms_sales_con_diff WHERE pj_seq='$project' ORDER BY diff_no "); // 프로젝트 등록된 전체 차수
+				$data['pr_diff'] = $this->main_m->sql_result(" SELECT 	cms_sales_con_diff.seq, diff_no, diff_name, COUNT(con_diff_seq) AS num_diff FROM cms_sales_price, cms_sales_con_diff WHERE cms_sales_price.pj_seq='$project' AND cms_sales_price.con_diff_seq=cms_sales_con_diff.seq "); // 차수
 				$data['pr_type'] = $this->main_m->sql_result(" SELECT COUNT(con_diff_seq) AS num_type FROM cms_sales_price WHERE pj_seq='$project' GROUP BY con_type_seq ");
 
 

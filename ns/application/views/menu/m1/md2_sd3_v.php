@@ -115,6 +115,18 @@
 		<input type="hidden" name="reg_sort" value="<?php echo $this->input->get('reg_sort'); ?>">
 
 		<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
+			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">차수구분 선택</div>
+			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+				<div class="col-xs-12 col-sm-10" style="padding: 0px;">
+					<label for="con_diff" class="sr-only">차수구분 선택</label>
+					<select class="form-control input-sm" name="con_diff" onchange="submit();">
+						<option value="">선 택</option>
+<?php foreach($con_diff as $lt) : ?>
+						<option value="<?php echo $lt->diff_no; ?>" <?php if($this->input->get('con_diff')==$lt->diff_no) echo "selected"; ?>><?php echo $lt->diff_name; ?></option>
+<?php endforeach; ?>
+					</select>
+				</div>
+			</div>
 			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">회차구분 선택</div>
 			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 				<div class="col-xs-12 col-sm-10" style="padding: 0px;">
@@ -131,7 +143,10 @@
 	</form>
 
 <?php
-if( !$this->input->get('pay_sort'))  : $msg = "회차구분을 선택하여 주십시요.";
+if( !$this->input->get('con_diff') OR  !$this->input->get('pay_sort'))  :
+	if( !$this->input->get('con_diff')) :  $msg = "차수구분을 선택하여 주십시요.";
+	elseif( !$this->input->get('pay_sort')) :  $msg = "회차구분을 선택하여 주십시요.";
+	endif;
 ?>
 	<div class="row font12" style="margin: 0; padding: 0;">
 		<div class="col-xs-12 center" style="padding: 180px 0;"><?php echo $msg; ?></div>
@@ -168,9 +183,7 @@ for($j=0; $j<count($pay_sche); $j++) :
 ?>
 							<td style="background-color: ; padding: 3px;">
 								<div style="color: #B00447;"><?php echo form_error("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq); ?>
-									<input type="text" name="<?php echo "pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq; ?>"
-									value="<?php if( !empty($pmt)) echo $pmt->payment; else echo set_value("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq) ?>"
-									size="15" placeholder="회차별 납부액">
+									<input type="text" name="<?php echo "pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq; ?>" value="<?php if( !empty($pmt)) echo $pmt->payment; else echo set_value("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq) ?>" size="15" placeholder="회차별 납부액">
 									<input type="hidden" name="<?php echo "pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h"; ?>" value="<?php if( !empty($pmt)) echo "1"; else "0"; ?>">
 								</div>
 							</td>
