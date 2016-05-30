@@ -136,7 +136,7 @@ foreach($app_data as $lt) :
 	$unit_dh = explode("-", $lt->unit_dong_ho);
 	$app_edit_link = ($lt->disposal_div=='0') ? "<a href='/ns/m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=1&project=".$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>" : "";
 	$app_edit = ($lt->disposal_div=='0') ? "</a>" : "";
-	$new_span = ($lt->app_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #AB0327; color: #fff; font-size: 10px;'>&nbsp;New </span>&nbsp; " : "";
+	$new_span = ($lt->app_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #AB0327; color: #fff; font-size: 10px;'>&nbsp;N </span>&nbsp; " : "";
 ?>
 					<tr>
 						<td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type] ?>;">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></span></td>
