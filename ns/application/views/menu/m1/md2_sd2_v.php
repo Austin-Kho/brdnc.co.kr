@@ -85,7 +85,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 			</div>
 		</div>
 		<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-			<div class="col-xs-12 font14" style="padding: 0;"><p class="bg-info" style="padding: 13px 50px; margin: 0;"><?php echo $contractor_info; ?>&nbsp;</p></div>
+			<div class="col-xs-12 font14" style="padding: 0;"><p class="bg-info" style="padding: 13px 20px; margin: 0;"><?php echo $contractor_info; ?>&nbsp;</p></div>
 		</div>
 	</form>
 	<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-프로젝트 선택 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
