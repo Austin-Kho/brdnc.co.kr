@@ -935,6 +935,9 @@ class M1 extends CI_Controller {
 
 				$now_dong = $this->input->get('dong');
 				$now_ho = $this->input->get('ho');
+				$now_who = $this->input->get('who_name');
+				$data['now_who'] = $this->main_m->sql_result(" SELECT paid_who, unit_dong_ho FROM cms_sales_received, cms_sales_contract WHERE cms_sales_received.pj_seq='$project' AND cont_seq=cms_sales_contract.seq AND paid_who='$now_who' GROUP BY cont_seq ");
+
 				$data['dong_list'] = $this->main_m->sql_result(" SELECT dong FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND is_contract='1' GROUP BY dong ORDER BY dong "); // 동 리스트
 				$data['ho_list'] = $this->main_m->sql_result(" SELECT ho FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$now_dong' AND is_contract='1' GROUP BY ho ORDER BY ho "); // 호 리스트
 				$unit = $data['unit'] = $this->main_m->sql_row(" SELECT * FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$now_dong' AND ho='$now_ho' AND is_contract='1' ");  // 선택한 동호수 유닛

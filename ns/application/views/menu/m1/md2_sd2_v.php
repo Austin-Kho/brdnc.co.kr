@@ -32,7 +32,16 @@ for($i=(count($year)-1); $i>=0; $i--) :
 					</select>
 				</div>
 			</div>
-
+			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">입금자 성명</div>
+			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+				<div class="col-xs-8" style="padding: 0px;">
+					<label for="who_name" class="sr-only">입금자 성명</label>
+					<input type="text" name="who_name" value="<?php if($this->input->get('who_name')) echo $this->input->get("who_name"); ?>" class="form-control input-sm">
+				</div>
+				<div class="col-xs-4">
+					<input type="button" class="btn btn-primary btn-sm" onclick="submit();" value="검 색">
+				</div>
+			</div>
 		</div>
 		<div class="row bo-bottom font12" style="margin: 0 0 20px;">
 			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">동 선택 <span class="red">*</span></div>
@@ -53,12 +62,26 @@ for($i=(count($year)-1); $i>=0; $i--) :
 				<div class="col-xs-12" style="padding: 0px;">
 					<label for="ho" class="sr-only">호수</label>
 					<select class="form-control input-sm" name="ho" onchange="submit();" <?php if( !$this->input->get('dong')) echo "disabled"; ?>>
-						<option value=""> 선 택</option>
+						<option value="">선 택</option>
 <?php foreach($ho_list as $lt) : ?>
 						<option value="<?php echo $lt->ho; ?>" <?php if($lt->ho==$this->input->get('ho')) echo "selected"; ?>><?php echo $lt->ho." 호"; ?></option>
 <?php endforeach; ?>
 					</select>
 				</div>
+			</div>
+
+			<div class="col-xs-12 col-sm-12 col-md-4" style="padding: 8px; 0">
+<?php if($this->input->get('who_name') && empty($now_who)): ?>
+				<div class="col-xs-12 center" style="padding-top: 5px;">조회 결과가 없습니다.</div>
+<?php elseif( !empty($now_who)) : ?>
+				<div class="col-xs-11" style="padding-top: 4px; margin: 0;">
+<?php foreach($now_who as $lt) :
+ $dong_ho = explode("-", $lt->unit_dong_ho);
+ echo "<a href='".base_url('m1/sales/2/2?project='.$project.'&who_name='.$this->input->get('who_name').'&dong='.$dong_ho[0].'&ho='.$dong_ho[1])."'>".$lt->paid_who."</a>";
+?>&nbsp;<?php endforeach; ?>
+				</div>
+				<div class="col-xs-1" style="padding: 0px; margin-top: -10;"><button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="location.href='<?php echo base_url('m1/sales/2/2?project='.$project.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1]) ?>'"><span aria-hidden="true">&times;</span></button></div>
+<?php endif; ?>
 			</div>
 		</div>
 		<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
