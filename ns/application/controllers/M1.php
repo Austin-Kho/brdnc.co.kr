@@ -849,7 +849,7 @@ class M1 extends CI_Controller {
 
 
 				// 수납 데이터 검색 필터링
-				$rec_query = " SELECT cms_sales_received.seq, paid_amount, paid_date, paid_who, acc_nick, pay_name, unit_type, unit_dong_ho ";
+				$rec_query = " SELECT cms_sales_received.seq, cont_seq, paid_amount, paid_date, paid_who, acc_nick, pay_name, unit_type, unit_dong_ho ";
 				$amount_qry = " SELECT SUM(paid_amount) AS total_amount FROM cms_sales_received WHERE pj_seq='$project'  ";
 				$w_qry = "";
 
@@ -935,8 +935,8 @@ class M1 extends CI_Controller {
 
 				$now_dong = $this->input->get('dong');
 				$now_ho = $this->input->get('ho');
-				$now_who = $this->input->get('who_name');
-				$data['now_who'] = $this->main_m->sql_result(" SELECT paid_who, unit_dong_ho FROM cms_sales_received, cms_sales_contract WHERE cms_sales_received.pj_seq='$project' AND cont_seq=cms_sales_contract.seq AND paid_who='$now_who' GROUP BY cont_seq ");
+				$now_payer = $this->input->get('payer');
+				$data['now_payer'] = $this->main_m->sql_result(" SELECT paid_who, unit_dong_ho FROM cms_sales_received, cms_sales_contract WHERE cms_sales_received.pj_seq='$project' AND cont_seq=cms_sales_contract.seq AND paid_who='$now_payer' GROUP BY cont_seq ");
 
 				$data['dong_list'] = $this->main_m->sql_result(" SELECT dong FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND is_contract='1' GROUP BY dong ORDER BY dong "); // 동 리스트
 				$data['ho_list'] = $this->main_m->sql_result(" SELECT ho FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$now_dong' AND is_contract='1' GROUP BY ho ORDER BY ho "); // 호 리스트

@@ -81,7 +81,7 @@
 	<div class="col-xs-12" style="padding: 0;">
 		<div class="col-xs-12 col-sm-6">
 			<div class="panel panel-success">
-				<div class="panel-heading"><h3 class="panel-title">동춘1구역 청약 · 계약 현황</h3></div>
+				<div class="panel-heading"><h3 class="panel-title"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> 동춘1구역 청약 · 계약 현황</h3></div>
 				<div class="panel-body">
 					<div class="col-xs-5" style="padding: 0;">신규 청약 건 (최근 7일) : </div>
 					<div class="col-xs-3 right" style="padding: 0; color: #3404D6;"><?php echo number_format($app_7day->num)." 건" ?></div>
@@ -106,7 +106,7 @@
 		</div>
 		<div class="col-xs-12 col-sm-6">
 			<div class="panel panel-default">
-				<div class="panel-heading"><h3 class="panel-title">동춘1분담금 총 납부현황</h3></div>
+				<div class="panel-heading"><h3 class="panel-title"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> 동춘1분담금 총 납부현황</h3></div>
 				<div class="panel-body">
 					<div class="col-xs-6" style="padding: 0;">조합 분담금 : </div>
 					<div class="col-xs-6 right" style="padding: 0;"><?php echo number_format($receive->receive)." 원"; ?></div>
@@ -129,7 +129,7 @@
 	<div class="col-xs-12" style="padding: 0;">
 		<div class="col-xs-12 col-sm-6">
 			<div class="panel panel-default">
-				<div class="panel-heading"><h3 class="panel-title">동춘1 계좌 별 납부현황 [1]</h3></div>
+				<div class="panel-heading"><h3 class="panel-title"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> 동춘1 계좌 별 납부현황 [1]</h3></div>
 				<div class="panel-body">
 					<div class="col-xs-6" style="padding: 0;">신탁계좌[신청금] : </div>
 					<div class="col-xs-6 right" style="padding: 0;"><?php echo number_format($rec[1]->rec)." 원"; ?></div>
@@ -154,7 +154,7 @@
 		</div>
 		<div class="col-xs-12 col-sm-6">
 			<div class="panel panel-warning">
-				<div class="panel-heading"><h3 class="panel-title">동춘1 계좌 별 납부현황 [2]</h3></div>
+				<div class="panel-heading"><h3 class="panel-title"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> 동춘1 계좌 별 납부현황 [2]</h3></div>
 				<div class="panel-body">
 					<div class="col-xs-6" style="padding: 0;">바램계좌[외환] : </div>
 					<div class="col-xs-6 right" style="padding: 0;"><?php echo number_format($rec[4]->rec)." 원"; ?></div>
@@ -179,11 +179,21 @@
 		</div>
 	</div>
 
-
-
-
-
 	<div class="col-xs-12" style="padding: 0;">
+		<div class="col-xs-12 col-sm-12">
+			<div class="panel panel-default">
+				<div class="panel-heading"><h3 class="panel-title"><span class="glyphicon glyphicon-headphones" aria-hidden="true"></span> 사 내 공 지</h3></div>
+<?php foreach($current_rec1 as $lt) :  ?>
+				<div class="panel-body">
+					<div class="col-xs-8" style="padding: 0;">게시물이 없습니다.</div>
+					<div class="col-xs-4" style="padding: 0;"></div>
+				</div>
+<?php endforeach; ?>
+			</div>
+		</div>
+	</div>
+
+	<!-- <div class="col-xs-12" style="padding: 0;">
 		<div class="col-xs-12 col-sm-6">
 			<div class="panel panel-info">
 				<div class="panel-heading"><h3 class="panel-title">동춘1 최근 입금 거래 현황 [1]</h3></div>
@@ -208,5 +218,5 @@
 <?php endforeach; ?>
 			</div>
 		</div>
-	</div>
+	</div> -->
 </div>

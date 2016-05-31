@@ -35,8 +35,8 @@ for($i=(count($year)-1); $i>=0; $i--) :
 			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">입금자 성명</div>
 			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 				<div class="col-xs-8" style="padding: 0px;">
-					<label for="who_name" class="sr-only">입금자 성명</label>
-					<input type="text" name="who_name" value="<?php if($this->input->get('who_name')) echo $this->input->get("who_name"); ?>" class="form-control input-sm">
+					<label for="payer" class="sr-only">입금자 성명</label>
+					<input type="text" name="payer" value="<?php if($this->input->get('payer')) echo $this->input->get("payer"); ?>" class="form-control input-sm">
 				</div>
 				<div class="col-xs-4">
 					<input type="button" class="btn btn-primary btn-sm" onclick="submit();" value="검 색">
@@ -70,15 +70,15 @@ for($i=(count($year)-1); $i>=0; $i--) :
 				</div>
 			</div>
 
-<?php if($this->input->get('who_name') && empty($now_who)): ?>
+<?php if($this->input->get('payer') && empty($now_payer)): ?>
 			<div class="col-xs-12 col-sm-12 col-md-4" style="padding: 8px; 0">
 				<div class="col-xs-12 center" style="padding-top: 5px;">조회 결과가 없습니다.</div>
 			</div>
-<?php elseif( !empty($now_who)) : ?>
+<?php elseif( !empty($now_payer)) : ?>
 			<div class="col-xs-11 col-sm-11 col-md-3" style="padding: 12px 10px 6px; margin: 0;">
-<?php foreach($now_who as $lt) :
+<?php foreach($now_payer as $lt) :
  $dong_ho = explode("-", $lt->unit_dong_ho);
- echo "<a href='".base_url('m1/sales/2/2?project='.$project.'&who_name='.$this->input->get('who_name').'&dong='.$dong_ho[0].'&ho='.$dong_ho[1])."'>".$lt->paid_who."</a>";
+ echo "<a href='".base_url('m1/sales/2/2?project='.$project.'&payer='.$this->input->get('payer').'&dong='.$dong_ho[0].'&ho='.$dong_ho[1])."'>".$lt->paid_who."</a>";
 ?>&nbsp;<?php endforeach; ?>
 			</div>
 			<div class="col-xs-1" style="padding: 8px;">
