@@ -90,7 +90,7 @@
 				<div class="panel-body">
 					<div class="col-xs-5" style="padding: 0;">신규 계약 건 (최근 7일) : </div>
 					<div class="col-xs-3 right" style="padding: 0; color: #3404D6;"><?php echo number_format($cont_7day->num)." 건" ?></div>
-					<div class="col-xs-4 right " style="padding: 0;"><a href="/ns/m1/sales/1/2?cont_sort2=2">계약 관리페이지 →</a></div>
+					<div class="col-xs-4 right " style="padding: 0;"><a href="/ns/m1/sales/1/2?cont_sort2=2">계약 등록 →</a></div>
 				</div>
 				<div class="panel-body">
 					<div class="col-xs-5" style="padding: 0;">전체 청약 건 : </div>
@@ -100,7 +100,7 @@
 				<div class="panel-body">
 					<div class="col-xs-5" style="padding: 0;">전체 계약 건 : </div>
 					<div class="col-xs-3 right" style="padding: 0;"><?php echo number_format($cont_num->num)." 건" ?></div>
-					<div class="col-xs-4 right " style="padding: 0;"><a href="/ns/m1">계약 리스트로 →</a></div>
+					<div class="col-xs-4 right " style="padding: 0;"><a href="/ns/m1">계약 현황 →</a></div>
 				</div>
 			</div>
 		</div>
@@ -121,14 +121,14 @@
 				</div>
 				<div class="panel-body">
 					<div class="col-xs-6" style="padding: 0;"></div>
-					<div class="col-xs-6 right" style="padding: 0;"><a href="/ns/m1/sales/2/1">수납관리 바로가기</a></div>
+					<div class="col-xs-6 right" style="padding: 0;"><a href="/ns/m1/sales/2/1">수납현황 바로가기</a></div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="col-xs-12" style="padding: 0;">
 		<div class="col-xs-12 col-sm-6">
-			<div class="panel panel-default">
+			<div class="panel panel-info">
 				<div class="panel-heading"><h3 class="panel-title"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> 동춘1 계좌 별 납부현황 [1]</h3></div>
 				<div class="panel-body">
 					<div class="col-xs-6" style="padding: 0;">신탁계좌[신청금] : </div>
@@ -148,7 +148,7 @@
 				</div>
 				<div class="panel-body">
 					<div class="col-xs-6" style="padding: 0;"></div>
-					<div class="col-xs-6 right" style="padding: 0;"><a href="/ns/m1/sales/2/1">수납관리 바로가기</a></div>
+					<div class="col-xs-6 right" style="padding: 0;"><a href="/ns/m1/sales/2/2">수납등록 바로가기</a></div>
 				</div>
 			</div>
 		</div>
