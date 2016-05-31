@@ -79,8 +79,33 @@
 <!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-조건별 제목 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
 
 <?php if( !$this->input->get('reg_sort') OR $this->input->get('reg_sort')==='1') : //1. 분양 차수 설정?>
-	<div class="row font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14"  style="padding-bottom: 440px;">1. 분양 차수 설정</div>
+	<div class="row font12" style="margin: 0 0 300px;">
+		<div class="col-xs-12 col-sm-12 col-md-8 table-responsive"  style="padding: 0;">
+			<table class="table table-hover">
+				<thead>
+					<tr class="bo-top active">
+						<td>등록차수</td>
+						<td>차수명</td>
+						<td>등록일</td>
+						<td>등록자</td>
+						<td>수정</td>
+						<td>삭제</td>
+					</tr>
+				</thead>
+				<tbody class="bo-bottom">
+<?php foreach($con_diff as $lt) :  ?>
+					<tr>
+						<td><?php echo $lt->diff_no; ?></td>
+						<td><?php echo $lt->diff_name; ?></td>
+						<td><?php echo $lt->reg_date; ?></td>
+						<td><?php echo $lt->reg_worker; ?></td>
+						<td>수정</td>
+						<td>삭제</td>
+					</tr>
+<?php endforeach; ?>
+				</tbody>
+			</table>
+		</div>
 	</div>
 <!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-1. 분양 차수 설정 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
 

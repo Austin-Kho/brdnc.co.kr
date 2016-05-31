@@ -1017,6 +1017,7 @@ class M1 extends CI_Controller {
 				$data['auth'] = $auth['_m1_2_3'];
 
 				// 1. 분양 차수 설정
+				$data['con_diff'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_con_diff WHERE pj_seq='$project' ORDER BY diff_no "); // 프로젝트 등록된 전체 차수
 
 				// 2. 납입 회차 설정
 
@@ -1030,7 +1031,7 @@ class M1 extends CI_Controller {
 				// price - 데이터 불러오기
 				$price = $data['price'] = $this->main_m->sql_result(" SELECT *, cms_sales_price.seq AS pr_seq FROM cms_sales_price, cms_sales_con_floor WHERE cms_sales_price.pj_seq='$project' AND con_diff_seq='".$this->input->get('con_diff')."' AND con_floor_seq=cms_sales_con_floor.seq  ORDER BY cms_sales_price.seq ");
 				$pay_sche = $data['pay_sche'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' AND pay_sort='".$this->input->get('pay_sort')."' ORDER BY pay_code ");
-				$data['con_diff'] = $this->main_m->sql_result(" SELECT seq, diff_no, diff_name FROM cms_sales_con_diff WHERE pj_seq='$project' ORDER BY diff_no "); // 프로젝트 등록된 전체 차수
+
 				$data['pr_diff'] = $this->main_m->sql_result(" SELECT 	cms_sales_con_diff.seq, diff_no, diff_name, COUNT(con_diff_seq) AS num_diff FROM cms_sales_price, cms_sales_con_diff WHERE cms_sales_price.pj_seq='$project' AND cms_sales_price.con_diff_seq=cms_sales_con_diff.seq "); // 차수
 				$data['pr_type'] = $this->main_m->sql_result(" SELECT COUNT(con_diff_seq) AS num_type FROM cms_sales_price WHERE pj_seq='$project' GROUP BY con_type_seq ");
 
