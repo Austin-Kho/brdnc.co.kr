@@ -150,14 +150,14 @@
 <?php $received_7 = ( !empty($received['7'])) ? $received['7']->seq : ""; // 계약금 폼7 입력 데이터?>
 			<input type="hidden" name="received7" value="<?php echo $received_7; ?>">
 
-
+<?php if( !empty($is_reg['app_data'])) $dong_ho = explode("-", $is_reg['app_data']->unit_dong_ho); ?>
 
 <!--==================================동호 선택 후 계약 상황판 S======================================-->
 <?php if($this->input->get('cont_sort2')=="1" && !empty($is_reg['app_data'])) : // 청약 등록 호수인 경우 ?>
 			<div class="row bo-top font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">처리 구분 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
-					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" onclick="app_tr_cont(this);">계약전환</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" onclick="if(this.checked===true) location.href='<?php echo base_url('m1/sales/1/2')."?mode=2&cont_sort1=1&cont_sort2=2&project=".$project."&type=".$is_reg['app_data']->unit_type."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>';">계약전환</label></div>
 				</div>
 			</div>
 <?php endif; ?>
@@ -318,7 +318,7 @@
 					</div>
 				</div>
 			</div>
-<?php if( !($this->input->get('cont_sort2')=='2' && empty($is_app_cont))): // 계약등록 시 청약 데이터가 없는 신규 등록인 경우만 제외하고 ->?>
+<?php if( !($this->input->get('cont_sort2')=='2' && empty($is_app_cont) && empty($is_reg['app_data']))): // 계약등록 시 청약 데이터가 없는 신규 등록인 경우만 제외하고 ->?>
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">청약금 <span class="red">*</span>
 					<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div>
@@ -333,7 +333,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="app_in_date" class="sr-only">입금일</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="app_in_date" id="app_in_date" class="form-control input-sm" value="<?php if( !empty($is_reg['app_data'])) echo $is_reg['app_data']->app_in_date; elseif ( !empty($is_app_cont)) echo $is_app_cont->app_in_date; else echo set_value('app_in_date'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="app_in_date" id="app_in_date" class="form-control input-sm en_only" value="<?php if( !empty($is_reg['app_data'])) echo $is_reg['app_data']->app_in_date; elseif ( !empty($is_app_cont)) echo $is_app_cont->app_in_date; else echo set_value('app_in_date'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
 							<a href="javascript:" onclick="cal_add(document.getElementById('app_in_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
