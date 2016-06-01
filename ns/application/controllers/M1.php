@@ -61,7 +61,7 @@ class M1 extends CI_Controller {
 
 		// 계약현황 1. 계약현황 ////////////////////////////////////////////////////////////////////
 		if($mdi==1 && $sdi==1 ){
-			// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+			$this->output->enable_profiler(TRUE); //프로파일러 보기//
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m1_1_1', $this->session->userdata['user_id']);
 
@@ -212,8 +212,9 @@ class M1 extends CI_Controller {
 
 					// 청약 또는 계약 유닛인지 확인
 					if($unit_seq->is_application=='1') { // 청약 물건이면
-						$app_data = $data['is_reg']['app_data'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_application WHERE unit_seq='$unit_seq->seq' AND disposal_div='0' "); // 청약 데이터
+						$app_data = $data['is_reg']['app_data'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_application WHERE unit_seq='$unit_seq->seq' "); // 청약 데이터
 					}else if($unit_seq->is_contract=='1'){ // 계약 물건이면
+						$data['is_app_cont'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_application WHERE pj_seq='$project' AND unit_seq='$unit_seq->seq' AND disposal_div='1' "); // 청약->계약전환 물건인지 확인
 						$cont_where = " WHERE unit_seq='$unit_seq->seq' AND is_transfer='0' AND is_rescission='0' AND cms_sales_contract.seq=cont_seq  ";
 						$cont_query = "  SELECT *, cms_sales_contractor.seq AS contractor_seq  FROM cms_sales_contract, cms_sales_contractor ".$cont_where;
 						$cont_data = $data['is_reg']['cont_data'] = $this->main_m->sql_row($cont_query); // 계약 및 계약자 데이터
@@ -735,8 +736,6 @@ class M1 extends CI_Controller {
 							);
 							$result[0] = $this->main_m->update_data('cms_sales_application', $cancel_data, array('pj_seq'=>$pj, 'unit_seq'=>$un)); // 해지처리
 							if( !$result[0]) alert('데이터베이스 에러입니다.', '');
-							$result[1] = $this->main_m->update_data('cms_project_all_housing_unit', array('is_application'=>'0', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('name')), array('seq'=>$un));
-							if( !$result[1])  alert('데이터베이스 에러입니다.', '');
 							$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
 							alert('정상처리 되었습니다.', $ret_url);
 						}
@@ -750,6 +749,8 @@ class M1 extends CI_Controller {
 							);
 							$result[0] = $this->main_m->update_data('cms_sales_application', $cancel_data, array('pj_seq'=>$pj, 'unit_seq'=>$un)); // 해지 환불 처리
 							if( !$result[0]) alert('데이터베이스 에러입니다.', '');
+							$result[1] = $this->main_m->update_data('cms_project_all_housing_unit', array('is_application'=>'0', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('name')), array('seq'=>$un));
+							if( !$result[1])  alert('데이터베이스 에러입니다.', '');
 							$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
 							alert('정상처리 되었습니다.', $ret_url);
 						}

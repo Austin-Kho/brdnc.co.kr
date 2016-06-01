@@ -471,6 +471,16 @@ function dong_ho_put(){
 /********************계약등록 종료*******************/
 
 /********************수납등록 시작 ******************/
+
+// 동선택 시 동작 합수
+function dong_seq(){
+	var form = document.form1;
+	if(form.ho.value){
+		form.ho.value = "";
+	}
+	form.submit();
+}
+
 // 수납 등록 폼 체크 함수
 function receive_chk(){
 	var form1 = document.form1;

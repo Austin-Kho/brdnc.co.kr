@@ -165,7 +165,7 @@
 			<div class="row bo-top font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">처리 구분 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
-					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 0 4px 10px;"><label><input type="checkbox" name="is_cancel" value="1">해지신청</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 0 4px 10px;"><label><input type="checkbox" name="is_cancel" value="1" <?php if($is_reg['app_data']->disposal_div=='2') echo "checked"; ?>>해지신청</label></div>
 					<div class="col-xs-6 col-sm-4 col-md-3 checkbox" style="margin: 0; padding: 4px 0 4px 10px;"><label><input type="checkbox" name="is_refund" value="1">환불완료</label></div>
 				</div>
 			</div>
@@ -318,7 +318,7 @@
 					</div>
 				</div>
 			</div>
-<?php if( !($this->input->get('cont_sort2')=='2' && empty($is_reg['app_data']))): // 계약등록 시 청약 데이터가 없는 신규 등록인 경우만 제외하고 ->?>
+<?php if( !($this->input->get('cont_sort2')=='2' && empty($is_app_cont))): // 계약등록 시 청약 데이터가 없는 신규 등록인 경우만 제외하고 ->?>
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">청약금 <span class="red">*</span>
 					<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div>
@@ -333,7 +333,7 @@
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="app_in_date" class="sr-only">입금일</label>
 						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="app_in_date" id="app_in_date" class="form-control input-sm" value="<?php if( !empty($is_reg['app_data'])) echo $is_reg['app_data']->app_in_date; else echo set_value('app_in_date'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+							<input type="text" name="app_in_date" id="app_in_date" class="form-control input-sm" value="<?php if( !empty($is_reg['app_data'])) echo $is_reg['app_data']->app_in_date; elseif ( !empty($is_app_cont)) echo $is_app_cont->app_in_date; else echo set_value('app_in_date'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true"  readonly>
 						</div>
 						<div class="col-xs-2" style="padding: 8px 8px 5px;">
 							<a href="javascript:" onclick="cal_add(document.getElementById('app_in_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
@@ -360,7 +360,7 @@
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0;">
 						<label for="app_in_who" class="sr-only">입금자</label>
-						<input type="text" class="form-control input-sm" name="app_in_who" placeholder="입금자" value="<?php if( !empty($is_reg['app_data']) && $is_reg['app_data']->app_in_who!="") echo $is_reg['app_data']->app_in_who; else echo set_value('app_in_who'); ?>" <?php echo $disabled; if($this->input->get('cont_sort2')==2 OR $this->input->get('cont_sort2')==4) echo "readonly"; ?>>
+						<input type="text" class="form-control input-sm" name="app_in_who" placeholder="입금자" value="<?php if( !empty($is_reg['app_data'])) echo $is_reg['app_data']->app_in_who; elseif ( !empty($is_app_cont)) echo $is_app_cont->app_in_who; else echo set_value('app_in_who'); ?>" <?php echo $disabled; if($this->input->get('cont_sort2')==2 OR $this->input->get('cont_sort2')==4) echo "readonly"; ?>>
 					</div>
 				</div>
 <?php if($this->input->get('cont_sort2')==='2') : ?>

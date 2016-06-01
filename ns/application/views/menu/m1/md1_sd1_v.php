@@ -134,8 +134,12 @@ foreach($app_data as $lt) :
 		default: $condi = "<font color='#05980F'>정상청약</font>"; break;
 	endswitch;
 	$unit_dh = explode("-", $lt->unit_dong_ho);
-	$app_edit_link = ($lt->disposal_div=='0') ? "<a href='/ns/m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=1&project=".$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>" : "";
-	$app_edit = ($lt->disposal_div=='0') ? "</a>" : "";
+	switch ($lt->disposal_div) {
+		case '0': $app_edit_link = "<a href='/ns/m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=1&project=".$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>"; break;
+		case '2': $app_edit_link = "<a href='/ns/m1/sales/1/2?mode=2&cont_sort1=2&cont_sort3=3&project=".$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>"; break;
+		default: $app_edit_link = ""; break;
+	}
+	$app_edit = ($lt->disposal_div=='0' OR $lt->disposal_div=='2') ? "</a>" : "";
 	$new_span = ($lt->app_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #AB0327; color: #fff; font-size: 10px;'>&nbsp;N </span>&nbsp; " : "";
 ?>
 					<tr>

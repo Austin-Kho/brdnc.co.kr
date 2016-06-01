@@ -48,7 +48,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 				<div class="col-xs-12" style="padding: 0px;">
 					<label for="dong" class="sr-only">동</label>
-					<select class="form-control input-sm" name="dong" onchange="submit();">
+					<select class="form-control input-sm" name="dong" onchange="dong_seq();">
 						<option value=""> 선 택</option>
 <?php foreach($dong_list as $lt) : ?>
 						<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->get('dong')) echo "selected"; ?>><?php echo $lt->dong." 동"; ?></option>
@@ -61,7 +61,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 				<div class="col-xs-12" style="padding: 0px;">
 					<label for="ho" class="sr-only">호수</label>
-					<select class="form-control input-sm" name="ho" onchange="submit();" <?php if( !$this->input->get('dong')) echo "disabled"; ?>>
+					<select class="form-control input-sm" name="ho" id="ho" onchange="submit();" <?php if( !$this->input->get('dong')) echo "disabled"; ?>>
 						<option value="">선 택</option>
 <?php foreach($ho_list as $lt) : ?>
 						<option value="<?php echo $lt->ho; ?>" <?php if($lt->ho==$this->input->get('ho')) echo "selected"; ?>><?php echo $lt->ho." 호"; ?></option>
