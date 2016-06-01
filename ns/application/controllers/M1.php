@@ -736,7 +736,7 @@ class M1 extends CI_Controller {
 							$result[0] = $this->main_m->update_data('cms_sales_application', $cancel_data, array('pj_seq'=>$pj, 'unit_seq'=>$un)); // 해지처리
 							if( !$result[0]) alert('데이터베이스 에러입니다.', '');
 							$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
-							alert('정상처리 되었습니다.', $ret_url);
+							alert('청약 해지가 정상처리 되었습니다.', $ret_url);
 						}
 						if($this->input->post('is_refund')==1) {
 							$cancel_data = array(
@@ -751,20 +751,18 @@ class M1 extends CI_Controller {
 							$result[1] = $this->main_m->update_data('cms_project_all_housing_unit', array('is_application'=>'0', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('name')), array('seq'=>$un));
 							if( !$result[1])  alert('데이터베이스 에러입니다.', '');
 							$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
-							alert('정상처리 되었습니다.', $ret_url);
+							alert('해지 환불이 정상처리 되었습니다.', $ret_url);
 						}
-						// 1. 청약 관리 테이블 해지 업데이트
-						// 2. 동호수 관리 테이블 해지 상태 업데이트
 
 					}else if($this->input->post('cont_sort3')=='4'){ // 계약 해지일 때
 						if($this->input->post('is_cancel')==3) {
 							$cancel_data = array(
-								'is_rescission'=>'1',
+								'is_rescission'=>'1', // 해지 처리
 								'rescission_date'=>$this->input->post('conclu_date'),
 								'last_modi_date'=>date('Y-m-d'),
 								'last_modi_worker'=>$this->session->userdata('name')
 							);
-							$result[0] = $this->main_m->update_data('cms_sales_contract', $cancel_data, array('seq'=>$cont_seq->seq)); // 해지처리
+							$result[0] = $this->main_m->update_data('cms_sales_contract', $cancel_data, array('seq'=>$cont_seq->seq)); // 해지 처리
 							if( !$result[0]) alert('데이터베이스 에러입니다.', '');
 							$cancel_data2 = array(
 								'is_transfer'=>'2', // 1.매도, 2. 해약
@@ -772,14 +770,14 @@ class M1 extends CI_Controller {
 								'last_modi_date'=>date('Y-m-d'),
 								'last_modi_worker'=>$this->session->userdata('name')
 							);
-							$result[1] = $this->main_m->update_data('cms_sales_contractor', $cancel_data2, array('cont_seq'=>$cont_seq->seq)); // 해지처리
+							$result[1] = $this->main_m->update_data('cms_sales_contractor', $cancel_data2, array('cont_seq'=>$cont_seq->seq)); // 해지 처리
 							if( !$result[1]) alert('데이터베이스 에러입니다.', '');
 							$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
-							alert('정상처리 되었습니다.', $ret_url);
+							alert('계약 해지가 정상처리 되었습니다.', $ret_url);
 						}
-						if($this->input->post('is_refund')==4) {
+						if($this->input->post('is_refund')==4) { // 계약 해지 환불일 때
 							$cancel_data = array(
-								'is_rescission'=>'2',
+								'is_rescission'=>'2', // 환불 처리
 								'rescission_date'=>$this->input->post('conclu_date'),
 								'last_modi_date'=>date('Y-m-d'),
 								'last_modi_worker'=>$this->session->userdata('name')
@@ -791,11 +789,8 @@ class M1 extends CI_Controller {
 							$result[2] = $this->main_m->update_data('cms_project_all_housing_unit', array('is_contract'=>'0', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('name')), array('seq'=>$un));
 							if( !$result[2])  alert('데이터베이스 에러입니다.', '');
 							$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
-							alert('정상처리 되었습니다.', $ret_url);
+							alert('해약 환불이 정상처리 되었습니다.', $ret_url);
 						}
-						// 1. 계약 및 계약자 관리 테이블 해지 업데이트
-						// 2. 동호수 관리 테이블 해지 상태 업데이트
-
 					}
 				}
 			}
