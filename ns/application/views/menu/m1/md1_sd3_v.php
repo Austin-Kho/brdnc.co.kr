@@ -98,8 +98,16 @@
 					$now_type = ($db_ho !==null) ? $db_ho->type : ''; // 해당 타입
 					if($db_ho !==null) : // 세대 상태
 						if($db_ho->is_hold==1) : $condi = "hold";
-						elseif($db_ho->is_application==1) : $app_data = $this->main_m->sql_row(" SELECT  applicant, app_date FROM cms_sales_application WHERE unit_seq='$db_ho->seq' "); $condi = $app_data->applicant;
-						elseif($db_ho->is_contract==1) :  $cont_data = $this->main_m->sql_row(" SELECT  contractor, cms_sales_contract.cont_date FROM cms_sales_contract, cms_sales_contractor WHERE unit_seq='$db_ho->seq' AND cms_sales_contract.seq=cont_seq "); $condi = $cont_data->contractor;
+						elseif($db_ho->is_application==1) :
+							$app_data = $this->main_m->sql_row(" SELECT  applicant, app_date, unit_type, unit_dong_ho FROM cms_sales_application WHERE unit_seq='$db_ho->seq' ");
+							$dong_ho = explode("-", $app_data->unit_dong_ho);
+							$condi = $app_data->applicant;
+							//$condi = '<span onclick="location.href='.base_url('m1/sales/1/2').'?mode=2&cont_sort1=1&cont_sort2=1&project='.$project.'&type='.$app_data->unit_type.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1].'">'.$app_data->applicant.'</span>';
+						elseif($db_ho->is_contract==1) :
+							$cont_data = $this->main_m->sql_row(" SELECT  contractor, cms_sales_contract.cont_date, unit_type, unit_dong_ho FROM cms_sales_contract, cms_sales_contractor WHERE unit_seq='$db_ho->seq' AND cms_sales_contract.seq=cont_seq ");
+							$dong_ho = explode("-", $cont_data->unit_dong_ho);
+							$condi = $cont_data->contractor;
+							// $condi = "<a href='".base_url('m1/sales/1/2')."?mode=2&cont_sort1=1&cont_sort2=2&project=".$project."&type=".$cont_data->unit_type."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]."'>".$cont_data->contractor."</a>";
 						else : $condi = "";
 						endif;
 					else:
@@ -128,8 +136,8 @@
 					endif;
 					if($db_ho !==null) : // 상태 색상 지정
 						if($db_ho->is_hold==1) : $condi_col = "background-color: #728a7d;";
-						elseif($db_ho->is_application==1) : $condi_col = "background-color: #0f9c02;"; // 청약 시
-						elseif($db_ho->is_contract==1) : $condi_col = "background-color: #3E5796;"; // 계약 시
+						elseif($db_ho->is_application==1) : $condi_col = "background-color: #649161;"; // 청약 시
+						elseif($db_ho->is_contract==1) : $condi_col = "background-color: #666098;"; // 계약 시
 						else : $condi_col = "";
 						endif;
 					else:
@@ -145,7 +153,7 @@
 										<div style="width:30px; height:14px; text-align:center; font-size:9px; color:#333; padding: 1px 0; <?php echo $div_col; ?>">
 											<span><?php echo $now_ho; ?></span>
 										</div>
-										<div style="width:30px; height:14px; text-align:center; font-size:9px; color: #fff; <?php echo $condi_col; ?>"><span  data-toggle="tooltip" title="<?php //echo $tooltip; ?>"><?php echo $condi;?></span></div>
+										<div style="width:30px; height:14px; text-align:center; font-size:9px; color: #FFF; <?php echo $condi_col; ?>" data-toggle="tooltip" title="<?php //echo $tooltip; ?>"><?php echo $condi;?></div>
 									</div>
 <?php endfor;  endfor; ?>
 								</td>
