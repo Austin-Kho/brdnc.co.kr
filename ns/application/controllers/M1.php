@@ -727,7 +727,6 @@ class M1 extends CI_Controller {
 
 					}else if($this->input->post('cont_sort3')=='3'){ // 청약 해지일 때
 						if($this->input->post('is_cancel')==1) {
-							// $app_data = $this->main_m->sql_row(" SELECT * FROM cms_sales_application WHERE pj_seq'$project  AND unit_seq='$un'");
 							$cancel_data = array(
 								'disposal_div'=>'2',
 								'disposal_date'=>$this->input->post('conclu_date'),
@@ -759,10 +758,40 @@ class M1 extends CI_Controller {
 
 					}else if($this->input->post('cont_sort3')=='4'){ // 계약 해지일 때
 						if($this->input->post('is_cancel')==3) {
-							$msg = "계약해지";
+							$cancel_data = array(
+								'is_rescission'=>'1',
+								'rescission_date'=>$this->input->post('conclu_date'),
+								'last_modi_date'=>date('Y-m-d'),
+								'last_modi_worker'=>$this->session->userdata('name')
+							);
+							$result[0] = $this->main_m->update_data('cms_sales_contract', $cancel_data, array('seq'=>$cont_seq->seq)); // 해지처리
+							if( !$result[0]) alert('데이터베이스 에러입니다.', '');
+							$cancel_data2 = array(
+								'is_transfer'=>'2', // 1.매도, 2. 해약
+								'transfer_date'=>$this->input->post('conclu_date'),
+								'last_modi_date'=>date('Y-m-d'),
+								'last_modi_worker'=>$this->session->userdata('name')
+							);
+							$result[1] = $this->main_m->update_data('cms_sales_contractor', $cancel_data2, array('cont_seq'=>$cont_seq->seq)); // 해지처리
+							if( !$result[1]) alert('데이터베이스 에러입니다.', '');
+							$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
+							alert('정상처리 되었습니다.', $ret_url);
 						}
 						if($this->input->post('is_refund')==4) {
-							$msg = "계약 해지환불";
+							$cancel_data = array(
+								'is_rescission'=>'2',
+								'rescission_date'=>$this->input->post('conclu_date'),
+								'last_modi_date'=>date('Y-m-d'),
+								'last_modi_worker'=>$this->session->userdata('name')
+							);
+							$result[0] = $this->main_m->update_data('cms_sales_contract', $cancel_data, array('seq'=>$cont_seq->seq)); // 해지 환불 처리
+							if( !$result[0]) alert('데이터베이스 에러입니다.', '');
+							$result[1] = $this->main_m->update_data('cms_sales_received', array('is_refund'=>'1'), array('cont_seq'=>$cont_seq->seq)); // 해지 환불 처리
+							if( !$result[1]) alert('데이터베이스 에러입니다.', '');
+							$result[2] = $this->main_m->update_data('cms_project_all_housing_unit', array('is_contract'=>'0', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('name')), array('seq'=>$un));
+							if( !$result[2])  alert('데이터베이스 에러입니다.', '');
+							$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
+							alert('정상처리 되었습니다.', $ret_url);
 						}
 						// 1. 계약 및 계약자 관리 테이블 해지 업데이트
 						// 2. 동호수 관리 테이블 해지 상태 업데이트
