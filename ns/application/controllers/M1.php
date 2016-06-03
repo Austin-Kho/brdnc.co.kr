@@ -726,7 +726,7 @@ class M1 extends CI_Controller {
 						}
 
 					}else if($this->input->post('cont_sort3')=='3'){ // 청약 해지일 때
-						if($this->input->post('is_cancel')==1) {
+						if($this->input->post('is_cancel')=='1' && $this->input->post('is_refund')!='1') {
 							$cancel_data = array(
 								'disposal_div'=>'2',
 								'disposal_date'=>$this->input->post('conclu_date'),
@@ -738,7 +738,7 @@ class M1 extends CI_Controller {
 							$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
 							alert('청약 해지가 정상처리 되었습니다.', $ret_url);
 						}
-						if($this->input->post('is_refund')==1) {
+						if($this->input->post('is_cancel')=='1' && $this->input->post('is_refund')=='1') {
 							$cancel_data = array(
 								'refund_amount' => $this->input->post('app_in_mon'),
 								'disposal_div' => '3',
@@ -755,7 +755,7 @@ class M1 extends CI_Controller {
 						}
 
 					}else if($this->input->post('cont_sort3')=='4'){ // 계약 해지일 때
-						if($this->input->post('is_cont_cancel')=='1') {
+						if($this->input->post('is_cont_cancel')=='1' && $this->input->post('is_cont_refund')!='1') {
 							$cancel_data = array(
 								'is_rescission'=>'1', // 해지 처리
 								'rescission_date'=>$this->input->post('conclu_date'),
@@ -775,7 +775,7 @@ class M1 extends CI_Controller {
 							$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
 							alert('계약 해지가 정상처리 되었습니다.', $ret_url);
 						}
-						if($this->input->post('is_cont_refund')=='1') { // 계약 해지 환불일 때
+						if($this->input->post('is_cont_cancel')=='1' && $this->input->post('is_cont_refund')=='1') { // 계약 해지 환불일 때
 							$cancel_data = array(
 								'is_rescission'=>'2', // 환불 처리
 								'rescission_date'=>$this->input->post('conclu_date'),
