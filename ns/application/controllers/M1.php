@@ -212,7 +212,7 @@ class M1 extends CI_Controller {
 
 					// 청약 또는 계약 유닛인지 확인
 					if($unit_seq->is_application=='1') { // 청약 물건이면
-						$app_data = $data['is_reg']['app_data'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_application WHERE unit_seq='$unit_seq->seq' "); // 청약 데이터
+						$app_data = $data['is_reg']['app_data'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_application WHERE unit_seq='$unit_seq->seq' AND disposal_div<>'3' "); // 청약 데이터
 					}else if($unit_seq->is_contract=='1'){ // 계약 물건이면
 						$data['is_app_cont'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_application WHERE pj_seq='$project' AND unit_seq='$unit_seq->seq' AND disposal_div='1' "); // 청약->계약전환 물건인지 확인
 						$cont_where = " WHERE unit_seq='$unit_seq->seq' AND is_transfer='0' AND is_rescission='0' AND cms_sales_contract.seq=cont_seq  ";
@@ -918,22 +918,6 @@ class M1 extends CI_Controller {
 				if($start != '' or $limit !='')	$rec_query .= " LIMIT ".$start.", ".$limit." ";
 				$data['rec_list'] = $this->main_m->sql_result($rec_query); // 수납 및 계약자 데이터
 				$data['rec'] = $this->main_m->sql_row($amount_qry.$w_qry); // 총 수납액 구하기
-
-
-				// // 납부 회차 데이터
-				// $pay_sche = $data['pay_sche'] = $this->main_m->sql_result( "SELECT seq, pay_name FROM  cms_sales_pay_sche WHERE pj_seq='$project' ORDER BY pay_code " );
-				//
-				// // price seq 전체 가져오기
-				// $price = $data['price'] = $this->main_m->sql_result(" SELECT seq, unit_price FROM cms_sales_price WHERE pj_seq='$project' ORDER BY seq ");
-				//
-				// //계약 통계 계산
-				// $data['total_sum'] = 0;
-				// $data['sche_sum'] = 0;
-				// for ($i=0; $i<count($price); $i++) {
-				// 	$cont_sum = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_contract WHERE price_seq='".$price[$i]->seq."' ");
-				// 	$data['total_sum'] += $price[$i]->unit_price*$cont_sum->num; // 현재 분양 총 매출액
-				// }
-
 
 				//본 페이지 로딩
 				$this->load->view('/menu/m1/md2_sd1_v', $data);

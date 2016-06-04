@@ -99,12 +99,12 @@
 					if($db_ho !==null) : // 세대 상태
 						if($db_ho->is_hold==1) : $condi = "hold";
 						elseif($db_ho->is_application==1) :
-							$app_data = $this->main_m->sql_row(" SELECT  applicant, app_date, unit_type, unit_dong_ho FROM cms_sales_application WHERE unit_seq='$db_ho->seq' ");
+							$app_data = $this->main_m->sql_row(" SELECT  applicant, app_date, unit_type, unit_dong_ho FROM cms_sales_application WHERE unit_seq='$db_ho->seq' AND disposal_div<>'3' ");
 							$dong_ho = explode("-", $app_data->unit_dong_ho);
 							$condi = $app_data->applicant;
 							//$condi = '<span onclick="location.href='.base_url('m1/sales/1/2').'?mode=2&cont_sort1=1&cont_sort2=1&project='.$project.'&type='.$app_data->unit_type.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1].'">'.$app_data->applicant.'</span>';
 						elseif($db_ho->is_contract==1) :
-							$cont_data = $this->main_m->sql_row(" SELECT  contractor, cms_sales_contract.cont_date, unit_type, unit_dong_ho FROM cms_sales_contract, cms_sales_contractor WHERE unit_seq='$db_ho->seq' AND cms_sales_contract.seq=cont_seq ");
+							$cont_data = $this->main_m->sql_row(" SELECT  contractor, cms_sales_contract.cont_date, unit_type, unit_dong_ho FROM cms_sales_contract, cms_sales_contractor WHERE unit_seq='$db_ho->seq' AND cms_sales_contract.seq=cont_seq AND is_transfer='0' ");
 							$dong_ho = explode("-", $cont_data->unit_dong_ho);
 							$condi = $cont_data->contractor;
 							// $condi = "<a href='".base_url('m1/sales/1/2')."?mode=2&cont_sort1=1&cont_sort2=2&project=".$project."&type=".$cont_data->unit_type."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]."'>".$cont_data->contractor."</a>";
