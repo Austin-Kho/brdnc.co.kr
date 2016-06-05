@@ -133,6 +133,8 @@
 			<input type="hidden" name="unit_is_cont" value="<?php echo $unit_is_cont; ?>">
 <?php $unit_dong_ho = ( !empty($unit_dong_ho)) ? $unit_dong_ho : ""; ?>
 			<input type="hidden" name="unit_dong_ho" value="<?php echo $unit_dong_ho; ?>">
+<?php $cont_seq = ( !empty($is_reg['cont_data'])) ? $is_reg['cont_data']->seq : ""; ?>
+			<input type="hidden" name="cont_seq" value="<?php echo $cont_seq; ?>">
 <?php $ctator_seq = ( !empty($is_reg['cont_data'])) ? $is_reg['cont_data']->contractor_seq : ""; ?>
 			<input type="hidden" name="contractor_seq" value="<?php echo $ctator_seq; ?>">
 <?php $received_1 = ( !empty($received['1'])) ? $received['1']->seq : ""; // 계약금 폼1 입력 데이터 ?>

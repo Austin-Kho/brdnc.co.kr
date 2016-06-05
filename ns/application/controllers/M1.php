@@ -392,7 +392,6 @@ class M1 extends CI_Controller {
 						}
 
 						/******************************계약자 테이블 데이터******************************/
-						$cont_seq = $this->main_m->sql_row(" SELECT seq FROM cms_sales_contract WHERE pj_seq='$pj' AND unit_seq='$un' ");
 						$addr_id = $this->input->post('zipcode')."|".$this->input->post('address1')."|".$this->input->post('address2');
 						$addr_dm = $this->input->post('zipcode_')."|".$this->input->post('address1_')."|".$this->input->post('address2_');
 						$idoc1 = $this->input->post('incom_doc_1');
@@ -418,7 +417,7 @@ class M1 extends CI_Controller {
 						/******************************계약금 1 폼 데이터******************************/
 						$cont_arr3 = array( // 수납 테이블 입력 데이터
 							'pj_seq' => $this->input->post('project', TRUE),
-							'cont_seq' => $cont_seq->seq,
+							'cont_seq' => $this->input->post('cont_seq'),
 							'pay_sche_code' => $this->input->post('cont_pay_sche1', TRUE), // 당회 납부 회차
 							'paid_amount' => $this->input->post('deposit_1', TRUE), // 납부한 금액
 							'paid_acc' => $this->input->post('dep_acc_1', TRUE),
@@ -431,7 +430,7 @@ class M1 extends CI_Controller {
 						/******************************계약금 2 폼 데이터******************************/
 						$cont_arr4 = array( // 수납 테이블 입력 데이터
 							'pj_seq' => $this->input->post('project', TRUE),
-							'cont_seq' => $cont_seq->seq,
+							'cont_seq' => $this->input->post('cont_seq'),
 							'pay_sche_code' => $this->input->post('cont_pay_sche2', TRUE), // 당회 납부 회차
 							'paid_amount' => $this->input->post('deposit_2', TRUE), // 납부한 금액
 							'paid_acc' => $this->input->post('dep_acc_2', TRUE),
@@ -444,7 +443,7 @@ class M1 extends CI_Controller {
 						/******************************계약금 3 폼 데이터******************************/
 						$cont_arr5 = array( // 수납 테이블 입력 데이터
 							'pj_seq' => $this->input->post('project', TRUE),
-							'cont_seq' => $cont_seq->seq,
+							'cont_seq' => $this->input->post('cont_seq'),
 							'pay_sche_code' => $this->input->post('cont_pay_sche3', TRUE), // 당회 납부 회차
 							'paid_amount' => $this->input->post('deposit_3', TRUE), // 납부한 금액
 							'paid_acc' => $this->input->post('dep_acc_3', TRUE),
@@ -457,7 +456,7 @@ class M1 extends CI_Controller {
 						/******************************계약금 4 폼 데이터******************************/
 						$cont_arr6 = array( // 수납 테이블 입력 데이터
 							'pj_seq' => $this->input->post('project', TRUE),
-							'cont_seq' => $cont_seq->seq,
+							'cont_seq' => $this->input->post('cont_seq'),
 							'pay_sche_code' => $this->input->post('cont_pay_sche4', TRUE), // 당회 납부 회차
 							'paid_amount' => $this->input->post('deposit_4', TRUE), // 납부한 금액
 							'paid_acc' => $this->input->post('dep_acc_4', TRUE),
@@ -470,7 +469,7 @@ class M1 extends CI_Controller {
 						/******************************계약금 5 폼 데이터******************************/
 						$cont_arr7 = array( // 수납 테이블 입력 데이터
 							'pj_seq' => $this->input->post('project', TRUE),
-							'cont_seq' => $cont_seq->seq,
+							'cont_seq' => $this->input->post('cont_seq'),
 							'pay_sche_code' => $this->input->post('cont_pay_sche5', TRUE), // 당회 납부 회차
 							'paid_amount' => $this->input->post('deposit_5', TRUE), // 납부한 금액
 							'paid_acc' => $this->input->post('dep_acc_5', TRUE),
@@ -483,7 +482,7 @@ class M1 extends CI_Controller {
 						/******************************계약금 6 폼 데이터******************************/
 						$cont_arr8 = array( // 수납 테이블 입력 데이터
 							'pj_seq' => $this->input->post('project', TRUE),
-							'cont_seq' => $cont_seq->seq,
+							'cont_seq' => $this->input->post('cont_seq'),
 							'pay_sche_code' => $this->input->post('cont_pay_sche6', TRUE), // 당회 납부 회차
 							'paid_amount' => $this->input->post('deposit_6', TRUE), // 납부한 금액
 							'paid_acc' => $this->input->post('dep_acc_6', TRUE),
@@ -496,7 +495,7 @@ class M1 extends CI_Controller {
 						/******************************계약금 7 폼 데이터******************************/
 						$cont_arr9 = array( // 수납 테이블 입력 데이터
 							'pj_seq' => $this->input->post('project', TRUE),
-							'cont_seq' => $cont_seq->seq,
+							'cont_seq' => $this->input->post('cont_seq'),
 							'pay_sche_code' => $this->input->post('cont_pay_sche7', TRUE), // 당회 납부 회차
 							'paid_amount' => $this->input->post('deposit_7', TRUE), // 납부한 금액
 							'paid_acc' => $this->input->post('dep_acc_7', TRUE),
@@ -511,7 +510,7 @@ class M1 extends CI_Controller {
 						if($this->input->post('unit_is_cont')=='0'){  // 신규 계약일 때
 
 							//   2. 계약자관리 테이블에 해당 데이터를 인서트한다.
-							$add_arr2 = array('cont_seq' => $cont_seq->seq, 'ini_reg_worker' => $this->session->userdata('name'));
+							$add_arr2 = array('cont_seq' => $this->input->post('cont_seq'), 'ini_reg_worker' => $this->session->userdata('name'));
 							$cont_arr22 = array_merge($cont_arr2, $add_arr2);
 							$result[1] = $this->main_m->insert_data('cms_sales_contractor', $cont_arr22, 'ini_reg_date');
 							if( !$result[1]) {
@@ -542,7 +541,7 @@ class M1 extends CI_Controller {
 								if( !empty($this->input->post('app_in_mon', TRUE))){
 									$app_mon = array( // 청약금 -> 수납 테이블 입력 데이터
 										'pj_seq' => $this->input->post('project', TRUE),
-										'cont_seq' => $cont_seq->seq,
+										'cont_seq' => $this->input->post('cont_seq'),
 										'pay_sche_code' => $this->input->post('app_pay_sche', TRUE), // 당회 납부 회차
 										'paid_amount' => $this->input->post('app_in_mon', TRUE), // 납부한 금액
 										'paid_acc' => $this->input->post('app_in_acc', TRUE),
@@ -626,14 +625,14 @@ class M1 extends CI_Controller {
 							//   1. 계약관리 테이블에 해당 데이터를 업데이트한다.
 							$add_arr1 = array('last_modi_date' => date('Y-m-d'), 'last_modi_worker' => $this->session->userdata('name'));
 							$cont_arr11 = array_merge($cont_arr1, $add_arr1);
-							$result[0] = $this->main_m->update_data('cms_sales_contract', $cont_arr11, array('seq'=>$cont_seq->seq, 'unit_seq'=>$un));
+							$result[0] = $this->main_m->update_data('cms_sales_contract', $cont_arr11, array('seq'=>$this->input->post('cont_seq'), 'unit_seq'=>$un));
 							if( !$result[0]){
 								alert('데이터베이스 에러입니다.1', base_url(uri_string()));
 							}
 
 							//   2. 계약자관리 테이블에 해당 데이터를 업데이트한다.
 							$cont_arr22 = array_merge($cont_arr2, $add_arr1);
-							$result[1] = $this->main_m->update_data('cms_sales_contractor', $cont_arr22,  array('seq'=>$this->input->post('contractor_seq'), 'cont_seq'=>$cont_seq->seq));
+							$result[1] = $this->main_m->update_data('cms_sales_contractor', $cont_arr22,  array('seq'=>$this->input->post('contractor_seq'), 'cont_seq'=>$this->input->post('cont_seq')));
 							if( !$result[1]) {
 								alert('데이터베이스 에러입니다.2', '');
 							}
@@ -762,7 +761,7 @@ class M1 extends CI_Controller {
 								'last_modi_date'=>date('Y-m-d'),
 								'last_modi_worker'=>$this->session->userdata('name')
 							);
-							$result[0] = $this->main_m->update_data('cms_sales_contract', $cancel_data, array('seq'=>$cont_seq->seq)); // 해지 처리
+							$result[0] = $this->main_m->update_data('cms_sales_contract', $cancel_data, array('seq'=>$this->input->post('cont_seq'))); // 해지 처리
 							if( !$result[0]) alert('데이터베이스 에러입니다.', '');
 							$cancel_data2 = array(
 								'is_transfer'=>'2', // 1.매도, 2. 해약
@@ -770,7 +769,7 @@ class M1 extends CI_Controller {
 								'last_modi_date'=>date('Y-m-d'),
 								'last_modi_worker'=>$this->session->userdata('name')
 							);
-							$result[1] = $this->main_m->update_data('cms_sales_contractor', $cancel_data2, array('cont_seq'=>$cont_seq->seq)); // 해지 처리
+							$result[1] = $this->main_m->update_data('cms_sales_contractor', $cancel_data2, array('cont_seq'=>$this->input->post('cont_seq'))); // 해지 처리
 							if( !$result[1]) alert('데이터베이스 에러입니다.', '');
 							$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
 							alert('계약 해지가 정상처리 되었습니다.', $ret_url);
@@ -782,12 +781,20 @@ class M1 extends CI_Controller {
 								'last_modi_date'=>date('Y-m-d'),
 								'last_modi_worker'=>$this->session->userdata('name')
 							);
-							$result[0] = $this->main_m->update_data('cms_sales_contract', $cancel_data, array('seq'=>$cont_seq->seq)); // 해지 환불 처리
+							$result[0] = $this->main_m->update_data('cms_sales_contract', $cancel_data, array('seq'=>$this->input->post('cont_seq'))); // 해지 환불 처리
 							if( !$result[0]) alert('데이터베이스 에러입니다.', '');
-							$result[1] = $this->main_m->update_data('cms_sales_received', array('is_refund'=>'1'), array('cont_seq'=>$cont_seq->seq)); // 해지 환불 처리
+							$cancel_data2 = array(
+								'is_transfer'=>'2', // 1.매도, 2. 해약
+								'transfer_date'=>$this->input->post('conclu_date'),
+								'last_modi_date'=>date('Y-m-d'),
+								'last_modi_worker'=>$this->session->userdata('name')
+							);
+							$result[1] = $this->main_m->update_data('cms_sales_contractor', $cancel_data2, array('cont_seq'=>$this->input->post('cont_seq'))); // 해지 처리
 							if( !$result[1]) alert('데이터베이스 에러입니다.', '');
-							$result[2] = $this->main_m->update_data('cms_project_all_housing_unit', array('is_contract'=>'0', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('name')), array('seq'=>$un));
-							if( !$result[2])  alert('데이터베이스 에러입니다.', '');
+							$result[2] = $this->main_m->update_data('cms_sales_received', array('is_refund'=>'1'), array('cont_seq'=>$this->input->post('cont_seq'))); // 해지 환불 처리
+							if( !$result[2]) alert('데이터베이스 에러입니다.', '');
+							$result[3] = $this->main_m->update_data('cms_project_all_housing_unit', array('is_contract'=>'0', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('name')), array('seq'=>$un));
+							if( !$result[3])  alert('데이터베이스 에러입니다.', '');
 							$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
 							alert('해약 환불이 정상처리 되었습니다.', $ret_url);
 						}
