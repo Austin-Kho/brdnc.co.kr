@@ -392,6 +392,7 @@ class M1 extends CI_Controller {
 						}
 
 						/******************************계약자 테이블 데이터******************************/
+                        $cont_seq = $this->main_m->sql_row(" SELECT seq FROM cms_sales_contract WHERE pj_seq='$pj' AND unit_seq='$un' ");
 						$addr_id = $this->input->post('zipcode')."|".$this->input->post('address1')."|".$this->input->post('address2');
 						$addr_dm = $this->input->post('zipcode_')."|".$this->input->post('address1_')."|".$this->input->post('address2_');
 						$idoc1 = $this->input->post('incom_doc_1');
@@ -417,7 +418,7 @@ class M1 extends CI_Controller {
 						/******************************계약금 1 폼 데이터******************************/
 						$cont_arr3 = array( // 수납 테이블 입력 데이터
 							'pj_seq' => $this->input->post('project', TRUE),
-							'cont_seq' => $this->input->post('cont_seq'),
+							'cont_seq' => $cont_seq->seq,
 							'pay_sche_code' => $this->input->post('cont_pay_sche1', TRUE), // 당회 납부 회차
 							'paid_amount' => $this->input->post('deposit_1', TRUE), // 납부한 금액
 							'paid_acc' => $this->input->post('dep_acc_1', TRUE),
@@ -430,7 +431,7 @@ class M1 extends CI_Controller {
 						/******************************계약금 2 폼 데이터******************************/
 						$cont_arr4 = array( // 수납 테이블 입력 데이터
 							'pj_seq' => $this->input->post('project', TRUE),
-							'cont_seq' => $this->input->post('cont_seq'),
+							'cont_seq' => $cont_seq->seq,
 							'pay_sche_code' => $this->input->post('cont_pay_sche2', TRUE), // 당회 납부 회차
 							'paid_amount' => $this->input->post('deposit_2', TRUE), // 납부한 금액
 							'paid_acc' => $this->input->post('dep_acc_2', TRUE),
@@ -443,7 +444,7 @@ class M1 extends CI_Controller {
 						/******************************계약금 3 폼 데이터******************************/
 						$cont_arr5 = array( // 수납 테이블 입력 데이터
 							'pj_seq' => $this->input->post('project', TRUE),
-							'cont_seq' => $this->input->post('cont_seq'),
+							'cont_seq' => $cont_seq->seq,
 							'pay_sche_code' => $this->input->post('cont_pay_sche3', TRUE), // 당회 납부 회차
 							'paid_amount' => $this->input->post('deposit_3', TRUE), // 납부한 금액
 							'paid_acc' => $this->input->post('dep_acc_3', TRUE),
@@ -456,7 +457,7 @@ class M1 extends CI_Controller {
 						/******************************계약금 4 폼 데이터******************************/
 						$cont_arr6 = array( // 수납 테이블 입력 데이터
 							'pj_seq' => $this->input->post('project', TRUE),
-							'cont_seq' => $this->input->post('cont_seq'),
+							'cont_seq' => $cont_seq->seq,
 							'pay_sche_code' => $this->input->post('cont_pay_sche4', TRUE), // 당회 납부 회차
 							'paid_amount' => $this->input->post('deposit_4', TRUE), // 납부한 금액
 							'paid_acc' => $this->input->post('dep_acc_4', TRUE),
@@ -469,7 +470,7 @@ class M1 extends CI_Controller {
 						/******************************계약금 5 폼 데이터******************************/
 						$cont_arr7 = array( // 수납 테이블 입력 데이터
 							'pj_seq' => $this->input->post('project', TRUE),
-							'cont_seq' => $this->input->post('cont_seq'),
+							'cont_seq' => $cont_seq->seq,
 							'pay_sche_code' => $this->input->post('cont_pay_sche5', TRUE), // 당회 납부 회차
 							'paid_amount' => $this->input->post('deposit_5', TRUE), // 납부한 금액
 							'paid_acc' => $this->input->post('dep_acc_5', TRUE),
@@ -482,7 +483,7 @@ class M1 extends CI_Controller {
 						/******************************계약금 6 폼 데이터******************************/
 						$cont_arr8 = array( // 수납 테이블 입력 데이터
 							'pj_seq' => $this->input->post('project', TRUE),
-							'cont_seq' => $this->input->post('cont_seq'),
+							'cont_seq' => $cont_seq->seq,
 							'pay_sche_code' => $this->input->post('cont_pay_sche6', TRUE), // 당회 납부 회차
 							'paid_amount' => $this->input->post('deposit_6', TRUE), // 납부한 금액
 							'paid_acc' => $this->input->post('dep_acc_6', TRUE),
@@ -495,7 +496,7 @@ class M1 extends CI_Controller {
 						/******************************계약금 7 폼 데이터******************************/
 						$cont_arr9 = array( // 수납 테이블 입력 데이터
 							'pj_seq' => $this->input->post('project', TRUE),
-							'cont_seq' => $this->input->post('cont_seq'),
+							'cont_seq' => $cont_seq->seq,
 							'pay_sche_code' => $this->input->post('cont_pay_sche7', TRUE), // 당회 납부 회차
 							'paid_amount' => $this->input->post('deposit_7', TRUE), // 납부한 금액
 							'paid_acc' => $this->input->post('dep_acc_7', TRUE),
@@ -510,7 +511,7 @@ class M1 extends CI_Controller {
 						if($this->input->post('unit_is_cont')=='0'){  // 신규 계약일 때
 
 							//   2. 계약자관리 테이블에 해당 데이터를 인서트한다.
-							$add_arr2 = array('cont_seq' => $this->input->post('cont_seq'), 'ini_reg_worker' => $this->session->userdata('name'));
+							$add_arr2 = array('cont_seq' => $cont_seq->seq, 'ini_reg_worker' => $this->session->userdata('name'));
 							$cont_arr22 = array_merge($cont_arr2, $add_arr2);
 							$result[1] = $this->main_m->insert_data('cms_sales_contractor', $cont_arr22, 'ini_reg_date');
 							if( !$result[1]) {
@@ -541,7 +542,7 @@ class M1 extends CI_Controller {
 								if( !empty($this->input->post('app_in_mon', TRUE))){
 									$app_mon = array( // 청약금 -> 수납 테이블 입력 데이터
 										'pj_seq' => $this->input->post('project', TRUE),
-										'cont_seq' => $this->input->post('cont_seq'),
+										'cont_seq' => $cont_seq->seq,
 										'pay_sche_code' => $this->input->post('app_pay_sche', TRUE), // 당회 납부 회차
 										'paid_amount' => $this->input->post('app_in_mon', TRUE), // 납부한 금액
 										'paid_acc' => $this->input->post('app_in_acc', TRUE),
@@ -809,6 +810,7 @@ class M1 extends CI_Controller {
 
 		// 계약현황 3. 동호수현황 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==1 && $sdi==3) {
+			$this->output->enable_profiler(TRUE); //프로파일러 보기
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m1_1_3', $this->session->userdata['user_id']);
 
