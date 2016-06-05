@@ -48,8 +48,8 @@
 
 	<div class="row font12" style="margin: 0; padding: 0;">
         <div class="col-xs-5 col-sm-7 col-md-9"><h4><span class="label label-info">요약 집계</span></h4></div>
-		<div class="col-xs-3 col-sm-2 col-md-1"><a href="javascript:" onclick="popUp_size('', '', 1500, 800);"><h5><span class="label label-default">약정별 수납현황</span></h5></a></div>
-		<div class="col-xs-3 col-sm-2 col-md-1"><a href="javascript:" onclick="popUp_size('', '', 1500, 800);"><h5><span class="label label-default">총 괄 집 계 현 황</span></h5></a></div>
+		<div class="col-xs-3 col-sm-2 col-md-1"><a href="javascript:" onclick="popUp_size('<?php echo base_url('popup/sales_receive?p=').$project; ?>', '약정별 수납현황', 1500, 800);"><h5><span class="label label-default">약정별 수납현황</span></h5></a></div>
+		<div class="col-xs-3 col-sm-2 col-md-1"><a href="javascript:" onclick="popUp_size('<?php echo base_url('popup/sales_total_table?p=').$project; ?>', '총괄 집계현황', 1500, 800);"><h5><span class="label label-default">총 괄 집 계 현 황</span></h5></a></div>
 
 
 <?php if(empty($all_pj)) : ?>
