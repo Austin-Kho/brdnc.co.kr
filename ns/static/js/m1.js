@@ -266,15 +266,15 @@ function cont_check(){
 			return;
 		}
 	}else if(typeof(form1.cont_sort3)!='undefined' && form1.cont_sort3.value=='3'){
-		if(form2.is_cancel.checked===false && form2.is_refund.checked===false){
-			alert("해지 또는 환불 여부를 체크하여 주십시요.");
+		if(form2.is_cancel.checked===false){
+			alert("해지 여부를 체크하여 주십시요.");
 			form2.is_cancel.focus();
 			return;
 		}
 	}else if(typeof(form1.cont_sort3)!='undefined'  && form1.cont_sort3.value=='4'){
-		if(form2.is_cancel.checked===false && form2.is_refund.checked===false){
-			alert("해지 또는 환불 여부를 체크하여 주십시요.");
-			form2.is_cancel.focus();
+		if(form2.is_cont_cancel.checked===false){
+			alert("해지 여부를 체크하여 주십시요.");
+			form2.is_cont_cancel.focus();
 			return;
 		}
 	}
