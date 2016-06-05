@@ -810,7 +810,7 @@ class M1 extends CI_Controller {
 
 		// 계약현황 3. 동호수현황 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==1 && $sdi==3) {
-			$this->output->enable_profiler(TRUE); //프로파일러 보기
+			// $this->output->enable_profiler(TRUE); //프로파일러 보기
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m1_1_3', $this->session->userdata['user_id']);
 
