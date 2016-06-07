@@ -364,7 +364,6 @@ class M1 extends CI_Controller {
 						);
 
 						$price_seq = $this->main_m->select_data_row('cms_sales_price' , $pr_where);
-						$last_paid_sche = ($this->input->post('cont_pay_sche2')) ? $this->input->post('cont_pay_sche2') : $this->input->post('cont_pay_sche1');
 
 						$cont_arr1 = array( // 계약 테이블 입력 데이터
 							'pj_seq' => $this->input->post('project', TRUE),
@@ -376,7 +375,6 @@ class M1 extends CI_Controller {
 							'unit_dong_ho' => $this->input->post('unit_dong_ho', TRUE),
 							'cont_diff' => $this->input->post('diff_no', TRUE),
 							'price_seq' => $price_seq->seq,
-							'last_paid_sche' => $last_paid_sche,
 							'note' => $this->input->post('note', TRUE)
 						);
 						/******************************계약 테이블 데이터******************************/
@@ -392,7 +390,7 @@ class M1 extends CI_Controller {
 						}
 
 						/******************************계약자 테이블 데이터******************************/
-                        $cont_seq = $this->main_m->sql_row(" SELECT seq FROM cms_sales_contract WHERE pj_seq='$pj' AND unit_seq='$un' ");
+                        $cont_seq = $this->main_m->sql_row(" SELECT seq FROM cms_sales_contract WHERE pj_seq='$pj' AND unit_seq='$un' AND is_rescission='0' ");
 						$addr_id = $this->input->post('zipcode')."|".$this->input->post('address1')."|".$this->input->post('address2');
 						$addr_dm = $this->input->post('zipcode_')."|".$this->input->post('address1_')."|".$this->input->post('address2_');
 						$idoc1 = $this->input->post('incom_doc_1');
