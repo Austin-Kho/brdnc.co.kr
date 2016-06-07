@@ -115,11 +115,11 @@ function cont_check(){
 			form2.app_pay_sche.focus();
 			return;
 		}
-		if(form1.cont_sort2.value=='2'&& !form2.deposit_1.value){
-			alert("계약금 항목을 입력하세요.");
-			form2.deposit_1.focus();
-			return;
-		}
+		// if(form1.cont_sort2.value=='2'&& !form2.deposit_1.value){
+		// 	alert("계약금 항목을 입력하세요.");
+		// 	form2.deposit_1.focus();
+		// 	return;
+		// }
 		if(form1.cont_sort2.value=='2'&& form2.deposit_1.value&& !form2.dep_acc_1.value){
 			alert("계약금 입금 계좌를 선택하세요.");
 			form2.dep_acc_1.focus();
