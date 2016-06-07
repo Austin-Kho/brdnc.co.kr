@@ -48,16 +48,16 @@ class Main extends CI_Controller {
 		$data['app_num'] = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_application WHERE disposal_div='0' "); // 전체 청약 건수
 		$data['cont_num'] = $this->main_m->sql_row(" SELECT COUNT(seq) AS num FROM cms_sales_contract WHERE is_rescission='0' "); // 전체 계약 건수
 
-		$data['receive'] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS receive FROM cms_sales_received WHERE pj_seq='1' AND pay_sche_code!='2' AND pay_sche_code!='4' "); // 분담금 수납금 총액
-		$data['agent_cost'] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS agent_cost FROM cms_sales_received WHERE pj_seq='1' AND pay_sche_code='2' OR pay_sche_code='4' "); // 대행비 수납금 총액
+		$data['receive'] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS receive FROM cms_sales_received WHERE pj_seq='1' AND pay_sche_code!='2' AND pay_sche_code!='4' AND is_refund='0' "); // 분담금 수납금 총액
+		$data['agent_cost'] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS agent_cost FROM cms_sales_received WHERE pj_seq='1' AND (pay_sche_code='2' OR pay_sche_code='4') AND is_refund='0' "); // 대행비 수납금 총액
 
-		$data['rec'][0] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='1' "); // 현금수표계좌 수납금 총액
-		$data['rec'][1] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='2' "); // 신탁[신청금]계좌 수납금 총액
-		$data['rec'][2] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='3' "); // 신탁[분담금]계좌 수납금 총액
-		$data['rec'][3] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='4' "); // 신탁[대행금]계좌 수납금 총액
-		$data['rec'][4] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='5' "); // 바램[외환]계좌 수납금 총액
-		$data['rec'][5] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='6' "); // 바램[국민]계좌 수납금 총액
-		$data['rec'][6] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='7' "); // 바램[신한]계좌 수납금 총액
+		$data['rec'][0] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='1' AND is_refund='0' "); // 현금수표계좌 수납금 총액
+		$data['rec'][1] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='2' AND is_refund='0' "); // 신탁[신청금]계좌 수납금 총액
+		$data['rec'][2] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='3' AND is_refund='0' "); // 신탁[분담금]계좌 수납금 총액
+		$data['rec'][3] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='4' AND is_refund='0' "); // 신탁[대행금]계좌 수납금 총액
+		$data['rec'][4] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='5' AND is_refund='0' "); // 바램[외환]계좌 수납금 총액
+		$data['rec'][5] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='6' AND is_refund='0' "); // 바램[국민]계좌 수납금 총액
+		$data['rec'][6] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS rec FROM cms_sales_received WHERE pj_seq='1' AND paid_acc='7' AND is_refund='0' "); // 바램[신한]계좌 수납금 총액
 
 		$data['current_rec1'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_received WHERE pj_seq='1' ORDER BY paid_date DESC, seq DESC LIMIT 0, 5 "); // 최근 입금 거래 데이터1
 		$data['current_rec2'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_received WHERE pj_seq='1' ORDER BY paid_date DESC, seq DESC LIMIT 5, 5 "); // 최근 입금 거래 데이터2
