@@ -268,7 +268,7 @@ echo form_open(base_url(uri_string()), $attributes);
 <?php
 foreach ($cont_data as $lt) :
 	$nd = $this->main_m->sql_row(" SELECT diff_name FROM cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$lt->cont_diff' ");
-	$total_rec = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS received FROM cms_sales_received WHERE pj_seq='$project' AND cont_seq='$lt->seq' ");
+	$total_rec = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS received FROM cms_sales_received WHERE pj_seq='$project' AND cont_seq='$lt->cont_seq' ");
 
 	$deposit1 = $this->main_m->sql_row(" SELECT SUM(payment) AS payment FROM cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<3 ");
 	$deposit2 = $this->main_m->sql_row(" SELECT SUM(payment) AS payment FROM cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<5 ");

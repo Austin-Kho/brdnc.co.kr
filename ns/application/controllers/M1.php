@@ -36,7 +36,7 @@ class M1 extends CI_Controller {
 	}
 
 	public function sales($mdi='', $sdi=''){
-		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+		$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
@@ -216,7 +216,7 @@ class M1 extends CI_Controller {
 					}else if($unit_seq->is_contract=='1'){ // 계약 물건이면
 						$data['is_app_cont'] = $this->main_m->sql_row(" SELECT * FROM cms_sales_application WHERE pj_seq='$project' AND unit_seq='$unit_seq->seq' AND disposal_div='1' "); // 청약->계약전환 물건인지 확인
 						$cont_where = " WHERE unit_seq='$unit_seq->seq' AND is_transfer='0' AND is_rescission='0' AND cms_sales_contract.seq=cont_seq  ";
-						$cont_query = "  SELECT *, cms_sales_contractor.seq AS contractor_seq  FROM cms_sales_contract, cms_sales_contractor ".$cont_where;
+						$cont_query = "  SELECT *, cms_sales_contract.seq AS cont_seq, cms_sales_contractor.seq AS contractor_seq  FROM cms_sales_contract, cms_sales_contractor ".$cont_where;
 						$cont_data = $data['is_reg']['cont_data'] = $this->main_m->sql_row($cont_query); // 계약 및 계약자 데이터
 					}
 				}
@@ -641,7 +641,7 @@ class M1 extends CI_Controller {
 								if($this->input->post('deposit_1_')=='1'){
 									$result[5] = $this->main_m->update_data('cms_sales_received', $cont_arr3, array('seq'=>$this->input->post('received1')));
 								}else{
-									$result[5] = $this->main_m->insert_data('cms_sales_received', $cont_arr3);
+									$result[5] = $this->main_m->insert_data('cms_sales_received', $cont_arr3, 'reg_date');
 								}
 								if( !$result[5]) {
 									alert('데이터베이스 에러입니다.6', base_url(uri_string()));
@@ -653,7 +653,7 @@ class M1 extends CI_Controller {
 								if($this->input->post('deposit_2_')=='1'){
 									$result[6] =$this->main_m->update_data('cms_sales_received', $cont_arr4, array('seq'=>$this->input->post('received2')));
 								}else{
-									$result[6] = $this->main_m->insert_data('cms_sales_received', $cont_arr4);
+									$result[6] = $this->main_m->insert_data('cms_sales_received', $cont_arr4, 'reg_date');
 								}
 								if( !$result[6]) {
 									alert('데이터베이스 에러입니다.7', base_url(uri_string()));
@@ -665,7 +665,7 @@ class M1 extends CI_Controller {
 								if($this->input->post('deposit_3_')=='1'){
 									$result[7] =$this->main_m->update_data('cms_sales_received', $cont_arr5, array('seq'=>$this->input->post('received3')));
 								}else{
-									$result[7] = $this->main_m->insert_data('cms_sales_received', $cont_arr5);
+									$result[7] = $this->main_m->insert_data('cms_sales_received', $cont_arr5, 'reg_date');
 								}
 								if( !$result[7]) {
 									alert('데이터베이스 에러입니다.8', base_url(uri_string()));
@@ -677,7 +677,7 @@ class M1 extends CI_Controller {
 								if($this->input->post('deposit_4_')=='1'){
 									$result[8] =$this->main_m->update_data('cms_sales_received', $cont_arr6, array('seq'=>$this->input->post('received4')));
 								}else{
-									$result[8] = $this->main_m->insert_data('cms_sales_received', $cont_arr6);
+									$result[8] = $this->main_m->insert_data('cms_sales_received', $cont_arr6, 'reg_date');
 								}
 								if( !$result[8]) {
 									alert('데이터베이스 에러입니다.9', base_url(uri_string()));
@@ -689,7 +689,7 @@ class M1 extends CI_Controller {
 								if($this->input->post('deposit_5_')=='1'){
 									$result[9] =$this->main_m->update_data('cms_sales_received', $cont_arr7, array('seq'=>$this->input->post('received5')));
 								}else{
-									$result[9] = $this->main_m->insert_data('cms_sales_received', $cont_arr7);
+									$result[9] = $this->main_m->insert_data('cms_sales_received', $cont_arr7, 'reg_date');
 								}
 								if( !$result[9]) {
 									alert('데이터베이스 에러입니다.10', base_url(uri_string()));
@@ -701,7 +701,7 @@ class M1 extends CI_Controller {
 								if($this->input->post('deposit_6_')=='1'){
 									$result[10] =$this->main_m->update_data('cms_sales_received', $cont_arr8, array('seq'=>$this->input->post('received6')));
 								}else{
-									$result[10] = $this->main_m->insert_data('cms_sales_received', $cont_arr8);
+									$result[10] = $this->main_m->insert_data('cms_sales_received', $cont_arr8, 'reg_date');
 								}
 								if( !$result[10]) {
 									alert('데이터베이스 에러입니다.11', base_url(uri_string()));
@@ -713,7 +713,7 @@ class M1 extends CI_Controller {
 								if($this->input->post('deposit_7_')=='1'){
 									$result[11] =$this->main_m->update_data('cms_sales_received', $cont_arr9, array('seq'=>$this->input->post('received7')));
 								}else{
-									$result[11] = $this->main_m->insert_data('cms_sales_received', $cont_arr9);
+									$result[11] = $this->main_m->insert_data('cms_sales_received', $cont_arr9, 'reg_date');
 								}
 								if( !$result[11]) {
 									alert('데이터베이스 에러입니다.12', base_url(uri_string()));
