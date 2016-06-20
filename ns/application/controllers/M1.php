@@ -733,7 +733,7 @@ class M1 extends CI_Controller {
 							);
 							$result[0] = $this->main_m->update_data('cms_sales_application', $cancel_data, array('pj_seq'=>$pj, 'unit_seq'=>$un)); // 해지처리
 							if( !$result[0]) alert('데이터베이스 에러입니다.', '');
-							$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
+							$ret_url = "?mode=2&cont_sort1=2&cont_sort3=3&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
 							alert('청약 해지가 정상처리 되었습니다.', $ret_url);
 						}
 						if($this->input->post('is_cancel')=='1' && $this->input->post('is_refund')=='1') {
@@ -748,7 +748,7 @@ class M1 extends CI_Controller {
 							if( !$result[0]) alert('데이터베이스 에러입니다.', '');
 							$result[1] = $this->main_m->update_data('cms_project_all_housing_unit', array('is_application'=>'0', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('name')), array('seq'=>$un));
 							if( !$result[1])  alert('데이터베이스 에러입니다.', '');
-							$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
+							$ret_url = "?mode=2&cont_sort1=2&cont_sort3=3&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
 							alert('해지 환불이 정상처리 되었습니다.', $ret_url);
 						}
 
@@ -770,7 +770,7 @@ class M1 extends CI_Controller {
 							);
 							$result[1] = $this->main_m->update_data('cms_sales_contractor', $cancel_data2, array('cont_seq'=>$this->input->post('cont_seq'))); // 해지 처리
 							if( !$result[1]) alert('데이터베이스 에러입니다.', '');
-							$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
+							$ret_url = "?mode=2&cont_sort1=2&cont_sort3=4&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
 							alert('계약 해지가 정상처리 되었습니다.', $ret_url);
 						}
 						if($this->input->post('is_cont_cancel')=='1' && $this->input->post('is_cont_refund')=='1') { // 계약 해지 환불일 때
@@ -794,7 +794,7 @@ class M1 extends CI_Controller {
 							if( !$result[2]) alert('데이터베이스 에러입니다.', '');
 							$result[3] = $this->main_m->update_data('cms_project_all_housing_unit', array('is_contract'=>'0', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('name')), array('seq'=>$un));
 							if( !$result[3])  alert('데이터베이스 에러입니다.', '');
-							$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
+							$ret_url = "?mode=2&cont_sort1=2&cont_sort3=4&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
 							alert('해약 환불이 정상처리 되었습니다.', $ret_url);
 						}
 					}
