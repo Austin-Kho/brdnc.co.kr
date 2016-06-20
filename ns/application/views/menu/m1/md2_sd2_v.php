@@ -160,7 +160,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 					<div class="col-sm-12 bo-top" style="padding: 0;">
 						<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">회차구분</div>
 						<div class="col-xs-8 col-md-4" style="padding:  4px;">
-							<label for="pay_sche_code" class="sr-only">납부회차</label>
+							<label for="pay_sche_code" class="sr-only">회차구분</label>
 							<select class="form-control input-sm" name="pay_sche_code">
 								<option value="">납부회차</option>
 <?php foreach ($pay_sche_code as $lt) : ?>

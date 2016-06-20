@@ -968,7 +968,7 @@ class M1 extends CI_Controller {
 					$data['total_paid'] = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS total_paid FROM cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' "); // 계약자별 총 수납액
 				}
 				// 수납 약정
-				$pay_sche_code = $data['pay_sche_code'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' "); // 약정 회차
+				$pay_sche_code = $data['pay_sche_code'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code>'2' "); // 계약금 이후 약정 회차
 				$data['contractor_info'] = ( !empty($this->input->get('ho'))) ? "<font color='#9f0404'><span class='glyphicon glyphicon-import' aria-hidden='true' style='padding-right: 10px;'></span></font><b>[".$unit->type." 타입] &nbsp;".$now_dong ." 동 ". $now_ho." 호 - 계약자 : ".$cont_data->contractor."</b>" : "";
 
 				// 수납 계좌
