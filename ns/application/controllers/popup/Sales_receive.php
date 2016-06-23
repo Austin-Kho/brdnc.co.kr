@@ -40,6 +40,9 @@ class Sales_receive extends CI_Controller
 
 		//본 페이지 로딩
 		$this->load->view('/popup/sales_receive_v', $data);
+
+
+
 		//본 페이지 로딩
 		$this->load->view('/popup/pop_footer_v');
 	}
