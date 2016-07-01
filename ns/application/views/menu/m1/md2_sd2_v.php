@@ -163,7 +163,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 							<label for="pay_sche_code" class="sr-only">회차구분</label>
 							<select class="form-control input-sm" name="pay_sche_code">
 								<option value="">납부회차</option>
-<?php foreach ($pay_sche_code as $lt) : ?>
+<?php foreach ($pay_sche_code_sel as $lt) : ?>
 								<option value="<?php echo $lt->pay_code; ?>" <?php if($this->input->get('modi')=='1' && $modi_rec->pay_sche_code==$lt->pay_code) echo "selected"; else echo set_select('pay_sche_code', $lt->pay_code); ?>><?php echo $lt->pay_name; ?></option>
 <?php endforeach; ?>
 							</select>
