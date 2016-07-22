@@ -195,7 +195,7 @@
 									<td class="center" ><?php echo $lt->deal_date; ?></td>
 									<td class="center"> <?php echo $cla1." - ".$cla2; ?></td>
 									<td class="center" style="color: #000099;"> <?php echo $account; ?></td>
-									<td class=""><div data-toggle="tooltip" data-placement="right" title="<?php echo $lt->cont.$memo; ?>" style="cursor: pointer;"><?php echo cut_string($lt->cont, 18, '..'); ?></div></td>
+									<td class=""><div data-toggle="tooltip" data-placement="right" title="<?php echo $lt->cont.$memo; ?>" style="cursor: pointer;"><?php echo cut_string($lt->cont, 17, '..'); ?></div></td>
 									<td class=""><div data-toggle="tooltip" data-placement="right" title="<?php echo $lt->acc.$memo; ?>" style="cursor: pointer;"><?php echo cut_string($acc, 7, '..'); ?> </td>
 									<td class="center" style="background-color: #ECFEE9;"><?php echo $in_acc; ?> </td>
 									<td class="right" style="background-color: #ECFEE9;"> <?php echo $inc; ?></td>
