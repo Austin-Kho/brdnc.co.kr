@@ -177,7 +177,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 				</div>
 
 				<div class="row" style="margin: 0; padding: 0;">
-					<div class="col-sm-12 bo-top  bo-bottom" style="padding: 0; margin-bottom: 20px;">
+					<div class="col-sm-12 bo-top" style="padding: 0;">
 						<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">수납계좌</div>
 						<div class="col-xs-8 col-md-4" style="padding: 4px;">
 							<label for="paid_acc" class="sr-only">수납계좌</label>
@@ -195,6 +195,19 @@ for($i=(count($year)-1); $i>=0; $i--) :
 						</div>
 					</div>
 				</div>
+
+				<div class="row" style="margin: 0; padding: 0;">
+					<div class="col-sm-12 bo-top  bo-bottom" style="padding: 0; margin-bottom: 20px;">
+						<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px; height: 73px;">비 고</div>
+						<div class="col-xs-8 col-md-10" style="padding: 0;">
+							<label for="paid_date" class="sr-only">비 고</label>
+							<div class="col-xs-12" style="padding: 4px;">
+								<textarea class="form-control input-sm" id="note" name="note"  rows="3"><?php if($this->input->get('modi')=='1') echo $modi_rec->note; else echo set_value('note'); ?></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+
 	<?php if( !$this->input->get('ho')) : ?>
 				<div class="row">
 					<div class="col-sm-12 center" style="padding: 70px 0  86px;"><?php echo validation_errors('<div class="error">', '</div>'); ?>등록할 동 호수를 선택하여 주세요.</div>

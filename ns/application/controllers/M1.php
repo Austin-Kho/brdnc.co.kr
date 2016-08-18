@@ -969,7 +969,7 @@ class M1 extends CI_Controller {
 				}
 				// 수납 약정
             	$pay_sche_code = $data['pay_sche_code'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' "); // 전체 약정 회차
-            	$pay_sche_code_sel = $data['pay_sche_code_sel'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' AND     pay_code>'2' "); // 계약금 이후 약정 회차
+            	$pay_sche_code_sel = $data['pay_sche_code_sel'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project'  "); // 계약금 이후 약정 회차
 				$data['contractor_info'] = ( !empty($this->input->get('ho'))) ? "<font color='#9f0404'><span class='glyphicon glyphicon-import' aria-hidden='true' style='padding-right: 10px;'></span></font><b>[".$unit->type." 타입] &nbsp;".$now_dong ." 동 ". $now_ho." 호 - 계약자 : ".$cont_data->contractor."</b>" : "";
 
 				// 수납 계좌
@@ -985,6 +985,7 @@ class M1 extends CI_Controller {
 				$this->form_validation->set_rules('paid_amount', '수납금액', 'trim|numeric|required');
 				$this->form_validation->set_rules('paid_acc', '수납계좌', 'trim|required');
 				$this->form_validation->set_rules('paid_who', '입금자', 'trim|required|max_length[20]');
+				$this->form_validation->set_rules('note', '비 고', 'trim|max_length[200]');
 
 				if($this->form_validation->run() == FALSE) {
 
@@ -1000,6 +1001,7 @@ class M1 extends CI_Controller {
 						'paid_acc' => $this->input->post('paid_acc'),
 						'paid_date' => $this->input->post('paid_date'),
 						'paid_who' => $this->input->post('paid_who'),
+						'note' => $this->input->post('note'),
 						'reg_date' => date('Y-m-d'),
 						'reg_worker' => $this->session->userdata('name')
 					);
