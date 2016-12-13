@@ -106,6 +106,7 @@ class M1 extends CI_Controller {
 				if( !empty($this->input->get('dong'))) {$dn = $this->input->get('dong'); $cont_query .= " AND unit_dong='$dn' ";}
 				if( !empty($this->input->get('s_date'))) {$sd = $this->input->get('s_date'); $cont_query .= " AND cms_sales_contract.cont_date>='$sd' ";}
 				if( !empty($this->input->get('e_date'))) {$ed = $this->input->get('e_date'); $cont_query .= " AND cms_sales_contract.cont_date<='$ed' ";}
+				if( !empty($this->input->get('sc_name'))) {$ctor = $this->input->get('sc_name'); $cont_query .= " AND (cms_sales_contractor.contractor='$ctor' OR cms_sales_contract.note LIKE '%$ctor%') ";}
 
 				//페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
