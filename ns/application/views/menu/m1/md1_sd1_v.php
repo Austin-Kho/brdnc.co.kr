@@ -236,7 +236,7 @@ echo form_open(base_url(uri_string()), $attributes);
 				</div> -->
 				<div class="col-xs-10 col-sm-4 col-md-2" style="height: 40px; padding: 6px 5px; text-align: right;">
 					<label for="계약자명" class="sr-only">입금자</label>
-					<input type="text" class="form-control input-sm" name="sc_name" maxlength="10" value="<?php if($this->input->get('sc_name')) echo $this->input->get('sc_name'); ?>" placeholder="계약자명">
+					<input type="text" class="form-control input-sm" name="sc_name" maxlength="10" value="<?php if($this->input->get('sc_name')) echo $this->input->get('sc_name'); ?>" placeholder="계약자명" onkeydown="if(event.keyCode==13)submit();">
 				</div>
 				<div class="col-xs-2 col-sm-2 col-md-1 center" style="height: 40px; padding: 5px;">
 					<input type="button" value="검 색" class="btn btn-info btn-sm" onclick="submit();">
