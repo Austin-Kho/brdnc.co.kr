@@ -68,7 +68,7 @@
 					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 						<div class="col-xs-12" style="padding: 0px;">
 							<label for="type" class="sr-only">타입</label>
-							<select class="form-control input-sm" name="type" onchange="submit();">
+							<select class="form-control input-sm" name="type" onchange="submit();"  <?php if( !$this->input->get('project')) echo "disabled"; ?>>
 								<option value=""> 선 택</option>
 <?php foreach($type_list as $lt) : ?>
 								<option value="<?php echo $lt->type; ?>" <?php if($lt->type==$this->input->get('type')) echo "selected"; ?>><?php echo $lt->type; ?></option>
@@ -82,7 +82,7 @@
 					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 						<div class="col-xs-12" style="padding: 0px;">
 							<label for="dong" class="sr-only">동</label>
-							<select class="form-control input-sm" name="dong" onchange="submit();">
+							<select class="form-control input-sm" name="dong" onchange="submit();"  <?php if( !$this->input->get('type')) echo "disabled"; ?>>
 								<option value=""> 선 택</option>
 	<?php foreach($dong_list as $lt) : ?>
 								<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->get('dong')) echo "selected"; ?>><?php echo $lt->dong." 동"; ?></option>
