@@ -6,8 +6,8 @@
 		background-image : url('/ns/static/img/bg_dot.jpg');
 	}
 
-	::selection { background-color: #31374F; color: #FFF; }
-	::-moz-selection { background-color: #31374F; color: #FFF; }
+	::selection { background-color: #1EB509; color: #FFF; }
+	::-moz-selection { background-color: #1EB509; color: #FFF; }
 	a { outline:none; select-dummy: expression(this.hideFocus=true); }
 	a { outline:none; }
 	* : focus { outline: none; }
