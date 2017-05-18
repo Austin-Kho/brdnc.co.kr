@@ -1065,9 +1065,11 @@ class M1 extends CI_Controller {
 				$price = $data['price'] = $this->main_m->sql_result(" SELECT *, cms_sales_price.seq AS pr_seq FROM cms_sales_price, cms_sales_con_floor WHERE cms_sales_price.pj_seq='$project' AND con_diff_seq='".$this->input->get('con_diff')."' AND con_floor_seq=cms_sales_con_floor.seq  ORDER BY cms_sales_price.seq ");
 				$pay_sche = $data['pay_sche'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' AND pay_sort='".$this->input->get('pay_sort')."' ORDER BY pay_code ");
 
-				$data['pr_diff'] = $this->main_m->sql_result(" SELECT 	cms_sales_con_diff.seq, diff_no, diff_name, COUNT(con_diff_seq) AS num_diff FROM cms_sales_price, cms_sales_con_diff WHERE cms_sales_price.pj_seq='$project' AND cms_sales_price.con_diff_seq=cms_sales_con_diff.seq "); // 차수
-				$data['pr_type'] = $this->main_m->sql_result(" SELECT COUNT(con_diff_seq) AS num_type FROM cms_sales_price WHERE pj_seq='$project' GROUP BY con_type_seq ");
-
+				$diff_no = $this->input->get('con_diff');
+				$data['pr_diff'] = $this->main_m->sql_result(" SELECT	seq, diff_no, diff_name FROM cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$diff_no' "); // 차수
+				$data['pr_floor'] = $this->main_m->sql_result(" SELECT seq, floor_name, COUNT(seq) AS num_floor FROM cms_sales_con_floor WHERE pj_seq='$project' "); // 층별
+				$data['pr_type'] = $this->main_m->sql_result(" SELECT seq, type_name, COUNT(seq) AS num_type FROM cms_sales_con_type WHERE pj_seq='$project' "); // 타입
+				$data['pr_row'] = $data['pr_floor'][0]->num_floor*$data['pr_type'][0]->num_type;
 
 				// 라이브러리 로드
 				$this->load->library('form_validation'); // 폼 검증

@@ -194,8 +194,8 @@ if( !$this->input->get('con_diff') OR  !$this->input->get('pay_sort'))  :
 					</thead>
 					<tbody>
 <?php for($i=0; $i<count($price); $i++) :
-	$diff_td = ($i===0) ?  "<td rowspan='".$pr_diff[$i]->num_diff."'>".$pr_diff[$i]->diff_name."</td>" : ""; // 차수명
-	$type_td = (($i+$pr_type[0]->num_type)%$pr_type[0]->num_type===0) ? "<td rowspan='".$pr_type[0]->num_type."'>".$price[$i]->con_type."</td>" : ""; // 타입명
+	$diff_td = ($i===0) ?  "<td rowspan='".($pr_row)."'>".$pr_diff[$i]->diff_name."</td>" : ""; // 차수명
+	$type_td = (($pr_row-$i)%$pr_floor[0]->num_floor===0) ? "<td rowspan='".$pr_floor[0]->num_floor."'>".$price[$i]->con_type."</td>" : ""; // 타입명
 ?>
 						<tr>
 							<?php echo $diff_td; ?>
