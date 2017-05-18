@@ -104,7 +104,7 @@ endif;?>
 	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
 		<div class="col-xs-12 font14" style="padding: 0;">
          <p class="bg-info" style="padding: 13px 20px; margin: 0;">
-            <span <?php echo $red_style; ?>><?php if($this->input->get('ho')) echo $del_op;?><?php echo $contractor_info;?><?php if($this->input->get('ho')) echo $del_cl;?></span>
+            <span <?php if($this->input->get('ho')) echo $red_style; ?>><?php if($this->input->get('ho')) echo $del_op;?><?php echo $contractor_info;?><?php if($this->input->get('ho')) echo $del_cl;?></span>
             <span><?php if($this->input->get('ho')) echo $nt; ?></span>
          </p>
       </div>
