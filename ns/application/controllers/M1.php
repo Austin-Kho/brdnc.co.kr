@@ -61,7 +61,7 @@ class M1 extends CI_Controller {
 
 		// 계약현황 1. 계약현황 ////////////////////////////////////////////////////////////////////
 		if($mdi==1 && $sdi==1 ){
-			// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+			$this->output->enable_profiler(TRUE); //프로파일러 보기//
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m1_1_1', $this->session->userdata['user_id']);
 
@@ -82,6 +82,7 @@ class M1 extends CI_Controller {
 				for($i=0; $i<count($data['tp_name']); $i++) {
 					$data['summary'][$i] = $this->main_m->sql_row(" SELECT COUNT(type) AS type_num, SUM(is_hold) AS hold, SUM(is_application) AS app, SUM(is_contract) AS cont FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND type='".$data['tp_name'][$i]->type."' ");
 				}
+
 				// 요약 총계 데이터 가져오기
 				$data['sum_all'] = $this->main_m->sql_row(" SELECT COUNT(seq) AS unit_num, SUM(is_hold) AS hold, SUM(is_application) AS app, SUM(is_contract) AS cont FROM cms_project_all_housing_unit WHERE pj_seq='$project' ");
 
@@ -90,7 +91,6 @@ class M1 extends CI_Controller {
 				$data['app_data'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_application WHERE pj_seq='$project' AND disposal_div='0' OR disposal_div='2' OR ((disposal_div='1' OR disposal_div='3') AND disposal_date>='$dis_date') ORDER BY app_date DESC, seq DESC ");
 
 				// 계약 데이터 필터링(타입, 동 별)
-
 				$data['sc_cont_diff'] = $this->main_m->sql_result(" SELECT cont_diff FROM cms_sales_contract GROUP BY cont_diff ORDER BY cont_diff ");
 				$data['sc_cont_type'] = $this->main_m->sql_result(" SELECT unit_type FROM cms_sales_contract GROUP BY unit_type ORDER BY unit_type ");
 				if($this->input->get('type')) {

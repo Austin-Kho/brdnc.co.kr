@@ -62,14 +62,20 @@ endfor;
 			<table class="table table-bordered table-hover table-condensed">
 				<thead class="bo-top center bgf8">
 					<tr>
-						<td width="20%">프로젝트명</td>
-						<td width="10%">타 입</td>
-						<td width="10%">세 대 수</td>
-						<td width="10%">유보세대</td>
-						<td width="11%">청약 건수</td>
-						<td width="12%">계약 건수</td>
-						<td width="12%">계 약 율</td>
-						<td width="15%">분양율(청약+계약)</td>
+						<td rowspan="2">프로젝트명</td>
+						<td rowspan="2">타 입</td>
+						<td rowspan="2">세 대 수</td>
+						<td rowspan="2">유보세대</td>
+						<td rowspan="2">청약 건수</td>
+						<td colspan="<?php echo count($sc_cont_diff)+1; ?>">계약 건수</td>
+						<td rowspan="2">계 약 율</td>
+						<td rowspan="2">분양율<br>(청약+계약)</td>
+					</tr>
+					<tr>
+<?php foreach($sc_cont_diff as $lt) : ?>
+						<td><?php echo $lt->cont_diff; ?> 차</td>
+<?php endforeach; ?>
+						<td>합계</td>
 					</tr>
 				</thead>
 				<tbody class="bo-bottom center">
@@ -82,6 +88,11 @@ endfor;
 						<td class="right"><?php echo $summary[$i]->type_num." 세대"; ?></td>
 						<td class="right"><?php echo $summary[$i]->hold." 세대"; ?></td>
 						<td class="right" style="color: #273169;"><?php echo $summary[$i]->app." 건"; ?></td>
+	<?php for($j=0; $j<count($sc_cont_diff); $j++):
+					$cn = $this->main_m->sql_row(" SELECT COUNT(seq) AS cont_num FROM cms_sales_contract WHERE pj_seq='$project' AND unit_type='".$tp_name[$i]->type."' AND cont_diff='".$sc_cont_diff[$j]->cont_diff."' ");
+	?>
+						<td class="right"><?php echo $cn->cont_num." 건 "; ?></td>
+	<?php endfor; ?>
 						<td class="right" style="color: #a60202;"><?php echo $summary[$i]->cont." 건"; ?></td>
 						<td class="right"><?php echo number_format(($summary[$i]->cont/$summary[$i]->type_num*100), 2)." %" ?></td>
 						<td class="right"><?php echo number_format((($summary[$i]->app+$summary[$i]->cont)/$summary[$i]->type_num*100), 2)." %" ?></td>
@@ -95,7 +106,14 @@ endfor;
 						<td><?php echo $sum_all->unit_num." 세대"; ?></td>
 						<td><?php echo $sum_all->hold." 세대"; ?></td>
 						<td style="color: #273169; font-weight: bold;"><?php echo $sum_all->app." 건"; ?></td>
+<?php for($j=0; $j<count($sc_cont_diff); $j++):
+				$cntot = $this->main_m->sql_row(" SELECT COUNT(seq) AS total FROM cms_sales_contract WHERE pj_seq='$project' AND cont_diff='".$sc_cont_diff[$j]->cont_diff."' ");
+?>
+						<td style="font-weight: bold;"><?php echo $cntot->total." 건"; ?></td>
+<?php endfor; ?>
 						<td style="color: #a60202; font-weight: bold;"><?php echo $sum_all->cont." 건"; ?></td>
+
+
 						<td><?php echo number_format(($sum_all->cont/$sum_all->unit_num*100), 2)." %" ?></td>
 						<td><?php echo number_format((($sum_all->app+$sum_all->cont)/$sum_all->unit_num*100), 2)." %" ?></td>
 					</tr>
