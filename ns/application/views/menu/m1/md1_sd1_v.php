@@ -179,6 +179,15 @@ echo form_open(base_url(uri_string()), $attributes);
 					</select>
 				</div>
 				<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
+					<label for="diff" class="sr-only">차수별</label>
+					<select class="form-control input-sm" name="diff">
+						<option value=""> 차수별</option>
+<?php foreach($sc_cont_diff as $lt) : ?>
+						<option value="<?php echo $lt->cont_diff; ?>" <?php if($lt->cont_diff == $this->input->get('diff')) echo "selected"; ?>> <?php echo $lt->cont_diff; ?> 차</option>
+<?php endforeach; ?>
+					</select>
+				</div>
+				<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
 					<label for="type" class="sr-only">타입별</label>
 					<select class="form-control input-sm" name="type" onchange="submit();">
 						<option value=""> 타입별</option>
@@ -234,7 +243,7 @@ echo form_open(base_url(uri_string()), $attributes);
 					<a href="javascript:" onclick="term_put('s_date', 'e_date', '3m');" title="3개월"><img src="<?php echo base_url(); ?>static/img/to_3month.jpg" alt="3개월"></a>
 					<button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="document.getElementById('s_date').value=''; document.getElementById('e_date').value='';"><span aria-hidden="true">&times;</span></button>
 				</div> -->
-				<div class="col-xs-10 col-sm-4 col-md-2" style="height: 40px; padding: 6px 5px; text-align: right;">
+				<div class="col-xs-10 col-sm-2 col-md-1" style="height: 40px; padding: 6px 5px; text-align: right;">
 					<label for="계약자명" class="sr-only">입금자</label>
 					<input type="text" class="form-control input-sm" name="sc_name" maxlength="10" value="<?php if($this->input->get('sc_name')) echo $this->input->get('sc_name'); ?>" placeholder="계약자명" onkeydown="if(event.keyCode==13)submit();">
 				</div>

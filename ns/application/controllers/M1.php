@@ -61,7 +61,7 @@ class M1 extends CI_Controller {
 
 		// 계약현황 1. 계약현황 ////////////////////////////////////////////////////////////////////
 		if($mdi==1 && $sdi==1 ){
-			// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+			$this->output->enable_profiler(TRUE); //프로파일러 보기//
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m1_1_1', $this->session->userdata['user_id']);
 
@@ -91,6 +91,7 @@ class M1 extends CI_Controller {
 
 				// 계약 데이터 필터링(타입, 동 별)
 
+				$data['sc_cont_diff'] = $this->main_m->sql_result(" SELECT cont_diff FROM cms_sales_contract GROUP BY cont_diff ORDER BY cont_diff ");
 				$data['sc_cont_type'] = $this->main_m->sql_result(" SELECT unit_type FROM cms_sales_contract GROUP BY unit_type ORDER BY unit_type ");
 				if($this->input->get('type')) {
 					$data['sc_cont_dong'] = $this->main_m->sql_result(" SELECT unit_dong FROM cms_sales_contract WHERE unit_type='".$this->input->get('type')."' GROUP BY unit_dong ORDER BY unit_dong ");
@@ -102,6 +103,7 @@ class M1 extends CI_Controller {
 				$cont_query = "  SELECT *, cms_sales_contractor.seq AS contractor_seq  ";
 				$cont_query .= " FROM cms_sales_contract, cms_sales_contractor  ";
 				$cont_query .= " WHERE pj_seq='$project' AND is_transfer='0' AND is_rescission='0' AND cms_sales_contract.seq = cont_seq ";
+				if( !empty($this->input->get('diff'))) {$df = $this->input->get('diff'); $cont_query .= " AND cont_diff='$df' ";}
 				if( !empty($this->input->get('type'))) {$tp = $this->input->get('type'); $cont_query .= " AND unit_type='$tp' ";}
 				if( !empty($this->input->get('dong'))) {$dn = $this->input->get('dong'); $cont_query .= " AND unit_dong='$dn' ";}
 				if( !empty($this->input->get('s_date'))) {$sd = $this->input->get('s_date'); $cont_query .= " AND cms_sales_contract.cont_date>='$sd' ";}
