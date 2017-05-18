@@ -32,10 +32,13 @@ for($i=(count($year)-1); $i>=0; $i--) :
 					</select>
 				</div>
 			</div>
-			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">입금자 성명</div>
+	<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-프로젝트 선택 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+
+
+			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">입금자(동호수)</div>
 			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 				<div class="col-xs-8" style="padding: 0px;">
-					<label for="payer" class="sr-only">입금자 성명</label>
+					<label for="payer" class="sr-only">입금자(동호수)</label>
 					<input type="text" name="payer" value="<?php if($this->input->get('payer')) echo $this->input->get("payer"); ?>" class="form-control input-sm">
 				</div>
 				<div class="col-xs-4">
@@ -74,11 +77,17 @@ for($i=(count($year)-1); $i>=0; $i--) :
 			<div class="col-xs-12 col-sm-12 col-md-4" style="padding: 8px; 0">
 				<div class="col-xs-12 center" style="padding-top: 5px;">조회 결과가 없습니다.</div>
 			</div>
-<?php elseif( !empty($now_payer)) : ?>
+<?php elseif( !empty($now_payer)) :
+	// 해지인 경우 red 스타일과 환불인 경우 Del 태그 만들기
+	if($now_payer[0]->is_rescission>0) {$red_style = "style = 'color : red'"; } else {$red_style = ""; }
+	if($now_payer[0]->is_rescission>1) {$del_op = "<del>"; $del_cl = "</del>";} else {$del_op = ""; $del_cl = "";}
+ ?>
 			<div class="col-xs-11 col-sm-11 col-md-3" style="padding: 12px 10px 6px; margin: 0;">
+
+
 <?php foreach($now_payer as $lt) :
- $dong_ho = explode("-", $lt->unit_dong_ho);
- echo "<a href='".base_url('m1/sales/2/2?project='.$project.'&payer='.$this->input->get('payer').'&dong='.$dong_ho[0].'&ho='.$dong_ho[1])."'>".$lt->paid_who."</a>";
+ 	$dong_ho = explode("-", $lt->unit_dong_ho);
+ 	echo $del_op."<a ".$red_style." href='".base_url('m1/sales/2/2?project='.$project.'&payer='.$lt->paid_who.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1])."'>".$lt->paid_who."(".$lt->unit_dong_ho.")</a>".$del_cl;
 ?>&nbsp;<?php endforeach; ?>
 			</div>
 			<div class="col-xs-1" style="padding: 8px;">
@@ -86,12 +95,11 @@ for($i=(count($year)-1); $i>=0; $i--) :
 			</div>
 <?php endif; ?>
 		</div>
-		<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-			<div class="col-xs-12 font14" style="padding: 0;"><p class="bg-info" style="padding: 13px 20px; margin: 0;"><?php echo $contractor_info; ?>&nbsp;</p></div>
-		</div>
 	</form>
-	<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-프로젝트 선택 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
 
+	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
+		<div class="col-xs-12 font14" style="padding: 0;"><p class="bg-info" style="padding: 13px 20px; margin: 0;"><?php echo $contractor_info; ?>&nbsp;</p></div>
+	</div>
 
 	<div class="row font12" style="margin: 0; padding: 0;">
 		<div class="col-sm-12 col-sm-12 col-md-7" style="padding: 0 10px;">
@@ -111,11 +119,21 @@ for($i=(count($year)-1); $i>=0; $i--) :
 <?php foreach($received as $lt):
 	$paid_sche = $this->main_m->sql_row(" SELECT pay_name FROM cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$lt->pay_sche_code' ");
 	$paid_acc_nick = $this->main_m->sql_row(" SELECT acc_nick FROM cms_sales_bank_acc WHERE pj_seq='$project' AND seq='$lt->paid_acc' ");
+
+
+	// 해지인 경우 red 스타일과 환불인 경우 Del 태그 만들기
+	if($cont_data->is_rescission>0) {$red_style = "style = 'color : red'"; } else {$red_style = ""; }
+	if($cont_data->is_rescission>1) {$del_op = "<del>"; $del_cl = "</del>";} else {$del_op = ""; $del_cl = "";}
+
 ?>
 						<tr style="background-color: #F9FAD9;">
 							<td><?php echo $lt->paid_date; ?></td>
 							<td><?php echo $paid_sche->pay_name; ?></td>
-							<td class="right"><a href="?modi=1&project=<?php echo $project; ?>&dong=<?php echo $this->input->get('dong'); ?>&ho=<?php echo $this->input->get('ho'); ?>&rec_seq=<?php echo $lt->seq; ?>" data-toggle="tooltip" title="입력 내용 수정하기"><?php echo number_format($lt->paid_amount); ?></a></td>
+							<td class="right">
+								<?php echo $del_op; ?>
+									<a <?php echo $red_style; ?> href="?modi=1&project=<?php echo $project; ?>&dong=<?php echo $this->input->get('dong'); ?>&ho=<?php echo $this->input->get('ho'); ?>&rec_seq=<?php echo $lt->seq; ?>" data-toggle="tooltip" title="입력 내용 수정하기"><?php echo number_format($lt->paid_amount); ?></a>
+								<?php echo $del_cl; ?>
+							</td>
 							<td><?php echo $paid_acc_nick->acc_nick ; ?></td>
 							<td><?php echo $lt->paid_who; ?></td>
 						</tr>

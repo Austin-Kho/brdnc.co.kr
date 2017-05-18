@@ -954,15 +954,19 @@ class M1 extends CI_Controller {
 
 				$now_dong = $this->input->get('dong');
 				$now_ho = $this->input->get('ho');
-				$now_payer = $this->input->get('payer');
-				$data['now_payer'] = $this->main_m->sql_result(" SELECT paid_who, unit_dong_ho FROM cms_sales_received, cms_sales_contract WHERE cms_sales_received.pj_seq='$project' AND cont_seq=cms_sales_contract.seq AND paid_who='$now_payer' GROUP BY cont_seq ");
+				if(!empty($this->input->get('payer'))){
+					$now_payer = $this->input->get('payer');
+					$data['now_payer'] = $this->main_m->sql_result(" SELECT paid_who, cont_seq, unit_dong_ho, is_rescission FROM cms_sales_received, cms_sales_contract WHERE cms_sales_received.pj_seq='$project' AND cont_seq=cms_sales_contract.seq AND paid_who LIKE '%$now_payer%' GROUP BY cont_seq ");
+				}
 
-				$data['dong_list'] = $this->main_m->sql_result(" SELECT dong FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND is_contract='1' GROUP BY dong ORDER BY dong "); // 동 리스트
+				// $data['dong_list'] = $this->main_m->sql_result(" SELECT dong FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND is_contract='1' GROUP BY dong ORDER BY dong "); // 동 리스트
+				$data['dong_list'] = $this->main_m->sql_result(" SELECT dong FROM cms_project_all_housing_unit WHERE pj_seq='$project' GROUP BY dong ORDER BY dong "); // 동 리스트
 				$data['ho_list'] = $this->main_m->sql_result(" SELECT ho FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$now_dong' AND is_contract='1' GROUP BY ho ORDER BY ho "); // 호 리스트
-				$unit = $data['unit'] = $this->main_m->sql_row(" SELECT * FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$now_dong' AND ho='$now_ho' AND is_contract='1' ");  // 선택한 동호수 유닛
+
+				$unit = $data['unit'] = $this->main_m->sql_row(" SELECT * FROM cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$now_dong' AND ho='$now_ho' ");  // 선택한 동호수 유닛
 
 				if( !empty($unit->seq)){
-					$cont_where = " WHERE unit_seq='$unit->seq' AND is_transfer='0' AND is_rescission='0' AND cms_sales_contract.seq=cont_seq  ";
+					$cont_where = " WHERE unit_seq='$unit->seq' AND cms_sales_contract.seq=cont_seq  ";
 					$cont_query = "  SELECT *, cms_sales_contractor.seq AS contractor_seq FROM cms_sales_contract, cms_sales_contractor ".$cont_where;
 					$cont_data = $data['cont_data'] = $this->main_m->sql_row($cont_query); // 계약 및 계약자 데이터
 
@@ -973,7 +977,14 @@ class M1 extends CI_Controller {
 				// 수납 약정
             	$pay_sche_code = $data['pay_sche_code'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project' "); // 전체 약정 회차
             	$pay_sche_code_sel = $data['pay_sche_code_sel'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_pay_sche WHERE pj_seq='$project'  "); // 계약금 이후 약정 회차
-				$data['contractor_info'] = ( !empty($this->input->get('ho'))) ? "<font color='#9f0404'><span class='glyphicon glyphicon-import' aria-hidden='true' style='padding-right: 10px;'></span></font><b>[".$unit->type." 타입] &nbsp;".$now_dong ." 동 ". $now_ho." 호 - 계약자 : ".$cont_data->contractor."</b>" : "";
+
+
+
+				$data['contractor_info'] = ( !empty($this->input->get('ho'))) ? "
+				<font color='#9f0404'><span class='glyphicon glyphicon-import' aria-hidden='true' style='padding-right: 10px;'></span></font><b>
+				[".$unit->type." 타입] &nbsp;".$now_dong ." 동 ". $now_ho." 호 - 계약자 : ".$cont_data->contractor."</b>" : "";
+
+				$data['cont_info'] =
 
 				// 수납 계좌
 				$data['paid_acc'] = $this->main_m->sql_result(" SELECT * FROM cms_sales_bank_acc WHERE pj_seq='$project' ");
