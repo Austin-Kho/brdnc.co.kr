@@ -79,7 +79,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 			</div>
 <?php elseif( !empty($now_payer)) :
 	// 해지인 경우 red 스타일과 환불인 경우 Del 태그 만들기
-	if($now_payer[0]->is_rescission>0) {$red_style = "style = 'color : red'"; } else {$red_style = ""; }
+	if($now_payer[0]->is_rescission>0) {$red_style = "style = 'color : #c20303;'"; } else {$red_style = ""; }
 	if($now_payer[0]->is_rescission>1) {$del_op = "<del>"; $del_cl = "</del>";} else {$del_op = ""; $del_cl = "";}
  ?>
 			<div class="col-xs-11 col-sm-11 col-md-3" style="padding: 12px 10px 6px; margin: 0;">
@@ -96,9 +96,18 @@ for($i=(count($year)-1); $i>=0; $i--) :
 <?php endif; ?>
 		</div>
 	</form>
-
+<?php if($this->input->get('ho')) :
+// 해지인 경우 red 스타일과 환불인 경우 Del 태그 만들기
+if($cont_data->is_rescission>0) {$red_style = "style = 'color : #c20303;'"; $nt = " <strong>계약해지 세대</strong>"; } else {$red_style = ""; $rstyle = ""; $nt =""; }
+if($cont_data->is_rescission>1) {$del_op = "<del>"; $del_cl = "</del>";} else {$del_op = ""; $del_cl = "";}
+endif;?>
 	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14" style="padding: 0;"><p class="bg-info" style="padding: 13px 20px; margin: 0;"><?php echo $contractor_info; ?>&nbsp;</p></div>
+		<div class="col-xs-12 font14" style="padding: 0;">
+         <p class="bg-info" style="padding: 13px 20px; margin: 0;">
+            <span <?php echo $red_style; ?>><?php if($this->input->get('ho')) echo $del_op;?><?php echo $contractor_info;?><?php if($this->input->get('ho')) echo $del_cl;?></span>
+            <span><?php if($this->input->get('ho')) echo $nt; ?></span>
+         </p>
+      </div>
 	</div>
 
 	<div class="row font12" style="margin: 0; padding: 0;">
@@ -119,12 +128,6 @@ for($i=(count($year)-1); $i>=0; $i--) :
 <?php foreach($received as $lt):
 	$paid_sche = $this->main_m->sql_row(" SELECT pay_name FROM cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$lt->pay_sche_code' ");
 	$paid_acc_nick = $this->main_m->sql_row(" SELECT acc_nick FROM cms_sales_bank_acc WHERE pj_seq='$project' AND seq='$lt->paid_acc' ");
-
-
-	// 해지인 경우 red 스타일과 환불인 경우 Del 태그 만들기
-	if($cont_data->is_rescission>0) {$red_style = "style = 'color : red'"; } else {$red_style = ""; }
-	if($cont_data->is_rescission>1) {$del_op = "<del>"; $del_cl = "</del>";} else {$del_op = ""; $del_cl = "";}
-
 ?>
 						<tr style="background-color: #F9FAD9;">
 							<td><?php echo $lt->paid_date; ?></td>
