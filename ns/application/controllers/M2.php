@@ -47,10 +47,17 @@ class M2 extends CI_Controller {
 			array('프로젝트별 예산집행 내역<구축 작업 전>', '프로젝트별 예산집행 등록<구축 작업 전>', '프로젝트별 사업수지 관리<구축 작업 전>'), // 첫번째 하위 제목
 			array('프로세스 진행 현황<구축 작업 전>', '프로세스 관리 (등록/수정)<구축 작업 전>', '일정 관리 및 업무 분장<구축 작업 전>')                 // 두번째 하위 제목
 		);
+
+		// 등록된 프로젝트 데이터
+		$where = "";
+		if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
+		$data['all_pj'] = $this->main_m->sql_result(' SELECT * FROM cms_project '.$where.' ORDER BY biz_start_ym DESC ');
+		$project = $data['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
+
 		// 메뉴데이터 삽입 하여 메인 페이지 호출
 		$this->load->view('menu/m2/process_v', $menu);
 
-		// 전도금 관리 1. 전도금 내역 ////////////////////////////////////////////////////////////////////
+		// 예산집행 관리 1. 집행 현황 ////////////////////////////////////////////////////////////////////
 		if($mdi==1 && $sdi==1 ){
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m2_1_1', $this->session->userdata['user_id']);
@@ -62,17 +69,19 @@ class M2 extends CI_Controller {
 				// 불러올 페이지에 보낼 조회 권한 데이터
 				$data['auth'] = $auth['_m2_1_1'];
 
+				// . 프로젝트명, 타입 정보 구하기
+				$pj_info = $data['pj_info'] = $this->main_m->sql_row(" SELECT pj_name, type_name, type_color FROM cms_project WHERE seq='$project' ");
+
+
+
+
 
 				//본 페이지 로딩
 				$this->load->view('/menu/m2/md1_sd1_v', $data);
 			}
 
 
-
-
-
-
-		// 전도금 관리 2. 입출내역 ////////////////////////////////////////////////////////////////////
+		// 예산집행 관리 2. 집행 관리 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==1 && $sdi==2) {
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m2_1_2', $this->session->userdata['user_id']);
@@ -93,7 +102,7 @@ class M2 extends CI_Controller {
 
 
 
-		// 전도금 관리 3. 전도금 현황 ////////////////////////////////////////////////////////////////////
+		// 예산집행 관리 3. 수지 관리 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==1 && $sdi==3) {
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m2_1_3', $this->session->userdata['user_id']);
@@ -111,7 +120,7 @@ class M2 extends CI_Controller {
 
 
 
-		// 투입자원 관리 4. 인원현황 ////////////////////////////////////////////////////////////////////
+		// 프로세스 관리 1. 진행 현황 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==1) {
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m2_2_1', $this->session->userdata['user_id']);
@@ -131,7 +140,7 @@ class M2 extends CI_Controller {
 
 
 
-		// 투입자원 관리 1. 인원 등록 ////////////////////////////////////////////////////////////////////
+		// 프로세스 관리 2. 프로세스 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==2) {
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m2_2_2', $this->session->userdata['user_id']);
@@ -151,7 +160,7 @@ class M2 extends CI_Controller {
 
 
 
-		// 투입자원 관리 1. 소속 관리 ////////////////////////////////////////////////////////////////////
+		// 프로세스 관리 3. 일정 관리 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==3) {
 			// 조회 등록 권한 체크
 			$auth = $this->main_m->auth_chk('_m2_2_3', $this->session->userdata['user_id']);
