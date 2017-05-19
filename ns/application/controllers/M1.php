@@ -13,7 +13,9 @@ class M1 extends CI_Controller {
 		}
 		$this->load->model('main_m'); //모델 파일 로드
 		$this->load->model('m1_m'); //모델 파일 로드
+		$this->load->helper('alert'); // 경고창 헤퍼 로딩
 		$this->load->helper('cut_string'); // 문자열 자르기 헬퍼 로드
+		$this->load->library('excel'); // PHPExcel 라이브러리 로드
 	}
 
 	/**
@@ -24,6 +26,11 @@ class M1 extends CI_Controller {
 		$this->sales();
 	}
 
+	/**
+	 * [_remap 헤더와 푸터 불러오기 위한 선행함수]
+	 * @param  [type] $method [description]
+	 * @return [type]         [description]
+	 */
 	public function _remap($method){
 		// 헤더 include
 		$this->load->view('cms_main_header');
@@ -35,6 +42,12 @@ class M1 extends CI_Controller {
 		$this->load->view('cms_main_footer');
 	}
 
+	/**
+	 * [sales 페이지 메인 함수]
+	 * @param  string $mdi [2단계 제목]
+	 * @param  string $sdi [3단계 제목]
+	 * @return [type]      [description]
+	 */
 	public function sales($mdi='', $sdi=''){
 		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
