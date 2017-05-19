@@ -7,7 +7,7 @@
 			<img src="<?php echo $this->config->base_url(); ?>static/img/cms_main_logo_.png" alt="" style="cursor: pointer;">
 		</div>
 		<h3 class="form-signin-heading">신규 계정등록</h3>
-		<details>직원 전용프로그램입니다. 계정등록 후 별도 인증이 필요하며, 인증을 거치지 않은 경우 계정등록 후에도 로그인 할 수 없습니다.</details><p></p>
+		<details style="cursor: pointer;">이 프로그램은 직원 전용 프로그램입니다. 계정등록 후 별도 인증이 필요하며, 인증을 거치지 않은 경우 계정등록 후에도 로그인 할 수 없습니다.</details><p></p>
 		<label for="inputName" class="control-label">Name</label>
 			<input type="text" name="name"  value="<?php echo set_value('name'); ?>" id="inputName" class="form-control han" placeholder="이름" required autofocus>
 		<label for="inputId" class="control-label">ID</label>

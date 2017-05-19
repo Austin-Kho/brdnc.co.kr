@@ -70,7 +70,7 @@
 </div>
 <div class="well hidden-xs">
 	<blockquote  style="margin: 0;">
-		<p><?php echo $saying->saying_han; ?></p>
+		<p style="font-weight: bold; color: #7c6848;"><?php echo $saying->saying_han; ?></p>
 		<footer><?php echo $saying->saying_en; ?></footer>
 	</blockquote>
 </div>
