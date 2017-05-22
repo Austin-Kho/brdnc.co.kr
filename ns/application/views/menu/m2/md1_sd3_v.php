@@ -36,142 +36,43 @@ for($i=(count($year)-1); $i>=0; $i--) :
 	</form>
 </div>
 
-<div class="main_start">&nbsp;</div>
 <div class="row">
-<div class="col-md-6">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>전체 현장별 전도금 현황</th>
-        <th>Last Name</th>
-        <th>Username</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div class="col-md-6">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Username</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-</div>
-
-<div class="row">
-<div class="col-md-6">
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Username</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td rowspan="2">1</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@TwBootstrap</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div class="col-md-6">
-  <table class="table table-condensed">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Username</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+	<div class="col-md-12">
+	  <table class="table table-bordered">
+	    <thead>
+	      <tr>
+	        <th>사업명</th>
+	        <th>동춘1구역지역주택조합 공동주택사업 수지표</th>
+	        <th>Last Name</th>
+	        <th>Username</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+	        <td rowspan="2">1</td>
+	        <td>Mark</td>
+	        <td>Otto</td>
+	        <td>@mdo</td>
+	      </tr>
+	      <tr>
+	        <td>Mark</td>
+	        <td>Otto</td>
+	        <td>@TwBootstrap</td>
+	      </tr>
+	      <tr>
+	        <td>2</td>
+	        <td>Jacob</td>
+	        <td>Thornton</td>
+	        <td>@fat</td>
+	      </tr>
+	      <tr>
+	        <td>3</td>
+	        <td colspan="2">Larry the Bird</td>
+	        <td>@twitter</td>
+	      </tr>
+	    </tbody>
+	  </table>
+	</div>
 </div>
 
 
