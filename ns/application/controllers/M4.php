@@ -16,7 +16,6 @@ class M4 extends CI_Controller {
 		$this->load->helper('alert'); // 경고창 헤퍼 로딩
 		$this->load->helper('cut_string'); // 문자열 자르기 헬퍼 로딩
 		$this->load->library('excel'); // PHPExcel 라이브러리 로드
-
 	}
 
 	/**

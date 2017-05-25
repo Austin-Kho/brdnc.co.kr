@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Cash_book extends CI_Controller {
+class Contract_data extends CI_Controller {
 	/**
 	 * [__construct 이 클래스의 생성자]
 	 */
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('main_m'); //모델 파일 로드
-		$this->load->model('m4_m'); //모델 파일 로드
+		$this->load->model('m1_m'); //모델 파일 로드
 		// PHPExcel 라이브러리 로드
 		$this->load->library('excel');
 		$this->load->helper('cut_string');
@@ -25,38 +25,38 @@ class Cash_book extends CI_Controller {
 	public function excel_file(){
 
 		// 검색변수 데이터 --------------------------------------------------------//
-		$sh_frm = array(
-			'class1' => $this->input->get('class1'),
-			'class2' => $this->input->get('class2'),
-			's_date' => $this->input->get('s_date'),
-			'e_date' => $this->input->get('e_date'),
-			'sh_con' => $this->input->get('search_con'),
-			'sh_text' => $this->input->get('search_text')
-		);
-		$where=" (com_div>0 AND ((in_acc=no AND class2<>7) OR out_acc=no) OR (com_div IS NULL AND in_acc=no AND class2=6)) ";
-
-		//검색어가 있을 경우
-		if($sh_frm['class1']){
-			if($sh_frm['class1']==1) $where.=" AND class1='1' ";
-			if($sh_frm['class1']==2) $where.=" AND class1='2' ";
-			if($sh_frm['class1']==3) $where.=" AND class1='3' ";
-		}
-		if($sh_frm['class2']) $where.=" AND class2='".$sh_frm['class2']."' ";
-		if($sh_frm['s_date']) $where.=" AND deal_date>='".$sh_frm['s_date']."' ";
-		if($sh_frm['e_date']) {$where.=" AND deal_date<='".$sh_frm['e_date']."' "; } //$e_add=" AND deal_date<='$sh_frm['e_date']' ";} else{$e_add="";}
-
-		if($sh_frm['sh_text']){
-			if($sh_frm['sh_con']==0) $where.=" AND (account like '%".$sh_frm['sh_text']."%' OR cont like '%".$sh_frm['sh_text']."%' OR acc like '%".$sh_frm['sh_text']."%' OR evidence like '%".$sh_frm['sh_text']."%' OR cms_capital_cash_book.worker like '%".$sh_frm['sh_text']."%') "; // 통합검색
-			if($sh_frm['sh_con']==1) $where.=" AND account like '%".$sh_frm['sh_text']."%' "; // 계정과목
-			if($sh_frm['sh_con']==2) $where.=" AND cont like '%".$sh_frm['sh_text']."%' "; //적요
-			if($sh_frm['sh_con']==3) $where.=" AND acc like '%".$sh_frm['sh_text']."%' "; // 거래처
-			if($sh_frm['sh_con']==4) $where.=" AND (in_acc like '%".$sh_frm['sh_text']."%' OR out_acc like '%".$sh_frm['sh_text']."%')  ";  //입출금처
-		}
+		// $sh_frm = array(
+		// 	'class1' => $this->input->get('class1'),
+		// 	'class2' => $this->input->get('class2'),
+		// 	's_date' => $this->input->get('s_date'),
+		// 	'e_date' => $this->input->get('e_date'),
+		// 	'sh_con' => $this->input->get('search_con'),
+		// 	'sh_text' => $this->input->get('search_text')
+		// );
+		// $where=" (com_div>0 AND ((in_acc=no AND class2<>7) OR out_acc=no) OR (com_div IS NULL AND in_acc=no AND class2=6)) ";
+		//
+		// //검색어가 있을 경우
+		// if($sh_frm['class1']){
+		// 	if($sh_frm['class1']==1) $where.=" AND class1='1' ";
+		// 	if($sh_frm['class1']==2) $where.=" AND class1='2' ";
+		// 	if($sh_frm['class1']==3) $where.=" AND class1='3' ";
+		// }
+		// if($sh_frm['class2']) $where.=" AND class2='".$sh_frm['class2']."' ";
+		// if($sh_frm['s_date']) $where.=" AND deal_date>='".$sh_frm['s_date']."' ";
+		// if($sh_frm['e_date']) {$where.=" AND deal_date<='".$sh_frm['e_date']."' "; } //$e_add=" AND deal_date<='$sh_frm['e_date']' ";} else{$e_add="";}
+		//
+		// if($sh_frm['sh_text']){
+		// 	if($sh_frm['sh_con']==0) $where.=" AND (account like '%".$sh_frm['sh_text']."%' OR cont like '%".$sh_frm['sh_text']."%' OR acc like '%".$sh_frm['sh_text']."%' OR evidence like '%".$sh_frm['sh_text']."%' OR cms_capital_cash_book.worker like '%".$sh_frm['sh_text']."%') "; // 통합검색
+		// 	if($sh_frm['sh_con']==1) $where.=" AND account like '%".$sh_frm['sh_text']."%' "; // 계정과목
+		// 	if($sh_frm['sh_con']==2) $where.=" AND cont like '%".$sh_frm['sh_text']."%' "; //적요
+		// 	if($sh_frm['sh_con']==3) $where.=" AND acc like '%".$sh_frm['sh_text']."%' "; // 거래처
+		// 	if($sh_frm['sh_con']==4) $where.=" AND (in_acc like '%".$sh_frm['sh_text']."%' OR out_acc like '%".$sh_frm['sh_text']."%')  ";  //입출금처
+		// }
 		// 검색변수 데이터 --------------------------------------------------------//
 
 		// 검색결과 데이터 --------------------------------------------------------//
-		$list_num = $this->m4_m->cash_book_list('cms_capital_cash_book, cms_capital_bank_account', $where, '', '', $sh_frm, 'num', '');
-		$cb_list = $this->m4_m->cash_book_list('cms_capital_cash_book, cms_capital_bank_account', $where, '', '', $sh_frm, '', 'ex');
+		// $list_num = $this->m4_m->cash_book_list('cms_capital_cash_book, cms_capital_bank_account', $where, '', '', $sh_frm, 'num', '');
+		// $cb_list = $this->m4_m->cash_book_list('cms_capital_cash_book, cms_capital_bank_account', $where, '', '', $sh_frm, '', 'ex');
 		// 검색결과 데이터 --------------------------------------------------------//
 
 
@@ -179,7 +179,7 @@ class Cash_book extends CI_Controller {
 
 		// 본문 내용 ---------------------------------------------------------------//
 
-		$filename='cash_book.xlsx'; // 엑셀 파일 이름
+		$filename='contract_data.xlsx'; // 엑셀 파일 이름
 		header('Content-Type: application/vnd.ms-excel'); //mime 타입
 		header('Content-Disposition: attachment;filename="'.$filename.'"'); // 브라우저에서 받을 파일 이름
 		header('Cache-Control: max-age=0'); //no cache
@@ -189,3 +189,4 @@ class Cash_book extends CI_Controller {
 		$objWriter->save('php://output');
 	}
 }
+// End of File
