@@ -36,6 +36,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 	</form>
 </div>
 
+  <table class="table">
 <div class="row">
 	<div class="col-md-12">
 	  <table class="table table-bordered">
