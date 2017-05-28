@@ -37,13 +37,13 @@ for($i=(count($year)-1); $i>=0; $i--) :
 </div>
 
 <div class="row">
-	<div class="col-md-12">
-		<table class="table table-bordered">
+	<div class="col-md-12 table-responsive">
+		<table class="table table-bordered table-condensed table-hover font12">
 			<thead>
 				<tr>
-					<th style="text-align: center; background-color:#BDD5FE;">사 업 명</th>
-					<th colspan="4">동춘1구역지역주택조합 공동주택사업 수지표</th>
-					<th colspan="2" style="font-weight: lighter; font-size: 5pt">조건: </th>
+					<th style="background-color:#BDD5FE;">사 업 명</th>
+					<th colspan="4" style="background-color:#fcf3e4;">동춘1구역지역주택조합 공동주택사업 수지표</th>
+					<th colspan="2" style="font-weight: lighter; font-size: 5pt">조건 : 당사예상, 발코니 확장비 포함, 중도금 후불제(일반=무이자)</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -89,26 +89,28 @@ for($i=(count($year)-1); $i>=0; $i--) :
 					<td style="text-align: right;">0.00%</td>
 				</tr>
 				<tr>
-					<td style="background-color:#ECF2FB;">기부면적(도로 등)</td>
+					<td style="background-color:#ECF2FB;">전체연면적(건물)</td>
 					<td></td>
 					<td></td>
-					<td style="background-color:#ECF2FB;">토지평단가</td>
+					<td style="background-color:#ECF2FB;">건축규모</td>
 					<td></td>
-					<td style="background-color:#ECF2FB;">건폐율</td>
+					<td style="background-color:#ECF2FB;">PF 수수료</td>
 					<td></td>
 				</tr>
 				<tr>
-					<td style="background-color:#ECF2FB;">기부면적(도로 등)</td>
+					<td style="background-color:#ECF2FB;">지상연면적(건물)</td>
 					<td></td>
 					<td></td>
-					<td style="background-color:#ECF2FB;">토지평단가</td>
+					<td style="background-color:#ECF2FB;">세 대 수</td>
 					<td></td>
-					<td style="background-color:#ECF2FB;">건폐율</td>
+					<td style="background-color:#ECF2FB;">PF 이자율</td>
 					<td></td>
 				</tr>
 			</tbody>
 		</table>
-		<table class="table table-bordered">
+	</div>
+	<div class="col-md-12 table-responsive">
+		<table class="table table-bordered table-condensed table-hover font12">
 			<thead>
 				<tr>
 					<th colspan="5" style="text-align: center; background-color:#BDD5FE;">구 분</th>
