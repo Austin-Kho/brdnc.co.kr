@@ -256,6 +256,7 @@ if ( ! function_exists('get_access_selectbox')) {
         }
 
         $show_level_array = array('3', '4', '5');
+        $show_group_array = array('2', '4', '5');
 
         $result = '';
         $result .= '<select name="' . element('column_name', $config) . '" class="form-control" >';
@@ -274,9 +275,21 @@ if ( ! function_exists('get_access_selectbox')) {
         $result .= element('column_value', $config) === '100' ? 'selected="selected"' : '';
         $result .= '>관리자</option>';
 
+        $result .= '<option value="2"';
+        $result .= element('column_value', $config) === '2' ? 'selected="selected"' : '';
+        $result .= '>특정그룹사용자</option>';
+
         $result .= '<option value="3"';
         $result .= element('column_value', $config) === '3' ? 'selected="selected"' : '';
         $result .= '>특정레벨이상인자</option>';
+
+        $result .= '<option value="4"';
+        $result .= element('column_value', $config) === '4' ? 'selected="selected"' : '';
+        $result .= '>특정그룹 OR 특정레벨</option>';
+
+        $result .= '<option value="5"';
+        $result .= element('column_value', $config) === '5' ? 'selected="selected"' : '';
+        $result .= '>특정그룹 AND 특정레벨</option>';
 
         $result .= '</select>';
 
@@ -296,10 +309,37 @@ if ( ! function_exists('get_access_selectbox')) {
         }
         $result .= '</select> 레벨 이상인자 </span>';
 
+        $result .= '<div id="' . element('column_group_name', $config) . '" style="';
+        $result .= in_array(element('column_value', $config), $show_group_array)
+            ? 'display:block;' : 'display:none;';
+
+        $result .= '">';
+
+        $mgroup = element('mgroup', $config);
+        $group_value = json_decode(element('column_group_value', $config), true);
+        if (element('list', $mgroup)) {
+            foreach (element('list', $mgroup) as $key => $value) {
+                $result .= '    <label class="checkbox-inline">
+                    <input type="checkbox" name="'
+                    . element('column_group_name', $config)
+                    . '[]" value="' . element('mgr_id', $value) . '" ';
+                $result .= is_array($group_value) && in_array(element('mgr_id', $value), $group_value)
+                    ? 'checked="checked"' : '';
+
+                $result .= ' /> ' . element('mgr_title', $value) . '</label>';
+            }
+        }
+
+        $result .= '</div>';
         $result .= '<script type="text/javascript">';
         $result .= '$(function() {
             $(document).on("change", "select[name=' . element('column_name', $config) . ']", function() {';
-                $result .= 'if ($(this).val() == "3") {';
+                $result .= 'if ($(this).val() == "2" || $(this).val() == "4" || $(this).val() == "5") {';
+                    $result .= '$("#' . element('column_group_name', $config) . '").css("display", "block");';
+                $result .= '} else {';
+                    $result .= '$("#' . element('column_group_name', $config) . '").css("display", "none");';
+                $result .= '}';
+                $result .= 'if ($(this).val() == "3" || $(this).val() == "4" || $(this).val() == "5") {';
                     $result .= '$("#' . element('column_level_name', $config) . '").css("display", "inline");';
                 $result .= '} else {';
                     $result .= '$("#' . element('column_level_name', $config) . '").css("display", "none");';
@@ -429,6 +469,24 @@ if ( ! function_exists('display_username')) {
         }
 
         return $result;
+    }
+}
+
+
+/**
+ * 성인인지 여부
+ */
+if ( ! function_exists('is_adult')) {
+    function is_adult($birthday = '')
+    {
+        $birthday = str_replace('-', '', $birthday);
+        if (strlen($birthday) !== 8) return false;
+        if ( ! is_numeric($birthday)) return false;
+
+        $adult_day = date("Ymd", strtotime("-19 years", ctimestamp()));
+        $is_adult = ($birthday < $adult_day) ? true : false;
+        
+        return $is_adult;
     }
 }
 
@@ -1283,6 +1341,77 @@ if ( ! function_exists('curl_setopt_array')) {
     }
 }
 
+if ( ! function_exists('is_serialized')) {
+    function is_serialized($value, &$result = null)
+    {
+        // Bit of a give away this one
+        if (!is_string($value))
+        {
+            return false;
+        }
+        // Serialized false, return true. unserialize() returns false on an
+        // invalid string or it could return false if the string is serialized
+        // false, eliminate that possibility.
+        if ($value === 'b:0;')
+        {
+            $result = false;
+            return true;
+        }
+        $length	= strlen($value);
+        $end	= '';
+        switch ($value[0])
+        {
+            case 's':
+                if ($value[$length - 2] !== '"')
+                {
+                    return false;
+                }
+            case 'b':
+            case 'i':
+            case 'd':
+                // This looks odd but it is quicker than isset()ing
+                $end .= ';';
+            case 'a':
+            case 'O':
+                $end .= '}';
+                if ($value[1] !== ':')
+                {
+                    return false;
+                }
+                switch ($value[2])
+                {
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    break;
+                    default:
+                        return false;
+                }
+            case 'N':
+                $end .= ';';
+                if ($value[$length - 1] !== $end[0])
+                {
+                    return false;
+                }
+            break;
+            default:
+                return false;
+        }
+        if (($result = @unserialize($value)) === false)
+        {
+            $result = null;
+            return false;
+        }
+        return true;
+    }
+}
 
 /**
  * Browscap 정보 얻기
@@ -1334,6 +1463,35 @@ if ( ! function_exists('get_useragent_info')) {
     }
 }
 
+// 로그 폴더에 기록을 남깁니다. ( 디버그시 사용 )
+if ( ! function_exists('test_write_log')) {
+    function test_write_log($msg, $file_add='log', $is_export=false)
+    {
+        $log_path = APPPATH . 'logs';
+        if( is_writeable($log_path) ){
+            $file = $log_path."/test_".$file_add."_".date("Ymd").".php";
+
+            if(!($fp = fopen($file, "a+"))) return 0;
+
+            ob_start();
+            if( $is_export ){
+                echo var_export($msg, true);
+            } else {
+                print_r($msg);
+            }
+            $ob_msg = ob_get_contents();
+            ob_clean();
+
+            if(fwrite($fp, " ".$ob_msg."\n") === FALSE)
+            {
+                fclose($fp);
+                return 0;
+            }
+            fclose($fp);
+            return 1;
+        }
+    }
+}
 
 /**
  * cache 디렉토리에 해당 디렉토리가 생성되어 있는지 체크

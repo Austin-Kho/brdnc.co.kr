@@ -398,6 +398,276 @@ class Cleanlog extends CB_Controller
         $this->view = element('view_skin_file', element('layout', $view));
     }
 
+    /**
+     * 오래된로그 삭제>파일다운로드로그삭제 페이지입니다
+     */
+    public function filedownloadlog()
+    {
+        // 이벤트 라이브러리를 로딩합니다
+        $eventname = 'event_admin_config_cleanlog_filedownloadlog';
+        $this->load->event($eventname);
+
+        $view = array();
+        $view['view'] = array();
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+        $this->load->model('Post_file_download_log_model');
+
+        /**
+         * Validation 라이브러리를 가져옵니다
+         */
+        $this->load->library('form_validation');
+
+        /**
+         * 전송된 데이터의 유효성을 체크합니다
+         */
+        $config = array(
+            array(
+                'field' => 'day',
+                'label' => '기간',
+                'rules' => 'trim|required|numeric|is_natural',
+            ),
+        );
+        $this->form_validation->set_rules($config);
+
+        /**
+         * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
+         * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
+         */
+        if ($this->form_validation->run() === false) {
+
+            // 이벤트가 존재하면 실행합니다
+            $view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+
+        } else {
+            /**
+             * 유효성 검사를 통과한 경우입니다.
+             * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
+             */
+
+            // 이벤트가 존재하면 실행합니다
+            $view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+
+            if ($this->input->post('criterion') && $this->input->post('day')) {
+
+                $deletewhere = array(
+                    'pfd_datetime <=' => $this->input->post('criterion'),
+                );
+                $this->Post_file_download_log_model->delete_where($deletewhere);
+
+                $view['view']['alert_message'] = '총 ' . number_format($this->input->post('log_count')) . ' 건의 '
+                    . $this->input->post('day') . '일 이상된 파일 다운로드 로그가 모두 삭제되었습니다';
+
+            } else {
+
+                $criterion = cdate('Y-m-d H:i:s', ctimestamp() - $this->input->post('day') * 24 * 60 * 60);
+                $countwhere = array(
+                    'pfd_datetime <=' => $criterion,
+                );
+                $log_count = $this->Post_file_download_log_model->count_by($countwhere);
+                $view['view']['criterion'] = $criterion;
+                $view['view']['day'] = $this->input->post('day');
+                $view['view']['log_count'] = $log_count;
+                if ($log_count > 0) {
+                    $view['view']['msg'] = '총 ' . number_format($log_count) . ' 건의 ' . $this->input->post('day') . '일 이상된 파일 다운로드 로그가 발견되었습니다. 이를 모두 삭제하시겠습니까?';
+                } else {
+                    $view['view']['alert_message'] = $this->input->post('day') . '일 이상된 파일 다운로드 로그가 발견되지 않았습니다';
+                }
+            }
+        }
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+        /**
+         * 어드민 레이아웃을 정의합니다
+         */
+        $layoutconfig = array('layout' => 'layout', 'skin' => 'filedownloadlog');
+        $view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+        $this->data = $view;
+        $this->layout = element('layout_skin_file', element('layout', $view));
+        $this->view = element('view_skin_file', element('layout', $view));
+    }
+
+    /**
+     * 오래된로그 삭제>게시물변경로그삭제 페이지입니다
+     */
+    public function posthistory()
+    {
+        // 이벤트 라이브러리를 로딩합니다
+        $eventname = 'event_admin_config_cleanlog_posthistory';
+        $this->load->event($eventname);
+
+        $view = array();
+        $view['view'] = array();
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+        $this->load->model('Post_history_model');
+
+        /**
+         * Validation 라이브러리를 가져옵니다
+         */
+        $this->load->library('form_validation');
+
+        /**
+         * 전송된 데이터의 유효성을 체크합니다
+         */
+        $config = array(
+            array(
+                'field' => 'day',
+                'label' => '기간',
+                'rules' => 'trim|required|numeric|is_natural',
+            ),
+        );
+        $this->form_validation->set_rules($config);
+
+        /**
+         * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
+         * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
+         */
+        if ($this->form_validation->run() === false) {
+
+            // 이벤트가 존재하면 실행합니다
+            $view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+
+        } else {
+            /**
+             * 유효성 검사를 통과한 경우입니다.
+             * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
+             */
+
+            // 이벤트가 존재하면 실행합니다
+            $view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+
+            if ($this->input->post('criterion') && $this->input->post('day')) {
+                $deletewhere = array(
+                    'phi_datetime <=' => $this->input->post('criterion'),
+                );
+                $this->Post_history_model->delete_where($deletewhere);
+                $view['view']['alert_message'] = '총 ' . number_format($this->input->post('log_count')) . ' 건의 ' . $this->input->post('day') . '일 이상된 게시물변경로그가 모두 삭제되었습니다';
+            } else {
+                $criterion = cdate('Y-m-d H:i:s', ctimestamp() - $this->input->post('day') * 24 * 60 * 60);
+                $countwhere = array(
+                    'phi_datetime <=' => $criterion,
+                );
+                $log_count = $this->Post_history_model->count_by($countwhere);
+                $view['view']['criterion'] = $criterion;
+                $view['view']['day'] = $this->input->post('day');
+                $view['view']['log_count'] = $log_count;
+                if ($log_count > 0) {
+                    $view['view']['msg'] = '총 ' . number_format($log_count) . ' 건의 ' . $this->input->post('day') . '일 이상된 게시물변경로그가 발견되었습니다. 이를 모두 삭제하시겠습니까?';
+                } else {
+                    $view['view']['alert_message'] = $this->input->post('day') . '일 이상된 게시물변경로그로그가 발견되지 않았습니다';
+                }
+            }
+        }
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+        /**
+         * 어드민 레이아웃을 정의합니다
+         */
+        $layoutconfig = array('layout' => 'layout', 'skin' => 'posthistory');
+        $view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+        $this->data = $view;
+        $this->layout = element('layout_skin_file', element('layout', $view));
+        $this->view = element('view_skin_file', element('layout', $view));
+    }
+
+    /**
+     * 오래된로그 삭제>링크클릭로그 삭제 페이지입니다
+     */
+    public function linkclicklog()
+    {
+        // 이벤트 라이브러리를 로딩합니다
+        $eventname = 'event_admin_config_cleanlog_linkclicklog';
+        $this->load->event($eventname);
+
+        $view = array();
+        $view['view'] = array();
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+        $this->load->model('Post_link_click_log_model');
+
+        /**
+         * Validation 라이브러리를 가져옵니다
+         */
+        $this->load->library('form_validation');
+
+        /**
+         * 전송된 데이터의 유효성을 체크합니다
+         */
+        $config = array(
+            array(
+                'field' => 'day',
+                'label' => '기간',
+                'rules' => 'trim|required|numeric|is_natural',
+            ),
+        );
+        $this->form_validation->set_rules($config);
+
+        /**
+         * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
+         * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
+         */
+        if ($this->form_validation->run() === false) {
+
+            // 이벤트가 존재하면 실행합니다
+            $view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+
+        } else {
+            /**
+             * 유효성 검사를 통과한 경우입니다.
+             * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
+             */
+
+            // 이벤트가 존재하면 실행합니다
+            $view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+
+            if ($this->input->post('criterion') && $this->input->post('day')) {
+
+                $deletewhere = array(
+                    'plc_datetime <=' => $this->input->post('criterion'),
+                );
+                $this->Post_link_click_log_model->delete_where($deletewhere);
+
+                $view['view']['alert_message'] = '총 ' . number_format($this->input->post('log_count')) . ' 건의 ' . $this->input->post('day') . '일 이상된 링크클릭로그가 모두 삭제되었습니다';
+            } else {
+                $criterion = cdate('Y-m-d H:i:s', ctimestamp() - $this->input->post('day') * 24 * 60 * 60);
+                $countwhere = array(
+                    'plc_datetime <=' => $criterion,
+                );
+                $log_count = $this->Post_link_click_log_model->count_by($countwhere);
+                $view['view']['criterion'] = $criterion;
+                $view['view']['day'] = $this->input->post('day');
+                $view['view']['log_count'] = $log_count;
+                if ($log_count > 0) {
+                    $view['view']['msg'] = '총 ' . number_format($log_count) . ' 건의 ' . $this->input->post('day') . '일 이상된 링크클릭로그가 발견되었습니다. 이를 모두 삭제하시겠습니까?';
+                } else {
+                    $view['view']['alert_message'] = $this->input->post('day') . '일 이상된 링크클릭로그가 발견되지 않았습니다';
+                }
+            }
+        }
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+        /**
+         * 어드민 레이아웃을 정의합니다
+         */
+        $layoutconfig = array('layout' => 'layout', 'skin' => 'linkclicklog');
+        $view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+        $this->data = $view;
+        $this->layout = element('layout_skin_file', element('layout', $view));
+        $this->view = element('view_skin_file', element('layout', $view));
+    }
 
     /**
      * 오래된로그 삭제>오래된쪽지삭제 페이지입니다

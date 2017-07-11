@@ -44,8 +44,10 @@
                         $config = array(
                             'column_name' => 'access_list',
                             'column_level_name' => 'access_list_level',
+                            'column_group_name' => 'access_list_group',
                             'column_value' => element('access_list', element('data', $view)),
                             'column_level_value' => element('access_list_level', element('data', $view)),
+                            'column_group_value' => element('access_list_group', element('data', $view)),
                             'max_level' => element('config_max_level', element('data', $view)),
                             'mgroup' => element('mgroup', element('data', $view)),
                             );
@@ -68,8 +70,10 @@
                         $config = array(
                             'column_name' => 'access_view',
                             'column_level_name' => 'access_view_level',
+                            'column_group_name' => 'access_view_group',
                             'column_value' => element('access_view', element('data', $view)),
                             'column_level_value' => element('access_view_level', element('data', $view)),
+                            'column_group_value' => element('access_view_group', element('data', $view)),
                             'max_level' => element('config_max_level', element('data', $view)),
                             'mgroup' => element('mgroup', element('data', $view)),
                             );
@@ -92,8 +96,10 @@
                         $config = array(
                             'column_name' => 'access_write',
                             'column_level_name' => 'access_write_level',
+                            'column_group_name' => 'access_write_group',
                             'column_value' => element('access_write', element('data', $view)),
                             'column_level_value' => element('access_write_level', element('data', $view)),
+                            'column_group_value' => element('access_write_group', element('data', $view)),
                             'max_level' => element('config_max_level', element('data', $view)),
                             'mgroup' => element('mgroup', element('data', $view)),
                             );
@@ -116,8 +122,10 @@
                         $config = array(
                             'column_name' => 'access_reply',
                             'column_level_name' => 'access_reply_level',
+                            'column_group_name' => 'access_reply_group',
                             'column_value' => element('access_reply', element('data', $view)),
                             'column_level_value' => element('access_reply_level', element('data', $view)),
+                            'column_group_value' => element('access_reply_group', element('data', $view)),
                             'max_level' => element('config_max_level', element('data', $view)),
                             'mgroup' => element('mgroup', element('data', $view)),
                             );
@@ -140,8 +148,10 @@
                         $config = array(
                             'column_name' => 'access_comment',
                             'column_level_name' => 'access_comment_level',
+                            'column_group_name' => 'access_comment_group',
                             'column_value' => element('access_comment', element('data', $view)),
                             'column_level_value' => element('access_comment_level', element('data', $view)),
+                            'column_group_value' => element('access_comment_group', element('data', $view)),
                             'max_level' => element('config_max_level', element('data', $view)),
                             'mgroup' => element('mgroup', element('data', $view)),
                             );
@@ -164,8 +174,10 @@
                         $config = array(
                             'column_name' => 'access_upload',
                             'column_level_name' => 'access_upload_level',
+                            'column_group_name' => 'access_upload_group',
                             'column_value' => element('access_upload', element('data', $view)),
                             'column_level_value' => element('access_upload_level', element('data', $view)),
+                            'column_group_value' => element('access_upload_group', element('data', $view)),
                             'max_level' => element('config_max_level', element('data', $view)),
                             'mgroup' => element('mgroup', element('data', $view)),
                             );
@@ -188,8 +200,10 @@
                         $config = array(
                             'column_name' => 'access_download',
                             'column_level_name' => 'access_download_level',
+                            'column_group_name' => 'access_download_group',
                             'column_value' => element('access_download', element('data', $view)),
                             'column_level_value' => element('access_download_level', element('data', $view)),
+                            'column_group_value' => element('access_download_group', element('data', $view)),
                             'max_level' => element('config_max_level', element('data', $view)),
                             'mgroup' => element('mgroup', element('data', $view)),
                             );
@@ -212,8 +226,10 @@
                         $config = array(
                             'column_name' => 'access_dhtml',
                             'column_level_name' => 'access_dhtml_level',
+                            'column_group_name' => 'access_dhtml_group',
                             'column_value' => element('access_dhtml', element('data', $view)),
                             'column_level_value' => element('access_dhtml_level', element('data', $view)),
+                            'column_group_value' => element('access_dhtml_group', element('data', $view)),
                             'max_level' => element('config_max_level', element('data', $view)),
                             'mgroup' => element('mgroup', element('data', $view)),
                             );
@@ -236,8 +252,10 @@
                         $config = array(
                             'column_name' => 'access_blame',
                             'column_level_name' => 'access_blame_level',
+                            'column_group_name' => 'access_blame_group',
                             'column_value' => element('access_blame', element('data', $view)),
                             'column_level_value' => element('access_blame_level', element('data', $view)),
+                            'column_group_value' => element('access_blame_group', element('data', $view)),
                             'max_level' => element('config_max_level', element('data', $view)),
                             'mgroup' => element('mgroup', element('data', $view)),
                             );
@@ -250,6 +268,203 @@
                         </label>
                         <label for="all_access_blame" class="checkbox-inline">
                             <input type="checkbox" name="all[access_blame]" id="all_access_blame" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">설문등록</label>
+                    <div class="col-sm-8 form-inline">
+                        <?php
+                        $config = array(
+                            'column_name' => 'access_poll_write',
+                            'column_level_name' => 'access_poll_write_level',
+                            'column_group_name' => 'access_poll_write_group',
+                            'column_value' => element('access_poll_write', element('data', $view)),
+                            'column_level_value' => element('access_poll_write_level', element('data', $view)),
+                            'column_group_value' => element('access_poll_write_group', element('data', $view)),
+                            'max_level' => element('config_max_level', element('data', $view)),
+                            'mgroup' => element('mgroup', element('data', $view)),
+                            );
+                        echo get_access_selectbox($config, true);
+                        ?>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_access_poll_write" class="checkbox-inline">
+                            <input type="checkbox" name="grp[access_poll_write]" id="grp_access_poll_write" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_access_poll_write" class="checkbox-inline">
+                            <input type="checkbox" name="all[access_poll_write]" id="all_access_poll_write" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">설문참여</label>
+                    <div class="col-sm-8 form-inline">
+                        <?php
+                        $config = array(
+                            'column_name' => 'access_poll_attend',
+                            'column_level_name' => 'access_poll_attend_level',
+                            'column_group_name' => 'access_poll_attend_group',
+                            'column_value' => element('access_poll_attend', element('data', $view)),
+                            'column_level_value' => element('access_poll_attend_level', element('data', $view)),
+                            'column_group_value' => element('access_poll_attend_group', element('data', $view)),
+                            'max_level' => element('config_max_level', element('data', $view)),
+                            'mgroup' => element('mgroup', element('data', $view)),
+                            );
+                        echo get_access_selectbox($config, true);
+                        ?>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_access_poll_attend" class="checkbox-inline">
+                            <input type="checkbox" name="grp[access_poll_attend]" id="grp_access_poll_attend" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_access_poll_attend" class="checkbox-inline">
+                            <input type="checkbox" name="all[access_poll_attend]" id="all_access_poll_attend" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">태그입력가능</label>
+                    <div class="col-sm-8 form-inline">
+                        <?php
+                        $config = array(
+                            'column_name' => 'access_tag_write',
+                            'column_level_name' => 'access_tag_write_level',
+                            'column_group_name' => 'access_tag_write_group',
+                            'column_value' => element('access_tag_write', element('data', $view)),
+                            'column_level_value' => element('access_tag_write_level', element('data', $view)),
+                            'column_group_value' => element('access_tag_write_group', element('data', $view)),
+                            'max_level' => element('config_max_level', element('data', $view)),
+                            'mgroup' => element('mgroup', element('data', $view)),
+                            );
+                        echo get_access_selectbox($config);
+                        ?>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_access_tag_write" class="checkbox-inline">
+                            <input type="checkbox" name="grp[access_tag_write]" id="grp_access_tag_write" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_access_tag_write" class="checkbox-inline">
+                            <input type="checkbox" name="all[access_tag_write]" id="all_access_tag_write" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">제목스타일사용가능</label>
+                    <div class="col-sm-8 form-inline">
+                        <?php
+                        $config = array(
+                            'column_name' => 'access_subject_style',
+                            'column_level_name' => 'access_subject_style_level',
+                            'column_group_name' => 'access_subject_style_group',
+                            'column_value' => element('access_subject_style', element('data', $view)),
+                            'column_level_value' => element('access_subject_style_level', element('data', $view)),
+                            'column_group_value' => element('access_subject_style_group', element('data', $view)),
+                            'max_level' => element('config_max_level', element('data', $view)),
+                            'mgroup' => element('mgroup', element('data', $view)),
+                            );
+                        echo get_access_selectbox($config);
+                        ?>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_access_subject_style" class="checkbox-inline">
+                            <input type="checkbox" name="grp[access_subject_style]" id="grp_access_subject_style" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_access_subject_style" class="checkbox-inline">
+                            <input type="checkbox" name="all[access_subject_style]" id="all_access_subject_style" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">본인인증 / 성인인증</label>
+                    <div class="col-sm-8">
+                        <div class=" form-inline">
+                            <div class="alert alert-success">
+                                해당 기능을 사용하기 위해서는 반드시 환경설정 &gt; 회원가입설정 &gt; 본인확인서비스 부분에서 본인확인 서비스 기능을 사용함으로 설정해주셔야 합니다.<br />
+                                성인인증이란 : 본인인증을 받은 회원 중에서 만 19세 이상이 된 회원을 말합니다. (즉, 성인인증 = 본인인증 + 만 19세이상)<br />
+                                비회원이 접근 가능한 페이지는 인증 기능이 적용되지 않습니다. <br />
+                                따라서 인증 기능을 사용하기 위해서는 위에 설정에서 해당 부분을 로그인사용자 이상으로 변경하여주세요
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">인증 - 목록</label>
+                    <div class="col-sm-8">
+                        <div class=" form-inline">
+                            <select name="access_list_selfcert" class="form-control" >
+                                <option value="" <?php echo set_select('access_list_selfcert', '', (element('access_list_selfcert', element('data', $view)) === '' ? true : false)); ?>>인증기능 사용안함</option>
+                                <option value="1" <?php echo set_select('access_list_selfcert', '1', (element('access_list_selfcert', element('data', $view)) === '1' ? true : false)); ?>>본인인증 필수</option>
+                                <option value="2" <?php echo set_select('access_list_selfcert', '2', (element('access_list_selfcert', element('data', $view)) === '2' ? true : false)); ?>>성인인증 필수</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_access_list_selfcert" class="checkbox-inline">
+                            <input type="checkbox" name="grp[access_list_selfcert]" id="grp_access_list_selfcert" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_access_list_selfcert" class="checkbox-inline">
+                            <input type="checkbox" name="all[access_list_selfcert]" id="all_access_list_selfcert" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">인증 - 글열람, 댓글열람</label>
+                    <div class="col-sm-8">
+                        <div class=" form-inline">
+                            <select name="access_view_selfcert" class="form-control" >
+                                <option value="" <?php echo set_select('access_view_selfcert', '', (element('access_view_selfcert', element('data', $view)) === '' ? true : false)); ?>>인증기능 사용안함</option>
+                                <option value="1" <?php echo set_select('access_view_selfcert', '1', (element('access_view_selfcert', element('data', $view)) === '1' ? true : false)); ?>>본인인증 필수</option>
+                                <option value="2" <?php echo set_select('access_view_selfcert', '2', (element('access_view_selfcert', element('data', $view)) === '2' ? true : false)); ?>>성인인증 필수</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_access_view_selfcert" class="checkbox-inline">
+                            <input type="checkbox" name="grp[access_view_selfcert]" id="grp_access_view_selfcert" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_access_view_selfcert" class="checkbox-inline">
+                            <input type="checkbox" name="all[access_view_selfcert]" id="all_access_view_selfcert" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">인증 - 원글, 답변작성</label>
+                    <div class="col-sm-8">
+                        <div class=" form-inline">
+                            <select name="access_write_selfcert" class="form-control" >
+                                <option value="" <?php echo set_select('access_write_selfcert', '', (element('access_write_selfcert', element('data', $view)) === '' ? true : false)); ?>>인증기능 사용안함</option>
+                                <option value="1" <?php echo set_select('access_write_selfcert', '1', (element('access_write_selfcert', element('data', $view)) === '1' ? true : false)); ?>>본인인증 필수</option>
+                                <option value="2" <?php echo set_select('access_write_selfcert', '2', (element('access_write_selfcert', element('data', $view)) === '2' ? true : false)); ?>>성인인증 필수</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_access_write_selfcert" class="checkbox-inline">
+                            <input type="checkbox" name="grp[access_write_selfcert]" id="grp_access_write_selfcert" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_access_write_selfcert" class="checkbox-inline">
+                            <input type="checkbox" name="all[access_write_selfcert]" id="all_access_write_selfcert" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">인증 - 댓글작성</label>
+                    <div class="col-sm-8">
+                        <div class=" form-inline">
+                            <select name="access_comment_selfcert" class="form-control" >
+                                <option value="" <?php echo set_select('access_comment_selfcert', '', (element('access_list_selfcert', element('data', $view)) === '' ? true : false)); ?>>인증기능 사용안함</option>
+                                <option value="1" <?php echo set_select('access_comment_selfcert', '1', (element('access_list_selfcert', element('data', $view)) === '1' ? true : false)); ?>>본인인증 필수</option>
+                                <option value="2" <?php echo set_select('access_comment_selfcert', '2', (element('access_list_selfcert', element('data', $view)) === '2' ? true : false)); ?>>성인인증 필수</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_access_comment_selfcert" class="checkbox-inline">
+                            <input type="checkbox" name="grp[access_comment_selfcert]" id="grp_access_comment_selfcert" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_access_comment_selfcert" class="checkbox-inline">
+                            <input type="checkbox" name="all[access_comment_selfcert]" id="all_access_comment_selfcert" value="1" /> 전체적용
                         </label>
                     </div>
                 </div>

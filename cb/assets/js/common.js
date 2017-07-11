@@ -619,6 +619,18 @@ if (typeof(COMMON_JS) === 'undefined') {
         window.open(cb_url + '/print/' + post_id , 'win_print', 'left=100,top=100,width=900,height=600,scrollbars=1');
         return false;
     }
+    function post_history( post_id) {
+        window.open(cb_url + '/helptool/post_history/' + post_id , 'win_post_history', 'left=100,top=100,width=620,height=500,scrollbars=1');
+        return false;
+    }
+    function download_log( post_id) {
+        window.open(cb_url + '/helptool/download_log/' + post_id , 'win_download_log', 'left=100,top=100,width=620,height=500,scrollbars=1');
+        return false;
+    }
+    function link_click_log( post_id) {
+        window.open(cb_url + '/helptool/link_click_log/' + post_id , 'win_link_click_log', 'left=100,top=100,width=620,height=500,scrollbars=1');
+        return false;
+    }
     function post_copy(type, post_id) {
         window.open(cb_url + '/helptool/post_copy/' + type + '/' + post_id, 'win_post_copy', 'left=100,top=100,width=620,height=500,scrollbars=1');
         return false;
@@ -792,8 +804,7 @@ if (typeof(COMMON_JS) === 'undefined') {
 		}
 	});
 
-
-	/**
+    /**
      * 우편번호 창
      **/
     var win_zip = function(frm_name, frm_zipcode, frm_address1, frm_address2, frm_address3, frm_address4) {

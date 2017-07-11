@@ -142,7 +142,7 @@ class Loginlog extends CB_Controller
     /**
      * 로그인 성공 기록을 그래프 형식으로 보는 페이지입니다
      */
-    public function graph()
+    public function graph($export = '')
     {
         // 이벤트 라이브러리를 로딩합니다
         $eventname = 'event_admin_member_loginlog_graph';
@@ -257,20 +257,28 @@ class Loginlog extends CB_Controller
         // 이벤트가 존재하면 실행합니다
         $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-        /**
-         * 어드민 레이아웃을 정의합니다
-         */
-        $layoutconfig = array('layout' => 'layout', 'skin' => 'graph');
-        $view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-        $this->data = $view;
-        $this->layout = element('layout_skin_file', element('layout', $view));
-        $this->view = element('view_skin_file', element('layout', $view));
+        if ($export === 'excel') {
+            
+            header('Content-type: application/vnd.ms-excel');
+            header('Content-Disposition: attachment; filename=로그인성공기록_' . cdate('Y_m_d') . '.xls');
+            echo $this->load->view('admin/' . ADMIN_SKIN . '/' . $this->pagedir . '/graph_excel', $view, true);
+
+        } else {
+            /**
+             * 어드민 레이아웃을 정의합니다
+             */
+            $layoutconfig = array('layout' => 'layout', 'skin' => 'graph');
+            $view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+            $this->data = $view;
+            $this->layout = element('layout_skin_file', element('layout', $view));
+            $this->view = element('view_skin_file', element('layout', $view));
+        }
     }
 
     /**
      * 로그인 실패 기록을 그래프 형식으로 보는 페이지입니다
      */
-    public function graph_fail()
+    public function graph_fail($export = '')
     {
         // 이벤트 라이브러리를 로딩합니다
         $eventname = 'event_admin_member_loginlog_graph_fail';
@@ -385,14 +393,22 @@ class Loginlog extends CB_Controller
         // 이벤트가 존재하면 실행합니다
         $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-        /**
-         * 어드민 레이아웃을 정의합니다
-         */
-        $layoutconfig = array('layout' => 'layout', 'skin' => 'graph_fail');
-        $view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-        $this->data = $view;
-        $this->layout = element('layout_skin_file', element('layout', $view));
-        $this->view = element('view_skin_file', element('layout', $view));
+        if ($export === 'excel') {
+            
+            header('Content-type: application/vnd.ms-excel');
+            header('Content-Disposition: attachment; filename=로그인실패기록_' . cdate('Y_m_d') . '.xls');
+            echo $this->load->view('admin/' . ADMIN_SKIN . '/' . $this->pagedir . '/graph_fail_excel', $view, true);
+
+        } else {
+            /**
+             * 어드민 레이아웃을 정의합니다
+             */
+            $layoutconfig = array('layout' => 'layout', 'skin' => 'graph_fail');
+            $view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+            $this->data = $view;
+            $this->layout = element('layout_skin_file', element('layout', $view));
+            $this->view = element('view_skin_file', element('layout', $view));
+        }
     }
 
     /**

@@ -10,7 +10,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">페이지주소</label>
                     <div class="col-sm-10 form-inline">
-                        <?php echo document_url(); ?>/ <input type="text" class="form-control" name="doc_key" value="<?php echo set_value('doc_key', element('doc_key', element('data', $view))); ?>" /> 페이지주소를 입력해주세요
+                        <?php echo document_url(); ?> <input type="text" class="form-control" name="doc_key" value="<?php echo set_value('doc_key', element('doc_key', element('data', $view))); ?>" /> 페이지주소를 입력해주세요
                     </div>
                 </div>
                 <div class="form-group">

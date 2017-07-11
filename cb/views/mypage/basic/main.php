@@ -51,6 +51,16 @@
             <span>포인트</span>
             <div class="form-text"><?php echo number_format($this->member->item('mem_point')); ?></div>
         </li>
+        <?php
+        /* if (element('member_group_name', $view)) {
+        // 회원에게 자신이 어떤 그룹에 속해있는지 보여주고 싶으면 여기 주석을 해제해주세요
+        // 웹사이트 운영 정책에 따라 결정해주시면 됩니다
+        ?>
+                <li>
+                    <span>회원그룹</span>
+                    <div class="form-text"><?php echo element('member_group_name', $view); ?></div>
+                </li>
+        <?php } */ ?>
         <li>
             <span>가입일</span>
             <div class="form-text"><?php echo display_datetime($this->member->item('mem_register_datetime'), 'full'); ?></div>

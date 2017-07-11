@@ -28,7 +28,7 @@ class Notelib extends CI_Controller
     /**
      * 쪽지를 발송하는 함수입니다
      */
-    public function send_note($sender = '', $receiver = '', $title = '', $content = '', $content_type = '')
+    public function send_note($sender = '', $receiver = '', $title = '', $content = '', $content_type = '', $originfilename = '', $uploadfilename = '')
     {
         // 포인트 사용을 하지 않는다면 return
         if ( ! $this->CI->cbconfig->item('use_note')) {
@@ -54,8 +54,17 @@ class Notelib extends CI_Controller
             $result = json_encode( array('error' => '쪽지 내용이 존재하지 않습니다'));
             return $result;
         }
+        if ( ! $this->CI->cbconfig->item('use_note_file')) {
+            if ($originfilename OR $uploadfilename) {
+                $result = json_encode( array('error' => '쪽지에 첨부파일 기능을 지원하지 않습니다'));
+                return $result;
+            }
+        }
         $point_note = $this->CI->cbconfig->item('use_point')
             ? $this->CI->cbconfig->item('point_note') : 0;
+
+        $point_note_file = ($uploadfilename && $this->CI->cbconfig->item('use_point'))
+            ? $this->CI->cbconfig->item('point_note_file') : 0;
 
         $send_member = '';
         if ($sender) {
@@ -104,6 +113,8 @@ class Notelib extends CI_Controller
             'nte_content' => $content,
             'nte_content_html_type' => $nte_content_html_type,
             'nte_datetime' => cdate('Y-m-d H:i:s'),
+            'nte_originname' => $originfilename,
+            'nte_filename' => $uploadfilename,
         );
         $note_id = $this->CI->Note_model->insert($insertdata);
 
@@ -126,6 +137,8 @@ class Notelib extends CI_Controller
                 'nte_content' => $content,
                 'nte_content_html_type' => $nte_content_html_type,
                 'nte_datetime' => cdate('Y-m-d H:i:s'),
+                'nte_originname' => $originfilename,
+                'nte_filename' => $uploadfilename,
             );
             $note_id2 = $this->CI->Note_model->insert($insertdata);
 
@@ -139,6 +152,19 @@ class Notelib extends CI_Controller
                     'note',
                     $note_id,
                     $note_id . ' 쪽지 발송'
+                );
+            }
+
+            if ($this->CI->cbconfig->item('use_point') && $point_note_file && $point_note_file > 0) {
+                $point = 0 - $point_note_file;
+                $this->CI->load->library('point');
+                $this->CI->point->insert_point(
+                    $sender,
+                    $point,
+                    element('mem_nickname', $recv_member) . '님께 발송한 쪽지에 파일첨부',
+                    'note',
+                    $note_id,
+                    $note_id . ' 쪽지 발송 파일첨부'
                 );
             }
         }

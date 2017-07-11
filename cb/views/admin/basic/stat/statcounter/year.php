@@ -34,6 +34,7 @@
             //]]>
             </script>
         </div>
+        <div id="chart_div"></div>
         <div class="table-responsive">
             <div class="pull-right form-group">
                 <label for="withoutzero" class="checkbox-inline">
@@ -90,10 +91,57 @@
                 ?>
             </table>
         </div>
+        <div class="box-info">
+            <div class="btn-group pull-right" role="group" aria-label="...">
+                <button type="button" class="btn btn-outline btn-success btn-sm" id="export_to_excel"><i class="fa fa-file-excel-o"></i> 엑셀 다운로드</button>
+            </div>            
+        </div>
     </div>
 </div>
 
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+
+// Load the Visualization API and the corechart package.
+google.charts.load('current', {'packages':['corechart']});
+
+// Set a callback to run when the Google Visualization API is loaded.
+google.charts.setOnLoadCallback(drawChart);
+
+// Callback that creates and populates a data table,
+// instantiates the pie chart, passes in the data and
+// draws it.
+function drawChart() {
+
+    var data = new google.visualization.DataTable();
+
+    data.addColumn('string', '년도');
+    data.addColumn('number', '방문자 수');
+    data.addRows([
+        <?php
+        if (element('list', $view)) {
+            foreach (element('list', $view) as $key => $result) {
+        ?>
+        ['<?php echo $key; ?>',<?php echo element('scd_count', $result, 0); ?>],
+        <?php
+            }
+        }
+        ?>
+    ]);
+
+    var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+
+    chart.draw(data, {
+        width: '100%', height: '400',
+        legendTextStyle: {fontName: 'gulim', fontSize: '12'},
+        tooltipTextStyle: {color: '#006679', fontName: 'dotum', fontSize: '12'},
+        hAxis: {textStyle: {color: '#959595', fontName: 'dotum', fontSize: '12'}},
+        vAxis: {textStyle: {color: '#959595', fontName: 'dotum', fontSize: '12'}, gridlineColor: '#e1e1e1', baselineColor: '#e1e1e1', textPosition: 'out'},
+        lineWidth: 3,
+        pointSize: 5
+    });
+}
+
 $(document).on('change', '#withoutzero', function(){
     if (this.checked) {
         $('.zerodata').hide();
@@ -105,5 +153,17 @@ $(document).on('change', '#orderdesc', function(){
     var $body = $('tbody.graphlist');
     var list = $body.children('tr');
     $body.html(list.get().reverse());
+})
+$(document).on('click', '#export_to_excel', function(){
+    exporturl = '<?php echo admin_url($this->pagedir . '/year/excel' . '?' . $this->input->server('QUERY_STRING', null, '')); ?>';
+    if ($('#withoutzero:checked').length)
+    {
+        exporturl += '&withoutzero=1';
+    }
+    if ($('#orderdesc:checked').length)
+    {
+        exporturl += '&orderby=desc';
+    }
+    document.location.href = exporturl;
 })
 </script>

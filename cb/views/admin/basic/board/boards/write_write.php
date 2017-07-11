@@ -224,6 +224,66 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">글입력시 이모티콘 사용</label>
+                    <div class="col-sm-8">
+                        <label for="use_post_emoticon" class="checkbox-inline">
+                            <input type="checkbox" name="use_post_emoticon" id="use_post_emoticon" value="1" <?php echo set_checkbox('use_post_emoticon', '1', (element('use_post_emoticon', element('data', $view)) ? true : false)); ?> /> PC
+                        </label>
+                        <label for="use_mobile_post_emoticon" class="checkbox-inline">
+                            <input type="checkbox" name="use_mobile_post_emoticon" id="use_mobile_post_emoticon" value="1" <?php echo set_checkbox('use_mobile_post_emoticon', '1', (element('use_mobile_post_emoticon', element('data', $view)) ? true : false)); ?> /> 모바일
+                        </label>
+                        <span class="help-inline">에디터를 사용하지 않는 게시판의 경우에 해당</span>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_use_post_emoticon" class="checkbox-inline">
+                            <input type="checkbox" name="grp[use_post_emoticon]" id="grp_use_post_emoticon" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_use_post_emoticon" class="checkbox-inline">
+                            <input type="checkbox" name="all[use_post_emoticon]" id="all_use_post_emoticon" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">글입력시 특수문자 사용</label>
+                    <div class="col-sm-8">
+                        <label for="use_post_specialchars" class="checkbox-inline">
+                            <input type="checkbox" name="use_post_specialchars" id="use_post_specialchars" value="1" <?php echo set_checkbox('use_post_specialchars', '1', (element('use_post_specialchars', element('data', $view)) ? true : false)); ?> /> PC
+                        </label>
+                        <label for="use_mobile_post_specialchars" class="checkbox-inline">
+                            <input type="checkbox" name="use_mobile_post_specialchars" id="use_mobile_post_specialchars" value="1" <?php echo set_checkbox('use_mobile_post_specialchars', '1', (element('use_mobile_post_specialchars', element('data', $view)) ? true : false)); ?> /> 모바일
+                        </label>
+                        <span class="help-inline">에디터를 사용하지 않는 게시판의 경우에 해당</span>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_use_post_specialchars" class="checkbox-inline">
+                            <input type="checkbox" name="grp[use_post_specialchars]" id="grp_use_post_specialchars" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_use_post_specialchars" class="checkbox-inline">
+                            <input type="checkbox" name="all[use_post_specialchars]" id="all_use_post_specialchars" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">제목 스타일 사용</label>
+                    <div class="col-sm-8">
+                        <label for="use_subject_style" class="checkbox-inline">
+                            <input type="checkbox" name="use_subject_style" id="use_subject_style" value="1" <?php echo set_checkbox('use_subject_style', '1', (element('use_subject_style', element('data', $view)) ? true : false)); ?> /> PC
+                        </label>
+                        <label for="use_mobile_subject_style" class="checkbox-inline">
+                            <input type="checkbox" name="use_mobile_subject_style" id="use_mobile_subject_style" value="1" <?php echo set_checkbox('use_mobile_subject_style', '1', (element('use_mobile_subject_style', element('data', $view)) ? true : false)); ?> /> 모바일
+                        </label>
+                        <span class="help-inline">볼드, 글시체, 색깔 적용 가능 - 게시판 목록에서만 적용됨</span>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_use_subject_style" class="checkbox-inline">
+                            <input type="checkbox" name="grp[use_subject_style]" id="grp_use_subject_style" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_use_subject_style" class="checkbox-inline">
+                            <input type="checkbox" name="all[use_subject_style]" id="all_use_subject_style" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-2 control-label">구글 지도 사용</label>
                     <div class="col-sm-8">
                         <label for="use_google_map" class="checkbox-inline">
@@ -236,6 +296,22 @@
                         </label>
                         <label for="all_use_google_map" class="checkbox-inline">
                             <input type="checkbox" name="all[use_google_map]" id="all_use_google_map" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">태그 기능</label>
+                    <div class="col-sm-8">
+                        <label for="use_post_tag" class="checkbox-inline">
+                            <input type="checkbox" name="use_post_tag" id="use_post_tag" value="1" <?php echo set_checkbox('use_post_tag', '1', (element('use_post_tag', element('data', $view)) ? true : false)); ?> /> 사용합니다
+                        </label>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_use_post_tag" class="checkbox-inline">
+                            <input type="checkbox" name="grp[use_post_tag]" id="grp_use_post_tag" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_use_post_tag" class="checkbox-inline">
+                            <input type="checkbox" name="all[use_post_tag]" id="all_use_post_tag" value="1" /> 전체적용
                         </label>
                     </div>
                 </div>

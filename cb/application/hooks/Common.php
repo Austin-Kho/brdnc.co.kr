@@ -92,7 +92,7 @@ class _Common
             $autodata = $CI->Autologin_model->get_one('', '', $where);
             if ( ! element('mem_id', $autodata)) {
                 delete_cookie('autologin');
-            } elseif ( ! element('aul_datetime', $autodata) OR (strtotime(element('aul_datetime', $autodata)) < ctimestamp() * 86400 * 30)) {
+            } elseif ( ! element('aul_datetime', $autodata) OR (strtotime(element('aul_datetime', $autodata)) < ctimestamp() + (86400 * 30))) {
                 $CI->Autologin_model->delete(element('aul_id', $autodata));
                 delete_cookie('autologin');
             } elseif ($CI->input->ip_address() !== element('aul_ip', $autodata)) {

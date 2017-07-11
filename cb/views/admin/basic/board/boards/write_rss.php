@@ -147,6 +147,26 @@
                         </label>
                     </div>
                 </div>
+                <hr />
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">네이버 블로그 자동등록사용</label>
+                    <div class="col-sm-8">
+                        <label for="use_naver_blog_post" class="checkbox-inline">
+                            <input type="checkbox" name="use_naver_blog_post" id="use_naver_blog_post" value="1" <?php echo set_checkbox('use_naver_blog_post', '1', (element('use_naver_blog_post', element('data', $view)) ? true : false)); ?> /> 사용합니다
+                        </label>
+                        <div class="help-inline">
+                            해당 게시판의 글내용을 네이버블로그로 자동등록할지를 결정합니다.
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_use_naver_blog_post" class="checkbox-inline">
+                            <input type="checkbox" name="grp[use_naver_blog_post]" id="grp_use_naver_blog_post" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_use_naver_blog_post" class="checkbox-inline">
+                            <input type="checkbox" name="all[use_naver_blog_post]" id="all_use_naver_blog_post" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
                 <div class="btn-group pull-right" role="group" aria-label="...">
                     <a href="<?php echo admin_url($this->pagedir); ?>" class="btn btn-default btn-sm">목록으로</a>
                     <button type="submit" class="btn btn-success btn-sm">저장하기</button>

@@ -138,6 +138,125 @@ if (element('syntax_highlighter', element('board', $view)) OR element('comment_s
         </div>
     <?php } ?>
 
+    <?php
+    if (element('poll', $view)) {
+        $poll = element('poll', $view);
+        $poll_item = element('poll_item', $view);
+    ?>
+        <div class="poll mb30 mt20">
+            <div class="headline">
+                <h5>[설문조사] <?php echo html_escape(element('ppo_title', $poll)); ?></h5>
+            </div>
+            <?php
+            if (element('attended', $poll) OR element('ended_poll', $poll)) {
+                if ($poll_item) {
+                    $i = 1;
+                    foreach ($poll_item as $pkey => $pval) {
+            ?>
+                <div class="poll-result"><?php echo $i;?>. <?php echo html_escape(element('ppi_item', $pval)); ?> <div class="pull-right"><?php echo number_format(element('ppi_count', $pval)); ?>표, <?php echo element('s_rate', $pval); ?>%</div></div>
+                <div class="progress" style="height:5px;">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo element('s_rate', $pval); ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo element('bar', $pval); ?>%;">
+                        <span class="sr-only"><?php echo element('s_rate', $pval); ?>% Complete</span>
+                    </div>
+                </div>
+            <?php
+                    $i++;
+                    }
+                }
+            } else {
+            ?>
+                <div id="poll_write_form">
+                    <?php
+                    $attributes = array('name' => 'fpostpoll', 'id' => 'fpostpoll');
+                    echo form_open('', $attributes);
+                        if ($poll_item) {
+                            foreach ($poll_item as $pkey => $pval) {
+                    ?>
+                        <div class="checkbox">
+                            <label for="ppi_item_<?php echo html_escape(element('ppi_id', $pval)); ?>">
+                                <input type="checkbox" name="ppi_item[]" class="poll_item_chk" id="ppi_item_<?php echo html_escape(element('ppi_id', $pval)); ?>" value="<?php echo html_escape(element('ppi_id', $pval)); ?>" />
+                                <?php echo html_escape(element('ppi_item', $pval)); ?>
+                            </label>
+                        </div>
+                    <?php
+                        }
+                    }
+                    ?>
+                        <div class="form-group mt10">
+                            <button type="button" class="btn btn-default btn-xs" onClick="post_poll('<?php echo element('post_id', element('post', $view)); ?>', '<?php echo element('ppo_id', element('post', $view)); ?>');">투표하기</button>
+                            <button type="button" class="btn btn-default btn-xs" onClick="post_poll_result('<?php echo element('post_id', element('post', $view)); ?>', '<?php echo element('ppo_id', element('post', $view)); ?>');">결과보기</button>
+                            <span class="help-block">
+                                답변 <?php echo element('ppo_choose_count', $poll); ?> 개 선택 가능, 현재 <?php echo element('ppo_count', $poll); ?>명이 참여함, 설문기간 : <?php echo html_escape(element('poll_period', $poll)); ?>
+                                <?php if (element('ppo_point', $poll)) { echo '참여시' . number_format(element('ppo_point', $poll)) . '포인트 지급'; } ?>
+                            </span>
+                        </div>
+                    <?php echo form_close(); ?>
+                </div>
+            <?php } ?>
+
+            <div id="poll_result_ajax"></div>
+
+            <script type="text/javascript">
+            //<![CDATA[
+            var chklimit = <?php echo element('ppo_choose_count', $poll); ?>;
+            $('input.poll_item_chk').on('change', function(evt) {
+            if ($('input.poll_item_chk:checked').length > chklimit) {
+                this.checked = false;
+                alert('답변은 ' + chklimit + '개까지만 선택이 가능합니다.');
+            }
+            });
+            function post_poll(post_id, ppo_id) {
+                var href;
+                href = cb_url + '/postact/post_poll/' + post_id + '/' + ppo_id;
+                var $that = $(this);
+                $.ajax({
+                    url : href,
+                    type : 'post',
+                    data : $('#fpostpoll').serialize() + '&csrf_test_name=' + cb_csrf_hash,
+                    dataType : 'json',
+                    success : function(data) {
+                        if (data.error) {
+                            alert(data.error);
+                            return false;
+                        } else if (data.success) {
+                            post_poll_result(post_id, ppo_id);
+                            $('#poll_write_form').hide();
+                        }
+                    }
+                });
+            }
+
+            function post_poll_result(post_id, ppo_id) {
+                var href;
+                var result = '';
+                href = cb_url + '/postact/post_poll_result/' + post_id + "/" + ppo_id;
+                var $that = $(this);
+                $.ajax({
+                    url : href,
+                    type : 'post',
+                    data : {csrf_test_name : cb_csrf_hash},
+                    dataType : 'json',
+                    success : function(data) {
+                        if (data.error) {
+                            alert(data.error);
+                            return false;
+                        } else if (data.success) {
+                            var i = 1;
+                            for (var key in data.poll_item) {
+                                obj = data.poll_item[key];
+                                result += '<div class="poll-result">' + i + '. ' + obj.ppi_item + '<div class="pull-right">' + obj.ppi_count + '표, ' + obj.s_rate + '%</div></div><div class="progress" style="height:5px;"><div class="progress-bar" role="progressbar" aria-valuenow="' + obj.s_rate + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + obj.bar + '%;"></div></div>';
+                                i++;
+                            }
+                            $('#poll_result_ajax').html(result);
+                        }
+                    }
+                });
+            }
+            //]]>
+            </script>
+        </div>
+    <?php } ?>
+
     <div class="pull-right mt20 mb20">
         <?php if ( ! element('post_del', element('post', $view)) && element('use_scrap', element('board', $view))) { ?>
             <button type="button" class="btn btn-black" id="btn-scrap" onClick="post_scrap('<?php echo element('post_id', element('post', $view)); ?>', 'post-scrap');">스크랩 <span class="post-scrap"><?php echo element('scrap_count', element('post', $view)) ? '+' . number_format(element('scrap_count', element('post', $view))) : ''; ?></span></button>
@@ -182,6 +301,15 @@ if (element('syntax_highlighter', element('board', $view)) OR element('comment_s
                 <?php } else { ?>
                     <div class="item" onClick="post_action('post_blame_blind', '<?php echo element('post_id', element('post', $view)); ?>', '1');"><i class="fa fa-exclamation-circle"></i> 블라인드처리</div>
                 <?php } ?>
+                <?php if (element('use_posthistory', element('board', $view))) { ?>
+                    <div class="item" onClick="post_history('<?php echo element('post_id', element('post', $view)); ?>');" ><i class="fa fa-history"></i> 글변경로그</div>
+                <?php } ?>
+                <?php if (element('use_download_log', element('board', $view))) { ?>
+                    <div class="item" onClick="download_log('<?php echo element('post_id', element('post', $view)); ?>');" ><i class="fa fa-download"></i> 다운로드로그</div>
+                <?php } ?>
+                <?php    if (element('use_link_click_log', element('board', $view))) { ?>
+                    <div class="item" onClick="link_click_log('<?php echo element('post_id', element('post', $view)); ?>');"><i class="fa fa-link"></i> 링크클릭로그</div>
+                <?php } ?>
                 <div class="item" onClick="post_action('post_trash', '<?php echo element('post_id', element('post', $view)); ?>', '', '이 글을 휴지통으로 이동하시겠습니까?');"><i class="fa fa-trash"></i> 휴지통으로</div>
             </div>
         <?php } ?>
@@ -207,6 +335,15 @@ if (element('syntax_highlighter', element('board', $view)) OR element('comment_s
     <?php } ?>
 
     <div class="clearfix"></div>
+
+    <?php if (element('tag', element('post', $view))) { ?>
+        <div class="tags mt20">
+            <i class="fa fa-tags"></i>
+            <?php foreach (element('tag', element('post', $view)) as $key => $value) { ?>
+                <a href="<?php echo site_url('tags/?tag=' . html_escape(element('pta_tag', $value))); ?>" title="<?php echo html_escape(element('pta_tag', $value)); ?> 태그 목록"><?php echo html_escape(element('pta_tag', $value)); ?></a>,
+            <?php    } ?>
+        </div>
+    <?php } ?>
 
     <?php
     if ( ! element('post_hide_comment', element('post', $view))) {

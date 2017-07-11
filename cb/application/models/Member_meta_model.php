@@ -166,4 +166,17 @@ class Member_meta_model extends CB_Model
 
         return true;
     }
+
+    public function is_already_selfcert($mem_id = 0, $selfkey = '')
+    {
+        $this->db->select('mem_id');
+        $this->db->where('mmt_key', 'selfcert_key');
+        $this->db->where('mmt_value', $selfkey);
+        $this->db->where('mem_id <>', $mem_id);
+        $qry = $this->db->get($this->_table);
+        $result = $qry->row_array();
+
+        return $result;
+        
+    }
 }

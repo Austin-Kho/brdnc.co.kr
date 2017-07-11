@@ -195,6 +195,45 @@ class Comment_model extends CB_Model
     }
 
 
+    /**
+     * List 페이지 커스테마이징 함수
+     */
+    public function get_best_list($post_id = 0, $limit = 3, $like_num= 0)
+    {
+        $post_id = (int) $post_id;
+        if (empty($post_id) OR $post_id < 1) {
+            return false;
+        }
+        $like_num = (int) $like_num;
+
+        $where = array(
+            'post_id' => $post_id,
+            'cmt_del' => 0,
+            'cmt_secret' => 0,
+            'cmt_like >=' => $like_num,
+        );
+
+        $orderby = 'cmt_like desc';
+
+        $this->db->select('comment.*, member.mem_id, member.mem_userid, member.mem_nickname, member.mem_icon, member.mem_photo, member.mem_point');
+        $this->db->from($this->_table);
+        $this->db->join('member', 'comment.mem_id = member.mem_id', 'left');
+
+        if ($where) {
+            $this->db->where($where);
+        }
+
+        $this->db->order_by($orderby);
+        if ($limit) {
+            $this->db->limit($limit);
+        }
+        $qry = $this->db->get();
+        $result = $qry->result_array();
+
+        return $result;
+    }
+
+
     public function next_comment_num()
     {
         $this->db->select_min('cmt_num');

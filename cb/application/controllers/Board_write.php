@@ -73,6 +73,7 @@ class Board_write extends CB_Controller
             $alertmessage,
             $check
         );
+        $this->accesslevel->selfcertcheck('write', element('access_write_selfcert', $board));
 
         // 이벤트가 존재하면 실행합니다
         Events::trigger('after', $eventname);
@@ -127,6 +128,7 @@ class Board_write extends CB_Controller
             $alertmessage,
             $check
         );
+        $this->accesslevel->selfcertcheck('write', element('access_write_selfcert', $board));
 
         if (element('post_del', $origin)) {
             alert('삭제된 글에는 답변을 입력하실 수 없습니다');
@@ -276,6 +278,12 @@ class Board_write extends CB_Controller
 
         $extravars = element('extravars', $board);
         $form = json_decode($extravars, true);
+        $use_subj_style = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_subject_style', $board)
+            : element('use_subject_style', $board);
+        $use_poll = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_poll', $board)
+            : element('use_poll', $board);
 
         /**
          * Validation 라이브러리를 가져옵니다
@@ -358,6 +366,23 @@ class Board_write extends CB_Controller
                 );
             }
         }
+        if ($use_subj_style) {
+            $config[] = array(
+                'field' => 'post_title_color',
+                'label' => '제목색상',
+                'rules' => 'trim|exact_length[7]',
+            );
+            $config[] = array(
+                'field' => 'post_title_font',
+                'label' => '제목폰트',
+                'rules' => 'trim',
+            );
+            $config[] = array(
+                'field' => 'post_title_bold',
+                'label' => '제목볼드',
+                'rules' => 'trim|exact_length[1]',
+            );
+        }
         if (element('use_category', $board) && $is_admin === false) {
             $config[] = array(
                 'field' => 'post_category',
@@ -411,11 +436,67 @@ class Board_write extends CB_Controller
             $use_dhtml = false;
         }
         $view['view']['board']['use_dhtml'] = $use_dhtml;
+        if ($use_subj_style) {
+            $check = array(
+                'group_id' => element('bgr_id', $board),
+                'board_id' => element('brd_id', $board),
+            );
+            $use_subject_style = $this->accesslevel->is_accessable(
+                element('access_subject_style', $board),
+                element('access_subject_style_level', $board),
+                element('access_subject_style_group', $board),
+                $check
+            );
+        } else {
+            $use_subject_style = false;
+        }
+        $view['view']['board']['use_subject_style'] = $use_subject_style;
+        if ($use_poll) {
+            $check = array(
+                'group_id' => element('bgr_id', $board),
+                'board_id' => element('brd_id', $board),
+            );
+            $can_poll_write = $this->accesslevel->is_accessable(
+                element('access_poll_write', $board),
+                element('access_poll_write_level', $board),
+                element('access_poll_write_group', $board),
+                $check
+            );
+        } else {
+            $can_poll_write = false;
+        }
+        $view['view']['board']['can_poll_write'] = $can_poll_write;
+
+        if (element('use_post_tag', $board)) {
+            $check = array(
+                'group_id' => element('bgr_id', $board),
+                'board_id' => element('brd_id', $board),
+            );
+            $can_tag_write = $this->accesslevel->is_accessable(
+                element('access_tag_write', $board),
+                element('access_tag_write_level', $board),
+                element('access_tag_write_group', $board),
+                $check
+            );
+        } else {
+            $can_tag_write = false;
+        }
+        $view['view']['board']['can_tag_write'] = $can_tag_write;
 
         $view['view']['board']['link_count']
             = ($this->cbconfig->get_device_view_type() === 'mobile')
             ? element('mobile_link_num', $board)
             : element('link_num', $board);
+
+        $view['view']['board']['use_emoticon']
+            = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_post_emoticon', $board)
+            : element('use_post_emoticon', $board);
+
+        $view['view']['board']['use_specialchars']
+            = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_post_specialchars', $board)
+            : element('use_post_specialchars', $board);
 
         $view['view']['board']['headercontent']
             = ($this->cbconfig->get_device_view_type() === 'mobile')
@@ -748,6 +829,11 @@ class Board_write extends CB_Controller
             if ($can_post_receive_email) {
                 $updatedata['post_receive_email'] = $this->input->post('post_receive_email') ? 1 : 0;
             }
+            if ($use_subject_style) {
+                $metadata['post_title_color'] = $this->input->post('post_title_color', null, '');
+                $metadata['post_title_font'] = $this->input->post('post_title_font', null, '');
+                $metadata['post_title_bold'] = $this->input->post('post_title_bold', null, '');
+            }
             if (element('use_category', $board)) {
                 $updatedata['post_category'] = $this->input->post('post_category', null, '');
             }
@@ -809,6 +895,20 @@ class Board_write extends CB_Controller
                     ->save($post_id, element('brd_id', $board), $metadata);
             }
 
+            if (element('use_posthistory', $board)) {
+                $this->load->model('Post_history_model');
+                $historydata = array(
+                    'post_id' => $post_id,
+                    'brd_id' => element('brd_id', $board),
+                    'mem_id' => $mem_id,
+                    'phi_title' => $post_title,
+                    'phi_content' => $post_content,
+                    'phi_content_html_type' => $content_type,
+                    'phi_ip' => $this->input->ip_address(),
+                    'phi_datetime' => cdate('Y-m-d H:i:s'),
+                );
+                $this->Post_history_model->insert($historydata);
+            }
             $post_link = $this->input->post('post_link');
             if ($post_link && is_array($post_link) && count($post_link) > 0) {
                 foreach ($post_link as $pkey => $pval) {
@@ -825,6 +925,55 @@ class Board_write extends CB_Controller
                     'post_link_count' => count($post_link),
                  );
                 $this->Post_model->update($post_id, $postupdate);
+            }
+            if ($can_poll_write) {
+                $this->load->model(array('Post_poll_model', 'Post_poll_item_model', 'Post_poll_item_poll_model'));
+                $post_poll_item = $this->input->post('poll_item');
+                $has_poll_item = false;
+                foreach ($post_poll_item as $pkey => $pval) {
+                    if ($pval) {
+                        $has_poll_item = true;
+                    }
+                }
+                if ($post_poll_item && $has_poll_item) {
+                    $start_time = sprintf("%02d", $this->input->post('ppo_start_time'));
+                    $start_datetime = $this->input->post('ppo_start_date')
+                        ? $this->input->post('ppo_start_date') . ' ' . $start_time . ':00:00' : '';
+                    $end_time = sprintf("%02d", $this->input->post('ppo_end_time'));
+                    $end_datetime = $this->input->post('ppo_end_date')
+                        ? $this->input->post('ppo_end_date') . ' ' . $end_time . ':00:00' : '';
+                    $ppo_choose_count = $this->input->post('ppo_choose_count') ? $this->input->post('ppo_choose_count') : 0;
+                    $ppo_after_comment = $this->input->post('ppo_after_comment') ? $this->input->post('ppo_after_comment') : 0;
+                    $polldata = array(
+                        'post_id' => $post_id,
+                        'brd_id' => element('brd_id', $board),
+                        'ppo_start_datetime' => $start_datetime,
+                        'ppo_end_datetime' => $end_datetime,
+                        'ppo_title' => $this->input->post('ppo_title', null, ''),
+                        'ppo_choose_count' => $ppo_choose_count,
+                        'ppo_after_comment' => $ppo_after_comment,
+                        'ppo_datetime' => cdate('Y-m-d H:i:s'),
+                        'ppo_ip' => $this->input->ip_address(),
+                        'mem_id' => $mem_id,
+                    );
+                    if ($is_admin !== false) {
+                        $polldata['ppo_point'] = $this->input->post('ppo_point') ? $this->input->post('ppo_point') : 0;
+                    }
+                    $ppo_id = $this->Post_poll_model->insert($polldata);
+                    foreach ($post_poll_item as $pkey => $pval) {
+                        if ($pval) {
+                            $itemdata = array(
+                                'ppo_id' => $ppo_id,
+                                'ppi_item' => $pval,
+                            );
+                            $this->Post_poll_item_model->insert($itemdata);
+                        }
+                    }
+                    $postupdate = array(
+                        'ppo_id' => $ppo_id,
+                    );
+                    $this->Post_model->update($post_id, $postupdate);
+                }
             }
 
             if ($this->member->is_member() && element('use_tempsave', $board)) {
@@ -885,24 +1034,53 @@ class Board_write extends CB_Controller
                 $this->Post_model->update($post_id, $postupdatedata);
             }
 
+            if (element('use_post_tag', $board) && $can_tag_write) {
+                $this->load->model('Post_tag_model');
+                $deletewhere = array(
+                    'post_id' => $post_id,
+                );
+                $this->Post_tag_model->delete_where($deletewhere);
+                if ($this->input->post('post_tag')) {
+                    $tags = explode(',', $this->input->post('post_tag'));
+                    if ($tags && is_array($tags)) {
+                        foreach ($tags as $key => $value) {
+                            $value = trim($value);
+                            if ($value) {
+                                $tagdata = array(
+                                    'post_id' => $post_id,
+                                    'brd_id' => element('brd_id', $board),
+                                    'pta_tag' => $value,
+                                );
+                                $this->Post_tag_model->insert($tagdata);
+                            }
+                        }
+                    }
+                }
+            }
+
             $emailsendlistadmin = array();
             $notesendlistadmin = array();
+            $smssendlistadmin = array();
             $emailsendlistpostwriter = array();
             $notesendlistpostwriter = array();
+            $smssendlistpostwriter = array();
 
             if (element('send_email_post_super_admin', $board)
-                OR element('send_note_post_super_admin', $board)) {
+                OR element('send_note_post_super_admin', $board)
+                OR element('send_sms_post_super_admin', $board)) {
                 $mselect = 'mem_id, mem_email, mem_nickname, mem_phone';
                 $superadminlist = $this->Member_model->get_superadmin_list($mselect);
             }
             if (element('send_email_post_group_admin', $board)
-                OR element('send_note_post_group_admin', $board)) {
+                OR element('send_note_post_group_admin', $board)
+                OR element('send_sms_post_group_admin', $board)) {
                 $this->load->model('Board_group_admin_model');
                 $groupadminlist = $this->Board_group_admin_model
                     ->get_board_group_admin_member(element('bgr_id', $board));
             }
             if (element('send_email_post_board_admin', $board)
-                OR element('send_note_post_board_admin', $board)) {
+                OR element('send_note_post_board_admin', $board)
+                OR element('send_sms_post_board_admin', $board)) {
                 $this->load->model('Board_admin_model');
                 $boardadminlist = $this->Board_admin_model
                     ->get_board_admin_member(element('brd_id', $board));
@@ -944,6 +1122,28 @@ class Board_write extends CB_Controller
             }
             if (element('send_note_post_writer', $board) && $this->member->item('mem_use_note')) {
                 $notesendlistpostwriter['mem_id'] = $mem_id;
+            }
+            if (element('send_sms_post_super_admin', $board) && $superadminlist) {
+                foreach ($superadminlist as $key => $value) {
+                    $smssendlistadmin[$value['mem_id']] = $value;
+                }
+            }
+            if (element('send_sms_post_group_admin', $board) && $groupadminlist) {
+                foreach ($groupadminlist as $key => $value) {
+                    $smssendlistadmin[$value['mem_id']] = $value;
+                }
+            }
+            if (element('send_sms_post_board_admin', $board) && $boardadminlist) {
+                foreach ($boardadminlist as $key => $value) {
+                    $smssendlistadmin[$value['mem_id']] = $value;
+                }
+            }
+            if (element('send_sms_post_writer', $board)
+                && $this->member->item('mem_phone')
+                && $this->member->item('mem_receive_sms')) {
+                $smssendlistpostwriter['mem_id'] = $mem_id;
+                $smssendlistpostwriter['mem_nickname'] = $this->member->item('mem_nickname');
+                $smssendlistpostwriter['mem_phone'] = $this->member->item('mem_phone');
             }
 
             $searchconfig = array(
@@ -1065,10 +1265,50 @@ class Board_write extends CB_Controller
                     1
                 );
             }
+            if ($smssendlistadmin) {
+                $content = str_replace(
+                    $searchconfig,
+                    $replaceconfig,
+                    $this->cbconfig->item('send_sms_post_admin_content')
+                );
+                $sender = array(
+                    'phone' => $this->cbconfig->item('sms_admin_phone'),
+                );
+                $receiver = array();
+                foreach ($smssendlistadmin as $akey => $aval) {
+                    $receiver[] = array(
+                        'mem_id' => element('mem_id', $aval),
+                        'name' => element('mem_nickname', $aval),
+                        'phone' => element('mem_phone', $aval),
+                    );
+                }
+                $this->load->library('smslib');
+                $smsresult = $this->smslib->send($receiver, $sender, $content, $date = '', '게시글 작성 알림');
+            }
+            if ($smssendlistpostwriter) {
+                $content = str_replace(
+                    $searchconfig,
+                    $replaceconfig,
+                    $this->cbconfig->item('send_sms_post_writer_content')
+                );
+                $sender = array(
+                    'phone' => $this->cbconfig->item('sms_admin_phone'),
+                );
+                $receiver = array();
+                $receiver[] = $smssendlistpostwriter;
+                $this->load->library('smslib');
+                $smsresult = $this->smslib->send($receiver, $sender, $content, $date = '', '게시글 작성 알림');
+            }
 
-            // 네이버 신디케이션 보내기
             if ( ! element('post_secret', $updatedata)) {
+                // 네이버 신디케이션 보내기
                 $this->_naver_syndi($post_id, $board, '입력');
+                
+                // 네이버 블로그 자동글쓰기
+                if ($is_admin !== false && $this->cbconfig->item('use_naver_blog_post') && element('use_naver_blog_post', $board)) {
+                    $this->load->helper('naver_blog_post');
+                    naver_blog_post($post_title, display_html_content($post_content, $content_type, element('post_image_width', $board), $autolink, $popup), $board);
+                }
             }
 
             $this->session->set_flashdata(
@@ -1278,11 +1518,87 @@ class Board_write extends CB_Controller
             $use_dhtml = false;
         }
         $view['view']['board']['use_dhtml'] = $use_dhtml;
+        $use_subj_style = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_subject_style', $board)
+            : element('use_subject_style', $board);
+
+        $use_poll = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_poll', $board)
+            : element('use_poll', $board);
+
+        if ($use_subj_style) {
+            $check = array(
+                'group_id' => element('bgr_id', $board),
+                'board_id' => element('brd_id', $board),
+            );
+            $use_subject_style = $this->accesslevel->is_accessable(
+                element('access_subject_style', $board),
+                element('access_subject_style_level', $board),
+                element('access_subject_style_group', $board),
+                $check
+            );
+        } else {
+            $use_subject_style = false;
+        }
+        $view['view']['board']['use_subject_style'] = $use_subject_style;
+        if ($use_poll) {
+            $this->load->model(array('Post_poll_model', 'Post_poll_item_model', 'Post_poll_item_poll_model'));
+            $postwhere = array(
+                'post_id' => $post_id,
+            );
+            $view['view']['poll'] = $poll
+                = $this->Post_poll_model->get_one('', '', $postwhere);
+            $view['view']['poll_item'] = $poll_item = '';
+            if (element('ppo_id', $poll)) {
+                $itemwhere = array(
+                    'ppo_id' => element('ppo_id', $poll),
+                );
+                $view['view']['poll_item'] = $poll_item
+                    = $this->Post_poll_item_model->get('', '', $itemwhere, '', '', 'ppi_id', 'ASC');
+            }
+            $check = array(
+                'group_id' => element('bgr_id', $board),
+                'board_id' => element('brd_id', $board),
+            );
+            $can_poll_write = $this->accesslevel->is_accessable(
+                element('access_poll_write', $board),
+                element('access_poll_write_level', $board),
+                element('access_poll_write_group', $board),
+                $check
+            );
+        } else {
+            $can_poll_write = false;
+        }
+        $view['view']['board']['can_poll_write'] = $can_poll_write;
+
+        if (element('use_post_tag', $board)) {
+            $check = array(
+                'group_id' => element('bgr_id', $board),
+                'board_id' => element('brd_id', $board),
+            );
+            $can_tag_write = $this->accesslevel->is_accessable(
+                element('access_tag_write', $board),
+                element('access_tag_write_level', $board),
+                element('access_tag_write_group', $board),
+                $check
+            );
+        } else {
+            $can_tag_write = false;
+        }
+        $view['view']['board']['can_tag_write'] = $can_tag_write;
 
         $view['view']['board']['link_count']
             = ($this->cbconfig->get_device_view_type() === 'mobile')
             ? element('mobile_link_num', $board)
             : element('link_num', $board);
+        $view['view']['board']['use_emoticon']
+            = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_post_emoticon', $board)
+            : element('use_post_emoticon', $board);
+        $view['view']['board']['use_specialchars']
+            = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_post_specialchars', $board)
+            : element('use_post_specialchars', $board);
 
         $extravars = element('extravars', $board);
         $form = json_decode($extravars, true);
@@ -1297,7 +1613,7 @@ class Board_write extends CB_Controller
             : element('footer_content', $board);
 
         $view['view']['post']['is_post_name'] = $is_post_name
-            = ($this->member->is_member() === false OR ($is_admin !== false && $mem_id !== (int) element('mem_id', $post))) ? true : false;
+            = ($this->member->is_member() === false OR ($is_admin !== false && $mem_id !== abs(element('mem_id', $post)))) ? true : false;
         $view['view']['post']['can_post_notice'] = $can_post_notice = ($is_admin !== false) ? true : false;
         $view['view']['post']['can_post_secret'] = $can_post_secret
             = element('use_post_secret', $board) === '1' ? true : false;
@@ -1393,6 +1709,23 @@ class Board_write extends CB_Controller
                     'rules' => 'trim|required|callback__check_captcha',
                 );
             }
+        }
+        if ($use_subject_style) {
+            $config[] = array(
+                'field' => 'post_title_color',
+                'label' => '제목색상',
+                'rules' => 'trim|exact_length[7]',
+            );
+            $config[] = array(
+                'field' => 'post_title_font',
+                'label' => '제목폰트',
+                'rules' => 'trim',
+            );
+            $config[] = array(
+                'field' => 'post_title_bold',
+                'label' => '제목볼드',
+                'rules' => 'trim|exact_length[1]',
+            );
         }
         if (element('use_category', $board) && $is_admin === false) {
             $config[] = array(
@@ -1566,6 +1899,22 @@ class Board_write extends CB_Controller
                 $view['view']['message'] = $file_error;
             }
 
+            if (element('use_post_tag', $board) && $can_tag_write) {
+                $this->load->model('Post_tag_model');
+                $view['view']['post']['post_tag'] = '';
+                $postwhere = array(
+                    'post_id' => $post_id,
+                );
+                $tag = $this->Post_tag_model->get('', '', $postwhere, '', '', 'pta_id', 'ASC');
+                if ($tag && is_array($tag)) {
+                    foreach ($tag as $key => $value) {
+                        if (element('pta_tag', $value)) {
+                            $view['view']['post']['post_tag'] .= trim(element('pta_tag', $value)) . ',';
+                        }
+                    }
+                }
+            }
+
             $extra_content = '';
             $k = 0;
             if ($form && is_array($form)) {
@@ -1712,6 +2061,10 @@ class Board_write extends CB_Controller
              * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
              */
 
+            if( $this->input->post($primary_key) != $post_id ){
+                // $_POST['post_id'] 값과 $_GET['post_id'] 값이 틀린 경우입니다.
+            }
+
             // 이벤트가 존재하면 실행합니다
             $view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
@@ -1757,6 +2110,11 @@ class Board_write extends CB_Controller
             if ($can_post_receive_email) {
                 $updatedata['post_receive_email'] = $this->input->post('post_receive_email') ? 1 : 0;
             }
+            if ($use_subject_style) {
+                $metadata['post_title_color'] = $this->input->post('post_title_color', null, '');
+                $metadata['post_title_font'] = $this->input->post('post_title_font', null, '');
+                $metadata['post_title_bold'] = $this->input->post('post_title_bold', null, '');
+            }
             if (element('use_category', $board)) {
                 $updatedata['post_category'] = $this->input->post('post_category', null, '');
             }
@@ -1780,6 +2138,20 @@ class Board_write extends CB_Controller
                     ->save($post_id, element('brd_id', $board), $metadata);
             }
 
+            if (element('use_posthistory', $board)) {
+                $this->load->model('Post_history_model');
+                $historydata = array(
+                    'post_id' => $post_id,
+                    'brd_id' => element('brd_id', $board),
+                    'mem_id' => $mem_id,
+                    'phi_title' => $post_title,
+                    'phi_content' => $post_content,
+                    'phi_content_html_type' => $content_type,
+                    'phi_ip' => $this->input->ip_address(),
+                    'phi_datetime' => cdate('Y-m-d H:i:s'),
+                );
+                $this->Post_history_model->insert($historydata);
+            }
             $post_link_update = $this->input->post('post_link_update');
             $link_count = 0;
             if ($post_link_update && is_array($post_link_update) && count($post_link_update) > 0) {
@@ -1810,6 +2182,134 @@ class Board_write extends CB_Controller
                 }
             }
             $updatedata['post_link_count'] = $link_count;
+
+            if ($can_poll_write) {
+                if ($ppo_id = (int) $this->input->post('ppo_id')) {
+                    $post_poll_data = $this->Post_poll_model->get_one($ppo_id);
+                    if (element('post_id', $post_poll_data) === $post_id) {
+                        $post_poll_item = $this->input->post('poll_item');
+                        $post_poll_item_update = $this->input->post('poll_item_update');
+                        if ($post_poll_item OR $post_poll_item_update) {
+                            $start_time = sprintf("%02d", $this->input->post('ppo_start_time'));
+                            $start_datetime = $this->input->post('ppo_start_date')
+                                ? $this->input->post('ppo_start_date') . ' ' . $start_time . ':00:00' : '';
+                            $end_time = sprintf("%02d", $this->input->post('ppo_end_time'));
+                            $end_datetime = $this->input->post('ppo_end_date')
+                                ? $this->input->post('ppo_end_date') . ' ' . $end_time . ':00:00' : '';
+                            $ppo_choose_count = $this->input->post('ppo_choose_count') ? $this->input->post('ppo_choose_count') : 0;
+                            $ppo_after_comment = $this->input->post('ppo_after_comment') ? $this->input->post('ppo_after_comment') : 0;
+                            $polldata = array(
+                                'ppo_start_datetime' => $start_datetime,
+                                'ppo_end_datetime' => $end_datetime,
+                                'ppo_title' => $this->input->post('ppo_title', null, ''),
+                                'ppo_choose_count' => $ppo_choose_count,
+                                'ppo_after_comment' => $ppo_after_comment,
+                            );
+                            if ($is_admin !== false) {
+                                $polldata['ppo_point'] = $this->input->post('ppo_point') ? $this->input->post('ppo_point') : 0;
+                            }
+                            $this->Post_poll_model->update(element('ppo_id', $post_poll_data), $polldata);
+                            if ($post_poll_item_update) {
+                                foreach ($post_poll_item_update as $pkey => $pval) {
+                                    $item = $this->Post_poll_item_model->get_one($pkey);
+                                    if (element('ppi_id', $item) && element('ppi_id', $item) === $pkey) {
+                                        if (element('ppo_id', $item) === element('ppo_id', $post_poll_data)) {
+                                            if ($pval) {
+                                                $itemdata = array(
+                                                    'ppi_item' => $pval,
+                                                );
+                                                $this->Post_poll_item_model->update($pkey, $itemdata);
+                                            } else {
+                                                $this->Post_poll_item_model->delete($pkey);
+                                                $pipwhere = array(
+                                                    'ppi_id' => $pkey,
+                                                );
+                                                $this->Post_poll_item_poll_model->delete_where($pipwhere);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if ($post_poll_item) {
+                                foreach ($post_poll_item as $pkey => $pval) {
+                                    if ($pval) {
+                                        $itemdata = array(
+                                            'ppo_id' => element('ppo_id', $post_poll_data),
+                                            'ppi_item' => $pval,
+                                        );
+                                        $this->Post_poll_item_model->insert($itemdata);
+                                    }
+                                }
+                            }
+                        } else {
+                            $pwhere = array(
+                                'ppo_id' => element('ppo_id', $post_poll_data),
+                            );
+                            $this->Post_poll_model->delete(element('ppo_id', $post_poll_data));
+                            $this->Post_poll_item_model->delete_where($pwhere);
+                            $this->Post_poll_item_poll_model->delete_where($pwhere);
+                            $updatedata['ppo_id'] = '';
+                        }
+                    }
+
+                    $pwhere = array(
+                        'ppo_id' => $ppo_id,
+                    );
+                    $cnt = $this->Post_poll_item_model->count_by($pwhere);
+                    if ($cnt === 0) {
+                        $this->Post_poll_model->delete($ppo_id);
+                        $this->Post_poll_item_model->delete_where($pwhere);
+                        $this->Post_poll_item_poll_model->delete_where($pwhere);
+                        $updatedata['ppo_id'] = '';
+                    }
+
+                } else {
+                    $post_poll_item = $this->input->post('poll_item');
+                    $has_poll_item = false;
+                    foreach ($post_poll_item as $pkey => $pval) {
+                        if ($pval) {
+                            $has_poll_item = true;
+                        }
+                    }
+                    if ($post_poll_item && $has_poll_item) {
+                        $start_time = sprintf("%02d", $this->input->post('ppo_start_time'));
+                        $start_datetime = $this->input->post('ppo_start_date')
+                            ? $this->input->post('ppo_start_date') . ' ' . $start_time . ':00:00' : '';
+                        $end_time = sprintf("%02d", $this->input->post('ppo_end_time'));
+                        $end_datetime = $this->input->post('ppo_end_date')
+                            ? $this->input->post('ppo_end_date') . ' ' . $end_time . ':00:00' : '';
+                        $ppo_choose_count = $this->input->post('ppo_choose_count') ? $this->input->post('ppo_choose_count') : 0;
+                        $ppo_after_comment = $this->input->post('ppo_after_comment') ? $this->input->post('ppo_after_comment') : 0;
+
+                        $polldata = array(
+                            'post_id' => $post_id,
+                            'brd_id' => element('brd_id', $board),
+                            'ppo_start_datetime' => $start_datetime,
+                            'ppo_end_datetime' => $end_datetime,
+                            'ppo_title' => $this->input->post('ppo_title', null, ''),
+                            'ppo_choose_count' => $ppo_choose_count,
+                            'ppo_after_comment' => $ppo_after_comment,
+                            'ppo_datetime' => cdate('Y-m-d H:i:s'),
+                            'ppo_ip' => $this->input->ip_address(),
+                            'mem_id' => $mem_id,
+                        );
+                        if ($is_admin !== false) {
+                            $polldata['ppo_point'] = $this->input->post('ppo_point') ? $this->input->post('ppo_point') : 0;
+                        }
+                        $ppo_id = $this->Post_poll_model->insert($polldata);
+                        foreach ($post_poll_item as $pkey => $pval) {
+                            if ($pval) {
+                                $itemdata = array(
+                                    'ppo_id' => $ppo_id,
+                                    'ppi_item' => $pval,
+                                );
+                                $this->Post_poll_item_model->insert($itemdata);
+                            }
+                        }
+                        $updatedata['ppo_id'] = $ppo_id;
+                    }
+                }
+            }
 
             $file_updated = false;
             $file_changed = false;
@@ -1929,10 +2429,34 @@ class Board_write extends CB_Controller
                 }
             }
 
+            if (element('use_post_tag', $board) && $can_tag_write) {
+                $this->load->model('Post_tag_model');
+                $deletewhere = array(
+                    'post_id' => $post_id,
+                );
+                $this->Post_tag_model->delete_where($deletewhere);
+                if ($this->input->post('post_tag')) {
+                    $tags = explode(',', $this->input->post('post_tag'));
+                    if ($tags && is_array($tags)) {
+                        foreach ($tags as $key => $value) {
+                            $value = trim($value);
+                            if ($value) {
+                                $tagdata = array(
+                                    'post_id' => $post_id,
+                                    'brd_id' => element('brd_id', $board),
+                                    'pta_tag' => $value,
+                                );
+                                $this->Post_tag_model->insert($tagdata);
+                            }
+                        }
+                    }
+                }
+            }
+
             // 이벤트가 존재하면 실행합니다
             Events::trigger('before_post_update', $eventname);
 
-            $this->Post_model->update($this->input->post($primary_key), $updatedata);
+            $this->Post_model->update($post_id, $updatedata);
 
             // 네이버 신디케이션 보내기
             if ( ! element('post_secret', $updatedata)) {
@@ -1952,7 +2476,7 @@ class Board_write extends CB_Controller
              * 게시물의 신규입력 또는 수정작업이 끝난 후 뷰 페이지로 이동합니다
              */
             $param =& $this->querystring;
-            $redirecturl = post_url(element('brd_key', $board), $this->input->post($primary_key)) . '?' . $param->output();
+            $redirecturl = post_url(element('brd_key', $board), $post_id) . '?' . $param->output();
 
             redirect($redirecturl);
         }
@@ -2143,6 +2667,24 @@ class Board_write extends CB_Controller
         $exec = curl_exec($ch);
         curl_close($ch);
 
+        if ($this->cbconfig->item('use_naver_syndi_log')) {
+            $this->load->library('simplexml');
+            //use the method to parse the data from xml
+            $xmlData = $this->simplexml->xml_parse($exec);
+
+            $mem_id = (int) $this->member->item('mem_id');
+            $logdata = array(
+                'post_id' => $post_id,
+                'mem_id' => $mem_id,
+                'pns_status' => $status,
+                'pns_return_code' => element('error_code', $xmlData, ''),
+                'pns_return_message' => element('message', $xmlData, ''),
+                'pns_receipt_number' => element('receipt_number', $xmlData, ''),
+                'pns_datetime' => cdate('Y-m-d H:i:s'),
+            );
+            $this->load->model('Post_naver_syndi_log_model');
+            $this->Post_naver_syndi_log_model->insert($logdata);
+        }
         return $exec;
     }
 }

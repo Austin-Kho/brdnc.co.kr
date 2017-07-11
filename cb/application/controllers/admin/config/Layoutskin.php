@@ -431,6 +431,36 @@ class Layoutskin extends CB_Controller
                 'rules' => 'trim',
             ),
             array(
+                'field' => 'layout_tag',
+                'label' => '태그페이지레이아웃',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'sidebar_tag',
+                'label' => '태그페이지사이드바',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'mobile_layout_tag',
+                'label' => '태그페이지모바일레이아웃',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'mobile_sidebar_tag',
+                'label' => '태그페이지모바일사이드바',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'skin_tag',
+                'label' => '태그페이지일반스킨',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'mobile_skin_tag',
+                'label' => '태그페이지모바일스킨',
+                'rules' => 'trim',
+            ),
+            array(
                 'field' => 'layout_note',
                 'label' => '쪽지레이아웃',
                 'rules' => 'trim',
@@ -589,7 +619,8 @@ class Layoutskin extends CB_Controller
                 'mobile_sidebar_mypage', 'skin_mypage', 'mobile_skin_mypage', 'layout_currentvisitor',
                 'mobile_layout_currentvisitor', 'sidebar_currentvisitor', 'mobile_sidebar_currentvisitor',
                 'skin_currentvisitor', 'mobile_skin_currentvisitor', 'layout_search', 'mobile_layout_search',
-                'sidebar_search', 'mobile_sidebar_search', 'skin_search', 'mobile_skin_search',
+                'sidebar_search', 'mobile_sidebar_search', 'skin_search', 'mobile_skin_search', 'layout_tag',
+                'mobile_layout_tag', 'sidebar_tag', 'mobile_sidebar_tag', 'skin_tag', 'mobile_skin_tag',
                 'layout_note', 'mobile_layout_note', 'skin_note', 'mobile_skin_note', 'layout_profile',
                 'mobile_layout_profile', 'skin_profile', 'mobile_skin_profile', 'layout_formmail',
                 'mobile_layout_formmail', 'skin_formmail', 'mobile_skin_formmail', 'layout_notification',
@@ -852,6 +883,27 @@ class Layoutskin extends CB_Controller
         $view['view']['data']['mobile_skin_search_option'] = get_skin_name(
             'search',
             set_value('mobile_skin_search', element('mobile_skin_search', $getdata)),
+            '기본설정따름'
+        );
+
+        $view['view']['data']['layout_tag_option'] = get_skin_name(
+            '_layout',
+            set_value('layout_tag', element('layout_tag', $getdata)),
+            '기본설정따름'
+        );
+        $view['view']['data']['mobile_layout_tag_option'] = get_skin_name(
+            '_layout',
+            set_value('mobile_layout_tag', element('mobile_layout_tag', $getdata)),
+            '기본설정따름'
+        );
+        $view['view']['data']['skin_tag_option'] = get_skin_name(
+            'tag',
+            set_value('skin_tag', element('skin_tag', $getdata)),
+            '기본설정따름'
+        );
+        $view['view']['data']['mobile_skin_tag_option'] = get_skin_name(
+            'tag',
+            set_value('mobile_skin_tag', element('mobile_skin_tag', $getdata)),
             '기본설정따름'
         );
 
@@ -1197,6 +1249,12 @@ class Layoutskin extends CB_Controller
                 'name' => '알림페이지',
                 'controllers' => array('Notification/index'),
                 'description' => '',
+            ),
+            array(
+                'key' => 'tag',
+                'name' => '태그페이지',
+                'controllers' => array('Tags/index'),
+                'description' => '{태그명}',
             ),
         );
 

@@ -105,6 +105,21 @@ class Emailform extends CB_Controller
                 'rules' => 'trim|numeric',
             ),
             array(
+                'field' => 'send_sms_register_admin',
+                'label' => '최고관리자에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_register_user',
+                'label' => '회원에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_register_alluser',
+                'label' => '회원에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
                 'field' => 'send_email_register_admin_title',
                 'label' => '최고관리자에게 보낼 메일 제목',
                 'rules' => 'trim|required',
@@ -154,6 +169,16 @@ class Emailform extends CB_Controller
                 'label' => '회원에게 보낼 쪽지 내용',
                 'rules' => 'trim|required',
             ),
+            array(
+                'field' => 'send_sms_register_admin_content',
+                'label' => '최고관리자에게 발송문자내용',
+                'rules' => 'trim|required',
+            ),
+            array(
+                'field' => 'send_sms_register_user_content',
+                'label' => '회원에게 발송문자내용',
+                'rules' => 'trim|required',
+            ),
         );
         $this->form_validation->set_rules($config);
 
@@ -177,12 +202,14 @@ class Emailform extends CB_Controller
 
             $array = array(
                 'send_email_register_admin', 'send_email_register_user', 'send_email_register_alluser',
-                'send_note_register_admin', 'send_note_register_user', 'send_email_register_admin_title',
+                'send_note_register_admin', 'send_note_register_user', 'send_sms_register_admin',
+                'send_sms_register_user', 'send_sms_register_alluser', 'send_email_register_admin_title',
                 'send_email_register_admin_content', 'send_email_register_user_title',
                 'send_email_register_user_content', 'send_email_register_user_verifytitle',
                 'send_email_register_user_verifycontent', 'send_note_register_admin_title',
                 'send_note_register_admin_content', 'send_note_register_user_title',
-                'send_note_register_user_content'
+                'send_note_register_user_content', 'send_sms_register_admin_content',
+                'send_sms_register_user_content'
             );
             foreach ($array as $value) {
                 $savedata[$value] = $this->input->post($value, null, '');
@@ -263,6 +290,21 @@ class Emailform extends CB_Controller
                 'rules' => 'trim|numeric',
             ),
             array(
+                'field' => 'send_sms_changepw_admin',
+                'label' => '최고관리자에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_changepw_user',
+                'label' => '회원에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_changepw_alluser',
+                'label' => '회원에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
                 'field' => 'send_email_changepw_admin_title',
                 'label' => '최고관리자에게 보낼 메일 제목',
                 'rules' => 'trim|required',
@@ -302,6 +344,16 @@ class Emailform extends CB_Controller
                 'label' => '회원에게 보낼 쪽지 내용',
                 'rules' => 'trim|required',
             ),
+            array(
+                'field' => 'send_sms_changepw_admin_content',
+                'label' => '최고관리자에게 발송문자내용',
+                'rules' => 'trim|required',
+            ),
+            array(
+                'field' => 'send_sms_changepw_user_content',
+                'label' => '회원에게 발송문자내용',
+                'rules' => 'trim|required',
+            ),
         );
         $this->form_validation->set_rules($config);
 
@@ -326,10 +378,12 @@ class Emailform extends CB_Controller
             $array = array(
                 'send_email_changepw_admin', 'send_email_changepw_user',
                 'send_email_changepw_alluser', 'send_note_changepw_admin', 'send_note_changepw_user',
+                'send_sms_changepw_admin', 'send_sms_changepw_user', 'send_sms_changepw_alluser',
                 'send_email_changepw_admin_title', 'send_email_changepw_admin_content',
                 'send_email_changepw_user_title', 'send_email_changepw_user_content',
                 'send_note_changepw_admin_title', 'send_note_changepw_admin_content',
-                'send_note_changepw_user_title', 'send_note_changepw_user_content'
+                'send_note_changepw_user_title', 'send_note_changepw_user_content',
+                'send_sms_changepw_admin_content', 'send_sms_changepw_user_content'
             );
             foreach ($array as $value) {
                 $savedata[$value] = $this->input->post($value, null, '');
@@ -404,6 +458,21 @@ class Emailform extends CB_Controller
                 'rules' => 'trim|numeric',
             ),
             array(
+                'field' => 'send_sms_memberleave_admin',
+                'label' => '최고관리자에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_memberleave_user',
+                'label' => '회원에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_memberleave_alluser',
+                'label' => '회원에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
                 'field' => 'send_email_memberleave_admin_title',
                 'label' => '최고관리자에게 보낼 메일 제목',
                 'rules' => 'trim|required',
@@ -433,6 +502,16 @@ class Emailform extends CB_Controller
                 'label' => '최고관리자에게 보낼 쪽지 내용',
                 'rules' => 'trim|required',
             ),
+            array(
+                'field' => 'send_sms_memberleave_admin_content',
+                'label' => '최고관리자에게 발송문자내용',
+                'rules' => 'trim|required',
+            ),
+            array(
+                'field' => 'send_sms_memberleave_user_content',
+                'label' => '회원에게 발송문자내용',
+                'rules' => 'trim|required',
+            ),
         );
         $this->form_validation->set_rules($config);
 
@@ -457,9 +536,12 @@ class Emailform extends CB_Controller
             $array = array(
                 'send_email_memberleave_admin', 'send_email_memberleave_user',
                 'send_email_memberleave_alluser', 'send_note_memberleave_admin',
-                'send_email_memberleave_admin_title', 'send_email_memberleave_admin_content',
-                'send_email_memberleave_user_title', 'send_email_memberleave_user_content',
-                'send_note_memberleave_admin_title', 'send_note_memberleave_admin_content'
+                'send_sms_memberleave_admin', 'send_sms_memberleave_user',
+                'send_sms_memberleave_alluser', 'send_email_memberleave_admin_title',
+                'send_email_memberleave_admin_content', 'send_email_memberleave_user_title',
+                'send_email_memberleave_user_content', 'send_note_memberleave_admin_title',
+                'send_note_memberleave_admin_content', 'send_sms_memberleave_admin_content',
+                'send_sms_memberleave_user_content'
             );
             foreach ($array as $value) {
                 $savedata[$value] = $this->input->post($value, null, '');
@@ -736,6 +818,16 @@ class Emailform extends CB_Controller
                 'label' => '게시글작성시 게시글작성자에게 발송쪽지 내용',
                 'rules' => 'trim|required',
             ),
+            array(
+                'field' => 'send_sms_post_admin_content',
+                'label' => '관리자에게 발송문자내용',
+                'rules' => 'trim|required',
+            ),
+            array(
+                'field' => 'send_sms_post_writer_content',
+                'label' => '게시글 작성 게시글작성자에게 발송문자내용',
+                'rules' => 'trim|required',
+            ),
         );
         $this->form_validation->set_rules($config);
 
@@ -761,7 +853,8 @@ class Emailform extends CB_Controller
                 'send_email_post_admin_title', 'send_email_post_admin_content',
                 'send_email_post_writer_title', 'send_email_post_writer_content',
                 'send_note_post_admin_title', 'send_note_post_admin_content',
-                'send_note_post_writer_title', 'send_note_post_writer_content'
+                'send_note_post_writer_title', 'send_note_post_writer_content',
+                'send_sms_post_admin_content', 'send_sms_post_writer_content'
             );
             foreach ($array as $value) {
                 $savedata[$value] = $this->input->post($value, null, '');
@@ -875,6 +968,21 @@ class Emailform extends CB_Controller
                 'label' => '댓글작성시 댓글작성자에게 발송쪽지 내용',
                 'rules' => 'trim|required',
             ),
+            array(
+                'field' => 'send_sms_comment_admin_content',
+                'label' => '관리자에게 발송문자내용',
+                'rules' => 'trim|required',
+            ),
+            array(
+                'field' => 'send_sms_comment_post_writer_content',
+                'label' => '댓글 작성 원글작성자에게 발송문자내용',
+                'rules' => 'trim|required',
+            ),
+            array(
+                'field' => 'send_sms_comment_comment_writer_content',
+                'label' => '댓글 작성 댓글작성자에게 발송문자내용',
+                'rules' => 'trim|required',
+            ),
         );
         $this->form_validation->set_rules($config);
 
@@ -903,7 +1011,8 @@ class Emailform extends CB_Controller
                 'send_email_comment_comment_writer_content', 'send_note_comment_admin_title',
                 'send_note_comment_admin_content', 'send_note_comment_post_writer_title',
                 'send_note_comment_post_writer_content', 'send_note_comment_comment_writer_title',
-                'send_note_comment_comment_writer_content'
+                'send_note_comment_comment_writer_content', 'send_sms_comment_admin_content',
+                'send_sms_comment_post_writer_content', 'send_sms_comment_comment_writer_content'
             );
             foreach ($array as $value) {
                 $savedata[$value] = $this->input->post($value, null, '');
@@ -997,6 +1106,16 @@ class Emailform extends CB_Controller
                 'label' => '게시글신고시 원글작성자에게 발송쪽지 내용',
                 'rules' => 'trim|required',
             ),
+            array(
+                'field' => 'send_sms_blame_admin_content',
+                'label' => '관리자에게 발송문자내용',
+                'rules' => 'trim|required',
+            ),
+            array(
+                'field' => 'send_sms_blame_post_writer_content',
+                'label' => '게시글 신고시 원글작성자에게 발송문자내용',
+                'rules' => 'trim|required',
+            ),
         );
         $this->form_validation->set_rules($config);
 
@@ -1022,7 +1141,8 @@ class Emailform extends CB_Controller
                 'send_email_blame_admin_title', 'send_email_blame_admin_content',
                 'send_email_blame_post_writer_title', 'send_email_blame_post_writer_content',
                 'send_note_blame_admin_title', 'send_note_blame_admin_content',
-                'send_note_blame_post_writer_title', 'send_note_blame_post_writer_content'
+                'send_note_blame_post_writer_title', 'send_note_blame_post_writer_content',
+                'send_sms_blame_admin_content', 'send_sms_blame_post_writer_content'
             );
             foreach ($array as $value) {
                 $savedata[$value] = $this->input->post($value, null, '');
@@ -1136,6 +1256,21 @@ class Emailform extends CB_Controller
                 'label' => '댓글신고시 댓글작성자에게 발송쪽지 내용',
                 'rules' => 'trim|required',
             ),
+            array(
+                'field' => 'send_sms_comment_blame_admin_content',
+                'label' => '관리자에게 발송문자내용',
+                'rules' => 'trim|required',
+            ),
+            array(
+                'field' => 'send_sms_comment_blame_post_writer_content',
+                'label' => '댓글 신고시 원글작성자에게 발송문자내용',
+                'rules' => 'trim|required',
+            ),
+            array(
+                'field' => 'send_sms_comment_blame_comment_writer_content',
+                'label' => '댓글 신고시 댓글작성자에게 발송문자내용',
+                'rules' => 'trim|required',
+            ),
         );
         $this->form_validation->set_rules($config);
 
@@ -1163,7 +1298,9 @@ class Emailform extends CB_Controller
                 'send_email_comment_blame_comment_writer_title', 'send_email_comment_blame_comment_writer_content',
                 'send_note_comment_blame_admin_title', 'send_note_comment_blame_admin_content',
                 'send_note_comment_blame_post_writer_title', 'send_note_comment_blame_post_writer_content',
-                'send_note_comment_blame_comment_writer_title', 'send_note_comment_blame_comment_writer_content'
+                'send_note_comment_blame_comment_writer_title', 'send_note_comment_blame_comment_writer_content',
+                'send_sms_comment_blame_admin_content', 'send_sms_comment_blame_post_writer_content',
+                'send_sms_comment_blame_comment_writer_content'
             );
             foreach ($array as $value) {
                 $savedata[$value] = $this->input->post($value, null, '');

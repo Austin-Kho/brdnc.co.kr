@@ -64,15 +64,22 @@ class Cbversion extends CB_Controller
         Requests::register_autoloader();
         $headers = array('Accept' => 'application/json');
         $postdata = array('requesturl' => current_full_url(), 'package' => CB_PACKAGE, 'version' => CB_VERSION);
-        $request = Requests::post(config_item('ciboard_check_latest_version'), $headers, $postdata);
-        $view['view']['latest_versions'] = json_decode($request->body, true);
-        if (strtolower(CB_PACKAGE) === 'premium') {
-            $view['view']['latest_version_name'] = $view['view']['latest_versions']['premium_version'];
-            $view['view']['latest_download_url'] = $view['view']['latest_versions']['premium_downloadurl'];
-        } else {
-            $view['view']['latest_version_name'] = $view['view']['latest_versions']['basic_version'];
-            $view['view']['latest_download_url'] = $view['view']['latest_versions']['basic_downloadurl'];
+        
+        /*      //폐지될 예정
+        try {
+            $request = Requests::post(config_item('ciboard_check_latest_version'), $headers, $postdata);
+            $view['view']['latest_versions'] = json_decode($request->body, true);
+            if (strtolower(CB_PACKAGE) === 'premium') {
+                $view['view']['latest_version_name'] = $view['view']['latest_versions']['premium_version'];
+                $view['view']['latest_download_url'] = $view['view']['latest_versions']['premium_downloadurl'];
+            } else {
+                $view['view']['latest_version_name'] = $view['view']['latest_versions']['basic_version'];
+                $view['view']['latest_download_url'] = $view['view']['latest_versions']['basic_downloadurl'];
+            }
+        } catch (Exception $e) {
+            log_message('error', 'Caught exception: '.$e->getMessage());
         }
+        */
 
         // 이벤트가 존재하면 실행합니다
         $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);

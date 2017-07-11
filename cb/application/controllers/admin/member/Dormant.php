@@ -220,6 +220,7 @@ class Dormant extends CB_Controller
             $lastlogin = ctimestamp() - $gap;
             $lastlogin_datetime = cdate('Y-m-d H:i:s', $lastlogin);
             $where['mem_lastlogin_datetime <='] = $lastlogin_datetime;
+            $where['mem_register_datetime <='] = $lastlogin_datetime;
             $view['view']['count'] = $this->Member_model->count_by($where);
 
 
@@ -250,6 +251,7 @@ class Dormant extends CB_Controller
             $lastlogin = ctimestamp() - $gap;
             $lastlogin_datetime = cdate('Y-m-d H:i:s', $lastlogin);
             $where['mem_lastlogin_datetime <='] = $lastlogin_datetime;
+            $where['mem_register_datetime <='] = $lastlogin_datetime;
             $result = $this->Member_model->get('', 'mem_id', $where);
             if ($result) {
                 foreach ($result as $value) {
@@ -724,6 +726,7 @@ class Dormant extends CB_Controller
         $lastlogin = ctimestamp() - $gap;
         $lastlogin_datetime = cdate('Y-m-d H:i:s', $lastlogin);
         $where['mem_lastlogin_datetime <='] = $lastlogin_datetime;
+        $where['mem_register_datetime <='] = $lastlogin_datetime;
         $result = $this->Member_model
             ->get_admin_list($per_page, $offset, $where, '', $findex, $forder, $sfield, $skeyword);
         $list_num = $result['total_rows'] - ($page - 1) * $per_page;

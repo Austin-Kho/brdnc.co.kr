@@ -5,6 +5,9 @@
             <li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/thumbnail'); ?>">썸네일삭제</a></li>
             <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/visitlog'); ?>">방문자로그삭제</a></li>
             <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/loginlog'); ?>">로그인로그삭제</a></li>
+            <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/filedownloadlog'); ?>">파일다운로드로그삭제</a></li>
+            <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/posthistory'); ?>">게시물변경로그삭제</a></li>
+            <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/linkclicklog'); ?>">링크클릭로그삭제</a></li>
             <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/note'); ?>">오래된쪽지삭제</a></li>
             <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/autologin'); ?>">자동로그인로그삭제</a></li>
         </ul>

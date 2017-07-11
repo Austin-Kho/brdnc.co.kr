@@ -26,7 +26,7 @@ $config['uploads_dir'] = 'uploads';
  * 설치를 진행하기 위해서는 현재 접속하고 계신 remote_addr 를 입력하셔야 합니다.
  * 설치가 끝난 후에는 다시 빈 값으로 변경해주시고, 바로 위에 chk_installed 의 값을 false 로 변경해주시면 매번 install 되었는지를 체크하지 않으므로 속도 향상에 도움이 됩니다.
  */
-$config['chk_installed'] = false;
+$config['chk_installed'] = true;
 $config['install_ip'] = ''; // 여기에 all 이라고 적으면, 모든 IP 에서 접근 가능합니다, 간혹 localhost 에 설치할 때에 ip 체크를 제대로 하지 못한 경우를 대비합니다.
 
 
@@ -36,6 +36,23 @@ $config['install_ip'] = ''; // 여기에 all 이라고 적으면, 모든 IP 에�
  * profiler 활성화 선언은 application/core/CB_Controller.php 의 __construct() 함수에 있습니다,
  */
 $config['enable_profiler'] = false;
+
+
+/**
+ * 스케쥴러 기능을 활성화할지 결정합니다.
+ * 스케쥴러 기능은 cron 과 그 역할이 비슷하며, 일정한 시간 간격으로 웹요청이 들어올 때마다 실행하는 것입니다.
+ * 스케쥴러 등록은 관리자페이지 > 환경설정 > 스케쥴러 등록 메뉴에서 설정하실 수 있습니다.
+ * $config['enable_scheduler'] 의 값을 false 로 지정하시면 관리자페이지에서 등록된 스케쥴러가 있더라도 실행되지 않습니다.
+ * 등록한 스케쥴러가 하나도 없는 경우에는 값을 false 로 지정해놓으시면 속도향상에 도움이 됩니다.
+ */
+$config['enable_scheduler'] = false;
+
+/**
+ * 정해진 초가 지날 때마다 한번씩 수행해야할 스케쥴러가 있는지 확인합니다.
+ * 스케쥴러가 하루에 한번 정도 수행해야할 것이라면, 1시간에 1번정도로 초를 길게 잡아주시면 부하를 줄일 수 있습니다.
+ * 이 변수는 application/hooks/Scheduler.php 에서 사용되고 있습니다.
+ */
+$config['check_scheduler_second'] = 300; // 초
 
 
 /**

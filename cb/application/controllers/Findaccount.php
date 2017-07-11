@@ -588,6 +588,8 @@ class Findaccount extends CB_Controller
             );
             return false;
         }
+
+        return true;
     }
 
 

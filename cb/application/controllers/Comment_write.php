@@ -105,6 +105,14 @@ class Comment_write extends CB_Controller
                 : '비회원은 댓글을 작성할 수 있는 권한이 없습니다.<br>회원이시라면 로그인 후 이용해 보십시오';
             $result = array('error' => $alertmessage);
             exit(json_encode($result));
+        }
+        $is_selfcert = $this->accesslevel->is_selfcert('comment', element('access_comment_selfcert', $board));
+        if ($is_selfcert === false) {
+            $alertmessage = $this->member->is_member()
+                ? '회원님은 댓글을 작성할 수 있는 권한이 없습니다<br />본인인증 후에 댓글 작성이 가능합니다.'
+                : '비회원은 댓글을 작성할 수 있는 권한이 없습니다.<br>회원이시라면 로그인 후 이용해 보십시오';
+            $result = array('error' => $alertmessage);
+            exit(json_encode($result));
 
         }
 
@@ -191,6 +199,13 @@ class Comment_write extends CB_Controller
             if ($this->session->userdata('lastest_post_time') >= ( ctimestamp() - $this->cbconfig->item('new_post_second')) && $is_admin === false) {
                 $result = array('error' => '너무 빠른 시간내에 게시물을 연속해서 올릴 수 없습니다.<br />'
                     . ($this->cbconfig->item('new_post_second') - (ctimestamp() - $this->session->userdata('lastest_post_time'))) . '초 후 글쓰기가 가능합니다');
+                exit(json_encode($result));
+            }
+        }
+        if (element('comment_possible_day', $board) > 0 && $is_admin === false
+            && $mode === 'c' && ! $this->input->post('cmt_id')) {
+            if (ctimestamp() - strtotime(element('post_datetime', $post)) >= element('comment_possible_day', $board) * 86400) {
+                $result = array('error' => '이 게시판은 ' . element('comment_possible_day', $board) . '일 이상된 게시글에 댓글 입력을 금지합니다');
                 exit(json_encode($result));
             }
         }
@@ -335,8 +350,8 @@ class Comment_write extends CB_Controller
                     $not_message = $updatedata['cmt_nickname'] . '님께서 [' . element('post_title', $post) . '] 에 댓글을 남기셨습니다';
                     $not_url = post_url(element('brd_key', $board), $post_id) . '#comment_' . $cmt_id;
                     $this->notificationlib->set_noti(
-                        element('mem_id', $post),
                         abs(element('mem_id', $post)),
+                        $mem_id,
                         'comment',
                         $cmt_id,
                         $not_message,
@@ -371,28 +386,54 @@ class Comment_write extends CB_Controller
                         '댓글 작성'
                     );
                 }
+                if (element('use_comment_lucky', $board)) {
+                    $rand = rand(1,100);
+                    if (element('comment_lucky_percent', $board) >= $rand) {
+                        $luckypoint = rand(element('comment_lucky_point_min', $board), element('comment_lucky_point_max', $board));
+                        $luckytitle = element('board_name', $board) . ' ' . $cmt_id . ' ' . element('comment_lucky_name', $board) . ' 당첨';
+                        $point = $this->point->insert_point(
+                            $mem_id,
+                            $luckypoint,
+                            $luckytitle,
+                            'lucky-comment',
+                            $cmt_id,
+                            '럭키포인트'
+                        );
+                        $metadata = array(
+                            'comment-lucky' => $luckypoint,
+                        );
+                        $this->load->model('Comment_meta_model');
+                        $this->Comment_meta_model->save($cmt_id, $metadata);
+                    }
+                }
 
                 $emailsendlistadmin = array();
                 $notesendlistadmin = array();
+                $smssendlistadmin = array();
                 $emailsendlistpostwriter = array();
                 $notesendlistpostwriter = array();
+                $smssendlistpostwriter = array();
                 $emailsendlistcmtwriter = array();
                 $notesendlistcmtwriter = array();
+                $smssendlistcmtwriter = array();
                 $post_writer = array();
 
                 if (element('send_email_comment_super_admin', $board)
-                    OR element('send_note_comment_super_admin', $board)) {
+                    OR element('send_note_comment_super_admin', $board)
+                    OR element('send_sms_comment_super_admin', $board)) {
                     $mselect = 'mem_id, mem_email, mem_nickname, mem_phone';
                     $superadminlist = $this->Member_model->get_superadmin_list($mselect);
                 }
                 if (element('send_email_comment_group_admin', $board)
-                    OR element('send_note_comment_group_admin', $board)) {
+                    OR element('send_note_comment_group_admin', $board)
+                    OR element('send_sms_comment_group_admin', $board)) {
                     $this->load->model('Board_group_admin_model');
                     $groupadminlist = $this->Board_group_admin_model
                         ->get_board_group_admin_member(element('bgr_id', $board));
                 }
                 if (element('send_email_comment_board_admin', $board)
-                    OR element('send_note_comment_board_admin', $board)) {
+                    OR element('send_note_comment_board_admin', $board)
+                    OR element('send_sms_comment_board_admin', $board)) {
                     $this->load->model('Board_admin_model');
                     $boardadminlist = $this->Board_admin_model
                         ->get_board_admin_member(element('brd_id', $board));
@@ -414,6 +455,7 @@ class Comment_write extends CB_Controller
                 }
                 if (element('send_email_comment_post_writer', $board)
                     OR element('send_note_comment_post_writer', $board)
+                    OR element('send_sms_comment_post_writer', $board)
                     OR element('post_receive_email', $post)) {
                     $post_writer = $this->Member_model->get_one(element('mem_id', $post));
                 }
@@ -446,6 +488,35 @@ class Comment_write extends CB_Controller
                 if (element('send_note_comment_comment_writer', $board)
                     && $this->member->item('mem_use_note')) {
                     $notesendlistcmtwriter['mem_id'] = $mem_id;
+                }
+                if (element('send_sms_comment_super_admin', $board) && $superadminlist) {
+                    foreach ($superadminlist as $key => $value) {
+                        $smssendlistadmin[$value['mem_id']] = $value;
+                    }
+                }
+                if (element('send_sms_comment_group_admin', $board) && $groupadminlist) {
+                    foreach ($groupadminlist as $key => $value) {
+                        $smssendlistadmin[$value['mem_id']] = $value;
+                    }
+                }
+                if (element('send_sms_comment_board_admin', $board) && $boardadminlist) {
+                    foreach ($boardadminlist as $key => $value) {
+                        $smssendlistadmin[$value['mem_id']] = $value;
+                    }
+                }
+                if (element('send_sms_comment_post_writer', $board)
+                    && element('mem_phone', $post_writer)
+                    && element('mem_receive_sms', $post_writer)) {
+                    $smssendlistpostwriter['mem_id'] = element('mem_id', $post_writer);
+                    $smssendlistpostwriter['mem_nickname'] = element('mem_nickname', $post_writer);
+                    $smssendlistpostwriter['mem_phone'] = element('mem_phone', $post_writer);
+                }
+                if (element('send_sms_comment_comment_writer', $board)
+                    && $this->member->item('mem_phone')
+                    && $this->member->item('mem_receive_sms')) {
+                    $smssendlistcmtwriter['mem_id'] = $mem_id;
+                    $smssendlistcmtwriter['mem_nickname'] = $this->member->item('mem_nickname');
+                    $smssendlistcmtwriter['mem_phone'] = $this->member->item('mem_phone');
                 }
 
                 $searchconfig = array(
@@ -619,6 +690,54 @@ class Comment_write extends CB_Controller
                         $content,
                         1
                     );
+                }
+                if ($smssendlistadmin) {
+                    $content = str_replace(
+                        $searchconfig,
+                        $replaceconfig,
+                        $this->cbconfig->item('send_sms_comment_admin_content')
+                    );
+                    $sender = array(
+                        'phone' => $this->cbconfig->item('sms_admin_phone'),
+                    );
+                    $receiver = array();
+                    foreach ($smssendlistadmin as $akey => $aval) {
+                        $receiver[] = array(
+                            'mem_id' => element('mem_id', $aval),
+                            'name' => element('mem_nickname', $aval),
+                            'phone' => element('mem_phone', $aval),
+                        );
+                    }
+                    $this->load->library('smslib');
+                    $smsresult = $this->smslib->send($receiver, $sender, $content, $date = '', '댓글 작성 알림');
+                }
+                if ($smssendlistpostwriter) {
+                    $content = str_replace(
+                        $searchconfig,
+                        $replaceconfig,
+                        $this->cbconfig->item('send_sms_comment_post_writer_content')
+                    );
+                    $sender = array(
+                        'phone' => $this->cbconfig->item('sms_admin_phone'),
+                    );
+                    $receiver = array();
+                    $receiver[] = $smssendlistpostwriter;
+                    $this->load->library('smslib');
+                    $smsresult = $this->smslib->send($receiver, $sender, $content, $date = '', '댓글 작성 알림');
+                }
+                if ($smssendlistcmtwriter) {
+                    $content = str_replace(
+                        $searchconfig,
+                        $replaceconfig,
+                        $this->cbconfig->item('send_sms_comment_comment_writer_content')
+                    );
+                    $sender = array(
+                        'phone' => $this->cbconfig->item('sms_admin_phone'),
+                    );
+                    $receiver = array();
+                    $receiver[] = $smssendlistcmtwriter;
+                    $this->load->library('smslib');
+                    $smsresult = $this->smslib->send($receiver, $sender, $content, $date = '', '댓글 작성 알림');
                 }
 
                 $this->session->set_userdata(

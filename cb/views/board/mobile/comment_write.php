@@ -1,7 +1,7 @@
 <?php
 if ( ! element('post_hide_comment', element('post', $view)) && element('is_admin', $view)) {
 ?>
-    <div class="chk_comment_all_wrapper"><label for="chk_comment_all"><input id="chk_comment_all" onclick="all_commentlist_checked(this.checked);" type="checkbox"> 코멘트 전체선택</label></div>
+    <div class="chk_comment_all_wrapper"><label for="chk_comment_all"><input id="chk_comment_all" onclick="all_commentlist_checked(this.checked);" type="checkbox" /> 코멘트 전체선택</label></div>
     <button type="button" class="btn btn-default btn-sm admin-manage-comment"><i class="fa fa-cog big-fa"></i>댓글관리</button>
     <div class="btn-admin-manage-layer admin-manage-layer-comment">
         <div class="item" onClick="comment_multi_action('viewcomment', '<?php echo element('post_id', element('post', $view)); ?>', 'comment_multi_delete', '0', '선택하신 글들을 완전삭제하시겠습니까?');"><i class="fa fa-trash-o"></i> 선택삭제</div>
@@ -66,6 +66,12 @@ if (element('can_comment_write', element('comment', $view)) OR element('show_tex
                                     <input type="checkbox" name="cmt_secret" id="cmt_secret" value="1" <?php echo set_checkbox('cmt_secret', '1', (element('cmt_secret', element('comment', $view)) ? true : false)); ?> /> 비밀글
                                 </label>
                             </div>
+                        <?php } ?>
+                        <?php if (element('use_emoticon', element('comment', $view))) { ?>
+                            <button type="button" class="btn btn-default btn-sm" title="이모티콘" onclick="window.open('<?php echo site_url('helptool/emoticon?id=cmt_content'); ?>', 'emoticon', 'width=600,height=400,scrollbars=yes')"><i class="fa fa-smile-o fa-lg"></i></button>
+                        <?php } ?>
+                        <?php if (element('use_specialchars', element('comment', $view))) { ?>
+                            <button type="button" class="btn btn-default btn-sm" title="특수문자" onclick="window.open('<?php echo site_url('helptool/specialchars?id=cmt_content'); ?>', 'specialchars', 'width=490,height=245,scrollbars=yes')"><i class="fa fa-star-o fa-lg"></i></button>
                         <?php } ?>
                         <button type="button" class="btn btn-default btn-sm" title="새글등록" onClick="comment_box('', 'c');"><i class="fa fa-pencil fa-lg"></i></button>
                         <button type="button" class="btn btn-default btn-sm" title="창을크게" onClick="resize_textarea('cmt_content', 'down');"><i class="fa fa-plus fa-lg"></i></button>

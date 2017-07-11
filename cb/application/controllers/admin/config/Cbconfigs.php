@@ -116,8 +116,23 @@ class Cbconfigs extends CB_Controller
                 'rules' => 'trim',
             ),
             array(
+                'field' => 'naver_blog_api_key',
+                'label' => '네이버 블로그 글쓰기 API',
+                'rules' => 'trim',
+            ),
+            array(
                 'field' => 'naver_syndi_key',
                 'label' => '네이버 신디케이션 연동키',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'use_naver_syndi_log',
+                'label' => '네이버 신디케이션 핑 전송 로그',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'bitly_access_token',
+                'label' => 'Bitly Access Token',
                 'rules' => 'trim',
             ),
             array(
@@ -198,7 +213,8 @@ class Cbconfigs extends CB_Controller
 
             $array = array(
                 'site_title', 'site_logo', 'admin_logo', 'footer_script', 'webmaster_name', 'webmaster_email',
-                'spam_word', 'white_iframe', 'jwplayer6_key', 'naver_syndi_key', 'kakao_apikey',
+                'spam_word', 'white_iframe', 'jwplayer6_key', 'naver_blog_api_key', 'naver_syndi_key', 
+                'use_naver_syndi_log', 'bitly_access_token', 'kakao_apikey',
                 'new_post_second', 'open_currentvisitor', 'currentvisitor_minute', 'use_copy_log', 'max_level',
                 'ip_display_style', 'list_count', 'use_recaptcha', 'recaptcha_sitekey', 'recaptcha_secret'
             );
@@ -785,6 +801,16 @@ class Cbconfigs extends CB_Controller
                 'label' => '쪽지발송시 차감포인트',
                 'rules' => 'trim|required|numeric',
             ),
+            array(
+                'field' => 'use_note_file',
+                'label' => '쪽지에 첨부파일 기능사용',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'point_note_file',
+                'label' => '첨부파일업로드시 차감포인트',
+                'rules' => 'trim|required|numeric',
+            ),
         );
         $this->form_validation->set_rules($config);
 
@@ -809,6 +835,7 @@ class Cbconfigs extends CB_Controller
             $array = array(
                 'use_note', 'note_list_page', 'note_mobile_list_page', 'use_note_dhtml',
                 'use_note_mobile_dhtml', 'note_editor_type', 'point_note',
+                'use_note_file', 'point_note_file',
             );
             foreach ($array as $value) {
                 $savedata[$value] = $this->input->post($value, null, '');

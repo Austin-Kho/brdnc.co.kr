@@ -29,12 +29,88 @@ class Cbconfig extends CI_Controller
     /**
      * config table 에서 정보를 얻습니다
      */
-    public function get_config()
+    public function get_config($return=false)
     {
         $this->CI->load->model('Config_model');
         $this->cfg = $this->CI->Config_model->get_all_meta();
-    }
 
+        // 이 부분에 현재 버전과 패치 버전이 틀릴시 db업그레이드 하는 부분을 넣습니다.
+
+        if( !isset( $this->cfg['cb_version'] ) ){
+            
+            $sql = "ALTER TABLE ".$this->CI->db->dbprefix."session CHANGE COLUMN `id` `id` VARCHAR(120) NOT NULL DEFAULT ''";
+            $this->CI->db->query($sql);
+            
+            try {
+                
+                $this->CI->load->model(array('Payment_order_data_model', 'Payment_inicis_log_model'));
+
+                if ($this->CI->db->table_exists($this->CI->db->dbprefix.'payment_order_data') ) {
+                    $row = $this->CI->Payment_order_data_model->get_one();
+
+                    if( !isset($row['mem_id']) ){
+                        $sql = "ALTER TABLE ".$this->CI->db->dbprefix."payment_order_data ADD COLUMN `mem_id` INT(11) NOT NULL DEFAULT 0 AFTER `pod_ip`, ADD COLUMN `cart_id` VARCHAR(255) NOT NULL DEFAULT '' AFTER `mem_id` ";
+                        $this->CI->db->query($sql);
+                    }
+                }
+                
+                if ($this->CI->db->table_exists($this->CI->db->dbprefix.'payment_inicis_log') ) {
+                    $row = $this->CI->Payment_inicis_log_model->get_one();
+
+                    if( !isset($row['P_AUTH_NO']) ){
+                        $sql = "ALTER TABLE ".$this->CI->db->dbprefix."payment_inicis_log ADD COLUMN `P_AUTH_NO` VARCHAR(255) NOT NULL DEFAULT '' AFTER `P_AMT` ";
+                        $this->CI->db->query($sql);
+                    }
+                }
+
+            } catch (Exception $e) {
+
+            }
+
+            //로그 파일이 있으면 삭제합니다.
+            $checks_paths = array(
+                FCPATH . '/plugin/pg/inicis/log/',
+                FCPATH . '/plugin/kcp/inicis/log/',
+                FCPATH . '/plugin/lg/inicis/log/',
+                );
+            
+            foreach( $checks_paths as $path ){
+                if( is_dir($path) ){
+                    $files = glob($path.'/*');
+                    
+                    foreach ((array) $files as $file) {
+                        if( $file && ! preg_match('/\.htaccess$/i', $file) ){
+                            unlink($file);
+                        }
+                    }
+                    
+                }
+            }
+
+            $savedata = array(
+                'cb_version' => CB_VERSION
+                );
+
+            $this->CI->Config_model->save($savedata);
+
+        } else {
+
+            if( $this->cfg['cb_version'] != CB_VERSION ){
+
+                $savedata = array(
+                    'cb_version' => CB_VERSION
+                    );
+
+                $this->CI->Config_model->save($savedata);
+
+            }
+
+        }
+    
+        if( $return ){
+            return $this->cfg;
+        }
+    }   //end function
 
     /**
      * config table 의 item 을 얻습니다

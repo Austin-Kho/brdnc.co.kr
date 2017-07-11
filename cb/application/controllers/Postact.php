@@ -446,6 +446,20 @@ class Postact extends CB_Controller
                 'post_file_download_' . element('pfi_id', $file),
                 '1'
             );
+
+            if (element('use_download_log', $board)) {
+                $insertdata = array(
+                    'pfi_id' => element('pfi_id', $file),
+                    'post_id' => element('post_id', $file),
+                    'brd_id' => element('brd_id', $file),
+                    'mem_id' => $mem_id,
+                    'pfd_datetime' => cdate('Y-m-d H:i:s'),
+                    'pfd_ip' => $this->input->ip_address(),
+                    'pfd_useragent' => $this->agent->agent_string(),
+                );
+                $this->load->model('Post_file_download_log_model');
+                $this->Post_file_download_log_model->insert($insertdata);
+            }
             $this->Post_file_model->update_plus(element('pfi_id', $file), 'pfi_download', 1);
 
         }
@@ -503,6 +517,20 @@ class Postact extends CB_Controller
                 'post_link_click_' . element('pln_id', $link),
                 '1'
             );
+
+            if (element('use_link_click_log', $board)) {
+                $insertdata = array(
+                    'pln_id' => element('pln_id', $link),
+                    'post_id' => element('post_id', $link),
+                    'brd_id' => element('brd_id', $link),
+                    'mem_id' => $mem_id,
+                    'plc_datetime' => cdate('Y-m-d H:i:s'),
+                    'plc_ip' => $this->input->ip_address(),
+                    'plc_useragent' => $this->agent->agent_string(),
+                );
+                $this->load->model('Post_link_click_log_model');
+                $this->Post_link_click_log_model->insert($insertdata);
+            }
             $this->Post_link_model->update_plus(element('pln_id', $link), 'pln_hit', 1);
         }
 
@@ -1038,25 +1066,30 @@ class Postact extends CB_Controller
 
         $emailsendlistadmin = array();
         $notesendlistadmin = array();
+        $smssendlistadmin = array();
         $emailsendlistpostwriter = array();
         $notesendlistpostwriter = array();
+        $smssendlistpostwriter = array();
 
         $writer = $this->Member_model->get_one(abs(element('mem_id', $post)));
 
         if (element('send_email_blame_super_admin', $board)
-            OR element('send_note_blame_super_admin', $board)) {
+            OR element('send_note_blame_super_admin', $board)
+            OR element('send_sms_blame_super_admin', $board)) {
             $mselect = 'mem_id, mem_email, mem_nickname, mem_phone';
             $superadminlist = $this->Member_model
                 ->get_superadmin_list($mselect);
         }
         if (element('send_email_blame_group_admin', $board)
-            OR element('send_note_blame_group_admin', $board)) {
+            OR element('send_note_blame_group_admin', $board)
+            OR element('send_sms_blame_group_admin', $board)) {
             $this->load->model('Board_group_admin_model');
             $groupadminlist = $this->Board_group_admin_model
                 ->get_board_group_admin_member(element('bgr_id', $board));
         }
         if (element('send_email_blame_board_admin', $board)
-            OR element('send_note_blame_board_admin', $board)) {
+            OR element('send_note_blame_board_admin', $board)
+            OR element('send_sms_blame_board_admin', $board)) {
             $this->load->model('Board_admin_model');
             $boardadminlist = $this->Board_admin_model
                 ->get_board_admin_member(element('brd_id', $board));
@@ -1098,6 +1131,26 @@ class Postact extends CB_Controller
         }
         if (element('send_note_blame_post_writer', $board) && element('mem_use_note', $writer)) {
             $notesendlistpostwriter = $writer;
+        }
+        if (element('send_sms_blame_super_admin', $board) && $superadminlist) {
+            foreach ($superadminlist as $key => $value) {
+                $smssendlistadmin[$value['mem_id']] = $value;
+            }
+        }
+        if (element('send_sms_blame_group_admin', $board) && $groupadminlist) {
+            foreach ($groupadminlist as $key => $value) {
+                $smssendlistadmin[$value['mem_id']] = $value;
+            }
+        }
+        if (element('send_sms_blame_board_admin', $board) && $boardadminlist) {
+            foreach ($boardadminlist as $key => $value) {
+                $smssendlistadmin[$value['mem_id']] = $value;
+            }
+        }
+        if (element('send_sms_blame_post_writer', $board)
+            && element('mem_phone', $writer)
+            && element('mem_receive_sms', $writer)) {
+            $smssendlistpostwriter = $writer;
         }
 
         $searchconfig = array(
@@ -1219,6 +1272,40 @@ class Postact extends CB_Controller
                 1
             );
         }
+        if ($smssendlistadmin) {
+            $content = str_replace(
+                $searchconfig,
+                $replaceconfig,
+                $this->cbconfig->item('send_sms_blame_admin_content')
+            );
+            $sender = array(
+                'phone' => $this->cbconfig->item('sms_admin_phone'),
+            );
+            $receiver = array();
+            foreach ($smssendlistadmin as $akey => $aval) {
+                $receiver[] = array(
+                    'mem_id' => element('mem_id', $aval),
+                    'name' => element('mem_nickname', $aval),
+                    'phone' => element('mem_phone', $aval),
+                );
+            }
+            $this->load->library('smslib');
+            $smsresult = $this->smslib->send($receiver, $sender, $content, $date = '', '게시글 신고 알림');
+        }
+        if ($smssendlistpostwriter) {
+            $content = str_replace(
+                $searchconfig,
+                $replaceconfig,
+                $this->cbconfig->item('send_sms_blame_post_writer_content')
+            );
+            $sender = array(
+                'phone' => $this->cbconfig->item('sms_admin_phone'),
+            );
+            $receiver = array();
+            $receiver[] = $smssendlistpostwriter;
+            $this->load->library('smslib');
+            $smsresult = $this->smslib->send($receiver, $sender, $content, $date = '', '게시글 신고 알림');
+        }
 
         // 이벤트가 존재하면 실행합니다
         Events::trigger('after', $eventname);
@@ -1335,27 +1422,33 @@ class Postact extends CB_Controller
 
         $emailsendlistadmin = array();
         $notesendlistadmin = array();
+        $smssendlistadmin = array();
         $emailsendlistpostwriter = array();
         $notesendlistpostwriter = array();
+        $smssendlistpostwriter = array();
         $emailsendlistcmtwriter = array();
         $notesendlistcmtwriter = array();
+        $smssendlistcmtwriter = array();
         $post_writer = $this->Member_model->get_one(abs(element('mem_id', $post)));
         $comment_writer = $this->Member_model->get_one(abs(element('mem_id', $comment)));
 
 
         if (element('send_email_comment_blame_super_admin', $board)
-            OR element('send_note_comment_blame_super_admin', $board)) {
+            OR element('send_note_comment_blame_super_admin', $board)
+            OR element('send_sms_comment_blame_super_admin', $board)) {
             $mselect = 'mem_id, mem_email, mem_nickname, mem_phone';
             $superadminlist = $this->Member_model->get_superadmin_list($mselect);
         }
         if (element('send_email_comment_blame_group_admin', $board)
-            OR element('send_note_comment_blame_group_admin', $board)) {
+            OR element('send_note_comment_blame_group_admin', $board)
+            OR element('send_sms_comment_blame_group_admin', $board)) {
             $this->load->model('Board_group_admin_model');
             $groupadminlist = $this->Board_group_admin_model
                 ->get_board_group_admin_member(element('bgr_id', $board));
         }
         if (element('send_email_comment_blame_board_admin', $board)
-            OR element('send_note_comment_blame_board_admin', $board)) {
+            OR element('send_note_comment_blame_board_admin', $board)
+            OR element('send_sms_comment_blame_board_admin', $board)) {
             $this->load->model('Board_admin_model');
             $boardadminlist = $this->Board_admin_model
                 ->get_board_admin_member(element('brd_id', $board));
@@ -1404,6 +1497,35 @@ class Postact extends CB_Controller
         if (element('send_note_comment_blame_comment_writer', $board)
             && element('mem_use_note', $comment_writer)) {
             $notesendlistcmtwriter['mem_id'] = element('mem_id', $comment_writer);
+        }
+        if (element('send_sms_comment_blame_super_admin', $board) && $superadminlist) {
+            foreach ($superadminlist as $key => $value) {
+                $smssendlistadmin[$value['mem_id']] = $value;
+            }
+        }
+        if (element('send_sms_comment_blame_group_admin', $board) && $groupadminlist) {
+            foreach ($groupadminlist as $key => $value) {
+                $smssendlistadmin[$value['mem_id']] = $value;
+            }
+        }
+        if (element('send_sms_comment_blame_board_admin', $board) && $boardadminlist) {
+            foreach ($boardadminlist as $key => $value) {
+                $smssendlistadmin[$value['mem_id']] = $value;
+            }
+        }
+        if (element('send_sms_comment_blame_post_writer', $board)
+            && element('mem_phone', $post_writer)
+            && element('mem_receive_sms', $post_writer)) {
+            $smssendlistpostwriter['mem_id'] = element('mem_id', $post_writer);
+            $smssendlistpostwriter['mem_nickname'] = element('mem_nickname', $post_writer);
+            $smssendlistpostwriter['mem_phone'] = element('mem_phone', $post_writer);
+        }
+        if (element('send_sms_comment_blame_comment_writer', $board)
+            && element('mem_phone', $comment_writer)
+            && element('mem_receive_sms', $comment_writer)) {
+            $smssendlistcmtwriter['mem_id'] = element('mem_id', $comment_writer);
+            $smssendlistcmtwriter['mem_nickname'] = element('mem_nickname', $comment_writer);
+            $smssendlistcmtwriter['mem_phone'] = element('mem_phone', $comment_writer);
         }
 
         $searchconfig = array(
@@ -1577,6 +1699,54 @@ class Postact extends CB_Controller
                 $content,
                 1
             );
+        }
+        if ($smssendlistadmin) {
+            $content = str_replace(
+                $searchconfig,
+                $replaceconfig,
+                $this->cbconfig->item('send_sms_comment_blame_admin_content')
+            );
+            $sender = array(
+                'phone' => $this->cbconfig->item('sms_admin_phone'),
+            );
+            $receiver = array();
+            foreach ($smssendlistadmin as $akey => $aval) {
+                $receiver[] = array(
+                    'mem_id' => element('mem_id', $aval),
+                    'name' => element('mem_nickname', $aval),
+                    'phone' => element('mem_phone', $aval),
+                );
+            }
+            $this->load->library('smslib');
+            $smsresult = $this->smslib->send($receiver, $sender, $content, $date = '', '댓글 신고 알림');
+        }
+        if ($smssendlistpostwriter) {
+            $content = str_replace(
+                $searchconfig,
+                $replaceconfig,
+                $this->cbconfig->item('send_sms_comment_blame_post_writer_content')
+            );
+            $sender = array(
+                'phone' => $this->cbconfig->item('sms_admin_phone'),
+            );
+            $receiver = array();
+            $receiver[] = $smssendlistpostwriter;
+            $this->load->library('smslib');
+            $smsresult = $this->smslib->send($receiver, $sender, $content, $date = '', '댓글 신고 알림');
+        }
+        if ($smssendlistcmtwriter) {
+            $content = str_replace(
+                $searchconfig,
+                $replaceconfig,
+                $this->cbconfig->item('send_sms_comment_blame_comment_writer_content')
+            );
+            $sender = array(
+                'phone' => $this->cbconfig->item('sms_admin_phone'),
+            );
+            $receiver = array();
+            $receiver[] = $smssendlistcmtwriter;
+            $this->load->library('smslib');
+            $smsresult = $this->smslib->send($receiver, $sender, $content, $date = '', '댓글 신고 알림');
         }
 
 
@@ -2846,6 +3016,292 @@ class Postact extends CB_Controller
         $result = array('success' => $success);
         exit(json_encode($result));
 
+    }
+
+
+    /**
+     * 게시물에서 설문조사하기
+     */
+    public function post_poll($post_id = 0, $ppo_id = 0)
+    {
+
+        // 이벤트 라이브러리를 로딩합니다
+        $eventname = 'event_postact_post_poll';
+        $this->load->event($eventname);
+
+        // 이벤트가 존재하면 실행합니다
+        Events::trigger('before', $eventname);
+
+        $result = array();
+        $this->output->set_content_type('application/json');
+
+        $post_id = (int) $post_id;
+        if (empty($post_id) OR $post_id < 1) {
+            $result = array('error' => '잘못된 접근입니다.');
+            exit(json_encode($result));
+        }
+
+        $ppo_id = (int) $ppo_id;
+        if (empty($ppo_id) OR $ppo_id < 1) {
+            $result = array('error' => '잘못된 접근입니다.');
+            exit(json_encode($result));
+        }
+
+        $this->load->model(array('Post_poll_model', 'Post_poll_item_model', 'Post_poll_item_poll_model', 'Comment_model'));
+
+        $select = 'post_id, brd_id, post_del, ppo_id';
+        $post = $this->Post_model->get_one($post_id, $select);
+
+        if ( ! $this->session->userdata('post_id_' . element('post_id', $post))) {
+            $result = array('error' => '해당 게시물에서만 접근 가능합니다');
+            exit(json_encode($result));
+        }
+        if ( ! element('post_id', $post)) {
+            $result = array('error' => '존재하지 않는 게시물입니다');
+            exit(json_encode($result));
+        }
+        if (element('post_del', $post)) {
+            $result = array('error' => '삭제된 게시물에서는 설문조사가 불가능합니다');
+            exit(json_encode($result));
+        }
+
+        $board = $this->board->item_all(element('brd_id', $post));
+
+        $is_admin = $this->member->is_admin(
+            array(
+                'board_id' => element('brd_id', $board),
+                'group_id' => element('bgr_id', $board),
+            )
+        );
+
+        $use_poll = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_poll', $board) : element('use_poll', $board);
+
+        if (empty($use_poll)) {
+            $result = array('error' => '이 게시판은 현재 설문조사 기능을 사용하지 않습니다');
+            exit(json_encode($result));
+        }
+        $check = array(
+            'group_id' => element('bgr_id', $board),
+            'board_id' => element('brd_id', $board),
+        );
+        $can_poll_attend = $this->accesslevel->is_accessable(
+            element('access_poll_attend', $board),
+            element('access_poll_attend_level', $board),
+            element('access_poll_attend_group', $board),
+            $check
+        );
+        if ($can_poll_attend === false) {
+            $errormessage = $this->member->is_member()
+                ? '회원님은 설문조사 참여 권한이 없습니다'
+                : '비회원은 설문조사 참여 권한이 없습니다. 회원이시라면 로그인 후 이용해 보십시오';
+            $result = array('error' => $errormessage);
+            exit(json_encode($result));
+        }
+
+        $mem_id = (int) $this->member->item('mem_id');
+
+        $post_poll = $this->Post_poll_model->get_one($ppo_id);
+
+        if (element('post_id', $post) !== element('post_id', $post_poll)) {
+            $result = array('error' => '잘못된 접근입니다');
+            exit(json_encode($result));
+        }
+
+        if (empty($post_poll['ppo_start_datetime'])
+            OR element('ppo_start_datetime', $post_poll) === '0000-00-00 00:00:00') {
+            $post_poll['ppo_start_datetime'] = '';
+        }
+        if (empty($post_poll['ppo_end_datetime'])
+            OR element('ppo_end_datetime', $post_poll) === '0000-00-00 00:00:00') {
+            $post_poll['ppo_end_datetime'] = '';
+        }
+
+        if (element('ppo_start_datetime', $post_poll)
+            && element('ppo_start_datetime', $post_poll) > cdate('Y-m-d H:i:s')) {
+            $result = array('error' => '아직 설문조사 시작 기간 전입니다.');
+            exit(json_encode($result));
+        }
+        if (element('ppo_end_datetime', $post_poll)
+            && element('ppo_end_datetime', $post_poll) < cdate('Y-m-d H:i:s')) {
+            $result = array('error' => '설문조사 기간이 이미 지났습니다.');
+            exit(json_encode($result));
+        }
+
+        $ppi_item = $this->input->post('ppi_item');
+        if (empty($ppi_item)) {
+            $result = array('error' => '선택된 답변이 없습니다.');
+            exit(json_encode($result));
+        }
+        if (count($ppi_item) > element('ppo_choose_count', $post_poll)) {
+            $result = array('error' => '답변은 ' . element('ppo_choose_count', $post_poll) . '개 이하로만 선택이 가능합니다');
+            exit(json_encode($result));
+        }
+
+        $where = array(
+            'ppo_id' => $ppo_id,
+            'mem_id' => $mem_id,
+        );
+        $post_poll_count = $this->Post_poll_item_poll_model->count_by($where);
+        if ($post_poll_count > 0) {
+            $result = array('error' => '회원님은 이미 이 설문에 참여해주셨습니다. 중복 참여는 불가능합니다');
+            exit(json_encode($result));
+        }
+        if (element('ppo_after_comment', $post_poll)) {
+            $where = array(
+                'post_id' => element('post_id', $post),
+                'mem_id' => $mem_id,
+            );
+            $cmt_count = $this->Comment_model->count_by($where);
+            if ($cmt_count === 0) {
+                $result = array('error' => '댓글 작성 후 설문에 응답하실 수 있습니다');
+                exit(json_encode($result));
+            }
+        }
+
+        foreach ($ppi_item as $pkey => $pval) {
+            $insertdata = array(
+                'ppo_id' => $ppo_id,
+                'ppi_id' => $pval,
+                'mem_id' => $mem_id,
+                'ppp_datetime' => cdate('Y-m-d H:i:s'),
+                'ppp_ip' => $this->input->ip_address(),
+            );
+            $this->Post_poll_item_poll_model->insert($insertdata);
+            $this->Post_poll_item_model->update_plus($pval, 'ppi_count', 1);
+        }
+        $this->Post_poll_model->update_plus($ppo_id, 'ppo_count', 1);
+
+        if (element('ppo_point', $post_poll)) {
+            $this->point->insert_point(
+                $mem_id,
+                element('ppo_point', $post_poll),
+                element('board_name', $board) . ' ' . element('post_id', $post) . ' 설문참여',
+                'post_poll',
+                $ppo_id,
+                '설문참여'
+            );
+        }
+
+        // 이벤트가 존재하면 실행합니다
+        Events::trigger('after', $eventname);
+
+        $result = array('success' => '설문조사에 응해주셔서 감사합니다');
+        exit(json_encode($result));
+    }
+
+
+    /**
+     * 게시물에서 설문조사한 후에 결과 불러오기
+     */
+    public function post_poll_result($post_id = 0, $ppo_id = 0)
+    {
+        // 이벤트 라이브러리를 로딩합니다
+        $eventname = 'event_postact_post_poll_result';
+        $this->load->event($eventname);
+
+        // 이벤트가 존재하면 실행합니다
+        Events::trigger('before', $eventname);
+
+        $result = array();
+        $this->output->set_content_type('application/json');
+
+        $post_id = (int) $post_id;
+        if (empty($post_id) OR $post_id < 1) {
+            $result = array('error' => '잘못된 접근입니다.');
+            exit(json_encode($result));
+        }
+
+        $ppo_id = (int) $ppo_id;
+        if (empty($ppo_id) OR $ppo_id < 1) {
+            $result = array('error' => '잘못된 접근입니다.');
+            exit(json_encode($result));
+        }
+
+        $this->load->model(array('Post_poll_model', 'Post_poll_item_model', 'Post_poll_item_poll_model'));
+
+        $select = 'post_id, brd_id, post_del, ppo_id';
+        $post = $this->Post_model->get_one($post_id, $select);
+
+        if ( ! $this->session->userdata('post_id_' . element('post_id', $post))) {
+            $result = array('error' => '해당 게시물에서만 접근 가능합니다');
+            exit(json_encode($result));
+        }
+        if ( ! element('post_id', $post)) {
+            $result = array('error' => '존재하지 않는 게시물입니다');
+            exit(json_encode($result));
+        }
+        if (element('post_del', $post)) {
+            $result = array('error' => '삭제된 게시물에서는 설문조사가 불가능합니다');
+            exit(json_encode($result));
+        }
+
+        $board = $this->board->item_all(element('brd_id', $post));
+        $is_admin = $this->member->is_admin(
+            array(
+                'board_id' => element('brd_id', $board),
+                'group_id' => element('bgr_id', $board),
+            )
+        );
+
+        $use_poll = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_poll', $board) : element('use_poll', $board);
+
+        if (empty($use_poll)) {
+            $result = array('error' => '이 게시판은 현재 설문조사 기능을 사용하지 않습니다');
+            exit(json_encode($result));
+        }
+        $post_poll = $this->Post_poll_model->get_one($ppo_id);
+
+        if (element('post_id', $post) !== element('post_id', $post_poll)) {
+            $result = array('error' => '잘못된 접근입니다');
+            exit(json_encode($result));
+        }
+
+        if (empty($post_poll['ppo_start_datetime'])
+            OR element('ppo_start_datetime', $post_poll) === '0000-00-00 00:00:00') {
+            $post_poll['ppo_start_datetime'] = '';
+        }
+        if (empty($post_poll['ppo_end_datetime'])
+            OR element('ppo_end_datetime', $post_poll) === '0000-00-00 00:00:00') {
+            $post_poll['ppo_end_datetime'] = '';
+        }
+
+        $itemwhere = array(
+            'ppo_id' => element('ppo_id', $post_poll),
+        );
+        $poll_item = $this->Post_poll_item_model->get('', '', $itemwhere, '', '', 'ppi_id', 'ASC');
+
+        $sum_count = 0;
+        $max = 0;
+        if ($poll_item && is_array($poll_item)) {
+            foreach ($poll_item as $key => $value) {
+                if ($value['ppi_count'] > $max) {
+                    $max = $value['ppi_count'];
+                }
+                $sum_count+= $value['ppi_count'];
+                $poll_item[$key]['ppi_item'] = html_escape($poll_item[$key]['ppi_item']);
+            }
+            foreach ($poll_item as $key => $value) {
+                $rate = $sum_count ? ($value['ppi_count'] / $sum_count * 100) : 0;
+                $poll_item[$key]['rate'] = $rate;
+                $s_rate = number_format($rate, 1);
+                $poll_item[$key]['s_rate'] = $s_rate;
+
+                $bar = $max ? (int)($value['ppi_count'] / $max * 100) : 0;
+                $poll_item[$key]['bar'] = $bar;
+            }
+        }
+
+        // 이벤트가 존재하면 실행합니다
+        Events::trigger('after', $eventname);
+
+        $result = array(
+            'success' => 'ok',
+            'poll' => $post_poll,
+            'poll_item' => $poll_item,
+        );
+        exit(json_encode($result));
     }
 
 

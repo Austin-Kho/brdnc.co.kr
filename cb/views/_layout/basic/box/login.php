@@ -21,6 +21,27 @@
                 <li>|</li>
                 <li><a href="<?php echo site_url('findaccount'); ?>" title="회원정보찾기">회원정보찾기</a></li>
             </ul>
+            <?php if ($this->cbconfig->item('use_sociallogin')) { ?>
+            <script type="text/javascript" src="<?php echo base_url('assets/js/social_login.js'); ?>"></script>
+            <div class="clearfix"></div>
+            <div class="sidebar-social-login-box">
+                <?php if ($this->cbconfig->item('use_sociallogin_facebook')) {?>
+                    <a href="javascript:;" onClick="social_connect_on('facebook');" title="페이스북 로그인"><img src="<?php echo base_url('assets/images/social_facebook.png')?>" width="26" height="26" alt="페이스북 로그인" title="페이스북 로그인" /></a>
+                <?php } ?>
+                <?php if ($this->cbconfig->item('use_sociallogin_twitter')) {?>
+                    <a href="javascript:;" onClick="social_connect_on('twitter');" title="트위터 로그인"><img src="<?php echo base_url('assets/images/social_twitter.png')?>" width="26" height="26" alt="트위터 로그인" title="트위터 로그인" /></a>
+                <?php } ?>
+                <?php if ($this->cbconfig->item('use_sociallogin_google')) {?>
+                    <a href="javascript:;" onClick="social_connect_on('google');" title="구글 로그인"><img src="<?php echo base_url('assets/images/social_google.png')?>" width="26" height="26" alt="구글 로그인" title="구글 로그인" /></a>
+                <?php } ?>
+                <?php if ($this->cbconfig->item('use_sociallogin_naver')) {?>
+                    <a href="javascript:;" onClick="social_connect_on('naver');" title="네이버 로그인"><img src="<?php echo base_url('assets/images/social_naver.png')?>" width="26" height="26" alt="네이버 로그인" title="네이버 로그인" /></a>
+                <?php } ?>
+                <?php if ($this->cbconfig->item('use_sociallogin_kakao')) {?>
+                    <a href="javascript:;" onClick="social_connect_on('kakao');" title="카카오 로그인"><img src="<?php echo base_url('assets/images/social_kakao.png')?>" width="26" height="26" alt="카카오 로그인" title="카카오 로그인" /></a>
+                <?php } ?>
+            </div>
+            <?php } ?>
         </div>
     <?php echo form_close(); ?>
     <script type="text/javascript">
@@ -50,6 +71,9 @@
             <?php } ?>
             <?php if ($this->cbconfig->item('use_point')) { ?>
                 <p><strong>포인트</strong> :<a href="<?php echo site_url('mypage/point'); ?>" title="나의 포인트"><?php echo number_format($this->member->item('mem_point')); ?> 점</a></p>
+            <?php } ?>
+            <?php if ($this->depositconfig->item('use_deposit')) { ?>
+                <p><strong><?php echo $this->depositconfig->item('deposit_name'); ?></strong> :<a href="<?php echo site_url('deposit'); ?>" title="<?php echo $this->depositconfig->item('deposit_name'); ?> 충전"><?php echo number_format($this->member->item('total_deposit')+0); ?> <?php echo $this->depositconfig->item('deposit_unit'); ?></a></p>
             <?php } ?>
         </div>
         <ul class="mt20">

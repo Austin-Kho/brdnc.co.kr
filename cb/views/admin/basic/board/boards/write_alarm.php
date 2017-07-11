@@ -325,6 +325,148 @@
                         </label>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">문자(SMS)사용(원글작성시)</label>
+                    <div class="col-sm-8">
+                        <div class="checkbox">
+                            <label for="send_sms_post_super_admin" >
+                                <input type="checkbox" name="send_sms_post_super_admin" id="send_sms_post_super_admin" value="1" <?php echo set_checkbox('send_sms_post_super_admin', '1', (element('send_sms_post_super_admin', element('data', $view)) ? true : false)); ?> /> 최고관리자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="send_sms_post_group_admin">
+                                <input type="checkbox" name="send_sms_post_group_admin" id="send_sms_post_group_admin" value="1" <?php echo set_checkbox('send_sms_post_group_admin', '1', (element('send_sms_post_group_admin', element('data', $view)) ? true : false)); ?> /> 그룹관리자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="send_sms_post_board_admin">
+                                <input type="checkbox" name="send_sms_post_board_admin" id="send_sms_post_board_admin" value="1" <?php echo set_checkbox('send_sms_post_board_admin', '1', (element('send_sms_post_board_admin', element('data', $view)) ? true : false)); ?> /> 게시판관리자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="send_sms_post_writer">
+                                <input type="checkbox" name="send_sms_post_writer" id="send_sms_post_writer" value="1" <?php echo set_checkbox('send_sms_post_writer', '1', (element('send_sms_post_writer', element('data', $view)) ? true : false)); ?> /> 원글작성자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_send_sms_post" class="checkbox-inline">
+                            <input type="checkbox" name="grp[send_sms_post]" id="grp_send_sms_post" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_send_sms_post" class="checkbox-inline">
+                            <input type="checkbox" name="all[send_sms_post]" id="all_send_sms_post" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">문자(SMS)사용(댓글작성시)</label>
+                    <div class="col-sm-8">
+                        <div class="checkbox">
+                            <label for="send_sms_comment_super_admin" >
+                                <input type="checkbox" name="send_sms_comment_super_admin" id="send_sms_comment_super_admin" value="1" <?php echo set_checkbox('send_sms_comment_super_admin', '1', (element('send_sms_comment_super_admin', element('data', $view)) ? true : false)); ?> /> 최고관리자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="send_sms_comment_group_admin">
+                                <input type="checkbox" name="send_sms_comment_group_admin" id="send_sms_comment_group_admin" value="1" <?php echo set_checkbox('send_sms_comment_group_admin', '1', (element('send_sms_comment_group_admin', element('data', $view)) ? true : false)); ?> /> 그룹관리자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="send_sms_comment_board_admin">
+                                <input type="checkbox" name="send_sms_comment_board_admin" id="send_sms_comment_board_admin" value="1" <?php echo set_checkbox('send_sms_comment_board_admin', '1', (element('send_sms_comment_board_admin', element('data', $view)) ? true : false)); ?> /> 게시판관리자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="send_sms_comment_post_writer">
+                                <input type="checkbox" name="send_sms_comment_post_writer" id="send_sms_comment_post_writer" value="1" <?php echo set_checkbox('send_sms_comment_post_writer', '1', (element('send_sms_comment_post_writer', element('data', $view)) ? true : false)); ?> /> 원글작성자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="send_sms_comment_comment_writer">
+                                <input type="checkbox" name="send_sms_comment_comment_writer" id="send_sms_comment_comment_writer" value="1" <?php echo set_checkbox('send_sms_comment_comment_writer', '1', (element('send_sms_comment_comment_writer', element('data', $view)) ? true : false)); ?> /> 해당댓글작성자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_send_sms_comment" class="checkbox-inline">
+                            <input type="checkbox" name="grp[send_sms_comment]" id="grp_send_sms_comment" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_send_sms_comment" class="checkbox-inline">
+                            <input type="checkbox" name="all[send_sms_comment]" id="all_send_sms_comment" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">문자(SMS)사용(원글신고발생시)</label>
+                    <div class="col-sm-8">
+                        <div class="checkbox">
+                            <label for="send_sms_blame_super_admin" >
+                                <input type="checkbox" name="send_sms_blame_super_admin" id="send_sms_blame_super_admin" value="1" <?php echo set_checkbox('send_sms_blame_super_admin', '1', (element('send_sms_blame_super_admin', element('data', $view)) ? true : false)); ?> /> 최고관리자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="send_sms_blame_group_admin" >
+                                <input type="checkbox" name="send_sms_blame_group_admin" id="send_sms_blame_group_admin" value="1" <?php echo set_checkbox('send_sms_blame_group_admin', '1', (element('send_sms_blame_group_admin', element('data', $view)) ? true : false)); ?> /> 그룹관리자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="send_sms_blame_board_admin" >
+                                <input type="checkbox" name="send_sms_blame_board_admin" id="send_sms_blame_board_admin" value="1" <?php echo set_checkbox('send_sms_blame_board_admin', '1', (element('send_sms_blame_board_admin', element('data', $view)) ? true : false)); ?> /> 게시판관리자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="send_sms_blame_post_writer" >
+                                <input type="checkbox" name="send_sms_blame_post_writer" id="send_sms_blame_post_writer" value="1" <?php echo set_checkbox('send_sms_blame_post_writer', '1', (element('send_sms_blame_post_writer', element('data', $view)) ? true : false)); ?> /> 원글작성자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_send_sms_blame" class="checkbox-inline">
+                            <input type="checkbox" name="grp[send_sms_blame]" id="grp_send_sms_blame" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_send_sms_blame" class="checkbox-inline">
+                            <input type="checkbox" name="all[send_sms_blame]" id="all_send_sms_blame" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">문자(SMS)사용(댓글신고발생시)</label>
+                    <div class="col-sm-8">
+                        <div class="checkbox">
+                            <label for="send_sms_comment_blame_super_admin" >
+                                <input type="checkbox" name="send_sms_comment_blame_super_admin" id="send_sms_comment_blame_super_admin" value="1" <?php echo set_checkbox('send_sms_comment_blame_super_admin', '1', (element('send_sms_comment_blame_super_admin', element('data', $view)) ? true : false)); ?> /> 최고관리자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="send_sms_comment_blame_group_admin" >
+                                <input type="checkbox" name="send_sms_comment_blame_group_admin" id="send_sms_comment_blame_group_admin" value="1" <?php echo set_checkbox('send_sms_comment_blame_group_admin', '1', (element('send_sms_comment_blame_group_admin', element('data', $view)) ? true : false)); ?> /> 그룹관리자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="send_sms_comment_blame_board_admin" >
+                                <input type="checkbox" name="send_sms_comment_blame_board_admin" id="send_sms_comment_blame_board_admin" value="1" <?php echo set_checkbox('send_sms_comment_blame_board_admin', '1', (element('send_sms_comment_blame_board_admin', element('data', $view)) ? true : false)); ?> /> 게시판관리자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="send_sms_comment_blame_post_writer" >
+                                <input type="checkbox" name="send_sms_comment_blame_post_writer" id="send_sms_comment_blame_post_writer" value="1" <?php echo set_checkbox('send_sms_comment_blame_post_writer', '1', (element('send_sms_comment_blame_post_writer', element('data', $view)) ? true : false)); ?> /> 원글작성자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label for="send_sms_comment_blame_comment_writer" >
+                                <input type="checkbox" name="send_sms_comment_blame_comment_writer" id="send_sms_comment_blame_comment_writer" value="1" <?php echo set_checkbox('send_sms_comment_blame_comment_writer', '1', (element('send_sms_comment_blame_comment_writer', element('data', $view)) ? true : false)); ?> /> 해당댓글작성자에게 문자(SMS)발송
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_send_sms_comment_blame" class="checkbox-inline">
+                            <input type="checkbox" name="grp[send_sms_comment_blame]" id="grp_send_sms_comment_blame" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_send_sms_comment_blame" class="checkbox-inline">
+                            <input type="checkbox" name="all[send_sms_comment_blame]" id="all_send_sms_comment_blame" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
                 <div class="btn-group pull-right" role="group" aria-label="...">
                     <a href="<?php echo admin_url($this->pagedir); ?>" class="btn btn-default btn-sm">목록으로</a>
                     <button type="submit" class="btn btn-success btn-sm">저장하기</button>

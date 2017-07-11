@@ -710,6 +710,21 @@ class Memberconfig extends CB_Controller
                 'rules' => 'trim|numeric',
             ),
             array(
+                'field' => 'send_sms_register_admin',
+                'label' => '회원가입시최고관리자에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_register_user',
+                'label' => '회원가입시가입한회원에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_register_alluser',
+                'label' => '회원가입시가입한회원에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
                 'field' => 'send_email_changepw_admin',
                 'label' => '패스워드변경시최고관리자에게메일발송',
                 'rules' => 'trim|numeric',
@@ -735,6 +750,21 @@ class Memberconfig extends CB_Controller
                 'rules' => 'trim|numeric',
             ),
             array(
+                'field' => 'send_sms_changepw_admin',
+                'label' => '패스워드변경시최고관리자에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_changepw_user',
+                'label' => '패스워드변경시가입한회원에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_changepw_alluser',
+                'label' => '패스워드변경시가입한회원에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
                 'field' => 'send_email_memberleave_admin',
                 'label' => '패스워드변경시최고관리자에게메일발송',
                 'rules' => 'trim|numeric',
@@ -754,6 +784,22 @@ class Memberconfig extends CB_Controller
                 'label' => '패스워드변경시최고관리자에게쪽지발송',
                 'rules' => 'trim|numeric',
             ),
+            array(
+                'field' => 'send_sms_memberleave_admin',
+                'label' => '패스워드변경시최고관리자에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_memberleave_user',
+                'label' => '패스워드변경시가입한회원에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_memberleave_alluser',
+                'label' => '패스워드변경시가입한회원에게문자(SMS)발송',
+                'rules' => 'trim|numeric',
+            ),
+
         );
         $this->form_validation->set_rules($config);
 
@@ -777,11 +823,15 @@ class Memberconfig extends CB_Controller
 
             $array = array(
                 'send_email_register_admin', 'send_email_register_user', 'send_email_register_alluser',
-                'send_note_register_admin', 'send_note_register_user', 'send_email_changepw_admin',
+                'send_note_register_admin', 'send_note_register_user', 'send_sms_register_admin',
+                'send_sms_register_user', 'send_sms_register_alluser', 'send_email_changepw_admin',
                 'send_email_changepw_user', 'send_email_changepw_alluser',
-                'send_note_changepw_admin', 'send_note_changepw_user',
+                'send_note_changepw_admin', 'send_note_changepw_user', 'send_sms_changepw_admin',
+                'send_sms_changepw_user', 'send_sms_changepw_alluser',
                 'send_email_memberleave_admin', 'send_email_memberleave_user',
                 'send_email_memberleave_alluser', 'send_note_memberleave_admin',
+                'send_sms_memberleave_admin', 'send_sms_memberleave_user',
+                'send_sms_memberleave_alluser',
             );
             foreach ($array as $value) {
                 $savedata[$value] = $this->input->post($value, null, '');
@@ -805,4 +855,306 @@ class Memberconfig extends CB_Controller
         $this->layout = element('layout_skin_file', element('layout', $view));
         $this->view = element('view_skin_file', element('layout', $view));
     }
+
+    /**
+     * 회원가입설정>소셜로그인 페이지입니다
+     */
+    public function sociallogin()
+    {
+        // 이벤트 라이브러리를 로딩합니다
+        $eventname = 'event_admin_config_memberconfig_sociallogin';
+        $this->load->event($eventname);
+
+        $view = array();
+        $view['view'] = array();
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+        /**
+         * Validation 라이브러리를 가져옵니다
+         */
+        $this->load->library('form_validation');
+
+        /**
+         * 전송된 데이터의 유효성을 체크합니다
+         */
+        $config = array(
+            array(
+                'field' => 'is_submit',
+                'label' => '전송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'use_sociallogin',
+                'label' => '소셜로그인 사용',
+                'rules' => 'trim|numeric|is_natural',
+            ),
+            array(
+                'field' => 'use_sociallogin_facebook',
+                'label' => '페이스북 사용',
+                'rules' => 'trim|numeric|is_natural',
+            ),
+            array(
+                'field' => 'facebook_app_id',
+                'label' => '페이스북 APP ID',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'facebook_secret',
+                'label' => '페이스북 Secret',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'use_sociallogin_twitter',
+                'label' => '트위터 사용',
+                'rules' => 'trim|numeric|is_natural',
+            ),
+            array(
+                'field' => 'twitter_consumer_key',
+                'label' => '트위터 Consumer Key',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'twitter_consumer_secret',
+                'label' => '트위터 Consumer Secret',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'use_sociallogin_google',
+                'label' => '구글 사용',
+                'rules' => 'trim|numeric|is_natural',
+            ),
+            array(
+                'field' => 'google_client_id',
+                'label' => '구글 Client ID',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'google_client_secret',
+                'label' => '구글 Client Secret',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'use_sociallogin_naver',
+                'label' => '네이버 사용',
+                'rules' => 'trim|numeric|is_natural',
+            ),
+            array(
+                'field' => 'naver_client_id',
+                'label' => '네이버 Client ID',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'naver_client_secret',
+                'label' => '네이버 Client Secret',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'use_sociallogin_kakao',
+                'label' => '카카오 사용',
+                'rules' => 'trim|numeric|is_natural',
+            ),
+            array(
+                'field' => 'kakao_client_id',
+                'label' => '카카오 Client ID',
+                'rules' => 'trim',
+            ),
+        );
+        $this->form_validation->set_rules($config);
+
+        /**
+         * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
+         * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
+         */
+        if ($this->form_validation->run() === false) {
+
+            // 이벤트가 존재하면 실행합니다
+            $view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+
+        } else {
+            /**
+             * 유효성 검사를 통과한 경우입니다.
+             * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
+             */
+
+            // 이벤트가 존재하면 실행합니다
+            $view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+
+            $array = array(
+                'use_sociallogin', 'use_sociallogin_facebook', 'facebook_app_id',
+                'facebook_secret', 'use_sociallogin_twitter', 'twitter_consumer_key', 'twitter_consumer_secret',
+                'use_sociallogin_google', 'google_client_id', 'google_client_secret', 'use_sociallogin_naver',
+                'naver_client_id', 'naver_client_secret', 'use_sociallogin_kakao', 'kakao_client_id'
+            );
+            foreach ($array as $value) {
+                $savedata[$value] = $this->input->post($value, null, '');
+            }
+            $this->Config_model->save($savedata);
+            $view['view']['alert_message'] = '소셜로그인 설정이 저장되었습니다';
+        }
+
+        $getdata = $this->Config_model->get_all_meta();
+        $view['view']['data'] = $getdata;
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+        /**
+         * 어드민 레이아웃을 정의합니다
+         */
+        $layoutconfig = array('layout' => 'layout', 'skin' => 'sociallogin');
+        $view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+        $this->data = $view;
+        $this->layout = element('layout_skin_file', element('layout', $view));
+        $this->view = element('view_skin_file', element('layout', $view));
+    }
+
+    /**
+     * 회원가입설정>본인확인 서비스 페이지입니다
+     */
+    public function selfcert()
+    {
+        // 이벤트 라이브러리를 로딩합니다
+        $eventname = 'event_admin_config_memberconfig_cert';
+        $this->load->event($eventname);
+
+        $view = array();
+        $view['view'] = array();
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+        /**
+         * Validation 라이브러리를 가져옵니다
+         */
+        $this->load->library('form_validation');
+
+        /**
+         * 전송된 데이터의 유효성을 체크합니다
+         */
+        $config = array(
+            array(
+                'field' => 'is_submit',
+                'label' => '전송',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'use_selfcert',
+                'label' => '본인확인 서비스 기능',
+                'rules' => 'trim|numeric|is_natural|callback__selfcert_required',
+            ),
+            array(
+                'field' => 'use_selfcert_required',
+                'label' => '회원가입시 본인확인 필수',
+                'rules' => 'trim|numeric|is_natural',
+            ),
+            array(
+                'field' => 'selfcert_try_limit',
+                'label' => '본인확인 회수 제한',
+                'rules' => 'trim|numeric|is_natural',
+            ),
+            array(
+                'field' => 'use_selfcert_test',
+                'label' => '테스트 여부',
+                'rules' => 'trim|numeric|is_natural',
+            ),
+            array(
+                'field' => 'use_selfcert_ipin',
+                'label' => '아이핀 본인확인',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'use_selfcert_phone',
+                'label' => '휴대폰 본인확인',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'selfcert_kcb_mid',
+                'label' => '코리아크레딧뷰로 KCB 회원사ID',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'selfcert_kcp_mid',
+                'label' => '한국사이버결제 KCP 사이트코드',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'selfcert_lg_mid',
+                'label' => 'LG유플러스 상점아이디',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'selfcert_lg_key',
+                'label' => 'LG유플러스 상점아이디',
+                'rules' => 'trim',
+            ),
+        );
+        $this->form_validation->set_rules($config);
+
+        /**
+         * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
+         * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
+         */
+        if ($this->form_validation->run() === false) {
+
+            // 이벤트가 존재하면 실행합니다
+            $view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
+
+        } else {
+            /**
+             * 유효성 검사를 통과한 경우입니다.
+             * 즉 데이터의 insert 나 update 의 process 처리가 필요한 상황입니다
+             */
+
+            // 이벤트가 존재하면 실행합니다
+            $view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
+
+            $array = array(
+                'use_selfcert', 'use_selfcert_required', 'selfcert_try_limit',
+                'use_selfcert_test', 'use_selfcert_ipin', 'use_selfcert_phone',
+                'selfcert_kcb_mid', 'selfcert_kcp_mid', 'selfcert_lg_mid', 'selfcert_lg_key'
+            );
+            foreach ($array as $value) {
+                $savedata[$value] = $this->input->post($value, null, '');
+            }
+            $this->Config_model->save($savedata);
+            $view['view']['alert_message'] = '본인확인 설정이 저장되었습니다';
+        }
+
+        $getdata = $this->Config_model->get_all_meta();
+        $view['view']['data'] = $getdata;
+
+        // 본인확인 모듈 실행권한 체크
+        if (element('use_selfcert', $getdata)) {
+            $this->load->helper('module_exec_check');
+            if ($error = module_exec_check(element('use_selfcert_ipin', $getdata))) echo '<script type="text/javascript">alert("' . html_escape($error) . '");</script>';
+            if (element('use_selfcert_ipin', $getdata) != element('use_selfcert_phone', $getdata) && $error = module_exec_check(element('use_selfcert_phone', $getdata))) echo '<script type="text/javascript">alert("' . html_escape($error) . '");</script>';
+        }
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+        /**
+         * 어드민 레이아웃을 정의합니다
+         */
+        $layoutconfig = array('layout' => 'layout', 'skin' => 'selfcert');
+        $view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+        $this->data = $view;
+        $this->layout = element('layout_skin_file', element('layout', $view));
+        $this->view = element('view_skin_file', element('layout', $view));
+    }
+
+    public function _selfcert_required($str)
+    {
+        if ($this->input->post('use_selfcert') && ! $this->input->post('use_selfcert_ipin') && ! $this->input->post('use_selfcert_phone')) {
+            $this->form_validation->set_message(
+                '_selfcert_required',
+                '본인확인 서비스 기능을 사용시, 아이핀본인확인 또는 휴대폰본인확인 서비스 중 하나는 선택하셔야 합니다'
+            );
+            return false;
+        }
+        return true;
+    }
+
 }

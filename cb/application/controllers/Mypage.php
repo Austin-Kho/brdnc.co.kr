@@ -60,6 +60,21 @@ class Mypage extends CB_Controller
         $registerform = $this->cbconfig->item('registerform');
         $view['view']['memberform'] = json_decode($registerform, true);
 
+        $view['view']['member_group_name'] = '';
+        $member_group = $this->member->group();
+        if ($member_group && is_array($member_group)) {
+
+            $this->load->model('Member_group_model');
+
+            foreach ($member_group as $gkey => $gval) {
+                $item = $this->Member_group_model->item(element('mgr_id', $gval));
+                if ($view['view']['member_group_name']) {
+                    $view['view']['member_group_name'] .= ', ';
+                }
+                $view['view']['member_group_name'] .= element('mgr_title', $item);
+            }
+        }
+
         // 이벤트가 존재하면 실행합니다
         $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 

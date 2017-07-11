@@ -41,6 +41,16 @@
                     <?php echo display_dhtml_editor('content', set_value('content'), $classname = 'form-control dhtmleditor', $is_dhtml_editor = element('use_dhtml', $view), $editor_type = $this->cbconfig->item('note_editor_type')); ?>
                 </div>
             </div>
+
+            <?php if ($this->cbconfig->item('use_note_file')) { ?>
+                <div class="form-group">
+                    <label for="title" class="col-sm-2 control-label">첨부파일</label>
+                    <div class="col-sm-10">
+                        <input type="file" class="form-control" name="note_file" />
+                    </div>
+                </div>
+            <?php } ?>
+
             <div class="form-group">
                 <div class="col-sm-10 pull-right">
                     <button type="submit" class="btn btn-success btn-sm">보내기</button>

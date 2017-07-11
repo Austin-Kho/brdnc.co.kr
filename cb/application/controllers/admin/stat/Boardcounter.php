@@ -49,7 +49,7 @@ class Boardcounter extends CB_Controller
     /**
      * 목록을 가져오는 메소드입니다
      */
-    public function index()
+    public function index($export = '')
     {
         // 이벤트 라이브러리를 로딩합니다
         $eventname = 'event_admin_stat_boardcounter_index';
@@ -194,14 +194,22 @@ class Boardcounter extends CB_Controller
         // 이벤트가 존재하면 실행합니다
         $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-        /**
-         * 어드민 레이아웃을 정의합니다
-         */
-        $layoutconfig = array('layout' => 'layout', 'skin' => 'index');
-        $view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-        $this->data = $view;
-        $this->layout = element('layout_skin_file', element('layout', $view));
-        $this->view = element('view_skin_file', element('layout', $view));
+        if ($export === 'excel') {
+            
+            header('Content-type: application/vnd.ms-excel');
+            header('Content-Disposition: attachment; filename=게시판별접속자_' . cdate('Y_m_d') . '.xls');
+            echo $this->load->view('admin/' . ADMIN_SKIN . '/' . $this->pagedir . '/index_excel', $view, true);
+
+        } else {
+            /**
+             * 어드민 레이아웃을 정의합니다
+             */
+            $layoutconfig = array('layout' => 'layout', 'skin' => 'index');
+            $view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+            $this->data = $view;
+            $this->layout = element('layout_skin_file', element('layout', $view));
+            $this->view = element('view_skin_file', element('layout', $view));
+        }
     }
 
     /**

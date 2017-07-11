@@ -20,6 +20,13 @@
         <div class="note-view-title">
             <?php echo html_escape(element('nte_title', element('data', $view))); ?> <small><?php echo element('display_name', element('data', $view)); ?>, <?php echo display_datetime(element('nte_datetime', element('data', $view)), 'full'); ?> </small>
         </div>
+
+        <?php if (element('nte_originname', element('data', $view))) { ?>
+            <ul class="list-group">
+                <li class="list-group-item"><i class="fa fa-download"></i> <a href="<?php echo element('download_link', element('data', $view)); ?>"><?php echo html_escape(element('nte_originname', element('data', $view))); ?></a></li>
+            </ul>
+        <?php } ?>
+
         <div class="note-contents">
             <?php echo element('content', element('data', $view)); ?>
         </div>

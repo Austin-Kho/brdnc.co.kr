@@ -327,12 +327,15 @@ class Document extends CB_Controller
                 'doc_updated_mem_id' => $this->member->item('mem_id'),
                 'doc_updated_datetime' => cdate('Y-m-d H:i:s'),
             );
+            
+            if ( $this->input->post($primary_key) != $pid ){
+            }
 
             /**
              * 게시물을 수정하는 경우입니다
              */
-            if ($this->input->post($primary_key)) {
-                $this->{$this->modelname}->update($this->input->post($primary_key), $updatedata);
+            if ($pid) {
+                $this->{$this->modelname}->update($pid, $updatedata);
                 $this->session->set_flashdata(
                     'message',
                     '정상적으로 수정되었습니다'

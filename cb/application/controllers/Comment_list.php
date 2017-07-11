@@ -79,6 +79,7 @@ class Comment_list extends CB_Controller
             $alertmessage,
             $check
         );
+        $this->accesslevel->selfcertcheck('view', element('access_view_selfcert', $board));
 
         $is_admin = $this->member->is_admin(
             array(
@@ -147,6 +148,9 @@ class Comment_list extends CB_Controller
         $comment_date_style_manual = ($this->cbconfig->get_device_view_type() === 'mobile')
             ? element('mobile_comment_date_style_manual', $board)
             : element('comment_date_style_manual', $board);
+        $comment_best = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('mobile_comment_best', $board)
+            : element('comment_best', $board);
 
         $board['use_comment_profile'] = ($this->cbconfig->get_device_view_type() === 'mobile')
             ? element('use_mobile_comment_profile', $board)
@@ -155,6 +159,80 @@ class Comment_list extends CB_Controller
         // 이벤트가 존재하면 실행합니다
         $view['view']['event']['step1'] = Events::trigger('step1', $eventname);
 
+        /**
+         * 상단에 베스트 부분에 필요한 정보를 가져옵니다.
+         */
+        $bestresult = '';
+        if ($comment_best) {
+            $bestresult = $this->Comment_model
+                ->get_best_list($post_id, $comment_best, element('comment_best_like_num', $board));
+            if ($bestresult) {
+                foreach ($bestresult as $key => $val) {
+                    $bestresult[$key]['meta'] = $meta = $this->Comment_meta_model->get_all_meta(element('cmt_id', $val));
+                    $bestresult[$key]['content'] = '';
+
+                    $is_blind = (element('comment_blame_blind_count', $board) > 0 && element('cmt_blame', $val) >= element('comment_blame_blind_count', $board)) ? true : false;
+
+                    if ($is_blind === true) {
+                        $bestresult[$key]['content'] .= '<div class="alert alert-danger">신고가 접수된 게시글입니다. 본인과 관리자만 확인이 가능합니다</div>';
+                    }
+                    if (element('cmt_secret', $val)) {
+                        $bestresult[$key]['content'] .= '<span class="label label-warning">비밀글입니다</span>';
+                    }
+                    if (($is_blind === false && ! element('cmt_secret', $val)) OR $is_admin !== false OR (element('mem_id', $val) && (int) element('mem_id', $val) === $mem_id)) {
+                        $bestresult[$key]['content'] .= display_html_content(
+                            element('cmt_content', $val),
+                            element('cmt_html', $val),
+                            $image_width,
+                            $autolink = true,
+                            $popup = true
+                        );
+                        if (element('comment_syntax_highlighter', $board)) {
+                            $bestresult[$key]['content'] = preg_replace_callback(
+                                "/(\[code\]|\[code=(.*)\])(.*)\[\/code\]/iUs",
+                                "content_syntaxhighlighter",
+                                $bestresult[$key]['content']
+                            ); // SyntaxHighlighter
+                        }
+                    }
+                    if (element('cmt_del', $val)) {
+                        $bestresult[$key]['content'] = '<div class="alert alert-danger">이 게시물은 '
+                            . html_escape(element('delete_mem_nickname', $meta)) . '님에 의해 '
+                            . html_escape(element('delete_datetime', $meta)) . ' 에 삭제 되었습니다</div>';
+                    }
+                    if (element('mem_id', $val) >= 0) {
+                        $bestresult[$key]['display_name'] = display_username(
+                            element('cmt_userid', $val),
+                            element('cmt_nickname', $val),
+                            ($use_sideview_icon ? element('mem_icon', $val) : ''),
+                            ($use_sideview ? 'Y' : 'N')
+                        );
+                    } else {
+                        $bestresult[$key]['display_name'] = '익명사용자';
+                    }
+                    $bestresult[$key]['display_datetime'] = display_datetime(
+                        element('cmt_datetime', $val),
+                        $comment_date_style,
+                        $comment_date_style_manual
+                    );
+                    $bestresult[$key]['is_mobile'] = (element('cmt_device', $val) === 'mobile') ? true : false;
+                    $bestresult[$key]['display_ip'] = '';
+
+                    $show_comment_ip = ($this->cbconfig->get_device_view_type() === 'mobile')
+                        ? element('show_mobile_comment_ip', $board)
+                        : element('show_comment_ip', $board);
+                    if ($this->member->is_admin() === 'super' OR $show_comment_ip === '2') {
+                        $bestresult[$key]['display_ip'] = display_ipaddress(element('cmt_ip', $val), '1111');
+                    } elseif ($show_comment_ip === '1') {
+                        $bestresult[$key]['display_ip'] = display_ipaddress(element('cmt_ip', $val), $this->cbconfig->item('ip_display_style'));
+                    }
+                    $bestresult[$key]['member_photo_url']
+                        = member_photo_url(element('mem_photo', $val), 64, 64)
+                        ? member_photo_url(element('mem_photo', $val), 64, 64)
+                        : site_url('assets/images/member_default.gif');
+                }
+            }
+        }
 
         /**
          * 게시판 목록에 필요한 정보를 가져옵니다.
@@ -221,6 +299,10 @@ class Comment_list extends CB_Controller
                 $result['list'][$key]['is_mobile'] = (element('cmt_device', $val) === 'mobile') ? true : false;
                 $result['list'][$key]['display_ip'] = '';
 
+                $result['list'][$key]['lucky'] = '';
+                if (element('comment-lucky', $meta)) {
+                    $result['list'][$key]['lucky'] = element('comment_lucky_name', $board). '에 당첨되어 <span class="luckypoint">' . number_format(element('comment-lucky', $meta)) . '</span> 포인트 지급되었습니다.';
+                }
                 if ($this->member->is_admin() === 'super'
                     OR element('show_comment_ip', $board) === '2') {
                     $result['list'][$key]['display_ip'] = display_ipaddress(element('cmt_ip', $val), '1111');
@@ -259,6 +341,9 @@ class Comment_list extends CB_Controller
                             }
                         }
                     }
+                    if (element('block_delete', $board) && $is_admin === false) {
+                        $result['list'][$key]['can_delete'] = false;
+                    }
                     if (strlen(element('cmt_reply', $val)) < 5 && $can_comment_write === true) {
                         $result['list'][$key]['can_reply'] = true;
                     }
@@ -267,6 +352,7 @@ class Comment_list extends CB_Controller
         }
 
         $view['view']['data'] = $result;
+        $view['view']['best_list'] = $bestresult;
         $view['view']['board'] = $board;
         $view['view']['post'] = $post;
         $view['view']['is_admin'] = $is_admin;

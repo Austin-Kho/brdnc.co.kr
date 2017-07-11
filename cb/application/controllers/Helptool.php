@@ -74,6 +74,576 @@ class Helptool extends CB_Controller
 
 
     /**
+     * 이모티콘 보기
+     */
+    public function emoticon()
+    {
+        // 이벤트 라이브러리를 로딩합니다
+        $eventname = 'event_helptool_emoticon';
+        $this->load->event($eventname);
+
+        $view = array();
+        $view['view'] = array();
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before'] = Events::trigger('before', $eventname);
+        $view['view']['emoticon'] = get_filenames(config_item('uploads_dir') . '/emoticon');
+
+        /**
+         * 레이아웃을 정의합니다
+         */
+        $page_title = '이모티콘';
+        $layoutconfig = array(
+            'path' => 'helptool',
+            'layout' => 'layout_popup',
+            'skin' => 'emoticon',
+            'layout_dir' => $this->cbconfig->item('layout_helptool'),
+            'mobile_layout_dir' => $this->cbconfig->item('mobile_layout_helptool'),
+            'skin_dir' => $this->cbconfig->item('skin_helptool'),
+            'mobile_skin_dir' => $this->cbconfig->item('mobile_skin_helptool'),
+            'page_title' => $page_title,
+        );
+        $view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
+        $this->data = $view;
+        $this->layout = element('layout_skin_file', element('layout', $view));
+        $this->view = element('view_skin_file', element('layout', $view));
+    }
+
+
+    /**
+     * 특수문자 보기
+     */
+    public function specialchars()
+    {
+        // 이벤트 라이브러리를 로딩합니다
+        $eventname = 'event_helptool_specialchars';
+        $this->load->event($eventname);
+
+        $view = array();
+        $view['view'] = array();
+
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+        $chars = "、 。 · ‥ … ¨ 〃 ― ∥ ＼ ∼ ‘ ’ “ ” 〔 〕 〈 〉 《 》 「 」 『 』 【 】 ± × ÷ ≠ ≤ ≥ ∞ ∴ ° ′ ″ ℃ Å ￠ ￡ ￥ ♂ ♀ ∠ ⊥ ⌒ ∂ ∇ ≡ ≒ § ※ ☆ ★ ○ ● ◎ ◇ ◆ □ ■ △ ▲ ▽ ▼ → ← ↑ ↓ ↔ 〓 ≪ ≫ √ ∽ ∝ ∵ ∫ ∬ ∈ ∋ ⊆ ⊇ ⊂ ⊃ ∩ ∧ ∨ ￢ ⇒ ⇔ ∀ ∃ ´ ～ ˇ ˘ ˝ ˚ ˙ ¸ ˛ ¡ ¿ ː ∮ ∑ ∏ ¤ ℉ ‰ ◁ ◀ ▷ ▶ ♤ ♠ ♡ ♥ ♧ ♣ ⊙ ◈ ▣ ◐ ◑ ▒ ▤ ▥ ▨ ▧ ▦ ▩ ♨ ☏ ☎ ☜ ☞ ¶ † ‡ ↕ ↗ ↙ ↖ ↘ ♭ ♩ ♪ ♬ ㉿ ㈜ № ㏇ ™ ㏂ ㏘ ℡";
+
+        $view['view']['char'] = explode(' ', $chars);
+
+        /**
+         * 레이아웃을 정의합니다
+         */
+        $page_title = '특수문자';
+        $layoutconfig = array(
+            'path' => 'helptool',
+            'layout' => 'layout_popup',
+            'skin' => 'specialchars',
+            'layout_dir' => $this->cbconfig->item('layout_helptool'),
+            'mobile_layout_dir' => $this->cbconfig->item('mobile_layout_helptool'),
+            'skin_dir' => $this->cbconfig->item('skin_helptool'),
+            'mobile_skin_dir' => $this->cbconfig->item('mobile_skin_helptool'),
+            'page_title' => $page_title,
+        );
+        $view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
+        $this->data = $view;
+        $this->layout = element('layout_skin_file', element('layout', $view));
+        $this->view = element('view_skin_file', element('layout', $view));
+    }
+
+
+    /**
+     * 게시물변경로그 보기
+     */
+    public function post_history($post_id = 0)
+    {
+        // 이벤트 라이브러리를 로딩합니다
+        $eventname = 'event_helptool_post_history';
+        $this->load->event($eventname);
+
+        $view = array();
+        $view['view'] = array();
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+        $post_id = (int) $post_id;
+        if (empty($post_id) OR $post_id < 1) {
+            alert('잘못된 접근입니다');
+            return false;
+        }
+
+        $select = 'post_id, brd_id, mem_id, post_title';
+        $post = $this->Post_model->get_one($post_id, $select);
+
+        if ( ! element('post_id', $post)) {
+            alert('존재하지 않는 게시물입니다');
+            return false;
+        }
+
+        $board = $this->board->item_all(element('brd_id', $post));
+
+        if ( ! element('use_posthistory', $board)) {
+            alert('게시물 변경로그를 사용하지 않는 게시판입니다');
+            return false;
+        }
+
+        $is_admin = $this->member->is_admin(
+            array(
+                'board_id' => element('brd_id', $board),
+                'group_id' => element('bgr_id', $board),
+            )
+        );
+
+        if ($is_admin === false) {
+            alert('접근권한이 없습니다');
+            return false;
+        }
+
+        /**
+         * 페이지에 숫자가 아닌 문자가 입력되거나 1보다 작은 숫자가 입력되면 에러 페이지를 보여줍니다.
+         */
+        $param =& $this->querystring;
+        $page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
+        $this->load->model('Post_history_model');
+        $findex = $this->Post_history_model->primary_key;
+        $forder = 'desc';
+
+        $per_page = 10;
+        $offset = ($page - 1) * $per_page;
+
+        /**
+         * 게시판 목록에 필요한 정보를 가져옵니다.
+         */
+        $where = array(
+            'post.post_id' => $post_id,
+        );
+        $result = $this->Post_history_model
+            ->get_list($per_page, $offset, $where, '', $findex, $forder);
+        $list_num = $result['total_rows'] - ($page - 1) * $per_page;
+
+        if (element('list', $result)) {
+            foreach (element('list', $result) as $key => $val) {
+                $result['list'][$key]['display_name'] = display_username(
+                    element('mem_userid', $val),
+                    element('mem_nickname', $val)
+                );
+                $result['list'][$key]['post_display_name'] = display_username(
+                    element('post_userid', $val),
+                    element('post_nickname', $val)
+                );
+                $result['list'][$key]['num'] = $list_num--;
+            }
+        }
+        $view['view']['data'] = $result;
+
+        /**
+         * 페이지네이션을 생성합니다
+         */
+        $config['base_url'] = site_url('helptool/post_history/' . $post_id) . '?' . $param->replace('page');
+        $config['total_rows'] = $result['total_rows'];
+        $config['per_page'] = $per_page;
+        $this->pagination->initialize($config);
+        $view['view']['paging'] = $this->pagination->create_links();
+        $view['view']['page'] = $page;
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+        /**
+         * 레이아웃을 정의합니다
+         */
+        $page_title = element('post_title', $post) . ' > 게시물 변경 로그';
+        $layoutconfig = array(
+            'path' => 'helptool',
+            'layout' => 'layout_popup',
+            'skin' => 'post_history',
+            'layout_dir' => $this->cbconfig->item('layout_helptool'),
+            'mobile_layout_dir' => $this->cbconfig->item('mobile_layout_helptool'),
+            'skin_dir' => $this->cbconfig->item('skin_helptool'),
+            'mobile_skin_dir' => $this->cbconfig->item('mobile_skin_helptool'),
+            'page_title' => $page_title,
+        );
+        $view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
+        $this->data = $view;
+        $this->layout = element('layout_skin_file', element('layout', $view));
+        $this->view = element('view_skin_file', element('layout', $view));
+    }
+
+
+    /**
+     * 게시물변경로그 상세 보기
+     */
+    public function post_history_view($post_id = 0, $phi_id = 0)
+    {
+        // 이벤트 라이브러리를 로딩합니다
+        $eventname = 'event_helptool_post_history_view';
+        $this->load->event($eventname);
+
+        $view = array();
+        $view['view'] = array();
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+        $post_id = (int) $post_id;
+        if (empty($post_id) OR $post_id < 1) {
+            alert('잘못된 접근입니다');
+            return false;
+        }
+
+        $phi_id = (int) $phi_id;
+        if (empty($phi_id) OR $phi_id < 1) {
+            alert('잘못된 접근입니다');
+            return false;
+        }
+
+        $select = 'post_id, brd_id, mem_id';
+        $post = $this->Post_model->get_one($post_id, $select);
+
+        if ( ! element('post_id', $post)) {
+            alert('존재하지 않는 게시물입니다');
+            return false;
+        }
+
+        $board = $this->board->item_all(element('brd_id', $post));
+
+        if ( ! element('use_posthistory', $board)) {
+            alert('게시물 변경로그를 사용하지 않는 게시판입니다');
+            return false;
+        }
+
+        $is_admin = $this->member->is_admin(
+            array(
+                'board_id' => element('brd_id', $board),
+                'group_id' => element('bgr_id', $board),
+            )
+        );
+
+        if ($is_admin === false) {
+            alert('접근권한이 없습니다');
+            return false;
+        }
+
+        $param =& $this->querystring;
+
+        $this->load->model('Post_history_model');
+        $result = $this->Post_history_model->get_one($phi_id);
+
+        if ( ! element('phi_id', $result)) {
+            alert('존재하지 않는 게시물입니다');
+            return false;
+        }
+
+        $select = 'mem_id, mem_userid, mem_nickname, mem_icon';
+        $result['member'] = $dbmember = $this->Member_model
+            ->get_by_memid(element('mem_id', $result), $select);
+        $result['display_name'] = display_username(
+            element('mem_userid', $dbmember),
+            element('mem_nickname', $dbmember)
+        );
+        $result['post'] = $post = $this->Post_model->get_one(element('post_id', $result));
+        if ($post) {
+            $result['board'] = $board = $this->board->item_all(element('brd_id', $post));
+        }
+        $image_width = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('post_mobile_image_width', $board)
+            : element('post_image_width', $board);
+        $result['post_display_name'] = display_username(
+            element('post_userid', $post),
+            element('post_nickname', $post)
+        );
+        $result['content'] = display_html_content(
+            element('phi_content', $result),
+            element('phi_content_html_type', $result),
+            $image_width
+        );
+
+        $where = array(
+            'post_id' => element('post_id', $result),
+            'phi_id <' => element('phi_id', $result),
+        );
+        $prev = $this->Post_history_model->get('', '', $where, 1, 0, 'phi_id', 'DESC');
+        if ($prev && element(0, $prev)) {
+            $p = element(0, $prev);
+            $p['content'] = display_html_content(
+                element('phi_content', $p),
+                element('phi_content_html_type', $p),
+                $image_width
+            );
+            $result['prev'] = $p;
+        }
+
+        $view['view']['data'] = $result;
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+        /**
+         * 레이아웃을 정의합니다
+         */
+        $page_title = element('post_title', $post) . ' > 게시물 변경 로그';
+        $layoutconfig = array(
+            'path' => 'helptool',
+            'layout' => 'layout_popup',
+            'skin' => 'post_history_view',
+            'layout_dir' => $this->cbconfig->item('layout_helptool'),
+            'mobile_layout_dir' => $this->cbconfig->item('mobile_layout_helptool'),
+            'skin_dir' => $this->cbconfig->item('skin_helptool'),
+            'mobile_skin_dir' => $this->cbconfig->item('mobile_skin_helptool'),
+            'page_title' => $page_title,
+        );
+        $view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
+        $this->data = $view;
+        $this->layout = element('layout_skin_file', element('layout', $view));
+        $this->view = element('view_skin_file', element('layout', $view));
+    }
+
+
+    /**
+     * 다운로드로그 보기
+     */
+    public function download_log($post_id = 0)
+    {
+        // 이벤트 라이브러리를 로딩합니다
+        $eventname = 'event_helptool_download_log';
+        $this->load->event($eventname);
+
+        $view = array();
+        $view['view'] = array();
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+        $post_id = (int) $post_id;
+        if (empty($post_id) OR $post_id < 1) {
+            alert('잘못된 접근입니다');
+            return false;
+        }
+
+        $this->load->model('Post_file_download_log_model');
+
+        $select = 'post_id, brd_id, mem_id, post_title';
+        $post = $this->Post_model->get_one($post_id, $select);
+
+        if ( ! element('post_id', $post)) {
+            alert('존재하지 않는 게시물입니다');
+            return false;
+        }
+
+        $board = $this->board->item_all(element('brd_id', $post));
+
+        if ( ! element('use_download_log', $board)) {
+            alert('다운로드 로그를 사용하지 않는 게시판입니다');
+            return false;
+        }
+
+        $is_admin = $this->member->is_admin(
+            array(
+                'board_id' => element('brd_id', $board),
+                'group_id' => element('bgr_id', $board),
+            )
+        );
+        if ($is_admin === false) {
+            alert('접근권한이 없습니다');
+            return false;
+        }
+
+        /**
+         * 페이지에 숫자가 아닌 문자가 입력되거나 1보다 작은 숫자가 입력되면 에러 페이지를 보여줍니다.
+         */
+        $param =& $this->querystring;
+        $page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
+        $findex = $this->Post_file_download_log_model->primary_key;
+        $forder = 'desc';
+
+        $per_page = 10;
+        $offset = ($page - 1) * $per_page;
+
+        /**
+         * 게시판 목록에 필요한 정보를 가져옵니다.
+         */
+        $where = array(
+            'post.post_id' => $post_id,
+        );
+        $result = $this->Post_file_download_log_model
+            ->get_list($per_page, $offset, $where, '', $findex, $forder);
+        $list_num = $result['total_rows'] - ($page - 1) * $per_page;
+        if (element('list', $result)) {
+            foreach (element('list', $result) as $key => $val) {
+                $select = 'mem_id, mem_userid, mem_nickname, mem_icon';
+                $result['list'][$key]['member'] = $dbmember = $this->Member_model
+                    ->get_by_memid(element('mem_id', $val), $select);
+                $result['list'][$key]['display_name'] = display_username(
+                    element('mem_userid', $dbmember),
+                    element('mem_nickname', $dbmember)
+                );
+                $result['list'][$key]['post_display_name'] = display_username(
+                    element('post_userid', $val),
+                    element('post_nickname', $val)
+                );
+                $result['list'][$key]['num'] = $list_num--;
+            }
+        }
+        $view['view']['data'] = $result;
+
+        /**
+         * 페이지네이션을 생성합니다
+         */
+        $config['base_url'] = site_url('helptool/download_log/' . $post_id) . '?' . $param->replace('page');
+        $config['total_rows'] = $result['total_rows'];
+        $config['per_page'] = $per_page;
+        $this->pagination->initialize($config);
+        $view['view']['paging'] = $this->pagination->create_links();
+        $view['view']['page'] = $page;
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+        /**
+         * 레이아웃을 정의합니다
+         */
+        $page_title = element('post_title', $post) . ' > 다운로드 로그';
+        $layoutconfig = array(
+            'path' => 'helptool',
+            'layout' => 'layout_popup',
+            'skin' => 'download_log',
+            'layout_dir' => $this->cbconfig->item('layout_helptool'),
+            'mobile_layout_dir' => $this->cbconfig->item('mobile_layout_helptool'),
+            'skin_dir' => $this->cbconfig->item('skin_helptool'),
+            'mobile_skin_dir' => $this->cbconfig->item('mobile_skin_helptool'),
+            'page_title' => $page_title,
+        );
+        $view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
+        $this->data = $view;
+        $this->layout = element('layout_skin_file', element('layout', $view));
+        $this->view = element('view_skin_file', element('layout', $view));
+    }
+
+
+    /**
+     * 링크클릭로그 보기
+     */
+    public function link_click_log($post_id = 0)
+    {
+        // 이벤트 라이브러리를 로딩합니다
+        $eventname = 'event_helptool_link_click_log';
+        $this->load->event($eventname);
+
+        $view = array();
+        $view['view'] = array();
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+        $post_id = (int) $post_id;
+        if (empty($post_id) OR $post_id < 1) {
+            alert('잘못된 접근입니다');
+            return false;
+        }
+
+        $this->load->model('Post_link_click_log_model');
+
+        $select = 'post_id, brd_id, mem_id, post_title';
+        $post = $this->Post_model->get_one($post_id, $select);
+
+        if ( ! element('post_id', $post)) {
+            alert('존재하지 않는 게시물입니다');
+            return false;
+        }
+
+        $board = $this->board->item_all(element('brd_id', $post));
+
+        if ( ! element('use_link_click_log', $board)) {
+            alert('링크클릭로그를 사용하지 않는 게시판입니다');
+            return false;
+        }
+
+        $is_admin = $this->member->is_admin(
+            array(
+                'board_id' => element('brd_id', $board),
+                'group_id' => element('bgr_id', $board),
+            )
+        );
+
+        if ($is_admin === false) {
+            alert('접근권한이 없습니다');
+            return false;
+        }
+
+        /**
+         * 페이지에 숫자가 아닌 문자가 입력되거나 1보다 작은 숫자가 입력되면 에러 페이지를 보여줍니다.
+         */
+        $param =& $this->querystring;
+        $page = (((int) $this->input->get('page')) > 0) ? ((int) $this->input->get('page')) : 1;
+        $findex = $this->Post_link_click_log_model->primary_key;
+        $forder = 'desc';
+
+        $per_page = 10;
+        $offset = ($page - 1) * $per_page;
+
+        /**
+         * 게시판 목록에 필요한 정보를 가져옵니다.
+         */
+        $where = array(
+            'post.post_id' => $post_id,
+        );
+        $result = $this->Post_link_click_log_model
+            ->get_list($per_page, $offset, $where, '', $findex, $forder);
+        $list_num = $result['total_rows'] - ($page - 1) * $per_page;
+        if (element('list', $result)) {
+            foreach (element('list', $result) as $key => $val) {
+                $select = 'mem_id, mem_userid, mem_nickname, mem_icon';
+                $result['list'][$key]['member'] = $dbmember = $this->Member_model
+                    ->get_by_memid(element('mem_id', $val), $select);
+                $result['list'][$key]['display_name'] = display_username(
+                    element('mem_userid', $dbmember),
+                    element('mem_nickname', $dbmember),
+                    element('mem_icon', $dbmember)
+                );
+                $result['list'][$key]['post_display_name'] = display_username(
+                    element('post_userid', $val),
+                    element('post_nickname', $val)
+                );
+                $result['list'][$key]['num'] = $list_num--;
+            }
+        }
+        $view['view']['data'] = $result;
+
+        /**
+         * 페이지네이션을 생성합니다
+         */
+        $config['base_url'] = site_url('helptool/link_click_log/' . $post_id) . '?' . $param->replace('page');
+        $config['total_rows'] = $result['total_rows'];
+        $config['per_page'] = $per_page;
+        $this->pagination->initialize($config);
+        $view['view']['paging'] = $this->pagination->create_links();
+        $view['view']['page'] = $page;
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+        /**
+         * 레이아웃을 정의합니다
+         */
+        $page_title = element('post_title', $post) . ' > 링크클릭 로그';
+        $layoutconfig = array(
+            'path' => 'helptool',
+            'layout' => 'layout_popup',
+            'skin' => 'link_click_log',
+            'layout_dir' => $this->cbconfig->item('layout_helptool'),
+            'mobile_layout_dir' => $this->cbconfig->item('mobile_layout_helptool'),
+            'skin_dir' => $this->cbconfig->item('skin_helptool'),
+            'mobile_skin_dir' => $this->cbconfig->item('mobile_skin_helptool'),
+            'page_title' => $page_title,
+        );
+        $view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
+        $this->data = $view;
+        $this->layout = element('layout_skin_file', element('layout', $view));
+        $this->view = element('view_skin_file', element('layout', $view));
+    }
+
+
+    /**
      * 게시물 복사 밎 이동
      */
     public function post_copy($type = 'copy', $post_id = '')
@@ -98,7 +668,9 @@ class Helptool extends CB_Controller
         $this->load->model(array(
             'Blame_model', 'Board_model', 'Board_group_model',
             'Comment_model', 'Like_model', 'Post_extra_vars_model',
-            'Post_file_model', 'Post_link_model', 'Post_meta_model', 'Scrap_model'
+            'Post_file_model', 'Post_file_download_log_model', 'Post_history_model',
+            'Post_link_model', 'Post_link_click_log_model', 'Post_meta_model',
+            'Post_poll_model', 'Post_tag_model', 'Scrap_model'
         ));
 
         $post_id_list = '';
@@ -308,6 +880,21 @@ class Helptool extends CB_Controller
                                 }
                             }
 
+                            $postwhere = array(
+                                'post_id' => $post_id,
+                            );
+                            $tagdata = $this->Post_tag_model->get('', '', $postwhere);
+                            if ($tagdata) {
+                                foreach ($tagdata as $data) {
+                                    $taginsert = array(
+                                        'post_id' => $new_post_id,
+                                        'brd_id' => $new_brd_id,
+                                        'pta_tag' => $data['pta_tag'],
+                                    );
+                                    $this->Post_tag_model->insert($taginsert);
+                                }
+                            }
+
                             // 이벤트가 존재하면 실행합니다
                             $view['view']['event']['copy_after'] = Events::trigger('copy_after', $eventname);
 
@@ -351,8 +938,13 @@ class Helptool extends CB_Controller
                             $this->Comment_model->update('', $dataupdate, $where);
                             $this->Post_extra_vars_model->update('', $dataupdate, $where);
                             $this->Post_file_model->update('', $dataupdate, $where);
+                            $this->Post_file_download_log_model->update('', $dataupdate, $where);
+                            $this->Post_history_model->update('', $dataupdate, $where);
                             $this->Post_link_model->update('', $dataupdate, $where);
+                            $this->Post_link_click_log_model->update('', $dataupdate, $where);
                             $this->Post_meta_model->update('', $dataupdate, $where);
+                            $this->Post_poll_model->update('', $dataupdate, $where);
+                            $this->Post_tag_model->update('', $dataupdate, $where);
                             $this->Scrap_model->update('', $dataupdate, $where);
 
                             // 이벤트가 존재하면 실행합니다

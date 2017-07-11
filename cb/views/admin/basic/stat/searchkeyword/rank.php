@@ -17,6 +17,7 @@
                 </div>
             </form>
         </div>
+        <div id="chart_div"></div>
         <div class="table-responsive">
             <table class="table table-hover table-striped table-bordered">
                 <colgroup>
@@ -82,5 +83,60 @@
                 ?>
             </table>
         </div>
+        <div class="box-info">
+            <div class="btn-group pull-right" role="group" aria-label="...">
+                <button type="button" class="btn btn-outline btn-success btn-sm" id="export_to_excel"><i class="fa fa-file-excel-o"></i> 엑셀 다운로드</button>
+            </div>            
+        </div>
     </div>
 </div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+// Load the Visualization API and the corechart package.
+google.charts.load('current', {'packages':['corechart']});
+
+// Set a callback to run when the Google Visualization API is loaded.
+google.charts.setOnLoadCallback(drawChart);
+
+// Callback that creates and populates a data table,
+// instantiates the pie chart, passes in the data and
+// draws it.
+function drawChart() {
+
+    var data = new google.visualization.arrayToDataTable([
+          ['검색어', '비율'],
+        <?php
+        $sum = 0;
+        if (element('list', $view)) {
+            $i=0;
+            foreach (element('list', $view) as $result) {
+        ?>
+        ['<?php echo html_escape(element('key', $result)); ?>',<?php echo element('count', $result, 0); ?>],
+        <?php
+                $i++;
+                $sum += element('count', $result, 0);
+                if ($i > 8) break;
+            }
+        }
+        if (element('sum_count', $view) && $sum && $sum < element('sum_count', $view)) {
+        ?>
+            ['기타',<?php echo element('sum_count', $view, 0) - $sum; ?>],
+        <?php
+        }
+        ?>
+    ]);
+
+    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+
+    chart.draw(data, {
+        width: '100%', height: '400',
+    });
+}
+
+$(document).on('click', '#export_to_excel', function(){
+    exporturl = '<?php echo admin_url($this->pagedir . '/rank/excel' . '?' . $this->input->server('QUERY_STRING', null, '')); ?>';
+    document.location.href = exporturl;
+})
+</script>

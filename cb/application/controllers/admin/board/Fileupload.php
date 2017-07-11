@@ -24,7 +24,7 @@ class Fileupload extends CB_Controller
     /**
      * 모델을 로딩합니다
      */
-    protected $models = array('Board', 'Post_file');
+    protected $models = array('Board', 'Post_file', 'Post_file_download_log');
 
     /**
      * 이 컨트롤러의 메인 모델 이름입니다
@@ -160,7 +160,7 @@ class Fileupload extends CB_Controller
     /**
      * 파일 업로드 현황을 그래프 형식으로 페이지입니다
      */
-    public function graph()
+    public function graph($export = '')
     {
 
         // 이벤트 라이브러리를 로딩합니다
@@ -280,14 +280,22 @@ class Fileupload extends CB_Controller
         // 이벤트가 존재하면 실행합니다
         $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-        /**
-         * 어드민 레이아웃을 정의합니다
-         */
-        $layoutconfig = array('layout' => 'layout', 'skin' => 'graph');
-        $view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-        $this->data = $view;
-        $this->layout = element('layout_skin_file', element('layout', $view));
-        $this->view = element('view_skin_file', element('layout', $view));
+        if ($export === 'excel') {
+            
+            header('Content-type: application/vnd.ms-excel');
+            header('Content-Disposition: attachment; filename=파일업로드_' . cdate('Y_m_d') . '.xls');
+            echo $this->load->view('admin/' . ADMIN_SKIN . '/' . $this->pagedir . '/graph_excel', $view, true);
+
+        } else {
+            /**
+             * 어드민 레이아웃을 정의합니다
+             */
+            $layoutconfig = array('layout' => 'layout', 'skin' => 'graph');
+            $view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+            $this->data = $view;
+            $this->layout = element('layout_skin_file', element('layout', $view));
+            $this->view = element('view_skin_file', element('layout', $view));
+        }
     }
 
     /**
@@ -309,6 +317,10 @@ class Fileupload extends CB_Controller
             foreach ($this->input->post('chk') as $val) {
                 if ($val) {
                     $this->{$this->modelname}->delete($val);
+                    $deletewhere = array(
+                        'pfi_id' => $val,
+                    );
+                    $this->Post_file_download_log_model->delete_where($deletewhere);
                 }
             }
         }

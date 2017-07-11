@@ -48,7 +48,7 @@ class Banner_model extends CB_Model
             $type = 'random';
         }
 
-        $cachename = 'banner/banner-' . $position . '-' . cdate('Y-m-d');
+        $cachename = 'banner/banner-' . $position . '-' . $type . '-' . cdate('Y-m-d');
 
         if ( ! $result = $this->cache->get($cachename)) {
             $this->db->from($this->_table);

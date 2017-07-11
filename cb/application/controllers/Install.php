@@ -412,11 +412,16 @@ class Install extends CI_Controller
                 alert('설치에 실패하였습니다', site_url('install'));
                 return;
             }
+            if ($this->_create_premium_tables() === false) {
+                alert('설치에 실패하였습니다', site_url('install'));
+                return;
+            }
             if ($this->_migration_tables() === false) {
                 alert('설치에 실패하였습니다', site_url('install'));
                 return;
             }
             $this->_insert_init_data();
+            $this->_insert_premium_init_data();
 
             redirect();
         } else {
@@ -3074,7 +3079,7 @@ class Install extends CI_Controller
         $this->dbforge->add_field(array(
             'id' => array(
                 'type' => 'VARCHAR',
-                'constraint' => '40',
+                'constraint' => '120',
                 'default' => '',
             ),
             'ip_address' => array(
@@ -3252,6 +3257,2222 @@ class Install extends CI_Controller
         }
 
         return true;
+    }
+
+
+    public function _create_premium_tables()
+    {
+        $this->load->database();
+        $this->load->dbforge();
+
+
+        // attendance table
+        $this->dbforge->add_field(array(
+            'att_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'att_point' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'att_memo' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'att_continuity' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'att_ranking' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'att_date' => array(
+                'type' => 'DATE',
+                'null' => true,
+            ),
+            'att_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+        ));
+        $this->dbforge->add_key('att_id', true);
+        $this->dbforge->add_key(array('att_datetime', 'mem_id'));
+        if ($this->dbforge->create_table('attendance', true) === false) {
+            return false;
+        }
+        $this->db->query('ALTER TABLE ' . $this->db->dbprefix . 'attendance ADD UNIQUE KEY att_date_mem_id (`att_date`, `mem_id`)');
+
+
+        // banner_click_log table
+        $this->dbforge->add_field(array(
+            'bcl_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'ban_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'bcl_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'bcl_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+            'bcl_referer' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'bcl_url' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'bcl_useragent' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+        ));
+        $this->dbforge->add_key('bcl_id', true);
+        $this->dbforge->add_key(array('ban_id'));
+        if ($this->dbforge->create_table('banner_click_log', true) === false) {
+            return false;
+        }
+
+
+        // cmall_cart table
+        $this->dbforge->add_field(array(
+            'cct_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cit_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cde_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cct_count' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cct_cart' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cct_order' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cct_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'cct_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+        ));
+        $this->dbforge->add_key('cct_id', true);
+        $this->dbforge->add_key('mem_id');
+        $this->dbforge->add_key('cit_id');
+        if ($this->dbforge->create_table('cmall_cart', true) === false) {
+            return false;
+        }
+
+
+        // cmall_category table
+        $this->dbforge->add_field(array(
+            'cca_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'cca_value' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cca_parent' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cca_order' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+        ));
+        $this->dbforge->add_key('cca_id', true);
+        if ($this->dbforge->create_table('cmall_category', true) === false) {
+            return false;
+        }
+
+
+        // cmall_category_rel table
+        $this->dbforge->add_field(array(
+            'ccr_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'cit_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cca_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+        ));
+        $this->dbforge->add_key('ccr_id', true);
+        $this->dbforge->add_key('cit_id');
+        $this->dbforge->add_key('cca_id');
+        if ($this->dbforge->create_table('cmall_category_rel', true) === false) {
+            return false;
+        }
+
+
+        // cmall_config table
+        $this->dbforge->add_field(array(
+            'ccf_key' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'ccf_value' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+        ));
+        if ($this->dbforge->create_table('cmall_config', true) === false) {
+            return false;
+        }
+        $this->db->query('ALTER TABLE ' . $this->db->dbprefix . 'cmall_config ADD UNIQUE KEY `ccf_key` (`ccf_key`)');
+
+
+        // cmall_demo_click_log table
+        $this->dbforge->add_field(array(
+            'cdc_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'cit_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cdc_type' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cdc_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'cdc_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+            'cdc_useragent' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+        ));
+        $this->dbforge->add_key('cdc_id', true);
+        $this->dbforge->add_key('cit_id');
+        if ($this->dbforge->create_table('cmall_demo_click_log', true) === false) {
+            return false;
+        }
+
+
+        // cmall_download_log table
+        $this->dbforge->add_field(array(
+            'cdo_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'cde_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cit_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cdo_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'cdo_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+            'cdo_useragent' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+        ));
+        $this->dbforge->add_key('cdo_id', true);
+        $this->dbforge->add_key('cde_id');
+        $this->dbforge->add_key('cit_id');
+        $this->dbforge->add_key('mem_id');
+        if ($this->dbforge->create_table('cmall_download_log', true) === false) {
+            return false;
+        }
+
+
+        // cmall_item table
+        $this->dbforge->add_field(array(
+            'cit_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'cit_key' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cit_name' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cit_order' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'cit_type1' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cit_type2' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cit_type3' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cit_type4' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cit_status' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cit_summary' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+            'cit_content' => array(
+                'type' => 'MEDIUMTEXT',
+                'null' => true,
+            ),
+            'cit_mobile_content' => array(
+                'type' => 'MEDIUMTEXT',
+                'null' => true,
+            ),
+            'cit_content_html_type' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cit_price' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cit_file_1' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cit_file_2' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cit_file_3' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cit_file_4' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cit_file_5' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cit_file_6' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cit_file_7' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cit_file_8' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cit_file_9' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cit_file_10' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cit_hit' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cit_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'cit_updated_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'cit_sell_count' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cit_wish_count' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cit_download_days' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cit_review_count' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cit_review_average' => array(
+                'type' => 'DECIMAL',
+                'constraint' => '2,1',
+                'default' => '0',
+            ),
+            'cit_qna_count' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+        ));
+        $this->dbforge->add_key('cit_id', true);
+        $this->dbforge->add_key('cit_order');
+        $this->dbforge->add_key('cit_price');
+        $this->dbforge->add_key('cit_sell_count');
+        if ($this->dbforge->create_table('cmall_item', true) === false) {
+            return false;
+        }
+        $this->db->query('ALTER TABLE ' . $this->db->dbprefix . 'cmall_item ADD UNIQUE KEY `cit_key` (`cit_key`)');
+
+
+        // cmall_item_detail table
+        $this->dbforge->add_field(array(
+            'cde_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'cit_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cde_title' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cde_price' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cde_originname' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cde_filename' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cde_download' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cde_filesize' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cde_type' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '10',
+                'default' => '',
+            ),
+            'cde_is_image' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'cde_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'cde_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+            'cde_status' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+        ));
+        $this->dbforge->add_key('cde_id', true);
+        $this->dbforge->add_key('cit_id');
+        $this->dbforge->add_key('mem_id');
+        if ($this->dbforge->create_table('cmall_item_detail', true) === false) {
+            return false;
+        }
+
+
+        // cmall_item_history table
+        $this->dbforge->add_field(array(
+            'chi_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'cit_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'chi_title' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'chi_content' => array(
+                'type' => 'MEDIUMTEXT',
+                'null' => true,
+            ),
+            'chi_content_html_type' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'chi_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+            'chi_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+        ));
+        $this->dbforge->add_key('chi_id', true);
+        $this->dbforge->add_key('cit_id');
+        $this->dbforge->add_key('mem_id');
+        if ($this->dbforge->create_table('cmall_item_history', true) === false) {
+            return false;
+        }
+
+
+        // cmall_item_meta table
+        $this->dbforge->add_field(array(
+            'cit_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cim_key' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cim_value' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+        ));
+        if ($this->dbforge->create_table('cmall_item_meta', true) === false) {
+            return false;
+        }
+        $this->db->query('ALTER TABLE ' . $this->db->dbprefix . 'cmall_item_meta ADD UNIQUE KEY `cit_id_cim_key` (`cit_id`, `cim_key`)');
+
+
+        // cmall_order table
+        $this->dbforge->add_field(array(
+            'cor_id' => array(
+                'type' => 'BIGINT',
+                'constraint' => 20,
+                'unsigned' => true,
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+                'unsigned' => true,
+            ),
+            'mem_nickname' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '100',
+                'default' => '',
+            ),
+            'mem_realname' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '100',
+                'default' => '',
+            ),
+            'mem_email' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'mem_phone' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cor_memo' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+            'cor_total_money' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'cor_deposit' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'cor_cash_request' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'cor_cash' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'cor_content' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+            'cor_pay_type' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '100',
+                'default' => '',
+            ),
+            'cor_pg' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cor_tno' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cor_app_no' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cor_bank_info' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cor_admin_memo' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+            'cor_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'cor_approve_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'cor_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+            'cor_useragent' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cor_status' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+        ));
+        $this->dbforge->add_key('cor_id', true);
+        $this->dbforge->add_key('mem_id');
+        $this->dbforge->add_key('cor_pay_type');
+        $this->dbforge->add_key('cor_datetime');
+        $this->dbforge->add_key('cor_approve_datetime');
+        $this->dbforge->add_key('cor_status');
+        if ($this->dbforge->create_table('cmall_order', true) === false) {
+            return false;
+        }
+
+
+        // cmall_order_detail table
+        $this->dbforge->add_field(array(
+            'cod_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'cor_id' => array(
+                'type' => 'BIGINT',
+                'constraint' => 20,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cit_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cde_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cod_download_days' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'cod_count' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+        ));
+        $this->dbforge->add_key('cod_id', true);
+        $this->dbforge->add_key('cor_id');
+        $this->dbforge->add_key('mem_id');
+        if ($this->dbforge->create_table('cmall_order_detail', true) === false) {
+            return false;
+        }
+
+
+        // cmall_qna table
+        $this->dbforge->add_field(array(
+            'cqa_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'cit_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cqa_title' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cqa_content' => array(
+                'type' => 'MEDIUMTEXT',
+                'null' => true,
+            ),
+            'cqa_content_html_type' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cqa_reply_content' => array(
+                'type' => 'MEDIUMTEXT',
+                'null' => true,
+            ),
+            'cqa_reply_html_type' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cqa_secret' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cqa_receive_email' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cqa_receive_sms' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cqa_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'cqa_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+            'cqa_reply_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'cqa_reply_mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cqa_reply_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+        ));
+        $this->dbforge->add_key('cqa_id', true);
+        $this->dbforge->add_key('cit_id');
+        $this->dbforge->add_key('mem_id');
+        if ($this->dbforge->create_table('cmall_qna', true) === false) {
+            return false;
+        }
+
+
+        // cmall_review table
+        $this->dbforge->add_field(array(
+            'cre_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'cit_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cre_title' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cre_content' => array(
+                'type' => 'MEDIUMTEXT',
+                'null' => true,
+            ),
+            'cre_content_html_type' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cre_score' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'default' => '0',
+            ),
+            'cre_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'cre_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+            'cre_status' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+        ));
+        $this->dbforge->add_key('cre_id', true);
+        $this->dbforge->add_key('cit_id');
+        $this->dbforge->add_key('mem_id');
+        if ($this->dbforge->create_table('cmall_review', true) === false) {
+            return false;
+        }
+
+
+        // cmall_wishlist table
+        $this->dbforge->add_field(array(
+            'cwi_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cit_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'cwi_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'cwi_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+        ));
+        $this->dbforge->add_key('cwi_id', true);
+        if ($this->dbforge->create_table('cmall_wishlist', true) === false) {
+            return false;
+        }
+        $this->db->query('ALTER TABLE ' . $this->db->dbprefix . 'cmall_wishlist ADD UNIQUE KEY `mem_id_cit_id` (`mem_id`, `cit_id`)');
+
+
+        // deposit table
+        $this->dbforge->add_field(array(
+            'dep_id' => array(
+                'type' => 'BIGINT',
+                'constraint' => 20,
+                'unsigned' => true,
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'mem_nickname' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '100',
+                'default' => '',
+            ),
+            'mem_realname' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '100',
+                'default' => '',
+            ),
+            'mem_email' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'mem_phone' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'dep_from_type' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '100',
+                'default' => '',
+            ),
+            'dep_to_type' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '100',
+                'default' => '',
+            ),
+            'dep_deposit_request' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'dep_deposit' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'dep_deposit_sum' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'dep_cash_request' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'dep_cash' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'dep_point' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'dep_content' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'dep_pay_type' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '100',
+                'default' => '',
+            ),
+            'dep_pg' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'dep_tno' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'dep_app_no' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'dep_bank_info' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'dep_admin_memo' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+            'dep_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'dep_deposit_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'dep_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+            'dep_useragent' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'dep_status' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+        ));
+        $this->dbforge->add_key('dep_id', true);
+        $this->dbforge->add_key('mem_id');
+        $this->dbforge->add_key('dep_pay_type');
+        $this->dbforge->add_key('dep_datetime');
+        $this->dbforge->add_key('dep_deposit_datetime');
+        $this->dbforge->add_key('dep_status');
+        if ($this->dbforge->create_table('deposit', true) === false) {
+            return false;
+        }
+
+
+        // deposit_config table
+        $this->dbforge->add_field(array(
+            'dcf_key' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'dcf_value' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+        ));
+        if ($this->dbforge->create_table('deposit_config', true) === false) {
+            return false;
+        }
+        $this->db->query('ALTER TABLE ' . $this->db->dbprefix . 'deposit_config ADD UNIQUE KEY `dcf_key` (`dcf_key`)');
+
+
+        // member_group table
+        $this->dbforge->add_field(array(
+            'mgr_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'mgr_title' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'mgr_is_default' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'mgr_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'mgr_order' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'mgr_description' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+        ));
+        $this->dbforge->add_key('mgr_id', true);
+        $this->dbforge->add_key('mgr_order');
+        if ($this->dbforge->create_table('member_group', true) === false) {
+            return false;
+        }
+
+
+        // member_group_member table
+        $this->dbforge->add_field(array(
+            'mgm_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'mgr_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'mgm_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+        ));
+        $this->dbforge->add_key('mgm_id', true);
+        $this->dbforge->add_key('mgr_id');
+        $this->dbforge->add_key('mem_id');
+        if ($this->dbforge->create_table('member_group_member', true) === false) {
+            return false;
+        }
+
+
+        // member_level_history table
+        $this->dbforge->add_field(array(
+            'mlh_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'mlh_from' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'mlh_to' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'mlh_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'mlh_reason' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'mlh_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+        ));
+        $this->dbforge->add_key('mlh_id', true);
+        $this->dbforge->add_key('mem_id');
+        if ($this->dbforge->create_table('member_level_history', true) === false) {
+            return false;
+        }
+
+
+        // note table
+        $fields = array(
+                'nte_originname' => array(
+                        'type' => 'VARCHAR',
+                        'constraint' => '255',
+                        'default' => '',
+                ),
+                'nte_filename' => array(
+                        'type' => 'VARCHAR',
+                        'constraint' => '255',
+                        'default' => '',
+                ),
+        );
+        $this->dbforge->add_column('note', $fields);
+
+
+        // payment_inicis_log table
+        $this->dbforge->add_field(array(
+            'pil_id' => array(
+                'type' => 'BIGINT',
+                'constraint' => 11,
+                'unsigned' => true,
+            ),
+            'pil_type' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'P_TID' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'P_MID' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'P_AUTH_DT' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'P_STATUS' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'P_TYPE' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'P_OID' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'P_FN_NM' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'P_AMT' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'P_AUTH_NO' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'P_RMESG1' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+        ));
+        $this->dbforge->add_key('pil_id');
+        if ($this->dbforge->create_table('payment_inicis_log', true) === false) {
+            return false;
+        }
+
+
+        // payment_order_data table
+        $this->dbforge->add_field(array(
+            'pod_id' => array(
+                'type' => 'BIGINT',
+                'constraint' => 11,
+                'unsigned' => true,
+            ),
+            'pod_pg' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'pod_type' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'pod_data' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+            'pod_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'pod_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'cart_id' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '0',
+            ),
+        ));
+        $this->dbforge->add_key('pod_id');
+        if ($this->dbforge->create_table('payment_order_data', true) === false) {
+            return false;
+        }
+
+
+        // post table
+        $fields = array(
+            'ppo_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+        );
+        $this->dbforge->add_column('post', $fields);
+
+
+        // post_file_download_log table
+        $this->dbforge->add_field(array(
+            'pfd_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'pfi_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'post_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'brd_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'pfd_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'pfd_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+            'pfd_useragent' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+        ));
+        $this->dbforge->add_key('pfd_id', true);
+        $this->dbforge->add_key('pfi_id');
+        $this->dbforge->add_key('post_id');
+        $this->dbforge->add_key('mem_id');
+        if ($this->dbforge->create_table('post_file_download_log', true) === false) {
+            return false;
+        }
+
+
+        // post_history table
+        $this->dbforge->add_field(array(
+            'phi_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'post_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'brd_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'phi_title' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'phi_content' => array(
+                'type' => 'MEDIUMTEXT',
+                'null' => true,
+            ),
+            'phi_content_html_type' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'phi_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+            'phi_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+        ));
+        $this->dbforge->add_key('phi_id', true);
+        $this->dbforge->add_key('post_id');
+        $this->dbforge->add_key('mem_id');
+        if ($this->dbforge->create_table('post_history', true) === false) {
+            return false;
+        }
+
+
+        // post_link_click_log table
+        $this->dbforge->add_field(array(
+            'plc_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'pln_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'post_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'brd_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'plc_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'plc_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+            'plc_useragent' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+        ));
+        $this->dbforge->add_key('plc_id', true);
+        $this->dbforge->add_key('pln_id');
+        $this->dbforge->add_key('post_id');
+        if ($this->dbforge->create_table('post_link_click_log', true) === false) {
+            return false;
+        }
+
+
+        // post_naver_syndi_log table
+        $this->dbforge->add_field(array(
+            'pns_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'post_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'pns_status' => array(
+                'type' => 'varchar',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'pns_return_code' => array(
+                'type' => 'varchar',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'pns_return_message' => array(
+                'type' => 'varchar',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'pns_receipt_number' => array(
+                'type' => 'varchar',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'pns_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+        ));
+        $this->dbforge->add_key('pns_id', true);
+        $this->dbforge->add_key('post_id');
+        $this->dbforge->add_key('mem_id');
+        if ($this->dbforge->create_table('post_naver_syndi_log', true) === false) {
+            return false;
+        }
+
+        // post_poll table
+        $this->dbforge->add_field(array(
+            'ppo_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'post_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'brd_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'ppo_start_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'ppo_end_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'ppo_title' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'ppo_count' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'ppo_choose_count' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'ppo_after_comment' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'ppo_point' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'ppo_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'ppo_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+        ));
+        $this->dbforge->add_key('ppo_id', true);
+        $this->dbforge->add_key('post_id');
+        if ($this->dbforge->create_table('post_poll', true) === false) {
+            return false;
+        }
+
+
+        // post_poll_item table
+        $this->dbforge->add_field(array(
+            'ppi_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'ppo_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'ppi_item' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'ppi_count' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+        ));
+        $this->dbforge->add_key('ppi_id', true);
+        $this->dbforge->add_key('ppo_id');
+        if ($this->dbforge->create_table('post_poll_item', true) === false) {
+            return false;
+        }
+
+
+        // post_poll_item_poll table
+        $this->dbforge->add_field(array(
+            'ppp_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'ppo_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'ppi_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'ppp_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'ppp_ip' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
+            ),
+        ));
+        $this->dbforge->add_key('ppp_id', true);
+        $this->dbforge->add_key('ppo_id');
+        $this->dbforge->add_key('ppi_id');
+        $this->dbforge->add_key('mem_id');
+        if ($this->dbforge->create_table('post_poll_item_poll', true) === false) {
+            return false;
+        }
+
+
+        //post_tag table
+        $this->dbforge->add_field(array(
+            'pta_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'post_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'brd_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'pta_tag' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+        ));
+        $this->dbforge->add_key('pta_id', true);
+        $this->dbforge->add_key('post_id');
+        $this->dbforge->add_key('pta_tag');
+        if ($this->dbforge->create_table('post_tag', true) === false) {
+            return false;
+        }
+
+
+        // sms_favorite table
+        $this->dbforge->add_field(array(
+            'sfa_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'sfa_title' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'sfa_content' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+            'sfa_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+        ));
+        $this->dbforge->add_key('sfa_id', true);
+        if ($this->dbforge->create_table('sms_favorite', true) === false) {
+            return false;
+        }
+
+
+        // sms_member table
+        $this->dbforge->add_field(array(
+            'sme_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'smg_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'sme_name' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'sme_phone' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'sme_receive' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'sme_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'sme_memo' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+        ));
+        $this->dbforge->add_key('sme_id', true);
+        $this->dbforge->add_key('smg_id');
+        $this->dbforge->add_key('mem_id');
+        if ($this->dbforge->create_table('sms_member', true) === false) {
+            return false;
+        }
+
+
+        // sms_member_group table
+        $this->dbforge->add_field(array(
+            'smg_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'smg_name' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'smg_order' => array(
+                'type' => 'MEDIUMINT',
+                'constraint' => 6,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'smg_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+        ));
+        $this->dbforge->add_key('smg_id', true);
+        if ($this->dbforge->create_table('sms_member_group', true) === false) {
+            return false;
+        }
+
+
+        // sms_send_content table
+        $this->dbforge->add_field(array(
+            'ssc_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'ssc_content' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+            'send_mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'ssc_send_phone' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'ssc_booking' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'ssc_total' => array(
+                'type' => 'MEDIUMINT',
+                'constraint' => 6,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'ssc_success' => array(
+                'type' => 'MEDIUMINT',
+                'constraint' => 6,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'ssc_fail' => array(
+                'type' => 'MEDIUMINT',
+                'constraint' => 6,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'ssc_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'ssc_memo' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+        ));
+        $this->dbforge->add_key('ssc_id', true);
+        if ($this->dbforge->create_table('sms_send_content', true) === false) {
+            return false;
+        }
+
+
+        // sms_send_history table
+        $this->dbforge->add_field(array(
+            'ssh_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'ssc_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'send_mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'recv_mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'ssh_name' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'ssh_phone' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'ssh_success' => array(
+                'type' => 'TINYINT',
+                'constraint' => 4,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'ssh_datetime' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'ssh_memo' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+            'ssh_log' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+        ));
+        $this->dbforge->add_key('ssh_id', true);
+        $this->dbforge->add_key('ssc_id');
+        if ($this->dbforge->create_table('sms_send_history', true) === false) {
+            return false;
+        }
+
+        // social table
+        $this->dbforge->add_field(array(
+            'soc_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'auto_increment' => true,
+            ),
+            'soc_type' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'soc_account_id' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'soc_key' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'soc_value' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
+        ));
+        $this->dbforge->add_key('soc_id', true);
+        $this->dbforge->add_key('soc_account_id');
+        if ($this->dbforge->create_table('social', true) === false) {
+            return false;
+        }
+
+        // social_meta table
+        $this->dbforge->add_field(array(
+            'mem_id' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'unsigned' => true,
+                'default' => '0',
+            ),
+            'smt_key' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'smt_value' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+        ));
+        $this->dbforge->add_key(array('smt_value'));
+        if ($this->dbforge->create_table('social_meta', true) === false) {
+            return false;
+        }
+        $this->db->query('ALTER TABLE ' . $this->db->dbprefix . 'social_meta ADD UNIQUE KEY `mem_id_smt_key` (`mem_id`, `smt_key`)');
+
+        return true;
+
     }
 
 
@@ -3509,6 +5730,7 @@ flvr.pandora.tv',
             'member_dormant_auto_email_days' => '30',
             'send_email_dormant_notify_user_title' => '[{홈페이지명}] 휴면 계정 전환 예정 안내',
             'send_email_dormant_notify_user_content' => '<table width="100%" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tbody><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><span style="font-size:14px;font-weight:bold;color:rgb(0,0,0)">안녕하세요 {회원닉네임}님,</span><br>항상 믿고 이용해주시는 회원님께 깊은 감사를 드립니다.</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><p>{정리기준} 이상 서비스를 이용하지 않은 계정 ‘정보통신망 이용 촉진 및 정보보호 등에 관한 법률 및 시행령 제16조에 따라 휴면 계정으로 전환되며, 해당 계정 정보는 별도 분리 보관될 예정입니다. </p><p>(법령 시행일 : 2015년 8월 18일)</P><p>&nbsp;</p><p><strong>1. 적용 대상 :</strong> {정리기준}간 로그인 기록이 없는 고객의 개인정보</p><p><strong>2. 적용 시점 :</strong> {정리예정날짜}</p><p><strong>3. 처리 방법 :</strong> {정리방법}</p><p>&nbsp;</p><p>{홈페이지명}에서는 앞으로도 회원님의 개인정보를 소중하게 관리하여 보다 더 안전하게 서비스를 이용하실 수 있도록 최선의 노력을 다하겠습니다. 많은 관심과 참여 부탁 드립니다. 감사합니다.</p></td></tr><tr><td style="padding:10px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;text-align:center;">{홈페이지명}</td></tr></tbody></table>',
+            'cb_version' => CB_VERSION,
         );
         $registerform = array(
             'mem_userid' => array(
@@ -4081,6 +6303,285 @@ flvr.pandora.tv',
     }
 
 
+    public function _insert_premium_init_data()
+    {
+        $this->load->library(array('user_agent', 'session'));
+        $this->load->model(array(
+            'Config_model', 'Deposit_config_model', 'Cmall_config_model',
+            'Member_group_model', 'Document_model'
+        ));
+
+        if ( ! function_exists('password_hash')) {
+            $this->load->helper('password');
+        }
+
+        $this->load->driver('cache', config_item('cache_method'));
+
+        $skin = $this->input->post('skin');
+        $skin_cmall = 'cmall_' . $this->input->post('skin');
+        $skin_mobile = $this->input->post('skin') === 'basic' ? 'mobile' : 'bootstrap';
+
+        $configdata = array(
+            'use_pointranking' => '1',
+            'use_poll_list' => '1',
+            'site_meta_title_tag' => '{태그명} - {홈페이지제목}',
+            'site_meta_title_levelup' => '레벨업 - {홈페이지제목}',
+            'site_meta_title_pointranking' => '전체 포인트 랭킹 - {홈페이지제목}',
+            'site_meta_title_pointranking_month' => '월별 포인트 랭킹 - {홈페이지제목}',
+            'site_meta_title_poll' => '설문조사모음 - {홈페이지제목}',
+            'site_meta_title_attendance' => '출석체크 - {홈페이지제목}',
+            'send_sms_register_admin_content' => '[회원가입알림] {회원닉네임}님이 회원가입하셨습니다',
+            'send_sms_register_user_content' => '[{홈페이지명}] 회원가입을 축하드립니다. 감사합니다',
+            'send_sms_changepw_admin_content' => '[패스워드변경알림] {회원닉네임}님이 패스워드를변경하셨습니다',
+            'send_sms_changepw_user_content' => '[{홈페이지명}] 회원님의 패스워드가 변경되었습니다. 감사합니다',
+            'send_sms_memberleave_admin_content' => '[회원탈퇴알림] {회원닉네임}님이 회원탈퇴하셨습니다',
+            'send_sms_memberleave_user_content' => '[{홈페이지명}] 회원탈퇴완료 - 그동안이용해주셔서감사합니다',
+            'send_sms_post_admin_content' => '[게시글작성알림] {게시판명} - {게시글제목}',
+            'send_sms_post_writer_content' => '[게시글작성알림] {게시판명} - {게시글제목}',
+            'send_sms_comment_admin_content' => '[댓글작성알림] {게시판명} - {게시글제목}',
+            'send_sms_comment_post_writer_content' => '[댓글작성알림] {게시판명} - {게시글제목}',
+            'send_sms_comment_comment_writer_content' => '[댓글작성알림] {게시판명} - {게시글제목}',
+            'send_sms_blame_admin_content' => '[게시글신고알림] {게시판명} - {게시글제목}',
+            'send_sms_blame_post_writer_content' => '[게시글신고알림] {게시판명} - {게시글제목}',
+            'send_sms_comment_blame_admin_content' => '[댓글신고알림] {게시판명} - {게시글제목}',
+            'send_sms_comment_blame_post_writer_content' => '[댓글신고알림] {게시판명} - {게시글제목}',
+            'send_sms_comment_blame_comment_writer_content' => '[댓글신고알림] {게시판명} - {게시글제목}',
+        );
+        $scheduler = array(
+            'Sample_scheduler' => array(
+                'library_name' => 'Sample_scheduler',
+                'interval_field_name' => 'hourly',
+            ),
+        );
+
+        $interval = array(
+            'hourly' => array(
+                'field_name' => 'hourly',
+                'interval' => '3600',
+                'display_name' => '매시간마다',
+            ),
+            'twicedaily' => array(
+                'field_name' => 'twicedaily',
+                'interval' => '43200',
+                'display_name' => '하루에2번',
+            ),
+            'daily' => array(
+                'field_name' => 'daily',
+                'interval' => '86400',
+                'display_name' => '하루에1번',
+            ),
+        );
+        $configdata['scheduler'] = json_encode($scheduler, true);
+        $configdata['scheduler_interval'] = json_encode($interval, true);
+
+        $this->cache->delete('config-model-get');
+        $this->cache->clean();
+        $this->Config_model->save($configdata);
+
+        $depositdata = array(
+            'site_meta_title_deposit' => '예치금 관리 - {홈페이지제목}',
+            'site_meta_title_deposit_mylist' => '나의 예치금 내역 - {홈페이지제목}',
+            'site_meta_title_deposit_result' => '예치금 충전 결과 - {홈페이지제목}',
+            'deposit_email_admin_cash_to_deposit_title' => '[결제 알림] {회원닉네임}님이 결제하셨습니다',
+            'deposit_email_admin_cash_to_deposit_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요</p><p>{회원닉네임}님이 결제하셨습니다</p><p>회원님께서 결제하신 내용입니다</p><p>결제금액 : {결제금액} 원</p><p>전환되는 {예치금명} : {전환예치금액}{예치금단위}</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_email_user_cash_to_deposit_title' => '[{홈페이지명}] 결제가 완료되었습니다',
+            'deposit_email_user_cash_to_deposit_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요 {회원닉네임}님</p><p>구매해주셔서 감사합니다</p><p>{회원닉네임}님께서 구매하신 내용입니다</p><p>결제금액 : {결제금액} 원</p><p>전환되는 {예치금명} : {전환예치금액}{예치금단위}</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_note_admin_cash_to_deposit_title' => '[결제 알림] {회원닉네임}님이 결제하셨습니다',
+            'deposit_note_admin_cash_to_deposit_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요</p><p>{회원닉네임}님이 결제하셨습니다</p><p>회원님께서 결제하신 내용입니다</p><p>결제금액 : {결제금액} 원</p><p>전환되는 {예치금명} : {전환예치금액}{예치금단위}</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_note_user_cash_to_deposit_title' => '결제가 완료되었습니다',
+            'deposit_note_user_cash_to_deposit_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요 {회원닉네임}님</p><p>구매해주셔서 감사합니다</p><p>{회원닉네임}님께서 구매하신 내용입니다</p><p>결제금액 : {결제금액} 원</p><p>전환되는 {예치금명} : {전환예치금액}{예치금단위}</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_sms_admin_cash_to_deposit_content' => '[결제알림] {회원닉네임}님, 결제금액 : {결제금액} 원',
+            'deposit_sms_user_cash_to_deposit_content' => '[{홈페이지명}] 결제완료 : {결제금액} 원 - 감사합니다',
+            'deposit_email_admin_bank_to_deposit_title' => '[무통장입금요청] {회원닉네임}님이 무통장입금 요청하셨습니다',
+            'deposit_email_admin_bank_to_deposit_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요</p><p>{회원닉네임}님이 무통장입금 요청하셨습니다</p><p>회원님께서 구매하신 내용입니다</p><p>결제금액 : {결제금액} 원</p><p>통장에 입금된 내역이 확인되면 관리자페이지에서 입금완료 승인을 해주시기 바랍니다</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_email_user_bank_to_deposit_title' => '[{홈페이지명}] 무통장입금요청을 하셨습니다',
+            'deposit_email_user_bank_to_deposit_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요 {회원닉네임}님</p><p>{회원닉네임}님께서 구매요청하신 내용입니다</p><p>결제금액 : {결제금액} 원</p><p>전환되는 {예치금명} : {전환예치금액}{예치금단위}</p><p>아래의 계좌번호로 입금부탁드립니다</p><p>은행안내 : {은행계좌안내}</p><p>입금이 확인되면 24시간 내에 처리가 완료됩니다</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_note_admin_bank_to_deposit_title' => '[무통장입금요청] {회원닉네임}님이 무통장입금 요청하셨습니다',
+            'deposit_note_admin_bank_to_deposit_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요</p><p>{회원닉네임}님이 무통장입금 요청하셨습니다</p><p>회원님께서 구매하신 내용입니다</p><p>결제금액 : {결제금액} 원</p><p>통장에 입금된 내역이 확인되면 관리자페이지에서 입금완료 승인을 해주시기 바랍니다</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_note_user_bank_to_deposit_title' => '무통장입금요청을 하셨습니다',
+            'deposit_note_user_bank_to_deposit_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요 {회원닉네임}님</p><p>{회원닉네임}님께서 구매요청하신 내용입니다</p><p>결제금액 : {결제금액} 원</p><p>전환되는 {예치금명} : {전환예치금액}{예치금단위}</p><p>아래의 계좌번호로 입금부탁드립니다</p><p>은행안내 : {은행계좌안내}</p><p>입금이 확인되면 24시간 내에 처리가 완료됩니다</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_sms_admin_bank_to_deposit_content' => '[무통장입금요청] {회원닉네임}님, 결제요청금액 : {결제금액} 원',
+            'deposit_sms_user_bank_to_deposit_content' => '[{홈페이지명}] 입금요청 : {결제금액} 원 - 감사합니다',
+            'deposit_email_admin_approve_bank_to_deposit_title' => '[입금처리완료] {회원닉네임}님의 입금처리요청이 완료되었습니다',
+            'deposit_email_admin_approve_bank_to_deposit_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요</p><p>{회원닉네임}님의 입금처리요청이 완료되었습니다</p><p>회원님께서 구매하신 내용입니다</p><p>결제금액 : {결제금액} 원</p><p>전환되는 {예치금명} : {전환예치금액}{예치금단위}</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_email_user_approve_bank_to_deposit_title' => '[{홈페이지명}] 구매해주셔서 감사합니다',
+            'deposit_email_user_approve_bank_to_deposit_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요 {회원닉네임}님</p><p>{회원닉네임}님께서 구매요청하신 내용입니다</p><p>결제금액 : {결제금액} 원</p><p>전환되는 {예치금명} : {전환예치금액}{예치금단위}</p><p>정상 구매가 완료되었습니다</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_note_admin_approve_bank_to_deposit_title' => '[입금처리완료] {회원닉네임}님의 입금처리요청이 완료되었습니다',
+            'deposit_note_admin_approve_bank_to_deposit_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요</p><p>{회원닉네임}님의 입금처리요청이 완료되었습니다</p><p>회원님께서 구매하신 내용입니다</p><p>결제금액 : {결제금액} 원</p><p>전환되는 {예치금명} : {전환예치금액}{예치금단위}</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_note_user_approve_bank_to_deposit_title' => '구매해주셔서 감사합니다',
+            'deposit_note_user_approve_bank_to_deposit_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요 {회원닉네임}님</p><p>{회원닉네임}님께서 구매요청하신 내용입니다</p><p>결제금액 : {결제금액} 원</p><p>전환되는 {예치금명} : {전환예치금액}{예치금단위}</p><p>정상 구매가 완료되었습니다</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_sms_admin_approve_bank_to_deposit_content' => '[입금처리완료] {회원닉네임}님의 {결제금액} 원 입금처리요청 완료',
+            'deposit_sms_user_approve_bank_to_deposit_content' => '[{홈페이지명}] {결제금액}원 입금처리완료되었습니다. 감사합니다',
+            'deposit_email_admin_point_to_deposit_title' => '[구매 알림] {회원닉네임}님이 포인트로 {예치금명} 구매 하셨습니다',
+            'deposit_email_admin_point_to_deposit_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요</p><p>{회원닉네임}님이 포인트로 {예치금명} 구매하셨습니다</p><p>회원님께서 구매하신 내용입니다</p><p>사용포인트 : {전환포인트} 점</p><p>전환되는 {예치금명} : {전환예치금액}{예치금단위}</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_email_user_point_to_deposit_title' => '[{홈페이지명}] 포인트 결제가 완료되었습니다',
+            'deposit_email_user_point_to_deposit_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요</p><p>구매해주셔서 감사합니다</p><p>회원님께서 구매하신 내용입니다</p><p>사용포인트 : {전환포인트} 점</p><p>전환되는 {예치금명} : {전환예치금액}{예치금단위}</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_note_admin_point_to_deposit_title' => '[구매 알림] {회원닉네임}님이 포인트로 {예치금명} 구매 하셨습니다',
+            'deposit_note_admin_point_to_deposit_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요</p><p>{회원닉네임}님이 포인트로 {예치금명} 구매하셨습니다</p><p>회원님께서 구매하신 내용입니다</p><p>사용포인트 : {전환포인트} 점</p><p>전환되는 {예치금명} : {전환예치금액}{예치금단위}</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_note_user_point_to_deposit_title' => '포인트 결제가 완료되었습니다',
+            'deposit_note_user_point_to_deposit_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요</p><p>구매해주셔서 감사합니다</p><p>회원님께서 구매하신 내용입니다</p><p>사용포인트 : {전환포인트} 점</p><p>전환되는 {예치금명} : {전환예치금액}{예치금단위}</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_sms_admin_point_to_deposit_content' => '[포인트->예치금 결제] {회원닉네임} 님 결제 완료',
+            'deposit_sms_user_point_to_deposit_content' => '[{홈페이지명}] 결제완료 - 전환{예치금명}:{전환예치금액}{예치금단위} 감사합니다',
+            'deposit_email_admin_deposit_to_point_title' => '[포인트 전환 알림] {회원닉네임}님이 포인트를 구매하셨습니다',
+            'deposit_email_admin_deposit_to_point_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요</p><p>{회원닉네임} 님이 포인트를 구매하셨습니다</p><p>회원님께서 구매하신 내용입니다</p><p> 포인트 : {전환포인트}점</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_email_user_deposit_to_point_title' => '[{홈페이지명}] 포인트구매가 완료되었습니다',
+            'deposit_email_user_deposit_to_point_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요 {회원닉네임}님</p><p>포인트를 구매해주셔서 감사합니다</p><p>{회원닉네임}님께서 구매하신 내용입니다</p><p> 포인트 : {전환포인트}점</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_note_admin_deposit_to_point_title' => '[포인트 전환 알림] {회원닉네임}님이 포인트를 구매하셨습니다',
+            'deposit_note_admin_deposit_to_point_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요</p><p>{회원닉네임} 님이 포인트를 구매하셨습니다</p><p>회원님께서 구매하신 내용입니다</p><p> 포인트 : {전환포인트}점</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_note_user_deposit_to_point_title' => '포인트구매가 완료되었습니다',
+            'deposit_note_user_deposit_to_point_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요 {회원닉네임}님</p><p>포인트를 구매해주셔서 감사합니다</p><p>{회원닉네임}님께서 구매하신 내용입니다</p><p> 포인트 : {전환포인트}점</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'deposit_sms_admin_deposit_to_point_content' => '[예치금->포인트 결제] {회원닉네임} 님 결제 완료',
+            'deposit_sms_user_deposit_to_point_content' => '[{홈페이지명}] 결제완료 - 적립포인트 {전환포인트}점. 감사합니다',
+        );
+        $cmalldata = array(
+            'site_meta_title_cmall' => '{컨텐츠몰명} - {홈페이지제목}',
+            'site_meta_title_cmall_list' => '{컨텐츠몰명} - {홈페이지제목}',
+            'site_meta_title_cmall_item' => '{상품명} > {컨텐츠몰명} - {홈페이지제목}',
+            'site_meta_title_cmall_cart' => '장바구니 > {컨텐츠몰명} - {홈페이지제목}',
+            'site_meta_title_cmall_order' => '상품주문 > {컨텐츠몰명} - {홈페이지제목}',
+            'site_meta_title_cmall_orderresult' => '주문결과 > {컨텐츠몰명} - {홈페이지제목}',
+            'site_meta_title_cmall_orderlist' => '주문내역 > {컨텐츠몰명} - {홈페이지제목}',
+            'site_meta_title_cmall_wishlist' => '찜한 목록 > {컨텐츠몰명} - {홈페이지제목}',
+            'site_meta_title_cmall_review_write' => '상품후기작성 > {컨텐츠몰명} - {홈페이지제목}',
+            'site_meta_title_cmall_qna_write' => '상품문의작성 > {컨텐츠몰명} - {홈페이지제목}',
+            'cmall_email_admin_cash_to_contents_title' => '[주문안내] {회원닉네임}님이 결제하셨습니다',
+            'cmall_email_user_cash_to_contents_title' => '[{홈페이지명}] 상품을 구매해주셔서 감사합니다',
+            'cmall_note_admin_cash_to_contents_title' => '[주문안내] {회원닉네임}님이 결제하셨습니다',
+            'cmall_note_admin_cash_to_contents_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요</p><p>{회원닉네임}님이 상품을 구매하셨습니다</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'cmall_note_user_cash_to_contents_title' => '상품을 구매해주셔서 감사합니다',
+            'cmall_note_user_cash_to_contents_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요 {회원닉네임}님</p><p>구매해주셔서 감사합니다</p><p>구매하신 상품 이용이 가능합니다</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'cmall_sms_admin_cash_to_contents_content' => '[구매알림] {회원닉네임}님이 구매하셨습니다',
+            'cmall_sms_user_cash_to_contents_content' => '[{홈페이지명}] 구매가완료되었습니다 감사합니다',
+            'cmall_email_admin_bank_to_contents_title' => '[주문안내] {회원닉네임}님이 무통장입금 요청하셨습니다',
+            'cmall_email_user_bank_to_contents_title' => '[{홈페이지명}] 구매신청이접수되었습니다.입금확인후상품이용가능합니다',
+            'cmall_note_admin_bank_to_contents_title' => '[주문안내] {회원닉네임}님이 무통장입금 요청하셨습니다',
+            'cmall_note_admin_bank_to_contents_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요</p><p>{회원닉네임}님이 무통장입금요청하셨습니다</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'cmall_note_user_bank_to_contents_title' => '구매신청이접수되었습니다.입금확인후상품이용가능합니다',
+            'cmall_note_user_bank_to_contents_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요 {회원닉네임}님</p><p>구매해주셔서 감사합니다</p><p>입금이 확인되는대로 승인처리해드리겠습니다</p><p>결제금액 : {결제금액}원</p><p>은행계좌안내 : {은행계좌안내}</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'cmall_sms_admin_bank_to_contents_content' => '[무통장입금요청] {회원닉네임}님이 무통장입금요청하였습니다',
+            'cmall_sms_user_bank_to_contents_content' => '[{홈페이지명}] 구매신청이접수되었습니다.입금확인후상품이용가능합니다',
+            'cmall_email_admin_approve_bank_to_contents_title' => '[입금처리완료] {회원닉네임}님의 입금처리요청이 완료되었습니다',
+            'cmall_email_user_approve_bank_to_contents_title' => '[{홈페이지명}] 입금이 확인되어 주문처리가 완료되었습니다',
+            'cmall_note_admin_approve_bank_to_contents_title' => '[입금처리완료] {회원닉네임}님의 입금처리요청이 완료되었습니다',
+            'cmall_note_admin_approve_bank_to_contents_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요</p><p>{회원닉네임}님의 입금확인 처리가 완료되었습니다</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'cmall_note_user_approve_bank_to_contents_title' => '입금이 확인되어 주문처리가 완료되었습니다',
+            'cmall_note_user_approve_bank_to_contents_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><p>안녕하세요 {회원닉네임}님</p><p>구매해주셔서 감사합니다</p><p>입금이 확인되어 이제 정상적으로 상품 이용이 가능합니다</p><p>감사합니다</p></div><p><a href="{홈페이지주소}" target="_blank" style="font-weight:bold;">홈페이지 가기</a></p><p>&nbsp;</p></td></tr></table>',
+            'cmall_sms_admin_approve_bank_to_contents_content' => '[무통장입금확인] {회원닉네임}님의 무통장입금요청이확인되었습니다',
+            'cmall_sms_user_approve_bank_to_contents_content' => '[{홈페이지명}] 입금이확인되었습니다. 구매하신상품다운로드가가능합니다',
+            'cmall_email_admin_write_product_review_title' => '[상품후기] {상품명} 상품 후기가 작성되었습니다',
+            'cmall_email_admin_write_product_review_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><strong>[후기제목]</strong></div><div>{후기제목}</div><div>&nbsp;</div><div><strong>[후기내용]</strong></div><div>{후기내용}</div><div>&nbsp;</div><div><a href="{상품주소}" target="_blank"><strong>[상품페이지 보기]</strong></a></div><p>&nbsp;</p></td></tr></table>',
+            'cmall_email_user_write_product_review_title' => '[홈페이지명] {상품명} 상품 후기를 작성해주셔서 감사합니다',
+            'cmall_email_user_write_product_review_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><strong>[후기제목]</strong></div><div>{후기제목}</div><div>&nbsp;</div><div><strong>[후기내용]</strong></div><div>{후기내용}</div><div>&nbsp;</div><div><a href="{상품주소}" target="_blank"><strong>[상품페이지 보기]</strong></a></div><p>&nbsp;</p></td></tr></table>',
+            'cmall_note_admin_write_product_review_title' => '[상품후기] {상품명} 상품 후기가 작성되었습니다',
+            'cmall_note_admin_write_product_review_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><strong>[후기제목]</strong></div><div>{후기제목}</div><div>&nbsp;</div><div><strong>[후기내용]</strong></div><div>{후기내용}</div><div>&nbsp;</div><div><a href="{상품주소}" target="_blank"><strong>[상품페이지 보기]</strong></a></div><p>&nbsp;</p></td></tr></table>',
+            'cmall_note_user_write_product_review_title' => '{상품명} 상품 후기를 작성해주셔서 감사합니다',
+            'cmall_note_user_write_product_review_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><strong>[후기제목]</strong></div><div>{후기제목}</div><div>&nbsp;</div><div><strong>[후기내용]</strong></div><div>{후기내용}</div><div>&nbsp;</div><div><a href="{상품주소}" target="_blank"><strong>[상품페이지 보기]</strong></a></div><p>&nbsp;</p></td></tr></table>',
+            'cmall_sms_admin_write_product_review_content' => '[상품후기] {상품명} 상품후기가 작성되었습니다',
+            'cmall_sms_user_write_product_review_content' => '[홈페이지명] {상품명} 상품후기를 작성해주셔서 감사합니다',
+            'cmall_email_admin_write_product_qna_title' => '[상품문의] {상품명} 상품 문의가 작성되었습니다',
+            'cmall_email_admin_write_product_qna_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><strong>[문의제목]</strong></div><div>{문의제목}</div><div>&nbsp;</div><div><strong>[문의내용]</strong></div><div>{문의내용}</div><div>&nbsp;</div><div><a href="{상품주소}" target="_blank"><strong>[상품페이지 보기]</strong></a></div><p>&nbsp;</p></td></tr></table>',
+            'cmall_email_user_write_product_qna_title' => '[홈페이지명] {상품명} 상품 문의가 접수되었습니다',
+            'cmall_email_user_write_product_qna_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><strong>[문의제목]</strong></div><div>{문의제목}</div><div>&nbsp;</div><div><strong>[문의내용]</strong></div><div>{문의내용}</div><div>&nbsp;</div><div><a href="{상품주소}" target="_blank"><strong>[상품페이지 보기]</strong></a></div><p>&nbsp;</p></td></tr></table>',
+            'cmall_note_admin_write_product_qna_title' => '[상품문의] {상품명} 상품 문의가 작성되었습니다',
+            'cmall_note_admin_write_product_qna_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><strong>[문의제목]</strong></div><div>{문의제목}</div><div>&nbsp;</div><div><strong>[문의내용]</strong></div><div>{문의내용}</div><div>&nbsp;</div><div><a href="{상품주소}" target="_blank"><strong>[상품페이지 보기]</strong></a></div><p>&nbsp;</p></td></tr></table>',
+            'cmall_note_user_write_product_qna_title' => '{상품명} 상품 문의가 접수되었습니다',
+            'cmall_note_user_write_product_qna_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><strong>[문의제목]</strong></div><div>{문의제목}</div><div>&nbsp;</div><div><strong>[문의내용]</strong></div><div>{문의내용}</div><div>&nbsp;</div><div><a href="{상품주소}" target="_blank"><strong>[상품페이지 보기]</strong></a></div><p>&nbsp;</p></td></tr></table>',
+            'cmall_sms_admin_write_product_qna_content' => '[상품문의] {상품명} 상품문의가 접수되었습니다',
+            'cmall_sms_user_write_product_qna_content' => '[홈페이지명] {상품명} 상품문의가 접수되었습니다 감사합니다',
+            'cmall_email_admin_write_product_qna_reply_title' => '[상품문의] {상품명} 상품 문의에 대한 답변이 등록되었습니다',
+            'cmall_email_admin_write_product_qna_reply_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><strong>[문의제목]</strong></div><div>{문의제목}</div><div>&nbsp;</div><div><strong>[답변내용]</strong></div><div>{답변내용}</div><div>&nbsp;</div><div><a href="{상품주소}" target="_blank"><strong>[상품페이지 보기]</strong></a></div><p>&nbsp;</p></td></tr></table>',
+            'cmall_email_user_write_product_qna_reply_title' => '[홈페이지명] {상품명} 상품 문의에 대한 답변입니다',
+            'cmall_email_user_write_product_qna_reply_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><strong>[문의제목]</strong></div><div>{문의제목}</div><div>&nbsp;</div><div><strong>[답변내용]</strong></div><div>{답변내용}</div><div>&nbsp;</div><div><a href="{상품주소}" target="_blank"><strong>[상품페이지 보기]</strong></a></div><p>&nbsp;</p></td></tr></table>',
+            'cmall_note_admin_write_product_qna_reply_title' => '[상품문의] {상품명} 상품 문의에 대한 답변이 등록되었습니다',
+            'cmall_note_admin_write_product_qna_reply_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><strong>[문의제목]</strong></div><div>{문의제목}</div><div>&nbsp;</div><div><strong>[답변내용]</strong></div><div>{답변내용}</div><div>&nbsp;</div><div><a href="{상품주소}" target="_blank"><strong>[상품페이지 보기]</strong></a></div><p>&nbsp;</p></td></tr></table>',
+            'cmall_note_user_write_product_qna_reply_title' => '{상품명} 상품 문의에 대한 답변입니다',
+            'cmall_note_user_write_product_qna_reply_content' => '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;">{홈페이지명}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div><strong>[문의제목]</strong></div><div>{문의제목}</div><div>&nbsp;</div><div><strong>[답변내용]</strong></div><div>{답변내용}</div><div>&nbsp;</div><div><a href="{상품주소}" target="_blank"><strong>[상품페이지 보기]</strong></a></div><p>&nbsp;</p></td></tr></table>',
+            'cmall_sms_admin_write_product_qna_reply_content' => '[상품문의] {상품명} 상품문의답변이 등록되었습니다',
+            'cmall_sms_user_write_product_qna_reply_content' => '[홈페이지명] {상품명} 상품문의에 대한 답변이 등록되었습니다 감사합니다',
+        );
+        $this->Deposit_config_model->save($depositdata);
+        $this->Cmall_config_model->save($cmalldata);
+
+
+        $insertdata = array(
+            'mgr_title' => '기본그룹',
+            'mgr_is_default' => 1,
+            'mgr_datetime' => cdate('Y-m-d H:i:s'),
+            'mgr_order' => 1,
+        );
+        $mgr_id = $this->Member_group_model->insert($insertdata);
+        $insertdata = array(
+            'mgr_title' => '특별그룹',
+            'mgr_is_default' => 0,
+            'mgr_datetime' => cdate('Y-m-d H:i:s'),
+            'mgr_order' => 2,
+        );
+        $this->Member_group_model->insert($insertdata);
+        $insertdata = array(
+            'mgr_title' => '우수그룹',
+            'mgr_is_default' => 0,
+            'mgr_datetime' => cdate('Y-m-d H:i:s'),
+            'mgr_order' => 3,
+        );
+        $this->Member_group_model->insert($insertdata);
+
+        $insertdata = array(
+            'doc_key' => 'cmall',
+            'doc_title' => '이용안내',
+            'doc_content' => '이용안내 내용을 입력해주세요',
+            'doc_content_html_type' => 1,
+            'doc_layout' => $skin_cmall,
+            'mem_id' => $this->session->userdata('mem_id') ? $this->session->userdata('mem_id') : 0,
+            'doc_datetime' => cdate('Y-m-d H:i:s'),
+            'doc_updated_mem_id' => $this->session->userdata('mem_id') ? $this->session->userdata('mem_id') : 0,
+            'doc_updated_datetime' => cdate('Y-m-d H:i:s'),
+        );
+        $this->Document_model->insert($insertdata);
+    }
+
+
+    /**
+     * 베이직 버전을 프리미엄 버전으로 업그레이드시 실행하는 컨트롤러입니다
+     */
+    public function upgrade($process = '')
+    {
+        $this->load->database();
+
+        if (config_item('install_ip') !== 'all' AND ( config_item('install_ip') === '' OR config_item('install_ip') !== $this->input->ip_address())) {
+            $data['need_install_ip'] = 1;
+            $this->load->view('install/header_upgrade');
+            $this->load->view('install/upgrade', $data);
+            $this->load->view('install/footer');
+        } elseif ($this->db->table_exists('social')) {
+            $data['already_installed'] = 1;
+            $this->load->view('install/header_upgrade');
+            $this->load->view('install/upgrade', $data);
+            $this->load->view('install/footer');
+        } elseif ($process === 'process') {
+            if ($this->_create_premium_tables() === false) {
+                alert('설치에 실패하였습니다', site_url('install'));
+                return;
+            }
+            if ($this->_migration_tables() === false) {
+                alert('설치에 실패하였습니다', site_url('install'));
+                return;
+            }
+
+            $this->_insert_premium_init_data();
+
+            $data['done'] = 1;
+            $this->load->view('install/header_upgrade');
+            $this->load->view('install/upgrade', $data);
+            $this->load->view('install/footer');
+        } else {
+            $data['do_upgrade'] = 1;
+            $this->load->view('install/header_upgrade');
+            $this->load->view('install/upgrade', $data);
+            $this->load->view('install/footer');
+        }
+    }
+
+
     /**
      * 회원가입시 닉네임을 체크하는 함수입니다
      */
@@ -4094,5 +6595,7 @@ flvr.pandora.tv',
             );
             return false;
         }
+
+        return true;
     }
 }

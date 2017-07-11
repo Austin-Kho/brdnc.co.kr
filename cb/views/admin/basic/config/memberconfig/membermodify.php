@@ -6,6 +6,8 @@
             <li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir . '/membermodify'); ?>" onclick="return check_form_changed();">정보수정시</a></li>
             <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/login'); ?>" onclick="return check_form_changed();">로그인</a></li>
             <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/alarm'); ?>" onclick="return check_form_changed();">알림 설정</a></li>
+            <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/sociallogin'); ?>" onclick="return check_form_changed();">소셜로그인</a></li>
+            <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/selfcert'); ?>" onclick="return check_form_changed();">본인 확인 서비스</a></li>
         </ul>
     </div>
     <div class="box-table">

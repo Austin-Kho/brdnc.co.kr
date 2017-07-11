@@ -19,6 +19,8 @@ class Member extends CI_Controller
 
     private $mb;
 
+    private $member_group;
+
 
     function __construct()
     {
@@ -83,6 +85,7 @@ class Member extends CI_Controller
                 if (is_array($metas)) {
                     $member = array_merge($member, $metas);
                 }
+                $member['social'] = $this->get_all_social_meta(element('mem_id', $member));
                 $this->mb = $member;
             }
             return $this->mb;
@@ -109,6 +112,42 @@ class Member extends CI_Controller
         $member = $this->mb;
 
         return isset($member[$column]) ? $member[$column] : false;
+    }
+
+
+    /**
+     * get_member 에서 가져온 데이터의 item 을 보여줍니다
+     */
+    public function socialitem($column = '')
+    {
+        if (empty($column)) {
+            return false;
+        }
+        if (empty($this->mb)) {
+            $this->get_member();
+        }
+        if (empty($this->mb)) {
+            return false;
+        }
+        $member = $this->mb;
+
+        return isset($member['social']) && isset($member['social'][$column]) ? $member['social'][$column] : false;
+    }
+
+
+    /**
+     * 회원이 속한 그룹 정보를 가져옵니다
+     */
+    public function group()
+    {
+        if (empty($this->member_group)) {
+            $where = array(
+                'mem_id' => $this->item('mem_id'),
+            );
+            $this->CI->load->model('Member_group_member_model');
+            $this->member_group = $this->CI->Member_group_member_model->get('', '', $where, '', 0, 'mgm_id', 'ASC');
+        }
+        return $this->member_group;
     }
 
 
@@ -142,6 +181,24 @@ class Member extends CI_Controller
         return $result;
     }
 
+
+    /**
+     * social_meta 테이블에서 가져옵니다
+     */
+    public function get_all_social_meta($mem_id = 0)
+    {
+        $mem_id = (int) $mem_id;
+        if (empty($mem_id) OR $mem_id < 1) {
+            return false;
+        }
+        if ($this->CI->db->table_exists('social_meta') === false) {
+            return;
+        }
+
+        $this->CI->load->model('Social_meta_model');
+        $result = $this->CI->Social_meta_model->get_all_meta($mem_id);
+        return $result;
+    }
 
     /**
      * 로그인 기록을 남깁니다
@@ -182,11 +239,13 @@ class Member extends CI_Controller
         $this->CI->load->model(
             array(
                 'Autologin_model', 'Board_admin_model', 'Board_group_admin_model',
-                'Follow_model', 'Member_model', 'Member_auth_email_model', 'Member_dormant_model',
-                'Member_dormant_notify_model', 'Member_extra_vars_model',
-                'Member_login_log_model', 'Member_meta_model',
+                'Cmall_cart_model', 'Cmall_wishlist_model', 'Follow_model',
+                'Member_model', 'Member_auth_email_model', 'Member_dormant_model',
+                'Member_dormant_notify_model', 'Member_extra_vars_model', 'Member_group_member_model',
+                'Member_level_history_model', 'Member_login_log_model', 'Member_meta_model',
                 'Member_register_model', 'Notification_model', 'Point_model',
-                'Scrap_model', 'Tempsave_model', 'Member_userid_model',
+                'Scrap_model', 'Sms_member_model', 'Social_meta_model',
+                'Tempsave_model', 'Member_userid_model',
             )
         );
 
@@ -196,18 +255,24 @@ class Member extends CI_Controller
         $this->CI->Autologin_model->delete_where($deletewhere);
         $this->CI->Board_admin_model->delete_where($deletewhere);
         $this->CI->Board_group_admin_model->delete_where($deletewhere);
+        $this->CI->Cmall_cart_model->delete_where($deletewhere);
+        $this->CI->Cmall_wishlist_model->delete_where($deletewhere);
         $this->CI->Follow_model->delete_where($deletewhere);
         $this->CI->Member_model->delete_where($deletewhere);
         $this->CI->Member_auth_email_model->delete_where($deletewhere);
         $this->CI->Member_dormant_model->delete_where($deletewhere);
         $this->CI->Member_dormant_notify_model->delete_where($deletewhere);
         $this->CI->Member_extra_vars_model->delete_where($deletewhere);
+        $this->CI->Member_group_member_model->delete_where($deletewhere);
+        $this->CI->Member_level_history_model->delete_where($deletewhere);
         $this->CI->Member_login_log_model->delete_where($deletewhere);
         $this->CI->Member_meta_model->delete_where($deletewhere);
         $this->CI->Member_register_model->delete_where($deletewhere);
         $this->CI->Notification_model->delete_where($deletewhere);
         $this->CI->Point_model->delete_where($deletewhere);
         $this->CI->Scrap_model->delete_where($deletewhere);
+        $this->CI->Sms_member_model->delete_where($deletewhere);
+        $this->CI->Social_meta_model->delete_where($deletewhere);
         $this->CI->Tempsave_model->delete_where($deletewhere);
 
         $this->CI->Member_userid_model->update($mem_id, array('mem_status' => 1));

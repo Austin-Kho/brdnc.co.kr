@@ -203,8 +203,10 @@ class Board extends CI_Controller
         $this->CI->load->model(
             array(
                 'Post_model', 'Blame_model', 'Like_model',
-                'Post_extra_vars_model', 'Post_file_model', 'Post_link_model',
-                'Post_meta_model', 'Scrap_model', 'Comment_model'
+                'Post_extra_vars_model', 'Post_file_model', 'Post_file_download_log_model',
+                'Post_history_model', 'Post_link_model', 'Post_link_click_log_model',
+                'Post_meta_model', 'Post_tag_model', 'Scrap_model',
+                'Comment_model'
             )
         );
 
@@ -239,8 +241,12 @@ class Board extends CI_Controller
 
         $this->CI->Post_extra_vars_model->delete_where($deletewhere);
         $this->CI->Post_file_model->delete_where($deletewhere);
+        $this->CI->Post_file_download_log_model->delete_where($deletewhere);
+        $this->CI->Post_history_model->delete_where($deletewhere);
         $this->CI->Post_link_model->delete_where($deletewhere);
+        $this->CI->Post_link_click_log_model->delete_where($deletewhere);
         $this->CI->Post_meta_model->deletemeta($post_id);
+        $this->CI->Post_tag_model->delete_where($deletewhere);
         $this->CI->Scrap_model->delete_where($deletewhere);
 
         $where = array(
@@ -335,6 +341,12 @@ class Board extends CI_Controller
             $cmt_id,
             '댓글 작성'
         );
+        $this->CI->point->delete_point(
+            abs(element('mem_id', $comment)),
+            'lucky-comment',
+            $cmt_id,
+            '럭키포인트'
+        );
 
         if (element('point_comment_delete', $board) && $this->CI->member->item('mem_id') === abs(element('mem_id', $comment))) {
             $point_delete = 0 - abs(element('point_comment_delete', $board));
@@ -394,6 +406,11 @@ class Board extends CI_Controller
             )
         );
         $can_delete_comment = false;
+
+        if (element('block_delete', $board) && $is_admin === false) {
+            $result = array('error' => '이 게시판의 글은 관리자에 의해서만 삭제가 가능합니다');
+            return json_encode($result);
+        }
 
         if ($is_admin === false) {
             $count_comment_reply = $this->CI->Comment_model->count_reply_comment(
@@ -760,6 +777,29 @@ class Board extends CI_Controller
         }
 
         return $html;
+    }
+
+
+    /**
+     * 인기태그를 가져옵니다
+     */
+    public function get_popular_tags($start_date = '', $limit = '')
+    {
+        $cachename = 'latest/get_popular_tags_' . $start_date . '_' . $limit;
+        $data = array();
+
+        if ( ! $data = $this->CI->cache->get($cachename)) {
+
+            $this->CI->load->model( array('Post_tag_model'));
+            $result = $this->CI->Post_tag_model->get_popular_tags($start_date, $limit);
+
+            $data['result'] = $result;
+            $data['cached'] = '1';
+            check_cache_dir('latest');
+            $this->CI->cache->save($cachename, $data, 60);
+
+        }
+        return isset($data['result']) ? $data['result'] : false;
     }
 
 

@@ -630,6 +630,56 @@
                                 <td><button type="button" onClick="open_preview('search')" class="btn btn-xs btn-success">미리보기</button></td>
                             </tr>
                             <tr>
+                                <th>태그페이지</th>
+                                <td>
+                                    <div class="form-inline">
+                                        <select class="form-control" name="layout_tag" id="layout_tag">
+                                            <?php echo element('layout_tag_option', element('data', $view)); ?>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-inline">
+                                        <select class="form-control" name="sidebar_tag" id="sidebar_tag">
+                                            <option value="">기본설정따름</option>
+                                            <option value="1" <?php echo set_select('sidebar_tag', '1', (element('sidebar_tag', element('data', $view)) === '1' ? true : false)); ?> >사용</option>
+                                            <option value="2" <?php echo set_select('sidebar_tag', '2', (element('sidebar_tag', element('data', $view)) === '2' ? true : false)); ?> >사용하지않음</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-inline">tag/
+                                        <select class="form-control" name="skin_tag" id="skin_tag">
+                                            <?php echo element('skin_tag_option', element('data', $view)); ?>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-inline">
+                                        <select class="form-control" name="mobile_layout_tag" id="mobile_layout_tag">
+                                            <?php echo element('mobile_layout_tag_option', element('data', $view)); ?>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-inline">
+                                        <select class="form-control" name="mobile_sidebar_tag" id="mobile_sidebar_tag">
+                                            <option value="">기본설정따름</option>
+                                            <option value="1" <?php echo set_select('mobile_sidebar_tag', '1', (element('mobile_sidebar_tag', element('data', $view)) === '1' ? true : false)); ?> >사용</option>
+                                            <option value="2" <?php echo set_select('mobile_sidebar_tag', '2', (element('mobile_sidebar_tag', element('data', $view)) === '2' ? true : false)); ?> >사용하지않음</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-inline">tag/
+                                        <select class="form-control" name="mobile_skin_tag" id="mobile_skin_tag">
+                                            <?php echo element('mobile_skin_tag_option', element('data', $view)); ?>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td><button type="button" onClick="open_preview('tag')" class="btn btn-xs btn-success">미리보기</button></td>
+                            </tr>
+                            <tr>
                                 <th>쪽지</th>
                                 <td>
                                     <div class="form-inline">

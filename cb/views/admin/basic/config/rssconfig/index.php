@@ -3,6 +3,7 @@
         <ul class="nav nav-tabs">
             <li role="presentation" class="active"><a href="<?php echo admin_url($this->pagedir); ?>" onclick="return check_form_changed();">RSS 피드</a></li>
             <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/sitemap'); ?>" onclick="return check_form_changed();">사이트맵</a></li>
+            <li role="presentation"><a href="<?php echo admin_url($this->pagedir . '/naverblog'); ?>" onclick="return check_form_changed();">네이버블로그자동등록</a></li>
         </ul>
     </div>
     <div class="box-table">

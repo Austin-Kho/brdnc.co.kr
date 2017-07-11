@@ -38,6 +38,22 @@
             <input type="hidden" name="<?php echo element('primary_key', $view); ?>" value="<?php echo element(element('primary_key', $view), element('data', $view)); ?>" />
             <div class="form-horizontal">
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">관리자만 삭제가능</label>
+                    <div class="col-sm-8">
+                        <label for="block_delete" class="checkbox-inline">
+                            <input type="checkbox" name="block_delete" id="block_delete" value="1" <?php echo set_checkbox('block_delete', '1', (element('block_delete', element('data', $view)) ? true : false)); ?> /> 사용합니다
+                        </label>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_block_delete" class="checkbox-inline">
+                            <input type="checkbox" name="grp[block_delete]" id="grp_block_delete" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_block_delete" class="checkbox-inline">
+                            <input type="checkbox" name="all[block_delete]" id="all_block_delete" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-2 control-label">원글 수정 및 삭제 금지 기간</label>
                     <div class="col-sm-8">
                         <input type="number" class="form-control" name="protect_post_day" value="<?php echo set_value('protect_post_day', element('protect_post_day', element('data', $view)) + 0); ?>" />일이 지난 원글은 수정 및 삭제가 불가합니다, 0 이면 항상 수정 및 삭제 가능
@@ -197,6 +213,42 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">Bitly short url</label>
+                    <div class="col-sm-8">
+                        <label for="use_bitly" class="checkbox-inline">
+                            <input type="checkbox" name="use_bitly" id="use_bitly" value="1" <?php echo set_checkbox('use_bitly', '1', (element('use_bitly', element('data', $view)) ? true : false)); ?> /> 사용합니다
+                            <span class="help-block">Bitly short url 기능을 사용하기 위해서는 환경설정 &gt; 기본환경설정 메뉴에서 Bitly Access Token을 입력하셔야 합니다<br />해당기능을 사용시, [글주소복사, QR코드, 소셜로퍼가기] 기능에 bitly 주소가 적용되어 보이게 됩니다</span>
+                        </label>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_use_bitly" class="checkbox-inline">
+                            <input type="checkbox" name="grp[use_bitly]" id="grp_use_bitly" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_use_bitly" class="checkbox-inline">
+                            <input type="checkbox" name="all[use_bitly]" id="all_use_bitly" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">설문 기능</label>
+                    <div class="col-sm-8">
+                        <label for="use_poll" class="checkbox-inline">
+                            <input type="checkbox" name="use_poll" id="use_poll" value="1" <?php echo set_checkbox('use_poll', '1', (element('use_poll', element('data', $view)) ? true : false)); ?> /> PC
+                        </label>
+                        <label for="use_mobile_poll" class="checkbox-inline">
+                            <input type="checkbox" name="use_mobile_poll" id="use_mobile_poll" value="1" <?php echo set_checkbox('use_mobile_poll', '1', (element('use_mobile_poll', element('data', $view)) ? true : false)); ?> /> 모바일
+                        </label>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_use_poll" class="checkbox-inline">
+                            <input type="checkbox" name="grp[use_poll]" id="grp_use_poll" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_use_poll" class="checkbox-inline">
+                            <input type="checkbox" name="all[use_poll]" id="all_use_poll" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-2 control-label">1:1 게시판</label>
                     <div class="col-sm-8">
                         <label for="use_personal" class="checkbox-inline">
@@ -241,6 +293,55 @@
                         </label>
                         <label for="all_use_tempsave" class="checkbox-inline">
                             <input type="checkbox" name="all[use_tempsave]" id="all_use_tempsave" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">다운로드 로그</label>
+                    <div class="col-sm-8">
+                        <label for="use_download_log" class="checkbox-inline">
+                            <input type="checkbox" name="use_download_log" id="use_download_log" value="1" <?php echo set_checkbox('use_download_log', '1', (element('use_download_log', element('data', $view)) ? true : false)); ?> /> 사용합니다    <span class="help-inline">누가 다운로드했는지 로그를 남깁니다</span>
+                        </label>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_use_download_log" class="checkbox-inline">
+                            <input type="checkbox" name="grp[use_download_log]" id="grp_use_download_log" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_use_download_log" class="checkbox-inline">
+                            <input type="checkbox" name="all[use_download_log]" id="all_use_download_log" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">게시물 변경 로그</label>
+                    <div class="col-sm-8">
+                        <label for="use_posthistory" class="checkbox-inline">
+                            <input type="checkbox" name="use_posthistory" id="use_posthistory" value="1" <?php echo set_checkbox('use_posthistory', '1', (element('use_posthistory', element('data', $view)) ? true : false)); ?> /> 사용합니다
+                            <span class="help-inline">누가 게시물을 어떤 내용으로 변경했는지 로그를 남깁니다</span>
+                        </label>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_use_posthistory" class="checkbox-inline">
+                            <input type="checkbox" name="grp[use_posthistory]" id="grp_use_posthistory" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_use_posthistory" class="checkbox-inline">
+                            <input type="checkbox" name="all[use_posthistory]" id="all_use_posthistory" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">링크 클릭 로그</label>
+                    <div class="col-sm-8">
+                        <label for="use_link_click_log" class="checkbox-inline">
+                            <input type="checkbox" name="use_link_click_log" id="use_link_click_log" value="1" <?php echo set_checkbox('use_link_click_log', '1', (element('use_link_click_log', element('data', $view)) ? true : false)); ?> /> 사용합니다 <span class="help-inline">누가 어떤 링크를 클릭했는지 로그를 남깁니다</span>
+                        </label>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_use_link_click_log" class="checkbox-inline">
+                            <input type="checkbox" name="grp[use_link_click_log]" id="grp_use_link_click_log" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_use_link_click_log" class="checkbox-inline">
+                            <input type="checkbox" name="all[use_link_click_log]" id="all_use_link_click_log" value="1" /> 전체적용
                         </label>
                     </div>
                 </div>

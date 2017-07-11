@@ -80,12 +80,36 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">네이버 블로그 글쓰기 API</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="naver_blog_api_key" id="naver_blog_api_key" value="<?php echo set_value('naver_blog_api_key', element('naver_blog_api_key', element('data', $view))); ?>" />
+                        <span class="help-inline">네이버 블로그 글쓰기 API 를 입력하면, 원하는 게시판에 한해 글쓰기시 네이버 블로그로 글이 동시 등록됩니다.
+                        <a href="<?php echo admin_url('config/rssconfig/naverblog'); ?>">세부 설정하기</a>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-2 control-label">네이버 신디케이션 연동키</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="naver_syndi_key" id="naver_syndi_key" value="<?php echo set_value('naver_syndi_key', element('naver_syndi_key', element('data', $view))); ?>" />
                         <span class="help-inline">네이버 신디케이션 연동키를 입력하면 네이버 신디케이션을 사용할 수 있습니다. 각 게시판별 일반기능 설정 페이지에서 &quot;신디케이션 사용하기&quot; 에 체크하셔야, 체크하신 게시판에 한하여 적용됩니다.
                         <a href="http://webmastertool.naver.com/" target="_blank">신디케이션 신청하기</a>
                         </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">네이버 신디케이션 핑 전송 로그</label>
+                    <div class="col-sm-10">
+                        <label for="use_naver_syndi_log" class="checkbox-inline">
+                            <input type="checkbox" name="use_naver_syndi_log" id="use_naver_syndi_log" value="1" <?php echo set_checkbox('use_naver_syndi_log', '1', (element('use_naver_syndi_log', element('data', $view)) ? true : false)); ?> /> 핑 전송 로그를 남깁니다
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Bitly Access Token</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="bitly_access_token" id="bitly_access_token" value="<?php echo set_value('bitly_access_token', element('bitly_access_token', element('data', $view))); ?>" />
+                        <span class="help-inline">Bitly short url 기능을 사용하실 수 있습니다. <a href="http://bit.ly/1VbGhsd" target="_blank">bitly.com</a> 에서 회원가입 하신 후에 <a href="http://bit.ly/1Wjk3Vs" target="_blank">https://bitly.com/a/oauth_apps</a> 에서 access token 을 얻어 입력해주시면 됩니다.</span>
                     </div>
                 </div>
                 <div class="form-group">

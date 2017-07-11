@@ -280,6 +280,10 @@ class Note extends CB_Controller
             $popup = true
         );
 
+        if ($result['nte_filename']) {
+            $result['download_link'] = site_url('note/download/' . $type . '/' . $note_id);
+        }
+
         $view['view']['data'] = $result;
         $view['view']['type'] = $type;
         $view['view']['canonical'] = site_url('note/view/' . $type . '/' . $note_id);
@@ -410,36 +414,101 @@ class Note extends CB_Controller
             // 이벤트가 존재하면 실행합니다
             $view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
-            $recv_list = explode(',', $this->input->post('userid'));
-            $mem_list = array();
-            $error_list = array();
-            $view['view']['message'] = '';
-            $content_type = $view['view']['use_dhtml'] ? 1 : 0;
+            $file_error = '';
+            $uploadfiledata = '';
 
-            if ($recv_list && is_array($recv_list)) {
-                foreach ($recv_list as $key => $value) {
-                    $value = trim($value);
-                    if ($value) {
-                        $mem = $this->Member_model->get_by_userid($value, 'mem_id');
+            if ($this->cbconfig->item('use_note_file')) {
+                $this->load->library('upload');
 
-                        if (element('mem_id', $mem)) {
+                if (isset($_FILES)
+                    && isset($_FILES['note_file'])
+                    && isset($_FILES['note_file']['name'])
+                    && $_FILES['note_file']['name']) {
+                    $upload_path = config_item('uploads_dir') . '/note/';
+                    if (is_dir($upload_path) === false) {
+                        mkdir($upload_path, 0707);
+                        $file = $upload_path . 'index.php';
+                        $f = @fopen($file, 'w');
+                        @fwrite($f, '');
+                        @fclose($f);
+                        @chmod($file, 0644);
+                    }
+                    $upload_path .= cdate('Y') . '/';
+                    if (is_dir($upload_path) === false) {
+                        mkdir($upload_path, 0707);
+                        $file = $upload_path . 'index.php';
+                        $f = @fopen($file, 'w');
+                        @fwrite($f, '');
+                        @fclose($f);
+                        @chmod($file, 0644);
+                    }
+                    $upload_path .= cdate('m') . '/';
+                    if (is_dir($upload_path) === false) {
+                        mkdir($upload_path, 0707);
+                        $file = $upload_path . 'index.php';
+                        $f = @fopen($file, 'w');
+                        @fwrite($f, '');
+                        @fclose($f);
+                        @chmod($file, 0644);
+                    }
 
-                            $send_result = $this->notelib->send_note(
-                                $this->member->item('mem_id'),
-                                element('mem_id', $mem),
-                                $this->input->post('title'),
-                                $this->input->post('content'),
-                                $content_type
-                            );
+                    $uploadconfig = '';
+                    $uploadconfig['upload_path'] = $upload_path;
+                    $uploadconfig['allowed_types'] = '*';
+                    $uploadconfig['encrypt_name'] = true;
 
-                            $jsonresult = json_decode($send_result, true);
+                    $this->upload->initialize($uploadconfig);
+                    $_FILES['userfile']['name'] = $_FILES['note_file']['name'];
+                    $_FILES['userfile']['type'] = $_FILES['note_file']['type'];
+                    $_FILES['userfile']['tmp_name'] = $_FILES['note_file']['tmp_name'];
+                    $_FILES['userfile']['error'] = $_FILES['note_file']['error'];
+                    $_FILES['userfile']['size'] = $_FILES['note_file']['size'];
+                    if ($this->upload->do_upload()) {
+                        $filedata = $this->upload->data();
 
-                            if (isset($jsonresult['error']) && $jsonresult['error']) {
-                                $view['view']['message'] .= $jsonresult['error'] . '<br />';
+                        $uploadfiledata['nte_filename'] = cdate('Y') . '/' . cdate('m') . '/' . element('file_name', $filedata);
+                        $uploadfiledata['nte_originname'] = element('orig_name', $filedata);
+                    } else {
+                        $file_error = $this->upload->display_errors();
+                    }
+                }
+            }
+            if ($file_error) {
+                $view['view']['message'] = $file_error;
+            } else {
+                $recv_list = explode(',', $this->input->post('userid'));
+                $mem_list = array();
+                $error_list = array();
+                $view['view']['message'] = '';
+                $content_type = $view['view']['use_dhtml'] ? 1 : 0;
+
+                if ($recv_list && is_array($recv_list)) {
+                    foreach ($recv_list as $key => $value) {
+                        $value = trim($value);
+                        if ($value) {
+                            $mem = $this->Member_model->get_by_userid($value, 'mem_id');
+
+                            if (element('mem_id', $mem)) {
+
+                                $send_result = $this->notelib->send_note(
+                                    $this->member->item('mem_id'),
+                                    element('mem_id', $mem),
+                                    $this->input->post('title'),
+                                    $this->input->post('content'),
+                                    $content_type,
+                                    element('nte_originname', $uploadfiledata),
+                                    element('nte_filename', $uploadfiledata)
+                                );
+
+                                $jsonresult = json_decode($send_result, true);
+
+                                if (isset($jsonresult['error']) && $jsonresult['error']) {
+                                    $view['view']['message'] .= $jsonresult['error'] . '<br />';
+                                }
+
+                            } else {
+                                $view['view']['message'] .= $value . '는 존재하지 않는 회원입니다<br />';
                             }
-
-                        } else {
-                            $view['view']['message'] .= $value . '는 존재하지 않는 회원입니다<br />';
                         }
                     }
                 }
@@ -488,6 +557,64 @@ class Note extends CB_Controller
         $this->data = $view;
         $this->layout = element('layout_skin_file', element('layout', $view));
         $this->view = element('view_skin_file', element('layout', $view));
+    }
+
+
+    /**
+     * 쪽지 다운로드 기능입니다
+     */
+    public function download($type = 'recv', $note_id = 0)
+    {
+        // 이벤트 라이브러리를 로딩합니다
+        $eventname = 'event_note_download';
+        $this->load->event($eventname);
+
+        /**
+         * 로그인이 필요한 페이지입니다
+         */
+        required_user_login();
+
+        // 이벤트가 존재하면 실행합니다
+        Events::trigger('before', $eventname);
+
+        if ( ! $this->cbconfig->item('use_note')) {
+            alert_close('쪽지 기능을 사용하지 않는 사이트입니다');
+            return false;
+        } elseif ( ! $this->member->item('mem_use_note') && $this->member->is_admin() !== 'super') {
+            alert_close('회원님은 쪽지 기능을 사용하지 않는 중이십니다');
+            return false;
+        }
+
+        if ($type !== 'send') {
+            $type = 'recv';
+        }
+        $nte_type = ($type === 'send') ? 2 : 1;
+        $columnname = ($type === 'send') ? 'send_mem_id' : 'recv_mem_id';
+        $mem_column = ($type === 'send') ? 'recv_mem_id' : 'send_mem_id';
+
+        $note_id = (int) $note_id;
+        if (empty($note_id) OR $note_id < 1) {
+            show_404();
+        }
+
+        $where = array(
+            'nte_id' => $note_id,
+            $columnname => $this->member->item('mem_id'),
+            'nte_type' => $nte_type,
+        );
+        $result = $this->Note_model->get_note($where);
+        if ( ! element('nte_id', $result) OR ! element('nte_filename', $result) OR ! element('nte_originname', $result)) {
+            show_404();
+        }
+
+        $this->load->helper('download');
+        // Read the file's contents
+        $data = file_get_contents(config_item('uploads_dir') . '/note/' . element('nte_filename', $result));
+        $name = element('nte_originname', $result);
+
+        // 이벤트가 존재하면 실행합니다
+        Events::trigger('after', $eventname);
+        force_download($name, $data);
     }
 
 

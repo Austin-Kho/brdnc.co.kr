@@ -195,6 +195,7 @@ class Board_post extends CB_Controller
             $alertmessage,
             $check
         );
+        $this->accesslevel->selfcertcheck('view', element('access_view_selfcert', $board));
 
         $view['view']['is_admin'] = $is_admin = $this->member->is_admin(
             array(
@@ -446,6 +447,77 @@ class Board_post extends CB_Controller
             $view['view']['file_image_count'] = count($view['view']['file_image']);
         }
 
+        if (element('ppo_id', $post)) {
+            $this->load->model(array('Post_poll_model', 'Post_poll_item_model', 'Post_poll_item_poll_model'));
+            $poll = $this->Post_poll_model->get_one(element('ppo_id', $post));
+            $pollwhere = array(
+                'ppo_id' => element('ppo_id', $post),
+            );
+            $poll_item = $this->Post_poll_item_model
+                ->get('', '', $pollwhere, '', '', 'ppi_id', 'ASC');
+
+            if (empty($poll['ppo_start_datetime'])
+                OR $poll['ppo_start_datetime'] === '0000-00-00 00:00:00') {
+                $poll['ppo_start_datetime'] = '';
+            }
+            if (empty($poll['ppo_end_datetime'])
+                OR $poll['ppo_end_datetime'] === '0000-00-00 00:00:00') {
+                $poll['ppo_end_datetime'] = '';
+            }
+            $poll['poll_period'] = '';
+            if ($poll['ppo_start_datetime']) {
+                $poll['poll_period'] .= cdate('Y월 m일 d일 H시', strtotime($poll['ppo_start_datetime']));
+            }
+            $poll['poll_period'] .= '~';
+            if ($poll['ppo_end_datetime']) {
+                $poll['poll_period'] .= cdate('Y월 m일 d일 H시', strtotime($poll['ppo_end_datetime']));
+            }
+            if (empty($poll['ppo_start_datetime']) && empty($poll['ppo_end_datetime'])) {
+                $poll['poll_period'] = '제한 없음';
+            }
+            $poll['ended_poll'] = false;
+            if ($poll['ppo_end_datetime'] && $poll['ppo_end_datetime'] < cdate('Y-m-d H:i:s')) {
+                $poll['ended_poll'] = true;
+            }
+
+            $post_poll_count = 0;
+            if ($this->member->is_member()) {
+                $where = array(
+                    'ppo_id' => element('ppo_id', $post),
+                    'mem_id' => $mem_id,
+                );
+                $post_poll_count = $this->Post_poll_item_poll_model->count_by($where);
+            }
+            if ($post_poll_count > 0 OR $poll['ended_poll']) {
+                if ($post_poll_count) {
+                    $poll['attended'] = true;
+                }
+                $sum_count = 0;
+                $max = 0;
+
+                if ($poll_item && is_array($poll_item)) {
+                    foreach ($poll_item as $key => $value) {
+                        if ($value['ppi_count'] > $max) {
+                            $max = $value['ppi_count'];
+                        }
+                        $sum_count+= $value['ppi_count'];
+                    }
+                    foreach ($poll_item as $key => $value) {
+                        $rate = $sum_count ? ($value['ppi_count'] / $sum_count * 100) : 0;
+                        $poll_item[$key]['rate'] = $rate;
+                        $s_rate = number_format($rate, 1);
+                        $poll_item[$key]['s_rate'] = $s_rate;
+
+                        $bar = $max ? (int) ($value['ppi_count'] / $max * 100) : 0;
+                        $poll_item[$key]['bar'] = $bar;
+                    }
+                }
+
+            }
+            $view['view']['poll'] = $poll;
+            $view['view']['poll_item'] = $poll_item;
+        }
+
         $autourl = ($this->cbconfig->get_device_view_type() === 'mobile')
             ? element('use_mobile_auto_url', $board)
             : element('use_auto_url', $board);
@@ -496,6 +568,16 @@ class Board_post extends CB_Controller
                         ); // SyntaxHighlighter
                     }
                 }
+            }
+
+            $view['view']['tag'] = '';
+            if (element('use_post_tag', $board)) {
+                $this->load->model('Post_tag_model');
+                $tagwhere = array(
+                    'post_id' => $post_id,
+                );
+                $view['view']['post']['tag'] = $tag = $this->Post_tag_model
+                    ->get('', '', $tagwhere, '', '', 'pta_id', 'ASC');
             }
 
             $extravars = element('extravars', $board);
@@ -565,6 +647,16 @@ class Board_post extends CB_Controller
 
         $view['view']['comment']['is_cmt_name'] = $is_cmt_name
             = ($this->member->is_member() === false) ? true : false;
+
+        $view['view']['comment']['use_emoticon']
+            = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_comment_emoticon', $board)
+            : element('use_comment_emoticon', $board);
+
+        $view['view']['comment']['use_specialchars']
+            = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_comment_specialchars', $board)
+            : element('use_comment_specialchars', $board);
 
         $view['view']['comment']['show_textarea']
             = ($this->cbconfig->get_device_view_type() === 'mobile')
@@ -793,6 +885,24 @@ class Board_post extends CB_Controller
 
             $view['view']['short_url'] = $view['view']['canonical'] = post_url(element('brd_key', $board), $post_id);
             
+            if(element('use_bitly', $board)) {
+                if(element('bitly_url', element('meta', $post))) {
+                    $view['view']['short_url'] = element('bitly_url', element('meta', $post));
+                } elseif($this->cbconfig->item('bitly_access_token')) {
+                    $this->load->helper('bitly_helper');
+                    $bitlyparams = array();
+                    $bitlyparams['access_token'] = $this->cbconfig->item('bitly_access_token');
+                    $bitlyparams['longUrl'] = post_url(element('brd_key', $board), $post_id);
+                    $bitlyparams['domain'] = 'bit.ly';
+                    $bitlyresult = bitly_get('shorten', $bitlyparams);
+                    if(element('status_code', $bitlyresult) === 200) {
+                        $bitlydata = array('bitly_url' => element('url', element('data', $bitlyresult)));
+                        $this->Post_meta_model->save($post_id, element('brd_id', $board), $bitlydata);
+                        $view['view']['short_url'] = element('url', element('data', $bitlyresult));
+                    }
+                }
+            }
+
             $layout_dir = element('board_layout', $board) ? element('board_layout', $board) : $this->cbconfig->item('layout_board');
             $mobile_layout_dir = element('board_mobile_layout', $board) ? element('board_mobile_layout', $board) : $this->cbconfig->item('mobile_layout_board');
             $use_sidebar = element('board_sidebar', $board) ? element('board_sidebar', $board) : $this->cbconfig->item('sidebar_board');
@@ -894,6 +1004,7 @@ class Board_post extends CB_Controller
             $alertmessage,
             $check
         );
+        $this->accesslevel->selfcertcheck('list', element('access_list_selfcert', $board));
 
         if (element('use_personal', $board) && $this->member->is_member() === false) {
             alert('이 게시판은 1:1 게시판입니다. 비회원은 접근할 수 없습니다');
@@ -955,6 +1066,9 @@ class Board_post extends CB_Controller
             && $this->cbconfig->get_device_view_type() === 'mobile') {
             $except_all_notice = true;
         }
+        $use_subject_style = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_subject_style', $board)
+            : element('use_subject_style', $board);
         $use_sideview = ($this->cbconfig->get_device_view_type() === 'mobile')
             ? element('use_mobile_sideview', $board)
             : element('use_sideview', $board);
@@ -1040,6 +1154,12 @@ class Board_post extends CB_Controller
                 if ($param->output()) {
                     $noticeresult[$key]['post_url'] .= '?' . $param->output();
                 }
+                $noticeresult[$key]['title_color'] = $use_subject_style
+                    ? element('post_title_color', $meta) : '';
+                $noticeresult[$key]['title_font'] = $use_subject_style
+                    ? element('post_title_font', $meta) : '';
+                $noticeresult[$key]['title_bold'] = $use_subject_style
+                    ? element('post_title_bold', $meta) : '';
                 $noticeresult[$key]['is_mobile'] = (element('post_device', $val) === 'mobile') ? true : false;
             }
         }
@@ -1144,6 +1264,9 @@ class Board_post extends CB_Controller
                     $result['list'][$key]['is_new'] = true;
                 }
 
+                $result['list'][$key]['title_color'] = ($use_subject_style && element('post_title_color', $meta)) ? element('post_title_color', $meta) : '';
+                $result['list'][$key]['title_font'] = ($use_subject_style && element('post_title_font', $meta)) ? element('post_title_font', $meta) : '';
+                $result['list'][$key]['title_bold'] = ($use_subject_style && element('post_title_bold', $meta)) ? element('post_title_bold', $meta) : '';
                 $result['list'][$key]['is_mobile'] = (element('post_device', $val) === 'mobile') ? true : false;
 
                 $result['list'][$key]['thumb_url'] = '';

@@ -146,6 +146,59 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-sm-2 control-label">댓글 입력시 이모티콘</label>
+                    <div class="col-sm-8">
+                        <label for="use_comment_emoticon" class="checkbox-inline">
+                            <input type="checkbox" name="use_comment_emoticon" id="use_comment_emoticon" value="1" <?php echo set_checkbox('use_comment_emoticon', '1', (element('use_comment_emoticon', element('data', $view)) ? true : false)); ?> /> PC
+                        </label>
+                        <label for="use_mobile_comment_profile" class="checkbox-inline">
+                            <input type="checkbox" name="use_mobile_comment_profile" id="use_mobile_comment_profile" value="1" <?php echo set_checkbox('use_mobile_comment_profile', '1', (element('use_mobile_comment_profile', element('data', $view)) ? true : false)); ?> /> 모바일
+                        </label>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_use_comment_emoticon" class="checkbox-inline">
+                            <input type="checkbox" name="grp[use_comment_emoticon]" id="grp_use_comment_emoticon" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_use_comment_emoticon" class="checkbox-inline">
+                            <input type="checkbox" name="all[use_comment_emoticon]" id="all_use_comment_emoticon" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">댓글 입력시 특수문자</label>
+                    <div class="col-sm-8">
+                        <label for="use_comment_specialchars" class="checkbox-inline">
+                            <input type="checkbox" name="use_comment_specialchars" id="use_comment_specialchars" value="1" <?php echo set_checkbox('use_comment_specialchars', '1', (element('use_comment_specialchars', element('data', $view)) ? true : false)); ?> /> PC
+                        </label>
+                        <label for="use_mobile_comment_specialchars" class="checkbox-inline">
+                            <input type="checkbox" name="use_mobile_comment_specialchars" id="use_mobile_comment_specialchars" value="1" <?php echo set_checkbox('use_mobile_comment_specialchars', '1', (element('use_mobile_comment_specialchars', element('data', $view)) ? true : false)); ?> /> 모바일
+                        </label>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_use_comment_specialchars" class="checkbox-inline">
+                            <input type="checkbox" name="grp[use_comment_specialchars]" id="grp_use_comment_specialchars" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_use_comment_specialchars" class="checkbox-inline">
+                            <input type="checkbox" name="all[use_comment_specialchars]" id="all_use_comment_specialchars" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">댓글 금지 기간</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" name="comment_possible_day" value="<?php echo set_value('comment_possible_day', element('comment_possible_day', element('data', $view)) + 0); ?>" />일 이내의 게시물에만 댓글 허용합니다.
+                        <span class="help-inline">0 이면 항상 댓글 허용, 관리자는 항상 댓글 입력이 가능합니다</span>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_comment_possible_day" class="checkbox-inline">
+                            <input type="checkbox" name="grp[comment_possible_day]" id="grp_comment_possible_day" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_comment_possible_day" class="checkbox-inline">
+                            <input type="checkbox" name="all[comment_possible_day]" id="all_comment_possible_day" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-sm-2 control-label">댓글 입력창 항상 출력</label>
                     <div class="col-sm-8">
                         <label for="always_show_comment_textarea" class="checkbox-inline">
@@ -162,6 +215,22 @@
                         </label>
                         <label for="all_always_show_comment_textarea" class="checkbox-inline">
                             <input type="checkbox" name="all[always_show_comment_textarea]" id="all_always_show_comment_textarea" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">댓글 베플 출력</label>
+                    <div class="col-sm-8">
+                        PC - <input type="number" class="form-control" name="comment_best" value="<?php echo set_value('comment_best', element('comment_best', element('data', $view)) + 0); ?>" />개 출력,
+                        모바일 - <input type="number" class="form-control" name="mobile_comment_best" value="<?php echo set_value('mobile_comment_best', element('mobile_comment_best', element('data', $view)) + 0); ?>" />개 출력<br />
+                        추천수가 <input type="number" class="form-control" name="comment_best_like_num" value="<?php echo set_value('comment_best_like_num', element('comment_best_like_num', element('data', $view)) + 0); ?>" />개 이상인 댓글중 추천이 많은 순으로 출력됩니다
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_comment_best" class="checkbox-inline">
+                            <input type="checkbox" name="grp[comment_best]" id="grp_comment_best" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_comment_best" class="checkbox-inline">
+                            <input type="checkbox" name="all[comment_best]" id="all_comment_best" value="1" /> 전체적용
                         </label>
                     </div>
                 </div>
@@ -348,6 +417,65 @@
                         </label>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">댓글 럭키포인트</label>
+                    <div class="col-sm-8 form-inline">
+                        <label for="use_comment_lucky" class="checkbox-inline">
+                            <input type="checkbox" name="use_comment_lucky" id="use_comment_lucky" value="1" <?php echo set_checkbox('use_comment_lucky', '1', (element('use_comment_lucky', element('data', $view)) ? true : false)); ?> /> 사용합니다
+                        </label>
+                        <span class="help-inline">댓글을 입력하신 분들에게 무작위로 보너스 포인트를 드립니다.</span>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_use_comment_lucky" class="checkbox-inline">
+                            <input type="checkbox" name="grp[use_comment_lucky]" id="grp_use_comment_lucky" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_use_comment_lucky" class="checkbox-inline">
+                            <input type="checkbox" name="all[use_comment_lucky]" id="all_use_comment_lucky" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">럭키포인트 이름</label>
+                    <div class="col-sm-8 form-inline">
+                        <input type="text" class="form-control" name="comment_lucky_name" value="<?php echo set_value('comment_lucky_name', element('comment_lucky_name', element('data', $view))); ?>" />
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_comment_lucky_name" class="checkbox-inline">
+                            <input type="checkbox" name="grp[comment_lucky_name]" id="grp_comment_lucky_name" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_comment_lucky_name" class="checkbox-inline">
+                            <input type="checkbox" name="all[comment_lucky_name]" id="all_comment_lucky_name" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">럭키포인트 당첨확률</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" name="comment_lucky_percent" value="<?php echo set_value('comment_lucky_percent', element('comment_lucky_percent', element('data', $view))); ?>" />%
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_comment_lucky_percent" class="checkbox-inline">
+                            <input type="checkbox" name="grp[comment_lucky_percent]" id="grp_comment_lucky_percent" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_comment_lucky_percent" class="checkbox-inline">
+                            <input type="checkbox" name="all[comment_lucky_percent]" id="all_comment_lucky_percent" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">럭키포인트 지급포인트</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" name="comment_lucky_point_min" value="<?php echo set_value('comment_lucky_point_min', element('comment_lucky_point_min', element('data', $view))); ?>" /> ~ <input type="number" class="form-control" name="comment_lucky_point_max" value="<?php echo set_value('comment_lucky_point_max', element('comment_lucky_point_max', element('data', $view))); ?>" />점
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_comment_lucky_point_min" class="checkbox-inline">
+                            <input type="checkbox" name="grp[comment_lucky_point_min]" id="grp_comment_lucky_point_min" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_comment_lucky_point_min" class="checkbox-inline">
+                            <input type="checkbox" name="all[comment_lucky_point_min]" id="all_comment_lucky_point_min" value="1" /> 전체적용
+                        </label>
+                    </div>
+                </div>
                 <div class="btn-group pull-right" role="group" aria-label="...">
                     <a href="<?php echo admin_url($this->pagedir); ?>" class="btn btn-default btn-sm">목록으로</a>
                     <button type="submit" class="btn btn-success btn-sm">저장하기</button>
@@ -363,6 +491,9 @@ $(function() {
     $('#fadminwrite').validate({
         rules: {
             comment_page: {required :true, number:true },
+            comment_possible_day: {required :true, number:true },
+            comment_best: {required :true, number:true },
+            mobile_comment_best: {required :true, number:true },
             comment_min_length: {required :true, number:true },
             comment_max_length: {required :true, number:true },
             comment_blame_blind_count: {required :true, number:true }

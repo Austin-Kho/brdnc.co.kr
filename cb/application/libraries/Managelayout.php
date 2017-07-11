@@ -62,28 +62,6 @@ class Managelayout extends CI_Controller
 
         $data['favicon'] = $CI->cbconfig->item('site_favicon') ? site_url(config_item('uploads_dir') . '/favicon/' . $CI->cbconfig->item('site_favicon')) : '';
 
-        $cachename = 'latest_version_from_ciboard_api';
-        $cachetime = 10800;
-        if ( ! $result = $CI->cache->get($cachename)) {
-            $CI->load->library('Requests');
-            $requests = new Requests();
-            $requests->register_autoloader();
-            $headers = array('Accept' => 'application/json');
-            $postdata = array('requesturl' => current_full_url(), 'package' => CB_PACKAGE, 'version' => CB_VERSION);
-            $request = $requests->post(config_item('ciboard_check_latest_version'), $headers, $postdata);
-            $result['latest_versions'] = json_decode($request->body, true);
-            if (strtolower(CB_PACKAGE) === 'premium') {
-                $result['latest_version_name'] = $result['latest_versions']['premium_version'];
-                $result['latest_download_url'] = $result['latest_versions']['premium_downloadurl'];
-            } else {
-                $result['latest_version_name'] = $result['latest_versions']['basic_version'];
-                $result['latest_download_url'] = $result['latest_versions']['basic_downloadurl'];
-            }
-            $CI->cache->save($cachename, $result, $cachetime);
-
-        }
-        $data['version_latest'] = $result;
-
         return $data;
     }
 
@@ -182,28 +160,6 @@ class Managelayout extends CI_Controller
         }
 
         $data['favicon'] = $CI->cbconfig->item('site_favicon') ? site_url(config_item('uploads_dir') . '/favicon/' . $CI->cbconfig->item('site_favicon')) : '';
-
-        $cachename = 'latest_version_from_ciboard_api';
-        $cachetime = 10800;
-        if ( ! $result = $CI->cache->get($cachename)) {
-            $CI->load->library('Requests');
-            $requests = new Requests();
-            $requests->register_autoloader();
-            $headers = array('Accept' => 'application/json');
-            $postdata = array('requesturl' => current_full_url(), 'package' => CB_PACKAGE, 'version' => CB_VERSION);
-            $request = $requests->post(config_item('ciboard_check_latest_version'), $headers, $postdata);
-            $result['latest_versions'] = json_decode($request->body, true);
-            if (strtolower(CB_PACKAGE) === 'premium') {
-                $result['latest_version_name'] = $result['latest_versions']['premium_version'];
-                $result['latest_download_url'] = $result['latest_versions']['premium_downloadurl'];
-            } else {
-                $result['latest_version_name'] = $result['latest_versions']['basic_version'];
-                $result['latest_download_url'] = $result['latest_versions']['basic_downloadurl'];
-            }
-            $CI->cache->save($cachename, $result, $cachetime);
-
-        }
-        $data['version_latest'] = $result;
 
         $mem_id = (int) $CI->member->item('mem_id');
 

@@ -60,6 +60,21 @@
                         <input type="number" class="form-control" name="point_note" id="point_note" value="<?php echo set_value('point_note', element('point_note', element('data', $view)) + 0); ?>" /> 양수로 입력해주세요, 해당 포인트만큼 차감됩니다
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">쪽지첨부파일기능</label>
+                    <div class="col-sm-10">
+                        <label for="use_note_file" class="checkbox-inline">
+                            <input type="checkbox" name="use_note_file" id="use_note_file" value="1" <?php echo set_checkbox('use_note_file', '1', (element('use_note_file', element('data', $view)) ? true : false)); ?> /> 사용합니다
+                        </label>
+                    <div class="help-inline">쪽지를 통해 첨부파일을 주고받을 수 있습니다</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">첨부파일 업로드시 차감포인트</label>
+                    <div class="col-sm-10">
+                        <input type="number" class="form-control" name="point_note_file" id="point_note_file" value="<?php echo set_value('point_note_file', element('point_note_file', element('data', $view)) + 0); ?>" /> 양수로 입력해주세요, 쪽지 발송시 차감포인트와는 별도로 추가로 해당 포인트만큼 차감됩니다
+                    </div>
+                </div>
                 <div class="btn-group pull-right" role="group" aria-label="...">
                     <button type="submit" class="btn btn-success btn-sm">저장하기</button>
                 </div>
@@ -74,7 +89,8 @@
 $(function() {
     $('#fadminwrite').validate({
         rules: {
-            point_note: {required :true, number:true}
+            point_note: {required :true, number:true},
+            point_note_file: {required :true, number:true}
         }
     });
 });

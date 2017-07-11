@@ -23,6 +23,7 @@
             <div class="alert alert-success">
                 <p><strong>메일발송</strong> : 메일이 보내지지 않는다면 메일발송 환경설정 부분을 확인하여주세요</p>
                 <p><strong>쪽지발송</strong> : 쪽지 기능을 사용하는 사이트에서만 쪽지가 발송됩니다.</p>
+                <p><strong>문자발송</strong> : 문자 기능을 사용하는 사이트에서만 문자가 발송됩니다.</p>
             </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">패스워드변경시</label>
@@ -51,6 +52,21 @@
                         <label for="send_note_changepw_user">
                             <input type="checkbox" name="send_note_changepw_user" id="send_note_changepw_user" value="1" <?php echo set_checkbox('send_note_changepw_user', '1', (element('send_note_changepw_user', element('data', $view)) ? true : false)); ?> /> <strong>회원</strong>에게 <strong>쪽지</strong>를 발송합니다 (쪽지사용에 <strong>동의한 회원</strong>에게만 발송합니다)
                             </label>
+                    </div>
+                    <div class="checkbox">
+                        <label for="send_sms_changepw_admin">
+                            <input type="checkbox" name="send_sms_changepw_admin" id="send_sms_changepw_admin" value="1" <?php echo set_checkbox('send_sms_changepw_admin', '1', (element('send_sms_changepw_admin', element('data', $view)) ? true : false)); ?> /> <strong>최고관리자</strong>에게 <strong>문자</strong>를 발송합니다 (문자수신동의 여부와 상관없이 <strong>무조건 발송</strong>합니다)
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label for="send_sms_changepw_user">
+                            <input type="checkbox" name="send_sms_changepw_user" id="send_sms_changepw_user" value="1" <?php echo set_checkbox('send_sms_changepw_user', '1', (element('send_sms_changepw_user', element('data', $view)) ? true : false)); ?> /> <strong>회원</strong>에게 <strong>문자</strong>를 발송합니다 (문자수신에 <strong>동의한 회원</strong>에게만 발송합니다)
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label for="send_sms_changepw_alluser">
+                            <input type="checkbox" name="send_sms_changepw_alluser" id="send_sms_changepw_alluser" value="1" <?php echo set_checkbox('send_sms_changepw_alluser', '1', (element('send_sms_changepw_alluser', element('data', $view)) ? true : false)); ?> /> <strong>회원</strong>에게 <strong>문자</strong>를 발송합니다 (문자수신 동의에 상관없이 <strong>무조건 발송</strong>합니다)
+                        </label>
                     </div>
                 </div>
             </div>
@@ -115,6 +131,24 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    최고관리자에게 보낼 문자<br />
+                    <button type="button" class="btn btn-xs btn-default reset_sms_to_admin">내용초기화하기</button>
+                </label>
+                <div class="col-sm-10 form-inline has-success ">
+                    <textarea class="form-control" style="width:140px;background-color:#d9edf7" rows="5" name="send_sms_changepw_admin_content" id="send_sms_changepw_admin_content"><?php echo set_value('send_sms_changepw_admin_content', element('send_sms_changepw_admin_content', element('data', $view))); ?></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    회원에게 보낼 문자<br />
+                    <button type="button" class="btn btn-xs btn-default reset_sms_to_user">내용초기화하기</button>
+                </label>
+                <div class="col-sm-10 form-inline has-success ">
+                    <textarea class="form-control" style="width:140px;background-color:#d9edf7" rows="5" name="send_sms_changepw_user_content" id="send_sms_changepw_user_content"><?php echo set_value('send_sms_changepw_user_content', element('send_sms_changepw_user_content', element('data', $view))); ?></textarea>
+                </div>
+            </div>
             <div class="btn-group pull-right" role="group" aria-label="...">
                 <button type="submit" class="btn btn-success btn-sm">저장하기</button>
             </div>
@@ -167,6 +201,26 @@ $(function() {
     <?php if (element('send_email_changepw_user', element('data', $view))) {?>
         $('#send_email_changepw_alluser').prop('checked', false).prop('disabled', true);
     <?php } ?>
+    $(document).on('change', '#send_sms_changepw_alluser', function() {
+        if ($(this).is(':checked')) {
+            $('#send_sms_changepw_user').prop('checked', false).prop('disabled', true);
+        } else {
+            $('#send_sms_changepw_user').prop('disabled', false);
+        }
+    });
+    <?php if (element('send_sms_changepw_alluser', element('data', $view))) {?>
+        $('#send_sms_changepw_user').prop('checked', false).prop('disabled', true);
+    <?php } ?>
+    $(document).on('change', '#send_sms_changepw_user', function() {
+        if ($(this).is(':checked')) {
+            $('#send_sms_changepw_alluser').prop('checked', false).prop('disabled', true);
+        } else {
+            $('#send_sms_changepw_alluser').prop('disabled', false);
+        }
+    });
+    <?php if (element('send_sms_changepw_user', element('data', $view))) {?>
+        $('#send_sms_changepw_alluser').prop('checked', false).prop('disabled', true);
+    <?php } ?>
 });
 
 $(document).on('click', '.reset_email_to_admin', function() {
@@ -188,6 +242,12 @@ $(document).on('click', '.reset_note_to_user', function() {
     $('#send_note_changepw_user_title').val('패스워드가 변경되었습니다');
     var sHTML = '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><span style="font-size:14px;font-weight:bold;color:rgb(0,0,0)">안녕하세요 {회원닉네임}님,</span><br />회원님의 패스워드가 변경되었습니다.</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><p>안녕하세요 {회원닉네임} 회원님,</p><p>회원님의 패스워드가 변경되었습니다.</p><p>변경한 곳 IP : {회원아이피}</p><p>더욱 편리한 서비스를 제공하기 위해 항상 최선을 다하겠습니다.</p><p>&nbsp;</p><p>감사합니다.</p></td></tr><tr><td style="padding:10px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;text-align:center;">{홈페이지명}</td></tr></table>';
     oEditors.getById["send_note_changepw_user_content"].exec("SET_CONTENTS", [sHTML]);
+});
+$(document).on('click', '.reset_sms_to_admin', function() {
+    $('#send_sms_changepw_admin_content').val('[패스워드변경알림] {회원닉네임}님이 패스워드를변경하셨습니다');
+});
+$(document).on('click', '.reset_sms_to_user', function() {
+    $('#send_sms_changepw_user_content').val('[{홈페이지명}] 회원님의 패스워드가 변경되었습니다. 감사합니다');
 });
 //]]>
 </script>

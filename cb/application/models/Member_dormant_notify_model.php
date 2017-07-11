@@ -45,6 +45,7 @@ class Member_dormant_notify_model extends CB_Model
         $this->db->join('member_dormant_notify', 'member.mem_id = member_dormant_notify.mem_id', 'left');
         $this->db->where(array('member_dormant_notify.mem_id' => null));
         $this->db->where(array('member.mem_lastlogin_datetime <=' => $lastlogindatetime));
+        $this->db->where(array('member.mem_register_datetime <=' => $lastlogindatetime));
         $this->db->where(array('member.mem_email <>' => ''));
         $this->db->limit(100);
 

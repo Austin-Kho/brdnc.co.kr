@@ -144,7 +144,7 @@ class Editorimage extends CB_Controller
     /**
      * 파일 업로드 현황을 그래프 형식으로 페이지입니다
      */
-    public function graph()
+    public function graph($export = '')
     {
         
         // 이벤트 라이브러리를 로딩합니다
@@ -259,18 +259,25 @@ class Editorimage extends CB_Controller
         $view['view']['end_date'] = $end_date;
         $view['view']['datetype'] = $datetype;
 
-
         // 이벤트가 존재하면 실행합니다
         $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
 
-        /**
-         * 어드민 레이아웃을 정의합니다
-         */
-        $layoutconfig = array('layout' => 'layout', 'skin' => 'graph');
-        $view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
-        $this->data = $view;
-        $this->layout = element('layout_skin_file', element('layout', $view));
-        $this->view = element('view_skin_file', element('layout', $view));
+        if ($export === 'excel') {
+            
+            header('Content-type: application/vnd.ms-excel');
+            header('Content-Disposition: attachment; filename=에디터이미지_' . cdate('Y_m_d') . '.xls');
+            echo $this->load->view('admin/' . ADMIN_SKIN . '/' . $this->pagedir . '/graph_excel', $view, true);
+
+        } else {
+            /**
+             * 어드민 레이아웃을 정의합니다
+             */
+            $layoutconfig = array('layout' => 'layout', 'skin' => 'graph');
+            $view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+            $this->data = $view;
+            $this->layout = element('layout_skin_file', element('layout', $view));
+            $this->view = element('view_skin_file', element('layout', $view));
+        }
     }
 
     /**

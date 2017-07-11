@@ -68,6 +68,7 @@ class Preview extends CB_Controller
             'mypage' => '마이페이지',
             'currentvisitor' => '현재접속자',
             'search' => '검색페이지',
+            'tag' => '태그페이지',
             'note' => '쪽지',
             'profile' => '프로필',
             'formmail' => '폼메일',
@@ -132,6 +133,15 @@ class Preview extends CB_Controller
         }
         if ($pagetype === 'search') {
             $pageurl = 'search/?skeyword=검색&';
+        }
+        if ($pagetype === 'tag') {
+            $this->load->model('Post_tag_model');
+            $latest = $this->Post_tag_model->get('', '', '', 1, '', 'pta_id', 'desc');
+            $val = element(0, $latest);
+            if (empty($val)) {
+                alert_close('최소 1개 이상의 태그가 작성된 후에 미리보기가 가능합니다');
+            }
+            $pageurl = 'tags/?tag=' . element('pta_tag', $val) . '&';
         }
         if ($pagetype === 'note') {
             $use_sidebar_option = false;

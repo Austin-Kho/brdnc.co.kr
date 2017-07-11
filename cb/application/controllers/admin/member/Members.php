@@ -24,7 +24,7 @@ class Members extends CB_Controller
     /**
      * 모델을 로딩합니다
      */
-    protected $models = array('Member_meta', 'Member_nickname', 'Member_extra_vars', 'Member_userid');
+    protected $models = array('Member_meta', 'Member_group', 'Member_group_member', 'Member_nickname', 'Member_extra_vars', 'Member_userid', 'Social_meta');
 
     /**
      * 이 컨트롤러의 메인 모델 이름입니다
@@ -112,17 +112,41 @@ class Members extends CB_Controller
         if (element('list', $result)) {
             foreach (element('list', $result) as $key => $val) {
 
+                $where = array(
+                    'mem_id' => element('mem_id', $val),
+                );
+                $result['list'][$key]['member_group_member'] = $this->Member_group_member_model->get('', '', $where, '', 0, 'mgm_id', 'ASC');
+                $mgroup = '';
+                if ($result['list'][$key]['member_group_member']) {
+                    foreach ($result['list'][$key]['member_group_member'] as $mk => $mv) {
+                        if (element('mgr_id', $mv)) {
+                            $mgroup[] = $this->Member_group_model->item(element('mgr_id', $mv));
+                        }
+                    }
+                }
+                $result['list'][$key]['member_group'] = '';
+                if ($mgroup) {
+                    foreach ($mgroup as $mk => $mv) {
+                        if ($result['list'][$key]['member_group']) {
+                            $result['list'][$key]['member_group'] .= ', ';
+                        }
+                        $result['list'][$key]['member_group'] .= element('mgr_title', $mv);
+                    }
+                }
                 $result['list'][$key]['display_name'] = display_username(
                     element('mem_userid', $val),
                     element('mem_nickname', $val),
                     element('mem_icon', $val)
                 );
                 $result['list'][$key]['meta'] = $this->Member_meta_model->get_all_meta(element('mem_id', $val));
+                $result['list'][$key]['social'] = $this->Social_meta_model->get_all_meta(element('mem_id', $val));
+
                 $result['list'][$key]['num'] = $list_num--;
             }
         }
 
         $view['view']['data'] = $result;
+        $view['view']['all_group'] = $this->Member_group_model->get_all_group();
 
         /**
          * primary key 정보를 저장합니다
@@ -196,8 +220,18 @@ class Members extends CB_Controller
             $getdata = $this->{$this->modelname}->get_one($pid);
             $getdata['extras'] = $this->Member_extra_vars_model->get_all_meta($pid);
             $getdata['meta'] = $this->Member_meta_model->get_all_meta($pid);
+            $where = array(
+                'mem_id' => $pid,
+            );
+            $group_member = $this->Member_group_member_model->get('', '', $where);
+            if ($group_member) {
+                foreach ($group_member as $mkey => $mval) {
+                    $getdata['member_group_member'][] = element('mgr_id', $mval);
+                }
+            }
         }
         $getdata['config_max_level'] = $this->cbconfig->item('max_level');
+        $getdata['mgroup'] = $this->Member_group_model->get_all_group();
         $registerform = $this->cbconfig->item('registerform');
         $form = json_decode($registerform, true);
 
@@ -676,6 +710,33 @@ class Members extends CB_Controller
                     $this->Member_nickname_model->insert($nickinsert);
                 }
 
+                if (element('mem_level', $getdata) !== $this->input->post('mem_level')) {
+                    $levelhistoryinsert = array(
+                        'mem_id' => $mem_id,
+                        'mlh_from' => element('mem_level', $getdata),
+                        'mlh_to' => $this->input->post('mem_level'),
+                        'mlh_datetime' => cdate('Y-m-d H:i:s'),
+                        'mlh_reason' => '관리자에 의한 레벨변경',
+                        'mlh_ip' => $this->input->ip_address(),
+                    );
+                    $this->load->model('Member_level_history_model');
+                    $this->Member_level_history_model->insert($levelhistoryinsert);
+                }
+
+                $deletewhere = array(
+                    'mem_id' => $mem_id,
+                );
+                $this->Member_group_member_model->delete_where($deletewhere);
+                if ($this->input->post('member_group')) {
+                    foreach ($this->input->post('member_group') as $gkey => $gval) {
+                        $mginsert = array(
+                            'mgr_id' => $gval,
+                            'mem_id' => $mem_id,
+                            'mgm_datetime' => cdate('Y-m-d H:i:s'),
+                        );
+                        $this->Member_group_member_model->insert($mginsert);
+                    }
+                }
                 $extradata = array();
                 if ($form && is_array($form)) {
                     foreach ($form as $key => $value) {
@@ -716,6 +777,27 @@ class Members extends CB_Controller
                     'mni_start_datetime' => cdate('Y-m-d H:i:s'),
                 );
                 $this->Member_nickname_model->insert($nickinsert);
+                $levelhistoryinsert = array(
+                    'mem_id' => $mem_id,
+                    'mlh_from' => 0,
+                    'mlh_to' => $this->input->post('mem_level'),
+                    'mlh_datetime' => cdate('Y-m-d H:i:s'),
+                    'mlh_reason' => '관리자에 의한 회원가입',
+                    'mlh_ip' => $this->input->ip_address(),
+                );
+                $this->load->model('Member_level_history_model');
+                $this->Member_level_history_model->insert($levelhistoryinsert);
+
+                if ($this->input->post('member_group')) {
+                    foreach ($this->input->post('member_group') as $gkey => $gval) {
+                        $mginsert = array(
+                            'mgr_id' => $gval,
+                            'mem_id' => $mem_id,
+                            'mgm_datetime' => cdate('Y-m-d H:i:s'),
+                        );
+                        $this->Member_group_member_model->insert($mginsert);
+                    }
+                }
 
                 $extradata = array();
                 if ($form && is_array($form)) {
@@ -750,6 +832,399 @@ class Members extends CB_Controller
         }
     }
 
+    /**
+     * 소셜 정보 자세히 보는 팝업페이지입니다
+     */
+    public function socialinfo($socialtype = '', $mem_id = 0)
+    {
+        // 이벤트 라이브러리를 로딩합니다
+        $eventname = 'event_admin_member_members_socialinfo';
+        $this->load->event($eventname);
+
+        $view = array();
+        $view['view'] = array();
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+        $this->load->model(array('Social_model', 'Social_meta_model'));
+
+        $social = array('facebook' => '페이스북', 'twitter' => '트위터', 'google' => '구글', 'naver' => '네이버', 'kakao' => '카카오');
+
+        $mem_id = (int) $mem_id;
+        if (empty($mem_id) OR $mem_id < 1) {
+            alert('잘못된 접근입니다');
+        }
+        if (empty($socialtype)) {
+            alert('잘못된 접근입니다');
+        }
+        if ( ! element($socialtype, $social)) {
+            alert('잘못된 접근입니다');
+        }
+
+        $social_id = $this->Social_meta_model->get_social_id_by_mem_id($socialtype, $mem_id);
+
+        $swhere = array(
+            'soc_type' => $socialtype,
+            'soc_account_id' => $social_id,
+        );
+        $socialinfo = $this->Social_model->get('', '', $swhere, '', '', 'soc_id', 'ASC');
+        $data = array();
+        if ($socialinfo) {
+            foreach ($socialinfo as $key => $value) {
+                if ($value['soc_value']) {
+                    $data[$value['soc_key']] = $value['soc_value'];
+                }
+            }
+        }
+
+        $info = '';
+        if ($socialtype === 'facebook') {
+            $info = array(
+                array(
+                    'key' => 'name',
+                    'text' => '성명',
+                    'value' => element('name', $data),
+                ),
+                array(
+                    'key' => 'last_name',
+                    'text' => '성',
+                    'value' => element('last_name', $data),
+                ),
+                array(
+                    'key' => 'first_name',
+                    'text' => '이름',
+                    'value' => element('first_name', $data),
+                ),
+                array(
+                    'key' => 'email',
+                    'text' => '이메일',
+                    'value' => element('email', $data),
+                ),
+                array(
+                    'key' => 'link',
+                    'text' => '주소',
+                    'value' => '<a href="' . goto_url(element('link', $data)) . '" target="_blank">' . element('link', $data) . '</a>',
+                ),
+                array(
+                    'key' => 'gender',
+                    'text' => '성별',
+                    'value' => (element('gender', $data) === 'male' ? '남성' : '여성'),
+                ),
+                array(
+                    'key' => 'locale',
+                    'text' => '언어',
+                    'value' => element('locale', $data),
+                ),
+                array(
+                    'key' => 'timezone',
+                    'text' => '타임존',
+                    'value' => element('timezone', $data),
+                ),
+                array(
+                    'key' => 'update_datetime',
+                    'text' => '최종정보갱신일',
+                    'value' => element('update_datetime', $data),
+                ),
+                array(
+                    'key' => 'ip_address',
+                    'text' => '최종접속IP',
+                    'value' => element('ip_address', $data),
+                ),
+            );
+        }
+        if ($socialtype === 'twitter') {
+            $info = array(
+                array(
+                    'key' => 'name',
+                    'text' => '이름',
+                    'value' => element('name', $data),
+                ),
+                array(
+                    'key' => 'screen_name',
+                    'text' => '주소',
+                    'value' => element('screen_name', $data),
+                ),
+                array(
+                    'key' => 'url',
+                    'text' => 'URL',
+                    'value' => element('url', $data),
+                ),
+                array(
+                    'key' => 'lang',
+                    'text' => '언어',
+                    'value' => element('lang', $data),
+                ),
+                array(
+                    'key' => 'description',
+                    'text' => '설명',
+                    'value' => element('description', $data),
+                ),
+                array(
+                    'key' => 'location',
+                    'text' => '지역',
+                    'value' => element('location', $data),
+                ),
+                array(
+                    'key' => 'created_at',
+                    'text' => '트위터 생성일',
+                    'value' => element('created_at', $data),
+                ),
+                array(
+                    'key' => 'update_datetime',
+                    'text' => '최종정보갱신일',
+                    'value' => element('update_datetime', $data),
+                ),
+                array(
+                    'key' => 'ip_address',
+                    'text' => '최종접속IP',
+                    'value' => element('ip_address', $data),
+                ),
+            );
+        }
+        if ($socialtype === 'google') {
+            $info = array(
+                array(
+                    'key' => 'name',
+                    'text' => '성명',
+                    'value' => element('name', $data),
+                ),
+                array(
+                    'key' => 'familyName',
+                    'text' => '성',
+                    'value' => element('familyName', $data),
+                ),
+                array(
+                    'key' => 'givenName',
+                    'text' => '이름',
+                    'value' => element('givenName', $data),
+                ),
+                array(
+                    'key' => 'email',
+                    'text' => '이메일',
+                    'value' => element('email', $data),
+                ),
+                array(
+                    'key' => 'gender',
+                    'text' => '성별',
+                    'value' => (element('gender', $data) === 'male' ? '남성' : '여성'),
+                ),
+                array(
+                    'key' => 'locale',
+                    'text' => '언어',
+                    'value' => element('locale', $data),
+                ),
+                array(
+                    'key' => 'link',
+                    'text' => '주소',
+                    'value' => '<a href="' . goto_url(element('link', $data)) . '" target="_blank">' . element('link', $data) . '</a>',
+                ),
+                array(
+                    'key' => 'picture',
+                    'text' => '사진',
+                    'value' => '<img src="' . element('picture', $data) . '" width="200" />',
+                ),
+                array(
+                    'key' => 'update_datetime',
+                    'text' => '최종정보갱신일',
+                    'value' => element('update_datetime', $data),
+                ),
+                array(
+                    'key' => 'ip_address',
+                    'text' => '최종접속IP',
+                    'value' => element('ip_address', $data),
+                ),
+            );
+        }
+        if ($socialtype === 'naver') {
+            $info = array(
+                array(
+                    'key' => 'name',
+                    'text' => '이름',
+                    'value' => element('name', $data),
+                ),
+                array(
+                    'key' => 'nickname',
+                    'text' => '닉네임',
+                    'value' => element('nickname', $data),
+                ),
+                array(
+                    'key' => 'email',
+                    'text' => '이메일',
+                    'value' => element('email', $data),
+                ),
+                array(
+                    'key' => 'age',
+                    'text' => '연령',
+                    'value' => element('age', $data),
+                ),
+                array(
+                    'key' => 'gender',
+                    'text' => '성별',
+                    'value' => (element('gender', $data) === 'F' ? '여성' : '남성'),
+                ),
+                array(
+                    'key' => 'birthday',
+                    'text' => '생일',
+                    'value' => element('birthday', $data),
+                ),
+                array(
+                    'key' => 'update_datetime',
+                    'text' => '최종정보갱신일',
+                    'value' => element('update_datetime', $data),
+                ),
+                array(
+                    'key' => 'ip_address',
+                    'text' => '최종접속IP',
+                    'value' => element('ip_address', $data),
+                ),
+            );
+        }
+        if ($socialtype === 'kakao') {
+            $info = array(
+                array(
+                    'key' => 'nickname',
+                    'text' => '닉네임',
+                    'value' => element('nickname', $data),
+                ),
+                array(
+                    'key' => 'profile_image',
+                    'text' => '프로필이미지',
+                    'value' => '<img src="' . element('profile_image', $data) . '" width="200" />'
+                ),
+                array(
+                    'key' => 'thumbnail_image',
+                    'text' => '썸네일이미지',
+                    'value' => '<img src="' . element('thumbnail_image', $data) . '" width="200" />'
+                ),
+                array(
+                    'key' => 'update_datetime',
+                    'text' => '최종정보갱신일',
+                    'value' => element('update_datetime', $data),
+                ),
+                array(
+                    'key' => 'ip_address',
+                    'text' => '최종접속IP',
+                    'value' => element('ip_address', $data),
+                ),
+            );
+        }
+
+        $view['view']['data'] = $info;
+        $view['view']['socialtype'] = $socialtype;
+        $view['view']['socialname'] = $social[$socialtype];
+
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+        /**
+         * 어드민 레이아웃을 정의합니다
+         */
+        $layoutconfig = array('layout' => 'layout_popup', 'skin' => 'socialinfo');
+        $view['layout'] = $this->managelayout->admin($layoutconfig, $this->cbconfig->get_device_view_type());
+        $this->data = $view;
+        $this->layout = element('layout_skin_file', element('layout', $view));
+        $this->view = element('view_skin_file', element('layout', $view));
+    }
+
+    /**
+     * 엑셀로 데이터를 추출합니다.
+     */
+    public function excel()
+    {
+
+        // 이벤트 라이브러리를 로딩합니다
+        $eventname = 'event_admin_member_members_excel';
+        $this->load->event($eventname);
+
+        $view = array();
+        $view['view'] = array();
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before'] = Events::trigger('before', $eventname);
+
+        /**
+         * 페이지에 숫자가 아닌 문자가 입력되거나 1보다 작은 숫자가 입력되면 에러 페이지를 보여줍니다.
+         */
+        $param =& $this->querystring;
+        $findex = $this->input->get('findex', null, 'member.mem_id');
+        $forder = $this->input->get('forder', null, 'desc');
+        $sfield = $this->input->get('sfield', null, '');
+        $skeyword = $this->input->get('skeyword', null, '');
+
+        /**
+         * 게시판 목록에 필요한 정보를 가져옵니다.
+         */
+        $this->{$this->modelname}->allow_search_field = array('mem_id', 'mem_userid', 'mem_email', 'mem_username', 'mem_nickname', 'mem_level', 'mem_homepage', 'mem_register_datetime', 'mem_register_ip', 'mem_lastlogin_datetime', 'mem_lastlogin_ip', 'mem_is_admin'); // 검색이 가능한 필드
+        $this->{$this->modelname}->search_field_equal = array('mem_id', 'mem_level', 'mem_is_admin'); // 검색중 like 가 아닌 = 검색을 하는 필드
+        $this->{$this->modelname}->allow_order_field = array('member.mem_id', 'mem_userid', 'mem_username', 'mem_nickname', 'mem_email', 'mem_point', 'mem_register_datetime', 'mem_lastlogin_datetime', 'mem_level'); // 정렬이 가능한 필드
+
+        $where = array();
+        if ($this->input->get('mem_is_admin')) {
+            $where['mem_is_admin'] = 1;
+        }
+        if ($this->input->get('mem_denied')) {
+            $where['mem_denied'] = 1;
+        }
+        if ($mgr_id = (int) $this->input->get('mgr_id')) {
+            if ($mgr_id > 0) {
+                $where['mgr_id'] = $mgr_id;
+            }
+        }
+        $result = $this->{$this->modelname}
+            ->get_admin_list('', '', $where, '', $findex, $forder, $sfield, $skeyword);
+
+        if (element('list', $result)) {
+            foreach (element('list', $result) as $key => $val) {
+
+                $where = array(
+                    'mem_id' => element('mem_id', $val),
+                );
+                $result['list'][$key]['member_group_member'] = $this->Member_group_member_model->get('', '', $where, '', 0, 'mgm_id', 'ASC');
+                $mgroup = '';
+                if ($result['list'][$key]['member_group_member']) {
+                    foreach ($result['list'][$key]['member_group_member'] as $mk => $mv) {
+                        if (element('mgr_id', $mv)) {
+                            $mgroup[] = $this->Member_group_model->item(element('mgr_id', $mv));
+                        }
+                    }
+                }
+                $result['list'][$key]['member_group'] = '';
+                if ($mgroup) {
+                    foreach ($mgroup as $mk => $mv) {
+                        if ($result['list'][$key]['member_group']) {
+                            $result['list'][$key]['member_group'] .= ', ';
+                        }
+                        $result['list'][$key]['member_group'] .= element('mgr_title', $mv);
+                    }
+                }
+                $result['list'][$key]['display_name'] = display_username(
+                    element('mem_userid', $val),
+                    element('mem_nickname', $val),
+                    element('mem_icon', $val)
+                );
+                $result['list'][$key]['meta'] = $this->Member_meta_model->get_all_meta(element('mem_id', $val));
+                $result['list'][$key]['social'] = $this->Social_meta_model->get_all_meta(element('mem_id', $val));
+            }
+        }
+
+        $view['view']['data'] = $result;
+        $view['view']['all_group'] = $this->Member_group_model->get_all_group();
+
+        /**
+         * primary key 정보를 저장합니다
+         */
+        $view['view']['primary_key'] = $this->{$this->modelname}->primary_key;
+
+
+        // 이벤트가 존재하면 실행합니다
+        $view['view']['event']['before_layout'] = Events::trigger('before_layout', $eventname);
+
+        header('Content-type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment; filename=회원정보_' . cdate('Y_m_d') . '.xls');
+        echo $this->load->view('admin/' . ADMIN_SKIN . '/' . $this->pagedir . '/excel', $view, true);
+    }
 
     /**
      * 목록 페이지에서 선택삭제를 하는 경우 실행되는 메소드입니다

@@ -23,6 +23,7 @@
             <div class="alert alert-success">
                 <p><strong>메일발송</strong> : 메일이 보내지지 않는다면 메일발송 환경설정 부분을 확인하여주세요</p>
                 <p><strong>쪽지발송</strong> : 쪽지 기능을 사용하는 사이트에서만 쪽지가 발송됩니다.</p>
+                <p><strong>문자발송</strong> : 문자 기능을 사용하는 사이트에서만 문자가 발송됩니다.</p>
                 <hr />
                 <p><strong>치환가능변수</strong></p>
                 <p>일반 : <strong>{홈페이지명}</strong>, <strong>{회사명}</strong>, <strong>{홈페이지주소}</strong>
@@ -114,6 +115,33 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    관리자에게 보낼 문자<br />
+                    <button type="button" class="btn btn-xs btn-default reset_sms_to_admin">내용초기화하기</button>
+                </label>
+                <div class="col-sm-10 form-inline has-success ">
+                    <textarea class="form-control" style="width:140px;background-color:#d9edf7" rows="5" name="send_sms_comment_admin_content" id="send_sms_comment_admin_content"><?php echo set_value('send_sms_comment_admin_content', element('send_sms_comment_admin_content', element('data', $view))); ?></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    원글작성자에게 보낼 문자<br />
+                    <button type="button" class="btn btn-xs btn-default reset_sms_to_post_writer">내용초기화하기</button>
+                </label>
+                <div class="col-sm-10 form-inline has-success ">
+                    <textarea class="form-control" style="width:140px;background-color:#d9edf7" rows="5" name="send_sms_comment_post_writer_content" id="send_sms_comment_post_writer_content"><?php echo set_value('send_sms_comment_post_writer_content', element('send_sms_comment_post_writer_content', element('data', $view))); ?></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">
+                    댓글작성자에게 보낼 문자<br />
+                    <button type="button" class="btn btn-xs btn-default reset_sms_to_comment_writer">내용초기화하기</button>
+                </label>
+                <div class="col-sm-10 form-inline has-success ">
+                    <textarea class="form-control" style="width:140px;background-color:#d9edf7" rows="5" name="send_sms_comment_comment_writer_content" id="send_sms_comment_comment_writer_content"><?php echo set_value('send_sms_comment_comment_writer_content', element('send_sms_comment_comment_writer_content', element('data', $view))); ?></textarea>
+                </div>
+            </div>
             <div class="btn-group pull-right" role="group" aria-label="...">
                 <button type="submit" class="btn btn-success btn-sm">저장하기</button>
             </div>
@@ -177,6 +205,15 @@ $(document).on('click', '.reset_note_to_comment_writer', function() {
     $('#send_note_comment_comment_writer_title').val('[{게시판명}] {게시글제목} - 댓글이 등록되었습니다');
     var sHTML = '<table width="100%" border="0" cellpadding="0" cellspacing="0" style="border-left: 1px solid rgb(226,226,225);border-right: 1px solid rgb(226,226,225);background-color: rgb(255,255,255);border-top:10px solid #348fe2; border-bottom:5px solid #348fe2;border-collapse: collapse;"><tr><td style="font-size:12px;padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><span style="font-size:14px;font-weight:bold;color:rgb(0,0,0)">{게시글제목}</span><br />댓글작성자 : {댓글작성자닉네임}</td></tr><tr style="border-top:1px solid #e2e2e2; border-bottom:1px solid #e2e2e2;"><td style="padding:20px 30px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;"><div>{댓글내용}</div><p><a href="{댓글주소}" target="_blank" style="font-weight:bold;">사이트에서 댓글 확인하기</a></p><p>&nbsp;</p></td></tr><tr><td style="padding:10px;font-family: Arial,sans-serif;color: rgb(0,0,0);font-size: 14px;line-height: 20px;text-align:center;">{홈페이지명}</td></tr></table>';
     oEditors.getById["send_note_comment_comment_writer_content"].exec("SET_CONTENTS", [sHTML]);
+});
+$(document).on('click', '.reset_sms_to_admin', function() {
+    $('#send_sms_comment_admin_content').val('[댓글작성알림] {게시판명} - {게시글제목}');
+});
+$(document).on('click', '.reset_sms_to_post_writer', function() {
+    $('#send_sms_comment_post_writer_content').val('[댓글작성알림] {게시판명} - {게시글제목}');
+});
+$(document).on('click', '.reset_sms_to_comment_writer', function() {
+    $('#send_sms_comment_comment_writer_content').val('[댓글작성알림] {게시판명} - {게시글제목}');
 });
 //]]>
 </script>

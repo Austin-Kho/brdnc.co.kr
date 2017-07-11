@@ -449,6 +449,9 @@ class Boards extends CB_Controller
                 $metadata['use_comment_dislike'] = 1;
                 $metadata['use_comment_profile'] = 1;
                 $metadata['use_mobile_comment_profile'] = 1;
+                $metadata['comment_best'] = 1;
+                $metadata['mobile_comment_best'] = 1;
+                $metadata['comment_best_like_num'] = 3;
                 $metadata['use_comment_secret'] = 1;
                 $metadata['comment_order'] = 'asc';
                 $metadata['use_comment_blame'] = 1;
@@ -457,6 +460,9 @@ class Boards extends CB_Controller
                 $metadata['use_sideview'] = 1;
                 $metadata['use_sideview_icon'] = 1;
                 $metadata['use_tempsave'] = 1;
+                $metadata['use_download_log'] = 1;
+                $metadata['use_posthistory'] = 1;
+                $metadata['use_link_click_log'] = 1;
                 $metadata['use_sitemap'] = 1;
 
                 $pid = $this->{$this->modelname}->insert($updatedata);
@@ -1343,8 +1349,43 @@ class Boards extends CB_Controller
                 'rules' => 'trim|required|numeric',
             ),
             array(
+                'field' => 'use_post_emoticon',
+                'label' => '글입력시 이모티콘 사용',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'use_mobile_post_emoticon',
+                'label' => '글입력시 이모티콘 사용 - 모바일',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'use_post_specialchars',
+                'label' => '글입력시 특수문자 사용',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'use_mobile_post_specialchars',
+                'label' => '글입력시 특수문자 사용 - 모바일',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'use_subject_style',
+                'label' => '제목 스타일 사용',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'use_mobile_subject_style',
+                'label' => '제목 스타일 사용 - 모바일',
+                'rules' => 'trim|numeric',
+            ),
+            array(
                 'field' => 'use_google_map',
                 'label' => '구글 지도 사용',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'use_post_tag',
+                'label' => '태그 사용',
                 'rules' => 'trim|numeric',
             ),
             array(
@@ -1425,7 +1466,9 @@ class Boards extends CB_Controller
                 'mobile_post_default_content', 'use_post_dhtml', 'use_mobile_post_dhtml',
                 'save_external_image', 'post_min_length', 'post_max_length', 'use_post_secret',
                 'use_post_secret_selected', 'use_post_receive_email', 'link_num', 'mobile_link_num',
-                'use_google_map', 'use_upload_file', 'upload_file_num',
+                'use_post_emoticon', 'use_mobile_post_emoticon', 'use_post_specialchars',
+                'use_mobile_post_specialchars', 'use_subject_style', 'use_mobile_subject_style',
+                'use_google_map', 'use_post_tag', 'use_upload_file', 'upload_file_num',
                 'mobile_upload_file_num', 'upload_file_max_size', 'upload_file_extension',
                 'comment_to_download', 'like_to_download', 'write_possible_days',
                 'use_only_one_post');
@@ -1446,6 +1489,15 @@ class Boards extends CB_Controller
                     if ($value === 'link_num') {
                         $groupdata['mobile_link_num'] = $this->input->post('mobile_link_num', null, '');
                     }
+                    if ($value === 'use_post_emoticon') {
+                        $groupdata['use_mobile_post_emoticon'] = $this->input->post('use_mobile_post_emoticon', null, '');
+                    }
+                    if ($value === 'use_post_specialchars') {
+                        $groupdata['use_mobile_post_specialchars'] = $this->input->post('use_mobile_post_specialchars', null, '');
+                    }
+                    if ($value === 'use_subject_style') {
+                        $groupdata['use_mobile_subject_style'] = $this->input->post('use_mobile_subject_style', null, '');
+                    }
                     if ($value === 'upload_file_num') {
                         $groupdata['mobile_upload_file_num'] = $this->input->post('mobile_upload_file_num', null, '');
                     }
@@ -1457,6 +1509,15 @@ class Boards extends CB_Controller
                     }
                     if ($value === 'link_num') {
                         $alldata['mobile_link_num'] = $this->input->post('mobile_link_num', null, '');
+                    }
+                    if ($value === 'use_post_emoticon') {
+                        $alldata['use_mobile_post_emoticon'] = $this->input->post('use_mobile_post_emoticon', null, '');
+                    }
+                    if ($value === 'use_post_specialchars') {
+                        $alldata['use_mobile_post_specialchars'] = $this->input->post('use_mobile_post_specialchars', null, '');
+                    }
+                    if ($value === 'use_subject_style') {
+                        $alldata['use_mobile_subject_style'] = $this->input->post('use_mobile_subject_style', null, '');
                     }
                     if ($value === 'upload_file_num') {
                         $alldata['mobile_upload_file_num'] = $this->input->post('mobile_upload_file_num', null, '');
@@ -1803,6 +1864,31 @@ class Boards extends CB_Controller
                 'rules' => 'trim|numeric',
             ),
             array(
+                'field' => 'use_comment_emoticon',
+                'label' => '댓글 입력시 이모티콘',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'use_mobile_comment_emoticon',
+                'label' => '댓글 입력시 이모티콘 - 모바일',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'use_comment_specialchars',
+                'label' => '댓글 입력시 특수문자',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'use_mobile_comment_specialchars',
+                'label' => '댓글 입력시 특수문자 - 모바일',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'comment_possible_day',
+                'label' => '댓글 금지 기간',
+                'rules' => 'trim|required|numeric',
+            ),
+            array(
                 'field' => 'always_show_comment_textarea',
                 'label' => '댓글 입력창 항상 출력',
                 'rules' => 'trim|numeric',
@@ -1811,6 +1897,21 @@ class Boards extends CB_Controller
                 'field' => 'mobile_always_show_comment_textarea',
                 'label' => '댓글 입력창 항상 출력 - 모바일',
                 'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'comment_best',
+                'label' => '댓글 베플 출력',
+                'rules' => 'trim|required|numeric',
+            ),
+            array(
+                'field' => 'mobile_comment_best',
+                'label' => '댓글 베플 출력 - 모바일',
+                'rules' => 'trim|required|numeric',
+            ),
+            array(
+                'field' => 'comment_best_like_num',
+                'label' => '댓글 베플 출력 추천수',
+                'rules' => 'trim|required|numeric',
             ),
             array(
                 'field' => 'comment_default_content',
@@ -1872,6 +1973,31 @@ class Boards extends CB_Controller
                 'label' => '댓글신고시블라인드',
                 'rules' => 'trim|required|numeric',
             ),
+            array(
+                'field' => 'use_comment_lucky',
+                'label' => '댓글 럭키포인트',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'comment_lucky_name',
+                'label' => '럭키포인트 이름',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'comment_lucky_percent',
+                'label' => '럭키포인트 당첨확률',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'comment_lucky_point_min',
+                'label' => '럭키포인트 최소 지급 포인트',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'comment_lucky_point_max',
+                'label' => '럭키포인트 최대 지급포인트',
+                'rules' => 'trim|numeric',
+            ),
         );
         $this->form_validation->set_rules($config);
 
@@ -1896,12 +2022,17 @@ class Boards extends CB_Controller
 
             $array = array('comment_count', 'mobile_comment_count', 'comment_page_count',
                 'mobile_comment_page_count', 'use_comment_like', 'use_comment_dislike',
-                'use_comment_profile', 'use_mobile_comment_profile',
-                'always_show_comment_textarea', 'mobile_always_show_comment_textarea', 'comment_default_content',
+                'use_comment_profile', 'use_mobile_comment_profile', 'use_comment_emoticon', 'use_mobile_comment_emoticon',
+                'use_comment_specialchars', 'use_mobile_comment_specialchars',
+                'comment_possible_day', 'always_show_comment_textarea',
+                'mobile_always_show_comment_textarea', 'comment_best', 'mobile_comment_best',
+                'comment_best_like_num', 'comment_default_content',
                 'mobile_comment_default_content', 'comment_min_length', 'comment_max_length',
                 'use_comment_secret', 'use_comment_secret_selected', 'show_comment_ip',
                 'show_mobile_comment_ip', 'notice_comment_block', 'comment_order',
-                'use_comment_blame', 'comment_blame_blind_count');
+                'use_comment_blame', 'comment_blame_blind_count', 'use_comment_lucky',
+                'comment_lucky_name', 'comment_lucky_percent', 'comment_lucky_point_min',
+                'comment_lucky_point_max');
 
             $metadata = array();
             $groupdata = array();
@@ -1916,8 +2047,18 @@ class Boards extends CB_Controller
                     if ($value === 'use_comment_profile') {
                         $groupdata['use_mobile_comment_profile'] = $this->input->post('use_mobile_comment_profile', null, '');
                     }
+                    if ($value === 'use_comment_emoticon') {
+                        $groupdata['use_mobile_comment_emoticon'] = $this->input->post('use_mobile_comment_emoticon', null, '');
+                    }
+                    if ($value === 'use_comment_specialchars') {
+                        $groupdata['use_mobile_comment_specialchars'] = $this->input->post('use_mobile_comment_specialchars', null, '');
+                    }
                     if ($value === 'always_show_comment_textarea') {
                         $groupdata['mobile_always_show_comment_textarea'] = $this->input->post('mobile_always_show_comment_textarea', null, '');
+                    }
+                    if ($value === 'comment_best') {
+                        $groupdata['mobile_comment_best'] = $this->input->post('mobile_comment_best', null, '');
+                        $groupdata['comment_best_like_num'] = $this->input->post('comment_best_like_num', null, '');
                     }
                     if ($value === 'comment_default_content') {
                         $groupdata['mobile_comment_default_content'] = $this->input->post('mobile_comment_default_content', null, '');
@@ -1925,20 +2066,36 @@ class Boards extends CB_Controller
                     if ($value === 'show_comment_ip') {
                         $groupdata['show_mobile_comment_ip'] = $this->input->post('show_mobile_comment_ip', null, '');
                     }
+                    if ($value === 'comment_lucky_point_min') {
+                        $groupdata['comment_lucky_point_max'] = $this->input->post('comment_lucky_point_max', null, '');
+                    }
                 }
                 if (element($value, $all)) {
                     $alldata[$value] = $this->input->post($value, null, '');
                     if ($value === 'use_comment_profile') {
                         $alldata['use_mobile_comment_profile'] = $this->input->post('use_mobile_comment_profile', null, '');
                     }
+                    if ($value === 'use_comment_emoticon') {
+                        $alldata['use_mobile_comment_emoticon'] = $this->input->post('use_mobile_comment_emoticon', null, '');
+                    }
+                    if ($value === 'use_comment_specialchars') {
+                        $alldata['use_mobile_comment_specialchars'] = $this->input->post('use_mobile_comment_specialchars', null, '');
+                    }
                     if ($value === 'always_show_comment_textarea') {
                         $alldata['mobile_always_show_comment_textarea'] = $this->input->post('mobile_always_show_comment_textarea', null, '');
+                    }
+                    if ($value === 'comment_best') {
+                        $alldata['mobile_comment_best'] = $this->input->post('mobile_comment_best', null, '');
+                        $alldata['comment_best_like_num'] = $this->input->post('comment_best_like_num', null, '');
                     }
                     if ($value === 'comment_default_content') {
                         $alldata['mobile_comment_default_content'] = $this->input->post('mobile_comment_default_content', null, '');
                     }
                     if ($value === 'show_comment_ip') {
                         $alldata['show_mobile_comment_ip'] = $this->input->post('show_mobile_comment_ip', null, '');
+                    }
+                    if ($value === 'comment_lucky_point_min') {
+                        $alldata['comment_lucky_point_max'] = $this->input->post('comment_lucky_point_max', null, '');
                     }
                 }
             }
@@ -2042,6 +2199,11 @@ class Boards extends CB_Controller
                 'rules' => 'trim|numeric',
             ),
             array(
+                'field' => 'block_delete',
+                'label' => '관리자만 삭제가능',
+                'rules' => 'trim|numeric',
+            ),
+            array(
                 'field' => 'protect_post_day',
                 'label' => '원글 수정 및 삭제 금지 기간',
                 'rules' => 'trim|required|numeric|is_natural',
@@ -2097,6 +2259,21 @@ class Boards extends CB_Controller
                 'rules' => 'trim|numeric',
             ),
             array(
+                'field' => 'use_bitly',
+                'label' => 'Bitly short url 기능',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'use_poll',
+                'label' => '설문 기능',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'use_mobile_poll',
+                'label' => '설문 기능 - 모바일',
+                'rules' => 'trim|numeric',
+            ),
+            array(
                 'field' => 'use_personal',
                 'label' => '1:1 게시판',
                 'rules' => 'trim|numeric',
@@ -2109,6 +2286,21 @@ class Boards extends CB_Controller
             array(
                 'field' => 'use_tempsave',
                 'label' => '임시저장기능',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'use_download_log',
+                'label' => '다운로드 로그',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'use_posthistory',
+                'label' => '게시물 변경 로그',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'use_link_click_log',
+                'label' => '링크 클릭 로그',
                 'rules' => 'trim|numeric',
             ),
             array(
@@ -2203,11 +2395,12 @@ class Boards extends CB_Controller
             // 이벤트가 존재하면 실행합니다
             $view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
-            $array = array('protect_post_day', 'protect_comment_day', 'protect_comment_num',
-                'use_sideview', 'use_mobile_sideview', 'use_sideview_icon',
-                'use_mobile_sideview_icon', 'use_category',
-                'category_display_style', 'mobile_category_display_style', 'use_naver_syndi',
-                'use_personal', 'use_anonymous', 'use_tempsave', 'use_post_delete_log',
+            $array = array('block_delete', 'protect_post_day', 'protect_comment_day',
+                'protect_comment_num', 'use_sideview', 'use_mobile_sideview',
+                'use_sideview_icon', 'use_mobile_sideview_icon', 'use_category',
+                'category_display_style', 'mobile_category_display_style', 'use_naver_syndi', 'use_bitly', 'use_poll',
+                'use_mobile_poll', 'use_personal', 'use_anonymous', 'use_tempsave', 'use_download_log',
+                'use_posthistory', 'use_link_click_log', 'use_post_delete_log',
                 'use_comment_delete_log', 'list_date_style', 'list_date_style_manual', 'view_date_style',
                 'view_date_style_manual', 'comment_date_style', 'comment_date_style_manual',
                 'mobile_list_date_style', 'mobile_list_date_style_manual', 'mobile_view_date_style',
@@ -2229,6 +2422,9 @@ class Boards extends CB_Controller
                     }
                     if ($value === 'use_sideview_icon') {
                         $groupdata['use_mobile_sideview_icon'] = $this->input->post('use_mobile_sideview_icon', null, '');
+                    }
+                    if ($value === 'use_poll') {
+                        $groupdata['use_mobile_poll'] = $this->input->post('use_mobile_poll', null, '');
                     }
                     if ($value === 'list_date_style') {
                         $groupdata['list_date_style_manual'] = $this->input->post('list_date_style_manual', null, '');
@@ -2256,6 +2452,9 @@ class Boards extends CB_Controller
                     }
                     if ($value === 'use_sideview_icon') {
                         $alldata['use_mobile_sideview_icon'] = $this->input->post('use_mobile_sideview_icon', null, '');
+                    }
+                    if ($value === 'use_poll') {
+                        $alldata['use_mobile_poll'] = $this->input->post('use_mobile_poll', null, '');
                     }
                     if ($value === 'list_date_style') {
                         $alldata['list_date_style_manual'] = $this->input->post('list_date_style_manual', null, '');
@@ -2801,6 +3000,96 @@ class Boards extends CB_Controller
                 'label' => '쪽지사용(댓글신고발생시) - 댓글작성자에게',
                 'rules' => 'trim|numeric',
             ),
+            array(
+                'field' => 'send_sms_post_super_admin',
+                'label' => '문자(SMS)사용(원글작성시) - 최고관리자에게',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_post_group_admin',
+                'label' => '문자(SMS)사용(원글작성시) - 그룹관리자에게',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_post_board_admin',
+                'label' => '문자(SMS)사용(원글작성시) - 게시판관리자에게',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_post_writer',
+                'label' => '문자(SMS)사용(원글작성시) - 원글작성자에게',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_comment_super_admin',
+                'label' => '문자(SMS)사용(댓글작성시) - 최고관리자에게',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_comment_group_admin',
+                'label' => '문자(SMS)사용(댓글작성시) - 그룹관리자에게',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_comment_board_admin',
+                'label' => '문자(SMS)사용(댓글작성시) - 게시판관리자에게',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_comment_post_writer',
+                'label' => '문자(SMS)사용(댓글작성시) - 원글작성자에게',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_comment_comment_writer',
+                'label' => '문자(SMS)사용(댓글작성시) - 해당댓글작성자에게',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_blame_super_admin',
+                'label' => '문자(SMS)사용(신고발생시) - 최고관리자에게',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_blame_group_admin',
+                'label' => '문자(SMS)사용(신고발생시) - 그룹관리자에게',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_blame_board_admin',
+                'label' => '문자(SMS)사용(신고발생시) - 게시판관리자에게',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_blame_post_writer',
+                'label' => '문자(SMS)사용(신고발생시) - 원글작성자에게',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_comment_blame_super_admin',
+                'label' => '문자(SMS)사용(댓글신고발생시) - 최고관리자에게',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_comment_blame_group_admin',
+                'label' => '문자(SMS)사용(댓글신고발생시) - 그룹관리자에게',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_comment_blame_board_admin',
+                'label' => '문자(SMS)사용(댓글신고발생시) - 게시판관리자에게',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_comment_blame_post_writer',
+                'label' => '문자(SMS)사용(댓글신고발생시) - 원글작성자에게',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'send_sms_comment_blame_comment_writer',
+                'label' => '문자(SMS)사용(댓글신고발생시) - 댓글작성자에게',
+                'rules' => 'trim|numeric',
+            ),
         );
         $this->form_validation->set_rules($config);
 
@@ -2844,8 +3133,16 @@ class Boards extends CB_Controller
                 'send_note_comment_blame_super_admin',
                 'send_note_comment_blame_group_admin',
                 'send_note_comment_blame_board_admin', 'send_note_comment_blame_post_writer',
-                'send_note_comment_blame_comment_writer'
-            );
+                'send_note_comment_blame_comment_writer', 'send_sms_post_super_admin',
+                'send_sms_post_group_admin', 'send_sms_post_board_admin', 'send_sms_post_writer',
+                'send_sms_comment_super_admin', 'send_sms_comment_group_admin',
+                'send_sms_comment_board_admin', 'send_sms_comment_post_writer',
+                'send_sms_comment_comment_writer', 'send_sms_blame_super_admin',
+                'send_sms_blame_group_admin', 'send_sms_blame_board_admin',
+                'send_sms_blame_post_writer', 'send_sms_comment_blame_super_admin',
+                'send_sms_comment_blame_group_admin',
+                'send_sms_comment_blame_board_admin', 'send_sms_comment_blame_post_writer',
+                'send_sms_comment_blame_comment_writer');
 
             $metadata = array();
             foreach ($array as $value) {
@@ -2908,6 +3205,32 @@ class Boards extends CB_Controller
                             $groupdata['send_note_comment_blame_post_writer'] = $this->input->post('send_note_comment_blame_post_writer', null, '');
                             $groupdata['send_note_comment_blame_comment_writer'] = $this->input->post('send_note_comment_blame_comment_writer', null, '');
                         }
+                        if ($key === 'send_sms_post') {
+                            $groupdata['send_sms_post_super_admin'] = $this->input->post('send_sms_post_super_admin', null, '');
+                            $groupdata['send_sms_post_group_admin'] = $this->input->post('send_sms_post_group_admin', null, '');
+                            $groupdata['send_sms_post_board_admin'] = $this->input->post('send_sms_post_board_admin', null, '');
+                            $groupdata['send_sms_post_writer'] = $this->input->post('send_sms_post_writer', null, '');
+                        }
+                        if ($key === 'send_sms_comment') {
+                            $groupdata['send_sms_comment_super_admin'] = $this->input->post('send_sms_comment_super_admin', null, '');
+                            $groupdata['send_sms_comment_group_admin'] = $this->input->post('send_sms_comment_group_admin', null, '');
+                            $groupdata['send_sms_comment_board_admin'] = $this->input->post('send_sms_comment_board_admin', null, '');
+                            $groupdata['send_sms_comment_post_writer'] = $this->input->post('send_sms_comment_post_writer', null, '');
+                            $groupdata['send_sms_comment_comment_writer'] = $this->input->post('send_sms_comment_comment_writer', null, '');
+                        }
+                        if ($key === 'send_sms_blame') {
+                            $groupdata['send_sms_blame_super_admin'] = $this->input->post('send_sms_blame_super_admin', null, '');
+                            $groupdata['send_sms_blame_group_admin'] = $this->input->post('send_sms_blame_group_admin', null, '');
+                            $groupdata['send_sms_blame_board_admin'] = $this->input->post('send_sms_blame_board_admin', null, '');
+                            $groupdata['send_sms_blame_post_writer'] = $this->input->post('send_sms_blame_post_writer', null, '');
+                        }
+                        if ($key === 'send_sms_comment_blame') {
+                            $groupdata['send_sms_comment_blame_super_admin'] = $this->input->post('send_sms_comment_blame_super_admin', null, '');
+                            $groupdata['send_sms_comment_blame_group_admin'] = $this->input->post('send_sms_comment_blame_group_admin', null, '');
+                            $groupdata['send_sms_comment_blame_board_admin'] = $this->input->post('send_sms_comment_blame_board_admin', null, '');
+                            $groupdata['send_sms_comment_blame_post_writer'] = $this->input->post('send_sms_comment_blame_post_writer', null, '');
+                            $groupdata['send_sms_comment_blame_comment_writer'] = $this->input->post('send_sms_comment_blame_comment_writer', null, '');
+                        }
                     }
                 }
             }
@@ -2967,6 +3290,32 @@ class Boards extends CB_Controller
                             $alldata['send_note_comment_blame_board_admin'] = $this->input->post('send_note_comment_blame_board_admin', null, '');
                             $alldata['send_note_comment_blame_post_writer'] = $this->input->post('send_note_comment_blame_post_writer', null, '');
                             $alldata['send_note_comment_blame_comment_writer'] = $this->input->post('send_note_comment_blame_comment_writer', null, '');
+                        }
+                        if ($key === 'send_sms_post') {
+                            $alldata['send_sms_post_super_admin'] = $this->input->post('send_sms_post_super_admin', null, '');
+                            $alldata['send_sms_post_group_admin'] = $this->input->post('send_sms_post_group_admin', null, '');
+                            $alldata['send_sms_post_board_admin'] = $this->input->post('send_sms_post_board_admin', null, '');
+                            $alldata['send_sms_post_writer'] = $this->input->post('send_sms_post_writer', null, '');
+                        }
+                        if ($key === 'send_sms_comment') {
+                            $alldata['send_sms_comment_super_admin'] = $this->input->post('send_sms_comment_super_admin', null, '');
+                            $alldata['send_sms_comment_group_admin'] = $this->input->post('send_sms_comment_group_admin', null, '');
+                            $alldata['send_sms_comment_board_admin'] = $this->input->post('send_sms_comment_board_admin', null, '');
+                            $alldata['send_sms_comment_post_writer'] = $this->input->post('send_sms_comment_post_writer', null, '');
+                            $alldata['send_sms_comment_comment_writer'] = $this->input->post('send_sms_comment_comment_writer', null, '');
+                        }
+                        if ($key === 'send_sms_blame') {
+                            $alldata['send_sms_blame_super_admin'] = $this->input->post('send_sms_blame_super_admin', null, '');
+                            $alldata['send_sms_blame_group_admin'] = $this->input->post('send_sms_blame_group_admin', null, '');
+                            $alldata['send_sms_blame_board_admin'] = $this->input->post('send_sms_blame_board_admin', null, '');
+                            $alldata['send_sms_blame_post_writer'] = $this->input->post('send_sms_blame_post_writer', null, '');
+                        }
+                        if ($key === 'send_sms_comment_blame') {
+                            $alldata['send_sms_comment_blame_super_admin'] = $this->input->post('send_sms_comment_blame_super_admin', null, '');
+                            $alldata['send_sms_comment_blame_group_admin'] = $this->input->post('send_sms_comment_blame_group_admin', null, '');
+                            $alldata['send_sms_comment_blame_board_admin'] = $this->input->post('send_sms_comment_blame_board_admin', null, '');
+                            $alldata['send_sms_comment_blame_post_writer'] = $this->input->post('send_sms_comment_blame_post_writer', null, '');
+                            $alldata['send_sms_comment_blame_comment_writer'] = $this->input->post('send_sms_comment_blame_comment_writer', null, '');
                         }
                     }
                 }
@@ -3106,6 +3455,11 @@ class Boards extends CB_Controller
                 'label' => '사이트맵 사용',
                 'rules' => 'trim',
             ),
+            array(
+                'field' => 'use_naver_blog_post',
+                'label' => '네이버 블로그 자동등록 사용',
+                'rules' => 'trim',
+            ),
         );
         $this->form_validation->set_rules($config);
 
@@ -3129,7 +3483,7 @@ class Boards extends CB_Controller
             $view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
             $array = array('use_rss_feed', 'use_rss_total_feed', 'rss_feed_content',
-                'rss_feed_description', 'rss_feed_copyright', 'rss_feed_post_count', 'use_sitemap');
+                'rss_feed_description', 'rss_feed_copyright', 'rss_feed_post_count', 'use_sitemap', 'use_naver_blog_post');
 
             $metadata = array();
             $groupdata = array();
@@ -3381,6 +3735,86 @@ class Boards extends CB_Controller
                 'label' => '권한 - 신고 그룹',
                 'rules' => 'trim',
             ),
+            array(
+                'field' => 'access_poll_write',
+                'label' => '권한 - 설문등록',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'access_poll_write_level',
+                'label' => '권한 - 설문등록 레벨',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'access_poll_write_group[]',
+                'label' => '권한 - 설문등록 그룹',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'access_poll_attend',
+                'label' => '권한 - 설문참여',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'access_poll_attend_level',
+                'label' => '권한 - 설문참여 레벨',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'access_poll_attend_group[]',
+                'label' => '권한 - 설문참여 그룹',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'access_tag_write',
+                'label' => '권한 - 태그입력',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'access_tag_write_level',
+                'label' => '권한 - 태그입력',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'access_tag_write_group[]',
+                'label' => '권한 - 태그입력',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'access_subject_style',
+                'label' => '권한 - 제목스타일',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'access_subject_style_level',
+                'label' => '권한 - 제목스타일 레벨',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'access_subject_style_group[]',
+                'label' => '권한 - 제목스타일 그룹',
+                'rules' => 'trim',
+            ),
+            array(
+                'field' => 'access_list_selfcert',
+                'label' => '인증 - 목록',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'access_view_selfcert',
+                'label' => '인증 - 글열람, 댓글열람',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'access_write_selfcert',
+                'label' => '인증 - 원글, 답변작성',
+                'rules' => 'trim|numeric',
+            ),
+            array(
+                'field' => 'access_comment_selfcert',
+                'label' => '인증 - 댓글작성',
+                'rules' => 'trim|numeric',
+            ),
         );
         $this->form_validation->set_rules($config);
 
@@ -3407,11 +3841,16 @@ class Boards extends CB_Controller
                 'access_write', 'access_write_level', 'access_reply', 'access_reply_level', 'access_comment',
                 'access_comment_level', 'access_upload', 'access_upload_level', 'access_download',
                 'access_download_level', 'access_dhtml', 'access_dhtml_level', 'access_blame',
-                'access_blame_level');
+                'access_blame_level', 'access_poll_write', 'access_poll_write_level', 'access_poll_attend',
+                'access_poll_attend_level', 'access_tag_write', 'access_tag_write_level',
+                'access_subject_style', 'access_subject_style_level', 'access_list_selfcert',
+                'access_view_selfcert', 'access_write_selfcert', 'access_comment_selfcert');
 
             $array_checkbox = array('access_list_group', 'access_view_group', 'access_write_group',
                 'access_reply_group', 'access_comment_group', 'access_upload_group',
-                'access_download_group', 'access_dhtml_group', 'access_blame_group');
+                'access_download_group', 'access_dhtml_group', 'access_blame_group',
+                'access_poll_write_group', 'access_poll_attend_group', 'access_subject_style_group',
+                'access_tag_write_group');
 
             $metadata = array();
             $groupdata = array();
@@ -3459,6 +3898,22 @@ class Boards extends CB_Controller
                         $groupdata['access_blame_level'] = $this->input->post('access_blame_level', null, '');
                         $groupdata['access_blame_group'] = json_encode($this->input->post('access_blame_group', null, ''));
                     }
+                    if ($value === 'access_poll_write') {
+                        $groupdata['access_poll_write_level'] = $this->input->post('access_poll_write_level', null, '');
+                        $groupdata['access_poll_write_group'] = json_encode($this->input->post('access_poll_write_group', null, ''));
+                    }
+                    if ($value === 'access_poll_attend') {
+                        $groupdata['access_poll_attend_level'] = $this->input->post('access_poll_attend_level', null, '');
+                        $groupdata['access_poll_attend_group'] = json_encode($this->input->post('access_poll_attend_group', null, ''));
+                    }
+                    if ($value === 'access_tag_write') {
+                        $groupdata['access_tag_write_level'] = $this->input->post('access_tag_write_level', null, '');
+                        $groupdata['access_tag_write_group'] = json_encode($this->input->post('access_tag_write_group', null, ''));
+                    }
+                    if ($value === 'access_subject_style') {
+                        $groupdata['access_subject_style_level'] = $this->input->post('access_subject_style_level', null, '');
+                        $groupdata['access_subject_style_group'] = json_encode($this->input->post('access_subject_style_group', null, ''));
+                    }
                 }
                 if (element($value, $all)) {
                     $alldata[$value] = $this->input->post($value, null, '');
@@ -3497,6 +3952,22 @@ class Boards extends CB_Controller
                     if ($value === 'access_blame') {
                         $alldata['access_blame_level'] = $this->input->post('access_blame_level', null, '');
                         $alldata['access_blame_group'] = json_encode($this->input->post('access_blame_group', null, ''));
+                    }
+                    if ($value === 'access_poll_write') {
+                        $alldata['access_poll_write_level'] = $this->input->post('access_poll_write_level', null, '');
+                        $alldata['access_poll_write_group'] = json_encode($this->input->post('access_poll_write_group', null, ''));
+                    }
+                    if ($value === 'access_poll_attend') {
+                        $alldata['access_poll_attend_level'] = $this->input->post('access_poll_attend_level', null, '');
+                        $alldata['access_poll_attend_group'] = json_encode($this->input->post('access_poll_attend_group', null, ''));
+                    }
+                    if ($value === 'access_tag_write') {
+                        $alldata['access_tag_write_level'] = $this->input->post('access_tag_write_level', null, '');
+                        $alldata['access_tag_write_group'] = json_encode($this->input->post('access_tag_write_group', null, ''));
+                    }
+                    if ($value === 'access_subject_style') {
+                        $alldata['access_subject_style_level'] = $this->input->post('access_subject_style_level', null, '');
+                        $alldata['access_subject_style_group'] = json_encode($this->input->post('access_subject_style_group', null, ''));
                     }
                 }
             }
@@ -3544,6 +4015,9 @@ class Boards extends CB_Controller
             $getdata = array_merge($getdata, $board_meta);
         }
         $getdata['config_max_level'] = $this->cbconfig->item('max_level');
+        $this->load->model('Member_group_model');
+        $getdata['mgroup'] = $this->Member_group_model
+            ->get_admin_list('', '', '', '', 'mgr_order', 'asc');
         $view['view']['data'] = $getdata;
 
         /**
@@ -4001,8 +4475,9 @@ class Boards extends CB_Controller
          */
         $this->load->model(array(
             'Blame_model', 'Board_admin_model', 'Board_category_model', 'Comment_model', 'Like_model',
-            'Post_model', 'Post_extra_vars_model', 'Post_file_model',
-            'Post_link_model', 'Post_meta_model', 'Scrap_model',
+            'Post_model', 'Post_extra_vars_model', 'Post_file_model', 'Post_file_download_log_model',
+            'Post_history_model', 'Post_link_model', 'Post_link_click_log_model', 'Post_meta_model',
+            'Post_poll_model', 'Post_tag_model', 'Scrap_model',
             'Stat_count_board_model', 'Tempsave_model'));
 
         if ($this->input->post('chk') && is_array($this->input->post('chk'))) {
@@ -4022,8 +4497,13 @@ class Boards extends CB_Controller
                     $this->Post_model->delete_where($where);
                     $this->Post_extra_vars_model->delete_where($where);
                     $this->Post_file_model->delete_where($where);
+                    $this->Post_file_download_log_model->delete_where($where);
+                    $this->Post_history_model->delete_where($where);
                     $this->Post_link_model->delete_where($where);
+                    $this->Post_link_click_log_model->delete_where($where);
                     $this->Post_meta_model->delete_where($where);
+                    $this->Post_poll_model->delete_where($where);
+                    $this->Post_tag_model->delete_where($where);
                     $this->Scrap_model->delete_where($where);
                     $this->Stat_count_board_model->delete_where($where);
                     $this->Tempsave_model->delete_where($where);

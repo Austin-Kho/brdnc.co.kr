@@ -28,6 +28,129 @@
             <label class="col-lg-3 control-label">회원아이디</label>
             <div class="col-lg-8"><p class="form-control-static"><?php echo $this->member->item('mem_userid'); ?></p></div>
         </div>
+        <?php if ($this->cbconfig->item('use_selfcert') && ($this->cbconfig->item('use_selfcert_phone') OR $this->cbconfig->item('use_selfcert_ipin'))) { ?>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">본인인증</label>
+                <div class="col-lg-8">
+                <?php if ($this->member->item('selfcert_type')) { ?>
+                    <div class="alert alert-warning">
+                        <p><strong>회원님의 본인 인증 정보</strong> - 회원님은 본인인증을 받으셨습니다</p>
+                        <?php if ($this->member->item('selfcert_username')) { ?>
+                            <p><strong>회원명</strong> <?php echo $this->member->item('selfcert_username'); ?></p>
+                        <?php } ?>
+                        <?php if ($this->member->item('selfcert_phone')) { ?>
+                            <p><strong>휴대폰</strong> <?php echo $this->member->item('selfcert_phone'); ?></p>
+                        <?php } ?>
+                        <?php if ($this->member->item('selfcert_birthday')) { ?>
+                            <p><strong>생년월일</strong> <?php echo $this->member->item('selfcert_birthday'); ?></p>
+                        <?php } ?>
+                        <?php if ($this->member->item('selfcert_sex')) { ?>
+                            <p><strong>성별</strong> <?php echo $this->member->item('selfcert_sex') == '1' ? '남성' : '여성'; ?></p>
+                        <?php } ?>
+                    </div>
+                <?php } else { ?>
+                    회원님은 아직 본인인증을 하지 않으셨습니다. <a href="<?php echo site_url('membermodify/selfcert?redirecturl=' . urlencode(current_full_url())); ?>" class="btn btn-default btn-sm" title="본인인증하기">본인인증 하기</a>
+                <?php } ?>
+                </div>
+            </div>
+        <?php
+        }
+        if ($this->cbconfig->item('use_sociallogin')) {
+            $this->managelayout->add_js(base_url('assets/js/social_login.js'));
+        ?>
+            <div class="form-group">
+                <label class="col-lg-3 control-label">소셜 연동</label>
+                <div class="col-lg-8">
+                    <div class="social-login-register">
+                        <?php if ($this->cbconfig->item('use_sociallogin_facebook')) {?>
+                            <div class="social-login-button social-facebook social-facebook-on">
+                                <a href="javascript:;" onClick="social_connect_off('facebook');" title="페이스북 연동해제하기"><img src="<?php echo base_url('assets/images/social_facebook.png'); ?>" width="30" height="30" alt="페이스북 연동해제하기" title="페이스북 연동해제하기" /></a>
+                            </div>
+                            <div class="social-login-button social-facebook social-facebook-off">
+                                <a href="javascript:;" onClick="social_connect_on('facebook');" title="페이스북 연동하기"><img src="<?php echo base_url('assets/images/social_facebook_off.png'); ?>" width="30" height="30" alt="페이스북 연동하기" title="페이스북 연동하기" /></a>
+                            </div>
+                            <script type="text/javascript">
+                            <?php if ($this->member->socialitem('facebook_id')) {?>
+                            $('.social-facebook-on').css('display', 'inline-block');
+                            $('.social-facebook-off').css('display', 'none');
+                            <?php } else {?>
+                            $('.social-facebook-on').css('display', 'none');
+                            $('.social-facebook-off').css('display', 'inline-block');
+                            <?php } ?>
+                            </script>
+                        <?php } ?>
+                        <?php if ($this->cbconfig->item('use_sociallogin_twitter')) {?>
+                            <div class="social-login-button social-twitter social-twitter-on">
+                                <a href="javascript:;" onClick="social_connect_off('twitter');" title="트위터 연동해제하기"><img src="<?php echo base_url('assets/images/social_twitter.png'); ?>" width="30" height="30" alt="트위터 연동해제하기" title="트위터 연동해제하기" /></a>
+                            </div>
+                            <div class="social-login-button social-twitter social-twitter-off">
+                                <a href="javascript:;" onClick="social_connect_on('twitter');" title="트위터 연동하기"><img src="<?php echo base_url('assets/images/social_twitter_off.png'); ?>" width="30" height="30" alt="트위터 연동하기" title="트위터 연동하기" /></a>
+                            </div>
+                            <script type="text/javascript">
+                            <?php if ($this->member->socialitem('twitter_id')) {?>
+                                $('.social-twitter-on').css('display', 'inline-block');
+                                $('.social-twitter-off').css('display', 'none');
+                            <?php } else {?>
+                                $('.social-twitter-on').css('display', 'none');
+                                $('.social-twitter-off').css('display', 'inline-block');
+                            <?php } ?>
+                            </script>
+                        <?php } ?>
+                        <?php if ($this->cbconfig->item('use_sociallogin_google')) {?>
+                            <div class="social-login-button social-google social-google-on">
+                                <a href="javascript:;" onClick="social_connect_off('google');" title="구글 연동해제하기"><img src="<?php echo base_url('assets/images/social_google.png'); ?>" width="30" height="30" alt="구글 연동해제하기" title="구글 연동해제하기" /></a>
+                            </div>
+                            <div class="social-login-button social-google social-google-off">
+                                <a href="javascript:;" onClick="social_connect_on('google');" title="구글 연동하기"><img src="<?php echo base_url('assets/images/social_google_off.png'); ?>" width="30" height="30" alt="구글 연동하기" title="구글 연동하기" /></a>
+                            </div>
+                            <script type="text/javascript">
+                            <?php if ($this->member->socialitem('google_id')) {?>
+                            $('.social-google-on').css('display', 'inline-block');
+                            $('.social-google-off').css('display', 'none');
+                            <?php } else {?>
+                            $('.social-google-on').css('display', 'none');
+                            $('.social-google-off').css('display', 'inline-block');
+                            <?php } ?>
+                            </script>
+                        <?php } ?>
+                        <?php if ($this->cbconfig->item('use_sociallogin_naver')) {?>
+                            <div class="social-login-button social-naver social-naver-on">
+                                <a href="javascript:;" onClick="social_connect_off('naver');" title="네이버 연동해제하기"><img src="<?php echo base_url('assets/images/social_naver.png'); ?>" width="30" height="30" alt="네이버 연동해제하기" title="네이버 연동해제하기" /></a>
+                            </div>
+                            <div class="social-login-button social-naver social-naver-off">
+                                <a href="javascript:;" onClick="social_connect_on('naver');" title="네이버 연동하기"><img src="<?php echo base_url('assets/images/social_naver_off.png'); ?>" width="30" height="30" alt="네이버 연동하기" title="네이버 연동하기" /></a>
+                            </div>
+                            <script type="text/javascript">
+                            <?php if ($this->member->socialitem('naver_id')) {?>
+                            $('.social-naver-on').css('display', 'inline-block');
+                            $('.social-naver-off').css('display', 'none');
+                            <?php } else {?>
+                            $('.social-naver-on').css('display', 'none');
+                            $('.social-naver-off').css('display', 'inline-block');
+                            <?php } ?>
+                            </script>
+                        <?php } ?>
+                        <?php if ($this->cbconfig->item('use_sociallogin_kakao')) {?>
+                            <div class="social-login-button social-kakao social-kakao-on">
+                                <a href="javascript:;" onClick="social_connect_off('kakao');" title="카카오 연동해제하기"><img src="<?php echo base_url('assets/images/social_kakao.png'); ?>" width="30" height="30" alt="카카오 연동해제하기" title="카카오 연동해제하기" /></a>
+                            </div>
+                            <div class="social-login-button social-kakao social-kakao-off">
+                                <a href="javascript:;" onClick="social_connect_on('kakao');" title="카카오 연동하기"><img src="<?php echo base_url('assets/images/social_kakao_off.png'); ?>" width="30" height="30" alt="카카오 연동하기" title="카카오 연동하기" /></a>
+                            </div>
+                            <script type="text/javascript">
+                            <?php if ($this->member->socialitem('kakao_id')) {?>
+                            $('.social-kakao-on').css('display', 'inline-block');
+                            $('.social-kakao-off').css('display', 'none');
+                            <?php } else {?>
+                            $('.social-kakao-on').css('display', 'none');
+                            $('.social-kakao-off').css('display', 'inline-block');
+                            <?php } ?>
+                            </script>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
         <div class="form-group">
             <label class="col-lg-3 control-label">패스워드</label>
             <div class="col-lg-8"><a href="<?php echo site_url('membermodify/password_modify'); ?>" class="btn btn-default btn-sm" title="패스워드 변경">패스워드 변경</a></div>

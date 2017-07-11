@@ -27,6 +27,11 @@
             <li>
                 <?php echo display_dhtml_editor('content', set_value('content'), $classname = 'dhtmleditor', $is_dhtml_editor = element('use_dhtml', $view), $editor_type = $this->cbconfig->item('note_editor_type')); ?>
             </li>
+            <?php if ($this->cbconfig->item('use_note_file')) { ?>
+                <li><span>첨부파일</span>
+                    <input type="file" class="form-control" name="note_file" />
+                </li>
+            <?php } ?>
         </ol>
         <div class="pull-right">
             <button type="submit" class="btn btn-success">보내기</button>
