@@ -35,7 +35,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 	<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-프로젝트 선택 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
 
 
-			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">입금자(동호수)</div>
+			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">입금자(동호수) ...<?php var_dump('');?></div>
 			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 				<div class="col-xs-8" style="padding: 0px;">
 					<label for="payer" class="sr-only">입금자(동호수)</label>
@@ -79,7 +79,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 			</div>
 <?php elseif( !empty($now_payer)) :
 	// 해지인 경우 red 스타일과 환불인 경우 Del 태그 만들기
-	if($now_payer[0]->is_rescission>0) {$red_style = "style = 'color : #c20303;'"; } else {$red_style = ""; }
+	if($now_payer[0]->is_rescission>0) {$red_style = "style = 'color : red'"; } else {$red_style = ""; }
 	if($now_payer[0]->is_rescission>1) {$del_op = "<del>"; $del_cl = "</del>";} else {$del_op = ""; $del_cl = "";}
  ?>
 			<div class="col-xs-11 col-sm-11 col-md-3" style="padding: 12px 10px 6px; margin: 0;">
@@ -96,18 +96,9 @@ for($i=(count($year)-1); $i>=0; $i--) :
 <?php endif; ?>
 		</div>
 	</form>
-<?php if($this->input->get('ho')) :
-// 해지인 경우 red 스타일과 환불인 경우 Del 태그 만들기
-if($cont_data->is_rescission>0) {$red_style = "style = 'color : #c20303;'"; $nt = " <strong>계약해지 세대</strong>"; } else {$red_style = ""; $rstyle = ""; $nt =""; }
-if($cont_data->is_rescission>1) {$del_op = "<del>"; $del_cl = "</del>";} else {$del_op = ""; $del_cl = "";}
-endif;?>
+
 	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14" style="padding: 0;">
-         <p class="bg-info" style="padding: 13px 20px; margin: 0;">
-            <span <?php if($this->input->get('ho')) echo $red_style; ?>><?php if($this->input->get('ho')) echo $del_op;?><?php echo $contractor_info;?><?php if($this->input->get('ho')) echo $del_cl;?></span>
-            <span><?php if($this->input->get('ho')) echo $nt; ?></span>
-         </p>
-      </div>
+		<div class="col-xs-12 font14" style="padding: 0;"><p class="bg-info" style="padding: 13px 20px; margin: 0;"><?php echo $contractor_info; ?>&nbsp;</p></div>
 	</div>
 
 	<div class="row font12" style="margin: 0; padding: 0;">
@@ -128,6 +119,12 @@ endif;?>
 <?php foreach($received as $lt):
 	$paid_sche = $this->main_m->sql_row(" SELECT pay_name FROM cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$lt->pay_sche_code' ");
 	$paid_acc_nick = $this->main_m->sql_row(" SELECT acc_nick FROM cms_sales_bank_acc WHERE pj_seq='$project' AND seq='$lt->paid_acc' ");
+
+
+	// 해지인 경우 red 스타일과 환불인 경우 Del 태그 만들기
+	if($cont_data->is_rescission>0) {$red_style = "style = 'color : red'"; } else {$red_style = ""; }
+	if($cont_data->is_rescission>1) {$del_op = "<del>"; $del_cl = "</del>";} else {$del_op = ""; $del_cl = "";}
+
 ?>
 						<tr style="background-color: #F9FAD9;">
 							<td><?php echo $lt->paid_date; ?></td>
@@ -245,6 +242,9 @@ endif;?>
 				</div>
 			</form>
 		</div>
+
+
+
 		<div class="col-sm-12 col-sm-12 col-md-5" style="padding: 0 10px;">
 			<div class="col-xs-12 table-responsive" style="padding: 0;">
 				<table class="table table-bordered  table-hover table-condensed center">
@@ -270,10 +270,11 @@ foreach($pay_sche_code as $lt) :
 	if( !empty($cont_data)) {
 		$ppsche = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS pps FROM cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' AND pay_sche_code='$lt->pay_code' ");
 		$paid_per_sche = (empty($ppsche->pps) OR $ppsche->pps=='0') ? "-" : number_format($ppsche->pps); // 수납금액
-      $payment = $this->main_m->sql_row(" SELECT seq, payment FROM cms_sales_payment WHERE pj_seq='$project' AND price_seq='$cont_data->price_seq' AND pay_sche_seq='$lt->seq' "); // 약정금액
+		$payment = $this->main_m->sql_row(" SELECT * FROM cms_sales_payment WHERE pj_seq='$project' AND price_seq='$cont_data->price_seq' AND pay_sche_seq='$lt->seq' "); // 약정금액
 		$col = ($ppsche->pps-$payment->payment<0) ? "#A80505" : "#0427A4";
 		$compair = ($ppsche->pps-$payment->payment===0) ? "-" : number_format($ppsche->pps-$payment->payment);
 	}
+
 ?>
 						<tr class="<?php if(empty($cont_data)) echo "active"; ?>">
 							<td style="color: <?php if(date('Y-md')>$due_date) echo '#d00202' ?>;"><?php echo $due_date; ?></td>

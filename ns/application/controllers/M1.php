@@ -969,6 +969,8 @@ class M1 extends CI_Controller {
 				$now_ho = $this->input->get('ho');
 				if(!empty($this->input->get('payer'))){
 					$now_payer = $this->input->get('payer');
+					$data['aaa'] = $now_payer;
+					// $data['pay_cont_seq'] = $this->main_m->sql_result(" SELECT cont_seq FROM cms_sales_contractor WHERE contractor='$now_payer' ");
 					$data['now_payer'] = $this->main_m->sql_result(" SELECT paid_who, cont_seq, unit_dong_ho, is_rescission FROM cms_sales_received, cms_sales_contract WHERE cms_sales_received.pj_seq='$project' AND cont_seq=cms_sales_contract.seq AND paid_who LIKE '%$now_payer%' GROUP BY cont_seq ");
 				}
 
