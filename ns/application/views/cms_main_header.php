@@ -84,9 +84,9 @@
 								<li><a href="javascript:" onclick="alert('준비 중입니다!');">공지사항</a></li>
 <?php  endif; ?>
 								<li class="divider"></li>
-								<li class="dropdown-header">관계사이트</li>
-								<li><a href="http://www.keb.co.kr/" target="blank">외환은행 간편조회</a></li>
-								<li><a href="http://xn--220b21dg6r6qdpdpmi3e.kr/" target="blank">동춘1구역조합사이트</a></li>
+								<li class="dropdown-header">협업솔루션</li>
+								<li><a href="https://brdnc.slack.com/" target="blank">Slack (brdnc)</a></li>
+								<li><a href="https://trello.com/" target="blank">Trello</a></li>
 							</ul>
 						</li>
 					</ul>
