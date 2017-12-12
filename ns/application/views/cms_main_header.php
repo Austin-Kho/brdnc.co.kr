@@ -85,8 +85,8 @@
 <?php  endif; ?>
 								<li class="divider"></li>
 								<li class="dropdown-header">협업솔루션</li>
-								<li><a href="https://brdnc.slack.com/" target="blank">Slack (brdnc)</a></li>
-								<li><a href="https://trello.com/" target="blank">Trello</a></li>
+								<li><a href="https://brdnc.slack.com/" target="blank">Slack brdnc 바로가기</a></li>
+								<li><a href="https://trello.com/" target="blank">Trello 바로가기</a></li>
 							</ul>
 						</li>
 					</ul>
