@@ -41,3 +41,4 @@ wp/wp-content/uploads/*
 */setup/config_set.php
 
 .gitignore
+apple-touch-icon.png
