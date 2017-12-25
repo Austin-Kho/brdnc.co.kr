@@ -193,12 +193,14 @@ echo form_open(base_url(uri_string()), $attributes);
 				<tbody>
 <?php
 $tp = $this->main_m->sql_row("SELECT type_name, type_color FROM cms_project WHERE seq='$project' ");
-$tn = explode("-", $tp->type_name);
-$tc = explode("-", $tp->type_color);
+if(!empty($tp)) :
+  $tn = explode("-", $tp->type_name);
+  $tc = explode("-", $tp->type_color);
 
-for($i=0; $i<count($tn); $i++) :
-	$type_color[$tn[$i]] = $tc[$i];
-endfor;
+  for($i=0; $i<count($tn); $i++) :
+  	$type_color[$tn[$i]] = $tc[$i];
+  endfor;
+endif;
 
 foreach($rec_list as $lt) :
 	$dong_ho = explode("-", $lt->unit_dong_ho);

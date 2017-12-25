@@ -3,7 +3,7 @@
 		<div class="row" style="margin: 0; padding: 0;">
 			<div class="point-sub col-xs-4 col-sm-4 col-md-2 bo-top bo-bottom" style="padding-top: 10px; margin-bottom: 20px; height: 40px;">회사 정보</div>
 			<div class="col-xs-8 col-sm-8 col-md-10 bo-top bo-bottom" style="height: 40px;">
-				<div class="" style="padding: 10px;">(주) 바램디앤씨</div>
+				<div class="" style="padding: 10px;"></div>
 				<!-- <div class="col-xs-12 col-sm-6 col-md-3" style="padding-top: 6px;">
 					<select class="form-control input-sm" id="user_sel" name="user_sel" onchange="location.href='<?php echo base_url(); ?>m5/config/2/2/?un='+this.value">
 						<option value="">선 택</option>

@@ -86,9 +86,9 @@ class M1 extends CI_Controller {
 				$data['auth'] = $auth['_m1_1_1'];
 
 
-				// . 프로젝트명, 타입 정보 구하기
+				// 프로젝트명, 타입 정보 구하기
 				$pj_info = $data['pj_info'] = $this->main_m->sql_row(" SELECT pj_name, type_name, type_color FROM cms_project WHERE seq='$project' ");
-				$data['tp_color'] = explode("-", $pj_info->type_color);
+				if($pj_info) $data['tp_color'] = explode("-", $pj_info->type_color);
 
 				$data['tp_name'] = $this->main_m->sql_result(" SELECT type FROM cms_project_all_housing_unit WHERE pj_seq='$project' GROUP BY type ");
 
@@ -840,10 +840,13 @@ class M1 extends CI_Controller {
 
 				// 타입 관련 데이터 구하기
 				$type = $this->main_m->sql_row(" SELECT type_name, type_color FROM cms_project WHERE seq='$project' ");
-				$data['type'] = array(
-					'name' => explode("-", $type->type_name),
-					'color' => explode("-", $type->type_color)
-				);
+				if($type) {
+					$data['type'] = array(
+						'name' => explode("-", $type->type_name),
+						'color' => explode("-", $type->type_color)
+					);
+				}
+
 
 				// 해당 단지 최 고층 구하기
 				$max_fl = $this->main_m->sql_row(" SELECT MAX(ho) AS max_ho FROM cms_project_all_housing_unit WHERE pj_seq='$project' ");

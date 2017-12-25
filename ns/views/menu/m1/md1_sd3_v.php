@@ -59,14 +59,14 @@
 				</table>
 			</div>
 			<div class="col-xs-12 col-sm-7 font10" style="padding: 10px;">
-<?php for($i=0; $i<count($type['name']); $i++) :
+<?php if(!empty($type)) : for($i=0; $i<count($type['name']); $i++) :
 				$type_color[$type['name'][$i]] = $type['color'][$i];
 ?>
 				<div class="col-xs-6 col-sm-4 col-md-2" style="margin-bottom: 5px; padding: 0;">
 					<div style="float:left; background-color: <?php echo $type['color'][$i]; ?>; height: 13px; width: 18px;"></div>
 					<div style="float:left; height: 13px; width: 80px; padding-left: 8px;"><?php echo $type['name'][$i]; ?> 타입</div>
 				</div>
-<?php endfor; ?>
+<?php endfor; endif; ?>
 			</div>
 		</div>
 		<div class="row bo-bottom font12" style="margin: 0; padding: 20px;">
