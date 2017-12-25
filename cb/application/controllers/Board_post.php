@@ -772,7 +772,7 @@ class Board_post extends CB_Controller
             $use_prev_next = true;
         }
         if ($use_prev_next) {
-            $where = '';
+            $where = array();
             $where['brd_id'] = element('brd_id', $post);
             $where['post_del <>'] =2;
             $where['post_secret'] = 0;

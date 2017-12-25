@@ -53,6 +53,59 @@ echo form_open(site_url('cmallact/optionupdate'), $attributes);
 
 <script type="text/javascript">
 //<![CDATA[
+jQuery(function($){
+
+    $('#total_order_price').on("item_total_order_price", function(e){
+
+        var tot_price = 0,
+            price = 0,
+            qty = 0,
+            $sel = jQuery('input[name^=chk_detail]:checked'),
+            $total_order_price = $(this);
+
+        if ($sel.size() > 0) {
+            $sel.each(function() {
+
+                price = parseInt($(this).closest('li').find('input[name^=item_price]').val());
+                qty = parseInt($(this).closest('li').find('input[name^=detail_qty]').val());
+                
+                tot_price += (price * qty);
+            });
+        }
+
+        $total_order_price.text(number_format(String(tot_price)));
+
+        return false;
+    });
+
+    $("button.btn-change-qty").on("item_change_qty", function(e){
+        var change_type = $(this).attr('data-change-type');
+        var $qty = $(this).closest('li').find('input[name^=detail_qty]');
+        var qty = parseInt($qty.val().replace(/[^0-9]/g, ""));
+        if (isNaN(qty)) {
+            qty = 1;
+        }
+
+        if (change_type === 'plus') {
+            qty++;
+            $qty.val(qty);
+        } else if (change_type === 'minus') {
+            qty--;
+            if (qty < 1) {
+                alert('수량은 1이상 입력해 주십시오.');
+                $qty.val(1);
+                return false;
+            }
+
+            $qty.val(qty);
+        }
+
+        item_price_calculate();
+
+        return false;
+    });
+
+});
 
 // 구매금액 계산
 item_price_calculate();

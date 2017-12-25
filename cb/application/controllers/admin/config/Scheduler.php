@@ -161,7 +161,7 @@ class Scheduler extends CB_Controller
         $getdata['result'] = json_decode(element('scheduler', $getdata), true);
         $getdata['scheduler_interval'] = json_decode(element('scheduler_interval', $getdata), true);
 
-        if (empty(element('scheduler_interval', $getdata))) {
+        if ( ! element('scheduler_interval', $getdata) ) {
             alert('스케쥴 주기명을 먼저 생성하신 후에 스케쥴러 등록이 가능합니다. 스케쥴 주기명 생성 페이지로 이동합니다', admin_url($this->pagedir . '/interval'));
         }
 

@@ -68,6 +68,9 @@
                                         <button type="button" class="btn btn-xs btn-danger" >사용</button>
                                     <?php } ?>
                                     <?php echo element('dep_type_display', $result); ?>
+                                    <?php if( element('is_test', $result) ){ ?>
+                                        <span class="btn btn-xs btn-warning">테스트결제</span>
+                                    <?php } ?>
                                 </td>
                                 <td><?php echo display_datetime(element('dep_datetime', $result), 'full'); ?></td>
                                 <td><?php echo element('dep_pay_type', $result) ? $this->depositlib->paymethodtype[element('dep_pay_type', $result)] : ''; ?></td>

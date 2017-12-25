@@ -57,6 +57,12 @@ class Board_write extends CB_Controller
             show_404();
         }
         $board = $this->board->item_all($board_id);
+        
+        $board['is_use_captcha'] = false;
+
+        if( check_use_captcha($this->member, $board) ){
+            $board['is_use_captcha'] = true;
+        }
 
         $alertmessage = $this->member->is_member()
             ? '회원님은 글을 작성할 수 있는 권한이 없습니다'
@@ -351,7 +357,9 @@ class Board_write extends CB_Controller
                 'label' => '패스워드',
                 'rules' => 'trim|required|min_length[' . $password_length . ']|callback__mem_password_check',
             );
+        }
 
+        if ( check_use_captcha($this->member, $board) ) {
             if ($this->cbconfig->item('use_recaptcha')) {
                 $config[] = array(
                     'field' => 'g-recaptcha-response',
@@ -2529,7 +2537,7 @@ class Board_write extends CB_Controller
 
 
     /**
-     * 게시물 작성시 비회원이 작성한 경우 captcha체크합니다
+     * 게시물 작성시 비회원이 작성한 경우 또는 게시판에서 캡챠를 사용시 captcha체크합니다
      */
     public function _check_captcha($str)
     {

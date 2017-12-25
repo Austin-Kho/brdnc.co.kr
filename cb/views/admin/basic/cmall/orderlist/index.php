@@ -49,7 +49,11 @@
                     foreach (element('list', element('data', $view)) as $result) {
                 ?>
                     <tr>
-                        <td><a href="<?php echo site_url('cmall/orderresult/' . element('cor_id', $result)); ?>" target="_blank"><?php echo element('cor_id', $result); ?></a></td>
+                        <td><a href="<?php echo site_url('cmall/orderresult/' . element('cor_id', $result)); ?>" target="_blank"><?php echo element('cor_id', $result); ?></a>
+                        <?php if( element('is_test', $result) ){ ?>
+                            <span class="btn btn-xs btn-warning">테스트 결제</span>
+                        <?php } ?>
+                        </td>
                         <td><a href="?sfield=deposit.mem_id&amp;skeyword=<?php echo element('mem_id', $result); ?>"><?php echo html_escape(element('mem_userid', $result)); ?></a></td>
                         <td><?php echo element('display_name', $result); ?> / <?php echo html_escape(element('mem_realname', $result)); ?></td>
                         <td><?php echo display_datetime(element('cor_datetime', $result), 'full'); ?></td>

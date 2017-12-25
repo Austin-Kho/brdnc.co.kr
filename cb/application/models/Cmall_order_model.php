@@ -40,7 +40,7 @@ class Cmall_order_model extends CB_Model
 
     public function get_check_pg_order($cor_id, $cor_tno){
 
-        $cor_id = (int) $cor_id;
+        $cor_id = preg_replace('/[^0-9]/', '', $cor_id);
 
         if (empty($cor_id) OR $cor_id < 1) {
             return;
@@ -128,11 +128,11 @@ class Cmall_order_model extends CB_Model
 
     public function is_ordered_item($mem_id = 0, $cit_id = 0)
     {
-        $mem_id = (int) $mem_id;
+        $mem_id = preg_replace('/[^0-9]/', '', $mem_id);
         if (empty($mem_id) OR $mem_id < 1) {
             return;
         }
-        $cit_id = (int) $cit_id;
+        $cit_id = preg_replace('/[^0-9]/', '', $cit_id);
         if (empty($cit_id) OR $cit_id < 1) {
             return;
         }
@@ -152,15 +152,15 @@ class Cmall_order_model extends CB_Model
 
     public function is_ordered_item_detail($mem_id = 0, $cor_id = 0, $cde_id = 0)
     {
-        $mem_id = (int) $mem_id;
+        $mem_id = preg_replace('/[^0-9]/', '', $mem_id);
         if (empty($mem_id) OR $mem_id < 1) {
             return;
         }
-        $cor_id = (int) $cor_id;
+        $cor_id = preg_replace('/[^0-9]/', '', $cor_id);
         if (empty($cor_id) OR $cor_id < 1) {
             return;
         }
-        $cde_id = (int) $cde_id;
+        $cde_id = preg_replace('/[^0-9]/', '', $cde_id);
         if (empty($cde_id) OR $cde_id < 1) {
             return;
         }

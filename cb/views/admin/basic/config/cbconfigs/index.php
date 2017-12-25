@@ -187,11 +187,24 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">구글 reCaptcah 사용여부</label>
                     <div class="col-sm-10">
-                        <label for="use_recaptcha" class="checkbox-inline">
-                            <input type="checkbox" name="use_recaptcha" id="use_recaptcha" value="1" <?php echo set_checkbox('use_recaptcha', '1', (element('use_recaptcha', element('data', $view)) ? true : false)); ?> /> 사용합니다
+                        <label for="use_recaptcha_0" class="checkbox-inline">
+                            <input type="radio" name="use_recaptcha" id="use_recaptcha_0" value="0" <?php echo (! element('use_recaptcha', element('data', $view))) ? 'checked="checked"' : ''; ?> /> 사용하지 않습니다. ( 코드이그나이터 기본캡챠 사용  )
                         </label>
+                        <br />
+                        <label for="use_recaptcha_1" class="checkbox-inline">
+                            <input type="radio" name="use_recaptcha" id="use_recaptcha_1" value="1" <?php echo set_radio('use_recaptcha', '1', (element('use_recaptcha', element('data', $view)) ? true : false)); ?> /> 보이는 캡챠 ( reCAPTCHA V2 ) 를 사용합니다
+                        </label>
+                        <br />
+                        <label for="use_recaptcha_2" class="checkbox-inline">
+                            <input type="radio" name="use_recaptcha" id="use_recaptcha_2" value="2" <?php echo set_radio('use_recaptcha', '2', (element('use_recaptcha', element('data', $view)) ? true : false)); ?> /> 안보이는 캡챠 ( Invisible reCAPTCHA ) 를 사용합니다
+                        </label>
+                        <br />
+                        <br />
                         <span class="help-inline">이 기능을 사용하시게 되면 코드이그나이터 내장 Captcha 기능 대신 구글 reCaptcha 기능을 사용하게 됩니다
                             <a href="http://www.ciboard.co.kr/tiptech/p/153" target="_blank">설정방법 자세히보기</a>
+                        </span>
+                        <span class="help-inline">
+                            보이는 캡챠와 안보이는 캡챠의 sitekey 와 secret 키는 동일하지 않고, 서로 발급받는 키가 다릅니다.
                         </span>
                     </div>
                 </div>

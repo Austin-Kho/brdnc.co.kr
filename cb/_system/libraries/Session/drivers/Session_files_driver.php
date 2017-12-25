@@ -109,7 +109,7 @@ class CI_Session_files_driver extends CI_Session_driver implements SessionHandle
 		}
 		else
 		{
-			//log_message('debug', 'Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.');
+			log_message('debug', 'Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.');
 			$this->_config['save_path'] = rtrim(ini_get('session.save_path'), '/\\');
 			if( ! $this->_config['save_path'])
 			{

@@ -4079,6 +4079,29 @@ class Install extends CI_Controller
                 'unsigned' => true,
                 'default' => '0',
             ),
+            'cor_vbank_expire' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'is_test' => array(
+                'type' => 'CHAR',
+                'constraint' => '1',
+                'default' => '',
+            ),
+            'status' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'cor_refund_price' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'cor_order_history' => array(
+                'type' => 'TEXT',
+                'null' => true,
+            ),
         ));
         $this->dbforge->add_key('cor_id', true);
         $this->dbforge->add_key('mem_id');
@@ -4133,6 +4156,11 @@ class Install extends CI_Controller
                 'constraint' => 11,
                 'unsigned' => true,
                 'default' => '0',
+            ),
+            'cod_status' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+                'default' => '',
             ),
         ));
         $this->dbforge->add_key('cod_id', true);
@@ -4470,6 +4498,29 @@ class Install extends CI_Controller
                 'constraint' => 4,
                 'unsigned' => true,
                 'default' => '0',
+            ),
+            'dep_vbank_expire' => array(
+                'type' => 'DATETIME',
+                'null' => true,
+            ),
+            'is_test' => array(
+                'type' => 'CHAR',
+                'constraint' => '1',
+                'default' => '',
+            ),
+            'status' => array(
+                'type' => 'VARCHAR',
+                'constraint' => '255',
+                'default' => '',
+            ),
+            'dep_refund_price' => array(
+                'type' => 'INT',
+                'constraint' => 11,
+                'default' => '0',
+            ),
+            'dep_order_history' => array(
+                'type' => 'TEXT',
+                'null' => true,
             ),
         ));
         $this->dbforge->add_key('dep_id', true);

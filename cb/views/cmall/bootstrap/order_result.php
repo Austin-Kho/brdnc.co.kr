@@ -1,4 +1,8 @@
-<?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css'); ?>
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+$this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css');
+?>
 
 <div id="order-result">
     <h3>주문상세내역</h3>
@@ -34,7 +38,7 @@
                                 } else {
                                 ?>
                                     <button type="button" class="btn btn-xs btn-warning">입금확인중</button>
-                                <?
+                                <?php
                                 }
                                 ?>
                                 <?php echo html_escape(element('cde_title', $detail)) . ' ' . element('cod_count', $detail);?>개 (+<?php echo number_format(element('cde_price', $detail)); ?>원)
@@ -56,7 +60,10 @@
                         <span>다운로드 :</span> 
                         <?php
                         if (element('cod_download_days', $detail)) {
-                            echo '구매후 <strong>' . element('cod_download_days', $detail) . '</strong>일간<br>(~' . element('download_end_date', element('item', $result)) . ' 까지)';
+                            echo '구매후 <strong>' . element('cod_download_days', $detail) . '</strong>일간';
+                            if( element('download_end_date', element('item', $result)) ){
+                                echo '<br>(~' . element('download_end_date', element('item', $result)) . ' 까지)';
+                            }
                         } else {
                             echo '기간제한없음';
                         }
@@ -127,29 +134,19 @@
                             <tr>
                                 <th>영수증</th>
                                 <td>
-                                <?php
-                                if (element('cor_pay_type', element('data', $view)) === 'card') {
-                                    if ($this->cbconfig->item('use_pg_test')) {
-                                        $receipturl = 'https://testadmin8.kcp.co.kr/assist/bill.BillActionNew.do?cmd=';
-                                    } else {
-                                        $receipturl = 'https://admin8.kcp.co.kr/assist/bill.BillActionNew.do?cmd=';
-                                    }
-                                ?>
-                                    <a href="javascript:;" onclick="window.open('<?php echo $receipturl; ?>card_bill&tno=<?php echo element('cor_tno', element('data', $view)); ?>&amp;order_no=<?php echo element('cor_id', element('data', $view)); ?>&trade_mony=<?php echo element('cor_cash', element('data', $view)); ?>', 'winreceipt', 'width=500,height=690,scrollbars=yes,resizable=yes');" title="영수증 출력">영수증 출력</a>
+                                <?php if( $receipt_link_js = element('card_receipt_js', element('data', $view)) ){ ?>
+                                <script language="JavaScript" src="<?php echo $receipt_link_js; ?>"></script>
                                 <?php } ?>
-                                <?php
-                                if (element('cor_pay_type', element('data', $view)) === 'phone') {
-                                    if ($this->cbconfig->item('use_pg_test')) {
-                                        $receipturl = 'https://testadmin8.kcp.co.kr/assist/bill.BillActionNew.do?cmd=';
-                                    } else {
-                                        $receipturl = 'https://admin8.kcp.co.kr/assist/bill.BillActionNew.do?cmd=';
-                                    }
-                                ?>
-                                    <a href="javascript:;" onclick="window.open('<?php echo $receipturl; ?>mcash_bill&tno=<?php echo element('cor_tno', element('data', $view)); ?>&amp;order_no=<?php echo element('cor_id', element('data', $view)); ?>&trade_mony=<?php echo element('cor_cash', element('data', $view)); ?>', 'winreceipt', 'width=500,height=690,scrollbars=yes,resizable=yes');" title="영수증 출력">영수증 출력</a>
-                                <?php } ?>
+                                <a href="#" onclick="<?php echo element('card_receipt_script', element('data', $view)); ?>">영수증 출력</a>
                             </td>
                         </tr>
-                    <?php } ?>
+                        <?php } ?>
+                        <?php if ( element('cor_pay_type', element('data', $view)) === 'vbank' ){    //가상계좌이면 ?>
+                            <tr>
+                                <th>입금계좌</th>
+                                <td><?php echo element('cor_bank_info', element('data', $view)); ?></td>
+                            </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>

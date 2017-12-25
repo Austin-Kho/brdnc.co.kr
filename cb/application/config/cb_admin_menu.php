@@ -104,6 +104,7 @@ $config['admin_page_menu'] = array(
 		'menu'                                => array(
 			'cmallconfig'                  => array('컨텐츠몰환경설정', ''),
 			'emailform'                    => array('메일/쪽지발송양식', ''),
+            'cmallorder'                    => array('주문내역', ''),
 			'pendingbank'               => array('무통장입금알림', ''),
 			'orderlist'                        => array('구매내역', ''),
 			'cmallcategory'              => array('분류관리', ''),

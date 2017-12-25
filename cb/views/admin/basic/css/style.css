@@ -220,6 +220,15 @@ ul.de_pg_tab li.tab-current a{background:#2CC185;color:#fff}
 .nopost {text-align:center; padding:120px 0 !important; }
 .list-group {padding:15px;}
 
+.bs-callout {padding: 20px;margin: 20px 0;border: 1px solid #eee;border-left-width: 5px;border-radius: 3px;}
+.bs-callout-warning {border-left-color: #aa6708}
+.bs-callout h4 {margin-top:0;margin-bottom:15px;font-size:14px}
+
+.bg-classes p{padding:15px;border-radius:4px}
+.sound_only{display:none}
+
+.cor_admin_memo_box h4{margin-bottom:10px}
+.cor_admin_memo_box textarea{margin-bottom:10px}
 /* Sideview */
 #nameContextMenu { background:#000; color:#fff; padding:4px 8px 6px;z-index:10000; }
 #nameContextMenu a { color:#fff; font-size:12px; line-height:20px; display:block; }

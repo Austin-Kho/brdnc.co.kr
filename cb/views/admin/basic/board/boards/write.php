@@ -1,3 +1,6 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 <div class="box">
 <?php
 if (element('brd_id', element('data', $view))) {
@@ -67,7 +70,7 @@ if (element('brd_id', element('data', $view))) {
                 <div class="form-group">
                     <label class="col-sm-2 control-label">게시판주소(KEY)</label>
                     <div class="col-sm-8 form-inline">
-                        <?php echo board_url(); ?>/ <input type="text" class="form-control" name="brd_key" value="<?php echo set_value('brd_key', element('brd_key', element('data', $view))); ?>" /> <span class="help-inline">페이지주소를 입력해주세요</span>
+                        <?php echo board_url(); ?> <input type="text" class="form-control" name="brd_key" value="<?php echo set_value('brd_key', element('brd_key', element('data', $view))); ?>" /> <span class="help-inline">페이지주소를 입력해주세요</span>
                         <?php
                         if (element('brd_key', element('data', $view))) {
                         ?>
@@ -261,6 +264,24 @@ if (element('brd_id', element('data', $view))) {
                     <div class="col-sm-8">
                         <label for="brd_search" class="checkbox-inline">
                             <input type="checkbox" name="brd_search" id="brd_search" value="1" <?php echo set_checkbox('brd_search', '1', (element('brd_search', element('data', $view)) ? true : false)); ?> /> 사용합니다
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">캡챠 사용</label>
+                    <div class="col-sm-8">
+                        <label for="board_use_captcha" class="checkbox-inline">
+                            <input type="checkbox" name="board_use_captcha" id="board_use_captcha" value="1" <?php echo set_checkbox('board_use_captcha', '1', (element('board_use_captcha', element('data', $view)) ? true : false)); ?> /> 사용합니다
+                        </label>
+                        <span class="help-block">체크하면 글 작성시 캡챠를 무조건 사용합니다.( 회원 + 비회원 모두 )</span>
+                        <span class="help-block">미 체크하면 비회원에게만 캡챠를 사용합니다.</span>
+                    </div>
+                    <div class="col-sm-2">
+                        <label for="grp_board_use_captcha" class="checkbox-inline">
+                            <input type="checkbox" name="grp[board_use_captcha]" id="grp_board_use_captcha" value="1" /> 그룹적용
+                        </label>
+                        <label for="all_board_use_captcha" class="checkbox-inline">
+                            <input type="checkbox" name="all[board_use_captcha]" id="all_board_use_captcha" value="1" /> 전체적용
                         </label>
                     </div>
                 </div>

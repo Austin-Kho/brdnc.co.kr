@@ -93,19 +93,66 @@ class Cbconfig extends CI_Controller
 
             $this->CI->Config_model->save($savedata);
 
-        } else {
+        }
+        
+        if( version_compare($this->cfg['cb_version'], '2.0.1', '<') ){
 
-            if( $this->cfg['cb_version'] != CB_VERSION ){
+           try {
 
-                $savedata = array(
-                    'cb_version' => CB_VERSION
-                    );
+                $this->CI->load->model(array('Cmall_order_model', 'Deposit_model', 'Cmall_order_detail_model'));
 
-                $this->CI->Config_model->save($savedata);
+                if ($this->CI->db->table_exists($this->CI->db->dbprefix.'cmall_order') ) {
+                    $row = $this->CI->Cmall_order_model->get_one();
+                    
+                    if( !array_key_exists('cor_vbank_expire', $row) ){
+                        $sql = "ALTER TABLE ".$this->CI->db->dbprefix."cmall_order ADD COLUMN `cor_vbank_expire` DATETIME NULL DEFAULT NULL AFTER `cor_status`, ADD COLUMN `is_test` CHAR(1) NOT NULL DEFAULT '' AFTER `cor_vbank_expire`,
+                        ADD COLUMN `status` varchar(255) NOT NULL DEFAULT '' AFTER `is_test`,
+                        ADD COLUMN `cor_refund_price` INT(11) NOT NULL DEFAULT '0' AFTER `status`,
+                        ADD COLUMN `cor_order_history` TEXT NULL DEFAULT '' AFTER `cor_refund_price` ";
+                        $this->CI->db->query($sql);
+                    }
+                }
+
+                if ($this->CI->db->table_exists($this->CI->db->dbprefix.'deposit') ) {
+                    $row = $this->CI->Deposit_model->get_one();
+                    
+                    if( !array_key_exists('dep_vbank_expire', $row) ){
+                        $sql = "ALTER TABLE ".$this->CI->db->dbprefix."deposit ADD COLUMN `dep_vbank_expire` DATETIME NULL DEFAULT NULL AFTER `dep_status`, ADD COLUMN `is_test` CHAR(1) NOT NULL DEFAULT '' AFTER `dep_vbank_expire`,
+                        ADD COLUMN `status` varchar(255) NOT NULL DEFAULT '' AFTER `is_test`, 
+                        ADD COLUMN `dep_refund_price` INT(11) NOT NULL DEFAULT '0' AFTER `status`, 
+                        ADD COLUMN `dep_order_history` TEXT NULL DEFAULT '' AFTER `dep_refund_price` ";
+                        $this->CI->db->query($sql);
+                    }
+                }
+
+                if ($this->CI->db->table_exists($this->CI->db->dbprefix.'cmall_order_detail') ) {
+
+                    $row = $this->CI->Cmall_order_detail_model->get_one();
+                    
+                    if( !isset($row['cod_status']) ){
+                        $sql = "ALTER TABLE ".$this->CI->db->dbprefix."cmall_order_detail ADD COLUMN `cod_status` VARCHAR(50) NOT NULL DEFAULT '' AFTER `cod_count` ";
+
+                        $this->CI->db->query($sql);
+                    }
+
+                }
+
+            } catch (Exception $e) {
 
             }
 
         }
+
+        if( $this->cfg['cb_version'] != CB_VERSION ){
+
+            $savedata = array(
+                'cb_version' => CB_VERSION
+                );
+
+            $this->CI->Config_model->save($savedata);
+
+        }
+
     
         if( $return ){
             return $this->cfg;

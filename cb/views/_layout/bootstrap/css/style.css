@@ -571,6 +571,7 @@ nav , .pagination{text-align:center;}
 #side_menu .side_wr{webkit-overflow-scrolling:touch}
 
 #side_menu .m_menu li{display: block;  line-height: 40px;border-top: 1px solid #323232; position:relative;padding-left: 20px; }
+#side_menu .m_menu li a.text_link{display:inline-block;width:65%;white-space:nowrap}
 #side_menu .m_menu li a:hover{color: #7080b1;}
 #side_menu .m_menu span{ position: absolute; right: 20px; top: 15px; } 
 

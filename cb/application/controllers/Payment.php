@@ -287,6 +287,9 @@ class Payment extends CB_Controller
 
         // 이벤트가 존재하면 실행합니다
         Events::trigger('before', $eventname);
+        
+        $this->load->library(array('paymentlib', 'depositlib'));
+        $init = $this->paymentlib->lg_init();
 
         /**
          * [상점 결제결과처리(DB) 페이지]
@@ -332,7 +335,7 @@ class Payment extends CB_Controller
         $LGD_RECEIVERPHONE = $this->input->post('LGD_RECEIVERPHONE', null, ''); // 수취인 전화번호
         $LGD_DELIVERYINFO = $this->input->post('LGD_DELIVERYINFO', null, ''); // 배송지
 
-        $LGD_MERTKEY = $this->cbconfig->item('pg_lg_key'); //LG유플러스에서 발급한 상점키로 변경해 주시기 바랍니다.
+        $LGD_MERTKEY = element('pg_lg_key', $init); //LG유플러스에서 발급한 상점키로 변경해 주시기 바랍니다.
 
         $LGD_HASHDATA2 = md5($LGD_MID . $LGD_OID . $LGD_AMOUNT . $LGD_RESPCODE . $LGD_TIMESTAMP . $LGD_MERTKEY);
 
@@ -345,7 +348,7 @@ class Payment extends CB_Controller
          * ※ 주의사항 : 성공시 'OK' 문자이외의 다른문자열이 포함되면 실패처리 되오니 주의하시기 바랍니다.
          */
         $resultMSG = '결제결과 상점 DB처리(LGD_CASNOTEURL) 결과값을 입력해 주시기 바랍니다.';
-
+        
         if ($LGD_HASHDATA2 === $LGD_HASHDATA) { //해쉬값 검증이 성공이면
             if ('0000' === $LGD_RESPCODE) { //결제가 성공이면
                 if ('R' === $LGD_CASFLAG) {
@@ -370,11 +373,21 @@ class Payment extends CB_Controller
 
                     if (element('dep_id', $deposit)) {
                         $updatedata = array();
+                        $updatedata['dep_deposit'] = $LGD_AMOUNT;
                         $updatedata['dep_cash'] = $LGD_AMOUNT;
                         if ($LGD_AMOUNT === element('dep_cash_request', $deposit)) {
                             $updatedata['dep_status'] = 1;
                             $updatedata['dep_deposit_datetime'] = cdate('Y-m-d H:i:s');
-                            $this->Deposit_model->update(element('dep_id', $deposit), $updatedata);
+
+                            $sum = $this->Deposit_model->get_deposit_sum(element('mem_id', $deposit));
+                            $updatedata['dep_deposit_sum'] = $sum + $LGD_AMOUNT;
+
+                            $result = $this->Deposit_model->update(element('dep_id', $deposit), $updatedata);
+
+                            if( $result ){
+                                //회원의 예치금 업데이트 합니다.
+                                $this->depositlib->update_member_deposit( element('mem_id', $deposit) );
+                            }
                         }
                     } else {
                         $where = array(
@@ -390,7 +403,7 @@ class Payment extends CB_Controller
                             if ($LGD_AMOUNT === element('cor_cash_request', $order)) {
                                 $updatedata['cor_status'] = 1;
                                 $updatedata['cor_approve_datetime'] = cdate('Y-m-d H:i:s');
-                                $this->Cmall_order_model->update(element('cor_id', $order), $updatedata);
+                                $result = $this->Cmall_order_model->update(element('cor_id', $order), $updatedata);
                             }
                         }
                     }
@@ -432,73 +445,6 @@ class Payment extends CB_Controller
         exit;
     }
 
-    public function lg_markethashdata()
-    {
-
-        /*
-        // 이 함수는 폐지될 예정입니다.
-        */
-
-        // 이벤트 라이브러리를 로딩합니다
-        $eventname = 'event_payment_lg_markethashdata';
-        $this->load->event($eventname);
-
-        // 이벤트가 존재하면 실행합니다
-        Events::trigger('before', $eventname);
-
-
-        $this->load->library(array('paymentlib'));
-        $init = $this->paymentlib->lg_init();
-
-        /*
-         * 1. 기본결제 인증요청 정보 변경
-         *
-         * 기본정보를 변경하여 주시기 바랍니다.(파라미터 전달시 POST를 사용하세요)
-         */
-        $LGD_OID = $this->input->post('LGD_OID', null, ''); //주문번호(상점정의 유니크한 주문번호를 입력하세요)
-        $LGD_AMOUNT = $this->input->post('LGD_AMOUNT', null, ''); //결제금액("," 를 제외한 결제금액을 입력하세요)
-        $LGD_TIMESTAMP = $this->input->post('LGD_TIMESTAMP', null, ''); //타임스탬프
-
-        /*
-         *************************************************
-         * 2. MD5 해쉬암호화 (수정하지 마세요) - BEGIN
-         *
-         * MD5 해쉬암호화는 거래 위변조를 막기위한 방법입니다.
-         *************************************************
-         *
-         * 해쉬 암호화 적용( LGD_MID + LGD_OID + LGD_AMOUNT + LGD_TIMESTAMP + LGD_MERTKEY)
-         * LGD_MID : 상점아이디
-         * LGD_OID : 주문번호
-         * LGD_AMOUNT : 금액
-         * LGD_TIMESTAMP : 타임스탬프
-         * LGD_MERTKEY : 상점MertKey (mertkey는 상점관리자 -> 계약정보 -> 상점정보관리에서 확인하실수 있습니다)
-         *
-         * MD5 해쉬데이터 암호화 검증을 위해
-         * LG유플러스에서 발급한 상점키(MertKey)를 환경설정 파일(lgdacom/conf/mall.conf)에 반드시 입력하여 주시기 바랍니다.
-         */
-        include(FCPATH . 'plugin/pg/lg/XPayClient.php');
-        include(FCPATH . 'plugin/pg/lg/XPay.php');
-        $xpay = new XPay(element('configPath', $init), element('CST_PLATFORM', $init));
-
-        // Mert Key 설정
-        $xpay->set_config_value('t' . element('LGD_MID', $init), $this->cbconfig->item('pg_lg_mid'));
-        $xpay->set_config_value(element('LGD_MID', $init), $this->cbconfig->item('pg_lg_key'));
-
-        $xpay->Init_TX(element('LGD_MID', $init));
-        $LGD_HASHDATA = md5(element('LGD_MID', $init) . $LGD_OID . $LGD_AMOUNT . $LGD_TIMESTAMP . $xpay->config[element('LGD_MID', $init)]);
-        /*
-         *************************************************
-         * 2. MD5 해쉬암호화 (수정하지 마세요) - END
-         *************************************************
-         */
-
-        // 이벤트가 존재하면 실행합니다
-        Events::trigger('after', $eventname);
-
-        die($LGD_HASHDATA);
-    }
-
-
     public function inicis_return_result()
     {
         // 이벤트 라이브러리를 로딩합니다
@@ -509,11 +455,15 @@ class Payment extends CB_Controller
         Events::trigger('before', $eventname);
 
         $TEMP_IP = $this->input->ip_address();
-        $PG_IP = substr($TEMP_IP,0, 10);
+        //$PG_IP = substr($TEMP_IP,0, 10);
+        $PG_IP = $TEMP_IP;
         if ( ! $this->cbconfig->item('use_pg_test')) {
             switch ($PG_IP) {
-                case '203.238.37' :
-                case '210.98.138' :
+                case '203.238.37.3' :
+                case '203.238.37.15' :
+                case '203.238.37.16' :
+                case '203.238.37.25' :
+                case '39.115.212.9' :
                     break;
                 default :
                     $this->load->model(array('Member_model'));
@@ -541,7 +491,6 @@ class Payment extends CB_Controller
                     exit;
             }
         }
-
 
         //**********************************************************************************
         //이니시스가 전달하는 가상계좌이체의 결과를 수신하여 DB 처리 하는 부분 입니다.
@@ -575,7 +524,7 @@ class Payment extends CB_Controller
         $cl_kor = $this->input->post('cl_kor', null, ''); //한글 구분 코드
         $no_msgmanage = $this->input->post('no_msgmanage', null, ''); //전문 관리 번호
         $no_vacct = $this->input->post('no_vacct', null, ''); //가상계좌번호
-        $amt_input = $this->input->post('amt_input', null, ''); //입금금액
+        $amt_input = (int) $this->input->post('amt_input', null, ''); //입금금액
         $amt_check = $this->input->post('amt_check', null, ''); //미결제 타점권 금액
         $nm_inputbank = $this->input->post('nm_inputbank', null, ''); //입금 금융기관명
         $nm_input = $this->input->post('nm_input', null, ''); //입금 의뢰인
@@ -615,15 +564,17 @@ class Payment extends CB_Controller
                 'cor_app_no' => $no_vacct,
                 'cor_status' => 0,
             );
+
             $order = $this->Cmall_order_model->get_one('', '', $where);
 
             if (element('cor_id', $order)) {
                 $updatedata = array();
                 $updatedata['cor_cash'] = $amt_input;
-                if ($amt_input === element('cor_cash_request', $order)) {
+                if ($amt_input === (int) element('cor_cash_request', $order)) {
                     $updatedata['cor_status'] = 1;
                     $updatedata['cor_approve_datetime'] = $receipt_time;
-                    $this->Cmall_order_model->update(element('cor_id', $order), $updatedata);
+
+                    $result = $this->Cmall_order_model->update(element('cor_id', $order), $updatedata);
                 }
             }
         }
@@ -843,7 +794,6 @@ class Payment extends CB_Controller
 
         // 이벤트가 존재하면 실행합니다
         Events::trigger('before', $eventname);
-
         
         //*******************************************************************************
         // FILE NAME : mx_rnoti.php
@@ -913,7 +863,8 @@ class Payment extends CB_Controller
             $P_AUTH_NO = $this->input->post('P_AUTH_NO', null, ''); // 승인번호
             $P_SRC_CODE = $this->input->post('P_SRC_CODE', null, ''); // 앱연동 결제구분
 
-            if( $P_STATUS == "00" && $P_TID && $P_MID ){
+            //가상계좌가 아니면
+            if( $P_STATUS == "00" && $P_TID && $P_MID && $P_TYPE != 'VBANK' ){
                 
                 $this->load->model(array('Deposit_model', 'Cmall_order_model', 'Payment_order_data_model'));
 
@@ -1000,8 +951,10 @@ class Payment extends CB_Controller
                             $result = $this->paymentlib->inipay_result('mobile');
                             $insertdata = array();
                             
-                            $total_price_sum = $P_AMT;  //결제된 금액
+                            $total_price_sum = $item_cct_price = element('total_price_sum', $data);
+                            $co_cash = $P_AMT;  //결제된 금액
                             $order_deposit = element('order_deposit', $data);
+                            $od_status = 'order';   //주문상태
 
                             switch ($P_TYPE) {
                                 case 'CARD':    //카드
@@ -1024,6 +977,9 @@ class Payment extends CB_Controller
                                     $insertdata['mem_realname'] = $this->CI->input->post('mem_realname', null, '');
                                     $insertdata['cor_pg'] = $this->CI->cbconfig->item('use_payment_pg');
 
+                                    if ( ((int) $item_cct_price - (int) $order_deposit - $cor_cash) == 0 ) {
+                                        $od_status = 'deposit';   //주문상태
+                                    }
                                     break;
                                 case 'BANK':    //계좌이체
 
@@ -1042,7 +998,12 @@ class Payment extends CB_Controller
                                     $insertdata['mem_realname'] = $this->CI->input->post('mem_realname', null, '');
                                     $insertdata['cor_pg'] = $this->CI->cbconfig->item('use_payment_pg');
 
+                                    if ( ((int) $item_cct_price - (int) $order_deposit - $cor_cash) == 0 ) {
+                                        $od_status = 'deposit';   //주문상태
+                                    }
+
                                     break;
+                                /*  //가상계좌는 해당 사항 없음
                                 case 'VBANK':   //가상계좌
 
                                     $insertdata['cor_tno'] = element('tno', $result);
@@ -1057,6 +1018,7 @@ class Payment extends CB_Controller
                                     $insertdata['cor_pg'] = $this->CI->cbconfig->item('use_payment_pg');
 
                                     break;
+                                */
                                 case 'MOBILE':   //휴대폰
 
                                     $insertdata['cor_tno'] = element('tno', $result);
@@ -1074,6 +1036,11 @@ class Payment extends CB_Controller
                                     $insertdata['cor_status'] = 1;
                                     $insertdata['mem_realname'] = $this->CI->input->post('mem_realname', null, '');
                                     $insertdata['cor_pg'] = $this->CI->cbconfig->item('use_payment_pg');
+
+                                    if ( ((int) $item_cct_price - (int) $order_deposit - $cor_cash) == 0 ) {
+                                        $od_status = 'deposit';   //주문상태
+                                    }
+
                                     break;
                             }   //end switch
 
@@ -1094,6 +1061,8 @@ class Payment extends CB_Controller
                             $insertdata['cor_content'] = $this->CI->input->post('cor_content', null, '');
                             $insertdata['cor_ip'] = $this->CI->input->ip_address();
                             $insertdata['cor_useragent'] = $this->CI->agent->agent_string();
+                            $insertdata['is_test'] = $this->CI->cbconfig->item('use_pg_test');
+                            $insertdata['status'] = $od_status;
                             
                             $res = $this->Cmall_order_model->insert($insertdata);
                             if ($res) {
@@ -1113,6 +1082,7 @@ class Payment extends CB_Controller
                                             'cde_id' => element('cde_id', $val),
                                             'cod_download_days' => element('cit_download_days', $item),
                                             'cod_count' => element('cct_count', $val),
+                                            'cod_status' =>  $od_status,
                                         );
                                         $this->Cmall_order_detail_model->insert($insertdetail);
                                         $deletewhere = array(
@@ -1410,8 +1380,6 @@ class Payment extends CB_Controller
         $row = $this->Payment_inicis_log_model->get_one($oid);
 
         if ( ! element('pil_id', $row)) {
-            echo $page_return_url;
-            exit;
             alert('결제 정보가 존재하지 않습니다.\\n\\n올바른 방법으로 이용해 주십시오.', $page_return_url);
         }
 
@@ -1769,8 +1737,8 @@ class Payment extends CB_Controller
         $xpay = new XPay(element('configPath', $init), element('CST_PLATFORM', $init));
 
         // Mert Key 설정
-        $xpay->set_config_value('t' . element('LGD_MID', $init), $this->cbconfig->item('pg_lg_mid'));
-        $xpay->set_config_value(element('LGD_MID', $init), $this->cbconfig->item('pg_lg_key'));
+        $xpay->set_config_value('t' . element('LGD_MID', $init), element('pg_lg_key', $init));
+        $xpay->set_config_value(element('LGD_MID', $init), element('pg_lg_key', $init));
 
         $xpay->Init_TX(element('LGD_MID', $init));
         $LGD_HASHDATA = md5(element('LGD_MID', $init) . $LGD_OID . $LGD_AMOUNT . $LGD_TIMESTAMP . $xpay->config[element('LGD_MID', $init)]);
@@ -1893,8 +1861,8 @@ class Payment extends CB_Controller
         $xpay = new XPay(element('configPath', $init), element('CST_PLATFORM', $init));
 
         // Mert Key 설정
-        $xpay->set_config_value('t' . element('LGD_MID', $init), $this->cbconfig->item('pg_lg_mid'));
-        $xpay->set_config_value(element('LGD_MID', $init), $this->cbconfig->item('pg_lg_key'));
+        $xpay->set_config_value('t' . element('LGD_MID', $init), element('pg_lg_key', $init));
+        $xpay->set_config_value(element('LGD_MID', $init), element('pg_lg_key', $init));
 
         $xpay->Init_TX(element('LGD_MID', $init));
         $LGD_HASHDATA = md5(element('LGD_MID', $init) . $LGD_OID . $LGD_AMOUNT . element('LGD_TIMESTAMP', $init) . $xpay->config[element('LGD_MID', $init)]);
@@ -2071,6 +2039,9 @@ class Payment extends CB_Controller
         if (empty($ptype)) {
             return;
         }
+        
+        $this->load->library(array('paymentlib'));
+        $init = $this->paymentlib->lg_init();
 
         $LGD_RESPCODE = $this->input->post('LGD_RESPCODE', null, ''); // 응답코드: 0000(성공) 그외 실패
         $LGD_RESPMSG = $this->input->post('LGD_RESPMSG', null, ''); // 응답메세지
@@ -2116,7 +2087,7 @@ class Payment extends CB_Controller
         $LGD_RECEIVERPHONE = $this->input->post('LGD_RECEIVERPHONE', null, ''); // 수취인 전화번호
         $LGD_DELIVERYINFO = $this->input->post('LGD_DELIVERYINFO', null, ''); // 배송지
 
-        $LGD_MERTKEY = $this->cbconfig->item('pg_lg_key'); //LG유플러스에서 발급한 상점키로 변경해 주시기 바랍니다.
+        $LGD_MERTKEY = element('pg_lg_key', $init); //LG유플러스에서 발급한 상점키로 변경해 주시기 바랍니다.
 
         $LGD_HASHDATA2 = md5($LGD_MID . $LGD_OID . $LGD_AMOUNT . $LGD_RESPCODE . $LGD_TIMESTAMP . $LGD_MERTKEY);
 

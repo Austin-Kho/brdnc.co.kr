@@ -1,4 +1,8 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+echo display_html_content(element('headercontent', element('group', $view)));
+
 if (element('board_list', $view)) {
     foreach (element('board_list', $view) as $key => $board) {
         $config = array(
@@ -14,3 +18,5 @@ if (element('board_list', $view)) {
         echo $this->board->latest($config);
     }
 }
+
+echo display_html_content(element('footercontent', element('group', $view)));

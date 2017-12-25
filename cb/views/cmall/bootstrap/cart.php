@@ -68,16 +68,17 @@ echo form_open(site_url('cmall/cart'), $attributes);
 
 <script type="text/javascript">
 //<![CDATA[
-$(document).on('change', '.list-chkbox', function() {
-    var sum = 0;
-    $('.list-chkbox:checked').each(function () {
-        sum += parseInt($("input[name='total_price[" + $(this).val() + "]']").val());
-    });
-    $('.checked_price').text(number_format(sum.toString()));
-});
 
-$(function() {
+jQuery(function($) {
     var close_btn_idx;
+
+    $(document).on('change', '.list-chkbox', function() {
+        var sum = 0;
+        $('.list-chkbox:checked').each(function () {
+            sum += parseInt($("input[name='total_price[" + $(this).val() + "]']").val());
+        });
+        $('.checked_price').text(number_format(sum.toString()));
+    });
 
     // 선택사항수정
     $(document).on('click', '.change_option', function() {

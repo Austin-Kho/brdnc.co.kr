@@ -78,6 +78,7 @@ class INIpay50 {
         /* -------------------------------------------------- */
         /* Log Start																				 */
         /* -------------------------------------------------- */
+
         $this->m_Log = new INILog($this->m_REQUEST);
         if (!$this->m_Log->StartLog()) {
             $this->MakeTXErrMsg(LOG_OPEN_ERR, "로그파일을 열수가 없습니다.[" . $this->m_REQUEST["inipayhome"] . "]");

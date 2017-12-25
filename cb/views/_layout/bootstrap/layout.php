@@ -324,7 +324,7 @@ var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
                                     if (element('men_target', $mval)) {
                                         $menuhtml .= ' target="' . element('men_target', $mval) . '"';
                                     }
-                                    $menuhtml .= ' title="' . html_escape(element('men_name', $mval)) . '">' . html_escape(element('men_name', $mval)) . '</a><a href="#" style="width:25px;float:right;" class="subopen" data-menu-order="' . $mkey . '"><i class="fa fa-caret-down"></i></a>
+                                    $menuhtml .= ' class="text_link" title="' . html_escape(element('men_name', $mval)) . '">' . html_escape(element('men_name', $mval)) . '</a><a href="#" style="width:25px;float:right;" class="subopen" data-menu-order="' . $mkey . '"><i class="fa fa-caret-down"></i></a>
                                     <ul class="dropdown-custom-menu drop-downorder-' . $mkey . '">';
 
                                     foreach (element(element('men_id', $mval), $menu) as $skey => $sval) {
@@ -337,7 +337,7 @@ var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
                                     $menuhtml .= '</ul></li>';
 
                                 } else {
-                                    $menuhtml .= '<li><a href="' . element('men_link', $mval) . '" ' . element('men_custom', $mval);
+                                    $menuhtml .= '<li><a class="text_link" href="' . element('men_link', $mval) . '" ' . element('men_custom', $mval);
                                     if (element('men_target', $mval)) {
                                         $menuhtml .= ' target="' . element('men_target', $mval) . '"';
                                     }

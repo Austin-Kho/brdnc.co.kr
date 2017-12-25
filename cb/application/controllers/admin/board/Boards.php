@@ -286,6 +286,11 @@ class Boards extends CB_Controller
                 'label' => '검색여부',
                 'rules' => 'trim|numeric',
             ),
+            array(
+                'field' => 'board_use_captcha',
+                'label' => '검색여부',
+                'rules' => 'trim|numeric',
+            ),
         );
         if ($this->input->post($primary_key)) {
             $config[] = array(
@@ -340,7 +345,7 @@ class Boards extends CB_Controller
 
             $array = array('board_layout', 'board_mobile_layout', 'board_sidebar',
                 'board_mobile_sidebar', 'board_skin', 'board_mobile_skin', 'header_content',
-                'footer_content', 'mobile_header_content', 'mobile_footer_content',);
+                'footer_content', 'mobile_header_content', 'mobile_footer_content', 'board_use_captcha');
 
             $metadata = array();
             $groupdata = array();

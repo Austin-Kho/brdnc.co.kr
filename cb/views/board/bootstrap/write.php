@@ -1,3 +1,6 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+?>
 <?php $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css'); ?>
 
 <?php echo element('headercontent', element('board', $view)); ?>
@@ -331,7 +334,7 @@
                 //]]>
                 </script>
             <?php } ?>
-            <?php if ($this->member->is_member() === false) { ?>
+            <?php if ( element('is_use_captcha', element('board', $view)) ) { ?>
                 <div class="well well-sm form-inline passcord">
                     <?php if ($this->cbconfig->item('use_recaptcha')) { ?>
                         <div class="captcha" id="recaptcha"><button type="button" id="captcha"></button></div>
@@ -418,7 +421,7 @@ function submitContents(f) {
 </script>
 
 <?php
-if (element('is_post_name', element('post', $view))) {
+if ( element('is_use_captcha', element('board', $view)) ) {
     if ($this->cbconfig->item('use_recaptcha')) {
         $this->managelayout->add_js(base_url('assets/js/recaptcha.js'));
     } else {
@@ -439,6 +442,8 @@ $(function() {
 <?php } ?>
 <?php if ($this->member->is_member() === false) { ?>
             , post_password: {required :true, minlength:4, maxlength:100}
+<?php } ?>
+<?php if ( element('is_use_captcha', element('board', $view)) ) { ?>
 <?php if ($this->cbconfig->item('use_recaptcha')) { ?>
             , recaptcha : {recaptchaKey:true}
 <?php } else { ?>

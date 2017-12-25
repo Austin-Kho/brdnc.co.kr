@@ -8,9 +8,16 @@ jQuery.fn.bindAll = function(options) {
 
 jQuery(function ($) {
     'use strict';
+
+    var ed_nonce = '';
+
+    if( !!opener && !!opener.window && !!opener.window.nhn ){
+        ed_nonce = opener.window.nhn.husky.SE2M_Configuration.SE2M_Accessibility.ed_nonce;
+    }
+
     // Change this to the location of your server-side upload handler:
     var gnu = {
-        url : '../../../../../editorfileupload/smarteditor/',
+        url : '../../../../../editorfileupload/smarteditor/'+ed_nonce,
         container_el : 'body',
         dreg_area : '#drag_area',
         dreg_area_list : '#drag_area > ul',
@@ -207,6 +214,14 @@ jQuery(function ($) {
         }
     }
 
+    var parent_cb_board = '';
+
+    try {
+        parent_cb_board = opener.window.parent.cb_board;
+    }
+    catch(err) {
+    }
+
     $('#fileupload').fileupload({
         url: gnu.url,
         dataType: 'json',
@@ -214,6 +229,7 @@ jQuery(function ($) {
         dropZone: $(gnu.dreg_area),
         autoUpload: true,
         sequentialUploads: true,
+        formData: {cb_board:parent_cb_board},
         acceptFileTypes: /(\.|\/)(gif|jpe?g|bmp|png)$/i,
         // Enable image resizing, except for Android and Opera,
         // which actually support image resizing, but fail to

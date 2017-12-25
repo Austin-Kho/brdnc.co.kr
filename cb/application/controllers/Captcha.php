@@ -83,8 +83,19 @@ class Captcha extends CB_Controller
     {
         $html = '<div id="google-recaptcha">';
         $html .= '<script src="https://www.google.com/recaptcha/api.js"></script>';
-        $html .= '<div class="g-recaptcha" data-sitekey="' . $this->cbconfig->item('recaptcha_sitekey') . '"></div>';
-        $html .= '</div">';
+
+        if ( (int) $this->cbconfig->item('use_recaptcha') === 2 ){
+
+            $html .= '<div id="recaptcha" class="g-recaptcha" data-sitekey="' . $this->cbconfig->item('recaptcha_sitekey') . '" data-callback="recaptcha_validate" data-badge="inline" data-size="invisible"></div>';
+            $html .= '<script>jQuery("#recaptcha").hide().parent("div").hide();</script>';
+
+        } else {
+            
+            $html .= '<div class="g-recaptcha" data-sitekey="' . $this->cbconfig->item('recaptcha_sitekey') . '"></div>';
+
+        }
+
+        $html .= '</div>';
 
         echo $html;
     }

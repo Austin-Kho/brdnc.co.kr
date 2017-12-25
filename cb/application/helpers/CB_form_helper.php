@@ -170,3 +170,25 @@ if ( ! function_exists('set_radio'))
         return ($input === (string) $value) ? ' checked="checked"' : '';
     }
 }
+
+if ( ! function_exists('check_use_captcha'))
+{
+    function check_use_captcha($member, $board=array(), $mode=''){
+
+        $use_captcha = false;
+        
+        if( $member->is_admin() !== false ){     //관리자면 캡챠 사용 안함
+            return false;
+        }
+
+        if( $member->is_member() === false ){       //비회원은 캡챠 사용
+            $use_captcha = true;
+        }
+
+        if( element('board_use_captcha', $board) && $mode !== 'cu' ){   //글쓰기일때만
+            $use_captcha = true;
+        }
+
+        return $use_captcha;
+    }
+}

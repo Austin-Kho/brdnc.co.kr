@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 define('CB_PACKAGE', 'basic');
-define('CB_VERSION', '2.0');
+define('CB_VERSION', '2.0.1');
 
 $config['cb_version'] = array();
 ?>

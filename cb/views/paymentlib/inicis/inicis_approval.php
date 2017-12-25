@@ -29,6 +29,7 @@ foreach (element('data', $view) as $key => $value) {
     <input type="hidden" name="P_APPL_NUM" value="<?php echo element('P_APPL_NUM', element('PAY', $view)); ?>" />
     <input type="hidden" name="P_VACT_NUM" value="<?php echo element('P_VACT_NUM', element('PAY', $view)); ?>" />
     <input type="hidden" name="P_VACT_NAME" value="<?php echo iconv('euc-kr', 'utf-8', element('P_VACT_NAME', element('PAY', $view))); ?>" />
+    <input type="hidden" name="P_VACT_DATE" value="<?php echo element('P_VACT_DATE', element('PAY', $view)); ?>" />
     <input type="hidden" name="P_VACT_BANK" value="<?php echo element(element('P_VACT_BANK_CODE', element('PAY', $view)), element('BANK_CODE', element('pg', $view))); ?>" />
     <input type="hidden" name="P_CARD_ISSUER" value="<?php echo element(element('P_CARD_ISSUER_CODE', element('PAY', $view)), element('CARD_CODE', element('pg', $view))); ?>" />
     <input type="hidden" name="P_UNAME" value="<?php echo iconv('euc-kr', 'utf-8', element('P_UNAME', element('PAY', $view))); ?>" />

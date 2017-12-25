@@ -10,6 +10,12 @@
                 <td class="text-center col-md-3">주문번호</td>
                 <td><?php echo element('dep_id', element('data', $view)); ?></td>
             </tr>
+            <?php if( element('is_test', element('data', $view) )) { ?>
+            <tr>
+                <td class="text-center col-md-3">테스트 결제</td>
+                <td><span style="color:red;font-weight:bold">테스트로 결제하셨습니다.</span></td>
+            </tr>
+            <?php } ?>
             <tr>
                 <td class="text-center"><?php echo html_escape($this->depositconfig->item('deposit_name')); ?> 충전</td>
                 <td><?php echo number_format(element('dep_deposit_request', element('data', $view))); ?> <?php echo html_escape($this->depositconfig->item('deposit_unit')); ?></td>
@@ -36,6 +42,16 @@
                 <tr>
                     <td class="text-center">입금계좌</td>
                     <td><?php echo nl2br(html_escape($this->cbconfig->item('payment_bank_info'))); ?></td>
+                </tr>
+            <?php } ?>
+            <?php if (element('dep_pay_type', element('data', $view)) === 'vbank') {   //가상계좌 ?>
+                <tr>
+                    <td class="text-center">입금자명</td>
+                    <td><?php echo html_escape(element('mem_realname', element('data', $view))); ?></td>
+                </tr>
+                <tr>
+                    <td class="text-center">입금계좌</td>
+                    <td><?php echo element('dep_bank_info', element('data', $view)); ?></td>
                 </tr>
             <?php } ?>
             <?php if (element('dep_pay_type', element('data', $view)) === 'card') {?>

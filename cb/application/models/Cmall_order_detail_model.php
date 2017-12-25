@@ -30,7 +30,7 @@ class Cmall_order_detail_model extends CB_Model
 
     public function get_by_item($cor_id = 0)
     {
-        $cor_id = (int) $cor_id;
+        $cor_id = preg_replace('/[^0-9]/', '', $cor_id);
         if (empty($cor_id) OR $cor_id < 1) {
             return;
         }
@@ -47,16 +47,16 @@ class Cmall_order_detail_model extends CB_Model
 
     public function get_detail_by_item($cor_id = 0, $cit_id = 0)
     {
-        $cor_id = (int) $cor_id;
+        $cor_id = preg_replace('/[^0-9]/', '', $cor_id);
         if (empty($cor_id) OR $cor_id < 1) {
             return;
         }
-        $cit_id = (int) $cit_id;
+        $cit_id = preg_replace('/[^0-9]/', '', $cit_id);
         if (empty($cit_id) OR $cit_id < 1) {
             return;
         }
 
-        $this->db->select('cmall_item_detail.*, cmall_order_detail.cod_count, cmall_order_detail.cod_download_days');
+        $this->db->select('cmall_item_detail.*, cmall_order_detail.cod_count, cmall_order_detail.cod_download_days, cmall_order_detail.cod_status');
         $this->db->from('cmall_order_detail');
         $this->db->join('cmall_item_detail', 'cmall_order_detail.cde_id = cmall_item_detail.cde_id', 'inner');
         $this->db->where('cmall_order_detail.cor_id', $cor_id);

@@ -23,7 +23,7 @@ class Editorfileupload extends CB_Controller
     /**
      * 헬퍼를 로딩합니다
      */
-    protected $helpers = array('array');
+    protected $helpers = array('array', 'dhtml_editor');
 
     function __construct()
     {
@@ -35,7 +35,7 @@ class Editorfileupload extends CB_Controller
     /**
      * 스마트 에디터를 통해 이미지를 업로드하는 컨트롤러입니다.
      */
-    public function smarteditor()
+    public function smarteditor($ed_nonce='')
     {
         // 이벤트 라이브러리를 로딩합니다
         $eventname = 'event_editorfileupload_smarteditor';
@@ -50,6 +50,10 @@ class Editorfileupload extends CB_Controller
 
         $upload_path = config_item('uploads_dir') . '/editor/' . cdate('Y') . '/' . cdate('m') . '/';
 
+        if( ! ft_nonce_is_valid( urldecode($ed_nonce) , 'smarteditor' ) ){
+            exit(json_encode(array('files'=>array('0'=>array('error'=>'토큰오류')))));
+        }
+
         if (isset($_FILES)
             && isset($_FILES['files'])
             && isset($_FILES['files']['name'])
@@ -63,11 +67,24 @@ class Editorfileupload extends CB_Controller
             );
 
             $this->upload->initialize($uploadconfig);
-            $_FILES['userfile']['name'] = $_FILES['files']['name'][0];
-            $_FILES['userfile']['type'] = $_FILES['files']['type'][0];
-            $_FILES['userfile']['tmp_name'] = $_FILES['files']['tmp_name'][0];
-            $_FILES['userfile']['error'] = $_FILES['files']['error'][0];
-            $_FILES['userfile']['size'] = $_FILES['files']['size'][0];
+            $upload = isset($_FILES['files']) ? $_FILES['files'] : null;
+            if( is_array( $upload['tmp_name'] ) ){
+                $_FILES['userfile']['name'] = $upload['name'][0];
+                $_FILES['userfile']['type'] = $upload['type'][0];
+                $_FILES['userfile']['tmp_name'] = $upload['tmp_name'][0];
+                $_FILES['userfile']['error'] = $upload['error'][0];
+                $_FILES['userfile']['size'] = $upload['size'][0];
+            } else {
+                if($upload['type'] == "application/octet-stream"){
+                    $imageMime = getimagesize($upload['tmp_name']); // get temporary file REAL info
+                    $upload['type'] = $imageMime['mime']; //set in our array the correct mime
+                }
+                $_FILES['userfile']['name'] = $upload['name'];
+                $_FILES['userfile']['type'] = $upload['type'];
+                $_FILES['userfile']['tmp_name'] = $upload['tmp_name'];
+                $_FILES['userfile']['error'] = $upload['error'];
+                $_FILES['userfile']['size'] = $upload['size'];
+            }
 
             if ($this->upload->do_upload()) {
 

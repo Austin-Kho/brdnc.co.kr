@@ -8,7 +8,15 @@
             <input type="hidden" name="<?php echo element('primary_key', $view); ?>"    value="<?php echo element(element('primary_key', $view), element('data', $view)); ?>" />
             <div class="box-table">
                 <div class="form-horizontal">
-                    <div class="form-group">
+                        <?php if( element('is_test', element('data', $view)) ){ ?>
+                        <div class="form-group">
+                        <label class="col-sm-2 control-label">테스트결제</label>
+                            <div class="col-sm-10">
+                                <span style="color:red;font-weight:bold">테스트로 결제 되었습니다.</span>
+                            </div>
+                        </div>
+                        <?php } ?>
+                        <div class="form-group">
                         <label class="col-sm-2 control-label">회원명</label>
                             <div class="col-sm-10">
                                 <?php

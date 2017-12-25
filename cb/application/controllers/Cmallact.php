@@ -131,11 +131,11 @@ class Cmallact extends CB_Controller
         $eventname = 'event_cmallact_download';
         $this->load->event($eventname);
 
-        $cor_id = (int) $cor_id;
+        $cor_id = preg_replace('/[^0-9]/', '', $cor_id);
         if (empty($cor_id) OR $cor_id < 1) {
             show_404();
         }
-        $cde_id = (int) $cde_id;
+        $cde_id = preg_replace('/[^0-9]/', '', $cde_id);
         if (empty($cde_id) OR $cde_id < 1) {
             show_404();
         }
@@ -162,7 +162,7 @@ class Cmallact extends CB_Controller
 
         $order = $this->Cmall_order_model
             ->is_ordered_item_detail($this->member->item('mem_id'), $cor_id, $cde_id);
-        if ( ! element('cor_id', $order) OR (int) element('cor_id', $order) !== $cor_id) {
+        if ( ! element('cor_id', $order) OR preg_replace('/[^0-9]/', '', element('cor_id', $order)) != $cor_id) {
             alert('회원님은 다운받으실 수 있는 권한이 없습니다');
         }
         if (element('cod_download_days', $order)) {

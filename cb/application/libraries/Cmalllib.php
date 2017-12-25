@@ -51,6 +51,16 @@ class Cmalllib extends CI_Controller
         return $result;
     }
 
+    public function get_paymethodtype($method){
+
+        $paymethodtype = $this->paymethodtype;
+
+        if( isset( $paymethodtype[$method] ) ){
+            return $paymethodtype[$method];
+        }
+
+        return $method;
+    }
 
     public function get_nav_category($category_id = '')
     {

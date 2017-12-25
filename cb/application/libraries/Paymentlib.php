@@ -19,6 +19,9 @@ class Paymentlib extends CI_Controller
     private $xpay;
     private $inipay;
 
+    private $inicis_authMap;    //이니시스
+    private $httpUtil;      //이니시스
+
     function __construct()
     {
         $this->CI = & get_instance();
@@ -106,6 +109,14 @@ class Paymentlib extends CI_Controller
         $data['CST_MID'] = 'si_'.$this->CI->cbconfig->item('pg_lg_mid'); //상점아이디(LG유플러스으로 부터 발급받으신 상점아이디를 입력하세요)
                                                                                     //테스트 아이디는 't'를 반드시 제외하고 입력하세요.
         $data['LGD_MID'] = (('test' === $data['CST_PLATFORM']) ? 't' : '') . $data['CST_MID']; //상점아이디(자동생성)
+        $data['pg_lg_key'] = $this->CI->cbconfig->item('pg_lg_key');    //mert key
+
+        if( $data['CST_PLATFORM'] === 'test' && $data['LGD_MID'] === 'tsi_' ){
+            $data['CST_MID'] = 'dacomst7';
+            $data['LGD_MID'] = 'tdacomst7';
+            $data['pg_lg_key'] = '95160cce09854ef44d2edb2bfb05f9f3';
+        }
+
         $data['LGD_TIMESTAMP'] = date('YmdHis'); //타임스탬프
         $data['LGD_BUYERIP'] = $this->CI->input->ip_address(); //구매자IP
         $data['LGD_BUYERID'] = ''; //구매자ID
@@ -155,7 +166,8 @@ class Paymentlib extends CI_Controller
             $data['pg_inicis_key'] = '1111';
             $data['pg_inicis_sign'] = 'SU5JTElURV9UUklQTEVERVNfS0VZU1RS';
 
-            $data['ini_js_url'] = 'https://stgstdpay.inicis.com/stdjs/INIStdPay.js';
+            //$data['ini_js_url'] = 'https://stgstdpay.inicis.com/stdjs/INIStdPay.js';
+            $data['ini_js_url'] = 'https://stdpay.inicis.com/stdjs/INIStdPay.js';
         } else {    //실결제
             $data['pg_inicis_mid'] = 'SIR'.$this->CI->cbconfig->item('pg_inicis_mid');
             $data['pg_inicis_key'] = $this->CI->cbconfig->item('pg_inicis_key');
@@ -183,7 +195,7 @@ class Paymentlib extends CI_Controller
             $this->inipay = new INIpay50;
 
             $this->inipay->SetField('inipayhome', FCPATH . 'plugin/pg/inicis'); // 이니페이 홈디렉터리(상점수정 필요)
-            $this->inipay->SetField('debug', 'false'); // 로그모드('true'로 설정하면 상세로그가 생성됨.)
+            $this->inipay->SetField('debug', "false"); // 로그모드('true'로 설정하면 상세로그가 생성됨.)
 
             $data['util'] = new INIStdPayUtil();
             $data['timestamp'] = $data['util']->getTimestamp(); // util에 의해서 자동생성
@@ -506,7 +518,7 @@ class Paymentlib extends CI_Controller
                     $result['bankname'] = $c_PayPlus->mf_get_res_data('bankname'); // 입금할 은행 이름
                     $result['depositor'] = $c_PayPlus->mf_get_res_data('depositor'); // 입금할 계좌 예금주
                     $result['account'] = $c_PayPlus->mf_get_res_data('account'); // 입금할 계좌 번호
-                    $result['va_date'] = $c_PayPlus->mf_get_res_data('va_date'); // 가상계좌 입금마감시간
+                    $result['va_date'] = $result['cor_vbank_expire'] = $c_PayPlus->mf_get_res_data('va_date'); // 가상계좌 입금마감시간
                 }
 
                 /* = -------------------------------------------------------------------------- = */
@@ -558,7 +570,7 @@ class Paymentlib extends CI_Controller
     }
 
 
-    public function kcp_pp_ax_hub_cancel($result)
+    public function kcp_pp_ax_hub_cancel($result, $return_msg=false)
     {
         $config = $this->kcp_init();
 
@@ -616,7 +628,10 @@ class Paymentlib extends CI_Controller
                     $c_PayPlus->mf_set_modx_data('tno', element('tno', $result)); // KCP 원거래 거래번호
                     $c_PayPlus->mf_set_modx_data('mod_type', $bSucc_mod_type); // 원거래 변경 요청 종류
                     $c_PayPlus->mf_set_modx_data('mod_ip', element('cust_ip', $result)); // 변경 요청자 IP
-                    $c_PayPlus->mf_set_modx_data('mod_desc', '결제금액 오류'); // 변경 사유
+
+                    $refund_msg = element('refund_msg', $result) ? element('refund_msg', $result) : '결제금액 오류';
+
+                    $c_PayPlus->mf_set_modx_data('mod_desc', $refund_msg); // 변경 사유
 
                     $c_PayPlus->mf_do_tx(element('tno', $result), element('pg_conf_home_dir', $config), element('pg_kcp_mid', $config),
                                         element('pg_kcp_key', $config), $result['tran_cd'], '',
@@ -633,6 +648,16 @@ class Paymentlib extends CI_Controller
 
         // locale 설정 초기화
         setlocale(LC_CTYPE, '');
+
+        if( $return_msg ){
+            $res_cd = isset( $res_cd ) ? $res_cd : 'fail';
+
+            if( $res_cd == '0000' ){
+                return 'success';
+            }
+
+            return $res_cd;
+        }
     }
 
 
@@ -668,8 +693,8 @@ class Paymentlib extends CI_Controller
         $this->xpay = new XPay(element('configPath', $config), element('CST_PLATFORM', $config));
 
         // Mert Key 설정
-        $this->xpay->set_config_value('t' . element('LGD_MID', $config), $this->CI->cbconfig->item('pg_lg_key'));
-        $this->xpay->set_config_value(element('LGD_MID', $config), $this->CI->cbconfig->item('pg_lg_key'));
+        $this->xpay->set_config_value('t' . element('LGD_MID', $config), element('pg_lg_key', $config));
+        $this->xpay->set_config_value(element('LGD_MID', $config), element('pg_lg_key', $config));
 
         $this->xpay->Init_TX(element('LGD_MID', $config));
 
@@ -751,6 +776,42 @@ class Paymentlib extends CI_Controller
         return $result;
     }
 
+    public function xpay_admin_cancel($result , $return_msg=false){
+        $config = $this->lg_init();
+
+        $LGD_TID = element('tno', $result);
+
+        include('plugin/pg/lg/XPayClient.php');
+        include('plugin/pg/lg/XPay.php');
+
+        $this->xpay = new XPay(element('configPath', $config), element('CST_PLATFORM', $config));
+
+        // Mert Key 설정
+        $this->xpay->set_config_value('t' . element('LGD_MID', $config), element('pg_lg_key', $config));
+        $this->xpay->set_config_value(element('LGD_MID', $config), element('pg_lg_key', $config));
+
+        $this->xpay->Init_TX(element('LGD_MID', $config));
+
+        $this->xpay->Set('LGD_TXNAME', 'Cancel');
+        $this->xpay->Set('LGD_TID', $LGD_TID);
+
+        $pg_res_cd = '';
+
+        if ($this->xpay->TX()) {
+            $res_cd = $this->xpay->Response_Code();
+            if($res_cd != '0000' && $res_cd != 'AV11') {
+                $pg_res_cd = $res_cd;
+                $pg_res_msg = $this->xpay->Response_Msg();
+            }
+        } else {
+            $pg_res_cd = $this->xpay->Response_Code();
+            $pg_res_msg = $this->xpay->Response_Msg();
+        }
+
+        if( $return_msg ){
+            return ($pg_res_cd == '') ? 'success' : $pg_res_cd;
+        }
+    }
 
     public function xpay_cancel($result)
     {
@@ -758,7 +819,7 @@ class Paymentlib extends CI_Controller
     }
 
     public function inipay_mobile_result(){
-        
+
         $config = $this->inicis_init();
 
         $mid = element('pg_inicis_mid', $config);
@@ -782,20 +843,24 @@ class Paymentlib extends CI_Controller
             'commid'          => $this->CI->input->post('P_HPP_CORP', true, ''),
             'mobile_no'       => $this->CI->input->post('P_APPL_NUM', true, ''),
             'app_no'          => $this->CI->input->post('P_AUTH_NO', true, ''),
-            'card_name'       => $this->CI->input->post('P_CARD_ISSUER', true, '')
+            'card_name'       => $this->CI->input->post('P_CARD_ISSUER', true, ''),
         );
 
         $pay_method = $result['pay_method'];
-        $result['pay_type'] = element($pay_method, $config['PAY_METHOD']);
+        //$result['pay_type'] = $pay_type = element($pay_method, $config['PAY_METHOD']);
+        $result['pay_type'] = $pay_type = $this->CI->input->post('pay_type', true, '');
 
         switch($pay_type) {
+            case 'realtime':
             case '계좌이체':
                 $result['bank_name'] = $this->CI->input->post('P_VACT_BANK', true, '');
                 break;
+            case 'vbank':
             case '가상계좌':
                 $result['bankname']  = $this->CI->input->post('P_VACT_BANK', true, '');
                 $result['account']   = $this->CI->input->post('P_VACT_NUM', true, '').' '.$this->CI->input->post('P_VACT_NAME', true, '');
                 $result['app_no']    = $this->CI->input->post('P_VACT_NUM', true, '');
+                $result['cor_vbank_expire'] = $this->CI->input->post('P_VACT_DATE', true, '');
                 break;
             default:
                 break;
@@ -850,7 +915,7 @@ class Paymentlib extends CI_Controller
 
                 $authUrl = $this->CI->input->post_get('authUrl', null, '');   // 승인요청 API url(수신 받은 값으로 설정, 임의 세팅 금지)
 
-                $netCancel = $this->CI->input->post_get('netCancel', null, '');   // 망취소 API url(수신 받은f값으로 설정, 임의 세팅 금지)
+                $netCancel = $this->CI->input->post_get('netCancelUrl', null, '');   // 망취소 API url(수신 받은f값으로 설정, 임의 세팅 금지)
                 
                 $mid = element('pg_inicis_mid', $config);
                 $signKey = element('pg_inicis_sign', $config);
@@ -886,20 +951,22 @@ class Paymentlib extends CI_Controller
                 //}
 
 
+                $this->inicis_authMap = $authMap;
+
                 try {
 
-                    $httpUtil = new HttpClient();
+                    $this->httpUtil = new HttpClient();
 
                     //#####################
                     // 4.API 통신 시작
                     //#####################
 
                     $authResultString = "";
-                    if ($httpUtil->processHTTP($authUrl, $authMap)) {
-                        $authResultString = $httpUtil->body;
+                    if ($this->httpUtil->processHTTP($authUrl, $authMap)) {
+                        $authResultString = $this->httpUtil->body;
                     } else {
                         echo "Http Connect Error\n";
-                        echo $httpUtil->errormsg;
+                        echo $this->httpUtil->errormsg;
 
                         throw new Exception("Http Connect Error");
                     }
@@ -1000,11 +1067,11 @@ class Paymentlib extends CI_Controller
                     //#####################
 
                     $netcancelResultString = ""; // 망취소 요청 API url(고정, 임의 세팅 금지)
-                    if ($httpUtil->processHTTP($netCancel, $authMap)) {
-                        $netcancelResultString = $httpUtil->body;
+                    if ($this->httpUtil->processHTTP($netCancel, $authMap)) {
+                        $netcancelResultString = $this->httpUtil->body;
                     } else {
                         echo "Http Connect Error\n";
-                        echo $httpUtil->errormsg;
+                        echo $this->httpUtil->errormsg;
 
                         throw new Exception("Http Connect Error");
                     }
@@ -1233,8 +1300,60 @@ class Paymentlib extends CI_Controller
         }
     }
 
+    public function inipay_admin_cancel($result, $return_msg=false){
+        $config = $this->inicis_init();
 
-    public function inipay_cancel($result)
+        /*********************
+         * 3. 취소 정보 설정 *
+         *********************/
+        $this->inipay->SetField("type",      "cancel");                        // 고정 (절대 수정 불가)
+        $this->inipay->SetField("mid",       element('pg_inicis_mid', $config));       // 상점아이디
+        /**************************************************************************************************
+         * admin 은 키패스워드 변수명입니다. 수정하시면 안됩니다. 1111의 부분만 수정해서 사용하시기 바랍니다.
+         * 키패스워드는 상점관리자 페이지(https://iniweb.inicis.com)의 비밀번호가 아닙니다. 주의해 주시기 바랍니다.
+         * 키패스워드는 숫자 4자리로만 구성됩니다. 이 값은 키파일 발급시 결정됩니다.
+         * 키패스워드 값을 확인하시려면 상점측에 발급된 키파일 안의 readme.txt 파일을 참조해 주십시오.
+         **************************************************************************************************/
+        $this->inipay->SetField("admin",     element('pg_inicis_key', $config)); //비대칭 사용키 키패스워드
+        $this->inipay->SetField("tid",       element('tno', $result));                   // 취소할 거래의 거래아이디
+        $this->inipay->SetField("cancelmsg", element('refund_msg', $result));                     // 취소사유
+        $this->inipay->SetField("log", "false");                     // 취소로그를 생성하지 않습니다.
+
+        /****************
+         * 4. 취소 요청 *
+         ****************/
+        $this->inipay->startAction();
+
+        /****************************************************************
+         * 5. 취소 결과                                           	*
+         *                                                        	*
+         * 결과코드 : $inipay->getResult('ResultCode') ("00"이면 취소 성공)  	*
+         * 결과내용 : $inipay->getResult('ResultMsg') (취소결과에 대한 설명) 	*
+         * 취소날짜 : $inipay->getResult('CancelDate') (YYYYMMDD)          	*
+         * 취소시각 : $inipay->getResult('CancelTime') (HHMMSS)            	*
+         * 현금영수증 취소 승인번호 : $inipay->getResult('CSHR_CancelNum')    *
+         * (현금영수증 발급 취소시에만 리턴됨)                          *
+         ****************************************************************/
+
+        $res_cd  = $this->inipay->getResult('ResultCode');
+        $res_msg = $this->inipay->getResult('ResultMsg');
+        
+        $pg_res_cd = '';
+
+        if($res_cd != '00') {
+            
+            $pg_res_cd = $res_cd;
+            $pg_res_msg = iconv('euc-kr', 'utf-8', $res_msg);
+
+            log_message('error', '이니시스 취소 에러: '.$res_cd.' 이유 : '.$pg_res_msg);
+        }
+
+        if( $return_msg ){
+            return ($pg_res_cd == '') ? 'success' : $pg_res_cd;
+        }
+    }
+
+    public function inipay_cancel($result, $agent_type='')
     {
         /*******************************************************************
          * 7. DB연동 실패 시 강제취소 *
@@ -1250,14 +1369,20 @@ class Paymentlib extends CI_Controller
         // 수행하여 주십시오.
 
         if ($cancelFlag === 'true') {
-            $TID = $this->CI->input->post('tno', null, '');
-            $this->inipay->SetField('type', 'cancel'); // 고정
-            $this->inipay->SetField('tid', $TID); // 고정
-            $this->inipay->SetField('cancelmsg', 'DB FAIL'); // 취소사유
-            $this->inipay->startAction();
-            if ($this->inipay->GetResult('ResultCode') === '00') {
-                $this->inipay->MakeTXErrMsg(MERCHANT_DB_ERR, 'Merchant DB FAIL');
+
+            if( $agent_type === 'mobile' ){     // 모바일
+
+                $result['refund_msg'] = 'DB FAIL';    // 취소사유
+
+                $this->inipay_admin_cancel($result);
+
+            } else {    // PC
+                
+                $netCancel = $this->CI->input->post_get('netCancelUrl', null, '');   // 망취소 API url(수신 받은f값으로 설정, 임의 세팅 금지)
+                $this->httpUtil->processHTTP($netCancel, $this->inicis_authMap);
+                
             }
+
         }
     }
 }

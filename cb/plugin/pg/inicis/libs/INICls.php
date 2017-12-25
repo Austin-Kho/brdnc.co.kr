@@ -106,7 +106,7 @@ class INILog {
     var $mkey;
     var $mergelog;
 
-    function __contrunct($request) {
+    public function __construct($request) {
         $this->debug_msg = array("", "CRITICAL", "ERROR", "NOTICE", "4", "INFO", "6", "DEBUG", "8");
         $this->debug_mode = $request["debug"];
         $this->type = $request["type"];
@@ -218,7 +218,7 @@ class INIData {
     var $m_RESULT = array();  //Encrypted 필드 hash table
     var $m_RESULT2 = array(); //PG Added Entity
 
-    function __contrunct($request, $request2) {
+    function __construct($request, $request2) {
         $this->m_Xml = NULL;
 
         $this->m_REQUEST = $request;
@@ -1086,7 +1086,7 @@ class INICrypto {
     var $mprivkeyid = NULL;
     var $mkey;
 
-    function __contrunct($request) {
+    function __construct($request) {
         $this->homedir = $request["inipayhome"];
         $this->mid = $request["mid"];
         $this->admin = $request["admin"];

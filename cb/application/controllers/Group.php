@@ -75,6 +75,16 @@ class Group extends CB_Controller
             }
         }
 
+        $group['headercontent'] = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('mobile_header_content', $group)
+            : element('header_content', $group);
+         
+        $group['footercontent'] = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('mobile_footer_content', $group)
+            : element('footer_content', $group);
+         
+        $view['view']['group'] = $group;
+
         $view['view']['board_list'] = $board_list;
 
         $view['view']['canonical'] = group_url($bgr_key);

@@ -1,4 +1,4 @@
-$(function() {
+jQuery(function($) {
     var $btn_side = $('#btn_side'),
         $side_menu = $('#side_menu'),
         $side_wr = $('#side_menu .side_wr'),
@@ -79,6 +79,14 @@ $(function() {
     });
 
     var clickEventType= 'ontouchend' in document ? 'touchend' : 'click';
+
+    if( clickEventType == 'touchend'){
+        $(document).on(clickEventType, function(e){
+            if ( $side_wr.has(e.target).length === 0 && $btn_side.data('toggle_enable')){
+                remove_side_data();
+            }
+        });
+    }
 
     $(document).on(clickEventType, '.subopen', function(){
         $submenu = $('.drop-downorder-' + $(this).attr('data-menu-order'));

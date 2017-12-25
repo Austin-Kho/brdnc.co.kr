@@ -448,6 +448,7 @@ class Deposit extends CB_Controller
             $insertdata['dep_cash'] = 0;
             $insertdata['dep_status'] = 0;
             $insertdata['mem_realname'] = element('depositor', $result);
+            $insertdata['dep_vbank_expire'] = element('cor_vbank_expire', $result) ? date("Y-m-d", strtotime(element('cor_vbank_expire', $result))) : '0000-00-00 00:00:00';
             $insertdata['dep_bank_info'] = element('bankname', $result) . ' ' . element('account', $result);
             $insertdata['dep_pg'] = $this->cbconfig->item('use_payment_pg');
             $insertdata['dep_content'] = $this->depositconfig->item('deposit_name') . ' 적립 (가상계좌)';
@@ -513,7 +514,6 @@ class Deposit extends CB_Controller
 
         // 주문금액과 결제금액이 일치하는지 체크
         if (element('tno', $result) && (int) element('amount', $result) !== $moneyreal) {
-
             if ($this->cbconfig->item('use_payment_pg') === 'kcp') {
                 $this->paymentlib->kcp_pp_ax_hub_cancel($result);
             } elseif ($this->cbconfig->item('use_payment_pg') === 'lg') {
@@ -536,6 +536,7 @@ class Deposit extends CB_Controller
         $insertdata['dep_pay_type'] = $pay_type;
         $insertdata['dep_ip'] = $this->input->ip_address();
         $insertdata['dep_useragent'] = $this->agent->agent_string();
+        $insertdata['is_test'] = $this->cbconfig->item('use_pg_test');
 
         $this->load->model('Deposit_model');
         $res = $this->Deposit_model->insert($insertdata);
