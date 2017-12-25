@@ -51,6 +51,10 @@
     add_theme_support( 'post-thumbnails' ); //supports featured image
 	// Register primary menu 
     register_nav_menu( 'primary', __( 'Primary Menu', 'appointment' ) );
+	
+	//Add Theme Support Title Tag
+	add_theme_support( "title-tag" );
+	
 	// Add default posts and comments RSS feed links to head.
     add_theme_support( 'automatic-feed-links' );
 	// Set the content_width with 900

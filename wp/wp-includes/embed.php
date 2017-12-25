@@ -251,7 +251,7 @@ function wp_embed_handler_googlevideo( $matches, $attr, $url, $rawattr ) {
  */
 function wp_embed_handler_youtube( $matches, $attr, $url, $rawattr ) {
 	global $wp_embed;
-	$embed = $wp_embed->autoembed( "https://youtube.com/watch?v={$matches[2]}" );
+	$embed = $wp_embed->autoembed( sprintf( "https://youtube.com/watch?v=%s", urlencode( $matches[2] ) ) );
 
 	/**
 	 * Filter the YoutTube embed output.
@@ -782,24 +782,30 @@ function wp_filter_oembed_result( $result, $data, $url ) {
 	}
 	$html = $content[1] . $content[2];
 
+	preg_match( '/ src=([\'"])(.*?)\1/', $html, $results );
+
+	if ( ! empty( $results ) ) {
+		$secret = wp_generate_password( 10, false );
+
+		$url = esc_url( "{$results[2]}#?secret=$secret" );
+		$q = $results[1];
+
+		$html = str_replace( $results[0], ' src=' . $q . $url . $q . ' data-secret=' . $q . $secret . $q, $html );
+		$html = str_replace( '<blockquote', "<blockquote data-secret=\"$secret\"", $html );
+	}
+
+	$allowed_html['blockquote']['data-secret'] = true;
+	$allowed_html['iframe']['data-secret'] = true;
+
+	$html = wp_kses( $html, $allowed_html );
+
 	if ( ! empty( $content[1] ) ) {
 		// We have a blockquote to fall back on. Hide the iframe by default.
 		$html = str_replace( '<iframe', '<iframe style="position: absolute; clip: rect(1px, 1px, 1px, 1px);"', $html );
 		$html = str_replace( '<blockquote', '<blockquote class="wp-embedded-content"', $html );
 	}
 
-	$html = str_replace( '<iframe', '<iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted"', $html );
-
-	preg_match( '/ src=[\'"]([^\'"]*)[\'"]/', $html, $results );
-
-	if ( ! empty( $results ) ) {
-		$secret = wp_generate_password( 10, false );
-
-		$url = esc_url( "{$results[1]}#?secret=$secret" );
-
-		$html = str_replace( $results[0], " src=\"$url\" data-secret=\"$secret\"", $html );
-		$html = str_replace( '<blockquote', "<blockquote data-secret=\"$secret\"", $html );
-	}
+	$html = str_ireplace( '<iframe', '<iframe class="wp-embedded-content" sandbox="allow-scripts" security="restricted"', $html );
 
 	return $html;
 }
@@ -1078,4 +1084,40 @@ function the_embed_site_title() {
 	 * @param string $site_title The site title HTML.
 	 */
 	echo apply_filters( 'embed_site_title_html', $site_title );
+}
+
+/**
+ * Filters the oEmbed result before any HTTP requests are made.
+ *
+ * If the URL belongs to the current site, the result is fetched directly instead of
+ * going through the oEmbed discovery process.
+ *
+ * @since 4.5.3
+ *
+ * @param null|string $result The UNSANITIZED (and potentially unsafe) HTML that should be used to embed. Default null.
+ * @param string      $url    The URL that should be inspected for discovery `<link>` tags.
+ * @param array       $args   oEmbed remote get arguments.
+ * @return null|string The UNSANITIZED (and potentially unsafe) HTML that should be used to embed.
+ *                     Null if the URL does not belong to the current site.
+ */
+function wp_filter_pre_oembed_result( $result, $url, $args ) {
+	$post_id = url_to_postid( $url );
+
+	/** This filter is documented in wp-includes/class-wp-oembed-controller.php */
+	$post_id = apply_filters( 'oembed_request_post_id', $post_id, $url );
+
+	if ( ! $post_id ) {
+		return $result;
+	}
+
+	$width = isset( $args['width'] ) ? $args['width'] : 0;
+
+	$data = get_oembed_response_data( $post_id, $width );
+	$data = _wp_oembed_get_object()->data2html( (object) $data, $url );
+
+	if ( ! $data ) {
+		return $result;
+	}
+
+	return $data;
 }

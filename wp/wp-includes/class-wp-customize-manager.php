@@ -386,13 +386,31 @@ final class WP_Customize_Manager {
 
 		show_admin_bar( false );
 
+		/*
+		 * Clear incoming post data if the user lacks a CSRF token (nonce). Note that the customizer
+		 * application will inject the customize_preview_nonce query parameter into all Ajax requests.
+		 * For similar behavior elsewhere in WordPress, see rest_cookie_check_errors() which logs out
+		 * a user when a valid nonce isn't present.
+		 */
+		$has_post_data_nonce = (
+			check_ajax_referer( 'preview-customize_' . $this->get_stylesheet(), 'nonce', false )
+			||
+			check_ajax_referer( 'save-customize_' . $this->get_stylesheet(), 'nonce', false )
+			||
+			check_ajax_referer( 'preview-customize_' . $this->get_stylesheet(), 'customize_preview_nonce', false )
+		);
+		if ( ! $has_post_data_nonce ) {
+			unset( $_POST['customized'] );
+			unset( $_REQUEST['customized'] );
+		}
+
 		if ( ! current_user_can( 'customize' ) ) {
 			$this->wp_die( -1, __( 'You are not allowed to customize the appearance of this site.' ) );
 		}
 
 		$this->original_stylesheet = get_stylesheet();
 
-		$this->theme = wp_get_theme( isset( $_REQUEST['theme'] ) ? $_REQUEST['theme'] : null );
+		$this->theme = wp_get_theme( isset( $_REQUEST['theme'] ) && 0 === validate_file( $_REQUEST['theme'] ) ? $_REQUEST['theme'] : null );
 
 		if ( $this->is_theme_active() ) {
 			// Once the theme is loaded, we'll validate it.
@@ -1542,6 +1560,7 @@ final class WP_Customize_Manager {
 	 * @param string $preview_url URL to be previewed.
 	 */
 	public function set_preview_url( $preview_url ) {
+		$preview_url = esc_url_raw( $preview_url );
 		$this->preview_url = wp_validate_redirect( $preview_url, home_url( '/' ) );
 	}
 
@@ -1573,6 +1592,7 @@ final class WP_Customize_Manager {
 	 * @param string $return_url URL for return link.
 	 */
 	public function set_return_url( $return_url ) {
+		$return_url = esc_url_raw( $return_url );
 		$return_url = remove_query_arg( wp_removable_query_args(), $return_url );
 		$return_url = wp_validate_redirect( $return_url );
 		$this->return_url = $return_url;

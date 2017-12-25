@@ -94,6 +94,10 @@ Source: http://fontawesome.io
 
 # --- EOF --- #
 ============================Change Log================================
+@version 2.4.9
+1. Update Font Awesome Library 4.6.1 to 4.6.3
+2. Remove White, Orange, Responsive Layout Tag and Add blog, portfolio, footer-widgets, featured-images, featured-image-header, custom-header
+3. Add Title Tag Support.
 @version 2.4.8
 1. Update Font awesome Library 4.5 to 4.6.1
 2. Solved Header Image issue.

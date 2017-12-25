@@ -11,8 +11,6 @@
 	<link rel="shortcut icon" href="<?php  echo $header_setting['upload_image_favicon']; ?>" /> 
 	<?php } ?>
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-	<title><?php wp_title('|', true , 'right'); ?></title>
-
 	<?php wp_head(); ?>
 	</head>
 	<body <?php body_class(); ?> >
