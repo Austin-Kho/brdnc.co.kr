@@ -133,32 +133,27 @@
 						</div>
 					</div>
 
-					<!-- 다음 우편번호 서비스 - iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
-					<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
-						<img src="//t1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
-					</div>
-					<!-- 다음 우편번호 서비스 -------------onclick="execDaumPostcode(1)"-----postcode1-----address1_1-----address2_1------------------------>
-
 					<div class="form-group"><!-- 대지주소 -->
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
 							<label>대지위치(주소) <span class="red">*</span></label>
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
-							<div class="col-xs-3 col-sm-5 col-md-1" style="padding-right: 0;">
-								<label for="postcode1" class="sr-only">우편번호</label>
-								<input type="text" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php if($this->input->post('zipcode')) echo set_value('zipcode'); else echo $addr[0]; ?>" readonly required>
-							</div>
 							<div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-								<input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="execDaumPostcode(1)">
+								<input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="javascript:ZipWindow('<?php echo base_url('/popup/zip_/zipcode/1'); ?>')">
+							</div>
+							<div class="col-xs-3 col-sm-5 col-md-1" style="padding-right: 0;">
+								<label for="zipcode" class="sr-only">우편번호</label>
+								<input type="text" class="form-control input-sm en_only" id="zipcode" name="zipcode" maxlength="5" value="<?php if($this->input->post('zipcode')) echo set_value('zipcode'); else echo $addr[0]; ?>" readonly required autofocus>
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-4" style="padding-right: 0;">
-								<label for="address1_1" class="sr-only">회사주소1</label>
-								<input type="text" class="form-control input-sm han" id="address1_1" name="address1_1" maxlength="100" value="<?php if($this->input->post('address1')) echo set_value('address1'); else echo $addr[1]; ?>" readonly required>
+								<label for="address1" class="sr-only">회사주소1</label>
+								<input type="text" class="form-control input-sm han" id="address1" name="address1" maxlength="100" value="<?php if($this->input->post('address1')) echo set_value('address1'); else echo $addr[1]; ?>" readonly required autofocus>
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-4" style="padding-right: 0;">
-								<label for="address2_1" class="sr-only">회사주소2</label>
-								<input type="text" class="form-control input-sm han" id="address2_1" name="address2_1" maxlength="93" value="<?php if($this->input->post('address2')) echo set_value('address2'); else echo $addr[2]; ?>" name="address2" placeholder="나머지 주소">
+								<label for="address2" class="sr-only">회사주소2</label>
+								<input type="text" class="form-control input-sm han" id="address2" maxlength="93" value="<?php if($this->input->post('address2')) echo set_value('address2'); else echo $addr[2]; ?>" name="address2" placeholder="나머지 주소">
 							</div>
+							<!-- <div class="col-xs-12 col-sm-12 col-md-3 glyphicon-wrap" style="padding: 11px;">나머지 주소</div> -->
 						</div>
 					</div>
 
