@@ -20,8 +20,7 @@
 		      	$('[data-toggle="tooltip"]').tooltip();
 				$('[data-toggle="popover"]').popover();
 			});
-			// 다음 우편번호 서비스 -3
-			// 우편번호 찾기 화면을 넣을 element
+			// 다음 우편번호 서비스 -3 --/ 우편번호 찾기 화면을 넣을 element
 			var element_layer = document.getElementById('layer');
 		</script>
 	</body>
