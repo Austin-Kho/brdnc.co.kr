@@ -1,12 +1,12 @@
-
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteBase /
-RewriteRule ^index\.php$ - [L]
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^(www.)?brinc.co.kr$
+RewriteCond %{REQUEST_URI} !^/wp/
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
+RewriteRule ^(.*)$ /wp/$1
+RewriteCond %{HTTP_HOST} ^(www.)?brinc.co.kr$
+RewriteRule ^(/)?$ wp/index.php [L]
 </IfModule>
-
 # END WordPress
