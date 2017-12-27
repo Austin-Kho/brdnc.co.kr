@@ -29,6 +29,7 @@
 		<![endif]-->
 		<script src="<?php echo $this->config->base_url('static/lib/calendar/calendar.js');?>"></script>
 		<script src="<?php echo $this->config->base_url('static/js/global.js');?>"></script>
+		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script><!-- 다음 우편번호 서비스 -->		
 <?php
 	switch ($this->uri->segment(1)) {
 		case 'm1': $menu_js = 'm1.js';	break;
