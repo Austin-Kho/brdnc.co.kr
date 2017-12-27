@@ -823,11 +823,12 @@
 				</div>
 			</div>
 
-			<!-- 다음 우편번호 서비스 - iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
-			<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
-				<img src="//t1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
-			</div>
-			<!-- 다음 우편번호 서비스 -------------onclick="execDaumPostcode(1)"-----postcode1-----address1_1-----address2_1------------------------>
+
+
+
+
+
+
 
 <?php if( !empty($is_reg['cont_data'])) $addr1 = explode("|", $is_reg['cont_data']->cont_addr1); ?>
 			<div class="row bo-bottom font12" style="margin: 0;">
@@ -837,20 +838,20 @@
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 0px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<div class="col-xs-4 col-sm-3 col-md-1" style="padding-right: 0;">
-							<label for="postcode1" class="sr-only">우편번호</label>
-							<input type="text" class="form-control input-sm en_only" id="postcode1" name="postcode1" style="margin: 4px 0;" maxlength="5" value="<?php if( !empty($addr1)) echo $addr1[0]; else echo set_value('postcode1');  ?>" readonly required placeholder="우편번호">
-						</div>
 						<div class="col-xs-4 col-sm-2 col-md-1" style="padding-right: 0;">
-							<input type="button" class="btn btn-info btn-sm" value="우편번호" style="margin: 4px 0;" onclick="execDaumPostcode(1)">
+							<input type="button" class="btn btn-info btn-sm" value="우편번호" style="margin: 4px 0;" onclick="javascript:ZipWindow('<?php echo base_url('/popup/zip_/zipcode/1'); ?>')">
+						</div>
+						<div class="col-xs-4 col-sm-3 col-md-1" style="padding-right: 0;">
+							<label for="zipcode" class="sr-only">우편번호</label>
+							<input type="text" class="form-control input-sm en_only" id="zipcode" name="zipcode" style="margin: 4px 0;" maxlength="5" value="<?php if( !empty($addr1)) echo $addr1[0]; else echo set_value('zipcode');  ?>" readonly required autofocus>
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4" style="padding-right: 0;">
-							<label for="address1_1" class="sr-only">계약자주소1</label>
-							<input type="text" class="form-control input-sm han" id="address1_1" name="address1_1" style="margin: 4px 0;" maxlength="100" value="<?php if( !empty($addr1)) echo $addr1[1]; else echo set_value('address1_1');  ?>" readonly required placeholder="일반주소">
+							<label for="address1" class="sr-only">계약자주소1</label>
+							<input type="text" class="form-control input-sm han" id="address1" name="address1" style="margin: 4px 0;" maxlength="100" value="<?php if( !empty($addr1)) echo $addr1[1]; else echo set_value('address1');  ?>" readonly required autofocus>
 						</div>
 						<div class="col-xs-12 col-sm-4 col-md-3" style="padding-right: 0;">
-							<label for="address2_1" class="sr-only">계약자주소2</label>
-							<input type="text" class="form-control input-sm han" id="address2_1" name="address2_1" style="margin: 4px 0;" maxlength="93" value="<?php if( !empty($addr1)) echo $addr1[2]; else echo set_value('address2_1');  ?>" placeholder="나머지 주소">
+							<label for="address2" class="sr-only">계약자주소2</label>
+							<input type="text" class="form-control input-sm han" id="address2" name="address2" style="margin: 4px 0;" maxlength="93" value="<?php if( !empty($addr1)) echo $addr1[2]; else echo set_value('address2');  ?>" placeholder="나머지 주소" <?php echo $disabled; ?>>
 						</div>
 					</div>
 				</div>
@@ -864,20 +865,20 @@
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 0;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<div class="col-xs-4 col-sm-3 col-md-1" style="padding-right: 0;">
-							<label for="postcode2" class="sr-only">우편번호</label>
-							<input type="text" class="form-control input-sm en_only" id="postcode2" name="postcode2"  style="margin: 4px 0;" maxlength="5" value="<?php if( !empty($addr2)) echo $addr2[0]; else echo set_value('postcode2');  ?>" readonly required placeholder="우편번호">
-						</div>
 						<div class="col-xs-4 col-sm-2 col-md-1" style="padding-right: 0;">
-							<input type="button" class="btn btn-info btn-sm" value="우편번호" style="margin: 4px 0;" onclick="execDaumPostcode(2)">
+							<input type="button" class="btn btn-info btn-sm" value="우편번호" style="margin: 4px 0;" onclick="javascript:ZipWindow('<?php echo base_url('/popup/zip_/zipcode/2'); ?>')">
+						</div>
+						<div class="col-xs-4 col-sm-3 col-md-1" style="padding-right: 0;">
+							<label for="zipcode_" class="sr-only">우편번호</label>
+							<input type="text" class="form-control input-sm en_only" id="zipcode_" name="zipcode_"  style="margin: 4px 0;" maxlength="5" value="<?php if( !empty($addr2)) echo $addr2[0]; else echo set_value('zipcode_');  ?>" readonly required autofocus>
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4" style="padding-right: 0;">
-							<label for="address1_2" class="sr-only">계약자주소11</label>
-							<input type="text" class="form-control input-sm han" id="address1_2" name="address1_2"  style="margin: 4px 0;" maxlength="100" value="<?php if( !empty($addr2)) echo $addr2[1]; else echo set_value('address1_2');  ?>" readonly required placeholder="일반주소">
+							<label for="address1_" class="sr-only">계약자주소11</label>
+							<input type="text" class="form-control input-sm han" id="address1_" name="address1_"  style="margin: 4px 0;" maxlength="100" value="<?php if( !empty($addr2)) echo $addr2[1]; else echo set_value('address1_');  ?>" readonly required autofocus>
 						</div>
 						<div class="col-xs-12 col-sm-4 col-md-3" style="padding-right: 0;">
-							<label for="address2_2" class="sr-only">계약자주소22</label>
-							<input type="text" class="form-control input-sm han" id="address2_2" name="address2_2"  style="margin: 4px 0;" maxlength="93" value="<?php if( !empty($addr2)) echo $addr2[2]; else echo set_value('address2_2');  ?>" placeholder="나머지 주소">
+							<label for="address2_" class="sr-only">계약자주소22</label>
+							<input type="text" class="form-control input-sm han" id="address2_" name="address2_"  style="margin: 4px 0;" maxlength="93" value="<?php if( !empty($addr2)) echo $addr2[2]; else echo set_value('address2_');  ?>" placeholder="나머지 주소" <?php echo $disabled; ?>>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-2 checkbox" style="margin: 0; padding: 9px;">
 							<label><input type="checkbox" name="sa_addr" onclick="same_addr();"> 위와 같음</label>
@@ -885,7 +886,6 @@
 					</div>
 				</div>
 			</div>
-
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">미비서류 항목
 					<div class="visible-xs" style="height: 60px;">&nbsp;</div>
