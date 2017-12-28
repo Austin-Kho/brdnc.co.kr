@@ -593,7 +593,7 @@ class M5 extends CI_Controller {
 					$this->load->view('/menu/m5/md2_sd2_v', $data);
 				}else{
 
-					if($this->input->post('sf')){
+					if($this->input->post('no')){
 						//사용자 승인//////////////////////////////////////////////
 						$where_no = $this->input->post('no', TRUE);
 						$auth_data = array(
@@ -611,78 +611,83 @@ class M5 extends CI_Controller {
 						//사용자 승인//////////////////////////////////////////////
 					}
 
-					//사용자 권한 설정/////////////////////////////////////////
-					if($this->input->post('_m1_1_1_m')=='on'){$_m1_1_1=2;} else if($this->input->post('_m1_1_1')=='on') {$_m1_1_1=1;} else {$_m1_1_1=0;}
-					if($this->input->post('_m1_1_2_m')=='on'){$_m1_1_2=2;} else if($this->input->post('_m1_1_2')=='on') {$_m1_1_2=1;} else {$_m1_1_2=0;}
-					if($this->input->post('_m1_1_3_m')=='on'){$_m1_1_3=2;} else if($this->input->post('_m1_1_3')=='on'){$_m1_1_3=1;} else {$_m1_1_3=0;}
-					if($this->input->post('_m1_2_1_m')=='on'){$_m1_2_1=2;} else if($this->input->post('_m1_2_1')=='on'){$_m1_2_1=1;} else {$_m1_2_1=0;}
-					if($this->input->post('_m1_2_2_m')=='on'){$_m1_2_2=2;} else if($this->input->post('_m1_2_2')=='on'){$_m1_2_2=1;} else {$_m1_2_2=0;}
-					if($this->input->post('_m1_2_3_m')=='on'){$_m1_2_3=2;} else if($this->input->post('_m1_2_3')=='on'){$_m1_2_3=1;} else {$_m1_2_3=0;}
+					if($this->input->get('un')&&$this->input->post('user_no')&&$this->input->post('user_id')){
+						//사용자 권한 설정/////////////////////////////////////////
+						if($this->input->post('_m1_1_1_m')=='on'){$_m1_1_1=2;} else if($this->input->post('_m1_1_1')=='on') {$_m1_1_1=1;} else {$_m1_1_1=0;}
+						if($this->input->post('_m1_1_2_m')=='on'){$_m1_1_2=2;} else if($this->input->post('_m1_1_2')=='on') {$_m1_1_2=1;} else {$_m1_1_2=0;}
+						if($this->input->post('_m1_1_3_m')=='on'){$_m1_1_3=2;} else if($this->input->post('_m1_1_3')=='on'){$_m1_1_3=1;} else {$_m1_1_3=0;}
+						if($this->input->post('_m1_2_1_m')=='on'){$_m1_2_1=2;} else if($this->input->post('_m1_2_1')=='on'){$_m1_2_1=1;} else {$_m1_2_1=0;}
+						if($this->input->post('_m1_2_2_m')=='on'){$_m1_2_2=2;} else if($this->input->post('_m1_2_2')=='on'){$_m1_2_2=1;} else {$_m1_2_2=0;}
+						if($this->input->post('_m1_2_3_m')=='on'){$_m1_2_3=2;} else if($this->input->post('_m1_2_3')=='on'){$_m1_2_3=1;} else {$_m1_2_3=0;}
 
-					if($this->input->post('_m2_1_1_m')=='on'){$_m2_1_1=2;} else if($this->input->post('_m2_1_1')=='on'){$_m2_1_1=1;} else {$_m2_1_1=0;}
-					if($this->input->post('_m2_1_2_m')=='on'){$_m2_1_2=2;} else if($this->input->post('_m2_1_2')=='on'){$_m2_1_2=1;} else {$_m2_1_2=0;}
-					if($this->input->post('_m2_1_3_m')=='on'){$_m2_1_3=2;} else if($this->input->post('_m2_1_3')=='on'){$_m2_1_3=1;} else {$_m2_1_3=0;}
-					if($this->input->post('_m2_2_1_m')=='on'){$_m2_2_1=2;} else if($this->input->post('_m2_2_1')=='on'){$_m2_2_1=1;} else {$_m2_2_1=0;}
-					if($this->input->post('_m2_2_2_m')=='on'){$_m2_2_2=2;} else if($this->input->post('_m2_2_2')=='on'){$_m2_2_2=1;} else {$_m2_2_2=0;}
-					if($this->input->post('_m2_2_3_m')=='on'){$_m2_2_3=2;} else if($this->input->post('_m2_2_3')=='on'){$_m2_2_3=1;} else {$_m2_2_3=0;}
+						if($this->input->post('_m2_1_1_m')=='on'){$_m2_1_1=2;} else if($this->input->post('_m2_1_1')=='on'){$_m2_1_1=1;} else {$_m2_1_1=0;}
+						if($this->input->post('_m2_1_2_m')=='on'){$_m2_1_2=2;} else if($this->input->post('_m2_1_2')=='on'){$_m2_1_2=1;} else {$_m2_1_2=0;}
+						if($this->input->post('_m2_1_3_m')=='on'){$_m2_1_3=2;} else if($this->input->post('_m2_1_3')=='on'){$_m2_1_3=1;} else {$_m2_1_3=0;}
+						if($this->input->post('_m2_2_1_m')=='on'){$_m2_2_1=2;} else if($this->input->post('_m2_2_1')=='on'){$_m2_2_1=1;} else {$_m2_2_1=0;}
+						if($this->input->post('_m2_2_2_m')=='on'){$_m2_2_2=2;} else if($this->input->post('_m2_2_2')=='on'){$_m2_2_2=1;} else {$_m2_2_2=0;}
+						if($this->input->post('_m2_2_3_m')=='on'){$_m2_2_3=2;} else if($this->input->post('_m2_2_3')=='on'){$_m2_2_3=1;} else {$_m2_2_3=0;}
 
-					if($this->input->post('_m3_1_1_m')=='on'){$_m3_1_1=2;} else if($this->input->post('_m3_1_1')=='on'){$_m3_1_1=1;} else {$_m3_1_1=0;}
-					if($this->input->post('_m3_1_2_m')=='on'){$_m3_1_2=2;} else if($this->input->post('_m3_1_2')=='on'){$_m3_1_2=1;} else {$_m3_1_2=0;}
-					if($this->input->post('_m3_2_1_m')=='on'){$_m3_2_1=2;} else if($this->input->post('_m3_2_1')=='on'){$_m3_2_1=1;} else {$_m3_2_1=0;}
-					if($this->input->post('_m3_2_2_m')=='on'){$_m3_2_2=2;} else if($this->input->post('_m3_2_2')=='on'){$_m3_2_2=1;} else {$_m3_2_2=0;}
+						if($this->input->post('_m3_1_1_m')=='on'){$_m3_1_1=2;} else if($this->input->post('_m3_1_1')=='on'){$_m3_1_1=1;} else {$_m3_1_1=0;}
+						if($this->input->post('_m3_1_2_m')=='on'){$_m3_1_2=2;} else if($this->input->post('_m3_1_2')=='on'){$_m3_1_2=1;} else {$_m3_1_2=0;}
+						if($this->input->post('_m3_2_1_m')=='on'){$_m3_2_1=2;} else if($this->input->post('_m3_2_1')=='on'){$_m3_2_1=1;} else {$_m3_2_1=0;}
+						if($this->input->post('_m3_2_2_m')=='on'){$_m3_2_2=2;} else if($this->input->post('_m3_2_2')=='on'){$_m3_2_2=1;} else {$_m3_2_2=0;}
 
-					if($this->input->post('_m4_1_1_m')=='on'){$_m4_1_1=2;} else if($this->input->post('_m4_1_1')=='on'){$_m4_1_1=1;} else {$_m4_1_1=0;}
-					if($this->input->post('_m4_1_2_m')=='on'){$_m4_1_2=2;} else if($this->input->post('_m4_1_2')=='on'){$_m4_1_2=1;} else {$_m4_1_2=0;}
-					if($this->input->post('_m4_1_3_m')=='on'){$_m4_1_3=2;} else if($this->input->post('_m4_1_3')=='on'){$_m4_1_3=1;} else {$_m4_1_3=0;}
-					if($this->input->post('_m4_2_1_m')=='on'){$_m4_2_1=2;} else if($this->input->post('_m4_2_1')=='on'){$_m4_2_1=1;} else {$_m4_2_1=0;}
-					if($this->input->post('_m4_2_2_m')=='on'){$_m4_2_2=2;} else if($this->input->post('_m4_2_2')=='on'){$_m4_2_2=1;} else {$_m4_2_2=0;}
-					if($this->input->post('_m4_2_3_m')=='on'){$_m4_2_3=2;} else if($this->input->post('_m4_2_3')=='on'){$_m4_2_3=1;} else {$_m4_2_3=0;}
+						if($this->input->post('_m4_1_1_m')=='on'){$_m4_1_1=2;} else if($this->input->post('_m4_1_1')=='on'){$_m4_1_1=1;} else {$_m4_1_1=0;}
+						if($this->input->post('_m4_1_2_m')=='on'){$_m4_1_2=2;} else if($this->input->post('_m4_1_2')=='on'){$_m4_1_2=1;} else {$_m4_1_2=0;}
+						if($this->input->post('_m4_1_3_m')=='on'){$_m4_1_3=2;} else if($this->input->post('_m4_1_3')=='on'){$_m4_1_3=1;} else {$_m4_1_3=0;}
+						if($this->input->post('_m4_2_1_m')=='on'){$_m4_2_1=2;} else if($this->input->post('_m4_2_1')=='on'){$_m4_2_1=1;} else {$_m4_2_1=0;}
+						if($this->input->post('_m4_2_2_m')=='on'){$_m4_2_2=2;} else if($this->input->post('_m4_2_2')=='on'){$_m4_2_2=1;} else {$_m4_2_2=0;}
+						if($this->input->post('_m4_2_3_m')=='on'){$_m4_2_3=2;} else if($this->input->post('_m4_2_3')=='on'){$_m4_2_3=1;} else {$_m4_2_3=0;}
 
-					if($this->input->post('_m5_1_1_m')=='on'){$_m5_1_1=2;} else if($this->input->post('_m5_1_1')=='on'){$_m5_1_1=1;} else {$_m5_1_1=0;}
-					if($this->input->post('_m5_1_2_m')=='on'){$_m5_1_2=2;} else if($this->input->post('_m5_1_2')=='on'){$_m5_1_2=1;} else {$_m5_1_2=0;}
-					if($this->input->post('_m5_1_3_m')=='on'){$_m5_1_3=2;} else if($this->input->post('_m5_1_3')=='on'){$_m5_1_3=1;} else {$_m5_1_3=0;}
-					if($this->input->post('_m5_1_4_m')=='on'){$_m5_1_4=2;} else if($this->input->post('_m5_1_4')=='on'){$_m5_1_4=1;} else {$_m5_1_4=0;}
-					if($this->input->post('_m5_2_1_m')=='on'){$_m5_2_1=2;} else if($this->input->post('_m5_2_1')=='on'){$_m5_2_1=1;} else {$_m5_2_1=0;}
-					if($this->input->post('_m5_2_2_m')=='on'){$_m5_2_2=2;} else if($this->input->post('_m5_2_2')=='on'){$_m5_2_2=1;} else {$_m5_2_2=0;}
+						if($this->input->post('_m5_1_1_m')=='on'){$_m5_1_1=2;} else if($this->input->post('_m5_1_1')=='on'){$_m5_1_1=1;} else {$_m5_1_1=0;}
+						if($this->input->post('_m5_1_2_m')=='on'){$_m5_1_2=2;} else if($this->input->post('_m5_1_2')=='on'){$_m5_1_2=1;} else {$_m5_1_2=0;}
+						if($this->input->post('_m5_1_3_m')=='on'){$_m5_1_3=2;} else if($this->input->post('_m5_1_3')=='on'){$_m5_1_3=1;} else {$_m5_1_3=0;}
+						if($this->input->post('_m5_1_4_m')=='on'){$_m5_1_4=2;} else if($this->input->post('_m5_1_4')=='on'){$_m5_1_4=1;} else {$_m5_1_4=0;}
+						if($this->input->post('_m5_2_1_m')=='on'){$_m5_2_1=2;} else if($this->input->post('_m5_2_1')=='on'){$_m5_2_1=1;} else {$_m5_2_1=0;}
+						if($this->input->post('_m5_2_2_m')=='on'){$_m5_2_2=2;} else if($this->input->post('_m5_2_2')=='on'){$_m5_2_2=1;} else {$_m5_2_2=0;}
 
-					$auth_dt = array(
-						'user_no' => $this->input->post('user_no', TRUE),
-						'user_id' => $this->input->post('user_id', TRUE),
-						'_m1_1_1' => $_m1_1_1,
-						'_m1_1_2' => $_m1_1_2,
-						'_m1_1_3' => $_m1_1_3,
-						'_m1_2_1' => $_m1_2_1,
-						'_m1_2_2' => $_m1_2_2,
-						'_m1_2_3' => $_m1_2_3,
+						$auth_dt = array(
+							'user_no' => $this->input->post('user_no', TRUE),
+							'user_id' => $this->input->post('user_id', TRUE),
+							'_m1_1_1' => $_m1_1_1,
+							'_m1_1_2' => $_m1_1_2,
+							'_m1_1_3' => $_m1_1_3,
+							'_m1_2_1' => $_m1_2_1,
+							'_m1_2_2' => $_m1_2_2,
+							'_m1_2_3' => $_m1_2_3,
 
-						'_m2_1_1' => $_m2_1_1,
-						'_m2_1_2' => $_m2_1_2,
-						'_m2_1_3' => $_m2_1_3,
-						'_m2_2_1' => $_m2_2_1,
-						'_m2_2_2' => $_m2_2_2,
-						'_m2_2_3' => $_m2_2_3,
+							'_m2_1_1' => $_m2_1_1,
+							'_m2_1_2' => $_m2_1_2,
+							'_m2_1_3' => $_m2_1_3,
+							'_m2_2_1' => $_m2_2_1,
+							'_m2_2_2' => $_m2_2_2,
+							'_m2_2_3' => $_m2_2_3,
 
-						'_m3_1_1' => $_m3_1_1,
-						'_m3_1_2' => $_m3_1_2,
-						'_m3_2_1' => $_m3_2_1,
-						'_m3_2_2' => $_m3_2_2,
+							'_m3_1_1' => $_m3_1_1,
+							'_m3_1_2' => $_m3_1_2,
+							'_m3_2_1' => $_m3_2_1,
+							'_m3_2_2' => $_m3_2_2,
 
-						'_m4_1_1' => $_m4_1_1,
-						'_m4_1_2' => $_m4_1_2,
-						'_m4_1_3' => $_m4_1_3,
-						'_m4_2_1' => $_m4_2_1,
-						'_m4_2_2' => $_m4_2_2,
-						'_m4_2_3' => $_m4_2_3,
+							'_m4_1_1' => $_m4_1_1,
+							'_m4_1_2' => $_m4_1_2,
+							'_m4_1_3' => $_m4_1_3,
+							'_m4_2_1' => $_m4_2_1,
+							'_m4_2_2' => $_m4_2_2,
+							'_m4_2_3' => $_m4_2_3,
 
-						'_m5_1_1' => $_m5_1_1,
-						'_m5_1_2' => $_m5_1_2,
-						'_m5_1_3' => $_m5_1_3,
-						'_m5_1_4' => $_m5_1_4,
-						'_m5_2_1' => $_m5_2_1,
-						'_m5_2_2' => $_m5_2_2
-					);
-					$auth_result = $this->m5_m->auth_reg($this->input->get('un'), $auth_dt);
-					if($auth_result) alert('요청하신 작업이 정상적으로 처리되었습니다.', base_url('m5/config/2/2/')."?un=".$this->input->get('un')); else alert('데이터베이스 에러입니다. 다시 시도하여 주십시요.', base_url('m5/config/2/2/'));
+							'_m5_1_1' => $_m5_1_1,
+							'_m5_1_2' => $_m5_1_2,
+							'_m5_1_3' => $_m5_1_3,
+							'_m5_1_4' => $_m5_1_4,
+							'_m5_2_1' => $_m5_2_1,
+							'_m5_2_2' => $_m5_2_2
+						);
+						$auth_result = $this->m5_m->auth_reg($this->input->get('un'), $auth_dt);
+						if($auth_result) alert('요청하신 작업이 정상적으로 처리되었습니다.', base_url('m5/config/2/2/')."?un=".$this->input->get('un')); else alert('데이터베이스 에러입니다. 다시 시도하여 주십시요.', base_url('m5/config/2/2/'));
+					}
+
+
+
 					//사용자 권한 설정/////////////////////////////////////////
 
 				}// 폼 검증 로직 종료

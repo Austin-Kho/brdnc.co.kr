@@ -22,7 +22,7 @@
 						<div class="col-md-2 center str">승인처리</div>
 					</div>
 <?php foreach($new_rq as $lt) : ?>
-<?php if($auth<2 && $this->session->userdata['is_admin']!=1) $perm_str="alert('승인(거부) 권한이 없습니다!')"; else $perm_str="permition('$lt->no',this.value);"; ?>
+<?php if($auth<2 && $this->session->userdata['is_admin']!=1) $perm_str="alert('승인(거부) 권한이 없습니다!')"; else $perm_str="permition('$lt->no', this.value);"; ?>
 					<div class="row new_user">
 						<div class="col-md-2 center str"><?php echo $lt->name." (".$lt->user_id.")"; ?></div>
 						<div class="col-md-3 center str">(주) 바램디앤씨</div>
