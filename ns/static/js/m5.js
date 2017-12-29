@@ -452,9 +452,9 @@ function com_submit(mode){
 		return;
 	}
 
-	if(!form.zipcode.value){
+	if(!form.postcode1.value){
 		alert('회사주소를 입력하세요!');
-		form.zipcode.focus();
+		form.postcode1.focus();
 		return;
 	}
 

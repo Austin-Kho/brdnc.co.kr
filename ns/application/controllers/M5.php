@@ -300,7 +300,7 @@ class M5 extends CI_Controller {
 					//본 페이지 로딩
 					$this->load->view('/menu/m5/md1_sd3_v', $data);
 				}else{
-					$tax_addr = $this->input->post('zipcode', TRUE)."-".$this->input->post('address1', TRUE)."-".$this->input->post('address2', TRUE);
+					$tax_addr = $this->input->post('postcode1', TRUE)."-".$this->input->post('address1_1', TRUE)."-".$this->input->post('address2_1', TRUE);
 					$acc_data = array(
 						'si_name' => $this->input->post('si_name', TRUE),
 						'acc_cla' => $this->input->post('acc_cla', TRUE),
@@ -477,9 +477,9 @@ class M5 extends CI_Controller {
 				$this->form_validation->set_rules('email2', '이메일', 'required');
 				$this->form_validation->set_rules('tax_off1_code', '세무서1코드', 'required');
 				$this->form_validation->set_rules('tax_off1_name', '세무서1이름', 'required');
-				$this->form_validation->set_rules('zipcode', '우편번호', 'required|numeric');
-				$this->form_validation->set_rules('address1', '주소1', 'required');
-				$this->form_validation->set_rules('address2', '주소2', 'required');
+				$this->form_validation->set_rules('postcode1', '우편번호', 'required|numeric');
+				$this->form_validation->set_rules('address1_1', '주소1', 'required');
+				$this->form_validation->set_rules('address2_1', '주소2', 'required');
 
 
 				// 회사 등록 정보가 있는지 확인
@@ -537,9 +537,9 @@ class M5 extends CI_Controller {
 						'tax_off1_name' => $this->input->post('tax_off1_name', TRUE),
 						'tax_off2_code' => $this->input->post('tax_off2_code', TRUE),
 						'tax_off2_name' => $this->input->post('tax_off2_name', TRUE),
-						'zipcode' => $this->input->post('zipcode', TRUE),
-						'address1' => $this->input->post('address1', TRUE),
-						'address2' => $this->input->post('address2', TRUE),
+						'zipcode' => $this->input->post('postcode1', TRUE),
+						'address1' => $this->input->post('address1_1', TRUE),
+						'address2' => $this->input->post('address2_1', TRUE),
 						'en_co_name' => $this->input->post('en_co_name', TRUE),
 						'en_address' => $this->input->post('en_address', TRUE),
 						'red_date' => 'now()'

@@ -260,14 +260,14 @@ function cont_check(){
 			form2.cont_pay_sche7.focus();
 			return;
 		}
-		if(form1.cont_sort2.value=='2'&& !form2.zipcode.value){
+		if(form1.cont_sort2.value=='2'&& !form2.postcode1.value){
 			alert("계약자 등록 주소 항목을 입력하세요.");
-			form2.zipcode.focus();
+			form2.postcode1.focus();
 			return;
 		}
-		if(form1.cont_sort2.value=='2'&& !form2.zipcode_.value){
+		if(form1.cont_sort2.value=='2'&& !form2.postcode2.value){
 			alert("계약자 우편 주소 항목을 입력하세요.");
-			form2.zipcode_.focus();
+			form2.postcode2.focus();
 			return;
 		}
 	}else if(typeof(form1.cont_sort3)!='undefined' && form1.cont_sort3.value=='3'){

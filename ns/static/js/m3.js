@@ -80,9 +80,9 @@ function con_formck(){
 		form.sort.focus();
 		return;
 	}
-	if(!form.zipcode.value){
+	if(!form.postcode1.value){
 		alert('대지위치(주소)를 입력하여 주세요!');
-		form.zipcode.focus();
+		form.postcode1.focus();
 		return;
 	}
 	if(!form.buy_land_extent.value){

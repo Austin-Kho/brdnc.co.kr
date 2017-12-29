@@ -314,9 +314,9 @@ class M3 extends CI_Controller {
 				// 폼 검증할 필드와 규칙 사전 정의
 				$this->form_validation->set_rules('pj_name', '프로젝트 명', 'required');
 				$this->form_validation->set_rules('sort', '프로젝트 종류', 'required');
-				$this->form_validation->set_rules('zipcode', '우편번호', 'required|numeric');
-				$this->form_validation->set_rules('address1', '메인 주소', 'required');
-				$this->form_validation->set_rules('address2', '상세 주소', 'max_length[93]');
+				$this->form_validation->set_rules('postcode1', '우편번호', 'required|numeric');
+				$this->form_validation->set_rules('address1_1', '메인 주소', 'required');
+				$this->form_validation->set_rules('address2_1', '상세 주소', 'max_length[93]');
 				$this->form_validation->set_rules('buy_land_extent', '대지 매입면적', 'required|numeric|max_length[10]');
 				$this->form_validation->set_rules('scheme_land_extent', '계획 대지면적', 'required|numeric|max_length[10]');
 				$this->form_validation->set_rules('build_size', '건축 규모', 'max_length[60]');
@@ -380,7 +380,7 @@ class M3 extends CI_Controller {
 					$this->load->view('/menu/m3/md1_sd2_v', $data);
 				}else{
 					//폼 데이타 가공
-					$local_addr = $this->input->post('zipcode')."|".$this->input->post('address1')."|".$this->input->post('address2');
+					$local_addr = $this->input->post('postcode1')."|".$this->input->post('address1_1')."|".$this->input->post('address2_1');
 					$type_name = $this->input->post('type_name_1', TRUE);
 					if($this->input->post('type_name_2', TRUE)) $type_name .="-".$this->input->post('type_name_2', TRUE);
 					if($this->input->post('type_name_3', TRUE)) $type_name .="-".$this->input->post('type_name_3', TRUE);
@@ -493,9 +493,9 @@ class M3 extends CI_Controller {
 				// 폼 검증할 필드와 규칙 사전 정의
 				$this->form_validation->set_rules('pj_name', '프로젝트 명', 'required');
 				$this->form_validation->set_rules('sort', '프로젝트 종류', 'required');
-				$this->form_validation->set_rules('zipcode', '우편번호', 'required|numeric');
-				$this->form_validation->set_rules('address1', '메인 주소', 'required');
-				$this->form_validation->set_rules('address2', '상세 주소', 'max_length[93]');
+				$this->form_validation->set_rules('postcode1', '우편번호', 'required|numeric');
+				$this->form_validation->set_rules('address1_1', '메인 주소', 'required');
+				$this->form_validation->set_rules('address2_1', '상세 주소', 'max_length[93]');
 				$this->form_validation->set_rules('buy_land_extent', '대지 매입면적', 'required|numeric|max_length[10]');
 				$this->form_validation->set_rules('scheme_land_extent', '계획 대지면적', 'required|numeric|max_length[10]');
 				$this->form_validation->set_rules('build_size', '건축 규모', 'max_length[60]');
@@ -560,7 +560,7 @@ class M3 extends CI_Controller {
 					$this->load->view('/menu/m3/md2_sd1_v', $data);
 				}else{
 					//폼 데이타 가공
-					$local_addr = $this->input->post('zipcode')."|".$this->input->post('address1')."|".$this->input->post('address2');
+					$local_addr = $this->input->post('postcode1')."|".$this->input->post('address1_1')."|".$this->input->post('address2_1');
 					$type_name = $this->input->post('type_name_1', TRUE);
 					if($this->input->post('type_name_2', TRUE)) $type_name .="-".$this->input->post('type_name_2', TRUE);
 					if($this->input->post('type_name_3', TRUE)) $type_name .="-".$this->input->post('type_name_3', TRUE);

@@ -292,12 +292,12 @@ class M1 extends CI_Controller {
 				$this->form_validation->set_rules('deposit_5', '계약금5', 'trim|numeric');
 				$this->form_validation->set_rules('deposit_6', '계약금6', 'trim|numeric');
 				$this->form_validation->set_rules('deposit_7', '계약금7', 'trim|numeric');
-				$this->form_validation->set_rules('zipcode', '우편변호1', 'trim|numeric|max_length[5]');
-				$this->form_validation->set_rules('address1', '메인주소1', 'trim|max_length[100]');
-				$this->form_validation->set_rules('address2', '세부주소1', 'trim|max_length[50]');
-				$this->form_validation->set_rules('zipcode_', '우편번호2', 'trim|numeric|max_length[5]');
-				$this->form_validation->set_rules('address1_', '메인주소2', 'trim|max_length[100]');
-				$this->form_validation->set_rules('address2_', '세부주소2', 'trim|max_length[50]');
+				$this->form_validation->set_rules('postcode1', '우편변호1', 'trim|numeric|max_length[5]');
+				$this->form_validation->set_rules('address1_1', '메인주소1', 'trim|max_length[100]');
+				$this->form_validation->set_rules('address2_1', '세부주소1', 'trim|max_length[50]');
+				$this->form_validation->set_rules('postcode2', '우편번호2', 'trim|numeric|max_length[5]');
+				$this->form_validation->set_rules('address1_2', '메인주소2', 'trim|max_length[100]');
+				$this->form_validation->set_rules('address2_2', '세부주소2', 'trim|max_length[50]');
 				$this->form_validation->set_rules('note', '비고', 'trim|max_length[200]');
 
 				if($this->form_validation->run() == FALSE) {
@@ -407,8 +407,8 @@ class M1 extends CI_Controller {
 
 						/******************************계약자 테이블 데이터******************************/
                         $cont_seq = $this->main_m->sql_row(" SELECT seq FROM cms_sales_contract WHERE pj_seq='$pj' AND unit_seq='$un' AND is_rescission='0' ");
-						$addr_id = $this->input->post('zipcode')."|".$this->input->post('address1')."|".$this->input->post('address2');
-						$addr_dm = $this->input->post('zipcode_')."|".$this->input->post('address1_')."|".$this->input->post('address2_');
+						$addr_id = $this->input->post('postcode1')."|".$this->input->post('address1_1')."|".$this->input->post('address2_1');
+						$addr_dm = $this->input->post('postcode2')."|".$this->input->post('address1_2')."|".$this->input->post('address2_2');
 						$idoc1 = $this->input->post('incom_doc_1');
 						$idoc2 = $this->input->post('incom_doc_2');
 						$idoc3 = $this->input->post('incom_doc_3');
