@@ -64,7 +64,7 @@ $autoload['packages'] = array();
  *	기본적으로 autoload 되고 있는 라이브러리는 지우시면 안됩니다
  *	그러나 필요한 경우 새로운 라이브러리를 추가히시는 건 괜찮습니다
  */
-$autoload['libraries'] = array('session', 'managelayout', 'member', 'cbconfig', 'board', 'user_agent', 'depositconfig', 'cmallconfig', 'events');
+$autoload['libraries'] = array('database', 'session', 'managelayout', 'member', 'cbconfig', 'board', 'user_agent', 'depositconfig', 'cmallconfig', 'events');
 
 /*
 | -------------------------------------------------------------------
@@ -101,7 +101,7 @@ $autoload['drivers'] = array();
  *	기본적으로 autoload 되고 있는 헬퍼는 지우시면 안됩니다
  *	그러나 필요한 경우 새로운 헬퍼를 추가히시는 건 괜찮습니다
  */
-$autoload['helper'] = array('url', 'basic', 'thumbnail', 'cookie');
+$autoload['helper'] = array('url', 'form', 'basic', 'thumbnail', 'cookie');
 
 /*
 | -------------------------------------------------------------------
