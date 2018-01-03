@@ -17,8 +17,11 @@ for($i=0; $i<count($tp_name); $i++) :
 endfor;
 ?>
 	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
-		<form method="get" name="pj_sel" action="<?php echo current_url(); ?>">
-
+		<!-- <form method="get" name="pj_sel" action="<?php echo current_url(); ?>"> -->
+<?php
+	$attributes = array('method' => 'get', 'name' => 'pj_sel');
+	echo form_open(current_url(), $attributes);
+?>
 			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
 			<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
 				<div class="col-xs-12 col-sm-8" style="padding: 0px;">
@@ -89,7 +92,7 @@ endfor;
 						<td class="right"><?php echo $summary[$i]->hold." 세대"; ?></td>
 						<td class="right" style="color: #273169;"><?php echo $summary[$i]->app." 건"; ?></td>
 	<?php for($j=0; $j<count($sc_cont_diff); $j++):
-					$cn = $this->main_m->sql_row(" SELECT COUNT(seq) AS cont_num FROM cb_cms_sales_contract WHERE pj_seq='$project' AND unit_type='".$tp_name[$i]->type."' AND cont_diff='".$sc_cont_diff[$j]->cont_diff."' ");
+					$cn = $this->cms_main_model->sql_row(" SELECT COUNT(seq) AS cont_num FROM cb_cms_sales_contract WHERE pj_seq='$project' AND unit_type='".$tp_name[$i]->type."' AND cont_diff='".$sc_cont_diff[$j]->cont_diff."' ");
 	?>
 						<td class="right"><?php echo $cn->cont_num." 건 "; ?></td>
 	<?php endfor; ?>
@@ -107,7 +110,7 @@ endfor;
 						<td><?php echo $sum_all->hold." 세대"; ?></td>
 						<td style="color: #273169; font-weight: bold;"><?php echo $sum_all->app." 건"; ?></td>
 <?php for($j=0; $j<count($sc_cont_diff); $j++):
-				$cntot = $this->main_m->sql_row(" SELECT COUNT(seq) AS total FROM cb_cms_sales_contract WHERE pj_seq='$project' AND cont_diff='".$sc_cont_diff[$j]->cont_diff."' ");
+				$cntot = $this->cms_main_model->sql_row(" SELECT COUNT(seq) AS total FROM cb_cms_sales_contract WHERE pj_seq='$project' AND cont_diff='".$sc_cont_diff[$j]->cont_diff."' ");
 ?>
 						<td style="font-weight: bold;"><?php echo $cntot->total." 건"; ?></td>
 <?php endfor; ?>
@@ -165,7 +168,7 @@ foreach($app_data as $lt) :
 						<td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type] ?>;">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></span></td>
 						<td ><?php echo $app_edit_link.$lt->unit_dong_ho.$app_edit; ?></td>
 						<td><?php echo $app_edit_link.$lt->applicant.$app_edit; ?></td>
-<?php $diff = $this->main_m->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no = '$lt->app_diff' "); ?>
+<?php $diff = $this->cms_main_model->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no = '$lt->app_diff' "); ?>
 						<td ><?php echo $diff->diff_name;?></td>
 						<td class="right"><?php echo number_format($lt->app_in_mon)." 원"; ?></td>
 						<td><?php echo $new_span." ".$lt->app_date; ?></td>
@@ -183,8 +186,8 @@ foreach($app_data as $lt) :
     <div class="col-md-12"><h4><span class="label label-primary">3. 계약 현황</span></h4></div>
 		<div class="col-md-12 bo-top bo-bottom" style="padding: 0; margin: 0 0 20px 0;">
 <?php
-$attributes = array('name' => 'form1', 'method' => 'get');
-echo form_open(base_url(uri_string()), $attributes);
+	$attributes = array('name' => 'form1', 'method' => 'get');
+	echo form_open(base_url(uri_string()), $attributes);
 ?>
 				<div class="col-xs-12 col-sm-2 col-md-1 center bgf8" style="height: 40px; padding: 10px 0;">검색 조건</div>
 				<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
@@ -304,11 +307,11 @@ echo form_open(base_url(uri_string()), $attributes);
 				<tbody class="bo-bottom center">
 <?php
 foreach ($cont_data as $lt) :
-	$nd = $this->main_m->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$lt->cont_diff' ");
-	$total_rec = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS received FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$lt->cont_seq' ");
+	$nd = $this->cms_main_model->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$lt->cont_diff' ");
+	$total_rec = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS received FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$lt->cont_seq' ");
 
-	$deposit1 = $this->main_m->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<3 ");
-	$deposit2 = $this->main_m->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<5 ");
+	$deposit1 = $this->cms_main_model->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<3 ");
+	$deposit2 = $this->cms_main_model->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<5 ");
 	if($total_rec->received>=$deposit2->payment){
 		$is_paid_ok = "<span style='color: #2205D0;'>2차 완납</span>";
 	}elseif($total_rec->received>=$deposit1->payment){

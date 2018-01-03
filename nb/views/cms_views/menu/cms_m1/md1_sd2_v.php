@@ -118,8 +118,10 @@
 <?php $disabled = (($this->input->get('cont_sort2') OR $this->input->get('cont_sort3')) && $this->input->get('ho')) ? "" : "disabled"; ?>
 
 		<!-- ===================계약내용 기록 시작================== -->
-		<form method="post" name="form1" action="<?php echo current_url(); ?>">
-
+<?php
+	$attributes = array('name' => 'form1');
+	echo form_open(current_url(), $attributes);
+?>
 			<input type="hidden" name="mode" value="<?php if( !empty($is_reg)) echo '2'; else echo '1'; ?>">
 			<input type="hidden" name="project" value="<?php echo $this->input->get('project'); ?>">
 			<input type="hidden" name="cont_sort1" value="<?php echo $this->input->get('cont_sort1'); ?>"><!-- 계약(1) 해지(2) 여부 -->
