@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit ('No direct script access allowed');
 
-class Capital_pop extends CI_Controller
+class Capital_pop extends CB_Controller
 {
 	public function __construct() {
 		parent::__construct();

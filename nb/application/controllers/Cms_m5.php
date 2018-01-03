@@ -47,7 +47,7 @@ class Cms_m5 extends CB_Controller {
 	 * @return [type]      [description]
 	 */
 	 public function config($mdi='', $sdi=''){
-		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+		$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
@@ -554,7 +554,7 @@ class Cms_m5 extends CB_Controller {
 						'address1' => $this->input->post('address1_1', TRUE),
 						'address2' => $this->input->post('address2_1', TRUE),
 						'en_co_name' => $this->input->post('en_co_name', TRUE),
-						'en_address' => $this->input->post('en_address', TRUE),
+						'en_address' => $this->input->post('addressEnglish', TRUE),
 						'red_date' => 'now()'
 					);
 

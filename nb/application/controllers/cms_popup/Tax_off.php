@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit ('No direct script access allowed');
 
-class Tax_off extends CI_Controller
+class Tax_off extends CB_Controller
 {
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('cmpopup_m');            // 팝업 모델 로드
-		$this->load->helper('is_mobile');
+		$this->load->model('cms_popup_model');    // 팝업 모델 로드
+		$this->load->helper('cms_is_mobile');
 	}
 
 	public function _remap($method) {
@@ -25,7 +25,7 @@ class Tax_off extends CI_Controller
 	}
 
 	public function lists () {
-		// $this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(TRUE);
 
 		$search_text = $this->input->post('search_text');
 
@@ -35,8 +35,8 @@ class Tax_off extends CI_Controller
 		$this->load->library('pagination');
 
 		//페이지네이션 설정/////////////////////////////////
-		$config['base_url'] = base_url('/popup/tax_off/lists/'.$data['n']); //페이징 주소
-		$config['total_rows'] = $this->cmpopup_m->tax_search($search_text, '', '', 'num'); //게시물의 전체 갯수
+		$config['base_url'] = base_url('/cms_popup/tax_off/lists/'.$data['n']); //페이징 주소
+		$config['total_rows'] = $this->cms_popup_model->tax_search($search_text, '', '', 'num'); //게시물의 전체 갯수
 		$config['per_page'] = 6; //한 페이지에 표시할 게시물 수
 		$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 		$config['uri_segment'] = $uri_segment = 5; //페이지 번호가 위치한 세그먼트
@@ -58,7 +58,8 @@ class Tax_off extends CI_Controller
 
 		$limit = $config['per_page'];
 
-		$data['tax_off_list'] = $this->cmpopup_m->tax_search($search_text , $start, $limit, '');
+		$data['tax_off_list'] = $this->cms_popup_model->tax_search($search_text , $start, $limit, '');
+
 		$this->load->view('/cms_views/popup/tax_search_v', $data);
 	}
 }

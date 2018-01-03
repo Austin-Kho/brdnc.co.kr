@@ -174,7 +174,7 @@ foreach($app_data as $lt) :
 						<td><?php echo $new_span." ".$lt->app_date; ?></td>
 						<td><?php echo $condi; ?></td>
 						<td><?php if($lt->disposal_date && $lt->disposal_date!="0000-00-00")echo $lt->disposal_date; ?></td>
-						<td class="left"><div style="cursor: pointer;" data-toggle="tooltip" data-placement="left" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 38, ".."); ?></div></td>
+						<td class="left"><div style="cursor: pointer;" data-toggle="tooltip" data-placement="left" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 23, ".."); ?></div></td>
 					</tr>
 <?php endforeach; ?>
 				</tbody>

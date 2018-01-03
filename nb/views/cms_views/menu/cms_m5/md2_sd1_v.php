@@ -341,7 +341,7 @@
 										<div class="col-xs-11 input-group">
 											<input type="text" class="form-control input-sm" id="tax_off1_code" name="tax_off1_code" value="<?php if($mode=='com_reg') {echo set_value('tax_off1_code');} else {echo $com->tax_off1_code; } ?>" readonly required>
 											<span class="input-group-btn">
-											      <button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('<?php echo base_url('popup/tax_off/lists/1/'); ?>', 'tax_search', 500, 616)"> &nbsp;
+											      <button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('<?php echo base_url('cms_popup/tax_off/lists/1/'); ?>', 'tax_search', 500, 616)"> &nbsp;
 													<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
 											      </button>
 											</span>
@@ -367,7 +367,7 @@
 										<div class="col-xs-11  input-group">
 											<input type="text" class="form-control input-sm" id=tax_off2_code"" name="tax_off2_code" value="<?php if($mode=='com_reg') {echo set_value('tax_off2_code');} else if($com->tax_off2_code>0) {echo $com->tax_off2_code; } ?>" readonly>
 											<span class="input-group-btn">
-										      	<button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('<?php echo base_url('/popup/tax_off/lists/2/'); ?>', 'tax_search', 500, 616)"> &nbsp;
+										      	<button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('<?php echo base_url('/cms_popup/tax_off/lists/2/'); ?>', 'tax_search', 500, 616)"> &nbsp;
 										      		<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
 										      	</button>
 										      </span>

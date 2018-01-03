@@ -21,7 +21,7 @@ class Cms_popup_model extends CB_Model
 			$limit_query = " LIMIT ".$start.", ".$limit;
 		}
 
-		$sql = " SELECT * FROM cms_tax_office ".$where." ORDER BY no ASC ".$limit_query;
+		$sql = " SELECT * FROM cb_cms_tax_office ".$where." ORDER BY no ASC ".$limit_query;
 		$qry = $this->db->query($sql);
 
 		if($num=='num') {	$result = $qry->num_rows(); }else{ $result = $qry->result(); }
