@@ -37,12 +37,12 @@ class Cbconfig extends CI_Controller
         // 이 부분에 현재 버전과 패치 버전이 틀릴시 db업그레이드 하는 부분을 넣습니다.
 
         if( !isset( $this->cfg['cb_version'] ) ){
-
+            
             $sql = "ALTER TABLE ".$this->CI->db->dbprefix."session CHANGE COLUMN `id` `id` VARCHAR(120) NOT NULL DEFAULT ''";
             $this->CI->db->query($sql);
-
+            
             try {
-
+                
                 $this->CI->load->model(array('Payment_order_data_model', 'Payment_inicis_log_model'));
 
                 if ($this->CI->db->table_exists($this->CI->db->dbprefix.'payment_order_data') ) {
@@ -53,7 +53,7 @@ class Cbconfig extends CI_Controller
                         $this->CI->db->query($sql);
                     }
                 }
-
+                
                 if ($this->CI->db->table_exists($this->CI->db->dbprefix.'payment_inicis_log') ) {
                     $row = $this->CI->Payment_inicis_log_model->get_one();
 
@@ -73,17 +73,17 @@ class Cbconfig extends CI_Controller
                 FCPATH . '/plugin/kcp/inicis/log/',
                 FCPATH . '/plugin/lg/inicis/log/',
                 );
-
+            
             foreach( $checks_paths as $path ){
                 if( is_dir($path) ){
                     $files = glob($path.'/*');
-
+                    
                     foreach ((array) $files as $file) {
                         if( $file && ! preg_match('/\.htaccess$/i', $file) ){
                             unlink($file);
                         }
                     }
-
+                    
                 }
             }
 
@@ -94,7 +94,7 @@ class Cbconfig extends CI_Controller
             $this->CI->Config_model->save($savedata);
 
         }
-
+        
         if( version_compare($this->cfg['cb_version'], '2.0.1', '<') ){
 
            try {
@@ -103,7 +103,7 @@ class Cbconfig extends CI_Controller
 
                 if ($this->CI->db->table_exists($this->CI->db->dbprefix.'cmall_order') ) {
                     $row = $this->CI->Cmall_order_model->get_one();
-
+                    
                     if( !array_key_exists('cor_vbank_expire', $row) ){
                         $sql = "ALTER TABLE ".$this->CI->db->dbprefix."cmall_order ADD COLUMN `cor_vbank_expire` DATETIME NULL DEFAULT NULL AFTER `cor_status`, ADD COLUMN `is_test` CHAR(1) NOT NULL DEFAULT '' AFTER `cor_vbank_expire`,
                         ADD COLUMN `status` varchar(255) NOT NULL DEFAULT '' AFTER `is_test`,
@@ -115,11 +115,11 @@ class Cbconfig extends CI_Controller
 
                 if ($this->CI->db->table_exists($this->CI->db->dbprefix.'deposit') ) {
                     $row = $this->CI->Deposit_model->get_one();
-
+                    
                     if( !array_key_exists('dep_vbank_expire', $row) ){
                         $sql = "ALTER TABLE ".$this->CI->db->dbprefix."deposit ADD COLUMN `dep_vbank_expire` DATETIME NULL DEFAULT NULL AFTER `dep_status`, ADD COLUMN `is_test` CHAR(1) NOT NULL DEFAULT '' AFTER `dep_vbank_expire`,
-                        ADD COLUMN `status` varchar(255) NOT NULL DEFAULT '' AFTER `is_test`,
-                        ADD COLUMN `dep_refund_price` INT(11) NOT NULL DEFAULT '0' AFTER `status`,
+                        ADD COLUMN `status` varchar(255) NOT NULL DEFAULT '' AFTER `is_test`, 
+                        ADD COLUMN `dep_refund_price` INT(11) NOT NULL DEFAULT '0' AFTER `status`, 
                         ADD COLUMN `dep_order_history` TEXT NULL DEFAULT '' AFTER `dep_refund_price` ";
                         $this->CI->db->query($sql);
                     }
@@ -128,7 +128,7 @@ class Cbconfig extends CI_Controller
                 if ($this->CI->db->table_exists($this->CI->db->dbprefix.'cmall_order_detail') ) {
 
                     $row = $this->CI->Cmall_order_detail_model->get_one();
-
+                    
                     if( !isset($row['cod_status']) ){
                         $sql = "ALTER TABLE ".$this->CI->db->dbprefix."cmall_order_detail ADD COLUMN `cod_status` VARCHAR(50) NOT NULL DEFAULT '' AFTER `cod_count` ";
 
@@ -153,7 +153,7 @@ class Cbconfig extends CI_Controller
 
         }
 
-
+    
         if( $return ){
             return $this->cfg;
         }

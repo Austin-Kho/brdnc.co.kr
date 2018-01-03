@@ -496,7 +496,7 @@ class Install extends CI_Controller
             'aul_datetime' => array(
                 'type' => 'DATETIME',
                 'null' => true,
-            ),
+        ),
         ));
         $this->dbforge->add_key('aul_id', true);
         $this->dbforge->add_key('mem_id');
@@ -1666,7 +1666,7 @@ class Install extends CI_Controller
             ),
             'mem_is_admin' => array(
                 'type' => 'TINYINT',
-                'constraint' => 1,
+                'constraint' => 4,
                 'unsigned' => true,
                 'default' => '0',
             ),
@@ -1699,37 +1699,6 @@ class Install extends CI_Controller
                 'type' => 'VARCHAR',
                 'constraint' => '255',
                 'default' => '',
-            ),
-            'request' => array(
-                'type' => 'TINYINT',
-                'constraint' => 1,
-                'unsigned' => true,
-                'default' => '2',
-            ),
-            'is_company' => array(
-                'type' => 'TINYINT',
-                'constraint' => 1,
-                'default' => '0',
-            ),
-            'div_seq' => array(
-                'type' => 'TINYINT',
-                'constraint' => 3,
-                'null' => true,
-            ),
-            'pj_seq' => array(
-                'type' => 'TINYINT',
-                'constraint' => 3,
-                'null' => true,
-            ),
-            'pj_where' => array(
-                'type' => 'VARCHAR',
-                'constraint' => '20',
-                'null' => true,
-            ),
-            'pj_posi' => array(
-                'type' => 'TINYINT',
-                'constraint' => 1,
-                'null' => true,
             ),
         ));
         $this->dbforge->add_key('mem_id', true);
