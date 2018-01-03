@@ -1,0 +1,11 @@
+<?php
+defined('BASEPATH') OR exit ('No direct script access allowed');
+
+class Cms_m2_model extends CB_Model {
+
+	////////////////////////////////////////////////////////
+	// 사업 정보 관리 모델
+	////////////////////////////////////////////////////////
+	
+}
+// End of this File
