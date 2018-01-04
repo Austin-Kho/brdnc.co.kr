@@ -1,4 +1,5 @@
 			<div class="main_start">&nbsp;</div>
+			<!-- 5. 환경설정 -> 1. 기본정보관리 ->4. 계좌 정보 관리 페이지 -->
 
 <?php if( !$this->input->get('ss_di') or $this->input->get('ss_di')==1) : ?>
 			<div class="row">

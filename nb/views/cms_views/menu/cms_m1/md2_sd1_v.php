@@ -212,14 +212,14 @@ foreach($rec_list as $lt) :
 ?>
 					<tr class="center">
 						<td><?php echo $lt->paid_date; ?></td>
-						<td class="right"><a href="<?php echo  base_url('cm1/sales/2/2').'?modi=1&project='.$project.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1].'&rec_seq='.$lt->seq; ?>"><?php echo number_format($lt->paid_amount); ?></a></td>
+						<td class="right"><a href="<?php echo  base_url('cms_m1/sales/2/2').'?modi=1&project='.$project.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1].'&rec_seq='.$lt->seq; ?>"><?php echo number_format($lt->paid_amount); ?></a></td>
 						<td><?php echo $lt->paid_who; ?></td>
 						<td><?php echo $lt->pay_name; ?></td>
 						<td><?php echo $lt->acc_nick; ?></td>
-						<td class="right"><a href="<?php echo  base_url('cm1/sales/2/2').'?modi=1&project='.$project.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1].'&rec_seq='.$lt->seq; ?>"><?php echo number_format($total_rec->pa); ?></a></td>
+						<td class="right"><a href="<?php echo  base_url('cms_m1/sales/2/2').'?modi=1&project='.$project.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1].'&rec_seq='.$lt->seq; ?>"><?php echo number_format($total_rec->pa); ?></a></td>
 						<td><b><?php echo $contractor->ct; ?></b></td>
 						<td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span> <?php echo $lt->unit_type; ?></td>
-						<td><a href="<?php echo base_url('cm1/sales/1/2')."?mode=1&cont_sort1=1&cont_sort2=2&project=".$project."&type=".$lt->unit_type."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>"><?php echo $lt->unit_dong_ho; ?></a></td>
+						<td><a href="<?php echo base_url('cms_m1/sales/1/2')."?mode=1&cont_sort1=1&cont_sort2=2&project=".$project."&type=".$lt->unit_type."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>"><?php echo $lt->unit_dong_ho; ?></a></td>
 					</tr>
 <?php endforeach; ?>
 				</tbody>

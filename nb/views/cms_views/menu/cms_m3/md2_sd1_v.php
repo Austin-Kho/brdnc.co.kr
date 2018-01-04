@@ -1,5 +1,6 @@
     <div class="main_start">&nbsp;</div>
-	<!-- 3. 프로젝트 -> 2. 신규 프로젝트 ->1. 신규 등록 -->
+	  <!-- 3. 프로젝트 -> 2. 신규 프로젝트 -> 1. 신규 등록 -->
+
     <div class="row" style="margin: 0; padding: 0;">
 <?php
 	$attributes = array('name' => 'form1', 'class' => '', 'method' => 'post');

@@ -104,13 +104,13 @@
 							$app_data = $this->cms_main_model->sql_row(" SELECT  applicant, app_date, unit_type, unit_dong_ho FROM cb_cms_sales_application WHERE unit_seq='$db_ho->seq' AND disposal_div<>'3' ");
 							$dong_ho = explode("-", $app_data->unit_dong_ho);
 							$condi = $app_data->applicant;
-							//$condi = '<span onclick="location.href='.base_url('cm1/sales/1/2').'?mode=2&cont_sort1=1&cont_sort2=1&project='.$project.'&type='.$app_data->unit_type.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1].'">'.$app_data->applicant.'</span>';
+							//$condi = '<span onclick="location.href='.base_url('cms_m1/sales/1/2').'?mode=2&cont_sort1=1&cont_sort2=1&project='.$project.'&type='.$app_data->unit_type.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1].'">'.$app_data->applicant.'</span>';
 						elseif($db_ho->is_contract==1) :
 							$cont_data = $this->cms_main_model->sql_row(" SELECT  cont_diff, contractor, cb_cms_sales_contract.cont_date, unit_type, unit_dong_ho FROM cb_cms_sales_contract, cb_cms_sales_contractor WHERE unit_seq='$db_ho->seq' AND is_rescission='0' AND cb_cms_sales_contract.seq=cont_seq AND is_transfer='0' ");
 							$dong_ho = explode("-", $cont_data->unit_dong_ho);
 							$condi = $cont_data->contractor;
 							$con_diff = $cont_data->cont_diff;
-							// $condi = "<a href='".base_url('cm1/sales/1/2')."?mode=2&cont_sort1=1&cont_sort2=2&project=".$project."&type=".$cont_data->unit_type."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]."'>".$cont_data->contractor."</a>";
+							// $condi = "<a href='".base_url('cms_m1/sales/1/2')."?mode=2&cont_sort1=1&cont_sort2=2&project=".$project."&type=".$cont_data->unit_type."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]."'>".$cont_data->contractor."</a>";
 						else : $condi = "";
 						endif;
 					else:

@@ -379,12 +379,10 @@ class Daily_money_report extends CB_Controller {
 		header('Content-Disposition: attachment;filename="'.$filename.'"'); // 브라우저에서 받을 파일 이름
 		header('Cache-Control: max-age=0'); //no cache
 
-		// Excel5 포맷으로 저장 엑셀 2007 포맷으로 저장하고 싶은 경우 'Excel2007'로 변경합니다.
+		// Excel5 포맷으로 저장 -> 엑셀 2007 포맷으로 저장하고 싶은 경우 'Excel2007'로 변경합니다.
 		$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
 		// 서버에 파일을 쓰지 않고 바로 다운로드 받습니다.
-		ob_end_clean();
-		// $objWriter->save('php://output');
-		exit;
+		$objWriter->save('php://output');
 	}
 }
 // End of File

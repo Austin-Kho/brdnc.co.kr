@@ -12,7 +12,7 @@
 					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 						<div class="col-xs-4 col-sm-3 col-md-6 radio" style="margin: 0; padding: 5px; padding-right: 0;">
 							<label>
-								<input type="radio" name="mode" value="1" <?php if(( !$this->input->get('mode') OR $this->input->get('mode')=='1') && $this->input->get('cont_sort1')!='2' && empty($is_reg)) echo "checked"; ?> onclick="location.href='<?php echo base_url('cm1/sales/1/2?mode=1') ?>'">신규
+								<input type="radio" name="mode" value="1" <?php if(( !$this->input->get('mode') OR $this->input->get('mode')=='1') && $this->input->get('cont_sort1')!='2' && empty($is_reg)) echo "checked"; ?> onclick="location.href='<?php echo base_url('cms_m1/sales/1/2?mode=1') ?>'">신규
 							</label>
 						</div>
 						<div class="col-xs-4 col-sm-3 col-md-6 radio" style="margin: 0; padding-top: 5px; padding-right: 0;">
@@ -164,7 +164,7 @@
 			<div class="row bo-top font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">처리 구분 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
-					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" onclick="if(this.checked===true) location.href='<?php echo base_url('cm1/sales/1/2')."?mode=2&cont_sort1=1&cont_sort2=2&project=".$project."&type=".$is_reg['app_data']->unit_type."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>';">계약전환</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" onclick="if(this.checked===true) location.href='<?php echo base_url('cms_m1/sales/1/2')."?mode=2&cont_sort1=1&cont_sort2=2&project=".$project."&type=".$is_reg['app_data']->unit_type."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>';">계약전환</label></div>
 				</div>
 			</div>
 <?php endif; ?>

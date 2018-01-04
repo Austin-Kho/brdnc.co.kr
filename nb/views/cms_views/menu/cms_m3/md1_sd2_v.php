@@ -1,7 +1,8 @@
 		<div class="main_start">&nbsp;</div>
 		<!-- 3. 프로젝트 -> 1. 프로젝트 관리 ->2. 기본정보 수정 -->
+		
 		<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
-			<!-- <form method="get" name="pj_sel" action="<?php echo base_url(); ?>cm3/project/1/2/"> -->
+			<!-- <form method="get" name="pj_sel" action="<?php echo base_url(); ?>cms_m3/project/1/2/"> -->
 <?php
 	$attributes = array('method' => 'get', 'name' => 'pj_sel');
 	form_open(current_url(), $attributes);
@@ -102,7 +103,7 @@
 		<div class="row" style="margin: 0; padding: 0;">
 		<?php
 			$attributes = array('name' => 'form1', 'class' => '', 'method' => 'post');
-			echo form_open(base_url('/cm3/project/1/2/'), $attributes);
+			echo form_open(base_url('/cms_m3/project/1/2/'), $attributes);
 		?>
 				<fieldset class="font12">
 					<label for="project" class="sr-only">모드</label>

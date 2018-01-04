@@ -1,5 +1,6 @@
     		<div class="main_start">&nbsp;</div>
-<!-- 3. 프로젝트 -> 1. 프로젝트 관리 ->1. 데이터 등록 -->
+        <!-- 3. 프로젝트 -> 1. 프로젝트 관리 ->1. 데이터 등록 -->
+
 			<div class="row font12" style="margin: 0; padding: 0;">
 <?php
 	$attributes = array('name' => 'pj_data_reg', 'method' => 'get');
@@ -241,7 +242,7 @@
 				<!------------------------------------동호수 데이터 불러오기 시작----------------------------------------------->
 <?php
 	$attributes = array('method' => 'get', 'name'=>'data_sh');
-	echo form_open(base_url('/cm3/project/1/1/'), $attributes);
+	echo form_open(base_url('/cms_m3/project/1/1/'), $attributes);
 ?>
 				<label for="mode" class="sr-only">모드</label><input type="hidden" name="mode" value="<?php echo $this->input->get('mode'); ?>">
 				<label for="new_pj" class="sr-only">모드</label><input type="hidden" name="new_pj" value="<?php echo $this->input->get('new_pj'); ?>">

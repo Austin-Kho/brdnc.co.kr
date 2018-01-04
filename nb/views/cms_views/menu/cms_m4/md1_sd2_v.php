@@ -23,6 +23,8 @@
 	if($this->input->get('search_text')!='') $sc=1;
 ?>
 			<div class="main_start">
+			<!-- 4. 본사관리 -> 1. 자금관리 ->2. 입출금 내역 페이지 -->
+
 				<a href="/os/_menu3/excel_cash_book.php?add_where=<?php echo $url_where;?>&s_date=<?php echo $url_s_date;?>&e_date=<?php echo $url_e_date;?>&m4=ok&sc=<?php echo $sc; ?>">
 				<!-- <a href="<?php echo base_url('excel_file/cash_book?class1='.$this->input->get('class1')."&class2=".$this->input->get('class2')."&s_date=").$this->input->get('s_date')."&e_date=".$this->input->get('e_date')."&sh_con=".$this->input->get('search_con')."&sh_text=".$this->input->get('search_text'); ?>"> -->
 					<img src="<?php echo base_url('static/img/excel_icon.jpg'); ?>" height="10" border="0" alt="EXCEL 아이콘" /> EXCEL로 출력
