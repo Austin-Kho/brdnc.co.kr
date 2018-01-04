@@ -70,27 +70,27 @@
 						<li class="dropdown">
 <?php if (@$this->member->is_member() !== false) : ?>
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-								<span id="top_user_id"><?php echo html_escape($this->member->item('mem_username')); ?></span> 님<span class="caret"></span>
-							</a>
+								<span id="top_user_id" style="font-size:15px;"><span class="glyphicon glyphicon-user" aria-hidden="true"> <?php echo html_escape($this->member->item('mem_username')); ?> 님</span> <span class="caret"></span>
+							</a></span>
 							<ul class="dropdown-menu" role="menu">
 <?php if($this->member->is_admin() === 'super') : ?>
-								<li><a href="<?php echo $this->config->base_url('admin');?>">관리자 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></li>
+								<li><a href="<?php echo $this->config->base_url('admin');?>"><span class="glyphicon glyphicon-cog" aria-hidden="true"> 관리자-페이지</span></a></li>
 <?php endif; ?>
-								<li><a href="<?php echo $this->config->base_url()."cms_member/logout?returnURL=".rawurlencode(base_url(uri_string()));?>">로그아웃</a></li>
-								<li><a href="<?php echo $this->config->base_url('cms_member/modify');?>">정보수정</a></li>
-								<li><a href="javascript:" onclick="alert('준비 중입니다!');">공지사항</a></li>
+								<li><a href="javascript:" onclick="alert('준비 중입니다!');"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"> 공지사항</span></a></li>
+								<li><a href="<?php echo $this->config->base_url('cms_member/modify');?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"> 정보수정</span></a></li>
+								<li><a href="<?php echo $this->config->base_url('cms_member/logout')."?returnURL=".rawurlencode(base_url(uri_string()));?>"><span class="glyphicon glyphicon-log-out" aria-hidden="true"> 로그아웃</span></a></li>
 <?php   else :  ?>
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">기타메뉴 <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="<?php echo $this->config->base_url('cms_member/login');?>">로그인</a></li>
-								<li><a href="<?php echo $this->config->base_url('cms_member/join');?>">회원가입</a></li>
-								<li><a href="javascript:" onclick="alert('준비 중입니다!');">공지사항</a></li>
+								<li><a href="<?php echo $this->config->base_url('cms_member/login');?>">link</a></li>
+								<li><a href="<?php echo $this->config->base_url('cms_member/join');?>"><span class="glyphicon glyphicon-link" aria-hidden="true"> 회원가입</span></a></li>
+								<li><a href="javascript:" onclick="alert('준비 중입니다!');"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"> 공지사항</span></a></li>
 <?php  endif; ?>
 								<li class="divider"></li>
 								<li class="dropdown-header">협업솔루션</li>
-								<li><a href="https://brdnc.slack.com/join/shared_invite/enQtMjg2NTYwODc3NzE1LTZiYmM3NGQ3YzNlNTY5NzE4N2RmYTI0OTBlNDM1MmI5ZGQyNzNjNDc4NGQ1MTg3NjU1OTY3NDc1NzcxMmIxYmI" target="blank">Slack (brdnc) : 참여하기</a></li>
-								<li><a href="https://brdnc.slack.com/" target="blank">Slack (brdnc) : 바로가기</a></li>
-								<li><a href="https://trello.com/" target="blank">Trello : 바로가기</a></li>
+								<li><a href="https://brdnc.slack.com/join/shared_invite/enQtMjg2NTYwODc3NzE1LTZiYmM3NGQ3YzNlNTY5NzE4N2RmYTI0OTBlNDM1MmI5ZGQyNzNjNDc4NGQ1MTg3NjU1OTY3NDc1NzcxMmIxYmI" target="blank"><span class="glyphicon glyphicon-time" aria-hidden="true"> Slack(brdnc)-참여하기</span></a></li>
+								<li><a href="https://brdnc.slack.com/" target="blank"><span class="glyphicon glyphicon-time" aria-hidden="true"> Slack(brdnc)-바로가기</span></a></li>
+								<li><a href="https://trello.com/" target="blank"><span class="glyphicon glyphicon-time" aria-hidden="true"> Trello-바로가기</span></a></li>
 							</ul>
 						</li>
 					</ul>

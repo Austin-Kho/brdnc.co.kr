@@ -12,8 +12,12 @@
 				self.close();
 			}
 		</script>
-		<form action="" name="taxsearch" id="taxsearch" class="form-inline" method="post">
-			<input type="hidden" name="n" value="<?php echo $n; ?>" id="n">
+<?php
+	$attributes = array('name' => 'taxsearch', 'id' => 'taxsearch', 'class' => 'form-inline');
+	// $hidden = array('n' => $n);
+	echo form_open(current_url(), $attributes);//, $hidden);
+?>
+	<input type="hidden" name="n" value="<?php echo $n; ?>" id="n">
 			<div class="container">
 				<header id="header">
 					<h1>관 할 세 무 서 검 색</h1>
@@ -56,18 +60,12 @@
 							<td class="pl20" style="padding-left: 20px;">
 								<a href="javascript:" onclick="value_put(<?php echo $lt->code;?>, '<?php echo $lt->office; ?> 세무서');"><?php echo $lt->office. '세무서'; ?></a>
 							</td>
-							<td class="center">
-								<?php echo $lt->tel; ?>
-							</td>
+							<td class="center"><?php echo $lt->tel; ?></td>
 						</tr>
 <?php endforeach; ?>
 					</table>
 				</div>
-				<nav class="center">
-					<ul class="pagination pagination-sm"><?php echo $pagination; ?></ul>
-				</nav>
-				<footer class="center">
-					<a href="javascript:self.close();" class="btn btn-danger btn-sm">닫 기</a>
-				</footer>
+				<nav class="center"><ul class="pagination pagination-sm"><?php echo $pagination; ?></ul></nav>
+				<footer class="center"><a href="javascript:self.close();" class="btn btn-danger btn-sm">닫 기</a></footer>
 			</div>
 		</form>

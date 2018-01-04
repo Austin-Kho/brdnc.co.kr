@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Sales_total_table extends CI_Controller
+class Sales_total_table extends CB_Controller
 {
 	/**
 	 * [__construct 이 클래스의 생성자]

@@ -248,7 +248,6 @@ class Cms_member extends CB_Controller
 
 		// 라이브러리 로드
 		$this->load->library('form_validation'); // 폼 검증
-		$this->load->helper('alert');  // 경고창 사용자 헬퍼 로딩
 
 		// 폼 검증할 필드와 규칙 사전 정의
 		$this->form_validation->set_rules('mem_username', '이름', 'trim|required|max_length[20]');
