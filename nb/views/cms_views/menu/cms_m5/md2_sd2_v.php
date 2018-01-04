@@ -49,7 +49,7 @@ endif;?>
 
 			<div class="form-group mg-0-15">
 				<div class="point-sub col-xs-12 col-sm-4 col-md-2 bo-top" style="padding-top: 9px; height: 40px;">
-					<font color="red">*</font> <font color="black">권한 설정 직원 선택</font>
+					<font color="red">*</font> <font color="black">사용자 선택</font>
 				</div>
 				<div class="col-xs-12 col-sm-8 col-md-10 bo-top" style="height: 40px;">
 					<div class="col-xs-12 col-sm-6 col-md-3" style="padding-top: 4px;">
@@ -92,7 +92,7 @@ endif;?>
 <?php // endif; ?>
 				</div>
 				<div class="row" style="margin: 0;">
-					<div class="table-responsive" style="padding: 0">
+					<div class="table-responsive" style="padding: 0;">
 						<table class="table auth-table table-hover">
 							<tbody>
 								<tr>

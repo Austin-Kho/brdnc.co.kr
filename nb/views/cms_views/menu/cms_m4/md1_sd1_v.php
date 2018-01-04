@@ -1,5 +1,5 @@
 			<div class="main_start">
-				<a href="<?php echo base_url('/excel_file/daily_money_report?sh_date=').$sh_date; ?>">
+				<a href="<?php echo base_url('/cms_excel_file/daily_money_report?sh_date=').$sh_date; ?>">
 					<img src="<?php echo base_url('static/img/excel_icon.jpg'); ?>" height="10" border="0" alt="EXCEL 아이콘" /> EXCEL로 출력
 				</a>
 			</div>

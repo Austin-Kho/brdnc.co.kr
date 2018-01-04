@@ -3,7 +3,7 @@
 
 <?php
   $attributes = array('method' => 'get', 'name' => 'form1');
-  form_open(current_url(), $attributes);
+  echo form_open(current_url(), $attributes);
 ?>
 		<div class="row bo-top bo-bottom font12" style="margin: 0;">
 			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
@@ -90,11 +90,12 @@
 
 <?php foreach($now_payer as $lt) :
  	$dong_ho = explode("-", $lt->unit_dong_ho);
- 	echo $del_op."<a ".$red_style." href='".base_url('cm1/sales/2/2?project='.$project.'&payer='.$lt->paid_who.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1])."'>".$lt->paid_who."(".$lt->unit_dong_ho.")</a>".$del_cl;
-?>&nbsp;<?php endforeach; ?>
+ 	echo $del_op."<a ".$red_style." href='".base_url('cms_m1/sales/2/2?yr='.$yr.'project='.$project.'&payer='.$lt->paid_who.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1])."'>".$lt->paid_who."(".$lt->unit_dong_ho.")</a>".$del_cl;
+?>
+<?php endforeach; ?>
 			</div>
 			<div class="col-xs-1" style="padding: 8px;">
-				<button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="location.href='<?php echo base_url('cm1/sales/2/2?project='.$project.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1]) ?>'"><span aria-hidden="true">&times;</span></button>
+				<button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="location.href='<?php echo base_url('cms_m1/sales/2/2?project='.$project.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1]) ?>'"><span aria-hidden="true">&times;</span></button>
 			</div>
 <?php endif; ?>
 		</div>
@@ -120,8 +121,8 @@
 					<tbody>
 <?php if($this->input->get('ho')) : ?>
 <?php foreach($received as $lt):
-	$paid_sche = $this->main_m->sql_row(" SELECT pay_name FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$lt->pay_sche_code' ");
-	$paid_acc_nick = $this->main_m->sql_row(" SELECT acc_nick FROM cb_cms_sales_bank_acc WHERE pj_seq='$project' AND seq='$lt->paid_acc' ");
+	$paid_sche = $this->cms_main_model->sql_row(" SELECT pay_name FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$lt->pay_sche_code' ");
+	$paid_acc_nick = $this->cms_main_model->sql_row(" SELECT acc_nick FROM cb_cms_sales_bank_acc WHERE pj_seq='$project' AND seq='$lt->paid_acc' ");
 
 
 	// 해지인 경우 red 스타일과 환불인 경우 Del 태그 만들기
@@ -157,7 +158,7 @@
 
 <?php
   $attributes = array('name' => 'form2');
-  form_open(current_url(), $attributes);
+  echo form_open(current_url(), $attributes);
 ?>
 				<input type="hidden" name="modi" value="<?php echo $this->input->get('modi'); ?>">
 				<input type="hidden" name="dong" value="<?php echo $this->input->get('dong'); ?>">
@@ -240,7 +241,7 @@
 	<?php if($auth<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="receive_chk();";} ?>
 				<div class="form-group btn-wrap" style="margin: ;">
 <?php if($this->input->get('modi')=='1') : ?>
-					<input type="button" class="btn btn-warning btn-sm" onclick="location.href='<?php echo base_url('cm1/sales/2/2').'?modi=0&project='.$project.'&dong='.$this->input->get('dong').'&ho='.$this->input->get('ho'); ?>'"  value="지우기">
+					<input type="button" class="btn btn-warning btn-sm" onclick="location.href='<?php echo base_url('cms_m1/sales/2/2').'?modi=0&project='.$project.'&dong='.$this->input->get('dong').'&ho='.$this->input->get('ho'); ?>'"  value="지우기">
 <?php endif;
 	$btn_val = ($this->input->get('modi')=='1') ? "변경 등록" : "신규 등록";
 ?>
@@ -274,9 +275,9 @@ foreach($pay_sche_code as $lt) :
 		$due_date = "";
 	endif;
 	if( !empty($cont_data)) {
-		$ppsche = $this->main_m->sql_row(" SELECT SUM(paid_amount) AS pps FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' AND pay_sche_code='$lt->pay_code' ");
+		$ppsche = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS pps FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' AND pay_sche_code='$lt->pay_code' ");
 		$paid_per_sche = (empty($ppsche->pps) OR $ppsche->pps=='0') ? "-" : number_format($ppsche->pps); // 수납금액
-		$payment = $this->main_m->sql_row(" SELECT * FROM cb_cms_sales_payment WHERE pj_seq='$project' AND price_seq='$cont_data->price_seq' AND pay_sche_seq='$lt->seq' "); // 약정금액
+		$payment = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_payment WHERE pj_seq='$project' AND price_seq='$cont_data->price_seq' AND pay_sche_seq='$lt->seq' "); // 약정금액
 		$col = ($ppsche->pps-$payment->payment<0) ? "#A80505" : "#0427A4";
 		$compair = ($ppsche->pps-$payment->payment===0) ? "-" : number_format($ppsche->pps-$payment->payment);
 	}

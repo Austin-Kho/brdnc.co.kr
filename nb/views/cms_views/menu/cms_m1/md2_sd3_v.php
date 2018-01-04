@@ -214,7 +214,7 @@ if( !$this->input->get('con_diff') OR  !$this->input->get('pay_sort'))  :
 							<td class="right"><?php echo number_format($price[$i]->unit_price); ?></td>
 <?php
 for($j=0; $j<count($pay_sche); $j++) :
-	$pmt = $this->main_m->sql_row(" SELECT * FROM cb_cms_sales_payment WHERE pj_seq='$project' AND price_seq='".$price[$i]->pr_seq."' AND pay_sche_seq='".$pay_sche[$j]->seq."' ");
+	$pmt = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_payment WHERE pj_seq='$project' AND price_seq='".$price[$i]->pr_seq."' AND pay_sche_seq='".$pay_sche[$j]->seq."' ");
 ?>
 							<td style="background-color: ; padding: 3px;">
 								<div style="color: #B00447;"><?php echo form_error("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq); ?>

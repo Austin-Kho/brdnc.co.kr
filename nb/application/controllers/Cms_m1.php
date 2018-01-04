@@ -1008,7 +1008,7 @@ class Cms_m1 extends CB_Controller {
 				<font color='#9f0404'><span class='glyphicon glyphicon-import' aria-hidden='true' style='padding-right: 10px;'></span></font><b>
 				[".$unit->type." 타입] &nbsp;".$now_dong ." 동 ". $now_ho." 호 - 계약자 : ".$cont_data->contractor."</b>" : "";
 
-				$data['cont_info'] =
+				// $data['cont_info'] =
 
 				// 수납 계좌
 				$data['paid_acc'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_bank_acc WHERE pj_seq='$project' ");
