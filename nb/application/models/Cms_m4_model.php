@@ -38,19 +38,17 @@ class Cms_m4_model extends CB_Model {
 	// 입출금 내역 관리 모델
 	////////////////////////////////////////////////////////
 
-	public function cash_book_list($table, $where, $start='', $limit='', $sh_frm, $n, $ex='') {
+	public function cash_book_list($table, $where, $start='', $limit='', $n, $order='') {
 		$this->db->select('seq_num, class1, class2, account, cont, acc, in_acc, inc, out_acc, exp, evidence, cms_capital_cash_book.note AS memo, worker, deal_date, name, no');
 
 		$this->db->where($where);
-
-		if($ex=='') $order_by = 'DESC'; else if($ex=='ex') $order_by = 'ASC';
-
+		$order_by = ($order==='')? "" : $order; // DESC or ASC(기본 값)
 		$this->db->order_by('deal_date', $order_by);
 		$this->db->order_by('seq_num', $order_by);
-		if($start != '' or $limit !='')	$this->db->limit($limit, $start);
+		if($start !== '' or $limit !=='')	$this->db->limit($limit, $start);
 		$qry = $this->db->get($table);
 
-		if($n=='num'){ $result = $qry->num_rows(); }else{ $result = $qry->result(); }
+		$result = ($n==='num') ? $qry->num_rows() : $qry->result();
 		return $result;
 	}
 

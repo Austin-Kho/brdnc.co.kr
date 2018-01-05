@@ -180,7 +180,7 @@ class Cms_m4 extends CB_Controller {
 				}
 				if($sh_frm['class2']) $data['where'].=" AND class2='".$sh_frm['class2']."' ";
 				if($sh_frm['s_date']) $data['where'].=" AND deal_date>='".$sh_frm['s_date']."' ";
-				if($sh_frm['e_date']) {$data['where'].=" AND deal_date<='".$sh_frm['e_date']."' "; } //$e_add=" AND deal_date<='$sh_frm['e_date']' ";} else{$e_add="";}
+				if($sh_frm['e_date']) $data['where'].=" AND deal_date<='".$sh_frm['e_date']."' ";  //$e_add=" AND deal_date<='$sh_frm['e_date']' ";} else{$e_add="";}
 
 				if($sh_frm['sh_text']){
 					if($sh_frm['sh_con']==0) $data['where'].=" AND (account like '%".$sh_frm['sh_text']."%' OR cont like '%".$sh_frm['sh_text']."%' OR acc like '%".$sh_frm['sh_text']."%' OR evidence like '%".$sh_frm['sh_text']."%' OR cb_cms_capital_cash_book.worker like '%".$sh_frm['sh_text']."%') "; // 통합검색
@@ -190,15 +190,22 @@ class Cms_m4 extends CB_Controller {
 					if($sh_frm['sh_con']==4) $data['where'].=" AND (in_acc like '%".$sh_frm['sh_text']."%' OR out_acc like '%".$sh_frm['sh_text']."%')  ";  //입출금처
 				}
 
-				// model data ////////////////
+				// sql문에 적용할 테이블명 ////////////////
 				$cb_table = 'cb_cms_capital_cash_book, cb_cms_capital_bank_account';
+
+				// Excell_cach_book file 다운로드 Start
+				if($this->input->get('excell_cach_book')==='ok') {
+					$data['com_title'] = $this->cms_main_model->select_data_row('cb_cms_com_info', array(1=>1));
+					$data['cb_list'] = $this->cms_m4_model->cash_book_list($cb_table, $data['where'], '', '', '', 'ASC');
+					$this->load->view('/cms_views/excell/cash_book', $data);
+				}
 
 				// 페이지네이션 라이브러리 로딩 추가
 				$this->load->library('pagination');
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = base_url('cms_m4/capital/1/2/');   //페이징 주소
-				$config['total_rows'] = $this->cms_m4_model->cash_book_list($cb_table, $data['where'], '', '', $sh_frm, 'num');  //게시물의 전체 갯수
+				$config['total_rows'] = $this->cms_m4_model->cash_book_list($cb_table, $data['where'], '', '', 'num', '');  //게시물의 전체 갯수
 				$config['per_page'] = 12; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 4;  // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -215,7 +222,7 @@ class Cms_m4 extends CB_Controller {
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$data['pagination'] = $this->pagination->create_links();
 
-				$data['cb_list'] = $this->cms_m4_model->cash_book_list($cb_table, $data['where'], $start, $limit, $sh_frm, '', '');
+				$data['cb_list'] = $this->cms_m4_model->cash_book_list($cb_table, $data['where'], $start, $limit, '', 'DESC'); // table, where, start, limit, num, order
 
 				if($this->input->get('del_code')) {
 					$result = $this->cms_m4_model->delete_data('cb_cms_capital_cash_book', array('seq_num' => $this->input->get('del_code')));

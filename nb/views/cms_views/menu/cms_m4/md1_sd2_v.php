@@ -19,15 +19,13 @@
 	$url_where = rawurlencode($where);
 	$url_s_date = rawurlencode($this->input->get('s_date'));
 	$url_e_date = rawurlencode($this->input->get('e_date'));
-	$sc=0;
-	if($this->input->get('search_text')!='') $sc=1;
+	if($this->input->get('search_text')===NULL) $sc=0; else $sc=1;
 ?>
 			<div class="main_start">
 			<!-- 4. 본사관리 -> 1. 자금관리 ->2. 입출금 내역 페이지 -->
 
-				<!-- <a href="/os/_menu3/excel_cash_book.php?add_where=<?php echo $url_where;?>&s_date=<?php echo $url_s_date;?>&e_date=<?php echo $url_e_date;?>&m4=ok&sc=<?php echo $sc; ?>"> -->
-				<a href="<?php echo base_url('cms_excel_file/cash_book')."?add_where=".$url_where."&s_date=".$url_s_date."&e_date=".$url_e_date."&sc=".$sc; ?>">
-				<!-- <a href="<?php echo base_url('cms_excel_file/cash_book?class1='.$this->input->get('class1')."&class2=".$this->input->get('class2')."&s_date=").$this->input->get('s_date')."&e_date=".$this->input->get('e_date')."&sh_con=".$this->input->get('search_con')."&sh_text=".$this->input->get('search_text'); ?>"> -->
+				<!-- <a href="<?php echo base_url('cms_excel_file/cash_book')."?add_where=".$url_where; ?>"> -->
+				<a href="<?php echo current_url()."?excell_cach_book=ok&sc=".$sc; ?>">
 					<img src="<?php echo base_url('static/img/excel_icon.jpg'); ?>" height="10" border="0" alt="EXCEL 아이콘" /> EXCEL로 출력
 				</a>
 			</div>
