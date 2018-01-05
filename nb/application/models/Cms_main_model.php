@@ -25,6 +25,7 @@ class Cms_main_model extends CB_Model
    * @param  [Array] $where [필터링 '키'=>값]
    * @return [Boolean]        [성공 여부]
    */
+
   public function select_data_row($table, $where) {
     $qry = $this->db->get_where($table, $where);
     return $rlt = $qry->row();
@@ -130,7 +131,7 @@ class Cms_main_model extends CB_Model
    */
   public function insert_data($table, $data, $now_field='') {
 		$this->db->set($data);
-		if($now_field!='') $this->db->set($now_field, 'now()', false);
+		if($now_field !=='') $this->db->set($now_field, 'now()', false);
 		$result = $this->db->insert($table);
 		return $result;
 	}

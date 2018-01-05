@@ -68,7 +68,7 @@ class Project_data extends CB_Controller
 				'is_hold' => $this->input->post('is_hold', TRUE),
 				'hold_reason' => $this->input->post('hold_reason', TRUE),
 				'modi_date' => date("Y-m-d"),
-				'modi_worker' => $this->session->userdata('name')
+				'modi_worker' => $this->session->userdata('mem_username')
 			);
 
 			$result = $this->cmain_m->update_data('cms_project_all_housing_unit', $update_data, $where = array('seq' => $this->input->post('seq')));

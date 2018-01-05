@@ -134,7 +134,8 @@ class Cms_m1 extends CB_Controller {
 				$config['reuse_query_string'] = TRUE;    //http://example.com/index.php/test/page/20?query=search%term
 
 				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
-				$page = $this->uri->segment($config['uri_segment']);
+				// $page = $this->uri->segment($config['uri_segment']);
+				$page = $this->input->get('page');
 				if($page<=1 or empty($page)) { $start = 0; }else{ $start = ($page-1) * $config['per_page']; }
 				$limit = $config['per_page'];
 
@@ -327,7 +328,7 @@ class Cms_m1 extends CB_Controller {
 							'note' => $this->input->post('note', TRUE)
 						);
 						if($this->input->post('mode')=='1' && $this->input->post('unit_is_app')=='0'){ // 신규 청약 등록 일 때
-							$add_arr = array('ini_reg_worker' => $this->session->userdata('name'));
+							$add_arr = array('ini_reg_worker' => $this->session->userdata('mem_username'));
 							$app_put = array_merge($app_arr, $add_arr);
 							$result = $this->cms_main_model->insert_data('cb_cms_sales_application', $app_put, 'ini_reg_date'); // 청약관리 테이블 데이터 입력
 							if( !$result){
@@ -335,11 +336,11 @@ class Cms_m1 extends CB_Controller {
 							}else{
 								// 2. 동호수 관리 테이블 입력
 								$where = array('type'=>$this->input->post('type'), 'dong'=>$this->input->post('dong'), 'ho'=>$this->input->post('ho'));
-								$result2 = $this->cms_main_model->update_data('cb_cms_project_all_housing_unit', array('is_application'=>'1', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('name')), $where); // 동호수 테이블 청약상태로 변경
+								$result2 = $this->cms_main_model->update_data('cb_cms_project_all_housing_unit', array('is_application'=>'1', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('mem_username')), $where); // 동호수 테이블 청약상태로 변경
 								if( !$result2) alert('데이터베이스 에러입니다.', base_url(uri_string()));
 							}
 						}else if($this->input->post('mode')=='2' && $this->input->post('unit_is_app')=='1'){ // 기존 청약정보 수정일 때
-							$add_arr = array('last_modi_date' => date('Y-m-d'), 'last_modi_worker' => $this->session->userdata('name'));
+							$add_arr = array('last_modi_date' => date('Y-m-d'), 'last_modi_worker' => $this->session->userdata('mem_username'));
 							$app_put = array_merge($app_arr, $add_arr);
 							$where = array('pj_seq'=>$pj, 'unit_type' =>$this->input->post('type'), 'unit_dong_ho'=>$this->input->post('unit_dong_ho'));
 							$result = $this->cms_main_model->update_data('cb_cms_sales_application', $app_put, $where); // 청약관리 테이블 데이터 입력
@@ -396,7 +397,7 @@ class Cms_m1 extends CB_Controller {
 						/////////////////////////////////////////////////////////////////////////////신규 계약 인서트
 						if($this->input->post('unit_is_cont')=='0'){  // 신규 계약일 때
 							//   1. 계약관리 테이블에 해당 데이터를 인서트한다.
-							$add_arr1 = array('ini_reg_worker' => $this->session->userdata('name'));
+							$add_arr1 = array('ini_reg_worker' => $this->session->userdata('mem_username'));
 							$cont_arr11 = array_merge($cont_arr1, $add_arr1);
 							$result[0] = $this->cms_main_model->insert_data('cb_cms_sales_contract', $cont_arr11, 'ini_reg_date');
 							if( !$result[0]){
@@ -438,7 +439,7 @@ class Cms_m1 extends CB_Controller {
 							'paid_date' => $this->input->post('cont_in_date1', TRUE),
 							'paid_who' => $this->input->post('cont_in_who1', TRUE),
 							'cont_form_code' => '2',
-							'reg_worker' => $this->session->userdata('name')
+							'reg_worker' => $this->session->userdata('mem_username')
 						);
 						/******************************계약금 1 폼 데이터******************************/
 						/******************************계약금 2 폼 데이터******************************/
@@ -451,7 +452,7 @@ class Cms_m1 extends CB_Controller {
 							'paid_date' => $this->input->post('cont_in_date2', TRUE),
 							'paid_who' => $this->input->post('cont_in_who2', TRUE),
 							'cont_form_code' => '3',
-							'reg_worker' => $this->session->userdata('name')
+							'reg_worker' => $this->session->userdata('mem_username')
 						);
 						/******************************계약금 2 폼 데이터******************************/
 						/******************************계약금 3 폼 데이터******************************/
@@ -464,7 +465,7 @@ class Cms_m1 extends CB_Controller {
 							'paid_date' => $this->input->post('cont_in_date3', TRUE),
 							'paid_who' => $this->input->post('cont_in_who3', TRUE),
 							'cont_form_code' => '4',
-							'reg_worker' => $this->session->userdata('name')
+							'reg_worker' => $this->session->userdata('mem_username')
 						);
 						/******************************계약금 3 폼 데이터******************************/
 						/******************************계약금 4 폼 데이터******************************/
@@ -477,7 +478,7 @@ class Cms_m1 extends CB_Controller {
 							'paid_date' => $this->input->post('cont_in_date4', TRUE),
 							'paid_who' => $this->input->post('cont_in_who4', TRUE),
 							'cont_form_code' => '5',
-							'reg_worker' => $this->session->userdata('name')
+							'reg_worker' => $this->session->userdata('mem_username')
 						);
 						/******************************계약금 4 폼 데이터******************************/
 						/******************************계약금 5 폼 데이터******************************/
@@ -490,7 +491,7 @@ class Cms_m1 extends CB_Controller {
 							'paid_date' => $this->input->post('cont_in_date5', TRUE),
 							'paid_who' => $this->input->post('cont_in_who5', TRUE),
 							'cont_form_code' => '6',
-							'reg_worker' => $this->session->userdata('name')
+							'reg_worker' => $this->session->userdata('mem_username')
 						);
 						/******************************계약금 5 폼 데이터******************************/
 						/******************************계약금 6 폼 데이터******************************/
@@ -503,7 +504,7 @@ class Cms_m1 extends CB_Controller {
 							'paid_date' => $this->input->post('cont_in_date6', TRUE),
 							'paid_who' => $this->input->post('cont_in_who6', TRUE),
 							'cont_form_code' => '7',
-							'reg_worker' => $this->session->userdata('name')
+							'reg_worker' => $this->session->userdata('mem_username')
 						);
 						/******************************계약금 6 폼 데이터******************************/
 						/******************************계약금 7 폼 데이터******************************/
@@ -516,7 +517,7 @@ class Cms_m1 extends CB_Controller {
 							'paid_date' => $this->input->post('cont_in_date7', TRUE),
 							'paid_who' => $this->input->post('cont_in_who7', TRUE),
 							'cont_form_code' => '8',
-							'reg_worker' => $this->session->userdata('name')
+							'reg_worker' => $this->session->userdata('mem_username')
 						);
 						/******************************계약금 7 폼 데이터******************************/
 
@@ -524,7 +525,7 @@ class Cms_m1 extends CB_Controller {
 						if($this->input->post('unit_is_cont')=='0'){  // 신규 계약일 때
 
 							//   2. 계약자관리 테이블에 해당 데이터를 인서트한다.
-							$add_arr2 = array('cont_seq' => $cont_seq->seq, 'ini_reg_worker' => $this->session->userdata('name'));
+							$add_arr2 = array('cont_seq' => $cont_seq->seq, 'ini_reg_worker' => $this->session->userdata('mem_username'));
 							$cont_arr22 = array_merge($cont_arr2, $add_arr2);
 							$result[1] = $this->cms_main_model->insert_data('cb_cms_sales_contractor', $cont_arr22, 'ini_reg_date');
 							if( !$result[1]) {
@@ -538,7 +539,7 @@ class Cms_m1 extends CB_Controller {
 									'disposal_div'=> '1',
 									'disposal_date' => date('Y-m-d'),
 									'last_modi_date'=> date('Y-m-d'),
-									'last_modi_worker' =>$this->session->userdata('name')
+									'last_modi_worker' =>$this->session->userdata('mem_username')
 								);
 								$result[2] = $this->cms_main_model->update_data('cb_cms_sales_application', $dis_data, array('unit_seq'=>$this->input->post('unit_seq'))); // 청약 테이블 계약전환 처리
 								if( !$result[2]) {
@@ -562,7 +563,7 @@ class Cms_m1 extends CB_Controller {
 										'paid_date' => $this->input->post('app_in_date', TRUE),
 										'paid_who' => $this->input->post('app_in_who', TRUE),
 										'cont_form_code' => '1',
-										'reg_worker' => $this->session->userdata('name')
+										'reg_worker' => $this->session->userdata('mem_username')
 									);
 									$result[4] = $this->cms_main_model->insert_data('cb_cms_sales_received', $app_mon, 'reg_date');
 									if( !$result[4]) {
@@ -571,7 +572,7 @@ class Cms_m1 extends CB_Controller {
 								}
 							}
 							// 6. 동호수 관리 테이블 입력 계약->On
-								$result[5] = $this->cms_main_model->update_data('cb_cms_project_all_housing_unit', array('is_contract'=>'1', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('name')), array('seq'=>$un)); // 동호수 테이블 계약상태로 변경
+								$result[5] = $this->cms_main_model->update_data('cb_cms_project_all_housing_unit', array('is_contract'=>'1', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('mem_username')), array('seq'=>$un)); // 동호수 테이블 계약상태로 변경
 								if( !$result[5]) {
 									alert('데이터베이스 에러입니다.6', base_url(uri_string()));
 								}
@@ -637,7 +638,7 @@ class Cms_m1 extends CB_Controller {
 						}else if($this->input->post('unit_is_cont')=='1'){ // 기존 계약정보 수정일 때
 
 							//   1. 계약관리 테이블에 해당 데이터를 업데이트한다.
-							$add_arr1 = array('last_modi_date' => date('Y-m-d'), 'last_modi_worker' => $this->session->userdata('name'));
+							$add_arr1 = array('last_modi_date' => date('Y-m-d'), 'last_modi_worker' => $this->session->userdata('mem_username'));
 							$cont_arr11 = array_merge($cont_arr1, $add_arr1);
 							$result[0] = $this->cms_main_model->update_data('cb_cms_sales_contract', $cont_arr11, array('seq'=>$this->input->post('cont_seq'), 'unit_seq'=>$un));
 							if( !$result[0]){
@@ -744,7 +745,7 @@ class Cms_m1 extends CB_Controller {
 								'disposal_div'=>'2',
 								'disposal_date'=>$this->input->post('conclu_date'),
 								'last_modi_date'=>date('Y-m-d'),
-								'last_modi_worker'=>$this->session->userdata('name')
+								'last_modi_worker'=>$this->session->userdata('mem_username')
 							);
 							$result[0] = $this->cms_main_model->update_data('cb_cms_sales_application', $cancel_data, array('pj_seq'=>$pj, 'unit_seq'=>$un)); // 해지처리
 							if( !$result[0]) alert('데이터베이스 에러입니다.', '');
@@ -757,11 +758,11 @@ class Cms_m1 extends CB_Controller {
 								'disposal_div' => '3',
 								'disposal_date' => $this->input->post('conclu_date'),
 								'last_modi_date' => date('Y-m-d'),
-								'last_modi_worker' => $this->session->userdata('name')
+								'last_modi_worker' => $this->session->userdata('mem_username')
 							);
 							$result[0] = $this->cms_main_model->update_data('cb_cms_sales_application', $cancel_data, array('pj_seq'=>$pj, 'unit_seq'=>$un)); // 해지 환불 처리
 							if( !$result[0]) alert('데이터베이스 에러입니다.', '');
-							$result[1] = $this->cms_main_model->update_data('cb_cms_project_all_housing_unit', array('is_application'=>'0', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('name')), array('seq'=>$un));
+							$result[1] = $this->cms_main_model->update_data('cb_cms_project_all_housing_unit', array('is_application'=>'0', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('mem_username')), array('seq'=>$un));
 							if( !$result[1])  alert('데이터베이스 에러입니다.', '');
 							$ret_url = "?mode=2&cont_sort1=2&cont_sort3=3&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
 							alert('해지 환불이 정상처리 되었습니다.', $ret_url);
@@ -773,7 +774,7 @@ class Cms_m1 extends CB_Controller {
 								'is_rescission'=>'1', // 해지 처리
 								'rescission_date'=>$this->input->post('conclu_date'),
 								'last_modi_date'=>date('Y-m-d'),
-								'last_modi_worker'=>$this->session->userdata('name')
+								'last_modi_worker'=>$this->session->userdata('mem_username')
 							);
 							$result[0] = $this->cms_main_model->update_data('cb_cms_sales_contract', $cancel_data, array('seq'=>$this->input->post('cont_seq'))); // 해지 처리
 							if( !$result[0]) alert('데이터베이스 에러입니다.', '');
@@ -781,7 +782,7 @@ class Cms_m1 extends CB_Controller {
 								'is_transfer'=>'2', // 1.매도, 2. 해약
 								'transfer_date'=>$this->input->post('conclu_date'),
 								'last_modi_date'=>date('Y-m-d'),
-								'last_modi_worker'=>$this->session->userdata('name')
+								'last_modi_worker'=>$this->session->userdata('mem_username')
 							);
 							$result[1] = $this->cms_main_model->update_data('cb_cms_sales_contractor', $cancel_data2, array('cont_seq'=>$this->input->post('cont_seq'))); // 해지 처리
 							if( !$result[1]) alert('데이터베이스 에러입니다.', '');
@@ -793,7 +794,7 @@ class Cms_m1 extends CB_Controller {
 								'is_rescission'=>'2', // 환불 처리
 								'rescission_date'=>$this->input->post('conclu_date'),
 								'last_modi_date'=>date('Y-m-d'),
-								'last_modi_worker'=>$this->session->userdata('name')
+								'last_modi_worker'=>$this->session->userdata('mem_username')
 							);
 							$result[0] = $this->cms_main_model->update_data('cb_cms_sales_contract', $cancel_data, array('seq'=>$this->input->post('cont_seq'))); // 해지 환불 처리
 							if( !$result[0]) alert('데이터베이스 에러입니다.', '');
@@ -801,13 +802,13 @@ class Cms_m1 extends CB_Controller {
 								'is_transfer'=>'2', // 1.매도, 2. 해약
 								'transfer_date'=>$this->input->post('conclu_date'),
 								'last_modi_date'=>date('Y-m-d'),
-								'last_modi_worker'=>$this->session->userdata('name')
+								'last_modi_worker'=>$this->session->userdata('mem_username')
 							);
 							$result[1] = $this->cms_main_model->update_data('cb_cms_sales_contractor', $cancel_data2, array('cont_seq'=>$this->input->post('cont_seq'))); // 해지 처리
 							if( !$result[1]) alert('데이터베이스 에러입니다.', '');
 							$result[2] = $this->cms_main_model->update_data('cb_cms_sales_received', array('is_refund'=>'1'), array('cont_seq'=>$this->input->post('cont_seq'))); // 해지 환불 처리
 							if( !$result[2]) alert('데이터베이스 에러입니다.', '');
-							$result[3] = $this->cms_main_model->update_data('cb_cms_project_all_housing_unit', array('is_contract'=>'0', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('name')), array('seq'=>$un));
+							$result[3] = $this->cms_main_model->update_data('cb_cms_project_all_housing_unit', array('is_contract'=>'0', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('mem_username')), array('seq'=>$un));
 							if( !$result[3])  alert('데이터베이스 에러입니다.', '');
 							$ret_url = "?mode=2&cont_sort1=2&cont_sort3=4&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
 							alert('해약 환불이 정상처리 되었습니다.', $ret_url);
@@ -924,11 +925,12 @@ class Cms_m1 extends CB_Controller {
 				$config['total_rows'] = $data['total_rows'] = $this->cms_main_model->sql_num_rows($rec_query);  //게시물의 전체 갯수
 				if( !$this->input->get('num')) $config['per_page'] = 10;  else $config['per_page'] = $this->input->get('num'); // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
-				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
+				$config['uri_segment'] =5; //페이지 번호가 위치한 세그먼트
 				$config['reuse_query_string'] = TRUE;    //http://example.com/index.php/test/page/20?query=search%term
 
 				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
-				$page = $this->uri->segment($config['uri_segment']);
+				// $page = $this->uri->segment($config['uri_segment']);
+				$page = $this->input->get('page');
 				if($page<=1 or empty($page)) { $start = 0; }else{ $start = ($page-1) * $config['per_page']; }
 				$limit = $config['per_page'];
 
@@ -1041,7 +1043,7 @@ class Cms_m1 extends CB_Controller {
 						'paid_who' => $this->input->post('paid_who'),
 						'note' => $this->input->post('note'),
 						'reg_date' => date('Y-m-d'),
-						'reg_worker' => $this->session->userdata('name')
+						'reg_worker' => $this->session->userdata('mem_username')
 					);
 					if($this->input->post('modi')=='1'){
 						$result = $this->cms_main_model->update_data('cb_cms_sales_received', $ins_data, array('seq' => $this->input->post('rec_seq'))); // 수정 모드일 경우
@@ -1049,7 +1051,8 @@ class Cms_m1 extends CB_Controller {
 						$result = $this->cms_main_model->insert_data('cb_cms_sales_received', $ins_data); // 입력 모드일 경우
 					}
 
-					if( !$result) alert("데이터베이스 에러입니다.", '');
+					if( !$result) alert($ins_data, '');
+					// if( !$result) alert("데이터베이스 에러입니다.", '');
 
 					alert("수납내역이 정상 입력 되었습니다.", base_url('cms_m1/sales/2/2?project='.$project.'&dong='.$this->input->post('dong').'&ho='.$this->input->post('ho')));
 				}
@@ -1119,7 +1122,7 @@ class Cms_m1 extends CB_Controller {
 								'pay_sche_seq' => $pay_sche[$j]->seq,
 								'payment' => $this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq),
 								'reg_date' => date('Y-m-d'),
-								'reg_worker' => $this->session->userdata('name')
+								'reg_worker' => $this->session->userdata('mem_username')
 							);
 							if(empty($this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h")) OR ($this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h"))=='0') {
 								$result[$j] = $this->cms_main_model->insert_data('cb_cms_sales_payment', $pmt_data);
