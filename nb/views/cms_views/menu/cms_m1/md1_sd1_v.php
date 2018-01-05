@@ -127,63 +127,7 @@ endfor;
     </div>
 
 	<div class="row font12" style="margin: 0; padding: 0;">
-        <div class="col-md-12"><h4><span class="label label-success">2. 청약 현황</span></h4></div>
-<?php if(empty($app_data)) : ?>
-		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 20px 0;">등록된 데이터가 없습니다.</div>
-<?php else : ?>
-		<div class="col-xs-12 table-responsive" style="padding: 0;">
-			<table class="table table-bordered table-hover table-condensed">
-				<thead class="bo-top center bgf8">
-					<tr>
-						<td width="10%">타 입</td>
-						<td width="10%">동 호 수</td>
-						<td width="10%">청 약 자</td>
-						<td width="10%">차 수</td>
-						<td width="10%">청 약 금</td>
-						<td width="10%">청약 일자</td>
-						<td width="10%">상 태</td>
-						<td width="10%">상태 변경일</td>
-						<td width="20%">비 고</td>
-					</tr>
-				</thead>
-				<tbody class="bo-bottom center">
-<?php
-foreach($app_data as $lt) :
-	switch ($lt->disposal_div) :
-		case '1': $condi = "<font color='#0D069F'>계약전환</font>"; break;
-		case '2': $condi = "<font color='#8C1024'>해지신청</font>"; break;
-		case '3': $condi = "<font color='#354E62'>환불완료</font>"; break;
-		default: $condi = "<font color='#05980F'>정상청약</font>"; break;
-	endswitch;
-	$unit_dh = explode("-", $lt->unit_dong_ho);
-	switch ($lt->disposal_div) {
-		case '0': $app_edit_link = "<a href='/nb/cms_m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=1&project=".$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>"; break;
-		case '2': $app_edit_link = "<a href='/nb/cms_m1/sales/1/2?mode=2&cont_sort1=2&cont_sort3=3&project=".$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>"; break;
-		default: $app_edit_link = ""; break;
-	}
-	$app_edit = ($lt->disposal_div=='0' OR $lt->disposal_div=='2') ? "</a>" : "";
-	$new_span = ($lt->app_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #AB0327; color: #fff; font-size: 10px;'>&nbsp;N </span>&nbsp; " : "";
-?>
-					<tr>
-						<td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type] ?>;">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></span></td>
-						<td ><?php echo $app_edit_link.$lt->unit_dong_ho.$app_edit; ?></td>
-						<td><?php echo $app_edit_link.$lt->applicant.$app_edit; ?></td>
-<?php $diff = $this->cms_main_model->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no = '$lt->app_diff' "); ?>
-						<td ><?php echo $diff->diff_name;?></td>
-						<td class="right"><?php echo number_format($lt->app_in_mon)." 원"; ?></td>
-						<td><?php echo $new_span." ".$lt->app_date; ?></td>
-						<td><?php echo $condi; ?></td>
-						<td><?php if($lt->disposal_date && $lt->disposal_date!="0000-00-00")echo $lt->disposal_date; ?></td>
-						<td class="left"><div style="cursor: pointer;" data-toggle="tooltip" data-placement="left" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 23, ".."); ?></div></td>
-					</tr>
-<?php endforeach; ?>
-				</tbody>
-			</table>
-		</div>
-<?php endif; ?>
-    </div>
-	<div class="row font12" style="margin: 0; padding: 0;">
-    <div class="col-md-12"><h4><span class="label label-primary">3. 계약 현황</span></h4></div>
+    <div class="col-md-12"><h4><span class="label label-primary">2. 계약 현황</span></h4></div>
 		<div class="col-md-12 bo-top bo-bottom" style="padding: 0; margin: 0 0 20px 0;">
 <?php
 	$attributes = array('name' => 'form1', 'method' => 'get');
@@ -362,3 +306,60 @@ foreach ($cont_data as $lt) :
 			<ul class="pagination pagination-sm"><?php echo $pagination; ?></ul>
 		</div>
   </div>
+
+	<div class="row font12" style="margin: 0; padding: 0;">
+        <div class="col-md-12"><h4><span class="label label-success">3. 청약 현황</span></h4></div>
+<?php if(empty($app_data)) : ?>
+		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 20px 0;">등록된 데이터가 없습니다.</div>
+<?php else : ?>
+		<div class="col-xs-12 table-responsive" style="padding: 0;">
+			<table class="table table-bordered table-hover table-condensed">
+				<thead class="bo-top center bgf8">
+					<tr>
+						<td width="10%">타 입</td>
+						<td width="10%">동 호 수</td>
+						<td width="10%">청 약 자</td>
+						<td width="10%">차 수</td>
+						<td width="10%">청 약 금</td>
+						<td width="10%">청약 일자</td>
+						<td width="10%">상 태</td>
+						<td width="10%">상태 변경일</td>
+						<td width="20%">비 고</td>
+					</tr>
+				</thead>
+				<tbody class="bo-bottom center">
+<?php
+foreach($app_data as $lt) :
+	switch ($lt->disposal_div) :
+		case '1': $condi = "<font color='#0D069F'>계약전환</font>"; break;
+		case '2': $condi = "<font color='#8C1024'>해지신청</font>"; break;
+		case '3': $condi = "<font color='#354E62'>환불완료</font>"; break;
+		default: $condi = "<font color='#05980F'>정상청약</font>"; break;
+	endswitch;
+	$unit_dh = explode("-", $lt->unit_dong_ho);
+	switch ($lt->disposal_div) {
+		case '0': $app_edit_link = "<a href='/nb/cms_m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=1&project=".$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>"; break;
+		case '2': $app_edit_link = "<a href='/nb/cms_m1/sales/1/2?mode=2&cont_sort1=2&cont_sort3=3&project=".$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>"; break;
+		default: $app_edit_link = ""; break;
+	}
+	$app_edit = ($lt->disposal_div=='0' OR $lt->disposal_div=='2') ? "</a>" : "";
+	$new_span = ($lt->app_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #AB0327; color: #fff; font-size: 10px;'>&nbsp;N </span>&nbsp; " : "";
+?>
+					<tr>
+						<td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type] ?>;">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></span></td>
+						<td ><?php echo $app_edit_link.$lt->unit_dong_ho.$app_edit; ?></td>
+						<td><?php echo $app_edit_link.$lt->applicant.$app_edit; ?></td>
+<?php $diff = $this->cms_main_model->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no = '$lt->app_diff' "); ?>
+						<td ><?php echo $diff->diff_name;?></td>
+						<td class="right"><?php echo number_format($lt->app_in_mon)." 원"; ?></td>
+						<td><?php echo $new_span." ".$lt->app_date; ?></td>
+						<td><?php echo $condi; ?></td>
+						<td><?php if($lt->disposal_date && $lt->disposal_date!="0000-00-00")echo $lt->disposal_date; ?></td>
+						<td class="left"><div style="cursor: pointer;" data-toggle="tooltip" data-placement="left" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 23, ".."); ?></div></td>
+					</tr>
+<?php endforeach; ?>
+				</tbody>
+			</table>
+		</div>
+<?php endif; ?>
+    </div>

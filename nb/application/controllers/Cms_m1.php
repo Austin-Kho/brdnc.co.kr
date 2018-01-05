@@ -130,7 +130,7 @@ class Cms_m1 extends CB_Controller {
 				$config['total_rows'] = $data['total_rows'] = $this->cms_main_model->sql_num_rows($cont_query);  //게시물의 전체 갯수
 				if( !$this->input->get('num')) $config['per_page'] = 10;  else $config['per_page'] = $this->input->get('num'); // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
-				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
+				// $config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
 				$config['reuse_query_string'] = TRUE;    //http://example.com/index.php/test/page/20?query=search%term
 
 				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기

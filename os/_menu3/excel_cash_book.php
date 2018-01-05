@@ -9,7 +9,7 @@ Header("Expires: 0");
 	// 데이터베이스 연결 정보와 기타 설정
 	include '../php/config.php';
 	// 각종 유틸 함수
-	include '../php/util.php';
+	include '../php/util.php'
 	// MySQL 연결
 	$connect=dbconn();
 	$add_where = stripslashes($_REQUEST['add_where']);
@@ -45,7 +45,7 @@ Header("Expires: 0");
 			<td width="100" bgcolor="#EAEAEA">비 고</td>
 	</tr>
 <?
-	if($s_date){$s_add=" AND deal_date<'$s_date' ";}else{$s_add="  AND deal_date<'2010-01-01'  ";} // 시작일이 있으면 시작일 이후 없으면 2000-01-01부터 시작
+	if($s_date){$s_add=" AND deal_date<'$s_date' ";}else{$s_add="  AND deal_date<'2015-05-01'  ";} // 시작일이 있으면 시작일 이후 없으면 2015-05-01부터 시작
 	$query1="SELECT seq_num, class1, class2, account, cont, acc, in_acc, inc, out_acc, exp, evidence, cms_capital_cash_book.note, worker, deal_date, name, no
 			    FROM cms_capital_cash_book, cms_capital_bank_account
 			    $where
