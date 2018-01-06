@@ -119,9 +119,8 @@ class Cms_m3 extends CB_Controller {
 						$config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
 
 						// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
-						// $page = $this->uri->segment($config['uri_segment']);
-						$page = $this->input->get('page');
-						if($page<=1 or empty($page)) { $start = 0; }else{ $start = ($page-1) * $config['per_page']; }
+						$page = $this->input->get('page'); // get 방식 아닌 경우 $this->uri->segment($config['uri_segment']);
+						$start = ($page<=1 or empty($page)) ? 0 : ($page-1) * $config['per_page'];
 						$limit = $config['per_page'];
 
 						//페이지네이션 초기화
@@ -293,9 +292,8 @@ class Cms_m3 extends CB_Controller {
 				$config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
 
 				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
-				// $page = $this->uri->segment($config['uri_segment']);
-				$page = $this->input->get('page');
-				if($page<=1 or empty($page)) { $start = 0; }else{ $start = ($page-1) * $config['per_page']; }
+				$page = $this->input->get('page'); // get 방식 아닌 경우 $this->uri->segment($config['uri_segment']);
+				$start = ($page<=1 or empty($page)) ? 0 : ($page-1) * $config['per_page'];
 				$limit = $config['per_page'];
 
 				//페이지네이션 초기화
