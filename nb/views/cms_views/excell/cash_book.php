@@ -81,13 +81,13 @@ switch ($lt->class2) :
 	case '7': $cla2="<font color='#669900'>[현장]</font>"; break;
 endswitch;
 
-$cla = $cla1."-".$cla2;
-$account = ($lt->account=="") ? "-" : "[".$lt->account."]";
-$inc = ($lt->inc==0 or ($lt->class1==3 && $lt->out_acc==$lt->no)) ? "" : number_format($lt->inc);
-$exp = ($lt->exp==0 or ($lt->class1==3 && $lt->in_acc==$lt->no)) ? "" : number_format($lt->exp);
-$acc = ($lt->acc) ? $lt->acc : "-";
-$in_acc = ($lt->in_acc==0 or ($lt->class1==3 && $lt->out_acc==$lt->no)) ? "" : $lt->name;
-$out_acc = ($lt->out_acc==0 or ($lt->class1==3 && $lt->in_acc==$lt->no)) ? "" : $lt->name;
+$cla = $cla1."-".$cla2;  // 대분류
+$account = ($lt->account=="") ? "-" : "[".$lt->account."]"; // 계정과목
+$acc = ($lt->acc) ? $lt->acc : "-"; // 거래처
+$in_acc = ($lt->in_acc==0 or ($lt->class1==3 && $lt->out_acc==$lt->no)) ? "" : $lt->name; // 입금계정
+$out_acc = ($lt->out_acc==0 or ($lt->class1==3 && $lt->in_acc==$lt->no)) ? "" : $lt->name; // 출금계정
+$inc = ($lt->inc==0 or ($lt->class1==3 && $lt->out_acc==$lt->no)) ? "" : number_format($lt->inc); // 입금액
+$exp = ($lt->exp==0 or ($lt->class1==3 && $lt->in_acc==$lt->no)) ? "" : number_format($lt->exp);  // 출금액
 
 echo $EXCEL_STR2 = "
 <tr  style='font-size:9pt;'>
