@@ -5,41 +5,39 @@ class Capital_pop extends CB_Controller
 {
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('cmain_m');
-		$this->load->model('cmpopup_m');            // 팝업 모델 로드
+		$this->load->model('cms_main_model');
+		$this->load->model('cms_popup_model');            // 팝업 모델 로드
 	}
 
 	// public function index() {
 	// 	$this->accounts();
 	// }
 
-	public function accounts ()
-	{
+	public function accounts ()	{
 		// $this->output->enable_profiler(TRUE);
-		$data['d2_acc'] = $this->cmpopup_m->d2_acc($this->input->post('acc_d1'));
+		$data['d2_acc'] = $this->cms_popup_model->d2_acc($this->input->post('acc_d1'));
 
 		$this->load->view('/cms_views/popup/accounts_v', $data);
 	}
 
-	public function cash_book($id)
-	{
+	public function cash_book($id) {
 		$this->load->view('/cms_views/popup/pop_header_v');
 
 		$where = array('seq_num'=>$id);
-		$data['row'] = $this->cmain_m->select_data_row('cms_capital_cash_book', $where);
+		$data['row'] = $this->cms_main_model->select_data_row('cb_cms_capital_cash_book', $where);
 
 		// 계정별 세부계정과목 구하기
-		$data['acnt1'] = $this->cmain_m->sql_result(" SELECT * FROM cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc !='1' ORDER BY d3_code ASC ");
-		$data['acnt2'] = $this->cmain_m->sql_result(" SELECT * FROM cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc !='1' ORDER BY d3_code ASC ");
-		$data['acnt3'] = $this->cmain_m->sql_result(" SELECT * FROM cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc !='1' ORDER BY d3_code ASC ");
-		$data['acnt4'] = $this->cmain_m->sql_result(" SELECT * FROM cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc !='1' ORDER BY d3_code ASC ");
-		$data['acnt5'] = $this->cmain_m->sql_result(" SELECT * FROM cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc !='1' ORDER BY d3_code ASC ");
+		$data['acnt1'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc !='1' ORDER BY d3_code ASC ");
+		$data['acnt2'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc !='1' ORDER BY d3_code ASC ");
+		$data['acnt3'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc !='1' ORDER BY d3_code ASC ");
+		$data['acnt4'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc !='1' ORDER BY d3_code ASC ");
+		$data['acnt5'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc !='1' ORDER BY d3_code ASC ");
 
 		// 현장목록 가져오기
-		$data['pj'] = $this->cmain_m->sql_result(" SELECT seq, pj_name FROM cms_project WHERE is_end!='1' ORDER BY biz_start_ym DESC, seq DESC ");
+		$data['pj'] = $this->cms_main_model->sql_result(" SELECT seq, pj_name FROM cb_cms_project WHERE is_end!='1' ORDER BY biz_start_ym DESC, seq DESC ");
 
-		// 입출금 계좌 가져오기 select * from cms_capital_bank_account
-		$data['bank_acc'] =  $this->cmain_m->sql_result(" select * from cms_capital_bank_account ");
+		// 입출금 계좌 가져오기 select * from cb_cms_capital_bank_account
+		$data['bank_acc'] =  $this->cms_main_model->sql_result(" select * from cb_cms_capital_bank_account ");
 
 		// 폼 검증 라이브러리 로드
 		$this->load->library('form_validation'); // 폼 검증
@@ -83,7 +81,7 @@ class Capital_pop extends CB_Controller
 			);
 
 			$where = array('seq_num'=>$this->input->post('seq_num', TRUE));
-			$result = $this->cmain_m->update_data('cms_capital_cash_book', $deal_data, $where);
+			$result = $this->cms_main_model->update_data('cb_cms_capital_cash_book', $deal_data, $where);
 
 			if($result){
 				alert('정상적으로 처리되었습니다.', base_url('popup/capital_pop/cash_book')."/".$this->input->post('seq_num', TRUE));

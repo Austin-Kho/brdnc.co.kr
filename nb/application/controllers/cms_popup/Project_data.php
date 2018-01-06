@@ -5,8 +5,8 @@ class Project_data extends CB_Controller
 {
 	public function __construct() {
 		parent::__construct();
-		$this->load->model('cmain_m');
-		$this->load->model('cmpopup_m');            // 팝업 모델 로드
+		$this->load->model('cms_main_model');
+		$this->load->model('cms_popup_model');   // 팝업 모델 로드
 	}
 
 	public function index() {
@@ -18,14 +18,14 @@ class Project_data extends CB_Controller
 		$this->load->view('/cms_views/popup/pop_header_v');
 
 		// 프로젝트 리스트 정보
-		$data['all_pj'] = $this->cmain_m->sql_result(' SELECT * FROM cms_project  ORDER BY biz_start_ym DESC ');
-		$data['now_pj'] = $this->cmain_m->sql_row(" SELECT * FROM cms_project  WHERE seq='".$pj."'");
+		$data['all_pj'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project  ORDER BY biz_start_ym DESC ');
+		$data['now_pj'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_project  WHERE seq='".$pj."'");
 		$data['type'] = explode("-", $data['now_pj']->type_name);
 
 		// 수정할 데이터 정보
-		$data['modi_data'] = $this->cmain_m->sql_row(" SELECT * FROM cms_project_all_housing_unit WHERE seq='".$seq."'" );
+		$data['modi_data'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_project_all_housing_unit WHERE seq='".$seq."'" );
 		// 동 리스트 정보
-		$data['dong'] = $this->cmain_m->sql_result(" SELECT dong FROM cms_project_all_housing_unit GROUP BY dong ORDER BY dong " );
+		$data['dong'] = $this->cms_main_model->sql_result(" SELECT dong FROM cb_cms_project_all_housing_unit GROUP BY dong ORDER BY dong " );
 
 
 
@@ -71,7 +71,7 @@ class Project_data extends CB_Controller
 				'modi_worker' => $this->session->userdata('mem_username')
 			);
 
-			$result = $this->cmain_m->update_data('cms_project_all_housing_unit', $update_data, $where = array('seq' => $this->input->post('seq')));
+			$result = $this->cms_main_model->update_data('cb_cms_project_all_housing_unit', $update_data, $where = array('seq' => $this->input->post('seq')));
 
 			if($result) { // 등록 성공 시
 				alert('프로젝트 정보가  수정되었습니다.', current_url());

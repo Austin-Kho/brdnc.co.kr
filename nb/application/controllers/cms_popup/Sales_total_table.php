@@ -11,8 +11,8 @@ class Sales_total_table extends CB_Controller
 		if(@$this->session->userdata['logged_in'] !== TRUE) {
 			redirect(base_url('cms_member').'?returnURL='.rawurlencode(base_url(uri_string())));
 		}
-		$this->load->model('cmain_m');
-		$this->load->model('cmpopup_m');            // 팝업 모델 로드
+		$this->load->model('cms_main_model');
+		$this->load->model('cms_popup_model');            // 팝업 모델 로드
 	}
 	/**
 	 * [index 클래스명 생략시 기본 실행 함수]
