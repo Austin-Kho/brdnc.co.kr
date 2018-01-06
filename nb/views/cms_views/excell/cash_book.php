@@ -30,36 +30,40 @@ echo $EXCEL_STR1 = "
     </tr>
   ";
 
+$i = 0;
 // 데이터 가져오기 시작
-foreach ($cb_list as $lt) :
-// if($this->input->get('sc')==0):
-// 	$i=0;
-// 	if($i==0) :
-// 		// 현금 최초 시재 구한다.
-// 		$c_in_qry = " SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE in_acc = '1' AND deal_date < '".$rows1[deal_date]."'" ;
-// 		$c_in_row = $this->cms_main_model->sql_row($c_in_qry);
-//
-// 		$c_ex_qry = " SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE out_acc = '1' AND deal_date < '".$rows1[deal_date]."'";
-// 		$c_ex_row = $this->cms_main_model->sql_row($c_ex_qry);
-//
-// 		$fcash = $c_in_row->inc-$c_ex_row->exp;
-//
-// 		// 예금 최초 시재 구한다.
-// 		$b_in_qry = " SELECT SUM(inc) AS inc FROM cms_capital_cash_book WHERE in_acc > '1' AND deal_date < '".$rows1[deal_date]."'";
-// 		$b_in_row = $this->cms_main_model->sql_row($b_in_qry);
-//
-// 		$b_ex_qry = " SELECT SUM(exp) AS exp FROM cms_capital_cash_book WHERE out_acc > '1' AND deal_date < '".$rows1[deal_date]."'";
-// 		$b_ex_row = $this->cms_main_model->sql_row($b_ex_qry);
-//
-// 		$fbank = $b_in_row->inc-$b_ex_row->exp;
-// 		$cash_hand = '=SUMIF(F3,"현금",G3)-SUMIF(H3,"현금",I3)+'.$fcash;
-// 		$bank_balance = '=SUMIF(F3,"<>현금",G3)-SUMIF(H3,"<>현금",I3)+'.$fbank;
-// 	elseif($i>0) :
-// 		$cash_hand = '=J'.($i+2).'+SUMIF(F'.($i+3).',"현금",G'.($i+3).')-SUMIF(H'.($i+3).',"현금",I'.($i+3).')';
-// 		$bank_balance = '=K'.($i+2).'+SUMIF(F'.($i+3).',"<>현금",G'.($i+3).')-SUMIF(H'.($i+3).',"<>현금",I'.($i+3).')';
-// 	endif;
-// 	$i++;
-// endif;
+foreach ($cash_book_list as $lt) :
+
+  if($sc==0):
+  	if($i==0) : // 전장이월 행, 즉 1행
+  		// 현금 최초 시재 구한다.
+  		$c_in_qry = " SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE in_acc = '1' AND deal_date < '".$lt->deal_date."'" ;
+  		$c_in_row = $this->cms_main_model->sql_row($c_in_qry);
+
+  		$c_ex_qry = " SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE out_acc = '1' AND deal_date < '".$lt->deal_date."'";
+  		$c_ex_row = $this->cms_main_model->sql_row($c_ex_qry);
+
+  		$fcash = $c_in_row->inc-$c_ex_row->exp; // 전일 현금 시재
+
+  		// 예금 최초 시재 구한다.
+  		$b_in_qry = " SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE in_acc > '1' AND deal_date < '".$lt->deal_date."'";
+  		$b_in_row = $this->cms_main_model->sql_row($b_in_qry);
+
+  		$b_ex_qry = " SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE out_acc > '1' AND deal_date < '".$lt->deal_date."'";
+  		$b_ex_row = $this->cms_main_model->sql_row($b_ex_qry);
+
+  		$fbank = $b_in_row->inc-$b_ex_row->exp; // 전일 예금 잔고
+
+  		$cash_hand = '=SUMIF(F3,"현금",G3)-SUMIF(H3,"현금",I3)+'.$fcash; // 금일 현금 시재
+  		$bank_balance = '=SUMIF(F3,"<>현금",G3)-SUMIF(H3,"<>현금",I3)+'.$fbank; // 금일 예금 잔고
+
+  	elseif($i>0) :
+  		$cash_hand = '=J'.($i+2).'+SUMIF(F'.($i+3).',"현금",G'.($i+3).')-SUMIF(H'.($i+3).',"현금",I'.($i+3).')';        // 금일 현금 시재
+  		$bank_balance = '=K'.($i+2).'+SUMIF(F'.($i+3).',"<>현금",G'.($i+3).')-SUMIF(H'.($i+3).',"<>현금",I'.($i+3).')'; // 금일 예금 잔고
+
+  	endif;
+  endif;
+  $i++;
 
 switch ($lt->class1) :
 	case '1': $cla1="<font color='#0066ff'>[입금]</font>"; break;
@@ -78,17 +82,11 @@ switch ($lt->class2) :
 endswitch;
 
 $cla = $cla1."-".$cla2;
-// if($lt->account==""){ $account = "-"; }else{ $account = "[".$lt->account."]"; }
 $account = ($lt->account=="") ? "-" : "[".$lt->account."]";
-// if($lt->inc==0 or ($lt->class1==3&&$lt->out_acc==$lt->no)){ $inc=""; }else{ $inc=number_format($lt->inc); }
-$inc = ($lt->inc==0 or ($lt->class1==4 && $lt->out_acc==$lt->no)) ? "" : number_format($lt->inc);
-// if($lt->exp==0 or ($lt->class1==3&&$lt->in_acc==$lt->no)){ $exp=""; }else{ $exp=number_format($lt->exp); }
+$inc = ($lt->inc==0 or ($lt->class1==3 && $lt->out_acc==$lt->no)) ? "" : number_format($lt->inc);
 $exp = ($lt->exp==0 or ($lt->class1==3 && $lt->in_acc==$lt->no)) ? "" : number_format($lt->exp);
-// if($lt->acc) {$acc=$lt->acc;}else{$acc="-";}
 $acc = ($lt->acc) ? $lt->acc : "-";
-// if($lt->in_acc==0 or ($lt->class1==3&&$lt->out_acc==$lt->no)){ $in_acc=""; }else{ $in_acc=$lt->name; }
 $in_acc = ($lt->in_acc==0 or ($lt->class1==3 && $lt->out_acc==$lt->no)) ? "" : $lt->name;
-// if($lt->out_acc==0 or ($lt->class1==3&&$lt->in_acc==$lt->no)){ $out_acc=""; }else{ $out_acc=$lt->name; }
 $out_acc = ($lt->out_acc==0 or ($lt->class1==3 && $lt->in_acc==$lt->no)) ? "" : $lt->name;
 
 echo $EXCEL_STR2 = "
