@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit ('No direct script access allowed');
 
-class Capital_pop extends CB_Controller
+class Capital_cash_pop extends CB_Controller
 {
 	public function __construct() {
 		parent::__construct();
@@ -9,15 +9,24 @@ class Capital_pop extends CB_Controller
 		$this->load->model('cms_popup_model');            // 팝업 모델 로드
 	}
 
-	// public function index() {
-	// 	$this->accounts();
-	// }
+	/**
+	 * [_remap 헤더와 푸터 불러오기 위한 선행함수]
+	 * @param  [type] $method [description]
+	 * @return [type]         [description]
+	 */
+	public function _remap($method){
+		// 헤더 include
+		$this->load->view('/cms_views/popup/pop_header_v');
 
-	public function accounts ()	{
-		// $this->output->enable_profiler(TRUE);
-		$data['d2_acc'] = $this->cms_popup_model->d2_acc($this->input->post('acc_d1'));
+		if(method_exists($this, $method)){
+			$this->{"$method"}();
+		}
+		// 푸터 include
+		$this->load->view('/cms_views/popup/pop_footer_v');
+	}
 
-		$this->load->view('/cms_views/popup/accounts_v', $data);
+	public function index() {
+		$this->cash_book();
 	}
 
 	public function cash_book($id) {

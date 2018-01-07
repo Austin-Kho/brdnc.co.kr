@@ -11,14 +11,14 @@ class Tax_off extends CB_Controller
 
 	public function _remap($method) {
  		//헤더 include
-    		$this->load->view('/cms_views/popup/pop_header_v');
+    $this->load->view('/cms_views/popup/pop_header_v');
 		if( method_exists($this, $method) )
 		{
 			$this->{"{$method}"}();
 		}
 		//푸터 include
 		$this->load->view('/cms_views/popup/pop_footer_v');
-  	}
+  }
 
 	public function index() {
 		$this->lists();

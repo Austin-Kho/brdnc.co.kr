@@ -11,7 +11,7 @@
 					document.getElementById(b).value = "<?php echo date('Y-m-d');?>";
 				}
 				function to_del(code){
-					if(aa=confirm('데이터가 삭제됩니다. 계속 진행하시겠습니까?')){
+					if(del_data=confirm('데이터가 삭제됩니다. 계속 진행하시겠습니까?')){
 						location.href='?del_code='+code
 					}else{
 						return false;
@@ -24,7 +24,6 @@
 	$url_e_date = rawurlencode($this->input->get('e_date'));
 	if($this->input->get('search_text')=="") $sc=0; else $sc=1;
 ?>
-
 				<a href="<?php echo base_url('cms_excel_file/cash_book')."?add_where=".$url_where."&sc=".$sc; ?>">
 					<img src="<?php echo base_url('static/img/excel_icon.jpg'); ?>" height="10" border="0" alt="EXCEL 아이콘" /> EXCEL로 출력
 				</a>
@@ -128,7 +127,8 @@
 									<th style="width: 80px;" class="center"> 구 분</th>
 									<th style="width: 110px;" class="center">
 										계정과목
-										<a href="javascript:" onclick="popUp_size('/os/_menu3/account_m.php', 'account',700,800)" title="계정과목 관리">
+										<!-- <a href="javascript:" onclick="popUp_size('/os/_menu3/account_m.php', 'account',700,800)" title="계정과목 관리"> -->
+										<a href="javascript:" onclick="popUp_size('<?php echo base_url('cms_popup/capital_acc_pop');?>', 'account',700,800)" title="계정과목 관리">
 											<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 										</a>
 									</th>

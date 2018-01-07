@@ -7,16 +7,19 @@ label { padding-top: 5px;}
 .ft { float: left; }
 .form-group { padding: 6px; margin: 0; }
 
+.mt5 { margin-top: 5px; }
+.mt10 { margin-top: 10px; }
 .mt20 { margin-top: 20px; }
 .mt30 { margin-top: 30px; }
 .ml20 { margin-left: 20px; }
 .num { padding: 5px 20px; color: #C91C1C; }
 .well { margin: 0 10px; padding: 8px 10px; }
 .row { margin: 0 10px; padding-top: 10px; border: 1px solid #eaeaea; }
-.zip-tb { margin: 0 10px; }
+.tb-h5 { margin: 0 5px; }
+.tb-h10 { margin: 0 10px; }
 th { background-color: #E7ECEF; }
 .center { text-align: center; }
 
 
-.pagination { margin-bottom: 20px; }
-footer { padding: 15px; }
+.pagination { margin-bottom: 10px; }
+footer { padding: 10px; }
