@@ -110,7 +110,7 @@
 							</div>
 							<div class="col-xs-5 col-sm-8 col-md-1" style="height: 40px; padding: 5px 0 0 5px;">
 								<label for="search_text" class="sr-only">검색어</label>
-								<input type="text" name="search_text" value="<?php if($this->input->get('search_text')) echo $this->input->get('search_text'); ?>" class="form-control input-sm" placeholder="검색어">
+								<input type="text" name="search_text" value="<?php if($this->input->get('search_text')) echo $this->input->get('search_text'); ?>" class="form-control input-sm" placeholder="검색어" onkeydown="if(event.keyCode==13)submit();">
 							</div>
 							<div class="col-xs-2 col-sm-2 col-md-1 center" style="height: 40px; padding: 3px;">
 								<input type="button" value="검 색" class="btn btn-info btn-sm" onclick="submit();">

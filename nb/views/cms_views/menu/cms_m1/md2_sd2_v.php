@@ -42,7 +42,7 @@
 			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 				<div class="col-xs-8" style="padding: 0px;">
 					<label for="payer" class="sr-only">입금자(동호수)</label>
-					<input type="text" name="payer" value="<?php if($this->input->get('payer')) echo $this->input->get("payer"); ?>" class="form-control input-sm" placeholder="입금자 또는 계약자">
+					<input type="text" name="payer" value="<?php if($this->input->get('payer')) echo $this->input->get("payer"); ?>" class="form-control input-sm" placeholder="입금자 또는 계약자" onkeydown="if(event.keyCode==13)submit();">
 				</div>
 				<div class="col-xs-4">
 					<input type="button" class="btn btn-primary btn-sm" onclick="submit();" value="검 색">

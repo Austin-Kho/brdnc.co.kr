@@ -22,7 +22,7 @@
 								</div>
 							</div>
 							<div class="col-md-2" style="height: 40px; padding-top: 5px;">
-								<input class="form-control input-sm" name="bank_search" placeholder="계좌 검색" value="<?php if($this->input->get('bank_search')) echo $this->input->get('bank_search'); ?>">
+								<input type="text" class="form-control input-sm" name="bank_search" placeholder="계좌 검색" value="<?php if($this->input->get('bank_search')) echo $this->input->get('bank_search'); ?>" onkeydown="if(event.keyCode==13)submit();">
 							</div>
 							<div class="col-md-1 right" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
 								<button class="btn btn-primary btn-sm"> 검 색 </button>

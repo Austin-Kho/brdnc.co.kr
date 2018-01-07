@@ -382,7 +382,6 @@
 									</td>
 								</tr>
 							</table>
-							<!-- <div class="col-xs-5  input-group"></div> -->
 						</div>
 					</div>
 

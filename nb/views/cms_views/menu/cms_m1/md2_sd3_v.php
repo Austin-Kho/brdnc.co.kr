@@ -3,7 +3,7 @@
 
 <?php
 	$attributes = array('method' => 'get', 'name' => 'get_frm');
-	form_open(current_url(), $attributes);
+	echo form_open(current_url(), $attributes);
 ?>
 		<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
 			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
@@ -140,7 +140,7 @@
 	<!-- <form method="get" name="get_frm" action="<?php echo current_url(); ?>"> -->
 <?php
 	$attributes = array('method' => 'get', 'name' => 'get_frm');
-	form_open(current_url(), $attributes);
+	echo form_open(current_url(), $attributes);
 ?>
 		<input type="hidden" name="yr" value="<?php echo $this->input->get('yr'); ?>">
 		<input type="hidden" name="project" value="<?php echo $this->input->get('project'); ?>">
@@ -184,9 +184,8 @@ if( !$this->input->get('con_diff') OR  !$this->input->get('pay_sort'))  :
 		<div class="col-xs-12 center" style="padding: 180px 0;"><?php echo $msg; ?></div>
 	</div>
 <?php else : ?>
-	<!-- <form class="" action="" method="post"> -->
 <?php
-	form_open(current_url());
+	echo form_open(current_url());
 ?>
 		<div class="row font12" style="margin: 0; padding: 0;">
 			<div class="col-xs-12 table-responsive" style="padding: 0;">

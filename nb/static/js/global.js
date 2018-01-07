@@ -2,12 +2,11 @@
  *
  */
 
-// 우편번호 검색창 열기
-// function ZipWindow(ref) { // ref = 파일경로, z_form = 우편번호 폼, a_form = 주소폼)
-// 	var window_left = (screen.width-640)/2;
-// 	var window_top = (screen.height-480)/2;
-// 	window.open(ref, "zipWin","scrollbars=no,width=530, height=618, status=no, top="+window_top+",left="+window_left);
-// }
+// 폼 button에서 엔터키를 눌렀을때 써브밋 해주는 함수
+function enter_search(form) {
+	var keycode = window.event.keyCode;
+	if(keycode == 13) $("#search_btn").click();
+}
 
 // 오픈 윈도우2
 function open_Win(ref,name, wid, hei) {
