@@ -34,15 +34,15 @@
 		<header id="header">
 			<h1>회계 계정과목(Account) 관리</h1>
 		</header>
-		<div class="desc">※ 검색할 계정과목 명칭을 선택하여 주십시요.</div>
-		<div class="well" style="padding: 13px; margin-bottom: 20px;">세무서를 제외한 <b>[관할 지역명]</b> 만 입력하세요.</div>
+		<div class="desc">&nbsp;</div>
+		<div class="well" style="padding: 13px; margin-bottom: 20px;">※ 검색할 계정과목 명칭을 선택하여 주십시요.</div>
 		<div class="row" style="padding-top: 0;">
 
 			<div class="form-group <?php if(is_mobile()) echo 'col-xs-6'; else echo 'col-xs-3'; ?>">
 				<label id="doro_name" for="acc_d1">계정과목 [대분류] :</label>
 			</div>
 			<div class="form-group <?php if(is_mobile()) echo 'col-xs-6'; else echo 'col-xs-3'; ?>" style="border-top: 0;">
-				<div class="col-xs-12">
+				<div class="col-xs-12" style="padding-left:0;">
 					<select name="acc_d1" class="form-control input-sm" onChange = "acc_d1_sub();">
 						<option value="0"> 전 체
 						<option value="1" <?php echo set_select('acc_d1', '1');?>> 자 산
@@ -57,7 +57,7 @@
 				<label id="doro_name" for="acc_d2">계정과목 [중분류] :</label>
 			</div>
 			<div class="form-group <?php if(is_mobile()) echo 'col-xs-6'; else echo 'col-xs-3'; ?>" style="border-top: 0;">
-				<div class="col-xs-12">
+				<div class="col-xs-12" style="padding-left:0;">
 					<select name="acc_d2" class="form-control input-sm" onChange = "d2_show(this);">
 						<option value=""> 전 체
 <?php foreach($d2_acc as $lt) : ?>
@@ -75,7 +75,7 @@
 			<div class="desc">&nbsp;</div>
 		</div>
 		<div class="tb-h5">
-			
+
 		</div>
 		<footer class="center"><a href="javascript:self.close();" class="btn btn-danger btn-sm">닫 기</a></footer>
 	</div>

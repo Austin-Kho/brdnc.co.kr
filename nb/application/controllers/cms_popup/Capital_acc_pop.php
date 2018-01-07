@@ -33,7 +33,7 @@ class Capital_acc_pop extends CB_Controller
 		// $this->output->enable_profiler(TRUE);
 		$data['d2_acc'] = $this->cms_popup_model->d2_acc($this->input->post('acc_d1'));
 
-		$this->load->view('/cms_views/popup/accounts_v', $data);
+		$this->load->view('/cms_views/popup/accountss_v', $data);
 	}
 }
 // End of this File
