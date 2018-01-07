@@ -52,9 +52,9 @@
 							<tr style="background-color: #EAEAEA;">
 								<th style="20px" class="center"><input type="checkbox" disabled></td>
 								<th style="100px" class="center">구 분 <font color="red">*</font></td>
-								<th style="55px" class="center">현 장 <font color="red">*</font></td>
+								<th style="75px" class="center">계정과목 <font color="red">*</font> <a href="javascript:" onclick="popUp_size('<?php echo base_url('cms_popup/capital_acc_pop');?>','account',700,800)" title="계정과목 관리"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td>
 								<th style="55px" class="center">조합대여</td>
-								<th style="75px" class="center">계정과목 <font color="red">*</font> <a href="javascript:" onclick="popUp_size('/os/_menu3/account_m.php','account',700,800)" title="계정과목 관리"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td>
+								<th style="55px" class="center">현 장 <font color="red">*</font></td>
 								<th style="100px" class="center">적 요 <font color="red">*</font></td>
 								<th style="70px" class="center">거 래 처</td>
 								<th style="60px" class="center">입금처 <font color="red">*</font> <a href="javascript:" onclick="popUp('/os/_menu3/acc_list.php?fn=1&amp;frm=out_stock_frm','bank_acc')" title="은행계좌 관리"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td>
@@ -91,17 +91,6 @@
 										<option value="7"> 현 장
 									</select>
 								</td>
-								<!-- 현장코드 _1 -->
-								<td class="center" style="padding-top: 7px;">
-									<select name="pj_seq_1" id="pj_seq_1" style="width:60px;" disabled>
-										<option value="0" selected> 선 택</option>
-<?php foreach($pj_dt as $lt) : ?>
-										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
-<?php endforeach; ?>
-									</select>
-								</td>
-								<!-- 조합 대여금여부 _1 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_1" id="jh_loan_1" onClick="jh_chk(1);" disabled></td>
 								<!-- 회계계정 _1 -->
 								<td class="center" id="d1_1_1" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_1" id="d1_acc1_1" style="width:60px;" disabled>
@@ -141,6 +130,17 @@
 <?php foreach($d3_d15 as $lt) :?>
 										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
 <?php endforeach;?>
+									</select>
+								</td>
+								<!-- 조합 대여금여부 _1 -->
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_1" id="jh_loan_1" onClick="jh_chk(1);" disabled></td>
+								<!-- 현장코드 _1 -->
+								<td class="center" style="padding-top: 7px;">
+									<select name="pj_seq_1" id="pj_seq_1" style="width:60px;" disabled>
+										<option value="0" selected> 선 택</option>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 적 요 _1 -->
@@ -207,17 +207,6 @@
 										<option value="7"> 현 장
 									</select>
 								</td>
-								<!-- 현장코드 _2 -->
-								<td class="center" style="padding-top: 7px;">
-									<select name="pj_seq_2" id="pj_seq_2" style="width:60px;" disabled>
-										<option value="0" selected> 선 택</option>
-<?php foreach($pj_dt as $lt) : ?>
-										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
-<?php endforeach; ?>
-									</select>
-								</td>
-								<!-- 조합 대여금여부 _2 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_2" id="jh_loan_2" onClick="jh_chk(2);" disabled></td>
 								<!-- 회계계정 _2 -->
 								<td class="center" id="d1_1_2" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_2" id="d1_acc1_2" style="width:60px;" disabled>
@@ -257,6 +246,17 @@
 <?php foreach($d3_d15 as $lt) :?>
 										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
 <?php endforeach;?>
+									</select>
+								</td>
+								<!-- 조합 대여금여부 _2 -->
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_2" id="jh_loan_2" onClick="jh_chk(2);" disabled></td>
+								<!-- 현장코드 _2 -->
+								<td class="center" style="padding-top: 7px;">
+									<select name="pj_seq_2" id="pj_seq_2" style="width:60px;" disabled>
+										<option value="0" selected> 선 택</option>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 적 요 _2 -->
@@ -323,17 +323,6 @@
 										<option value="7"> 현 장
 									</select>
 								</td>
-								<!-- 현장코드 _3 -->
-								<td class="center" style="padding-top: 7px;">
-									<select name="pj_seq_3" id="pj_seq_3" style="width:60px;" disabled>
-										<option value="0" selected> 선 택</option>
-<?php foreach($pj_dt as $lt) : ?>
-										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
-<?php endforeach; ?>
-									</select>
-								</td>
-								<!-- 조합 대여금여부 _3 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_3" id="jh_loan_3" onClick="jh_chk(3);" disabled></td>
 								<!-- 회계계정 _3 -->
 								<td class="center" id="d1_1_3" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_3" id="d1_acc1_3" style="width:60px;" disabled>
@@ -373,6 +362,17 @@
 <?php foreach($d3_d15 as $lt) :?>
 										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
 <?php endforeach;?>
+									</select>
+								</td>
+								<!-- 조합 대여금여부 _3 -->
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_3" id="jh_loan_3" onClick="jh_chk(3);" disabled></td>
+								<!-- 현장코드 _3 -->
+								<td class="center" style="padding-top: 7px;">
+									<select name="pj_seq_3" id="pj_seq_3" style="width:60px;" disabled>
+										<option value="0" selected> 선 택</option>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 적 요 _3 -->
@@ -439,17 +439,6 @@
 										<option value="7"> 현 장
 									</select>
 								</td>
-								<!-- 현장코드 _4 -->
-								<td class="center" style="padding-top: 7px;">
-									<select name="pj_seq_4" id="pj_seq_4" style="width:60px;" disabled>
-										<option value="0" selected> 선 택</option>
-<?php foreach($pj_dt as $lt) : ?>
-										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
-<?php endforeach; ?>
-									</select>
-								</td>
-								<!-- 조합 대여금여부 _4 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_4" id="jh_loan_4" onClick="jh_chk(4);" disabled></td>
 								<!-- 회계계정 _4 -->
 								<td class="center" id="d1_1_4" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_4" id="d1_acc1_4" style="width:60px;" disabled>
@@ -489,6 +478,17 @@
 <?php foreach($d3_d15 as $lt) :?>
 										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
 <?php endforeach;?>
+									</select>
+								</td>
+								<!-- 조합 대여금여부 _4 -->
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_4" id="jh_loan_4" onClick="jh_chk(4);" disabled></td>
+								<!-- 현장코드 _4 -->
+								<td class="center" style="padding-top: 7px;">
+									<select name="pj_seq_4" id="pj_seq_4" style="width:60px;" disabled>
+										<option value="0" selected> 선 택</option>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 적 요 _4 -->
@@ -555,17 +555,6 @@
 										<option value="7"> 현 장
 									</select>
 								</td>
-								<!-- 현장코드 _5 -->
-								<td class="center" style="padding-top: 7px;">
-									<select name="pj_seq_5" id="pj_seq_5" style="width:60px;" disabled>
-										<option value="0" selected> 선 택</option>
-<?php foreach($pj_dt as $lt) : ?>
-										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
-<?php endforeach; ?>
-									</select>
-								</td>
-								<!-- 조합 대여금여부 _5 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_5" id="jh_loan_5" onClick="jh_chk(5);" disabled></td>
 								<!-- 회계계정 _5 -->
 								<td class="center" id="d1_1_5" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_5" id="d1_acc1_5" style="width:60px;" disabled>
@@ -605,6 +594,17 @@
 <?php foreach($d3_d15 as $lt) :?>
 										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
 <?php endforeach;?>
+									</select>
+								</td>
+								<!-- 조합 대여금여부 _5 -->
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_5" id="jh_loan_5" onClick="jh_chk(5);" disabled></td>
+								<!-- 현장코드 _5 -->
+								<td class="center" style="padding-top: 7px;">
+									<select name="pj_seq_5" id="pj_seq_5" style="width:60px;" disabled>
+										<option value="0" selected> 선 택</option>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 적 요 _5 -->
@@ -671,17 +671,6 @@
 										<option value="7"> 현 장
 									</select>
 								</td>
-								<!-- 현장코드 _6 -->
-								<td class="center" style="padding-top: 7px;">
-									<select name="pj_seq_6" id="pj_seq_6" style="width:60px;" disabled>
-										<option value="0" selected> 선 택</option>
-<?php foreach($pj_dt as $lt) : ?>
-										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
-<?php endforeach; ?>
-									</select>
-								</td>
-								<!-- 조합 대여금여부 _6 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_6" id="jh_loan_6" onClick="jh_chk(6);" disabled></td>
 								<!-- 회계계정 _6 -->
 								<td class="center" id="d1_1_6" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_6" id="d1_acc1_6" style="width:60px;" disabled>
@@ -721,6 +710,17 @@
 <?php foreach($d3_d15 as $lt) :?>
 										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
 <?php endforeach;?>
+									</select>
+								</td>
+								<!-- 조합 대여금여부 _6 -->
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_6" id="jh_loan_6" onClick="jh_chk(6);" disabled></td>
+								<!-- 현장코드 _6 -->
+								<td class="center" style="padding-top: 7px;">
+									<select name="pj_seq_6" id="pj_seq_6" style="width:60px;" disabled>
+										<option value="0" selected> 선 택</option>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 적 요 _6 -->
@@ -787,17 +787,6 @@
 										<option value="7"> 현 장
 									</select>
 								</td>
-								<!-- 현장코드 _7 -->
-								<td class="center" style="padding-top: 7px;">
-									<select name="pj_seq_7" id="pj_seq_7" style="width:60px;" disabled>
-										<option value="0" selected> 선 택</option>
-<?php foreach($pj_dt as $lt) : ?>
-										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
-<?php endforeach; ?>
-									</select>
-								</td>
-								<!-- 조합 대여금여부 _7 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_7" id="jh_loan_7" onClick="jh_chk(7);" disabled></td>
 								<!-- 회계계정 _7 -->
 								<td class="center" id="d1_1_7" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_7" id="d1_acc1_7" style="width:60px;" disabled>
@@ -837,6 +826,17 @@
 <?php foreach($d3_d15 as $lt) :?>
 										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
 <?php endforeach;?>
+									</select>
+								</td>
+								<!-- 조합 대여금여부 _7 -->
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_7" id="jh_loan_7" onClick="jh_chk(7);" disabled></td>
+								<!-- 현장코드 _7 -->
+								<td class="center" style="padding-top: 7px;">
+									<select name="pj_seq_7" id="pj_seq_7" style="width:60px;" disabled>
+										<option value="0" selected> 선 택</option>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 적 요 _7 -->
@@ -903,17 +903,6 @@
 										<option value="7"> 현 장
 									</select>
 								</td>
-								<!-- 현장코드 _8 -->
-								<td class="center" style="padding-top: 7px;">
-									<select name="pj_seq_8" id="pj_seq_8" style="width:60px;" disabled>
-										<option value="0" selected> 선 택</option>
-<?php foreach($pj_dt as $lt) : ?>
-										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
-<?php endforeach; ?>
-									</select>
-								</td>
-								<!-- 조합 대여금여부 _8 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_8" id="jh_loan_8" onClick="jh_chk(8);" disabled></td>
 								<!-- 회계계정 _8 -->
 								<td class="center" id="d1_1_8" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_8" id="d1_acc1_8" style="width:60px;" disabled>
@@ -953,6 +942,17 @@
 <?php foreach($d3_d15 as $lt) :?>
 										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
 <?php endforeach;?>
+									</select>
+								</td>
+								<!-- 조합 대여금여부 _8 -->
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_8" id="jh_loan_8" onClick="jh_chk(8);" disabled></td>
+								<!-- 현장코드 _8 -->
+								<td class="center" style="padding-top: 7px;">
+									<select name="pj_seq_8" id="pj_seq_8" style="width:60px;" disabled>
+										<option value="0" selected> 선 택</option>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 적 요 _8 -->
@@ -1019,17 +1019,6 @@
 										<option value="7"> 현 장
 									</select>
 								</td>
-								<!-- 현장코드 _9 -->
-								<td class="center" style="padding-top: 7px;">
-									<select name="pj_seq_9" id="pj_seq_9" style="width:60px;" disabled>
-										<option value="0" selected> 선 택</option>
-<?php foreach($pj_dt as $lt) : ?>
-										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
-<?php endforeach; ?>
-									</select>
-								</td>
-								<!-- 조합 대여금여부 _9 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_9" id="jh_loan_9" onClick="jh_chk(9);" disabled></td>
 								<!-- 회계계정 _9 -->
 								<td class="center" id="d1_1_9" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_9" id="d1_acc1_9" style="width:60px;" disabled>
@@ -1069,6 +1058,17 @@
 <?php foreach($d3_d15 as $lt) :?>
 										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
 <?php endforeach;?>
+									</select>
+								</td>
+								<!-- 조합 대여금여부 _9 -->
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_9" id="jh_loan_9" onClick="jh_chk(9);" disabled></td>
+								<!-- 현장코드 _9 -->
+								<td class="center" style="padding-top: 7px;">
+									<select name="pj_seq_9" id="pj_seq_9" style="width:60px;" disabled>
+										<option value="0" selected> 선 택</option>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 적 요 _9 -->
@@ -1135,17 +1135,6 @@
 										<option value="7"> 현 장
 									</select>
 								</td>
-								<!-- 현장코드 _10 -->
-								<td class="center" style="padding-top: 7px;">
-									<select name="pj_seq_10" id="pj_seq_10" style="width:60px;" disabled>
-										<option value="0" selected> 선 택</option>
-<?php foreach($pj_dt as $lt) : ?>
-										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
-<?php endforeach; ?>
-									</select>
-								</td>
-								<!-- 조합 대여금여부 _10 -->
-								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_10" id="jh_loan_10" onClick="jh_chk(10);" disabled></td>
 								<!-- 회계계정 _10 -->
 								<td class="center" id="d1_1_10" style="padding-top: 7px;"> <!-- 자산 계정 -->
 									<select name="account_10" id="d1_acc1_10" style="width:60px;" disabled>
@@ -1185,6 +1174,17 @@
 <?php foreach($d3_d15 as $lt) :?>
 										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
 <?php endforeach;?>
+									</select>
+								</td>								
+								<!-- 조합 대여금여부 _10 -->
+								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_10" id="jh_loan_10" onClick="jh_chk(10);" disabled></td>
+								<!-- 현장코드 _10 -->
+								<td class="center" style="padding-top: 7px;">
+									<select name="pj_seq_10" id="pj_seq_10" style="width:60px;" disabled>
+										<option value="0" selected> 선 택</option>
+<?php foreach($pj_dt as $lt) : ?>
+										<option value="<?php echo $lt->seq; ?>"> <?php echo $lt->pj_name; ?></option>
+<?php endforeach; ?>
 									</select>
 								</td>
 								<!-- 적 요 _10 -->
