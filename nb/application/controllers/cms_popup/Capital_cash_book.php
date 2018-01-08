@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit ('No direct script access allowed');
 
-class Capital_cash_pop extends CB_Controller
+class Capital_cash_book extends CB_Controller
 {
 	public function __construct() {
 		parent::__construct();
@@ -94,9 +94,9 @@ class Capital_cash_pop extends CB_Controller
 			$result = $this->cms_main_model->update_data('cb_cms_capital_cash_book', $deal_data, $where);
 
 			if($result){
-				alert('정상적으로 처리되었습니다.', base_url('cms_popup/capital_cash_pop/cash_book')."/".$this->input->post('seq_num', TRUE));
+				alert('정상적으로 처리되었습니다.', base_url('cms_popup/Capital_cash_book/cash_book')."/".$this->input->post('seq_num', TRUE));
 			}else{
-				alert('다시 시도하여 주십시요.', base_url('cms_popup/capital_cash_pop/cash_book')."/".$this->input->post('seq_num', TRUE));
+				alert('다시 시도하여 주십시요.', base_url('cms_popup/Capital_cash_book/cash_book')."/".$this->input->post('seq_num', TRUE));
 			}
 		}
 	}

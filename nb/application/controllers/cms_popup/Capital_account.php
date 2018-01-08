@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit ('No direct script access allowed');
 
-class Capital_acc_pop extends CB_Controller
+class Capital_account extends CB_Controller
 {
 	public function __construct()
 	{

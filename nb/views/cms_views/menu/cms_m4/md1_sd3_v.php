@@ -52,14 +52,16 @@
 							<tr style="background-color: #EAEAEA;">
 								<th style="20px" class="center"><input type="checkbox" disabled></td>
 								<th style="100px" class="center">구 분 <font color="red">*</font></td>
-								<th style="75px" class="center">계정과목 <font color="red">*</font> <a href="javascript:" onclick="popUp_size('<?php echo base_url('cms_popup/capital_acc_pop');?>','account',700,800)" title="계정과목 관리"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td>
+								<th style="75px" class="center">계정과목 <font color="red">*</font> <a href="javascript:" onclick="popUp_size('<?php echo base_url('cms_popup/capital_account');?>','account',700,800)" title="계정과목 관리"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td>
 								<th style="55px" class="center">조합대여</td>
 								<th style="55px" class="center">현 장 <font color="red">*</font></td>
 								<th style="100px" class="center">적 요 <font color="red">*</font></td>
 								<th style="70px" class="center">거 래 처</td>
-								<th style="60px" class="center">입금처 <font color="red">*</font> <a href="javascript:" onclick="popUp('/os/_menu3/acc_list.php?fn=1&amp;frm=out_stock_frm','bank_acc')" title="은행계좌 관리"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td>
+								<!-- <th style="60px" class="center">입금처 <font color="red">*</font> <a href="javascript:" onclick="popUp('/os/_menu3/acc_list.php?fn=1&amp;frm=out_stock_frm','bank_acc')" title="은행계좌 관리"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td> -->
+								<th style="60px" class="center">입금처 <font color="red">*</font> <a href="javascript:" onclick="popUp('<?php echo base_url('cms_popup/capital_acc_add'); ?>?fn=1&amp;frm=out_stock_frm','bank_acc')" title="은행계좌 관리"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td>
 								<th style="50px" class="center">입금금액 <font color="red">*</font></td>
-								<th style="60px" class="center">출금처 <font color="red">*</font> <a href="javascript:" onclick="popUp('/os/_menu3/acc_list.php?fn=1&amp;frm=out_stock_frm','bank_acc')" title="은행계좌 관리"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td>
+								<!-- <th style="60px" class="center">출금처 <font color="red">*</font> <a href="javascript:" onclick="popUp('/os/_menu3/acc_list.php?fn=1&amp;frm=out_stock_frm','bank_acc')" title="은행계좌 관리"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td> -->
+								<th style="60px" class="center">출금처 <font color="red">*</font> <a href="javascript:" onclick="popUp('<?php echo base_url('cms_popup/capital_acc_add'); ?>?fn=1&amp;frm=out_stock_frm','bank_acc')" title="은행계좌 관리"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td>
 								<th style="50px" class="center">출금금액 <font color="red">*</font></td>
 								<th style="110px" class="center">이체수수료 <font color="red">*</font></td>
 								<th style="70px" class="center">증빙서류 <font color="red">*</font></td>
@@ -1175,7 +1177,7 @@
 										<option value="<?php echo $lt->d3_acc_name;?>"> <?php echo $lt->d3_acc_name."(".$lt->d3_code.")"; ?></option>
 <?php endforeach;?>
 									</select>
-								</td>								
+								</td>
 								<!-- 조합 대여금여부 _10 -->
 								<td class="center" style="padding-top: 7px;">조합 : <input type="checkbox" value="1" name="jh_loan_10" id="jh_loan_10" onClick="jh_chk(10);" disabled></td>
 								<!-- 현장코드 _10 -->
