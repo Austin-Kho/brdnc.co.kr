@@ -1,9 +1,5 @@
 		<script>
-			function enter_search(form) {// 폼 button에서 엔터키를 눌렀을때 써브밋 해주는 함수
-				var keycode = window.event.keyCode;
-				if(keycode == 13) $("#search_btn").click();
-			}
-
+		<!--
 			function value_put(a,b){
 				var form_obj=opener.document.form1;
 				var n = document.getElementById('n').value;
@@ -11,6 +7,7 @@
 				eval("form_obj.tax_off"+n+"_name").value=b;
 				self.close();
 			}
+		-->
 		</script>
 
 	<div class="container">
@@ -21,17 +18,17 @@
 	?>
 		<input type="hidden" name="n" value="<?php echo $n; ?>" id="n">
 		<header id="header">
-			<h1>관 할 세 무 서 검 색</h1>
+			<h3>관 할 세 무 서 검 색</h3>
 		</header><!-- /header -->
 		<div class="desc">※ 찾고자 하는 세무서를 입력해 주세요.</div>
 		<div class="well" style="padding: 13px; margin-bottom: 20px;">세무서를 제외한 <b>[관할 지역명]</b> 만 입력하세요.</div>
 		<div class="row" style="padding-top: 0;">
 			<div class="form-group <?php if(is_mobile()) echo 'col-xs-4'; else echo 'col-xs-3'; ?>" style="border-top: 0;">
-				<label id="doro_name" for="search_text">관할세무서</label>
+				<label for="search_text">관할세무서</label>
 			</div>
 			<div class="form-group <?php if(is_mobile()) echo 'col-xs-8'; else echo 'col-xs-9'; ?>" style="border-top: 0;">
 				<div class="col-xs-7">
-					<input class="form-control input-sm han" type="text" name="search_text" id="q" value="<?php echo $this->input->post('search_text'); ?>" onclick="this.value=null" onkeypress="enter_search(document.q);">
+					<input class="form-control input-sm han" type="text" name="search_text" id="q" value="<?php echo $this->input->post('search_text'); ?>" onclick="this.value=null" onkeydown="if(event.keyCode==13)submit();">
 				</div>
 				<div class="col-xs-5">
 					<button class="btn btn-primary btn-sm" id="search_btn">검 색</button>
