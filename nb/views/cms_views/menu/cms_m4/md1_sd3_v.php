@@ -41,8 +41,8 @@
 							</a>
 						</div>
 					</div>
-					<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">담당자</div>
-					<div class="col-xs-8 col-md-2" style=" padding-top: 10px;"><?php  echo $this->session->userdata['name']; ?></div>
+					<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">입력직원</div>
+					<div class="col-xs-8 col-md-2" style=" padding-top: 10px;"><?php  echo $this->session->userdata['mem_username']; ?></div>
 				</div>
 <?php echo validation_errors(); ?>
 
