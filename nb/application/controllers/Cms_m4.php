@@ -224,7 +224,7 @@ class Cms_m4 extends CB_Controller {
 				$data['cb_list'] = $this->cms_m4_model->cash_book_list($cb_table, $data['where'], $start, $limit, '', 'DESC'); // table, where, start, limit, num, order
 
 				if($this->input->get('del_code')) {
-					$result = $this->cms_m4_model->delete_data('cb_cms_capital_cash_book', array('seq_num' => $this->input->get('del_code')));
+					$result = $this->cms_main_model->delete_data('cb_cms_capital_cash_book', array('seq_num' => $this->input->get('del_code')));
 					if($result) {
 						alert('삭제 되었습니다.', base_url('cms_m4/capital/1/2/'));
 					}else{
@@ -604,7 +604,7 @@ class Cms_m4 extends CB_Controller {
 							}
 						}
 					}
-					alert('정상적으로 거래등록이 처리되었습니다.', base_url('cms_m4/capital/1/3/'));
+					alert('정상적으로 거래등록이 처리되었습니다.', base_url('cms_m4/capital/1/2/'));
 				}
 			}
 
