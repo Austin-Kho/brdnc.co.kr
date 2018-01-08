@@ -29,10 +29,12 @@ class Capital_cash_pop extends CB_Controller
 		$this->cash_book();
 	}
 
-	public function cash_book($id) {
-		$this->load->view('/cms_views/popup/pop_header_v');
+	public function cash_book() {
+		// $this->output->enable_profiler(TRUE);
 
-		$where = array('seq_num'=>$id);
+		$seq_id = $this->uri->segment(4);
+
+		$where = array('seq_num' => $seq_id);
 		$data['row'] = $this->cms_main_model->select_data_row('cb_cms_capital_cash_book', $where);
 
 		// 계정별 세부계정과목 구하기
@@ -63,7 +65,6 @@ class Capital_cash_pop extends CB_Controller
 		if($this->form_validation->run()==FALSE) {
 			//본 페이지 로딩
 			$this->load->view('/cms_views/popup/cash_book_v', $data);
-			$this->load->view('/cms_views/popup/pop_footer_v');
 		}else{
 			if($this->input->post('account_1')) $account = $this->input->post('account_1');
 			if($this->input->post('account_2')) $account = $this->input->post('account_2');
@@ -89,15 +90,15 @@ class Capital_cash_pop extends CB_Controller
 				'deal_date' => $this->input->post('deal_date', TRUE)
 			);
 
-			$where = array('seq_num'=>$this->input->post('seq_num', TRUE));
+			$where = array('seq_num' => $this->input->post('seq_num', TRUE));
 			$result = $this->cms_main_model->update_data('cb_cms_capital_cash_book', $deal_data, $where);
 
 			if($result){
-				alert('정상적으로 처리되었습니다.', base_url('popup/capital_pop/cash_book')."/".$this->input->post('seq_num', TRUE));
+				alert('정상적으로 처리되었습니다.', base_url('cms_popup/capital_cash_pop/cash_book')."/".$this->input->post('seq_num', TRUE));
 			}else{
-				alert('다시 시도하여 주십시요.', base_url('popup/capital_pop/cash_book')."/".$this->input->post('seq_num', TRUE));
+				alert('다시 시도하여 주십시요.', base_url('cms_popup/capital_cash_pop/cash_book')."/".$this->input->post('seq_num', TRUE));
 			}
 		}
 	}
 }
-// End of File
+// End of this File

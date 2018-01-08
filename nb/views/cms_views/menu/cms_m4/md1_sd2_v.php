@@ -206,7 +206,7 @@
 <?php if($auth>1) :  ?><!-- //마스터 관리자와 쓰기권한 있는 자금담당에게만 출력 -->
 									<td class="center">
 <?php if($m_auth->mem_is_admin==='1' or $m_auth->auth_level>=80 or ($m_auth->auth_level<80&&date('Y-m-d', strtotime('-3 day'))<=$lt->deal_date)) : //관리자와 마스터 쓰기권한이 아니면 최근 3일전 건에 대해서만 수정 가능 ?>
-										<a href='javascript:'class="btn btn-info btn-xs" onclick="popUp_size('<?php echo base_url('/popup/capital_pop/cash_book/'.$lt->seq_num); ?>','cash_book','500','670')">
+										<a href='javascript:'class="btn btn-info btn-xs" onclick="popUp_size('<?php echo base_url('/cms_popup/capital_cash_pop/cash_book/'.$lt->seq_num); ?>','cash_book','500','670')">
 <?php else: ?>
 										<a href="javascript:" class="btn btn-default btn-xs" onclick="alert('마스터 관리자가 아니면 3일전 이후 건에 대해서만 수정 가능합니다.\n\n수정 필요 시 마스터 관리자에게 요청하여 주십시요.');">
 <?php endif; ?>

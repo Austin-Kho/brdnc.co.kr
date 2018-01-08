@@ -110,9 +110,11 @@
 	<div class="desc"></div>
 	<div class="well" style="padding: 13px; margin-bottom: 9px;">변경 할 입출금 거래정보를 수정해 주십시요. (<font color="#ff0000">*</font>표시는 필수 정보)</div>
 
-	<form name="form1" class="form-horizontal" action="" method="post">
-		<label><input type="hidden" name="seq_num" value="<?php echo $this->uri->segment(4); ?>"></label>
-
+<?php
+	$attributes = array('name' => 'form1', 'class' => 'form-horizontal');
+	$hidden = array('seq_num' => $this->uri->segment(4));
+	echo form_open(current_url(), $attributes, $hidden);
+?>
 		<div class="row" style="padding: 0 15px; margin-bottom: 15px;">
 			<div class="form-group" style="padding-top: 15px;">
 				<div class="col-xs-3 right" style="text-align: right;">

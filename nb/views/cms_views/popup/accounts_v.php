@@ -1,13 +1,9 @@
 <script type="text/javascript">
-	function acc_d2_show(acc_no) {
-		if(acc_no=='1'){
-			if(document.getElementById('acc1').display="") {
-				document.getElementById('acc1').display="none";
-			}else{
-				document.getElementById('acc1').display="";
-			}
-		}
-	}
+$(document).ready(function(){
+	$("#acc1_h").click(function(){
+			$("#acc1").toggle();
+	});
+});
 </script>
 	<div class="container">
 <?php
@@ -42,9 +38,9 @@
 				<div class="mt10">
 					<div class="desc">&nbsp;</div>
 				</div>
-				<div class="sub_header" onClick="acc_d2_show('1');"><h5>자 산 계 정</h5></div>
+				<div class="sub_header" id="acc1_h"><h5>자 산 계 정</h5></div>
 				<div class="tb-h5">
-					<table id="acc1" class="table table-bordered table-hover table-condensed" style="display:<?if($this->input->post_get('acc_d1')==='1') echo ''; else echo 'none';?>">
+					<table id="acc1" class="table table-bordered table-hover table-condensed" style="display:<?if($this->input->post_get('acc_d1')==='1' or empty($this->input->post_get('acc_d1'))) echo ''; else echo 'none';?>">
 <?php
 	foreach($d2_acc_1 as $lt1) : // 1-d2 계정 나열 시작
 ?>
