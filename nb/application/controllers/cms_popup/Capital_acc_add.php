@@ -26,14 +26,42 @@ class Capital_acc_add extends CB_Controller
 
 	public function index()
 	{
-		$this->accounts();
+		$this->acc_add();
 	}
 
-	public function accounts()
+	public function acc_add()
 	{
-		// $this->output->enable_profiler(TRUE);
-		$qry = " SELECT seq, pj_name FROM cb_cms_project_info ";
-		$data['pj_info'] = $this->cms_main_model->sql_result($qry);
+		$this->output->enable_profiler(TRUE);
+
+		// $qry = " SELECT seq, pj_name FROM cb_cms_project_info ";
+		// $data['pj_info'] = $this->cms_main_model->sql_result($qry);
+
+		// //페이지네이션 라이브러리 로딩 추가
+		// $this->load->library('pagination');
+    //
+		// //페이지네이션 설정/////////////////////////////////
+		// $config['base_url'] = base_url('cms_popup/capital_acc_add/');   //페이징 주소
+		// $config['total_rows'] = $this->cms_m5_model->com_div_list($div_table, '', '', $st1, $st2, 'num', '');  //게시물의 전체 갯수
+		// $config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
+		// $config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
+		// $config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
+		// $config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
+    //
+		// // 게시물 목록을 불러오기 위한 start / limit 값 가져오기
+		// $page = $this->input->get('page'); // get 방식 아닌 경우 $this->uri->segment($config['uri_segment']);
+		// $start = ($page<=1 or empty($page)) ? 0 : ($page-1) * $config['per_page'];
+		// $limit = $config['per_page'];
+    //
+		// //페이지네이션 초기화
+		// $this->pagination->initialize($config);
+		// //페이징 링크를 생성하여 view에서 사용할 변수에 할당
+		// $data['pagination'] = $this->pagination->create_links();
+    //
+		// // db[전체부서목록] 데이터 불러오기
+		// $data['all_div'] = $this->cms_m5_model->all_div_name($div_table);
+    //
+		// //  db [부서]데이터 불러오기
+		// $data['list'] = $this->cms_m5_model->com_div_list($div_table, $start, $limit, $st1, $st2, '', ''); // 테이블, 시작, 갯수,
 
 		// $total_bnum = $_REQUEST['total_bnum'];
 		// $where_add = " WHERE no!=1 ";

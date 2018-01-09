@@ -46,10 +46,6 @@ class Cms_member extends CB_Controller
 		$this->load->library('form_validation'); // 폼 검증
 		$this->load->helper('cookie');  // 쿠키 헬퍼 로딩
 
-		// if ( ! function_exists('password_hash')) {
-		// 	 $this->load->helper('password');
-	  // }
-
 		$use_login_account = $this->cbconfig->item('use_login_account');
 
 		/**
@@ -102,11 +98,11 @@ class Cms_member extends CB_Controller
 		 */
 
 			if ($use_login_account === 'both') {
-				$userinfo = $this->Member_model->get_by_both($this->input->post('user_data'), 'mem_id, mem_userid, mem_username, request, mem_is_admin');
+				$userinfo = $this->Member_model->get_by_both($this->input->post('user_data'), 'mem_id, mem_userid, mem_username, mem_level, request, mem_is_admin');
 			} elseif ($use_login_account === 'email') {
-				$userinfo = $this->Member_model->get_by_email($this->input->post('user_data'), 'mem_id, mem_userid, mem_username, request, mem_is_admin');
+				$userinfo = $this->Member_model->get_by_email($this->input->post('user_data'), 'mem_id, mem_userid, mem_username, mem_level, request, mem_is_admin');
 			} else {
-				$userinfo = $this->Member_model->get_by_userid($this->input->post('user_data'), 'mem_id, mem_userid, mem_username, request, mem_is_admin');
+				$userinfo = $this->Member_model->get_by_userid($this->input->post('user_data'), 'mem_id, mem_userid, mem_username, mem_level, request, mem_is_admin');
 			}
 
 			// 승인 전 비관리자 회원인 경우 안내
@@ -121,6 +117,7 @@ class Cms_member extends CB_Controller
 				'mem_userid' => $userinfo['mem_userid'],
 				'mem_username' => $userinfo['mem_username'],
 				'mem_is_admin' => $userinfo['mem_is_admin'],
+				'mem_level' => $userinfo['mem_level'],
 				'logged_in' => TRUE
 			);
 			$this->session->set_userdata($user_sess_data);

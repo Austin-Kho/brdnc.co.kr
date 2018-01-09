@@ -73,7 +73,7 @@
 								<span id="top_user_id" style="font-size:15px;"><span class="glyphicon glyphicon-user" aria-hidden="true"> <?php echo html_escape($this->member->item('mem_username')); ?> 님</span> <span class="caret"></span>
 							</a></span>
 							<ul class="dropdown-menu" role="menu">
-<?php if($this->member->is_admin() === 'super') : ?>
+<?php if($this->member->is_admin() === 'super' or $this->session->userdata('mem_level')>=50) : ?>
 								<li><a href="<?php echo $this->config->base_url('admin');?>"><span class="glyphicon glyphicon-cog" aria-hidden="true"> 관리자-페이지</span></a></li>
 <?php endif; ?>
 								<li><a href="javascript:" onclick="alert('준비 중입니다!');"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"> 공지사항</span></a></li>
