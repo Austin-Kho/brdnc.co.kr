@@ -1008,12 +1008,19 @@ class Cms_m1 extends CB_Controller {
 				<font color='#9f0404'><span class='glyphicon glyphicon-import' aria-hidden='true' style='padding-right: 10px;'></span></font><b>
 				[".$unit->type." 타입] &nbsp;".$now_dong ." 동 ". $now_ho." 호 - 계약자 : ".$cont_data->contractor."</b>" : "";
 
-				// $data['cont_info'] =
-
 				// 수납 계좌
 				$data['paid_acc'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_bank_acc WHERE pj_seq='$project' ");
 				// 수정 시 수납 데이터
 				$data['modi_rec'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE seq='".$this->input->get('rec_seq')."' ");
+				// 데이터 삭제
+				if( !empty($this->input->get('del_code'))){
+					$result = $this->cms_main_model->delete_data('cb_cms_sales_received', array('seq' => $this->input->get('del_code')));
+					if($result) {
+						alert('삭제 되었습니다.', base_url('cms_m1/sales/2/2').'?modi=0&project='.$project.'&dong='.$this->input->get('dong').'&ho='.$this->input->get('ho'));
+					}else{
+						alert('다시 시도하여 주십시요.', base_url('cms_m1/sales/2/2').'?modi=0&project='.$project.'&dong='.$this->input->get('dong').'&ho='.$this->input->get('ho'));
+					}
+				}
 
 				// 라이브러리 로드
 				$this->load->library('form_validation'); // 폼 검증

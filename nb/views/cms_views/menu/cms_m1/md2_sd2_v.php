@@ -241,7 +241,15 @@
 	<?php if($auth<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="receive_chk();";} ?>
 				<div class="form-group btn-wrap" style="margin: ;">
 <?php if($this->input->get('modi')=='1') : ?>
-					<input type="button" class="btn btn-warning btn-sm" onclick="location.href='<?php echo base_url('cms_m1/sales/2/2').'?modi=0&project='.$project.'&dong='.$this->input->get('dong').'&ho='.$this->input->get('ho'); ?>'"  value="지우기">
+          <input type="button" class="btn btn-warning btn-sm" onclick="location.href='<?php echo base_url('cms_m1/sales/2/2').'?modi=0&project='.$project.'&dong='.$this->input->get('dong').'&ho='.$this->input->get('ho'); ?>'"  value="뒤로 가기">
+
+
+<?php   if(date('Y-m-d', strtotime('-3 day')) <= $modi_rec->reg_date) :?>
+					<input type="button" class="btn btn-danger btn-sm" onclick="if(confirm('해당 수납 데이터를 삭제하시겠습니까?')===true) location.href='<?php echo base_url('cms_m1/sales/2/2').'?modi=0&project='.$project.'&dong='.$this->input->get('dong').'&ho='.$this->input->get('ho').'&del_code='.$this->input->get('rec_seq'); ?>'"  value="삭제 하기">
+<?php   else : ?>
+          <input type="button" class="btn btn-default btn-sm" onclick="alert('등록일 기준 3일 이내의 건에 한해서 삭제할 수 있습니다.\n등록일로부터 3일 이후의 건에 대한 삭제는 관리자에게 문의하여 주십시요.')"  value="삭제 하기">
+<?php   endif; ?>
+
 <?php endif;
 	$btn_val = ($this->input->get('modi')=='1') ? "변경 등록" : "신규 등록";
 ?>
