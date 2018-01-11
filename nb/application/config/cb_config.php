@@ -26,8 +26,8 @@ $config['uploads_dir'] = 'uploads';
  * 설치를 진행하기 위해서는 현재 접속하고 계신 remote_addr 를 입력하셔야 합니다.
  * 설치가 끝난 후에는 다시 빈 값으로 변경해주시고, 바로 위에 chk_installed 의 값을 false 로 변경해주시면 매번 install 되었는지를 체크하지 않으므로 속도 향상에 도움이 됩니다.
  */
-$config['chk_installed'] = true;
-$config['install_ip'] = '220.79.80.181'; // 여기에 all 이라고 적으면, 모든 IP 에서 접근 가능합니다, 간혹 localhost 에 설치할 때에 ip 체크를 제대로 하지 못한 경우를 대비합니다.
+$config['chk_installed'] = false;
+$config['install_ip'] = ''; // 여기에 all 이라고 적으면, 모든 IP 에서 접근 가능합니다, 간혹 localhost 에 설치할 때에 ip 체크를 제대로 하지 못한 경우를 대비합니다.
 
 
 /**
