@@ -283,7 +283,8 @@ class Board_post extends CB_Controller
             }
         }
 
-        if ($mem_id > 0  && $mem_id !== abs(element('mem_id', $post)) && element('use_point', $board)) {
+        if ($mem_id > 0  && $mem_id !== abs(element('mem_id', $post))
+            && element('use_point', $board)) {
             $point = $this->point->insert_point(
                 $mem_id,
                 element('point_read', $board),
@@ -325,10 +326,18 @@ class Board_post extends CB_Controller
             );
         }
 
-        $use_sideview = ($this->cbconfig->get_device_view_type() === 'mobile') ? element('use_mobile_sideview', $board) : element('use_sideview', $board);
-        $use_sideview_icon = ($this->cbconfig->get_device_view_type() === 'mobile') ? element('use_mobile_sideview_icon', $board) : element('use_sideview_icon', $board);
-        $view_date_style = ($this->cbconfig->get_device_view_type() === 'mobile') ? element('mobile_view_date_style', $board) : element('view_date_style', $board);
-        $view_date_style_manual = ($this->cbconfig->get_device_view_type() === 'mobile') ? element('mobile_view_date_style_manual', $board) : element('view_date_style_manual', $board);
+        $use_sideview = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_sideview', $board)
+            : element('use_sideview', $board);
+        $use_sideview_icon = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_sideview_icon', $board)
+            : element('use_sideview_icon', $board);
+        $view_date_style = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('mobile_view_date_style', $board)
+            : element('view_date_style', $board);
+        $view_date_style_manual = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('mobile_view_date_style_manual', $board)
+            : element('view_date_style_manual', $board);
 
         if (element('mem_id', $post) >= 0) {
             $dbmember = $this->Member_model
@@ -357,19 +366,31 @@ class Board_post extends CB_Controller
 
         $view['view']['post']['display_ip'] = '';
 
-        $show_ip = ($this->cbconfig->get_device_view_type() === 'mobile') ? element('show_mobile_ip', $board) : element('show_ip', $board);
+        $show_ip = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('show_mobile_ip', $board)
+            : element('show_ip', $board);
+
         if ($this->member->is_admin() === 'super' OR $show_ip === '2') {
             $view['view']['post']['display_ip'] = display_ipaddress(element('post_ip', $post), '1111');
         } elseif ($show_ip === '1') {
             $view['view']['post']['display_ip'] = display_ipaddress(element('post_ip', $post), $this->cbconfig->item('ip_display_style'));
         }
-        $image_width = ($this->cbconfig->get_device_view_type() === 'mobile') ? element('post_mobile_image_width', $board) : element('post_image_width', $board);
+        $image_width = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('post_mobile_image_width', $board)
+            : element('post_image_width', $board);
 
-        $board['target_blank'] = $target_blank = ($this->cbconfig->get_device_view_type() === 'mobile') ? element('mobile_content_target_blank', $board) : element('content_target_blank', $board);
+        $board['target_blank'] = $target_blank
+            = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('mobile_content_target_blank', $board)
+            : element('content_target_blank', $board);
 
-        $board['show_url_qrcode'] = ($this->cbconfig->get_device_view_type() === 'mobile') ? element('use_mobile_url_qrcode', $board) : element('use_url_qrcode', $board);
+        $board['show_url_qrcode'] = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_url_qrcode', $board)
+            : element('use_url_qrcode', $board);
 
-        $board['show_attached_url_qrcode'] = ($this->cbconfig->get_device_view_type() === 'mobile') ? element('use_mobile_attached_url_qrcode', $board) : element('use_attached_url_qrcode', $board);
+        $board['show_attached_url_qrcode'] = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_attached_url_qrcode', $board)
+            : element('use_attached_url_qrcode', $board);
 
         $link_player = '';
         $view['view']['link'] = $link = array();
@@ -432,12 +453,15 @@ class Board_post extends CB_Controller
             $pollwhere = array(
                 'ppo_id' => element('ppo_id', $post),
             );
-            $poll_item = $this->Post_poll_item_model->get('', '', $pollwhere, '', '', 'ppi_id', 'ASC');
+            $poll_item = $this->Post_poll_item_model
+                ->get('', '', $pollwhere, '', '', 'ppi_id', 'ASC');
 
-            if (empty($poll['ppo_start_datetime']) OR $poll['ppo_start_datetime'] === '0000-00-00 00:00:00') {
+            if (empty($poll['ppo_start_datetime'])
+                OR $poll['ppo_start_datetime'] === '0000-00-00 00:00:00') {
                 $poll['ppo_start_datetime'] = '';
             }
-            if (empty($poll['ppo_end_datetime']) OR $poll['ppo_end_datetime'] === '0000-00-00 00:00:00') {
+            if (empty($poll['ppo_end_datetime'])
+                OR $poll['ppo_end_datetime'] === '0000-00-00 00:00:00') {
                 $poll['ppo_end_datetime'] = '';
             }
             $poll['poll_period'] = '';
@@ -494,7 +518,9 @@ class Board_post extends CB_Controller
             $view['view']['poll_item'] = $poll_item;
         }
 
-        $autourl = ($this->cbconfig->get_device_view_type() === 'mobile') ? element('use_mobile_auto_url', $board) : element('use_auto_url', $board);
+        $autourl = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('use_mobile_auto_url', $board)
+            : element('use_auto_url', $board);
 
         $autolink = $autourl ? true : false;
         $popup = $target_blank ? true : false;
@@ -516,14 +542,16 @@ class Board_post extends CB_Controller
                 $view['view']['post']['content'] .= '<div class="alert alert-danger">신고가 접수된 게시글입니다. 본인과 관리자만 확인이 가능합니다</div>';
             }
 
-            if ($is_blind === false OR $is_admin !== false OR (element('mem_id', $post) && abs(element('mem_id', $post)) === $mem_id)) {
-                $view['view']['post']['content'] .= $file_player . $link_player. display_html_content(
-                    // element('post_content', $post), 
-                    // element('post_html', $post),
-                    // $image_width,
-                    // $autolink,
-                    $popup
-                );
+            if ($is_blind === false OR $is_admin !== false
+                OR (element('mem_id', $post) && abs(element('mem_id', $post)) === $mem_id)) {
+                $view['view']['post']['content'] .= $file_player . $link_player
+                    . display_html_content(
+                        element('post_content', $post),
+                        element('post_html', $post),
+                        $image_width,
+                        $autolink,
+                        $popup
+                    );
 
                 if (element('syntax_highlighter', $board)) {
                     if (element('post_html', $post)) {
@@ -585,9 +613,13 @@ class Board_post extends CB_Controller
 
             $view['view']['extra_content'] = $extra_content;
         }
-        $show_list_from_view = ($this->cbconfig->get_device_view_type() === 'mobile') ? element('mobile_show_list_from_view', $board) : element('show_list_from_view', $board);
+        $show_list_from_view = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('mobile_show_list_from_view', $board)
+            : element('show_list_from_view', $board);
 
-        $board['headercontent'] = ($this->cbconfig->get_device_view_type() === 'mobile') ? element('mobile_header_content', $board) : element('header_content', $board);
+        $board['headercontent'] = ($this->cbconfig->get_device_view_type() === 'mobile')
+            ? element('mobile_header_content', $board)
+            : element('header_content', $board);
 
         if (empty($show_list_from_view)) {
             $board['footercontent'] = ($this->cbconfig->get_device_view_type() === 'mobile')
