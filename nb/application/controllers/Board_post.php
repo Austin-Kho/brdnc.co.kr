@@ -884,7 +884,7 @@ class Board_post extends CB_Controller
             $view['view']['event']['before_post_layout'] = Events::trigger('before_post_layout', $eventname);
 
             $view['view']['short_url'] = $view['view']['canonical'] = post_url(element('brd_key', $board), $post_id);
-
+            
             if(element('use_bitly', $board)) {
                 if(element('bitly_url', element('meta', $post))) {
                     $view['view']['short_url'] = element('bitly_url', element('meta', $post));
