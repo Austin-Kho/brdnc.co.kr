@@ -9,7 +9,6 @@
 			<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">날 짜</div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding-top: 5px;">
-					<!-- <form method="post" name="d_cash_book_frm" action=""> -->
 <?php
 	$attributes = array('name' => 'd_cash_book_frm');
 	echo form_open(current_url(), $attributes);

@@ -17,7 +17,6 @@ for($i=0; $i<count($tp_name); $i++) :
 endfor;
 ?>
 	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
-		<!-- <form method="get" name="pj_sel" action="<?php echo current_url(); ?>"> -->
 <?php
 	$attributes = array('method' => 'get', 'name' => 'pj_sel');
 	echo form_open(current_url(), $attributes);
