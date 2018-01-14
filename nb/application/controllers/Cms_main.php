@@ -64,7 +64,23 @@ class Cms_main extends CB_Controller {
 		$data['current_rec1'] = 5;
 		$data['current_rec2'] = 5;
 
+		// // board list 불러오기 Start--------------------------//
+		// $where = array(
+		// 		'brd_search' => 1,
+		// );
+		// $board_id = $view['board_id'] = $this->Board_model->get_board_list($where);
+		// $board_list = array();
+		// if ($board_id && is_array($board_id)) {
+		// 		foreach ($board_id as $key => $val) {
+		// 				$board_list[] = $this->board->item_all(element('brd_id', $val));
+		// 		}
+		// }
+		// $view['view']['board_list'] = $board_list;
+		// // board list 불러오기 End----------------------------//
+
 		$this->load->view('/cms_views/cms_main_index', $data);
+		// 최근 게시물 불러오기
+		// $this->load->view('/cms_views/board/d_main', $view);
 	}
 
 	public function module() {

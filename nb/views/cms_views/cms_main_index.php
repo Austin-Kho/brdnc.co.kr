@@ -178,18 +178,4 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="col-xs-12" style="padding: 0;">
-		<div class="col-xs-12 col-sm-12">
-			<div class="panel panel-default">
-				<div class="panel-heading"><h3 class="panel-title"><span class="glyphicon glyphicon-headphones" aria-hidden="true"></span> 사 내 공 지</h3></div>
-<?php for($i=0; $i<5; $i++) :  ?>
-				<div class="panel-body">
-					<div class="col-xs-8" style="padding: 0;">게시물이 없습니다.</div>
-					<div class="col-xs-4" style="padding: 0;"></div>
-				</div>
-<?php endfor; ?>
-			</div>
-		</div>
-	</div>
 </div>
