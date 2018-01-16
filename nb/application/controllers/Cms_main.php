@@ -11,7 +11,7 @@ class Cms_main extends CB_Controller {
 	public function __construct()	{
 		parent::__construct();
 		if($this->member->is_member() === false) {
-			redirect(base_url('cms_member'));
+			redirect(site_url('login'));
 		}
 		$this->load->model('cms_main_model'); //모델 파일 로드
 	}

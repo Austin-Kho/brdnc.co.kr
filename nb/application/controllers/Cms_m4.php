@@ -9,7 +9,7 @@ class Cms_m4 extends CB_Controller {
 	public function __construct(){
 		parent::__construct();
 		if($this->member->is_member() === false) {
-			redirect(base_url('cms_member').'?returnURL='.rawurlencode(base_url(uri_string())));
+			redirect(site_url('login?url=' . urlencode(current_full_url())));
 		}
 		$this->load->model('cms_main_model'); //모델 파일 로드
 		$this->load->model('cms_m4_model'); //모델 파일 로드

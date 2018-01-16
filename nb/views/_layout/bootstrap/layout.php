@@ -230,7 +230,7 @@ if ($this->member->is_member()) {
 <?php   else :  ?>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">기타메뉴 <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="<?php echo base_url('cms_member/login');?>">link</a></li>
+                  <li><a href="<?php echo site_url('login?url=' . urlencode(current_full_url())); ?>"><span class="glyphicon glyphicon-log-in" aria-hidden="true"> 로그인</a></li>
                   <li><a href="<?php echo site_url('register'); ?>"><span class="glyphicon glyphicon-link" aria-hidden="true"> 회원가입</span></a></li>
                   <li><a href="<?php echo base_url('board/notice'); ?>"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"> 공지사항</span></a></li>
 <?php  endif; ?>

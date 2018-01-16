@@ -74,15 +74,15 @@
 <?php if($this->member->is_admin() === 'super') : ?>
 								<li><a href="<?php echo base_url('admin');?>"><span class="glyphicon glyphicon-cog" aria-hidden="true"> 관리자-페이지</span></a></li>
 <?php endif; ?>
-								<li><a href="javascript:" onclick="alert('준비 중입니다!');"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"> 공지사항</span></a></li>
-								<li><a href="<?php echo base_url('cms_member/modify');?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"> 정보수정</span></a></li>
-								<li><a href="<?php echo base_url('cms_member/logout')."?returnURL=".rawurlencode(base_url(uri_string()));?>"><span class="glyphicon glyphicon-log-out" aria-hidden="true"> 로그아웃</span></a></li>
+								<li><a href="<?php echo base_url('board/notice'); ?>"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"> 공지사항</span></a></li>
+								<li><a href="<?php echo base_url('membermodify');?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"> 정보수정</span></a></li>
+								<li><a href="<?php echo site_url('login/logout?url=' . urlencode(current_full_url())); ?>"><span class="glyphicon glyphicon-log-out" aria-hidden="true"> 로그아웃</span></a></li>
 <?php   else :  ?>
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">기타메뉴 <span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="<?php echo base_url('cms_member/login');?>">link</a></li>
-								<li><a href="<?php echo base_url('cms_member/join');?>"><span class="glyphicon glyphicon-link" aria-hidden="true"> 회원가입</span></a></li>
-								<li><a href="javascript:" onclick="alert('준비 중입니다!');"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"> 공지사항</span></a></li>
+								<li><a href="<?php echo site_url('login?url=' . urlencode(current_full_url())); ?>">link</a></li>
+								<li><a href="<?php echo site_url('register'); ?>"><span class="glyphicon glyphicon-link" aria-hidden="true"> 회원가입</span></a></li>
+								<li><a href="<?php echo base_url('board/notice'); ?>"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"> 공지사항</span></a></li>
 <?php  endif; ?>
 								<li class="divider"></li>
 								<li class="dropdown-header">협업솔루션</li>
