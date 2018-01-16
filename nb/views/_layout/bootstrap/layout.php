@@ -147,7 +147,7 @@ if ($this->member->is_member()) {
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="navbar"> <!--id="topmenu-navbar-collapse"-->
+          <div class="collapse navbar-collapse" id="navbar"><!--id="topmenu-navbar-collapse"-->
             <ul class="nav navbar-nav navbar-right">
               <li>
                 <form class="navbar-form navbar-right" name="header_search" id="header_search" action="<?php echo site_url('search'); ?>" onSubmit="return headerSearch(this);">
@@ -253,15 +253,15 @@ if ($this->member->is_member()) {
           <div class="main_container"> <!--class="container"-->
             <div class="row">
 
-  <?php if (element('use_sidebar', $layout)) {?>
+<?php if (element('use_sidebar', $layout)) {?>
               <div class="col-md-9 col-sm-8 col-xs-12 mb20">
-  <?php } ?>
+<?php } ?>
 
                 <!-- 본문 시작 -->
                 <?php if (isset($yield))echo $yield; ?>
                 <!-- 본문 끝 -->
 
-  <?php if (element('use_sidebar', $layout)) {?>
+<?php if (element('use_sidebar', $layout)) {?>
               </div>
               <div class="col-md-3 col-sm-4 col-xs-12">
                 <div class="sidebar">
@@ -270,7 +270,7 @@ if ($this->member->is_member()) {
                   <!-- 사이드바 끝 -->
                 </div>
               </div>
-  <?php } ?>
+<?php } ?>
             </div>
           </div>
         </div>
@@ -279,8 +279,8 @@ if ($this->member->is_member()) {
         <!-- footer start -->
         <footer class="footer">
           <div class="container">
-            <div><img src="<?php echo $this->config->base_url(); ?>static/img/cms_box_logo.png" width="120px"></div>
-            <div>
+            <div style="float: left; margin-right:15px;"><img src="<?php echo $this->config->base_url(); ?>static/img/cms_box_logo.png" width="120px"></div>
+            <div style="float: left; padding-top: 14px;">
               <ul class="company">
                 <li><a href="<?php echo document_url('aboutus'); ?>" title="회사소개">회사소개</a></li>
                 <li><a href="<?php echo document_url('provision'); ?>" title="이용약관">이용약관</a></li>
