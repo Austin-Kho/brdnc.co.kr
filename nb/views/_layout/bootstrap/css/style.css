@@ -470,7 +470,7 @@ fieldset[disabled] .btn-black.active {
 }
 
 .navbar {
-  background:#1e1e1e;
+  background:#222;
   border: 0 none;
   border-radius: 0;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);

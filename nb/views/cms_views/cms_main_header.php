@@ -55,7 +55,7 @@
 						<span class="icon-bar"></span>
 					</button>
 					<a class="navbar-brand" href="<?php echo base_url(); ?>">
-						<strong><small>|주|바램디앤씨</small></strong>
+						<strong><small>|주| 바램디앤씨</small></strong>
 					</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
