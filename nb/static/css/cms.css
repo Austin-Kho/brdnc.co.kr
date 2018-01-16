@@ -35,8 +35,8 @@
 	/************************************IME MODE**************************************/
 
 	/**************************glyphicon style*****************************/
-	.head_gly { color: #5E4859;  margin-right: 10px; }
-	.glyphicon-book { color: #B5A1B0; }
+	.head_gly { color: #485e5b;  margin-right: 10px; }
+	.glyphicon-book { color: #b5b1a1; }
 	.glyphicon-calendar{ color: #9fb0c8; }
 	/**************************glyphicon style*****************************/
 
@@ -47,6 +47,8 @@
 	.page-header .nav-pills a {  margin-top: 3px; padding: 7px 0; width: 90px; text-align: center; color: #858586; }
 	.page-header .nav-pills .active a { background-color: #816C76; }
 	.page-header .nav-pills .active a:hover { background-color: #8A536D;  }
+
+	.carousel-caption > h4  { font-size: 24px; font-weight: bold; color: #FFF; margin: 15px;}
 
 	.sdi { font-size: 15px; display: inline; }
 	.sdi_sub { margin-top: -20px; padding: 15px 0 15px 20px; background-color: #F8F8F8; border-bottom-color: #B2BCDE; }
