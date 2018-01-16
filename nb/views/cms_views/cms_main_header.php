@@ -59,7 +59,37 @@
 					</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<form class="navbar-form navbar-right" name="header_search" id="header_search" action="<?php echo site_url('search'); ?>" onSubmit="return headerSearch(this);">
+								<div class="form-group">
+									<input type="text" class="form-control px150" placeholder="Search" name="skeyword" accesskey="s" />
+									<button class="btn btn-default btn-sm" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+								</div>
+							</form>
+							<script type="text/javascript">
+								//<![CDATA[
+								$(function() {
+									$('#topmenu-navbar-collapse .dropdown').hover(function() {
+										$(this).addClass('open');
+									}, function() {
+										$(this).removeClass('open');
+									});
+								});
+								function headerSearch(f) {
+									var skeyword = f.skeyword.value.replace(/(^\s*)|(\s*$)/g,'');
+									if (skeyword.length < 2) {
+										alert('2글자 이상으로 검색해 주세요');
+										f.skeyword.focus();
+										return false;
+									}
+									return true;
+								}
+								//]]>
+							</script>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
 						<li class="<?php if( !strpos($this->uri->segment(1), '1')) echo ''; else echo 'active';?>"><a href=<?php echo base_url('cms_m1'); ?>>분양관리</a></li>
 						<li class="<?php if( !strpos($this->uri->segment(1), '2')) echo ''; else echo 'active';?>"><a href=<?php echo base_url('cms_m2'); ?>>사업관리</a></li>
 						<li class="<?php if( !strpos($this->uri->segment(1), '3')) echo ''; else echo 'active';?>"><a href=<?php echo base_url('cms_m3'); ?>>프로젝트</a></li>
