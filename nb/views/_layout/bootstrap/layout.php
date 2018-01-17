@@ -184,35 +184,39 @@ if ($this->member->is_member()) {
   if (element('menu', $layout)) {
     $menu = element('menu', $layout);
     if (element(0, $menu)) {
+      $i = 1;
       foreach (element(0, $menu) as $mkey => $mval) {
-      if (element(element('men_id', $mval), $menu)) {
-        $mlink = element('men_link', $mval) ? element('men_link', $mval) : 'javascript:;';
-        $menuhtml .= '<li class="dropdown">
-          <a href="' . $mlink . '" ' . element('men_custom', $mval);
-        if (element('men_target', $mval)) {
-          $menuhtml .= ' target="' . element('men_target', $mval) . '"';
-        }
-        $menuhtml .= ' title="' . html_escape(element('men_name', $mval)) . '">' . html_escape(element('men_name', $mval)) . '</a>
-          <ul class="dropdown-menu">';
-
-        foreach (element(element('men_id', $mval), $menu) as $skey => $sval) {
-          $slink = element('men_link', $sval) ? element('men_link', $sval) : 'javascript:;';
-          $menuhtml .= '<li><a href="' . $slink . '" ' . element('men_custom', $sval);
-          if (element('men_target', $sval)) {
-            $menuhtml .= ' target="' . element('men_target', $sval) . '"';
+        $active = (strpos($this->uri->segment(1), (string)$i)) ? "active" : "";
+        if (element(element('men_id', $mval), $menu)) {
+          $mlink = element('men_link', $mval) ? element('men_link', $mval) : 'javascript:;';
+          $menuhtml .= '<li class="dropdown '.$active.'">
+            <a href="' . $mlink . '" ' . element('men_custom', $mval);
+          if (element('men_target', $mval)) {
+            $menuhtml .= ' target="' . element('men_target', $mval) . '"';
           }
-          $menuhtml .= ' title="' . html_escape(element('men_name', $sval)) . '">' . html_escape(element('men_name', $sval)) . '</a></li>';
-        }
-        $menuhtml .= '</ul></li>';
+          $menuhtml .= ' title="' . html_escape(element('men_name', $mval)) . '">' . html_escape(element('men_name', $mval)) . '</a>
+            <ul class="dropdown-menu">';
+
+          foreach (element(element('men_id', $mval), $menu) as $skey => $sval) {
+            $slink = element('men_link', $sval) ? element('men_link', $sval) : 'javascript:;';
+            $menuhtml .= '<li><a href="' . $slink . '" ' . element('men_custom', $sval);
+            if (element('men_target', $sval)) {
+              $menuhtml .= ' target="' . element('men_target', $sval) . '"';
+            }
+            $menuhtml .= ' title="' . html_escape(element('men_name', $sval)) . '">' . html_escape(element('men_name', $sval)) . '</a></li>';
+          }
+          $menuhtml .= '</ul></li>';
 
         } else {
           $mlink = element('men_link', $mval) ? element('men_link', $mval) : 'javascript:;';
+
           $menuhtml .= '<li><a href="' . $mlink . '" ' . element('men_custom', $mval);
           if (element('men_target', $mval)) {
             $menuhtml .= ' target="' . element('men_target', $mval) . '"';
           }
           $menuhtml .= ' title="' . html_escape(element('men_name', $mval)) . '">' . html_escape(element('men_name', $mval)) . '</a></li>';
         }
+        $i++;
       }
     }
   }
