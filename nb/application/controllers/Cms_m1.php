@@ -75,8 +75,7 @@ class Cms_m1 extends CB_Controller {
 
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m1_1_1', $this->session->userdata['mem_id']);
-			// 불러올 페이지에 보낼 조회 권한 데이터
-			$view['auth11'] = $auth['_m1_1_1'];
+			$view['auth11'] = $auth['_m1_1_1']; // 불러올 페이지에 보낼 조회 권한 데이터
 
 			// 프로젝트명, 타입 정보 구하기
 			$pj_info = $view['pj_info'] = $this->cms_main_model->sql_row(" SELECT pj_name, type_name, type_color FROM cb_cms_project WHERE seq='$project' ");
@@ -283,11 +282,7 @@ class Cms_m1 extends CB_Controller {
 			$this->form_validation->set_rules('address2_2', '세부주소2', 'trim|max_length[50]');
 			$this->form_validation->set_rules('note', '비고', 'trim|max_length[200]');
 
-			if($this->form_validation->run() == FALSE) {
-
-				// //본 페이지 로딩
-				// $this->load->view('/cms_views/menu/cms_m1/md1_sd2_v', $view);
-			}else{
+			if($this->form_validation->run() !== FALSE) {
 				$pj = $this->input->post('project', TRUE); // 프로젝트 아이디
 				$un = $this->input->post('unit_seq', TRUE); // 동호 아이디
 
@@ -810,8 +805,7 @@ class Cms_m1 extends CB_Controller {
 
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m1_1_3', $this->session->userdata['mem_id']);
-			// 불러올 페이지에 보낼 조회 권한 데이터
-			$view['auth13'] = $auth['_m1_1_3'];
+			$view['auth13'] = $auth['_m1_1_3']; // 불러올 페이지에 보낼 조회 권한 데이터
 
 			// 공급세대 및 유보세대 청약 계약세대 구하기
 			$view['summary_tb'] = $this->cms_main_model->sql_row(" SELECT COUNT(*) AS total, SUM(is_hold) AS hold, SUM(is_application) AS acn, SUM(is_contract) AS cont FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project'  ");
@@ -824,7 +818,6 @@ class Cms_m1 extends CB_Controller {
 					'color' => explode("-", $type->type_color)
 				);
 			}
-
 
 			// 해당 단지 최 고층 구하기
 			$max_fl = $this->cms_main_model->sql_row(" SELECT MAX(ho) AS max_ho FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' ");
@@ -993,11 +986,8 @@ class Cms_m1 extends CB_Controller {
 			$this->form_validation->set_rules('paid_who', '입금자', 'trim|required|max_length[20]');
 			$this->form_validation->set_rules('note', '비 고', 'trim|max_length[200]');
 
-			if($this->form_validation->run() == FALSE) {
 
-				// //본 페이지 로딩
-				// $this->load->view('/cms_views/menu/cms_m1/md2_sd2_v', $view);
-			}else{
+			if($this->form_validation->run() !== FALSE) { // 폼 데이터가 있는 경우
 
 				$ins_data = array(
 					'pj_seq' => $project,
@@ -1017,7 +1007,6 @@ class Cms_m1 extends CB_Controller {
 					$result = $this->cms_main_model->insert_data('cb_cms_sales_received', $ins_data); // 입력 모드일 경우
 				}
 
-				// if( !$result) alert($ins_data, '');
 				if( !$result) alert("데이터베이스 에러입니다.", '');
 
 				alert("수납내역이 정상 입력 되었습니다.", base_url('cms_m1/sales/2/2?project='.$project.'&dong='.$this->input->post('dong').'&ho='.$this->input->post('ho')));
