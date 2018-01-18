@@ -27,6 +27,9 @@ class Main extends CB_Controller
     function __construct()
     {
         parent::__construct();
+        if($this->member->is_member() === false) {
+    			redirect(site_url('login?url=' . urlencode(current_full_url())));
+    		}
 
         $this->load->library(array('querystring')); // 라이브러리를 로딩합니다.
         $this->load->model('cms_main_model'); //모델 파일 로드
