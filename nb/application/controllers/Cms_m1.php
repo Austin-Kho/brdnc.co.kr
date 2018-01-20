@@ -92,6 +92,7 @@ class Cms_m1 extends CB_Controller {
 			// 청약 데이터 가져오기
 			$dis_date = date('Y-m-d', strtotime('-3 day'));
 			$view['app_data'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_application WHERE pj_seq='$project' AND disposal_div='0' OR disposal_div='2' OR ((disposal_div='1' OR disposal_div='3') AND disposal_date>='$dis_date') ORDER BY app_date DESC, seq DESC ");
+			$view['app_num'] = $this->cms_main_model->sql_num_rows(" SELECT * FROM cb_cms_sales_application WHERE pj_seq='$project' AND disposal_div='0' OR disposal_div='2' OR ((disposal_div='1' OR disposal_div='3') AND disposal_date>='$dis_date') ORDER BY app_date DESC, seq DESC ");
 
 			// 계약 데이터 필터링(타입, 동 별)
 			$view['sc_cont_diff'] = $this->cms_main_model->sql_result(" SELECT cont_diff FROM cb_cms_sales_contract GROUP BY cont_diff ORDER BY cont_diff ");
@@ -112,6 +113,8 @@ class Cms_m1 extends CB_Controller {
 			if( !empty($this->input->get('s_date'))) {$sd = $this->input->get('s_date'); $cont_query .= " AND cb_cms_sales_contract.cont_date>='$sd' ";}
 			if( !empty($this->input->get('e_date'))) {$ed = $this->input->get('e_date'); $cont_query .= " AND cb_cms_sales_contract.cont_date<='$ed' ";}
 			if( !empty($this->input->get('sc_name'))) {$ctor = $this->input->get('sc_name'); $cont_query .= " AND (cb_cms_sales_contractor.contractor='$ctor' OR cb_cms_sales_contract.note LIKE '%$ctor%') ";}
+
+			$view['cont_query'] = $cont_query; // Excel file 로 보낼 쿼리
 
 			//페이지네이션 라이브러리 로딩 추가
 			$this->load->library('pagination');
@@ -140,6 +143,7 @@ class Cms_m1 extends CB_Controller {
 			if($this->input->get('order')=='1') $cont_query .= " ORDER BY cont_code ";
 			if($this->input->get('order')=='2') $cont_query .= " ORDER BY cont_code DESC ";
 			if($start != '' or $limit !='')	$cont_query .= " LIMIT ".$start.", ".$limit." ";
+
 			$view['cont_data'] = $this->cms_main_model->sql_result($cont_query); // 계약 및 계약자 데이터
 
 

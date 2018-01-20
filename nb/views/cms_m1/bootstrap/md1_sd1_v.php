@@ -59,7 +59,7 @@ endfor;
 	</div>
 
     <div class="row font12" style="margin: 0; padding: 0;">
-        <div class="col-md-12"><h4><span class="label label-info">1. 요약 집계</span></h4></div>
+        <div class="col-md-12 mb10"><h4><span class="label label-info">1. 요약 집계</span></h4></div>
 <?php if(empty($all_pj)) : ?>
 		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 50px 0;">조회할 프로젝트를 선택하여 주십시요.</div>
 <?php elseif($all_pj && empty($tp_name)) : ?>
@@ -131,7 +131,7 @@ endfor;
     </div>
 
 	<div class="row font12" style="margin: 0; padding: 0;">
-    <div class="col-md-12"><h4><span class="label label-primary">2. 계약 현황</span></h4></div>
+    <div class="col-md-12 mb10"><h4><span class="label label-primary">2. 계약 현황</span></h4></div>
 		<div class="col-md-12 bo-top bo-bottom" style="padding: 0; margin: 0 0 20px 0;">
 <?php
 	$attributes = array('name' => 'form1', 'method' => 'get');
@@ -230,7 +230,7 @@ endfor;
 		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 120px 0;">등록된 데이터가 없습니다.</div>
 <?php else : ?>
 		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;"><?php echo "[ 결과 : ".$total_rows." 건 ]"; ?>
-			<a href="<?php echo base_url('/cms_excel_file/contract_data'); ?>" style="padding-left: 30px;">
+			<a href="<?php echo base_url('/cms_excel_file/contract_data/download')."?pj=".$project."&qry=".urlencode($cont_query); ?>" style="padding-left: 30px;">
 				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
 			</a>
 		</div>
@@ -312,10 +312,15 @@ foreach ($cont_data as $lt) :
   </div>
 
 	<div class="row font12" style="margin: 0; padding: 0;">
-        <div class="col-md-12"><h4><span class="label label-success">3. 청약 현황</span></h4></div>
+        <div class="col-md-12 mb10"><h4><span class="label label-success">3. 청약 현황</span></h4></div>
 <?php if(empty($app_data)) : ?>
 		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 20px 0;">등록된 데이터가 없습니다.</div>
 <?php else : ?>
+		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;"><?php echo "[ 결과 : ".$app_num." 건 ]"; ?>
+			<a href="<?php echo base_url('/cms_excel_file/application_data/download')."?pj=".$project; ?>" style="padding-left: 30px;">
+				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
+			</a>
+		</div>
 		<div class="col-xs-12 table-responsive" style="padding: 0;">
 			<table class="table table-bordered table-hover table-condensed">
 				<thead class="bo-top center bgf8">
