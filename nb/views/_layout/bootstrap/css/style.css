@@ -1,14 +1,14 @@
 @charset "UTF-8";
 /* CSS Document */
 
-* {margin: 0;padding: 0;}
+* {margin: 0; padding: 0;}
 a > * {line-height: 0;}
 img {border: medium none;}
-body {font-family: 나눔고딕,NanumGothic,돋움,Dotum,Arial,Helvetica,sans-serif;font-size: 13px; }
+body {font-family: 나눔고딕,NanumGothic,돋움,Dotum,Arial,Helvetica,sans-serif; font-size: 12px; }
 a {color:#3E3E3E;text-decoration: none;}
 a:hover{color:#2773ae;}
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {font-family: inherit;margin:0;}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {font-family: inherit; margin:0;}
 li{list-style:none;}
 
 .clearfix {clear:both;}
@@ -538,9 +538,9 @@ border: 0;
 border-bottom: 1px solid #e5e5e5;
 }
 
-.view-all {float: right;width: 75px;position: absolute;top: 10px;right: 0;}
+.view-all {float: right; width: 75px; position: absolute; top: 10px; right: 0;}
 
-.form-control{background-color: #FFFFFF;background-image: none;border: 1px solid #e5e6e7;border-radius: 5px;color: inherit;display: inline-block;padding: 6px 12px;font-size: 14px;vertical-align: middle;  }
+.form-control{background-color: #FFFFFF; background-image: none; border: 1px solid #e5e6e7; border-radius: 5px; color: inherit; display: inline-block; padding: 6px 12px; font-size: 12px; vertical-align: middle;  }
 .panel-heading{font-size:14px;}
 
 /* header */
