@@ -4,6 +4,7 @@
 class Cms_main_model extends CB_Model
 {
 
+
   /**************************************************************************************/
 	//공통 함수 Start//
 
@@ -25,7 +26,6 @@ class Cms_main_model extends CB_Model
    * @param  [Array] $where [필터링 '키'=>값]
    * @return [Boolean]        [성공 여부]
    */
-
   public function select_data_row($table, $where) {
     $qry = $this->db->get_where($table, $where);
     return $rlt = $qry->row();
