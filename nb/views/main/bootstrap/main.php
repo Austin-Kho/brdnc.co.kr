@@ -111,7 +111,7 @@ else :
 	}
 ?>
 <div class="row font13">
-	<div class="col-xs-12">
+	<div class="col-xs-12" style="padding: 0px;">
 		<div class="col-xs-12 col-sm-6">
 			<div class="panel panel-success">
 				<div class="panel-heading"><h4 class="panel-title"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> 동춘1구역 청약 · 계약 현황</h4></div>
@@ -159,7 +159,7 @@ else :
 			</div>
 		</div>
 	</div>
-	<div class="col-xs-12">
+	<div class="col-xs-12" style="padding: 0px;">
 		<div class="col-xs-12 col-sm-6">
 			<div class="panel panel-info">
 				<div class="panel-heading"><h4 class="panel-title"><span class="glyphicon glyphicon-paperclip" aria-hidden="true"></span> 동춘1 계좌 별 납부현황 [1]</h4></div>
