@@ -30,7 +30,7 @@
 	if($this->input->get('search_text')=="") $sc=0; else $sc=1;
 ?>
 				<a href="<?php echo base_url('cms_excel_file/cash_book')."?add_where=".$url_where."&sc=".$sc; ?>">
-					<img src="<?php echo base_url('static/img/excel_icon.jpg'); ?>" height="10" border="0" alt="EXCEL 아이콘" /> EXCEL로 출력
+					<img src="<?php echo base_url('static/img/excel_icon.jpg'); ?>" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
 				</a>
 			</div>
 

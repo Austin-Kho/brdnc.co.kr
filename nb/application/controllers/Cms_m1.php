@@ -15,7 +15,6 @@ class Cms_m1 extends CB_Controller {
 		$this->load->model('cms_m1_model'); //모델 파일 로드
 		$this->load->helper('cms_alert'); // 경고창 헬퍼 로딩
 		$this->load->helper('cms_cut_string'); // 문자열 자르기 헬퍼 로드
-		$this->load->library('excel'); // PHPExcel 라이브러리 로드
 	}
 
 	/**
