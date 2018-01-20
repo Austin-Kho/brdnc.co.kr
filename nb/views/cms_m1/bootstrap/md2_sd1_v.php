@@ -55,7 +55,7 @@ else :
 	</div>
 
 	<div class="row font12" style="margin: 0; padding: 0;">
-        <div class="col-xs-5 col-sm-7 col-md-9"><h4><span class="label label-info">요약 집계</span></h4></div>
+    <div class="col-xs-5 col-sm-7 col-md-9 mb10"><h4><span class="label label-info">요약 집계</span></h4></div>
 		<div class="col-xs-3 col-sm-2 col-md-1"><a href="javascript:" onclick="popUp_size('<?php echo base_url('popup/sales_receive?p=').$project; ?>', '약정별 수납현황', 1500, 800);"><h5><span class="label label-default">약정별 수납현황</span></h5></a></div>
 		<div class="col-xs-3 col-sm-2 col-md-1"><a href="javascript:" onclick="popUp_size('<?php echo base_url('popup/sales_total_table?p=').$project; ?>', '총괄 집계현황', 1500, 800);"><h5><span class="label label-default">총 괄 집 계 현 황</span></h5></a></div>
 
@@ -118,7 +118,7 @@ else :
     </div>
 
 	<div class="row font12" style="margin: 0; padding: 0;">
-        <div class="col-md-12"><h4><span class="label label-success">최근 수납현황</span></h4></div>
+    <div class="col-md-12 mb10"><h4><span class="label label-success">최근 수납현황</span></h4></div>
 		<div class="col-md-12 bo-top bo-bottom" style="padding: 0; margin: 0 0 20px 0;">
 <?php
   $attributes = array('name' => 'form1', 'method' => 'get');
@@ -180,8 +180,15 @@ else :
 			</form>
 		</div>
 
+		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;"><?php echo "[ 결과 : ".number_format($total_rows)." 건 ]"; ?>
+			<a href="<?php echo base_url('/cms_excel_file/received_data/download')."?pj=".$project."&qry=".urlencode($rec_query); ?>" style="padding-left: 30px;">
+				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
+			</a>
+		</div>
 
-
+<?php if(empty($rec_list)) :  ?>
+		<div class="col-xs-12 center" style="margin-top: 0px; padding: 80px 0;">등록된 데이터가 없습니다.</div>
+<?php endif; ?>
 
 		<div class="col-xs-12 table-responsive" style="padding: 0;">
 			<table class="table table-bordered table-hover table-condensed">
@@ -229,12 +236,11 @@ foreach($rec_list as $lt) :
 <?php endforeach; ?>
 				</tbody>
 			</table>
+			<div class="col-xs-12 center" style="margin-top: 0px; padding: 0;">
+				<ul class="pagination pagination-sm"><?php echo $pagination; ?></ul>
+			</div>
 		</div>
-<?php if(empty($rec_list)) :  ?>
-		<div class="col-xs-12 center" style="margin-top: 0px; padding: 80px 0;">등록된 데이터가 없습니다.</div>
-<?php endif; ?>
-		<div class="col-xs-12 center" style="margin-top: 0px; padding: 0;">
-			<ul class="pagination pagination-sm"><?php echo $pagination; ?></ul>
-		</div>
+
+
 	</div>
 <?php endif ?>

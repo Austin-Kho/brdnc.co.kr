@@ -865,8 +865,6 @@ class Cms_m1 extends CB_Controller {
 
 			// 수납 데이터 검색 필터링
 			$rec_query = " SELECT cb_cms_sales_received.seq, cont_seq, paid_amount, paid_date, paid_who, acc_nick, pay_name, unit_type, unit_dong_ho ";
-			$amount_qry = " SELECT SUM(paid_amount) AS total_amount FROM cb_cms_sales_received WHERE pj_seq='$project'  ";
-			$w_qry = "";
 
 			$rec_query .= " FROM cb_cms_sales_received, cb_cms_sales_pay_sche, cb_cms_sales_bank_acc, cb_cms_sales_contract ";
 			$rec_query .= " WHERE cb_cms_sales_received.pj_seq='$project' AND cb_cms_sales_pay_sche.pj_seq='$project'  AND pay_sche_code=cb_cms_sales_pay_sche.pay_code AND paid_acc=cb_cms_sales_bank_acc.seq AND cont_seq=cb_cms_sales_contract.seq ";
@@ -875,6 +873,11 @@ class Cms_m1 extends CB_Controller {
 			if( !empty($this->input->get('s_date'))) { $rec_query .= " AND paid_date>='".$this->input->get('s_date')."' ";}
 			if( !empty($this->input->get('e_date'))) { $rec_query .= " AND paid_date<='".$this->input->get('e_date')."' ";}
 
+			$view['rec_query'] = $rec_query; // Excel 출력 데이터로 보낼 쿼리
+
+			$amount_qry = " SELECT SUM(paid_amount) AS total_amount FROM cb_cms_sales_received WHERE pj_seq='$project'  ";
+
+			$w_qry = "";
 			if( !empty($this->input->get('con_pay_sche'))) { $w_qry = " AND pay_sche_code='".$this->input->get('con_pay_sche')."' ";}
 			if( !empty($this->input->get('con_paid_acc'))) { $w_qry .= " AND paid_acc='".$this->input->get('con_paid_acc')."' ";}
 			if( !empty($this->input->get('s_date'))) { $w_qry .= " AND paid_date>='".$this->input->get('s_date')."' ";}
