@@ -82,7 +82,7 @@ else :
 <?php $com_fac = 2400640000; // 상가 매출액?>
 				<tbody>
 					<tr class="active right">
-						<td class="left"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span> 동춘1구역지역주택조합</td>
+						<td class="left"><span class="glyphicon glyphicon-folder-open" aria-hidden="true">&nbsp;</span>동춘1구역지역주택조합</td>
 						<td style="font-weight: bold;"><?php echo number_format($total_pmt->total+$com_fac); ?></td>
 						<td style="font-weight: bold;"><?php echo number_format($sell_data->sell_total); ?></td>
 						<td style="font-weight: bold; color: #060EC8;"><?php echo number_format($rec_data->rec_total); ?></td>

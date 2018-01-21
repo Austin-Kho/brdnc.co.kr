@@ -59,10 +59,9 @@
 		<span class="sr-only">Next</span>
 	</a>
 </div>
-<div class="page-header">
-	<!-- <h1>Wells</h1><!-- 영문 h1-->
-	<!-- <h3>공지사항</h3><!-- 한글 h3-->
-</div>
+
+<div class="page-header" style="margin-top: 18px;"></div>
+
 <div class="well hidden-xs">
 	<blockquote  style="margin: 0;">
 		<p style="font-weight: bold; color: #7c6848;"><?php echo $saying->saying_han; ?></p>
@@ -110,6 +109,7 @@ else :
 	    $is_open = false;
 	}
 ?>
+<div class="page-header" style="margin-top: 0;"></div>
 <div class="row font13">
 	<div class="col-xs-12" style="padding: 0px;">
 		<div class="col-xs-12 col-sm-6">
