@@ -186,7 +186,10 @@ if ($this->member->is_member()) {
     if (element(0, $menu)) {
       $i = 1;
       foreach (element(0, $menu) as $mkey => $mval) {
-        $active = (strpos($this->uri->segment(1), (string)$i)) ? "active" : "";
+        $act = (strpos($this->uri->segment(1), (string)$i))
+          ? strpos($this->uri->segment(1), (string)$i)
+          : strpos($this->uri->segment(2), (string)$i);
+        $active = ($act) ? "active" : "";
         if (element(element('men_id', $mval), $menu)) {
           $mlink = element('men_link', $mval) ? element('men_link', $mval) : 'javascript:;';
           $menuhtml .= '<li class="dropdown '.$active.'">
