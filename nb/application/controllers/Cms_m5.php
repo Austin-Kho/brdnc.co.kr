@@ -269,7 +269,7 @@ class Cms_m5 extends CB_Controller {
 			$view['list'] = $this->cms_m5_model->com_accounts_list($acc_table, $start, $limit, $st1, $st2, '');
 
 			// 세부 거래처데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-			if($this->input->get('seq')) $view['sel_acc'] = $this->cms_m5_model->select_data_row($acc_table, $where = array('seq' => $this->input->get('seq')));
+			if($this->input->get('seq')) $view['sel_acc'] = $this->cms_main_model->select_data_row($acc_table, $where = array('seq' => $this->input->get('seq')));
 
 			// 폼 검증 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
