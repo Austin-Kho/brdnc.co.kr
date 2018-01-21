@@ -76,6 +76,13 @@ else :
 <?php endfor; endif; ?>
 			</div>
 		</div>
+
+		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;">
+			<a href="<?php echo base_url('/cms_excel_file/status_board/download')."?pj=".$project; ?>" style="padding-left: 30px;">
+				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력 - 구현 준비 중 <?php echo $project; ?>
+			</a>
+		</div>
+
 		<div class="row bo-bottom font12" style="margin: 0; padding: 20px;">
 <?php if( !$summary_tb->total OR $summary_tb->total==0) : ?>
 			<div class="center" style="padding: 50px; <?php if( !$this-> agent->is_mobile()) echo 'height: 380px;'; ?>">등록된 데이터가 없습니다.</div>
@@ -116,7 +123,8 @@ else :
 							$condi = $cont_data->contractor;
 							$con_diff = $cont_data->cont_diff;
 							// $condi = "<a href='".base_url('cms_m1/sales/1/2')."?mode=2&cont_sort1=1&cont_sort2=2&project=".$project."&type=".$cont_data->unit_type."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]."'>".$cont_data->contractor."</a>";
-						else : $condi = "";
+						else :
+							$condi = "";
 						endif;
 					else:
 						$condi = "";
