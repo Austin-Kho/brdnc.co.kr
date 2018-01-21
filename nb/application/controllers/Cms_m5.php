@@ -103,7 +103,8 @@ class Cms_m5 extends CB_Controller {
 			$view['list'] = $this->cms_m5_model->com_div_list($div_table, $start, $limit, $st1, $st2, '');
 
 			// 세부 부서데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-			if($this->input->get('seq')) $view['sel_div'] = $this->cms_m5_model->select_data_row($div_table, $where = array('seq' => $this->input->get('seq')));
+			if($this->input->get('seq')) $view['sel_div'] = $this->cms_main_model->select_data_row($div_table, $where = array('seq' => $this->input->get('seq')));
+
 
 			// 폼 검증 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
@@ -123,12 +124,12 @@ class Cms_m5 extends CB_Controller {
 					'note' => $this->input->post('note', TRUE)
 				);
 
-				if($this->input->post('mode')=='reg') {
+				if($this->input->post('mode')==='reg') {
 					$result = $this->cms_main_model->insert_data($div_table, $div_data);
-				}else if($this->input->post('mode')=='modify') {
+				}else if($this->input->post('mode')==='modify') {
 					$result = $this->cms_main_model->update_data($div_table, $div_data, $where = array('seq' => $this->input->post('seq')));
-				}else if($this->input->post('mode')=='del') {
-					$result = $this->cms_main_model->delete_data($div_table, $this->input->post('seq'));
+				}else if($this->input->post_get('mode')==='del'){
+					$result = $this->cms_main_model->delete_data($div_table, array('seq' => $this->input->post('seq')));
 				}
 				if($result){
 					alert('정상적으로 처리되었습니다.', base_url('cms_m5/config/1/1/'));
@@ -182,7 +183,7 @@ class Cms_m5 extends CB_Controller {
 			$view['list'] = $this->cms_m5_model->com_mem_list($mem_table, $start, $limit, $st1, $st2, '');
 
 			// 세부 부서데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-			if($this->input->get('seq')) $view['sel_mem'] = $this->cms_m5_model->select_data_row($mem_table, $where = array('seq' => $this->input->get('seq')));
+			if($this->input->get('seq')) $view['sel_mem'] = $this->cms_main_model->select_data_row($mem_table, $where = array('seq' => $this->input->get('seq')));
 
 			// 폼 검증 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
@@ -217,8 +218,8 @@ class Cms_m5 extends CB_Controller {
 					$result = $this->cms_main_model->insert_data($mem_table, $mem_data);
 				}else if($this->input->post('mode')=='modify') {
 					$result = $this->cms_main_model->update_data($mem_table, $mem_data, $where = array('seq' => $this->input->post('seq')));
-				}else if($this->input->post('mode')=='del') {
-					$result = $this->cms_main_model->delete_data($mem_table, $this->input->post('seq'));
+				}else if($this->input->post_get('mode')==='del'){
+					$result = $this->cms_main_model->delete_data($mem_table, array('seq' => $this->input->post('seq')));
 				}
 				if($result){
 					alert('정상적으로 처리되었습니다.', base_url('cms_m5/config/1/2/'));
@@ -308,8 +309,8 @@ class Cms_m5 extends CB_Controller {
 					$result = $this->cms_main_model->insert_data($acc_table, $acc_data);
 				}else if($this->input->post('mode')=='modify') {
 					$result = $this->cms_main_model->update_data($acc_table, $acc_data, $where = array('seq' => $this->input->post('seq')));
-				}else if($this->input->post('mode')=='del') {
-					$result = $this->cms_main_model->delete_data($acc_table, $where = array('seq' => $this->input->post('seq')));
+				}else if($this->input->post_get('mode')==='del'){
+					$result = $this->cms_main_model->delete_data($acc_table, array('seq' => $this->input->post('seq')));
 				}
 				if($result){
 					alert('정상적으로 처리되었습니다.', base_url('cms_m5/config/1/3/'));
