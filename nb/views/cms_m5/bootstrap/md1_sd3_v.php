@@ -94,7 +94,12 @@
 
 <?php
 	$attributes = array('name' => 'form1', 'class' => 'form-horizontal');
-	echo form_open(current_url(), $attributes);
+  if($this->input->get('seq')) :
+		$hidden = array('mode' => $this->input->get('mode'), 'seq' => $sel_acc->seq);
+  else :
+		$hidden = array('mode' => $this->input->get('mode'));
+	endif;
+	echo form_open(current_url(), $attributes, $hidden);
 ?>
 					<fieldset class="font12">
 						<div class="col-md-12">
@@ -103,12 +108,6 @@
 								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: green;"></span>
 								<strong>거래처 <?php if($this->input->get('mode')=='reg') echo '신규'; else echo '수정'; ?>등록</strong>
 							</div>
-							<label for="mode" class="sr-only">모드</label>
-							<input type="hidden" name="mode" value="<?php echo $this->input->get('mode'); ?>">
-<?php if($this->input->get('seq')) : ?>
-						<label for="seq" class="sr-only">키</label>
-						<input type="hidden" name="seq" value="<?php echo $sel_acc->seq; ?>">
-<?php endif; ?>
 						<div class="row bo-top">
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="si_name">상호(회사명) <span class="red">*</span></label>

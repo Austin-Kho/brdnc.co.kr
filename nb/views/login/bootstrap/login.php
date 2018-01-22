@@ -1,12 +1,12 @@
 <?php
   $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css');
-  $mar_bottom = ($this->is_mobile === TRUE) ? "20px" : "300px;";
+  $mar_bottom = ($this->is_mobile === TRUE) ? "margin-top: 20px; margin-bottom: 20px" : "margin-top: 150px; margin-bottom: 200px;";
 ?>
 
-<div class="access col-md-4 col-md-offset-4" style="margin-top:60px; margin-bottom: <?php echo $mar_bottom;?> ;">
+<div class="access col-md-4 col-md-offset-4" style="<?php echo $mar_bottom;?>; border: 2px solid #ccc; padding:25px; background-color: #F6F6F6;">
 
   <!-- <div class="panel panel-info"> -->
-    <div class="panel-heading"><h4><strong>계정에 로그인</strong></h4></div>
+    <div class="panel-heading"><h3 style="margin-bottom: 0; font-size: 22px;">로그인</h3></div>
       <div class="panel-body">
         <?php
           echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');

@@ -31,14 +31,14 @@ endfor;
 				<div class="col-xs-12 col-sm-8" style="padding: 0px;">
 					<label for="yr" class="sr-only">사업 개시년도</label>
 					<select class="form-control input-sm" name="yr" onchange="submit();">
-						<option value=""> 전 체
+						<option value=""> 전 체</option>
 <?php
   $start_year = "2015";
   // if(!$yr) $yr=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
   $year=range($start_year,date('Y'));
   for($i=(count($year)-1); $i>=0; $i--) :
 ?>
-						<option value="<?php echo $year[$i]?>" <?php if($this->input->get('yr')==$year[$i]) echo "selected"; ?>><?php echo $year[$i]."년"?>
+						<option value="<?php echo $year[$i]?>" <?php if($this->input->get('yr')==$year[$i]) echo "selected"; ?>><?php echo $year[$i]."년"?></option>
 <?php endfor; ?>
 					</select>
 				</div>
@@ -48,9 +48,9 @@ endfor;
 				<div class="col-xs-12 col-sm-8" style="padding: 0px;">
 					<label for="project" class="sr-only">프로젝트 선택</label>
 					<select class="form-control input-sm" name="project" onchange="submit();">
-						<option value="0"> 전 체
+						<option value="0" <?php if( !$this->input->get('project')) echo "selected"; ?>> 선 택</option>
 <?php foreach($all_pj as $lt) : ?>
-						<option value="<?php echo $lt->seq; ?>" <?php if(( !$this->input->post('project') && $lt->seq=='1') OR $this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?>
+						<option value="<?php echo $lt->seq; ?>" <?php if(( !$this->input->get('project') && $lt->seq=='1') OR $this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
 					</select>
 				</div>
@@ -59,7 +59,7 @@ endfor;
 	</div>
 
     <div class="row font12" style="margin: 0; padding: 0;">
-        <div class="col-md-12"><h4><span class="label label-info">1. 요약 집계</span></h4></div>
+        <div class="col-md-12 mb10"><h4><span class="label label-info">1. 요약 집계</span></h4></div>
 <?php if(empty($all_pj)) : ?>
 		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 50px 0;">조회할 프로젝트를 선택하여 주십시요.</div>
 <?php elseif($all_pj && empty($tp_name)) : ?>
@@ -131,7 +131,7 @@ endfor;
     </div>
 
 	<div class="row font12" style="margin: 0; padding: 0;">
-    <div class="col-md-12"><h4><span class="label label-primary">2. 계약 현황</span></h4></div>
+    <div class="col-md-12 mb10"><h4><span class="label label-primary">2. 계약 현황</span></h4></div>
 		<div class="col-md-12 bo-top bo-bottom" style="padding: 0; margin: 0 0 20px 0;">
 <?php
 	$attributes = array('name' => 'form1', 'method' => 'get');
@@ -229,9 +229,9 @@ endfor;
 <?php if(empty($cont_data)) : ?>
 		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 120px 0;">등록된 데이터가 없습니다.</div>
 <?php else : ?>
-		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;"><?php echo "[ 결과 : ".$total_rows." 건 ]"; ?>
-			<a href="<?php echo base_url('/cms_excel_file/contract_data'); ?>" style="padding-left: 30px;">
-				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="10" border="0" alt="EXCEL 아이콘" /> EXCEL로 출력
+		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;"><?php echo "[ 결과 : ".number_format($total_rows)." 건 ]"; ?>
+			<a href="<?php echo base_url('/cms_excel_file/contract_data/download')."?pj=".$project."&qry=".urlencode($cont_query); ?>" style="padding-left: 30px;">
+				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
 			</a>
 		</div>
 		<div class="col-xs-12 table-responsive" style="padding: 0;">
@@ -312,10 +312,15 @@ foreach ($cont_data as $lt) :
   </div>
 
 	<div class="row font12" style="margin: 0; padding: 0;">
-        <div class="col-md-12"><h4><span class="label label-success">3. 청약 현황</span></h4></div>
+        <div class="col-md-12 mb10"><h4><span class="label label-success">3. 청약 현황</span></h4></div>
 <?php if(empty($app_data)) : ?>
 		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 20px 0;">등록된 데이터가 없습니다.</div>
 <?php else : ?>
+		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;"><?php echo "[ 결과 : ".number_format($app_num)." 건 ]"; ?>
+			<a href="<?php echo base_url('/cms_excel_file/application_data/download')."?pj=".$project; ?>" style="padding-left: 30px;">
+				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
+			</a>
+		</div>
 		<div class="col-xs-12 table-responsive" style="padding: 0;">
 			<table class="table table-bordered table-hover table-condensed">
 				<thead class="bo-top center bgf8">

@@ -4,7 +4,7 @@
   else :
 ?>
 			<div class="main_start">&nbsp;</div>
-			<!-- 4. 본사관리 -> 2. 인사총무관리 ->3. 기타 관리 페이지 -->
+			<!-- 4. 본사관리 -> 2. 인사총무관리 ->1. 인사급여 관리 페이지 -->
 
 			<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
 				<div class="col-md-2 point-sub" style="height: 40px; padding-top: 10px;">부서별</div>

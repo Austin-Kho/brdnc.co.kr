@@ -8,21 +8,21 @@ else :
 		<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
 <?php
 	$attributes = array('method' => 'get', 'name' => 'pj_sel');
-	form_open(current_url(), $attributes);
+	echo form_open(current_url(), $attributes);
 ?>
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
 				<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
 					<div class="col-xs-12 col-sm-8" style="padding: 0px;">
 						<label for="yr" class="sr-only">사업 개시년도</label>
 						<select class="form-control input-sm" name="yr" onchange="submit();">
-							<option value=""> 전 체
+							<option value=""> 전 체</option>
 <?php
 	$start_year = "2015";
 	// if(!$yr) $yr=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
 	$year=range($start_year,date('Y'));
 	for($i=(count($year)-1); $i>=0; $i--) :
 ?>
-							<option value="<?php echo $year[$i]?>" <?php if($this->input->get('yr')==$year[$i]) echo "selected"; ?>><?php echo $year[$i]."년"?>
+							<option value="<?php echo $year[$i]?>" <?php if($this->input->get('yr')==$year[$i]) echo "selected"; ?>><?php echo $year[$i]."년"?></option>
 <?php endfor; ?>
 						</select>
 					</div>
@@ -32,10 +32,10 @@ else :
 					<div class="col-xs-12 col-sm-8" style="padding: 0px;">
 						<label for="project" class="sr-only">프로젝트 선택</label>
 						<select class="form-control input-sm" name="project" onchange="submit();">
-							<option value="0"> 전 체
-<?php foreach($all_pj as $lt) : ?>
-							<option value="<?php echo $lt->seq; ?>" <?php if(( !$this->input->post('project') && $lt->seq=='1') OR $this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?>
-<?php endforeach; ?>
+							<option value="0" <?php if( !$this->input->get('project')) echo "selected"; ?>> 선 택</option>
+	<?php foreach($all_pj as $lt) : ?>
+							<option value="<?php echo $lt->seq; ?>" <?php if(( !$this->input->get('project') && $lt->seq=='1') OR $this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?></option>
+	<?php endforeach; ?>
 						</select>
 					</div>
 				</div>
@@ -76,6 +76,13 @@ else :
 <?php endfor; endif; ?>
 			</div>
 		</div>
+
+		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;">
+			<a href="<?php echo base_url('/cms_excel_file/status_board/download')."?pj=".$project; ?>" style="padding-left: 30px;">
+				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력 - 구현 준비 중 <?php echo $project; ?>
+			</a>
+		</div>
+
 		<div class="row bo-bottom font12" style="margin: 0; padding: 20px;">
 <?php if( !$summary_tb->total OR $summary_tb->total==0) : ?>
 			<div class="center" style="padding: 50px; <?php if( !$this-> agent->is_mobile()) echo 'height: 380px;'; ?>">등록된 데이터가 없습니다.</div>
@@ -116,7 +123,8 @@ else :
 							$condi = $cont_data->contractor;
 							$con_diff = $cont_data->cont_diff;
 							// $condi = "<a href='".base_url('cms_m1/sales/1/2')."?mode=2&cont_sort1=1&cont_sort2=2&project=".$project."&type=".$cont_data->unit_type."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]."'>".$cont_data->contractor."</a>";
-						else : $condi = "";
+						else :
+							$condi = "";
 						endif;
 					else:
 						$condi = "";

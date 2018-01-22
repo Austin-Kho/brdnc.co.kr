@@ -15,7 +15,6 @@ class Cms_m1 extends CB_Controller {
 		$this->load->model('cms_m1_model'); //모델 파일 로드
 		$this->load->helper('cms_alert'); // 경고창 헬퍼 로딩
 		$this->load->helper('cms_cut_string'); // 문자열 자르기 헬퍼 로드
-		$this->load->library('excel'); // PHPExcel 라이브러리 로드
 	}
 
 	/**
@@ -93,6 +92,7 @@ class Cms_m1 extends CB_Controller {
 			// 청약 데이터 가져오기
 			$dis_date = date('Y-m-d', strtotime('-3 day'));
 			$view['app_data'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_application WHERE pj_seq='$project' AND disposal_div='0' OR disposal_div='2' OR ((disposal_div='1' OR disposal_div='3') AND disposal_date>='$dis_date') ORDER BY app_date DESC, seq DESC ");
+			$view['app_num'] = $this->cms_main_model->sql_num_rows(" SELECT * FROM cb_cms_sales_application WHERE pj_seq='$project' AND disposal_div='0' OR disposal_div='2' OR ((disposal_div='1' OR disposal_div='3') AND disposal_date>='$dis_date') ORDER BY app_date DESC, seq DESC ");
 
 			// 계약 데이터 필터링(타입, 동 별)
 			$view['sc_cont_diff'] = $this->cms_main_model->sql_result(" SELECT cont_diff FROM cb_cms_sales_contract GROUP BY cont_diff ORDER BY cont_diff ");
@@ -113,6 +113,8 @@ class Cms_m1 extends CB_Controller {
 			if( !empty($this->input->get('s_date'))) {$sd = $this->input->get('s_date'); $cont_query .= " AND cb_cms_sales_contract.cont_date>='$sd' ";}
 			if( !empty($this->input->get('e_date'))) {$ed = $this->input->get('e_date'); $cont_query .= " AND cb_cms_sales_contract.cont_date<='$ed' ";}
 			if( !empty($this->input->get('sc_name'))) {$ctor = $this->input->get('sc_name'); $cont_query .= " AND (cb_cms_sales_contractor.contractor='$ctor' OR cb_cms_sales_contract.note LIKE '%$ctor%') ";}
+
+			$view['cont_query'] = $cont_query; // Excel file 로 보낼 쿼리
 
 			//페이지네이션 라이브러리 로딩 추가
 			$this->load->library('pagination');
@@ -141,6 +143,7 @@ class Cms_m1 extends CB_Controller {
 			if($this->input->get('order')=='1') $cont_query .= " ORDER BY cont_code ";
 			if($this->input->get('order')=='2') $cont_query .= " ORDER BY cont_code DESC ";
 			if($start != '' or $limit !='')	$cont_query .= " LIMIT ".$start.", ".$limit." ";
+
 			$view['cont_data'] = $this->cms_main_model->sql_result($cont_query); // 계약 및 계약자 데이터
 
 
@@ -862,8 +865,6 @@ class Cms_m1 extends CB_Controller {
 
 			// 수납 데이터 검색 필터링
 			$rec_query = " SELECT cb_cms_sales_received.seq, cont_seq, paid_amount, paid_date, paid_who, acc_nick, pay_name, unit_type, unit_dong_ho ";
-			$amount_qry = " SELECT SUM(paid_amount) AS total_amount FROM cb_cms_sales_received WHERE pj_seq='$project'  ";
-			$w_qry = "";
 
 			$rec_query .= " FROM cb_cms_sales_received, cb_cms_sales_pay_sche, cb_cms_sales_bank_acc, cb_cms_sales_contract ";
 			$rec_query .= " WHERE cb_cms_sales_received.pj_seq='$project' AND cb_cms_sales_pay_sche.pj_seq='$project'  AND pay_sche_code=cb_cms_sales_pay_sche.pay_code AND paid_acc=cb_cms_sales_bank_acc.seq AND cont_seq=cb_cms_sales_contract.seq ";
@@ -872,6 +873,11 @@ class Cms_m1 extends CB_Controller {
 			if( !empty($this->input->get('s_date'))) { $rec_query .= " AND paid_date>='".$this->input->get('s_date')."' ";}
 			if( !empty($this->input->get('e_date'))) { $rec_query .= " AND paid_date<='".$this->input->get('e_date')."' ";}
 
+			$view['rec_query'] = $rec_query; // Excel 출력 데이터로 보낼 쿼리
+
+			$amount_qry = " SELECT SUM(paid_amount) AS total_amount FROM cb_cms_sales_received WHERE pj_seq='$project'  ";
+
+			$w_qry = "";
 			if( !empty($this->input->get('con_pay_sche'))) { $w_qry = " AND pay_sche_code='".$this->input->get('con_pay_sche')."' ";}
 			if( !empty($this->input->get('con_paid_acc'))) { $w_qry .= " AND paid_acc='".$this->input->get('con_paid_acc')."' ";}
 			if( !empty($this->input->get('s_date'))) { $w_qry .= " AND paid_date>='".$this->input->get('s_date')."' ";}

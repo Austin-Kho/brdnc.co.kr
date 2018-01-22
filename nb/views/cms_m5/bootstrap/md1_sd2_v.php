@@ -93,7 +93,12 @@
 
 <?php
 	$attributes = array('name' => 'form1', 'class' => 'form-horizontal');
-	echo form_open(current_url(), $attributes);
+  if($this->input->get('seq')) :
+		$hidden = array('mode' => $this->input->get('mode'), 'seq' => $sel_mem->seq);
+  else :
+		$hidden = array('mode' => $this->input->get('mode'));
+	endif;
+	echo form_open(current_url(), $attributes, $hidden);
 ?>
 					<fieldset class="font12">
 						<div class="col-md-12" style="<?php if( !$this->agent->is_mobile()) echo 'height: 490px;'; ?>">
@@ -102,12 +107,6 @@
 								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: green;"></span>
 								<strong>직원정보 <?php if($this->input->get('mode')=='reg') echo '신규'; else echo '수정'; ?>등록</strong>
 							</div>
-							<label for="mode" class="sr-only">모드</label>
-							<input type="hidden" name="mode" value="<?php echo $this->input->get('mode'); ?>">
-<?php if($this->input->get('seq')) : ?>
-						<label for="seq" class="sr-only">키</label>
-						<input type="hidden" name="seq" value="<?php echo $sel_mem->seq; ?>">
-<?php endif; ?>
 						<div class="row bo-top">
 							<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 								<label for="mem_name">(임)직원명 <span class="red">*</span></label>

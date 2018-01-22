@@ -92,9 +92,9 @@
 <?php
 	$attributes = array('name' => 'form1');
 	if($this->input->get('seq')) :
-		$hidden = array('mode' => $this->input->get('mode'));
-	else :
 		$hidden = array('mode' => $this->input->get('mode'), 'seq' => $sel_div->seq);
+  else :
+		$hidden = array('mode' => $this->input->get('mode'));
 	endif;
 	echo form_open(current_url(), $attributes, $hidden);
 ?>
@@ -105,12 +105,6 @@
 								<span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: green;"></span>
 								<strong>부서정보 <?php if($this->input->get('mode')=='reg') echo '신규'; else echo '수정'; ?>등록</strong>
 							</div>
-								<!-- <label for="mode" class="sr-only">모드</label>
-								<input type="hidden" name="mode" value="<?php echo $this->input->get('mode'); ?>">
-<?php if($this->input->get('seq')) : ?>
-								<label for="seq" class="sr-only">키</label>
-								<input type="hidden" name="seq" value="<?php echo $sel_div->seq; ?>">
-<?php endif; ?> -->
 								<div class="row bo-top">
 									<div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2" >
 										<label for="div_code">부서코드 <span class="red">*</span></label>
