@@ -79,7 +79,7 @@ else :
 
 		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;">
 			<a href="<?php echo base_url('/cms_excel_file/status_board/download')."?pj=".$project; ?>" style="padding-left: 30px;">
-				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력 - 구현 준비 중 <?php echo $project; ?>
+				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
 			</a>
 		</div>
 
@@ -87,7 +87,6 @@ else :
 <?php if( !$summary_tb->total OR $summary_tb->total==0) : ?>
 			<div class="center" style="padding: 50px; <?php if( !$this-> agent->is_mobile()) echo 'height: 380px;'; ?>">등록된 데이터가 없습니다.</div>
 <?php else :
-			$base_a = mt_rand(0, 2); // 베이스컬러 첫번 째 난수
 			for($a=0; $a<count($dong_data); $a++): // 전체 동 수 만큼 반복
 ?>
 				<div style="float:left; margin:10px;">
@@ -160,11 +159,6 @@ else :
 					else:
 						$condi_col = "";
 					endif;
-					$base_col = array(
-						array('#5D5D8E','#5A5B93',' #4D568B', '#544983', '#534A96', '#524C8B'),
-						array('#9F4664','#9C3D5F',' #992C50', '#AB3164', '#9D3646', '#A3305A'),
-						array('#554F50','#515C51',' #50515B', '#524747', '#525B55', '#534B53')
-					);
 ?>
 									<div style="<?php echo $clear_css; ?> float:left; <?php echo $div_pointer; ?> border: 1px solid #ddd; <?php echo $bo_wid." ".$bo_col." ".$piloti; ?>">
 										<div style="width:30px; height:14px; text-align:center; font-size:9px; color:#333; padding: 1px 0; <?php echo $div_col; ?>">
@@ -176,7 +170,7 @@ else :
 								</td>
 							</tr>
 						</table>
-					<div class="col-xs-12 center" style="border: 1px solid #3e3e3e; padding: 8px; background-color: <?php echo $base_col[$base_a][mt_rand(0, 5)]; ?>; color: #FFF; font-weight: bold;"><?php echo $dong_data[$a]->dong."동"?></div>
+					<div class="col-xs-12 center" style="border: 1px solid #3e3e3e; padding: 8px; background-color: #848486; color: #FFF; font-weight: bold;"><?php echo $dong_data[$a]->dong."동"?></div>
 				</div>
 <?php endfor; ?>
 <?php endif; ?>

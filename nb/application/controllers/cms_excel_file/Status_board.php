@@ -29,6 +29,22 @@ class Status_board extends CB_Controller {
 
 		$spreadsheet->setActiveSheetIndex(0); // 워크시트에서 1번째는 활성화
 		$spreadsheet->getActiveSheet()->setTitle('동호수_현황표'); // 워크시트 이름 지정
+
+		// 인쇄 관련 옵션
+		$spreadsheet->getActiveSheet()->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE); // 가로 모드
+		$spreadsheet->getActiveSheet()->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A3); // 용지 크기
+
+		$spreadsheet->getActiveSheet()->getPageSetup()->setFitToWidth(1); // 1페이지에 모든 열 마추기
+		$spreadsheet->getActiveSheet()->getPageSetup()->setFitToHeight(0); //
+
+		// 인쇄 시 여백
+		$spreadsheet->getActiveSheet()->getPageMargins()->setTop(0.8);
+		$spreadsheet->getActiveSheet()->getPageMargins()->setRight(0.5);
+		$spreadsheet->getActiveSheet()->getPageMargins()->setLeft(0.5);
+		$spreadsheet->getActiveSheet()->getPageMargins()->setBottom(0.3);
+
+		$spreadsheet->getActiveSheet()->getPageSetup()->setHorizontalCentered(true); // 가로 중앙 true 모드
+		$spreadsheet->getActiveSheet()->getPageSetup()->setVerticalCentered(true); // 세로 중앙 true 모드
 		//----------------------------------------------------------//
 		/** 엑셀 시트만들기 기초정보 종료 **/
 
@@ -38,15 +54,6 @@ class Status_board extends CB_Controller {
 
 		// 공급세대 및 유보세대 청약 계약세대 구하기
 		$view['summary_tb'] = $this->cms_main_model->sql_row(" SELECT COUNT(*) AS total, SUM(is_hold) AS hold, SUM(is_application) AS acn, SUM(is_contract) AS cont FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project'  ");
-
-		// 타입 관련 데이터 구하기
-		$type = $this->cms_main_model->sql_row(" SELECT type_name, type_color FROM cb_cms_project WHERE seq='$project' ");
-		if($type) {
-			$view['type'] = array(
-				'name' => explode("-", $type->type_name),
-				'color' => explode("-", $type->type_color)
-			);
-		}
 
 		// 해당 단지 최 고층 구하기
 		$max_fl = $this->cms_main_model->sql_row(" SELECT MAX(ho) AS max_ho FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' ");
@@ -82,7 +89,7 @@ class Status_board extends CB_Controller {
 		endfor;
 
 		$max_col_n = count($dong_data)+$total_line;
-		$max_col_a = strtoupper(toAlpha(count($view['dong_data'])+$total_line));
+		$max_col_a = toAlpha(count($view['dong_data'])+$total_line);
 
 		//----------------------------------------------------------//
 		/** 데이터 가져오기 종료 **/
@@ -92,7 +99,7 @@ class Status_board extends CB_Controller {
 		// 전체 글꼴 및 정렬
 		$spreadsheet->getActiveSheet()->duplicateStyleArray( // 전체 글꼴 및 정렬
 			array(
-				'font' => array('size' => 8),
+				'font' => array('size' => 6),
 				'alignment' => array(
 					'vertical'   => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
 					'horizontal'   => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER
@@ -112,27 +119,56 @@ class Status_board extends CB_Controller {
         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
       ),
     );
-    $spreadsheet->getActiveSheet()->getStyle('A1:L1')->applyFromArray($styleArray);
-		$spreadsheet->getActiveSheet()->mergeCells('A1:L1');// A1부터 G1까지 셀을 합칩니다.
+    $spreadsheet->getActiveSheet()->getStyle('A1:'.$max_col_a.'1')->applyFromArray($styleArray);
 
-		$spreadsheet->getActiveSheet()->getDefaultRowDimension()->setRowHeight(10); // 전체 기본 셀 높이 설정
+		$outBorder = array(
+      'borders' => array(
+        'outline' => array(
+          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        ),
+      ),
+    ); // 아웃라인 보더
+		$allBorder = array(
+      'borders' => array(
+        'allborders' => array(
+          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        ),
+      ),
+    ); // 올 보더
+		$diaBorder = array(
+      'borders' => array(
+        'diagonal' => array(
+          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        ),
+      ),
+    ); // 대각선
+
+		$spreadsheet->getActiveSheet()->mergeCells('A1:'.$max_col_a.'1');// 헤더 셀을 합칩니다.
+
+		$spreadsheet->getActiveSheet()->getDefaultRowDimension()->setRowHeight(12); // 전체 기본 셀 높이 설정
 		$spreadsheet->getActiveSheet()->getRowDimension(1)->setRowHeight(37.5); // 1행의 셀 높이 설정
-		$spreadsheet->getActiveSheet()->getRowDimension(2)->setRowHeight(15); // 2행의 셀 높이 설정
-		$spreadsheet->getActiveSheet()->getRowDimension(3)->setRowHeight(15); // 2행의 셀 높이 설정
-		$spreadsheet->getActiveSheet()->getRowDimension(4)->setRowHeight(15); // 2행의 셀 높이 설정
 
-		for($i=0; $i<=$max_col_n; $i++) :
-			$spreadsheet->getActiveSheet()->getColumnDimension(strtoupper(toAlpha($i)))->setWidth(5); // A열의 셀 넓이 설정
-		endfor;
+		$pj_name = $this->cms_main_model->sql_row(" SELECT pj_name FROM cb_cms_project WHERE seq='$project' ");
+		$spreadsheet->getActiveSheet()->setCellValue('A1', $pj_name->pj_name.' 동호수 상황표');// 해당 셀의 내용을 입력 합니다.
 
 
-		// 동호 테이블 시작 열과 행 지정 B(1) // 5행 부터 시작
+		// 타입 관련 데이터 구하기
+		$type_data = $this->cms_main_model->sql_row(" SELECT type_name, type_color FROM cb_cms_project WHERE seq='$project' ");
+		if($type_data) {
+			$type = array(
+				'name' => explode("-", $type_data->type_name),
+				'color' => explode("-", $type_data->type_color)
+			);
+		}
+		if(!empty($type)) :
+			for($i=0; $i<count($type['name']); $i++) :
+				$type_color[$type['name'][$i]] = $type['color'][$i];
+			endfor;
+		endif;
 
-		// $spreadsheet->getActiveSheet()->setCellValue(toAlpha(1).'5', 'aa');
-		// 각 동별 라인 수 구하기   //$line_num[6]->to_line
+		$spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(2); // 첫 번째 열의 셀 넓이 설정
 
 		$base_col = 0; // 시작열
-
 
 		for($j=0; $j<count($dong_data); $j++) : // 1. 동 수만큼 반복
 
@@ -140,12 +176,22 @@ class Status_board extends CB_Controller {
 				$line_num = $view['line_num'][$j] = // 라인수 구하기
 						$this->cms_main_model->sql_row(" SELECT MIN(RIGHT(ho,2)) AS from_line, MAX(RIGHT(ho,2)) AS to_line FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$d' ");
 
+				// 동 표기 셀 병합
+				$spreadsheet->getActiveSheet()->mergeCells(toAlpha($base_col+1).((2*$view['max_floor'])+5).":".toAlpha($base_col+$line_num->to_line).((2*$view['max_floor'])+6));
+				$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col+1).((2*$view['max_floor'])+5).":".toAlpha($base_col+$line_num->to_line).((2*$view['max_floor'])+6))->applyFromArray($outBorder);
+				$spreadsheet->getActiveSheet()->setCellValue(toAlpha($base_col+1).((2*$view['max_floor'])+5), $d.'동');// 해당 셀의 내용을 입력 합니다.
+				$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col+1).((2*$view['max_floor'])+5))->getFont()->setSize(9);// A1의 폰트를 변경 합니다.
+				$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col+1).((2*$view['max_floor'])+5))->getFont()->setBold(true);// A1의 글씨를 볼드로 변경합니다.
+				$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col+1).((2*$view['max_floor'])+5))->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFd6d7d5');
+
 				for($k=0; $k<$line_num->to_line; $k++): // 2. 라인수 만큼 반복
-						$base_row = 5; // 시작행 초기화
+						$base_row = 3; // 시작행 초기화
 						$base_col++; // 라인수 증가분 만큼 시작열 증가시키기
 
-						$line_no = str_pad($k+1, 2, 0, STR_PAD_LEFT); // 라인 텍스트
+						// 동 부분 열 너비 지정
+						if($j<count($dong_data)) $spreadsheet->getActiveSheet()->getColumnDimension(toAlpha($base_col))->setWidth(5); // 열의 셀 넓이 설정
 
+						$line_no = str_pad($k+1, 2, 0, STR_PAD_LEFT); // 라인 텍스트
 
 						for($l=0; $l<$view['max_floor']; $l++) : // 3. 최고층 만큼 반복
 
@@ -153,56 +199,63 @@ class Status_board extends CB_Controller {
 								$ho_no = $floor_no.$line_no;       // 호수 텍스트
 
 								// 실제 디비에서 가져온 동호수 데이터
-								$db_ho = $this->cms_main_model->sql_row(" SELECT seq, type, ho, is_hold, is_application, is_contract FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$dong' AND ho='$ho_no' ");
+								$db_ho = $this->cms_main_model->sql_row(" SELECT seq, type, ho, is_hold, is_application, is_contract FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$d' AND ho='$ho_no' ");
 
 								$now_ho = ($db_ho !==null) ? $db_ho->ho : ''; // 해당 호수
-								$now_type = ($db_ho !==null) ? $db_ho->type : ''; // 해당 타입
+								$type_col = ($db_ho !==null) ? str_replace('#', 'FF', $type_color[$db_ho->type]) : '';
+
+								if($floor_no<3 && $db_ho===null){ // 피로티일 때
+									$spreadsheet->getActiveSheet()->mergeCells(toAlpha($base_col).($base_row+2).':'.toAlpha($base_col).($base_row+3)); // 셀을 합칩니다.
+									// 피로티 색상
+									$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col).($base_row+2).':'.toAlpha($base_col).($base_row+3))->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFdbdedc');
+									$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col).($base_row+2).':'.toAlpha($base_col).($base_row+3))->applyFromArray($outBorder);
+								}
+
 
 								if($db_ho !==null) : // 세대 상태 확인 소스
 									if($db_ho->is_hold==1) :
 										$condi = "hold";
+										$condi_col = "FFd2d2d5"; // hold  시
 									elseif($db_ho->is_application==1) :
 										$app_data = $this->cms_main_model->sql_row(" SELECT  applicant, app_date, unit_type, unit_dong_ho FROM cb_cms_sales_application WHERE unit_seq='$db_ho->seq' AND disposal_div<>'3' ");
 										$dong_ho = explode("-", $app_data->unit_dong_ho);
 										$condi = $app_data->applicant;
+										$condi_col = "FFe0fbd7"; // 청약 시
 									elseif($db_ho->is_contract==1) :
 										$cont_data = $this->cms_main_model->sql_row(" SELECT  cont_diff, contractor, cb_cms_sales_contract.cont_date, unit_type, unit_dong_ho FROM cb_cms_sales_contract, cb_cms_sales_contractor WHERE unit_seq='$db_ho->seq' AND is_rescission='0' AND cb_cms_sales_contract.seq=cont_seq AND is_transfer='0' ");
 										$dong_ho = explode("-", $cont_data->unit_dong_ho);
 										$condi = $cont_data->contractor;
 										$con_diff = $cont_data->cont_diff;
+										if($con_diff==1):
+											$condi_col = "FFffdee2"; // 계약 시  1차
+										elseif($con_diff==2):
+											$condi_col = "FFd7dbff"; // 계약 시  2차
+										endif;
 									else :
 										$condi = "";
+										$condi_col = "";
 									endif;
 								else:
 									$condi = "";
+									$condi_col = "";
 								endif;
 
 								$base_row+=2; // 시작행 부터 최고층 만큼 증가
-								$spreadsheet->getActiveSheet()->setCellValue(strtoupper(toAlpha($base_col)).$base_row, $ho_no);// 해당 셀의 내용을 입력 합니다.
-								$spreadsheet->getActiveSheet()->setCellValue(strtoupper(toAlpha($base_col)).($base_row+1), $condi);// 해당 셀의 내용을 입력 합니다.
+								if(!empty($now_ho)) {
+									$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col).$base_row.':'.toAlpha($base_col).($base_row+1))->applyFromArray($outBorder);
+									$spreadsheet->getActiveSheet()->setCellValue(toAlpha($base_col).$base_row, $now_ho);// 해당 셀의 내용을 입력 합니다.
+									$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col).$base_row)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($type_col);
 
+									if($condi!==""){
+										$spreadsheet->getActiveSheet()->setCellValue(toAlpha($base_col).($base_row+1), $condi);// 해당 셀의 내용을 입력 합니다.
+										$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col).($base_row+1))->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($condi_col);
+									}
+								}
 						endfor;
 				endfor;
 				$base_col++; // 동 사이 1칸 띄우기
+				$spreadsheet->getActiveSheet()->getColumnDimension(toAlpha($base_col))->setWidth(2); // 동 사이 셀 넓이 설정
 		endfor;
-
-
-
-
-
-		// $spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);// A1의 폰트를 변경 합니다.
-		$spreadsheet->getActiveSheet()->setCellValue('A1', '동호수 현황표');// 해당 셀의 내용을 입력 합니다.
-		// $spreadsheet->getActiveSheet()->setCellValue('A2', $max_col);// 해당 셀의 내용을 입력 합니다.
-		// $spreadsheet->getActiveSheet()->setCellValue('A3', '1234');// 해당 셀의 내용을 입력 합니다.
-		// $spreadsheet->getActiveSheet()->setCellValue('A4', '홍길동');// 해당 셀의 내용을 입력 합니다.
-
-		$base = $view['max_floor']+5;
-
-
-
-
-
-
 
 
 
