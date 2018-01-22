@@ -219,7 +219,7 @@ class Daily_money_report extends CB_Controller {
 		$spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);// A1의 폰트를 변경 합니다.
 		$spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);// A1의 글씨를 볼드로 변경합니다.
 
-		$spreadsheet->getActiveSheet()->setCellValue('G1', '결       재');
+		$spreadsheet->getActiveSheet()->setCellValue('G1', '결    재');
 		$spreadsheet->getActiveSheet()->getStyle('G1')->getAlignment()->setWrapText(true);
 		// $spreadsheet->getActiveSheet()->getStyle('G1:G2')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM);
 

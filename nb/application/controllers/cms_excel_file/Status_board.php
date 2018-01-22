@@ -35,7 +35,7 @@ class Status_board extends CB_Controller {
 		$spreadsheet->getActiveSheet()->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A3); // 용지 크기
 
 		$spreadsheet->getActiveSheet()->getPageSetup()->setFitToWidth(1); // 1페이지에 모든 열 마추기
-		$spreadsheet->getActiveSheet()->getPageSetup()->setFitToHeight(0); //
+		// $spreadsheet->getActiveSheet()->getPageSetup()->setFitToHeight(0); //
 
 		// 인쇄 시 여백
 		$spreadsheet->getActiveSheet()->getPageMargins()->setTop(0.8);
@@ -51,9 +51,6 @@ class Status_board extends CB_Controller {
 		/** 데이터 가져오기 시작 **/
 		//----------------------------------------------------------//
 		$project = urldecode($this->input->get('pj'));
-
-		// 공급세대 및 유보세대 청약 계약세대 구하기
-		$view['summary_tb'] = $this->cms_main_model->sql_row(" SELECT COUNT(*) AS total, SUM(is_hold) AS hold, SUM(is_application) AS acn, SUM(is_contract) AS cont FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project'  ");
 
 		// 해당 단지 최 고층 구하기
 		$max_fl = $this->cms_main_model->sql_row(" SELECT MAX(ho) AS max_ho FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' ");
@@ -81,11 +78,12 @@ class Status_board extends CB_Controller {
         return $alpha;
       }
 		}
-		// 각 동별 라인 수 구하기   //$line_num[6]->to_line
-		for($j=0; $j<count($dong_data); $j++) :
-			$d = $dong_data[$j]->dong;
-			$line_num = $view['line_num'][$j] = $this->cms_main_model->sql_row(" SELECT MIN(RIGHT(ho,2)) AS from_line, MAX(RIGHT(ho,2)) AS to_line FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$d' ");
-			$total_line += $view['line_num'][$j]->to_line;
+
+		// 각 동별 라인 수 구하기
+		for($a=0; $a<count($dong_data); $a++) :
+			$d = $dong_data[$a]->dong;
+			$line_num = $view['line_num'][$a] = $this->cms_main_model->sql_row(" SELECT MIN(RIGHT(ho,2)) AS from_line, MAX(RIGHT(ho,2)) AS to_line FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$d' ");
+			$total_line += $view['line_num'][$a]->to_line;
 		endfor;
 
 		$max_col_n = count($dong_data)+$total_line;
@@ -93,6 +91,8 @@ class Status_board extends CB_Controller {
 
 		//----------------------------------------------------------//
 		/** 데이터 가져오기 종료 **/
+
+
 
 		/** 본문 내용 만들기 시작 **/
 		//----------------------------------------------------------//
@@ -119,7 +119,7 @@ class Status_board extends CB_Controller {
         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
       ),
     );
-    $spreadsheet->getActiveSheet()->getStyle('A1:'.$max_col_a.'1')->applyFromArray($styleArray);
+    $spreadsheet->getActiveSheet()->getStyle('A1')->applyFromArray($styleArray);
 
 		$outBorder = array(
       'borders' => array(
@@ -207,7 +207,8 @@ class Status_board extends CB_Controller {
 								if($floor_no<3 && $db_ho===null){ // 피로티일 때
 									$spreadsheet->getActiveSheet()->mergeCells(toAlpha($base_col).($base_row+2).':'.toAlpha($base_col).($base_row+3)); // 셀을 합칩니다.
 									// 피로티 색상
-									$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col).($base_row+2).':'.toAlpha($base_col).($base_row+3))->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFdbdedc');
+									$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col).($base_row+2).':'.toAlpha($base_col).($base_row+3))
+										->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFdbdedc');
 									$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col).($base_row+2).':'.toAlpha($base_col).($base_row+3))->applyFromArray($outBorder);
 								}
 
@@ -262,7 +263,7 @@ class Status_board extends CB_Controller {
 		// set right to left direction
     // $spreadsheet->getActiveSheet()->setRightToLeft(true);
 		//----------------------------------------------------------//
-		/** 본문 내용 만들기 시작 **/
+		/** 본문 내용 만들기 종료 **/
 
 
 
