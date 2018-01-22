@@ -227,7 +227,7 @@ class Status_board extends CB_Controller {
 										$condi = $cont_data->contractor;
 										$con_diff = $cont_data->cont_diff;
 										if($con_diff==1):
-											$condi_col = "FFffdee2"; // 계약 시  1차
+											$condi_col = "FFdec1ae"; // 계약 시  1차
 										elseif($con_diff==2):
 											$condi_col = "FFd7dbff"; // 계약 시  2차
 										endif;
