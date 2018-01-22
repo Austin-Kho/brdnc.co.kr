@@ -15,8 +15,8 @@
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">날 짜</div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding-top: 5px;">
 <?php
-	$attributes = array('name' => 'd_cash_book_frm');
-	echo form_open(current_url(), $attributes);
+   $attributes = array('name' => 'd_cash_book_frm');
+   echo form_open(current_url(), $attributes);
 ?>
 						<div class="col-xs-8 col-sm-5 col-md-3 glyphicon-wrap" style="padding: 0px;">
 							<label for="sh_date" class="sr-only">시작일</label>
