@@ -100,6 +100,16 @@ class Daily_money_report extends CB_Controller {
       ->setTitle('Daily_money_report')
       ->setSubject('자금일보')
       ->setDescription('일별 자금 입출금 보고서');
+
+		// 인쇄 시 각 여백 조절
+		$spreadsheet->getActiveSheet()->getPageMargins()->setTop(0.8);
+		$spreadsheet->getActiveSheet()->getPageMargins()->setRight(0.5);
+		$spreadsheet->getActiveSheet()->getPageMargins()->setLeft(0.5);
+		$spreadsheet->getActiveSheet()->getPageMargins()->setBottom(0.3);
+
+		// 인쇄 시 정렬 조절
+		$spreadsheet->getActiveSheet()->getPageSetup()->setHorizontalCentered(true); // 가로 정렬
+		$spreadsheet->getActiveSheet()->getPageSetup()->setVerticalCentered(false); // 세로 정렬
 		//----------------------------------------------------------//
 
 
@@ -154,6 +164,7 @@ class Daily_money_report extends CB_Controller {
 
 		$spreadsheet->getActiveSheet()->mergeCells('A1:F2');// A1부터 D1까지 셀을 합칩니다.
 		$spreadsheet->getActiveSheet()->mergeCells('A3:F3');
+		$spreadsheet->getActiveSheet()->mergeCells('G1:G3');
 		$spreadsheet->getActiveSheet()->mergeCells('H2:H3');
 		$spreadsheet->getActiveSheet()->mergeCells('I2:I3');
 		$spreadsheet->getActiveSheet()->mergeCells('J2:J3');
@@ -170,33 +181,6 @@ class Daily_money_report extends CB_Controller {
 		$spreadsheet->getActiveSheet()->mergeCells('A'.($sum_3rd+1).':K'.($sum_3rd+1));
 		$spreadsheet->getActiveSheet()->mergeCells('A'.($sum_3rd+2).':K'.($sum_3rd+2));
 
-		// // add style to the header
-    // $styleArray = array(
-    //   'font' => array(
-    //     'bold' => true,
-    //   ),
-    //   'alignment' => array(
-    //     'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-    //     'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-    //   ),
-    //   'borders' => array(
-    //     'top' => array(
-    //       'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-    //     ),
-    //   ),
-    //   'fill' => array(
-    //     'type' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_GRADIENT_LINEAR,
-    //     'rotation' => 90,
-    //     'startcolor' => array(
-    //       'argb' => 'FFA0A0A0',
-    //     ),
-    //     'endcolor' => array(
-    //     'argb' => 'FFFFFFFF',
-    //     ),
-    //   ),
-    // );
-    // $spreadsheet->getActiveSheet()->getStyle('A1:F1')->applyFromArray($styleArray);
-
 		$spreadsheet->getActiveSheet()->getStyle('A5:K5')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFEAEAEA');
 		$spreadsheet->getActiveSheet()->getStyle('A6:K6')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFCFDF2');
 		$spreadsheet->getActiveSheet()->getStyle('A'.$sum_1st.':K'.$sum_1st)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFCFDF2');
@@ -206,19 +190,38 @@ class Daily_money_report extends CB_Controller {
 		$spreadsheet->getActiveSheet()->getStyle('A'.($sum_3rd+3).':K'.($sum_3rd+3))->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFEAEAEA');
 		$spreadsheet->getActiveSheet()->getStyle('A'.($sum_3rd+$numx+5).':K'.($sum_3rd+$numx+5))->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFCFDF2');
 
-		$spreadsheet->getActiveSheet()->getStyle('A1:F3')->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-		$spreadsheet->getActiveSheet()->getStyle('G1:G3')->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-		$spreadsheet->getActiveSheet()->getStyle('H1:K3')->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-		$spreadsheet->getActiveSheet()->getStyle('A4:K4')->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
-		$spreadsheet->getActiveSheet()->getStyle('A5:K'.$sum_2nd)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+		$outBorder = array(
+      'borders' => array(
+        'outline' => array(
+          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        ),
+      ),
+    );
+		$allBorder = array(
+      'borders' => array(
+        'allborders' => array(
+          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        ),
+      ),
+    );
+		$spreadsheet->getActiveSheet()->getStyle('A1:F3')->applyFromArray($outBorder);
+		$spreadsheet->getActiveSheet()->getStyle('G1:G3')->applyFromArray($outBorder);
+		$spreadsheet->getActiveSheet()->getStyle('H1:K3')->applyFromArray($allBorder);
+		$spreadsheet->getActiveSheet()->getStyle('A4:K4')->applyFromArray($outBorder);
+		$spreadsheet->getActiveSheet()->getStyle('A5:K'.$sum_2nd)->applyFromArray($allBorder);
+		// $spreadsheet->getActiveSheet()->getStyle('A1:F3')->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+		// $spreadsheet->getActiveSheet()->getStyle('G1:G3')->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+		// $spreadsheet->getActiveSheet()->getStyle('H1:K3')->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+		// $spreadsheet->getActiveSheet()->getStyle('A4:K4')->getBorders()->getOutline()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+		// $spreadsheet->getActiveSheet()->getStyle('A5:K'.$sum_2nd)->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
 
-		$spreadsheet->getActiveSheet()->setCellValue('A1', '[주] 바램디앤씨 자금일보');// A1의 내용을 입력 합니다.
+		$spreadsheet->getActiveSheet()->setCellValue('A1', '|주| 바램디앤씨 자금일보');// A1의 내용을 입력 합니다.
 		$spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);// A1의 폰트를 변경 합니다.
 		$spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);// A1의 글씨를 볼드로 변경합니다.
 
-		$spreadsheet->getActiveSheet()->setCellValue('G1', '결');
-		$spreadsheet->getActiveSheet()->setCellValue('G2', '재');
-		$spreadsheet->getActiveSheet()->getStyle('G1:G2')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM);
+		$spreadsheet->getActiveSheet()->setCellValue('G1', '결       재');
+		$spreadsheet->getActiveSheet()->getStyle('G1')->getAlignment()->setWrapText(true);
+		// $spreadsheet->getActiveSheet()->getStyle('G1:G2')->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_BOTTOM);
 
 		$spreadsheet->getActiveSheet()->setCellValue('H1', '담당');
 		$spreadsheet->getActiveSheet()->setCellValue('I1', '전무');
@@ -340,7 +343,7 @@ class Daily_money_report extends CB_Controller {
 		for($i=0;$i<=$numn;$i++) :
 			if(empty($da_in['result'][$i]->acc)) $da_in_acc = ''; else $da_in_acc = $da_in['result'][$i]->acc;
 			if(empty($da_in['result'][$i]->cont)) $da_in_cont = ''; else $da_in_cont = $da_in['result'][$i]->cont;
-			if(empty($da_in['result'][$i]->inc) OR $da_in['result'][$i]->inc==0){ $income = "";}else{$income = number_format($da_in['result'][$i]->inc);}
+			if(empty($da_in['result'][$i]->inc) OR $da_in['result'][$i]->inc==0){ $income = "";}else{$income = $da_in['result'][$i]->inc;}
 			if(empty($da_in['result'][$i]->account)) $da_in_account = ''; else $da_in_account = $da_in['result'][$i]->account;
 			if(empty($da_in['result'][$i]->note)) $da_in_note = ''; else $da_in_note = $da_in['result'][$i]->note;
 
@@ -387,7 +390,7 @@ class Daily_money_report extends CB_Controller {
 		for($i=0;$i<=$numx;$i++):
 			if(empty($da_ex['result'][$i]->acc)) $da_ex_acc = ''; else $da_ex_acc = $da_ex['result'][$i]->acc;
 			if(empty($da_ex['result'][$i]->cont)) $da_ex_cont = ''; else $da_ex_cont = $da_ex['result'][$i]->cont;
-			if(empty($da_ex['result'][$i]->exp) OR $da_ex['result'][$i]->exp==0){ $exp = ""; }else{ $exp = number_format($da_ex['result'][$i]->exp); }
+			if(empty($da_ex['result'][$i]->exp) OR $da_ex['result'][$i]->exp==0){ $exp = ""; }else{ $exp = $da_ex['result'][$i]->exp; }
 			if(empty($da_ex['result'][$i]->account)) $da_ex_account = ''; else $da_ex_account = $da_ex['result'][$i]->account;
 			if(empty($da_ex['result'][$i]->note)) $da_ex_note = ''; else $da_ex_note = $da_ex['result'][$i]->note;
 
@@ -412,14 +415,16 @@ class Daily_money_report extends CB_Controller {
 		$spreadsheet->getActiveSheet()->setCellValue('F'.($sum_3rd+$numx+5), $da_ex_total[0]->total_exp);
 		$spreadsheet->getActiveSheet()->getStyle('F'.($sum_3rd+$numx+5))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
 		$spreadsheet->getActiveSheet()->getStyle('F'.($sum_3rd+4).':F'.($sum_3rd+$numx+5))->getNumberFormat()->setFormatCode('#,##0'); // 셀 숫자형 변환 (1000 -> 1,000)
-		$spreadsheet->getActiveSheet()->getStyle('A'.($sum_2nd+1).':K'.($sum_3rd+$numx+5))->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
+
+		$spreadsheet->getActiveSheet()->getStyle('A'.($sum_2nd+1).':K'.($sum_3rd+$numx+5))->applyFromArray($allBorder);
+		// $spreadsheet->getActiveSheet()->getStyle('A'.($sum_2nd+1).':K'.($sum_3rd+$numx+5))->getBorders()->getAllBorders()->setBorderStyle(\PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN);
 
 		// set right to left direction
     // $spreadsheet->getActiveSheet()->setRightToLeft(true);
 
 		// 본문 내용 ---------------------------------------------------------------//
 
-		$filename='daily_money_report_'.$sh_date.'.xlsx'; // 엑셀 파일 이름
+		$filename='자금일보_'.$sh_date.'.xlsx'; // 엑셀 파일 이름
 
     // Redirect output to a client's web browser (Excel2007)
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // mime 타입
