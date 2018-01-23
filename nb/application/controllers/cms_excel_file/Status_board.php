@@ -273,7 +273,7 @@ class Status_board extends CB_Controller {
 
     // Redirect output to a client's web browser (Excel2007)
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // mime 타입
-    header('Content-Disposition: attachment;filename="'.$filename.'"'); // 브라우저에서 받을 파일 이름
+	Header('Content-Disposition: attachment; filename='.iconv('UTF-8','CP949',$filename)); // 브라우저에서 받을 파일 이름
     header('Cache-Control: max-age=0'); // no cache
     // If you're serving to IE 9, then the following may be needed
     header('Cache-Control: max-age=1');
