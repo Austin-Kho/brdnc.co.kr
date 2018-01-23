@@ -223,7 +223,7 @@ endif;?>
 											<label><input type="checkbox" id="_m3_1_1_m" name="_m3_1_1_m" <?php if(isset($user_auth->_m3_1_1) && $user_auth->_m3_1_1>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
-									<td>프로젝트 목록
+                  <td>기타 세부설정
 										<div class="checkbox" style="margin: 0; width: 80px;">
 											<label><input type="checkbox" id="_m3_1_2" name="_m3_1_2" <?php if(isset($user_auth->_m3_1_2) && $user_auth->_m3_1_2>0) echo 'checked'; ?>> 조회</label>
 										</div>
@@ -231,7 +231,14 @@ endif;?>
 											<label><input type="checkbox" id="_m3_1_2_m" name="_m3_1_2_m" <?php if(isset($user_auth->_m3_1_2) && $user_auth->_m3_1_2>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
-									<td></td>
+									<td>프로젝트 목록
+										<div class="checkbox" style="margin: 0; width: 80px;">
+											<label><input type="checkbox" id="_m3_1_3" name="_m3_1_3" <?php if(isset($user_auth->_m3_1_3) && $user_auth->_m3_1_3>0) echo 'checked'; ?>> 조회</label>
+										</div>
+										<div class="checkbox" style="margin: 0; width: 80px;">
+											<label><input type="checkbox" id="_m3_1_3_m" name="_m3_1_3_m" <?php if(isset($user_auth->_m3_1_3) && $user_auth->_m3_1_3>1) echo 'checked'; ?>> 관리</label>
+										</div>
+									</td>
 									<td></td>
 
 									<td class="sec-td bo-right bo-left bgf8" style="vertical-align: middle; padding: 0 0 0 10px;"><div style="width: 80px;"><strong>신규 프로젝트</strong></div></td>

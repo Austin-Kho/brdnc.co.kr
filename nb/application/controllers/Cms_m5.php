@@ -594,6 +594,7 @@ class Cms_m5 extends CB_Controller {
 
 					if($this->input->post('_m3_1_1_m')=='on'){$_m3_1_1=2;} else if($this->input->post('_m3_1_1')=='on'){$_m3_1_1=1;} else {$_m3_1_1=0;}
 					if($this->input->post('_m3_1_2_m')=='on'){$_m3_1_2=2;} else if($this->input->post('_m3_1_2')=='on'){$_m3_1_2=1;} else {$_m3_1_2=0;}
+					if($this->input->post('_m3_1_3_m')=='on'){$_m3_1_3=2;} else if($this->input->post('_m3_1_3')=='on'){$_m3_1_3=1;} else {$_m3_1_3=0;}
 					if($this->input->post('_m3_2_1_m')=='on'){$_m3_2_1=2;} else if($this->input->post('_m3_2_1')=='on'){$_m3_2_1=1;} else {$_m3_2_1=0;}
 					if($this->input->post('_m3_2_2_m')=='on'){$_m3_2_2=2;} else if($this->input->post('_m3_2_2')=='on'){$_m3_2_2=1;} else {$_m3_2_2=0;}
 
@@ -630,6 +631,7 @@ class Cms_m5 extends CB_Controller {
 
 						'_m3_1_1' => $_m3_1_1,
 						'_m3_1_2' => $_m3_1_2,
+						'_m3_1_3' => $_m3_1_3,
 						'_m3_2_1' => $_m3_2_1,
 						'_m3_2_2' => $_m3_2_2,
 

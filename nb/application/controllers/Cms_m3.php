@@ -48,13 +48,19 @@ class Cms_m3 extends CB_Controller {
 		$sdi = $this->uri->segment(4, 1);
 
 		$view['s_di'] = array(
-			array('동호수 등록', '프로젝트 목록'), // 첫번째 하위 메뉴
+			array('동호수 등록', '기타 세부설정', '프로젝트 목록'), // 첫번째 하위 메뉴
 			array('신규 등록', '검토 자료'),       // 두번째 하위 메뉴
-			array('동호 데이터 입력', '프로젝트 기본정보 수정'),   // 첫번째 하위 제목
+			array('동호 데이터 입력', '프로젝트 타입별 수납약정 관리 ------- [일부 완성]', '프로젝트 목록 및 기본정보 수정'),   // 첫번째 하위 제목
 			array('신규 프로젝트 등록', '예비 프로젝트 검토')     // 두번째 하위 제목
 		);
 
-		// 프로젝트 관리 1. 데이터등록 ////////////////////////////////////////////////////////////////////
+		// 등록된 프로젝트 데이터
+		$where = "";
+		if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
+		$view['all_pj'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC ');
+		$project = $view['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
+
+		// 3-1 프로젝트 관리 1. 데이터등록 ////////////////////////////////////////////////////////////////////
 		if($mdi==1 && $sdi==1 ){
 
 			// 조회 등록 권한 체크
@@ -261,16 +267,91 @@ class Cms_m3 extends CB_Controller {
 				}
 			}
 
-		// 프로젝트 관리 2. 기본정보 수정 ////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+		// 3-1 프로젝트 관리 2. 기타 세부약정 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==1 && $sdi==2) {
+			$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m3_1_2', $this->session->userdata['mem_id']);
 			// 불러올 페이지에 보낼 조회 권한 데이터
 			$view['auth12'] = $auth['_m3_1_2'];
 
-			$where = "";
-			if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
+			// 1. 분양 차수 설정
+			$view['con_diff'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_con_diff WHERE pj_seq='$project' ORDER BY diff_no "); // 프로젝트 등록된 전체 차수
+
+			// 2. 납입 회차 설정
+
+			// 3. 층별 조건 설정
+
+			// 4. 향별 조건 설정
+
+			// 5. 조건별 분양가 설정
+
+			// 6. 회차별 납입가 설정
+			// price - 데이터 불러오기
+			$price = $view['price'] = $this->cms_main_model->sql_result(" SELECT *, cb_cms_sales_price.seq AS pr_seq FROM cb_cms_sales_price, cb_cms_sales_con_floor WHERE cb_cms_sales_price.pj_seq='$project' AND con_diff_seq='".$this->input->get('con_diff')."' AND con_floor_seq=cb_cms_sales_con_floor.seq  ORDER BY cb_cms_sales_price.seq ");
+			$pay_sche = $view['pay_sche'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_sort='".$this->input->get('pay_sort')."' ORDER BY pay_code ");
+
+			$diff_no = $this->input->get('con_diff');
+			$view['pr_diff'] = $this->cms_main_model->sql_result(" SELECT	seq, diff_no, diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$diff_no' "); // 차수
+			$view['pr_floor'] = $this->cms_main_model->sql_result(" SELECT seq, floor_name, COUNT(seq) AS num_floor FROM cb_cms_sales_con_floor WHERE pj_seq='$project' "); // 층별
+			$view['pr_type'] = $this->cms_main_model->sql_result(" SELECT seq, type_name, COUNT(seq) AS num_type FROM cb_cms_sales_con_type WHERE pj_seq='$project' "); // 타입
+			$view['pr_row'] = $view['pr_floor'][0]->num_floor*$view['pr_type'][0]->num_type;
+
+			// 라이브러리 로드
+			$this->load->library('form_validation'); // 폼 검증
+
+			// 6. 회차별 납입가 설정
+			for($i=0; $i<count($price); $i++) :
+				for($j=0; $j<count($pay_sche); $j++) :
+					$this->form_validation->set_rules("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq, "납부액_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq, 'trim|numeric|required');
+				endfor;
+			endfor;
+
+			if($this->form_validation->run() !== FALSE) : // 폼검증 통과 했을 경우, post 데이터가 있을 때
+
+				for($i=0; $i<count($price); $i++) :
+					for($j=0; $j<count($pay_sche); $j++) :
+						$pmt_data = array(
+							'pj_seq' => $project,
+							'price_seq' => $price[$i]->pr_seq,
+							'pay_sche_seq' => $pay_sche[$j]->seq,
+							'payment' => $this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq),
+							'reg_date' => date('Y-m-d'),
+							'reg_worker' => $this->session->userdata('mem_username')
+						);
+						if(empty($this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h")) OR ($this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h"))=='0') {
+							$result[$j] = $this->cms_main_model->insert_data('cb_cms_sales_payment', $pmt_data);
+							if( !$result[$j]) {alert('데이터베이스 에러입니다.1', '');}
+						}elseif(($this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h"))=='1') {
+							$result[$j] = $this->cms_main_model->update_data('cb_cms_sales_payment', $pmt_data, array('pj_seq'=>$project, 'price_seq'=>$price[$i]->pr_seq, 'pay_sche_seq'=>$pay_sche[$j]->seq));
+							if( !$result[$j]) {alert('데이터베이스 에러입니다.2', '');}
+						}
+					endfor;
+				endfor;
+
+				alert('정상 처리 되었습니다.', '');
+			endif; // 폼검증 통과 시 종료
+
+
+
+
+
+
+
+		// 3-1 프로젝트 관리 3. 목록 및 기본정보 수정 ////////////////////////////////////////////////////////////////////
+		}else if($mdi==1 && $sdi==3) {
+
+			// 조회 등록 권한 체크
+			$auth = $this->cms_main_model->auth_chk('_m3_1_3', $this->session->userdata['mem_id']);
+			// 불러올 페이지에 보낼 조회 권한 데이터
+			$view['auth13'] = $auth['_m3_1_3'];
 
 			// 페이지네이션 라이브러리 로딩 추가
 			$this->load->library('pagination');
@@ -451,10 +532,10 @@ class Cms_m3 extends CB_Controller {
 				$result = $this->cms_main_model->update_data('cb_cms_project', $update_pj_data, $where = array('seq' => $this->input->post('project')));
 
 				if($result) { // 등록 성공 시
-					alert('프로젝트 정보가  수정되었습니다.', base_url('cms_m3/project/1/2/?project='.$this->input->post('project')));
+					alert('프로젝트 정보가  수정되었습니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project')));
 					exit;
 				}else{   // 등록 실패 시
-					alert('데이터베이스 오류가 발생하였습니다..', base_url('cms_m3/project/1/2/'));
+					alert('데이터베이스 오류가 발생하였습니다..', base_url('cms_m3/project/1/3/'));
 					exit;
 				}
 			}
@@ -463,7 +544,7 @@ class Cms_m3 extends CB_Controller {
 
 
 
-		// 신규 프로젝트 1. 신규등록 ////////////////////////////////////////////////////////////////////
+		// 3-2 신규 프로젝트 1. 신규등록 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==1) {
 
 			// 조회 등록 권한 체크
@@ -632,7 +713,7 @@ class Cms_m3 extends CB_Controller {
 
 
 
-		// 신규 프로젝트 1. 예비검토 ////////////////////////////////////////////////////////////////////
+		// 3-2 신규 프로젝트 2. 예비검토 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==2) {
 
 			// 조회 등록 권한 체크
