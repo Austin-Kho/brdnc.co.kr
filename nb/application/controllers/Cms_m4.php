@@ -174,11 +174,11 @@ class Cms_m4 extends CB_Controller {
 			// sql문에 적용할 테이블명 ////////////////
 			$cb_table = 'cb_cms_capital_cash_book, cb_cms_capital_bank_account';
 
-			// Excell_cach_book file 다운로드 Start
-			if($this->input->get('excell_cach_book')==='ok') {
+			// Excel_cach_book file 다운로드 Start
+			if($this->input->get('excel_cach_book')==='ok') {
 				$view['com_title'] = $this->cms_main_model->select_data_row('cb_cms_com_info', array(1=>1));
 				$view['cb_list'] = $this->cms_m4_model->cash_book_list($cb_table, $view['where'], '', '', '', 'ASC');
-				$this->load->view('/cms_views/excell/cash_book', $view);
+				$this->load->view('/cms_views/excel/cash_book', $view);
 			}
 
 			// 페이지네이션 라이브러리 로딩 추가

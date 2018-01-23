@@ -31,7 +31,7 @@ class Cash_book extends CB_Controller {
 		$data['cash_book_list'] = $this->cms_m4_model->cash_book_list($cb_table, $data['where'], '', '', '', 'ASC');
 
 		// 실제 엑셀 VIEW 파일 로드
-		$this->load->view('/cms_views/excell/cash_book', $data);
+		$this->load->view('/cms_views/excel/cash_book', $data);
 	}
 }
 // End of this file
