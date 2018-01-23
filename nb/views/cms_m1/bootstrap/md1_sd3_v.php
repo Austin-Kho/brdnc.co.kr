@@ -164,7 +164,7 @@ else :
 										<div style="width:30px; height:14px; text-align:center; font-size:9px; color:#333; padding: 1px 0; <?php echo $div_col; ?>">
 											<span><?php echo $now_ho; ?></span>
 										</div>
-										<div style="width:30px; height:14px; text-align:center; font-size:9px; color: #FFF; <?php echo $condi_col; ?>" data-toggle="tooltip" title="<?php //echo $tooltip; ?>"><?php echo $condi;?></div>
+										<div style="width:30px; height:14px; text-align:center; font-size:8px; color: #FFF; <?php echo $condi_col; ?>" data-toggle="tooltip" title="<?php //echo $tooltip; ?>"><?php echo $condi;?></div>
 									</div>
 <?php endfor;  endfor; ?>
 								</td>
