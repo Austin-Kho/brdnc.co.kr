@@ -12,19 +12,44 @@ class Status_board extends CB_Controller
 		$this->load->model('cms_main_model'); //모델 파일 로드
 	}
 
+	public function download(){
 
+ 		/** 엑셀 시트만들기 기초정보 시작 **/
+ 		//----------------------------------------------------------//
+    require_once APPPATH . '/third_party/Phpexcel/Bootstrap.php';
 
+    // Create new Spreadsheet object
+    $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+
+    // Set document properties
+    $spreadsheet->getProperties()
+		 	 ->setCreator('brinc.co.kr')
+       ->setLastModifiedBy($this->session->userdata('mem_username'))
+       ->setTitle('Status_board')
+       ->setSubject('동호수_현황표')
+       ->setDescription('동호수 청/계약 현황표');
+
+ 		$spreadsheet->setActiveSheetIndex(0); // 워크시트에서 1번째는 활성화
+ 		$spreadsheet->getActiveSheet()->setTitle('동호수_현황표'); // 워크시트 이름 지정
+
+ 		// 인쇄 관련 옵션
+ 		$spreadsheet->getActiveSheet()->getPageSetup()
+			->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE) // 가로 모드
+ 			->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A3); // 용지 크기
+
+ 		$spreadsheet->getActiveSheet()->getPageSetup()->setFitToWidth(1); // 1페이지에 모든 열 마추기
+ 		// $spreadsheet->getActiveSheet()->getPageSetup()->setFitToHeight(0); //
 
 		// 인쇄 시 여백
-		$spreadsheet->getActiveSheet()->getPageMargins()->setTop(0.8);
-		$spreadsheet->getActiveSheet()->getPageMargins()->setRight(0.5);
-		$spreadsheet->getActiveSheet()->getPageMargins()->setLeft(0.5);
-		$spreadsheet->getActiveSheet()->getPageMargins()->setBottom(0.3);
+		$spreadsheet->getActiveSheet()->getPageMargins()
+			->setTop(0.8)->setRight(0.5)->setLeft(0.5)->setBottom(0.3);
 
-		$spreadsheet->getActiveSheet()->getPageSetup()->setHorizontalCentered(true); // 가로 중앙 true 모드
-		$spreadsheet->getActiveSheet()->getPageSetup()->setVerticalCentered(true); // 세로 중앙 true 모드
+		$spreadsheet->getActiveSheet()->getPageSetup()
+			->setHorizontalCentered(true) // 가로 중앙 true 모드
+			->setVerticalCentered(true);  // 세로 중앙 true 모드
 		//----------------------------------------------------------//
 		/** 엑셀 시트만들기 기초정보 종료 **/
+
 
 		/** 데이터 가져오기 시작 **/
 		//----------------------------------------------------------//
@@ -66,7 +91,6 @@ class Status_board extends CB_Controller
 
 		// 동 수 및 라인 수에 따른 총 열 계산 및 컬럼 텍스트 구하기
 		$max_col = toAlpha(count($dong_data)+$total_line);
-
 		//----------------------------------------------------------//
 		/** 데이터 가져오기 종료 **/
 
@@ -148,8 +172,8 @@ class Status_board extends CB_Controller
 
 				// 동(베이스) 표기 셀 병합
 				$spreadsheet->getActiveSheet()->mergeCells(toAlpha($base_col+1).((2*$view['max_floor'])+7).":".toAlpha($base_col+$line_num->to_line).((2*$view['max_floor'])+8));
-				$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col+1).((2*$view['max_floor'])+7).":".toAlpha($base_col+$line_num->to_line).((2*$view['max_floor'])+8))->applyFromArray($outBorder);
 				$spreadsheet->getActiveSheet()->setCellValue(toAlpha($base_col+1).((2*$view['max_floor'])+7), $d.'동');// 해당 셀의 내용을 입력 합니다.
+				$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col+1).((2*$view['max_floor'])+7).":".toAlpha($base_col+$line_num->to_line).((2*$view['max_floor'])+8))->applyFromArray($outBorder);
 				$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col+1).((2*$view['max_floor'])+7))->getFont()->setSize(9);// A1의 폰트를 변경 합니다.
 				$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col+1).((2*$view['max_floor'])+7))->getFont()->setBold(true);// A1의 글씨를 볼드로 변경합니다.
 				$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col+1).((2*$view['max_floor'])+7))->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFd6d7d5');
@@ -174,12 +198,12 @@ class Status_board extends CB_Controller
 								$now_ho = ($db_ho !==null) ? $db_ho->ho : ''; // 해당 호수
 								$type_col = ($db_ho !==null) ? str_replace('#', 'FF', $type_color[$db_ho->type]) : '';
 
-								if($floor_no<3 && $db_ho===null){ // 피로티일 때
+								if($floor_no<3 && $db_ho===null) : // 피로티일 때
 									$spreadsheet->getActiveSheet()->mergeCells(toAlpha($base_col).($base_row+2).':'.toAlpha($base_col).($base_row+3)); // 셀을 합칩니다.
 									$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col).($base_row+2).':'.toAlpha($base_col).($base_row+3))
 										->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFdbdedc'); // 피로티 색상
 									$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col).($base_row+2).':'.toAlpha($base_col).($base_row+3))->applyFromArray($outBorder);
-								}
+								endif;
 
 
 								if($db_ho !==null) : // 세대 상태 확인 소스
@@ -211,16 +235,16 @@ class Status_board extends CB_Controller
 								endif;
 
 								$base_row+=2; // 시작행 부터 최고층 만큼 증가
-								if(!empty($now_ho)) {
+								if(!empty($now_ho)) :
 									$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col).$base_row.':'.toAlpha($base_col).($base_row+1))->applyFromArray($outBorder);
 									$spreadsheet->getActiveSheet()->setCellValue(toAlpha($base_col).$base_row, $now_ho);// 해당 셀의 내용을 입력 합니다.
 									$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col).$base_row)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($type_col);
 
-									if($condi!==""){
+									if($condi!=="") :
 										$spreadsheet->getActiveSheet()->setCellValue(toAlpha($base_col).($base_row+1), $condi);// 해당 셀의 내용을 입력 합니다.
 										$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col).($base_row+1))->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB($condi_col);
-									}
-								}
+									endif;
+								endif;
 						endfor;
 				endfor;
 				$base_col++; // 동 사이 1칸 띄우기
@@ -241,17 +265,17 @@ class Status_board extends CB_Controller
 		$filename='동호수_현황표.xlsx'; // 엑셀 파일 이름
 
 	    // Redirect output to a client's web browser (Excel2007)
-	    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // mime 타입
-		Header('Content-Disposition: attachment; filename='.iconv('UTF-8','CP949',$filename)); // 브라우저에서 받을 파일 이름
-	    header('Cache-Control: max-age=0'); // no cache
+	    Header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // mime 타입
+			Header('Content-Disposition: attachment; filename='.iconv('UTF-8','CP949',$filename)); // 브라우저에서 받을 파일 이름
+	    Header('Cache-Control: max-age=0'); // no cache
 	    // If you're serving to IE 9, then the following may be needed
-	    header('Cache-Control: max-age=1');
+	    Header('Cache-Control: max-age=1');
 
 	    // If you're serving to IE over SSL, then the following may be needed
-	    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-	    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
-	    header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-	    header('Pragma: public'); // HTTP/1.0
+	    Header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+	    Header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+	    Header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+	    Header('Pragma: public'); // HTTP/1.0
 
 			// Excel5 포맷으로 저장 -> 엑셀 2007 포맷으로 저장하고 싶은 경우 'Excel2007'로 변경합니다.
 	    $writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Excel2007');
