@@ -38,11 +38,9 @@ class Capital_cash_book extends CB_Controller
 		$data['row'] = $this->cms_main_model->select_data_row('cb_cms_capital_cash_book', $where);
 
 		// 계정별 세부계정과목 구하기
-		$data['acnt1'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_capital_account_d3 WHERE d1_code='1' AND is_sp_acc !='1' ORDER BY d3_code ASC ");
-		$data['acnt2'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_capital_account_d3 WHERE d1_code='2' AND is_sp_acc !='1' ORDER BY d3_code ASC ");
-		$data['acnt3'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_capital_account_d3 WHERE d1_code='3' AND is_sp_acc !='1' ORDER BY d3_code ASC ");
-		$data['acnt4'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_capital_account_d3 WHERE d1_code='4' AND is_sp_acc !='1' ORDER BY d3_code ASC ");
-		$data['acnt5'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_capital_account_d3 WHERE d1_code='5' AND is_sp_acc !='1' ORDER BY d3_code ASC ");
+		for($i=1; $i<=5; $i++) : // 자본/부채/자산/수익/비용->(5)
+			$data['acnt'.$i] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_capital_account_d3 WHERE d1_code=$i AND is_sp_acc !='1' ORDER BY d3_code ASC ");
+		endfor;
 
 		// 현장목록 가져오기
 		$data['pj'] = $this->cms_main_model->sql_result(" SELECT seq, pj_name FROM cb_cms_project WHERE is_end!='1' ORDER BY biz_start_ym DESC, seq DESC ");
@@ -66,11 +64,9 @@ class Capital_cash_book extends CB_Controller
 			//본 페이지 로딩
 			$this->load->view('/cms_views/popup/cash_book_v', $data);
 		}else{
-			if($this->input->post('account_1')) $account = $this->input->post('account_1');
-			if($this->input->post('account_2')) $account = $this->input->post('account_2');
-			if($this->input->post('account_3')) $account = $this->input->post('account_3');
-			if($this->input->post('account_4')) $account = $this->input->post('account_4');
-			if($this->input->post('account_5')) $account = $this->input->post('account_5');
+			for($j=1; $j<=5; $j++) :
+				if($this->input->post('account_'.$j)) $account = $this->input->post('account_'.$j);
+			endfor;
 
 			$deal_data = array(
 				'class1' => $this->input->post('class1', TRUE),

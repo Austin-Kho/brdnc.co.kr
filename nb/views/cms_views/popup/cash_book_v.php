@@ -1,5 +1,5 @@
-	<script src="http://brinc.co.kr/ns/static/js/global.js"></script>
-	<script src="http://brinc.co.kr/ns/static/js/m4.js"></script>
+	<script src="<?php echo base_url('static/js/global.js'); ?>"></script>
+	<script src="<?php echo base_url('static/js/cms_m4.js'); ?>"></script>
 	<script type="text/javascript">
 	<!--
 		function _editChk(){
