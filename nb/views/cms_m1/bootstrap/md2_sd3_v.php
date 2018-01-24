@@ -3,6 +3,18 @@ if($auth23<1) :
 	include('no_auth.php');
 else :
 ?>
+<script>
+	function checkAll(handle, obj) {
+		var i;
+		var chk = document.getElementsByName(obj);
+		var tot = chk.length;
+		if(handle.checked===true){
+			for (i = 0; i < tot; i++) {chk[i].checked = true;}
+		}else {
+			for (i = 0; i < tot; i++) {chk[i].checked = false;}
+		}
+	}
+</script>
 	<div class="main_start">&nbsp;</div>
 	<!-- 1. 분양관리 -> 2. 수납 관리 ->2.   설정 관리 -->
 
@@ -121,7 +133,8 @@ else :
 		<div class="col-md-12 bo-top bo-bottom" style="padding: 0; margin: 0 0 20px 0;">
 <?php
 	$attributes = array('name' => 'form1', 'method' => 'get');
-	echo form_open(base_url(uri_string()), $attributes);
+	$hedden = array('pj' => $project);
+	echo form_open(base_url(uri_string()), $attributes, $hedden);
 ?>
 				<div class="col-xs-12 col-sm-2 col-md-1 center bgf8" style="height: 40px; padding: 10px 0;">검색 조건</div>
 				<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
@@ -216,31 +229,29 @@ else :
 <?php if(empty($cont_data)) : ?>
 		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 120px 0;">등록된 데이터가 없습니다.</div>
 <?php else : ?>
-		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;"><?php echo "[ 결과 : ".number_format($total_rows)." 건 ]"; ?>
+		<!-- <div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;"><?php echo "[ 결과 : ".number_format($total_rows)." 건 ]"; ?>
 			<a href="<?php echo base_url('/cms_excel_file/contract_data/download')."?pj=".$project."&qry=".urlencode($cont_query); ?>" style="padding-left: 30px;">
 				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
 			</a>
-		</div>
+		</div> -->
 		<div class="col-xs-12 table-responsive" style="padding: 0;">
 			<table class="table table-bordered table-hover table-condensed">
 				<thead class="bo-top center bgf8">
 					<tr>
-						<td width="8%">계약 일련번호</td>
-						<td width="8%">차 수</td>
-						<td width="6%">타 입</td>
-						<td width="7%">동 호 수</td>
-						<td width="6%">계 약 자</td>
-						<td width="9%">연락처 [1]</td>
-						<td width="9%">계약 일자</td>
-						<td width="8%">총 납입금</td>
-						<td width="6%">계약 완납</td>
-						<td width="9%">미비 서류</td>
-						<td width="14%">비 고</td>
-						<td width="10%">계약자 거주지</td>
+						<td width="5%"><input type="checkbox" onclick="checkAll(this, 'chk[]')"></td>
+						<td width="15%">계약 일련번호</td>
+						<td width="10%">차 수</td>
+						<td width="10%">타 입</td>
+						<td width="10%">동 호 수</td>
+						<td width="10%">계 약 자</td>
+						<td width="15%">총 납입금</td>
+						<td width="10%">계약 완납</td>
+						<td width="15%">계약 일자</td>
 					</tr>
 				</thead>
 				<tbody class="bo-bottom center">
 <?php
+$i=1;
 foreach ($cont_data as $lt) :
 	$nd = $this->cms_main_model->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$lt->cont_diff' ");
 	$total_rec = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS received FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$lt->cont_seq' ");
@@ -255,17 +266,6 @@ foreach ($cont_data as $lt) :
 		$is_paid_ok = "<span style='color: #CD0505;'>미납</span>";
 	}
 
-	$idoc = explode("-", $lt->incom_doc); // 미비 서류
-	$incom_doc = "";
-	if($idoc[0]==1) $incom_doc .= " 각서9종/";
-	if($idoc[1]==1) $incom_doc .= " 주민등본/";
-	if($idoc[2]==1) $incom_doc .= " 주민초본/";
-	if($idoc[3]==1) $incom_doc .= " 가족관계증명/";
-	if($idoc[4]==1) $incom_doc .= " 인감증명/";
-	if($idoc[5]==1) $incom_doc .= " 사용인감/";
-	if($idoc[6]==1) $incom_doc .= " 신분증/";
-	if($idoc[7]==1) $incom_doc .= " 배우자등본/";
-
 	$dong_ho = explode("-", $lt->unit_dong_ho);
 	$adr1 = ($lt->cont_addr2) ? explode("|", $lt->cont_addr2) : explode("|", $lt->cont_addr1);
 	$adr2 = explode(" ", $adr1[1]);
@@ -275,20 +275,20 @@ foreach ($cont_data as $lt) :
 	$new_span = ($lt->cont_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #2A41DB; color: #fff; font-size: 10px;'>&nbsp;N </span>&nbsp; " : "";
 ?>
 					<tr>
+						<td><input type="checkbox" name="chk[]" value="<?php echo $i; ?>"></td>
 						<td><?php echo $cont_edit_link.$lt->cont_code."</a>"; ?></td>
 						<td><?php echo $nd->diff_name; ?></td>
 						<td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></td>
 						<td><?php echo $cont_edit_link.$lt->unit_dong_ho."</a>"; ?></td>
 						<td><?php echo $cont_edit_link.$lt->contractor."</a>"; ?></td>
-						<td><?php echo $lt->cont_tel1; ?></td>
-						<td><?php echo $new_span." ".$lt->cont_date; ?></span></td>
 						<td class="right"><a href="<?php echo base_url('cms_m1/sales/2/2')."?project=".$project."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>"><?php echo number_format($total_rec->received); ?></a></td>
 						<td><?php echo $is_paid_ok; ?></td>
-						<td><div style="cursor: pointer; color: red;" data-toggle="tooltip" data-placement="left" title="<?php echo $incom_doc; ?>"><?php echo cut_string($incom_doc, 9, ".."); ?></div></td>
-						<td class="left"><div style="cursor: pointer;" data-toggle="tooltip" data-placement="left" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 12, ".."); ?></div></td>
-						<td><?php echo $addr; ?></td>
+						<td><?php echo $new_span." ".$lt->cont_date; ?></span></td>
 					</tr>
-<?php endforeach; ?>
+<?php
+	$i++;
+	endforeach;
+?>
 				</tbody>
 			</table>
 		</div>
@@ -297,20 +297,11 @@ foreach ($cont_data as $lt) :
 			<ul class="pagination pagination-sm"><?php echo $pagination; ?></ul>
 		</div>
   </div>
-
+<?php
+	$download_str = $auth23<2 ? "alert('출력 권한이 없습니다.');" : "if(confirm('선택하신 건별 고지서를 다운로드하시겠습니까?')) alert('준비 중입니다.')"; // location.href='".base_url()."'
+?>
 	<div class="form-group btn-wrap" style="margin: ;">
-<?php if($this->input->get('modi')=='1') : ?>
-		<input type="button" class="btn btn-warning btn-sm" onclick="location.href='<?php echo base_url('cms_m1/sales/2/2').'?modi=0&project='.$project.'&dong='.$this->input->get('dong').'&ho='.$this->input->get('ho'); ?>'"  value="뒤로 가기">
-
-
-<?php   if(date('Y-m-d', strtotime('-3 day')) <= $modi_rec->reg_date) :?>
-		<input type="button" class="btn btn-danger btn-sm" onclick="if(confirm('해당 수납 데이터를 삭제하시겠습니까?')===true) location.href='<?php echo base_url('cms_m1/sales/2/2').'?modi=0&project='.$project.'&dong='.$this->input->get('dong').'&ho='.$this->input->get('ho').'&del_code='.$this->input->get('rec_seq'); ?>'"  value="삭제 하기">
-<?php   else : ?>
-		<input type="button" class="btn btn-default btn-sm" onclick="alert('등록일 기준 3일 이내의 건에 한해서 삭제할 수 있습니다.\n등록일로부터 3일 이후의 건에 대한 삭제는 관리자에게 문의하여 주십시요.')"  value="삭제 하기">
-<?php   endif; ?>
-
-<?php endif;?>
-		<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str?>" value="고지서 다운로드">
+		<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $download_str?>" value="선택 건별 고지서 다운로드">
 	</div>
 	<!-- -------------------------------------------------- -->
 <?php endif; ?>

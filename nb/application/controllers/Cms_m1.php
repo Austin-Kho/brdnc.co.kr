@@ -1035,6 +1035,50 @@ class Cms_m1 extends CB_Controller {
 			$view['view']['bill_issue'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_bill_issue WHERE pj_seq='$project' ");
 			$view['view']['pay_sche'] = $this->cms_main_model->sql_result(" SELECT seq, pay_sort, pay_code, pay_name, pay_due_date FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' ");
 
+			// 계약자 데이터 구하기
+			// 계약 데이터 검색 필터링
+			$cont_query = "  SELECT *, cb_cms_sales_contractor.seq AS contractor_seq  ";
+			$cont_query .= " FROM cb_cms_sales_contract, cb_cms_sales_contractor  ";
+			$cont_query .= " WHERE pj_seq='$project' AND is_transfer='0' AND is_rescission='0' AND cb_cms_sales_contract.seq = cont_seq ";
+			if( !empty($this->input->get('diff'))) {$df = $this->input->get('diff'); $cont_query .= " AND cont_diff='$df' ";}
+			if( !empty($this->input->get('type'))) {$tp = $this->input->get('type'); $cont_query .= " AND unit_type='$tp' ";}
+			if( !empty($this->input->get('dong'))) {$dn = $this->input->get('dong'); $cont_query .= " AND unit_dong='$dn' ";}
+			if( !empty($this->input->get('s_date'))) {$sd = $this->input->get('s_date'); $cont_query .= " AND cb_cms_sales_contract.cont_date>='$sd' ";}
+			if( !empty($this->input->get('e_date'))) {$ed = $this->input->get('e_date'); $cont_query .= " AND cb_cms_sales_contract.cont_date<='$ed' ";}
+			if( !empty($this->input->get('sc_name'))) {$ctor = $this->input->get('sc_name'); $cont_query .= " AND (cb_cms_sales_contractor.contractor='$ctor' OR cb_cms_sales_contract.note LIKE '%$ctor%') ";}
+
+			// $view['cont_query'] = $cont_query; // Excel file 로 보낼 쿼리
+
+			//페이지네이션 라이브러리 로딩 추가
+			$this->load->library('pagination');
+
+			//페이지네이션 설정/////////////////////////////////
+			$config['base_url'] = base_url('cms_m1/sales/2/3');   //페이징 주소
+			$config['total_rows'] = $view['total_rows'] = $this->cms_main_model->sql_num_rows($cont_query);  //게시물의 전체 갯수
+			if( !$this->input->get('num')) $config['per_page'] = 10;  else $config['per_page'] = $this->input->get('num'); // 한 페이지에 표시할 게시물 수
+			$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
+			// $config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
+			$config['reuse_query_string'] = TRUE;    //http://example.com/index.php/test/page/20?query=search%term
+
+			// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
+			$page = $this->input->get('page'); // get 방식 아닌 경우 $this->uri->segment($config['uri_segment']);
+			$start = ($page<=1 or empty($page)) ? 0 : ($page-1) * $config['per_page'];
+			$limit = $config['per_page'];
+
+			//페이지네이션 초기화
+			$this->pagination->initialize($config);
+			//페이징 링크를 생성하여 view에서 사용할 변수에 할당
+			$view['pagination'] = $this->pagination->create_links();
+
+
+			// 계약 데이터 가져오기
+			if( !$this->input->get('order')) $cont_query .= " ORDER BY cb_cms_sales_contract.cont_date DESC, cb_cms_sales_contract.seq DESC ";
+			if($this->input->get('order')=='1') $cont_query .= " ORDER BY cont_code ";
+			if($this->input->get('order')=='2') $cont_query .= " ORDER BY cont_code DESC ";
+			if($start != '' or $limit !='')	$cont_query .= " LIMIT ".$start.", ".$limit." ";
+
+			$view['cont_data'] = $this->cms_main_model->sql_result($cont_query); // 계약 및 계약자 데이터
+
 
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
