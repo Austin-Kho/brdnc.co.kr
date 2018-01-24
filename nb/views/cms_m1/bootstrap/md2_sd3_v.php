@@ -14,6 +14,18 @@ else :
 			for (i = 0; i < tot; i++) {chk[i].checked = false;}
 		}
 	}
+	function print_bill(obj){
+		var i;
+		var chk = document.getElementsByName(obj);
+		var tot = chk.length;
+		var seq = '';
+
+		for (i = 0; i < tot; i++) {
+			sep = i==0 ?  "" : "-";
+			if(chk[i].checked == true) seq += sep+chk[i].value;
+		}
+		location.href="<?php echo base_url('cms_download/bill_issue/download').'?seq='?>"+seq;
+	}
 </script>
 	<div class="main_start">&nbsp;</div>
 	<!-- 1. 분양관리 -> 2. 수납 관리 ->2.   설정 관리 -->
@@ -118,9 +130,7 @@ else :
 	</div>
 	<div class="form-group btn-wrap" style="margin: ;">
 <?php
-	$submit_str = $auth23<2
-		? alert('등록권한이 없습니다.', current_url())
-		: "if(confirm('고지서 기본사항을 설정하시겠습니까?')) submit();";
+	$submit_str = $auth23<2	? "alert('이 페이지에 대한 관리(등록)권한이 없습니다.')" : "if(confirm('고지서 기본사항을 설정하시겠습니까?')) submit();";
 ?>
 		<input type="button" class="btn btn-default btn-sm" onclick="<?php echo $submit_str?>" value="UPDATE">
 	</div>
@@ -230,7 +240,7 @@ else :
 		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 120px 0;">등록된 데이터가 없습니다.</div>
 <?php else : ?>
 		<!-- <div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;"><?php echo "[ 결과 : ".number_format($total_rows)." 건 ]"; ?>
-			<a href="<?php echo base_url('/cms_excel_file/contract_data/download')."?pj=".$project."&qry=".urlencode($cont_query); ?>" style="padding-left: 30px;">
+			<a href="<?php echo base_url('/cms_download/contract_data/download')."?pj=".$project."&qry=".urlencode($cont_query); ?>" style="padding-left: 30px;">
 				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
 			</a>
 		</div> -->
@@ -251,7 +261,6 @@ else :
 				</thead>
 				<tbody class="bo-bottom center">
 <?php
-$i=1;
 foreach ($cont_data as $lt) :
 	$nd = $this->cms_main_model->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$lt->cont_diff' ");
 	$total_rec = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS received FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$lt->cont_seq' ");
@@ -275,7 +284,7 @@ foreach ($cont_data as $lt) :
 	$new_span = ($lt->cont_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #2A41DB; color: #fff; font-size: 10px;'>&nbsp;N </span>&nbsp; " : "";
 ?>
 					<tr>
-						<td><input type="checkbox" name="chk[]" value="<?php echo $i; ?>"></td>
+						<td><input type="checkbox" name="chk[]" value="<?php echo $lt->cont_seq; ?>"></td>
 						<td><?php echo $cont_edit_link.$lt->cont_code."</a>"; ?></td>
 						<td><?php echo $nd->diff_name; ?></td>
 						<td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></td>
@@ -286,7 +295,6 @@ foreach ($cont_data as $lt) :
 						<td><?php echo $new_span." ".$lt->cont_date; ?></span></td>
 					</tr>
 <?php
-	$i++;
 	endforeach;
 ?>
 				</tbody>
@@ -298,7 +306,7 @@ foreach ($cont_data as $lt) :
 		</div>
   </div>
 <?php
-	$download_str = $auth23<2 ? "alert('출력 권한이 없습니다.');" : "if(confirm('선택하신 건별 고지서를 다운로드하시겠습니까?')) alert('준비 중입니다.')"; // location.href='".base_url()."'
+	$download_str = $auth23<2 ? "alert('이 페이지에 대한 관리(출력) 권한이 없습니다.');" : "if(confirm('선택하신 건별 고지서를 다운로드하시겠습니까?')) print_bill('chk[]');"; // location.href='".base_url()."'
 ?>
 	<div class="form-group btn-wrap" style="margin: ;">
 		<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $download_str?>" value="선택 건별 고지서 다운로드">

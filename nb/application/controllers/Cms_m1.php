@@ -1021,8 +1021,7 @@ class Cms_m1 extends CB_Controller {
 
 
 
-
-		// 1. 수납관리 3. 수납약정 ////////////////////////////////////////////////////////////////////
+		// 1. 수납관리 3. 수납 고지서 관리 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==3) {
 			$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
@@ -1035,8 +1034,7 @@ class Cms_m1 extends CB_Controller {
 			$view['view']['bill_issue'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_bill_issue WHERE pj_seq='$project' ");
 			$view['view']['pay_sche'] = $this->cms_main_model->sql_result(" SELECT seq, pay_sort, pay_code, pay_name, pay_due_date FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' ");
 
-			// 계약자 데이터 구하기
-			// 계약 데이터 검색 필터링
+			// 계약자 데이터 구하기	// 계약 데이터 검색 필터링
 			$cont_query = "  SELECT *, cb_cms_sales_contractor.seq AS contractor_seq  ";
 			$cont_query .= " FROM cb_cms_sales_contract, cb_cms_sales_contractor  ";
 			$cont_query .= " WHERE pj_seq='$project' AND is_transfer='0' AND is_rescission='0' AND cb_cms_sales_contract.seq = cont_seq ";
@@ -1065,10 +1063,8 @@ class Cms_m1 extends CB_Controller {
 			$start = ($page<=1 or empty($page)) ? 0 : ($page-1) * $config['per_page'];
 			$limit = $config['per_page'];
 
-			//페이지네이션 초기화
-			$this->pagination->initialize($config);
-			//페이징 링크를 생성하여 view에서 사용할 변수에 할당
-			$view['pagination'] = $this->pagination->create_links();
+			$this->pagination->initialize($config); //페이지네이션 초기화
+			$view['pagination'] = $this->pagination->create_links(); //페이징 링크를 생성하여 view에서 사용할 변수에 할당
 
 
 			// 계약 데이터 가져오기
@@ -1090,42 +1086,6 @@ class Cms_m1 extends CB_Controller {
 			$this->form_validation->set_rules('content', '고지서 내용', 'trim');
 
 
-			// 출력 계약자 데이터 검색 폼 (search_cont)
-			// $this->form_validation->set_rules('ho', '호수', 'trim|required');
-			// $this->form_validation->set_rules('cont_code', '계약일련번호', 'trim|max_length[12]');
-			// $this->form_validation->set_rules('custom_name', '청/계약자명', 'trim|required|max_length[20]');
-      //
-			// $this->form_validation->set_rules('conclu_date', '처리일자', 'trim|exact_length[10]');
-			// $this->form_validation->set_rules('due_date', '계약예정일', 'trim|exact_length[10]');
-			// $this->form_validation->set_rules('app_in_date', '청약금 입금일', 'trim|exact_length[10]');
-			// $this->form_validation->set_rules('cont_in_date1', '계약금 입금일1', 'trim|exact_length[10]');
-			// $this->form_validation->set_rules('cont_in_date2', '계약금 입금일2', 'trim|exact_length[10]');
-			// $this->form_validation->set_rules('cont_in_date3', '계약금 입금일3', 'trim|exact_length[10]');
-			// $this->form_validation->set_rules('cont_in_date4', '계약금 입금일4', 'trim|exact_length[10]');
-			// $this->form_validation->set_rules('cont_in_date5', '계약금 입금일5', 'trim|exact_length[10]');
-			// $this->form_validation->set_rules('cont_in_date6', '계약금 입금일6', 'trim|exact_length[10]');
-			// $this->form_validation->set_rules('cont_in_date7', '계약금 입금일7', 'trim|exact_length[10]');
-      //
-			// $this->form_validation->set_rules('app_in_mon', '청약금', 'trim|numeric');
-			// $this->form_validation->set_rules('tel_1', '연락처[1]', 'trim|required');
-			// $this->form_validation->set_rules('conclu_date', '청/계약일', 'trim|required');
-			// $this->form_validation->set_rules('deposit_1', '계약금1', 'trim|numeric');
-			// $this->form_validation->set_rules('deposit_2', '계약금2', 'trim|numeric');
-			// $this->form_validation->set_rules('deposit_3', '계약금3', 'trim|numeric');
-			// $this->form_validation->set_rules('deposit_4', '계약금4', 'trim|numeric');
-			// $this->form_validation->set_rules('deposit_5', '계약금5', 'trim|numeric');
-			// $this->form_validation->set_rules('deposit_6', '계약금6', 'trim|numeric');
-			// $this->form_validation->set_rules('deposit_7', '계약금7', 'trim|numeric');
-			// $this->form_validation->set_rules('postcode1', '우편변호1', 'trim|numeric|max_length[5]');
-			// $this->form_validation->set_rules('address1_1', '메인주소1', 'trim|max_length[100]');
-			// $this->form_validation->set_rules('address2_1', '세부주소1', 'trim|max_length[50]');
-			// $this->form_validation->set_rules('postcode2', '우편번호2', 'trim|numeric|max_length[5]');
-			// $this->form_validation->set_rules('address1_2', '메인주소2', 'trim|max_length[100]');
-			// $this->form_validation->set_rules('address2_2', '세부주소2', 'trim|max_length[50]');
-			// $this->form_validation->set_rules('note', '비고', 'trim|max_length[200]');
-
-
-
 			if($this->form_validation->run() !== FALSE) : // 폼검증 통과 했을 경우, Post 데이타 있을 경우
 
 				// 고지서 기본 내용 폼(bill_set)
@@ -1141,8 +1101,6 @@ class Cms_m1 extends CB_Controller {
 					$result = $this->cms_main_model->update_data('cb_cms_sales_bill_issue', $bill_set_data, array('pj_seq' => $project));
 					if(isset($result)) alert('정상적으로 설정 되었습니다.', current_url());
 				}
-
-				// 출력 계약자 데이터 검색 폼 (search_cont)
 
 
 
