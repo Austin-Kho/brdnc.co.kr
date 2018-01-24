@@ -6,22 +6,22 @@ else :
 	<div class="main_start">&nbsp;</div>
 	<!-- 1. 분양관리 -> 2. 수납 관리 ->2.   설정 관리 -->
 
+	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
 <?php
-	$attributes = array('method' => 'get', 'name' => 'get_frm');
+	$attributes = array('method' => 'get', 'name' => 'pj_sel');
 	echo form_open(current_url(), $attributes);
 ?>
-		<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
 			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
-			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
-				<div class="col-xs-12 col-sm-10" style="padding: 0px;">
+			<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
+				<div class="col-xs-12 col-sm-8" style="padding: 0px;">
 					<label for="yr" class="sr-only">사업 개시년도</label>
 					<select class="form-control input-sm" name="yr" onchange="submit();">
 						<option value=""> 전 체
 <?php
-  $start_year = "2015";
-  // if(!$yr) $yr=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
-  $year=range($start_year,date('Y'));
-  for($i=(count($year)-1); $i>=0; $i--) :
+	$start_year = "2015";
+	// if(!$yr) $yr=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
+	$year=range($start_year,date('Y'));
+	for($i=(count($year)-1); $i>=0; $i--) :
 ?>
 						<option value="<?php echo $year[$i]?>" <?php if($this->input->get('yr')==$year[$i]) echo "selected"; ?>><?php echo $year[$i]."년"?>
 <?php endfor; ?>
@@ -29,217 +29,288 @@ else :
 				</div>
 			</div>
 			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">프로젝트 선택 </div>
-			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
-				<div class="col-xs-12 col-sm-10" style="padding: 0px;">
+			<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
+				<div class="col-xs-12 col-sm-8" style="padding: 0px;">
 					<label for="project" class="sr-only">프로젝트 선택</label>
 					<select class="form-control input-sm" name="project" onchange="submit();">
-						<option value="0"> 전 체</option>
+						<option value="0"> 전 체
 <?php foreach($all_pj as $lt) : ?>
-						<option value="<?php echo $lt->seq; ?>" <?php if(( !$this->input->post('project') && $lt->seq=='1') OR $this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?></option>
+						<option value="<?php echo $lt->seq; ?>" <?php if(( !$this->input->post('project') && $lt->seq=='1') OR $this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?>
 <?php endforeach; ?>
 					</select>
 				</div>
 			</div>
-			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">설정항목 선택 </div>
-			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
-				<div class="col-xs-12 col-sm-10" style="padding: 0px;">
-					<label for="reg_sort" class="sr-only">설정항목 선택</label>
-					<select class="form-control input-sm" name="reg_sort" onchange="submit();">
-						<option value=""> 전 체
-						<option value="1" <?php if($this->input->get('reg_sort')==='1') echo "selected"; ?>>1. 분양 차수 설정</option>
-						<option value="2" <?php if($this->input->get('reg_sort')==='2') echo "selected"; ?>>2. 납입 회차 설정</option>
-						<option value="3" <?php if($this->input->get('reg_sort')==='3') echo "selected"; ?>>3. 층별 조건 설정</option>
-						<option value="4" <?php if($this->input->get('reg_sort')==='4') echo "selected"; ?>>4. 향별 조건 설정</option>
-						<option value="5" <?php if($this->input->get('reg_sort')==='5') echo "selected"; ?>>5. 조건별 분양가 설정</option>
-						<option value="6" <?php if($this->input->get('reg_sort')==='6') echo "selected"; ?>>6. 회차별 납입가 설정</option>
-					</select>
+		</form>
+	</div>
+
+	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
+		<div class="col-xs-12 font14" style="padding: 0;"><p class="bg-success" style="padding: 13px 30px; margin: 0;">&nbsp;</p></div>
+	</div>
+	<!-- -------------------------------------------------- -->
+<?php
+	$attributes = array('name' => 'bill_set');
+	echo form_open(current_url(), $attributes);
+?>
+
+	<div class="row" style="margin: 0; padding: 0;">
+		<div class="col-sm-12 bo-top" style="padding: 0;">
+			<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">발 행 일 자</div>
+			<div class="col-xs-8 col-md-4" style="padding: 4px;">
+				<div class="col-xs-11 col-sm-11 col-md-11" style="padding: 0px;">
+					<label for="published_date" class="sr-only">발행 일자</label>
+					<input type="text" class="form-control input-sm wid-95" id="published_date" name="published_date" maxlength="10" value="<?php echo date('Y-m-d'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="고지서 발행일">
+				</div>
+				<div class="col-xs-1 col-sm-1 glyphicon-wrap" style="padding: 6px 0;">
+					<a href="javascript:" onclick="cal_add(document.getElementById('published_date'),this); event.cancelBubble=true">
+						<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+					</a>
+				</div>
+			</div>
+			<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">회 차 구 분</div>
+
+			<div class="col-xs-8 col-md-4" style="padding:  4px;">
+				<label for="pay_sche_code" class="sr-only">납부회차</label>
+				<select class="form-control input-sm" name="pay_sche_code">
+					<option value="">납부회차</option>
+<?php foreach ($view['pay_sche'] as $lt) : ?>
+					<option value="<?php echo $lt->pay_code; ?>" <?php if($view['bill_issue']->pay_code==$lt->pay_code) echo "selected"; else echo set_select('pay_sche_code', $lt->pay_code); ?>><?php echo $lt->pay_name; ?></option>
+<?php endforeach; ?>
+				</select>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="row" style="margin: 0; padding: 0;">
+		<div class="col-sm-12 bo-top" style="padding: 0;">
+			<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">고지서 제목</div>
+			<div class="col-xs-8 col-md-10" style="padding: 4px;">
+				<label for="title" class="sr-only">고지서 제목</label>
+				<input type="text" class="form-control input-sm" name="title" value="<?php if(isset($view['bill_issue']->title)) echo $view['bill_issue']->title; else echo set_value('title'); ?>" placeholder="제 목">
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="row" style="margin: 0; padding: 0;">
+		<div class="col-sm-12 bo-top  bo-bottom" style="padding: 0; margin-bottom: 20px;">
+			<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px; height: 73px;">고지서 내용</div>
+			<div class="col-xs-8 col-md-10" style="padding: 0;">
+				<label for="paid_date" class="sr-only">고지서 내용</label>
+				<div class="col-xs-12" style="padding: 4px;">
+					<textarea class="form-control input-sm" id="content" name="content"  rows="3" placeholder="내 용"><?php if(isset($view['bill_issue']->content)) echo $view['bill_issue']->content; else echo set_value('content'); ?></textarea>
 				</div>
 			</div>
 		</div>
-	</form>
-	<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-프로젝트 /조건선택 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+	</div>
+	<div class="form-group btn-wrap" style="margin: ;">
+<?php
+	$submit_str = $auth23<2
+		? alert('등록권한이 없습니다.', current_url())
+		: "if(confirm('고지서 기본사항을 설정하시겠습니까?')) submit();";
+?>
+		<input type="button" class="btn btn-default btn-sm" onclick="<?php echo $submit_str?>" value="UPDATE">
+	</div>
+</form>
+	<!-- -------------------------------------------------- -->
 
-<?php if( !$this->input->get('reg_sort') OR $this->input->get('reg_sort')==='1') : ?>
-	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14" style="padding: 0;"><p class="bg-success" style="padding: 13px 30px; margin: 0;">1. 분양 차수 설정</p></div>
-	</div>
-<?php elseif($this->input->get('reg_sort')==='2') : ?>
-	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14" style="padding: 0;"><p class="bg-success" style="padding: 13px 30px; margin: 0;">2. 납입 회차 설정</p></div>
-	</div>
-<?php elseif($this->input->get('reg_sort')==='3') : ?>
-	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14" style="padding: 0;"><p class="bg-success" style="padding: 13px 30px; margin: 0;">3. 층별 조건 설정</p></div>
-	</div>
-<?php elseif($this->input->get('reg_sort')==='4') : ?>
-	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14" style="padding: 0;"><p class="bg-success" style="padding: 13px 30px; margin: 0;">4. 향별 조건 설정</p></div>
-	</div>
-<?php elseif($this->input->get('reg_sort')==='5') : ?>
-	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14" style="padding: 0;"><p class="bg-success" style="padding: 13px 30px; margin: 0;">5. 조건별 분양가 설정</p></div>
-	</div>
-<?php elseif($this->input->get('reg_sort')==='6') : ?>
-	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14" style="padding: 0;"><p class="bg-success" style="padding: 13px 30px; margin: 0;">6. 회차별 납입가 설정</p></div>
-	</div>
-<?php endif; ?>
-<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-조건별 제목 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+	<!-- -------------------------------------------------- -->
+	<div class="row font12" style="margin: 0; padding: 0;">
+    <div class="col-md-12 mb10"><h4><span class="label label-primary">계약자 데이터</span></h4></div>
+		<div class="col-md-12 bo-top bo-bottom" style="padding: 0; margin: 0 0 20px 0;">
+<?php
+	$attributes = array('name' => 'form1', 'method' => 'get');
+	echo form_open(base_url(uri_string()), $attributes);
+?>
+				<div class="col-xs-12 col-sm-2 col-md-1 center bgf8" style="height: 40px; padding: 10px 0;">검색 조건</div>
+				<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
+					<label for="num" class="sr-only">표시개수</label>
+					<select class="form-control input-sm" name="num">
+						<option value="">표시개수</option>
+						<option value="5" <?php if($this->input->get('num')==5) echo "selected"; ?>> 5개</option>
+						<option value="10" <?php if($this->input->get('num')==10) echo "selected"; ?>> 10개</option>
+						<option value="15" <?php if($this->input->get('num')==15) echo "selected"; ?>> 15개</option>
+						<option value="20" <?php if($this->input->get('num')==20) echo "selected"; ?>> 20개</option>
+						<option value="25" <?php if($this->input->get('num')==25) echo "selected"; ?>> 25개</option>
+						<option value="30" <?php if($this->input->get('num')==30) echo "selected"; ?>> 30개</option>
+					</select>
+				</div>
+				<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
+					<label for="diff" class="sr-only">차수별</label>
+					<select class="form-control input-sm" name="diff">
+						<option value=""> 차수별</option>
+<?php foreach($sc_cont_diff as $lt) : ?>
+						<option value="<?php echo $lt->cont_diff; ?>" <?php if($lt->cont_diff == $this->input->get('diff')) echo "selected"; ?>> <?php echo $lt->cont_diff; ?> 차</option>
+<?php endforeach; ?>
+					</select>
+				</div>
+				<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
+					<label for="type" class="sr-only">타입별</label>
+					<select class="form-control input-sm" name="type" onchange="submit();">
+						<option value=""> 타입별</option>
+<?php foreach($sc_cont_type as $lt) : ?>
+						<option value="<?php echo $lt->unit_type; ?>" <?php if($lt->unit_type == $this->input->get('type')) echo "selected"; ?>> <?php echo $lt->unit_type; ?></option>
+<?php endforeach; ?>
+					</select>
+				</div>
+				<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
+					<label for="dong" class="sr-only">동별</label>
+					<select class="form-control input-sm" name="dong">
+						<option value=""> 동 별</option>
+<?php foreach($sc_cont_dong as $lt) : ?>
+						<option value="<?php echo $lt->unit_dong; ?>" <?php if($lt->unit_dong==$this->input->get('dong')) echo "selected"; ?>> <?php echo $lt->unit_dong; ?></option>
+<?php endforeach; ?>
+					</select>
+				</div>
+				<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
+					<label for="order" class="sr-only">정 렬</label>
+					<select class="form-control input-sm" name="order">
+						<option value="">정렬 순서</option>
+						<option value="1" <?php if($this->input->get('order')==1) echo "selected"; ?>>일련번호 순</option>
+						<option value="2" <?php if($this->input->get('order')==2) echo "selected"; ?>>일련번호 역순</option>
+						<!-- <option value="3" <?php if($this->input->get('order')==3) echo "selected"; ?>>계약</option> -->
+						<!-- <option value="4" <?php if($this->input->get('order')==4) echo "selected"; ?>>홀딩</option> -->
+					</select>
+				</div>
+				<div class="col-xs-12 col-sm-2 col-md-1 center bgf8" style="height: 40px; padding: 10px 0;">계약 기간</div>
+				<div class="col-xs-12 col-sm-6 col-md-3" style="height: 40px; padding: 5px 0 0 5px;">
+					<div class="col-xs-5 col-sm-5 col-md-4" style="padding: 0px;">
+						<label for="s_date" class="sr-only">시작일</label>
+						<input type="text" class="form-control input-sm wid-95" id="s_date" name="s_date" maxlength="10" value="<?php if($this->input->get('s_date')) echo $this->input->get('s_date'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="시작일">
+					</div>
+					<div class="col-xs-1 col-sm-1 glyphicon-wrap" style="padding: 6px 0;">
+						<a href="javascript:" onclick="cal_add(document.getElementById('s_date'),this); event.cancelBubble=true">
+							<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+						</a>
+					</div>
+					<div class="col-xs-5 col-sm-5 col-md-4" style="padding: 0px;">
+						<label for="e_date" class="sr-only">종료일</label>
+						<input type="text" class="form-control input-sm wid-95" id="e_date" name="e_date" maxlength="10" value="<?php if($this->input->get('e_date')) echo $this->input->get('e_date'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="종료일">
+					</div>
+					<div class="col-xs-1 col-sm-2 glyphicon-wrap" style="padding: 6px 0;">
+						<a href="javascript:" onclick="cal_add(document.getElementById('e_date'),this); event.cancelBubble=true">
+							<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+						</a>
+						<button type="button" class="close" aria-label="Close" style="padding-left: 5px; margin-top: -2px;" onclick="document.getElementById('s_date').value=''; document.getElementById('e_date').value='';"><span aria-hidden="true">&times;</span></button>
+					</div>
+				</div>
+				<!-- <div class="hidden-xs col-sm-4 col-md-2" style="height: 40px; padding: 10px 5px; text-align: right;">
+					<a href="javascript:" onclick="term_put('s_date', 'e_date', 'd');" title="오늘"><img src="<?php echo base_url(); ?>static/img/to_today.jpg" alt="오늘"></a>
+					<a href="javascript:" onclick="term_put('s_date', 'e_date', 'w');" title="일주일"><img src="<?php echo base_url(); ?>static/img/to_week.jpg" alt="일주일"></a>
+					<a href="javascript:" onclick="term_put('s_date', 'e_date', 'm');" title="1개월"><img src="<?php echo base_url(); ?>static/img/to_month.jpg" alt="1개월"></a>
+					<a href="javascript:" onclick="term_put('s_date', 'e_date', '3m');" title="3개월"><img src="<?php echo base_url(); ?>static/img/to_3month.jpg" alt="3개월"></a>
+					<button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="document.getElementById('s_date').value=''; document.getElementById('e_date').value='';"><span aria-hidden="true">&times;</span></button>
+				</div> -->
+				<div class="col-xs-10 col-sm-2 col-md-1" style="height: 40px; padding: 6px 5px; text-align: right;">
+					<label for="계약자명" class="sr-only">입금자</label>
+					<input type="text" class="form-control input-sm" name="sc_name" maxlength="10" value="<?php if($this->input->get('sc_name')) echo $this->input->get('sc_name'); ?>" placeholder="계약자명" onkeydown="if(event.keyCode==13)submit();">
+				</div>
+				<div class="col-xs-2 col-sm-2 col-md-1 center" style="height: 40px; padding: 5px;">
+					<input type="button" value="검 색" class="btn btn-info btn-sm" onclick="submit();">
+				</div>
+			</form>
+		</div>
 
-<?php if( !$this->input->get('reg_sort') OR $this->input->get('reg_sort')==='1') : //1. 분양 차수 설정?>
-	<div class="row font12" style="margin: 0 0 300px;">
-		<div class="col-xs-12 col-sm-12 col-md-8 table-responsive"  style="padding: 0;">
-			<table class="table table-hover">
-				<thead>
-					<tr class="bo-top active">
-						<td>등록차수</td>
-						<td>차수명</td>
-						<td>등록일</td>
-						<td>등록자</td>
-						<td>수정</td>
-						<td>삭제</td>
+		<!-- <div class="col-md-12">검색</div> -->
+<?php if(empty($cont_data)) : ?>
+		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 120px 0;">등록된 데이터가 없습니다.</div>
+<?php else : ?>
+		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;"><?php echo "[ 결과 : ".number_format($total_rows)." 건 ]"; ?>
+			<a href="<?php echo base_url('/cms_excel_file/contract_data/download')."?pj=".$project."&qry=".urlencode($cont_query); ?>" style="padding-left: 30px;">
+				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
+			</a>
+		</div>
+		<div class="col-xs-12 table-responsive" style="padding: 0;">
+			<table class="table table-bordered table-hover table-condensed">
+				<thead class="bo-top center bgf8">
+					<tr>
+						<td width="8%">계약 일련번호</td>
+						<td width="8%">차 수</td>
+						<td width="6%">타 입</td>
+						<td width="7%">동 호 수</td>
+						<td width="6%">계 약 자</td>
+						<td width="9%">연락처 [1]</td>
+						<td width="9%">계약 일자</td>
+						<td width="8%">총 납입금</td>
+						<td width="6%">계약 완납</td>
+						<td width="9%">미비 서류</td>
+						<td width="14%">비 고</td>
+						<td width="10%">계약자 거주지</td>
 					</tr>
 				</thead>
-				<tbody class="bo-bottom">
-<?php foreach($con_diff as $lt) :  ?>
+				<tbody class="bo-bottom center">
+<?php
+foreach ($cont_data as $lt) :
+	$nd = $this->cms_main_model->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$lt->cont_diff' ");
+	$total_rec = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS received FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$lt->cont_seq' ");
+
+	$deposit1 = $this->cms_main_model->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<3 ");
+	$deposit2 = $this->cms_main_model->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<5 ");
+	if($total_rec->received>=$deposit2->payment){
+		$is_paid_ok = "<span style='color: #2205D0;'>2차 완납</span>";
+	}elseif($total_rec->received>=$deposit1->payment){
+		$is_paid_ok = "<span style='color: #03A719;'>1차 완납</span>";
+	}else{
+		$is_paid_ok = "<span style='color: #CD0505;'>미납</span>";
+	}
+
+	$idoc = explode("-", $lt->incom_doc); // 미비 서류
+	$incom_doc = "";
+	if($idoc[0]==1) $incom_doc .= " 각서9종/";
+	if($idoc[1]==1) $incom_doc .= " 주민등본/";
+	if($idoc[2]==1) $incom_doc .= " 주민초본/";
+	if($idoc[3]==1) $incom_doc .= " 가족관계증명/";
+	if($idoc[4]==1) $incom_doc .= " 인감증명/";
+	if($idoc[5]==1) $incom_doc .= " 사용인감/";
+	if($idoc[6]==1) $incom_doc .= " 신분증/";
+	if($idoc[7]==1) $incom_doc .= " 배우자등본/";
+
+	$dong_ho = explode("-", $lt->unit_dong_ho);
+	$adr1 = ($lt->cont_addr2) ? explode("|", $lt->cont_addr2) : explode("|", $lt->cont_addr1);
+	$adr2 = explode(" ", $adr1[1]);
+	$addr = $adr2[0]." ".$adr2[1];
+	$unit_dh = explode("-", $lt->unit_dong_ho);
+	$cont_edit_link ="<a href ='".base_url('cms_m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=2&project=').$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>" ;
+	$new_span = ($lt->cont_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #2A41DB; color: #fff; font-size: 10px;'>&nbsp;N </span>&nbsp; " : "";
+?>
 					<tr>
-						<td><?php echo $lt->diff_no; ?></td>
-						<td><?php echo $lt->diff_name; ?></td>
-						<td><?php echo $lt->reg_date; ?></td>
-						<td><?php echo $lt->reg_worker; ?></td>
-						<td>수정</td>
-						<td>삭제</td>
+						<td><?php echo $cont_edit_link.$lt->cont_code."</a>"; ?></td>
+						<td><?php echo $nd->diff_name; ?></td>
+						<td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></td>
+						<td><?php echo $cont_edit_link.$lt->unit_dong_ho."</a>"; ?></td>
+						<td><?php echo $cont_edit_link.$lt->contractor."</a>"; ?></td>
+						<td><?php echo $lt->cont_tel1; ?></td>
+						<td><?php echo $new_span." ".$lt->cont_date; ?></span></td>
+						<td class="right"><a href="<?php echo base_url('cms_m1/sales/2/2')."?project=".$project."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>"><?php echo number_format($total_rec->received); ?></a></td>
+						<td><?php echo $is_paid_ok; ?></td>
+						<td><div style="cursor: pointer; color: red;" data-toggle="tooltip" data-placement="left" title="<?php echo $incom_doc; ?>"><?php echo cut_string($incom_doc, 9, ".."); ?></div></td>
+						<td class="left"><div style="cursor: pointer;" data-toggle="tooltip" data-placement="left" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 12, ".."); ?></div></td>
+						<td><?php echo $addr; ?></td>
 					</tr>
 <?php endforeach; ?>
 				</tbody>
 			</table>
 		</div>
-	</div>
-<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-1. 분양 차수 설정 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
-
-<?php elseif($this->input->get('reg_sort')==='2') : //2. 납입 회차 설정 ?>
-	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14"  style="padding-bottom: 440px;">2. 납입 회차 설정</div>
-	</div>
-<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-2. 납입 회차 설정 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
-
-<?php elseif($this->input->get('reg_sort')==='3') : //3. 층별 조건 설정 ?>
-	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14"  style="padding-bottom: 440px;">3. 층별 조건 설정</div>
-	</div>
-<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-3. 층별 조건 설정 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
-
-<?php elseif($this->input->get('reg_sort')==='4') : //4. 향별 조건 설정 ?>
-	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14"  style="padding-bottom: 440px;">4. 향별 조건 설정</div>
-	</div>
-<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-4. 향별 조건 설정 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
-
-<?php elseif($this->input->get('reg_sort')==='5') : //5. 조건별 분양가 설정 ?>
-	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14"  style="padding-bottom: 440px;">5. 조건별 분양가 설정</div>
-	</div>
-<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-5. 조건별 분양가 설정 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
-
-<?php elseif($this->input->get('reg_sort')==='6') : //6. 회차별 납입가 설정 ?>
-	<!-- <form method="get" name="get_frm" action="<?php echo current_url(); ?>"> -->
-<?php
-	$attributes = array('method' => 'get', 'name' => 'get_frm');
-	echo form_open(current_url(), $attributes);
-?>
-		<input type="hidden" name="yr" value="<?php echo $this->input->get('yr'); ?>">
-		<input type="hidden" name="project" value="<?php echo $this->input->get('project'); ?>">
-		<input type="hidden" name="reg_sort" value="<?php echo $this->input->get('reg_sort'); ?>">
-
-		<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
-			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">차수구분 선택</div>
-			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
-				<div class="col-xs-12 col-sm-10" style="padding: 0px;">
-					<label for="con_diff" class="sr-only">차수구분 선택</label>
-					<select class="form-control input-sm" name="con_diff" onchange="submit();">
-						<option value="">선 택</option>
-<?php foreach($con_diff as $lt) : ?>
-						<option value="<?php echo $lt->diff_no; ?>" <?php if($this->input->get('con_diff')==$lt->diff_no) echo "selected"; ?>><?php echo $lt->diff_name; ?></option>
-<?php endforeach; ?>
-					</select>
-				</div>
-			</div>
-			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">회차구분 선택</div>
-			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
-				<div class="col-xs-12 col-sm-10" style="padding: 0px;">
-					<label for="pay_sort" class="sr-only">회차구분 선택</label>
-					<select class="form-control input-sm" name="pay_sort" onchange="submit();">
-						<option value="">선 택</option>
-						<option value="1" <?php if($this->input->get('pay_sort')=='1') echo "selected"; ?>>계약금</option>
-						<option value="2" <?php if($this->input->get('pay_sort')=='2') echo "selected"; ?>>중도금</option>
-						<option value="3" <?php if($this->input->get('pay_sort')=='3') echo "selected"; ?>>잔 금</option>
-					</select>
-				</div>
-			</div>
-		</div>
-	</form>
-
-<?php
-if( !$this->input->get('con_diff') OR  !$this->input->get('pay_sort'))  :
-	if( !$this->input->get('con_diff')) :  $msg = "차수구분을 선택하여 주십시요.";
-	elseif( !$this->input->get('pay_sort')) :  $msg = "회차구분을 선택하여 주십시요.";
-	endif;
-?>
-	<div class="row font12" style="margin: 0; padding: 0;">
-		<div class="col-xs-12 center" style="padding: 180px 0;"><?php echo $msg; ?></div>
-	</div>
-<?php else : ?>
-<?php
-	echo form_open(current_url());
-?>
-		<div class="row font12" style="margin: 0; padding: 0;">
-			<div class="col-xs-12 table-responsive" style="padding: 0;">
-				<table class="table table-bordered center">
-					<thead>
-						<tr class="active">
-							<td width="3%">No.</td>
-							<td width="5%">타입</td>
-							<td width="8%">층별</td>
-							<td width="10%">분양가</td>
-<?php foreach($pay_sche as $lt) :  ?>
-							<td><?php echo $lt->pay_name ?></td>
-<?php endforeach; ?>
-						</tr>
-					</thead>
-					<tbody>
-<?php for($i=0; $i<count($price); $i++) :
-	$diff_td = ($i===0) ?  "<td rowspan='".($pr_row)."'>".$pr_diff[$i]->diff_name."</td>" : ""; // 차수명
-	$type_td = (($pr_row-$i)%$pr_floor[0]->num_floor===0) ? "<td rowspan='".$pr_floor[0]->num_floor."'>".$price[$i]->con_type."</td>" : ""; // 타입명
-?>
-						<tr>
-							<?php echo $diff_td; ?>
-							<?php echo $type_td; ?>
-							<td><?php echo $price[$i]->floor_name; ?></td>
-							<td class="right"><?php echo number_format($price[$i]->unit_price); ?></td>
-<?php
-for($j=0; $j<count($pay_sche); $j++) :
-	$pmt = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_payment WHERE pj_seq='$project' AND price_seq='".$price[$i]->pr_seq."' AND pay_sche_seq='".$pay_sche[$j]->seq."' ");
-?>
-							<td style="background-color: ; padding: 3px;">
-								<div style="color: #B00447;"><?php echo form_error("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq); ?>
-									<input type="text" name="<?php echo "pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq; ?>" value="<?php if( !empty($pmt)) echo $pmt->payment; else echo set_value("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq) ?>" size="15" placeholder="회차별 납부액">
-									<input type="hidden" name="<?php echo "pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h"; ?>" value="<?php if( !empty($pmt)) echo "1"; else "0"; ?>">
-								</div>
-							</td>
-<?php endfor; ?>
-						</tr>
-<?php endfor; ?>
-					</tbody>
-				</table>
-			</div>
-		</div>
 <?php endif; ?>
-<?php if($auth23<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="if(confirm('납입금 내역을 등록하시겠습니까?')===true) submit();";} ?>
-		<div class="form-group btn-wrap" style="margin: ;">
-			<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str?>" value="등록 하기">
+		<div class="col-xs-12 center" style="margin-top: 0px; padding: 0;">
+			<ul class="pagination pagination-sm"><?php echo $pagination; ?></ul>
 		</div>
-	</form>
+  </div>
 
-<?php 	endif; ?>
-<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-6. 회차별 납입가 설정 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
-<?php endif ?>
+	<div class="form-group btn-wrap" style="margin: ;">
+<?php if($this->input->get('modi')=='1') : ?>
+		<input type="button" class="btn btn-warning btn-sm" onclick="location.href='<?php echo base_url('cms_m1/sales/2/2').'?modi=0&project='.$project.'&dong='.$this->input->get('dong').'&ho='.$this->input->get('ho'); ?>'"  value="뒤로 가기">
+
+
+<?php   if(date('Y-m-d', strtotime('-3 day')) <= $modi_rec->reg_date) :?>
+		<input type="button" class="btn btn-danger btn-sm" onclick="if(confirm('해당 수납 데이터를 삭제하시겠습니까?')===true) location.href='<?php echo base_url('cms_m1/sales/2/2').'?modi=0&project='.$project.'&dong='.$this->input->get('dong').'&ho='.$this->input->get('ho').'&del_code='.$this->input->get('rec_seq'); ?>'"  value="삭제 하기">
+<?php   else : ?>
+		<input type="button" class="btn btn-default btn-sm" onclick="alert('등록일 기준 3일 이내의 건에 한해서 삭제할 수 있습니다.\n등록일로부터 3일 이후의 건에 대한 삭제는 관리자에게 문의하여 주십시요.')"  value="삭제 하기">
+<?php   endif; ?>
+
+<?php endif;?>
+		<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str?>" value="고지서 다운로드">
+	</div>
+	<!-- -------------------------------------------------- -->
+<?php endif; ?>

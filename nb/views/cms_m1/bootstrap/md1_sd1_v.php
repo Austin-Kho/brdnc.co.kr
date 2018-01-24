@@ -6,7 +6,7 @@ else :
 	<div class="main_start">&nbsp;</div>
 	<!-- 1. 분양관리 -> 1. 계약 관리 ->1. 계약 현황 -->
 
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		function term_put(a,b,term){
 			if(term=='d')var term="<?php echo date('Y-m-d'); ?>";
 			if(term=='w')var term="<?php echo date('Y-m-d',strtotime ('-1 weeks'));?>";
@@ -15,7 +15,7 @@ else :
 			document.getElementById(a).value = term;
 			document.getElementById(b).value = "<?php echo date('Y-m-d');?>";
 		}
-	</script>
+	</script> -->
 <?php
 for($i=0; $i<count($tp_name); $i++) :
 	$type_color[$tp_name[$i]->type] = $tp_color[$i];
@@ -202,10 +202,11 @@ endfor;
 						<label for="e_date" class="sr-only">종료일</label>
 						<input type="text" class="form-control input-sm wid-95" id="e_date" name="e_date" maxlength="10" value="<?php if($this->input->get('e_date')) echo $this->input->get('e_date'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="종료일">
 					</div>
-					<div class="col-xs-1 col-sm-1 glyphicon-wrap" style="padding: 6px 0;">
+					<div class="col-xs-1 col-sm-2 glyphicon-wrap" style="padding: 6px 0;">
 						<a href="javascript:" onclick="cal_add(document.getElementById('e_date'),this); event.cancelBubble=true">
 							<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
 						</a>
+						<button type="button" class="close" aria-label="Close" style="padding-left: 5px; margin-top: -2px;" onclick="document.getElementById('s_date').value=''; document.getElementById('e_date').value='';"><span aria-hidden="true">&times;</span></button>
 					</div>
 				</div>
 				<!-- <div class="hidden-xs col-sm-4 col-md-2" style="height: 40px; padding: 10px 5px; text-align: right;">

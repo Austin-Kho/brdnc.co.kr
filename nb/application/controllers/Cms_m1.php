@@ -56,9 +56,9 @@ class Cms_m1 extends CB_Controller {
 
 		$view['s_di'] = array(
 			array('계약 현황', '계약 등록', '동호수 현황'), // 첫번째 하위 메뉴
-			array('수납 현황', '수납 등록', '설정 관리'),	 // 두번째 하위 메뉴
+			array('수납 현황', '수납 등록', '수납 고지서'),	 // 두번째 하위 메뉴
 			array('프로젝트별 계약현황', '프로젝트별 계약등록(수정)', '동호수 계약 현황표'),  // 첫번째 하위 제목
-			array('분양대금 수납 현황', '분양대금 수납 등록', '프로젝트 타입별 수납약정 관리 ------- [일부 완성]')   // 두번째 하위 제목
+			array('분양대금 수납 현황', '분양대금 수납 등록', '계약자 / 차수별 수납고지서 출력 ------- [준비 중]')   // 두번째 하위 제목
 		);
 
 		// 등록된 프로젝트 데이터
@@ -145,7 +145,6 @@ class Cms_m1 extends CB_Controller {
 			if($start != '' or $limit !='')	$cont_query .= " LIMIT ".$start.", ".$limit." ";
 
 			$view['cont_data'] = $this->cms_main_model->sql_result($cont_query); // 계약 및 계약자 데이터
-
 
 
 
@@ -1032,65 +1031,73 @@ class Cms_m1 extends CB_Controller {
 			// 불러올 페이지에 보낼 조회 권한 데이터
 			$view['auth23'] = $auth['_m1_2_3'];
 
-			// 1. 분양 차수 설정
-			$view['con_diff'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_con_diff WHERE pj_seq='$project' ORDER BY diff_no "); // 프로젝트 등록된 전체 차수
+			// view page로 보낼 데이터 구하기
+			$view['view']['bill_issue'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_bill_issue WHERE pj_seq='$project' ");
+			$view['view']['pay_sche'] = $this->cms_main_model->sql_result(" SELECT seq, pay_sort, pay_code, pay_name, pay_due_date FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' ");
 
-			// 2. 납입 회차 설정
-
-			// 3. 층별 조건 설정
-
-			// 4. 향별 조건 설정
-
-			// 5. 조건별 분양가 설정
-
-			// 6. 회차별 납입가 설정
-			// price - 데이터 불러오기
-			$price = $view['price'] = $this->cms_main_model->sql_result(" SELECT *, cb_cms_sales_price.seq AS pr_seq FROM cb_cms_sales_price, cb_cms_sales_con_floor WHERE cb_cms_sales_price.pj_seq='$project' AND con_diff_seq='".$this->input->get('con_diff')."' AND con_floor_seq=cb_cms_sales_con_floor.seq  ORDER BY cb_cms_sales_price.seq ");
-			$pay_sche = $view['pay_sche'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_sort='".$this->input->get('pay_sort')."' ORDER BY pay_code ");
-
-			$diff_no = $this->input->get('con_diff');
-			$view['pr_diff'] = $this->cms_main_model->sql_result(" SELECT	seq, diff_no, diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$diff_no' "); // 차수
-			$view['pr_floor'] = $this->cms_main_model->sql_result(" SELECT seq, floor_name, COUNT(seq) AS num_floor FROM cb_cms_sales_con_floor WHERE pj_seq='$project' "); // 층별
-			$view['pr_type'] = $this->cms_main_model->sql_result(" SELECT seq, type_name, COUNT(seq) AS num_type FROM cb_cms_sales_con_type WHERE pj_seq='$project' "); // 타입
-			$view['pr_row'] = $view['pr_floor'][0]->num_floor*$view['pr_type'][0]->num_type;
 
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
 
-			// 6. 회차별 납입가 설정
-			for($i=0; $i<count($price); $i++) :
-				for($j=0; $j<count($pay_sche); $j++) :
-					$this->form_validation->set_rules("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq, "납부액_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq, 'trim|numeric|required');
-				endfor;
-			endfor;
+			// 고지서 기본 내용 폼(bill_set)
+			$this->form_validation->set_rules('published_date', '발행일자', 'trim|exact_length[10]');
+			$this->form_validation->set_rules('pay_sche', '회차구분', 'trim|numeric');
+			$this->form_validation->set_rules('title', '고지서 제목', 'trim|max_length[100]');
+			$this->form_validation->set_rules('content', '고지서 내용', 'trim');
 
-			if($this->form_validation->run() == FALSE) : // 폼검증 안했거나 통과 못했을 경우
 
-				// //본 페이지 로딩
-				// $this->load->view('/cms_views/menu/cms_m1/md2_sd3_v', $view);
-			else : // 폼검증 통과 시
+			// 출력 계약자 데이터 검색 폼 (search_cont)
+			// $this->form_validation->set_rules('ho', '호수', 'trim|required');
+			// $this->form_validation->set_rules('cont_code', '계약일련번호', 'trim|max_length[12]');
+			// $this->form_validation->set_rules('custom_name', '청/계약자명', 'trim|required|max_length[20]');
+      //
+			// $this->form_validation->set_rules('conclu_date', '처리일자', 'trim|exact_length[10]');
+			// $this->form_validation->set_rules('due_date', '계약예정일', 'trim|exact_length[10]');
+			// $this->form_validation->set_rules('app_in_date', '청약금 입금일', 'trim|exact_length[10]');
+			// $this->form_validation->set_rules('cont_in_date1', '계약금 입금일1', 'trim|exact_length[10]');
+			// $this->form_validation->set_rules('cont_in_date2', '계약금 입금일2', 'trim|exact_length[10]');
+			// $this->form_validation->set_rules('cont_in_date3', '계약금 입금일3', 'trim|exact_length[10]');
+			// $this->form_validation->set_rules('cont_in_date4', '계약금 입금일4', 'trim|exact_length[10]');
+			// $this->form_validation->set_rules('cont_in_date5', '계약금 입금일5', 'trim|exact_length[10]');
+			// $this->form_validation->set_rules('cont_in_date6', '계약금 입금일6', 'trim|exact_length[10]');
+			// $this->form_validation->set_rules('cont_in_date7', '계약금 입금일7', 'trim|exact_length[10]');
+      //
+			// $this->form_validation->set_rules('app_in_mon', '청약금', 'trim|numeric');
+			// $this->form_validation->set_rules('tel_1', '연락처[1]', 'trim|required');
+			// $this->form_validation->set_rules('conclu_date', '청/계약일', 'trim|required');
+			// $this->form_validation->set_rules('deposit_1', '계약금1', 'trim|numeric');
+			// $this->form_validation->set_rules('deposit_2', '계약금2', 'trim|numeric');
+			// $this->form_validation->set_rules('deposit_3', '계약금3', 'trim|numeric');
+			// $this->form_validation->set_rules('deposit_4', '계약금4', 'trim|numeric');
+			// $this->form_validation->set_rules('deposit_5', '계약금5', 'trim|numeric');
+			// $this->form_validation->set_rules('deposit_6', '계약금6', 'trim|numeric');
+			// $this->form_validation->set_rules('deposit_7', '계약금7', 'trim|numeric');
+			// $this->form_validation->set_rules('postcode1', '우편변호1', 'trim|numeric|max_length[5]');
+			// $this->form_validation->set_rules('address1_1', '메인주소1', 'trim|max_length[100]');
+			// $this->form_validation->set_rules('address2_1', '세부주소1', 'trim|max_length[50]');
+			// $this->form_validation->set_rules('postcode2', '우편번호2', 'trim|numeric|max_length[5]');
+			// $this->form_validation->set_rules('address1_2', '메인주소2', 'trim|max_length[100]');
+			// $this->form_validation->set_rules('address2_2', '세부주소2', 'trim|max_length[50]');
+			// $this->form_validation->set_rules('note', '비고', 'trim|max_length[200]');
 
-				for($i=0; $i<count($price); $i++) :
-					for($j=0; $j<count($pay_sche); $j++) :
-						$pmt_data = array(
-							'pj_seq' => $project,
-							'price_seq' => $price[$i]->pr_seq,
-							'pay_sche_seq' => $pay_sche[$j]->seq,
-							'payment' => $this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq),
-							'reg_date' => date('Y-m-d'),
-							'reg_worker' => $this->session->userdata('mem_username')
-						);
-						if(empty($this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h")) OR ($this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h"))=='0') {
-							$result[$j] = $this->cms_main_model->insert_data('cb_cms_sales_payment', $pmt_data);
-							if( !$result[$j]) {alert('데이터베이스 에러입니다.1', '');}
-						}elseif(($this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h"))=='1') {
-							$result[$j] = $this->cms_main_model->update_data('cb_cms_sales_payment', $pmt_data, array('pj_seq'=>$project, 'price_seq'=>$price[$i]->pr_seq, 'pay_sche_seq'=>$pay_sche[$j]->seq));
-							if( !$result[$j]) {alert('데이터베이스 에러입니다.2', '');}
-						}
-					endfor;
-				endfor;
 
-				alert('정상 처리 되었습니다.', '');
+
+			if($this->form_validation->run() !== FALSE) : // 폼검증 통과 했을 경우, Post 데이타 있을 경우
+
+				// 고지서 기본 내용 폼(bill_set)
+				$bill_set_data = array(
+					'pay_code' => $this->input->post('pay_sche_code', TRUE),
+					'title' => $this->input->post('title', TRUE),
+					'content' => $this->input->post('content', TRUE),
+					'last_update_user' => $this->session->userdata('mem_username'),
+					'last_update_time' => date()
+				);
+
+
+				// 출력 계약자 데이터 검색 폼 (search_cont)
+
+
+
 			endif; // 폼검증 통과 시 종료
 		}
 
