@@ -1093,8 +1093,13 @@ class Cms_m1 extends CB_Controller {
 					'last_update_time' => date()
 				);
 
+				if(isset($bill_set_data)) {
+					$result = $this->cms_main_model->update_data('cb_cms_sales_bill_issue', $bill_set_data, array('pj_seq' => $project));
+					if(isset($result)) alert('정상적으로 설정 되었습니다.', current_url());
+				}
 
 				// 출력 계약자 데이터 검색 폼 (search_cont)
+
 
 
 
