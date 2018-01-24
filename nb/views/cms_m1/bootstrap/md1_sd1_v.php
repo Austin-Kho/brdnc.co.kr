@@ -18,7 +18,7 @@ else :
 	</script> -->
 <?php
 for($i=0; $i<count($tp_name); $i++) :
-	$type_color[$tp_name[$i]->type] = $tp_color[$i];
+	$type_color[$tp_name[$i]] = $tp_color[$i];
 endfor;
 ?>
 	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
@@ -91,12 +91,12 @@ endfor;
 ?>
 					<tr>
 						<?php echo $first_td; ?>
-						<td style="background-color: <?php echo $tp_color[$i].";"; ?>"><?php echo $tp_name[$i]->type; ?></td>
+						<td style="background-color: <?php echo $tp_color[$i].";"; ?>"><?php echo $tp_name[$i]; ?></td>
 						<td class="right"><?php echo $summary[$i]->type_num." 세대"; ?></td>
 						<td class="right"><?php echo $summary[$i]->hold." 세대"; ?></td>
 						<td class="right" style="color: #273169;"><?php echo $summary[$i]->app." 건"; ?></td>
 	<?php for($j=0; $j<count($sc_cont_diff); $j++):
-					$cn = $this->cms_main_model->sql_row(" SELECT COUNT(seq) AS cont_num FROM cb_cms_sales_contract WHERE pj_seq='$project' AND unit_type='".$tp_name[$i]->type."' AND cont_diff='".$sc_cont_diff[$j]->cont_diff."' ");
+					$cn = $this->cms_main_model->sql_row(" SELECT COUNT(seq) AS cont_num FROM cb_cms_sales_contract WHERE pj_seq='$project' AND unit_type='".$tp_name[$i]."' AND cont_diff='".$sc_cont_diff[$j]->cont_diff."' ");
 	?>
 						<td class="right"><?php echo $cn->cont_num." 건 "; ?></td>
 	<?php endfor; ?>
