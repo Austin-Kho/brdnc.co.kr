@@ -29,7 +29,7 @@
 	$url_e_date = rawurlencode($this->input->get('e_date'));
 	if($this->input->get('search_text')=="") $sc=0; else $sc=1;
 ?>
-				<a href="<?php echo base_url('cms_excel_file/cash_book')."?add_where=".$url_where."&sc=".$sc; ?>">
+				<a href="<?php echo base_url('cms_download/cash_book')."?add_where=".$url_where."&sc=".$sc; ?>">
 					<img src="<?php echo base_url('static/img/excel_icon.jpg'); ?>" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
 				</a>
 			</div>
@@ -96,12 +96,12 @@
 									</a>
 								</div>
 							</div>
-							<div class="col-xs-12 col-sm-4 col-md-2" style="height: 40px; padding: 10px 5px; text-align: right;">
+							<div class="col-xs-12 col-sm-4 col-md-2" style="height: 40px; padding: 10px 0px; text-align: right;">
 								<a href="javascript:" onclick="term_put('s_date', 'e_date', 'd');" title="오늘"><img src="<?php echo base_url(); ?>static/img/to_today.jpg" alt="오늘"></a>
 								<a href="javascript:" onclick="term_put('s_date', 'e_date', 'w');" title="일주일"><img src="<?php echo base_url(); ?>static/img/to_week.jpg" alt="일주일"></a>
 								<a href="javascript:" onclick="term_put('s_date', 'e_date', 'm');" title="1개월"><img src="<?php echo base_url(); ?>static/img/to_month.jpg" alt="1개월"></a>
 								<a href="javascript:" onclick="term_put('s_date', 'e_date', '3m');" title="3개월"><img src="<?php echo base_url(); ?>static/img/to_3month.jpg" alt="3개월"></a>
-								<button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="document.getElementById('s_date').value=''; document.getElementById('e_date').value='';"><span aria-hidden="true">&times;</span></button>
+								<button type="button" class="close" aria-label="Close" style="padding-left: 2px;" onclick="document.getElementById('s_date').value=''; document.getElementById('e_date').value='';"><span aria-hidden="true">&times;</span></button>
 							</div>
 							<div class="col-xs-5 col-sm-2 col-md-1 center point-sub" style="height: 40px; padding: 5px;">
 								<label for="search_con" class="sr-only">검색조건</label>
@@ -129,7 +129,7 @@
 								<tr style="border-top: 1px solid #ddd; background-color: #EAEAEA;">
 									<th style="width: 20px;" class="center"><input type="checkbox" disabled></th>
 									<th style="width: 80px;" class="center">거래 일자</th>
-									<th style="width: 80px;" class="center"> 구 분</th>
+									<th style="width: 100px;" class="center"> 구 분</th>
 									<th style="width: 110px;" class="center">
 										계정과목
 										<!-- <a href="javascript:" onclick="popUp_size('/os/_menu3/account_m.php', 'account',700,800)" title="계정과목 관리"> -->
@@ -137,7 +137,7 @@
 											<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 										</a>
 									</th>
-									<th style="width: 190px;" class="center">적 요</th>
+									<th style="width: 170px;" class="center">적 요</th>
 									<th style="width: 100px;" class="center">거 래 처</th>
 									<th style="width: 50px;" class="center">입금처</th>
 									<th style="width: 90px;" class="center">입금 금액</th>
