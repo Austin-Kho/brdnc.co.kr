@@ -24,7 +24,7 @@ else :
 			for (i = 0; i < tot; i++) {chk[i].checked = false;}
 		}
 	}
-	function print_bill(obj){
+	function print_bill(obj, p){
 		var i;
 		var chk = document.getElementsByName(obj);
 		var tot = chk.length;
@@ -38,7 +38,9 @@ else :
 			alert('다운로드(출력)할 계약 건을 선택하여 주십시요.');
 			return;
 		}else if(confirm('선택하신 건별 고지서를 다운로드하시겠습니까?')) {
-			location.href="<?php echo base_url('cms_download/bill_issue/download').'?seq='?>"+seq;
+			var uri = "<?php echo base_url('cms_download/bill_issue/download').'?pj="+p+"&seq='?>"+seq;
+			var res = encodeURI(uri);
+			location.href=res;
 		}
 	}
 </script>
@@ -405,7 +407,7 @@ foreach ($cont_data as $lt) :
 		</div>
   </div>
 <?php
-	$download_str = $auth23<2 ? "alert('이 페이지에 대한 관리(출력) 권한이 없습니다.');" : "print_bill('chk[]');"; // location.href='".base_url()."'
+	$download_str = $auth23<2 ? "alert('이 페이지에 대한 관리(출력) 권한이 없습니다.');" : "print_bill('chk[]', $project);"; // location.href='".base_url()."'
 ?>
 	<div class="form-group btn-wrap" style="margin: ;">
 		<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $download_str?>" value="선택 건별 고지서 다운로드">
