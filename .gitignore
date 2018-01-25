@@ -34,6 +34,7 @@ sftp-config.json
 
 ## wp
 wp/wp-content/uploads/*
+wp-config.php
 
 ## old cms system config File
 */php/auth.php
