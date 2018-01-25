@@ -58,7 +58,7 @@ class Cms_m1 extends CB_Controller {
 			array('계약 현황', '계약 등록', '동호수 현황'), // 첫번째 하위 메뉴
 			array('수납 현황', '수납 등록', '수납 고지서'),	 // 두번째 하위 메뉴
 			array('프로젝트별 계약현황', '프로젝트별 계약등록(수정)', '동호수 계약 현황표'),  // 첫번째 하위 제목
-			array('분양대금 수납 현황', '분양대금 수납 등록', '계약자 / 차수별 수납고지서 출력 ------- [준비 중]')   // 두번째 하위 제목
+			array('분양대금 수납 현황', '분양대금 수납 등록', '계약 건별 수납고지서 출력')   // 두번째 하위 제목
 		);
 
 		// 등록된 프로젝트 데이터
@@ -78,12 +78,13 @@ class Cms_m1 extends CB_Controller {
 
 			// 프로젝트명, 타입 정보 구하기
 			$pj_info = $view['pj_info'] = $this->cms_main_model->sql_row(" SELECT pj_name, type_name, type_color FROM cb_cms_project WHERE seq='$project' ");
-			if($pj_info) $view['tp_color'] = explode("-", $pj_info->type_color);
-
-			$view['tp_name'] = $this->cms_main_model->sql_result(" SELECT type FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' GROUP BY type ");
+			if($pj_info) {
+				$view['tp_name'] = explode("-", $pj_info->type_name);
+				$view['tp_color'] = explode("-", $pj_info->type_color);
+			}
 
 			for($i=0; $i<count($view['tp_name']); $i++) {
-				$view['summary'][$i] = $this->cms_main_model->sql_row(" SELECT COUNT(type) AS type_num, SUM(is_hold) AS hold, SUM(is_application) AS app, SUM(is_contract) AS cont FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND type='".$view['tp_name'][$i]->type."' ");
+				$view['summary'][$i] = $this->cms_main_model->sql_row(" SELECT COUNT(type) AS type_num, SUM(is_hold) AS hold, SUM(is_application) AS app, SUM(is_contract) AS cont FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND type='".$view['tp_name'][$i]."' ");
 			}
 
 			// 요약 총계 데이터 가져오기
@@ -1023,7 +1024,7 @@ class Cms_m1 extends CB_Controller {
 
 		// 1. 수납관리 3. 수납 고지서 관리 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==3) {
-			$this->output->enable_profiler(TRUE); //프로파일러 보기//
+			// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m1_2_3', $this->session->userdata['mem_id']);
@@ -1032,7 +1033,15 @@ class Cms_m1 extends CB_Controller {
 
 			// view page로 보낼 데이터 구하기
 			$view['view']['bill_issue'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_bill_issue WHERE pj_seq='$project' ");
+			$view['view']['addr'] = explode("|", $view['view']['bill_issue']->address);
 			$view['view']['pay_sche'] = $this->cms_main_model->sql_result(" SELECT seq, pay_sort, pay_code, pay_name, pay_due_date FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' ");
+
+			// 프로젝트명, 타입 정보 구하기
+			$pj_info = $this->cms_main_model->sql_row(" SELECT pj_name, type_name, type_color FROM cb_cms_project WHERE seq='$project' ");
+			if($pj_info) {
+				$view['tp_name'] = explode("-", $pj_info->type_name);
+				$view['tp_color'] = explode("-", $pj_info->type_color);
+			}
 
 			// 계약자 데이터 구하기	// 계약 데이터 검색 필터링
 			$cont_query = "  SELECT *, cb_cms_sales_contractor.seq AS contractor_seq  ";
@@ -1081,16 +1090,40 @@ class Cms_m1 extends CB_Controller {
 
 			// 고지서 기본 내용 폼(bill_set)
 			$this->form_validation->set_rules('published_date', '발행일자', 'trim|exact_length[10]');
-			$this->form_validation->set_rules('pay_sche', '회차구분', 'trim|numeric');
+			$this->form_validation->set_rules('pay_sche_code', '회차구분', 'trim|numeric');
+			$this->form_validation->set_rules('host_name_1', '시행자(조합)', 'trim|max_length[30]');
+			$this->form_validation->set_rules('tell_1', '시행자(조합) 연락처', 'trim|max_length[13]');
+			$this->form_validation->set_rules('host_name_2', '시행자(대행사)', 'trim|max_length[30]');
+			$this->form_validation->set_rules('tell_2', '시행자(대행사) 연락처', 'trim|max_length[13]');
+			$this->form_validation->set_rules('bank_acc_1', '은행계좌1', 'trim|max_length[30]');
+			$this->form_validation->set_rules('acc_host_1', '예금주1', 'trim|max_length[20]');
+			$this->form_validation->set_rules('bank_acc_2', '은행계좌2', 'trim|max_length[30]');
+			$this->form_validation->set_rules('acc_host_2', '예금주2', 'trim|max_length[20]');
+			$this->form_validation->set_rules('postcode1', '우편변호1', 'trim|numeric|max_length[5]');
+			$this->form_validation->set_rules('address1_1', '메인주소1', 'trim|max_length[100]');
+			$this->form_validation->set_rules('address2_1', '세부주소1', 'trim|max_length[50]');
 			$this->form_validation->set_rules('title', '고지서 제목', 'trim|max_length[100]');
 			$this->form_validation->set_rules('content', '고지서 내용', 'trim');
 
 
 			if($this->form_validation->run() !== FALSE) : // 폼검증 통과 했을 경우, Post 데이타 있을 경우
 
+				// 데이터 가공
+				$address = $this->input->post('postcode1', TRUE)."|".$this->input->post('address1_1', TRUE)."|".$this->input->post('address2_1', TRUE);
+
 				// 고지서 기본 내용 폼(bill_set)
 				$bill_set_data = array(
 					'pay_code' => $this->input->post('pay_sche_code', TRUE),
+
+					'host_name_1' => $this->input->post('host_name_1', TRUE),
+					'tell_1' => $this->input->post('tell_1', TRUE),
+					'host_name_2' => $this->input->post('host_name_2', TRUE),
+					'tell_2' => $this->input->post('tell_2', TRUE),
+					'bank_acc_1' => $this->input->post('bank_acc_1', TRUE),
+					'acc_host_1' => $this->input->post('acc_host_1', TRUE),
+					'bank_acc_2' => $this->input->post('bank_acc_2', TRUE),
+					'acc_host_2' => $this->input->post('acc_host_2', TRUE),
+					'address' => $address,
 					'title' => $this->input->post('title', TRUE),
 					'content' => $this->input->post('content', TRUE),
 					'last_update_user' => $this->session->userdata('mem_username'),
@@ -1101,8 +1134,6 @@ class Cms_m1 extends CB_Controller {
 					$result = $this->cms_main_model->update_data('cb_cms_sales_bill_issue', $bill_set_data, array('pj_seq' => $project));
 					if(isset($result)) alert('정상적으로 설정 되었습니다.', current_url());
 				}
-
-
 
 
 			endif; // 폼검증 통과 시 종료

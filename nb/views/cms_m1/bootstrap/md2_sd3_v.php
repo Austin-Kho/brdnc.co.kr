@@ -4,6 +4,16 @@ if($auth23<1) :
 else :
 ?>
 <script>
+	function show_hide(obj){
+		var show_hide = document.getElementById('show_hide');
+		if(obj.checked==true){
+			show_hide.style.display = "block";
+			// alert('체크');
+		}else{
+			show_hide.style.display = "none";
+			// alert('안체크');
+		}
+	}
 	function checkAll(handle, obj) {
 		var i;
 		var chk = document.getElementsByName(obj);
@@ -24,7 +34,12 @@ else :
 			sep = i==0 ?  "" : "-";
 			if(chk[i].checked == true) seq += sep+chk[i].value;
 		}
-		location.href="<?php echo base_url('cms_download/bill_issue/download').'?seq='?>"+seq;
+		if(seq==='') {
+			alert('다운로드(출력)할 계약 건을 선택하여 주십시요.');
+			return;
+		}else if(confirm('선택하신 건별 고지서를 다운로드하시겠습니까?')) {
+			location.href="<?php echo base_url('cms_download/bill_issue/download').'?seq='?>"+seq;
+		}
 	}
 </script>
 	<div class="main_start">&nbsp;</div>
@@ -35,7 +50,7 @@ else :
 	$attributes = array('method' => 'get', 'name' => 'pj_sel');
 	echo form_open(current_url(), $attributes);
 ?>
-			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
+			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">사업 개시년도</div>
 			<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
 				<div class="col-xs-12 col-sm-8" style="padding: 0px;">
 					<label for="yr" class="sr-only">사업 개시년도</label>
@@ -52,7 +67,7 @@ else :
 					</select>
 				</div>
 			</div>
-			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">프로젝트 선택 </div>
+			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">프로젝트 선택 </div>
 			<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
 				<div class="col-xs-12 col-sm-8" style="padding: 0px;">
 					<label for="project" class="sr-only">프로젝트 선택</label>
@@ -67,9 +82,14 @@ else :
 		</form>
 	</div>
 
-	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14" style="padding: 0;"><p class="bg-success" style="padding: 13px 30px; margin: 0;">&nbsp;</p></div>
+	<div class="row bg-success bo-top bo-bottom font12" style="margin: 0 0 20px;">
+		<div class="col-xs-12 font14 right checkbox" style="padding: 0 30px;">
+			<label>
+				<input type="checkbox" onclick="show_hide(this)"> 고지서 관련 세부설정 보기
+			</label>
+		</div>
 	</div>
+
 	<!-- -------------------------------------------------- -->
 <?php
 	$attributes = array('name' => 'bill_set');
@@ -78,10 +98,9 @@ else :
 
 	<div class="row" style="margin: 0; padding: 0;">
 		<div class="col-sm-12 bo-top" style="padding: 0;">
-			<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">발 행 일 자</div>
-			<div class="col-xs-8 col-md-4" style="padding: 4px;">
-				<div class="col-xs-11 col-sm-11 col-md-11" style="padding: 0px;">
-					<label for="published_date" class="sr-only">발행 일자</label>
+			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="published_date">발 행 일 자</label></div>
+			<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
+				<div class="col-xs-11" style="padding: 0px;">
 					<input type="text" class="form-control input-sm wid-95" id="published_date" name="published_date" maxlength="10" value="<?php echo date('Y-m-d'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="고지서 발행일">
 				</div>
 				<div class="col-xs-1 col-sm-1 glyphicon-wrap" style="padding: 6px 0;">
@@ -90,10 +109,8 @@ else :
 					</a>
 				</div>
 			</div>
-			<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">회 차 구 분</div>
-
-			<div class="col-xs-8 col-md-4" style="padding:  4px;">
-				<label for="pay_sche_code" class="sr-only">납부회차</label>
+			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="pay_sche_code">회 차 구 분</label></div>
+			<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
 				<select class="form-control input-sm" name="pay_sche_code">
 					<option value="">납부회차</option>
 <?php foreach ($view['pay_sche'] as $lt) : ?>
@@ -104,12 +121,109 @@ else :
 
 		</div>
 	</div>
+	<div id="show_hide" style="display:none;">
+		<div class="row" style="margin: 0; padding: 0;">
+			<div class="col-sm-12 bo-top" style="padding: 0;">
+				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="host_name_1">발송자명(조 합)</label></div>
+				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<input type="text" class="form-control input-sm" id="host_name_1" name="host_name_1" value="<?php if(isset($view['bill_issue']->host_name_1)) echo $view['bill_issue']->host_name_1; else echo set_value('host_name_1'); ?>" placeholder="시행자명">
+					</div>
+				</div>
+
+				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="tell_1">연락처(조 합)</label></div>
+				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
+					<input type="text" class="form-control input-sm" id="tell_1" name="tell_1" value="<?php if(isset($view['bill_issue']->tell_1)) echo $view['bill_issue']->tell_1; else echo set_value('tell_1'); ?>" placeholder="02-1234-5678">
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="margin: 0; padding: 0;">
+			<div class="col-sm-12 bo-top" style="padding: 0;">
+				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="host_name_2">발송자명(대행사)</label></div>
+				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<input type="text" class="form-control input-sm" id="host_name_2" name="host_name_2" value="<?php if(isset($view['bill_issue']->host_name_2)) echo $view['bill_issue']->host_name_2; else echo set_value('host_name_2'); ?>" placeholder="시행자명">
+					</div>
+				</div>
+
+				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="tell_2">연락처(대행사)</label></div>
+				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
+					<input type="text" class="form-control input-sm" id="tell_2" name="tell_2" value="<?php if(isset($view['bill_issue']->tell_2)) echo $view['bill_issue']->tell_2; else echo set_value('tell_2'); ?>" placeholder="02-1234-5678">
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin: 0; padding: 0;">
+			<div class="col-sm-12 bo-top" style="padding: 0;">
+				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="bank_acc_1">수취계좌 1</label></div>
+				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<input type="text" class="form-control input-sm" id="bank_acc_1" name="bank_acc_1" value="<?php if(isset($view['bill_issue']->bank_acc_1)) echo $view['bill_issue']->bank_acc_1; else echo set_value('bank_acc_1'); ?>" placeholder="예금은행 + 계좌번호">
+					</div>
+				</div>
+
+				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="acc_host_1">예 금 주 1</label></div>
+				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
+					<input type="text" class="form-control input-sm" id="acc_host_1" name="acc_host_1" value="<?php if(isset($view['bill_issue']->acc_host_1)) echo $view['bill_issue']->acc_host_1; else echo set_value('acc_host_1'); ?>" placeholder="예금주">
+				</div>
+			</div>
+		</div>
+
+		<div class="row" style="margin: 0; padding: 0;">
+			<div class="col-sm-12 bo-top" style="padding: 0;">
+				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="bank_acc_2">수취계좌 2</label></div>
+				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<input type="text" class="form-control input-sm" id="bank_acc_2" name="bank_acc_2" value="<?php if(isset($view['bill_issue']->bank_acc_2)) echo $view['bill_issue']->bank_acc_2; else echo set_value('bank_acc_2'); ?>" placeholder="예금은행 + 계좌번호">
+					</div>
+				</div>
+
+				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="acc_host_2">예 금 주 2</label></div>
+				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
+					<input type="text" class="form-control input-sm" id="acc_host_2" name="acc_host_2" value="<?php if(isset($view['bill_issue']->acc_host_2)) echo $view['bill_issue']->acc_host_2; else echo set_value('acc_host_2'); ?>" placeholder="예금주">
+				</div>
+			</div>
+		</div>
+
+		<!-- 다음 우편번호 서비스 - iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
+		<div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+			<img src="//t1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+		</div>
+		<!-- 다음 우편번호 서비스 -------------onclick="execDaumPostcode(1)"-----postcode1-----address1_1-----address2_1------------------------>
+
+		<div class="row" style="margin: 0; padding: 0;">
+			<div class="col-sm-12 bo-top" style="padding: 0;">
+				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="address">발송자 주소</label></div>
+				<!-- <div class="col-xs-8 col-md-10" style="padding: 4px;">
+					<input type="text" class="form-control input-sm" name="address" value="<?php if(isset($view['bill_issue']->address)) echo $view['bill_issue']->address; else echo set_value('address'); ?>" placeholder="주 소">
+				</div> -->
+				<div class="col-xs-8 col-md-10" style="padding: 0px;">
+					<div class="col-xs-12" style="padding: 0px;">
+						<div class="col-xs-4 col-sm-3 col-md-2" style="padding: 4px;">
+							<label for="postcode1" class="sr-only">우편번호</label>
+							<input type="text" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php if( !empty($view['addr'])) echo $view['addr'][0]; else echo set_value('postcode1');  ?>" readonly required placeholder="우편번호">
+						</div>
+						<div class="col-xs-4 col-sm-2 col-md-1" style="padding: 4px 0;">
+							<input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="execDaumPostcode(1)">
+						</div>
+						<div class="col-xs-12 col-sm-8 col-md-5" style="padding: 4px;">
+							<label for="address1_1" class="sr-only">계약자주소1</label>
+							<input type="text" class="form-control input-sm han" id="address1_1" name="address1_1" maxlength="100" value="<?php if( !empty($view['addr'])) echo $view['addr'][1]; else echo set_value('address1_1');  ?>" readonly required placeholder="일반주소">
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-4" style="padding: 4px;">
+							<label for="address2_1" class="sr-only">계약자주소2</label>
+							<input type="text" class="form-control input-sm han" id="address2_1" name="address2_1" maxlength="93" value="<?php if( !empty($view['addr'])) echo $view['addr'][2]; else echo set_value('address2_1');  ?>" placeholder="나머지 주소">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<div class="row" style="margin: 0; padding: 0;">
 		<div class="col-sm-12 bo-top" style="padding: 0;">
-			<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">고지서 제목</div>
+			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="title">고지서 제목</label></div>
 			<div class="col-xs-8 col-md-10" style="padding: 4px;">
-				<label for="title" class="sr-only">고지서 제목</label>
 				<input type="text" class="form-control input-sm" name="title" value="<?php if(isset($view['bill_issue']->title)) echo $view['bill_issue']->title; else echo set_value('title'); ?>" placeholder="제 목">
 			</div>
 		</div>
@@ -119,11 +233,11 @@ else :
 
 	<div class="row" style="margin: 0; padding: 0;">
 		<div class="col-sm-12 bo-top  bo-bottom" style="padding: 0; margin-bottom: 20px;">
-			<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px; height: 73px;">고지서 내용</div>
+			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px; height: 112px;"><label for="paid_date">고지서 내용</label></div>
 			<div class="col-xs-8 col-md-10" style="padding: 0;">
-				<label for="paid_date" class="sr-only">고지서 내용</label>
+
 				<div class="col-xs-12" style="padding: 4px;">
-					<textarea class="form-control input-sm" id="content" name="content"  rows="3" placeholder="내 용"><?php if(isset($view['bill_issue']->content)) echo $view['bill_issue']->content; else echo set_value('content'); ?></textarea>
+					<textarea class="form-control input-sm" id="content" name="content"  rows="5" placeholder="내 용"><?php if(isset($view['bill_issue']->content)) echo $view['bill_issue']->content; else echo set_value('content'); ?></textarea>
 				</div>
 			</div>
 		</div>
@@ -196,36 +310,17 @@ else :
 						<!-- <option value="4" <?php if($this->input->get('order')==4) echo "selected"; ?>>홀딩</option> -->
 					</select>
 				</div>
-				<div class="col-xs-12 col-sm-2 col-md-1 center bgf8" style="height: 40px; padding: 10px 0;">계약 기간</div>
-				<div class="col-xs-12 col-sm-6 col-md-3" style="height: 40px; padding: 5px 0 0 5px;">
-					<div class="col-xs-5 col-sm-5 col-md-4" style="padding: 0px;">
-						<label for="s_date" class="sr-only">시작일</label>
-						<input type="text" class="form-control input-sm wid-95" id="s_date" name="s_date" maxlength="10" value="<?php if($this->input->get('s_date')) echo $this->input->get('s_date'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="시작일">
-					</div>
-					<div class="col-xs-1 col-sm-1 glyphicon-wrap" style="padding: 6px 0;">
-						<a href="javascript:" onclick="cal_add(document.getElementById('s_date'),this); event.cancelBubble=true">
-							<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
-						</a>
-					</div>
-					<div class="col-xs-5 col-sm-5 col-md-4" style="padding: 0px;">
-						<label for="e_date" class="sr-only">종료일</label>
-						<input type="text" class="form-control input-sm wid-95" id="e_date" name="e_date" maxlength="10" value="<?php if($this->input->get('e_date')) echo $this->input->get('e_date'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="종료일">
-					</div>
-					<div class="col-xs-1 col-sm-2 glyphicon-wrap" style="padding: 6px 0;">
-						<a href="javascript:" onclick="cal_add(document.getElementById('e_date'),this); event.cancelBubble=true">
-							<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
-						</a>
-						<button type="button" class="close" aria-label="Close" style="padding-left: 5px; margin-top: -2px;" onclick="document.getElementById('s_date').value=''; document.getElementById('e_date').value='';"><span aria-hidden="true">&times;</span></button>
-					</div>
+				<div class="col-xs-12 col-sm-2 col-md-1 center bgf8" style="height: 40px; padding: 10px 0;">회차별 미납</div>
+				<div class="col-xs-8 col-sm-2 col-md-2" style="padding:5px;">
+					<label for="pay_sche" class="sr-only">납부회차</label>
+					<select class="form-control input-sm" name="pay_sche_code">
+						<option value="">납부회차</option>
+	<?php foreach ($view['pay_sche'] as $lt) : ?>
+						<option value="<?php echo $lt->pay_code; ?>" <?php if($view['bill_issue']->pay_code==$lt->pay_code) echo "selected"; ?>><?php echo $lt->pay_name; ?></option>
+	<?php endforeach; ?>
+					</select>
 				</div>
-				<!-- <div class="hidden-xs col-sm-4 col-md-2" style="height: 40px; padding: 10px 5px; text-align: right;">
-					<a href="javascript:" onclick="term_put('s_date', 'e_date', 'd');" title="오늘"><img src="<?php echo base_url(); ?>static/img/to_today.jpg" alt="오늘"></a>
-					<a href="javascript:" onclick="term_put('s_date', 'e_date', 'w');" title="일주일"><img src="<?php echo base_url(); ?>static/img/to_week.jpg" alt="일주일"></a>
-					<a href="javascript:" onclick="term_put('s_date', 'e_date', 'm');" title="1개월"><img src="<?php echo base_url(); ?>static/img/to_month.jpg" alt="1개월"></a>
-					<a href="javascript:" onclick="term_put('s_date', 'e_date', '3m');" title="3개월"><img src="<?php echo base_url(); ?>static/img/to_3month.jpg" alt="3개월"></a>
-					<button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="document.getElementById('s_date').value=''; document.getElementById('e_date').value='';"><span aria-hidden="true">&times;</span></button>
-				</div> -->
-				<div class="col-xs-10 col-sm-2 col-md-1" style="height: 40px; padding: 6px 5px; text-align: right;">
+				<div class="col-xs-10 col-sm-2 col-md-2" style="height: 40px; padding: 5px; text-align: right;">
 					<label for="계약자명" class="sr-only">입금자</label>
 					<input type="text" class="form-control input-sm" name="sc_name" maxlength="10" value="<?php if($this->input->get('sc_name')) echo $this->input->get('sc_name'); ?>" placeholder="계약자명" onkeydown="if(event.keyCode==13)submit();">
 				</div>
@@ -248,11 +343,11 @@ else :
 			<table class="table table-bordered table-hover table-condensed">
 				<thead class="bo-top center bgf8">
 					<tr>
-						<td width="5%"><input type="checkbox" onclick="checkAll(this, 'chk[]')"></td>
-						<td width="15%">계약 일련번호</td>
-						<td width="10%">차 수</td>
+						<td width="7%"><div class="checkbox" style="margin:0;"><label><input type="checkbox" onclick="checkAll(this, 'chk[]')"> 전체</label></div></td>
+						<td width="11%">계약 일련번호</td>
+						<td width="11%">차 수</td>
 						<td width="10%">타 입</td>
-						<td width="10%">동 호 수</td>
+						<td width="11%">동 호 수</td>
 						<td width="10%">계 약 자</td>
 						<td width="15%">총 납입금</td>
 						<td width="10%">계약 완납</td>
@@ -261,6 +356,10 @@ else :
 				</thead>
 				<tbody class="bo-bottom center">
 <?php
+for($i=0; $i<count($tp_name); $i++) :
+	$type_color[$tp_name[$i]] = $tp_color[$i];
+endfor;
+
 foreach ($cont_data as $lt) :
 	$nd = $this->cms_main_model->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$lt->cont_diff' ");
 	$total_rec = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS received FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$lt->cont_seq' ");
@@ -276,18 +375,18 @@ foreach ($cont_data as $lt) :
 	}
 
 	$dong_ho = explode("-", $lt->unit_dong_ho);
-	$adr1 = ($lt->cont_addr2) ? explode("|", $lt->cont_addr2) : explode("|", $lt->cont_addr1);
-	$adr2 = explode(" ", $adr1[1]);
-	$addr = $adr2[0]." ".$adr2[1];
+	// $adr1 = ($lt->cont_addr2) ? explode("|", $lt->cont_addr2) : explode("|", $lt->cont_addr1);
+	// $adr2 = explode(" ", $adr1[1]);
+	// $addr = $adr2[0]." ".$adr2[1];
 	$unit_dh = explode("-", $lt->unit_dong_ho);
 	$cont_edit_link ="<a href ='".base_url('cms_m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=2&project=').$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>" ;
-	$new_span = ($lt->cont_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #2A41DB; color: #fff; font-size: 10px;'>&nbsp;N </span>&nbsp; " : "";
+	// $new_span = ($lt->cont_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #2A41DB; color: #fff; font-size: 10px;'>&nbsp;N </span>&nbsp; " : "";
 ?>
 					<tr>
-						<td><input type="checkbox" name="chk[]" value="<?php echo $lt->cont_seq; ?>"></td>
+						<td><div class="checkbox" style="margin:0;"><label><input type="checkbox" name="chk[]" value="<?php echo $lt->cont_seq; ?>"> 선택</label></div></td>
 						<td><?php echo $cont_edit_link.$lt->cont_code."</a>"; ?></td>
 						<td><?php echo $nd->diff_name; ?></td>
-						<td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></td>
+						<td class="left" style="padding-left:20px;"><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type;?></td>
 						<td><?php echo $cont_edit_link.$lt->unit_dong_ho."</a>"; ?></td>
 						<td><?php echo $cont_edit_link.$lt->contractor."</a>"; ?></td>
 						<td class="right"><a href="<?php echo base_url('cms_m1/sales/2/2')."?project=".$project."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>"><?php echo number_format($total_rec->received); ?></a></td>
@@ -306,7 +405,7 @@ foreach ($cont_data as $lt) :
 		</div>
   </div>
 <?php
-	$download_str = $auth23<2 ? "alert('이 페이지에 대한 관리(출력) 권한이 없습니다.');" : "if(confirm('선택하신 건별 고지서를 다운로드하시겠습니까?')) print_bill('chk[]');"; // location.href='".base_url()."'
+	$download_str = $auth23<2 ? "alert('이 페이지에 대한 관리(출력) 권한이 없습니다.');" : "print_bill('chk[]');"; // location.href='".base_url()."'
 ?>
 	<div class="form-group btn-wrap" style="margin: ;">
 		<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $download_str?>" value="선택 건별 고지서 다운로드">
