@@ -29,10 +29,32 @@ class Bill_issue extends CB_Controller {
 		// 	$view['tp_color'] = explode("-", $pj_info->type_color);
 		// }
 		/**------------------------  데이터 가져오기  ------------------------**/
+		require_once APPPATH.'/third_party/mpdf/mpdf.php';
 
 		$view = [];
+		$data = [];
 
-		
+		$style = file_get_contents("style.css");
+
+
+    //load the view and saved it into $html variable
+    $html=$this->load->view('cms_views/pdf/bill_issue', $data, true);
+
+    //this the the PDF filename that user will get to download
+    $pdfFilePath = "bill.pdf";
+
+
+    //load mPDF library
+    // $this->load->library('m_pdf');
+		$mpdf=new mPDF('ko');
+
+		$mpdf->WriteHTML($style,1);   // 1 은 스타일시트를 의미
+    //generate the PDF from the given html
+    $mpdf->WriteHTML($html, 2); // 2는 html 을 의미 //생략가능
+
+    //download it.
+    $mpdf->Output($pdfFilePath, "D");
+		exit;
 	}
 }
 // End of File
