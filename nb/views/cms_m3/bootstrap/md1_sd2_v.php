@@ -234,7 +234,7 @@ $pmt = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_payment WHERE
     </div>
   </div>
 <?php endif; ?>
-<?php if($auth23<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="if(confirm('납입금 내역을 등록하시겠습니까?')===true) submit();";} ?>
+<?php if($auth12<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="if(confirm('납입금 내역을 등록하시겠습니까?')===true) submit();";} ?>
   <div class="form-group btn-wrap" style="margin: ;">
     <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str?>" value="등록 하기">
   </div>
