@@ -40,7 +40,8 @@ else :
 			alert('다운로드(출력)할 계약 건을 선택하여 주십시요.');
 			return;
 		}else if(confirm('선택하신 건별 고지서를 다운로드하시겠습니까?')) {
-			var uri = "<?php echo base_url('cms_download/bill_issue/download').'?pj="+p+"&seq='?>"+seq;
+			var d = document.bill_set.published_date.value;
+			var uri = "<?php echo base_url('cms_download/bill_issue/download').'?pj="+p+"&date="+d+"&seq='?>"+seq;
 			location.href=uri;
 		}
 	}
