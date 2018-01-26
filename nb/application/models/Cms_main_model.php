@@ -14,7 +14,8 @@ class Cms_main_model extends CB_Model
 	 * @param  [Array] $where [필터링 '키'=>값]
 	 * @return [Array]        [추출 데이터]
 	 */
-	public function select_data_list($table, $where=''){
+	public function select_data_list($table, $where='', $select){
+    if(isset($select)) $this->db->select($select);
 		if($where!='') $this->db->where($where);
 		$qry = $this->db->get($table);
 		return $rlt = $qry->result();
@@ -24,9 +25,11 @@ class Cms_main_model extends CB_Model
    * [select_data_row  단수 데이터 불러오기]
    * @param  [String] $table [테이블명]
    * @param  [Array] $where [필터링 '키'=>값]
-   * @return [Boolean]        [성공 여부]
+   * @param  [Array] $select [불러올 필드명]
+   * @return [Boolean]       [성공 여부]
    */
-  public function select_data_row($table, $where) {
+  public function select_data_row($table, $where, $select) {
+    if(isset($select)) $this->db->select($select);
     $qry = $this->db->get_where($table, $where);
     return $rlt = $qry->row();
   }
@@ -50,7 +53,8 @@ class Cms_main_model extends CB_Model
 	 * @param  string $opt   [description]
 	 * @return [type]        [description]
 	 */
-	public function select_data_opt($table, $where='', $opt=''){
+	public function select_data_opt($table, $where='', $opt='', $select){
+    if(isset($select)) $this->db->select($select);
 		if($where!='') $this->db->where($where);
 		$qry = $this->db->get($table);
 		switch ($opt) {
