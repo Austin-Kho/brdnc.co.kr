@@ -6,12 +6,10 @@ else :
 <script>
 	function show_hide(obj){
 		var show_hide = document.getElementById('show_hide');
-		if(obj.checked==true){
+		if(obj.checked==true){ // 체크시 보이기
 			show_hide.style.display = "block";
-			// alert('체크');
 		}else{
 			show_hide.style.display = "none";
-			// alert('안체크');
 		}
 	}
 	function checkAll(handle, obj) {
@@ -29,18 +27,21 @@ else :
 		var chk = document.getElementsByName(obj);
 		var tot = chk.length;
 		var seq = '';
+		var j = 0;
+		for (i = 0; i < tot; i++) { // get에 전달할 계약아이디 변수를 "-"로 연결하기
 
-		for (i = 0; i < tot; i++) {
-			sep = i==0 ?  "" : "-";
-			if(chk[i].checked == true) seq += sep+chk[i].value;
+			if(chk[i].checked == true) {
+				sepwd = j==0 ?  "" : "-";
+				seq += sepwd+chk[i].value;
+				j++;
+			}
 		}
 		if(seq==='') {
 			alert('다운로드(출력)할 계약 건을 선택하여 주십시요.');
 			return;
 		}else if(confirm('선택하신 건별 고지서를 다운로드하시겠습니까?')) {
 			var uri = "<?php echo base_url('cms_download/bill_issue/download').'?pj="+p+"&seq='?>"+seq;
-			var res = encodeURI(uri);
-			location.href=res;
+			location.href=uri;
 		}
 	}
 </script>
