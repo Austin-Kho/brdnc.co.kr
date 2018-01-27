@@ -126,9 +126,9 @@ else :
 					<tbody>
 <?php if($this->input->get('ho')) : ?>
 <?php foreach($received as $lt):
-	$paid_sche = $this->cms_main_model->sql_row(" SELECT pay_name FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$lt->pay_sche_code' ");
+	$paid_sche = $this->cms_main_model->sql_row(" SELECT pay_name, pay_disc FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$lt->pay_sche_code' ");
 	$paid_acc_nick = $this->cms_main_model->sql_row(" SELECT acc_nick FROM cb_cms_sales_bank_acc WHERE pj_seq='$project' AND seq='$lt->paid_acc' ");
-
+	$pay_name = ($paid_sche->pay_disc!=='') ?$paid_sche->pay_disc : $paid_sche->pay_name;
 
 	// 해지인 경우 red 스타일과 환불인 경우 Del 태그 만들기
 	if($cont_data->is_rescission>0) {$red_style = "style = 'color : red'"; } else {$red_style = ""; }
@@ -137,7 +137,7 @@ else :
 ?>
 						<tr style="background-color: #F9FAD9;">
 							<td><?php echo $lt->paid_date; ?></td>
-							<td><?php echo $paid_sche->pay_name; ?></td>
+							<td><?php echo $pay_name; ?></td>
 							<td class="right">
 								<?php echo $del_op; ?>
 									<a <?php echo $red_style; ?> href="?modi=1&project=<?php echo $project; ?>&dong=<?php echo $this->input->get('dong'); ?>&ho=<?php echo $this->input->get('ho'); ?>&rec_seq=<?php echo $lt->seq; ?>" data-toggle="tooltip" title="입력 내용 수정하기"><?php echo number_format($lt->paid_amount); ?></a>
@@ -193,8 +193,10 @@ else :
 							<label for="pay_sche_code" class="sr-only">회차구분</label>
 							<select class="form-control input-sm" name="pay_sche_code">
 								<option value="">납부회차</option>
-<?php foreach ($pay_sche_code_sel as $lt) : ?>
-								<option value="<?php echo $lt->pay_code; ?>" <?php if($this->input->get('modi')=='1' && $modi_rec->pay_sche_code==$lt->pay_code) echo "selected"; else echo set_select('pay_sche_code', $lt->pay_code); ?>><?php echo $lt->pay_name; ?></option>
+<?php foreach ($pay_sche as $lt) :
+	$pay_name = ($lt->pay_disc!=='') ? $lt->pay_disc : $lt->pay_name;
+?>
+								<option value="<?php echo $lt->pay_code; ?>" <?php if($this->input->get('modi')=='1' && $modi_rec->pay_sche_code==$lt->pay_code) echo "selected"; else echo set_select('pay_sche_code', $lt->pay_code); ?>><?php echo $pay_name; ?></option>
 <?php endforeach; ?>
 							</select>
 						</div>
@@ -279,14 +281,13 @@ else :
 					</thead>
 					<tbody>
 <?php
-foreach($pay_sche_code as $lt) :
-	if(($lt->pay_code=='3' OR $lt->pay_code=='4') && !empty($cont_data)) :
-		$due_date = date('Y-m-d', strtotime('+1 month', strtotime($cont_data->cont_date)));
-	elseif($lt->pay_code>'3' && !empty($cont_data->pay_due_date)) :
-		$due_date = $cont_data->pay_due_date;
-	else :
-		$due_date = "";
-	endif;
+foreach($pay_sche as $lt) :
+	$pay_name = ($lt->pay_disc!=='') ? $lt->pay_disc : $lt->pay_name;
+
+	if($lt->pay_time==1 && !empty($cont_data)) $due_date = $cont_data->cont_date;
+	if($lt->pay_time==2 && !empty($cont_data)) $due_date = date('Y-m-d', strtotime($cont_data->cont_date."+1months"));
+	if($lt->pay_time>2) $due_date = ($lt->pay_due_date!=='0000-00-00') ? $lt->pay_due_date : "";
+
 	if( !empty($cont_data)) {
 		$ppsche = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS pps FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' AND pay_sche_code='$lt->pay_code' ");
 		$paid_per_sche = (empty($ppsche->pps) OR $ppsche->pps=='0') ? "-" : number_format($ppsche->pps); // 수납금액

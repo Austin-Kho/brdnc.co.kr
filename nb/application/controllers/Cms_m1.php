@@ -959,8 +959,7 @@ class Cms_m1 extends CB_Controller {
 				$view['total_paid'] = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS total_paid FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' "); // 계약자별 총 수납액
 			}
 			// 수납 약정
-          	$pay_sche_code = $view['pay_sche_code'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' "); // 전체 약정 회차
-          	$pay_sche_code_sel = $view['pay_sche_code_sel'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_pay_sche WHERE pj_seq='$project'  "); // 계약금 이후 약정 회차
+      $pay_sche = $view['pay_sche'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' "); // 전체 약정 회차
 
 
 
