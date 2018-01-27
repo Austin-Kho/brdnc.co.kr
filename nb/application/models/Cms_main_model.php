@@ -14,8 +14,10 @@ class Cms_main_model extends CB_Model
 	 * @param  [Array] $where [필터링 '키'=>값]
 	 * @return [Array]        [추출 데이터]
 	 */
-	public function select_data_list($table, $where='', $select){
+	public function select_data_list($table, $where='', $select, $group, $order){
     if(isset($select)) $this->db->select($select);
+    if(isset($group)) $this->db->group_by($group);
+    if(isset($order)) $this->db->order_by($order);
 		if($where!='') $this->db->where($where);
 		$qry = $this->db->get($table);
 		return $rlt = $qry->result();
@@ -28,8 +30,10 @@ class Cms_main_model extends CB_Model
    * @param  [Array] $select [불러올 필드명]
    * @return [Boolean]       [성공 여부]
    */
-  public function select_data_row($table, $where, $select) {
+  public function select_data_row($table, $where, $select, $group, $order) {
     if(isset($select)) $this->db->select($select);
+    if(isset($group)) $this->db->group_by($group);
+    if(isset($order)) $this->db->order_by($order);
     $qry = $this->db->get_where($table, $where);
     return $rlt = $qry->row();
   }
