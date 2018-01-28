@@ -24,8 +24,8 @@
         <th style="height:50px; margin:auto; text-align:center; " colspan="2"><h2><?php echo $bill_issue->host_name_1; ?></h2></th>
       </tr>
       <tr>
-        <td style="font-size:10px;"><?php echo str_replace("|", " ", $bill_issue->address); ?></td>
-        <td style="font-size:10px; text-align:right;">Tel. <?php echo $bill_issue->tell_1 ?></td>
+        <td style="font-size:11px;"><?php echo str_replace("|", " ", $bill_issue->address); ?></td>
+        <td style="font-size:11px; text-align:right;">Tel. <?php echo $bill_issue->tell_1 ?></td>
       </tr>
     </table>
     <table style="width:100%; font-size:11px;" cellpadding=0; cellspacing=0;>
