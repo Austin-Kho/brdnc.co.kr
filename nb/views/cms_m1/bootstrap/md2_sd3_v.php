@@ -90,7 +90,7 @@ else :
 
 	<div class="row bg-success bo-top bo-bottom font12" style="margin: 0 0 20px;">
 		<div class="col-xs-6 checkbox" style="">
-			<h5 style="color:#cc5704">기본 설정</h5>
+			<h5 style="color:#16125b"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> &nbsp;기본 설정</h5>
 		</div>
 		<div class="col-xs-6 font14 right checkbox" style="padding-top: 13px;">
 			<label>
@@ -118,7 +118,7 @@ else :
 					</a>
 				</div>
 			</div>
-			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="pay_sche_code">회 차 구 분</label></div>
+			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="pay_sche_code">발 행 회 차</label></div>
 			<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
 				<select class="form-control input-sm" name="pay_sche_code" id="psc">
 					<option value="">납부회차</option>
