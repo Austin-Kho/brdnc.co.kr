@@ -78,39 +78,65 @@
             <td style="padding: 3px 10px; border:1px solid black; text-align:center;" width="20%;">금회 납부 총액</td>
         </tr>
 <?php
-  $n = 0; // 초기화
-	foreach ($real_sche as $val) { // 실제 납부회차 만큼 반복
+    $n = 0; // 초기화
+    $paid_sum = 0; // 초기화 - 완납회차까지 약정금액
+	foreach ($real_sche as $val) : // 실제 납부회차 만큼 반복
 		$val->pay_code;
 		$time_payment[$n] = $this->cms_main_model->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$contractor->price_seq' AND pay_sche_seq<=$val->pay_code ");
-		if($cont_recieve->total>=$time_payment[$n]->payment) $is_paid = $val->pay_code;
+		if($cont_recieve->total>=$time_payment[$n]->payment) $is_paid = $val->pay_code; // 완납 회차 구하기 $is_paid
+        if($cont_recieve->total>=$time_payment[$n]->payment) $paid_sum += $time_payment[$n]->payment; // 완납회차까지 약정금 총액 $paid_sum
 		$n++;
-	}
-  $is_paid; // 계약자 완납 코드
-  $bill_issue->pay_code; // 금회 납부 코드 5
-  $cont_recieve->total; // 토탈납부액
-  $first_time_lack; // 계약자 첫번째 미납회차의 일부 미납 금액
-  $rn = ($is_paid<$bill_issue->pay_code) ? range($is_paid, $bill_issue->pay_code-1) : 0;
-  $rep = $rn<3 ? 3 : $rn;
-  //
-  for($rep=0; $rep<3; $rep++) :
-    $sche_name = ($pay_sche[$rn[$rep]]->pay_disc) ? $pay_sche[$rn[$rep]]->pay_disc : $pay_sche[$rn[$rep]]->pay_name;
+	endforeach;
 
+  $rn = ($is_paid<$bill_issue->pay_code) ? range($is_paid, $bill_issue->pay_code-1) : 0;  // $is_paid; // 현재 계약자 완납 코드 $bill_issue->pay_code; // 금회 납부 코드 5
+  $rep = count($rn)<3 ? 3 : count($rn); // 반복회수-> 범위가 3미만이면 3번 // 그렇지 않다면 실제 필요 반복회수
+
+  $pay_sum = 0; // 약정금 합계 초기화
+  $non_paid_sum = 0; // 미납금 합계 초기화
+  $late_fee_sum = 0; // 연체료 합계 초기화
+  $total_pay_sum = 0; // 금회납부총액 합계 초기화
+  $total_pay_sum_1 = 0; // 분담금 총액 초기화
+  $total_pay_sum_2 = 0; // 대행비 총액 초기화
+
+  for($x=0; $x<$rep; $x++) :
+    $sche_name = ($pay_sche[$rn[$x]]->pay_disc) ? $pay_sche[$rn[$x]]->pay_disc : $pay_sche[$rn[$x]]->pay_name; // 금회 약정회차 이름 구하기
+    $pseq = $pay_sche[$rn[$x]]->pay_code;
+    $pay = $this->cms_main_model->sql_row(" SELECT payment FROM cb_cms_sales_payment WHERE price_seq='$contractor->price_seq' AND pay_sche_seq='$pseq' "); // 금회 약정금 구하기
+    $pay_sum += $pay->payment;
+    // 납부 기한 구하기
+    if($pay_sche[$rn[$x]]->pay_time == 1) $due_date = $contractor->cont_date;
+    if($pay_sche[$rn[$x]]->pay_time == 2) $due_date = date('Y-m-d', strtotime($contractor->cont_date."+1months"));
+    if($pay_sche[$rn[$x]]->pay_time >= 3) $due_date = ($pay_sche[$rn[$x]]->pay_due_date!=='0000-00-00') ? $pay_sche[$rn[$x]]->pay_due_date : "";
+
+    // 미납1회차 해당 약정금액에서 완납회차까지 총납부금액에서 총 약정금액을 뺀 차액을 반영 한 미납액 계산한다.
+    $non_paid = ($x==0) ? ($pay->payment-($cont_recieve->total-$paid_sum)) : $pay->payment; // (금회약정금 - (총 납부액-총 약정금))
+    $non_paid_sum += $non_paid;
+    $late_fee = 0; // // 연체료 // 추후 필요 시 수식 입력
+    $late_fee_sum += $late_fee;
+    $total_pay = $non_paid+$late_fee; // 금회납부총액
+    $total_pay_sum += $total_pay; // 금회납부총액 합계
+
+    $total_pay_1 = ($pay_sche[$rn[$x]]->pay_code != 2 && $pay_sche[$rn[$x]]->pay_code != 4)  ? $non_paid+$late_fee : 0; // 금회납부총액 중 분담금
+    $total_pay_sum_1 += $total_pay_1; // 금회납부총액 중 분담금 합계
+
+    $total_pay_2 = ($pay_sche[$rn[$x]]->pay_code == 2 or $pay_sche[$rn[$x]]->pay_code == 4)  ? $non_paid+$late_fee : 0; // 금회납부총액 중 업무대행비
+    $total_pay_sum_2 += $total_pay_2; // 금회납부총액 합계 중 업무대행비
 ?>
-        <tr style="background-color:yellow;">
+        <tr>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center;"><?php echo $sche_name; ?></td><!--납 부 회 차-->
-            <td style="padding: 3px 0px; border:1px solid black; text-align:center;"><?php echo $is_paid; ?></td><!--납 부 기 한-->
-            <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php echo $bill_issue->pay_code-1; ?></td><!--금 회 약 정-->
-            <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php echo $cont_recieve->total; ?></td><!--미 납 금 액-->
-            <td style="padding: 3px 10px; border:1px solid black; text-align:right;">[12345]</td><!--연 체 금 액-->
-            <td style="padding: 3px 10px; border:1px solid black; text-align:right;">[12345]</td><!--납 부 총 액-->
+            <td style="padding: 3px 0px; border:1px solid black; text-align:center;"><?php if(isset($sche_name)) echo $due_date; ?></td><!--납 부 기 한-->
+            <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php if(isset($sche_name)) {if($pay->payment==0) echo '-'; else echo number_format($pay->payment);}else{echo '&nbsp;';} ?></td><!--금 회 약 정-->
+            <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php if(isset($sche_name)) {if($non_paid==0) echo '-'; else echo number_format($non_paid);}else{echo '&nbsp;';} ?></td><!--미 납 금 액-->
+            <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php if(isset($sche_name)) {if($late_fee==0) echo '-'; else echo number_format($late_fee);}else{echo '&nbsp;';} ?></td><!--연 체 금 액-->
+            <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php if(isset($sche_name)) {if($total_pay==0) echo '-'; else echo number_format($total_pay);}else{echo '&nbsp;';} ?></td><!--납 부 총 액-->
         </tr>
 <?php endfor; ?>
         <tr>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center;" colspan="2">합 계</td>
-            <td style="padding: 3px 10px; border:1px solid black; text-align:right; background-color:yellow;">[12345]</td>
-            <td style="padding: 3px 10px; border:1px solid black; text-align:right; background-color:yellow;">[12345]</td>
-            <td style="padding: 3px 10px; border:1px solid black; text-align:right; background-color:yellow;">[12345]</td>
-            <td style="padding: 3px 10px; border:1px solid black; text-align:right; background-color:yellow;">[12345]</td>
+            <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php if($pay_sum==0) echo '-'; else echo number_format($pay_sum); ?></td>
+            <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php if($non_paid_sum==0) echo '-'; else echo number_format($non_paid_sum); ?></td>
+            <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php if($late_fee_sum==0) echo '-'; else echo number_format($late_fee_sum); ?></td>
+            <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php if($total_pay_sum==0) echo '-'; else echo number_format($total_pay_sum);?></td>
         </tr>
     </table>
     <table style="margin-top: 10px;"><tr><td style="font-size: 12px;">■ 계좌번호 안내</td></tr></table>
@@ -127,21 +153,21 @@
             <td style="padding: 3px 0px; border:1px solid black; text-align:center; "><?php echo explode('+', $bill_issue->bank_acc_1)[0]; ?></td>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center; "><?php echo $bill_issue->acc_host_1; ?></td>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center; " colspan="2"><?php echo explode('+', $bill_issue->bank_acc_1)[1]; ?></td>
-            <td style="padding: 3px 10px; border:1px solid black; text-align:right; background-color:yellow;">[12345]</td>
+            <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php if($total_pay_sum_1==0) echo '-'; else echo number_format($total_pay_sum_1); ?></td>
         </tr>
         <tr>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center;"><?php if(isset($bill_issue->bank_acc_2)) echo "업무 대행비"; ?></td>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center; "><?php if(isset($bill_issue->bank_acc_2)) echo explode('+', $bill_issue->bank_acc_2)[0]; ?></td>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center; "><?php if(isset($bill_issue->bank_acc_2)) echo $bill_issue->acc_host_2; ?></td>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center; " colspan="2"><?php if(isset($bill_issue->bank_acc_2)) echo explode('+', $bill_issue->bank_acc_2)[1]; ?></td>
-            <td style="padding: 3px 10px; border:1px solid black; text-align:right; background-color:yellow;">[12345]</td>
+            <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php if($total_pay_sum_2==0) echo '-'; else echo number_format($total_pay_sum_2); ?></td>
         </tr>
         <tr>
             <td style="padding: 5px 10px; border:1px solid black;" colspan="4">
                 ※ 계좌 입금 시 반드시 계약자명과 동호수를 표기하여 납부하여 주시기 바랍니다. <br /> &nbsp;&nbsp;&nbsp;&nbsp;예) 홍길동901-101 or 홍길동901101
             </td>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center;">합 계</td>
-            <td style="padding: 3px 10px; border:1px solid black; text-align:right; background-color:yellow;">[12345]</td>
+            <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php if($total_pay_sum==0) echo '-'; else echo number_format($total_pay_sum);?></td>
         </tr>
     </table>
 
@@ -171,7 +197,8 @@
         </tr>
 
         <tr>
-            <td style="padding: 5px 0px; border:1px solid black; height: 286px; vertical-align: top;" colspan="11">
+<?php $tdheight =( 286-(($rep-3)*20)).'px'; ?>
+            <td style="padding: 5px 0px; border:1px solid black; height: <?php echo $tdheight; ?>; vertical-align: top;" colspan="11">
               <table width="100%" cellpadding="0" cellspacing="0">
 <?php
   $time_cum = 0; //계약건당 약정금 누계 초기화
@@ -191,7 +218,7 @@
     // 약정금액
     $pay = $this->cms_main_model->sql_row(" SELECT payment FROM cb_cms_sales_payment WHERE price_seq='$price->seq' AND pay_sche_seq='$lt->seq' ");
     // 납입금액
-		$paid = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS time_paid, MAX(paid_date) AS paid_date FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$contractor->seq' AND pay_sche_code='$lt->pay_code' ");
+	$paid = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS time_paid, MAX(paid_date) AS paid_date FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$contractor->seq' AND pay_sche_code='$lt->pay_code' ");
 
     $prepay = ($paid->time_paid!==null) ? '-' : ''; // 선납일 수 추후 필요 시 수식 적용
     $discount = ($paid->time_paid!==null) ? '-' : ''; //할인료 추후 필요 시 수식 적용
@@ -222,7 +249,6 @@
                   <td style="text-align:center; " width="120"><?php echo $pay_name; ?></td>
                   <td style="text-align:center; " width="120"><?php echo $due_date; ?></td>
                   <td style="text-align:right; " width="120"><?php echo number_format($pay->payment); ?></td>
-
                   <td style="text-align:right; padding-right:1px;" width="110"><?php echo $paid->paid_date; ?></td>
                   <td style="text-align:right; " width="110"><?php echo number_format($out_payment); ?></td>
                   <td style="text-align:right;" width="26"><?php echo $prepay; ?></td>
@@ -237,6 +263,13 @@
 endforeach;
 ?>
               </table>
+              <!-- <table style="height:100%; background-color:red;">
+                  <tr>
+                      <td valign="bottom">
+                          <span style="font-size: 10px;"><?php if(isset($bill_issue->host_name_2)) echo "※ 미 도래한 납부회차의 납부기한은 예정사항이며 추후 변동 시 변경고지될 수 있습니다." ?><span>
+                      </td>
+                  </tr>
+              </table> -->
             </td>
         </tr>
         <tr>
