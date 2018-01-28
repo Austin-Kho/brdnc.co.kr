@@ -1033,13 +1033,24 @@ class Cms_m1 extends CB_Controller {
 			// view page로 보낼 데이터 구하기
 			$view['view']['bill_issue'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_bill_issue WHERE pj_seq='$project' ");
 			$view['view']['addr'] = explode("|", $view['view']['bill_issue']->address);
-			$view['view']['pay_sche'] = $this->cms_main_model->sql_result(" SELECT seq, pay_sort, pay_code, pay_name, pay_due_date FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' ");
+			$view['view']['pay_sche'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' GROUP BY pay_name ORDER BY pay_code ");
+			// 실제 납부회차
+			$view['view']['real_sche'] = $this->cms_main_model->sql_result( " SELECT MAX(pay_code) AS pay_code FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' GROUP BY pay_time ");
 
 			// 프로젝트명, 타입 정보 구하기
 			$pj_info = $this->cms_main_model->sql_row(" SELECT pj_name, type_name, type_color FROM cb_cms_project WHERE seq='$project' ");
 			if($pj_info) {
 				$view['tp_name'] = explode("-", $pj_info->type_name);
 				$view['tp_color'] = explode("-", $pj_info->type_color);
+			}
+
+			// 계약 데이터 필터링(타입, 동 별)
+			$view['sc_cont_diff'] = $this->cms_main_model->sql_result(" SELECT cont_diff FROM cb_cms_sales_contract GROUP BY cont_diff ORDER BY cont_diff ");
+			$view['sc_cont_type'] = $this->cms_main_model->sql_result(" SELECT unit_type FROM cb_cms_sales_contract GROUP BY unit_type ORDER BY unit_type ");
+			if($this->input->get('type')) {
+				$view['sc_cont_dong'] = $this->cms_main_model->sql_result(" SELECT unit_dong FROM cb_cms_sales_contract WHERE unit_type='".$this->input->get('type')."' GROUP BY unit_dong ORDER BY unit_dong ");
+			}else {
+				$view['sc_cont_dong'] = $this->cms_main_model->sql_result(" SELECT unit_dong FROM cb_cms_sales_contract GROUP BY unit_dong ORDER BY unit_dong ");
 			}
 
 			// 계약자 데이터 구하기	// 계약 데이터 검색 필터링
@@ -1049,8 +1060,7 @@ class Cms_m1 extends CB_Controller {
 			if( !empty($this->input->get('diff'))) {$df = $this->input->get('diff'); $cont_query .= " AND cont_diff='$df' ";}
 			if( !empty($this->input->get('type'))) {$tp = $this->input->get('type'); $cont_query .= " AND unit_type='$tp' ";}
 			if( !empty($this->input->get('dong'))) {$dn = $this->input->get('dong'); $cont_query .= " AND unit_dong='$dn' ";}
-			if( !empty($this->input->get('s_date'))) {$sd = $this->input->get('s_date'); $cont_query .= " AND cb_cms_sales_contract.cont_date>='$sd' ";}
-			if( !empty($this->input->get('e_date'))) {$ed = $this->input->get('e_date'); $cont_query .= " AND cb_cms_sales_contract.cont_date<='$ed' ";}
+			if( !empty($this->input->get('filter'))) $cont_query .= "  ";
 			if( !empty($this->input->get('sc_name'))) {$ctor = $this->input->get('sc_name'); $cont_query .= " AND (cb_cms_sales_contractor.contractor='$ctor' OR cb_cms_sales_contract.note LIKE '%$ctor%') ";}
 
 			// $view['cont_query'] = $cont_query; // Excel file 로 보낼 쿼리
@@ -1073,7 +1083,6 @@ class Cms_m1 extends CB_Controller {
 
 			$this->pagination->initialize($config); //페이지네이션 초기화
 			$view['pagination'] = $this->pagination->create_links(); //페이징 링크를 생성하여 view에서 사용할 변수에 할당
-
 
 			// 계약 데이터 가져오기
 			if( !$this->input->get('order')) $cont_query .= " ORDER BY cb_cms_sales_contract.cont_date DESC, cb_cms_sales_contract.seq DESC ";
