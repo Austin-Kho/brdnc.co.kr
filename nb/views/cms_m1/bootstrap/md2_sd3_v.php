@@ -4,7 +4,7 @@ if($auth23<1) :
 else :
 ?>
 <script>
-	function show_hide(obj){
+	function show_hide(obj){ // 기본설정 숨기거나 보이기
 		var show_hide = document.getElementById('show_hide');
 		if(obj.checked==true){ // 체크시 보이기
 			show_hide.style.display = "block";
@@ -12,12 +12,14 @@ else :
 			show_hide.style.display = "none";
 		}
 	}
-	function checkAll(handle, obj) {
+	function checkAll(handle, obj) { // 계약 항목 전체 선택
 		var i;
 		var chk = document.getElementsByName(obj);
 		var tot = chk.length;
 		if(handle.checked===true){
-			for (i = 0; i < tot; i++) {chk[i].checked = true;}
+			for (i = 0; i < tot; i++) {
+				if(chk[i].disabled==false) chk[i].checked = true;
+			}
 		}else {
 			for (i = 0; i < tot; i++) {chk[i].checked = false;}
 		}
@@ -87,7 +89,10 @@ else :
 	</div>
 
 	<div class="row bg-success bo-top bo-bottom font12" style="margin: 0 0 20px;">
-		<div class="col-xs-12 font14 right checkbox" style="padding: 0 30px;">
+		<div class="col-xs-6 checkbox" style="">
+			<h5 style="color:#cc5704">기본 설정</h5>
+		</div>
+		<div class="col-xs-6 font14 right checkbox" style="padding-top: 13px;">
 			<label>
 				<input type="checkbox" onclick="show_hide(this)"> 고지서 관련 세부설정 보기
 			</label>
@@ -115,10 +120,13 @@ else :
 			</div>
 			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="pay_sche_code">회 차 구 분</label></div>
 			<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
-				<select class="form-control input-sm" name="pay_sche_code">
+				<select class="form-control input-sm" name="pay_sche_code" id="psc">
 					<option value="">납부회차</option>
-<?php foreach ($view['pay_sche'] as $lt) : ?>
-					<option value="<?php echo $lt->pay_code; ?>" <?php if($view['bill_issue']->pay_code==$lt->pay_code) echo "selected"; else echo set_select('pay_sche_code', $lt->pay_code); ?>><?php echo $lt->pay_name; ?></option>
+<?php
+	foreach ($view['pay_sche'] as $lt) :
+		$pay_name = ($lt->pay_disc!=='') ? $lt->pay_name.' ('.$lt->pay_disc.')' : $lt->pay_name;
+?>
+					<option value="<?php echo $lt->pay_code; ?>" <?php if($view['bill_issue']->pay_code==$lt->pay_code) echo "selected"; else echo set_select('pay_sche_code', $lt->pay_code); ?>><?php echo $pay_name; ?></option>
 <?php endforeach; ?>
 				</select>
 			</div>
@@ -198,9 +206,6 @@ else :
 		<div class="row" style="margin: 0; padding: 0;">
 			<div class="col-sm-12 bo-top" style="padding: 0;">
 				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="address">발송자 주소</label></div>
-				<!-- <div class="col-xs-8 col-md-10" style="padding: 4px;">
-					<input type="text" class="form-control input-sm" name="address" value="<?php if(isset($view['bill_issue']->address)) echo $view['bill_issue']->address; else echo set_value('address'); ?>" placeholder="주 소">
-				</div> -->
 				<div class="col-xs-8 col-md-10" style="padding: 0px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<div class="col-xs-4 col-sm-3 col-md-2" style="padding: 4px;">
@@ -314,17 +319,22 @@ else :
 						<!-- <option value="4" <?php if($this->input->get('order')==4) echo "selected"; ?>>홀딩</option> -->
 					</select>
 				</div>
-				<div class="col-xs-12 col-sm-2 col-md-1 center bgf8" style="height: 40px; padding: 10px 0;">회차별 미납</div>
-				<div class="col-xs-8 col-sm-2 col-md-2" style="padding:5px;">
-					<label for="pay_sche" class="sr-only">납부회차</label>
-					<select class="form-control input-sm" name="pay_sche_code">
-						<option value="">납부회차</option>
-	<?php foreach ($view['pay_sche'] as $lt) : ?>
-						<option value="<?php echo $lt->pay_code; ?>" <?php if($view['bill_issue']->pay_code==$lt->pay_code) echo "selected"; ?>><?php echo $lt->pay_name; ?></option>
-	<?php endforeach; ?>
-					</select>
+				<div class="col-xs-12 col-sm-2 col-md-1 center bgf8" style="height: 40px; padding: 10px 0;">현재 설정회차</div>
+
+				<div class="col-xs-8 col-sm-4 col-md-2">
+					<div class="checkbox">
+						<label style="color:#c33103">
+							<!-- <input type="checkbox" name="filter" value="<?php echo $view['bill_issue']->pay_code; ?>" <?php if($this->input->get('filter')!==null) echo 'checked'; ?>> -->
+							<strong>
+								<script>
+									document.write((document.getElementById('psc').options[document.getElementById('psc').selectedIndex].text).substring(0, 6)+" 납부기준");
+								</script>
+							</strong>
+						</label>
+					</div>
 				</div>
-				<div class="col-xs-10 col-sm-2 col-md-2" style="height: 40px; padding: 5px; text-align: right;">
+
+				<div class="col-xs-10 col-sm-4 col-md-2" style="height: 40px; padding: 5px; text-align: right;">
 					<label for="계약자명" class="sr-only">입금자</label>
 					<input type="text" class="form-control input-sm" name="sc_name" maxlength="10" value="<?php if($this->input->get('sc_name')) echo $this->input->get('sc_name'); ?>" placeholder="계약자명" onkeydown="if(event.keyCode==13)submit();">
 				</div>
@@ -347,14 +357,14 @@ else :
 			<table class="table table-bordered table-hover table-condensed">
 				<thead class="bo-top center bgf8">
 					<tr>
-						<td width="7%"><div class="checkbox" style="margin:0;"><label><input type="checkbox" onclick="checkAll(this, 'chk[]')"> 전체</label></div></td>
-						<td width="11%">계약 일련번호</td>
-						<td width="11%">차 수</td>
-						<td width="10%">타 입</td>
-						<td width="11%">동 호 수</td>
+						<td width="6%"><div class="checkbox" style="margin:0;"><label><input type="checkbox" onclick="checkAll(this, 'chk[]')"> 전체</label></div></td>
+						<td width="10%">계약 일련번호</td>
+						<td width="10%">차 수</td>
+						<td width="8%">타 입</td>
+						<td width="12%">동 호 수</td>
 						<td width="10%">계 약 자</td>
-						<td width="15%">총 납입금</td>
-						<td width="10%">계약 완납</td>
+						<td width="13%">총 납입금</td>
+						<td width="16%">현 회차상태(완납회차)</td>
 						<td width="15%">계약 일자</td>
 					</tr>
 				</thead>
@@ -365,36 +375,40 @@ for($i=0; $i<count($tp_name); $i++) :
 endfor;
 
 foreach ($cont_data as $lt) :
+	// 차수 구하기
 	$nd = $this->cms_main_model->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$lt->cont_diff' ");
+	// 총 납부금액 구하기
 	$total_rec = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS received FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$lt->cont_seq' ");
-
-	$deposit1 = $this->cms_main_model->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<3 ");
-	$deposit2 = $this->cms_main_model->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<5 ");
-	if($total_rec->received>=$deposit2->payment){
-		$is_paid_ok = "<span style='color: #2205D0;'>2차 완납</span>";
-	}elseif($total_rec->received>=$deposit1->payment){
-		$is_paid_ok = "<span style='color: #03A719;'>1차 완납</span>";
-	}else{
-		$is_paid_ok = "<span style='color: #CD0505;'>미납</span>";
+	$n = 0;
+	foreach ($view['real_sche'] as $val) { // 실제 납부회차 만큼 반복
+		$val->pay_code;
+		$time_payment[$n] = $this->cms_main_model->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<=$val->pay_code ");
+		if($total_rec->received>=$time_payment[$n]->payment) $is_paid = $val->pay_code;
+		$n++;
 	}
+	$condi = ($view['bill_issue']->pay_code <= $is_paid)
+		? "<span style='color: #2205D0;'>".$view['pay_sche']->pay_name." 완납 중</span>"
+		: "<span style='color: #CD0505;'>".$view['pay_sche']->pay_name." 미납 중</span>";
+	$chk_con = ($view['bill_issue']->pay_code <= $is_paid)
+		? "disabled"
+		: "";
+
+
+	$paid_out = $this->cms_main_model->sql_row(" SELECT pay_name FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$is_paid' ");
 
 	$dong_ho = explode("-", $lt->unit_dong_ho);
-	// $adr1 = ($lt->cont_addr2) ? explode("|", $lt->cont_addr2) : explode("|", $lt->cont_addr1);
-	// $adr2 = explode(" ", $adr1[1]);
-	// $addr = $adr2[0]." ".$adr2[1];
 	$unit_dh = explode("-", $lt->unit_dong_ho);
 	$cont_edit_link ="<a href ='".base_url('cms_m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=2&project=').$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>" ;
-	// $new_span = ($lt->cont_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #2A41DB; color: #fff; font-size: 10px;'>&nbsp;N </span>&nbsp; " : "";
 ?>
 					<tr>
-						<td><div class="checkbox" style="margin:0;"><label><input type="checkbox" name="chk[]" value="<?php echo $lt->cont_seq; ?>"> 선택</label></div></td>
+						<td><div class="checkbox" style="margin:0;"><label><input type="checkbox" name="chk[]" value="<?php echo $lt->cont_seq; ?>" <?php echo $chk_con; ?>> 선택</label></div></td>
 						<td><?php echo $cont_edit_link.$lt->cont_code."</a>"; ?></td>
 						<td><?php echo $nd->diff_name; ?></td>
 						<td class="left" style="padding-left:20px;"><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type;?></td>
 						<td><?php echo $cont_edit_link.$lt->unit_dong_ho."</a>"; ?></td>
 						<td><?php echo $cont_edit_link.$lt->contractor."</a>"; ?></td>
 						<td class="right"><a href="<?php echo base_url('cms_m1/sales/2/2')."?project=".$project."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>"><?php echo number_format($total_rec->received); ?></a></td>
-						<td><?php echo $is_paid_ok; ?></td>
+						<td><?php echo $condi.' ('.$paid_out->pay_name.')'; ?></td>
 						<td><?php echo $new_span." ".$lt->cont_date; ?></span></td>
 					</tr>
 <?php
