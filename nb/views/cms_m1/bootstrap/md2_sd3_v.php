@@ -90,7 +90,7 @@ else :
 
 	<div class="row bg-success bo-top bo-bottom font12" style="margin: 0 0 20px;">
 		<div class="col-xs-6 checkbox" style="">
-			<h5 style="color:#16125b"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> &nbsp;기본 설정</h5>
+			<h5><span class="glyphicon glyphicon-cog" aria-hidden="true" style="color:#c2630c"></span> &nbsp;기본 설정</h5>
 		</div>
 		<div class="col-xs-6 font14 right checkbox" style="padding-top: 13px;">
 			<label>
@@ -323,13 +323,13 @@ else :
 
 				<div class="col-xs-8 col-sm-4 col-md-2">
 					<div class="checkbox">
-						<label style="color:#c33103">
+						<label style="color:#2683fe;">
 							<!-- <input type="checkbox" name="filter" value="<?php echo $view['bill_issue']->pay_code; ?>" <?php if($this->input->get('filter')!==null) echo 'checked'; ?>> -->
-							<strong>
+							<h5>
 								<script>
 									document.write((document.getElementById('psc').options[document.getElementById('psc').selectedIndex].text).substring(0, 6)+" 납부기준");
 								</script>
-							</strong>
+							</h5>
 						</label>
 					</div>
 				</div>
