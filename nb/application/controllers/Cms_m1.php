@@ -1033,7 +1033,7 @@ class Cms_m1 extends CB_Controller {
 			// view page로 보낼 데이터 구하기
 			$view['view']['bill_issue'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_bill_issue WHERE pj_seq='$project' ");
 			$view['view']['addr'] = explode("|", $view['view']['bill_issue']->address);
-			$view['view']['pay_sche'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' GROUP BY pay_name ORDER BY pay_code ");
+			$view['view']['pay_sche'] = $this->cms_main_model->sql_result(" SELECT *, MAX(pay_code) AS pay_code FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' GROUP BY pay_time ORDER BY pay_code ");
 			// 실제 납부회차
 			$view['view']['real_sche'] = $this->cms_main_model->sql_result( " SELECT MAX(pay_code) AS pay_code FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' GROUP BY pay_time ");
 
