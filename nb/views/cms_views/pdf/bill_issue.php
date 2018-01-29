@@ -156,7 +156,7 @@
             <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php if($total_pay_sum_1==0) echo '-'; else echo number_format($total_pay_sum_1); ?></td>
         </tr>
         <tr>
-            <td style="padding: 3px 0px; border:1px solid black; text-align:center;"><?php if(isset($bill_issue->bank_acc_2)) echo "업무 대행비"; ?></td>
+            <td style="padding: 3px 0px; border:1px solid black; text-align:center;"><?php if(isset($bill_issue->bank_acc_2)) echo "PM 용역비"; ?></td>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center; "><?php if(isset($bill_issue->bank_acc_2)) echo explode('+', $bill_issue->bank_acc_2)[0]; ?></td>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center; "><?php if(isset($bill_issue->bank_acc_2)) echo $bill_issue->acc_host_2; ?></td>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center; " colspan="2"><?php if(isset($bill_issue->bank_acc_2)) echo explode('+', $bill_issue->bank_acc_2)[1]; ?></td>
