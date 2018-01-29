@@ -110,6 +110,7 @@ class Daily_money_report extends CB_Controller {
 		// 인쇄 시 정렬 조절
 		$spreadsheet->getActiveSheet()->getPageSetup()->setHorizontalCentered(true); // 가로 정렬
 		$spreadsheet->getActiveSheet()->getPageSetup()->setVerticalCentered(false); // 세로 정렬
+		$spreadsheet->getActiveSheet()->getPageSetup()->setFitToWidth(1); // 1페이지에 모든 열 마추기
 		//----------------------------------------------------------//
 
 
