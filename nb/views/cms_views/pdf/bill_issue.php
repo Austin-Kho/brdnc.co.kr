@@ -35,7 +35,7 @@
         </tr>
     	<tr>
             <td style="padding: 5px 0 2px 15px;">수 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;신 :</td>
-            <td style="padding: 5px 0 2px; font-size:12px; "><?php echo $contractor->contractor." 님"; ?></td><td></td>
+            <td style="padding: 5px 0 2px; font-size:12px; "><strong><?php echo $contractor->contractor." 님"; ?></strong></td><td></td>
         </tr>
     	<tr>
             <td style="padding: 5px 0 2px 15px;">참 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;조 :</td><td></td><td></td>
