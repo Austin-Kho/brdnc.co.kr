@@ -166,7 +166,7 @@ else :
 						</a>
 					</div>
 				</div>
-				<div class="col-xs-10 col-sm-4 col-md-2" style="height: 40px; padding: 10px 5px; text-align: right;">
+				<div class="col-xs-10 col-sm-4 col-md-2" style="height: 40px; padding: 10px 0px; text-align: right;">
 					<a href="javascript:" onclick="term_put('s_date', 'e_date', 'd');" title="오늘"><img src="<?php echo base_url(); ?>static/img/to_today.jpg" alt="오늘"></a>
 					<a href="javascript:" onclick="term_put('s_date', 'e_date', 'w');" title="일주일"><img src="<?php echo base_url(); ?>static/img/to_week.jpg" alt="일주일"></a>
 					<a href="javascript:" onclick="term_put('s_date', 'e_date', 'm');" title="1개월"><img src="<?php echo base_url(); ?>static/img/to_month.jpg" alt="1개월"></a>
