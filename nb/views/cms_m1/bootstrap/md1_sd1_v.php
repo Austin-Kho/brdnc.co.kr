@@ -239,13 +239,13 @@ endfor;
 			<table class="table table-bordered table-hover table-condensed">
 				<thead class="bo-top center bgf8">
 					<tr>
-						<td width="8%">계약 일련번호</td>
-						<td width="8%">차 수</td>
+						<td width="7%">일련번호</td>
+						<td width="7%">차 수</td>
 						<td width="6%">타 입</td>
 						<td width="7%">동 호 수</td>
 						<td width="6%">계 약 자</td>
-						<td width="9%">연락처 [1]</td>
-						<td width="9%">계약 일자</td>
+						<td width="10%">연락처 [1]</td>
+						<td width="10%">계약 일자</td>
 						<td width="8%">총 납입금</td>
 						<td width="6%">계약 완납</td>
 						<td width="9%">미비 서류</td>
@@ -326,15 +326,15 @@ foreach ($cont_data as $lt) :
 			<table class="table table-bordered table-hover table-condensed">
 				<thead class="bo-top center bgf8">
 					<tr>
-						<td width="10%">타 입</td>
-						<td width="10%">동 호 수</td>
-						<td width="10%">청 약 자</td>
-						<td width="10%">차 수</td>
+						<td width="8%">타 입</td>
+						<td width="9%">동 호 수</td>
+						<td width="9%">청 약 자</td>
+						<td width="9%">차 수</td>
 						<td width="10%">청 약 금</td>
-						<td width="10%">청약 일자</td>
-						<td width="10%">상 태</td>
-						<td width="10%">상태 변경일</td>
-						<td width="20%">비 고</td>
+						<td width="12%">청약 일자</td>
+						<td width="9%">상 태</td>
+						<td width="12%">상태 변경일</td>
+						<td width="22%">비 고</td>
 					</tr>
 				</thead>
 				<tbody class="bo-bottom center">
@@ -356,7 +356,7 @@ foreach($app_data as $lt) :
 	$new_span = ($lt->app_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #AB0327; color: #fff; font-size: 10px;'>&nbsp;N </span>&nbsp; " : "";
 ?>
 					<tr>
-						<td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type] ?>;">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></span></td>
+						<td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type] ?>;">&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></span></td>
 						<td ><?php echo $app_edit_link.$lt->unit_dong_ho.$app_edit; ?></td>
 						<td><?php echo $app_edit_link.$lt->applicant.$app_edit; ?></td>
 <?php $diff = $this->cms_main_model->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no = '$lt->app_diff' "); ?>
@@ -365,7 +365,7 @@ foreach($app_data as $lt) :
 						<td><?php echo $new_span." ".$lt->app_date; ?></td>
 						<td><?php echo $condi; ?></td>
 						<td><?php if($lt->disposal_date && $lt->disposal_date!="0000-00-00")echo $lt->disposal_date; ?></td>
-						<td class="left"><div style="cursor: pointer;" data-toggle="tooltip" data-placement="left" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 23, ".."); ?></div></td>
+						<td class="left"><div style="cursor: pointer;" data-toggle="tooltip" data-placement="left" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 22, ".."); ?></div></td>
 					</tr>
 <?php endforeach; ?>
 				</tbody>
