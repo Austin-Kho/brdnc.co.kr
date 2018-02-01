@@ -7,11 +7,6 @@ var g_target;
 var g_cal_Day;     // 폼에 날짜 값이 없을 경우 '오늘' 또는 날짜 값이 있을 경우 '해당 날짜' 의 값을 가지는 변수
 var g_cssAddr = "/nb/static/lib/calendar/calendar.css";
 
-var back_url = "/nb/static/img/to_left.jpg";
-var back_url_ = "/nb/static/img/to_left_.jpg";
-var next_url = "/nb/static/img/to_right.jpg";
-var next_url_ = "/nb/static/img/to_right_.jpg";
-
 var sel_width=184;                                                     //div 넓이
 
 function slideCalScroll(what) {
@@ -209,7 +204,7 @@ function Show_cal(arg_sYear, arg_sMonth, arg_sDay) {  // 달력 내용을 출력
 	var l_strCal_HTML = "<form name='calendar'>";
 	l_strCal_HTML += "<div style='width:"+sel_width+"px;'><table id='Cal_Table' border='0' cellspacing='0' cellpadding='0' style='width:"+(sel_width-9)+"px'>";
 	l_strCal_HTML += "<tr><td colspan=7 valign='top'><table id='Cal_Header' border='0' cellspacing='0' cellpadding='0' style='width:"+(sel_width-9)+"px'><tr><td>";
-	l_strCal_HTML += "<a style='cursor:pointer;' OnClick='parent.Show_cal("+l_intPrevYear+","+l_intPrevMonth+","+l_intThisDay+");'><img src="+back_url+" name=img1 alt=이전달 border=0 onmouseover=this.src='"+back_url_+"' onmouseout=this.src='"+back_url+"'></a></td><td> ";
+	l_strCal_HTML += "<a style='cursor:pointer;' OnClick='parent.Show_cal("+l_intPrevYear+","+l_intPrevMonth+","+l_intThisDay+");'><div class='Cal_NextBack' onmouseover=\"this.class='Cal_NextBack_'\"; onmouseout=\"this.class='Cal_NextBack'\"><span class='glyphicon glyphicon-chevron-left' aria-hidden='true'></span></div></a></td><td> ";
 	l_strCal_HTML += "<select name='selYear' id='Cal_Select' OnChange='parent.fnChangeYearD(this.form.selYear.value, this.form.selMonth.value, "+l_intThisDay+")';>";
 	for (var l_optYear=(l_intThisYear-3); l_optYear<(l_intThisYear+4); l_optYear++)
 	{
@@ -232,7 +227,7 @@ function Show_cal(arg_sYear, arg_sMonth, arg_sDay) {  // 달력 내용을 출력
 		l_strCal_HTML += l_straMonth_Val[i-1]+"</option>";
 	}
 	l_strCal_HTML += "</select></td><td> ";
-	l_strCal_HTML += "<a style='cursor:pointer;' OnClick='parent.Show_cal("+l_intNextYear+","+l_intNextMonth+","+l_intThisDay+");'><img src='"+next_url+"' name='img1' alt='다음달' border='0' onmouseover=this.src='"+next_url_+"' onmouseout=this.src='"+next_url+"'></a></td></tr></table>";
+	l_strCal_HTML += "<a style='cursor:pointer;' OnClick='parent.Show_cal("+l_intNextYear+","+l_intNextMonth+","+l_intThisDay+");'><div class='Cal_NextBack'><span class='glyphicon glyphicon-chevron-right' aria-hidden='true'></span></div></a></td></tr></table>";
 
 
 	l_strCal_HTML += "</td></tr><tr id='Cal_Week'>";
