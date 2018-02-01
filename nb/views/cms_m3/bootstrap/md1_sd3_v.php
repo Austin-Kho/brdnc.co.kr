@@ -313,6 +313,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <input type="text" class="form-control input-sm eng" id="type_name_1" name="type_name_1" maxlength="10" value="<?php if($this->input->post('type_name_1')) echo set_value('type_name_1'); else if($t_count>0) echo $type_name[0]; ?>" required autofocus placeholder="타입">
           </div>
                 <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
+      <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="type_color_1" class="sr-only">컬러</span></label>
             <input type="color" class="form-control input-sm en_only" id="type_color_1" name="type_color_1" maxlength="7" value="<?php if($this->input->post('type_color_1')) echo set_value('type_color_1'); else if($t_count>0) echo $type_color[0]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>0) echo $type_color[0]; ?>">
@@ -321,7 +322,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <label for="type_quantity_1" class="sr-only">수량</span></label>
             <input type="text" class="form-control input-sm en_only" id="type_quantity_1" name="type_quantity_1" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_1')) echo set_value('type_quantity_1'); else if($t_count>0) echo $type_quantity[0]; ?>" required autofocus placeholder="타입별 단위 수량">
           </div>
-                <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
+
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="count_unit_1" class="sr-only">단위</span></label>
             <select class="form-control input-sm" id="count_unit_1" name="count_unit_1">
@@ -351,6 +352,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <input type="text" class="form-control input-sm eng" id="type_name_2" name="type_name_2" maxlength="10" value="<?php if($this->input->post('type_name_2')) echo set_value('type_name_2'); else if($t_count>1)  echo $type_name[1]; ?>" required autofocus placeholder="타입">
           </div>
                 <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
+      <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="type_color_2" class="sr-only">컬러</span></label>
             <input type="color" class="form-control input-sm en_only" id="type_color_2" name="type_color_2" maxlength="7" value="<?php if($this->input->post('type_color_2')) echo set_value('type_color_2'); else if($t_count>1) echo $type_color[1]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>1) echo $type_color[1]; ?>">
@@ -359,7 +361,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <label for="type_quantity_2" class="sr-only">수량</span></label>
             <input type="text" class="form-control input-sm en_only" id="type_quantity_2" name="type_quantity_2" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_2')) echo set_value('type_quantity_2'); else if($t_count>1) echo $type_quantity[1]; ?>" required autofocus placeholder="타입별 단위 수량">
           </div>
-                <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
+
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="count_unit_2" class="sr-only">단위</span></label>
             <select class="form-control input-sm" id="count_unit_2" name="count_unit_2">
@@ -389,6 +391,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <input type="text" class="form-control input-sm eng" id="type_name_3" name="type_name_3" maxlength="10" value="<?php if($this->input->post('type_name_3')) echo set_value('type_name_3'); else if($t_count>2)  echo $type_name[2]; ?>" required autofocus placeholder="타입">
           </div>
                 <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
+      <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="type_color_3" class="sr-only">컬러</span></label>
             <input type="color" class="form-control input-sm en_only" id="type_color_3" name="type_color_3" maxlength="7" value="<?php if($this->input->post('type_color_3')) echo set_value('type_color_3'); else if($t_count>2) echo $type_color[2]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>2) echo $type_color[2]; ?>">
@@ -397,7 +400,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <label for="type_quantity_3" class="sr-only">수량</span></label>
             <input type="text" class="form-control input-sm en_only" id="type_quantity_3" name="type_quantity_3" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_3')) echo set_value('type_quantity_3'); else if($t_count>2) echo $type_quantity[2]; ?>" required autofocus placeholder="타입별 단위 수량">
           </div>
-                <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
+
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="count_unit_3" class="sr-only">단위</span></label>
             <select class="form-control input-sm" id="count_unit_3" name="count_unit_3">
@@ -427,6 +430,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <input type="text" class="form-control input-sm eng" id="type_name_4" name="type_name_4" maxlength="10" value="<?php if($this->input->post('type_name_4')) echo set_value('type_name_4'); else if($t_count>3)  echo $type_name[3]; ?>" required autofocus placeholder="타입">
           </div>
                 <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
+      <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="type_color_4" class="sr-only">컬러</span></label>
             <input type="color" class="form-control input-sm en_only" id="type_color_4" name="type_color_4" maxlength="7" value="<?php if($this->input->post('type_color_4')) echo set_value('type_color_4'); else if($t_count>3) echo $type_color[3]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>3) echo $type_color[3]; ?>">
@@ -435,7 +439,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <label for="type_quantity_4" class="sr-only">수량</span></label>
             <input type="text" class="form-control input-sm en_only" id="type_quantity_4" name="type_quantity_4" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_4')) echo set_value('type_quantity_4'); else if($t_count>3) echo $type_quantity[3]; ?>" required autofocus placeholder="타입별 단위 수량">
           </div>
-                <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
+
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="count_unit_4" class="sr-only">단위</span></label>
             <select class="form-control input-sm" id="count_unit_4" name="count_unit_4">
@@ -465,6 +469,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <input type="text" class="form-control input-sm eng" id="type_name_5" name="type_name_5" maxlength="10" value="<?php if($this->input->post('type_name_5')) echo set_value('type_name_5'); else if($t_count>4)  echo $type_name[4]; ?>" required autofocus placeholder="타입">
           </div>
                 <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
+      <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="type_color_5" class="sr-only">컬러</span></label>
             <input type="color" class="form-control input-sm en_only" id="type_color_5" name="type_color_5" maxlength="7" value="<?php if($this->input->post('type_color_5')) echo set_value('type_color_5'); else if($t_count>4) echo $type_color[4]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>4) echo $type_color[4]; ?>">
@@ -473,7 +478,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <label for="type_quantity_5" class="sr-only">수량</span></label>
             <input type="text" class="form-control input-sm en_only" id="type_quantity_5" name="type_quantity_5" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_5')) echo set_value('type_quantity_5'); else if($t_count>4) echo $type_quantity[4]; ?>" required autofocus placeholder="타입별 단위 수량">
           </div>
-                <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
+
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="count_unit_5" class="sr-only">단위</span></label>
             <select class="form-control input-sm" id="count_unit_5" name="count_unit_5">
@@ -503,6 +508,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <input type="text" class="form-control input-sm eng" id="type_name_6" name="type_name_6" maxlength="10" value="<?php if($this->input->post('type_name_6')) echo set_value('type_name_6'); else if($t_count>5)  echo $type_name[5]; ?>" required autofocus placeholder="타입">
           </div>
                 <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
+      <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="type_color_6" class="sr-only">컬러</span></label>
             <input type="color" class="form-control input-sm en_only" id="type_color_6" name="type_color_6" maxlength="7" value="<?php if($this->input->post('type_color_6')) echo set_value('type_color_6'); else if($t_count>5) echo $type_color[5]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>5) echo $type_color[5]; ?>">
@@ -511,7 +517,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <label for="type_quantity_6" class="sr-only">수량</span></label>
             <input type="text" class="form-control input-sm en_only" id="type_quantity_6" name="type_quantity_6" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_6')) echo set_value('type_quantity_6'); else if($t_count>5) echo $type_quantity[5]; ?>" required autofocus placeholder="타입별 단위 수량">
           </div>
-                <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
+
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="count_unit_6" class="sr-only">단위</span></label>
             <select class="form-control input-sm" id="count_unit_6" name="count_unit_6">
@@ -541,6 +547,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <input type="text" class="form-control input-sm eng" id="type_name_7" name="type_name_7" maxlength="10" value="<?php if($this->input->post('type_name_7')) echo set_value('type_name_7'); else if($t_count>6)  echo $type_name[6]; ?>" required autofocus placeholder="타입">
           </div>
                 <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
+      <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="type_color_7" class="sr-only">컬러</span></label>
             <input type="color" class="form-control input-sm en_only" id="type_color_7" name="type_color_7" maxlength="7" value="<?php if($this->input->post('type_color_7')) echo set_value('type_color_7'); else if($t_count>6) echo $type_color[6]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>6) echo $type_color[6]; ?>">
@@ -549,7 +556,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <label for="type_quantity_7" class="sr-only">수량</span></label>
             <input type="text" class="form-control input-sm en_only" id="type_quantity_7" name="type_quantity_7" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_7')) echo set_value('type_quantity_7'); else if($t_count>6) echo $type_quantity[6]; ?>" required autofocus placeholder="타입별 단위 수량">
           </div>
-                <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
+
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="count_unit_7" class="sr-only">단위</span></label>
             <select class="form-control input-sm" id="count_unit_7" name="count_unit_7">
@@ -579,6 +586,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <input type="text" class="form-control input-sm eng" id="type_name_8" name="type_name_8" maxlength="10" value="<?php if($this->input->post('type_name_8')) echo set_value('type_name_8'); else if($t_count>7)  echo $type_name[7]; ?>" required autofocus placeholder="타입">
           </div>
                 <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
+      <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="type_color_8" class="sr-only">컬러</span></label>
             <input type="color" class="form-control input-sm en_only" id="type_color_8" name="type_color_8" maxlength="7" value="<?php if($this->input->post('type_color_8')) echo set_value('type_color_8'); else if($t_count>7) echo $type_color[7]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>7) echo $type_color[7]; ?>">
@@ -587,7 +595,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <label for="type_quantity_8" class="sr-only">수량</span></label>
             <input type="text" class="form-control input-sm en_only" id="type_quantity_8" name="type_quantity_8" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_8')) echo set_value('type_quantity_8'); else if($t_count>7) echo $type_quantity[7]; ?>" required autofocus placeholder="타입별 단위 수량">
           </div>
-                <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
+
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="count_unit_8" class="sr-only">단위</span></label>
             <select class="form-control input-sm" id="count_unit_8" name="count_unit_8">
@@ -617,6 +625,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <input type="text" class="form-control input-sm eng" id="type_name_9" name="type_name_9" maxlength="10" value="<?php if($this->input->post('type_name_9')) echo set_value('type_name_9'); else if($t_count>8)  echo $type_name[8]; ?>" required autofocus placeholder="타입">
           </div>
                 <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
+      <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="type_color_9" class="sr-only">컬러</span></label>
             <input type="color" class="form-control input-sm en_only" id="type_color_9" name="type_color_9" maxlength="7" value="<?php if($this->input->post('type_color_9')) echo set_value('type_color_9'); else if($t_count>8) echo $type_color[8]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>8) echo $type_color[8]; ?>">
@@ -625,7 +634,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <label for="type_quantity_9" class="sr-only">수량</span></label>
             <input type="text" class="form-control input-sm en_only" id="type_quantity_9" name="type_quantity_9" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_9')) echo set_value('type_quantity_9'); else if($t_count>8) echo $type_quantity[8]; ?>" required autofocus placeholder="타입별 단위 수량">
           </div>
-          <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
+
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="count_unit_9" class="sr-only">단위</span></label>
             <select class="form-control input-sm" id="count_unit_9" name="count_unit_9">
@@ -655,6 +664,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <input type="text" class="form-control input-sm eng" id="type_name_10" name="type_name_10" maxlength="10" value="<?php if($this->input->post('type_name_10')) echo set_value('type_name_10'); else if($t_count>9)  echo $type_name[9]; ?>" required autofocus placeholder="타입">
           </div>
                 <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
+      <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="type_color_10" class="sr-only">컬러</span></label>
             <input type="color" class="form-control input-sm en_only" id="type_color_10" name="type_color_10" maxlength="7" value="<?php if($this->input->post('type_color_10')) echo set_value('type_color_10'); else if($t_count>9) echo $type_color[9]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>9) echo $type_color[9]; ?>">
@@ -663,7 +673,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <label for="type_quantity_10" class="sr-only">수량</span></label>
             <input type="text" class="form-control input-sm en_only" id="type_quantity_10" name="type_quantity_10" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_10')) echo set_value('type_quantity_10'); else if($t_count>10) echo $type_quantity[10]; ?>" required autofocus placeholder="타입별 단위 수량">
           </div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
+
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="count_unit_10" class="sr-only">단위</span></label>
             <select class="form-control input-sm" id="count_unit_10" name="count_unit_10">
@@ -693,6 +703,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <input type="text" class="form-control input-sm eng" id="type_name_11" name="type_name_11" maxlength="10" value="<?php if($this->input->post('type_name_11')) echo set_value('type_name_11'); else if($t_count>10)  echo $type_name[10]; ?>" required autofocus placeholder="타입">
           </div>
                 <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
+      <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="type_color_11" class="sr-only">컬러</span></label>
             <input type="color" class="form-control input-sm en_only" id="type_color_11" name="type_color_11" maxlength="7" value="<?php if($this->input->post('type_color_11')) echo set_value('type_color_11'); else if($t_count>10) echo $type_color[10]; ?>"  placeholder="컬러" style = "background-color: <?php if($t_count>10) echo $type_color[10]; ?>">
@@ -701,7 +712,7 @@ $biz_start_ym = explode("-",$project[0]->biz_start_ym);
             <label for="type_quantity_11" class="sr-only">수량</span></label>
             <input type="text" class="form-control input-sm en_only" id="type_quantity_11" name="type_quantity_11" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('type_quantity_11')) echo set_value('type_quantity_11'); else if($t_count>11) echo $type_quantity[11]; ?>" required autofocus placeholder="타입별 단위 수량">
           </div>
-                <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>세대</span></div>
+
           <div class="col-xs-2 col-sm-2" style="padding-right: 0;">
             <label for="count_unit_11" class="sr-only">단위</span></label>
             <select class="form-control input-sm" id="count_unit_11" name="count_unit_11">
