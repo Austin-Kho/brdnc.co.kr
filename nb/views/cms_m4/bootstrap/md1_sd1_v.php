@@ -20,14 +20,16 @@
 ?>
 						<div class="col-xs-8 col-sm-5 col-md-3 glyphicon-wrap" style="padding: 0px;">
 							<label for="sh_date" class="sr-only">시작일</label>
-							<input type="text" class="form-control input-sm wid-95" id="sh_date" name="sh_date" maxlength="10" value="<?php echo $sh_date;?>" readonly onClick="cal_add(this); event.cancelBubble=true">
+              <div class="input-group">
+							  <input type="text" class="form-control input-sm wid-95" id="sh_date" name="sh_date" maxlength="10" value="<?php echo $sh_date;?>" onClick="cal_add(this); event.cancelBubble=true">
+                <div class="input-group-addon">
+                  <a href="javascript:" onclick="cal_add(document.getElementById('sh_date'),this); event.cancelBubble=true">
+                    <span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+                  </a>
+                </div>
+              </div>
 						</div>
-						<div class="col-xs-1 glyphicon-wrap" style="padding: 6px 0;">
-							<a href="javascript:" onclick="cal_add(document.getElementById('sh_date'),this); event.cancelBubble=true">
-								<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
-							</a>
-						</div>
-						<div class="col-xs-2" style="padding-left: 0;">
+						<div class="col-xs-2" style="padding-left: 20px;">
 							<input type="button" class="btn btn-primary btn-sm" name="name" value="검 색" onclick="submit();">
 						</div>
 					</form>

@@ -7,19 +7,19 @@ var g_target;
 var g_cal_Day;     // 폼에 날짜 값이 없을 경우 '오늘' 또는 날짜 값이 있을 경우 '해당 날짜' 의 값을 가지는 변수
 var g_cssAddr = "/nb/static/lib/calendar/calendar.css";
 
-var sel_width=184;                                                     //div 넓이
+var sel_width=190;                                                     //div 넓이
 
 function slideCalScroll(what) {
 	var cal = document.getElementById("calendar");
 
 	if(cal!=null){
 		if (cal.heightPos==null || (cal.isDone && cal.isOn==false)) {   //div 오픈 크기 지정 (cal.heightPos 가 없음 - 첫클릭 이거나 / (cal.isDone-- 이 있고 cal.isOn 설정 크기에 도달하면 트루...진행중일때는 펄스) 이면....
-			cal.isDone = false;                      // 이스돈은 꺼져 있는 상태로 설정하고
-			cal.heightPos = 1;                      // 현재 높이는 1px 로 설정하고
+			cal.isDone = false;                  // 이스돈은 꺼져 있는 상태로 설정하고
+			cal.heightPos = 1;                   // 현재 높이는 1px 로 설정하고
 			cal.heightTo = sel_height;           // 최대 목표 높이를 설정한 높이로 하고
-			cal.widthPos = 1;                       // 현재 넓이는 1px 로 설정하고
-			cal.widthTo = sel_width;            // 최대 목표 넓이를 설정한 넓이로 하라
-		} else if (cal.isDone && cal.isOn){                                    //div 닫기 닫힐때 크기 지정
+			cal.widthPos = 1;                    // 현재 넓이는 1px 로 설정하고
+			cal.widthTo = sel_width;             // 최대 목표 넓이를 설정한 넓이로 하라
+		} else if (cal.isDone && cal.isOn){    // div 닫기 닫힐때 크기 지정
 			cal.isDone = false;
 			cal.heightTo = 1;
 			cal.widthTo = 1;
@@ -31,16 +31,16 @@ function slideCalScroll(what) {
 			cal.style.width=cal.widthPos+"px";
 			startCateScrollScroll();
 		} else {  // 절대값(cal.heightTo - cal.heightPos) 가 1보다 작으면  // 즉 설정한 크기보다 1px 작거나 같아지면 ---- 설정한 크기가 다 되었다면.....
-			if (cal.heightTo==sel_height) { // 다 커졌으면 ..
-				cal.isOn = true;                     // 이스온은 트루 --- 같아졌을 땐 켜고
-			} else {                                    // 그렇지 않으면
+			if (cal.heightTo==sel_height) {       // 다 커졌으면 ..
+				cal.isOn = true;                    // 이스온은 트루 --- 같아졌을 땐 켜고
+			} else {                              // 그렇지 않으면
 				cal.isOn = false;                   // 이스온은 펄스 --- 1px 작을 땐 아직 켜지말고
 			}
 			cal.heightPos = cal.heightTo;                    // 현재 높이를 설정한 높이로 동일하게 하고
-			cal.style.height = cal.heightPos + "px";     // cal 의 높이를 설정한 크기 px 로 하고
+			cal.style.height = cal.heightPos + "px";         // cal 의 높이를 설정한 크기 px 로 하고
 			cal.widthPos = cal.widthTo;                      // 현재 넓이를 설정한 넓이로 동일하게 하고
-			cal.style.width = cal.widthPos + "px";          // cal 의 넓이를 설정한 넓이 px 로 하고
-			cal.isDone = true;                                      // 이스돈을 켜라  -- (설정한 크기로 변경 완료를 선언하라)
+			cal.style.width = cal.widthPos + "px";           // cal 의 넓이를 설정한 넓이 px 로 하고
+			cal.isDone = true;                               // 이스돈을 켜라  -- (설정한 크기로 변경 완료를 선언하라)
 			if(cal.heightTo==1&&cal.isDone==true){ // 디브의 축소 이벤트가 완료되면
 				var parent = cal.parentNode;
 				var grandp = parent.parentNode;
@@ -50,25 +50,25 @@ function slideCalScroll(what) {
 	}
 }
 function startCateScrollScroll() {
-    setTimeout("slideCalScroll()", 5);                                 //div 내려오는 시간 (1/1,000 초 단위)
+    setTimeout("slideCalScroll()", 5);       //div 내려오는 시간 (1/1,000 초 단위)
 }
 /////////////////////////////////////////////////////////////////////////
 function cal_add(frm, obj){ // 달력 호출 함수
-	var pos = frm.parentNode; // 새로 생성할 디브의 부모 노드
+	var pos = frm.parentNode.parentNode; // 새로 생성할 디브의 부모 노드
 	var cal = document.getElementById('calendar'); // 생성된 달력 디브
 
 	if(cal!=null){ // 달력 디브가 생성 되어 있으면
-		var parent = cal.parentNode;            // 그 부모노드는 페어런트이고
-		var grandp = parent.parentNode;     // 그 부모의 부모 노드는 그랜드피이다..
+		var parent = cal.parentNode;         // 그 부모노드는 페어런트이고
+		var grandp = parent.parentNode;      // 그 부모의 부모 노드는 그랜드피이다..
 	}
 	if(obj!=null&&(grandp==pos)){ // 이미지 버튼 클릭이면서  그 자리가 디브가 있는 자리이면..
-		if(cal!=null){                        // 그러면서 달력이 있다면
-			cal_del();                        // 달력 닫기 함수를 실행하고----애니실행 필요
+		if(cal!=null){                       // 그러면서 달력이 있다면
+			cal_del();                         // 달력 닫기 함수를 실행하고----애니실행 필요
 			return;                            // 함수를 빠져나간다...
 		}
 	}else if(obj==null&&((grandp==pos))){  // 그렇지 않고 폼 클릭이면서 그자리 그대로이면
-		if(cal!=null){                           // 그러면서 달력이 있으면
-			return;                                // 그냥 함수를 빠져나간다...
+		if(cal!=null){                       // 그러면서 달력이 있으면
+			return;                            // 그냥 함수를 빠져나간다...
 		}
 	}
 	if(cal!=null) {	grandp.removeChild(cal.parentNode);	}  // 새 디브를 열기 전에 기존에 열려있는 디브가 있으면 애니 효과 없이 그냥 닫고....
@@ -79,7 +79,7 @@ function cal_add(frm, obj){ // 달력 호출 함수
 	var content = "<link type='text/css' rel='stylesheet' href='"+g_cssAddr+"'><div id='calendar' style='position:absolute; height:1px; width:1px; padding:3px; overflow: hidden; border:2px solid #768ECD; background-color:white; margin-top:1px; z-index: 100000;' onclick='event.cancelBubble=true'></div>";
 	newdiv.innerHTML = content; // newdiv 엘리면트 안에 content HTML 소스(calendar - div) 를 추가 생성 하고
 
-	g_target   = frm;
+	g_target  = frm;
 	var l_now = frm.value.split('-'); // 현재 폼의 값을 가져와서 '-' 로 분리한 후 배열로 저장
 
 	if (l_now.length == 3 && frm.value.length == 10)	{ // 폼의 값이 배열이 3개이고 값의 글자 수가 10개 ('0000-00-00'의 형식) 이면

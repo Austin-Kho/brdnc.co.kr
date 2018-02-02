@@ -177,11 +177,13 @@ else :
 						<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">수납일자</div>
 						<div class="col-xs-8 col-md-4" style="padding: 0;">
 							<label for="paid_date" class="sr-only">수납일자</label>
-							<div class="col-xs-10" style="padding: 4px;">
-								<input type="text" name="paid_date" id="paid_date" class="form-control input-sm" value="<?php if($this->input->get('modi')=='1') echo $modi_rec->paid_date; else echo set_value('paid_date'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
-							</div>
-							<div class="col-xs-2" style="padding: 10px 5px;">
-								<a href="javascript:" onclick="cal_add(document.getElementById('paid_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+							<div class="col-xs-12" style="padding: 4px;">
+								<div class="input-group">
+									<input type="text" name="paid_date" id="paid_date" class="form-control input-sm" value="<?php if($this->input->get('modi')=='1') echo $modi_rec->paid_date; else echo set_value('paid_date'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
+									<span class="input-group-addon">
+										<a href="javascript:" onclick="cal_add(document.getElementById('paid_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+									</span>
+								</div>
 							</div>
 						</div>
 					</div>

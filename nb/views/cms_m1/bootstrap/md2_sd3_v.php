@@ -110,12 +110,14 @@ else :
 			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="published_date">발 행 일 자</label></div>
 			<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
 				<div class="col-xs-11" style="padding: 0px;">
-					<input type="text" class="form-control input-sm wid-95" id="published_date" name="published_date" maxlength="10" value="<?php echo date('Y-m-d'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="고지서 발행일">
-				</div>
-				<div class="col-xs-1 col-sm-1 glyphicon-wrap" style="padding: 6px 0;">
-					<a href="javascript:" onclick="cal_add(document.getElementById('published_date'),this); event.cancelBubble=true">
-						<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
-					</a>
+					<div class="input-group">
+						<input type="text" class="form-control input-sm wid-95" id="published_date" name="published_date" maxlength="10" value="<?php echo date('Y-m-d'); ?>" onClick="cal_add(this); event.cancelBubble=true" placeholder="고지서 발행일">
+						<span class="input-group-addon">
+							<a href="javascript:" onclick="cal_add(document.getElementById('published_date'),this); event.cancelBubble=true">
+								<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+							</a>
+						</span>
+					</div>
 				</div>
 			</div>
 			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="pay_sche_code">발 행 회 차</label></div>

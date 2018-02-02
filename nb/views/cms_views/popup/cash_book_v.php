@@ -121,7 +121,9 @@
 					<label for="deal_date">거래일자 <font color="#ff0000">*</font></label>
 				</div>
 				<div class="col-xs-5" style="padding-right: 0;">
-					<input type="text" name="deal_date" id="deal_date" class="form-control input-sm" value="<?php echo $row->deal_date; ?>" onclick="cal_add(this); event.cancelBubble=true"  readonly>
+					<div>
+						<input type="text" name="deal_date" id="deal_date" class="form-control input-sm" value="<?php echo $row->deal_date; ?>" onclick="cal_add(this); event.cancelBubble=true">
+					</div>					
 				</div>
 				<div class="col-xs-1" style="padding: 7px; 0;">
 					<a href="javascript:" onclick="cal_add(document.getElementById('deal_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
