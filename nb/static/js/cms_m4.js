@@ -376,7 +376,12 @@ function inoutSel2(form, no){ // ==capital2.php 와 capital_edit.php => form // 
 		if(jh_loan_id)jh_loan_id.disabled=1;// 대여 선택 시 조합대여금 체크박스 열기
 		if(jh_loan_id)jh_loan_id.checked=0;
 	}
-	if(class2_id.value==7)	if(pj_seq_id)pj_seq_id.disabled=false; else if(pj_seq_id)pj_seq_id.disabled=true; // 현장 대체 선택 시 현장 선택 열기
+	if(class2_id.value==7)	{
+		if(pj_seq_id)pj_seq_id.disabled=false; // 현장 대체 선택 시 현장 선택 열기
+	}else{
+		if(pj_seq_id)pj_seq_id.options[0].selected=1;
+		if(pj_seq_id)pj_seq_id.disabled=true; // 현장 대체 선택 시 현장 선택 닫기
+	}
 }
 
 
