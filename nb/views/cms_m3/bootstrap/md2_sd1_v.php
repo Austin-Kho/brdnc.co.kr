@@ -210,10 +210,10 @@
 						<label for="type_name_1">타입별 정보등록(1) <span class="red">*</span></label>
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
+                        <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 :</span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<input type="text" class="form-control input-sm eng" id="type_name_1" name="type_name_1" maxlength="10" value="<?php echo set_value('type_name_1'); ?>" required autofocus placeholder="타입">
 						</div>
-                        <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
                         <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
 						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
 							<label for="type_color_1" class="sr-only">컬러</span></label>
