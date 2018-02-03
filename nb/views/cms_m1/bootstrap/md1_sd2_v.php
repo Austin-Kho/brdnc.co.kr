@@ -236,11 +236,15 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="conclu_date" class="sr-only">거래일자</label>
-						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="conclu_date" id="conclu_date" class="form-control input-sm" value="<?php echo $conclu_date; ?>" onclick="cal_add(this); event.cancelBubble=true" placeholder="0000-00-00">
-						</div>
-						<div class="col-xs-2" style="padding: 8px 8px 5px;">
-							<a href="javascript:" onclick="cal_add(document.getElementById('conclu_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+						<div class="col-xs-12" style="padding: 0;">
+							<div class="input-group">
+								<input type="text" name="conclu_date" id="conclu_date" class="form-control input-sm" value="<?php echo $conclu_date; ?>" onclick="cal_add(this); event.cancelBubble=true" placeholder="0000-00-00">
+								<span class="input-group-addon">
+									<a href="javascript:" onclick="cal_add(document.getElementById('conclu_date'),this); event.cancelBubble=true; document.getElementById('conclu_date').focus=true;">
+										<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+									</a>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -254,13 +258,16 @@ else :
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약 예정일</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
-
 						<label for="due_date" class="sr-only">계약 예정일</label>
-						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="due_date" id="due_date" class="form-control input-sm" value="<?php echo $due_date; ?>" onclick="cal_add(this); event.cancelBubble=true"  placeholder="0000-00-00">
-						</div>
-						<div class="col-xs-2" style="padding: 8px 8px 5px;">
-							<a href="javascript:" onclick="cal_add(document.getElementById('due_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+						<div class="col-xs-12" style="padding: 0;">
+							<div class="input-group">
+								<input type="text" name="due_date" id="due_date" class="form-control input-sm" value="<?php echo $due_date; ?>" onclick="cal_add(this); event.cancelBubble=true"  placeholder="0000-00-00">
+								<span class="input-group-addon">
+									<a href="javascript:" onclick="cal_add(document.getElementById('due_date'),this); event.cancelBubble=true">
+										<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+									</a>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -344,11 +351,15 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="app_in_date" class="sr-only">입금일</label>
-						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="app_in_date" id="app_in_date" class="form-control input-sm en_only" value="<?php if( !empty($is_reg['app_data'])) echo $is_reg['app_data']->app_in_date; elseif ( !empty($is_app_cont)) echo $is_app_cont->app_in_date; else echo set_value('app_in_date'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
-						</div>
-						<div class="col-xs-2" style="padding: 8px 8px 5px;">
-							<a href="javascript:" onclick="cal_add(document.getElementById('app_in_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+						<div class="col-xs-12" style="padding: 0;">
+							<div class="input-group">
+								<input type="text" name="app_in_date" id="app_in_date" class="form-control input-sm en_only" value="<?php if( !empty($is_reg['app_data'])) echo $is_reg['app_data']->app_in_date; elseif ( !empty($is_app_cont)) echo $is_app_cont->app_in_date; else echo set_value('app_in_date'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
+								<span class="input-group-addon">
+									<a href="javascript:" onclick="cal_add(document.getElementById('app_in_date'),this); event.cancelBubble=true">
+										<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+									</a>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -404,12 +415,14 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date1" class="sr-only">입금일</label>
-						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date1" id="cont_in_date1" class="form-control input-sm" value="<?php if( !empty($received['1'])) echo $received['1']->paid_date; else echo set_value('cont_in_date1'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
-							<input type="hidden" name="deposit_1_" value="<?php  if( !empty($received['1'])) echo "1"; else "0"; ?>">
-						</div>
-						<div class="col-xs-2" style="padding: 8px 8px 5px;">
-							<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date1'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+						<div class="col-xs-12" style="padding: 0;">
+							<div class="input-group">
+								<input type="text" name="cont_in_date1" id="cont_in_date1" class="form-control input-sm" value="<?php if( !empty($received['1'])) echo $received['1']->paid_date; else echo set_value('cont_in_date1'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
+								<input type="hidden" name="deposit_1_" value="<?php  if( !empty($received['1'])) echo "1"; else "0"; ?>">
+								<span class="input-group-addon">
+									<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date1'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -459,12 +472,14 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date2" class="sr-only">입금일</label>
-						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date2" id="cont_in_date2" class="form-control input-sm" value="<?php if( !empty($received['2'])) echo $received['2']->paid_date; else echo set_value('cont_in_date2'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
-							<input type="hidden" name="deposit_2_" value="<?php  if( !empty($received['2'])) echo "1"; else "0"; ?>">
-						</div>
-						<div class="col-xs-2" style="padding: 8px 8px 5px;">
-							<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date2'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+						<div class="col-xs-12" style="padding: 0;">
+							<div class="input-group">
+								<input type="text" name="cont_in_date2" id="cont_in_date2" class="form-control input-sm" value="<?php if( !empty($received['2'])) echo $received['2']->paid_date; else echo set_value('cont_in_date2'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
+								<input type="hidden" name="deposit_2_" value="<?php  if( !empty($received['2'])) echo "1"; else "0"; ?>">
+								<span class="input-group-addon">
+									<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date2'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -524,12 +539,14 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date3" class="sr-only">입금일</label>
-						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date3" id="cont_in_date3" class="form-control input-sm" value="<?php if( !empty($received['3'])) echo $received['3']->paid_date; else echo set_value('cont_in_date3'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
-							<input type="hidden" name="deposit_3_" value="<?php  if( !empty($received['3'])) echo "1"; else "0"; ?>">
-						</div>
-						<div class="col-xs-2" style="padding: 8px 8px 5px;">
-							<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date3'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+						<div class="col-xs-12" style="padding: 0;">
+							<div class="input-group">
+								<input type="text" name="cont_in_date3" id="cont_in_date3" class="form-control input-sm" value="<?php if( !empty($received['3'])) echo $received['3']->paid_date; else echo set_value('cont_in_date3'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
+								<input type="hidden" name="deposit_3_" value="<?php  if( !empty($received['3'])) echo "1"; else "0"; ?>">
+								<span class="input-group-addon">
+									<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date3'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -590,12 +607,14 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date4" class="sr-only">입금일</label>
-						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date4" id="cont_in_date4" class="form-control input-sm" value="<?php if( !empty($received['4'])) echo $received['4']->paid_date; else echo set_value('cont_in_date4'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
-							<input type="hidden" name="deposit_4_" value="<?php  if( !empty($received['4'])) echo "1"; else "0"; ?>">
-						</div>
-						<div class="col-xs-2" style="padding: 8px 8px 5px;">
-							<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date4'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+						<div class="col-xs-12" style="padding: 0;">
+							<div class="input-group">
+								<input type="text" name="cont_in_date4" id="cont_in_date4" class="form-control input-sm" value="<?php if( !empty($received['4'])) echo $received['4']->paid_date; else echo set_value('cont_in_date4'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
+								<input type="hidden" name="deposit_4_" value="<?php  if( !empty($received['4'])) echo "1"; else "0"; ?>">
+								<span class="input-group-addon">
+									<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date4'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -656,12 +675,14 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date5" class="sr-only">입금일</label>
-						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date5" id="cont_in_date5" class="form-control input-sm" value="<?php if( !empty($received['5'])) echo $received['5']->paid_date; else echo set_value('cont_in_date5'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
-							<input type="hidden" name="deposit_5_" value="<?php  if( !empty($received['5'])) echo "1"; else "0"; ?>">
-						</div>
-						<div class="col-xs-2" style="padding: 8px 8px 5px;">
-							<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date5'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+						<div class="col-xs-12" style="padding: 0;">
+							<div class="input-group">
+								<input type="text" name="cont_in_date5" id="cont_in_date5" class="form-control input-sm" value="<?php if( !empty($received['5'])) echo $received['5']->paid_date; else echo set_value('cont_in_date5'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
+								<input type="hidden" name="deposit_5_" value="<?php  if( !empty($received['5'])) echo "1"; else "0"; ?>">
+								<span class="input-group-addon">
+									<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date5'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -722,12 +743,14 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date6" class="sr-only">입금일</label>
-						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date6" id="cont_in_date6" class="form-control input-sm" value="<?php if( !empty($received['6'])) echo $received['6']->paid_date; else echo set_value('cont_in_date6'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
-							<input type="hidden" name="deposit_6_" value="<?php  if( !empty($received['6'])) echo "1"; else "0"; ?>">
-						</div>
-						<div class="col-xs-2" style="padding: 8px 8px 5px;">
-							<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date6'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+						<div class="col-xs-12" style="padding: 0;">
+							<div class="input-group">
+								<input type="text" name="cont_in_date6" id="cont_in_date6" class="form-control input-sm" value="<?php if( !empty($received['6'])) echo $received['6']->paid_date; else echo set_value('cont_in_date6'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
+								<input type="hidden" name="deposit_6_" value="<?php  if( !empty($received['6'])) echo "1"; else "0"; ?>">
+								<span class="input-group-addon">
+									<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date6'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -788,12 +811,14 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date7" class="sr-only">입금일</label>
-						<div class="col-xs-10" style="padding: 0;">
-							<input type="text" name="cont_in_date7" id="cont_in_date7" class="form-control input-sm" value="<?php if( !empty($received['7'])) echo $received['7']->paid_date; else echo set_value('cont_in_date7'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
-							<input type="hidden" name="deposit_7_" value="<?php  if( !empty($received['7'])) echo "1"; else "0"; ?>">
-						</div>
-						<div class="col-xs-2" style="padding: 8px 8px 5px;">
-							<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date7'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+						<div class="col-xs-12" style="padding: 0;">
+							<div class="input-group">
+								<input type="text" name="cont_in_date7" id="cont_in_date7" class="form-control input-sm" value="<?php if( !empty($received['7'])) echo $received['7']->paid_date; else echo set_value('cont_in_date7'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
+								<input type="hidden" name="deposit_7_" value="<?php  if( !empty($received['7'])) echo "1"; else "0"; ?>">
+								<span class="input-group-addon">
+									<a href="javascript:" onclick="cal_add(document.getElementById('cont_in_date7'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
+								</span>
+							</div>
 						</div>
 					</div>
 				</div>

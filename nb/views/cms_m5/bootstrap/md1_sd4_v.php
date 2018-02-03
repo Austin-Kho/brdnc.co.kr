@@ -176,7 +176,9 @@
 								</div>
 								<div class="col-xs-8 col-sm-8 col-md-4 form-wrap2">
 									<div class="col-xs-10 col-sm-8 col-md-6" style="padding-left: 0;">
-										<input type="text" class="form-control input-sm wid-100" id="open_date" name="open_date" maxlength="10" value="<?php if($this->input->get('seq')) echo $sel_bank->open_date; ?>" readonly onClick="cal_add(this); event.cancelBubble=true" maxlength="10" required>
+                    <div>
+                      <input type="text" class="form-control input-sm wid-100" id="open_date" name="open_date" maxlength="10" value="<?php if($this->input->get('seq')) echo $sel_bank->open_date; ?>" onClick="cal_add(this); event.cancelBubble=true" maxlength="10" required>
+                    </div>
 									</div>
 									<div class="col-xs-2 col-sm-4 col-md-6 glyphicon-wrap">
 										<a href="javascript:" onclick="cal_add(document.getElementById('open_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>

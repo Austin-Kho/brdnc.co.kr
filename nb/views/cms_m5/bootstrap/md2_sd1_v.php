@@ -216,9 +216,9 @@
 							<label for="es_date">설립일자 <span class="red">*</span></label>
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap">
-							<div class="col-xs-6">
+							<div class="col-xs-6"><div>
 								<input type="text" class="form-control input-sm wid-100" id="es_date" name="es_date" maxlength="10" value="<?php if($data['mode']=='com_reg') {echo set_value('es_date');} else {echo $data['com']->es_date;} ?>" readonly onClick="cal_add(this); event.cancelBubble=true" maxlength="10"  required>
-							</div>
+							</div></div>
 							<div class="col-xs-6 glyphicon-wrap">
 								<a href="javascript:" onclick="cal_add(document.getElementById('es_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>
 							</div>
@@ -228,7 +228,9 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap">
 							<div class="col-xs-6">
-								<input type="text" class="form-control input-sm wid-100" id="op_date" name="op_date" maxlength="10" value="<?php if($data['mode']=='com_reg') {echo set_value('op_date');} else {echo $data['com']->op_date;} ?>" readonly onClick="cal_add(this); event.cancelBubble=true" maxlength="10" required>
+                <div>
+                  <input type="text" class="form-control input-sm wid-100" id="op_date" name="op_date" maxlength="10" value="<?php if($data['mode']=='com_reg') {echo set_value('op_date');} else {echo $data['com']->op_date;} ?>" readonly onClick="cal_add(this); event.cancelBubble=true" maxlength="10" required>
+                </div>
 							</div>
 							<div class="col-xs-6 glyphicon-wrap">
 								<a href="javascript:" onclick="cal_add(document.getElementById('op_date'),this); event.cancelBubble=true"><span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span></a>

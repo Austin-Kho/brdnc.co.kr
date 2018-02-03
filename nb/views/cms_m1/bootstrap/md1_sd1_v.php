@@ -191,7 +191,9 @@ endfor;
 				<div class="col-xs-12 col-sm-6 col-md-3" style="height: 40px; padding: 5px 0 0 5px;">
 					<div class="col-xs-5 col-sm-5 col-md-4" style="padding: 0px;">
 						<label for="s_date" class="sr-only">시작일</label>
-						<input type="text" class="form-control input-sm wid-95" id="s_date" name="s_date" maxlength="10" value="<?php if($this->input->get('s_date')) echo $this->input->get('s_date'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="시작일">
+						<div>
+							<input type="text" class="form-control input-sm wid-95" id="s_date" name="s_date" maxlength="10" value="<?php if($this->input->get('s_date')) echo $this->input->get('s_date'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="시작일">
+						</div>
 					</div>
 					<div class="col-xs-1 col-sm-1 glyphicon-wrap" style="padding: 6px 0;">
 						<a href="javascript:" onclick="cal_add(document.getElementById('s_date'),this); event.cancelBubble=true">
@@ -200,7 +202,9 @@ endfor;
 					</div>
 					<div class="col-xs-5 col-sm-5 col-md-4" style="padding: 0px;">
 						<label for="e_date" class="sr-only">종료일</label>
-						<input type="text" class="form-control input-sm wid-95" id="e_date" name="e_date" maxlength="10" value="<?php if($this->input->get('e_date')) echo $this->input->get('e_date'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="종료일">
+						<div>
+							<input type="text" class="form-control input-sm wid-95" id="e_date" name="e_date" maxlength="10" value="<?php if($this->input->get('e_date')) echo $this->input->get('e_date'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="종료일">
+						</div>
 					</div>
 					<div class="col-xs-1 col-sm-2 glyphicon-wrap" style="padding: 6px 0;">
 						<a href="javascript:" onclick="cal_add(document.getElementById('e_date'),this); event.cancelBubble=true">
