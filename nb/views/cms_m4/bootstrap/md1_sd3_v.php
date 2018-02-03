@@ -1,4 +1,4 @@
- disabled> 금액 : </label><?php
+<?php
   if($auth13<1) :
   	include('no_auth.php');
   else :
