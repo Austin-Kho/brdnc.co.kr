@@ -90,7 +90,7 @@ endif;?>
 							<div class="col-xs-12 col-sm-3 center" style="height:38px; padding-top:8px;"><?php echo $sel_user->mem_email; ?></div>
 							<div class="col-xs-12 col-sm-3 center" style="height:38px; padding-top:8px;"><?php echo $sel_user->mem_register_datetime; ?></div>
 							<div class="col-xs-12 col-sm-1 center" style="height:38px; padding-top:8px;">
-								<input type="checkbox" name="user_no" value="<?php echo $sel_user->mem_id; ?>" <? if($sel_user->mem_id==$this->input->get('un')) echo "checked"?>>
+								<input type="checkbox" name="user_no" value="<?php echo $sel_user->mem_id; ?>" <? if(isset($sel_user->mem_id) && $sel_user->mem_id==$this->input->get('un')) echo "checked"?>>
 							</div>
 						</div>
 					</div>
