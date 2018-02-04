@@ -50,7 +50,7 @@ class Cms_m3 extends CB_Controller {
 		$view['s_di'] = array(
 			array('동호수 등록', '기타 세부설정', '프로젝트 목록'), // 첫번째 하위 메뉴
 			array('신규 등록', '검토 자료'),       // 두번째 하위 메뉴
-			array('동호 데이터 입력', '프로젝트 타입별 수납약정 관리 ------- [일부 완성]', '프로젝트 목록 및 기본정보 수정'),   // 첫번째 하위 제목
+			array('동호 데이터 입력', '프로젝트 세부설정 관리 ------- [진행 중]', '프로젝트 목록 및 기본정보 수정'),   // 첫번째 하위 제목
 			array('신규 프로젝트 등록', '예비 프로젝트 검토')     // 두번째 하위 제목
 		);
 
@@ -282,10 +282,15 @@ class Cms_m3 extends CB_Controller {
 			// 불러올 페이지에 보낼 조회 권한 데이터
 			$view['auth12'] = $auth['_m3_1_2'];
 
+			// 라이브러리 로드
+			$this->load->library('form_validation'); // 폼 검증
+
 			// 1. 분양 차수 설정
 			$view['con_diff'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_con_diff WHERE pj_seq='$project' ORDER BY diff_no "); // 프로젝트 등록된 전체 차수
 
+
 			// 2. 납입 회차 설정
+			$view['pay_time'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' ORDER BY seq, pay_code ");
 
 			// 3. 층별 조건 설정
 
@@ -304,18 +309,30 @@ class Cms_m3 extends CB_Controller {
 			$view['pr_type'] = $this->cms_main_model->sql_result(" SELECT seq, type_name, COUNT(seq) AS num_type FROM cb_cms_sales_con_type WHERE pj_seq='$project' "); // 타입
 			$view['pr_row'] = $view['pr_floor'][0]->num_floor*$view['pr_type'][0]->num_type;
 
-			// 라이브러리 로드
-			$this->load->library('form_validation'); // 폼 검증
-
-			// 6. 회차별 납입가 설정
+			// price - 데이터 불러오기
 			for($i=0; $i<count($price); $i++) :
-				for($j=0; $j<count($pay_sche); $j++) :
+				for($j=0; $j<count($pay_sche); $j++) : // form_validation->set_rules(''); 설정
 					$this->form_validation->set_rules("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq, "납부액_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq, 'trim|numeric|required');
 				endfor;
 			endfor;
 
 			if($this->form_validation->run() !== FALSE) : // 폼검증 통과 했을 경우, post 데이터가 있을 때
+				// 1. 분양 차수 설정
 
+				// 1. 분양 차수 설정---종료
+				// 2. 납입 회차 설정
+
+				// 2. 납입 회차 설정---종료
+				// 3. 층별 조건 설정
+
+				// 3. 층별 조건 설정---종료
+				// 4. 향별 조건 설정
+
+				// // 4. 향별 조건 설정---종료
+				// 5. 조건별 분양가 설정
+
+				// 5. 조건별 분양가 설정---종료
+				// 6. 회차별 납입가 설정
 				for($i=0; $i<count($price); $i++) :
 					for($j=0; $j<count($pay_sche); $j++) :
 						$pmt_data = array(
@@ -337,6 +354,8 @@ class Cms_m3 extends CB_Controller {
 				endfor;
 
 				alert('정상 처리 되었습니다.', '');
+				// 6. 회차별 납입가 설정---종료
+
 			endif; // 폼검증 통과 시 종료
 
 
