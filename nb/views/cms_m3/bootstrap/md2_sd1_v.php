@@ -209,22 +209,23 @@
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
 						<label for="type_name_1">타입별 정보등록(1) <span class="red">*</span></label>
 					</div>
-					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
-                        <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 :</span></div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+          <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
+            <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
 							<input type="text" class="form-control input-sm eng" id="type_name_1" name="type_name_1" maxlength="10" value="<?php echo set_value('type_name_1'); ?>" required autofocus placeholder="타입">
 						</div>
-                        <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_color_1" class="sr-only">컬러</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
+            <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
+              <label for="type_color_2" class="sr-only">컬러</span></label>
 							<input type="color" class="form-control input-sm en_only" id="type_color_1" name="type_color_1" maxlength="7" value="<?php echo set_value('type_color_1'); ?>"  placeholder="컬러">
 						</div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_quantity_1" class="sr-only">수량</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+              <label for="type_quantity_1" class="sr-only">수량</span></label>
 							<input type="text" class="form-control input-sm en_only" id="type_quantity_1" name="type_quantity_1" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_1'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="count_unit_1" class="sr-only">단위</span></label>
+            <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
+              <label for="count_unit_1" class="sr-only">단위</span></label>
 							<select class="form-control input-sm" id="count_unit_1" name="count_unit_1">
 								<option value="0">단위</option>
 								<option value="1" <?php echo set_select('count_unit_1', '1'); ?>>세대</option>
@@ -233,7 +234,7 @@
 								<option value="4" <?php echo set_select('count_unit_1', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
-						<div class="col-xs-2">
+						<div class="col-xs-2 col-sm-1 col-md-2">
                           <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                             <label>
                         			<input type="checkbox" name="ck2_1" id="ck2_1" onclick="type_reg('2',this,1);">
@@ -247,22 +248,23 @@
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
 						<label for="type_name_2">타입별 정보등록(2) <span class="red">*</span></label>
 					</div>
-					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+          <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
+            <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
 							<input type="text" class="form-control input-sm eng" id="type_name_2" name="type_name_2" maxlength="10" value="<?php echo set_value('type_name_2'); ?>" required autofocus placeholder="타입">
 						</div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_color_2" class="sr-only">컬러</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
+            <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
+              <label for="type_color_2" class="sr-only">컬러</span></label>
 							<input type="color" class="form-control input-sm en_only" id="type_color_2" name="type_color_2" maxlength="7" value="<?php echo set_value('type_color_2'); ?>"  placeholder="컬러">
 						</div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_quantity_2" class="sr-only">수량</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+              <label for="type_quantity_1" class="sr-only">수량</span></label>
 							<input type="text" class="form-control input-sm en_only" id="type_quantity_2" name="type_quantity_2" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_2'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
 
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
 							<label for="count_unit_2" class="sr-only">단위</span></label>
 							<select class="form-control input-sm" id="count_unit_2" name="count_unit_2">
 								<option value="0">단위</option>
@@ -272,7 +274,7 @@
 								<option value="4" <?php echo set_select('count_unit_2', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
-						<div class="col-xs-2">
+						<div class="col-xs-2 col-sm-1 col-md-2">
               <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                 <label>
             			<input type="checkbox" name="ck2_2" id="ck2_2" onclick="type_reg('2',this,2);">
@@ -286,22 +288,23 @@
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
 						<label for="type_name_3">타입별 정보등록(3) <span class="red">*</span></label>
 					</div>
-					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+          <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
+            <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
 							<input type="text" class="form-control input-sm eng" id="type_name_3" name="type_name_3" maxlength="10" value="<?php echo set_value('type_name_3'); ?>" required autofocus placeholder="타입">
 						</div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_color_3" class="sr-only">컬러</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
+            <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
+              <label for="type_color_2" class="sr-only">컬러</span></label>
 							<input type="color" class="form-control input-sm en_only" id="type_color_3" name="type_color_3" maxlength="7" value="<?php echo set_value('type_color_3'); ?>"  placeholder="컬러">
 						</div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_quantity_3" class="sr-only">수량</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+              <label for="type_quantity_1" class="sr-only">수량</span></label>
 							<input type="text" class="form-control input-sm en_only" id="type_quantity_3" name="type_quantity_3" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_3'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
 
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
 							<label for="count_unit_3" class="sr-only">단위</span></label>
 							<select class="form-control input-sm" id="count_unit_3" name="count_unit_3">
 								<option value="0">단위</option>
@@ -311,7 +314,7 @@
 								<option value="4" <?php echo set_select('sort', '1'); ?>>㎡(면적)</option>
 							</select>
 						</div>
-						<div class="col-xs-2">
+						<div class="col-xs-2 col-sm-1 col-md-2">
               <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                 <label>
             			<input type="checkbox" name="ck2_3" id="ck2_3" onclick="type_reg('2',this,3);">
@@ -325,22 +328,23 @@
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
 						<label for="type_name_4">타입별 정보등록(4) <span class="red">*</span></label>
 					</div>
-					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+          <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
+            <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
 							<input type="text" class="form-control input-sm eng" id="type_name_4" name="type_name_4" maxlength="10" value="<?php echo set_value('type_name_4'); ?>" required autofocus placeholder="타입">
 						</div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_color_4" class="sr-only">컬러</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
+            <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
+              <label for="type_color_2" class="sr-only">컬러</span></label>
 							<input type="color" class="form-control input-sm en_only" id="type_color_4" name="type_color_4" maxlength="7" value="<?php echo set_value('type_color_4'); ?>"  placeholder="컬러">
 						</div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_quantity_4" class="sr-only">수량</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+              <label for="type_quantity_2" class="sr-only">수량</span></label>
 							<input type="text" class="form-control input-sm en_only" id="type_quantity_4" name="type_quantity_4" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_4'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
 
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
 							<label for="count_unit_4" class="sr-only">단위</span></label>
 							<select class="form-control input-sm" id="count_unit_4" name="count_unit_4">
 								<option value="0">단위</option>
@@ -350,7 +354,7 @@
 								<option value="4" <?php echo set_select('count_unit_4', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
-						<div class="col-xs-2">
+						<div class="col-xs-2 col-sm-1 col-md-2">
               <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                 <label>
             			<input type="checkbox" name="ck2_4" id="ck2_4" onclick="type_reg('2',this,4);">
@@ -364,22 +368,23 @@
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
 						<label for="type_name_5">타입별 정보등록(5) <span class="red">*</span></label>
 					</div>
-					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+          <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
+            <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
 							<input type="text" class="form-control input-sm eng" id="type_name_5" name="type_name_5" maxlength="10" value="<?php echo set_value('type_name_5'); ?>" required autofocus placeholder="타입">
 						</div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_color_5" class="sr-only">컬러</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
+            <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
+              <label for="type_color_2" class="sr-only">컬러</span></label>
 							<input type="color" class="form-control input-sm en_only" id="type_color_5" name="type_color_5" maxlength="7" value="<?php echo set_value('type_color_5'); ?>"  placeholder="컬러">
 						</div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_quantity_5" class="sr-only">수량</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+              <label for="type_quantity_2" class="sr-only">수량</span></label>
 							<input type="text" class="form-control input-sm en_only" id="type_quantity_5" name="type_quantity_5" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_5'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
 
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
 							<label for="count_unit_5" class="sr-only">단위</span></label>
 							<select class="form-control input-sm" id="count_unit_5" name="count_unit_5">
 								<option value="0">단위</option>
@@ -389,7 +394,7 @@
 								<option value="4" <?php echo set_select('count_unit_5', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
-						<div class="col-xs-2">
+						<div class="col-xs-2 col-sm-1 col-md-2">
               <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                 <label>
             			<input type="checkbox" name="ck2_5" id="ck2_5" onclick="type_reg('2',this,5);">
@@ -403,22 +408,23 @@
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
 						<label for="type_name_6">타입별 정보등록(6) <span class="red">*</span></label>
 					</div>
-					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+          <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
+            <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
 							<input type="text" class="form-control input-sm eng" id="type_name_6" name="type_name_6" maxlength="10" value="<?php echo set_value('type_name_6'); ?>" required autofocus placeholder="타입">
 						</div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_color_6" class="sr-only">컬러</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
+            <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
+              <label for="type_color_2" class="sr-only">컬러</span></label>
 							<input type="color" class="form-control input-sm en_only" id="type_color_6" name="type_color_6" maxlength="7" value="<?php echo set_value('type_color_6'); ?>"  placeholder="컬러">
 						</div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_quantity_6" class="sr-only">수량</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+              <label for="type_quantity_2" class="sr-only">수량</span></label>
 							<input type="text" class="form-control input-sm en_only" id="type_quantity_6" name="type_quantity_6" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_6'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
 
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
 							<label for="count_unit_6" class="sr-only">단위</span></label>
 							<select class="form-control input-sm" id="count_unit_6" name="count_unit_6">
 								<option value="0">단위</option>
@@ -428,7 +434,7 @@
 								<option value="4" <?php echo set_select('count_unit_6', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
-						<div class="col-xs-2">
+						<div class="col-xs-2 col-sm-1 col-md-2">
               <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                 <label>
             			<input type="checkbox" name="ck2_6" id="ck2_6" onclick="type_reg('2',this,6);">
@@ -442,22 +448,23 @@
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
 						<label for="type_name_7">타입별 정보등록(7) <span class="red">*</span></label>
 					</div>
-					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+          <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
+            <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
 							<input type="text" class="form-control input-sm eng" id="type_name_7" name="type_name_7" maxlength="10" value="<?php echo set_value('type_name_7'); ?>" required autofocus placeholder="타입">
 						</div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_color_7" class="sr-only">컬러</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
+            <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
+              <label for="type_color_2" class="sr-only">컬러</span></label>
 							<input type="color" class="form-control input-sm en_only" id="type_color_7" name="type_color_7" maxlength="7" value="<?php echo set_value('type_color_7'); ?>"  placeholder="컬러">
 						</div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_quantity_7" class="sr-only">수량</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+              <label for="type_quantity_2" class="sr-only">수량</span></label>
 							<input type="text" class="form-control input-sm en_only" id="type_quantity_7" name="type_quantity_7" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_7'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
 
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
 							<label for="count_unit_7" class="sr-only">단위</span></label>
 							<select class="form-control input-sm" id="count_unit_7" name="count_unit_7">
 								<option value="0">단위</option>
@@ -467,7 +474,7 @@
 								<option value="4" <?php echo set_select('count_unit_7', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
-						<div class="col-xs-2">
+						<div class="col-xs-2 col-sm-1 col-md-2">
               <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                 <label>
             			<input type="checkbox" name="ck2_7" id="ck2_7" onclick="type_reg('2',this,7);">
@@ -481,22 +488,23 @@
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
 						<label for="type_name_8">타입별 정보등록(8) <span class="red">*</span></label>
 					</div>
-					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+          <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
+            <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
 							<input type="text" class="form-control input-sm eng" id="type_name_8" name="type_name_8" maxlength="10" value="<?php echo set_value('type_name_8'); ?>" required autofocus placeholder="타입">
 						</div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_color_8" class="sr-only">컬러</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
+            <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
+              <label for="type_color_2" class="sr-only">컬러</span></label>
 							<input type="color" class="form-control input-sm en_only" id="type_color_8" name="type_color_8" maxlength="7" value="<?php echo set_value('type_color_8'); ?>"  placeholder="컬러">
 						</div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_quantity_8" class="sr-only">수량</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+              <label for="type_quantity_2" class="sr-only">수량</span></label>
 							<input type="text" class="form-control input-sm en_only" id="type_quantity_8" name="type_quantity_8" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_8'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
 
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
 							<label for="count_unit_8" class="sr-only">단위</span></label>
 							<select class="form-control input-sm" id="count_unit_8" name="count_unit_8">
 								<option value="0">단위</option>
@@ -506,7 +514,7 @@
 								<option value="4" <?php echo set_select('count_unit_8', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
-						<div class="col-xs-2">
+						<div class="col-xs-2 col-sm-1 col-md-2">
               <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                 <label>
             			<input type="checkbox" name="ck2_8" id="ck2_8" onclick="type_reg('2',this,8);">
@@ -520,22 +528,23 @@
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
 						<label for="type_name_9">타입별 정보등록(9) <span class="red">*</span></label>
 					</div>
-					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+          <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
+            <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
 							<input type="text" class="form-control input-sm eng" id="type_name_9" name="type_name_9" maxlength="10" value="<?php echo set_value('type_name_9'); ?>" required autofocus placeholder="타입">
 						</div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_color_9" class="sr-only">컬러</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
+            <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
+              <label for="type_color_2" class="sr-only">컬러</span></label>
 							<input type="color" class="form-control input-sm en_only" id="type_color_9" name="type_color_9" maxlength="7" value="<?php echo set_value('type_color_9'); ?>"  placeholder="컬러">
 						</div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_quantity_9" class="sr-only">수량</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+              <label for="type_quantity_2" class="sr-only">수량</span></label>
 							<input type="text" class="form-control input-sm en_only" id="type_quantity_9" name="type_quantity_9" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_9'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
 
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
 							<label for="count_unit_9" class="sr-only">단위</span></label>
 							<select class="form-control input-sm" id="count_unit_9" name="count_unit_9">
 								<option value="0">단위</option>
@@ -545,7 +554,7 @@
 								<option value="4" <?php echo set_select('count_unit_9', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
-						<div class="col-xs-2">
+						<div class="col-xs-2 col-sm-1 col-md-2">
               <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                 <label>
             			<input type="checkbox" name="ck2_9" id="ck2_9" onclick="type_reg('2',this,9);">
@@ -559,22 +568,23 @@
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
 						<label for="type_name_10">타입별 정보등록(10) <span class="red">*</span></label>
 					</div>
-					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+          <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
+            <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
 							<input type="text" class="form-control input-sm eng" id="type_name_10" name="type_name_10" maxlength="10" value="<?php echo set_value('type_name_10'); ?>" required autofocus placeholder="타입">
 						</div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_color_10" class="sr-only">컬러</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
+            <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
+              <label for="type_color_2" class="sr-only">컬러</span></label>
 							<input type="color" class="form-control input-sm en_only" id="type_color_10" name="type_color_10" maxlength="7" value="<?php echo set_value('type_color_10'); ?>"  placeholder="컬러">
 						</div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_quantity_10" class="sr-only">수량</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+              <label for="type_quantity_2" class="sr-only">수량</span></label>
 							<input type="text" class="form-control input-sm en_only" id="type_quantity_10" name="type_quantity_10" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_10'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
 
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
 							<label for="count_unit_10" class="sr-only">단위</span></label>
 							<select class="form-control input-sm" id="count_unit_10" name="count_unit_10">
 								<option value="0">단위</option>
@@ -584,7 +594,7 @@
 								<option value="4" <?php echo set_select('count_unit_10', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
-						<div class="col-xs-2">
+						<div class="col-xs-2 col-sm-1 col-md-2">
               <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
                 <label>
             			<input type="checkbox" name="ck2_10" id="ck2_10" onclick="type_reg('2',this,10);">
@@ -598,22 +608,23 @@
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
 						<label for="type_name_11">타입별 정보등록(11) <span class="red">*</span></label>
 					</div>
-					<div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+          <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
+            <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
 							<input type="text" class="form-control input-sm eng" id="type_name_11" name="type_name_11" maxlength="10" value="<?php echo set_value('type_name_11'); ?>" required autofocus placeholder="타입">
 						</div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입</span></div>
-            <div class="col-xs-1" style="padding: 11px 0 0 8px;"><span>타입 컬러 :</span></span></div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_color_11" class="sr-only">컬러</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
+            <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
+              <label for="type_color_2" class="sr-only">컬러</span></label>
 							<input type="color" class="form-control input-sm en_only" id="type_color_11" name="type_color_11" maxlength="7" value="<?php echo set_value('type_color_11'); ?>"  placeholder="컬러">
 						</div>
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
-							<label for="type_quantity_11" class="sr-only">수량</span></label>
+            <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+              <label for="type_quantity_2" class="sr-only">수량</span></label>
 							<input type="text" class="form-control input-sm en_only" id="type_quantity_11" name="type_quantity_11" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_11'); ?>" required autofocus placeholder="타입별 단위 수량">
 						</div>
 
-						<div class="col-xs-2 col-sm-2" style="padding-right: 0;">
+						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
 							<label for="count_unit_11" class="sr-only">단위</span></label>
 							<select class="form-control input-sm" id="count_unit_11" name="count_unit_11">
 								<option value="0">단위</option>
@@ -623,7 +634,7 @@
 								<option value="4" <?php echo set_select('count_unit_11', '4'); ?>>㎡(면적)</option>
 							</select>
 						</div>
-						<div class="col-xs-2"></div>
+						<div class="col-xs-2 col-sm-1 col-md-2"></div>
 					</div>
 				</div>
 
