@@ -80,15 +80,20 @@
 
 <?php echo form_open(current_url()); ?>
   <fieldset>
-    <div class="row font12 form-group" style="margin: 0 0 200px;">
+    <div class="row font12 form-group" style="margin: 0 0 50px;">
       <div class="col-xs-12 bo-top bo-bottom" style="padding:0;">
         <div class="col-xs-3 center label-wrap" style="padding:10px;">등록차수</div>
         <div class="col-xs-5 col-sm-3 center label-wrap" style="padding:10px;">차수명</div>
         <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">등록일</div>
         <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">등록자</div>
-        <div class="col-xs-2 col-sm-1 center label-wrap" style="padding:10px;">수정</div>
-        <div class="col-xs-2 col-sm-1 center label-wrap" style="padding:10px;">삭제</div>
+        <div class="col-xs-2 col-sm-2 center label-wrap" style="padding:10px;">수정</div>
     <?php if(empty($con_diff)): ?>
+
+        <div class="col-xs-3 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="<?php echo $lt->diff_no; ?>" placeholder="등록차수"></div>
+        <div class="col-xs-5 col-sm-3 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="<?php echo $lt->diff_name; ?>" placeholder="차수명"></div>
+        <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo date('Y-m-d'); ?></div>
+        <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo $this->session->userdata('mem_username'); ?></div>
+        <div class="col-xs-2 col-sm-2 center bo-top" style="padding:10px;">수정</div>
 
         <div class="col-xs-12 center bo-top" style="padding:60px;">등록된 데이터가 없습니다.</div>
 
@@ -99,18 +104,11 @@
         </div>
         <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo $lt->reg_date; ?></div>
         <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo $lt->reg_worker; ?></div>
-        <div class="col-xs-2 col-sm-1 center bo-top" style="padding:10px;">수정</div>
-        <div class="col-xs-2 col-sm-1 center bo-top" style="padding:10px;">삭제</div>
+        <div class="col-xs-2 col-sm-2 center bo-top" style="padding:10px;">수정</div>
     <?php endforeach; endif; ?>
 
       </div>
       <div class="col-xs-12 btn-wrap" style="margin-top: 30px;">
-        <div class="col-xs-3 center" style="padding-top:3px;">
-          <input type='text' class="form-control input-sm" value="" placeholder="등록차수">
-        </div>
-        <div class="col-xs-3 center" style="padding-top:3px;">
-          <input type='text' class="form-control input-sm" value="" placeholder="차수명">
-        </div>
         <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="추가하기">
       </div>
     </div>
@@ -123,7 +121,7 @@
 
 <?php echo form_open(current_url()); ?>
   <fieldset>
-    <div class="row font12 form-group" style="margin: 0 0 200px;">
+    <div class="row font12 form-group" style="margin: 0 0 50px;">
       <div class="col-xs-12 bo-top bo-bottom" style="padding:0;">
         <div class="col-xs-3 col-sm-2 center label-wrap" style="padding:10px;">구분</div>
         <div class="hidden-xs col-sm-1 center label-wrap" style="padding:10px;">코드</div>
@@ -133,7 +131,21 @@
         <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">납부기한</div>
         <div class="col-xs-2 col-sm-2 center label-wrap" style="padding:10px;">수정</div>
     <?php if(empty($pay_time)): ?>
-
+        <div class="col-xs-3 col-sm-2 center" style="padding-top:3px;">
+            <label for="pay_sort" class="sr-only">납부구분 선택</label>
+            <select class="form-control input-sm" name="pay_sort">
+                <option value="0"> 전 체</option>
+                <option value="1" <?php if($lt->pay_sort=='1') echo "selected"; ?>>계약금</option>
+                <option value="2" <?php if($lt->pay_sort=='2') echo "selected"; ?>>중도금</option>
+                <option value="3" <?php if($lt->pay_sort=='3') echo "selected"; ?>>잔 금</option>
+            </select>
+        </div>
+      <div class="hidden-xs col-sm-1 center" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="" placeholder="납부코드"></div>
+      <div class="col-xs-3 col-sm-1 center" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="" placeholder="납부순서"></div>
+      <div class="col-xs-4 col-sm-2 center" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="" placeholder="회차명칭"></div>
+      <div class="hidden-xs col-sm-2 center" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="" placeholder="부가설명"></div>
+      <div class="hidden-xs col-sm-2 center" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="" placeholder="납부기한"></div>
+      <div class="col-xs-2 col-sm-2 center" style="padding:10px;">수정</div>
         <div class="col-xs-12 center bo-top" style="padding:60px;">등록된 데이터가 없습니다.</div>
 
     <?php else: foreach($pay_time as $lt) : ?>
@@ -167,37 +179,37 @@
 
 <?php echo form_open(current_url()); ?>
   <fieldset>
-    <div class="row font12 form-group" style="margin: 0 0 200px;">
-      <div class="col-xs-12 col-md-8 bo-top bo-bottom" style="padding:0;">
-        <div class="col-xs-3 center label-wrap" style="padding:10px;">등록차수</div>
-        <div class="col-xs-5 col-sm-3 center label-wrap" style="padding:10px;">차수명</div>
-        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">등록일</div>
-        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">등록자</div>
-        <div class="col-xs-2 col-sm-1 center label-wrap" style="padding:10px;">수정</div>
-        <div class="col-xs-2 col-sm-1 center label-wrap" style="padding:10px;">삭제</div>
-    <?php if(empty($con_diff)): ?>
+    <div class="row font12 form-group" style="margin: 0 0 50px;">
+      <div class="col-xs-12 bo-top bo-bottom" style="padding:0;">
+        <div class="col-xs-4 col-sm-2 center label-wrap" style="padding:10px;">층 범위(시작)</div>
+        <div class="col-xs-4 col-sm-2 center label-wrap" style="padding:10px;">층 범위(종료)</div>
+        <div class="col-xs-4 col-sm-2 center label-wrap" style="padding:10px;">층 범위 명칭</div>
+        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">등록(수정)일</div>
+        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">(변경)등록자</div>
+        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">&nbsp;</div>
+    <?php if(empty($con_floor)): ?>
 
+        <div class="col-xs-4 col-sm-2 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="" placeholder="시작 층"></div>
+        <div class="col-xs-4 col-sm-2 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="" placeholder="종료 층"></div>
+        <div class="col-xs-4 col-sm-2 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="" placeholder="층 범위 명"></div>
+        <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo date('Y-m-d'); ?></div>
+        <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo $this->session->userdata('mem_username'); ?></div>
+        <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;">&nbsp;</div>
         <div class="col-xs-12 center bo-top" style="padding:60px;">등록된 데이터가 없습니다.</div>
 
-    <?php else: foreach($con_diff as $lt) : ?>
-        <div class="col-xs-3 center bo-top" style="padding:10px;"><?php echo $lt->diff_no; ?></div>
-        <div class="col-xs-5 col-sm-3 center bo-top" style="padding-top:3px;">
-          <input type='text' class="form-control input-sm" value="<?php echo $lt->diff_name; ?>" placeholder="차수명">
-        </div>
+    <?php else: foreach($con_floor as $lt) :
+        $fl_range = explode("-", $lt->floor_range);
+    ?>
+        <div class="col-xs-3 col-sm-2 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="<?php echo $fl_range[0]; ?>" placeholder="시작 층"></div>
+        <div class="col-xs-3 col-sm-2 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="<?php echo $fl_range[1]; ?>" placeholder="종료 층"></div>
+        <div class="col-xs-4 col-sm-2 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="<?php echo $lt->floor_name; ?>" placeholder="층 범위 명"></div>
         <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo $lt->reg_date; ?></div>
         <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo $lt->reg_worker; ?></div>
-        <div class="col-xs-2 col-sm-1 center bo-top" style="padding:10px;">수정</div>
-        <div class="col-xs-2 col-sm-1 center bo-top" style="padding:10px;">삭제</div>
+        <div class="col-xs-2 center bo-top" style="padding:10px;">asdfasdf</div>
     <?php endforeach; endif; ?>
 
       </div>
-      <div class="col-xs-12 col-md-8 btn-wrap" style="margin-top: 30px;">
-        <div class="col-xs-3 center" style="padding-top:3px;">
-          <input type='text' class="form-control input-sm" value="" placeholder="등록차수">
-        </div>
-        <div class="col-xs-3 center" style="padding-top:3px;">
-          <input type='text' class="form-control input-sm" value="" placeholder="차수명">
-        </div>
+      <div class="col-xs-12 btn-wrap" style="margin-top: 30px;">
         <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="추가하기">
       </div>
     </div>
@@ -209,23 +221,24 @@
 
 <?php echo form_open(current_url()); ?>
   <fieldset>
-    <div class="row font12 form-group" style="margin: 0 0 200px;">
-      <div class="col-xs-12 col-md-8 bo-top bo-bottom" style="padding:0;">
-        <div class="col-xs-3 center label-wrap" style="padding:10px;">등록차수</div>
-        <div class="col-xs-5 col-sm-3 center label-wrap" style="padding:10px;">차수명</div>
-        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">등록일</div>
-        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">등록자</div>
-        <div class="col-xs-2 col-sm-1 center label-wrap" style="padding:10px;">수정</div>
-        <div class="col-xs-2 col-sm-1 center label-wrap" style="padding:10px;">삭제</div>
-    <?php if(empty($con_diff)): ?>
+    <div class="row font12 form-group" style="margin: 0 0 50px;">
+      <div class="col-xs-12 bo-top bo-bottom" style="padding:0;">
+        <div class="col-xs-4 center label-wrap" style="padding:10px;">향별 조건명</div>
+        <div class="col-xs-2 center label-wrap" style="padding:10px;">등록일</div>
+        <div class="col-xs-2 center label-wrap" style="padding:10px;">등록자</div>
+        <div class="col-xs-2 center label-wrap" style="padding:10px;">수정</div>
+        <div class="col-xs-2 center label-wrap" style="padding:10px;">삭제</div>
+    <?php if(empty($con_direction)): ?>
 
+        <div class="col-xs-4 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="" placeholder="향별 조건명"></div>
+        <div class="col-xs-2 center bo-top" style="padding:10px;"><?php echo date('Y-m-d'); ?></div>
+        <div class="col-xs-2 center bo-top" style="padding:10px;"><?php echo $this->session->userdata('mem_username'); ?></div>
+        <div class="col-xs-2 center bo-top" style="padding:10px;">수정</div>
+        <div class="col-xs-2 center bo-top" style="padding:10px;">삭제</div>
         <div class="col-xs-12 center bo-top" style="padding:60px;">등록된 데이터가 없습니다.</div>
 
-    <?php else: foreach($con_diff as $lt) : ?>
-        <div class="col-xs-3 center bo-top" style="padding:10px;"><?php echo $lt->diff_no; ?></div>
-        <div class="col-xs-5 col-sm-3 center bo-top" style="padding-top:3px;">
-          <input type='text' class="form-control input-sm" value="<?php echo $lt->diff_name; ?>" placeholder="차수명">
-        </div>
+    <?php else: foreach($con_direction as $lt) : ?>
+        <div class="col-xs-4 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="<?php echo $lt->diff_name; ?>" placeholder="차수명"></div>
         <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo $lt->reg_date; ?></div>
         <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo $lt->reg_worker; ?></div>
         <div class="col-xs-2 col-sm-1 center bo-top" style="padding:10px;">수정</div>
@@ -233,13 +246,7 @@
     <?php endforeach; endif; ?>
 
       </div>
-      <div class="col-xs-12 col-md-8 btn-wrap" style="margin-top: 30px;">
-        <div class="col-xs-3 center" style="padding-top:3px;">
-          <input type='text' class="form-control input-sm" value="" placeholder="등록차수">
-        </div>
-        <div class="col-xs-3 center" style="padding-top:3px;">
-          <input type='text' class="form-control input-sm" value="" placeholder="차수명">
-        </div>
+      <div class="col-xs-12 btn-wrap" style="margin-top: 30px;">
         <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="추가하기">
       </div>
     </div>
@@ -251,7 +258,7 @@
 
 <?php echo form_open(current_url()); ?>
   <fieldset>
-    <div class="row font12 form-group" style="margin: 0 0 200px;">
+    <div class="row font12 form-group" style="margin: 0 0 50px;">
       <div class="col-xs-12 col-md-8 bo-top bo-bottom" style="padding:0;">
         <div class="col-xs-3 center label-wrap" style="padding:10px;">등록차수</div>
         <div class="col-xs-5 col-sm-3 center label-wrap" style="padding:10px;">차수명</div>

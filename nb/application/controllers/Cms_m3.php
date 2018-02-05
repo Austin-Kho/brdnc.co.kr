@@ -50,7 +50,7 @@ class Cms_m3 extends CB_Controller {
 		$view['s_di'] = array(
 			array('동호수 등록', '기타 세부설정', '프로젝트 목록'), // 첫번째 하위 메뉴
 			array('신규 등록', '검토 자료'),       // 두번째 하위 메뉴
-			array('동호 데이터 입력', '프로젝트 세부설정 관리 ------- [진행 중]', '프로젝트 목록 및 기본정보 수정'),   // 첫번째 하위 제목
+			array('동호 데이터 입력', '타입별 세부설정 관리 - [진행 중]', '프로젝트 목록 및 기본정보 수정'),   // 첫번째 하위 제목
 			array('신규 프로젝트 등록', '예비 프로젝트 검토')     // 두번째 하위 제목
 		);
 
@@ -286,15 +286,16 @@ class Cms_m3 extends CB_Controller {
 			$this->load->library('form_validation'); // 폼 검증
 
 			// 1. 분양 차수 설정
-			$view['con_diff'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_con_diff WHERE pj_seq='$project' ORDER BY diff_no "); // 프로젝트 등록된 전체 차수
-
+			$view['con_diff'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_con_diff WHERE pj_seq='$project' ORDER BY diff_no ");  // 프로젝트 등록된 전체 차수
 
 			// 2. 납입 회차 설정
 			$view['pay_time'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' ORDER BY seq, pay_code ");
 
 			// 3. 층별 조건 설정
+			$view['con_floor'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_con_floor WHERE pj_seq='$project' ORDER BY seq ");
 
 			// 4. 향별 조건 설정
+			$view['con_direction'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_con_direction WHERE pj_seq='$project' ORDER BY seq ");
 
 			// 5. 조건별 분양가 설정
 
