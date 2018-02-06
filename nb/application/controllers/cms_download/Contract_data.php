@@ -40,6 +40,25 @@ class Contract_data extends CB_Controller {
 		$spreadsheet->setActiveSheetIndex(0); // 워크시트에서 1번째는 활성화
 		$spreadsheet->getActiveSheet()->setTitle('계약자_데이터'); // 워크시트 이름 지정
 
+		// 총 라인수에 따라 최종 Excel 열 구하기 함수
+		function toAlpha($data){
+			$alphabet =   array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z');
+			$alpha_flip = array_flip($alphabet);
+			if($data <= 25){
+				return $alphabet[$data];
+			}elseif($data > 25){
+				$dividend = ($data + 1);
+				$alpha = '';
+				$modulo;
+				while ($dividend > 0){
+					$modulo = ($dividend - 1) % 26;
+					$alpha = $alphabet[$modulo] . $alpha;
+					$dividend = floor((($dividend - $modulo) / 26));
+				}
+				return $alpha;
+			}
+		}
+
 		// 본문 내용 ---------------------------------------------------------------//
 
 		// 전체 글꼴 및 정렬
