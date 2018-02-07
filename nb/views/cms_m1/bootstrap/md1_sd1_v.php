@@ -6,16 +6,27 @@ else :
 	<div class="main_start">&nbsp;</div>
 	<!-- 1. 분양관리 -> 1. 계약 관리 ->1. 계약 현황 -->
 
-	<!-- <script type="text/javascript">
-		function term_put(a,b,term){
-			if(term=='d')var term="<?php echo date('Y-m-d'); ?>";
-			if(term=='w')var term="<?php echo date('Y-m-d',strtotime ('-1 weeks'));?>";
-			if(term=='m')var term="<?php echo date('Y-m-d',strtotime ('-1 months'));?>";
-			if(term=='3m')var term="<?php echo date('Y-m-d',strtotime ('-3 months'));?>";
-			document.getElementById(a).value = term;
-			document.getElementById(b).value = "<?php echo date('Y-m-d');?>";
+	<script type="text/javascript">
+		function excel(url){
+			var opt;
+			if(document.form1.opt1.checked===true) var opt = document.form1.opt1.value;
+			if(document.form1.opt2.checked===true) var opt = opt+"-"+document.form1.opt2.value;
+			if(document.form1.opt3.checked===true) var opt = opt+"-"+document.form1.opt3.value;
+			if(document.form1.opt4.checked===true) var opt = opt+"-"+document.form1.opt4.value;
+			if(document.form1.opt5.checked===true) var opt = opt+"-"+document.form1.opt5.value;
+			if(document.form1.opt6.checked===true) var opt = opt+"-"+document.form1.opt6.value;
+			if(document.form1.opt7.checked===true) var opt = opt+"-"+document.form1.opt7.value;
+			if(document.form1.opt8.checked===true) var opt = opt+"-"+document.form1.opt8.value;
+			if(document.form1.opt9.checked===true) var opt = opt+"-"+document.form1.opt9.value;
+			if(document.form1.opt10.checked===true) var opt = opt+"-"+document.form1.opt10.value;
+			if(document.form1.opt11.checked===true) var opt = opt+"-"+document.form1.opt11.value;
+			if(document.form1.opt12.checked===true) var opt = opt+"-"+document.form1.opt12.value;
+			if(document.form1.opt13.checked===true) var opt = opt+"-"+document.form1.opt13.value;
+			if(document.form1.opt14.checked===true) var opt = opt+"-"+document.form1.opt14.value;
+
+			location.href = url+"&row="+opt;
 		}
-	</script> -->
+	</script>
 <?php
 for($i=0; $i<count($tp_name); $i++) :
 	$type_color[$tp_name[$i]] = $tp_color[$i];
@@ -212,13 +223,6 @@ endfor;
 					<button type="button" class="close" aria-label="Close" style="padding-left: 5px; margin-top: -2px;" onclick="document.getElementById('s_date').value=''; document.getElementById('e_date').value='';"><span aria-hidden="true">&times;</span></button>
 				</div>
 			</div>
-			<!-- <div class="hidden-xs col-sm-4 col-md-2" style="height: 40px; padding: 10px 5px; text-align: right;">
-				<a href="javascript:" onclick="term_put('s_date', 'e_date', 'd');" title="오늘"><img src="<?php echo base_url(); ?>static/img/to_today.jpg" alt="오늘"></a>
-				<a href="javascript:" onclick="term_put('s_date', 'e_date', 'w');" title="일주일"><img src="<?php echo base_url(); ?>static/img/to_week.jpg" alt="일주일"></a>
-				<a href="javascript:" onclick="term_put('s_date', 'e_date', 'm');" title="1개월"><img src="<?php echo base_url(); ?>static/img/to_month.jpg" alt="1개월"></a>
-				<a href="javascript:" onclick="term_put('s_date', 'e_date', '3m');" title="3개월"><img src="<?php echo base_url(); ?>static/img/to_3month.jpg" alt="3개월"></a>
-				<button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="document.getElementById('s_date').value=''; document.getElementById('e_date').value='';"><span aria-hidden="true">&times;</span></button>
-			</div> -->
 			<div class="col-xs-10 col-sm-2 col-md-1" style="height: 40px; padding: 6px 5px; text-align: right;">
 				<label for="sc_name" class="sr-only">계약자명</label>
 				<input type="text" class="form-control input-sm" name="sc_name" maxlength="10" value="<?php if($this->input->get('sc_name')) echo $this->input->get('sc_name'); ?>" placeholder="계약자명" onkeydown="if(event.keyCode==13)submit();">
@@ -228,33 +232,33 @@ endfor;
 			</div>
 		</div>
 
-		<!-- <div class="col-md-12">검색</div> -->
 <?php if(empty($cont_data)) : ?>
 		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 120px 0;">등록된 데이터가 없습니다.</div>
 <?php else : ?>
 		<div class="hidden-xs col-sm-12 right" style="padding: 0 20px 3px; color: #5E81FE;">
 			<?php echo "[ 결과 : ".number_format($total_rows)." 건 ]"; ?>
-			<a href="javascript:$('#output_option').toggle();"  style="padding-left: 5px;">[엑셀 출력옵션 선택]</a>
-			<a href="<?php echo base_url('/cms_download/contract_data/download')."?pj=".$project."&qry=".urlencode($cont_query); ?>">
+			<a href="javascript:$('#output_option').toggle();"  style="padding-left: 5px;">[엑셀 출력항목 선택]</a>
+			<!-- <a href="<?php echo base_url('/cms_download/contract_data/download')."?pj=".$project."&qry=".urlencode($cont_query); ?>"> -->
+			<?php $url = base_url('/cms_download/contract_data/download')."?pj=".$project."&qry=".urlencode($cont_query); ?>
+			<a href='javascript:excel("<?php echo $url; ?>");'>
 				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
 			</a>
 		</div>
 		<div class="hidden-xs col-sm-12 form-inline center bg-info" id="output_option" style="padding: 8px; display:none;">
-			<div class="checkbox"><label><input type="checkbox" name="opt1" checked> 일련번호</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt2" checked> 차수</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt3" checked> 타입</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt4" checked> 동호수</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt5" checked> 계약자</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt6" checked> 계약일자</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt7" checked> 연락처[1]</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt8"> 연락처[2]</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt9" checked> 총 납입금</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt10"> 주소[1][등본상]</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt11"> 주소[2][우편용]</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt12"> 미비서류</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt13"> 해지 건 포함</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt14"> 명의변경 회수</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt15"> 비 고</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt1" value="1" checked> 일련번호&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt2" value="2" checked> 차수&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt3" value="3" checked> 타입&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt4" value="4" checked> 동호수&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt5" value="5" checked> 계약자&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt6" value="6" checked> 계약일자&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt7" value="7"> 총 납입금&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt8" value="8" checked> 연락처[1]&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt9" value="9"> 연락처[2]&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt10" value="10"> 주소[1][등본]&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt11" value="11" checked> 주소[2][우편]&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt12" value="12"> 미비서류&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt13" value="13"> 명의변경 횟수&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt14" value="14"> 비 고</label></div>
 		</div>
 	</form>
 		<div class="col-xs-12 table-responsive" style="padding: 0;">
