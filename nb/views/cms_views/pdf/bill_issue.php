@@ -244,7 +244,7 @@
 
     if($cont_recieve->total<$time_cum){ // 완납회차 후 칸 띄우기
       if(empty($bool)):
-        for($k=0; $k<5; $k++):
+        for($k=0; $k<(9-$rep); $k++):
           echo "<tr><td colspan='11'>&nbsp;</td></tr>";
         endfor;
         $bool = true;
