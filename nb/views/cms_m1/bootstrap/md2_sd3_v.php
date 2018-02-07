@@ -4,14 +4,6 @@ if($auth23<1) :
 else :
 ?>
 <script>
-	function show_hide(obj){ // 기본설정 숨기거나 보이기
-		var show_hide = document.getElementById('show_hide');
-		if(obj.checked==true){ // 체크시 보이기
-			show_hide.style.display = "block";
-		}else{
-			show_hide.style.display = "none";
-		}
-	}
 	function checkAll(handle, obj) { // 계약 항목 전체 선택
 		var i;
 		var chk = document.getElementsByName(obj);
@@ -94,7 +86,7 @@ else :
 		</div>
 		<div class="col-xs-6 font14 right checkbox" style="padding-top: 13px;">
 			<label>
-				<input type="checkbox" onclick="show_hide(this)"> 고지서 관련 세부설정 보기
+				<input type="checkbox" onclick="$('#show_hide').toggle();"> 고지서 관련 세부설정 보기
 			</label>
 		</div>
 	</div>
