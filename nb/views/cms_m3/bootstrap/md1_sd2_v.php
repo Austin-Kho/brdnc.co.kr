@@ -2,9 +2,19 @@
   if($auth12<1) :
   	include('no_auth.php');
   else :
+    switch ($this->input->get('reg_sort')) {
+      case '1': $obj = '분양 차수를'; break;
+      case '2': $obj = '납입 회차를'; break;
+      case '3': $obj = '층별 조건을'; break;
+      case '4': $obj = '향별 조건을'; break;
+      case '5': $obj = '조건별 분양가를'; break;
+      case '6': $obj = '회차별 납입가를'; break;
+      default: $obj = '데이터를'; break;
+    }
+    if($auth12<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="if(confirm('".$obj." 등록하시겠습니까?')===true) submit();";}
 ?>
 <div class="main_start">&nbsp;</div>
-<!-- 3. 프로젝트 -> 1. 프로젝트 관리 ->2. 기타 세부설정 -->
+<!-- 3. 프로젝트 -> 1. 프로젝트 관리 ->2. 기타 세부등록 -->
 
 <?php
   $attributes = array('method' => 'get', 'name' => 'get_frm');
@@ -45,13 +55,12 @@
       <div class="col-xs-12 col-sm-10" style="padding: 0px;">
         <label for="reg_sort" class="sr-only">설정항목 선택</label>
         <select class="form-control input-sm" name="reg_sort" onchange="submit();">
-          <option value=""> 전 체
-          <option value="1" <?php if($this->input->get('reg_sort')==='1') echo "selected"; ?>>1. 분양 차수 설정</option>
-          <option value="2" <?php if($this->input->get('reg_sort')==='2') echo "selected"; ?>>2. 납입 회차 설정</option>
-          <option value="3" <?php if($this->input->get('reg_sort')==='3') echo "selected"; ?>>3. 층별 조건 설정</option>
-          <option value="4" <?php if($this->input->get('reg_sort')==='4') echo "selected"; ?>>4. 향별 조건 설정</option>
-          <option value="5" <?php if($this->input->get('reg_sort')==='5') echo "selected"; ?>>5. 조건별 분양가 설정</option>
-          <option value="6" <?php if($this->input->get('reg_sort')==='6') echo "selected"; ?>>6. 회차별 납입가 설정</option>
+          <option value="1" <?php if(empty($this->input->get('reg_sort')) or $this->input->get('reg_sort')==='1') echo "selected"; ?>>1. 분양 차수 등록</option>
+          <option value="2" <?php if($this->input->get('reg_sort')==='2') echo "selected"; ?>>2. 납입 회차 등록</option>
+          <option value="3" <?php if($this->input->get('reg_sort')==='3') echo "selected"; ?>>3. 층별 조건 등록</option>
+          <option value="4" <?php if($this->input->get('reg_sort')==='4') echo "selected"; ?>>4. 향별 조건 등록</option>
+          <option value="5" <?php if($this->input->get('reg_sort')==='5') echo "selected"; ?>>5. 조건별 분양가 등록</option>
+          <option value="6" <?php if($this->input->get('reg_sort')==='6') echo "selected"; ?>>6. 회차별 납입가 등록</option>
         </select>
       </div>
     </div>
@@ -59,24 +68,32 @@
 </form>
 <!--||||||||||||||||||||||||||||||||||-프로젝트 /조건선택 종료-||||||||||||||||||||||||||||||||||-->
 
-<?php
-  if( !$this->input->get('reg_sort') OR $this->input->get('reg_sort')==='1') : $sub_title = "1. 분양 차수 설정";
-  elseif($this->input->get('reg_sort')==='2') :$sub_title = "2. 납입 회차 설정";
-  elseif($this->input->get('reg_sort')==='3') :$sub_title = "3. 층별 조건 설정";
-  elseif($this->input->get('reg_sort')==='4') :$sub_title = "4. 향별 조건 설정";
-  elseif($this->input->get('reg_sort')==='5') :$sub_title = "5. 조건별 분양가 설정";
-  elseif($this->input->get('reg_sort')==='6') :$sub_title = "6. 회차별 납입가 설정";
-  endif;
-?>
 
-<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px;">
-  <div class="col-xs-12 font14" style="padding: 0;">
-    <p class="bg-success" style="padding: 13px 30px; margin: 0;"><?php echo $sub_title; ?></p>
-  </div>
+<div class="row font12" style="margin: 0 0 20px;">
+  <ul class="nav nav-tabs">
+    <li role="presentation" class="<?php if(empty($this->input->get('reg_sort')) or $this->input->get('reg_sort')==='1') echo 'active'; ?>">
+      <a href="<?php echo htmlspecialchars(base_url('cms_m3/project/1/2').'?yr='.$this->input->get('yr').'&project='.$project.'&reg_sort=1'); ?>">분양 차수 등록</a>
+    </li>
+    <li role="presentation" class="<?php if($this->input->get('reg_sort')==='2') echo 'active'; ?>">
+      <a href="<?php echo htmlspecialchars(base_url('cms_m3/project/1/2').'?yr='.$this->input->get('yr').'&project='.$project.'&reg_sort=2'); ?>">납입 회차 등록</a>
+    </li>
+    <li role="presentation" class="<?php if($this->input->get('reg_sort')==='3') echo 'active'; ?>">
+      <a href="<?php echo htmlspecialchars(base_url('cms_m3/project/1/2').'?yr='.$this->input->get('yr').'&project='.$project.'&reg_sort=3'); ?>">층별 조건 등록</a>
+    </li>
+    <li role="presentation" class="<?php if($this->input->get('reg_sort')==='4') echo 'active'; ?>">
+      <a href="<?php echo htmlspecialchars(base_url('cms_m3/project/1/2').'?yr='.$this->input->get('yr').'&project='.$project.'&reg_sort=4'); ?>">향별 조건 등록</a>
+    </li>
+    <li role="presentation" class="<?php if($this->input->get('reg_sort')==='5') echo 'active'; ?>">
+      <a href="<?php echo htmlspecialchars(base_url('cms_m3/project/1/2').'?yr='.$this->input->get('yr').'&project='.$project.'&reg_sort=5'); ?>">조건별 분양가 등록</a>
+    </li>
+    <li role="presentation" class="<?php if($this->input->get('reg_sort')==='6') echo 'active'; ?>">
+      <a href="<?php echo htmlspecialchars(base_url('cms_m3/project/1/2').'?yr='.$this->input->get('yr').'&project='.$project.'&reg_sort=6'); ?>">회차별 납입가 등록</a>
+    </li>
+  </ul>
 </div>
 <!--||||||||||||||||||||||||||||||||||-조건별 제목 종료-||||||||||||||||||||||||||||||||||-->
 
-<?php if( !$this->input->get('reg_sort') OR $this->input->get('reg_sort')==='1') { //1. 분양 차수 설정?>
+<?php if( !$this->input->get('reg_sort') OR $this->input->get('reg_sort')==='1') { //1. 분양 차수 등록?>
 
 <?php echo form_open(current_url()); ?>
   <fieldset>
@@ -109,15 +126,15 @@
 
       </div>
       <div class="col-xs-12 btn-wrap" style="margin-top: 30px;">
-        <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="추가하기">
+        <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="등록하기">
       </div>
     </div>
   </fieldset>
 </form>
 
-<!--||||||||||||||||||||||||||||||||||-1. 분양 차수 설정 종료-||||||||||||||||||||||||||||||||||-->
+<!--||||||||||||||||||||||||||||||||||-1. 분양 차수 등록 종료-||||||||||||||||||||||||||||||||||-->
 
-<?php }elseif($this->input->get('reg_sort')==='2') { //2. 납입 회차 설정 ?>
+<?php }elseif($this->input->get('reg_sort')==='2') { //2. 납입 회차 등록 ?>
 
 <?php echo form_open(current_url()); ?>
   <fieldset>
@@ -168,14 +185,14 @@
 
       </div>
       <div class="col-xs-12 btn-wrap" style="margin-top: 30px;">
-        <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="추가하기">
+        <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="등록하기">
       </div>
     </div>
   </fieldset>
 </form>
-<!--||||||||||||||||||||||||||||||||||-2. 납입 회차 설정 종료-||||||||||||||||||||||||||||||||||-->
+<!--||||||||||||||||||||||||||||||||||-2. 납입 회차 등록 종료-||||||||||||||||||||||||||||||||||-->
 
-<?php }elseif($this->input->get('reg_sort')==='3') { //3. 층별 조건 설정 ?>
+<?php }elseif($this->input->get('reg_sort')==='3') { //3. 층별 조건 등록 ?>
 
 <?php echo form_open(current_url()); ?>
   <fieldset>
@@ -210,14 +227,14 @@
 
       </div>
       <div class="col-xs-12 btn-wrap" style="margin-top: 30px;">
-        <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="추가하기">
+        <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="등록하기">
       </div>
     </div>
   </fieldset>
 </form>
-<!--||||||||||||||||||||||||||||||||||-3. 층별 조건 설정 종료-||||||||||||||||||||||||||||||||||-->
+<!--||||||||||||||||||||||||||||||||||-3. 층별 조건 등록 종료-||||||||||||||||||||||||||||||||||-->
 
-<?php }elseif($this->input->get('reg_sort')==='4') { //4. 향별 조건 설정 ?>
+<?php }elseif($this->input->get('reg_sort')==='4') { //4. 향별 조건 등록 ?>
 
 <?php echo form_open(current_url()); ?>
   <fieldset>
@@ -247,56 +264,14 @@
 
       </div>
       <div class="col-xs-12 btn-wrap" style="margin-top: 30px;">
-        <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="추가하기">
+        <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="등록하기">
       </div>
     </div>
   </fieldset>
 </form>
-<!--||||||||||||||||||||||||||||||||||-4. 향별 조건 설정 종료-||||||||||||||||||||||||||||||||||-->
+<!--||||||||||||||||||||||||||||||||||-4. 향별 조건 등록 종료-||||||||||||||||||||||||||||||||||-->
 
-<?php }elseif($this->input->get('reg_sort')==='5') { //5. 조건별 분양가 설정 ?>
-
-<?php echo form_open(current_url()); ?>
-  <fieldset>
-    <div class="row font12 form-group" style="margin: 0 0 50px;">
-      <div class="col-xs-12 col-md-8 bo-top bo-bottom" style="padding:0;">
-        <div class="col-xs-3 center label-wrap" style="padding:10px;">등록차수</div>
-        <div class="col-xs-5 col-sm-3 center label-wrap" style="padding:10px;">차수명</div>
-        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">등록일</div>
-        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">등록자</div>
-        <div class="col-xs-2 col-sm-1 center label-wrap" style="padding:10px;">수정</div>
-        <div class="col-xs-2 col-sm-1 center label-wrap" style="padding:10px;">삭제</div>
-    <?php if(empty($con_diff)): ?>
-
-        <div class="col-xs-12 center bo-top" style="padding:60px;">등록된 데이터가 없습니다.</div>
-
-    <?php else: foreach($con_diff as $lt) : ?>
-        <div class="col-xs-3 center bo-top" style="padding:10px;"><?php echo $lt->diff_no; ?></div>
-        <div class="col-xs-5 col-sm-3 center bo-top" style="padding-top:3px;">
-          <input type='text' class="form-control input-sm" value="<?php echo $lt->diff_name; ?>" placeholder="차수명">
-        </div>
-        <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo $lt->reg_date; ?></div>
-        <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo $lt->reg_worker; ?></div>
-        <div class="col-xs-2 col-sm-1 center bo-top" style="padding:10px;">수정</div>
-        <div class="col-xs-2 col-sm-1 center bo-top" style="padding:10px;">삭제</div>
-    <?php endforeach; endif; ?>
-
-      </div>
-      <div class="col-xs-12 col-md-8 btn-wrap" style="margin-top: 30px;">
-        <div class="col-xs-3 center" style="padding-top:3px;">
-          <input type='text' class="form-control input-sm" value="" placeholder="등록차수">
-        </div>
-        <div class="col-xs-3 center" style="padding-top:3px;">
-          <input type='text' class="form-control input-sm" value="" placeholder="차수명">
-        </div>
-        <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="추가하기">
-      </div>
-    </div>
-  </fieldset>
-</form>
-<!--||||||||||||||||||||||||||||||||||-5. 조건별 분양가 설정 종료-||||||||||||||||||||||||||||||||||-->
-
-<?php }elseif($this->input->get('reg_sort')==='6') { //6. 회차별 납입가 설정
+<?php }elseif($this->input->get('reg_sort')==='5') { //5. 조건별 분양가 등록
 
   $attributes = array('method' => 'get', 'name' => 'get_frm');
   echo form_open(current_url(), $attributes);
@@ -306,7 +281,7 @@
   <input type="hidden" name="reg_sort" value="<?php echo $this->input->get('reg_sort'); ?>">
 
   <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
-    <div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">차수구분 선택</div>
+    <div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">차수구분 선택</div>
     <div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
       <div class="col-xs-12 col-sm-10" style="padding: 0px;">
         <label for="con_diff" class="sr-only">차수구분 선택</label>
@@ -318,7 +293,73 @@
         </select>
       </div>
     </div>
-    <div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">회차구분 선택</div>
+  </div>
+</form>
+<?php echo form_open(current_url()); ?>
+  <fieldset>
+    <div class="row font12" style="margin: 0; padding: 0;">
+      <div class="col-xs-12 table-responsive" style="padding: 0;">
+        <table class="table table-bordered center">
+          <thead>
+            <tr class="active">
+<?php if($this->input->get('con_diff')): ?><th class="center">차수</th><?php endif;?>
+              <th class="center">타입</th>
+              <th class="center">층별 조건</th>
+              <th class="center">분양(모집)가격</th>
+            </tr>
+          </thead>
+          <tbody>
+  <?php
+  $type = explode("-", $type_info->type_name);
+  for($i=0; $i<count($type); $i++) :
+    for($j=0; $j<count($con_floor); $j++): ?>
+            <tr>
+  <?php if($i==0 && $j==0): ?>
+              <?php if($this->input->get('con_diff')): ?><td class="center" rowspan="<?php echo count($type)*count($con_floor); ?>" width="10%"><?php echo $diff->diff_name; ?></td><?php endif;?>
+  <?php endif; if($j==0): ?>
+              <td style="vertical-align:middle;" rowspan="<?php echo count($con_floor); ?>"  width="10%"><?php echo $type[$i]; ?></td>
+  <?php endif; ?>
+              <td><?php echo $con_floor[$j]->floor_name; ?></td>
+              <td><input type="text" name="<?php echo "price".$i."_".$j; ?>" class="form-control input-sm" value="" placeholder="해당 타입 층별 가격"></td>
+            </tr>
+  <?php
+      endfor;
+    endfor;
+  ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-xs-12 btn-wrap" style="margin-top: 30px;">
+      <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="등록하기">
+    </div>
+  </fieldset>
+</form>
+<!--||||||||||||||||||||||||||||||||||-5. 조건별 분양가 등록 종료-||||||||||||||||||||||||||||||||||-->
+
+<?php }elseif($this->input->get('reg_sort')==='6') { //6. 회차별 납입가 등록
+
+  $attributes = array('method' => 'get', 'name' => 'get_frm');
+  echo form_open(current_url(), $attributes);
+?>
+  <input type="hidden" name="yr" value="<?php echo $this->input->get('yr'); ?>">
+  <input type="hidden" name="project" value="<?php echo $this->input->get('project'); ?>">
+  <input type="hidden" name="reg_sort" value="<?php echo $this->input->get('reg_sort'); ?>">
+
+  <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
+    <div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">차수구분 선택</div>
+    <div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+      <div class="col-xs-12 col-sm-10" style="padding: 0px;">
+        <label for="con_diff" class="sr-only">차수구분 선택</label>
+        <select class="form-control input-sm" name="con_diff" onchange="submit();">
+          <option value="">선 택</option>
+<?php foreach($con_diff as $lt) : ?>
+          <option value="<?php echo $lt->diff_no; ?>" <?php if($this->input->get('con_diff')==$lt->diff_no) echo "selected"; ?>><?php echo $lt->diff_name; ?></option>
+<?php endforeach; ?>
+        </select>
+      </div>
+    </div>
+    <div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">회차구분 선택</div>
     <div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
       <div class="col-xs-12 col-sm-10" style="padding: 0px;">
         <label for="pay_sort" class="sr-only">회차구분 선택</label>
@@ -337,20 +378,22 @@
 if( !$this->input->get('con_diff') OR  !$this->input->get('pay_sort'))  :
   if( !$this->input->get('con_diff')) :  $msg = "차수구분을 선택하여 주십시요.";
   elseif( !$this->input->get('pay_sort')) :  $msg = "회차구분을 선택하여 주십시요.";
-endif;
+  endif;
 ?>
 <div class="row font12" style="margin: 0; padding: 0;">
   <div class="col-xs-12 center" style="padding: 180px 0;"><?php echo $msg; ?></div>
 </div>
 <?php else :
-  echo form_open(current_url());
+  $attributes = array();
+  $hidden = array();
+  echo form_open(current_url(), $attributes, $hidden);
 ?>
   <div class="row font12" style="margin: 0; padding: 0;">
     <div class="col-xs-12 table-responsive" style="padding: 0;">
       <table class="table table-bordered center">
         <thead>
           <tr class="active">
-            <td width="3%">No.</td>
+            <td width="5%">차수</td>
             <td width="5%">타입</td>
             <td width="8%">층별</td>
             <td width="10%">분양가</td>
@@ -375,7 +418,7 @@ endif;
 ?>
             <td style="background-color: ; padding: 3px;">
               <div style="color: #B00447;"><?php echo form_error("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq); ?>
-                <input type="text" name="<?php echo "pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq; ?>" value="<?php if( !empty($pmt)) echo $pmt->payment; else echo set_value("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq) ?>" size="15" placeholder="회차별 납부액">
+                <input type="text" name="<?php echo "pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq; ?>" value="<?php if( !empty($pmt)) echo $pmt->payment; else echo set_value("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq) ?>" size="15" placeholder="회차별 납부액" class="form-control input-sm">
                 <input type="hidden" name="<?php echo "pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h"; ?>" value="<?php if( !empty($pmt)) echo "1"; else "0"; ?>">
               </div>
             </td>
@@ -387,12 +430,11 @@ endif;
     </div>
   </div>
 <?php endif; ?>
-<?php if($auth12<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="if(confirm('납입금 내역을 등록하시겠습니까?')===true) submit();";} ?>
   <div class="form-group btn-wrap" style="margin: ;">
     <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str?>" value="등록 하기">
   </div>
 </form>
 
 <?php }; ?>
-<!--||||||||||||||||||||||||||||||||||-6. 회차별 납입가 설정 종료-||||||||||||||||||||||||||||||||||-->
+<!--||||||||||||||||||||||||||||||||||-6. 회차별 납입가 등록 종료-||||||||||||||||||||||||||||||||||-->
 <?php endif ?>
