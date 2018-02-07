@@ -80,14 +80,14 @@ endfor;
 			<table class="table table-bordered table-hover table-condensed">
 				<thead class="bo-top center bgf8">
 					<tr>
-						<td rowspan="2">프로젝트명</td>
-						<td rowspan="2">타 입</td>
-						<td rowspan="2">세 대 수</td>
-						<td rowspan="2">유보세대</td>
-						<td rowspan="2">청약 건수</td>
+						<td rowspan="2" style="vertical-align:middle;">프로젝트명</td>
+						<td rowspan="2" style="vertical-align:middle;">타 입</td>
+						<td rowspan="2" style="vertical-align:middle;">세 대 수</td>
+						<td rowspan="2" style="vertical-align:middle;">유보세대</td>
+						<td rowspan="2" style="vertical-align:middle;">청약 건수</td>
 						<td colspan="<?php echo count($sc_cont_diff)+1; ?>">계약 건수</td>
-						<td rowspan="2">계 약 율</td>
-						<td rowspan="2">분양율<br>(청약+계약)</td>
+						<td rowspan="2" style="vertical-align:middle;">계 약 율</td>
+						<td rowspan="2" style="vertical-align:middle;">분양율<br>(청약+계약)</td>
 					</tr>
 					<tr>
 <?php foreach($sc_cont_diff as $lt) : ?>
@@ -98,7 +98,7 @@ endfor;
 				</thead>
 				<tbody class="bo-bottom center">
 <?php for($i=0; $i<count($summary); $i++) :
-	if($i==0) $first_td = "<td rowspan='".count($summary)."' style='background-color:#FFF;'>".$pj_info->pj_name."</td>"; else $first_td = "";
+	if($i==0) $first_td = "<td rowspan='".count($summary)."' style='background-color:#FFF; vertical-align:middle;'>".$pj_info->pj_name."</td>"; else $first_td = "";
 ?>
 					<tr>
 						<?php echo $first_td; ?>
