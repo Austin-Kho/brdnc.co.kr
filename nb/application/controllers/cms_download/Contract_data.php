@@ -74,38 +74,38 @@ class Contract_data extends CB_Controller {
 		);
 
 		// 헤더 스타일 생성 -- add style to the header
-    $styleArray = array(
-      'font' => array(
-        'bold' => true,
-      ),
-      'alignment' => array(
-        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-      ),
-      'borders' => array(
-        'allborders' => array(
-          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-        ),
-      ),
-    );
-    $spreadsheet->getActiveSheet()->getStyle('A1:'.toAlpha(count($row_opt)).'1')->applyFromArray($styleArray);
+	    $styleArray = array(
+	      'font' => array(
+	        'bold' => true,
+	      ),
+	      'alignment' => array(
+	        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+	        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+	      ),
+	      'borders' => array(
+	        'allborders' => array(
+	          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+	        ),
+	      ),
+	    );
+	    $spreadsheet->getActiveSheet()->getStyle('A1:'.toAlpha(count($row_opt)).'1')->applyFromArray($styleArray);
 
 		$outBorder = array(
-      'borders' => array(
-        'outline' => array(
-          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-        ),
-      ),
-    );
+	      'borders' => array(
+	        'outline' => array(
+	          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+	        ),
+	      ),
+	    );
 		$spreadsheet->getActiveSheet()->getStyle('A2:'.toAlpha(count($row_opt)).'2')->applyFromArray($outBorder);
 
 		$allBorder = array(
-      'borders' => array(
-        'allborders' => array(
-          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-        ),
-      ),
-    );
+	      'borders' => array(
+	        'allborders' => array(
+	          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+	        ),
+	      ),
+	    );
 		$spreadsheet->getActiveSheet()->getStyle('A3:'.toAlpha(count($row_opt)).(count($cont_data)+3))->applyFromArray($allBorder);
 
 		$spreadsheet->getActiveSheet()->getDefaultRowDimension()->setRowHeight(19.5); // 전체 기본 셀 높이 설정
@@ -126,19 +126,19 @@ class Contract_data extends CB_Controller {
 		for($k=0; $k<count($row_opt); $k++){
 			switch ($row_opt[$k]) {
 				case '1': $wn = 10; $title = "일련번호"; break; // 일련번호
-				case '2': $wn = 10; $title = "차수"; break; // 차수
+				case '2': $wn = 11; $title = "차수"; break; // 차수
 				case '3': $wn = 7; $title = "타입"; break; // 타입
 				case '4': $wn = 10; $title = "동호수"; break; // 동호수
-				case '5': $wn = 8; $title = "계약자"; break; // 계약자
+				case '5': $wn = 9; $title = "계약자"; break; // 계약자
 				case '6': $wn = 12; $title = "계약일자"; break; // 계약일자
 				case '7': $wn = 12; $title = "총납입금"; break; // 총납입금
-				case '8': $wn = 13; $title = "연락처[1]"; break; // 연락처
-				case '9': $wn = 13; $title = "연락처[2]"; break; // 연락처
-				case '10': $wn = 60; $title = "주소[신분증]"; break; // 등본주소
-				case '11': $wn = 60; $title = "주소[우편물]"; break; // 우편주소
+				case '8': $wn = 14; $title = "연락처[1]"; break; // 연락처
+				case '9': $wn = 14; $title = "연락처[2]"; break; // 연락처
+				case '10': $wn = 75; $title = "주소[신분증]"; break; // 등본주소
+				case '11': $wn = 75; $title = "주소[우편물]"; break; // 우편주소
 				case '12': $wn = 20; $title = "미비서류"; break; // 미비서류
-				case '13': $wn = 10; $title = "명의변경 횟수"; break; // 명의변경 횟수
-				case '14': $wn = 80; $title = "비 고"; break; // 비고
+				case '13': $wn = 12; $title = "명의변경 횟수"; break; // 명의변경 횟수
+				case '14': $wn = 120; $title = "비 고"; break; // 비고
 				default: $wn = 5; break; // 번호
 			}
 			$spreadsheet->getActiveSheet()->getColumnDimension(toAlpha($k+1))->setWidth($wn); // 열의 셀 넓이 설정
@@ -187,7 +187,10 @@ class Contract_data extends CB_Controller {
 					case '14': $content = $lt->note; $align = "left"; break; // 비고
 				}
 				$spreadsheet->getActiveSheet()->setCellValue(toAlpha($j+1).(3+$i), $content);// 해당 셀의 내용을 입력 합니다.
-				if($align == "right") {$spreadsheet->getActiveSheet()->getStyle(toAlpha($j+1).(3+$i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);}
+				if($align == "right") {
+					$spreadsheet->getActiveSheet()->getStyle(toAlpha($j+1).(3+$i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+					// if($j==0) {$spreadsheet->getActiveSheet()->getStyle(toAlpha($j+1).(3+$i).':'.toAlpha($j+1).(count($cont_data)))->getNumberFormat()->setFormatCode('#,##0');} // 셀 숫자형 변환 (1000 -> 1,000)
+				}
 				if($align == "left") {$spreadsheet->getActiveSheet()->getStyle(toAlpha($j+1).(3+$i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);}
 			}
 			$i++;
