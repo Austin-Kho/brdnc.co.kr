@@ -125,24 +125,25 @@ class Contract_data extends CB_Controller {
 
 		for($k=0; $k<count($row_opt); $k++){
 			switch ($row_opt[$k]) {
-				case '1': $wn = 10; $title = "일련번호"; break; // 일련번호
-				case '2': $wn = 11; $title = "차수"; break; // 차수
-				case '3': $wn = 7; $title = "타입"; break; // 타입
-				case '4': $wn = 10; $title = "동호수"; break; // 동호수
-				case '5': $wn = 9; $title = "계약자"; break; // 계약자
-				case '6': $wn = 12; $title = "계약일자"; break; // 계약일자
-				case '7': $wn = 12; $title = "총납입금"; break; // 총납입금
-				case '8': $wn = 14; $title = "연락처[1]"; break; // 연락처
-				case '9': $wn = 14; $title = "연락처[2]"; break; // 연락처
-				case '10': $wn = 75; $title = "주소[신분증]"; break; // 등본주소
-				case '11': $wn = 75; $title = "주소[우편물]"; break; // 우편주소
-				case '12': $wn = 20; $title = "미비서류"; break; // 미비서류
-				case '13': $wn = 12; $title = "명의변경 횟수"; break; // 명의변경 횟수
-				case '14': $wn = 120; $title = "비 고"; break; // 비고
+				case '1': $wn = 10; $title = "일련번호"; $num=""; break; // 일련번호
+				case '2': $wn = 11; $title = "차수"; $num=""; break; // 차수
+				case '3': $wn = 7; $title = "타입"; $num=""; break; // 타입
+				case '4': $wn = 10; $title = "동호수"; $num=""; break; // 동호수
+				case '5': $wn = 9; $title = "계약자"; $num=""; break; // 계약자
+				case '6': $wn = 12; $title = "계약일자"; $num=""; break; // 계약일자
+				case '7': $wn = 12; $title = "총납입금"; $num="ok"; break; // 총납입금
+				case '8': $wn = 14; $title = "연락처[1]"; $num=""; break; // 연락처
+				case '9': $wn = 14; $title = "연락처[2]"; $num=""; break; // 연락처
+				case '10': $wn = 75; $title = "주소[신분증]"; $num=""; break; // 등본주소
+				case '11': $wn = 75; $title = "주소[우편물]"; $num=""; break; // 우편주소
+				case '12': $wn = 20; $title = "미비서류"; $num=""; break; // 미비서류
+				case '13': $wn = 12; $title = "명의변경 횟수"; $num="ok"; break; // 명의변경 횟수
+				case '14': $wn = 120; $title = "비 고"; $num=""; break; // 비고
 				default: $wn = 5; break; // 번호
 			}
 			$spreadsheet->getActiveSheet()->getColumnDimension(toAlpha($k+1))->setWidth($wn); // 열의 셀 넓이 설정
 			$spreadsheet->getActiveSheet()->setCellValue(toAlpha($k+1).'3', $title);// 해당 셀의 내용을 입력 합니다.
+			if($num=="ok") {$spreadsheet->getActiveSheet()->getStyle(toAlpha($k+1).'4:'.toAlpha($k+1).(count($cont_data)+3))->getNumberFormat()->setFormatCode('#,##0');} // 셀 숫자형 변환 (1000 -> 1,000)
 		}
 
 		$i=1;
@@ -177,19 +178,18 @@ class Contract_data extends CB_Controller {
 					case '4': $content = $lt->unit_dong_ho; $align =""; break; // 동호수
 					case '5': $content = $lt->contractor; $align =""; break; // 계약자
 					case '6': $content = $lt->cont_date; $align =""; break; // 계약일자
-					case '7': $content = number_format($total_rec->received); $align = "right"; break; // 총납입금
+					case '7': $content = $total_rec->received; $align = "right"; break; // 총납입금
 					case '8': $content = $lt->cont_tel1; $align =""; break; // 연락처
 					case '9': $content = $lt->cont_tel2; $align =""; break; // 연락처
 					case '10': $content = $addr1; $align = "left"; break; // 등본주소
 					case '11': $content = $addr2; $align = "left"; break; // 우편주소
 					case '12': $content = $incom_doc; $align =""; break; // 미비서류
-					case '13': $content = number_format($lt->transfer_number); $align ="right"; break; // 명의변경 횟수
+					case '13': $content = $lt->transfer_number; $align ="right"; break; // 명의변경 횟수
 					case '14': $content = $lt->note; $align = "left"; break; // 비고
 				}
 				$spreadsheet->getActiveSheet()->setCellValue(toAlpha($j+1).(3+$i), $content);// 해당 셀의 내용을 입력 합니다.
 				if($align == "right") {
 					$spreadsheet->getActiveSheet()->getStyle(toAlpha($j+1).(3+$i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-					// if($j==0) {$spreadsheet->getActiveSheet()->getStyle(toAlpha($j+1).(3+$i).':'.toAlpha($j+1).(count($cont_data)))->getNumberFormat()->setFormatCode('#,##0');} // 셀 숫자형 변환 (1000 -> 1,000)
 				}
 				if($align == "left") {$spreadsheet->getActiveSheet()->getStyle(toAlpha($j+1).(3+$i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);}
 			}
