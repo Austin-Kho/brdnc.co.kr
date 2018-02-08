@@ -238,7 +238,6 @@ endfor;
 		<div class="hidden-xs col-sm-12 right" style="padding: 0 20px 3px; color: #5E81FE;">
 			<?php echo "[ 결과 : ".number_format($total_rows)." 건 ]"; ?>
 			<a href="javascript:$('#output_option').toggle();"  style="padding-left: 5px;">[엑셀 출력항목 선택]</a>
-			<!-- <a href="<?php echo base_url('/cms_download/contract_data/download')."?pj=".$project."&qry=".urlencode($cont_query); ?>"> -->
 			<?php $url = base_url('/cms_download/contract_data/download')."?pj=".$project."&qry=".urlencode($cont_query); ?>
 			<a href='javascript:excel("<?php echo $url; ?>");'>
 				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
@@ -343,8 +342,10 @@ foreach ($cont_data as $lt) :
 <?php if(empty($app_data)) : ?>
 		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 20px 0;">등록된 데이터가 없습니다.</div>
 <?php else : ?>
-		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;"><?php echo "[ 결과 : ".number_format($app_num)." 건 ]"; ?>
-			<a href="<?php echo base_url('/cms_download/application_data/download')."?pj=".$project; ?>" style="padding-left: 30px;">
+		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;">
+			<?php echo "[ 결과 : ".number_format($app_num)." 건 ]"; ?>
+			<a href="javascript:$('.tr_toggle').toggle();"  style="padding-left: 5px;">[청약 데이터 전체 보기]</a>
+			<a href="<?php echo base_url('/cms_download/application_data/download')."?pj=".$project; ?>">
 				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
 			</a>
 		</div>
@@ -365,6 +366,7 @@ foreach ($cont_data as $lt) :
 				</thead>
 				<tbody class="bo-bottom center">
 <?php
+$z = 0;
 foreach($app_data as $lt) :
 	switch ($lt->disposal_div) :
 		case '1': $condi = "<font color='#0D069F'>계약전환</font>"; break;
@@ -374,16 +376,16 @@ foreach($app_data as $lt) :
 	endswitch;
 	$unit_dh = explode("-", $lt->unit_dong_ho);
 	switch ($lt->disposal_div) {
-		case '0': $app_edit_link = "<a href='/nb/cms_m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=1&project=".$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>"; break;
-		case '2': $app_edit_link = "<a href='/nb/cms_m1/sales/1/2?mode=2&cont_sort1=2&cont_sort3=3&project=".$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>"; break;
+		case '0': $app_edit_link = "<a href='".base_url()."cms_m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=1&project=".$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>"; break;
+		case '2': $app_edit_link = "<a href='".base_url()."cms_m1/sales/1/2?mode=2&cont_sort1=2&cont_sort3=3&project=".$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>"; break;
 		default: $app_edit_link = ""; break;
 	}
 	$app_edit = ($lt->disposal_div=='0' OR $lt->disposal_div=='2') ? "</a>" : "";
 	$new_span = ($lt->app_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #AB0327; color: #fff; font-size: 10px;'>&nbsp;N </span>&nbsp; " : "";
 ?>
-					<tr>
+					<tr <?php if($z>10) echo "class='tr_toggle'; style='display:none;'" ?>>
 						<td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type] ?>;">&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></span></td>
-						<td ><?php echo $app_edit_link.$lt->unit_dong_ho.$app_edit; ?></td>
+						<td><?php echo $app_edit_link.$lt->unit_dong_ho.$app_edit; ?></td>
 						<td><?php echo $app_edit_link.$lt->applicant.$app_edit; ?></td>
 <?php $diff = $this->cms_main_model->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no = '$lt->app_diff' "); ?>
 						<td ><?php echo $diff->diff_name;?></td>
@@ -393,9 +395,10 @@ foreach($app_data as $lt) :
 						<td><?php if($lt->disposal_date && $lt->disposal_date!="0000-00-00")echo $lt->disposal_date; ?></td>
 						<td class="left"><div style="cursor: pointer;" data-toggle="tooltip" data-placement="left" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 22, ".."); ?></div></td>
 					</tr>
-<?php endforeach; ?>
+<?php $z++; endforeach; ?>
 				</tbody>
 			</table>
+			<div class="center"><a href="javascript:$('.tr_toggle').toggle();"  style="padding-left: 5px;">[청약 데이터 펼치기/접기]</a></div>
 		</div>
 <?php endif; ?>
     </div>
