@@ -18,6 +18,7 @@ class Contract_data extends CB_Controller {
 		$cont_query = urldecode($this->input->get('qry'));
 		$cont_data = $this->cms_main_model->sql_result($cont_query); // 계약 및 계약자 데이터
 		$row_opt = explode("-", urldecode($this->input->get('row')));
+		$pj_title = $this->cms_main_model->sql_row(" SELECT pj_name FROM cb_cms_project WHERE seq='$project' ");
 
 		//----------------------------------------------------------//
 		/** 데이터 가져오기 종료 **/
@@ -74,38 +75,38 @@ class Contract_data extends CB_Controller {
 		);
 
 		// 헤더 스타일 생성 -- add style to the header
-	    $styleArray = array(
-	      'font' => array(
-	        'bold' => true,
-	      ),
-	      'alignment' => array(
-	        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-	        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-	      ),
-	      'borders' => array(
-	        'allborders' => array(
-	          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-	        ),
-	      ),
-	    );
-	    $spreadsheet->getActiveSheet()->getStyle('A1:'.toAlpha(count($row_opt)).'1')->applyFromArray($styleArray);
+    $styleArray = array(
+      'font' => array(
+        'bold' => true,
+      ),
+      'alignment' => array(
+        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+      ),
+      'borders' => array(
+        'allborders' => array(
+          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        ),
+      ),
+    );
+    $spreadsheet->getActiveSheet()->getStyle('A1:'.toAlpha(count($row_opt)).'1')->applyFromArray($styleArray);
 
 		$outBorder = array(
-	      'borders' => array(
-	        'outline' => array(
-	          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-	        ),
-	      ),
-	    );
+      'borders' => array(
+        'outline' => array(
+          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        ),
+      ),
+    );
 		$spreadsheet->getActiveSheet()->getStyle('A2:'.toAlpha(count($row_opt)).'2')->applyFromArray($outBorder);
 
 		$allBorder = array(
-	      'borders' => array(
-	        'allborders' => array(
-	          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-	        ),
-	      ),
-	    );
+      'borders' => array(
+        'allborders' => array(
+          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        ),
+      ),
+    );
 		$spreadsheet->getActiveSheet()->getStyle('A3:'.toAlpha(count($row_opt)).(count($cont_data)+3))->applyFromArray($allBorder);
 
 		$spreadsheet->getActiveSheet()->getDefaultRowDimension()->setRowHeight(19.5); // 전체 기본 셀 높이 설정
@@ -115,7 +116,7 @@ class Contract_data extends CB_Controller {
 		$spreadsheet->getActiveSheet()->mergeCells('A1:'.toAlpha(count($row_opt)).'1');// A1부터 해당 열까지 셀을 합칩니다.
 
 		$spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);// A1의 폰트를 변경 합니다.
-		$spreadsheet->getActiveSheet()->setCellValue('A1', '계약자 데이터');// 해당 셀의 내용을 입력 합니다.
+		$spreadsheet->getActiveSheet()->setCellValue('A1', $pj_title->pj_name.' 계약자 데이터');// 해당 셀의 내용을 입력 합니다.
 		$spreadsheet->getActiveSheet()->getStyle(toAlpha(count($row_opt)).'2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
 		$spreadsheet->getActiveSheet()->setCellValue(toAlpha(count($row_opt)).'2', date('Y-m-d')." 현재");// 해당 셀의 내용을 입력 합니다.
 
@@ -205,7 +206,7 @@ class Contract_data extends CB_Controller {
 
     // Redirect output to a client's web browser (Excel2007)
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // mime 타입
-	Header('Content-Disposition: attachment; filename='.iconv('UTF-8','CP949',$filename)); // 브라우저에서 받을 파일 이름
+		header('Content-Disposition: attachment; filename='.iconv('UTF-8','CP949',$filename)); // 브라우저에서 받을 파일 이름
     header('Cache-Control: max-age=0'); // no cache
     // If you're serving to IE 9, then the following may be needed
     header('Cache-Control: max-age=1');
