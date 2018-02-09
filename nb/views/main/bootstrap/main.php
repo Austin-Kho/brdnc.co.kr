@@ -80,7 +80,7 @@ else :
 	if (element('board_list', $view)) {
 		$i=1;
     foreach (element('board_list', $view) as $key => $board) {
-			if($i>2) break;
+			if($i>6) break;
       $config = array(
         'skin' => 'bootstrap',
         'brd_key' => element('brd_key', $board),
