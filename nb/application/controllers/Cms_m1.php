@@ -1038,9 +1038,10 @@ class Cms_m1 extends CB_Controller {
 			$view['view']['real_sche'] = $this->cms_main_model->sql_result( " SELECT MAX(pay_code) AS pay_code FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' GROUP BY pay_time ");
 
 			// 2차 계약금 이후 회차의 납부기한 데이터
+			$view['due_sche'] = $this->cms_main_model->sql_row(" SELECT MIN(pay_code) AS start FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_time='3' ");
 			$pay_code = $view['view']['bill_issue']->pay_code;
-			$view['ddate'] = $this->cms_main_model->sql_row(" SELECT pay_due_date FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$pay_code' ");
-			$view['due_date'] = ($view['ddate']->pay_due_date == "0000-00-00") ? "" : $view['ddate']->pay_due_date;
+			$ddate = $this->cms_main_model->sql_row(" SELECT pay_due_date FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$pay_code' ");
+			$view['due_date'] = ($ddate->pay_due_date == "0000-00-00") ? "" : $ddate->pay_due_date;
 
 			// 프로젝트명, 타입 정보 구하기
 			$pj_info = $this->cms_main_model->sql_row(" SELECT pj_name, type_name, type_color FROM cb_cms_project WHERE seq='$project' ");

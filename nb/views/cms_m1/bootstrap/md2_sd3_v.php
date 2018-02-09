@@ -125,7 +125,7 @@ else :
 <?php endforeach; ?>
 				</select>
 			</div>
-<?php if($view['bill_issue']->pay_code>4): ?>
+<?php if($view['bill_issue']->pay_code>=$due_sche->start): // 2계약금 이후 납부 회차인 경우?>
 			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="sche_due_date">당회 납부기한</label></div>
 			<div class="col-xs-8 col-md-2" style="padding: 6px 4px;">
 				<div class="col-xs-11" style="padding: 0px;">
