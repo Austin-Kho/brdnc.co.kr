@@ -26,6 +26,15 @@ else :
 
 			location.href = url+"&row="+opt;
 		}
+		$(document).ready(function() {
+			$(".text_toggle").click( function() {
+				if($(".text_toggle").html() == '[청약 데이터 접기]' ) {
+					$(".text_toggle").html('[청약 데이터 펼치기]');
+				}else{
+					$(".text_toggle").html('[청약 데이터 접기]');
+				}
+			});
+		});
 	</script>
 <?php
 for($i=0; $i<count($tp_name); $i++) :
@@ -148,7 +157,7 @@ endfor;
 <?php else : ?>
 		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;">
 			<?php echo "[ 결과 : ".number_format($app_num)." 건 ]"; ?>
-			<a href="javascript:$('.tr_toggle').toggle();"  style="padding-left: 5px;">[청약 데이터 전체 보기]</a>
+			<a href="javascript:$('.tr_toggle').toggle();"  style="padding-left: 5px;" class="text_toggle">[청약 데이터 펼치기]</a>
 			<a href="<?php echo base_url('/cms_download/application_data/download')."?pj=".$project; ?>">
 				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
 			</a>
@@ -202,7 +211,7 @@ foreach($app_data as $lt) :
 <?php $z++; endforeach; ?>
 				</tbody>
 			</table>
-			<div class="center"><a href="javascript:$('.tr_toggle').toggle();"  style="padding-left: 5px;">[청약 데이터 펼치기/접기]</a></div>
+			<div class="center"><a href="javascript:$('.tr_toggle').toggle();"  style="padding-left: 5px;" class="text_toggle">[청약 데이터 펼치기]</a></div>
 		</div>
 <?php endif; ?>
   </div>
