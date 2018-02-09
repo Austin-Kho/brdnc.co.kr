@@ -1037,6 +1037,11 @@ class Cms_m1 extends CB_Controller {
 			// 실제 납부회차
 			$view['view']['real_sche'] = $this->cms_main_model->sql_result( " SELECT MAX(pay_code) AS pay_code FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' GROUP BY pay_time ");
 
+			// 2차 계약금 이후 회차의 납부기한 데이터
+			$pay_code = $view['view']['bill_issue']->pay_code;
+			$view['ddate'] = $this->cms_main_model->sql_row(" SELECT pay_due_date FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$pay_code' ");
+			$view['due_date'] = ($view['ddate']->pay_due_date == "0000-00-00") ? "" : $view['ddate']->pay_due_date;
+
 			// 프로젝트명, 타입 정보 구하기
 			$pj_info = $this->cms_main_model->sql_row(" SELECT pj_name, type_name, type_color FROM cb_cms_project WHERE seq='$project' ");
 			if($pj_info) {
@@ -1099,6 +1104,7 @@ class Cms_m1 extends CB_Controller {
 			// 고지서 기본 내용 폼(bill_set)
 			$this->form_validation->set_rules('published_date', '발행일자', 'trim|exact_length[10]');
 			$this->form_validation->set_rules('pay_sche_code', '회차구분', 'trim|numeric');
+			$this->form_validation->set_rules('sche_due_date', '당회 납부기한', 'trim|exact_length[10]');
 			$this->form_validation->set_rules('host_name_1', '시행자(조합)', 'trim|max_length[30]');
 			$this->form_validation->set_rules('tell_1', '시행자(조합) 연락처', 'trim|max_length[13]');
 			$this->form_validation->set_rules('host_name_2', '시행자(대행사)', 'trim|max_length[30]');
@@ -1122,7 +1128,6 @@ class Cms_m1 extends CB_Controller {
 				// 고지서 기본 내용 폼(bill_set)
 				$bill_set_data = array(
 					'pay_code' => $this->input->post('pay_sche_code', TRUE),
-
 					'host_name_1' => $this->input->post('host_name_1', TRUE),
 					'tell_1' => $this->input->post('tell_1', TRUE),
 					'host_name_2' => $this->input->post('host_name_2', TRUE),
@@ -1137,13 +1142,13 @@ class Cms_m1 extends CB_Controller {
 					'last_update_user' => $this->session->userdata('mem_username'),
 					'last_update_time' => date()
 				);
+				$due_date_data = array('pay_due_date' => $this->input->post('sche_due_date', TRUE));
 
 				if(isset($bill_set_data)) {
 					$result = $this->cms_main_model->update_data('cb_cms_sales_bill_issue', $bill_set_data, array('pj_seq' => $project));
+					if(isset($due_date_data)) {$result1 = $this->cms_main_model->update_data('cb_cms_sales_pay_sche', $due_date_data, array('pj_seq' => $project, 'pay_code' => $pay_code));}
 					if(isset($result)) alert('정상적으로 설정 되었습니다.', current_url());
 				}
-
-
 			endif; // 폼검증 통과 시 종료
 		}
 

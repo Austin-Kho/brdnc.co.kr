@@ -99,8 +99,9 @@ else :
 
 	<div class="row" style="margin: 0; padding: 0;">
 		<div class="col-sm-12 bo-top" style="padding: 0;">
+
 			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="published_date">발 행 일 자</label></div>
-			<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
+			<div class="col-xs-8 col-md-2" style="padding: 6px 4px;">
 				<div class="col-xs-11" style="padding: 0px;">
 					<div class="input-group">
 						<input type="text" class="form-control input-sm wid-95" id="published_date" name="published_date" maxlength="10" value="<?php echo date('Y-m-d'); ?>" onClick="cal_add(this); event.cancelBubble=true" placeholder="고지서 발행일">
@@ -113,7 +114,7 @@ else :
 				</div>
 			</div>
 			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="pay_sche_code">발 행 회 차</label></div>
-			<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
+			<div class="col-xs-8 col-md-2" style="padding: 6px 4px;">
 				<select class="form-control input-sm" name="pay_sche_code" id="psc">
 					<option value="">납부회차</option>
 <?php
@@ -124,7 +125,21 @@ else :
 <?php endforeach; ?>
 				</select>
 			</div>
-
+<?php if($view['bill_issue']->pay_code>4): ?>
+			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="sche_due_date">당회 납부기한</label></div>
+			<div class="col-xs-8 col-md-2" style="padding: 6px 4px;">
+				<div class="col-xs-11" style="padding: 0px;">
+					<div class="input-group">
+						<input type="text" class="form-control input-sm wid-95" id="sche_due_date" name="sche_due_date" maxlength="10" value="<?php echo $due_date; ?>" onClick="cal_add(this); event.cancelBubble=true" placeholder="당 회차 납부기한">
+						<span class="input-group-addon">
+							<a href="javascript:" onclick="cal_add(document.getElementById('sche_due_date'),this); event.cancelBubble=true">
+								<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+							</a>
+						</span>
+					</div>
+				</div>
+			</div>
+<?php endif; ?>
 		</div>
 	</div>
 	<div id="show_hide" style="display:none;">
