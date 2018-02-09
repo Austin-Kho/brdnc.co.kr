@@ -16,7 +16,7 @@ else :
 			for (i = 0; i < tot; i++) {chk[i].checked = false;}
 		}
 	}
-	function print_bill(obj, p){
+	function print_bill(obj, p){ // 필요한 데이터 가공 후 고지서 출력 파일로 이동
 		var i;
 		var chk = document.getElementsByName(obj);
 		var tot = chk.length;
@@ -104,7 +104,7 @@ else :
 			<div class="col-xs-8 col-md-2" style="padding: 6px 4px;">
 				<div class="col-xs-11" style="padding: 0px;">
 					<div class="input-group">
-						<input type="text" class="form-control input-sm wid-95" id="published_date" name="published_date" maxlength="10" value="<?php echo date('Y-m-d'); ?>" onClick="cal_add(this); event.cancelBubble=true" placeholder="고지서 발행일">
+						<input type="text" class="form-control input-sm" id="published_date" name="published_date" maxlength="10" value="<?php echo date('Y-m-d'); ?>" onClick="cal_add(this); event.cancelBubble=true" placeholder="고지서 발행일">
 						<span class="input-group-addon">
 							<a href="javascript:" onclick="cal_add(document.getElementById('published_date'),this); event.cancelBubble=true">
 								<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
@@ -130,7 +130,7 @@ else :
 			<div class="col-xs-8 col-md-2" style="padding: 6px 4px;">
 				<div class="col-xs-11" style="padding: 0px;">
 					<div class="input-group">
-						<input type="text" class="form-control input-sm wid-95" id="sche_due_date" name="sche_due_date" maxlength="10" value="<?php echo $due_date; ?>" onClick="cal_add(this); event.cancelBubble=true" placeholder="당 회차 납부기한">
+						<input type="text" class="form-control input-sm" id="sche_due_date" name="sche_due_date" maxlength="10" value="<?php echo $due_date; ?>" onClick="cal_add(this); event.cancelBubble=true" placeholder="당 회차 납부기한">
 						<span class="input-group-addon">
 							<a href="javascript:" onclick="cal_add(document.getElementById('sche_due_date'),this); event.cancelBubble=true">
 								<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
