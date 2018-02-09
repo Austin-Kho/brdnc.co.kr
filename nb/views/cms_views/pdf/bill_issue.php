@@ -90,7 +90,7 @@
 	endforeach;
 
   $rn = ($is_paid<$bill_issue->pay_code) ? range($is_paid, $bill_issue->pay_code-1) : 0;  // $is_paid; // 현재 계약자 완납 코드 $bill_issue->pay_code; // 금회 납부 코드 5
-  $rep = count($rn)<3 ? 3 : count($rn); // 반복회수-> 범위가 3미만이면 3번 // 그렇지 않다면 실제 필요 반복회수
+  $rep = count($rn)<3 ? 3 : count($rn); // (고지회차)반복회수-> 범위가 3미만이면 3번 // 그렇지 않다면 실제 필요 반복회수
 
   $non_paid_sum = 0; // 미납금 합계 초기화
   $late_fee_sum = 0; // 연체료 합계 초기화
@@ -244,7 +244,7 @@
 
     if($cont_recieve->total<$time_cum){ // 완납회차 후 칸 띄우기
       if(empty($bool)):
-        for($k=0; $k<(9-$rep); $k++):
+        for($k=0; $k<(23-count($pay_sche)-$rep); $k++):
           echo "<tr><td colspan='11'>&nbsp;</td></tr>";
         endfor;
         $bool = true;
