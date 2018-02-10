@@ -373,7 +373,7 @@
 								<td class="center"><span style="padding: 3px; background-color: <?php echo $t_color; ?>"><?php echo $lt->type; ?> 타입</span></td>
 								<td class="center"><?php echo $condi; ?></td>
 								<td class="center" style="<?php if($lt->is_hold==1) echo 'cursor: pointer;' ?>"><div data-toggle="tooltip" title="<?php echo $lt->hold_reason; ?>"><?php echo $hold_str; ?></div></td>
-<?php if($auth11<2) $modi_str = "alert('수정/등록 권한이 없습니다.')"; else $modi_str = "popUp_size('".base_url('/popup/project_data/data_modi/'.$lt->pj_seq."/".$lt->seq)."','cash_book','500','620')"; ?>
+<?php if($auth11<2) $modi_str = "alert('수정/등록 권한이 없습니다.')"; else $modi_str = "popUp_size('".base_url('/cms_popup/project_data/data_modi/'.$lt->pj_seq."/".$lt->seq)."','cash_book','500','635')"; ?>
 								<td class="center"><a href='javascript:'class="btn btn-info btn-xs" onclick="<?php echo $modi_str; ?>">수정</a></td>
 <?php if($auth11<2) $del_str = "alert('등록/삭제 권한이 없습니다.')"; else $del_str = "alert('준비 중입니다.');"; ?>
 								<td class="center"><a href="javascript:" class="btn btn-danger btn-xs" onclick="<?php echo $del_str; ?>">삭제</a></td>
