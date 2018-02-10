@@ -18,7 +18,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-12 col-sm-8">
-							<input type="text" class="form-control input-sm han" id="pj_name" name="pj_name" maxlength="30" value="<?php echo set_value('pj_name'); ?>" required autofocus placeholder="프로젝트 명">
+							<input type="text" class="form-control input-sm han" id="pj_name" name="pj_name" maxlength="30" value="<?php echo set_value('pj_name'); ?>" required placeholder="프로젝트 명">
 						</div>
 					</div>
 					<div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
@@ -26,7 +26,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-12 col-sm-8">
-							<select class="form-control input-sm" id="sort" name="sort" required autofocus>
+							<select class="form-control input-sm" id="sort" name="sort" required>
 								<option value="">선택</option>
   	    			  <option value="1" <?php echo set_select('sort', '1'); ?>> 아파트(일반분양)</option>
 	    			    <option value="2" <?php echo set_select('sort', '2'); ?>> 아파트(조합)</option>
@@ -55,14 +55,14 @@
 
 						<div class="col-xs-3 col-sm-5 col-md-1" style="padding-right: 0;">
               				<label for="postcode1" class="sr-only">우편번호</label>
-							<input type="text" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php echo set_value('zipcode'); ?>" readonly required autofocus>
+							<input type="text" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php echo set_value('zipcode'); ?>" readonly required>
 						</div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
 							<input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="execDaumPostcode(1)">
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-4" style="padding-right: 0;">
 							<label for="address1_1" class="sr-only">회사주소1</label>
-							<input type="text" class="form-control input-sm han" id="address1_1" name="address1_1" maxlength="100" value="<?php echo set_value('address1'); ?>" readonly required autofocus>
+							<input type="text" class="form-control input-sm han" id="address1_1" name="address1_1" maxlength="100" value="<?php echo set_value('address1'); ?>" readonly required>
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-4" style="padding-right: 0;">
 							<label for="address2_1" class="sr-only">회사주소2</label>
@@ -78,7 +78,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="buy_land_extent" name="buy_land_extent" onkeydown="onlyNum(this);" maxlength="10" value="<?php echo set_value('buy_land_extent'); ?>" required autofocus placeholder="대지 매입면적 (㎡)">
+							<input type="text" class="form-control input-sm en_only" id="buy_land_extent" name="buy_land_extent" onkeydown="onlyNum(this);" maxlength="10" value="<?php echo set_value('buy_land_extent'); ?>" required placeholder="대지 매입면적 (㎡)">
 						</div>
                                     <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
 					</div>
@@ -87,7 +87,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="scheme_land_extent" name="scheme_land_extent" onkeydown="onlyNum(this);" maxlength="10" value="<?php echo set_value('scheme_land_extent'); ?>" required autofocus placeholder="계획 대지면적 (㎡)">
+							<input type="text" class="form-control input-sm en_only" id="scheme_land_extent" name="scheme_land_extent" onkeydown="onlyNum(this);" maxlength="10" value="<?php echo set_value('scheme_land_extent'); ?>" required placeholder="계획 대지면적 (㎡)">
 						</div>
                                     <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
 					</div>
@@ -107,7 +107,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="num_unit" name="num_unit" onkeydown="onlyNum(this);" maxlength="6" value="<?php echo set_value('num_unit'); ?>" required autofocus placeholder="세대(호/실) 수">
+							<input type="text" class="form-control input-sm en_only" id="num_unit" name="num_unit" onkeydown="onlyNum(this);" maxlength="6" value="<?php echo set_value('num_unit'); ?>" required placeholder="세대(호/실) 수">
 						</div>
                                     <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>세대(호/실)</span></div>
 					</div>
@@ -128,7 +128,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="gr_floor_area" name="gr_floor_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php echo set_value('gr_floor_area'); ?>" required autofocus placeholder="총 연면적 (㎡)">
+							<input type="text" class="form-control input-sm en_only" id="gr_floor_area" name="gr_floor_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php echo set_value('gr_floor_area'); ?>" required placeholder="총 연면적 (㎡)">
 						</div>
                         <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
 					</div>
@@ -140,7 +140,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="on_floor_area" name="on_floor_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php echo set_value('on_floor_area'); ?>" required autofocus placeholder="지상 연면적 (㎡)">
+							<input type="text" class="form-control input-sm en_only" id="on_floor_area" name="on_floor_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php echo set_value('on_floor_area'); ?>" required placeholder="지상 연면적 (㎡)">
 						</div>
                         <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
 					</div>
@@ -149,7 +149,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="ba_floor_area" name="ba_floor_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php echo set_value('ba_floor_area'); ?>" required autofocus placeholder="지하 연면적 (㎡)">
+							<input type="text" class="form-control input-sm en_only" id="ba_floor_area" name="ba_floor_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php echo set_value('ba_floor_area'); ?>" required placeholder="지하 연면적 (㎡)">
 						</div>
                         <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
 					</div>
@@ -161,7 +161,7 @@
 					</div>
 					<div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
 						<div class="col-xs-10 col-sm-8">
-							<input type="text" class="form-control input-sm en_only" id="floor_ar_rat" name="floor_ar_rat" maxlength="8" value="<?php echo set_value('floor_ar_rat'); ?>" required autofocus placeholder="용적율 (%)">
+							<input type="text" class="form-control input-sm en_only" id="floor_ar_rat" name="floor_ar_rat" maxlength="8" value="<?php echo set_value('floor_ar_rat'); ?>" required placeholder="용적율 (%)">
 						</div>
                                     <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>%</span></div>
 					</div>
@@ -212,7 +212,7 @@
           <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
             <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_1" name="type_name_1" maxlength="10" value="<?php echo set_value('type_name_1'); ?>" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_1" name="type_name_1" maxlength="10" value="<?php echo set_value('type_name_1'); ?>" required placeholder="타입">
 						</div>
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
             <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
@@ -222,7 +222,7 @@
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
               <label for="type_quantity_1" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_1" name="type_quantity_1" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_1'); ?>" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_1" name="type_quantity_1" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_1'); ?>" required placeholder="타입별 단위 수량">
 						</div>
             <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
               <label for="count_unit_1" class="sr-only">단위</span></label>
@@ -251,7 +251,7 @@
           <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
             <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_2" name="type_name_2" maxlength="10" value="<?php echo set_value('type_name_2'); ?>" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_2" name="type_name_2" maxlength="10" value="<?php echo set_value('type_name_2'); ?>" required placeholder="타입">
 						</div>
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
             <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
@@ -261,7 +261,7 @@
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
               <label for="type_quantity_1" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_2" name="type_quantity_2" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_2'); ?>" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_2" name="type_quantity_2" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_2'); ?>" required placeholder="타입별 단위 수량">
 						</div>
 
 						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
@@ -291,7 +291,7 @@
           <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
             <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_3" name="type_name_3" maxlength="10" value="<?php echo set_value('type_name_3'); ?>" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_3" name="type_name_3" maxlength="10" value="<?php echo set_value('type_name_3'); ?>" required placeholder="타입">
 						</div>
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
             <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
@@ -301,7 +301,7 @@
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
               <label for="type_quantity_1" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_3" name="type_quantity_3" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_3'); ?>" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_3" name="type_quantity_3" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_3'); ?>" required placeholder="타입별 단위 수량">
 						</div>
 
 						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
@@ -331,7 +331,7 @@
           <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
             <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_4" name="type_name_4" maxlength="10" value="<?php echo set_value('type_name_4'); ?>" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_4" name="type_name_4" maxlength="10" value="<?php echo set_value('type_name_4'); ?>" required placeholder="타입">
 						</div>
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
             <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
@@ -341,7 +341,7 @@
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
               <label for="type_quantity_2" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_4" name="type_quantity_4" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_4'); ?>" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_4" name="type_quantity_4" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_4'); ?>" required placeholder="타입별 단위 수량">
 						</div>
 
 						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
@@ -371,7 +371,7 @@
           <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
             <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_5" name="type_name_5" maxlength="10" value="<?php echo set_value('type_name_5'); ?>" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_5" name="type_name_5" maxlength="10" value="<?php echo set_value('type_name_5'); ?>" required placeholder="타입">
 						</div>
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
             <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
@@ -381,7 +381,7 @@
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
               <label for="type_quantity_2" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_5" name="type_quantity_5" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_5'); ?>" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_5" name="type_quantity_5" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_5'); ?>" required placeholder="타입별 단위 수량">
 						</div>
 
 						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
@@ -411,7 +411,7 @@
           <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
             <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_6" name="type_name_6" maxlength="10" value="<?php echo set_value('type_name_6'); ?>" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_6" name="type_name_6" maxlength="10" value="<?php echo set_value('type_name_6'); ?>" required placeholder="타입">
 						</div>
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
             <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
@@ -421,7 +421,7 @@
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
               <label for="type_quantity_2" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_6" name="type_quantity_6" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_6'); ?>" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_6" name="type_quantity_6" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_6'); ?>" required placeholder="타입별 단위 수량">
 						</div>
 
 						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
@@ -451,7 +451,7 @@
           <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
             <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_7" name="type_name_7" maxlength="10" value="<?php echo set_value('type_name_7'); ?>" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_7" name="type_name_7" maxlength="10" value="<?php echo set_value('type_name_7'); ?>" required placeholder="타입">
 						</div>
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
             <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
@@ -461,7 +461,7 @@
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
               <label for="type_quantity_2" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_7" name="type_quantity_7" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_7'); ?>" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_7" name="type_quantity_7" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_7'); ?>" required placeholder="타입별 단위 수량">
 						</div>
 
 						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
@@ -491,7 +491,7 @@
           <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
             <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_8" name="type_name_8" maxlength="10" value="<?php echo set_value('type_name_8'); ?>" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_8" name="type_name_8" maxlength="10" value="<?php echo set_value('type_name_8'); ?>" required placeholder="타입">
 						</div>
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
             <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
@@ -501,7 +501,7 @@
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
               <label for="type_quantity_2" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_8" name="type_quantity_8" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_8'); ?>" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_8" name="type_quantity_8" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_8'); ?>" required placeholder="타입별 단위 수량">
 						</div>
 
 						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
@@ -531,7 +531,7 @@
           <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
             <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_9" name="type_name_9" maxlength="10" value="<?php echo set_value('type_name_9'); ?>" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_9" name="type_name_9" maxlength="10" value="<?php echo set_value('type_name_9'); ?>" required placeholder="타입">
 						</div>
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
             <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
@@ -541,7 +541,7 @@
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
               <label for="type_quantity_2" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_9" name="type_quantity_9" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_9'); ?>" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_9" name="type_quantity_9" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_9'); ?>" required placeholder="타입별 단위 수량">
 						</div>
 
 						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
@@ -571,7 +571,7 @@
           <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
             <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_10" name="type_name_10" maxlength="10" value="<?php echo set_value('type_name_10'); ?>" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_10" name="type_name_10" maxlength="10" value="<?php echo set_value('type_name_10'); ?>" required placeholder="타입">
 						</div>
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
             <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
@@ -581,7 +581,7 @@
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
               <label for="type_quantity_2" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_10" name="type_quantity_10" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_10'); ?>" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_10" name="type_quantity_10" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_10'); ?>" required placeholder="타입별 단위 수량">
 						</div>
 
 						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
@@ -611,7 +611,7 @@
           <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
             <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>타입명 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-							<input type="text" class="form-control input-sm eng" id="type_name_11" name="type_name_11" maxlength="10" value="<?php echo set_value('type_name_11'); ?>" required autofocus placeholder="타입">
+							<input type="text" class="form-control input-sm eng" id="type_name_11" name="type_name_11" maxlength="10" value="<?php echo set_value('type_name_11'); ?>" required placeholder="타입">
 						</div>
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
             <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
@@ -621,7 +621,7 @@
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
               <label for="type_quantity_2" class="sr-only">수량</span></label>
-							<input type="text" class="form-control input-sm en_only" id="type_quantity_11" name="type_quantity_11" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_11'); ?>" required autofocus placeholder="타입별 단위 수량">
+							<input type="text" class="form-control input-sm en_only" id="type_quantity_11" name="type_quantity_11" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value('type_quantity_11'); ?>" required placeholder="타입별 단위 수량">
 						</div>
 
 						<div class="col-xs-2 col-sm-1" style="padding-right: 0;">
