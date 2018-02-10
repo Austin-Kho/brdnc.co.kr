@@ -13,17 +13,17 @@ class Project_data extends CB_Controller
 		$this->data_modi();
 	}
 
-	public function data_modi ($pj, $seq) {
+	public function data_modi ($pj='', $seq='') {
 		// $this->output->enable_profiler(TRUE); //프로파일러 보기
 		$this->load->view('/cms_views/popup/pop_header_v');
 
 		// 프로젝트 리스트 정보
 		$data['all_pj'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project  ORDER BY biz_start_ym DESC ');
-		$data['now_pj'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_project  WHERE seq='".$pj."'");
+		$data['now_pj'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_project  WHERE seq='$pj'");
 		$data['type'] = explode("-", $data['now_pj']->type_name);
 
 		// 수정할 데이터 정보
-		$data['modi_data'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_project_all_housing_unit WHERE seq='".$seq."'" );
+		$data['modi_data'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_project_all_housing_unit WHERE seq='$seq'" );
 		// 동 리스트 정보
 		$data['dong'] = $this->cms_main_model->sql_result(" SELECT dong FROM cb_cms_project_all_housing_unit GROUP BY dong ORDER BY dong " );
 
@@ -37,7 +37,7 @@ class Project_data extends CB_Controller
 		$this->form_validation->set_rules('type', '타입', 'required');
 		$this->form_validation->set_rules('dong', '동', 'required');
 		$this->form_validation->set_rules('ho', '호수', 'required|numeric|max_length[5]');
-		$this->form_validation->set_rules('hold_reason', '동2', 'trim|max_length[200]');
+		$this->form_validation->set_rules('hold_reason', '홀드사유', 'trim|max_length[200]');
 
 		if($this->form_validation->run() == FALSE) {
 

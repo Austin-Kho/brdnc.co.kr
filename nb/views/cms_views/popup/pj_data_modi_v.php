@@ -4,15 +4,17 @@
 	</header>
 	<div class="desc"></div>
 	<div class="well" style="padding: 13px; margin-bottom: 9px;">
-		<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> <span style="padding-left: 10px; <?php if($modi_data->is_application==1 OR $modi_data->is_contract==1) echo "color: blue;"; ?>">청약 또는 계약 체결 상태에서는 수정할 수 없습니다. (<font color="#ff0000">*</font>표시는 필수 정보)</span>
+		<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> <span style="padding-left: 10px; <?php if($modi_data->is_application==1 OR $modi_data->is_contract==1) echo "color: blue;"; ?>">청약 또는 계약 체결 상태에서는 수정할 수 없습니다. (<font color="#ff0000"> *</font> 표시는 필수 정보)</span>
 	</div>
 
-	<form name="form1" class="form-horizontal" action="" method="post">
-		<label><input type="hidden" name="seq" value="<?php echo $this->uri->segment(5); ?>"></label>
-
+<?php
+	$attributes = array('name' => 'form1', 'class' => 'form-horizontal');
+	$hidden = array('seq'=> $this->uri->segment(5));
+	echo form_open(current_url(), $attributes, $hidden);
+?>
 		<div class="row" style="padding: 0 15px; margin-bottom: 15px;">
 			<div class="form-group" style="padding-top: 15px;">
-				<div class="col-xs-3 right" style="text-align: right;">
+				<div class="col-xs-3" style="text-align: right;">
 					<label for="pj_seq">프로젝트 <font color="#ff0000">*</font></label>
 				</div>
 				<div class="col-xs-6" style="padding-right: 0;">
@@ -25,7 +27,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-xs-3 right">
+				<div class="col-xs-3" style="text-align: right;">
 					<label for="type">타 입 <font color="#ff0000">*</font></label>
 				</div>
 				<div class="col-xs-6"  style="padding-right: 0;">
@@ -38,7 +40,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-xs-3 right">
+				<div class="col-xs-3" style="text-align: right;">
 					<label for="dong">동 호수 <font color="#ff0000">*</font></label>
 				</div>
 				<div class="col-xs-3" style="padding-right: 0;">
@@ -53,12 +55,9 @@
 					<input type="text" name="ho" id="ho" class="form-control input-sm" value="<?php echo $modi_data->ho; ?>" <?php if($modi_data->is_application==1 OR $modi_data->is_contract==1) echo "disabled"; ?>>
 				</div>
 				<div class="col-xs-3" style="padding-top: 6px;">호</div>
-
-
-
 			</div>
 			<div class="form-group">
-				<div class="col-xs-3 right" style="text-align: right;">
+				<div class="col-xs-3" style="text-align: right;">
 					<label for="is_application">청약 여부 <font color="#ff0000">*</font></label>
 				</div>
 				<div class="col-xs-6 checkbox" style="padding-top: 0;">
@@ -66,7 +65,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-xs-3 right" style="text-align: right;">
+				<div class="col-xs-3" style="text-align: right;">
 					<label for="is_contract">계약 여부 <font color="#ff0000">*</font></label>
 				</div>
 				<div class="col-xs-6 checkbox" style="padding-top: 0;">
@@ -74,7 +73,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-xs-3 right" style="text-align: right;">
+				<div class="col-xs-3" style="text-align: right;">
 					<label for="is_hold">홀딩 여부 <font color="#ff0000">*</font></label>
 				</div>
 				<div class="col-xs-6 checkbox" style="padding-top: 0;">
@@ -82,7 +81,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-xs-3 right" style="text-align: right;">
+				<div class="col-xs-3" style="text-align: right;">
 					<label for="hold_reason">홀딩 사유 <font color="#ff0000">*</font></label>
 				</div>
 				<div class="col-xs-7"  style="padding-right: 0;">
@@ -98,7 +97,7 @@
 			<div class="row center" style="padding: 3px; margin-bottom: 10px; color: #8f8f91;">
 				<div class="col-xs-3 col-sm-3"><?php echo mb_substr($modi_data->reg_time, 0, 10); ?></div>
 				<div class="col-xs-3 col-sm-3"><?php echo $modi_data->reg_worker; ?></div>
-				<div class="col-xs-3 col-sm-3"><?php echo $modi_data->modi_date; ?></div>
+				<div class="col-xs-3 col-sm-3"><?php if($modi_data->modi_date!=='0000-00-00')echo $modi_data->modi_date; ?></div>
 				<div class="col-xs-3 col-sm-3"><?php echo $modi_data->modi_worker; ?></div>
 			</div>
 			<footer style=" border-top: 1px solid #ddd;">
