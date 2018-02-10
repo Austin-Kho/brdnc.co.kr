@@ -17,8 +17,8 @@ class Daily_money_report extends CB_Controller {
 		/** 데이터 가져오기 시작 **/
 		//----------------------------------------------------------//
 		// 자금일보 출력 일자
-		$sh_date = $this->input->get('sh_date', TRUE);
-		$d_obj = date_create($sh_date);
+		$ref_date = $this->input->get('ref_date', TRUE);
+		$d_obj = date_create($ref_date);
 		$year = date_format($d_obj, "Y");
 		$month = date_format($d_obj, "m");
 		$day = date_format($d_obj, "d");
@@ -37,17 +37,17 @@ class Daily_money_report extends CB_Controller {
 
 		// 은행 계좌별 전일 잔고 및 금일 출납, 잔고 구하기 데이터
 		for($i=0; $i<$bank_acc['num']; $i++) {
-			$cum_in[$i] = $this->cms_main_model->sql_result("SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND in_acc='".$bank_acc['result'][$i]->no."' AND deal_date<='".$sh_date."' ");
-			$date_in[$i] = $this->cms_main_model->sql_result("SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND in_acc='".$bank_acc['result'][$i]->no."' AND deal_date ='".$sh_date."' ");
-			$cum_ex[$i] = $this->cms_main_model->sql_result("SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE (com_div>0) AND out_acc='".$bank_acc['result'][$i]->no."' AND deal_date<='".$sh_date."' ");
-			$date_ex[$i] = $this->cms_main_model->sql_result("SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE (com_div>0) AND out_acc='".$bank_acc['result'][$i]->no."' AND deal_date ='".$sh_date."' ");
+			$cum_in[$i] = $this->cms_main_model->sql_result("SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND in_acc='".$bank_acc['result'][$i]->no."' AND deal_date<='".$ref_date."' ");
+			$date_in[$i] = $this->cms_main_model->sql_result("SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND in_acc='".$bank_acc['result'][$i]->no."' AND deal_date ='".$ref_date."' ");
+			$cum_ex[$i] = $this->cms_main_model->sql_result("SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE (com_div>0) AND out_acc='".$bank_acc['result'][$i]->no."' AND deal_date<='".$ref_date."' ");
+			$date_ex[$i] = $this->cms_main_model->sql_result("SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE (com_div>0) AND out_acc='".$bank_acc['result'][$i]->no."' AND deal_date ='".$ref_date."' ");
 		}
 
 		// 회사 현금자산 설정일 전일잔고 및 금일 출납, 잔고 구하기 데이터
-		$cum_inc = $this->cms_main_model->sql_result("SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND deal_date<='".$sh_date."' ");
-		$date_inc = $this->cms_main_model->sql_result("SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND deal_date ='".$sh_date."' ");
-		$date_exp = $this->cms_main_model->sql_result("SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE (com_div>0) AND deal_date ='".$sh_date."' ");
-		$cum_exp = $this->cms_main_model->sql_result("SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE (com_div>0) AND deal_date<='".$sh_date."' ");
+		$cum_inc = $this->cms_main_model->sql_result("SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND deal_date<='".$ref_date."' ");
+		$date_inc = $this->cms_main_model->sql_result("SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE (com_div>0 AND class1!=3 AND class2!=7) AND deal_date ='".$ref_date."' ");
+		$date_exp = $this->cms_main_model->sql_result("SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE (com_div>0) AND class1!=3 AND deal_date ='".$ref_date."' ");
+		$cum_exp = $this->cms_main_model->sql_result("SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE (com_div>0) AND deal_date<='".$ref_date."' ");
 		$yd_tot = $cum_inc[0]->inc-$cum_exp[0]->exp-$date_inc[0]->inc+$date_exp[0]->exp;
 		if($date_inc[0]->inc==0) $td_inc = '-'; else $td_inc = $date_inc[0]->inc;
 		if($date_exp[0]->exp==0) $td_exp = '-'; else $td_exp = $date_exp[0]->exp;
@@ -57,17 +57,17 @@ class Daily_money_report extends CB_Controller {
 		$jh_data = $this->cms_m4_model->select_data_lt('cb_cms_capital_cash_book', 'any_jh', 'any_jh<>0', 'any_jh');
 		for($i=0; $i<$jh_data['num']; $i++){
 			$jh_name[$i] = $this->cms_main_model->sql_result(" SELECT pj_name FROM cb_cms_project WHERE seq = '".$jh_data['result'][$i]->any_jh."' ORDER BY seq ");//조합명
-			$jh_cum_in[$i] = $this->cms_main_model->sql_result(" SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND any_jh = '".$jh_data['result'][$i]->any_jh."' AND deal_date<='".$sh_date."' "); //총 회수금
-			$jh_date_in[$i] = $this->cms_main_model->sql_result(" SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND any_jh = '".$jh_data['result'][$i]->any_jh."' AND deal_date='".$sh_date."' "); // 당일 회수
-			$jh_cum_ex[$i] = $this->cms_main_model->sql_result(" SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND any_jh ='".$jh_data['result'][$i]->any_jh."' AND deal_date<='".$sh_date."' "); // 총 대여금
-			$jh_date_ex[$i] = $this->cms_main_model->sql_result(" SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND any_jh = '".$jh_data['result'][$i]->any_jh."' AND deal_date='".$sh_date."' "); // 당일 대여
+			$jh_cum_in[$i] = $this->cms_main_model->sql_result(" SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND any_jh = '".$jh_data['result'][$i]->any_jh."' AND deal_date<='".$ref_date."' "); //총 회수금
+			$jh_date_in[$i] = $this->cms_main_model->sql_result(" SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND any_jh = '".$jh_data['result'][$i]->any_jh."' AND deal_date='".$ref_date."' "); // 당일 회수
+			$jh_cum_ex[$i] = $this->cms_main_model->sql_result(" SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND any_jh ='".$jh_data['result'][$i]->any_jh."' AND deal_date<='".$ref_date."' "); // 총 대여금
+			$jh_date_ex[$i] = $this->cms_main_model->sql_result(" SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND any_jh = '".$jh_data['result'][$i]->any_jh."' AND deal_date='".$ref_date."' "); // 당일 대여
 		}
 
 		// 조합 대여금 자산 설정일 전일잔고 및 금일 출납, 잔고 구하기 데이터
-		$jh_cum_inc = $this->cms_main_model->sql_result(" SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND deal_date<='".$sh_date."' "); //총 회수금
-		$jh_date_inc = $this->cms_main_model->sql_result(" SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND deal_date='".$sh_date."' "); // 당일 회수
-		$jh_cum_exp = $this->cms_main_model->sql_result(" SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND deal_date<='".$sh_date."' "); // 총 대여금
-		$jh_date_exp = $this->cms_main_model->sql_result(" SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND deal_date='".$sh_date."' "); // 당일 대여
+		$jh_cum_inc = $this->cms_main_model->sql_result(" SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND deal_date<='".$ref_date."' "); //총 회수금
+		$jh_date_inc = $this->cms_main_model->sql_result(" SELECT SUM(inc) AS inc FROM cb_cms_capital_cash_book WHERE (com_div>0 AND class2!=7) AND is_jh_loan='1' AND deal_date='".$ref_date."' "); // 당일 회수
+		$jh_cum_exp = $this->cms_main_model->sql_result(" SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND deal_date<='".$ref_date."' "); // 총 대여금
+		$jh_date_exp = $this->cms_main_model->sql_result(" SELECT SUM(exp) AS exp FROM cb_cms_capital_cash_book WHERE (com_div>0) AND is_jh_loan='1' AND deal_date='".$ref_date."' "); // 당일 대여
 
 		$jh_yd_tot = ($jh_cum_exp[0]->exp-$jh_cum_inc[0]->inc)+($jh_date_exp[0]->exp-$jh_date_inc[0]->inc);
 		if($jh_date_inc[0]->inc==0) $jh_td_inc = "-"; else $jh_td_inc = $jh_date_inc[0]->inc;
@@ -75,13 +75,13 @@ class Daily_money_report extends CB_Controller {
 		$jh_td_tot = $jh_cum_exp[0]->exp-$jh_cum_inc[0]->inc;
 
 		// 설정일 입금 내역
-		$da_in = $this->cms_m4_model->select_data_lt("cb_cms_capital_cash_book", "account, cont, acc, inc, note", "(com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='".$sh_date."'", "", "seq_num");
+		$da_in = $this->cms_m4_model->select_data_lt("cb_cms_capital_cash_book", "account, cont, acc, inc, note", "(com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='".$ref_date."'", "", "seq_num");
 		// 설정일까지 입금 내역
-		$da_in_total = $this->cms_m4_model->da_in_total('cb_cms_capital_cash_book', $sh_date);
+		$da_in_total = $this->cms_m4_model->da_in_total('cb_cms_capital_cash_book', $ref_date);
 		// 설정일 출금내역
-		$da_ex = $this->cms_m4_model->select_data_lt("cb_cms_capital_cash_book", "account, cont, acc, exp, note", "(com_div>0) AND (class1='2' or class1='3') AND deal_date='".$sh_date."'", "", "seq_num");
+		$da_ex = $this->cms_m4_model->select_data_lt("cb_cms_capital_cash_book", "account, cont, acc, exp, note", "(com_div>0) AND (class1='2' or class1='3') AND deal_date='".$ref_date."'", "", "seq_num");
 		// 설정일까지 출금내역
-		$da_ex_total = $this->cms_m4_model->da_ex_total('cb_cms_capital_cash_book', $sh_date);
+		$da_ex_total = $this->cms_m4_model->da_ex_total('cb_cms_capital_cash_book', $ref_date);
 		//----------------------------------------------------------//
 		/** 데이터 가져오기 종료 **/
 
@@ -120,7 +120,7 @@ class Daily_money_report extends CB_Controller {
 		// 워크시트에서 1번째는 활성화
 		$spreadsheet->setActiveSheetIndex(0);
 		// 워크시트 이름 지정
-		$spreadsheet->getActiveSheet()->setTitle('자금일보('.$sh_date.')');
+		$spreadsheet->getActiveSheet()->setTitle('자금일보('.$ref_date.')');
 
 
 		// 본문 내용 ---------------------------------------------------------------//
@@ -425,7 +425,7 @@ class Daily_money_report extends CB_Controller {
 
 		// 본문 내용 ---------------------------------------------------------------//
 
-		$filename='자금일보_'.$sh_date.'.xlsx'; // 엑셀 파일 이름
+		$filename='자금일보_'.$ref_date.'.xlsx'; // 엑셀 파일 이름
 
     // Redirect output to a client's web browser (Excel2007)
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // mime 타입

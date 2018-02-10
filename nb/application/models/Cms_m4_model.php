@@ -21,13 +21,13 @@ class Cms_m4_model extends CB_Model {
 	}
 
 	public function da_in_total($table, $sh_date) {
-		$sql = "SELECT SUM(inc) AS total_inc FROM ".$table." WHERE (com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='".$sh_date."'";
+		$sql = "SELECT SUM(inc) AS total_inc FROM ".$table." WHERE (com_div>0 AND class1!=3 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='".$sh_date."'";
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}
 
 	public function da_ex_total($table, $sh_date) {
-		$sql = "SELECT SUM(exp) AS total_exp FROM ".$table." WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='".$sh_date."'";
+		$sql = "SELECT SUM(exp) AS total_exp FROM ".$table." WHERE (com_div>0) AND class1=2 AND deal_date='".$sh_date."'";
 		$qry = $this->db->query($sql);
 		return $qry->result();
 	}

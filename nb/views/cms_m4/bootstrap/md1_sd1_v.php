@@ -6,11 +6,10 @@
 			<div class="main_start">
 			<!-- 4. 본사관리 -> 1. 자금관리 ->1. 자금일보 페이지 -->
 
-				<a href="<?php echo base_url('/cms_download/daily_money_report/download?sh_date=').$sh_date; ?>">
+				<a href="<?php echo base_url('/cms_download/daily_money_report/download?ref_date=').$ref_date; ?>">
 					<img src="<?php echo base_url('static/img/excel_icon.jpg'); ?>" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
 				</a>
 			</div>
-
 			<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">날 짜</div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding-top: 5px;">
@@ -19,11 +18,11 @@
    echo form_open(current_url(), $attributes);
 ?>
 						<div class="col-xs-8 col-sm-5 col-md-3 glyphicon-wrap" style="padding: 0px;">
-							<label for="sh_date" class="sr-only">시작일</label>
+							<label for="ref_date" class="sr-only">기준일</label>
               <div class="input-group">
-							  <input type="text" class="form-control input-sm wid-95" id="sh_date" name="sh_date" maxlength="10" value="<?php echo $sh_date;?>" onClick="cal_add(this); event.cancelBubble=true">
+							  <input type="text" class="form-control input-sm" id="ref_date" name="ref_date" maxlength="10" value="<?php echo $ref_date;?>" onClick="cal_add(this); event.cancelBubble=true">
                 <div class="input-group-addon">
-                  <a href="javascript:" onclick="cal_add(document.getElementById('sh_date'),this); event.cancelBubble=true">
+                  <a href="javascript:" onclick="cal_add(document.getElementById('ref_date'),this); event.cancelBubble=true">
                     <span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
                   </a>
                 </div>
@@ -44,7 +43,7 @@
             <table class="table table-bordered table-hover table-condensed font12">
               <tr bgcolor="#f2f2f9">
                 <td colspan="5">
-                <b><font color="#ee0066">▶</font> <font color="#003399">자 금 현 황</font></b> (<?php echo $sh_date?> 현재)
+                <b><font color="#ee0066">▶</font> <font color="#003399">자 금 현 황</font></b> (<?php echo $ref_date?> 현재)
                 </td>
                 <td class="right">(단위 : 원)</td>
               </tr>
@@ -138,7 +137,7 @@
             <table class="table table-bordered table-hover table-condensed font12">
               <tr bgcolor="#f2f2f9">
                 <td colspan="4">
-                  <b><font color="#ee0066">▶</font> <font color="#003399">금 일 수 지 현 황</font></b> (<?php echo $sh_date?> 현재)
+                  <b><font color="#ee0066">▶</font> <font color="#003399">금 일 수 지 현 황</font></b> (<?php echo $ref_date?> 현재)
                 </td>
                 <td class="right">(단위 : 원)</td>
               </tr>
