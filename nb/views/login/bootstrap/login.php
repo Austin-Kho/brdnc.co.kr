@@ -2,12 +2,13 @@
   $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css');
   $mar_bottom = ($this->is_mobile === TRUE) ? "margin-top: 20px; margin-bottom: 20px" : "margin-top: 150px; margin-bottom: 200px;";
   $sh_col = array("#d3ebc9", "#ebdcc9", "#c9d7eb", "#ebcbe8", "#ebcbd0", "#ddd", "#d5f4f1", "#ffffae", "#ecd8fa");
+  $box_title = (!empty($this->cbconfig->item('site_logo'))) ? $this->cbconfig->item('site_logo') : "로그인";
 ?>
 
 <div class="access col-md-4 col-md-offset-4" style="<?php echo $mar_bottom;?>; border: 2px solid #ccc; padding:25px 30px; background-color: #F6F6F6; box-shadow: 10px 10px 100px <?php echo $sh_col[rand(0, 8)];?>;">
 
   <!-- <div class="panel panel-info"> -->
-    <div class="panel-heading"><h3 style="margin-bottom: 0; font-size: 22px;">로그인</h3></div>
+    <div class="panel-heading"><h3 style="margin-bottom: 0; font-size: 18px;"><?php echo $box_title; ?></h3></div>
       <div class="panel-body">
         <?php
           echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
@@ -43,7 +44,7 @@
         </div>
         <div class="form-group">
           <div class="col-sm-12 col-sm-offset-0" >
-            <button type="submit" class="btn btn-primary btn-block">로그인</button>
+            <button type="submit" class="btn btn-primary btn-block"><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> 로그인</button>
           </div>
         </div>
         <div class="alert alert-dismissible alert-info autologinalert" style="display:none;">
