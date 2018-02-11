@@ -15,32 +15,27 @@
 ?>
 <script type="text/javascript">
     //<![CDATA[
-    function check_add(val, no, n){  // 체크박스 // 넘버  id="type_10"
-    	// if(frm=='1'){
-    	// 	var str1="type1_";
-    	// 	var str2="ck1_";
-    	// }
-    	// if(frm=='2'){
-    	// 	var str1="type2_";
-    	// 	var str2="ck2_";
-    	// }
-    	// if(frm=='3'){
-    	// 	var str1="floor_";
-    	// 	var str2="fc_";
-    	// }
+    function check_add__(frm, val, no, n){  // 체크박스 // 넘버  id="type_10"
+    	if(frm=='1'){ var str1="add1_"; var str2="chk1_"; }
+    	if(frm=='2'){ var str1="add2_"; var str2="chk2_"; }
+    	if(frm=='3'){ var str1="add3_"; var str2="chk3_"; }
+      if(frm=='4'){ var str1="add4_"; var str2="chk4_"; }
+      if(frm=='5'){ var str1="add5_"; var str2="chk5_"; }
+      if(frm=='6'){ var str1="add6_"; var str2="chk6_"; }
+
     	var np=parseInt(no)+1;
     	var nm=parseInt(no)-1;
-    	var type_n=str1+np;
-    	var ck_n=str2+nm;
+    	var add_n=str1+np;
+    	var chk_n=str2+nm;
 
-    	var type=document.getElementById(type_n);
-    	var ckbox=document.getElementById(ck_n);
+    	var add_div=document.getElementById(add_n);
+    	var ckbox=document.getElementById(chk_n);
 
     	if(val.checked===true){
-    		type.style.display="";
+    		add_div.style.display="";
     		if(!n)ckbox.disabled=true;
     	}else{
-    		type.style.display="none";
+    		add_div.style.display="none";
     		if(!n)ckbox.disabled=false;
     	}
     }
@@ -128,49 +123,33 @@
 
 <?php if( !$this->input->get('reg_sort') OR $this->input->get('reg_sort')==='1') { //1. 분양 차수 등록?>
 
-<?php echo form_open(current_url()); ?>
+<?php
+  $attributes = array('method' => 'post', 'name' => 'form_diff');
+  $hidden = array('reg_sort' => $this->input->get('reg_sort'));
+  echo form_open(current_url(), $attributes, $hidden);
+?>
   <fieldset>
     <div class="row font12 form-group" style="margin: 0 0 50px;">
       <div class="col-xs-12 bo-top bo-bottom" style="padding:0;">
-        <div class="col-xs-3 center label-wrap" style="padding:10px;">등록차수</div>
-        <div class="col-xs-5 col-sm-3 center label-wrap" style="padding:10px;">차수명</div>
+        <div class="col-xs-4 col-sm-2 center label-wrap" style="padding:10px;">등록차수</div>
+        <div class="col-xs-5 col-sm-4 center label-wrap" style="padding:10px;">차수명</div>
         <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">등록일</div>
         <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">등록자</div>
-        <div class="col-xs-2 col-sm-2 center label-wrap" style="padding:10px;">추가</div>
-    <?php if(empty($con_diff)): ?>
+        <div class="col-xs-3 col-sm-2 center label-wrap" style="padding:10px;">&nbsp;</div>
 
-        <div class="col-xs-3 center bo-top" style="padding-top:5px;"><input type='text' class="form-control input-sm" value="<?php echo $lt->diff_no; ?>" placeholder="등록차수"></div>
-        <div class="col-xs-5 col-sm-3 center bo-top" style="padding-top:5px;"><input type='text' class="form-control input-sm" value="<?php echo $lt->diff_name; ?>" placeholder="차수명"></div>
-        <div class="hidden-xs col-sm-2 center bo-top" style="padding:12px;"><?php echo date('Y-m-d'); ?></div>
-        <div class="hidden-xs col-sm-2 center bo-top" style="padding:12px;"><?php echo $this->session->userdata('mem_username'); ?></div>
-        <div class="col-xs-2 col-sm-2 bo-top" style="padding:0px;">
-            <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
-              <label>
-                <input type="checkbox" name="ck2_1" id="ck2_1" onclick="check_add(this,1);" <?php if( !empty($type_name[1])){echo " checked ";} if( !empty($type_name[2])){echo " disabled ";}?>>
-                <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
-              </label>
-            </div>
-        </div>
-
+<?php if(empty($con_diff)): ?>
         <div class="col-xs-12 center bo-top" style="padding:60px;">등록된 데이터가 없습니다.</div>
+<?php endif;  ?>
 
-    <?php else: foreach($con_diff as $lt) : ?>
-        <div class="col-xs-3 center bo-top" style="padding-top:12px;"><?php echo $lt->diff_no; ?></div>
-        <div class="col-xs-5 col-sm-3 center bo-top" style="padding-top:5px;">
-          <input type='text' class="form-control input-sm" value="<?php echo $lt->diff_name; ?>" placeholder="차수명">
+<?php for($a=0; $a<5; $a++): ?>
+        <div class="col-xs-12" style="padding:0; display:<?php if($a!==0 && $a>count($con_diff)) echo "none;"; ?>">
+          <div class="col-xs-4 col-sm-2 center bo-top" style="padding:5px;"><input type='text' class="form-control input-sm" name="<?php echo "diff_no_".$a; ?>" value="<?php echo $con_diff[$a]->diff_no; ?>" placeholder="등록차수"></div>
+          <div class="col-xs-5 col-sm-4 center bo-top" style="padding:5px;"><input type='text' class="form-control input-sm" name="<?php echo "diff_name_".$a; ?>" value="<?php echo $con_diff[$a]->diff_name; ?>" placeholder="차수명"></div>
+          <div class="hidden-xs col-sm-2 center bo-top" style="padding-top:12px;"><?php echo $con_diff[$a]->reg_date; ?></div>
+          <div class="hidden-xs col-sm-2 center bo-top" style="padding-top:12px;"><?php echo $con_diff[$a]->reg_worker; ?></div>
+          <div class="col-xs-3 col-sm-2 center bo-top" style="padding:0;"></div>
         </div>
-        <div class="hidden-xs col-sm-2 center bo-top" style="padding-top:12px;"><?php echo $lt->reg_date; ?></div>
-        <div class="hidden-xs col-sm-2 center bo-top" style="padding-top:12px;"><?php echo $lt->reg_worker; ?></div>
-        <div class="col-xs-2 col-sm-2 bo-top" style="padding:0;">
-            <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
-              <label>
-                <input type="checkbox" name="ck2_1" id="ck2_1" onclick="check_add(this,1);" <?php if( !empty($type_name[1])){echo " checked ";} if( !empty($type_name[2])){echo " disabled ";}?>>
-                <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
-              </label>
-            </div>
-        </div>
-    <?php endforeach; endif; ?>
-
+<?php endfor; ?>
       </div>
       <div class="col-xs-12 btn-wrap" style="margin-top: 30px;">
         <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="등록하기">
@@ -194,25 +173,26 @@
         <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">설명</div>
         <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">납부기한</div>
         <div class="col-xs-2 col-sm-2 center label-wrap" style="padding:10px;">추가</div>
-    <?php if(empty($pay_time)): ?>
-        <div class="col-xs-3 col-sm-2 center" style="padding-top:3px;">
-            <label for="pay_sort" class="sr-only">납부구분 선택</label>
-            <select class="form-control input-sm" name="pay_sort">
-                <option value="0"> 전 체</option>
-                <option value="1" <?php if($lt->pay_sort=='1') echo "selected"; ?>>계약금</option>
-                <option value="2" <?php if($lt->pay_sort=='2') echo "selected"; ?>>중도금</option>
-                <option value="3" <?php if($lt->pay_sort=='3') echo "selected"; ?>>잔 금</option>
-            </select>
-        </div>
+<?php if(empty($pay_time)): ?>
+
+      <div class="col-xs-12 center bo-top" style="padding:60px;">등록된 데이터가 없습니다.</div>
+      <div class="col-xs-3 col-sm-2 center" style="padding-top:3px;">
+        <label for="pay_sort" class="sr-only">납부구분 선택</label>
+        <select class="form-control input-sm" name="pay_sort">
+          <option value="0"> 전 체</option>
+          <option value="1" <?php if($lt->pay_sort=='1') echo "selected"; ?>>계약금</option>
+          <option value="2" <?php if($lt->pay_sort=='2') echo "selected"; ?>>중도금</option>
+          <option value="3" <?php if($lt->pay_sort=='3') echo "selected"; ?>>잔 금</option>
+        </select>
+      </div>
       <div class="hidden-xs col-sm-1 center" style="padding-top:5px;"><input type='text' class="form-control input-sm" value="" placeholder="납부코드"></div>
       <div class="col-xs-3 col-sm-1 center" style="padding-top:5px;"><input type='text' class="form-control input-sm" value="" placeholder="납부순서"></div>
       <div class="col-xs-4 col-sm-2 center" style="padding-top:5px;"><input type='text' class="form-control input-sm" value="" placeholder="회차명칭"></div>
       <div class="hidden-xs col-sm-2 center" style="padding-top:5px;"><input type='text' class="form-control input-sm" value="" placeholder="부가설명"></div>
       <div class="hidden-xs col-sm-2 center" style="padding-top:5px;"><input type='text' class="form-control input-sm" value="" placeholder="납부기한"></div>
       <div class="col-xs-2 col-sm-2 center" style="padding:12px;">추가</div>
-        <div class="col-xs-12 center bo-top" style="padding:60px;">등록된 데이터가 없습니다.</div>
 
-    <?php else: foreach($pay_time as $lt) : ?>
+<?php else: foreach($pay_time as $lt) : ?>
         <div class="col-xs-3 col-sm-2 center" style="padding-top:3px;">
           <label for="pay_sort" class="sr-only">납부구분 선택</label>
           <select class="form-control input-sm" name="pay_sort">
@@ -226,17 +206,16 @@
         <div class="col-xs-3 col-sm-1 center" style="padding-top:5px;"><input type='text' class="form-control input-sm" value="<?php echo $lt->pay_time; ?>" placeholder="납부순서"></div>
         <div class="col-xs-4 col-sm-2 center" style="padding-top:5px;"><input type='text' class="form-control input-sm" value="<?php echo $lt->pay_name; ?>" placeholder="회차명칭"></div>
         <div class="hidden-xs col-sm-2 center" style="padding-top:5px;"><input type='text' class="form-control input-sm" value="<?php echo $lt->pay_disc; ?>" placeholder="부가설명"></div>
-        <div class="hidden-xs col-sm-2 center" style="padding-top:5px;"><input type='text' class="form-control input-sm" value="<?php echo $lt->due_date; ?>" placeholder="납부기한"></div>
+        <div class="hidden-xs col-sm-2 center" style="padding-top:5px;"><input type='text' class="form-control input-sm" value="<?php if($lt->pay_due_date!=='0000-00-00') echo $lt->pay_due_date; ?>" placeholder="납부기한"></div>
         <div class="col-xs-2 col-sm-2" style="padding-left:10px;">
-            <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
-              <label>
-                <input type="checkbox" name="ck2_1" id="ck2_1" onclick="type_reg('2',this,1);" <?php if( !empty($type_name[1])){echo " checked ";} if( !empty($type_name[2])){echo " disabled ";}?>>
-                <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
-              </label>
-            </div>
+          <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
+            <label>
+              <input type="checkbox" name="chk_1" id="chk_1" onclick="type_reg('2',this,1);" <?php if( !empty($type_name[1])){echo " checked ";} if( !empty($type_name[2])){echo " disabled ";}?>>
+              <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
+            </label>
+          </div>
         </div>
     <?php endforeach; endif; ?>
-
       </div>
       <div class="col-xs-12 btn-wrap" style="margin-top: 30px;">
         <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="등록하기">
@@ -279,7 +258,7 @@
         <div class="col-xs-2 center bo-top" style="padding-left:10px;">
             <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
               <label>
-                <input type="checkbox" name="ck2_1" id="ck2_1" onclick="type_reg('2',this,1);" <?php if( !empty($type_name[1])){echo " checked ";} if( !empty($type_name[2])){echo " disabled ";}?>>
+                <input type="checkbox" name="chk_1" id="chk_1" onclick="type_reg('2',this,1);" <?php if( !empty($type_name[1])){echo " checked ";} if( !empty($type_name[2])){echo " disabled ";}?>>
                 <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
               </label>
             </div>

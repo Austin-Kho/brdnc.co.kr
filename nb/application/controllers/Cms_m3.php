@@ -282,9 +282,6 @@ class Cms_m3 extends CB_Controller {
 			// 불러올 페이지에 보낼 조회 권한 데이터
 			$view['auth12'] = $auth['_m3_1_2'];
 
-			// 라이브러리 로드
-			$this->load->library('form_validation'); // 폼 검증
-
 			// 1. 분양 차수 등록
 			$view['con_diff'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_con_diff WHERE pj_seq='$project' ORDER BY diff_no ");  // 프로젝트 등록된 전체 차수
 
@@ -322,28 +319,35 @@ class Cms_m3 extends CB_Controller {
 				endfor;
 			endfor;
 
-			if($this->form_validation->run() !== FALSE) : // 폼검증 통과 했을 경우, post 데이터가 있을 때
+			// 라이브러리 로드
+			$this->load->library('form_validation'); // 폼 검증
+
+			for($a=0; $a<5; $a++){ //
+				$this->form_validation->set_rules('diff_no_'.$a, '차수1', 'required|max_length[2]|numeric');
+				$this->form_validation->set_rules('diff_name_'.$a, '차수명1', 'required|max_length[10]');
+			}
+			if($this->form_validation->run() === FALSE) :
+				// alert('222', current_url());
+				// redirect(current_url());
+
+			elseif($this->form_validation->run() !== FALSE) : // 폼검증 통과 했을 경우, post 데이터가 있을 때
 				// 1. 분양 차수 등록
+				if($this->input->post('reg_sort')==='1'){
+					alert('111', current_url());
 
 				// 2. 납입 회차 등록
-
-				// 3. 층별 조건 등록
-
-				// 4. 향별 조건 등록
-
-				// 5. 조건별 분양가 등록
-
-				// 6. 회차별 납입가 등록
-				if($this->input->get('reg_sort')==='1'){
-
 				}elseif($this->input->get('reg_sort')==='2'){
 
+				// 3. 층별 조건 등록
 				}elseif($this->input->get('reg_sort')==='3'){
 
+				// 4. 향별 조건 등록
 				}elseif($this->input->get('reg_sort')==='4'){
 
+				// 5. 조건별 분양가 등록
 				}elseif($this->input->get('reg_sort')==='5'){
 
+				// 6. 회차별 납입가 등록
 				}elseif($this->input->get('reg_sort')==='6'){
 					for($i=0; $i<count($price); $i++) :
 						for($j=0; $j<count($pay_sche); $j++) :
