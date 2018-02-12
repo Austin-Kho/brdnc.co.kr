@@ -124,7 +124,7 @@
 <?php if( !$this->input->get('reg_sort') OR $this->input->get('reg_sort')==='1') { //1. 분양 차수 등록?>
 
 <?php
-  $attributes = array('method' => 'post', 'name' => 'form_diff');
+  $attributes = array('name' => 'reg_sort_1');
   $hidden = array('reg_sort' => $this->input->get('reg_sort'));
   echo form_open(current_url(), $attributes, $hidden);
 ?>
@@ -152,7 +152,9 @@
 <?php endfor; ?>
       </div>
       <div class="col-xs-12 btn-wrap" style="margin-top: 30px;">
-        <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="등록하기">
+          <button type="submit" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>">등록하기</button>
+          <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="다음설정으로>>">
+
       </div>
     </div>
   </fieldset>
@@ -162,7 +164,15 @@
 
 <?php }elseif($this->input->get('reg_sort')==='2') { //2. 납입 회차 등록 ?>
 
-<?php echo form_open(current_url()); ?>
+<?php
+    $attributes = array('name' => 'reg_sort_2');
+    $hidden = array(
+        'yr' => $this->input->get('yr'),
+        'project' => $this->input->get('project'),
+        'reg_sort' => $this->input->get('reg_sort')
+    );
+    echo form_open(current_url(), $attributes, $hidden);
+?>
   <fieldset>
     <div class="row font12 form-group" style="margin: 0 0 50px;">
       <div class="col-xs-12 bo-top bo-bottom" style="padding:0;">
@@ -218,7 +228,7 @@
     <?php endforeach; endif; ?>
       </div>
       <div class="col-xs-12 btn-wrap" style="margin-top: 30px;">
-        <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="등록하기">
+        <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="다음으로>>">
       </div>
     </div>
   </fieldset>
@@ -227,7 +237,15 @@
 
 <?php }elseif($this->input->get('reg_sort')==='3') { //3. 층별 조건 등록 ?>
 
-<?php echo form_open(current_url()); ?>
+<?php
+    $attributes = array('name' => 'reg_sort_3');
+    $hidden = array(
+        'yr' => $this->input->get('yr'),
+        'project' => $this->input->get('project'),
+        'reg_sort' => $this->input->get('reg_sort')
+    );
+    echo form_open(current_url(), $attributes, $hidden);
+?>
   <fieldset>
     <div class="row font12 form-group" style="margin: 0 0 50px;">
       <div class="col-xs-12 bo-top bo-bottom" style="padding:0;">
@@ -267,7 +285,7 @@
 
       </div>
       <div class="col-xs-12 btn-wrap" style="margin-top: 30px;">
-        <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="등록하기">
+        <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="다음으로>>">
       </div>
     </div>
   </fieldset>
@@ -276,7 +294,15 @@
 
 <?php }elseif($this->input->get('reg_sort')==='4') { //4. 향별 조건 등록 ?>
 
-<?php echo form_open(current_url()); ?>
+<?php
+    $attributes = array('name' => 'reg_sort_4');
+    $hidden = array(
+        'yr' => $this->input->get('yr'),
+        'project' => $this->input->get('project'),
+        'reg_sort' => $this->input->get('reg_sort')
+    );
+    echo form_open(current_url(), $attributes, $hidden);
+?>
   <fieldset>
     <div class="row font12 form-group" style="margin: 0 0 50px;">
       <div class="col-xs-12 bo-top bo-bottom" style="padding:0;">
@@ -304,7 +330,7 @@
 
       </div>
       <div class="col-xs-12 btn-wrap" style="margin-top: 30px;">
-        <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="등록하기">
+        <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="다음으로>>">
       </div>
     </div>
   </fieldset>
@@ -313,13 +339,14 @@
 
 <?php }elseif($this->input->get('reg_sort')==='5') { //5. 조건별 분양가 등록
 
-  $attributes = array('method' => 'get', 'name' => 'get_frm');
-  echo form_open(current_url(), $attributes);
+    $attributes = array('name' => 'reg_sort_5');
+    $hidden = array(
+        'yr' => $this->input->get('yr'),
+        'project' => $this->input->get('project'),
+        'reg_sort' => $this->input->get('reg_sort')
+    );
+    echo form_open(current_url(), $attributes, $hidden);
 ?>
-  <input type="hidden" name="yr" value="<?php echo $this->input->get('yr'); ?>">
-  <input type="hidden" name="project" value="<?php echo $this->input->get('project'); ?>">
-  <input type="hidden" name="reg_sort" value="<?php echo $this->input->get('reg_sort'); ?>">
-
   <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
     <div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">차수구분 선택</div>
     <div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
@@ -371,7 +398,7 @@
       </div>
     </div>
     <div class="col-xs-12 btn-wrap" style="margin-top: 30px;">
-      <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="등록하기">
+      <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="다음으로>>">
     </div>
   </fieldset>
 </form>
@@ -423,10 +450,15 @@ if( !$this->input->get('con_diff') OR  !$this->input->get('pay_sort'))  :
 <div class="row font12" style="margin: 0; padding: 0;">
   <div class="col-xs-12 center" style="padding: 180px 0;"><?php echo $msg; ?></div>
 </div>
+
 <?php else :
-  $attributes = array();
-  $hidden = array();
-  echo form_open(current_url(), $attributes, $hidden);
+    $attributes = array('name' => 'reg_sort_6');
+    $hidden = array(
+        'yr' => $this->input->get('yr'),
+        'project' => $this->input->get('project'),
+        'reg_sort' => $this->input->get('reg_sort')
+    );
+    echo form_open(current_url(), $attributes, $hidden);
 ?>
   <div class="row font12" style="margin: 0; padding: 0;">
     <div class="col-xs-12 table-responsive" style="padding: 0;">
