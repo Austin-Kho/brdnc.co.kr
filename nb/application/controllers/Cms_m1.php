@@ -347,17 +347,17 @@ class Cms_m1 extends CB_Controller {
 						$now_floor = substr($this->input->post('ho'), 0, 2);
 					}
 
-					foreach($con_fl as $lt) { // 층수조건 아이디 (con_floor_seq) 구하기
+					foreach($con_fl as $lt) { // 층수조건 아이디 (con_floor_no) 구하기
 						$a = explode("-", $lt->floor_range);
-						if($now_floor>=$a[0] && $now_floor<=$a[1]) $con_floor_seq = $lt->seq;
+						if($now_floor>=$a[0] && $now_floor<=$a[1]) $con_floor_no = $lt->seq;
 					}
 
 					$pr_where = array(
 						'pj_seq'=>$pj,
 						'con_type'=>$this->input->post('type'),
-						'con_diff_seq'=>$this->input->post('diff_no'),
-						'con_direction_seq'=>'1', // 향후 필요 시 폼으로 데이터 받을 것
-						'con_floor_seq'=>$con_floor_seq
+						'con_diff'=>$this->input->post('diff_no'),
+						'con_direction_no'=>'1', // 향후 필요 시 폼으로 데이터 받을 것
+						'con_floor_no'=>$con_floor_no
 					);
 
 					$price_seq = $this->cms_main_model->select_data_row('cb_cms_sales_price' , $pr_where);

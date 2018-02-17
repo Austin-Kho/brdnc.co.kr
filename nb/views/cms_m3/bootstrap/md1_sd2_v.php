@@ -254,40 +254,31 @@ echo form_open(current_url(), $attributes, $hidden);
   <fieldset>
     <div class="row font12 form-group" style="margin: 0 0 50px;">
       <div class="col-xs-12 bo-top bo-bottom" style="padding:0;">
-        <div class="col-xs-4 col-sm-2 center label-wrap" style="padding:10px;">층 범위(시작)</div>
-        <div class="col-xs-4 col-sm-2 center label-wrap" style="padding:10px;">층 범위(종료)</div>
+        <div class="col-xs-3 col-sm-2 center label-wrap" style="padding:10px;">층 범위(시작)</div>
+        <div class="col-xs-3 col-sm-2 center label-wrap" style="padding:10px;">층 범위(종료)</div>
         <div class="col-xs-4 col-sm-2 center label-wrap" style="padding:10px;">층 범위 명칭</div>
         <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">등록(수정)일</div>
-        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">(변경)등록자</div>
-        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">추가</div>
-    <?php if(empty($con_floor)): ?>
+        <div class="col-xs-2 col-sm-2 center label-wrap" style="padding:10px;">등록자</div>
+        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">&nbsp;</div>
 
-        <div class="col-xs-4 col-sm-2 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="" placeholder="시작 층"></div>
-        <div class="col-xs-4 col-sm-2 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="" placeholder="종료 층"></div>
-        <div class="col-xs-4 col-sm-2 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="" placeholder="층 범위 명"></div>
-        <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo date('Y-m-d'); ?></div>
-        <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo $this->session->userdata('mem_username'); ?></div>
-        <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;">추가</div>
-        <div class="col-xs-12 center bo-top" style="padding:60px;">등록된 데이터가 없습니다.</div>
+<?php if(empty($con_floor)): ?>
+      <div class="col-xs-12 center bo-top" style="padding:60px;">등록된 데이터가 없습니다.</div>
+<?php endif; ?>
 
-    <?php else: foreach($con_floor as $lt) :
-        $fl_range = explode("-", $lt->floor_range);
-    ?>
-        <div class="col-xs-3 col-sm-2 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="<?php echo $fl_range[0]; ?>" placeholder="시작 층"></div>
-        <div class="col-xs-3 col-sm-2 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="<?php echo $fl_range[1]; ?>" placeholder="종료 층"></div>
-        <div class="col-xs-4 col-sm-2 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="<?php echo $lt->floor_name; ?>" placeholder="층 범위 명"></div>
-        <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo $lt->reg_date; ?></div>
-        <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo $lt->reg_worker; ?></div>
-        <div class="col-xs-2 center bo-top" style="padding-left:10px;">
-            <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
-              <label>
-                <input type="checkbox" name="chk_1" id="chk_1" onclick="type_reg('2',this,1);" <?php if( !empty($type_name[1])){echo " checked ";} if( !empty($type_name[2])){echo " disabled ";}?>>
-                <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
-              </label>
-            </div>
+<?php
+  for($c=0; $c<15; $c++):
+    $fl_range = explode("-", $con_floor[$c]->floor_range);
+?>
+        <div class="col-xs-12" style="padding:0; display:<?php if($c!==0 && $c>count($con_floor)) echo "none;"; ?>">
+        <input type='hidden' name="<?php echo "seq_".$c; ?>" value="<?php echo $con_floor[$c]->seq; ?>">
+          <div class="col-xs-3 col-sm-2 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" name="<?php echo "s_range_".$c; ?>" value="<?php echo $fl_range[0]; ?>" placeholder="시작 층"></div>
+          <div class="col-xs-3 col-sm-2 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" name="<?php echo "e_range_".$c; ?>" value="<?php echo $fl_range[1]; ?>" placeholder="종료 층"></div>
+          <div class="col-xs-4 col-sm-2 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" name="<?php echo "floor_name_".$c; ?>" value="<?php echo $con_floor[$c]->floor_name; ?>" placeholder="층 범위 명"></div>
+          <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo $con_floor[$c]->reg_date; ?></div>
+          <div class="col-xs-2 col-sm-2 center bo-top" style="padding:10px;"><?php echo $con_floor[$c]->reg_worker; ?></div>
+          <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;">&nbsp;</div>
         </div>
-    <?php endforeach; endif; ?>
-
+  <?php endfor; ?>
       </div>
       <div class="col-xs-6 btn-wrap" style="margin-top: 30px; text-align:left; padding-left:20px;">
           <input type="button" class="btn btn-default btn-sm" onclick="location.href='<?php echo $reg_sort_url2; ?>'" value="<< 이전설정">
@@ -316,28 +307,26 @@ echo form_open(current_url(), $attributes, $hidden);
   <fieldset>
     <div class="row font12 form-group" style="margin: 0 0 50px;">
       <div class="col-xs-12 bo-top bo-bottom" style="padding:0;">
-        <div class="col-xs-4 center label-wrap" style="padding:10px;">향별 조건명</div>
-        <div class="col-xs-2 center label-wrap" style="padding:10px;">등록일</div>
+        <div class="col-xs-3 center label-wrap" style="padding:10px;">향별 조건코드</div>
+        <div class="col-xs-3 center label-wrap" style="padding:10px;">향별 조건명</div>
+        <div class="col-xs-2 center label-wrap" style="padding:10px;">등록(수정)일</div>
         <div class="col-xs-2 center label-wrap" style="padding:10px;">등록자</div>
-        <div class="col-xs-2 center label-wrap" style="padding:10px;">수정</div>
-        <div class="col-xs-2 center label-wrap" style="padding:10px;">삭제</div>
-    <?php if(empty($con_direction)): ?>
+        <div class="col-xs-2 center label-wrap" style="padding:10px;">&nbsp;</div>
 
-        <div class="col-xs-4 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="" placeholder="향별 조건명"></div>
-        <div class="col-xs-2 center bo-top" style="padding:10px;"><?php echo date('Y-m-d'); ?></div>
-        <div class="col-xs-2 center bo-top" style="padding:10px;"><?php echo $this->session->userdata('mem_username'); ?></div>
-        <div class="col-xs-2 center bo-top" style="padding:10px;">수정</div>
-        <div class="col-xs-2 center bo-top" style="padding:10px;">삭제</div>
-        <div class="col-xs-12 center bo-top" style="padding:60px;">등록된 데이터가 없습니다.</div>
+  <?php if(empty($con_direction)): ?>
+      <div class="col-xs-12 center bo-top" style="padding:60px;">등록된 데이터가 없습니다.</div>
+  <?php endif; ?>
 
-    <?php else: foreach($con_direction as $lt) : ?>
-        <div class="col-xs-4 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" value="<?php echo $lt->diff_name; ?>" placeholder="차수명"></div>
-        <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo $lt->reg_date; ?></div>
-        <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo $lt->reg_worker; ?></div>
-        <div class="col-xs-2 col-sm-1 center bo-top" style="padding:10px;">수정</div>
-        <div class="col-xs-2 col-sm-1 center bo-top" style="padding:10px;">삭제</div>
-    <?php endforeach; endif; ?>
-
+  <?php for($d=0; $d<15; $d++): ?>
+        <div class="col-xs-12" style="padding:0; display:<?php if($d!==0 && $d>count($con_direction)) echo "none;"; ?>">
+        <input type='hidden' name="<?php echo "seq_".$d; ?>" value="<?php echo $con_direction[$d]->seq; ?>">
+          <div class="col-xs-3 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" name="<?php echo "dir_no_".$d; ?>" value="<?php echo $con_direction[$d]->dir_no; ?>" placeholder="향별 조건코드"></div>
+          <div class="col-xs-3 center bo-top" style="padding-top:3px;"><input type='text' class="form-control input-sm" name="<?php echo "dir_name_".$d; ?>" value="<?php echo $con_direction[$d]->dir_name; ?>" placeholder="향별 조건명"></div>
+          <div class="col-xs-2 center bo-top" style="padding:10px;"><?php echo $con_direction[$d]->reg_date; ?></div>
+          <div class="col-xs-2 center bo-top" style="padding:10px;"><?php echo $con_direction[$d]->reg_worker; ?></div>
+          <div class="col-xs-2 center bo-top" style="padding:10px;">&nbsp;</div>
+        </div>
+  <?php endfor; ?>
       </div>
       <div class="col-xs-6 btn-wrap" style="margin-top: 30px; text-align:left; padding-left:20px;">
           <input type="button" class="btn btn-default btn-sm" onclick="location.href='<?php echo $reg_sort_url3; ?>'" value="<< 이전설정">
@@ -353,13 +342,8 @@ echo form_open(current_url(), $attributes, $hidden);
 
 <?php }elseif($this->input->get('reg_sort')==='5') { //5. 조건별 분양가 등록
 
-  echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
-  $attributes = array('name' => 'reg_sort_5');
-  $hidden = array(
-      'year' => $this->input->get('yr'),
-      'project' => $this->input->get('project'),
-      'reg_sort' => '6'
-  );
+  $attributes = array('method' => 'get', 'name' => 'get_frm');
+  $hidden = array('yr' => $this->input->get('yr'), 'project' => $this->input->get('project'), 'reg_sort' => '5');
   echo form_open(current_url(), $attributes, $hidden);
 ?>
   <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
@@ -377,7 +361,17 @@ echo form_open(current_url(), $attributes, $hidden);
     </div>
   </div>
 </form>
-<?php echo form_open(current_url()); ?>
+<?php
+  echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
+  $attributes = array('name' => 'reg_sort_5');
+  $hidden = array(
+      'year' => $this->input->get('yr'),
+      'project' => $this->input->get('project'),
+      'reg_sort' => '5',
+      'con_diff' => $this->input->get('con_diff')
+  );
+  echo form_open(current_url(), $attributes, $hidden);
+?>
   <fieldset>
     <div class="row font12" style="margin: 0; padding: 0;">
       <div class="col-xs-12 table-responsive" style="padding: 0;">
@@ -388,26 +382,54 @@ echo form_open(current_url(), $attributes, $hidden);
               <th class="center">타입</th>
               <th class="center">층별 조건</th>
               <th class="center">분양(모집)가격</th>
+              <th class="center">조건해당 세대수</th>
+              <th class="center">등록(수정)일</th>
+              <th class="center">등록(수정)자</th>
             </tr>
           </thead>
           <tbody>
-  <?php
+<?php
   $type = explode("-", $type_info->type_name);
+  $k=0;
   for($i=0; $i<count($type); $i++) :
-    for($j=0; $j<count($con_floor); $j++): ?>
+    for($j=0; $j<count($con_floor); $j++):
+      for($l=0; $l<count($con_direction); $l++):
+
+?>
             <tr>
-  <?php if($i==0 && $j==0): ?>
+<?php if($i==0 && $j==0): ?>
               <?php if($this->input->get('con_diff')): ?><td class="center" rowspan="<?php echo count($type)*count($con_floor); ?>" width="10%"><?php echo $diff->diff_name; ?></td><?php endif;?>
-  <?php endif; if($j==0): ?>
+<?php endif; if($j==0): ?>
               <td style="vertical-align:middle;" rowspan="<?php echo count($con_floor); ?>"  width="10%"><?php echo $type[$i]; ?></td>
-  <?php endif; ?>
-              <td><?php echo $con_floor[$j]->floor_name; ?></td>
-              <td><input type="text" name="<?php echo "price".$i."_".$j; ?>" class="form-control input-sm" value="" placeholder="해당 타입 층별 가격"></td>
+<?php endif; ?>
+              <td style="vertical-align:middle;"><?php echo $con_floor[$j]->floor_name; ?></td>
+
+              <input type="hidden" name="<?php echo "diff_no_".$k; ?>" value="<?php echo $this->input->get('con_diff'); ?>">
+              <input type="hidden" name="<?php echo "type_no_".$k; ?>" value="<?php echo $i+1; ?>">
+              <input type="hidden" name="<?php echo "type_".$k; ?>" value="<?php echo $type[$i]; ?>">
+              <input type="hidden" name="<?php echo "dir_no_".$k; ?>" value="<?php echo $con_direction[$l]->dir_no; // 향별 실제 입력 시 추후 적용 ?>">
+              <input type="hidden" name="<?php echo "fl_no_".$k; ?>" value="<?php echo $con_floor[$j]->seq; ?>">
+
+              <td>
+                <div style="color: #B00448;"><?php echo form_error("price_".$k); ?>
+                  <input type="text" name="<?php echo "price_".$k; ?>" class="form-control input-sm" value="<?php echo $price[$k]->unit_price; ?>" placeholder="해당 타입 층별 가격">
+                  <input type="hidden" name="<?php echo "price_".$k."_h"; ?>" value="<?php if( !empty($price[$k]->pr_seq)) echo "1"; else echo "0"; ?>">
+                </div>
+              </td>
+              <td>
+                <div style="color: #B00448;"><?php echo form_error("num_".$k); ?>
+                  <input type="text" name="<?php echo "num_".$k; ?>" class="form-control input-sm" value="<?php echo $price[$k]->unit_num; ?>" placeholder="해당 타입 층별 세대수">
+                </div>
+              </td>
+              <td style="vertical-align:middle;"><?php if($price[$k]->pr_reg_date!=='0000-00-00') echo $price[$k]->pr_reg_date; ?></td>
+              <td style="vertical-align:middle;"><?php echo $price[$k]->pr_reg_worker; ?></td>
             </tr>
-  <?php
+<?php
+        $k++;
       endfor;
     endfor;
-  ?>
+  endfor;
+?>
           </tbody>
         </table>
       </div>
@@ -426,12 +448,9 @@ echo form_open(current_url(), $attributes, $hidden);
 <?php }elseif($this->input->get('reg_sort')==='6') { //6. 회차별 납입가 등록
 
   $attributes = array('method' => 'get', 'name' => 'get_frm');
-  echo form_open(current_url(), $attributes);
+  $hidden = array('yr' => $this->input->get('yr'), 'project' => $this->input->get('project'), 'reg_sort' => '6');
+  echo form_open(current_url(), $attributes, $hidden);
 ?>
-  <input type="hidden" name="yr" value="<?php echo $this->input->get('yr'); ?>">
-  <input type="hidden" name="project" value="<?php echo $this->input->get('project'); ?>">
-  <input type="hidden" name="reg_sort" value="<?php echo $this->input->get('reg_sort'); ?>">
-
   <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
     <div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">차수구분 선택</div>
     <div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
@@ -461,16 +480,16 @@ echo form_open(current_url(), $attributes, $hidden);
 </form>
 
 <?php
-if( !$this->input->get('con_diff') OR  !$this->input->get('pay_sort'))  :
-  if( !$this->input->get('con_diff')) :  $msg = "차수구분을 선택하여 주십시요.";
-  elseif( !$this->input->get('pay_sort')) :  $msg = "회차구분을 선택하여 주십시요.";
-  endif;
+// if( !$this->input->get('con_diff') OR !$this->input->get('pay_sort'))  :
+  // if( !$this->input->get('con_diff')) :  $msg = "차수구분을 선택하여 주십시요.";
+  // elseif( !$this->input->get('pay_sort')) :  $msg = "회차구분을 선택하여 주십시요.";
+  // endif;
 ?>
-<div class="row font12" style="margin: 0; padding: 0;">
+<!-- <div class="row font12" style="margin: 0; padding: 0;">
   <div class="col-xs-12 center" style="padding: 180px 0;"><?php echo $msg; ?></div>
-</div>
+</div> -->
 
-<?php else :
+<?php // else :
   echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
   $attributes = array('name' => 'reg_sort_6');
   $hidden = array(
@@ -509,9 +528,9 @@ if( !$this->input->get('con_diff') OR  !$this->input->get('pay_sort'))  :
   $pmt = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_payment WHERE pj_seq='$project' AND price_seq='".$price[$i]->pr_seq."' AND pay_sche_seq='".$pay_sche[$j]->seq."' ");
 ?>
             <td style="background-color: ; padding: 3px;">
-              <div style="color: #B00447;"><?php echo form_error("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq); ?>
-                <input type="text" name="<?php echo "pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq; ?>" value="<?php if( !empty($pmt)) echo $pmt->payment; else echo set_value("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq) ?>" size="15" placeholder="회차별 납부액" class="form-control input-sm">
-                <input type="hidden" name="<?php echo "pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h"; ?>" value="<?php if( !empty($pmt)) echo "1"; else "0"; ?>">
+              <div style="color: #B00448;"><?php echo form_error("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq); ?>
+                <input type="text" name="<?php echo "pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq; ?>" value="<?php if( !empty($pmt)) echo $pmt->payment; else echo set_value("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq) ?>" placeholder="회차별 납부액" class="form-control input-sm">
+                <input type="hidden" name="<?php echo "pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h"; ?>" value="<?php if( !empty($pmt)) echo "1"; else echo "0"; ?>">
               </div>
             </td>
 <?php endfor; ?>
@@ -521,13 +540,12 @@ if( !$this->input->get('con_diff') OR  !$this->input->get('pay_sort'))  :
       </table>
     </div>
   </div>
-<?php endif; ?>
+<?php // endif; ?>
   <div class="col-xs-6 btn-wrap" style="margin-top: 30px; text-align:left; padding-left:20px;">
       <input type="button" class="btn btn-default btn-sm" onclick="location.href='<?php echo $reg_sort_url5; ?>'" value="<< 이전설정">
   </div>
   <div class="col-xs-6 btn-wrap" style="margin-top: 30px;">
       <button type="submit" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>">등록하기</button>
-      <!-- <input type="button" class="btn btn-info btn-sm" onclick="location.href='<?php echo $reg_sort_url3; ?>'" value="다음설정 >>"> -->
   </div>
 </form>
 

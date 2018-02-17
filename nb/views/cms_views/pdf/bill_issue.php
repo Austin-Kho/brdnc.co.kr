@@ -17,7 +17,7 @@
     elseif ((int)substr($ho, 0, $n) >= 6 && (int)substr($ho, 0, $n) <= 10) : $floor_con = 5;
     elseif ((int)substr($ho, 0, $n) > 10) : $floor_con = 6;
     endif;
-    $price = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_price WHERE pj_seq='$project' AND con_diff_seq='$contractor->cont_diff' AND con_type='$contractor->unit_type' AND con_floor_seq='$floor_con' ");
+    $price = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_price WHERE pj_seq='$project' AND con_diff='$contractor->cont_diff' AND con_type='$contractor->unit_type' AND con_floor_no='$floor_con' ");
 ?>
     <table style="width:100%;">
       <tr>
