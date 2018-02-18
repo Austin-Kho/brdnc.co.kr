@@ -51,7 +51,7 @@ class Cms_m2 extends CB_Controller
 		////////////////////////
 
 		$mdi = $this->uri->segment(3, 1);
-		$sdi = $this->uri->segment(4, 1);		
+		$sdi = $this->uri->segment(4, 1);
 
 		$view['s_di'] = array(
 			array('집행 현황', '집행 등록', '수지 예산안'), // 첫번째 하위 메뉴
@@ -65,6 +65,7 @@ class Cms_m2 extends CB_Controller
 		if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
 		$view['all_pj'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC ');
 		$project = $view['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
+		$pj_info = $view['pj_info'] = $this->cms_main_model->select_data_row('cb_cms_project', array('seq' => $project)); // cb_cms_project 테이블 정보
 
 
 
@@ -76,8 +77,6 @@ class Cms_m2 extends CB_Controller
 			$auth = $this->cms_main_model->auth_chk('_m2_1_1', $this->session->userdata['mem_id']);
 			$view['auth11'] = $auth['_m2_1_1']; // 불러올 페이지에 보낼 조회 권한 데이터
 
-			// 프로젝트명, 타입 정보 구하기
-			$pj_info = $view['pj_info'] = $this->cms_main_model->sql_row(" SELECT pj_name, type_name, type_color FROM cb_cms_project WHERE seq='$project' ");
 
 
 
@@ -94,8 +93,6 @@ class Cms_m2 extends CB_Controller
 
 
 
-
-
 		// 예산집행 관리 3. 수지 관리 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==1 && $sdi==3) {
 
@@ -103,6 +100,10 @@ class Cms_m2 extends CB_Controller
 			$auth = $this->cms_main_model->auth_chk('_m2_1_3', $this->session->userdata['mem_id']);
 			// 불러올 페이지에 보낼 조회 권한 데이터
 			$view['auth13'] = $auth['_m2_1_3'];
+
+
+
+
 
 
 

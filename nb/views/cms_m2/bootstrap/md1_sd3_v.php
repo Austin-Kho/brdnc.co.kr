@@ -9,7 +9,7 @@ else :
 <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
 <?php
 	$attributes = array('method' => 'get', 'name' => 'pj_sel');
-	form_open(current_url(), $attributes);
+	echo form_open(current_url(), $attributes);
 ?>
 		<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
 		<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
@@ -45,28 +45,28 @@ for($i=(count($year)-1); $i>=0; $i--) :
 
 <div class="row">
 	<div class="col-md-12 table-responsive">
-		<table class="table table-bordered table-condensed table-hover font12">
+		<table class="table table-bordered table-hover font12">
 			<thead>
 				<tr>
-					<th style="background-color:#BDD5FE;">사 업 명</th>
-					<th colspan="4" style="background-color:#fcf3e4;">동춘1구역지역주택조합 공동주택사업 수지표</th>
-					<th colspan="2" style="font-weight: lighter; font-size: 5pt">조건 : 당사예상, 발코니 확장비 포함, 중도금 후불제(일반=무이자)</th>
+					<th style="background-color:#BDD5FE; vertical-align: middle;" width="15%" height="50px">사 업 명</th>
+					<th colspan="4" style="background-color:#fcf3e4; vertical-align: middle;"><?php echo $pj_info->pj_name." 사업 수지표"; ?></th>
+					<th colspan="2" style="font-weight: lighter; font-size: 8pt; vertical-align: middle;">조건 : 당사예상, 발코니 확장비 포함, 중도금 후불제(일반=무이자)</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
-					<td style="background-color:#ECF2FB;">부지대표지번</td>
-					<td colspan="5">인천광역시 동춘1구역 도시개발사업지구 공동주택지 9블럭</td>
+					<td style="background-color:#ECF2FB;">부지주소(대표지번)</td>
+					<td colspan="5"><?php echo str_replace('|', ' ', $pj_info->local_addr); ?></td>
 					<td style="text-align:right;">(단위 : 천원, ㎡, 평)</td>
 				</tr>
 				<tr>
 					<td style="background-color:#ECF2FB;">매입면적(토지)</td>
-					<td style="text-align: right;">30,842.00 ㎡</td>
-					<td style="text-align: right;">9,329.71 평</td>
-					<td style="background-color:#ECF2FB;">용도지역(지구)</td>
-					<td>제2종 일반주거</td>
-					<td style="background-color:#ECF2FB;">용적율</td>
-					<td style="text-align: right;">208.38%</td>
+					<td style="text-align: right;" width="13%"><?php echo number_format($pj_info->buy_land_extent, 2).' ㎡'; ?></td>
+					<td style="text-align: right;" width="12%"><?php echo number_format($pj_info->buy_land_extent*0.3025, 2).' 평'; ?></td>
+					<td style="background-color:#ECF2FB;" width="15%">용도지역(지구)</td>
+					<td width="15%">제2종 일반주거</td>
+					<td style="background-color:#ECF2FB;" width="15%">용적율</td>
+					<td style="text-align: right;" width="15%">208.38%</td>
 				</tr>
 				<tr>
 					<td style="background-color:#ECF2FB;">기부면적(도로 등)</td>
@@ -120,14 +120,15 @@ for($i=(count($year)-1); $i>=0; $i--) :
 		<table class="table table-bordered table-condensed table-hover font12">
 			<thead>
 				<tr>
-					<th colspan="5" style="text-align: center; background-color:#BDD5FE;">구 분</th>
-					<th style="text-align: center; background-color:#BDD5FE;">금 액</th>
-					<th style="text-align: center; background-color:#BDD5FE;">산 출 내 역</th>
-					<th style="text-align: center; background-color:#BDD5FE;">비 고</th>
-					<th style="text-align: center; background-color:#BDD5FE;">비 율</th>
+					<th colspan="5" style="text-align: center; background-color:#BDD5FE;" width="20%">구 분</th>
+					<th style="text-align: center; background-color:#BDD5FE;" width="15%">금 액</th>
+					<th style="text-align: center; background-color:#BDD5FE;" width="40%">산 출 내 역</th>
+					<th style="text-align: center; background-color:#BDD5FE;" width="20%">비 고</th>
+					<th style="text-align: center; background-color:#BDD5FE;" width="5%">비 율</th>
 				</tr>
 			</thead>
 			<tbody>
+<?php for($i=0; $i<20; $i++) : ?>
 				<tr>
 					<td>ㅁ</td>
 					<td></td>
@@ -139,138 +140,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 					<td></td>
 					<td></td>
 				</tr>
-				<tr>
-					<td>ㅁ</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>ㅁ</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>ㅁ</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>ㅁ</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>ㅁ</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>ㅁ</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>ㅁ</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>ㅁ</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>ㅁ</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>ㅁ</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>ㅁ</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>ㅁ</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
+<?php endfor; ?>
 			</tbody>
 		</table>
 	</div>
