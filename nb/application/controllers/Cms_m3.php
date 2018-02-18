@@ -282,22 +282,21 @@ class Cms_m3 extends CB_Controller {
 			// 불러올 페이지에 보낼 조회 권한 데이터
 			$view['auth12'] = $auth['_m3_1_2'];
 
-			// view 파일에서 보내 온 차수 데이터
-			$this_diff = $this->input->get('con_diff');
-
 			// 1. 분양 차수 등록
-			$view['con_diff'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_con_diff WHERE pj_seq='$project' ORDER BY seq, diff_no ");  // 프로젝트 등록된 전체 차수
+			$con_diff = $view['con_diff'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_con_diff WHERE pj_seq='$project' ORDER BY seq, diff_no ");  // 프로젝트 등록된 전체 차수
 
 			// 2. 납입 회차 등록
 			$view['pay_time'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' ORDER BY seq, pay_code ");
 
 			// 3. 층별 조건 등록
-			$view['con_floor'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_con_floor WHERE pj_seq='$project' ORDER BY seq ");
+			$con_floor = $view['con_floor'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_con_floor WHERE pj_seq='$project' ORDER BY seq ");
 
 			// 4. 향별 조건 등록
 			$view['con_direction'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_con_direction WHERE pj_seq='$project' ORDER BY seq ");
 
 			// 5. 조건별 분양가 등록
+			// view 파일에서 보내 온 차수 데이터
+			$this_diff = $this->input->get('con_diff');
 			$view['type_info'] = $this->cms_main_model->sql_row(" SELECT type_name, type_color FROM cb_cms_project WHERE seq='$project' ");
 			$view['diff'] = $this->cms_main_model->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$this_diff' ");
 			// price - 데이터 불러오기
@@ -313,62 +312,67 @@ class Cms_m3 extends CB_Controller {
 			$pay_sche = $view['pay_sche'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_sort='".$this->input->get('pay_sort')."' ORDER BY pay_code ");
 			$diff_no = $this->input->get('con_diff');
 			$view['pr_diff'] = $this->cms_main_model->sql_result(" SELECT	seq, diff_no, diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$diff_no' "); // 차수
-			$view['pr_floor'] = $this->cms_main_model->sql_result(" SELECT seq, floor_name, COUNT(seq) AS num_floor FROM cb_cms_sales_con_floor WHERE pj_seq='$project' "); // 층별
-			$view['pr_type'] = $this->cms_main_model->sql_result(" SELECT seq, type_name, COUNT(seq) AS num_type FROM cb_cms_sales_con_type WHERE pj_seq='$project' "); // 타입
-			$view['pr_row'] = $view['pr_floor'][0]->num_floor*$view['pr_type'][0]->num_type;
 
+
+			$type = $view['type'] = explode("-", $view['type_info']->type_name);
 
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
 
 			for($a=0; $a<5; $a++){ // 1. diff form_validation->set_rules(''); 설정
-				$this->form_validation->set_rules('diff_no_'.$a, '차수'.$a, 'trim|max_length[2]|numeric');
-				$this->form_validation->set_rules('diff_name_'.$a, '차수명'.$a, 'trim|max_length[10]');
+				$this->form_validation->set_rules('diff_no_'.$a, '등록차수'.($a+1), 'trim|max_length[2]|numeric');
+				$this->form_validation->set_rules('diff_name_'.$a, '차수명'.($a+1), 'trim|max_length[10]');
 			}
+			// if($this->form_validation->run() === FALSE) redirect(base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=1');
 
-			for($b=0; $b<5; $b++){ // 2. pay_sche form_validation->set_rules(''); 설정
-				$this->form_validation->set_rules('pay_sort_'.$b, '납부구분'.$b, 'trim|max_length[1]|numeric');
-				$this->form_validation->set_rules('pay_code_'.$b, '회차코드'.$b, 'trim|max_length[2]|numeric');
-				$this->form_validation->set_rules('pay_time_'.$b, '납부회차'.$b, 'trim|max_length[2]|numeric');
-				$this->form_validation->set_rules('pay_name_'.$b, '회차명'.$b, 'trim|max_length[10]');
-				$this->form_validation->set_rules('pay_disc_'.$b, '회차설명'.$b, 'trim|max_length[10]');
-				$this->form_validation->set_rules('pay_due_date_'.$b, '납부기한'.$b, 'trim|max_length[10]');
+			for($b=0; $b<15; $b++){ // 2. pay_sche form_validation->set_rules(''); 설정
+				$this->form_validation->set_rules('pay_sort_'.$b, '납부구분'.($b+1), 'trim|max_length[1]|numeric');
+				$this->form_validation->set_rules('pay_code_'.$b, '회차코드'.($b+1), 'trim|max_length[2]|numeric');
+				$this->form_validation->set_rules('pay_time_'.$b, '납부순서'.($b+1), 'trim|max_length[2]|numeric');
+				$this->form_validation->set_rules('pay_name_'.$b, '회차명칭'.($b+1), 'trim|max_length[10]');
+				$this->form_validation->set_rules('pay_disc_'.$b, '부가설명'.($b+1), 'trim|max_length[10]');
+				$this->form_validation->set_rules('pay_due_date_'.$b, '납부기한'.($b+1), 'trim|max_length[10]');
 			}
+			// if($this->form_validation->run() === FALSE) redirect(base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=2');
 
 			for($c=0; $c<10; $c++){ // 3. floor form_validation->set_rules(''); 설정
-				$this->form_validation->set_rules("s_range_".$c, '시작 층'.$c, 'trim|max_length[2]|numeric');
-				$this->form_validation->set_rules("e_range_".$c, '종료 층'.$c, 'trim|max_length[2]|numeric');
-				$this->form_validation->set_rules("floor_name_".$c, '층 범위 명'.$c, 'trim|max_length[12]');
+				$this->form_validation->set_rules('s_range_'.$c, '층 범위(시작)'.($c+1), 'trim|max_length[2]|numeric');
+				$this->form_validation->set_rules('e_range_'.$c, '층 범위(종료)'.($c+1), 'trim|max_length[2]|numeric');
+				$this->form_validation->set_rules('floor_name_'.$c, '층 범위 명칭'.($c+1), 'trim|max_length[12]');
 			}
 
 			for($d=0; $d<15; $d++){ // 4. direction form_validation->set_rules(''); 설정
-				$this->form_validation->set_rules("dir_no_".$d, '향별 조건코드'.$d, 'trim|max_length[1]|numeric');
-				$this->form_validation->set_rules("dir_name_".$d, '향별 조건명'.$d, 'trim|max_length[10]');
+				$this->form_validation->set_rules('dir_no_'.$d, '향별 조건코드'.($d+1), 'trim|max_length[1]|numeric');
+				$this->form_validation->set_rules('dir_name_'.$d, '향별 조건명'.($d+1), 'trim|max_length[10]');
 			}
 
 			$k=0;
-			for($i=0; $i<count($type); $i++) : // 5. price form_validation->set_rules(''); 설정
-				for($j=0; $j<count($con_floor); $j++):
-					for($l=0; $l<count($con_direction); $l++):
-						$this->form_validation->set_rules("price_".$k, '해당 타입 층별 가격'.$k, 'trim|max_length[10]|numeric');
-						$this->form_validation->set_rules("num_".$k, '해당 타입 층별 세대수'.$k, 'trim|max_length[5]|numeric');
+			for($i=0; $i<count($type); $i++) { // 5. price form_validation->set_rules(''); 설정
+				for($j=0; $j<count($con_floor); $j++){
+					for($l=0; $l<count($view['con_direction']); $l++) {
+						$this->form_validation->set_rules(('price_'.$k), '분양(모집) 가격'.($k+1), 'trim|max_length[10]|numeric');
+						$this->form_validation->set_rules(('num_'.$k), '해당조건 세대수'.($k+1), 'trim|max_length[5]|numeric');
+						$k++;
+					}
+				}
+			}
+			// $this->form_validation->set_rules("pmt_25_1", "납부금액_".$p_seq."_".$view['pay_sche'][$j]->seq, 'trim|max_length[10]numeric|required');
+			$p=0;
+			for($i=0; $i<count($type); $i++) : // 6. payment form_validation->set_rules(''); 설정
+				for($m=0; $m<count($con_floor); $m++) :
+					$p_seq = $view['price'][$p]->pr_seq;
+					$p++;
+					for($j=0; $j<count($view['pay_sche']); $j++) :
+						$this->form_validation->set_rules("pmt_".$p_seq."_".$view['pay_sche'][$j]->seq, "납부금액_".$p_seq."_".$view['pay_sche'][$j]->seq, 'trim|max_length[10]numeric|required');
 					endfor;
 				endfor;
 			endfor;
-			$k++;
 
-			for($i=0; $i<count($price); $i++) : // 6. payment form_validation->set_rules(''); 설정
-				for($j=0; $j<count($pay_sche); $j++) :
-					$this->form_validation->set_rules("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq, "납부액_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq, 'trim|numeric|required');
-				endfor;
-			endfor;
-
-			// if($this->form_validation->run() === FALSE) : // 폼검증 통과 하지 않았을 경우, post 데이터가 없을 때
 
 			if($this->form_validation->run() !== FALSE) : // 폼검증 통과 했을 경우, post 데이터가 있을 때
 
 				// 1. 분양 차수 등록
-				if($this->input->post('reg_sort')==='1'){
+				if($this->input->post('set_sort')==='1'){
 
 					for($a=0; $a<5; $a++){ //
 						$diff_data = array(
@@ -382,20 +386,20 @@ class Cms_m3 extends CB_Controller {
 							if($a<count($view['con_diff'])){
 								// 포스트 데이터가 서버 등록 데이터 수 초과하지 않을 경우 - 데이터 업데이트
 								$result[$a] = $this->cms_main_model->update_data('cb_cms_sales_con_diff', $diff_data, array('seq'=> $this->input->post('seq_'.$a), 'pj_seq'=>$project));
-								if( !$result[$a]) {alert('데이터베이스 에러입니다.1', base_url('cms_m3/project/1/2').'?project='.$project.'&reg_sort=1');}
+								if( !$result[$a]) {alert('데이터베이스 에러입니다.1', base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=1');}
 							}else{
 								// 포스트 데이터가 서버 등록 데이터 수 초과 시 - 신규 입력
 								$result[$a] = $this->cms_main_model->insert_data('cb_cms_sales_con_diff', $diff_data);
-								if( !$result[$a]) {alert('데이터베이스 에러입니다.2', base_url('cms_m3/project/1/2').'?project='.$project.'&reg_sort=1');}
+								if( !$result[$a]) {alert('데이터베이스 에러입니다.2', base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=1');}
 							}
 						}else{
 							break;
 						}
 					}
-					alert('정상 처리 되었습니다.', base_url('cms_m3/project/1/2').'?project='.$project.'&reg_sort=1');
+					alert('정상 처리 되었습니다.', base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=1');
 
 				// 2. 납입 회차 등록
-				}elseif($this->input->post('reg_sort')==='2'){
+				}elseif($this->input->post('set_sort')==='2'){
 
 					for($b=0; $b<15; $b++){ //
 						$sche_data = array(
@@ -413,20 +417,20 @@ class Cms_m3 extends CB_Controller {
 							if($b<count($view['pay_time'])){
 								// 포스트 데이터가 서버 등록 데이터 수 초과하지 않을 경우 - 데이터 업데이트
 								$result[$b] = $this->cms_main_model->update_data('cb_cms_sales_pay_sche', $sche_data, array('seq'=> $this->input->post('seq_'.$b), 'pj_seq'=>$project));
-								if( !$result[$b]) {alert('데이터베이스 에러입니다.1', base_url('cms_m3/project/1/2').'?project='.$project.'&reg_sort=2');}
+								if( !$result[$b]) {alert('데이터베이스 에러입니다.1', base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=2');}
 							}else{
 								// 포스트 데이터가 서버 등록 데이터 수 초과 시 - 신규 입력
 								$result[$b] = $this->cms_main_model->insert_data('cb_cms_sales_pay_sche', $sche_data);
-								if( !$result[$b]) {alert('데이터베이스 에러입니다.2', base_url('cms_m3/project/1/2').'?project='.$project.'&reg_sort=2');}
+								if( !$result[$b]) {alert('데이터베이스 에러입니다.2', base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=2');}
 							}
 						}else{
 							break;
 						}
 					}
-					alert('정상 처리 되었습니다.', base_url('cms_m3/project/1/2').'?project='.$project.'&reg_sort=2');
+					alert('정상 처리 되었습니다.', base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=2');
 
 				// 3. 층별 조건 등록
-				}elseif($this->input->post('reg_sort')==='3'){
+				}elseif($this->input->post('set_sort')==='3'){
 
 					for($c=0; $c<15; $c++){ //
 						$con_fl_data = array(
@@ -440,20 +444,20 @@ class Cms_m3 extends CB_Controller {
 							if($c<count($view['con_floor'])){
 								// 포스트 데이터가 서버 등록 데이터 수 초과하지 않을 경우 - 데이터 업데이트
 								$result[$c] = $this->cms_main_model->update_data('cb_cms_sales_con_floor', $con_fl_data, array('seq'=> $this->input->post('seq_'.$c), 'pj_seq'=>$project));
-								if( !$result[$c]) {alert('데이터베이스 에러입니다.1', base_url('cms_m3/project/1/2').'?project='.$project.'&reg_sort=3');}
+								if( !$result[$c]) {alert('데이터베이스 에러입니다.1', base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=3');}
 							}else{
 								// 포스트 데이터가 서버 등록 데이터 수 초과 시 - 신규 입력
 								$result[$c] = $this->cms_main_model->insert_data('cb_cms_sales_con_floor', $con_fl_data);
-								if( !$result[$c]) {alert('데이터베이스 에러입니다.2', base_url('cms_m3/project/1/2').'?project='.$project.'&reg_sort=3');}
+								if( !$result[$c]) {alert('데이터베이스 에러입니다.2', base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=3');}
 							}
 						}else{
 							break;
 						}
 					}
-					alert('정상 처리 되었습니다.', base_url('cms_m3/project/1/2').'?project='.$project.'&reg_sort=3');
+					alert('정상 처리 되었습니다.', base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=3');
 
 				// 4. 향별 조건 등록
-				}elseif($this->input->post('reg_sort')==='4'){
+				}elseif($this->input->post('set_sort')==='4'){
 
 					for($d=0; $d<15; $d++){ //
 						$con_dir_data = array(
@@ -467,20 +471,20 @@ class Cms_m3 extends CB_Controller {
 							if($d<count($view['con_direction'])){
 								// 포스트 데이터가 서버 등록 데이터 수 초과하지 않을 경우 - 데이터 업데이트
 								$result[$d] = $this->cms_main_model->update_data('cb_cms_sales_con_direction', $con_dir_data, array('seq'=> $this->input->post('seq_'.$d), 'pj_seq'=>$project));
-								if( !$result[$d]) {alert('데이터베이스 에러입니다.1', base_url('cms_m3/project/1/2').'?project='.$project.'&reg_sort=4');}
+								if( !$result[$d]) {alert('데이터베이스 에러입니다.1', base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=4');}
 							}else{
 								// 포스트 데이터가 서버 등록 데이터 수 초과 시 - 신규 입력
 								$result[$d] = $this->cms_main_model->insert_data('cb_cms_sales_con_direction', $con_dir_data);
-								if( !$result[$d]) {alert('데이터베이스 에러입니다.2', base_url('cms_m3/project/1/2').'?project='.$project.'&reg_sort=4');}
+								if( !$result[$d]) {alert('데이터베이스 에러입니다.2', base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=4');}
 							}
 						}else{
 							break;
 						}
 					}
-					alert('정상 처리 되었습니다.', base_url('cms_m3/project/1/2').'?project='.$project.'&reg_sort=4');
+					alert('정상 처리 되었습니다.', base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=4');
 
 				// 5. 조건별 분양가 등록
-				}elseif($this->input->post('reg_sort')==='5'){
+				}elseif($this->input->post('set_sort')==='5'){
 
 					$price =
 						$this->cms_main_model->sql_result(
@@ -490,7 +494,9 @@ class Cms_m3 extends CB_Controller {
 								ORDER BY cb_cms_sales_price.seq "
 						);
 
-					if($this->input->post('con_diff')){
+					if( !$this->input->post('con_diff')) {
+						alert('차수구분 데이터를 입력하여 주십시오!');
+					}else{
 						$type = explode("-", $view['type_info']->type_name);
 					  $k=0;
 					  for($e=0; $e<count($type); $e++) {
@@ -530,35 +536,48 @@ class Cms_m3 extends CB_Controller {
 							}
 						}
 						alert('정상 처리 되었습니다.', '');
-					}else{
-						alert('차수 데이터를 선택하십시오.', '');
 					}
 
 				// 6. 회차별 납입가 등록
-				}elseif($this->input->post('reg_sort')==='6'){
+				}elseif($this->input->post('set_sort')==='6'){
 
-					for($i=0; $i<count($price); $i++) :
-						for($j=0; $j<count($pay_sche); $j++) :
-							$pmt_data = array(
-								'pj_seq' => $project,
-								'price_seq' => $price[$i]->pr_seq,
-								'pay_sche_seq' => $pay_sche[$j]->seq,
-								'payment' => $this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq),
-								'reg_date' => date('Y-m-d'),
-								'reg_worker' => $this->session->userdata('mem_username')
-							);
-							if(empty($this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h")) OR ($this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h"))=='0') {
-								$result[$j] = $this->cms_main_model->insert_data('cb_cms_sales_payment', $pmt_data);
-								if( !$result[$j]) {alert('데이터베이스 에러입니다.1', '');}
-							}elseif(($this->input->post("pmt_".$price[$i]->pr_seq."-".$pay_sche[$j]->seq."_h"))=='1') {
-								$result[$j] = $this->cms_main_model->update_data('cb_cms_sales_payment', $pmt_data, array('pj_seq'=>$project, 'price_seq'=>$price[$i]->pr_seq, 'pay_sche_seq'=>$pay_sche[$j]->seq));
-								if( !$result[$j]) {alert('데이터베이스 에러입니다.2', '');}
-							}
+					if( empty($this->input->post('con_diff'))) {
+						alert('차수구분 데이터를 입력하여 주십시오!');
+					}else	if( empty($this->input->post('pay_sort'))){
+						alert('회차구분 데이터를 선택하여 주십시오!');
+					}else {
+						$type = explode("-", $view['type_info']->type_name);
+						$p=0;
+						for($i=0; $i<count($type); $i++) : // 6. payment form_validation->set_rules(''); 설정
+							for($m=0; $m<count($con_floor); $m++) :
+								$p_seq = $price[$p]->pr_seq; // $p++ 시키기 전에 seq 미리 정의
+								$p++;
+								for($j=0; $j<count($pay_sche); $j++) :
+									$pmt_data = array(
+										'pj_seq' => $project,
+										'price_seq' => $p_seq,
+										'pay_sche_seq' => $pay_sche[$j]->seq,
+										'sche_pay_code' => $pay_sche[$j]->pay_code,
+										'payment' => $this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq),
+										'reg_date' => date('Y-m-d'),
+										'reg_worker' => $this->session->userdata('mem_username')
+									);
+									
+									if(empty($this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq."_h")) OR ($this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq."_h"))=='0') {
+										$result[$j] = $this->cms_main_model->insert_data('cb_cms_sales_payment', $pmt_data);
+										if( !$result[$j]) {alert('데이터베이스 에러입니다.1', '');}
+									}elseif(($this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq."_h"))=='1') {
+										$result[$j] = $this->cms_main_model->update_data('cb_cms_sales_payment', $pmt_data, array('pj_seq'=>$project, 'price_seq'=>$p_seq, 'pay_sche_seq'=>$pay_sche[$j]->seq));
+										if( !$result[$j]) {alert('데이터베이스 에러입니다.2', '');}
+									}
+
+								endfor;
+							endfor;
 						endfor;
-					endfor;
 
-					alert('정상 처리 되었습니다.', '');
-					// 6. 회차별 납입가 등록---종료
+						alert('정상 처리 되었습니다.', '');
+						// 6. 회차별 납입가 등록---종료
+					}
 				}
 
 			endif; // 폼검증 통과 시 종료
