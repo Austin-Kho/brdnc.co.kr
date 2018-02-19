@@ -65,7 +65,7 @@ class Cms_m2 extends CB_Controller
 		if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
 		$view['all_pj'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC ');
 		$project = $view['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
-		$pj_info = $view['pj_info'] = $this->cms_main_model->select_data_row('cb_cms_project', array('seq' => $project)); // cb_cms_project 테이블 정보
+		$pj_info = $view['pj_info'] = $this->cms_main_model->data_row('cb_cms_project', array('seq' => $project)); // cb_cms_project 테이블 정보
 
 
 
@@ -100,6 +100,10 @@ class Cms_m2 extends CB_Controller
 			$auth = $this->cms_main_model->auth_chk('_m2_1_3', $this->session->userdata['mem_id']);
 			// 불러올 페이지에 보낼 조회 권한 데이터
 			$view['auth13'] = $auth['_m2_1_3'];
+
+
+			$view['diff'] = $this->cms_main_model->data_result('cb_cms_sales_con_diff', array('pj_seq'=>$project)); // 차수 데이터
+			$view['type'] = explode("-", $pj_info->type_name); // 타입 데이터
 
 
 

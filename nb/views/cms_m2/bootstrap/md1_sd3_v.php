@@ -61,8 +61,8 @@ for($i=(count($year)-1); $i>=0; $i--) :
 				</tr>
 				<tr>
 					<td style="background-color:#ECF2FB;">매입면적(토지)</td>
-					<td style="text-align: right;" width="13%"><?php echo number_format($pj_info->buy_land_extent, 2).' ㎡'; ?></td>
-					<td style="text-align: right;" width="12%"><?php echo number_format($pj_info->buy_land_extent*0.3025, 2).' 평'; ?></td>
+					<td style="text-align: right;" width="14%"><?php echo number_format($pj_info->buy_land_extent, 2).' ㎡'; ?></td>
+					<td style="text-align: right;" width="11%"><?php echo number_format($pj_info->buy_land_extent*0.3025, 2).' 평'; ?></td>
 					<td style="background-color:#ECF2FB;" width="15%">용도지역(지구)</td>
 					<td width="15%"><?php echo $pj_info->area_usage; ?></td>
 					<td style="background-color:#ECF2FB;" width="15%">용적율</td>
@@ -97,19 +97,19 @@ for($i=(count($year)-1); $i>=0; $i--) :
 				</tr>
 				<tr>
 					<td style="background-color:#ECF2FB;">전체연면적(건물)</td>
-					<td style="text-align: right;"></td>
-					<td style="text-align: right;"></td>
+					<td style="text-align: right;"><?php echo number_format($pj_info->gr_floor_area, 2)." ㎡"; ?></td>
+					<td style="text-align: right;"><?php echo number_format($pj_info->gr_floor_area*0.3025, 2)." 평"; ?></td>
 					<td style="background-color:#ECF2FB;">건축규모</td>
-					<td style="text-align: right;"></td>
+					<td><?php echo $pj_info->build_size; ?></td>
 					<td style="background-color:#ECF2FB;">PF 수수료</td>
 					<td style="text-align: right;"></td>
 				</tr>
 				<tr>
 					<td style="background-color:#ECF2FB;">지상연면적(건물)</td>
-					<td style="text-align: right;"></td>
-					<td style="text-align: right;"></td>
+					<td style="text-align: right;"><?php echo number_format($pj_info->on_floor_area, 2)." ㎡"; ?></td>
+					<td style="text-align: right;"><?php echo number_format($pj_info->on_floor_area*0.3025, 2)." 평"; ?></td>
 					<td style="background-color:#ECF2FB;">세 대 수</td>
-					<td style="text-align: right;"></td>
+					<td style="text-align: right;"><?php echo number_format($pj_info->num_unit); ?></td>
 					<td style="background-color:#ECF2FB;">PF 이자율</td>
 					<td style="text-align: right;"></td>
 				</tr>
@@ -128,12 +128,36 @@ for($i=(count($year)-1); $i>=0; $i--) :
 				</tr>
 			</thead>
 			<tbody>
-<?php for($i=0; $i<20; $i++) : ?>
+<?php
+	$inc_total_rows = (count($diff)*count($type))+count($diff)+3;
+	for($i=0; $i<$inc_total_rows; $i++) :
+		$td_1st = $i==0 ? "<td rowspan='".$inc_total_rows."' style='text-align:center; vertical-align:middle;'>수<br>입</td>" : "";
+		$td_2nd = $i==0 ? "<td rowspan='".($inc_total_rows-2)."' style='text-align:center; vertical-align:middle;'>공<br>동<br>주<br>택</td>" : "";
+		// switch ($i) {
+		// 	case ($i%((count($type)+1))===0): $td_3rd = "<td rowspan='".(count($type)+1)."'>".($type[$i])."</td>"; break;
+		// 	default: $td_3rd = ""; break;
+		// }
+		if(($i==0 or $i%(count($type)+1)===0) && $i<=(count($diff)*count($type))) {
+			$td_3rd = "<td rowspan='".(count($type)+1)."'>".mb_substr($diff[$i%(count($type))]->diff_name, 0, 2)."</td>";
+		}else if($i==(count($diff)*(count($type)+1))){
+			$td_3rd = "<td></td>";
+		}else if($i>(count($diff)*(count($type)+1))){
+			$td_3rd = "<td></td><td></td>";
+		}else{
+			$td_3rd = "";
+		}
+
+		if(($i)%(count($type))===0){
+			$type_line = "소계";
+		}else{
+			$type_line = "";
+		}
+?>
 				<tr>
-					<td>ㅁ</td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<?php echo $td_1st; ?>
+					<?php echo $td_2nd; ?>
+					<?php echo $td_3rd; ?>
+					<td><?php echo $type_line; ?></td>
 					<td></td>
 					<td></td>
 					<td></td>
