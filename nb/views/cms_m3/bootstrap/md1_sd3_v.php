@@ -351,7 +351,7 @@ return $sort;
                 <label for="<?php echo "type_quantity_".$j; ?>" class="sr-only">수량</span></label>
                 <input type="text" class="form-control input-sm en_only" id="<?php echo "type_quantity_".$j; ?>" name="<?php echo "type_quantity_".$j; ?>" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post("type_quantity_".$j)) echo set_value("type_quantity_".$j); else if($t_count>0) echo $type_quantity[$j-1]; ?>" required placeholder="타입별 단위 수량">
             </div>
-            <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
+            <div class="col-xs-3 col-sm-2" style="padding-right: 0;">
                 <label for="<?php echo "count_unit_".$j; ?>" class="sr-only">단위</span></label>
                 <select class="form-control input-sm" id="<?php echo "count_unit_".$j; ?>" name="<?php echo "count_unit_".$j; ?>">
                     <option value="0">단위</option>
