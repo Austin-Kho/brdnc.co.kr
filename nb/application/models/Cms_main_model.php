@@ -9,7 +9,7 @@ class Cms_main_model extends CB_Model
 	//공통 함수 Start//
 
   /**
-	 * [data_result 복수 데이터 불러오기]
+	 * [data_result 복수행 데이터 불러오기]
 	 * @param  [String] $table [테이블명]
 	 * @param  [Array] $where [필터링 '키'=>값]
 	 * @return [Array]        [추출 데이터]
@@ -18,17 +18,17 @@ class Cms_main_model extends CB_Model
     if(isset($select)) $this->db->select($select);
     if(isset($group)) $this->db->group_by($group);
     if(isset($order)) $this->db->order_by($order);
-		if($where!='') $this->db->where($where);
+		if($where!=='') $this->db->where($where);
 		$qry = $this->db->get($table);
 		return $rlt = $qry->result();
 	}
 
   /**
-   * [data_row  단수 데이터 불러오기]
+   * [data_row  단수행 데이터 불러오기]
    * @param  [String] $table [테이블명]
    * @param  [Array] $where [필터링 '키'=>값]
    * @param  [Array] $select [불러올 필드명]
-   * @return [Boolean]       [성공 여부]
+   * @return [Array]       [추출 데이터]
    */
   public function data_row($table, $where, $select, $group, $order) {
     if(isset($select)) $this->db->select($select);
@@ -51,44 +51,45 @@ class Cms_main_model extends CB_Model
 	}
 
   /**
-	 * [data_option description]
-	 * @param  [type] $table [description]
-	 * @param  string $where [description]
-	 * @param  string $opt   [description]
-	 * @return [type]        [description]
+	 * [data_option 옵션으로 선택적으로 데이터 추출]
+	 * @param  string $table [테이블명]
+	 * @param  [Array] $where ['key' => value]
+	 * @param  string $opt    [num]
+	 * @return [Array]        [추출 데이터]
 	 */
 	public function data_option($table, $where='', $opt='', $select){
     if(isset($select)) $this->db->select($select);
 		if($where!='') $this->db->where($where);
 		$qry = $this->db->get($table);
 		switch ($opt) {
-			case '1': $val = $qry->row(); break; // 단수 데이터
-			case '2': $val = $qry->result(); break; // 복수 데이터
-			case '3': $val = $qry->num_rows(); break; // 데이터 수
-			case '4': $val = array('result' => $qry->result(), 'num' => $qry->num_rows()); break; // 복수데이터와 데이터 수
-			default: $val = $qry->result(); break; // 복수 데이터
+			case '1': $rlt = $qry->row(); break; // 단수행 데이터
+			case '2': $rlt = $qry->result(); break; // 복수행 데이터
+			case '3': $rlt = $qry->num_rows(); break; // 데이터 수
+			case '4': $rlt = array('row' => $qry->row(), 'num' => $qry->num_rows()); break; // 단수행 데이터와 데이터 수
+      case '5': $rlt = array('result' => $qry->result(), 'num' => $qry->num_rows()); break; // 복수행 데이터와 데이터 수
+			default: $rlt = $qry->result(); break; // 복수행 데이터
 		}
-		return $val;
+		return $rlt;
 	}
 
   /**
 	 * [sql_row sql 인자로 단수데이터 추출 함수]
-	 * @param  [type] $sql [sql 인자]
-	 * @return [type]      [추출한 데이터]
+	 * @param  string $sql [sql 인자]
+	 * @return [Array]      [추출한 데이터]
 	 */
 	public function sql_row($sql){
 		$qry = $this->db->query($sql);
-		return $qry->row();
+		return $rlt = $qry->row();
 	}
 
   /**
-   * [sql_result sql인자로 데이터 추출 함수]
-   * @param  [String] $sql [sql 인자]
-   * @return [Array]      [추출한 데이터]
+   * [sql_result sql인자로 복수 데이터 추출 함수]
+   * @param  String sql [sql 인자]
+   * @return Array      [추출한 데이터]
    */
   public function sql_result($sql) {
 		$qry = $this->db->query($sql);
-		return $qry->result();
+		return $rlt = $qry->result();
 	}
 
   /**
@@ -98,7 +99,7 @@ class Cms_main_model extends CB_Model
    */
   public function sql_num_rows($sql) {
 		$qry = $this->db->query($sql);
-		return $qry->num_rows();
+		return $rlt = $qry->num_rows();
 	}
 
   /**
@@ -108,27 +109,26 @@ class Cms_main_model extends CB_Model
    */
   public function sql_num_result($sql) {
 		$qry = $this->db->query($sql);
-		return array(
-      'num' => $qry->num_rows(),
-      'result' => $qry->result()
-    );
+		return $rlt = array('num' => $qry->num_rows(), 'result' => $qry->result());
 	}
 
   /**
 	 * [sql_sel_opt sql 인자로 데이터 추출 // 추출방식 옵션 적용]
-	 * @param  [type] $sql [sql 인자]
-	 * @param  [type] $opt [1. row 2. result 3. num_rows 4. result + num_rows]
-	 * @return [type]      [추출한 데이터]
+	 * @param  [String] $sql [sql 인자]
+	 * @param  [String] $opt [1. row 2. result 3. num_rows 4. result + num_rows]
+	 * @return [Array]      [추출한 데이터]
 	 */
 	public function sql_sel_opt($sql, $opt){
 		$qry = $this->db->query($sql);
 		switch ($opt) {
-			case '1': $ret_val = $qry->row(); break;
-			case '2': $ret_val = $qry->result(); break;
-			case '3': $ret_val = $qry->num_rows(); break;
-			case '4': $ret_val = array('result' => $qry->result(), 'num' => $qry->num_rows()); break;
+			case '1': $rlt = $qry->row(); break;
+			case '2': $rlt = $qry->result(); break;
+			case '3': $rlt = $qry->num_rows(); break;
+			case '4': $rlt = array('row' => $qry->row(), 'num' => $qry->num_rows()); break;
+      case '5': $rlt = array('result' => $qry->result(), 'num' => $qry->num_rows()); break;
+      default: $rlt = $qry->result(); break; // 복수행 데이터
 		}
-		return $ret_val;
+		return $rlt;
 	}
 
   /**
