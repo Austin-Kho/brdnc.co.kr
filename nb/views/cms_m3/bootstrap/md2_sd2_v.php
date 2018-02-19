@@ -416,9 +416,7 @@
             <div class="col-xs-1 col-sm-2" style="padding: 11px 0;"><span>월</span></div>
 					</div>
 				</div>
-				<div class="form-group" style="color: red;">
-          <?php echo validation_errors('<div class="error">', '</div>'); ?>&nbsp;
-        </div>
+				<div class="form-group" style="color: red;">&nbsp;</div>
 
 <?php if($auth22<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="con_formck();";} ?>
 				<div class="form-group btn-wrap" style="margin: 0;">
