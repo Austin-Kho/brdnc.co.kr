@@ -182,13 +182,13 @@
   <fieldset>
     <div class="row font12 form-group" style="margin: 0 0 50px;">
       <div class="col-xs-12 bo-top bo-bottom" style="padding:0;">
-        <div class="col-xs-3 col-sm-2 center label-wrap" style="padding:10px;">납부구분</div>
+        <div class="col-xs-3 col-sm-1 center label-wrap" style="padding:10px;">납부구분</div>
         <div class="hidden-xs col-sm-1 center label-wrap" style="padding:10px;">회차코드</div>
         <div class="col-xs-3 col-sm-1 center label-wrap" style="padding:10px;">납부순서</div>
         <div class="col-xs-4 col-sm-2 center label-wrap" style="padding:10px;">회차명칭</div>
         <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">부가설명</div>
         <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">납부기한</div>
-        <div class="hidden-xs col-sm-1 center label-wrap" style="padding:10px;">등록(수정)일</div>
+        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">등록(수정)일</div>
         <div class="col-xs-2 col-sm-1 center label-wrap" style="padding:10px;">등록자</div>
 
 <?php if(empty($pay_time)): ?>
@@ -198,7 +198,7 @@
 <?php for($b=0; $b<15; $b++): ?>
         <div class="col-xs-12" style="padding:0; display:<?php if($b!==0 && $b>count($pay_time)) echo "none;"; ?>">
         <input type='hidden' name="<?php echo "seq_".$b; ?>" value="<?php echo $pay_time[$b]->seq; ?>">
-          <div class="col-xs-3 col-sm-2 center bo-top" style="padding-top:5px; color: #B00448;">
+          <div class="col-xs-3 col-sm-1 center bo-top" style="padding-top:5px; color: #B00448;">
             <label for="<?php echo "pay_sort_".$b ?>" class="sr-only">납부구분 선택</label>
             <select class="form-control input-sm" name="<?php echo "pay_sort_".$b ?>">
               <option value="0"> 전 체</option>
@@ -220,7 +220,7 @@
             <input type='text' class="form-control input-sm" name="<?php echo "pay_disc_".$b; ?>" value="<?php if($this->input->post("pay_disc_".$b)) echo set_value("pay_disc_".$b); else echo $pay_time[$b]->pay_disc; ?>" placeholder="부가설명">
           </div>
           <div class="hidden-xs col-sm-2 center bo-top" style="padding-top:5px;">
-            <div class="input-group" style="color: #B00448;"><?php echo form_error("pay_due_date_".$b); ?>
+            <div class="input-group" style="color: #B00448;">
               <input type="text" class="form-control input-sm" id="<?php echo "pay_due_date_".$b; ?>" name="<?php echo "pay_due_date_".$b; ?>" maxlength="10" value="<?php if($pay_time[$b]->pay_due_date!=='0000-00-00') echo $pay_time[$b]->pay_due_date; ?>" onClick="cal_add(this); event.cancelBubble=true" placeholder="납부기한">
               <div class="input-group-addon">
                 <a href="javascript:" onclick="cal_add(document.getElementById('<?php echo "pay_due_date_".$b; ?>'),this); event.cancelBubble=true">
@@ -229,7 +229,7 @@
               </div>
             </div>
           </div>
-          <div class="hidden-xs col-sm-1 center bo-top" style="padding:12px;"><?php echo $pay_time[$b]->reg_date; ?>&nbsp;</div>
+          <div class="hidden-xs col-sm-2 center bo-top" style="padding:12px;"><?php echo $pay_time[$b]->reg_date; ?>&nbsp;</div>
           <div class="col-xs-2 col-sm-1 center bo-top" style="padding:12px;"><?php echo $pay_time[$b]->reg_worker; ?>&nbsp;</div>
         </div>
 <?php endfor; ?>

@@ -48,9 +48,9 @@ class Cms_m3 extends CB_Controller {
 		$sdi = $this->uri->segment(4, 1);
 
 		$view['s_di'] = array(
-			array('동호수 등록', '기타 세부설정', '프로젝트 목록'), // 첫번째 하위 메뉴
+			array('동호수 등록', '세부설정 관리', '프로젝트 목록'), // 첫번째 하위 메뉴
 			array('검토 자료', '신규 등록'),       // 두번째 하위 메뉴
-			array('동호 데이터 입력', '타입별 세부설정 관리 - [진행 중]', '프로젝트 목록 및 기본정보 수정'),   // 첫번째 하위 제목
+			array('동호(UNIT) 데이터 입력', 'UNIT별 세부설정 관리', '목록 및 기본정보 관리'),   // 첫번째 하위 제목
 			array('신규 프로젝트 등록', '예비 프로젝트 검토')     // 두번째 하위 제목
 		);
 
@@ -562,7 +562,7 @@ class Cms_m3 extends CB_Controller {
 										'reg_date' => date('Y-m-d'),
 										'reg_worker' => $this->session->userdata('mem_username')
 									);
-									
+
 									if(empty($this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq."_h")) OR ($this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq."_h"))=='0') {
 										$result[$j] = $this->cms_main_model->insert_data('cb_cms_sales_payment', $pmt_data);
 										if( !$result[$j]) {alert('데이터베이스 에러입니다.1', '');}
