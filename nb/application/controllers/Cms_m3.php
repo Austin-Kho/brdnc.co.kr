@@ -271,8 +271,6 @@ class Cms_m3 extends CB_Controller {
 
 
 
-
-
 		// 3-1 프로젝트 관리 2. 기타 세부약정 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==1 && $sdi==2) {
 			// $this->output->enable_profiler(TRUE); //프로파일러 보기//
@@ -586,8 +584,6 @@ class Cms_m3 extends CB_Controller {
 
 
 
-
-
 		// 3-1 프로젝트 관리 3. 목록 및 기본정보 수정 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==1 && $sdi==3) {
 
@@ -621,8 +617,8 @@ class Cms_m3 extends CB_Controller {
 
 			// 등록된 프로젝트 데이터
 			$view['all_pj'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC '.$limit);
-
-			if($this->input->get('project')) $view['project'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project WHERE seq = '.$this->input->get('project'));
+			// if($this->input->get('project')) $view['project'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project WHERE seq = '.$this->input->get('project'));
+			if($this->input->get('project')) $view['project_data'] = $this->cms_main_model->select_data_row('cb_cms_project', array('seq'=>$project));
 
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
@@ -634,7 +630,9 @@ class Cms_m3 extends CB_Controller {
 			$this->form_validation->set_rules('address1_1', '메인 주소', 'required');
 			$this->form_validation->set_rules('address2_1', '상세 주소', 'max_length[93]');
 			$this->form_validation->set_rules('buy_land_extent', '대지 매입면적', 'required|numeric|max_length[10]');
+			$this->form_validation->set_rules('donation_land_extent', '기부채납 면적', 'required|numeric|max_length[10]');
 			$this->form_validation->set_rules('scheme_land_extent', '계획 대지면적', 'required|numeric|max_length[10]');
+			$this->form_validation->set_rules('area_usage', '용도지역지구', 'max_length[30]');
 			$this->form_validation->set_rules('build_size', '건축 규모', 'max_length[60]');
 			$this->form_validation->set_rules('num_unit', '세대(호/실) 수', 'required|numeric|max_length[6]');
 			$this->form_validation->set_rules('build_area', '건축 면적', 'numeric|max_length[10]');
@@ -645,40 +643,14 @@ class Cms_m3 extends CB_Controller {
 			$this->form_validation->set_rules('bu_to_la_rat', '건폐율(%)', 'max_length[8]');
 			$this->form_validation->set_rules('law_num_parking', '법정주차대수', 'numeric|max_length[6]');
 			$this->form_validation->set_rules('plan_num_parking', '계획주차대수', 'numeric|max_length[6]');
-			$this->form_validation->set_rules('type_name_1', '타입명(1)', 'required|max_length[10]');
-			$this->form_validation->set_rules('type_color_1', '타입컬러(1)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_1', '타입수량(1)', 'required|max_length[5]');
-			$this->form_validation->set_rules('count_unit_1', '수량단위(1)', 'required');
-			$this->form_validation->set_rules('type_name_2', '타입명(2)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_2', '타입컬러(2)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_2', '타입수량(2)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_3', '타입명(3)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_3', '타입컬러(3)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_3', '타입수량(3)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_4', '타입명(4)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_4', '타입컬러(4)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_4', '타입수량(4)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_5', '타입명(5)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_5', '타입컬러(5)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_5', '타입수량(5)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_6', '타입명(6)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_6', '타입컬러(6)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_6', '타입수량(6)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_7', '타입명(7)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_7', '타입컬러(7)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_7', '타입수량(7)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_8', '타입명(8)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_8', '타입컬러(8)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_8', '타입수량(8)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_9', '타입명(9)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_9', '타입컬러(9)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_9', '타입수량(9)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_10', '타입명(10)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_10', '타입컬러(10)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_10', '타입수량(10)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_11', '타입명(11)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_11', '타입컬러(11)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_11', '타입수량(11)', 'max_length[5]');
+
+			for($q=1; $q<=11; $q++):
+				$this->form_validation->set_rules('type_name_'.$j, '타입명('.$j.')', 'required|max_length[10]');
+				$this->form_validation->set_rules('type_color_'.$j, '타입컬러('.$j.')', 'max_length[7]');
+				$this->form_validation->set_rules('type_quantity_'.$j, '타입수량('.$j.')', 'required|max_length[5]');
+				$this->form_validation->set_rules('count_unit_'.$j, '수량단위('.$j.')', 'required');
+			endfor;
+
 			$this->form_validation->set_rules('land_cost', '토지 매입비', 'numeric|max_length[10]');
 			$this->form_validation->set_rules('build_cost', '평당건축비', 'numeric|max_length[5]');
 			$this->form_validation->set_rules('arc_design_cost', '설계용역비', 'numeric|max_length[8]');
@@ -694,50 +666,19 @@ class Cms_m3 extends CB_Controller {
 
 			if($this->form_validation->run() !== FALSE) { // 폼 전송 데이타가 있을 때 폼 데이타 가공
 				$local_addr = $this->input->post('postcode1')."|".$this->input->post('address1_1')."|".$this->input->post('address2_1');
+
 				$type_name = $this->input->post('type_name_1', TRUE);
-				if($this->input->post('type_name_2', TRUE)) $type_name .="-".$this->input->post('type_name_2', TRUE);
-				if($this->input->post('type_name_3', TRUE)) $type_name .="-".$this->input->post('type_name_3', TRUE);
-				if($this->input->post('type_name_4', TRUE)) $type_name .="-".$this->input->post('type_name_4', TRUE);
-				if($this->input->post('type_name_5', TRUE)) $type_name .="-".$this->input->post('type_name_5', TRUE);
-				if($this->input->post('type_name_6', TRUE)) $type_name .="-".$this->input->post('type_name_6', TRUE);
-				if($this->input->post('type_name_7', TRUE)) $type_name .="-".$this->input->post('type_name_7', TRUE);
-				if($this->input->post('type_name_8', TRUE)) $type_name .="-".$this->input->post('type_name_8', TRUE);
-				if($this->input->post('type_name_9', TRUE)) $type_name .="-".$this->input->post('type_name_9', TRUE);
-				if($this->input->post('type_name_10', TRUE)) $type_name .="-".$this->input->post('type_name_10', TRUE);
-				if($this->input->post('type_name_11', TRUE)) $type_name .="-".$this->input->post('type_name_11', TRUE);
 				$type_color = $this->input->post('type_color_1', TRUE);
-				if($this->input->post('type_color_2', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_2', TRUE);
-				if($this->input->post('type_color_3', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_3', TRUE);
-				if($this->input->post('type_color_4', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_4', TRUE);
-				if($this->input->post('type_color_5', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_5', TRUE);
-				if($this->input->post('type_color_6', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_6', TRUE);
-				if($this->input->post('type_color_7', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_7', TRUE);
-				if($this->input->post('type_color_8', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_8', TRUE);
-				if($this->input->post('type_color_9', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_9', TRUE);
-				if($this->input->post('type_color_10', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_10', TRUE);
-				if($this->input->post('type_color_11', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_11', TRUE);
 				$type_quantity = $this->input->post('type_quantity_1', TRUE);
-				if($this->input->post('type_quantity_2', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_2', TRUE);
-				if($this->input->post('type_quantity_3', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_3', TRUE);
-				if($this->input->post('type_quantity_4', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_4', TRUE);
-				if($this->input->post('type_quantity_5', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_5', TRUE);
-				if($this->input->post('type_quantity_6', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_6', TRUE);
-				if($this->input->post('type_quantity_7', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_7', TRUE);
-				if($this->input->post('type_quantity_8', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_8', TRUE);
-				if($this->input->post('type_quantity_9', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_9', TRUE);
-				if($this->input->post('type_quantity_10', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_10', TRUE);
-				if($this->input->post('type_quantity_11', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_11', TRUE);
 				$count_unit = $this->input->post('count_unit_1', TRUE);
-				if($this->input->post('count_unit_2', TRUE)) $count_unit .="-".$this->input->post('count_unit_2', TRUE);
-				if($this->input->post('count_unit_3', TRUE)) $count_unit .="-".$this->input->post('count_unit_3', TRUE);
-				if($this->input->post('count_unit_4', TRUE)) $count_unit .="-".$this->input->post('count_unit_4', TRUE);
-				if($this->input->post('count_unit_5', TRUE)) $count_unit .="-".$this->input->post('count_unit_5', TRUE);
-				if($this->input->post('count_unit_6', TRUE)) $count_unit .="-".$this->input->post('count_unit_6', TRUE);
-				if($this->input->post('count_unit_7', TRUE)) $count_unit .="-".$this->input->post('count_unit_7', TRUE);
-				if($this->input->post('count_unit_8', TRUE)) $count_unit .="-".$this->input->post('count_unit_8', TRUE);
-				if($this->input->post('count_unit_9', TRUE)) $count_unit .="-".$this->input->post('count_unit_9', TRUE);
-				if($this->input->post('count_unit_10', TRUE)) $count_unit .="-".$this->input->post('count_unit_10', TRUE);
-				if($this->input->post('count_unit_11', TRUE)) $count_unit .="-".$this->input->post('count_unit_11', TRUE);
+
+				for($r=2; $r<=11; $r++):
+					if($this->input->post('type_name_'.$r, TRUE)) $type_name .="-".$this->input->post('type_name_'.$r, TRUE);
+					if($this->input->post('type_color_'.$r, TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_'.$r, TRUE);
+					if($this->input->post('type_quantity_'.$r, TRUE)) $type_quantity .="-".$this->input->post('type_quantity_'.$r, TRUE);
+					if($this->input->post('count_unit_'.$r, TRUE)) $count_unit .="-".$this->input->post('count_unit_'.$r, TRUE);
+				endfor;
+
 				$biz_start_ym = $this->input->post('biz_start_year').'-'.$this->input->post('biz_start_month');
 
 				$update_pj_data = array(
@@ -745,7 +686,9 @@ class Cms_m3 extends CB_Controller {
 					'sort' => $this->input->post('sort', TRUE),
 					'local_addr' => $local_addr,
 					'buy_land_extent' => $this->input->post('buy_land_extent', TRUE),
+					'donation_land_extent' => $this->input->post('donation_land_extent', TRUE),
 					'scheme_land_extent' => $this->input->post('scheme_land_extent', TRUE),
+					'area_usage' => $this->input->post('area_usage', TRUE),
 					'build_size' => $this->input->post('build_size', TRUE),
 					'num_unit' => $this->input->post('num_unit', TRUE),
 					'build_area' => $this->input->post('build_area', TRUE),
@@ -787,12 +730,24 @@ class Cms_m3 extends CB_Controller {
 
 
 
-		// 3-2 신규 프로젝트 1. 신규등록 ////////////////////////////////////////////////////////////////////
+		// 3-2 신규 프로젝트 1. 예비검토 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==1) {
 
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m3_2_1', $this->session->userdata['mem_id']);
 			$view['auth21'] = $auth['_m3_2_1']; // 불러올 페이지에 보낼 조회 권한 데이터
+
+
+
+
+
+		// 3-2 신규 프로젝트 2. 신규등록 ////////////////////////////////////////////////////////////////////
+		}else if($mdi==2 && $sdi==2) {
+
+			// 조회 등록 권한 체크
+			$auth = $this->cms_main_model->auth_chk('_m3_2_2', $this->session->userdata['mem_id']);
+			// 불러올 페이지에 보낼 조회 권한 데이터
+			$view['auth22'] = $auth['_m3_2_2'];
 
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
@@ -804,7 +759,9 @@ class Cms_m3 extends CB_Controller {
 			$this->form_validation->set_rules('address1_1', '메인 주소', 'required');
 			$this->form_validation->set_rules('address2_1', '상세 주소', 'max_length[93]');
 			$this->form_validation->set_rules('buy_land_extent', '대지 매입면적', 'required|numeric|max_length[10]');
+			$this->form_validation->set_rules('donation_land_extent', '기부채납 면적', 'required|numeric|max_length[10]');
 			$this->form_validation->set_rules('scheme_land_extent', '계획 대지면적', 'required|numeric|max_length[10]');
+			$this->form_validation->set_rules('area_usage', '용도지역지구', 'max_length[30]');
 			$this->form_validation->set_rules('build_size', '건축 규모', 'max_length[60]');
 			$this->form_validation->set_rules('num_unit', '세대(호/실) 수', 'required|numeric|max_length[6]');
 			$this->form_validation->set_rules('build_area', '건축 면적', 'numeric|max_length[10]');
@@ -815,40 +772,14 @@ class Cms_m3 extends CB_Controller {
 			$this->form_validation->set_rules('bu_to_la_rat', '건폐율(%)', 'max_length[8]');
 			$this->form_validation->set_rules('law_num_parking', '법정주차대수', 'numeric|max_length[6]');
 			$this->form_validation->set_rules('plan_num_parking', '계획주차대수', 'numeric|max_length[6]');
-			$this->form_validation->set_rules('type_name_1', '타입명(1)', 'required|max_length[10]');
-			$this->form_validation->set_rules('type_color_1', '타입컬러(1)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_1', '타입수량(1)', 'required|max_length[5]');
-			$this->form_validation->set_rules('count_unit_1', '수량단위(1)', 'required');
-			$this->form_validation->set_rules('type_name_2', '타입명(2)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_2', '타입컬러(2)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_2', '타입수량(2)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_3', '타입명(3)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_3', '타입컬러(3)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_3', '타입수량(3)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_4', '타입명(4)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_4', '타입컬러(4)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_4', '타입수량(4)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_5', '타입명(5)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_5', '타입컬러(5)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_5', '타입수량(5)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_6', '타입명(6)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_6', '타입컬러(6)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_6', '타입수량(6)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_7', '타입명(7)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_7', '타입컬러(7)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_7', '타입수량(7)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_8', '타입명(8)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_8', '타입컬러(8)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_8', '타입수량(8)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_9', '타입명(9)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_9', '타입컬러(9)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_9', '타입수량(9)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_10', '타입명(10)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_10', '타입컬러(10)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_10', '타입수량(10)', 'max_length[5]');
-			$this->form_validation->set_rules('type_name_11', '타입명(11)', 'max_length[10]');
-			$this->form_validation->set_rules('type_color_11', '타입컬러(11)', 'max_length[7]');
-			$this->form_validation->set_rules('type_quantity_11', '타입수량(11)', 'max_length[5]');
+
+			for($q=1; $q<=11; $q++):
+				$this->form_validation->set_rules('type_name_'.$j, '타입명('.$j.')', 'required|max_length[10]');
+				$this->form_validation->set_rules('type_color_'.$j, '타입컬러('.$j.')', 'max_length[7]');
+				$this->form_validation->set_rules('type_quantity_'.$j, '타입수량('.$j.')', 'required|max_length[5]');
+				$this->form_validation->set_rules('count_unit_'.$j, '수량단위('.$j.')', 'required');
+			endfor;
+
 			$this->form_validation->set_rules('land_cost', '토지 매입비', 'numeric|max_length[10]');
 			$this->form_validation->set_rules('build_cost', '평당건축비', 'numeric|max_length[5]');
 			$this->form_validation->set_rules('arc_design_cost', '설계용역비', 'numeric|max_length[8]');
@@ -864,50 +795,19 @@ class Cms_m3 extends CB_Controller {
 
 			if($this->form_validation->run() !== FALSE) { // 폼 전송 데이타가 있으면,//폼 데이타 가공
 				$local_addr = $this->input->post('postcode1')."|".$this->input->post('address1_1')."|".$this->input->post('address2_1');
+
 				$type_name = $this->input->post('type_name_1', TRUE);
-				if($this->input->post('type_name_2', TRUE)) $type_name .="-".$this->input->post('type_name_2', TRUE);
-				if($this->input->post('type_name_3', TRUE)) $type_name .="-".$this->input->post('type_name_3', TRUE);
-				if($this->input->post('type_name_4', TRUE)) $type_name .="-".$this->input->post('type_name_4', TRUE);
-				if($this->input->post('type_name_5', TRUE)) $type_name .="-".$this->input->post('type_name_5', TRUE);
-				if($this->input->post('type_name_6', TRUE)) $type_name .="-".$this->input->post('type_name_6', TRUE);
-				if($this->input->post('type_name_7', TRUE)) $type_name .="-".$this->input->post('type_name_7', TRUE);
-				if($this->input->post('type_name_8', TRUE)) $type_name .="-".$this->input->post('type_name_8', TRUE);
-				if($this->input->post('type_name_9', TRUE)) $type_name .="-".$this->input->post('type_name_9', TRUE);
-				if($this->input->post('type_name_10', TRUE)) $type_name .="-".$this->input->post('type_name_10', TRUE);
-				if($this->input->post('type_name_11', TRUE)) $type_name .="-".$this->input->post('type_name_11', TRUE);
 				$type_color = $this->input->post('type_color_1', TRUE);
-				if($this->input->post('type_color_2', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_2', TRUE);
-				if($this->input->post('type_color_3', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_3', TRUE);
-				if($this->input->post('type_color_4', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_4', TRUE);
-				if($this->input->post('type_color_5', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_5', TRUE);
-				if($this->input->post('type_color_6', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_6', TRUE);
-				if($this->input->post('type_color_7', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_7', TRUE);
-				if($this->input->post('type_color_8', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_8', TRUE);
-				if($this->input->post('type_color_9', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_9', TRUE);
-				if($this->input->post('type_color_10', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_10', TRUE);
-				if($this->input->post('type_color_11', TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_11', TRUE);
 				$type_quantity = $this->input->post('type_quantity_1', TRUE);
-				if($this->input->post('type_quantity_2', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_2', TRUE);
-				if($this->input->post('type_quantity_3', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_3', TRUE);
-				if($this->input->post('type_quantity_4', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_4', TRUE);
-				if($this->input->post('type_quantity_5', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_5', TRUE);
-				if($this->input->post('type_quantity_6', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_6', TRUE);
-				if($this->input->post('type_quantity_7', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_7', TRUE);
-				if($this->input->post('type_quantity_8', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_8', TRUE);
-				if($this->input->post('type_quantity_9', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_9', TRUE);
-				if($this->input->post('type_quantity_10', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_10', TRUE);
-				if($this->input->post('type_quantity_11', TRUE)) $type_quantity .="-".$this->input->post('type_quantity_11', TRUE);
 				$count_unit = $this->input->post('count_unit_1', TRUE);
-				if($this->input->post('count_unit_2', TRUE)) $count_unit .="-".$this->input->post('count_unit_2', TRUE);
-				if($this->input->post('count_unit_3', TRUE)) $count_unit .="-".$this->input->post('count_unit_3', TRUE);
-				if($this->input->post('count_unit_4', TRUE)) $count_unit .="-".$this->input->post('count_unit_4', TRUE);
-				if($this->input->post('count_unit_5', TRUE)) $count_unit .="-".$this->input->post('count_unit_5', TRUE);
-				if($this->input->post('count_unit_6', TRUE)) $count_unit .="-".$this->input->post('count_unit_6', TRUE);
-				if($this->input->post('count_unit_7', TRUE)) $count_unit .="-".$this->input->post('count_unit_7', TRUE);
-				if($this->input->post('count_unit_8', TRUE)) $count_unit .="-".$this->input->post('count_unit_8', TRUE);
-				if($this->input->post('count_unit_9', TRUE)) $count_unit .="-".$this->input->post('count_unit_9', TRUE);
-				if($this->input->post('count_unit_10', TRUE)) $count_unit .="-".$this->input->post('count_unit_10', TRUE);
-				if($this->input->post('count_unit_11', TRUE)) $count_unit .="-".$this->input->post('count_unit_11', TRUE);
+
+				for($r=2; $r<=11; $r++):
+					if($this->input->post('type_name_'.$r, TRUE)) $type_name .="-".$this->input->post('type_name_'.$r, TRUE);
+					if($this->input->post('type_color_'.$r, TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_'.$r, TRUE);
+					if($this->input->post('type_quantity_'.$r, TRUE)) $type_quantity .="-".$this->input->post('type_quantity_'.$r, TRUE);
+					if($this->input->post('count_unit_'.$r, TRUE)) $count_unit .="-".$this->input->post('count_unit_'.$r, TRUE);
+				endfor;
+
 				$biz_start_ym = $this->input->post('biz_start_year').'-'.$this->input->post('biz_start_month');
 
 				$new_pj_data = array(
@@ -915,7 +815,9 @@ class Cms_m3 extends CB_Controller {
 					'sort' => $this->input->post('sort', TRUE),
 					'local_addr' => $local_addr,
 					'buy_land_extent' => $this->input->post('buy_land_extent', TRUE),
+					'donation_land_extent' => $this->input->post('donation_land_extent', TRUE),
 					'scheme_land_extent' => $this->input->post('scheme_land_extent', TRUE),
+					'area_usage' => $this->input->post('area_usage', TRUE),
 					'build_size' => $this->input->post('build_size', TRUE),
 					'num_unit' => $this->input->post('num_unit', TRUE),
 					'build_area' => $this->input->post('build_area', TRUE),
@@ -945,24 +847,13 @@ class Cms_m3 extends CB_Controller {
 				$result = $this->cms_main_model->insert_data('cb_cms_project', $new_pj_data, 'reg_date');
 
 				if($result) { // 등록 성공 시
-					alert('프로젝트 정보가  등록되었습니다.', base_url('cms_m3/project/2/1/'));
+					alert('프로젝트 정보가  등록되었습니다.', base_url('cms_m3/project/2/2/'));
 					exit;
 				}else{   // 등록 실패 시
-					alert('데이터베이스 오류가 발생하였습니다..', base_url('cms_m3/project/2/1/'));
+					alert('데이터베이스 오류가 발생하였습니다..', base_url('cms_m3/project/2/2/'));
 					exit;
 				}
 			}
-
-
-
-
-		// 3-2 신규 프로젝트 2. 예비검토 ////////////////////////////////////////////////////////////////////
-		}else if($mdi==2 && $sdi==2) {
-
-			// 조회 등록 권한 체크
-			$auth = $this->cms_main_model->auth_chk('_m3_2_2', $this->session->userdata['mem_id']);
-			// 불러올 페이지에 보낼 조회 권한 데이터
-			$view['auth22'] = $auth['_m3_2_2'];
 		}
 
 		/**
