@@ -617,51 +617,55 @@ class Cms_m3 extends CB_Controller {
 
 			// 등록된 프로젝트 데이터
 			$view['all_pj'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC '.$limit);
-			// if($this->input->get('project')) $view['project'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project WHERE seq = '.$this->input->get('project'));
 			if($this->input->get('project')) $view['project_data'] = $this->cms_main_model->select_data_row('cb_cms_project', array('seq'=>$project));
 
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
 
 			// 폼 검증할 필드와 규칙 사전 정의
-			$this->form_validation->set_rules('pj_name', '프로젝트 명', 'required');
-			$this->form_validation->set_rules('sort', '프로젝트 종류', 'required');
-			$this->form_validation->set_rules('postcode1', '우편번호', 'required|numeric');
-			$this->form_validation->set_rules('address1_1', '메인 주소', 'required');
-			$this->form_validation->set_rules('address2_1', '상세 주소', 'max_length[93]');
-			$this->form_validation->set_rules('buy_land_extent', '대지 매입면적', 'required|numeric|max_length[10]');
-			$this->form_validation->set_rules('donation_land_extent', '기부채납 면적', 'required|numeric|max_length[10]');
-			$this->form_validation->set_rules('scheme_land_extent', '계획 대지면적', 'required|numeric|max_length[10]');
-			$this->form_validation->set_rules('area_usage', '용도지역지구', 'max_length[30]');
-			$this->form_validation->set_rules('build_size', '건축 규모', 'max_length[60]');
-			$this->form_validation->set_rules('num_unit', '세대(호/실) 수', 'required|numeric|max_length[6]');
-			$this->form_validation->set_rules('build_area', '건축 면적', 'numeric|max_length[10]');
-			$this->form_validation->set_rules('gr_floor_area', '총 연면적', 'required|numeric|max_length[10]');
-			$this->form_validation->set_rules('on_floor_area', '지상 연면적', 'required|numeric|max_length[10]');
-			$this->form_validation->set_rules('ba_floor_area', '지하 연면적', 'required|numeric|max_length[10]');
-			$this->form_validation->set_rules('floor_ar_rat', '용적율(%)', 'required|max_length[8]');
-			$this->form_validation->set_rules('bu_to_la_rat', '건폐율(%)', 'max_length[8]');
-			$this->form_validation->set_rules('law_num_parking', '법정주차대수', 'numeric|max_length[6]');
-			$this->form_validation->set_rules('plan_num_parking', '계획주차대수', 'numeric|max_length[6]');
+			$this->form_validation->set_rules('pj_name', '프로젝트 명', 'trim|required');
+			$this->form_validation->set_rules('sort', '프로젝트 종류', 'trim|required');
+			$this->form_validation->set_rules('postcode1', '우편번호', 'trim|required|numeric');
+			$this->form_validation->set_rules('address1_1', '메인 주소', 'trim|required');
+			$this->form_validation->set_rules('address2_1', '상세 주소', 'trim|max_length[93]');
+			$this->form_validation->set_rules('buy_land_extent', '대지 매입면적', 'trim|required|numeric|max_length[10]');
+			$this->form_validation->set_rules('donation_land_extent', '기부채납 면적', 'trim|required|numeric|max_length[10]');
+			$this->form_validation->set_rules('scheme_land_extent', '계획 대지면적', 'trim|required|numeric|max_length[10]');
+			$this->form_validation->set_rules('area_usage', '용도지역지구', 'trim|max_length[30]');
+			$this->form_validation->set_rules('build_size', '건축 규모', 'trim|max_length[60]');
+			$this->form_validation->set_rules('num_unit', '세대(호/실) 수', 'trim|required|numeric|max_length[6]');
+			$this->form_validation->set_rules('build_area', '건축 면적', 'trim|numeric|max_length[10]');
+			$this->form_validation->set_rules('gr_floor_area', '총 연면적', 'trim|required|numeric|max_length[10]');
+			$this->form_validation->set_rules('on_floor_area', '지상 연면적', 'trim|required|numeric|max_length[10]');
+			$this->form_validation->set_rules('ba_floor_area', '지하 연면적', 'trim|required|numeric|max_length[10]');
+			$this->form_validation->set_rules('floor_ar_rat', '용적율(%)', 'trim|required|max_length[8]');
+			$this->form_validation->set_rules('bu_to_la_rat', '건폐율(%)', 'trim|max_length[8]');
+			$this->form_validation->set_rules('law_num_parking', '법정주차대수', 'trim|numeric|max_length[6]');
+			$this->form_validation->set_rules('plan_num_parking', '계획주차대수', 'trim|numeric|max_length[6]');
 
 			for($q=1; $q<=11; $q++):
-				$this->form_validation->set_rules('type_name_'.$j, '타입명('.$j.')', 'required|max_length[10]');
-				$this->form_validation->set_rules('type_color_'.$j, '타입컬러('.$j.')', 'max_length[7]');
-				$this->form_validation->set_rules('type_quantity_'.$j, '타입수량('.$j.')', 'required|max_length[5]');
-				$this->form_validation->set_rules('count_unit_'.$j, '수량단위('.$j.')', 'required');
+				$this->form_validation->set_rules('type_name_'.$q, '타입명('.$q.')', 'trim|max_length[10]');
+				$this->form_validation->set_rules('type_color_'.$q, '타입컬러('.$q.')', 'trim|max_length[7]');
+				$this->form_validation->set_rules('type_quantity_'.$q, '타입수량('.$q.')', 'trim|max_length[5]');
+				$this->form_validation->set_rules('count_unit_'.$q, '수량단위('.$q.')', 'trim');
+				$this->form_validation->set_rules('area_exc_'.$q, '전용면적('.$q.')', 'trim|numeric|max_length[10]');
+				$this->form_validation->set_rules('area_com_'.$q, '주거공용('.$q.')', 'trim|numeric|max_length[10]');
+				$this->form_validation->set_rules('area_sup_'.$q, '공급면적('.$q.')', 'trim|numeric|max_length[10]');
+				$this->form_validation->set_rules('area_other_'.$q, '기타공용('.$q.')', 'trim|numeric|max_length[10]');
+				$this->form_validation->set_rules('area_cont_'.$q, '계약면적('.$q.')', 'trim|numeric|max_length[10]');
 			endfor;
 
-			$this->form_validation->set_rules('land_cost', '토지 매입비', 'numeric|max_length[10]');
-			$this->form_validation->set_rules('build_cost', '평당건축비', 'numeric|max_length[5]');
-			$this->form_validation->set_rules('arc_design_cost', '설계용역비', 'numeric|max_length[8]');
-			$this->form_validation->set_rules('supervision_cost', '감리용역비', 'numeric|max_length[8]');
-			$this->form_validation->set_rules('initial_inves', '시행사 초기투자금', 'numeric|max_length[10]');
-			$this->form_validation->set_rules('dev_agency_charge', '시행대행 용역비(세대당)', 'numeric|max_length[5]');
-			$this->form_validation->set_rules('bridge_loan', '브리지차입규모', 'numeric|max_length[10]');
-			$this->form_validation->set_rules('pf_loan', 'PF차입규모', 'numeric|max_length[10]');
-			$this->form_validation->set_rules('con_lead_time', '공사 소요기간', 'numeric|max_length[4]');
-			$this->form_validation->set_rules('biz_start_year', '사업개시 년', 'numeric|max_length[4]');
-			$this->form_validation->set_rules('biz_start_month', '사업개시 월', 'numeric|max_length[2]');
+			$this->form_validation->set_rules('land_cost', '토지 매입비', 'trim|numeric|max_length[10]');
+			$this->form_validation->set_rules('build_cost', '평당건축비', 'trim|numeric|max_length[5]');
+			$this->form_validation->set_rules('arc_design_cost', '설계용역비', 'trim|numeric|max_length[8]');
+			$this->form_validation->set_rules('supervision_cost', '감리용역비', 'trim|numeric|max_length[8]');
+			$this->form_validation->set_rules('initial_inves', '시행사 초기투자금', 'trim|numeric|max_length[10]');
+			$this->form_validation->set_rules('dev_agency_charge', '시행대행 용역비(세대당)', 'trim|numeric|max_length[5]');
+			$this->form_validation->set_rules('bridge_loan', '브리지차입규모', 'trim|numeric|max_length[10]');
+			$this->form_validation->set_rules('pf_loan', 'PF차입규모', 'trim|numeric|max_length[10]');
+			$this->form_validation->set_rules('con_lead_time', '공사 소요기간', 'trim|numeric|max_length[4]');
+			$this->form_validation->set_rules('biz_start_year', '사업개시 년', 'trim|numeric|max_length[4]');
+			$this->form_validation->set_rules('biz_start_month', '사업개시 월', 'trim|numeric|max_length[2]');
 
 
 			if($this->form_validation->run() !== FALSE) { // 폼 전송 데이타가 있을 때 폼 데이타 가공
@@ -671,12 +675,21 @@ class Cms_m3 extends CB_Controller {
 				$type_color = $this->input->post('type_color_1', TRUE);
 				$type_quantity = $this->input->post('type_quantity_1', TRUE);
 				$count_unit = $this->input->post('count_unit_1', TRUE);
-
+				$area_exc = $this->input->post('area_exc_1', TRUE);
+				$area_com = $this->input->post('area_com_1', TRUE);
+				$area_sup = $this->input->post('area_sup_1', TRUE);
+				$area_other = $this->input->post('area_other_1', TRUE);
+				$area_cont = $this->input->post('area_cont_1', TRUE);
 				for($r=2; $r<=11; $r++):
 					if($this->input->post('type_name_'.$r, TRUE)) $type_name .="-".$this->input->post('type_name_'.$r, TRUE);
 					if($this->input->post('type_color_'.$r, TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_'.$r, TRUE);
 					if($this->input->post('type_quantity_'.$r, TRUE)) $type_quantity .="-".$this->input->post('type_quantity_'.$r, TRUE);
 					if($this->input->post('count_unit_'.$r, TRUE)) $count_unit .="-".$this->input->post('count_unit_'.$r, TRUE);
+					if($this->input->post('area_exc_'.$r, TRUE)) $area_exc .="-".$this->input->post('area_exc_'.$r, TRUE);
+					if($this->input->post('area_com_'.$r, TRUE)) $area_com .="-".$this->input->post('area_com_'.$r, TRUE);
+					if($this->input->post('area_sup_'.$r, TRUE)) $area_sup .="-".$this->input->post('area_sup_'.$r, TRUE);
+					if($this->input->post('area_other_'.$r, TRUE)) $area_other .="-".$this->input->post('area_other_'.$r, TRUE);
+					if($this->input->post('area_cont_'.$r, TRUE)) $area_cont .="-".$this->input->post('area_cont_'.$r, TRUE);
 				endfor;
 
 				$biz_start_ym = $this->input->post('biz_start_year').'-'.$this->input->post('biz_start_month');
@@ -699,10 +712,17 @@ class Cms_m3 extends CB_Controller {
 					'bu_to_la_rat' => $this->input->post('bu_to_la_rat', TRUE),
 					'law_num_parking' => $this->input->post('law_num_parking', TRUE),
 					'plan_num_parking' => $this->input->post('plan_num_parking', TRUE),
+
 					'type_name' => $type_name,
 					'type_color' => $type_color,
 					'type_quantity' => $type_quantity,
 					'count_unit' => $count_unit,
+					'area_exc' => $area_exc,
+					'area_com' => $area_com,
+					'area_sup' => $area_sup,
+					'area_other' => $area_other,
+					'area_cont' => $area_cont,
+
 					'land_cost' => $this->input->post('land_cost', TRUE),
 					'build_cost' => $this->input->post('build_cost', TRUE),
 					'arc_design_cost' => $this->input->post('arc_design_cost', TRUE),
@@ -753,44 +773,49 @@ class Cms_m3 extends CB_Controller {
 			$this->load->library('form_validation'); // 폼 검증
 
 			// 폼 검증할 필드와 규칙 사전 정의
-			$this->form_validation->set_rules('pj_name', '프로젝트 명', 'required');
-			$this->form_validation->set_rules('sort', '프로젝트 종류', 'required');
-			$this->form_validation->set_rules('postcode1', '우편번호', 'required|numeric');
-			$this->form_validation->set_rules('address1_1', '메인 주소', 'required');
-			$this->form_validation->set_rules('address2_1', '상세 주소', 'max_length[93]');
-			$this->form_validation->set_rules('buy_land_extent', '대지 매입면적', 'required|numeric|max_length[10]');
-			$this->form_validation->set_rules('donation_land_extent', '기부채납 면적', 'required|numeric|max_length[10]');
-			$this->form_validation->set_rules('scheme_land_extent', '계획 대지면적', 'required|numeric|max_length[10]');
-			$this->form_validation->set_rules('area_usage', '용도지역지구', 'max_length[30]');
-			$this->form_validation->set_rules('build_size', '건축 규모', 'max_length[60]');
-			$this->form_validation->set_rules('num_unit', '세대(호/실) 수', 'required|numeric|max_length[6]');
-			$this->form_validation->set_rules('build_area', '건축 면적', 'numeric|max_length[10]');
-			$this->form_validation->set_rules('gr_floor_area', '총 연면적', 'required|numeric|max_length[10]');
-			$this->form_validation->set_rules('on_floor_area', '지상 연면적', 'required|numeric|max_length[10]');
-			$this->form_validation->set_rules('ba_floor_area', '지하 연면적', 'required|numeric|max_length[10]');
-			$this->form_validation->set_rules('floor_ar_rat', '용적율(%)', 'required|max_length[8]');
-			$this->form_validation->set_rules('bu_to_la_rat', '건폐율(%)', 'max_length[8]');
-			$this->form_validation->set_rules('law_num_parking', '법정주차대수', 'numeric|max_length[6]');
-			$this->form_validation->set_rules('plan_num_parking', '계획주차대수', 'numeric|max_length[6]');
+			$this->form_validation->set_rules('pj_name', '프로젝트 명', 'trim|required');
+			$this->form_validation->set_rules('sort', '프로젝트 종류', 'trim|required');
+			$this->form_validation->set_rules('postcode1', '우편번호', 'trim|required|numeric');
+			$this->form_validation->set_rules('address1_1', '메인 주소', 'trim|required');
+			$this->form_validation->set_rules('address2_1', '상세 주소', 'trim|max_length[93]');
+			$this->form_validation->set_rules('buy_land_extent', '대지 매입면적', 'trim|required|numeric|max_length[10]');
+			$this->form_validation->set_rules('donation_land_extent', '기부채납 면적', 'trim|required|numeric|max_length[10]');
+			$this->form_validation->set_rules('scheme_land_extent', '계획 대지면적', 'trim|required|numeric|max_length[10]');
+			$this->form_validation->set_rules('area_usage', '용도지역지구', 'trim|max_length[30]');
+			$this->form_validation->set_rules('build_size', '건축 규모', 'trim|max_length[60]');
+			$this->form_validation->set_rules('num_unit', '세대(호/실) 수', 'trim|required|numeric|max_length[6]');
+			$this->form_validation->set_rules('build_area', '건축 면적', 'trim|numeric|max_length[10]');
+			$this->form_validation->set_rules('gr_floor_area', '총 연면적', 'trim|required|numeric|max_length[10]');
+			$this->form_validation->set_rules('on_floor_area', '지상 연면적', 'trim|required|numeric|max_length[10]');
+			$this->form_validation->set_rules('ba_floor_area', '지하 연면적', 'trim|required|numeric|max_length[10]');
+			$this->form_validation->set_rules('floor_ar_rat', '용적율(%)', 'trim|required|max_length[8]');
+			$this->form_validation->set_rules('bu_to_la_rat', '건폐율(%)', 'trim|max_length[8]');
+			$this->form_validation->set_rules('law_num_parking', '법정주차대수', 'trim|numeric|max_length[6]');
+			$this->form_validation->set_rules('plan_num_parking', '계획주차대수', 'trim|numeric|max_length[6]');
 
 			for($q=1; $q<=11; $q++):
-				$this->form_validation->set_rules('type_name_'.$j, '타입명('.$j.')', 'required|max_length[10]');
-				$this->form_validation->set_rules('type_color_'.$j, '타입컬러('.$j.')', 'max_length[7]');
-				$this->form_validation->set_rules('type_quantity_'.$j, '타입수량('.$j.')', 'required|max_length[5]');
-				$this->form_validation->set_rules('count_unit_'.$j, '수량단위('.$j.')', 'required');
+				$this->form_validation->set_rules('type_name_'.$q, '타입명('.$q.')', 'trim|max_length[10]');
+				$this->form_validation->set_rules('type_color_'.$q, '타입컬러('.$q.')', 'trim|max_length[7]');
+				$this->form_validation->set_rules('type_quantity_'.$q, '타입수량('.$q.')', 'trim|numeric|max_length[5]');
+				$this->form_validation->set_rules('count_unit_'.$q, '수량단위('.$q.')', 'trim');
+				$this->form_validation->set_rules('area_exc_'.$q, '전용면적('.$q.')', 'trim|numeric|max_length[10]');
+				$this->form_validation->set_rules('area_com_'.$q, '주거공용('.$q.')', 'trim|numeric|max_length[10]');
+				$this->form_validation->set_rules('area_sup_'.$q, '공급면적('.$q.')', 'trim|numeric|max_length[10]');
+				$this->form_validation->set_rules('area_other_'.$q, '기타공용('.$q.')', 'trim|numeric|max_length[10]');
+				$this->form_validation->set_rules('area_cont_'.$q, '계약면적('.$q.')', 'trim|numeric|max_length[10]');
 			endfor;
 
-			$this->form_validation->set_rules('land_cost', '토지 매입비', 'numeric|max_length[10]');
-			$this->form_validation->set_rules('build_cost', '평당건축비', 'numeric|max_length[5]');
-			$this->form_validation->set_rules('arc_design_cost', '설계용역비', 'numeric|max_length[8]');
-			$this->form_validation->set_rules('supervision_cost', '감리용역비', 'numeric|max_length[8]');
-			$this->form_validation->set_rules('initial_inves', '시행사 초기투자금', 'numeric|max_length[10]');
-			$this->form_validation->set_rules('dev_agency_charge', '시행대행 용역비(세대당)', 'numeric|max_length[5]');
-			$this->form_validation->set_rules('bridge_loan', '브리지차입규모', 'numeric|max_length[10]');
-			$this->form_validation->set_rules('pf_loan', 'PF차입규모', 'numeric|max_length[10]');
-			$this->form_validation->set_rules('con_lead_time', '공사 소요기간', 'numeric|max_length[4]');
-			$this->form_validation->set_rules('biz_start_year', '사업개시 년', 'numeric|max_length[4]');
-			$this->form_validation->set_rules('biz_start_month', '사업개시 월', 'numeric|max_length[2]');
+			$this->form_validation->set_rules('land_cost', '토지 매입비', 'trim|numeric|max_length[10]');
+			$this->form_validation->set_rules('build_cost', '평당건축비', 'trim|numeric|max_length[5]');
+			$this->form_validation->set_rules('arc_design_cost', '설계용역비', 'trim|numeric|max_length[8]');
+			$this->form_validation->set_rules('supervision_cost', '감리용역비', 'trim|numeric|max_length[8]');
+			$this->form_validation->set_rules('initial_inves', '시행사 초기투자금', 'trim|numeric|max_length[10]');
+			$this->form_validation->set_rules('dev_agency_charge', '시행대행 용역비(세대당)', 'trim|numeric|max_length[5]');
+			$this->form_validation->set_rules('bridge_loan', '브리지차입규모', 'trim|numeric|max_length[10]');
+			$this->form_validation->set_rules('pf_loan', 'PF차입규모', 'trim|numeric|max_length[10]');
+			$this->form_validation->set_rules('con_lead_time', '공사 소요기간', 'trim|numeric|max_length[4]');
+			$this->form_validation->set_rules('biz_start_year', '사업개시 년', 'trim|numeric|max_length[4]');
+			$this->form_validation->set_rules('biz_start_month', '사업개시 월', 'trim|numeric|max_length[2]');
 
 
 			if($this->form_validation->run() !== FALSE) { // 폼 전송 데이타가 있으면,//폼 데이타 가공
@@ -800,12 +825,22 @@ class Cms_m3 extends CB_Controller {
 				$type_color = $this->input->post('type_color_1', TRUE);
 				$type_quantity = $this->input->post('type_quantity_1', TRUE);
 				$count_unit = $this->input->post('count_unit_1', TRUE);
+				$area_exc = $this->input->post('area_exc_1', TRUE);
+				$area_com = $this->input->post('area_com_1', TRUE);
+				$area_sup = $this->input->post('area_sup_1', TRUE);
+				$area_other = $this->input->post('area_other_1', TRUE);
+				$area_cont = $this->input->post('area_cont_1', TRUE);
 
 				for($r=2; $r<=11; $r++):
 					if($this->input->post('type_name_'.$r, TRUE)) $type_name .="-".$this->input->post('type_name_'.$r, TRUE);
 					if($this->input->post('type_color_'.$r, TRUE)!="#000000") $type_color .="-".$this->input->post('type_color_'.$r, TRUE);
 					if($this->input->post('type_quantity_'.$r, TRUE)) $type_quantity .="-".$this->input->post('type_quantity_'.$r, TRUE);
 					if($this->input->post('count_unit_'.$r, TRUE)) $count_unit .="-".$this->input->post('count_unit_'.$r, TRUE);
+					if($this->input->post('area_exc_'.$r, TRUE)) $area_exc .="-".$this->input->post('area_exc_'.$r, TRUE);
+					if($this->input->post('area_com_'.$r, TRUE)) $area_com .="-".$this->input->post('area_com_'.$r, TRUE);
+					if($this->input->post('area_sup_'.$r, TRUE)) $area_sup .="-".$this->input->post('area_sup_'.$r, TRUE);
+					if($this->input->post('area_other_'.$r, TRUE)) $area_other .="-".$this->input->post('area_other_'.$r, TRUE);
+					if($this->input->post('area_cont_'.$r, TRUE)) $area_cont .="-".$this->input->post('area_cont_'.$r, TRUE);
 				endfor;
 
 				$biz_start_ym = $this->input->post('biz_start_year').'-'.$this->input->post('biz_start_month');
@@ -832,6 +867,11 @@ class Cms_m3 extends CB_Controller {
 					'type_color' => $type_color,
 					'type_quantity' => $type_quantity,
 					'count_unit' => $count_unit,
+					'area_exc' => $area_exc,
+					'area_com' => $area_com,
+					'area_sup' => $area_sup,
+					'area_other' => $area_other,
+					'area_cont' => $area_cont,
 					'land_cost' => $this->input->post('land_cost', TRUE),
 					'build_cost' => $this->input->post('build_cost', TRUE),
 					'arc_design_cost' => $this->input->post('arc_design_cost', TRUE),

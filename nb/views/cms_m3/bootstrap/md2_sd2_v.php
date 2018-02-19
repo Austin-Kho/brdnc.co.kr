@@ -8,8 +8,9 @@
 
     <div class="row" style="margin: 0; padding: 0;">
 <?php
-	$attributes = array('name' => 'form1', 'class' => '', 'method' => 'post');
-	echo form_open(current_url(), $attributes);
+    echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
+    $attributes = array('name' => 'form1', 'class' => '', 'method' => 'post');
+    echo form_open(current_url(), $attributes);
 ?>
 			<fieldset class="font12">
 				<div class="form-group"><!-- 프로젝트명/종류 -->
@@ -236,17 +237,17 @@
                         <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
                             <input type="text" class="form-control input-sm eng" id="<?php echo "type_name_".$j; ?>" name="<?php echo "type_name_".$j; ?>" maxlength="10" value="<?php echo set_value("type_name_".$j); ?>" required placeholder="타입">
                         </div>
-                        <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 컬러 :</span></span></div>
+                        <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입컬러 :</span></span></div>
                         <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
                             <label for="<?php echo "type_color_".$j; ?>" class="sr-only">컬러</span></label>
                             <input type="color" class="form-control input-sm en_only" id="<?php echo "type_color_".$j; ?>" name="<?php echo "type_color_".$j; ?>" maxlength="7" value="<?php echo set_value("type_color_".$j); ?>"  placeholder="컬러">
                         </div>
-                        <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
+                        <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입수량 :</span></div>
                         <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
                             <label for="<?php echo "type_quantity_".$j; ?>" class="sr-only">수량</span></label>
                             <input type="text" class="form-control input-sm en_only" id="<?php echo "type_quantity_".$j; ?>" name="<?php echo "type_quantity_".$j; ?>" onkeydown="onlyNum(this);" maxlength="5" value="<?php echo set_value("type_quantity_".$j); ?>" required placeholder="타입별 단위 수량">
                         </div>
-                        <div class="col-xs-3 col-sm-1" style="padding-right: 0;">
+                        <div class="col-xs-3 col-sm-2" style="padding-right: 0;">
                             <label for="<?php echo "count_unit_".$j; ?>" class="sr-only">단위</span></label>
                             <select class="form-control input-sm" id="<?php echo "count_unit_".$j; ?>" name="<?php echo "count_unit_".$j; ?>">
                                 <option value="0">단위</option>
@@ -255,6 +256,36 @@
                                 <option value="3" <?php echo set_select("count_unit_".$j, '3'); ?>>호</option>
                                 <option value="4" <?php echo set_select("count_unit_".$j, '4'); ?>>㎡(면적)</option>
                             </select>
+                        </div>
+                        <div class="col-xs-3 hidden-sm col-md-1"></div>
+                    </div>
+
+                    <div class="hidden-xs col-sm-4 col-md-2 label-wrap"><label><?php echo "( 면적 / 단위 / ㎡ )"; ?></label></div>
+                    <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
+                        <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>전용면적 :</span></div>
+                        <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+                            <label for="<?php echo "area_exc_".$j; ?>" class="sr-only">수량</span></label>
+                            <input type="text" class="form-control input-sm eng" id="<?php echo "area_exc_".$j; ?>" name="<?php echo "area_exc_".$j; ?>" maxlength="10" value="<?php echo set_value("area_exc_".$j); ?>" placeholder="전용면적">
+                        </div>
+                        <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>주거공용 :</span></div>
+                        <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+                            <label for="<?php echo "area_com_".$j; ?>" class="sr-only">수량</span></label>
+                            <input type="text" class="form-control input-sm eng" id="<?php echo "area_com_".$j; ?>" name="<?php echo "area_com_".$j; ?>" maxlength="10" value="<?php echo set_value("area_com_".$j); ?>" placeholder="주거공용">
+                        </div>
+                        <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>공급면적 :</span></div>
+                        <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+                            <label for="<?php echo "area_sup_".$j; ?>" class="sr-only">수량</span></label>
+                            <input type="text" class="form-control input-sm eng" id="<?php echo "area_sup_".$j; ?>" name="<?php echo "area_sup_".$j; ?>" maxlength="10" value="<?php echo set_value("area_sup_".$j); ?>" placeholder="공급면적">
+                        </div>
+                        <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>기타공용 :</span></div>
+                        <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+                            <label for="<?php echo "area_other_".$j; ?>" class="sr-only">수량</span></label>
+                            <input type="text" class="form-control input-sm eng" id="<?php echo "area_other_".$j; ?>" name="<?php echo "area_other_".$j; ?>" maxlength="10" value="<?php echo set_value("area_other_".$j); ?>" placeholder="기타공용">
+                        </div>
+                        <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>계약면적 :</span></div>
+                        <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+                            <label for="<?php echo "area_cont_".$j; ?>" class="sr-only">수량</span></label>
+                            <input type="text" class="form-control input-sm eng" id="<?php echo "area_cont_".$j; ?>" name="<?php echo "area_cont_".$j; ?>" maxlength="10" value="<?php echo set_value("area_cont_".$j); ?>" placeholder="계약면적">
                         </div>
 <?php if($j<11): ?>
                         <div class="col-xs-3 col-sm-1 col-md-2">

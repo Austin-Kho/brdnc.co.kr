@@ -7,7 +7,6 @@
 <!-- 3. 프로젝트 -> 1. 프로젝트 관리 ->2. 기본정보 수정 -->
 
 <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
-  <!-- <form method="get" name="pj_sel" action="<?php echo base_url(); ?>cms_m3/project/1/2/"> -->
 <?php
   $attributes = array('method' => 'get', 'name' => 'pj_sel');
   echo form_open(current_url(), $attributes);
@@ -102,13 +101,19 @@ return $sort;
     $t_count=count($type_name);
     $type_quantity = explode("-",$project_data->type_quantity);
     $count_unit = explode("-",$project_data->count_unit);
+    $area_exc = explode("-",$project_data->area_exc);
+    $area_com = explode("-",$project_data->area_com);
+    $area_sup = explode("-",$project_data->area_sup);
+    $area_other =  explode("-",$project_data->area_other);
+    $area_cont = explode("-",$project_data->area_cont);
     $biz_start_ym = explode("-",$project_data->biz_start_ym);
 ?>
 
 <div class="row" style="margin: 0; padding: 0;">
 <?php
-  $attributes = array('name' => 'form1', 'class' => '', 'method' => 'post');
-  echo form_open(current_url(), $attributes);
+    echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
+    $attributes = array('name' => 'form1', 'class' => '', 'method' => 'post');
+    echo form_open(current_url().'?project='.$this->input->get_post('project'), $attributes);
 ?>
     <fieldset class="font12">
       <label for="project" class="sr-only">모드</label>
@@ -356,14 +361,44 @@ return $sort;
                     <option value="4" <?php if($this->input->post("count_unit_".$j)) echo set_select("count_unit_".$j, '4'); else if($t_count>0 && $count_unit[$j-1]==4) echo "selected"; ?>>㎡(면적)</option>
                 </select>
             </div>
+            <div class="col-xs-3 hidden-sm col-md-1"></div>
+        </div>
+
+        <div class="hidden-xs col-sm-4 col-md-2 label-wrap"><label><?php echo "( 면적 / 단위 / ㎡ )"; ?></label></div>
+        <div class="col-xs-12 col-sm-8 col-md-10 form-wrap bo-top">
+            <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>전용면적 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+                <label for="<?php echo "area_exc_".$j; ?>" class="sr-only">수량</span></label>
+                <input type="text" class="form-control input-sm eng" id="<?php echo "area_exc_".$j; ?>" name="<?php echo "area_exc_".$j; ?>" maxlength="10" value="<?php if($this->input->post("area_exc_".$j)) echo set_value("area_exc_".$j); else if($t_count>0) echo $area_exc[$j-1]; ?>" placeholder="전용면적">
+            </div>
+            <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>주거공용 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+                <label for="<?php echo "area_com_".$j; ?>" class="sr-only">수량</span></label>
+                <input type="text" class="form-control input-sm eng" id="<?php echo "area_com_".$j; ?>" name="<?php echo "area_com_".$j; ?>" maxlength="10" value="<?php if($this->input->post("area_com_".$j)) echo set_value("area_com_".$j); else if($t_count>0) echo $area_com[$j-1]; ?>" placeholder="주거공용">
+            </div>
+            <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>공급면적 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+                <label for="<?php echo "area_sup_".$j; ?>" class="sr-only">수량</span></label>
+                <input type="text" class="form-control input-sm eng" id="<?php echo "area_sup_".$j; ?>" name="<?php echo "area_sup_".$j; ?>" maxlength="10" value="<?php if($this->input->post("area_sup_".$j)) echo set_value("area_sup_".$j); else if($t_count>0) echo $area_sup[$j-1]; ?>" placeholder="공급면적">
+            </div>
+            <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>기타공용 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+                <label for="<?php echo "area_other_".$j; ?>" class="sr-only">수량</span></label>
+                <input type="text" class="form-control input-sm eng" id="<?php echo "area_other_".$j; ?>" name="<?php echo "area_other_".$j; ?>" maxlength="10" value="<?php if($this->input->post("area_other_".$j)) echo set_value("area_other_".$j); else if($t_count>0) echo $area_other[$j-1]; ?>" placeholder="기타공용">
+            </div>
+            <div class="col-xs-3 col-sm-1" style="padding: 11px 0 0 8px; text-align:right;"><span>계약면적 :</span></div>
+            <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+                <label for="<?php echo "area_cont_".$j; ?>" class="sr-only">수량</span></label>
+                <input type="text" class="form-control input-sm eng" id="<?php echo "area_cont_".$j; ?>" name="<?php echo "area_cont_".$j; ?>" maxlength="10" value="<?php if($this->input->post("area_cont_".$j)) echo set_value("area_cont_".$j); else if($t_count>0) echo $area_cont[$j-1]; ?>" placeholder="계약면적">
+            </div>
 <?php if($j<11): ?>
             <div class="col-xs-3 col-sm-1 col-md-2">
-                <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
-                    <label>
-                        <input type="checkbox" name="<?php echo "ck2_".$j; ?>" id="<?php echo "ck2_".$j; ?>" onclick=<?php echo "type_reg('2',this,".$j.")" ?> <?php if( !empty($type_name[$j])){echo " checked ";} if( !empty($type_name[$j+1])){echo " disabled ";}?>>
-                        <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
-                    </label>
-                </div>
+              <div class="checkbox" data-toggle="tooltip" title="타입 추가하기">
+                <label>
+                  <input type="checkbox" name="<?php echo "ck2_".$j; ?>" id="<?php echo "ck2_".$j; ?>" onclick=<?php echo "type_reg('2',this,".$j.")" ?> <?php if( !empty($type_name[$j])){echo " checked ";} if( !empty($type_name[$j+1])){echo " disabled ";}?>>
+                  <a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
+                </label>
+              </div>
             </div>
 <?php endif; ?>
         </div>
@@ -484,9 +519,7 @@ return $sort;
           <div class="col-xs-1 col-sm-2" style="padding: 11px 0;"><span>월</span></div>
         </div>
       </div>
-      <div class="form-group" style="color: red;">
-        <?php echo validation_errors('<div class="error">', '</div>'); ?>&nbsp;
-      </div>
+      <div class="form-group" style="color: red;">&nbsp;</div>
 
 <?php if($auth13<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="con_formck();";} ?>
       <div class="form-group btn-wrap" style="margin: 0;">
