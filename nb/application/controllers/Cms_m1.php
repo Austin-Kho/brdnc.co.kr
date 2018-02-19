@@ -360,7 +360,7 @@ class Cms_m1 extends CB_Controller {
 						'con_floor_no'=>$con_floor_no
 					);
 
-					$price_seq = $this->cms_main_model->select_data_row('cb_cms_sales_price' , $pr_where);
+					$price_seq = $this->cms_main_model->data_row('cb_cms_sales_price' , $pr_where);
 
 					$cont_arr1 = array( // 계약 테이블 입력 데이터
 						'pj_seq' => $this->input->post('project', TRUE),

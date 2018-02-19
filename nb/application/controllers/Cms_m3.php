@@ -617,7 +617,7 @@ class Cms_m3 extends CB_Controller {
 
 			// 등록된 프로젝트 데이터
 			$view['all_pj'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC '.$limit);
-			if($this->input->get('project')) $view['project_data'] = $this->cms_main_model->select_data_row('cb_cms_project', array('seq'=>$project));
+			if($this->input->get('project')) $view['project_data'] = $this->cms_main_model->data_row('cb_cms_project', array('seq'=>$project));
 
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증

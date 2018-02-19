@@ -103,7 +103,7 @@ class Cms_m5 extends CB_Controller {
 			$view['list'] = $this->cms_m5_model->com_div_list($div_table, $start, $limit, $st1, $st2, '');
 
 			// 세부 부서데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-			if($this->input->get('seq')) $view['sel_div'] = $this->cms_main_model->select_data_row($div_table, $where = array('seq' => $this->input->get('seq')));
+			if($this->input->get('seq')) $view['sel_div'] = $this->cms_main_model->data_row($div_table, $where = array('seq' => $this->input->get('seq')));
 
 
 			// 폼 검증 라이브러리 로드
@@ -183,7 +183,7 @@ class Cms_m5 extends CB_Controller {
 			$view['list'] = $this->cms_m5_model->com_mem_list($mem_table, $start, $limit, $st1, $st2, '');
 
 			// 세부 부서데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-			if($this->input->get('seq')) $view['sel_mem'] = $this->cms_main_model->select_data_row($mem_table, $where = array('seq' => $this->input->get('seq')));
+			if($this->input->get('seq')) $view['sel_mem'] = $this->cms_main_model->data_row($mem_table, $where = array('seq' => $this->input->get('seq')));
 
 			// 폼 검증 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
@@ -270,7 +270,7 @@ class Cms_m5 extends CB_Controller {
 			$view['list'] = $this->cms_m5_model->com_accounts_list($acc_table, $start, $limit, $st1, $st2, '');
 
 			// 세부 거래처데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-			if($this->input->get('seq')) $view['sel_acc'] = $this->cms_main_model->select_data_row($acc_table, $where = array('seq' => $this->input->get('seq')));
+			if($this->input->get('seq')) $view['sel_acc'] = $this->cms_main_model->data_row($acc_table, $where = array('seq' => $this->input->get('seq')));
 
 			// 폼 검증 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
@@ -360,14 +360,14 @@ class Cms_m5 extends CB_Controller {
 			// db[전체은행목록] 데이터 불러오기
 			$view['com_bank'] = $this->cms_m5_model->all_bank_name();
 			//은행 디비 전체 불러오기
-			$view['all_bank'] = $this->cms_main_model->select_data_list('cb_cms_capital_bank_code');
-			$view['all_div'] = $this->cms_main_model->select_data_list('cb_cms_com_div');
+			$view['all_bank'] = $this->cms_main_model->data_result('cb_cms_capital_bank_code');
+			$view['all_div'] = $this->cms_main_model->data_result('cb_cms_com_div');
 
 			//  db [은행 ]데이터 불러오기
 			$view['list'] = $this->cms_m5_model->bank_account_list($bank_table, $start, $limit, $st1, $st2, '');
 
 			// 세부 은행데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-			if($this->input->get('seq')) $view['sel_bank'] = $this->cms_main_model->select_data_row($bank_table, $where = array('no' => $this->input->get('seq')));
+			if($this->input->get('seq')) $view['sel_bank'] = $this->cms_main_model->data_row($bank_table, $where = array('no' => $this->input->get('seq')));
 
 			// 폼 검증 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
@@ -381,7 +381,7 @@ class Cms_m5 extends CB_Controller {
 
 			if($this->form_validation->run() !==FALSE) { // post data 있는 경우
 
-				$bank_name = $this->cms_main_model->select_data_row('cb_cms_capital_bank_code', $where = array('bank_code' => $this->input->post('bank_code')));
+				$bank_name = $this->cms_main_model->data_row('cb_cms_capital_bank_code', $where = array('bank_code' => $this->input->post('bank_code')));
 				$bank_data = array(
 					'bank' => $bank_name->bank_name,
 					'bank_code' => $this->input->post('bank_code', TRUE),

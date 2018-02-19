@@ -9,12 +9,12 @@ class Cms_main_model extends CB_Model
 	//공통 함수 Start//
 
   /**
-	 * [select_data_list 복수 데이터 불러오기]
+	 * [data_result 복수 데이터 불러오기]
 	 * @param  [String] $table [테이블명]
 	 * @param  [Array] $where [필터링 '키'=>값]
 	 * @return [Array]        [추출 데이터]
 	 */
-	public function select_data_list($table, $where='', $select, $group, $order){
+	public function data_result($table, $where='', $select, $group, $order){
     if(isset($select)) $this->db->select($select);
     if(isset($group)) $this->db->group_by($group);
     if(isset($order)) $this->db->order_by($order);
@@ -24,13 +24,13 @@ class Cms_main_model extends CB_Model
 	}
 
   /**
-   * [select_data_row  단수 데이터 불러오기]
+   * [data_row  단수 데이터 불러오기]
    * @param  [String] $table [테이블명]
    * @param  [Array] $where [필터링 '키'=>값]
    * @param  [Array] $select [불러올 필드명]
    * @return [Boolean]       [성공 여부]
    */
-  public function select_data_row($table, $where, $select, $group, $order) {
+  public function data_row($table, $where, $select, $group, $order) {
     if(isset($select)) $this->db->select($select);
     if(isset($group)) $this->db->group_by($group);
     if(isset($order)) $this->db->order_by($order);
@@ -39,34 +39,34 @@ class Cms_main_model extends CB_Model
   }
 
   /**
-	 * [select_data_num 데이터 수 가져오기]
+	 * [data_num_rows 데이터 수 가져오기]
 	 * @param  [String] $table [테이블명]
 	 * @param  string $where [검색조건]
 	 * @return [Array]        [추출 데이터]
 	 */
-	public function select_data_num($table, $where=''){
+	public function data_num_rows($table, $where=''){
 		if($where!='') $this->db->where($where);
 		$qry = $this->db->get($table);
 		return $rlt = $qry->num_rows();
 	}
 
   /**
-	 * [select_data_opt description]
+	 * [data_option description]
 	 * @param  [type] $table [description]
 	 * @param  string $where [description]
 	 * @param  string $opt   [description]
 	 * @return [type]        [description]
 	 */
-	public function select_data_opt($table, $where='', $opt='', $select){
+	public function data_option($table, $where='', $opt='', $select){
     if(isset($select)) $this->db->select($select);
 		if($where!='') $this->db->where($where);
 		$qry = $this->db->get($table);
 		switch ($opt) {
-			case '1': $val = $qry->row(); break;
-			case '2': $val = $qry->result(); break;
-			case '3': $val = $qry->num_rows(); break;
-			case '4': $val = array('result' => $qry->result(), 'num' => $qry->num_rows()); break;
-			default: $val = $qry->result(); break;
+			case '1': $val = $qry->row(); break; // 단수 데이터
+			case '2': $val = $qry->result(); break; // 복수 데이터
+			case '3': $val = $qry->num_rows(); break; // 데이터 수
+			case '4': $val = array('result' => $qry->result(), 'num' => $qry->num_rows()); break; // 복수데이터와 데이터 수
+			default: $val = $qry->result(); break; // 복수 데이터
 		}
 		return $val;
 	}
