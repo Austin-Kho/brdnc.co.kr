@@ -120,7 +120,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 		<table class="table table-bordered table-condensed table-hover font12">
 			<thead>
 				<tr>
-					<th colspan="5" style="text-align: center; background-color:#BDD5FE;" width="20%">구 분</th>
+					<th colspan="4" style="text-align: center; background-color:#BDD5FE;" width="20%">구 분</th>
 					<th style="text-align: center; background-color:#BDD5FE;" width="15%">금 액</th>
 					<th style="text-align: center; background-color:#BDD5FE;" width="40%">산 출 내 역</th>
 					<th style="text-align: center; background-color:#BDD5FE;" width="20%">비 고</th>
@@ -129,37 +129,20 @@ for($i=(count($year)-1); $i>=0; $i--) :
 			</thead>
 			<tbody>
 <?php
-	$inc_total_rows = (count($diff)*count($type))+count($diff)+3;
-	for($i=0; $i<$inc_total_rows; $i++) :
-		$td_1st = $i==0 ? "<td rowspan='".$inc_total_rows."' style='text-align:center; vertical-align:middle;'>수<br>입</td>" : "";
-		$td_2nd = $i==0 ? "<td rowspan='".($inc_total_rows-2)."' style='text-align:center; vertical-align:middle;'>공<br>동<br>주<br>택</td>" : "";
+	$store_type_num = 1;
+	$incom_total_row = (count($diff)*(count($type)+1))+$store_type_num+3;
 
-		if(($i==0 or $i%(count($type)+1)===0) && $i<=(count($diff)*count($type))) {
-			$td_3rd = "<td rowspan='".(count($type)+1)."' style='text-align:center; vertical-align:middle;'>".mb_substr($diff[$i%(count($type))]->diff_name, 0, 2)."</td>";
-		}else if($i==(count($diff)*(count($type)+1))){
-			$td_3rd = "<td></td>";
-		}else if($i>(count($diff)*(count($type)+1))){
-			$td_3rd = "<td></td><td></td>";
-		}else{
-			$td_3rd = "";
-		}
-
-		if(($i)%(count($type)+1)===count($type)){
-			$type_line = "소계";
-		}else{
-			$type_line = $type[$i%(count($type)+1)];
-		}
+	for($i=0; $i<$incom_total_row; $i++) :
 ?>
 				<tr>
-					<?php echo $td_1st; ?>
-					<?php echo $td_2nd; ?>
-					<?php echo $td_3rd; ?>
-					<td style="text-align:center;"><?php echo $type_line; ?></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
 				</tr>
 <?php endfor; ?>
 			</tbody>
