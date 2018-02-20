@@ -133,12 +133,9 @@ for($i=(count($year)-1); $i>=0; $i--) :
 	for($i=0; $i<$inc_total_rows; $i++) :
 		$td_1st = $i==0 ? "<td rowspan='".$inc_total_rows."' style='text-align:center; vertical-align:middle;'>수<br>입</td>" : "";
 		$td_2nd = $i==0 ? "<td rowspan='".($inc_total_rows-2)."' style='text-align:center; vertical-align:middle;'>공<br>동<br>주<br>택</td>" : "";
-		// switch ($i) {
-		// 	case ($i%((count($type)+1))===0): $td_3rd = "<td rowspan='".(count($type)+1)."'>".($type[$i])."</td>"; break;
-		// 	default: $td_3rd = ""; break;
-		// }
+
 		if(($i==0 or $i%(count($type)+1)===0) && $i<=(count($diff)*count($type))) {
-			$td_3rd = "<td rowspan='".(count($type)+1)."'>".mb_substr($diff[$i%(count($type))]->diff_name, 0, 2)."</td>";
+			$td_3rd = "<td rowspan='".(count($type)+1)."' style='text-align:center; vertical-align:middle;'>".mb_substr($diff[$i%(count($type))]->diff_name, 0, 2)."</td>";
 		}else if($i==(count($diff)*(count($type)+1))){
 			$td_3rd = "<td></td>";
 		}else if($i>(count($diff)*(count($type)+1))){
@@ -147,17 +144,17 @@ for($i=(count($year)-1); $i>=0; $i--) :
 			$td_3rd = "";
 		}
 
-		if(($i)%(count($type))===0){
+		if(($i)%(count($type)+1)===count($type)){
 			$type_line = "소계";
 		}else{
-			$type_line = "";
+			$type_line = $type[$i%(count($type)+1)];
 		}
 ?>
 				<tr>
 					<?php echo $td_1st; ?>
 					<?php echo $td_2nd; ?>
 					<?php echo $td_3rd; ?>
-					<td><?php echo $type_line; ?></td>
+					<td style="text-align:center;"><?php echo $type_line; ?></td>
 					<td></td>
 					<td></td>
 					<td></td>
