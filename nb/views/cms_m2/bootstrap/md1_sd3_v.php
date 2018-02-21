@@ -132,13 +132,16 @@ for($i=(count($year)-1); $i>=0; $i--) :
 <?php
 	$store_type_row = 1;
 	$income_title_row = (count($diff)*(count($type)+1))+$store_type_row+3;
+	$apt_title_row = (count($diff)*(count($type)+1));
 ?>
 <?php
 	for($i=0; $i<$income_title_row-1; $i++) :
 		echo "<tr>";
 		for($j=0; $j<8; $j++):
 
-			echo "<td>&nbsp;</td>";
+			$td_html = "<td>&nbsp;</td>";
+
+			echo $td_html;
 
 		endfor;
 		echo "</tr>";
