@@ -128,23 +128,22 @@ for($i=(count($year)-1); $i>=0; $i--) :
 				</tr>
 			</thead>
 			<tbody>
+				<!-- <td style="text-align:center; vertical-align:middle;" rowspan="<?php echo $income_title_row; ?>">수<br/><br/>입</td> -->
 <?php
-	$store_type_num = 1;
-	$incom_total_row = (count($diff)*(count($type)+1))+$store_type_num+3;
-
-	for($i=0; $i<$incom_total_row; $i++) :
+	$store_type_row = 1;
+	$income_title_row = (count($diff)*(count($type)+1))+$store_type_row+3;
 ?>
-				<tr>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-				</tr>
-<?php endfor; ?>
+<?php
+	for($i=0; $i<$income_title_row-1; $i++) :
+		echo "<tr>";
+		for($j=0; $j<8; $j++):
+
+			echo "<td>&nbsp;</td>";
+
+		endfor;
+		echo "</tr>";
+	endfor;
+?>
 			</tbody>
 		</table>
 	</div>
