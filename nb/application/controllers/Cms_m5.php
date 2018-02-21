@@ -581,6 +581,7 @@ class Cms_m5 extends CB_Controller {
 					if($this->input->post('_m1_1_1_m')=='on'){$_m1_1_1=2;} else if($this->input->post('_m1_1_1')=='on') {$_m1_1_1=1;} else {$_m1_1_1=0;}
 					if($this->input->post('_m1_1_2_m')=='on'){$_m1_1_2=2;} else if($this->input->post('_m1_1_2')=='on') {$_m1_1_2=1;} else {$_m1_1_2=0;}
 					if($this->input->post('_m1_1_3_m')=='on'){$_m1_1_3=2;} else if($this->input->post('_m1_1_3')=='on'){$_m1_1_3=1;} else {$_m1_1_3=0;}
+					if($this->input->post('_m1_1_4_m')=='on'){$_m1_1_4=2;} else if($this->input->post('_m1_1_4')=='on'){$_m1_1_4=1;} else {$_m1_1_4=0;}
 					if($this->input->post('_m1_2_1_m')=='on'){$_m1_2_1=2;} else if($this->input->post('_m1_2_1')=='on'){$_m1_2_1=1;} else {$_m1_2_1=0;}
 					if($this->input->post('_m1_2_2_m')=='on'){$_m1_2_2=2;} else if($this->input->post('_m1_2_2')=='on'){$_m1_2_2=1;} else {$_m1_2_2=0;}
 					if($this->input->post('_m1_2_3_m')=='on'){$_m1_2_3=2;} else if($this->input->post('_m1_2_3')=='on'){$_m1_2_3=1;} else {$_m1_2_3=0;}
@@ -618,6 +619,7 @@ class Cms_m5 extends CB_Controller {
 						'_m1_1_1' => $_m1_1_1,
 						'_m1_1_2' => $_m1_1_2,
 						'_m1_1_3' => $_m1_1_3,
+						'_m1_1_4' => $_m1_1_4,
 						'_m1_2_1' => $_m1_2_1,
 						'_m1_2_2' => $_m1_2_2,
 						'_m1_2_3' => $_m1_2_3,

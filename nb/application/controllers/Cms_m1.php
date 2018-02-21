@@ -55,9 +55,9 @@ class Cms_m1 extends CB_Controller {
 		$sdi = $this->uri->segment(4, 1);
 
 		$view['s_di'] = array(
-			array('계약 현황', '계약 등록', '동호수 현황'), // 첫번째 하위 메뉴
+			array('계약 현황', '계약 등록', '동호수 현황', '계약서 관리'), // 첫번째 하위 메뉴
 			array('수납 현황', '수납 등록', '고지서 발행'),	 // 두번째 하위 메뉴
-			array('프로젝트별 계약현황', '프로젝트별 계약등록(수정)', '동호수 계약 현황표'),  // 첫번째 하위 제목
+			array('프로젝트별 계약현황', '프로젝트별 계약등록(수정)', '동호수 계약 현황표', '계약서 관련 스캔파일'),  // 첫번째 하위 제목
 			array('분양대금 수납 현황', '분양대금 수납 등록', '계약 건별 수납고지서 출력')   // 두번째 하위 제목
 		);
 
@@ -835,6 +835,19 @@ class Cms_m1 extends CB_Controller {
 				$d = $dong_data[$j]->dong;
 				$line_num = $view['line_num'][$j] = $this->cms_main_model->sql_row(" SELECT MIN(RIGHT(ho,2)) AS from_line, MAX(RIGHT(ho,2)) AS to_line FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$d' ");
 			endfor;
+
+
+
+
+
+
+		// 계약현황 4. 계약서 [스캔파일] ////////////////////////////////////////////////////////////////////
+		}else if($mdi==1 && $sdi==4) {
+			// $this->output->enable_profiler(TRUE); //프로파일러 보기
+
+			// 조회 등록 권한 체크
+			$auth = $this->cms_main_model->auth_chk('_m1_1_4', $this->session->userdata['mem_id']);
+			$view['auth14'] = $auth['_m1_1_4']; // 불러올 페이지에 보낼 조회 권한 데이터
 
 
 

@@ -127,7 +127,14 @@ endif;?>
 											<label><input type="checkbox" id="_m1_1_3_m" name="_m1_1_3_m" <?php if(isset($user_auth->_m1_1_3) && $user_auth->_m1_1_3>1) echo 'checked'; ?>> 관리</label>
 										</div>
 									</td>
-									<td class=" mbo-top" ></td>
+                                    <td class=" mbo-top" >계약서 [스캔]
+										<div class="checkbox" style="margin: 0; width: 80px;">
+											<label><input type="checkbox" id="_m1_1_4" name="_m1_1_4" <?php if(isset($user_auth->_m1_1_4) && $user_auth->_m1_1_4>0) echo 'checked'; ?>> 조회</label>
+										</div>
+										<div class="checkbox" style="margin: 0; width: 80px;">
+											<label><input type="checkbox" id="_m1_1_4_m" name="_m1_1_4_m" <?php if(isset($user_auth->_m1_1_4) && $user_auth->_m1_1_4>1) echo 'checked'; ?>> 관리</label>
+										</div>
+									</td>
 
 									<td class="sec-td bo-right bo-left bgf8" style="vertical-align: middle; padding: 0 0 0 10px;"><div style="width: 80px;"><strong>수납관리</strong></div></td>
 									<td class="sec-td" >수납현황
