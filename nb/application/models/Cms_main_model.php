@@ -113,23 +113,23 @@ class Cms_main_model extends CB_Model
 	}
 
   /**
-	 * [sql_sel_opt sql 인자로 데이터 추출 // 추출방식 옵션 적용]
+	 * [sql_option sql 인자로 데이터 추출 // 추출방식 옵션 적용]
 	 * @param  [String] $sql [sql 인자]
 	 * @param  [String] $opt [1. row 2. result 3. num_rows 4. result + num_rows]
 	 * @return [Array]      [추출한 데이터]
 	 */
-	public function sql_sel_opt($sql, $opt){
-		$qry = $this->db->query($sql);
-		switch ($opt) {
-			case '1': $rlt = $qry->row(); break;
-			case '2': $rlt = $qry->result(); break;
-			case '3': $rlt = $qry->num_rows(); break;
-			case '4': $rlt = array('row' => $qry->row(), 'num' => $qry->num_rows()); break;
-      case '5': $rlt = array('result' => $qry->result(), 'num' => $qry->num_rows()); break;
-      default: $rlt = $qry->result(); break; // 복수행 데이터
-		}
-		return $rlt;
-	}
+    public function sql_option($sql, $opt){
+        $qry = $this->db->query($sql);
+        switch ($opt) {
+            case '1': $rlt = $qry->row(); break;
+            case '2': $rlt = $qry->result(); break;
+            case '3': $rlt = $qry->num_rows(); break;
+            case '4': $rlt = array('row' => $qry->row(), 'num' => $qry->num_rows()); break;
+            case '5': $rlt = array('result' => $qry->result(), 'num' => $qry->num_rows()); break;
+            default: $rlt = $qry->result(); break; // 복수행 데이터
+        }
+        return $rlt;
+    }
 
   /**
    * [insert_data 데이터 입력함수]
@@ -178,9 +178,9 @@ class Cms_main_model extends CB_Model
 	 * @return [int]        [권한 값]
 	 */
 	public function auth_chk($field, $where) {
-    $this->db->select($field);
-    $query = $this->db->get_where('cms_mem_auth', array('user_no' => $where));
-    return $row = $query->row_array();
+        $this->db->select($field);
+        $query = $this->db->get_where('cms_mem_auth', array('user_no' => $where));
+        return $row = $query->row_array();
 	}
 
 	/**
@@ -188,10 +188,10 @@ class Cms_main_model extends CB_Model
 	 * @return [Array] [결과 데이터]
 	 */
 	public function master_auth_chk(){
-    $this->db->select('mem_is_admin, mem_level');
-    $qry = $this->db->get_where('member', array('mem_id'=>$this->session->userdata['mem_id']));
-    return $result = $qry->row();
-  }
+        $this->db->select('mem_is_admin, mem_level');
+        $qry = $this->db->get_where('member', array('mem_id'=>$this->session->userdata['mem_id']));
+        return $result = $qry->row();
+    }
 
 	/**************************************************************************************/
 }
