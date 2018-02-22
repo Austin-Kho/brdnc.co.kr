@@ -57,7 +57,7 @@ class Cms_m3 extends CB_Controller {
 		// 등록된 프로젝트 데이터
 		$where = "";
 		if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
-		$view['all_pj'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC ');
+		$view['all_pj'] = $this->cms_main_model->data_result('cb_cms_project', '', '', '', 'biz_start_ym DESC');
 		$project = $view['project'] = ($this->input->get_post('project')) ? $this->input->get_post('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
 
 		// 3-1 프로젝트 관리 1. 데이터등록 ////////////////////////////////////////////////////////////////////
@@ -311,8 +311,8 @@ class Cms_m3 extends CB_Controller {
 			$diff_no = $this->input->get('con_diff');
 			$view['pr_diff'] = $this->cms_main_model->sql_result(" SELECT	seq, diff_no, diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$diff_no' "); // 차수
 
-
 			$type = $view['type'] = explode("-", $view['type_info']->type_name);
+
 
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
@@ -352,14 +352,14 @@ class Cms_m3 extends CB_Controller {
 					}
 				}
 			}
-			// $this->form_validation->set_rules("pmt_25_1", "납부금액_".$p_seq."_".$view['pay_sche'][$j]->seq, 'trim|max_length[10]numeric|required');
+
 			$p=0;
 			for($i=0; $i<count($type); $i++) : // 6. payment form_validation->set_rules(''); 설정
 				for($m=0; $m<count($con_floor); $m++) :
 					$p_seq = $view['price'][$p]->pr_seq;
 					$p++;
 					for($j=0; $j<count($view['pay_sche']); $j++) :
-						$this->form_validation->set_rules("pmt_".$p_seq."_".$view['pay_sche'][$j]->seq, "납부금액_".$p_seq."_".$view['pay_sche'][$j]->seq, 'trim|max_length[10]numeric');
+						$this->form_validation->set_rules("pmt_".$p_seq."_".$view['pay_sche'][$j]->seq, "납부금액_".$p_seq."_".$view['pay_sche'][$j]->seq, 'trim|max_length[10]|numeric');
 					endfor;
 				endfor;
 			endfor;
@@ -513,7 +513,6 @@ class Cms_m3 extends CB_Controller {
 									// 입력할 데이터가 존재하는 경우 업데이트(UPDATE)
 									$result[$j] = $this->cms_main_model->insert_data('cb_cms_sales_price', $price_data);
 									if( !$result[$j]) {alert('데이터베이스 에러입니다.1', '');}
-									// alert($this->input->post("price_".$k."_h").' - 인서트 처리 합니다.', '');
 
 								}else if($this->input->post("price_".$k."_h") ==="1"){
 									// 입력할 데이터가 존재하지 않는 경우 인서트(INSERT)
@@ -526,7 +525,6 @@ class Cms_m3 extends CB_Controller {
 										'con_floor_no' => $this->input->post('fl_no_'.$k)
 									));
 									if( !$result[$j]) {alert('데이터베이스 에러입니다.2', '');}
-									// alert($this->input->post("price_".$k."_h").' - 업데이트 처리 합니다.', '');
 								}
 								$k++;
 							}
@@ -559,23 +557,20 @@ class Cms_m3 extends CB_Controller {
 										'reg_worker' => $this->session->userdata('mem_username')
 									);
 
-									if(empty($this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq."_h")) OR ($this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq."_h"))=='0') {
-										// alert($p_seq, '');
-										// $result[$j] = $this->cms_main_model->insert_data('cb_cms_sales_payment', $pmt_data);
-										// if( !$result[$j]) {alert('데이터베이스 에러입니다.1', '');}
-									}elseif(($this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq."_h"))=='1') {
-										// alert($p_seq, '');
-										// $result[$j] = $this->cms_main_model->update_data('cb_cms_sales_payment', $pmt_data, array('pj_seq'=>$project, 'price_seq'=>$p_seq, 'pay_sche_seq'=>$pay_sche[$j]->seq));
-										// if( !$result[$j]) {alert('데이터베이스 에러입니다.2', '');}
+									if($this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq) && ($this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq."_h"))=='0') {
+										$result[$j] = $this->cms_main_model->insert_data('cb_cms_sales_payment', $pmt_data);
+										if( !$result[$j]) {alert('데이터베이스 에러입니다.1', '');}
+									}elseif($this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq) && $this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq."_h")=='1') {
+										$result[$j] = $this->cms_main_model->update_data('cb_cms_sales_payment', $pmt_data, array('pj_seq'=>$project, 'price_seq'=>$p_seq, 'pay_sche_seq'=>$pay_sche[$j]->seq));
+										if( !$result[$j]) {alert('데이터베이스 에러입니다.2', '');}
 									}
 
 								endfor;
 							endfor;
 						endfor;
 
-						alert($p_seq, '');
+						alert('정상 처리 되었습니다.', '');
 
-						// alert('정상 처리 되었습니다.', '');
 						// 6. 회차별 납입가 등록---종료
 					}
 				}
