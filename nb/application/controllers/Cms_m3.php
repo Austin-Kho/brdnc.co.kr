@@ -321,7 +321,6 @@ class Cms_m3 extends CB_Controller {
 				$this->form_validation->set_rules('diff_no_'.$a, '등록차수'.($a+1), 'trim|max_length[2]|numeric');
 				$this->form_validation->set_rules('diff_name_'.$a, '차수명'.($a+1), 'trim|max_length[10]');
 			}
-			// if($this->form_validation->run() === FALSE) redirect(base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=1');
 
 			for($b=0; $b<15; $b++){ // 2. pay_sche form_validation->set_rules(''); 설정
 				$this->form_validation->set_rules('pay_sort_'.$b, '납부구분'.($b+1), 'trim|max_length[1]|numeric');
@@ -331,7 +330,6 @@ class Cms_m3 extends CB_Controller {
 				$this->form_validation->set_rules('pay_disc_'.$b, '부가설명'.($b+1), 'trim|max_length[10]');
 				$this->form_validation->set_rules('pay_due_date_'.$b, '납부기한'.($b+1), 'trim|max_length[10]');
 			}
-			// if($this->form_validation->run() === FALSE) redirect(base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=2');
 
 			for($c=0; $c<10; $c++){ // 3. floor form_validation->set_rules(''); 설정
 				$this->form_validation->set_rules('s_range_'.$c, '층 범위(시작)'.($c+1), 'trim|max_length[2]|numeric');
@@ -361,7 +359,7 @@ class Cms_m3 extends CB_Controller {
 					$p_seq = $view['price'][$p]->pr_seq;
 					$p++;
 					for($j=0; $j<count($view['pay_sche']); $j++) :
-						$this->form_validation->set_rules("pmt_".$p_seq."_".$view['pay_sche'][$j]->seq, "납부금액_".$p_seq."_".$view['pay_sche'][$j]->seq, 'trim|max_length[10]numeric|required');
+						$this->form_validation->set_rules("pmt_".$p_seq."_".$view['pay_sche'][$j]->seq, "납부금액_".$p_seq."_".$view['pay_sche'][$j]->seq, 'trim|max_length[10]numeric');
 					endfor;
 				endfor;
 			endfor;
@@ -562,18 +560,22 @@ class Cms_m3 extends CB_Controller {
 									);
 
 									if(empty($this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq."_h")) OR ($this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq."_h"))=='0') {
-										$result[$j] = $this->cms_main_model->insert_data('cb_cms_sales_payment', $pmt_data);
-										if( !$result[$j]) {alert('데이터베이스 에러입니다.1', '');}
+										// alert($p_seq, '');
+										// $result[$j] = $this->cms_main_model->insert_data('cb_cms_sales_payment', $pmt_data);
+										// if( !$result[$j]) {alert('데이터베이스 에러입니다.1', '');}
 									}elseif(($this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq."_h"))=='1') {
-										$result[$j] = $this->cms_main_model->update_data('cb_cms_sales_payment', $pmt_data, array('pj_seq'=>$project, 'price_seq'=>$p_seq, 'pay_sche_seq'=>$pay_sche[$j]->seq));
-										if( !$result[$j]) {alert('데이터베이스 에러입니다.2', '');}
+										// alert($p_seq, '');
+										// $result[$j] = $this->cms_main_model->update_data('cb_cms_sales_payment', $pmt_data, array('pj_seq'=>$project, 'price_seq'=>$p_seq, 'pay_sche_seq'=>$pay_sche[$j]->seq));
+										// if( !$result[$j]) {alert('데이터베이스 에러입니다.2', '');}
 									}
 
 								endfor;
 							endfor;
 						endfor;
 
-						alert('정상 처리 되었습니다.', '');
+						alert($p_seq, '');
+
+						// alert('정상 처리 되었습니다.', '');
 						// 6. 회차별 납입가 등록---종료
 					}
 				}
