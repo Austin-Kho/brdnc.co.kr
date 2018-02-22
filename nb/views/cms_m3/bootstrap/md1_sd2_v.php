@@ -398,7 +398,7 @@ echo form_open(base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=4'
 <?php if($this->input->get('con_diff')): ?><th class="center">차수</th><?php endif;?>
               <th class="center">타입</th>
               <th class="center">층별 조건</th>
-              <th class="center">분양(모집)가격</th>
+              <th class="center">분양(모집)가격 [단위:원]</th>
               <th class="center">해당조건 세대수</th>
               <th class="center">등록(수정)일</th>
               <th class="center">등록(수정)자</th>
