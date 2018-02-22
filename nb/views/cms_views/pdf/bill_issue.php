@@ -17,7 +17,7 @@
     elseif ((int)substr($ho, 0, $n) >= 6 && (int)substr($ho, 0, $n) <= 10) : $floor_con = 5;
     elseif ((int)substr($ho, 0, $n) > 10) : $floor_con = 6;
     endif;
-    $price = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_price WHERE pj_seq='$project' AND con_diff='$contractor->cont_diff' AND con_type='$contractor->unit_type' AND con_floor_no='$floor_con' ");
+    $price = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_price WHERE pj_seq='$project' AND con_diff_no='$contractor->cont_diff' AND con_type='$contractor->unit_type' AND con_floor_no='$floor_con' ");
 ?>
     <table style="width:100%;">
       <tr>
@@ -25,7 +25,7 @@
       </tr>
       <tr>
         <td style="font-size:11px;"><?php echo str_replace("|", " ", $bill_issue->address); ?></td>
-        <td style="font-size:11px; text-align:right;">Tel. <?php echo $bill_issue->tell_1 ?></td>
+        <td style="font-size:11px; text-align:right;">Tel. <?php echo $bill_issue->tell_1; ?></td>
       </tr>
     </table>
     <table style="width:100%; font-size:11px;" cellpadding=0; cellspacing=0;>
