@@ -15,9 +15,9 @@ class Cms_main_model extends CB_Model
 	 * @return [Array]        [추출 데이터]
 	 */
 	public function data_result($table, $where='', $select, $group, $order){
-    if(isset($select)) $this->db->select($select);
-    if(isset($group)) $this->db->group_by($group);
-    if(isset($order)) $this->db->order_by($order);
+        if(isset($select)) $this->db->select($select);
+        if(isset($group)) $this->db->group_by($group);
+        if(isset($order)) $this->db->order_by($order);
 		if($where!=='') $this->db->where($where);
 		$qry = $this->db->get($table);
 		return $rlt = $qry->result();
@@ -66,7 +66,7 @@ class Cms_main_model extends CB_Model
 			case '2': $rlt = $qry->result(); break; // 복수행 데이터
 			case '3': $rlt = $qry->num_rows(); break; // 데이터 수
 			case '4': $rlt = array('row' => $qry->row(), 'num' => $qry->num_rows()); break; // 단수행 데이터와 데이터 수
-      case '5': $rlt = array('result' => $qry->result(), 'num' => $qry->num_rows()); break; // 복수행 데이터와 데이터 수
+            case '5': $rlt = array('result' => $qry->result(), 'num' => $qry->num_rows()); break; // 복수행 데이터와 데이터 수
 			default: $rlt = $qry->result(); break; // 복수행 데이터
 		}
 		return $rlt;
