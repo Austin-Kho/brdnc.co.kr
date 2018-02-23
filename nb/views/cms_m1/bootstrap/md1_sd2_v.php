@@ -12,7 +12,7 @@ else :
 	echo form_open(current_full_url(), $attributes);
 ?>
 			<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px;">사업 개시년도</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="yr" class="sr-only">사업 개시년도</label>
@@ -29,7 +29,7 @@ else :
 						</select>
 					</div>
 				</div>
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">프로젝트 선택 </div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px;">프로젝트 선택 </div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="project" class="sr-only">프로젝트 선택</label>
@@ -44,9 +44,9 @@ else :
 			</div>
 			<div class="row bo-top bo-bottom font12" style="margin: 0;">
 				<div class="row bo-bottom font12" style="margin: 0;">
-					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">처리 구분 <span class="red">*</span></div>
+					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px 0;">처리 구분 <span class="red">*</span></div>
 					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
-						<div class="col-xs-4 col-sm-3 col-md-6 radio" style="margin: 0; padding: 5px; padding-right: 0;">
+						<div class="col-xs-4 col-sm-3 col-md-6 radio" style="margin: 0; padding: 5px 15px; padding-right: 0;">
 							<label>
 								<input type="radio" name="mode" value="1" <?php if(( !$this->input->get('mode') OR $this->input->get('mode')=='1') && $this->input->get('cont_sort1')!='2' && empty($is_reg)) echo "checked"; ?> onclick="location.href='<?php echo base_url('cms_m1/sales/1/2?mode=1') ?>'">신규
 							</label>
@@ -57,9 +57,9 @@ else :
 							</label>
 						</div>
 					</div>
-					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">등록 구분 <span class="red">*</span></div>
+					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px;">등록 구분 <span class="red">*</span></div>
 					<div class="col-xs-8 col-sm-9 col-md-6" style="padding: 4px 15px;">
-						<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 0; padding: 5px; padding-right: 0;">
+						<div class="col-xs-4 col-sm-3 col-md-2 radio" style="margin: 0; padding-top: 5px; padding-right: 0;">
 							<label>
 								<input type="radio" name="cont_sort1" id="cont_sort1" value="1" <?php if( !$this->input->get('cont_sort1') OR $this->input->get('cont_sort1')=='1') echo "checked";?>  onclick="submit();">계약
 							</label>
@@ -91,7 +91,7 @@ else :
 					</div>
 				</div>
 				<div class="row bo-bottom font12" style="margin: 0;">
-					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">차수 구분 <span class="red">*</span></div>
+					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px;">차수 구분 <span class="red">*</span></div>
 					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 						<div class="col-xs-12" style="padding: 0px;">
 							<label for="diff_no" class="sr-only">차수</label>
@@ -109,7 +109,7 @@ else :
 							</select>
 						</div>
 					</div>
-					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">타입 선택 <span class="red">*</span></div>
+					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px;">타입 선택 <span class="red">*</span></div>
 					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 						<div class="col-xs-12" style="padding: 0px;">
 							<label for="type" class="sr-only">타입</label>
@@ -123,7 +123,7 @@ else :
 					</div>
 				</div>
 				<div class="row bo-bottom font12" style="margin: 0 0 15px;">
-					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">동 선택 <span class="red">*</span></div>
+					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px;">동 선택 <span class="red">*</span></div>
 					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 						<div class="col-xs-12" style="padding: 0px;">
 							<label for="dong" class="sr-only">동</label>
@@ -136,7 +136,7 @@ else :
 						</div>
 					</div>
 
-					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">호수 선택 <span class="red">*</span></div>
+					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px;">호수 선택 <span class="red">*</span></div>
 					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 						<div class="col-xs-12" style="padding: 0px;">
 							<label for="ho" class="sr-only">호수</label>
@@ -203,18 +203,18 @@ else :
 <!--==================================동호 선택 후 계약 상황판 S======================================-->
 <?php if($this->input->get('cont_sort2')=="1" && !empty($is_reg['app_data'])) : // 청약 등록 호수인 경우 ?>
 			<div class="row bo-top font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">처리 구분 <span class="red">*</span></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">구 분</div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
-					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" onclick="if(this.checked===true) location.href='<?php echo base_url('cms_m1/sales/1/2')."?project=".$project."&mode=2&cont_sort1=1&cont_sort2=2&diff_no=".$is_reg['app_data']->app_diff."&type=".$is_reg['app_data']->unit_type."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>';">계약전환</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 6px 10px 4px;"><label><input type="checkbox" onclick="if(this.checked===true) location.href='<?php echo base_url('cms_m1/sales/1/2')."?project=".$project."&mode=2&cont_sort1=1&cont_sort2=2&diff_no=".$is_reg['app_data']->app_diff."&type=".$is_reg['app_data']->unit_type."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>';">계약전환</label></div>
 				</div>
 			</div>
 <?php endif; ?>
 <?php if($this->input->get('cont_sort3')=="3") : // 청약 해지 처리 시 ?>
 			<div class="row bo-top font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">처리 구분 <span class="red">*</span></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">구 분</div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
-					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 6px 0 4px;"><label><input type="checkbox" name="is_cancel" value="1" <?php if( !empty($is_reg['app_data']) && $is_reg['app_data']->disposal_div=='2') echo "checked"; ?>>해지신청</label></div>
-					<div class="col-xs-6 col-sm-4 col-md-3 checkbox" style="margin: 0; padding: 6px 0 4px;"><label style=""><input type="checkbox" name="is_refund" value="1">환불완료</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 6px 10px 4px;"><label><input type="checkbox" name="is_cancel" value="1" <?php if( !empty($is_reg['app_data']) && $is_reg['app_data']->disposal_div=='2') echo "checked"; ?>>해지신청</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 6px 10px 4px;"><label style=""><input type="checkbox" name="is_refund" value="1">환불완료</label></div>
 				</div>
 			</div>
 <?php endif; ?>
@@ -223,9 +223,9 @@ else :
 
 <?php if($this->input->get('cont_sort2')=="2") : // 계약 등록 처리 시 ?>
 			<div class="row bo-top font12" style="margin: 0;">
-<?php if( !empty($is_reg['app_data'])) $dicol = "#f8f9cc;"; if( !empty($is_reg['cont_data'])) $dicol = "#E0E7FB;";   ?>
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="height: 60px; padding: 10px; 0">현재 상태 <span class="red">*</span></div>
-				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe; background-color: <?php if( !empty($dicol)) echo $dicol; ?>">
+<?php if( !empty($is_reg['app_data'])) $dicol = "#eefb86;"; if( !empty($is_reg['cont_data'])) $dicol = "#bee3b1;";   ?>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="height: 60px; padding: 10px;">현재 상태 <span class="red">*</span></div>
+				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #395087; background-color: <?php if( !empty($dicol)) echo $dicol; ?>">
 <?php if( !empty($is_reg['app_data'])) : // 현재 청약상태 호수이면  ?>
 					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">청약 : <?php echo $is_reg['app_data']->app_date; ?></div>
 					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">입금 : <?php echo number_format($is_reg['app_data']->app_in_mon)." 원"; ?></div>
@@ -243,10 +243,10 @@ else :
 <?php endif; ?>
 <?php if($this->input->get('cont_sort3')=="4") : // 계약 해지 시 ?>
 			<div class="row bo-top font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">처리 구분 <span class="red">*</span></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">구 분</div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
-					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 6px 0 4px;"><label><input type="checkbox" name="is_cont_cancel" value="1" <?php if( !empty($is_reg['cont_data']) && $is_reg['cont_data']->is_rescission=='1') echo "checked"; ?>>해지신청</label></div>
-					<div class="col-xs-6 col-sm-4 col-md-3 checkbox" style="margin: 0; padding: 6px 0 4px;"><label><input type="checkbox" name="is_cont_refund" value="1" <?php if( !empty($is_reg['cont_data']) && $is_reg['cont_data']->is_rescission=='2') echo "checked"; ?>>환불완료</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 6px 10px 4px;"><label><input type="checkbox" name="is_cont_cancel" value="1" <?php if( !empty($is_reg['cont_data']) && $is_reg['cont_data']->is_rescission=='1') echo "checked"; ?>>해지신청</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 6px 10px 4px;"><label><input type="checkbox" name="is_cont_refund" value="1" <?php if( !empty($is_reg['cont_data']) && $is_reg['cont_data']->is_rescission=='2') echo "checked"; ?>>환불완료</label></div>
 				</div>
 			</div>
 <?php endif; ?>
@@ -267,7 +267,7 @@ else :
 	endif;
 ?>
 			<div class="row bo-top font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0"><?php echo $conclu_date_label; ?> <span class="red">*</span></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;"><?php echo $conclu_date_label; ?> <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="conclu_date" class="sr-only">거래일자</label>
@@ -290,7 +290,7 @@ else :
 
 	if(( !$this->input->get('cont_sort2') && !$this->input->get('cont_sort3')) OR ($this->input->get('cont_sort2')!=2 && $this->input->get('cont_sort3')!=4)) :
 ?>
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약 예정일</div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">계약 예정일</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="due_date" class="sr-only">계약 예정일</label>
@@ -311,7 +311,7 @@ else :
 	else : $cont_code = $is_reg['cont_data']->cont_code;
 	endif;
 ?>
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; ">계약 일련번호</div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px; ">계약 일련번호</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_code" class="sr-only">계약 일련번호</label>
@@ -322,7 +322,7 @@ else :
 			</div>
 
 			<div class="row bo-top bo-bottom font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약 고객명 <span class="red">*</span></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">계약 고객명 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 <?php
@@ -335,14 +335,17 @@ else :
 						<input type="text" class="form-control input-sm" name="custom_name" value="<?php echo $custom_name; ?>" maxlength="20" <?php echo $disabled; ?>>
 					</div>
 				</div>
-<?php if($this->input->get('cont_sort2')==2 or $this->input->get('cont_sort3')==4) : ?>
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">생년 월일 (성별) <span class="red">*</span></div>
+<?php if($this->input->get('cont_sort2')==1 or $this->input->get('cont_sort3')==3) : ?>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">&nbsp;</span></div>
+<?php elseif($this->input->get('cont_sort2')==2 or $this->input->get('cont_sort3')==4) : ?>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">생년 월일 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="birth_date" class="sr-only">생년 월일</label>
 						<input type="text" class="form-control input-sm" name="birth_date" value="<?php if($this->input->post('birth_date')) echo set_value('birth_date'); else echo substr($is_reg['cont_data']->cont_birth_id, 0, 6); ?>" maxlength="6" <?php echo $disabled; ?> placeholder="ex : 981231">
 					</div>
 				</div>
+				<div class="visible-xs visible-sm col-xs-4  col-sm-3 center point-sub3" style="padding: 10px;">성 별 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="margin: 0; padding: 6px 0 4px; ">
 						<label class="radio-inline"><input type="radio" name="cont_gender" value="1" <?php echo $disabled; if(substr($is_reg['cont_data']->cont_birth_id, -1)=='1') echo 'checked'; ?> > 남성</label>
@@ -359,14 +362,14 @@ else :
 	endif;
 ?>
 			<div class="row bo-bottom font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">연락처 [1] <span class="red">*</span></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">연락처 [1] <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="tel_1" class="sr-only">연락처1</label>
 						<input type="text" class="form-control input-sm" name="tel_1" value="<?php echo $tel_1; ?>" maxlength="20" <?php echo $disabled; ?>>
 					</div>
 				</div>
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">연락처 [2]</div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">연락처 [2]</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="tel_2" class="sr-only">연락처2</label>
@@ -376,8 +379,8 @@ else :
 			</div>
 <?php if( !($this->input->get('cont_sort2')=='2' && empty($is_app_cont) && empty($is_reg['app_data']))): // 계약등록 시 청약 데이터가 없는 신규 등록인 경우만 제외하고 ->?>
 			<div class="row bo-bottom font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">청약금 <span class="red">*</span>
-					<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">청약금 <span class="red">*</span>
+					<div class="point-sub3 hidden-md hidden-lg" style="height: 153px;">&nbsp;</div>
 				</div>
 <?php
 	if( empty($is_reg['app_data']) && empty($receiv_app)) : $app_in_mon = set_value('app_in_mon');
@@ -440,8 +443,8 @@ else :
 <?php endif; ?>
 <?php if($this->input->get('cont_sort2')=="2" OR $this->input->get('cont_sort3')==4) : // 계약 등록 시 ?>
 			<div class="row bo-bottom font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약금 [1] <span class="red">*</span>
-					<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">계약금 [1] <span class="red">*</span>
+					<div class="point-sub3 hidden-md hidden-lg" style="height: 153px;">&nbsp;</div>
 				</div>
 <?php
 	if(empty($received['1'])) : $deposit_1 = set_value('deposit_1');
@@ -504,8 +507,8 @@ else :
 	endif;
 ?>
 			<div class="row bo-bottom font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약금 [2] &nbsp;
-				<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">계약금 [2] &nbsp;
+				<div class="point-sub3 hidden-md hidden-lg" style="height: 153px;">&nbsp;</div></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date2" class="sr-only">입금일</label>
@@ -571,8 +574,8 @@ else :
 	endif;
 ?>
 			<div class="row bo-bottom font12" id="rec_3" style="margin: 0; <?php if($rec_num<3) echo "display:none";?>">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약금 [3] &nbsp;
-				<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">계약금 [3] &nbsp;
+				<div class="point-sub3 hidden-md hidden-lg" style="height: 153px;">&nbsp;</div></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date3" class="sr-only">입금일</label>
@@ -639,8 +642,8 @@ else :
 	endif;
 ?>
 			<div class="row bo-bottom font12" id="rec_4" style="margin: 0; <?php if($rec_num<4) echo "display:none";?>">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약금 [4] &nbsp;
-				<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">계약금 [4] &nbsp;
+				<div class="point-sub3 hidden-md hidden-lg" style="height: 153px;">&nbsp;</div></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date4" class="sr-only">입금일</label>
@@ -707,8 +710,8 @@ else :
 	endif;
 ?>
 			<div class="row bo-bottom font12" id="rec_5" style="margin: 0; <?php if($rec_num<5) echo "display:none";?>">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약금 [5] &nbsp;
-				<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">계약금 [5] &nbsp;
+				<div class="point-sub3 hidden-md hidden-lg" style="height: 153px;">&nbsp;</div></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date5" class="sr-only">입금일</label>
@@ -775,8 +778,8 @@ else :
 	endif;
 ?>
 			<div class="row bo-bottom font12" id="rec_6" style="margin: 0; <?php if($rec_num<6) echo "display:none";?>">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약금 [6] &nbsp;
-				<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">계약금 [6] &nbsp;
+				<div class="point-sub3 hidden-md hidden-lg" style="height: 153px;">&nbsp;</div></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date6" class="sr-only">입금일</label>
@@ -843,8 +846,8 @@ else :
 	endif;
 ?>
 			<div class="row bo-bottom font12" id="rec_7" style="margin: 0; <?php if($rec_num<7) echo "display:none";?>">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">계약금 [7] &nbsp;
-				<div class="point-sub hidden-md hidden-lg" style="height: 153px;">&nbsp;</div></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">계약금 [7] &nbsp;
+				<div class="point-sub3 hidden-md hidden-lg" style="height: 153px;">&nbsp;</div></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_in_date7" class="sr-only">입금일</label>
@@ -903,7 +906,7 @@ else :
 
 <?php if( !empty($is_reg['cont_data'])) $addr1 = explode("|", $is_reg['cont_data']->cont_addr1); ?>
 			<div class="row bo-bottom font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">주민등록 주소 <span class="red">*</span>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">주민등록 주소 <span class="red">*</span>
 					<div class="visible-xs" style="height: 39px;">&nbsp;</div>
 					<div class="hidden-md hidden-lg" style="height: 39px;">&nbsp;</div>
 				</div>
@@ -930,7 +933,7 @@ else :
 
 <?php if( !empty($is_reg['cont_data'])) $addr2 = explode("|", $is_reg['cont_data']->cont_addr2); ?>
 			<div class="row bo-bottom font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">우편송부 주소  <span class="red">*</span>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">우편송부 주소  <span class="red">*</span>
 					<div class="visible-xs" style="height: 39px;">&nbsp;</div>
 					<div class="hidden-md hidden-lg" style="height: 78px;">&nbsp;</div>
 				</div>
@@ -959,7 +962,7 @@ else :
 			</div>
 
 			<div class="row bo-bottom font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">미비서류 항목
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">미비서류 항목
 					<div class="visible-xs" style="height: 60px;">&nbsp;</div>
 					<div class="" style="height: 30px;">&nbsp;</div>
 				</div>
@@ -983,7 +986,7 @@ else :
 	endif;
 ?>
 			<div class="row bo-bottom font12" style="margin: 0;">
-				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0; height: 75px;">비 고</div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;; height: 75px;">비 고</div>
 				<div class="col-xs-8 col-sm-9 col-md-8" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="note" class="sr-only">타입</label>
