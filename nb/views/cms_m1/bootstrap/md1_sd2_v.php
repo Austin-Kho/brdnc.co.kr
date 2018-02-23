@@ -335,7 +335,7 @@ else :
 						<input type="text" class="form-control input-sm" name="custom_name" value="<?php echo $custom_name; ?>" maxlength="20" <?php echo $disabled; ?>>
 					</div>
 				</div>
-<?php if($this->input->get('cont_sort2')==1 or $this->input->get('cont_sort3')==3) : ?>
+<?php if( !$this->input->get('cont_sort2') or $this->input->get('cont_sort2')==1 or $this->input->get('cont_sort3')==3) : ?>
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">&nbsp;</span></div>
 <?php elseif($this->input->get('cont_sort2')==2 or $this->input->get('cont_sort3')==4) : ?>
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="padding: 10px;">생년 월일 <span class="red">*</span></div>
