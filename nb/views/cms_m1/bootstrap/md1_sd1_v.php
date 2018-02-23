@@ -113,16 +113,16 @@ endfor;
 						<?php echo $first_td; ?>
 						<td style="background-color: <?php echo $tp_color[$i].";"; ?>"><?php echo $tp_name[$i]; ?></td>
 						<td class="right"><?php echo $summary[$i]->type_num." 세대"; ?></td>
-						<td class="right"><?php echo $summary[$i]->hold." 세대"; ?></td>
-						<td class="right" style="color: #273169;"><?php echo $summary[$i]->app." 건"; ?></td>
+						<td class="right"><?php if(empty($summary[$i]->hold)) echo "0 세대"; else echo $summary[$i]->hold." 세대"; ?></td>
+						<td class="right" style="color: #273169;"><?php if(empty($summary[$i]->app)) echo "0 건"; else echo $summary[$i]->app." 건"; ?></td>
 	<?php for($j=0; $j<count($sc_cont_diff); $j++):
 					$cn = $this->cms_main_model->sql_row(" SELECT COUNT(seq) AS cont_num FROM cb_cms_sales_contract WHERE pj_seq='$project' AND unit_type='".$tp_name[$i]."' AND cont_diff='".$sc_cont_diff[$j]->cont_diff."' ");
 	?>
 						<td class="right"><?php echo $cn->cont_num." 건 "; ?></td>
 	<?php endfor; ?>
-						<td class="right" style="color: #a60202;"><?php echo $summary[$i]->cont." 건"; ?></td>
-						<td class="right"><?php echo number_format(($summary[$i]->cont/$summary[$i]->type_num*100), 2)." %" ?></td>
-						<td class="right"><?php echo number_format((($summary[$i]->app+$summary[$i]->cont)/$summary[$i]->type_num*100), 2)." %" ?></td>
+						<td class="right" style="color: #a60202;"><?php if(empty($summary[$i]->cont)) echo "0 건"; else echo $summary[$i]->cont." 건"; ?></td>
+						<td class="right"><?php if(empty($summary[$i]->cont)) echo "0.00 %"; else echo number_format(($summary[$i]->cont/$summary[$i]->type_num*100), 2)." %" ?></td>
+						<td class="right"><?php if(empty($summary[$i]->cont)) echo "0.00 %"; else echo number_format((($summary[$i]->app+$summary[$i]->cont)/$summary[$i]->type_num*100), 2)." %" ?></td>
 					</tr>
 <?php endfor; ?>
 				</tbody>
@@ -153,7 +153,7 @@ endfor;
 	<div class="row font12" style="margin: 0; padding: 0;">
         <div class="col-md-12 mb10"><h4><span class="label label-success">2. 청약 현황</span></h4></div>
 <?php if(empty($app_data)) : ?>
-		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 20px 0;">등록된 데이터가 없습니다.</div>
+		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 50px 0;">등록된 데이터가 없습니다.</div>
 <?php else : ?>
 		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;">
 			<?php echo "[ 결과 : ".number_format($app_num)." 건 ]"; ?>
@@ -222,7 +222,7 @@ foreach($app_data as $lt) :
 	echo form_open(current_full_url(), $attributes);
 ?>
 	<div class="row font12" style="margin: 0; padding: 0;">
-    <div class="col-md-12 mb10"><h4><span class="label label-primary">3. 계약 현황</span></h4></div>
+    <div class="col-md-12 mt20 mb10"><h4><span class="label label-primary">3. 계약 현황</span></h4></div>
 		<div class="col-md-12 bo-top bo-bottom" style="padding: 0; margin: 0 0 20px 0;">
 			<div class="col-xs-12 col-sm-2 col-md-1 center bgf8" style="height: 40px; padding: 10px 0;">검색 조건</div>
 			<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
