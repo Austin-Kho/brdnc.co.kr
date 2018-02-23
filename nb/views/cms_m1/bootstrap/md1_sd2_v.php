@@ -223,11 +223,7 @@ else :
 
 <?php if($this->input->get('cont_sort2')=="2") : // 계약 등록 처리 시 ?>
 			<div class="row bo-top font12" style="margin: 0;">
-<<<<<<< HEAD
 <?php if( !empty($is_reg['app_data'])) $dicol = "#eefb86;"; if( !empty($is_reg['cont_data'])) $dicol = "#bee3b1;";   ?>
-=======
-<?php if( !empty($is_reg['app_data'])) $dicol = "#eefb86;"; if( !empty($is_reg['cont_data'])) $dicol = "#fce8a2;";   ?>
->>>>>>> d2591673db663ee5415e159fdf1e9921fe79c4c6
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub3" style="height: 60px; padding: 10px;">현재 상태 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #395087; background-color: <?php if( !empty($dicol)) echo $dicol; ?>">
 <?php if( !empty($is_reg['app_data'])) : // 현재 청약상태 호수이면  ?>
