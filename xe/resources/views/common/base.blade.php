@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="{{app('xe.translator')->getLocale()}}">
+<head>
+    <!-- CUSTOM TAGS -->
+    {!! XeFrontend::output('html', 'head.prepend') !!}
+
+    <!-- META -->
+    <meta charset="utf-8">
+    <meta name="Generator" content="XpressEngine 3">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {!! XeFrontend::output('meta') !!}
+
+    <!-- TITLE -->
+    <title>{!! XeLang::trans(XeFrontend::output('title')) !!}</title>
+
+    <!-- ICON -->
+    {!! XeFrontend::output('icon') !!}
+
+    <!-- CSS -->
+    {!! XeFrontend::output('css') !!}
+
+    <!-- JS at head.prepend -->
+    <script>var xeBaseURL = '{{  url()->to(null) }}';</script>
+    {!! XeFrontend::output('js', 'head.prepend') !!}
+
+    <script type="text/javascript">
+        XE.setup({
+            'X-CSRF-TOKEN': '{!! csrf_token() !!}',
+            loginUserId: '{{ Auth::check() ? Auth::user()->getId() : ''}}',
+            useXeSpinner: true
+        });
+
+        XE.configure({
+            locale: '{{ Request::cookie('locale') ?: app('xe.translator')->getLocale() }}',
+            defaultLocale: '{{ app('xe.translator')->getLocale() }}',
+            fixedPrefix: '{{ app('config')['xe.routing.fixedPrefix'] }}',
+            @if (in_array(Auth::user()->getRating(), [\Xpressengine\User\Rating::SUPER, \Xpressengine\User\Rating::MANAGER]))
+            managePrefix: '{{ app('config')['xe.routing.settingsPrefix'] }}'
+            @endif
+        });
+
+        $(document).on('click', 'a[target]:not([target=_self],[target=_top],[target=_parent])', function (e) {
+            e.preventDefault();
+
+            var $this = $(this);
+            var href = $this.attr('href');
+            var splitHref = href.split('://');
+
+            if(splitHref.length === 1
+            || (splitHref.length > 1 && splitHref[1].indexOf(xeBaseURL.split('://')[1]) !== -1)) {
+                window.open(href);
+
+            } else {
+                blankshield.open(href);
+
+            }
+        });
+
+        <!-- Translation -->
+        {!! XeFrontend::output('translation') !!}
+    </script>
+
+    <!-- JS at head.append -->
+    {!! XeFrontend::output('js', 'head.append') !!}
+
+    <!-- CUSTOM TAGS -->
+    {!! XeFrontend::output('html', 'head.append') !!}
+
+</head>
+
+<body class="{{ XeFrontend::output('bodyClass') }}">
+
+<!-- JS at body.prepend -->
+{!! XeFrontend::output('js', 'body.prepend') !!}
+
+<!-- CUSTOM TAGS -->
+{!! XeFrontend::output('html', 'body.prepend') !!}
+
+{!! $content !!}
+
+<!-- JS at body.append -->
+{!! XeFrontend::output('js', 'body.append') !!}
+
+<!-- CUSTOM TAGS -->
+{!! XeFrontend::output('html', 'body.append') !!}
+
+<!-- Rule -->
+{!! XeFrontend::output('rule') !!}
+
+@include('common.alert')
+
+</body>
+</html>
