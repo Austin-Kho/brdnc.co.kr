@@ -131,15 +131,16 @@ class Contract_data extends CB_Controller {
 				case '3': $wn = 7; $title = "타입"; $num=""; break; // 타입
 				case '4': $wn = 10; $title = "동호수"; $num=""; break; // 동호수
 				case '5': $wn = 9; $title = "계약자"; $num=""; break; // 계약자
-				case '6': $wn = 12; $title = "계약일자"; $num=""; break; // 계약일자
-				case '7': $wn = 12; $title = "총납입금"; $num="ok"; break; // 총납입금
-				case '8': $wn = 14; $title = "연락처[1]"; $num=""; break; // 연락처
-				case '9': $wn = 14; $title = "연락처[2]"; $num=""; break; // 연락처
-				case '10': $wn = 75; $title = "주소[신분증]"; $num=""; break; // 등본주소
-				case '11': $wn = 75; $title = "주소[우편물]"; $num=""; break; // 우편주소
-				case '12': $wn = 20; $title = "미비서류"; $num=""; break; // 미비서류
-				case '13': $wn = 12; $title = "명의변경 횟수"; $num="ok"; break; // 명의변경 횟수
-				case '14': $wn = 120; $title = "비 고"; $num=""; break; // 비고
+				case '6': $wn = 10; $title = "생년월일"; $num=""; break; // 생년월일
+				case '7': $wn = 12; $title = "계약일자"; $num=""; break; // 계약일자
+				case '8': $wn = 12; $title = "총납입금"; $num="ok"; break; // 총납입금
+				case '9': $wn = 14; $title = "연락처[1]"; $num=""; break; // 연락처
+				case '10': $wn = 14; $title = "연락처[2]"; $num=""; break; // 연락처
+				case '11': $wn = 75; $title = "주소[신분증]"; $num=""; break; // 등본주소
+				case '12': $wn = 75; $title = "주소[우편물]"; $num=""; break; // 우편주소
+				case '13': $wn = 20; $title = "미비서류"; $num=""; break; // 미비서류
+				case '14': $wn = 12; $title = "명의변경 횟수"; $num="ok"; break; // 명의변경 횟수
+				case '15': $wn = 120; $title = "비 고"; $num=""; break; // 비고
 				default: $wn = 5; break; // 번호
 			}
 			$spreadsheet->getActiveSheet()->getColumnDimension(toAlpha($k+1))->setWidth($wn); // 열의 셀 넓이 설정
@@ -178,15 +179,16 @@ class Contract_data extends CB_Controller {
 					case '3': $content = $lt->unit_type; $align =""; break; // 타입
 					case '4': $content = $lt->unit_dong_ho; $align =""; break; // 동호수
 					case '5': $content = $lt->contractor; $align =""; break; // 계약자
-					case '6': $content = $lt->cont_date; $align =""; break; // 계약일자
-					case '7': $content = $total_rec->received; $align = "right"; break; // 총납입금
-					case '8': $content = $lt->cont_tel1; $align =""; break; // 연락처
-					case '9': $content = $lt->cont_tel2; $align =""; break; // 연락처
-					case '10': $content = $addr1; $align = "left"; break; // 등본주소
-					case '11': $content = $addr2; $align = "left"; break; // 우편주소
-					case '12': $content = $incom_doc; $align =""; break; // 미비서류
-					case '13': $content = $lt->transfer_number; $align ="right"; break; // 명의변경 횟수
-					case '14': $content = $lt->note; $align = "left"; break; // 비고
+					case '6': $content = $lt->cont_birth_id; $align =""; break; // 생년월일
+					case '7': $content = $lt->cont_date; $align =""; break; // 계약일자
+					case '8': $content = $total_rec->received; $align = "right"; break; // 총납입금
+					case '9': $content = $lt->cont_tel1; $align =""; break; // 연락처
+					case '10': $content = $lt->cont_tel2; $align =""; break; // 연락처
+					case '11': $content = $addr1; $align = "left"; break; // 등본주소
+					case '12': $content = $addr2; $align = "left"; break; // 우편주소
+					case '13': $content = $incom_doc; $align =""; break; // 미비서류
+					case '14': $content = $lt->transfer_number; $align ="right"; break; // 명의변경 횟수
+					case '15': $content = $lt->note; $align = "left"; break; // 비고
 				}
 				$spreadsheet->getActiveSheet()->setCellValue(toAlpha($j+1).(3+$i), $content);// 해당 셀의 내용을 입력 합니다.
 				if($align == "right") {

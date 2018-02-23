@@ -44,7 +44,7 @@ endfor;
 	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
 <?php
 	$attributes = array('method' => 'get', 'name' => 'pj_sel');
-	echo form_open(current_url(), $attributes);
+	echo form_open(current_full_url(), $attributes);
 ?>
 			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
 			<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
@@ -189,8 +189,8 @@ foreach($app_data as $lt) :
 	endswitch;
 	$unit_dh = explode("-", $lt->unit_dong_ho);
 	switch ($lt->disposal_div) {
-		case '0': $app_edit_link = "<a href='".base_url()."cms_m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=1&project=".$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>"; break;
-		case '2': $app_edit_link = "<a href='".base_url()."cms_m1/sales/1/2?mode=2&cont_sort1=2&cont_sort3=3&project=".$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>"; break;
+		case '0': $app_edit_link = "<a href='".base_url('cms_m1/sales/1/2')."?project=".$project."&mode=2&cont_sort1=1&cont_sort2=1&diff_no=".$lt->app_diff."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>"; break;
+		case '2': $app_edit_link = "<a href='".base_url('cms_m1/sales/1/2')."?project=".$project."&mode=2&cont_sort1=2&cont_sort3=3&diff_no=".$lt->app_diff."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>"; break;
 		default: $app_edit_link = ""; break;
 	}
 	$app_edit = ($lt->disposal_div=='0' OR $lt->disposal_div=='2') ? "</a>" : "";
@@ -219,7 +219,7 @@ foreach($app_data as $lt) :
 
 <?php
 	$attributes = array('name' => 'form1', 'method' => 'get');
-	echo form_open(base_url(uri_string()), $attributes);
+	echo form_open(current_full_url(), $attributes);
 ?>
 	<div class="row font12" style="margin: 0; padding: 0;">
     <div class="col-md-12 mb10"><h4><span class="label label-primary">3. 계약 현황</span></h4></div>
@@ -326,15 +326,16 @@ foreach($app_data as $lt) :
 			<div class="checkbox"><label><input type="checkbox" name="opt3" value="3" checked> 타입&nbsp;</label></div>
 			<div class="checkbox"><label><input type="checkbox" name="opt4" value="4" checked> 동호수&nbsp;</label></div>
 			<div class="checkbox"><label><input type="checkbox" name="opt5" value="5" checked> 계약자&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt6" value="6" checked> 계약일자&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt7" value="7"> 총 납입금&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt8" value="8" checked> 연락처[1]&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt9" value="9"> 연락처[2]&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt10" value="10"> 주소[1][등본]&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt11" value="11" checked> 주소[2][우편]&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt12" value="12"> 미비서류&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt13" value="13"> 명의변경 횟수&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt14" value="14"> 비 고</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt6" value="6" checked> 생년월일&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt7" value="7" checked> 계약일자&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt8" value="8"> 총 납입금&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt9" value="9" checked> 연락처[1]&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt10" value="10"> 연락처[2]&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt11" value="11"> 주소[1][등본]&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt12" value="12" checked> 주소[2][우편]&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt13" value="13"> 미비서류&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt14" value="14"> 명의변경 횟수&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt15" value="15"> 비 고</label></div>
 		</div>
 	</form>
 		<div class="col-xs-12 table-responsive" style="padding: 0;">
@@ -387,7 +388,7 @@ foreach ($cont_data as $lt) :
 	$adr2 = explode(" ", $adr1[1]);
 	$addr = $adr2[0]." ".$adr2[1];
 	$unit_dh = explode("-", $lt->unit_dong_ho);
-	$cont_edit_link ="<a href ='".base_url('cms_m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=2&project=').$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>" ;
+	$cont_edit_link ="<a href ='".base_url('cms_m1/sales/1/2?project='.$project.'&mode=2&cont_sort1=1&cont_sort2=2&diff_no='.$lt->cont_diff.'&type='.$lt->unit_type.'&dong='.$unit_dh[0].'&ho='.$unit_dh[1])."'>" ;
 	$new_span = ($lt->cont_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #2A41DB; color: #fff; font-size: 10px;'>&nbsp;N </span>&nbsp; " : "";
 ?>
 					<tr>

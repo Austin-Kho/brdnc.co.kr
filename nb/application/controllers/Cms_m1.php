@@ -248,50 +248,55 @@ class Cms_m1 extends CB_Controller {
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
 
-			$this->form_validation->set_rules('project', '프로젝트', 'trim|required');
-			$this->form_validation->set_rules('cont_sort1', '등록구분1', 'trim|required');
-			$this->form_validation->set_rules('type', '타입', 'trim|required');
-			$this->form_validation->set_rules('dong', '동', 'trim|required');
-			$this->form_validation->set_rules('ho', '호수', 'trim|required');
-			$this->form_validation->set_rules('cont_code', '계약일련번호', 'trim|max_length[12]');
-			$this->form_validation->set_rules('custom_name', '청/계약자명', 'trim|required|max_length[20]');
-			$this->form_validation->set_rules('birth_date', '생년월일', 'trim|required|numeric|max_length[8]');
-			$this->form_validation->set_rules('cont_gender', '계약자 성별', 'trim|required|numeric|max_length[1]');
+			if($this->input->post('project')) $this->form_validation->set_rules('project', '프로젝트', 'trim|required');
+			if($this->input->post('cont_sort1')) $this->form_validation->set_rules('cont_sort1', '등록구분1', 'trim|required');
+			if($this->input->post('type')) $this->form_validation->set_rules('type', '타입', 'trim|required');
+			if($this->input->post('dong')) $this->form_validation->set_rules('dong', '동', 'trim|required');
+			if($this->input->post('ho')) $this->form_validation->set_rules('ho', '호수', 'trim|required');
+			if($this->input->post('cont_code')) $this->form_validation->set_rules('cont_code', '계약일련번호', 'trim|max_length[12]');
+			if($this->input->post('custom_name')) $this->form_validation->set_rules('custom_name', '청/계약자명', 'trim|required|max_length[20]');
 
-			$this->form_validation->set_rules('conclu_date', '처리일자', 'trim|exact_length[10]');
-			$this->form_validation->set_rules('due_date', '계약예정일', 'trim|exact_length[10]');
-			$this->form_validation->set_rules('app_in_date', '청약금 입금일', 'trim|exact_length[10]');
-			$this->form_validation->set_rules('cont_in_date1', '계약금 입금일1', 'trim|exact_length[10]');
-			$this->form_validation->set_rules('cont_in_date2', '계약금 입금일2', 'trim|exact_length[10]');
-			$this->form_validation->set_rules('cont_in_date3', '계약금 입금일3', 'trim|exact_length[10]');
-			$this->form_validation->set_rules('cont_in_date4', '계약금 입금일4', 'trim|exact_length[10]');
-			$this->form_validation->set_rules('cont_in_date5', '계약금 입금일5', 'trim|exact_length[10]');
-			$this->form_validation->set_rules('cont_in_date6', '계약금 입금일6', 'trim|exact_length[10]');
-			$this->form_validation->set_rules('cont_in_date7', '계약금 입금일7', 'trim|exact_length[10]');
+			$this->form_validation->set_rules('birth_date', '생년월일', 'trim|required|numeric|max_length[6]');
+			$this->form_validation->set_rules('cont_gender', '계약자 성별', 'trim|required');
 
-			$this->form_validation->set_rules('app_in_mon', '청약금', 'trim|numeric');
-			$this->form_validation->set_rules('tel_1', '연락처[1]', 'trim|required');
-			$this->form_validation->set_rules('conclu_date', '청/계약일', 'trim|required');
-			$this->form_validation->set_rules('deposit_1', '계약금1', 'trim|numeric');
-			$this->form_validation->set_rules('deposit_2', '계약금2', 'trim|numeric');
-			$this->form_validation->set_rules('deposit_3', '계약금3', 'trim|numeric');
-			$this->form_validation->set_rules('deposit_4', '계약금4', 'trim|numeric');
-			$this->form_validation->set_rules('deposit_5', '계약금5', 'trim|numeric');
-			$this->form_validation->set_rules('deposit_6', '계약금6', 'trim|numeric');
-			$this->form_validation->set_rules('deposit_7', '계약금7', 'trim|numeric');
-			$this->form_validation->set_rules('postcode1', '우편변호1', 'trim|numeric|max_length[5]');
-			$this->form_validation->set_rules('address1_1', '메인주소1', 'trim|max_length[100]');
-			$this->form_validation->set_rules('address2_1', '세부주소1', 'trim|max_length[50]');
-			$this->form_validation->set_rules('postcode2', '우편번호2', 'trim|numeric|max_length[5]');
-			$this->form_validation->set_rules('address1_2', '메인주소2', 'trim|max_length[100]');
-			$this->form_validation->set_rules('address2_2', '세부주소2', 'trim|max_length[50]');
-			$this->form_validation->set_rules('note', '비고', 'trim|max_length[200]');
+			if($this->input->post('conclu_date')) $this->form_validation->set_rules('conclu_date', '처리일자', 'trim|exact_length[10]');
+			if($this->input->post('due_date')) $this->form_validation->set_rules('due_date', '계약예정일', 'trim|exact_length[10]');
+			if($this->input->post('app_in_date')) $this->form_validation->set_rules('app_in_date', '청약금 입금일', 'trim|exact_length[10]');
+			if($this->input->post('cont_in_date1')) $this->form_validation->set_rules('cont_in_date1', '계약금 입금일1', 'trim|exact_length[10]');
+			if($this->input->post('cont_in_date2')) $this->form_validation->set_rules('cont_in_date2', '계약금 입금일2', 'trim|exact_length[10]');
+			if($this->input->post('cont_in_date3')) $this->form_validation->set_rules('cont_in_date3', '계약금 입금일3', 'trim|exact_length[10]');
+			if($this->input->post('cont_in_date4')) $this->form_validation->set_rules('cont_in_date4', '계약금 입금일4', 'trim|exact_length[10]');
+			if($this->input->post('cont_in_date5')) $this->form_validation->set_rules('cont_in_date5', '계약금 입금일5', 'trim|exact_length[10]');
+			if($this->input->post('cont_in_date6')) $this->form_validation->set_rules('cont_in_date6', '계약금 입금일6', 'trim|exact_length[10]');
+			if($this->input->post('cont_in_date7')) $this->form_validation->set_rules('cont_in_date7', '계약금 입금일7', 'trim|exact_length[10]');
+
+			if($this->input->post('app_in_mon')) $this->form_validation->set_rules('app_in_mon', '청약금', 'trim|numeric');
+			if($this->input->post('tel_1')) $this->form_validation->set_rules('tel_1', '연락처[1]', 'trim|required');
+			if($this->input->post('conclu_date')) $this->form_validation->set_rules('conclu_date', '청/계약일', 'trim|required');
+			if($this->input->post('deposit_1')) $this->form_validation->set_rules('deposit_1', '계약금1', 'trim|numeric');
+			if($this->input->post('deposit_2')) $this->form_validation->set_rules('deposit_2', '계약금2', 'trim|numeric');
+			if($this->input->post('deposit_3')) $this->form_validation->set_rules('deposit_3', '계약금3', 'trim|numeric');
+			if($this->input->post('deposit_4')) $this->form_validation->set_rules('deposit_4', '계약금4', 'trim|numeric');
+			if($this->input->post('deposit_5')) $this->form_validation->set_rules('deposit_5', '계약금5', 'trim|numeric');
+			if($this->input->post('deposit_6')) $this->form_validation->set_rules('deposit_6', '계약금6', 'trim|numeric');
+			if($this->input->post('deposit_7')) $this->form_validation->set_rules('deposit_7', '계약금7', 'trim|numeric');
+			if($this->input->post('postcode1')) $this->form_validation->set_rules('postcode1', '우편변호1', 'trim|numeric|max_length[5]');
+			if($this->input->post('address1_1')) $this->form_validation->set_rules('address1_1', '메인주소1', 'trim|max_length[100]');
+			if($this->input->post('address2_1')) $this->form_validation->set_rules('address2_1', '세부주소1', 'trim|max_length[50]');
+			if($this->input->post('postcode2')) $this->form_validation->set_rules('postcode2', '우편번호2', 'trim|numeric|max_length[5]');
+			if($this->input->post('address1_2')) $this->form_validation->set_rules('address1_2', '메인주소2', 'trim|max_length[100]');
+			if($this->input->post('address2_2')) $this->form_validation->set_rules('address2_2', '세부주소2', 'trim|max_length[50]');
+			if($this->input->post('note')) $this->form_validation->set_rules('note', '비고', 'trim|max_length[200]');
 
 			if($this->form_validation->run() !== FALSE) {
+
 				$pj = $this->input->post('project', TRUE); // 프로젝트 아이디
 				$un = $this->input->post('unit_seq', TRUE); // 동호 아이디
 
+
+
 				if($this->input->post('cont_sort2')=='1'){ // 청약일 때
+
 					// 1. 청약 관리 테이블 입력
 					$app_arr = array(
 						'pj_seq' => $this->input->post('project', TRUE),
@@ -331,12 +336,13 @@ class Cms_m1 extends CB_Controller {
 							alert('데이터베이스 에러입니다.', base_url(uri_string()));
 						}
 					}
-					$ret_url = "?mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
+					$ret_url = "?project=".$pj."&mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&diff_no=".$this->input->post('diff_no')."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
 					alert('청약 정보 입력이 정상 처리되었습니다.', base_url('cms_m1/sales/1/2').$ret_url);
 
 
 
 				}else if($this->input->post('cont_sort2')=='2'){ // 계약일 때
+
 					$pj = $this->input->post('project', TRUE); // 프로젝트 아이디
 					$un = $this->input->post('unit_seq', TRUE); // 동호 아이디
 
@@ -356,12 +362,11 @@ class Cms_m1 extends CB_Controller {
 
 					$pr_where = array(
 						'pj_seq'=>$pj,
-						'con_type'=>$this->input->post('type'),
-						'con_diff'=>$this->input->post('diff_no'),
+						'con_diff_no'=>$this->input->post('diff_no'),
+						'con_type_no'=>$this->input->post('type'),
 						'con_direction_no'=>'1', // 향후 필요 시 폼으로 데이터 받을 것
 						'con_floor_no'=>$con_floor_no
 					);
-
 					$price_seq = $this->cms_main_model->data_row('cb_cms_sales_price' , $pr_where);
 
 					$cont_arr1 = array( // 계약 테이블 입력 데이터
@@ -389,8 +394,8 @@ class Cms_m1 extends CB_Controller {
 					}
 
 					/******************************계약자 테이블 데이터******************************/
-                    $cont_seq = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_contract WHERE pj_seq='$pj' AND unit_seq='$un' AND is_rescission='0' ");
-					$birth_gender = $this->input->post('birth_date', TRUE).'-'.$this->input->post('cont_gender', TRUE);
+          $cont_seq = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_contract WHERE pj_seq='$pj' AND unit_seq='$un' AND is_rescission='0' ");
+					if( !empty($this->input->post('birth_date'))) $birth_gender = $this->input->post('birth_date').'-'.$this->input->post('cont_gender');
 					$addr_id = $this->input->post('postcode1')."|".$this->input->post('address1_1')."|".$this->input->post('address2_1');
 					$addr_dm = $this->input->post('postcode2')."|".$this->input->post('address1_2')."|".$this->input->post('address2_2');
 					$idoc1 = $this->input->post('incom_doc_1');
@@ -618,7 +623,8 @@ class Cms_m1 extends CB_Controller {
 							}
 						}
 						$udh = $this->input->post('unit_dong_ho', TRUE);
-						alert($udh.'의 계약 정보입력이 정상처리되었습니다.', base_url("cms_m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=2&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho')." "));
+						$ret_url = base_url("cms_m1/sales/1/2?project=".$pj."&mode=2&cont_sort1=1&cont_sort2=2&diff_no=".$this->input->post('diff_no')."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho'));
+						alert($udh.'의 계약 정보입력이 정상처리되었습니다.', $ret_url);
 
 					}else if($this->input->post('unit_is_cont')=='1'){ // 기존 계약정보 수정일 때
 
@@ -721,7 +727,7 @@ class Cms_m1 extends CB_Controller {
 							}
 						}
 						$udh = $this->input->post('unit_dong_ho', TRUE);
-						alert($udh.'의 계약 정보수정이 정상처리되었습니다.', base_url("cms_m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=2&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho')." "));
+						alert($udh.'의 계약 정보수정이 정상처리되었습니다.', base_url("cms_m1/sales/1/2?project=".$pj."&mode=2&cont_sort1=1&cont_sort2=2&diff_no=".$this->input->post('diff_no')."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho')));
 					}
 
 				}else if($this->input->post('cont_sort3')=='3'){ // 청약 해지일 때
@@ -734,7 +740,7 @@ class Cms_m1 extends CB_Controller {
 						);
 						$result[0] = $this->cms_main_model->update_data('cb_cms_sales_application', $cancel_data, array('pj_seq'=>$pj, 'unit_seq'=>$un)); // 해지처리
 						if( !$result[0]) alert('데이터베이스 에러입니다.', '');
-						$ret_url = "?mode=2&cont_sort1=2&cont_sort3=3&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
+						$ret_url = base_url("cms_m1/sales/1/2?project=".$pj."&mode=2&cont_sort1=2&cont_sort3=3&diff_no=".$this->input->post('diff_no')."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho'));
 						alert('청약 해지가 정상처리 되었습니다.', $ret_url);
 					}
 					if($this->input->post('is_cancel')=='1' && $this->input->post('is_refund')=='1') {
@@ -749,7 +755,7 @@ class Cms_m1 extends CB_Controller {
 						if( !$result[0]) alert('데이터베이스 에러입니다.', '');
 						$result[1] = $this->cms_main_model->update_data('cb_cms_project_all_housing_unit', array('is_application'=>'0', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('mem_username')), array('seq'=>$un));
 						if( !$result[1])  alert('데이터베이스 에러입니다.', '');
-						$ret_url = "?mode=2&cont_sort1=2&cont_sort3=3&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
+						$ret_url = base_url("cms_m1/sales/1/2?project=".$pj."&mode=2&cont_sort1=2&cont_sort3=3&diff_no=".$this->input->post('diff_no')."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho'));
 						alert('해지 환불이 정상처리 되었습니다.', $ret_url);
 					}
 
@@ -771,7 +777,7 @@ class Cms_m1 extends CB_Controller {
 						);
 						$result[1] = $this->cms_main_model->update_data('cb_cms_sales_contractor', $cancel_data2, array('cont_seq'=>$this->input->post('cont_seq'))); // 해지 처리
 						if( !$result[1]) alert('데이터베이스 에러입니다.', '');
-						$ret_url = "?mode=2&cont_sort1=2&cont_sort3=4&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
+						$ret_url = base_url("cms_m1/sales/1/2?project=".$pj."&mode=2&cont_sort1=2&cont_sort3=4&diff_no=".$this->input->post('diff_no')."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho'));
 						alert('계약 해지가 정상처리 되었습니다.', $ret_url);
 					}
 					if($this->input->post('is_cont_cancel')=='1' && $this->input->post('is_cont_refund')=='1') { // 계약 해지 환불일 때
@@ -795,7 +801,7 @@ class Cms_m1 extends CB_Controller {
 						if( !$result[2]) alert('데이터베이스 에러입니다.', '');
 						$result[3] = $this->cms_main_model->update_data('cb_cms_project_all_housing_unit', array('is_contract'=>'0', 'modi_date'=>date('Y-m-d'), 'modi_worker'=>$this->session->userdata('mem_username')), array('seq'=>$un));
 						if( !$result[3])  alert('데이터베이스 에러입니다.', '');
-						$ret_url = "?mode=2&cont_sort1=2&cont_sort3=4&project=".$pj."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
+						$ret_url = base_url("cms_m1/sales/1/2?project=".$pj."&mode=2&cont_sort1=2&cont_sort3=4&diff_no=".$this->input->post('diff_no')."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho'));
 						alert('해약 환불이 정상처리 되었습니다.', $ret_url);
 					}
 				}

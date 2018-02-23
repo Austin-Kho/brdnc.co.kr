@@ -49,6 +49,12 @@ function cont_check(){
 			return;
 		}
 	}
+
+	if( !form1.cont_sort3 && !form1.diff_no.value){
+		alert('차수구분을 선택하여 주십시요!');
+		form2.diff_no.focus();
+		return;
+	}
 	if(!form1.type.value){
 		alert('타입 정보를 선택하여 주십시요!');
 		form1.type.focus();
@@ -64,15 +70,9 @@ function cont_check(){
 		form1.ho.focus();
 		return;
 	}
-
 	if(!form1.cont_sort3&&!form2.conclu_date.value){
 		alert('거래일자를 입력하여 주십시요!');
 		form2.conclu_date.focus();
-		return;
-	}
-	if( !form1.cont_sort3 && !form2.diff_no.value){
-		alert('차수구분을 선택하여 주십시요!');
-		form2.diff_no.focus();
 		return;
 	}
 	if(!form1.cont_sort3&&!form2.custom_name.value){
@@ -85,7 +85,6 @@ function cont_check(){
 		form2.tel_1.focus();
 		return;
 	}
-
 	if(typeof(form1.cont_sort2)!='undefined'  && form1.cont_sort2.value=='1') {
 		if( !form2.app_in_mon.value){
 			alert('청약금을 입력하여 주십시요!');

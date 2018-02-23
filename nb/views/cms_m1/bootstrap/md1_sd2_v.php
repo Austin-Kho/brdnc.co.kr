@@ -9,7 +9,7 @@ else :
 		<!-- ===================계약물건 검색 시작================== -->
 <?php
 	$attributes = array('method' => 'get', 'name' => 'set1');
-	echo form_open(uri_string(), $attributes);
+	echo form_open(current_full_url(), $attributes);
 ?>
 			<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
@@ -91,38 +91,33 @@ else :
 					</div>
 				</div>
 				<div class="row bo-bottom font12" style="margin: 0;">
-
-					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">타입 선택 <span class="red">*</span></div>
-					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
-						<div class="col-xs-12" style="padding: 0px;">
-							<label for="type" class="sr-only">타입</label>
-							<select class="form-control input-sm" name="type" onchange="submit();">
-								<option value=""> 선 택</option>
-<?php foreach($type_list as $lt) : ?>
-								<option value="<?php echo $lt->type; ?>" <?php if($lt->type==$this->input->get('type')) echo "selected"; ?>><?php echo $lt->type; ?></option>
-<?php endforeach; ?>
-							</select>
-						</div>
-					</div>
 					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">차수 구분 <span class="red">*</span></div>
 					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 						<div class="col-xs-12" style="padding: 0px;">
 							<label for="diff_no" class="sr-only">차수</label>
-							<select class="form-control input-sm" name="diff_no" onchange="submit();"  <?php if( !$this->input->get('type')) echo "disabled"; ?>>
+							<select class="form-control input-sm" name="diff_no" onchange="submit();">
 								<option value=""> 선 택</option>
 <?php foreach($diff_no as $lt) :
-		if($this->input->post('diff_no')) :
-			$now_diff = $this->input->post('diff_no');
-		elseif( !empty($is_reg['app_data']->app_diff)) :
-			$now_diff = $is_reg['app_data']->app_diff;
-		elseif( !empty($is_reg['cont_data']->cont_diff)) :
-			$now_diff = $is_reg['cont_data']->cont_diff;
-		else :
-			$now_diff = '';
+		if( !empty($this->input->get('diff_no'))) : $now_diff = $this->input->get('diff_no');
+		elseif( !empty($is_reg['app_data']->app_diff)) : $now_diff = $is_reg['app_data']->app_diff;
+		elseif( !empty($is_reg['cont_data']->cont_diff)) : $now_diff = $is_reg['cont_data']->cont_diff;
+		else : $now_diff = '';
 		endif;
 ?>
-								<option value="<?php echo $lt->diff_no; ?>" <?php if($this->input->get('diff_no')) echo set_select('diff_no'); elseif($lt->diff_no==$now_diff) echo "selected"; ?>><?php echo $lt->diff_name; ?></option>
+								<option value="<?php echo $lt->diff_no; ?>" <?php if($lt->diff_no==$now_diff) echo "selected"; ?>><?php echo $lt->diff_name; ?></option>
 	<?php endforeach; ?>
+							</select>
+						</div>
+					</div>
+					<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">타입 선택 <span class="red">*</span></div>
+					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+						<div class="col-xs-12" style="padding: 0px;">
+							<label for="type" class="sr-only">타입</label>
+							<select class="form-control input-sm" name="type" onchange="submit();" <?php if( !$this->input->get('diff_no')) echo "disabled"; ?>>
+								<option value=""> 선 택</option>
+<?php foreach($type_list as $lt) : ?>
+								<option value="<?php echo $lt->type; ?>" <?php if($lt->type==$this->input->get('type')) echo "selected"; ?>><?php echo $lt->type; ?></option>
+<?php endforeach; ?>
 							</select>
 						</div>
 					</div>
@@ -132,7 +127,7 @@ else :
 					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 						<div class="col-xs-12" style="padding: 0px;">
 							<label for="dong" class="sr-only">동</label>
-							<select class="form-control input-sm" name="dong" onchange="submit();"  <?php if( !$this->input->get('diff_no')) echo "disabled"; ?>>
+							<select class="form-control input-sm" name="dong" onchange="submit();"  <?php if( !$this->input->get('type')) echo "disabled"; ?>>
 								<option value=""> 선 택</option>
 	<?php foreach($dong_list as $lt) : ?>
 								<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->get('dong')) echo "selected"; ?>><?php echo $lt->dong." 동"; ?></option>
@@ -165,16 +160,15 @@ else :
 <?php
 	echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
 	$attributes = array('name' => 'form1');
-	$url = '?yr='.$this->input->get('yr').'&project='.$project.'&mode='.$this->input->get('mode').'&cont_sort1='.$this->input->get('cont_sort1').'&cont_sort2='.$this->input->get('cont_sort2').'&type='.$this->input->get('type').'&diff_no='.$this->input->get('diff_no').'&dong='.$this->input->get('dong').'&ho='.$this->input->get('ho');
-	echo form_open(base_url('cms_m1/sales/1/2').$url, $attributes);
+	echo form_open(current_full_url(), $attributes);
 ?>
 			<input type="hidden" name="mode" value="<?php if( !empty($is_reg)) echo '2'; else echo '1'; ?>">
 			<input type="hidden" name="project" value="<?php echo $this->input->get('project'); ?>">
 			<input type="hidden" name="cont_sort1" value="<?php echo $this->input->get('cont_sort1'); ?>"><!-- 계약(1) 해지(2) 여부 -->
 			<input type="hidden" name="cont_sort2" value="<?php echo $this->input->get('cont_sort2'); ?>"><!-- 청약(1) 계약(2) 여부 -->
 			<input type="hidden" name="cont_sort3" value="<?php echo $this->input->get('cont_sort3'); ?>"><!-- 청약해지(1) 계약해지(2) 여부 -->
-			<input type="hidden" name="type" value="<?php echo $this->input->get('type'); ?>">
 			<input type="hidden" name="diff_no" value="<?php echo $this->input->get('diff_no'); ?>">
+			<input type="hidden" name="type" value="<?php echo $this->input->get('type'); ?>">
 			<input type="hidden" name="dong" value="<?php echo $this->input->get('dong'); ?>">
 			<input type="hidden" name="ho" value="<?php echo $this->input->get('ho'); ?>">
 <?php $unitseq = ( !empty($unit_seq)) ? $unit_seq->seq : ""; ?>
@@ -211,7 +205,7 @@ else :
 			<div class="row bo-top font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">처리 구분 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
-					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" onclick="if(this.checked===true) location.href='<?php echo base_url('cms_m1/sales/1/2')."?mode=2&cont_sort1=1&cont_sort2=2&project=".$project."&type=".$is_reg['app_data']->unit_type."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>';">계약전환</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 4px 20px;"><label><input type="checkbox" onclick="if(this.checked===true) location.href='<?php echo base_url('cms_m1/sales/1/2')."?project=".$project."&mode=2&cont_sort1=1&cont_sort2=2&diff_no=".$is_reg['app_data']->app_diff."&type=".$is_reg['app_data']->unit_type."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>';">계약전환</label></div>
 				</div>
 			</div>
 <?php endif; ?>
