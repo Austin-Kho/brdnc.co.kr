@@ -8,7 +8,7 @@ else :
 
 <?php
   $attributes = array('method' => 'get', 'name' => 'form1');
-  echo form_open(current_url(), $attributes);
+  echo form_open(current_full_url(), $attributes);
 ?>
 		<div class="row bo-top bo-bottom font12" style="margin: 0;">
 			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
@@ -163,7 +163,7 @@ else :
 
 <?php
   $attributes = array('name' => 'form2');
-  echo form_open(current_url(), $attributes);
+  echo form_open(current_full_url(), $attributes);
 ?>
 				<input type="hidden" name="modi" value="<?php echo $this->input->get('modi'); ?>">
 				<input type="hidden" name="dong" value="<?php echo $this->input->get('dong'); ?>">

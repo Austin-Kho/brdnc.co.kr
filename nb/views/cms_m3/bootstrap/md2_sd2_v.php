@@ -10,7 +10,7 @@
 <?php
     echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
     $attributes = array('name' => 'form1', 'class' => '', 'method' => 'post');
-    echo form_open(current_url(), $attributes);
+    echo form_open(current_full_url(), $attributes);
 ?>
 			<fieldset class="font12">
 				<div class="form-group"><!-- 프로젝트명/종류 -->

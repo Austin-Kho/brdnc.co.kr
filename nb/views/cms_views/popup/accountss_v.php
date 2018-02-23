@@ -32,7 +32,7 @@
 
 	$attributes = array('name' => 'form1');
 	$hidden = array('start' => '1');
-	echo form_open(current_url(), $attributes, $hidden);
+	echo form_open(current_full_url(), $attributes, $hidden);
 ?>
 				<div style="float:left; height:28px; text-align:center; padding:7px 0 0 55px; ;">
 					<select name="sort" class="inputstyle2" style="width:80px; height:22px;">
@@ -164,12 +164,12 @@
 <?php
 	$attributes = array('name' => 'taxsearch', 'id' => 'taxsearch', 'class' => 'form-inline');
 	// $hidden = array('n' => $n);
-	echo form_open(current_url(), $attributes);//, $hidden);
+	echo form_open(current_full_url(), $attributes);//, $hidden);
 ?>
 	<input type="hidden" name="n" value="<?php echo $n; ?>" id="n">
 	<header id="header">
 		<h3>은 행 계 좌 관 리</h3>
-	</header>-->  <!-- /header --> 
+	</header>-->  <!-- /header -->
 	<!-- <div class="desc">※ 검색할 은행(계좌) 명칭을 입력해 주십시요.</div>
 
 	<div class="well" style="padding: 13px; margin-bottom: 20px;">세무서를 제외한 <b>[관할 지역명]</b> 만 입력하세요.</div>

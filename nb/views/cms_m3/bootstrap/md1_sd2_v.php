@@ -46,7 +46,7 @@
 
 <?php
   $attributes = array('method' => 'get', 'name' => 'get_frm');
-  echo form_open(current_url(), $attributes);
+  echo form_open(current_full_url(), $attributes);
 ?>
   <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
     <div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
@@ -127,7 +127,7 @@
       'project' => $this->input->get('project'),
       'set_sort' => '1'
   );
-  echo form_open(base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=1', $attributes, $hidden);
+  echo form_open(current_full_url(), $attributes, $hidden);
 ?>
   <fieldset>
     <div class="row font12 form-group" style="margin: 0 0 50px;">
@@ -177,7 +177,7 @@
       'project' => $this->input->get('project'),
       'set_sort' => '2'
   );
-  echo form_open(base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=2', $attributes, $hidden);
+  echo form_open(current_full_url(), $attributes, $hidden);
 ?>
   <fieldset>
     <div class="row font12 form-group" style="margin: 0 0 50px;">
@@ -256,7 +256,7 @@ $hidden = array(
     'project' => $this->input->get('project'),
     'set_sort' => '3'
 );
-echo form_open(base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=3', $attributes, $hidden);
+echo form_open(current_full_url(), $attributes, $hidden);
 ?>
   <fieldset>
     <div class="row font12 form-group" style="margin: 0 0 50px;">
@@ -315,7 +315,7 @@ $hidden = array(
     'project' => $this->input->get('project'),
     'set_sort' => '4'
 );
-echo form_open(base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=4', $attributes, $hidden);
+echo form_open(current_full_url(), $attributes, $hidden);
 ?>
   <fieldset>
     <div class="row font12 form-group" style="margin: 0 0 50px;">
@@ -361,7 +361,7 @@ echo form_open(base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=4'
 
   $attributes = array('method' => 'get', 'name' => 'get_frm');
   $hidden = array('yr' => $this->input->get('yr'), 'project' => $this->input->get('project'), 'set_sort' => '5');
-  echo form_open(base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=5', $attributes, $hidden);
+  echo form_open(current_full_url(), $attributes, $hidden);
 ?>
   <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
     <div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">차수구분 선택</div>
@@ -387,7 +387,7 @@ echo form_open(base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=4'
       'set_sort' => '5',
       'con_diff' => $this->input->get('con_diff')
   );
-  echo form_open(base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=5&con_diff='.$this->input->get('con_diff'), $attributes, $hidden);
+  echo form_open(current_full_url(), $attributes, $hidden);
 ?>
   <fieldset>
     <div class="row font12" style="margin: 0; padding: 0;">
@@ -466,7 +466,7 @@ echo form_open(base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=4'
 
   $attributes = array('method' => 'get', 'name' => 'get_frm');
   $hidden = array('yr' => $this->input->get('yr'), 'project' => $this->input->get('project'), 'set_sort' => '6');
-  echo form_open(base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=6', $attributes, $hidden);
+  echo form_open(current_full_url(), $attributes, $hidden);
 ?>
   <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
     <div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">차수구분 선택</div>
@@ -506,10 +506,7 @@ echo form_open(base_url('cms_m3/project/1/2').'?project='.$project.'&set_sort=4'
       'con_diff' => $this->input->get('con_diff'),
       'pay_sort' => $this->input->get('pay_sort')
   );
-  echo form_open(base_url(
-    'cms_m3/project/1/2').'?project='.$project.'&set_sort=6&con_diff='.$this->input->get('con_diff').'&pay_sort='.$this->input->get('pay_sort'),
-    $attributes, $hidden
-  );
+  echo form_open(current_full_url(), $attributes, $hidden);
 ?>
   <div class="row font12" style="margin: 0; padding: 0;">
     <div class="col-xs-12 table-responsive" style="padding: 0;">

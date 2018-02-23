@@ -19,7 +19,7 @@ else :
 	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
 <?php
   $attributes = array('method' => 'get', 'name' => 'pj_sel');
-  echo form_open(current_url());
+  echo form_open(current_full_url(), $attributes);
 ?>
 			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
 			<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
@@ -162,7 +162,7 @@ else :
 						<label for="e_date" class="sr-only">종료일</label>
 						<div>
 							<input type="text" class="form-control input-sm wid-95" id="e_date" name="e_date" maxlength="10" value="<?php if($this->input->get('e_date')) echo $this->input->get('e_date'); ?>" readonly onClick="cal_add(this); event.cancelBubble=true" placeholder="종료일">
-						</div>						
+						</div>
 					</div>
 					<div class="col-xs-1 col-sm-1 glyphicon-wrap" style="padding: 6px 0;">
 						<a href="javascript:" onclick="cal_add(document.getElementById('e_date'),this); event.cancelBubble=true">

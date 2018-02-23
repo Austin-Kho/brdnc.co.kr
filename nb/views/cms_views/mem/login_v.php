@@ -1,7 +1,7 @@
 <div class="container" style="color: #BBBBBB; width: 300px;">
 <?php
 	$attributes = array('name' => 'login', 'class' => 'form-signin', 'method' => 'post');
-	echo form_open(base_url('cms_member'), $attributes);
+	echo form_open(current_full_url(), $attributes);
 ?>
 		<label><input type="hidden" name="returnURL" value="<?php echo $this->input->get('returnURL'); ?>"></label>
 		<div id="main_logo" style="margin: 100px 0 50px 0;">

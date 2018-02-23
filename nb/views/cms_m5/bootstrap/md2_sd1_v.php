@@ -24,7 +24,7 @@
 		<div class="row" style="margin: 0; padding: 0;">
 <?php
 	$attributes = array('name' => 'form1', 'id' => 'com_reg_form', 'class' => 'form-horizontal');
-	echo form_open(current_url(), $attributes);
+	echo form_open(current_full_url(), $attributes);
 ?>
 				<fieldset class="font12">
 

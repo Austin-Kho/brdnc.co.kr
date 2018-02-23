@@ -10,7 +10,7 @@
 			<div class="row font12" style="margin: 0; padding: 0;">
 <?php
 	$attributes = array('name' => 'pj_data_reg', 'method' => 'get');
-	echo form_open(current_url(), $attributes);
+	echo form_open(current_full_url(), $attributes);
 ?>
 
 					<label for="mode" class="sr-only">모드</label>
@@ -58,7 +58,7 @@
 
 <?php
 	$attributes = array('name' => 'form1', 'method' => 'post', 'class' => 'form-inline');
-	echo form_open(current_url(), $attributes);
+	echo form_open(current_full_url(), $attributes);
 ?><!-- 메인폼(form1) 시작 -->
 				<!------------------------------------동호수 별 입력 시작--------------------------------------------->
 					<label for="mode" class="sr-only">모드</label><input type="hidden" name="mode" value="<?php echo $this->input->get('mode'); ?>">
@@ -248,7 +248,7 @@
 				<!------------------------------------동호수 데이터 불러오기 시작----------------------------------------------->
 <?php
 	$attributes = array('method' => 'get', 'name'=>'data_sh');
-	echo form_open(base_url('/cms_m3/project/1/1/'), $attributes);
+	echo form_open(current_full_url(), $attributes);
 ?>
 				<label for="mode" class="sr-only">모드</label><input type="hidden" name="mode" value="<?php echo $this->input->get('mode'); ?>">
 				<label for="new_pj" class="sr-only">모드</label><input type="hidden" name="new_pj" value="<?php echo $this->input->get('new_pj'); ?>">

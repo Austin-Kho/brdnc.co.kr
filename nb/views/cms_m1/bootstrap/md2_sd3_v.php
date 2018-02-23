@@ -46,7 +46,7 @@ else :
 	<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
 <?php
 	$attributes = array('method' => 'get', 'name' => 'pj_sel');
-	echo form_open(current_url(), $attributes);
+	echo form_open(current_full_url(), $attributes);
 ?>
 			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">사업 개시년도</div>
 			<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
@@ -94,7 +94,7 @@ else :
 	<!-- -------------------------------------------------- -->
 <?php
 	$attributes = array('name' => 'bill_set');
-	echo form_open(current_url(), $attributes);
+	echo form_open(current_full_url(), $attributes);
 ?>
 
 	<div class="row" style="margin: 0; padding: 0;">
@@ -276,7 +276,7 @@ else :
 <?php
 	$attributes = array('name' => 'form1', 'method' => 'get');
 	$hedden = array('pj' => $project);
-	echo form_open(base_url(uri_string()), $attributes, $hedden);
+	echo form_open(current_full_url(), $attributes, $hedden);
 ?>
 				<div class="col-xs-12 col-sm-2 col-md-1 center bgf8" style="height: 40px; padding: 10px 0;">검색 조건</div>
 				<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">

@@ -21,7 +21,7 @@
 <?php
 	$attributes = array('name' => 'taxsearch', 'id' => 'taxsearch', 'class' => 'form-inline');
 	// $hidden = array('n' => $n);
-	echo form_open(current_url(), $attributes);//, $hidden);
+	echo form_open(current_full_url(), $attributes);//, $hidden);
 ?>
 	<input type="hidden" name="n" value="<?php echo $n; ?>" id="n">
 	<header id="header">

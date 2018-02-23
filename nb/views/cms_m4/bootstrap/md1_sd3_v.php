@@ -20,7 +20,7 @@
 		'cont_9_h' => '', // 수수료 발생 시 - 적요_9
 		'cont_10_h' => '', // 수수료 발생 시 - 적요_10
 	);
-	echo form_open(current_url(), $attributes, $hidden);
+	echo form_open(current_full_url(), $attributes, $hidden);
 ?>
 				<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
 					<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px; 0">거래일자</div>

@@ -11,7 +11,7 @@
 	<div class="container">
 <?php
 	$attributes = array('name' => 'form1');
-	echo form_open(current_url(), $attributes);
+	echo form_open(current_full_url(), $attributes);
 ?>
 		<div class="row">
 			<header id="header">

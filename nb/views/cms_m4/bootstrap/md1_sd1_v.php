@@ -15,7 +15,7 @@
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding-top: 5px;">
 <?php
    $attributes = array('name' => 'd_cash_book_frm');
-   echo form_open(current_url(), $attributes);
+   echo form_open(current_full_url(), $attributes);
 ?>
 						<div class="col-xs-8 col-sm-5 col-md-3 glyphicon-wrap" style="padding: 0px;">
 							<label for="ref_date" class="sr-only">기준일</label>

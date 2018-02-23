@@ -9,7 +9,7 @@
 <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
 <?php
   $attributes = array('method' => 'get', 'name' => 'pj_sel');
-  echo form_open(current_url(), $attributes);
+  echo form_open(current_full_url(), $attributes);
 ?>
     <div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
     <div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
@@ -113,7 +113,7 @@ return $sort;
 <?php
     echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
     $attributes = array('name' => 'form1', 'class' => '', 'method' => 'post');
-    echo form_open(current_url().'?project='.$this->input->get_post('project'), $attributes);
+    echo form_open(current_full_url(), $attributes);
 ?>
     <fieldset class="font12">
       <label for="project" class="sr-only">모드</label>

@@ -10,7 +10,7 @@
 <?php
 	$attributes = array('name' => 'form1', 'class' => 'form-horizontal');
 	$hidden = array('seq'=> $this->uri->segment(5));
-	echo form_open(current_url(), $attributes, $hidden);
+	echo form_open(current_full_url(), $attributes, $hidden);
 ?>
 		<div class="row" style="padding: 0 15px; margin-bottom: 15px;">
 			<div class="form-group" style="padding-top: 15px;">

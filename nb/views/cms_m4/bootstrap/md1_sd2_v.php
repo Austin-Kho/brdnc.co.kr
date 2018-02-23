@@ -39,7 +39,7 @@
 					<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
 <?php
 	$attributes = array('name' => 'cash_book_frm', 'method' => 'get');
-	echo form_open(current_url(), $attributes);
+	echo form_open(current_full_url(), $attributes);
 ?>
 							<div class="col-xs-12 col-sm-2 col-md-1 center point-sub" style="height: 40px; padding: 10px 0;">구 분</div>
 							<div class="col-xs-6 col-sm-5 col-md-1" style="height: 40px; padding: 5px;">

@@ -13,7 +13,7 @@
 						<!-- <form name="list_frm" method="get" action=""> -->
 <?php
 	$attributes = array('method' => 'get', 'name' => 'list_frm');
-	echo form_open(current_url(), $attributes);
+	echo form_open(current_full_url(), $attributes);
 ?>
 							<div class="point-sub col-md-2" style="height: 40px; padding-top: 10px;">업체구분</div>
 							<div class="col-md-7" style="height: 40px; padding-top: 5px;">
@@ -99,7 +99,7 @@
   else :
 		$hidden = array('mode' => $this->input->get('mode'));
 	endif;
-	echo form_open(current_url(), $attributes, $hidden);
+	echo form_open(current_full_url(), $attributes, $hidden);
 ?>
 					<fieldset class="font12">
 						<div class="col-md-12">

@@ -11,7 +11,7 @@
 		<!-- 신규 사용자 등록자가 있을 때 처리 시작 -->
 <?php if($new_rq) :
 		$attributes = array('name' => 'form2');
-		echo form_open(current_url(), $attributes);
+		echo form_open(current_full_url(), $attributes);
 ?>
 				<fieldset style="margin-bottom: 15px;">
 					<input type="hidden" name="no"><!-- js -> permition	함수로 입력 // 신규 사용자 DB 등록 mem_id //-->
@@ -70,7 +70,7 @@ endif;?>
 		</div>
 <?php
 	$attributes = array('name' => 'form3');
-	echo form_open(base_url('cms_m5/config/2/2?un=').$this->input->get('un'), $attributes);
+	echo form_open(current_full_url(), $attributes);
 ?>
 			<fieldset class="font12">
 				<div class="row bo-top" style="padding-top: 15px;">

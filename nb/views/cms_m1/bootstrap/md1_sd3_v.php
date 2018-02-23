@@ -8,7 +8,7 @@ else :
 		<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
 <?php
 	$attributes = array('method' => 'get', 'name' => 'pj_sel');
-	echo form_open(current_url(), $attributes);
+	echo form_open(current_full_url(), $attributes);
 ?>
 				<div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
 				<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
