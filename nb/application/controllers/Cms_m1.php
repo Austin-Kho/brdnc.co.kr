@@ -255,6 +255,8 @@ class Cms_m1 extends CB_Controller {
 			$this->form_validation->set_rules('ho', '호수', 'trim|required');
 			$this->form_validation->set_rules('cont_code', '계약일련번호', 'trim|max_length[12]');
 			$this->form_validation->set_rules('custom_name', '청/계약자명', 'trim|required|max_length[20]');
+			$this->form_validation->set_rules('birth_date', '생년월일', 'trim|required|numeric|max_length[8]');
+			$this->form_validation->set_rules('cont_gender', '계약자 성별', 'trim|required|numeric|max_length[1]');
 
 			$this->form_validation->set_rules('conclu_date', '처리일자', 'trim|exact_length[10]');
 			$this->form_validation->set_rules('due_date', '계약예정일', 'trim|exact_length[10]');
@@ -387,7 +389,8 @@ class Cms_m1 extends CB_Controller {
 					}
 
 					/******************************계약자 테이블 데이터******************************/
-                      $cont_seq = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_contract WHERE pj_seq='$pj' AND unit_seq='$un' AND is_rescission='0' ");
+                    $cont_seq = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_contract WHERE pj_seq='$pj' AND unit_seq='$un' AND is_rescission='0' ");
+					$birth_gender = $this->input->post('birth_date', TRUE).'-'.$this->input->post('cont_gender', TRUE);
 					$addr_id = $this->input->post('postcode1')."|".$this->input->post('address1_1')."|".$this->input->post('address2_1');
 					$addr_dm = $this->input->post('postcode2')."|".$this->input->post('address1_2')."|".$this->input->post('address2_2');
 					$idoc1 = $this->input->post('incom_doc_1');
@@ -402,6 +405,7 @@ class Cms_m1 extends CB_Controller {
 
 					$cont_arr2 = array( // 계약자 테이블 입력 데이터
 						'contractor' => $this->input->post('custom_name', TRUE),
+						'cont_birth_id' => $birth_gender,
 						'cont_tel1' =>  $this->input->post('tel_1', TRUE),
 						'cont_tel2' =>  $this->input->post('tel_2', TRUE),
 						'cont_addr1' =>  $addr_id,
