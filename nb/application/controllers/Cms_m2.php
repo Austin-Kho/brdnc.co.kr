@@ -105,7 +105,7 @@ class Cms_m2 extends CB_Controller
 			$view['diff'] = $this->cms_main_model->data_result('cb_cms_sales_con_diff', array('pj_seq'=>$project)); // 차수 데이터
 			$view['type'] = explode("-", $pj_info->type_name); // 타입 데이터
 			$view['area_sup'] = explode("-", $pj_info->area_sup); // 공급 면적 데이터
-			$view['type_quantity'] = explode("-", $pj_info->type_quantity); // 타입별 세대수 데이터
+			$view['type_quantity'] = explode("-", $pj_info->type_quantity); // 타입별 세대수 데이터			
 
 
 
