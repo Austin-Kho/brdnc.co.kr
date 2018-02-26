@@ -78,11 +78,10 @@ else :
 						<td>미수금액</td>
 					</tr>
 				</thead>
-<?php $com_fac = 2400640000; // 상가 매출액?>
 				<tbody>
 					<tr class="active right">
-						<td class="left"><span class="glyphicon glyphicon-folder-open" aria-hidden="true">&nbsp;</span><?php // echo $now_pj->pj_name; ?></td>
-						<td style="font-weight: bold;"><?php echo number_format($total_pmt->total+$com_fac); ?></td>
+						<td class="left"><span class="glyphicon glyphicon-folder-open" aria-hidden="true">&nbsp;</span><?php echo $pj_now->pj_name; ?></td>
+						<td style="font-weight: bold;"><?php echo number_format($total_pmt->total+($pj_now->inside_arcade_price*1000)); ?></td>
 						<td style="font-weight: bold;"><?php echo number_format($sell_data->sell_total); ?></td>
 						<td style="font-weight: bold; color: #060EC8;"><?php echo number_format($rec_data->rec_total); ?></td>
 						<td style="font-weight: bold; color: #C30505;">-</td>
@@ -102,13 +101,13 @@ else :
 					</tr>
 					<tr class="right">
 						<td class="left" style="padding-left: 20px;"><span class="glyphicon glyphicon-file" aria-hidden="true"></span> 단지내상가</td>
-						<td><?php echo number_format($com_fac); ?></td>
+						<td><?php echo number_format($pj_now->inside_arcade_price*1000); ?></td>
 						<td>-</td>
 						<td style="color: #060EC8;">-</td>
 						<td style="color: #C30505;">-</td>
 						<td style="color: #060EC8;">-</td>
 						<td style="color: #060EC8;">-</td>
-						<td style="color: #C30505;">-</td>
+						<td style="color: #C30505;"><?php echo number_format($pj_now->inside_arcade_price*1000); ?></td>
 					</tr>
 				</tbody>
 			</table>

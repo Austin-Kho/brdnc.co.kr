@@ -64,8 +64,9 @@ class Cms_m1 extends CB_Controller {
 		// 등록된 프로젝트 데이터
 		$where = "";
 		if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
-		$view['all_pj'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC ');
 		$project = $view['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
+		$view['pj_list'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC '); // 프로젝트 목록
+		$view['pj_now'] = $this->cms_main_model->data_row('cb_cms_project', array('seq' => $project)); // 현재 페이지 선택 프로젝트
 
 
  		// 계약현황 1. 계약현황 ////////////////////////////////////////////////////////////////////
@@ -146,9 +147,6 @@ class Cms_m1 extends CB_Controller {
 			if($start != '' or $limit !='')	$cont_query .= " LIMIT ".$start.", ".$limit." ";
 
 			$view['cont_data'] = $this->cms_main_model->sql_result($cont_query); // 계약 및 계약자 데이터
-
-
-
 
 
 
@@ -809,9 +807,6 @@ class Cms_m1 extends CB_Controller {
 
 
 
-
-
-
 		// 계약현황 3. 동호수현황 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==1 && $sdi==3) {
 			// $this->output->enable_profiler(TRUE); //프로파일러 보기
@@ -848,9 +843,6 @@ class Cms_m1 extends CB_Controller {
 
 
 
-
-
-
 		// 계약현황 4. 계약서 [스캔파일] ////////////////////////////////////////////////////////////////////
 		}else if($mdi==1 && $sdi==4) {
 			// $this->output->enable_profiler(TRUE); //프로파일러 보기
@@ -861,10 +853,7 @@ class Cms_m1 extends CB_Controller {
 
 
 
-
-
-
-		// 1. 수납관리 1. 수납현황 ////////////////////////////////////////////////////////////////////
+		//2. 수납관리 1. 수납현황 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==1) {
 			// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
@@ -937,10 +926,7 @@ class Cms_m1 extends CB_Controller {
 
 
 
-
-
-
-		// 1. 수납관리 2. 수납등록 ////////////////////////////////////////////////////////////////////
+		// 2. 수납관리 2. 수납등록 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==2) {
 			// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
@@ -982,7 +968,7 @@ class Cms_m1 extends CB_Controller {
 				$view['total_paid'] = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS total_paid FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' "); // 계약자별 총 수납액
 			}
 			// 수납 약정
-      $pay_sche = $view['pay_sche'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' "); // 전체 약정 회차
+      		$pay_sche = $view['pay_sche'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' "); // 전체 약정 회차
 
 
 
@@ -1039,8 +1025,6 @@ class Cms_m1 extends CB_Controller {
 
 				alert("수납내역이 정상 입력 되었습니다.", base_url('cms_m1/sales/2/2?project='.$project.'&dong='.$this->input->post('dong').'&ho='.$this->input->post('ho')));
 			}
-
-
 
 
 
