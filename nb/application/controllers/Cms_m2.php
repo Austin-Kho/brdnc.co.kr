@@ -65,7 +65,7 @@ class Cms_m2 extends CB_Controller
 		if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
 		$view['pj_list'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC ');
 		$project = $view['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
-		$pj_info = $view['pj_info'] = $this->cms_main_model->data_row('cb_cms_project', array('seq' => $project)); // cb_cms_project 테이블 정보
+		$pj_now = $view['pj_now'] = $this->cms_main_model->data_row('cb_cms_project', array('seq' => $project)); // cb_cms_project 테이블 정보
 
 
 
@@ -103,9 +103,10 @@ class Cms_m2 extends CB_Controller
 
 
 			$view['diff'] = $this->cms_main_model->data_result('cb_cms_sales_con_diff', array('pj_seq'=>$project)); // 차수 데이터
-			$view['type'] = explode("-", $pj_info->type_name); // 타입 데이터
-			$view['area_sup'] = explode("-", $pj_info->area_sup); // 공급 면적 데이터
-			$view['type_quantity'] = explode("-", $pj_info->type_quantity); // 타입별 세대수 데이터
+			$view['type'] = explode("-", $pj_now->type_name); // 타입 데이터
+			$view['area_sup'] = explode("-", $pj_now->area_sup); // 공급 면적 데이터
+			$view['type_quantity'] = explode("-", $pj_now->type_quantity); // 타입별 세대수 데이터
+			$view['apt_take'] = $this->cms_main_model->data_row('cb_cms_sales_price', array('pj_seq'=>$project), 'SUM(unit_price*unit_num) AS total'); // 차수 데이터
 
 
 

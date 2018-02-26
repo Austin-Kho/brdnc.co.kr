@@ -136,6 +136,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 	$apt_type_row = (count($diff)*(count($type)+1)+1);
 	$store_type_row = 1+1;
 	$income_title_row = (count($diff)*(count($type)+1))+$store_type_row+2;
+	$sum_total = ($apt_take->total/1000) + $pj_now->inside_arcade_price; // 전체 매출
 
 	// 차수별 타입별 평균 세대가격 구하기(select문)
 	$tp_select = "SUM(unit_price * unit_num) AS sum_price, SUM(unit_num) AS type_num";
@@ -146,7 +147,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 		// 차수별 타입별 평균 세대가격 구하기(where문)
 		$tp_where = array('pj_seq' => $project, 'con_diff_no' => $diff[(ceil(($i+1)/(count($type)+1))-1)]->diff_no, 'con_type_no' => ($i%(count($type)+1))+1, 'con_direction_no' => 1);
 		$type_price = $this->cms_main_model->data_row('cb_cms_sales_price', $tp_where, $tp_select); // 차수별 타입별 평균 세대가격 구하기
-		$t_price = $type_price->sum_price/1000;
+		$t_price = $type_price->sum_price/1000; // 타입별 세대가격(단위 :천원)
 
 		for($j=0; $j<8; $j++):
 
@@ -193,19 +194,19 @@ for($i=(count($year)-1); $i>=0; $i--) :
 
 				if($i<count($diff)*(count($type)+1)){
 					// 각 타입 행
-					if($i%(count($type)+1)!==4){ $td_html = "<td style='text-align:right;'>".number_format($t_price)."</td>"; $diff_total += $t_price;
+					if($i%(count($type)+1)!==4){ $td_html = "<td style='text-align:right;'>".number_format($t_price)."</td>"; $rat[$i] = $t_price/$sum_total*100;   $diff_total += $t_price;
 					// 타입 소계 행
-				}else{ $td_html = "<td style='text-align:right; background-color:#f6f8fc;'>".number_format($diff_total)."</td>"; $apt_total += $diff_total; $diff_total = 0;}
+					}else{ $td_html = "<td style='text-align:right; background-color:#f6f8fc;'>".number_format($diff_total)."</td>"; $rat[$i] = $diff_total/$sum_total*100;   $apt_total += $diff_total; $diff_total = 0;   }
 				// 공동주택 합계 행
 				}elseif($i==$apt_type_row-1){
-						$td_html = "<td style='text-align:right; background-color:#f1f5fc;'>".number_format($apt_total)."</td>";
+						$td_html = "<td style='text-align:right; background-color:#f1f5fc;'>".number_format($apt_total)."</td>";    $rat[$i] = $apt_total/$sum_total*100;
 				// 상가 합계 행
 				}elseif($i==$apt_type_row+$store_type_row-1){
-						$td_html = "<td style='text-align:right; background-color:#f1f5fc; color:red;'>".number_format(234234)."</td>";
+						$td_html = "<td style='text-align:right; background-color:#f1f5fc;'>".number_format($pj_now->inside_arcade_price)."</td>";    $rat[$i] = $pj_now->inside_arcade_price/$sum_total*100;
 				// 상가 타입 행
-				}elseif($i !==$income_title_row-1){ $td_html = "<td style='text-align:right; color:red;'>".number_format(234234)."</td>";
+				}elseif($i !==$income_title_row-1){ $td_html = "<td style='text-align:right;'>".number_format($pj_now->inside_arcade_price)."</td>";  $rat[$i] = $pj_now->inside_arcade_price/$sum_total*100;
 				// 총계 행
-				}else{ $td_html = "<td style='text-align:right; background-color:#eaecf1; color:red;'><strong>".number_format(234234)."</strong></td>"; }
+				}else{ $td_html = "<td style='text-align:right; background-color:#eaecf1;'><strong>".number_format($apt_total+$pj_now->inside_arcade_price)."</strong></td>";   $rat[$i] = ($apt_total+$pj_now->inside_arcade_price)/$sum_total*100;}
 
 			}elseif($j==5){ // 산출근거 열
 
@@ -232,11 +233,11 @@ for($i=(count($year)-1); $i>=0; $i--) :
 						$td_html = "<td style='padding-left:30px; background-color:#f1f5fc;'>"."분양면적&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp;&nbsp; ".number_format($total_diff_py, 2)." 평&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (".number_format($total_diff_num)." 세대)"."</td>";
 				// 상가 합계 행
 				}elseif($i==$apt_type_row+$store_type_row-1){
-						$td_html = "<td style='padding-left:30px; background-color:#f1f5fc; color:red;'>"."분양면적&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp;&nbsp; 0,000.00 평"."</td>";
+						$td_html = "<td style='padding-left:30px; background-color:#f1f5fc;'>"."분양면적&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp;&nbsp; ".number_format($pj_now->inside_arcade_area*0.3025, 2)." 평"."</td>";
 				// 상가 타입 행
-				}elseif($i !==$income_title_row-1){ $td_html = "<td style='padding-left:30px; color:red;'>"."000.00 평&nbsp;&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp; 0,000 천원"."</td>";
+				}elseif($i !==$income_title_row-1){ $td_html = "<td style='padding-left:30px;'>".number_format($pj_now->inside_arcade_area*0.3025, 2)." 평&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *&nbsp;&nbsp;&nbsp; ".number_format($pj_now->inside_arcade_price/($pj_now->inside_arcade_area*0.3025))." 천원"."</td>";
 				// 총계 행
-				}else{ $td_html = "<td style='padding-left:30px; background-color:#eaecf1; color:red;'>"."총 분양면적&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp;&nbsp; 0,000.00 평"."</td>"; }
+				}else{ $td_html = "<td style='padding-left:30px; background-color:#eaecf1;'>"."총 분양면적&nbsp;&nbsp;&nbsp; :&nbsp;&nbsp;&nbsp; ".number_format($total_diff_py+($pj_now->inside_arcade_area*0.3025), 2)." 평"."</td>"; }
 
 			}elseif($j==6){ // 비고 열
 
@@ -244,13 +245,13 @@ for($i=(count($year)-1); $i>=0; $i--) :
 					// 각 타입 행
 					if($i%(count($type)+1)!==4){ $td_html = "<td style='padding-left:30px;'> 세대가격&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ".number_format($type_price->sum_price/$type_price->type_num/1000)."</td>";
 					// 타입 소계 행
-					}else{ $td_html = "<td style='padding-left:30px; background-color:#f6f8fc; color:red;'>&nbsp;</td>"; }
+					}else{ $td_html = "<td style='padding-left:30px; background-color:#f6f8fc;'>&nbsp;</td>"; }
 				// 공동주택 합계 행
 				}elseif($i==$apt_type_row-1){
-						$td_html = "<td style='padding-left:30px; background-color:#f1f5fc; color:red;'>&nbsp;</td>";
+						$td_html = "<td style='padding-left:30px; background-color:#f1f5fc;'>&nbsp;</td>";
 				// 상가 합계 행
 				}elseif($i==$apt_type_row+$store_type_row-1){
-						$td_html = "<td style='padding-left:30px; background-color:#f1f5fc; color:red;'>&nbsp;</td>";
+						$td_html = "<td style='padding-left:30px; background-color:#f1f5fc;'>&nbsp;</td>";
 				// 상가 타입 행
 				}elseif($i !==$income_title_row-1){ $td_html = "<td style='padding-left:30px;'>&nbsp;</td>";
 				// 총계 행
@@ -260,19 +261,20 @@ for($i=(count($year)-1); $i>=0; $i--) :
 
 				if($i<count($diff)*(count($type)+1)){
 					// 각 타입 행
-					if($i%(count($type)+1)!==4){ $td_html = "<td style='text-align:right; color:red;'>".'00.0%'."</td>";
+					if($i%(count($type)+1)!==4){ $td_html = "<td style='text-align:right;'>".number_format($rat[$i], 2)."%</td>";
 					// 타입 소계 행
-				}else{ $td_html = "<td style='text-align:right; background-color:#f6f8fc; color:red;'>".'00.0%'."</td>"; }
+				}else{ $td_html = "<td style='text-align:right; background-color:#f6f8fc;'>".number_format($rat[$i], 2)."%</td>"; }
 				// 공동주택 합계 행
 				}elseif($i==$apt_type_row-1){
-						$td_html = "<td style='text-align:right; background-color:#f1f5fc; color:red;'>".'00.0%'."</td>";
+						$td_html = "<td style='text-align:right; background-color:#f1f5fc;'>".number_format($rat[$i], 2)."%</td>";
 				// 상가 합계 행
 				}elseif($i==$apt_type_row+$store_type_row-1){
-						$td_html = "<td style='text-align:right; background-color:#f1f5fc; color:red;'>".'00.0%'."</td>";
+						$td_html = "<td style='text-align:right; background-color:#f1f5fc;'>".number_format($rat[$i], 2)."%</td>";
 				// 상가 타입 행
-				}elseif($i !==$income_title_row-1){ $td_html = "<td style='text-align:right; color:red;'>".'00.0%'."</td>";
+			}elseif($i !==$income_title_row-1){ $td_html = "<td style='text-align:right;'>".number_format($rat[$i], 2)."%</td>";
 				// 총계 행
-				}else{ $td_html = "<td style='text-align:right; background-color:#eaecf1; color:red;'>".'100.0%'."</td>"; }
+			}else{ $td_html = "<td style='text-align:right; background-color:#eaecf1;'>".number_format($rat[$i], 2)."%</td>"; }
+
 			}else {
 				$td_html = "<td>&nbsp;</td>";
 			}
@@ -290,7 +292,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 					<td><?php echo $i%(count($type)+1); ?></td>
 					<td><?php echo $type_price->type_num; ?></td>
 					<td><?php echo number_format($type_price->sum_price/$type_price->type_num); ?></td>
-					<td></td>
+					<td><?php echo number_format($apt_take->total);?></td>
 					<td></td>
 					<td></td>
 					<td></td>
