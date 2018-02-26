@@ -44,7 +44,7 @@ else :
 					<label for="project" class="sr-only">프로젝트 선택</label>
 					<select class="form-control input-sm" name="project" onchange="submit();">
 						<option value="0"> 전 체
-<?php foreach($all_pj as $lt) : ?>
+<?php foreach($pj_list as $lt) : ?>
 						<option value="<?php echo $lt->seq; ?>" <?php if(( !$this->input->post('project') && $lt->seq=='1') OR $this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?>
 <?php endforeach; ?>
 					</select>
@@ -59,9 +59,9 @@ else :
 		<div class="col-xs-3 col-sm-2 col-md-1"><a href="javascript:" onclick="popUp_size('<?php echo base_url('popup/sales_total_table?p=').$project; ?>', '총괄 집계현황', 1500, 800);"><h5><span class="label label-default">총 괄 집 계 현 황</span></h5></a></div>
 
 
-<?php if(empty($all_pj)) : ?>
+<?php if(empty($pj_list)) : ?>
 		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 50px 0;">조회할 프로젝트를 선택하여 주십시요.</div>
-<?php elseif($all_pj && empty($rec_data)) : ?>
+<?php elseif($pj_list && empty($rec_data)) : ?>
 		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 50px 0;">등록된 데이터가 없습니다.</div>
 <?php else : ?>
 		<div class="col-xs-12 table-responsive" style="padding: 0;">
@@ -81,7 +81,7 @@ else :
 <?php $com_fac = 2400640000; // 상가 매출액?>
 				<tbody>
 					<tr class="active right">
-						<td class="left"><span class="glyphicon glyphicon-folder-open" aria-hidden="true">&nbsp;</span>동춘1구역지역주택조합</td>
+						<td class="left"><span class="glyphicon glyphicon-folder-open" aria-hidden="true">&nbsp;</span><?php // echo $now_pj->pj_name; ?></td>
 						<td style="font-weight: bold;"><?php echo number_format($total_pmt->total+$com_fac); ?></td>
 						<td style="font-weight: bold;"><?php echo number_format($sell_data->sell_total); ?></td>
 						<td style="font-weight: bold; color: #060EC8;"><?php echo number_format($rec_data->rec_total); ?></td>

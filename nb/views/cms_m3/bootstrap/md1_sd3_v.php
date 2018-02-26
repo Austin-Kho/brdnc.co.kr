@@ -34,7 +34,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
         <label for="project" class="sr-only">사업 개시년도</label>
         <select class="form-control input-sm" name="project" onchange="submit();">
           <option value=""> 전 체
-<?php foreach($all_pj as $lt) : ?>
+<?php foreach($pj_list as $lt) : ?>
           <option value="<?php echo $lt->seq; ?>" <?php if($this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?>
 <?php endforeach; ?>
         </select>
@@ -77,7 +77,7 @@ switch ($no) {
 return $sort;
 }
 ?>
-<?php foreach($all_pj as $pj) : ?>
+<?php foreach($pj_list as $pj) : ?>
     <tr align="center">
       <td> <?php echo $pj->seq; ?></td>
       <td> <a href="javascript:" onclick="location.href='?project=<?php echo $pj->seq; ?>'"><?php echo $pj->pj_name; ?></a></td>

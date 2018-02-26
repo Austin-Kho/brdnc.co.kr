@@ -57,7 +57,7 @@ class Cms_m3 extends CB_Controller {
 		// 등록된 프로젝트 데이터
 		$where = "";
 		if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
-		$view['all_pj'] = $this->cms_main_model->data_result('cb_cms_project', '', '', '', 'biz_start_ym DESC');
+		$view['pj_list'] = $this->cms_main_model->data_result('cb_cms_project', '', '', '', 'biz_start_ym DESC');
 		$project = $view['project'] = ($this->input->get_post('project')) ? $this->input->get_post('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
 
 		// 3-1 프로젝트 관리 1. 데이터등록 ////////////////////////////////////////////////////////////////////
@@ -613,7 +613,7 @@ class Cms_m3 extends CB_Controller {
 			if($start != '' or $limit !='')	$limit = " LIMIT ".$start.", ".$limit." ";
 
 			// 등록된 프로젝트 데이터
-			$view['all_pj'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC '.$limit);
+			$view['pj_list'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC '.$limit);
 			if($this->input->get('project')) $view['project_data'] = $this->cms_main_model->data_row('cb_cms_project', array('seq'=>$project));
 
 			// 라이브러리 로드

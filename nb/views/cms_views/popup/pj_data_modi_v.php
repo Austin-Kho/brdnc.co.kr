@@ -20,7 +20,7 @@
 				<div class="col-xs-6" style="padding-right: 0;">
 					<select name="pj_seq" id="pj_seq" class="form-control input-sm" <?php if($modi_data->is_application==1 OR $modi_data->is_contract==1) echo "disabled"; ?>>
 						<option value="" selected> 선 택</option>
-<?php foreach($all_pj as $lt) : ?>
+<?php foreach($pj_list as $lt) : ?>
 						<option value="<?php echo $lt->seq; ?>" <?php if($lt->seq==$modi_data->pj_seq) echo "selected"; ?>><?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
 					</select>

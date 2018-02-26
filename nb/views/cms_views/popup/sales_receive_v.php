@@ -6,7 +6,7 @@
 				<label for="view_sort" class="sr-only">프로젝트 선택</label>
 				<select class="form-control input-sm" name="view_sort" onchange="submit();" style="margin: 5px 0;">
 					<option value="0"> 전 체
-<?php foreach($all_pj as $lt) : ?>
+<?php foreach($pj_list as $lt) : ?>
 							<option value="<?php echo $lt->seq; ?>" <?php if(( !$this->input->post('project') && $lt->seq=='1') OR $this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?>
 <?php endforeach; ?>
 				</select>

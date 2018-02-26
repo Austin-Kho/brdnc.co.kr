@@ -18,7 +18,7 @@ class Project_data extends CB_Controller
 		$this->load->view('/cms_views/popup/pop_header_v');
 
 		// 프로젝트 리스트 정보
-		$data['all_pj'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project  ORDER BY biz_start_ym DESC ');
+		$data['pj_list'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project  ORDER BY biz_start_ym DESC ');
 		$data['now_pj'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_project  WHERE seq='$pj'");
 		$data['type'] = explode("-", $data['now_pj']->type_name);
 

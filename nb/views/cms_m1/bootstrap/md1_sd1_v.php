@@ -69,7 +69,7 @@ endfor;
 					<label for="project" class="sr-only">프로젝트 선택</label>
 					<select class="form-control input-sm" name="project" onchange="submit();">
 						<option value="0" <?php if( !$this->input->get('project')) echo "selected"; ?>> 선 택</option>
-<?php foreach($all_pj as $lt) : ?>
+<?php foreach($pj_list as $lt) : ?>
 						<option value="<?php echo $lt->seq; ?>" <?php if(( !$this->input->get('project') && $lt->seq=='1') OR $this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
 					</select>
@@ -80,9 +80,9 @@ endfor;
 
   <div class="row font12" style="margin: 0; padding: 0;">
     <div class="col-md-12 mb10"><h4><span class="label label-info">1. 요약 집계</span></h4></div>
-<?php if(empty($all_pj)) : ?>
+<?php if(empty($pj_list)) : ?>
 		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 50px 0;">조회할 프로젝트를 선택하여 주십시요.</div>
-<?php elseif($all_pj && empty($tp_name)) : ?>
+<?php elseif($pj_list && empty($tp_name)) : ?>
 		<div class="col-xs-12 center bo-top bo-bottom" style="padding: 50px 0;">등록된 데이터가 없습니다.</div>
 <?php else : ?>
 		<div class="col-xs-12 table-responsive" style="padding: 0;">

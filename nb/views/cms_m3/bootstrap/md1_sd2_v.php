@@ -72,7 +72,7 @@
         <label for="project" class="sr-only">프로젝트 선택</label>
         <select class="form-control input-sm" name="project" onchange="submit();">
           <option value="0"> 전 체</option>
-<?php foreach($all_pj as $lt) : ?>
+<?php foreach($pj_list as $lt) : ?>
           <option value="<?php echo $lt->seq; ?>" <?php if(( !$this->input->post('project') && $lt->seq=='1') OR $this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
         </select>
