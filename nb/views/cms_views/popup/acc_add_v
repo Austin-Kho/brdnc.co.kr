@@ -38,7 +38,7 @@
 					<select name="sort" class="inputstyle2" style="width:80px; height:22px;">
 						<option value="" <?if(!$sort) echo "selected";?>> 전 체
 						<option value="com" <?if($sort=='com') echo "selected";?>> 본 사
-<? foreach ($pj_info as $lt) : ?>
+<? foreach ($pj_now as $lt) : ?>
 						<option value="<?=$lt->seq?>" <?if($sort==$lt->seq) echo "selected";?>><?=$lt->pj_name?>
 <? endforeach; ?>
 					</select>

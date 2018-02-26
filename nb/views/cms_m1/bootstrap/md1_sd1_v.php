@@ -107,7 +107,7 @@ endfor;
 				</thead>
 				<tbody class="bo-bottom center">
 <?php for($i=0; $i<count($summary); $i++) :
-	if($i==0) $first_td = "<td rowspan='".count($summary)."' style='background-color:#FFF; vertical-align:middle;'>".$pj_info->pj_name."</td>"; else $first_td = "";
+	if($i==0) $first_td = "<td rowspan='".count($summary)."' style='background-color:#FFF; vertical-align:middle;'>".$pj_now->pj_name."</td>"; else $first_td = "";
 ?>
 					<tr>
 						<?php echo $first_td; ?>

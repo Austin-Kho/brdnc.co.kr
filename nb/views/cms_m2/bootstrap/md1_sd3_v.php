@@ -53,67 +53,67 @@ for($i=(count($year)-1); $i>=0; $i--) :
 			<thead>
 				<tr>
 					<th style="background-color:#BDD5FE; vertical-align: middle;" width="15%" height="50px">사 업 명</th>
-					<th colspan="3" style="background-color:#fcf3e4; vertical-align: middle;"><?php echo $pj_info->pj_name." 사업 수지표"; ?></th>
+					<th colspan="3" style="background-color:#fcf3e4; vertical-align: middle;"><?php echo $pj_now->pj_name." 사업 수지표"; ?></th>
 					<th colspan="3" style="font-weight: lighter; font-size: 8pt; vertical-align: middle;"><div class=""><input type="text" class="form-control input-sm" name="" value="조건 : 당사예상, 발코니 확장비 포함, 중도금 후불제(일반=무이자)"></div></th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<td style="background-color:#ECF2FB;">부지주소(대표지번)</td>
-					<td colspan="5"><?php echo str_replace('|', ' ', $pj_info->local_addr); ?></td>
+					<td colspan="5"><?php echo str_replace('|', ' ', $pj_now->local_addr); ?></td>
 					<td style="text-align:right;">(단위 : 천원, ㎡, 평)</td>
 				</tr>
 				<tr>
 					<td style="background-color:#ECF2FB;">매입면적(토지)</td>
-					<td style="text-align: right;" width="14%"><?php echo number_format($pj_info->buy_land_extent, 2).' ㎡'; ?></td>
-					<td style="text-align: right;" width="11%"><?php echo number_format($pj_info->buy_land_extent*0.3025, 2).' 평'; ?></td>
+					<td style="text-align: right;" width="14%"><?php echo number_format($pj_now->buy_land_extent, 2).' ㎡'; ?></td>
+					<td style="text-align: right;" width="11%"><?php echo number_format($pj_now->buy_land_extent*0.3025, 2).' 평'; ?></td>
 					<td style="background-color:#ECF2FB;" width="15%">용도지역(지구)</td>
-					<td width="15%"><?php echo $pj_info->area_usage; ?></td>
+					<td width="15%"><?php echo $pj_now->area_usage; ?></td>
 					<td style="background-color:#ECF2FB;" width="15%">용적율</td>
-					<td style="text-align: right;" width="15%"><?php echo $pj_info->floor_ar_rat."%"; ?></td>
+					<td style="text-align: right;" width="15%"><?php echo $pj_now->floor_ar_rat."%"; ?></td>
 				</tr>
 				<tr>
 					<td style="background-color:#ECF2FB;">기부면적(도로 등)</td>
-					<td style="text-align: right;"><?php echo number_format($pj_info->donation_land_extent, 2)." ㎡"; ?></td>
-					<td style="text-align: right;"><?php echo number_format($pj_info->donation_land_extent*0.3025, 2)." 평"; ?></td>
+					<td style="text-align: right;"><?php echo number_format($pj_now->donation_land_extent, 2)." ㎡"; ?></td>
+					<td style="text-align: right;"><?php echo number_format($pj_now->donation_land_extent*0.3025, 2)." 평"; ?></td>
 					<td style="background-color:#ECF2FB;">토지평단가</td>
-					<td style="text-align: right;"><?php echo number_format($pj_info->land_cost/($pj_info->buy_land_extent*0.3025)) ?></td>
+					<td style="text-align: right;"><?php echo number_format($pj_now->land_cost/($pj_now->buy_land_extent*0.3025)) ?></td>
 					<td style="background-color:#ECF2FB;">건폐율</td>
-					<td style="text-align: right;"><?php echo number_format($pj_info->bu_to_la_rat, 2)."%" ?></td>
+					<td style="text-align: right;"><?php echo number_format($pj_now->bu_to_la_rat, 2)."%" ?></td>
 				</tr>
 				<tr>
 					<td style="background-color:#ECF2FB;">유휴면적(토지)</td>
-					<td style="text-align: right;"><?php echo number_format($pj_info->buy_land_extent-$pj_info->donation_land_extent-$pj_info->scheme_land_extent, 2)." ㎡" ?></td>
-					<td style="text-align: right;"><?php echo number_format(($pj_info->buy_land_extent-$pj_info->donation_land_extent-$pj_info->scheme_land_extent)*0.3025, 2)." 평" ?></td>
+					<td style="text-align: right;"><?php echo number_format($pj_now->buy_land_extent-$pj_now->donation_land_extent-$pj_now->scheme_land_extent, 2)." ㎡" ?></td>
+					<td style="text-align: right;"><?php echo number_format(($pj_now->buy_land_extent-$pj_now->donation_land_extent-$pj_now->scheme_land_extent)*0.3025, 2)." 평" ?></td>
 					<td style="background-color:#ECF2FB;">건축비(평당)</td>
-					<td style="text-align: right;"><?php echo number_format($pj_info->build_cost); ?></td>
+					<td style="text-align: right;"><?php echo number_format($pj_now->build_cost); ?></td>
 					<td style="background-color:#ECF2FB;">PF 대출액</td>
-					<td style="text-align: right;"><?php echo number_format($pj_info->bridge_loan+$pj_info->pf_loan); ?></td>
+					<td style="text-align: right;"><?php echo number_format($pj_now->bridge_loan+$pj_now->pf_loan); ?></td>
 				</tr>
 				<tr>
 					<td style="background-color:#ECF2FB;">사업면적(토지)</td>
-					<td style="text-align: right;"><?php echo number_format($pj_info->scheme_land_extent, 2)." ㎡"; ?></td>
-					<td style="text-align: right;"><?php echo number_format($pj_info->scheme_land_extent*0.3025, 2)." 평"; ?></td>
+					<td style="text-align: right;"><?php echo number_format($pj_now->scheme_land_extent, 2)." ㎡"; ?></td>
+					<td style="text-align: right;"><?php echo number_format($pj_now->scheme_land_extent*0.3025, 2)." 평"; ?></td>
 					<td style="background-color:#ECF2FB;">평당분양가(평균)</td>
 					<td style="text-align: right;"></td>
 					<td style="background-color:#ECF2FB;">PF율(토지비 대비)</td>
-					<td style="text-align: right;"><?php echo number_format(($pj_info->bridge_loan+$pj_info->pf_loan)/$pj_info->land_cost*100, 2)."%"; ?></td>
+					<td style="text-align: right;"><?php echo number_format(($pj_now->bridge_loan+$pj_now->pf_loan)/$pj_now->land_cost*100, 2)."%"; ?></td>
 				</tr>
 				<tr>
 					<td style="background-color:#ECF2FB;">전체연면적(건물)</td>
-					<td style="text-align: right;"><?php echo number_format($pj_info->gr_floor_area, 2)." ㎡"; ?></td>
-					<td style="text-align: right;"><?php echo number_format($pj_info->gr_floor_area*0.3025, 2)." 평"; ?></td>
+					<td style="text-align: right;"><?php echo number_format($pj_now->gr_floor_area, 2)." ㎡"; ?></td>
+					<td style="text-align: right;"><?php echo number_format($pj_now->gr_floor_area*0.3025, 2)." 평"; ?></td>
 					<td style="background-color:#ECF2FB;">건축규모</td>
-					<td><?php echo $pj_info->build_size; ?></td>
+					<td><?php echo $pj_now->build_size; ?></td>
 					<td style="background-color:#ECF2FB;">PF 수수료</td>
 					<td style="text-align: right;"></td>
 				</tr>
 				<tr>
 					<td style="background-color:#ECF2FB;">지상연면적(건물)</td>
-					<td style="text-align: right;"><?php echo number_format($pj_info->on_floor_area, 2)." ㎡"; ?></td>
-					<td style="text-align: right;"><?php echo number_format($pj_info->on_floor_area*0.3025, 2)." 평"; ?></td>
+					<td style="text-align: right;"><?php echo number_format($pj_now->on_floor_area, 2)." ㎡"; ?></td>
+					<td style="text-align: right;"><?php echo number_format($pj_now->on_floor_area*0.3025, 2)." 평"; ?></td>
 					<td style="background-color:#ECF2FB;">세 대 수</td>
-					<td style="text-align: right;"><?php echo number_format($pj_info->num_unit); ?></td>
+					<td style="text-align: right;"><?php echo number_format($pj_now->num_unit); ?></td>
 					<td style="background-color:#ECF2FB;">PF 이자율</td>
 					<td style="text-align: right;"></td>
 				</tr>

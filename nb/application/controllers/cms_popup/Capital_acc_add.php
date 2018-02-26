@@ -34,7 +34,7 @@ class Capital_acc_add extends CB_Controller
 		$this->output->enable_profiler(TRUE);
 
 		// $qry = " SELECT seq, pj_name FROM cb_cms_project_info ";
-		// $data['pj_info'] = $this->cms_main_model->sql_result($qry);
+		// $data['pj_now'] = $this->cms_main_model->sql_result($qry);
 
 		// //페이지네이션 라이브러리 로딩 추가
 		// $this->load->library('pagination');

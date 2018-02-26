@@ -66,7 +66,13 @@ class Cms_m1 extends CB_Controller {
 		if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
 		$project = $view['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
 		$view['pj_list'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC '); // 프로젝트 목록
-		$view['pj_now'] = $this->cms_main_model->data_row('cb_cms_project', array('seq' => $project)); // 현재 페이지 선택 프로젝트
+		$view['pj_now'] = $pj_now = $this->cms_main_model->data_row('cb_cms_project', array('seq' => $project)); // 현재 페이지 선택 프로젝트
+
+		// 프로젝트명, 타입 정보 구하기
+		if($pj_now) {
+			$view['tp_name'] = explode("-", $pj_now->type_name);
+			$view['tp_color'] = explode("-", $pj_now->type_color);
+		}
 
 
  		// 계약현황 1. 계약현황 ////////////////////////////////////////////////////////////////////
@@ -76,13 +82,6 @@ class Cms_m1 extends CB_Controller {
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m1_1_1', $this->session->userdata['mem_id']);
 			$view['auth11'] = $auth['_m1_1_1']; // 불러올 페이지에 보낼 조회 권한 데이터
-
-			// 프로젝트명, 타입 정보 구하기
-			$pj_info = $view['pj_info'] = $this->cms_main_model->sql_row(" SELECT pj_name, type_name, type_color FROM cb_cms_project WHERE seq='$project' ");
-			if($pj_info) {
-				$view['tp_name'] = explode("-", $pj_info->type_name);
-				$view['tp_color'] = explode("-", $pj_info->type_color);
-			}
 
 			for($i=0; $i<count($view['tp_name']); $i++) {
 				$view['summary'][$i] = $this->cms_main_model->sql_row(" SELECT COUNT(type) AS type_num, SUM(is_hold) AS hold, SUM(is_application) AS app, SUM(is_contract) AS cont FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND type='".$view['tp_name'][$i]."' ");
@@ -1049,13 +1048,6 @@ class Cms_m1 extends CB_Controller {
 			$pay_code = $view['view']['bill_issue']->pay_code;
 			$ddate = $this->cms_main_model->sql_row(" SELECT pay_due_date FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$pay_code' ");
 			$view['due_date'] = ($ddate->pay_due_date == "0000-00-00") ? "" : $ddate->pay_due_date;
-
-			// 프로젝트명, 타입 정보 구하기
-			$pj_info = $this->cms_main_model->sql_row(" SELECT pj_name, type_name, type_color FROM cb_cms_project WHERE seq='$project' ");
-			if($pj_info) {
-				$view['tp_name'] = explode("-", $pj_info->type_name);
-				$view['tp_color'] = explode("-", $pj_info->type_color);
-			}
 
 			// 계약 데이터 필터링(타입, 동 별)
 			$view['sc_cont_diff'] = $this->cms_main_model->sql_result(" SELECT cont_diff FROM cb_cms_sales_contract GROUP BY cont_diff ORDER BY cont_diff ");
