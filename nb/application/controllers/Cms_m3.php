@@ -51,7 +51,7 @@ class Cms_m3 extends CB_Controller {
 			array('동호수 등록', '세부설정 관리', '프로젝트 목록'), // 첫번째 하위 메뉴
 			array('검토 자료', '신규 등록'),       // 두번째 하위 메뉴
 			array('동호(UNIT) 데이터 입력', 'UNIT별 세부설정 관리', '목록 및 기본정보 관리'),   // 첫번째 하위 제목
-			array('신규 프로젝트 등록', '예비 프로젝트 검토')     // 두번째 하위 제목
+			array('예비 프로젝트 검토', '신규 프로젝트 등록')     // 두번째 하위 제목
 		);
 
 		// 등록된 프로젝트 데이터
@@ -654,6 +654,8 @@ class Cms_m3 extends CB_Controller {
 
 			$this->form_validation->set_rules('land_cost', '토지 매입비', 'trim|numeric|max_length[10]');
 			$this->form_validation->set_rules('build_cost', '평당건축비', 'trim|numeric|max_length[5]');
+			$this->form_validation->set_rules('inside_arcade_area', '단지내 상가 면적', 'trim|numeric|max_length[10]');
+			$this->form_validation->set_rules('inside_arcade_price', '단지내 상가 매각가', 'trim|numeric|max_length[10]');
 			$this->form_validation->set_rules('arc_design_cost', '설계용역비', 'trim|numeric|max_length[8]');
 			$this->form_validation->set_rules('supervision_cost', '감리용역비', 'trim|numeric|max_length[8]');
 			$this->form_validation->set_rules('initial_inves', '시행사 초기투자금', 'trim|numeric|max_length[10]');
@@ -709,7 +711,6 @@ class Cms_m3 extends CB_Controller {
 					'bu_to_la_rat' => $this->input->post('bu_to_la_rat', TRUE),
 					'law_num_parking' => $this->input->post('law_num_parking', TRUE),
 					'plan_num_parking' => $this->input->post('plan_num_parking', TRUE),
-
 					'type_name' => $type_name,
 					'type_color' => $type_color,
 					'type_quantity' => $type_quantity,
@@ -719,9 +720,10 @@ class Cms_m3 extends CB_Controller {
 					'area_sup' => $area_sup,
 					'area_other' => $area_other,
 					'area_cont' => $area_cont,
-
 					'land_cost' => $this->input->post('land_cost', TRUE),
 					'build_cost' => $this->input->post('build_cost', TRUE),
+					'inside_arcade_area' => $this->input->post('inside_arcade_area', TRUE),
+					'inside_arcade_price' => $this->input->post('inside_arcade_price', TRUE),
 					'arc_design_cost' => $this->input->post('arc_design_cost', TRUE),
 					'supervision_cost' => $this->input->post('supervision_cost', TRUE),
 					'initial_inves' => $this->input->post('initial_inves', TRUE),
@@ -738,7 +740,7 @@ class Cms_m3 extends CB_Controller {
 					alert('프로젝트 정보가  수정되었습니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project')));
 					exit;
 				}else{   // 등록 실패 시
-					alert('데이터베이스 오류가 발생하였습니다..', base_url('cms_m3/project/1/3/'));
+					alert('데이터베이스 오류가 발생하였습니다..',  base_url('cms_m3/project/1/3/?project='.$this->input->post('project')));
 					exit;
 				}
 			}
@@ -804,6 +806,8 @@ class Cms_m3 extends CB_Controller {
 
 			$this->form_validation->set_rules('land_cost', '토지 매입비', 'trim|numeric|max_length[10]');
 			$this->form_validation->set_rules('build_cost', '평당건축비', 'trim|numeric|max_length[5]');
+			$this->form_validation->set_rules('inside_arcade_area', '단지내 상가 면적', 'trim|numeric|max_length[10]');
+			$this->form_validation->set_rules('inside_arcade_price', '단지내 상가 매각가', 'trim|numeric|max_length[10]');
 			$this->form_validation->set_rules('arc_design_cost', '설계용역비', 'trim|numeric|max_length[8]');
 			$this->form_validation->set_rules('supervision_cost', '감리용역비', 'trim|numeric|max_length[8]');
 			$this->form_validation->set_rules('initial_inves', '시행사 초기투자금', 'trim|numeric|max_length[10]');
@@ -871,6 +875,8 @@ class Cms_m3 extends CB_Controller {
 					'area_cont' => $area_cont,
 					'land_cost' => $this->input->post('land_cost', TRUE),
 					'build_cost' => $this->input->post('build_cost', TRUE),
+					'inside_arcade_area' => $this->input->post('inside_arcade_area', TRUE),
+					'inside_arcade_price' => $this->input->post('inside_arcade_price', TRUE),
 					'arc_design_cost' => $this->input->post('arc_design_cost', TRUE),
 					'supervision_cost' => $this->input->post('supervision_cost', TRUE),
 					'initial_inves' => $this->input->post('initial_inves', TRUE),

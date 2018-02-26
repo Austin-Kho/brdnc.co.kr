@@ -434,7 +434,28 @@ return $sort;
         </div>
       </div>
 
-      <div class="form-group"><!-- 토지매입비/평당건축비 -->
+      <div class="form-group"><!-- 단지내 상가면적 / 매각가 -->
+          <div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
+              <label for="inside_arcade_area">단지내 상가 면적</label>
+          </div>
+          <div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
+              <div class="col-xs-10 col-sm-8">
+                  <input type="text" class="form-control input-sm en_only" id="inside_arcade_area" name="inside_arcade_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('inside_arcade_area')) echo set_value('inside_arcade_area'); else echo $project_data->inside_arcade_area; ?>" placeholder="단지내 상가 면적 (단위:㎡)">
+              </div>
+  <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
+          </div>
+          <div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
+              <label for="inside_arcade_price">단지내 상가 매각가</label>
+          </div>
+          <div class="col-xs-12 col-sm-8 col-md-4 form-wrap bo-top">
+              <div class="col-xs-10 col-sm-8">
+                  <input type="text" class="form-control input-sm en_only" id="inside_arcade_price" name="inside_arcade_price" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('inside_arcade_price')) echo set_value('inside_arcade_price'); else echo $project_data->inside_arcade_price; ?>" placeholder="단지내 상가 매각가 (단위:천원)">
+              </div>
+  <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
+          </div>
+      </div>
+
+      <div class="form-group"><!-- 설계용역비/감리용역비 -->
         <div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
           <label for="arc_design_cost">설계 용역비</label>
         </div>
@@ -454,7 +475,7 @@ return $sort;
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
         </div>
       </div>
-      <div class="form-group"><!-- 토지매입비/평당건축비 -->
+      <div class="form-group"><!-- 시행사 초기투자금/시대행 용역비 -->
         <div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
           <label for="initial_inves">시행사 초기투자금</label>
         </div>
@@ -474,7 +495,7 @@ return $sort;
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
         </div>
       </div>
-      <div class="form-group"><!-- 토지매입비/평당건축비 -->
+      <div class="form-group"><!-- 브리지 차입규모/PF차입규모 -->
         <div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
           <label for="bridge_loan">브리지 차입규모</label>
         </div>
@@ -494,7 +515,7 @@ return $sort;
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
         </div>
       </div>
-      <div class="form-group"><!-- 토지매입비/평당건축비 -->
+      <div class="form-group"><!-- 공사소요기간/사업개시년 -->
         <div class="col-xs-12 col-sm-4 col-md-2 label-wrap bo-top">
           <label for="con_lead_time">공사 소요기간</label>
         </div>
