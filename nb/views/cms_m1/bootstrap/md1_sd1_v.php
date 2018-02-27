@@ -326,7 +326,7 @@ foreach($app_data as $lt) :
 			<div class="checkbox"><label><input type="checkbox" name="opt3" value="3" checked> 타입&nbsp;</label></div>
 			<div class="checkbox"><label><input type="checkbox" name="opt4" value="4" checked> 동호수&nbsp;</label></div>
 			<div class="checkbox"><label><input type="checkbox" name="opt5" value="5" checked> 계약자&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt6" value="6" checked> 생년월일&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt6" value="6" checked> 생년월일(성별)&nbsp;</label></div>
 			<div class="checkbox"><label><input type="checkbox" name="opt7" value="7" checked> 계약일자&nbsp;</label></div>
 			<div class="checkbox"><label><input type="checkbox" name="opt8" value="8"> 총 납입금&nbsp;</label></div>
 			<div class="checkbox"><label><input type="checkbox" name="opt9" value="9" checked> 연락처[1]&nbsp;</label></div>
