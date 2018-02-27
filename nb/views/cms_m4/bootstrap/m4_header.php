@@ -1,9 +1,9 @@
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="<?if( !$this->uri->segment(3) or $this->uri->segment(3)==='1') echo 'active'; else echo '';?>">
-        	<a href="<?php echo $this->config->base_url('cms_m5/config/1'); ?>"><strong>기본 정보관리</strong></a>
+        	<a href="<?php echo $this->config->base_url('cms_m4/capital/1'); ?>"><strong>자 금 관 리</strong></a>
         </li>
-        <li role="presentation" class="<?if( $this->uri->segment(3)==='2') echo 'active'; else echo '';?>">
-        	<a href="<?php echo $this->config->base_url('cms_m5/config/2'); ?>"><strong>회사 정보관리</strong></a>
+        <li role="presentation" class="<?if( $this->uri->segment(3)=='2') echo 'active'; else echo '';?>">
+        	<a href="<?php echo $this->config->base_url('cms_m4/capital/2'); ?>"><strong>일 반 관 리</strong></a>
         </li>
       </ul>
 <!-- ---------------------------------mdi-menu end------------------------------------ -->
@@ -17,7 +17,7 @@
 					$j = $i+1;
 ?>
 					<li role="presentation" class="<?php if(( !$this->uri->segment(4) && $j==1) or $this->uri->segment(4)==$j) echo 'active'; ?>">
-						<a href="<?php echo $this->config->base_url('cms_m5/config'); ?>/<?php if($this->uri->segment(3)) {echo $this->uri->segment(3).'/'.$j;} else {echo '1/'.$j;}?>"><?php echo $s_di[0][$i]; ?></a>
+						<a href="<?php echo $this->config->base_url('cms_m4/capital'); ?>/<?php if($this->uri->segment(3)) {echo $this->uri->segment(3).'/'.$j;} else {echo '1/'.$j;}?>"><?php echo $s_di[0][$i]; ?></a>
 					</li>
 <?
 				endfor;
@@ -27,21 +27,20 @@
 					$j = $i+1;
 ?>
 					<li role="presentation" class="<?php if(( !$this->uri->segment(4) && $j==1) or $this->uri->segment(4)==$j) echo 'active'; ?>">
-						<a href="<?php echo $this->config->base_url('cms_m5/config'); ?>/<?php if($this->uri->segment(3)) {echo $this->uri->segment(3).'/'.$j;} else {echo '1/'.$j;}?>"><?php echo $s_di[1][$i]; ?></a>
+						<a href="<?php echo $this->config->base_url('cms_m4/capital'); ?>/<?php if($this->uri->segment(3)) {echo $this->uri->segment(3).'/'.$j;} else {echo '1/'.$j;}?>"><?php echo $s_di[1][$i]; ?></a>
 					</li>
 <?
 				endfor;
 			endif;
-
 ?>
 		</ul>
       </div>
 <!-- ---------------------------------sdi-menu end------------------------------------ -->
       <div class="page-header sdi_sub">
         <span class="glyphicon glyphicon-book head_gly" aria-hidden="true"></span>
-        <h4 class="sdi">
+         <h4 class="sdi">
 <?php
-			$k = ( !$this->uri->segment(3) or $this->uri->segment(3)==='1') ? 2 : 3;
+			$k = ( !$this->uri->segment(3) or $this->uri->segment(3)==1) ? 2 : 3;
 			switch ($this->uri->segment(4)) :
 				case '1': echo $s_di[$k][0]; break;
 				case '2': echo $s_di[$k][1]; break;
@@ -55,16 +54,16 @@
 <!-- ---------------------------------sdi-sub end------------------------------------ -->
 <?php
 	if($this->uri->segment(3, 1)=='1' && $this->uri->segment(4, 1)=='1') :
-		include('md1_sd1_v.php');
+		include('md1_sd1.php');
 	elseif ($this->uri->segment(3, 1)=='1' && $this->uri->segment(4)=='2') :
-		include('md1_sd2_v.php');
+		include('md1_sd2.php');
 	elseif ($this->uri->segment(3, 1)=='1' && $this->uri->segment(4)=='3') :
-		include('md1_sd3_v.php');
-	elseif ($this->uri->segment(3)=='1' && $this->uri->segment(4)=='4') :
-		include('md1_sd4_v.php');
+		include('md1_sd3.php');
 	elseif ($this->uri->segment(3)=='2' && $this->uri->segment(4, 1)=='1') :
-		include('md2_sd1_v.php');
+		include('md2_sd1.php');
 	elseif ($this->uri->segment(3)=='2' && $this->uri->segment(4)=='2') :
-		include('md2_sd2_v.php');
+		include('md2_sd2.php');
+	elseif ($this->uri->segment(3)=='2' && $this->uri->segment(4)=='3') :
+		include('md2_sd3.php');
 	endif
 ?>

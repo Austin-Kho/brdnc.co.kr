@@ -669,7 +669,7 @@ class Cms_m5 extends CB_Controller {
 		$layoutconfig = array(
 				'path' => 'cms_m5',
 				'layout' => 'layout',
-				'skin' => 'config_v',
+				'skin' => 'm5_header',
 				'layout_dir' => 'bootstrap',
 				'mobile_layout_dir' => 'bootstrap',
 				'use_sidebar' => 0,

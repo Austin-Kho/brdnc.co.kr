@@ -156,7 +156,7 @@ class Cms_m2 extends CB_Controller
 		$layoutconfig = array(
 				'path' => 'cms_m2',
 				'layout' => 'layout',
-				'skin' => 'process_v',
+				'skin' => 'm2_header',
 				'layout_dir' => 'bootstrap',
 				'mobile_layout_dir' => 'bootstrap',
 				'use_sidebar' => 0,

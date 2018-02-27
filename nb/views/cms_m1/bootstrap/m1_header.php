@@ -54,18 +54,18 @@ endif;
 <!-- ---------------------------------sdi-sub end------------------------------------ -->
 <?php
 	if($this->uri->segment(3, 1)=='1' && $this->uri->segment(4, 1)=='1') :
-		include('md1_sd1_v.php');
+		include('md1_sd1.php');
 	elseif ($this->uri->segment(3, 1)=='1' && $this->uri->segment(4)=='2') :
-		include('md1_sd2_v.php');
+		include('md1_sd2.php');
 	elseif ($this->uri->segment(3, 1)=='1' && $this->uri->segment(4)=='3') :
-		include('md1_sd3_v.php');
+		include('md1_sd3.php');
 	elseif ($this->uri->segment(3, 1)=='1' && $this->uri->segment(4)=='4') :
-		include('md1_sd4_v.php');
+		include('md1_sd4.php');
 	elseif ($this->uri->segment(3)=='2' && $this->uri->segment(4, 1)=='1') :
-		include('md2_sd1_v.php');
+		include('md2_sd1.php');
 	elseif ($this->uri->segment(3)=='2' && $this->uri->segment(4)=='2') :
-		include('md2_sd2_v.php');
+		include('md2_sd2.php');
 	elseif ($this->uri->segment(3)=='2' && $this->uri->segment(4)=='3') :
-		include('md2_sd3_v.php');
+		include('md2_sd3.php');
 	endif
 ?>

@@ -911,7 +911,7 @@ class Cms_m3 extends CB_Controller {
 		$layoutconfig = array(
 				'path' => 'cms_m3',
 				'layout' => 'layout',
-				'skin' => 'project_v',
+				'skin' => 'm3_header',
 				'layout_dir' => 'bootstrap',
 				'mobile_layout_dir' => 'bootstrap',
 				'use_sidebar' => 0,

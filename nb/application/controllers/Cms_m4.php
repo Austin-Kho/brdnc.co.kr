@@ -624,7 +624,7 @@ class Cms_m4 extends CB_Controller {
 		$layoutconfig = array(
 				'path' => 'cms_m4',
 				'layout' => 'layout',
-				'skin' => 'capital_v',
+				'skin' => 'm4_header',
 				'layout_dir' => 'bootstrap',
 				'mobile_layout_dir' => 'bootstrap',
 				'use_sidebar' => 0,

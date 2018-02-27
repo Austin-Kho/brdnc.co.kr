@@ -1168,7 +1168,7 @@ class Cms_m1 extends CB_Controller {
 		$layoutconfig = array(
 				'path' => 'cms_m1',
 				'layout' => 'layout',
-				'skin' => 'sales_v',
+				'skin' => 'm1_header',
 				'layout_dir' => 'bootstrap',
 				'mobile_layout_dir' => 'bootstrap',
 				'use_sidebar' => 0,
