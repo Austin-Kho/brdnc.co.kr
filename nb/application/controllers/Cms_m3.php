@@ -47,6 +47,9 @@ class Cms_m3 extends CB_Controller {
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
 
+		$view['top_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>0), '', '', 'men_order');
+		$view['sec_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>$view['top_menu'][2]->men_id), '', '', 'men_order');
+
 		$view['s_di'] = array(
 			array('동호수 등록', '세부설정 관리', '프로젝트 목록'), // 첫번째 하위 메뉴
 			array('검토 자료', '신규 등록'),       // 두번째 하위 메뉴

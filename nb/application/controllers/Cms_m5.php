@@ -53,6 +53,9 @@ class Cms_m5 extends CB_Controller {
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
 
+		$view['top_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>0), '', '', 'men_order');
+		$view['sec_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>$view['top_menu'][4]->men_id), '', '', 'men_order');
+
 		$view['s_di'] = array(
 			array('부서 정보', '직원 정보', '거래처 정보', '계좌 정보'), // m1 첫번째 하위 메뉴
 			array('회사 정보', '권한 관리'),                        // m2 두번째 하위 메뉴

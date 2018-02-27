@@ -54,6 +54,9 @@ class Cms_m1 extends CB_Controller {
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
 
+		$view['top_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>0), '', '', 'men_order');
+		$view['sec_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>$view['top_menu'][0]->men_id), '', '', 'men_order');
+
 		$view['s_di'] = array(
 			array('계약 현황', '계약 등록', '동호수 현황', '계약서 관리'), // 첫번째 하위 메뉴
 			array('수납 현황', '수납 등록', '고지서 발행'),	 // 두번째 하위 메뉴

@@ -1,10 +1,9 @@
 <ul class="nav nav-tabs" role="tablist">
-	<li role="presentation" class="<?if( !$this->uri->segment(3) or $this->uri->segment(3)==='1') echo 'active'; else echo '';?>">
-		<a href="<?php echo $this->config->base_url('cms_m1/sales/1'); ?>"><strong>계 약 관 리</strong></a>
+<?php for($i=0; $i<count($sec_menu); $i++) : ?>
+	<li role="presentation" class="<?if(( !$this->uri->segment(3) && $i===0) or $this->uri->segment(3)===(string)($i+1)) echo 'active'; else echo '';?>">
+		<a href="<?php echo $sec_menu[$i]->men_link; ?>"><strong><?php echo $sec_menu[$i]->men_name; ?></strong></a>
 	</li>
-	<li role="presentation" class="<?if( $this->uri->segment(3)==='2') echo 'active'; else echo '';?>">
-		<a href="<?php echo $this->config->base_url('cms_m1/sales/2'); ?>"><strong>수 납 관 리</strong></a>
-	</li>
+<?php endfor; ?>
 </ul>
 <!-- ---------------------------------mdi-menu end------------------------------------ -->
 

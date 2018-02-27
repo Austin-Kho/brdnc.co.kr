@@ -53,6 +53,9 @@ class Cms_m2 extends CB_Controller
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
 
+		$view['top_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>0), '', '', 'men_order');
+		$view['sec_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>$view['top_menu'][1]->men_id), '', '', 'men_order');
+
 		$view['s_di'] = array(
 			array('문서 관리', '일정 관리', '프로세스'), // 첫번째 하위 메뉴
 			array('집행 현황', '집행 등록', '수지 예산안'), // 두번째 하위 메뉴
