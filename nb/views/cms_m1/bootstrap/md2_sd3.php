@@ -384,13 +384,13 @@ for($i=0; $i<count($tp_name); $i++) :
 endfor;
 
 foreach ($cont_data as $lt) :
+	$is_paid = 0; // 초기화
 	// 차수 구하기
-	$nd = $this->cms_main_model->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$lt->cont_diff' ");
+	$nd = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$lt->cont_diff' ");
 	// 총 납부금액 구하기
 	$total_rec = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS received FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$lt->cont_seq' ");
 	$n = 0;
 	foreach ($view['real_sche'] as $val) { // 실제 납부회차 만큼 반복
-		$val->pay_code;
 		$time_payment[$n] = $this->cms_main_model->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<=$val->pay_code ");
 		if($total_rec->received>=$time_payment[$n]->payment) $is_paid = $val->pay_code;
 		$n++;
@@ -404,20 +404,21 @@ foreach ($cont_data as $lt) :
 
 
 	$paid_out = $this->cms_main_model->sql_row(" SELECT pay_name FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$is_paid' ");
+	$paid_out_name = isset($paid_out->pay_name) ? $paid_out->pay_name : "<span style='color:#d25606;'>납부유예 중</span>";
 
 	$dong_ho = explode("-", $lt->unit_dong_ho);
 	$unit_dh = explode("-", $lt->unit_dong_ho);
-	$cont_edit_link ="<a href ='".base_url('cms_m1/sales/1/2?mode=2&cont_sort1=1&cont_sort2=2&project=').$project."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>" ;
+	$cont_edit_link ="<a href ='".base_url('cms_m1/sales/1/2?project='.$project.'&mode=2&cont_sort1=1&cont_sort2=2&diff_no='.$nd->diff_no.'&type='.$lt->unit_type.'&dong='.$unit_dh[0].'&ho='.$unit_dh[1])."'>" ;
 ?>
 					<tr>
 						<td><div class="checkbox" style="margin:0;"><label><input type="checkbox" name="chk[]" value="<?php echo $lt->cont_seq; ?>" <?php echo $chk_con; ?>> 선택</label></div></td>
-						<td><?php echo $cont_edit_link.$lt->cont_code."</a>"; ?></td>
+						<td><?php echo $cont_edit_link."[".$lt->cont_code."]</a>"; ?></td>
 						<td><?php echo $nd->diff_name; ?></td>
 						<td class="left" style="padding-left:20px;"><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type;?></td>
 						<td><?php echo $cont_edit_link.$lt->unit_dong_ho."</a>"; ?></td>
 						<td><?php echo $cont_edit_link.$lt->contractor."</a>"; ?></td>
 						<td class="right"><a href="<?php echo base_url('cms_m1/sales/2/2')."?project=".$project."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>"><?php echo number_format($total_rec->received); ?></a></td>
-						<td><?php echo $condi.' ('.$paid_out->pay_name.')'; ?></td>
+						<td><?php echo $condi.' ('.$paid_out_name.')'; ?></td>
 						<td><?php echo $new_span." ".$lt->cont_date; ?></span></td>
 					</tr>
 <?php

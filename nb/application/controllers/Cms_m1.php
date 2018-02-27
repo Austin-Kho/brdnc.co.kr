@@ -360,7 +360,7 @@ class Cms_m1 extends CB_Controller {
 					$pr_where = array(
 						'pj_seq'=>$pj,
 						'con_diff_no'=>$this->input->post('diff_no'),
-						'con_type_no'=>$this->input->post('type'),
+						'con_type'=>$this->input->post('type'),
 						'con_direction_no'=>'1', // 향후 필요 시 폼으로 데이터 받을 것
 						'con_floor_no'=>$con_floor_no
 					);
