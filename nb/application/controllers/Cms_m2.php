@@ -54,10 +54,10 @@ class Cms_m2 extends CB_Controller
 		$sdi = $this->uri->segment(4, 1);
 
 		$view['s_di'] = array(
-			array('집행 현황', '집행 등록', '수지 예산안'), // 첫번째 하위 메뉴
-			array('문서 관리', '일정 관리', '프로세스'), // 두번째 하위 메뉴
-			array('프로젝트별 예산집행 내역<구축 작업 전>', '프로젝트별 예산집행 등록<구축 작업 전>', '프로젝트별 사업수지 관리<구축 작업 전>'), // 첫번째 하위 제목
-			array('프로젝트 관련 문서관리', '일정 관리 및 업무 분장<구축 작업 전>', '전체 프로세스 (등록/수정)<구축 작업 전>')      // 두번째 하위 제목
+			array('문서 관리', '일정 관리', '프로세스'), // 첫번째 하위 메뉴
+			array('집행 현황', '집행 등록', '수지 예산안'), // 두번째 하위 메뉴
+			array('프로젝트 관련 문서관리', '일정 관리 및 업무 분장<구축 작업 전>', '전체 프로세스 (등록/수정)<구축 작업 전>'),      // 첫번째 하위 제목
+			array('프로젝트별 예산집행 내역<구축 작업 전>', '프로젝트별 예산집행 등록<구축 작업 전>', '프로젝트별 사업수지 관리<구축 작업 전>') // 두번째 하위 제목
 		);
 
 		// 등록된 프로젝트 데이터
@@ -69,7 +69,7 @@ class Cms_m2 extends CB_Controller
 
 
 
-		// 예산집행 관리 1. 집행 현황 ////////////////////////////////////////////////////////////////////
+		// 프로세스 관리 1. 진행 현황 ////////////////////////////////////////////////////////////////////
 		if($mdi==1 && $sdi==1 ){
 			// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
@@ -81,7 +81,7 @@ class Cms_m2 extends CB_Controller
 
 
 
-		// 예산집행 관리 2. 집행 관리 ////////////////////////////////////////////////////////////////////
+		// 프로세스 관리 2. 프로세스 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==1 && $sdi==2) {
 
 			// 조회 등록 권한 체크
@@ -93,7 +93,7 @@ class Cms_m2 extends CB_Controller
 
 
 
-		// 예산집행 관리 3. 수지 관리 ////////////////////////////////////////////////////////////////////
+		// 프로세스 관리 3. 일정 관리 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==1 && $sdi==3) {
 
 			// 조회 등록 권한 체크
@@ -102,19 +102,11 @@ class Cms_m2 extends CB_Controller
 			$view['auth13'] = $auth['_m2_1_3'];
 
 
-			$view['diff'] = $this->cms_main_model->data_result('cb_cms_sales_con_diff', array('pj_seq'=>$project)); // 차수 데이터
-			$view['type'] = explode("-", $pj_now->type_name); // 타입 데이터
-			$view['area_sup'] = explode("-", $pj_now->area_sup); // 공급 면적 데이터
-			$view['type_quantity'] = explode("-", $pj_now->type_quantity); // 타입별 세대수 데이터
-			$view['apt_take'] = $this->cms_main_model->data_row('cb_cms_sales_price', array('pj_seq'=>$project), 'SUM(unit_price*unit_num) AS total'); // 차수 데이터
 
 
 
 
-
-
-
-		// 프로세스 관리 1. 진행 현황 ////////////////////////////////////////////////////////////////////
+		// 예산집행 관리 1. 집행 현황 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==1) {
 
 			// 조회 등록 권한 체크
@@ -126,7 +118,7 @@ class Cms_m2 extends CB_Controller
 
 
 
-		// 프로세스 관리 2. 프로세스 ////////////////////////////////////////////////////////////////////
+		// 예산집행 관리 2. 집행 관리 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==2) {
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m2_2_2', $this->session->userdata['mem_id']);
@@ -137,13 +129,19 @@ class Cms_m2 extends CB_Controller
 
 
 
-		// 프로세스 관리 3. 일정 관리 ////////////////////////////////////////////////////////////////////
+		// 예산집행 관리 3. 수지 관리 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==3) {
 
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m2_2_3', $this->session->userdata['mem_id']);
 			// 불러올 페이지에 보낼 조회 권한 데이터
 			$view['auth23'] = $auth['_m2_2_3'];
+
+			$view['diff'] = $this->cms_main_model->data_result('cb_cms_sales_con_diff', array('pj_seq'=>$project)); // 차수 데이터
+			$view['type'] = explode("-", $pj_now->type_name); // 타입 데이터
+			$view['area_sup'] = explode("-", $pj_now->area_sup); // 공급 면적 데이터
+			$view['type_quantity'] = explode("-", $pj_now->type_quantity); // 타입별 세대수 데이터
+			$view['apt_take'] = $this->cms_main_model->data_row('cb_cms_sales_price', array('pj_seq'=>$project), 'SUM(unit_price*unit_num) AS total'); // 차수 데이터
 		}
 
 		/**
