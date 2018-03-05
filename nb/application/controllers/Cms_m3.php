@@ -51,10 +51,10 @@ class Cms_m3 extends CB_Controller {
 		$view['sec_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>$view['top_menu'][2]->men_id), '', '', 'men_order');
 
 		$view['s_di'] = array(
-			array('동호수 등록', '세부설정 관리', '프로젝트 목록'), // 첫번째 하위 메뉴
-			array('검토 자료', '신규 등록'),       // 두번째 하위 메뉴
-			array('동호(UNIT) 데이터 입력', 'UNIT별 세부설정 관리', '목록 및 기본정보 관리'),   // 첫번째 하위 제목
-			array('예비 프로젝트 검토', '신규 프로젝트 등록')     // 두번째 하위 제목
+			array('동호수 등록', '세부설정 관리', '토지조서 관리'), // 첫번째 하위 메뉴
+			array('프로젝트 목록', '신규 등록', '검토 자료'),       // 두번째 하위 메뉴
+			array('동호(UNIT) 데이터 입력', 'UNIT별 세부설정 관리', '토지목록 조서 관리'),   // 첫번째 하위 제목
+			array('목록 및 기본정보 관리', '신규 프로젝트 등록', '예비 프로젝트 검토')     // 두번째 하위 제목
 		);
 
 		// 등록된 프로젝트 데이터
@@ -592,6 +592,17 @@ class Cms_m3 extends CB_Controller {
 			// 불러올 페이지에 보낼 조회 권한 데이터
 			$view['auth13'] = $auth['_m3_1_3'];
 
+
+
+
+
+		// 3-2 신규 프로젝트 1. 목록 및 기본정보 수정 ////////////////////////////////////////////////////////////////////
+		}else if($mdi==2 && $sdi==1) {
+
+			// 조회 등록 권한 체크
+			$auth = $this->cms_main_model->auth_chk('_m3_2_1', $this->session->userdata['mem_id']);
+			$view['auth21'] = $auth['_m3_2_1']; // 불러올 페이지에 보낼 조회 권한 데이터
+
 			// 페이지네이션 라이브러리 로딩 추가
 			$this->load->library('pagination');
 
@@ -752,17 +763,6 @@ class Cms_m3 extends CB_Controller {
 
 
 
-		// 3-2 신규 프로젝트 1. 예비검토 ////////////////////////////////////////////////////////////////////
-		}else if($mdi==2 && $sdi==1) {
-
-			// 조회 등록 권한 체크
-			$auth = $this->cms_main_model->auth_chk('_m3_2_1', $this->session->userdata['mem_id']);
-			$view['auth21'] = $auth['_m3_2_1']; // 불러올 페이지에 보낼 조회 권한 데이터
-
-
-
-
-
 		// 3-2 신규 프로젝트 2. 신규등록 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==2) {
 
@@ -900,10 +900,25 @@ class Cms_m3 extends CB_Controller {
 					exit;
 				}
 			}
+
+
+
+
+
+
+
+		}else if($mdi==2 && $sdi==3) {
+
+			// 조회 등록 권한 체크
+			$auth = $this->cms_main_model->auth_chk('_m3_2_3', $this->session->userdata['mem_id']);
+			// 불러올 페이지에 보낼 조회 권한 데이터
+			$view['auth23'] = $auth['_m3_2_3'];
+
+
 		}
 
 		/**
-		 * 레이아웃을 정의합니다
+		 * 레이아웃을 정의합니다.
 		 */
 		$page_title = $this->cbconfig->item('site_meta_title_main');
 		$meta_description = $this->cbconfig->item('site_meta_description_main');

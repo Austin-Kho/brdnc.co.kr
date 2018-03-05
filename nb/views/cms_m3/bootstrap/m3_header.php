@@ -62,5 +62,7 @@ else :
 		include('md2_sd1.php');
 	elseif ($this->uri->segment(3)=='2' && $this->uri->segment(4)=='2') :
 		include('md2_sd2.php');
+	elseif ($this->uri->segment(3)=='2' && $this->uri->segment(4)=='3') :
+		include('md2_sd3.php');
 	endif
 ?>
