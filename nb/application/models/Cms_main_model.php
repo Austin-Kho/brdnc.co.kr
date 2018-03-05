@@ -15,10 +15,10 @@ class Cms_main_model extends CB_Model
 	 * @return [Array]        [추출 데이터]
 	 */
 	public function data_result($table, $where, $order, $select, $group, $start='', $limit=''){
-    if(isset($where)) $this->db->where($where);
-    if(isset($order)) $this->db->order_by($order);
-    if(isset($select)) $this->db->select($select);
-    if(isset($group)) $this->db->group_by($group);
+    if( !empty($where)) $this->db->where($where);
+    if( !empty($order)) $this->db->order_by($order);
+    if( !empty($select)) $this->db->select($select);
+    if( !empty($group)) $this->db->group_by($group);
     if($start !== '' or $limit !=='')	$this->db->limit($limit, $start);
 		$qry = $this->db->get($table);
 		return $rlt = $qry->result();
@@ -31,10 +31,9 @@ class Cms_main_model extends CB_Model
    * @param  [Array] $select [불러올 필드명]
    * @return [Array]       [추출 데이터]
    */
-  public function data_row($table, $where, $select, $group, $order) {
-    if(isset($select)) $this->db->select($select);
-    if(isset($group)) $this->db->group_by($group);
-    if(isset($order)) $this->db->order_by($order);
+  public function data_row($table, $where, $select, $group) {
+    if( !empty($select)) $this->db->select($select);
+    if( !empty($group)) $this->db->group_by($group);
     $qry = $this->db->get_where($table, $where);
     return $rlt = $qry->row();
   }
