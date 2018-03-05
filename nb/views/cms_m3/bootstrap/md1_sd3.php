@@ -57,7 +57,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 <?php if( !$this->input->get('set_sort') OR $this->input->get('set_sort')==='1') { //1. 토지 기초 정보?>
 <div class="row table-responsive font12" style="margin: 0; padding: 0; height: 480px;">
 
-    no. / 행정동 / 지번 / 지목 / 면적 / 환지면적 / 주 소유자명 및 공유자 수 / 전체 토지에 해당 되는 권리 제한 사항 및 비고
+    no. / 행정동(Lot) / 지번 / 지목 / 면적 / 환지면적 / 주 소유자명 및 공유자 수 / 전체 토지에 해당 되는 권리 제한 사항 및 비고
 
 </div>
 
