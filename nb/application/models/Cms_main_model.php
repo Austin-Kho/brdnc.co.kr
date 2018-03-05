@@ -14,8 +14,8 @@ class Cms_main_model extends CB_Model
 	 * @param  [Array] $where [필터링 '키'=>값]
 	 * @return [Array]        [추출 데이터]
 	 */
-	public function data_result($table, $where='', $order, $select, $group, $start='', $limit=''){
-    if($where!=='') $this->db->where($where);
+	public function data_result($table, $where, $order, $select, $group, $start='', $limit=''){
+    if(isset($where)) $this->db->where($where);
     if(isset($order)) $this->db->order_by($order);
     if(isset($select)) $this->db->select($select);
     if(isset($group)) $this->db->group_by($group);
