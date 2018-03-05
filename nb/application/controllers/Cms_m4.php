@@ -215,18 +215,6 @@ class Cms_m4 extends CB_Controller {
 					alert('다시 시도하여 주십시요!', base_url('cms_m4/capital/1/2/'));
 				}
 			}
-			// if($this->input->get('excel_pop')=='cash_book'){
-			// 	// 본문 내용 ---------------------------------------------------------------//
-			// 	$filename='cash_book.xlsx'; // 엑셀 파일 이름
-			// 	header('Content-Type: application/vnd.ms-excel'); //mime 타입
-			// 	header('Content-Disposition: attachment;filename="'.$filename.'"'); // 브라우저에서 받을 파일 이름
-			// 	header('Cache-Control: max-age=0'); //no cache
-      //
-			// 	// Excel5 포맷으로 저장 엑셀 2007 포맷으로 저장하고 싶은 경우 'Excel2007'로 변경합니다.
-			// 	$objWriter = PHPExcel_IOFactory::createWriter($this->excel, 'Excel2007');
-			// 	// 서버에 파일을 쓰지 않고 바로 다운로드 받습니다.
-			// 	$objWriter->save('php://output');
-			// }
 
 
 
