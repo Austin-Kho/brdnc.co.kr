@@ -594,6 +594,56 @@ class Cms_m3 extends CB_Controller {
 
 
 
+			// 페이지네이션 라이브러리 로딩 추가
+			$this->load->library('pagination');
+
+			//페이지네이션 설정/////////////////////////////////
+			$config['base_url'] = base_url('cms_m3/project/1/3/');   //페이징 주소
+			$config['total_rows'] = $this->cms_m4_model->cash_book_list($cb_table, $view['where'], '', '', 'num', '');  //게시물의 전체 갯수
+			$config['per_page'] = 12; // 한 페이지에 표시할 게시물 수
+			$config['num_links'] = 4;  // 링크 좌우로 보여질 페이지 수
+			$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
+			$config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
+
+			// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
+			$page = $this->input->get('page'); // get 방식 아닌 경우 $this->uri->segment($config['uri_segment']);
+			$start = ($page<=1 or empty($page)) ? 0 : ($page-1) * $config['per_page'];
+			$limit = $config['per_page'];
+
+			//페이지네이션 초기화
+			$this->pagination->initialize($config);
+			//페이징 링크를 생성하여 view에서 사용할 변수에 할당
+			$view['pagination'] = $this->pagination->create_links();
+
+			$view['cb_list'] = $this->cms_m4_model->cash_book_list($cb_table, $view['where'], $start, $limit, '', 'DESC'); // table, where, start, limit, num, order
+
+			if($this->input->get('del_code')) {
+				$result = $this->cms_main_model->delete_data('cb_cms_capital_cash_book', array('seq_num' => $this->input->get('del_code')));
+				if($result) {
+					alert('삭제 되었습니다.', base_url('cms_m4/capital/1/2/'));
+				}else{
+					alert('다시 시도하여 주십시요!', base_url('cms_m4/capital/1/2/'));
+				}
+			}
+
+			// 라이브러리 로드
+			$this->load->library('form_validation'); // 폼 검증
+
+			$this->form_validation->set_rules('admin_dong', '행정동', 'trim|required|max_length[10]');
+			$this->form_validation->set_rules('lot_num', '지번', 'trim|required|max_length[10]');
+			$this->form_validation->set_rules('land_mark', '지목', 'trim|required|max_length[10]');
+			$this->form_validation->set_rules('area_official', '공부상 면적', 'trim|required|numeric|max_length[12]');
+			$this->form_validation->set_rules('area_returned', '환지면적', 'trim|numeric|max_length[12]');
+
+			if($this->form_validation->run() !== FALSE) : // 폼검증 통과 했을 경우, post 데이터가 있을 때
+
+				alert('aaa', '');
+
+			endif;
+
+
+
+
 
 
 		// 3-2 신규 프로젝트 1. 목록 및 기본정보 수정 ////////////////////////////////////////////////////////////////////
