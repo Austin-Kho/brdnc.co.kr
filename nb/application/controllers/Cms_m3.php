@@ -63,6 +63,8 @@ class Cms_m3 extends CB_Controller {
 		$view['pj_list'] = $this->cms_main_model->data_result('cb_cms_project', '', 'biz_start_ym DESC');
 		$project = $view['project'] = ($this->input->get_post('project')) ? $this->input->get_post('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
 
+
+
 		// 3-1 프로젝트 관리 1. 데이터등록 ////////////////////////////////////////////////////////////////////
 		if($mdi==1 && $sdi==1 ){
 
@@ -592,6 +594,8 @@ class Cms_m3 extends CB_Controller {
 			// 불러올 페이지에 보낼 조회 권한 데이터
 			$view['auth13'] = $auth['_m3_1_3'];
 
+			$view['summary'] = $this->cms_main_model->data_row('cb_cms_site_status', array('pj_seq'=>$project), 'SUM(area_returned) as total_area'); // $table, $where, $order, $select, $group, $start='', $limit=''
+
 
 
 			// 페이지네이션 라이브러리 로딩 추가
@@ -599,8 +603,8 @@ class Cms_m3 extends CB_Controller {
 
 			//페이지네이션 설정/////////////////////////////////
 			$config['base_url'] = base_url('cms_m3/project/1/3/');   //페이징 주소
-			$config['total_rows'] = $this->cms_main_model->data_num_rows('cb_cms_site_status', array('pj_seq'=>$project));  //게시물의 전체 갯수
-			$config['per_page'] = 12; // 한 페이지에 표시할 게시물 수
+			$config['total_rows'] = $view['total_rows'] = $this->cms_main_model->data_num_rows('cb_cms_site_status', array('pj_seq'=>$project));  //게시물의 전체 갯수
+			$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 			$config['num_links'] = 4;  // 링크 좌우로 보여질 페이지 수
 			$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
 			$config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
@@ -615,20 +619,22 @@ class Cms_m3 extends CB_Controller {
 			//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 			$view['pagination'] = $this->pagination->create_links();
 
-			$view['cb_list'] = $this->cms_main_model->cash_book_list($cb_table, $view['where'], $start, $limit, '', 'DESC'); // table, where, start, limit, num, order
+			$view['site_lot_list'] = $this->cms_main_model->data_result('cb_cms_site_status', array('pj_seq'=>$project), 'order_no DESC, seq DESC', '', '', $start, $limit); // $table, $where, $order, $select, $group, $start='', $limit=''
 
 			if($this->input->get('del_code')) {
-				$result = $this->cms_main_model->delete_data('cb_cms_capital_cash_book', array('seq_num' => $this->input->get('del_code')));
-				if($result) {
-					alert('삭제 되었습니다.', base_url('cms_m4/capital/1/2/'));
+				$del_rlt1 = $this->cms_main_model->delete_data('cb_cms_site_status', array('seq' => $this->input->get('del_code')));
+				$del_rlt2 = $this->cms_main_model->delete_data('cb_cms_site_ownership', array('lot_seq' => $this->input->get('del_code')));
+				if($del_rlt1 or $del_rlt2) {
+					alert('삭제 되었습니다.', base_url('cms_m3/project/1/3/'));
 				}else{
-					alert('다시 시도하여 주십시요!', base_url('cms_m4/capital/1/2/'));
+					alert('데이터베이스 에러입니다. 다시 시도하여 주십시요!', base_url('cms_m3/project/1/3/'));
 				}
 			}
 
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
 
+			$this->form_validation->set_rules('order_no', '순번', 'trim|required|numeric|max_length[5]');
 			$this->form_validation->set_rules('admin_dong', '행정동', 'trim|required|max_length[10]');
 			$this->form_validation->set_rules('lot_num', '지번', 'trim|required|max_length[10]');
 			$this->form_validation->set_rules('land_mark', '지목', 'trim|required|max_length[10]');
@@ -637,7 +643,29 @@ class Cms_m3 extends CB_Controller {
 
 			if($this->form_validation->run() !== FALSE) : // 폼검증 통과 했을 경우, post 데이터가 있을 때
 
-				alert('aaa', '');
+				if($this->input->post('sort')==='basic'){
+
+					$right_area = !empty($this->input->post('area_returned')) ? $this->input->post('area_returned', TRUE) : $this->input->post('area_official', TRUE);
+
+					$site_basic_unit = array( // 토지 기초 데이터
+						'pj_seq' => $this->input->post('project', TRUE),
+						'order_no' => $this->input->post('order_no', TRUE),
+						'admin_dong' => $this->input->post('admin_dong', TRUE),
+						'lot_num' => $this->input->post('lot_num', TRUE),
+						'land_mark' => $this->input->post('land_mark', TRUE),
+						'area_official' => $this->input->post('area_official', TRUE),
+						'area_returned' => $right_area,
+						'reg_date' => date('Y-m-d'),
+						'reg_worker' => $this->session->userdata('mem_username')
+					);
+
+					$result = $this->cms_main_model->insert_data('cb_cms_site_status', $site_basic_unit);
+					if( !$result){
+						alert('데이터베이스 에러입니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project', TRUE)));
+					}else{
+						alert('정상적으로 등록되었습니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project', TRUE)));
+					}
+				}
 
 			endif;
 
@@ -801,10 +829,10 @@ class Cms_m3 extends CB_Controller {
 				$result = $this->cms_main_model->update_data('cb_cms_project', $update_pj_data, $where = array('seq' => $this->input->post('project')));
 
 				if($result) { // 등록 성공 시
-					alert('프로젝트 정보가  수정되었습니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project')));
+					alert('프로젝트 정보가  수정되었습니다.', base_url('cms_m3/project/2/1/?project='.$this->input->post('project')));
 					exit;
 				}else{   // 등록 실패 시
-					alert('데이터베이스 오류가 발생하였습니다..',  base_url('cms_m3/project/1/3/?project='.$this->input->post('project')));
+					alert('데이터베이스 오류가 발생하였습니다..',  base_url('cms_m3/project/2/1/?project='.$this->input->post('project')));
 					exit;
 				}
 			}

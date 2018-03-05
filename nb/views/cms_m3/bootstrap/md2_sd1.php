@@ -214,7 +214,7 @@ return $sort;
               <div class="col-xs-10 col-sm-8">
                   <input type="text" class="form-control input-sm" id="area_usage" name="area_usage" maxlength="30" value="<?php if($this->input->post('area_usage')) echo set_value('area_usage'); else echo $project_data->area_usage; ?>" placeholder="용도지역 · 지구">
               </div>
-                          <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
+              <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
           </div>
       </div>
 
@@ -542,7 +542,7 @@ return $sort;
       </div>
       <div class="form-group" style="color: red;">&nbsp;</div>
 
-<?php if($auth13<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="con_formck();";} ?>
+<?php if($auth21<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="con_formck();";} ?>
       <div class="form-group btn-wrap" style="margin: 0;">
         <input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str; ?>" value="수정하기">
       </div>

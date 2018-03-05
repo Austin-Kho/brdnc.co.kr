@@ -2,6 +2,15 @@
   if($auth13<1) :
   	include('no_auth.php');
   else :
+    if($auth13<2) {
+      $submit_str="alert('등록 권한이 없습니다!')";
+    } else {
+      if(empty($this->input->get('project'))){
+        $submit_str="alert('등록할 프로젝트를 선택하여 주십시요!'); document.pj_sel.project.focus();";
+      }else{
+        $submit_str="if(confirm('토지 기초 데이터를 등록하시겠습니까?')===true) submit();";
+      }
+    }
 ?>
 <div class="main_start">&nbsp;</div>
 <!-- 3. 프로젝트 -> 1. 프로젝트 관리 ->2. 기본정보 수정 -->
@@ -70,6 +79,10 @@ for($i=(count($year)-1); $i>=0; $i--) :
 ?>
     <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
       <div class="col-sm-12 col-md-1 center point-sub1" style="padding: 10px; 0">토지 데이터</div>
+      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 4px 15px;">
+        <label for="order_no" class="sr-only">순번</label>
+        <input type="text" name="order_no" value="<?php echo set_value('order_no'); ?>" placeholder="순번" class="form-control input-sm" maxlength="5" required>
+      </div>
       <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
         <label for="admin_dong" class="sr-only">행정동</label>
         <input type="text" name="admin_dong" value="<?php echo set_value('admin_dong'); ?>" placeholder="행정동(Lot)" class="form-control input-sm" maxlength="10" required>
@@ -78,9 +91,9 @@ for($i=(count($year)-1); $i>=0; $i--) :
         <label for="lot_num" class="sr-only">지번</label>
         <input type="text" name="lot_num" value="<?php echo set_value('lot_num'); ?>" placeholder="지번(000-00)" class="form-control input-sm" maxlength="10" required>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
+      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 4px 15px;">
         <label for="land_mark" class="sr-only">지목</label>
-        <input type="text" name="land_mark" value="<?php echo set_value('land_mark'); ?>" placeholder="지목(ex:대)" class="form-control input-sm" maxlength="10" required>
+        <input type="text" name="land_mark" value="<?php echo set_value('land_mark'); ?>" placeholder="지목" class="form-control input-sm" maxlength="10" required>
       </div>
       <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
         <label for="area_official" class="sr-only">공부상 면적</label>
@@ -88,31 +101,41 @@ for($i=(count($year)-1); $i>=0; $i--) :
       </div>
       <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
         <label for="area_returned" class="sr-only">환지 면적</label>
-        <input type="text" name="area_returned" value="<?php echo set_value('area_returned'); ?>" placeholder="환지 면적(㎡)" class="form-control input-sm" maxlength="12">
+        <input type="text" name="area_returned" value="<?php echo set_value('area_returned'); ?>" placeholder="환지(실권리) 면적(㎡)" class="form-control input-sm" maxlength="12">
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-1 right" style="padding: 4px 15px;">
-        <input class="btn btn-primary btn-sm" type="button" value="추가하기" onclick="if(confirm('등록하시겠습니까?')===true) submit();">
+      <div class="col-xs-12 col-md-1 right" style="padding: 4px 15px;">
+<?php  ?>
+        <input class="btn btn-primary btn-sm" type="button" value="추가 등록" onclick="<?php echo $submit_str; ?>">
       </div>
     </div>
   </form>
+  <div class="row font12" style="margin: 0 0 5px;">
+    <div class="col-xs-6" style="color: #5771fb;">총 <?php echo $total_rows; ?> 필지 / 면적 <?php echo number_format($summary->total_area, 2); ?>㎡ (<?php echo number_format($summary->total_area*0.3025, 2) ?>평) 등록</div>
+    <div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;">
+      <a href="javascript:alert('준비 중입니다!');">
+      <!-- <a href="<?php echo base_url('/cms_download/application_data/download')."?pj=".$project; ?>"> -->
+				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
+			</a>
+    </div>
+  </div>
 
   <!-- 출력 및 get으로 수정 삭제하기 -->
   <div class="table-responsive">
     <table class="table table-bordered table-hover table-condensed font12">
       <thead>
-        <tr class="info">
+        <tr class="warning">
           <th class="center" style="vertical-align:middle;" rowspan="2">no.</th>
           <th class="center" style="vertical-align:middle;" rowspan="2">행정동(Lot)</th>
           <th class="center" style="vertical-align:middle;" rowspan="2">지번</th>
           <th class="center" style="vertical-align:middle;" rowspan="2">지목</th>
           <th class="center" colspan="2">공부상 면적</th>
-          <th class="center" colspan="2">환지 면적</th>
+          <th class="center" colspan="2">환지(실권리) 면적</th>
           <th class="center" style="vertical-align:middle;" rowspan="2">등록일</th>
           <th class="center" style="vertical-align:middle;" rowspan="2">등록자</th>
           <th class="center" style="vertical-align:middle;" rowspan="2">수정</th>
           <th class="center" style="vertical-align:middle;" rowspan="2">삭제</th>
         </tr>
-        <tr class="info">
+        <tr class="warning">
           <th class="center">면적(㎡)</th>
           <th class="center">면적(평)</th>
           <th class="center">면적(㎡)</th>
@@ -120,24 +143,41 @@ for($i=(count($year)-1); $i>=0; $i--) :
         </tr>
       </thead>
       <tbody>
-        <tr>
-<?php if(1===1) :  ?>
+
+<?php if(empty($site_lot_list)) :  ?>
+        <tr class="center">
           <td class="center" colspan="12" style="padding: 130px 0;">조회할 데이터가 없습니다.</td>
-<?php elseif(1===2) : ?>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-<?php endif; ?>
         </tr>
+<?php
+  elseif( !empty($site_lot_list)) :
+    $a=1;
+    foreach($site_lot_list as $lt) :
+      $ao_py = $lt->area_official*0.3025;
+      $ar_py = $lt->area_returned*0.3025;
+      $reg_date = (empty($lt->modi_date) or $lt->modi_date==='0000-00-00') ? $lt->reg_date : $lt->modi_date;
+      $reg_worker = empty($lt->modi_worker) ? $lt->reg_worker : $lt->modi_worker;
+      $del_url = base_url('cms_m3/project/1/3/?del_code=').$lt->seq;
+?>
+        <tr class="center">
+          <td><?php echo $lt->order_no; ?></td>
+          <td><?php echo $lt->admin_dong; ?></td>
+          <td><?php echo $lt->lot_num; ?></td>
+          <td><?php echo $lt->land_mark; ?></td>
+          <td class="right"><?php echo number_format($lt->area_official, 2); ?></td>
+          <td class="right"><?php echo number_format($ao_py, 2); ?></td>
+          <td class="right"><?php echo number_format($lt->area_returned, 2); ?></td>
+          <td class="right"><?php echo number_format($ar_py, 2); ?></td>
+          <td><?php echo $reg_date; ?></td>
+          <td><?php echo $reg_worker; ?></td>
+          <td><a href='javascript:'class="btn btn-info btn-xs" onclick="alert('준비 중입니다!')">수정</a></td>
+          <!-- <td><a href='javascript:'class="btn btn-info btn-xs" onclick="popUp_size('<?php echo base_url('/cms_popup/Capital_cash_book/cash_book/'.$lt->seq); ?>','cash_book','500','670')">수정</a></td> -->
+          <td><a href='javascript:'class="btn btn-danger btn-xs" onclick="if(confirm('해당 데이터를 정말 삭제하시겠습니까?')===true) location.href='<?php echo $del_url; ?>';">삭제</a></td>
+        </tr>
+<?php
+      $a++;
+    endforeach;
+  endif;
+?>
       </tbody>
     </table>
   </div>
