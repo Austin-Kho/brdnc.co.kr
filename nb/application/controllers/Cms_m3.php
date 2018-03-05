@@ -892,7 +892,7 @@ class Cms_m3 extends CB_Controller {
 				$result = $this->cms_main_model->insert_data('cb_cms_project', $new_pj_data, 'reg_date');
 
 				if($result) { // 등록 성공 시
-					alert('프로젝트 정보가  등록되었습니다.', base_url('cms_m3/project/2/1/?project='.$project));
+					alert('프로젝트 정보가  등록되었습니다.', base_url('cms_m3/project/2/1/'));
 					exit;
 				}else{   // 등록 실패 시
 					alert('데이터베이스 오류가 발생하였습니다..', base_url('cms_m3/project/2/2/'));
