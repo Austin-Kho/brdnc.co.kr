@@ -102,7 +102,7 @@ endif;?>
 							<tbody>
 <?php
   if (element('menu', $layout)) :
-      
+
       for($i=0; $i<count($top_menu); $i++) :
           $sub_menu = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>$top_menu[$i]->men_id), '', '', 'men_order');
 ?>

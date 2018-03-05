@@ -580,7 +580,8 @@ class Cms_m5 extends CB_Controller {
 
 				if($this->input->get('un')&&$this->input->post('user_no')&&$this->input->post('user_id')){ // 사용자 권한 설정 버튼 클릭 시
 
-					//사용자 권한 설정/////////////////////////////////////////
+					// 사용자 권한 설정/////////////////////////////////////////
+
 					if($this->input->post('_m1_1_1_m')=='on'){$_m1_1_1=2;} else if($this->input->post('_m1_1_1')=='on') {$_m1_1_1=1;} else {$_m1_1_1=0;}
 					if($this->input->post('_m1_1_2_m')=='on'){$_m1_1_2=2;} else if($this->input->post('_m1_1_2')=='on') {$_m1_1_2=1;} else {$_m1_1_2=0;}
 					if($this->input->post('_m1_1_3_m')=='on'){$_m1_1_3=2;} else if($this->input->post('_m1_1_3')=='on'){$_m1_1_3=1;} else {$_m1_1_3=0;}
@@ -601,6 +602,7 @@ class Cms_m5 extends CB_Controller {
 					if($this->input->post('_m3_1_3_m')=='on'){$_m3_1_3=2;} else if($this->input->post('_m3_1_3')=='on'){$_m3_1_3=1;} else {$_m3_1_3=0;}
 					if($this->input->post('_m3_2_1_m')=='on'){$_m3_2_1=2;} else if($this->input->post('_m3_2_1')=='on'){$_m3_2_1=1;} else {$_m3_2_1=0;}
 					if($this->input->post('_m3_2_2_m')=='on'){$_m3_2_2=2;} else if($this->input->post('_m3_2_2')=='on'){$_m3_2_2=1;} else {$_m3_2_2=0;}
+					if($this->input->post('_m3_2_3_m')=='on'){$_m3_2_3=2;} else if($this->input->post('_m3_2_3')=='on'){$_m3_2_3=1;} else {$_m3_2_3=0;}
 
 					if($this->input->post('_m4_1_1_m')=='on'){$_m4_1_1=2;} else if($this->input->post('_m4_1_1')=='on'){$_m4_1_1=1;} else {$_m4_1_1=0;}
 					if($this->input->post('_m4_1_2_m')=='on'){$_m4_1_2=2;} else if($this->input->post('_m4_1_2')=='on'){$_m4_1_2=1;} else {$_m4_1_2=0;}
@@ -639,6 +641,7 @@ class Cms_m5 extends CB_Controller {
 						'_m3_1_3' => $_m3_1_3,
 						'_m3_2_1' => $_m3_2_1,
 						'_m3_2_2' => $_m3_2_2,
+						'_m3_2_3' => $_m3_2_3,
 
 						'_m4_1_1' => $_m4_1_1,
 						'_m4_1_2' => $_m4_1_2,
