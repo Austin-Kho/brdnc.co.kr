@@ -47,8 +47,8 @@ class Cms_m3 extends CB_Controller {
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
 
-		$view['top_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>0), '', '', 'men_order');
-		$view['sec_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>$view['top_menu'][2]->men_id), '', '', 'men_order');
+		$view['top_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>0), 'men_order');
+		$view['sec_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>$view['top_menu'][2]->men_id), 'men_order');
 
 		$view['s_di'] = array(
 			array('동호수 등록', '세부설정 관리', '토지조서 관리'), // 첫번째 하위 메뉴
@@ -60,7 +60,7 @@ class Cms_m3 extends CB_Controller {
 		// 등록된 프로젝트 데이터
 		$where = "";
 		if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
-		$view['pj_list'] = $this->cms_main_model->data_result('cb_cms_project', '', '', '', 'biz_start_ym DESC');
+		$view['pj_list'] = $this->cms_main_model->data_result('cb_cms_project', '', 'biz_start_ym DESC');
 		$project = $view['project'] = ($this->input->get_post('project')) ? $this->input->get_post('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
 
 		// 3-1 프로젝트 관리 1. 데이터등록 ////////////////////////////////////////////////////////////////////
@@ -599,7 +599,7 @@ class Cms_m3 extends CB_Controller {
 
 			//페이지네이션 설정/////////////////////////////////
 			$config['base_url'] = base_url('cms_m3/project/1/3/');   //페이징 주소
-			$config['total_rows'] = $this->cms_m4_model->cash_book_list($cb_table, $view['where'], '', '', 'num', '');  //게시물의 전체 갯수
+			$config['total_rows'] = $this->cms_main_model->data_num_rows('cb_cms_site_status', array('pj_seq'=>$project));  //게시물의 전체 갯수
 			$config['per_page'] = 12; // 한 페이지에 표시할 게시물 수
 			$config['num_links'] = 4;  // 링크 좌우로 보여질 페이지 수
 			$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -615,7 +615,7 @@ class Cms_m3 extends CB_Controller {
 			//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 			$view['pagination'] = $this->pagination->create_links();
 
-			$view['cb_list'] = $this->cms_m4_model->cash_book_list($cb_table, $view['where'], $start, $limit, '', 'DESC'); // table, where, start, limit, num, order
+			$view['cb_list'] = $this->cms_main_model->cash_book_list($cb_table, $view['where'], $start, $limit, '', 'DESC'); // table, where, start, limit, num, order
 
 			if($this->input->get('del_code')) {
 				$result = $this->cms_main_model->delete_data('cb_cms_capital_cash_book', array('seq_num' => $this->input->get('del_code')));
