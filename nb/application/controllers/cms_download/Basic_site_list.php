@@ -41,8 +41,124 @@ class Basic_site_list extends CB_Controller {
     	// Create new Spreadsheet object
     	$spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
 
+		// Set document properties
+	    $spreadsheet->getProperties()->setCreator('brinc.co.kr')
+	      ->setLastModifiedBy($this->session->userdata('mem_username'))
+	      ->setTitle('토지목록 조서')
+	      ->setSubject($pj_title.' 토지목록_데이터')
+	      ->setDescription('토지 지번/지목/면적 정보');
+		//----------------------------------------------------------//
+
         // 본문 내용 시작---------------------------------------------------------------//
 
+		// 전체 글꼴 및 정렬
+		$spreadsheet->getActiveSheet()->duplicateStyleArray( // 전체 글꼴 및 정렬
+			array(
+				'font' => array('size' => 10),
+				'alignment' => array(
+					'vertical'   => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+					'horizontal'   => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER
+				)
+			),
+			'A:H'
+		);
+
+		// 헤더 스타일 생성 -- add style to the header
+	    $styleArray = array(
+	      'font' => array(
+	        'bold' => true,
+	      ),
+	      'alignment' => array(
+	        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+	        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+	      ),
+	      'borders' => array(
+	        'top' => array(
+	          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+	        ),
+	      ),
+	    );
+    	$spreadsheet->getActiveSheet()->getStyle('A1:H1')->applyFromArray($styleArray);
+
+		$allBorder = array(
+	      'borders' => array(
+	        'allborders' => array(
+	          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+	        ),
+	      ),
+	    );
+		$spreadsheet->getActiveSheet()->getStyle('A3:H'.(count($basic_site_data)+4))->applyFromArray($allBorder);
+
+		$spreadsheet->getActiveSheet()->getColumnDimension("A")->setWidth(8); // A열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("B")->setWidth(10); // B열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("C")->setWidth(12); // C열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("D")->setWidth(10); // D열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("E")->setWidth(15); // E열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("F")->setWidth(15); // F열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("G")->setWidth(15); // G열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("H")->setWidth(15); // H열의 셀 넓이 설정
+		// $spreadsheet->getActiveSheet()->getColumnDimension("I")->setWidth(38); // I열의 셀 넓이 설정
+
+		$spreadsheet->getActiveSheet()->getDefaultRowDimension()->setRowHeight(19.5); // 전체 기본 셀 높이 설정
+		$spreadsheet->getActiveSheet()->getRowDimension(1)->setRowHeight(37.5); // 1행의 셀 높이 설정
+
+		$spreadsheet->getActiveSheet()->mergeCells('A1:H1');// A1부터 D1까지 셀을 합칩니다.
+
+		$spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);// A1의 폰트를 변경 합니다.
+		$spreadsheet->getActiveSheet()->setCellValue('A1', $pj_title->pj_name.' 토지목록 조서');// 해당 셀의 내용을 입력 합니다.
+		$spreadsheet->getActiveSheet()->getStyle('H2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+		$spreadsheet->getActiveSheet()->setCellValue('H2', date('Y-m-d')." 현재");// 해당 셀의 내용을 입력 합니다.
+
+		$spreadsheet->getActiveSheet()->getStyle('A3:H4')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFEAEAEA');
+
+		$spreadsheet->getActiveSheet()->getStyle('E5:H'.(count($basic_site_data)+4))->getNumberFormat()->setFormatCode('#,##0.00');  // 셀 숫자형 변환 (1000 -> 1,000)
+
+		$spreadsheet->getActiveSheet()->mergeCells('A3:A4');// 해당 셀을 합칩니다.
+		$spreadsheet->getActiveSheet()->setCellValue('A3', 'no.');
+
+		$spreadsheet->getActiveSheet()->mergeCells('B3:B4');// 해당 셀을 합칩니다.
+		$spreadsheet->getActiveSheet()->setCellValue('B3', '행정동(Lot)');// 해당 셀의 내용을 입력 합니다.
+		$spreadsheet->getActiveSheet()->mergeCells('C3:C4');// 해당 셀을 합칩니다.
+		$spreadsheet->getActiveSheet()->setCellValue('C3', '지 번');// 해당 셀의 내용을 입력 합니다.
+		$spreadsheet->getActiveSheet()->mergeCells('D3:D4');// 해당 셀을 합칩니다.
+		$spreadsheet->getActiveSheet()->setCellValue('D3', '지 목');// 해당 셀의 내용을 입력 합니다.
+
+		$spreadsheet->getActiveSheet()->mergeCells('E3:F3');// 해당 셀을 합칩니다.
+		$spreadsheet->getActiveSheet()->setCellValue('E3', '공부상 면적');// 해당 셀의 내용을 입력 합니다.
+
+		$spreadsheet->getActiveSheet()->setCellValue('E4', '면적(㎡)');// 해당 셀의 내용을 입력 합니다.
+		$spreadsheet->getActiveSheet()->setCellValue('F4', '면적(평)');// 해당 셀의 내용을 입력 합니다.
+
+		$spreadsheet->getActiveSheet()->mergeCells('G3:H3');// 해당 셀을 합칩니다.
+		$spreadsheet->getActiveSheet()->setCellValue('G3', '환지(실권리) 면적');// 해당 셀의 내용을 입력 합니다.
+
+		$spreadsheet->getActiveSheet()->setCellValue('G4', '면적(㎡)');// 해당 셀의 내용을 입력 합니다.
+		$spreadsheet->getActiveSheet()->setCellValue('H4', '면적(평)');// 해당 셀의 내용을 입력 합니다.
+
+		// $spreadsheet->getActiveSheet()->mergeCells('I3:I4');// 해당 셀을 합칩니다.
+		// $spreadsheet->getActiveSheet()->setCellValue('I3', '비 고');// 해당 셀의 내용을 입력 합니다.
+
+		$i=1;
+		foreach ($basic_site_data as $lt) {
+
+			$spreadsheet->getActiveSheet()->setCellValue('A'.(4+$i), $lt->order_no);
+			$spreadsheet->getActiveSheet()->setCellValue('B'.(4+$i), $lt->admin_dong);
+			$spreadsheet->getActiveSheet()->setCellValue('C'.(4+$i), $lt->lot_num);
+			$spreadsheet->getActiveSheet()->setCellValue('D'.(4+$i), $lt->land_mark);
+
+			$spreadsheet->getActiveSheet()->getStyle('E'.(4+$i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+			$spreadsheet->getActiveSheet()->setCellValue('E'.(4+$i), $lt->area_official);
+			$spreadsheet->getActiveSheet()->getStyle('F'.(4+$i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+			$spreadsheet->getActiveSheet()->setCellValue('F'.(4+$i), $lt->area_official*0.3025);
+			$spreadsheet->getActiveSheet()->getStyle('G'.(4+$i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+			$spreadsheet->getActiveSheet()->setCellValue('G'.(4+$i), $lt->area_returned);
+			$spreadsheet->getActiveSheet()->getStyle('H'.(4+$i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+			$spreadsheet->getActiveSheet()->setCellValue('H'.(4+$i), $lt->area_returned*0.3025);
+			// $spreadsheet->getActiveSheet()->getStyle('I'.(3+$i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+			// $spreadsheet->getActiveSheet()->setCellValue('I'.(3+$i), '');
+
+			$i++;
+		}
 
 
 
