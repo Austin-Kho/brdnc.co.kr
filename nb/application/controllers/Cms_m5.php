@@ -363,7 +363,7 @@ class Cms_m5 extends CB_Controller {
 			// db[전체은행목록] 데이터 불러오기
 			$view['com_bank'] = $this->cms_m5_model->all_bank_name();
 			//은행 디비 전체 불러오기
-			$view['all_bank'] = $this->cms_main_model->data_result('cb_cms_capital_bank_code');
+			$view['all_bank'] = $this->cms_main_model->data_result('cb_cms_capital_bank_code', '', 'bank_code');
 			$view['all_div'] = $this->cms_main_model->data_result('cb_cms_com_div');
 
 			//  db [은행 ]데이터 불러오기
