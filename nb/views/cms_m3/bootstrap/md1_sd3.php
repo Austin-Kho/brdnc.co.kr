@@ -157,6 +157,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
       $reg_date = (empty($lt->modi_date) or $lt->modi_date==='0000-00-00') ? $lt->reg_date : $lt->modi_date;
       $reg_worker = empty($lt->modi_worker) ? $lt->reg_worker : $lt->modi_worker;
       $del_url = base_url('cms_m3/project/1/3/?del_code=').$lt->seq;
+      if($auth13<2) { $del_submit = "alert('삭제 관리 권한이 없습니다.');";  }else { $del_submit = "if(confirm('이후 해당 데이터를 복구할 수 없습니다. 정말 삭제하시겠습니까?')===true) location.href='".$del_url."'"; }
 ?>
         <tr class="center">
           <td><?php echo $lt->order_no; ?></td>
@@ -171,7 +172,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
           <td><?php echo $reg_worker; ?></td>
           <td><a href='javascript:'class="btn btn-info btn-xs" onclick="alert('준비 중입니다!')">수정</a></td>
           <!-- <td><a href='javascript:'class="btn btn-info btn-xs" onclick="popUp_size('<?php echo base_url('/cms_popup/Capital_cash_book/cash_book/'.$lt->seq); ?>','cash_book','500','670')">수정</a></td> -->
-          <td><a href='javascript:'class="btn btn-danger btn-xs" onclick="if(confirm('해당 데이터를 정말 삭제하시겠습니까?')===true) location.href='<?php echo $del_url; ?>';">삭제</a></td>
+          <td><a href='javascript:'class="btn btn-danger btn-xs" onclick="<?php echo $del_submit; ?>">삭제</a></td>
         </tr>
 <?php
       $a++;
