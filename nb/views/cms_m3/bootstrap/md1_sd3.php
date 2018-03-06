@@ -112,10 +112,10 @@ for($i=(count($year)-1); $i>=0; $i--) :
   <div class="row font12" style="margin: 0 0 5px;">
     <div class="col-xs-6" style="color: #5771fb;">총 <?php echo $total_rows; ?> 필지 / 면적 <?php echo number_format($summary->total_area, 2); ?>㎡ (<?php echo number_format($summary->total_area*0.3025, 2) ?>평) 등록</div>
     <div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;">
-      <a href="javascript:alert('준비 중입니다!');">
-      <!-- <a href="<?php echo base_url('/cms_download/application_data/download')."?pj=".$project; ?>"> -->
-				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
-			</a>
+        <!-- <a href="javascript:alert('준비 중입니다!');"> -->
+        <a href="<?php echo base_url('/cms_download/basic_site_list/download')."?pj=".$project; ?>">
+			<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
+		</a>
     </div>
   </div>
 
