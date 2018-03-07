@@ -588,13 +588,20 @@ class Cms_m3 extends CB_Controller {
 
 		// 3-1 프로젝트 관리 3. 토지목록 조서 관리 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==1 && $sdi==3) {
+			$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m3_1_3', $this->session->userdata['mem_id']);
 			// 불러올 페이지에 보낼 조회 권한 데이터
 			$view['auth13'] = $auth['_m3_1_3'];
 
+			// 등록된 토지 기초 데이터 총 면적
 			$view['summary'] = $this->cms_main_model->data_row('cb_cms_site_status', array('pj_seq'=>$project), 'SUM(area_returned) as total_area'); // $table, $where, $order, $select, $group, $start='', $limit=''
+
+			// 소유권 관련
+			// $where_qry = " WHERE cb_cms_site_status.seq=cb_cms_site_ownership.lot_seq ";
+			$where_qry = " WHERE 1=1 ";
+			$view['site_basic_own'] = $this->cms_main_model->sql_result(" SELECT * FROM  cb_cms_site_status, cb_cms_site_ownership $where_qry ");
 
 
 
@@ -634,12 +641,16 @@ class Cms_m3 extends CB_Controller {
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
 
-			$this->form_validation->set_rules('order_no', '순번', 'trim|required|numeric|max_length[5]');
-			$this->form_validation->set_rules('admin_dong', '행정동', 'trim|required|max_length[10]');
-			$this->form_validation->set_rules('lot_num', '지번', 'trim|required|max_length[10]');
-			$this->form_validation->set_rules('land_mark', '지목', 'trim|required|max_length[10]');
-			$this->form_validation->set_rules('area_official', '공부상 면적', 'trim|required|numeric|max_length[12]');
-			$this->form_validation->set_rules('area_returned', '환지면적', 'trim|numeric|max_length[12]');
+			if(!$this->input->get('set_sort') OR $this->input->get('set_sort')==='1'){
+				$this->form_validation->set_rules('order_no', '순번', 'trim|required|numeric|max_length[5]');
+				$this->form_validation->set_rules('admin_dong', '행정동', 'trim|required|max_length[10]');
+				$this->form_validation->set_rules('lot_num', '지번', 'trim|required|max_length[10]');
+				$this->form_validation->set_rules('land_mark', '지목', 'trim|required|max_length[10]');
+				$this->form_validation->set_rules('area_official', '공부상 면적', 'trim|required|numeric|max_length[12]');
+				$this->form_validation->set_rules('area_returned', '환지면적', 'trim|numeric|max_length[12]');
+			}
+
+
 
 			if($this->form_validation->run() !== FALSE) : // 폼검증 통과 했을 경우, post 데이터가 있을 때
 
