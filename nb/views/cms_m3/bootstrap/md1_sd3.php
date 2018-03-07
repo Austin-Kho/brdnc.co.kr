@@ -220,7 +220,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
             <input type="text" name="search_word" value="<?php echo set_value('search_word'); ?>" placeholder="Search" class="form-control input-sm" onclick="this.value='';">
         </div>
 
-        <div class="col-xs-6 col-sm-4 col-md-6" style="padding: 4px 15px;">
+        <div class="col-xs-6 col-sm-4 col-md-6" style="padding: 4px 15px; line-height: 30px;">
             <?php var_dump($site_basic_own); ?>
 
 
