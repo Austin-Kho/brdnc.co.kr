@@ -112,10 +112,10 @@ for($i=(count($year)-1); $i>=0; $i--) :
   <div class="row font12" style="margin: 0 0 5px;">
     <div class="col-xs-6" style="color: #5771fb;">총 <?php echo $total_rows; ?> 필지 / 면적 <?php echo number_format($summary->total_area, 2); ?>㎡ (<?php echo number_format($summary->total_area*0.3025, 2) ?>평) 등록</div>
     <div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;">
-        <!-- <a href="javascript:alert('준비 중입니다!');"> -->
-        <a href="<?php echo base_url('/cms_download/basic_site_list/download')."?pj=".$project; ?>">
-			<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
-		</a>
+      <!-- <a href="javascript:alert('준비 중입니다!');"> -->
+      <a href="<?php echo base_url('/cms_download/basic_site_list/download')."?pj=".$project; ?>">
+  			<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
+  		</a>
     </div>
   </div>
 
@@ -201,7 +201,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
   echo form_open(current_full_url(), $attributes, $hidden);
 ?>
   <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
-    <div class="col-sm-12 col-md-1 center point-sub1" style="padding: 10px; 0">지번 선택</div>
+    <div class="col-sm-12 col-md-1 center point-sub1" style="padding: 10px; 0">입력 지번</div>
     <div class="col-xs-3 col-sm-2 col-md-2" style="padding: 4px 15px;">
       <label for="site_lot" class="sr-only">지 번</label>
       <select class="form-control input-sm" name="site_lot" onchange="submit();">
@@ -211,13 +211,13 @@ for($i=(count($year)-1); $i>=0; $i--) :
 <?php endforeach; ?>
       </select>
     </div>
-    <div class="col-xs-3 col-sm-2 col-md-3" style="padding: 4px 15px; line-height: 30px;">
+    <div class="col-xs-3 col-sm-2 col-md-3" style="padding: 4px 15px; text-align:center; line-height: 30px; <?php if( !empty($this->input->get('site_lot'))) echo "background-color:#fefdcb;"; ?>">
       <div class="col-xs-10" style="">
         <?php if( !empty($this->input->get('site_lot'))): ?><a href="javascript:" onclick="$('#owner_input').toggle();"><?php echo $lt->lot_num." 소유자 정보 입력</a>"; endif; ?>
       </div>
       <div class="col-xs-2" style="padding-top:5px;">
 <?php if( !empty($this->input->get('site_lot'))) : ?>
-        <button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="location.href='<?php echo base_url('cms_m1/sales/2/2?project='.$project.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1]) ?>'"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="location.href='<?php echo base_url('cms_m3/project/1/3?project='.$project.'&set_sort=2') ?>'"><span aria-hidden="true">&times;</span></button>
 <?php endif; ?>
       </div>
     </div>
@@ -239,6 +239,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
         <button type="button" name="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> 검색하기</button>
     </div>
   </div>
+
 </form>
   <!-- 입력하기 폼 -->
 <?php
@@ -289,7 +290,15 @@ for($i=(count($year)-1); $i>=0; $i--) :
   </div>
 
 
+
 </form>
+
+  <div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -10px; color: #5E81FE;">
+    <a href="javascript:alert('준비 중입니다!');">
+    <!-- <a href="<?php echo base_url('/cms_download/basic_site_list/download')."?pj=".$project; ?>"> -->
+      <img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
+    </a>
+  </div>
 
   <!-- 출력 및 get으로 수정 삭제하기 -->
   <div class="table-responsive font12">
@@ -317,12 +326,14 @@ for($i=(count($year)-1); $i>=0; $i--) :
         </tr>
       </thead>
       <tbody>
-<?php if(empty($owner_list)) :  ?>
+<?php
+  if(empty($owner_list)) :  ?>
         <tr class="center">
           <td class="center" colspan="14" style="padding: 130px 0;">조회할 데이터가 없습니다.</td>
         </tr>
-<?php else:
-  foreach ($owner_list as $lt) :
+<?php
+  else:
+    foreach ($owner_list as $lt) :
 ?>
         <tr class="center">
           <td>&nbsp;</td>
@@ -344,6 +355,9 @@ for($i=(count($year)-1); $i>=0; $i--) :
 <?php endif;?>
       </tbody>
     </table>
+  </div>
+  <div class="col-md-12 center" style="margin:padding: 0;">
+    <ul class="pagination pagination-sm"><?php echo $pagination;?></ul>
   </div>
 </div>
 <?php } ?>

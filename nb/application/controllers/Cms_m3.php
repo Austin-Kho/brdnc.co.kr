@@ -604,7 +604,8 @@ class Cms_m3 extends CB_Controller {
 			// 페이지네이션 라이브러리 로딩 추가
 			$this->load->library('pagination');
 
-			if($this->input->get('set_sort')=='1') {
+			if( !$this->input->get('set_sort') OR $this->input->get('set_sort')=='1') {
+
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = base_url('cms_m3/project/1/3/');   //페이징 주소
 				$config['total_rows'] = $view['total_rows'] = $this->cms_main_model->data_num_rows('cb_cms_site_status', array('pj_seq'=>$project));  //게시물의 전체 갯수
@@ -634,12 +635,22 @@ class Cms_m3 extends CB_Controller {
 						alert('데이터베이스 에러입니다. 다시 시도하여 주십시요!', base_url('cms_m3/project/1/3/'));
 					}
 				}
-				
+
 			}elseif($this->input->get('set_sort')=='2'){
+
+				if( !$this->input->get('search_con') OR $this->input->get('search_con')==='1'){
+					$like_array = array('lot_num'=>$this->input->get('search_word'));
+					$or_like_array = array('owner'=>$this->input->get('search_word'));;
+				}elseif($this->input->get('search_con')==='2'){
+					$like_array = array('lot_num'=>$this->input->get('search_word'));
+				}elseif($this->input->get('search_con')==='3'){
+					$like_array = array('owner'=>$this->input->get('search_word'));
+				}
+
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = base_url('cms_m3/project/1/3/');   //페이징 주소
-				$config['total_rows'] = $view['total_rows'] = $this->cms_main_model->data_num_rows('cb_cms_site_ownership', array('pj_seq'=>$project));  //게시물의 전체 갯수
+				$config['total_rows'] = $view['total_rows'] = $this->cms_main_model->data_num_rows('cb_cms_site_ownership', array('pj_seq'=>$project), $like_array, $or_like_array);  //게시물의 전체 갯수
 				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 4;  // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -655,8 +666,8 @@ class Cms_m3 extends CB_Controller {
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$view['pagination'] = $this->pagination->create_links();
 
-				// $table, $where, $order, $select, $group, $start='', $limit=''
-				$view['owner_list'] = $this->cms_main_model->data_result('cb_cms_site_ownership', array('pj_seq'=>$project), 'lot_seq DESC, seq DESC', '', '', $start, $limit);
+				// $table, $where, $order, $select, $group, $start='', $limit='', $like(array)
+				$view['owner_list'] = $this->cms_main_model->data_result('cb_cms_site_ownership', array('pj_seq'=>$project), 'lot_seq DESC, seq DESC', '', '', $start, $limit, $like_array, $or_like_array);
 
 				if($this->input->get('del_code1')) {
 					$del_rlt = $this->cms_main_model->delete_data('cb_cms_site_ownership', array('seq' => $this->input->get('del_code1')));
