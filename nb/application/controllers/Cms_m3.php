@@ -601,7 +601,7 @@ class Cms_m3 extends CB_Controller {
 			// 소유권 관련
 			// $where_qry = " WHERE cb_cms_site_status.seq=cb_cms_site_ownership.lot_seq ";
 			if( !empty($this->input->post('search_word'))) {
-				$where_qry = " WHERE lot_num LIKE ".$this->input->post('search_word');
+				$where_qry = " WHERE lot_num LIKE %".$this->input->post('search_word');
 				$view['site_basic_own'] = $this->cms_main_model->sql_result(" SELECT * FROM  cb_cms_site_status $where_qry ");
 			}
 
