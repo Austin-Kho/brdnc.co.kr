@@ -597,49 +597,83 @@ class Cms_m3 extends CB_Controller {
 
 			// 등록된 토지 기초 데이터 총 면적
 			$view['summary'] = $this->cms_main_model->data_row('cb_cms_site_status', array('pj_seq'=>$project), 'SUM(area_returned) as total_area'); // $table, $where, $order, $select, $group, $start='', $limit=''
-
 			// 소유권 관련
-			// $where_qry = " WHERE cb_cms_site_status.seq=cb_cms_site_ownership.lot_seq ";
-			if( !empty($this->input->post('search_word'))) {
-				$where_qry = " WHERE lot_num LIKE %".$this->input->post('search_word');
-				$view['site_basic_own'] = $this->cms_main_model->sql_result(" SELECT * FROM  cb_cms_site_status $where_qry ");
-			}
-
-
+			$view['site_lot'] = $this->cms_main_model->data_result('cb_cms_site_status', array('pj_seq'=>$project));
 
 
 			// 페이지네이션 라이브러리 로딩 추가
 			$this->load->library('pagination');
 
-			//페이지네이션 설정/////////////////////////////////
-			$config['base_url'] = base_url('cms_m3/project/1/3/');   //페이징 주소
-			$config['total_rows'] = $view['total_rows'] = $this->cms_main_model->data_num_rows('cb_cms_site_status', array('pj_seq'=>$project));  //게시물의 전체 갯수
-			$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
-			$config['num_links'] = 4;  // 링크 좌우로 보여질 페이지 수
-			$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
-			$config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
+			if($this->input->get('set_sort')=='1') {
+				//페이지네이션 설정/////////////////////////////////
+				$config['base_url'] = base_url('cms_m3/project/1/3/');   //페이징 주소
+				$config['total_rows'] = $view['total_rows'] = $this->cms_main_model->data_num_rows('cb_cms_site_status', array('pj_seq'=>$project));  //게시물의 전체 갯수
+				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
+				$config['num_links'] = 4;  // 링크 좌우로 보여질 페이지 수
+				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
+				$config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
 
-			// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
-			$page = $this->input->get('page'); // get 방식 아닌 경우 $this->uri->segment($config['uri_segment']);
-			$start = ($page<=1 or empty($page)) ? 0 : ($page-1) * $config['per_page'];
-			$limit = $config['per_page'];
+				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
+				$page = $this->input->get('page'); // get 방식 아닌 경우 $this->uri->segment($config['uri_segment']);
+				$start = ($page<=1 or empty($page)) ? 0 : ($page-1) * $config['per_page'];
+				$limit = $config['per_page'];
 
-			//페이지네이션 초기화
-			$this->pagination->initialize($config);
-			//페이징 링크를 생성하여 view에서 사용할 변수에 할당
-			$view['pagination'] = $this->pagination->create_links();
+				//페이지네이션 초기화
+				$this->pagination->initialize($config);
+				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
+				$view['pagination'] = $this->pagination->create_links();
 
-			$view['site_lot_list'] = $this->cms_main_model->data_result('cb_cms_site_status', array('pj_seq'=>$project), 'order_no DESC, seq DESC', '', '', $start, $limit); // $table, $where, $order, $select, $group, $start='', $limit=''
+				$view['site_lot_list'] = $this->cms_main_model->data_result('cb_cms_site_status', array('pj_seq'=>$project), 'order_no DESC, seq DESC', '', '', $start, $limit); // $table, $where, $order, $select, $group, $start='', $limit=''
 
-			if($this->input->get('del_code')) {
-				$del_rlt1 = $this->cms_main_model->delete_data('cb_cms_site_status', array('seq' => $this->input->get('del_code')));
-				$del_rlt2 = $this->cms_main_model->delete_data('cb_cms_site_ownership', array('lot_seq' => $this->input->get('del_code')));
-				if($del_rlt1 or $del_rlt2) {
-					alert('삭제 되었습니다.', base_url('cms_m3/project/1/3/'));
-				}else{
-					alert('데이터베이스 에러입니다. 다시 시도하여 주십시요!', base_url('cms_m3/project/1/3/'));
+				if($this->input->get('del_code')) {
+					$del_rlt1 = $this->cms_main_model->delete_data('cb_cms_site_status', array('seq' => $this->input->get('del_code')));
+					$del_rlt2 = $this->cms_main_model->delete_data('cb_cms_site_ownership', array('lot_seq' => $this->input->get('del_code')));
+					if($del_rlt1 or $del_rlt2) {
+						alert('삭제 되었습니다.', base_url('cms_m3/project/1/3/'));
+					}else{
+						alert('데이터베이스 에러입니다. 다시 시도하여 주십시요!', base_url('cms_m3/project/1/3/'));
+					}
+				}
+				
+			}elseif($this->input->get('set_sort')=='2'){
+
+				//페이지네이션 설정/////////////////////////////////
+				$config['base_url'] = base_url('cms_m3/project/1/3/');   //페이징 주소
+				$config['total_rows'] = $view['total_rows'] = $this->cms_main_model->data_num_rows('cb_cms_site_ownership', array('pj_seq'=>$project));  //게시물의 전체 갯수
+				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
+				$config['num_links'] = 4;  // 링크 좌우로 보여질 페이지 수
+				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
+				$config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
+
+				// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
+				$page = $this->input->get('page'); // get 방식 아닌 경우 $this->uri->segment($config['uri_segment']);
+				$start = ($page<=1 or empty($page)) ? 0 : ($page-1) * $config['per_page'];
+				$limit = $config['per_page'];
+
+				//페이지네이션 초기화
+				$this->pagination->initialize($config);
+				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
+				$view['pagination'] = $this->pagination->create_links();
+
+				// $table, $where, $order, $select, $group, $start='', $limit=''
+				$view['owner_list'] = $this->cms_main_model->data_result('cb_cms_site_ownership', array('pj_seq'=>$project), 'lot_seq DESC, seq DESC', '', '', $start, $limit);
+
+				if($this->input->get('del_code1')) {
+					$del_rlt = $this->cms_main_model->delete_data('cb_cms_site_ownership', array('seq' => $this->input->get('del_code1')));
+
+					if($del_rlt) {
+						alert('삭제 되었습니다.', base_url('cms_m3/project/1/3/?project='.$project.'&set_sort=2'));
+					}else{
+						alert('데이터베이스 에러입니다. 다시 시도하여 주십시요!', base_url('cms_m3/project/1/3/?project='.$project.'&set_sort=2'));
+					}
 				}
 			}
+
+
+
+
+
+
 
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증

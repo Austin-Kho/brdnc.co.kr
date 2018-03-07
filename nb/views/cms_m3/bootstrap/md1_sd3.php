@@ -6,7 +6,7 @@
       $submit_str="alert('등록 권한이 없습니다!')";
     } else {
       if(empty($this->input->get('project'))){
-        $submit_str="alert('등록할 프로젝트를 선택하여 주십시요!'); document.pj_sel.project.focus();";
+        $submit_str="alert('등록할 프로젝트를 선택하여 주십시요!'); document.sel_condi.project.focus();";
       }else{
         $submit_str="if(confirm('토지 기초 데이터를 등록하시겠습니까?')===true) submit();";
       }
@@ -17,7 +17,7 @@
 
 <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
 <?php
-  $attributes = array('method' => 'get', 'name' => 'pj_sel');
+  $attributes = array('method' => 'get', 'name' => 'sel_condi');
   echo form_open(current_full_url(), $attributes);
 ?>
     <div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
@@ -72,7 +72,6 @@ for($i=(count($year)-1); $i>=0; $i--) :
   echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
   $attributes = array('name' => 'basic_insert');
   $hidden = array(
-      'year' => $this->input->get('yr'),
       'project' => $this->input->get('project'),
       'sort' => 'basic'
   );
@@ -193,81 +192,159 @@ for($i=(count($year)-1); $i>=0; $i--) :
 <!------- 소유권 관련 정보 입출력 하기 ------->
 <?php }elseif($this->input->get('set_sort')==='2'){  // 2. 소유권 관련 정보 ?>
 <div class="row font12" style="margin: 0; padding: 0; height: 480px;">
+<?php
+  $attributes = array('method'=>'get');
+  $hidden = array(
+      'project' => $this->input->get('project'),
+      'set_sort' => '2'
+  );
+  echo form_open(current_full_url(), $attributes, $hidden);
+?>
+  <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
+    <div class="col-sm-12 col-md-1 center point-sub1" style="padding: 10px; 0">지번 선택</div>
+    <div class="col-xs-3 col-sm-2 col-md-2" style="padding: 4px 15px;">
+      <label for="site_lot" class="sr-only">지 번</label>
+      <select class="form-control input-sm" name="site_lot" onchange="submit();">
+        <option value="" <?php if(empty($this->input->get('site_lot'))) echo "selected";?>>전 체</option>
+<?php foreach ($site_lot as $lt) : ?>
+        <option value="<?php echo $lt->seq; ?>" <?php if($this->input->get('site_lot')==$lt->seq) echo "selected";;?>><?php echo "[".$lt->order_no."] - [".$lt->admin_dong."] - ".$lt->lot_num; ?></option>
+<?php endforeach; ?>
+      </select>
+    </div>
+    <div class="col-xs-3 col-sm-2 col-md-3" style="padding: 4px 15px; line-height: 30px;">
+      <div class="col-xs-10" style="">
+        <?php if( !empty($this->input->get('site_lot'))): ?><a href="javascript:" onclick="$('#owner_input').toggle();"><?php echo $lt->lot_num." 소유자 정보 입력</a>"; endif; ?>
+      </div>
+      <div class="col-xs-2" style="padding-top:5px;">
+<?php if( !empty($this->input->get('site_lot'))) : ?>
+        <button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="location.href='<?php echo base_url('cms_m1/sales/2/2?project='.$project.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1]) ?>'"><span aria-hidden="true">&times;</span></button>
+<?php endif; ?>
+      </div>
+    </div>
+    <div class="col-sm-12 col-md-1 center point-sub1" style="padding: 10px; 0">검색 조건</div>
+    <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
+        <label for="search_con" class="sr-only">조건</label>
+        <select class="form-control input-sm" name="search_con">
+          <option value="1" <?php echo set_select('search_con', '1');?>>전 체</option>
+          <option value="2" <?php echo set_select('search_con', '2');?>>지 번</option>
+          <option value="3" <?php echo set_select('search_con', '3');?>>지 주</option>
+        </select>
+    </div>
+    <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
+        <label for="search_word" class="sr-only">검색어</label>
+        <input type="text" name="search_word" value="<?php echo $this->input->get('search_word'); ?>" placeholder="Search" class="form-control input-sm" onclick="this.value='';">
+    </div>
+
+    <div class="col-xs-6 col-sm-4 col-md-1 right" style="padding: 4px 15px;">
+        <button type="button" name="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> 검색하기</button>
+    </div>
+  </div>
+</form>
   <!-- 입력하기 폼 -->
 <?php
   echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
   $attributes = array('name' => 'ownership_insert');
   $hidden = array(
-      'year' => $this->input->get('yr'),
       'project' => $this->input->get('project'),
       'sort' => 'ownership'
   );
   echo form_open(current_full_url(), $attributes, $hidden);
 ?>
-    <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
-        <div class="col-sm-12 col-md-1 center point-sub1" style="padding: 10px; 0">검색 조건</div>
-        <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
-            <label for="search_con" class="sr-only">조건</label>
-            <select class="form-control input-sm" name="search_con">
-              <option value="0" <?php echo set_select('search_con', '0');?>>전 &nbsp;&nbsp;&nbsp;체</option>
-              <option value="1" <?php echo set_select('search_con', '1');?>>소 유 자</option>
-              <option value="2" <?php echo set_select('search_con', '2');?>>지  &nbsp;&nbsp;&nbsp;번</option>
-              <option value="3" <?php echo set_select('search_con', '3');?>>지   &nbsp;&nbsp;&nbsp;목</option>
-            </select>
-        </div>
-        <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
-            <label for="search_word" class="sr-only">검색어</label>
-            <input type="text" name="search_word" value="<?php echo set_value('search_word'); ?>" placeholder="Search" class="form-control input-sm" onclick="this.value='';">
-        </div>
-
-        <div class="col-xs-6 col-sm-4 col-md-6" style="padding: 4px 15px; line-height: 30px;">
-            <?php var_dump($site_basic_own); ?>
+  <div class="row bo-top bo-bottom font12" id="owner_input" style="margin: 0 0 20px 0; display:none; height:200px;">
+    <div class="col-sm-12 col-md-2 center point-sub3" style="padding: 10px; 0">소유자 정보 입력하기</div>
+    <div class="col-xs-6 col-sm-4 col-md-10" style="padding: 4px 15px;">
+      no. / {지번ID} 행정동 지번 / 소(공)유자 / 소유지분 / 소유면적 / 소유구분(개인, 법인, 국, 공유지) / 계약여부 / 총 매매대금 / 지급계좌(은행/계좌번호/예금주) / 소유자에게 국한되는 권리제한사항 및 비고</br></br></br>
 
 
-            <!-- <?php if($this->input->post('search_word') && empty($now_payer)): ?>
-            			<div class="col-xs-12 col-sm-12 col-md-4" style="padding: 8px; 0">
-            				<div class="col-xs-12 center" style="padding-top: 5px;">조회 결과가 없습니다.</div>
-            			</div>
-            <?php elseif( !empty($now_payer)) :
-            	// 해지인 경우 red 스타일과 환불인 경우 Del 태그 만들기
-            	if($now_payer[0]->is_rescission>0) {$red_style = "style = 'color : red'"; } else {$red_style = ""; }
-            	if($now_payer[0]->is_rescission>1) {$del_op = "<del>"; $del_cl = "</del>";} else {$del_op = ""; $del_cl = "";}
-             ?>
-            			<div class="col-xs-11 col-sm-11 col-md-3" style="padding: 12px 10px 6px; margin: 0;">
-
-
-            <?php foreach($now_payer as $lt) :
-             	$dong_ho = explode("-", $lt->unit_dong_ho);
-             	echo $del_op."<a ".$red_style." href='".base_url('cms_m1/sales/2/2?yr='.$yr.'project='.$project.'&payer='.$lt->paid_who.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1])."'>".$lt->paid_who."(".$lt->unit_dong_ho.")</a>".$del_cl;
-            ?>
-            <?php endforeach; ?>
-            			</div>
-            			<div class="col-xs-1" style="padding: 8px;">
-            				<button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="location.href='<?php echo base_url('cms_m1/sales/2/2?project='.$project.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1]) ?>'"><span aria-hidden="true">&times;</span></button>
-            			</div>
-            <?php endif; ?> -->
-        </div>
-
-
-
-
-        <div class="col-xs-6 col-sm-4 col-md-1 right" style="padding: 4px 15px;">
-            <button type="button" name="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> 검색하기</button>
-        </div>
+      <strong>대금지급 관련 사항</strong></br>
+       계약금1 / 계약금1 지급일자 / 계약금1 지급여부 / 계약금2 / 계약금2 지급일자 / 계약금2 지급여부 / 중도금1 / 중도금1 지급일자 / 중도금1 지급여부
+      / 중도금2 / 중도금2 지급일자 / 중도금2 지급여부 /  잔금 / 잔금지급일자 / 잔금 지급여부
+      <!-- <label for="order_no" class="sr-only">순번</label>
+      <input type="text" name="order_no" value="<?php echo set_value('order_no'); ?>" placeholder="no." class="form-control input-sm" maxlength="5" required>
     </div>
+    <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
+      <label for="admin_dong" class="sr-only">행정동</label>
+      <input type="text" name="admin_dong" value="<?php echo set_value('admin_dong'); ?>" placeholder="행정동(Lot)" class="form-control input-sm" maxlength="10" required>
+    </div>
+    <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
+      <label for="lot_num" class="sr-only">지번</label>
+      <input type="text" name="lot_num" value="<?php echo set_value('lot_num'); ?>" placeholder="지번(000-00)" class="form-control input-sm" maxlength="10" required>
+    </div>
+    <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 4px 15px;">
+      <label for="land_mark" class="sr-only">지목</label>
+      <input type="text" name="land_mark" value="<?php echo set_value('land_mark'); ?>" placeholder="지목" class="form-control input-sm" maxlength="10" required>
+    </div>
+    <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
+      <label for="area_official" class="sr-only">공부상 면적</label>
+      <input type="text" name="area_official" value="<?php echo set_value('area_official'); ?>" placeholder="공부상 면적(㎡)" class="form-control input-sm" maxlength="12" required>
+    </div>
+    <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
+      <label for="area_returned" class="sr-only">환지 면적</label>
+      <input type="text" name="area_returned" value="<?php echo set_value('area_returned'); ?>" placeholder="환지(실권리) 면적(㎡)" class="form-control input-sm" maxlength="12">
+    </div>
+    <div class="col-xs-12 col-md-1 right" style="padding: 4px 15px;">
+  <?php  ?>
+      <input class="btn btn-warning btn-sm" type="button" value="추가 등록" onclick="<?php echo $submit_str; ?>"> -->
+    </div>
+  </div>
+
+
 </form>
 
   <!-- 출력 및 get으로 수정 삭제하기 -->
-  <div class="row table-responsive font12">
-
+  <div class="table-responsive font12">
+    <table class="table table-bordered table-hover table-condensed font12">
+      <thead>
+        <tr class="warning">
+          <th class="center" rowspan="2" style="vertical-align:middle;">no</th>
+          <th class="center" rowspan="2" style="vertical-align:middle;">소유자</th>
+          <th class="center" rowspan="2" style="vertical-align:middle;">행정동</th>
+          <th class="center" rowspan="2" style="vertical-align:middle;">지 번</th>
+          <th class="center" rowspan="2" style="vertical-align:middle;">지 목</th>
+          <th class="center" colspan="2">실권리 면적</th>
+          <th class="center" rowspan="2" style="vertical-align:middle;">소유지분</th>
+          <th class="center" colspan="2">지분면적</th>
+          <th class="center" rowspan="2" style="vertical-align:middle;">소유구분</th>
+          <th class="center" rowspan="2" style="vertical-align:middle;">계약여부</th>
+          <th class="center" rowspan="2" style="vertical-align:middle;">사용승낙</th>
+          <th class="center" rowspan="2" style="vertical-align:middle;">매매대금</th>
+        </tr>
+        <tr class="warning">
+          <th class="center">면적(㎡)</th>
+          <th class="center">면적(평)</th>
+          <th class="center">면적(㎡)</th>
+          <th class="center">면적(평)</th>
+        </tr>
+      </thead>
+      <tbody>
+<?php if(empty($owner_list)) :  ?>
+        <tr class="center">
+          <td class="center" colspan="14" style="padding: 130px 0;">조회할 데이터가 없습니다.</td>
+        </tr>
+<?php else:
+  foreach ($owner_list as $lt) :
+?>
+        <tr class="center">
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+<?php endforeach; ?>
+<?php endif;?>
+      </tbody>
+    </table>
   </div>
-    no. / {지번ID} 행정동 지번 / 소(공)유자 / 소유지분 / 소유면적 / 소유구분(개인, 법인, 국, 공유지) / 계약여부 / 총 매매대금 / 지급계좌(은행/계좌번호/예금주) / 소유자에게 국한되는 권리제한사항 및 비고</br></br></br>
-
-
-    <strong>대금지급 관련 사항</strong></br>
-     계약금1 / 계약금1 지급일자 / 계약금1 지급여부 / 계약금2 / 계약금2 지급일자 / 계약금2 지급여부 / 중도금1 / 중도금1 지급일자 / 중도금1 지급여부
-    / 중도금2 / 중도금2 지급일자 / 중도금2 지급여부 /  잔금 / 잔금지급일자 / 잔금 지급여부
-
 </div>
 <?php } ?>
 
