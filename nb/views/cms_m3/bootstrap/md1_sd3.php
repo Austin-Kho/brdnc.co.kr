@@ -109,9 +109,9 @@ for($i=(count($year)-1); $i>=0; $i--) :
       </div>
     </div>
   </form>
-  <div class="row font12" style="margin: 0 0 5px;">
+  <div class="row font12" style="margin-bottom:3px;">
     <div class="col-xs-6" style="color: #5771fb;">총 <?php echo $total_rows; ?> 필지 / 면적 <?php echo number_format($summary->total_area, 2); ?>㎡ (<?php echo number_format($summary->total_area*0.3025, 2) ?>평) 등록</div>
-    <div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;">
+    <div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px; margin: -18px 0 3px;">
       <!-- <a href="javascript:alert('준비 중입니다!');"> -->
       <a href="<?php echo base_url('/cms_download/basic_site_list/download')."?pj=".$project; ?>">
   			<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
@@ -224,12 +224,12 @@ for($i=(count($year)-1); $i>=0; $i--) :
     <!-- 검색하기 폼 시작 -->
     <div class="col-sm-12 col-md-1 center point-sub1" style="padding: 10px; 0">검색 조건</div>
     <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
-        <label for="search_con" class="sr-only">조건</label>
-        <select class="form-control input-sm" name="search_con">
-          <option value="1" <?php echo set_select('search_con', '1');?>>전 체</option>
-          <option value="2" <?php echo set_select('search_con', '2');?>>지 번</option>
-          <option value="3" <?php echo set_select('search_con', '3');?>>지 주</option>
-        </select>
+      <label for="search_con" class="sr-only">조건</label>
+      <select class="form-control input-sm" name="search_con">
+        <option value="1" <?php echo set_select('search_con', '1');?>>전 체</option>
+        <option value="2" <?php echo set_select('search_con', '2');?>>지 번</option>
+        <option value="3" <?php echo set_select('search_con', '3');?>>지 주</option>
+      </select>
     </div>
     <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
         <label for="search_word" class="sr-only">검색어</label>
@@ -252,29 +252,29 @@ for($i=(count($year)-1); $i>=0; $i--) :
   );
   echo form_open(current_full_url(), $attributes, $hidden);
 ?>
-  <div class="bo-top bo-bottom font12" id="owner_input" style="margin-bottom:20px; display:none; height:250px;">
-    <div class="col-sm-12 bo-bottom point-sub3" style="line-height:35px;">
-      <span style="color:#324cfc;"><strong><?php echo "[".$sel_site->admin_dong."] ".$sel_site->lot_num." (".number_format($sel_site->area_returned, 2)."㎡)"; ?></strong></span> 소유자 정보 입력
+  <div class="bo-top bo-bottom font12" id="owner_input" style="display:none;">
+    <div class="col-sm-12 bo-bottom point-sub3" style="line-height:36px; padding:5px 15px;">
+      <span style="color:#324cfc;"><strong><?php echo "[".$sel_site->admin_dong."] ".$sel_site->lot_num." (".number_format($sel_site->area_returned, 2)."㎡)"; ?></strong></span> - 소유자 정보 입력
     </div>
-    <div class="col-sm-12 form-group" style="padding:0;">
-      <div class="col-sm-12 col-sm-4 col-md-2 point-sub" style="line-height:35px;">소유자 정보</div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 10px;">
+    <div class="col-sm-12 form-group" style="padding:0; margin:0;">
+      <div class="col-xs-12 col-sm-4 col-md-2 point-sub" style="line-height:36px; padding:4px 15px;">소유자 정보</div>
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
         <label for="owner" class="sr-only">소유자명</label>
-        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="소유자명" class="form-control input-sm" maxlength="5" required>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="소유자명 - (필수)" class="form-control input-sm" maxlength="5" required>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 10px;">
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
         <label for="owner" class="sr-only">소유자명</label>
         <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="생년월일(ex:800123)" class="form-control input-sm" maxlength="5" required>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 10px 10px 0;">
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 11px 10px 0;">
         <label class="radio-inline"><input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 남성</label>
         <label class="radio-inline"><input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 여성</label>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 10px;">
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
         <label for="owner" class="sr-only">소유자명</label>
-        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="연락처1" class="form-control input-sm" maxlength="5" required>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="연락처1 - (필수)" class="form-control input-sm" maxlength="5" required>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 10px;">
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
         <label for="owner" class="sr-only">소유자명</label>
         <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="연락처2" class="form-control input-sm" maxlength="5" required>
       </div>
@@ -284,39 +284,223 @@ for($i=(count($year)-1); $i>=0; $i--) :
       <img src="//t1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
     </div>
     <!-- 다음 우편번호 서비스 -------------onclick="execDaumPostcode(1)"-----postcode1-----address1_1-----address2_1------------------------>
-    <div class="col-sm-12" style="padding:0;">
-    <div class="col-sm-12 col-sm-4 col-md-2 point-sub" style="line-height:35px;">소유자 주소</div>
-      <div class="col-xs-12 col-sm-8 col-md-10" style="">
-        <div class="col-xs-3 col-sm-5 col-md-1" style="padding-left: 0;">
-          <label for="postcode1" class="sr-only">우편번호</label>
-          <input type="text" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php if($this->input->post('zipcode')) echo set_value('zipcode'); else echo $addr[0]; ?>" readonly required>
-        </div>
-        <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-          <input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="execDaumPostcode(1)">
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-4" style="padding-right: 0;">
-          <label for="address1_1" class="sr-only">회사주소1</label>
-          <input type="text" class="form-control input-sm han" id="address1_1" name="address1_1" maxlength="100" value="<?php if($this->input->post('address1')) echo set_value('address1'); else echo $addr[1]; ?>" readonly required>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-4" style="padding-right: 0;">
-          <label for="address2_1" class="sr-only">회사주소2</label>
-          <input type="text" class="form-control input-sm han" id="address2_1" name="address2_1" maxlength="93" value="<?php if($this->input->post('address2')) echo set_value('address2'); else echo $addr[2]; ?>" name="address2" placeholder="나머지 주소">
+    <div class="col-sm-12" style="padding:0; margin:0;">
+      <div class="col-xs-12 col-sm-4 col-md-2 point-sub bo-bottom" style="line-height:36px; padding:4px 15px;">&nbsp;</div>
+      <div class="col-xs-3 col-sm-5 col-md-1 bo-bottom" style="padding: 7px 10px;">
+        <label for="postcode1" class="sr-only">우편번호</label>
+        <input type="text" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php if($this->input->post('zipcode')) echo set_value('zipcode'); else echo $addr[0]; ?>" readonly required>
+      </div>
+      <div class="col-xs-3 col-sm-2 col-md-1 bo-bottom" style="padding: 7px 10px;">
+        <input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="execDaumPostcode(1)">
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-4 bo-bottom" style="padding: 7px 10px;">
+        <label for="address1_1" class="sr-only">소유자주소</label>
+        <input type="text" class="form-control input-sm han" id="address1_1" name="address1_1" maxlength="100" value="<?php if($this->input->post('address1')) echo set_value('address1'); else echo $addr[1]; ?>" readonly required>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-2 bo-bottom" style="padding: 7px 10px;">
+        <label for="address2_1" class="sr-only">소유자주소2</label>
+        <input type="text" class="form-control input-sm han" id="address2_1" name="address2_1" maxlength="93" value="<?php if($this->input->post('address2')) echo set_value('address2'); else echo $addr[2]; ?>" name="address2" placeholder="나머지 주소">
+      </div>
+
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+        <div class="input-group">
+          <label for="owner" class="sr-only">등기부등본 발급일</label>
+          <input type="text" class="form-control input-sm" id="ref_date" name="ref_date" maxlength="10" value="<?php echo $ref_date;?>" placeholder="등기부등본 발급일" onClick="cal_add(this); event.cancelBubble=true">
+          <div class="input-group-addon">
+            <a href="javascript:" onclick="cal_add(document.getElementById('ref_date'),this); event.cancelBubble=true">
+              <span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
-    <div class="col-xs-12 right" style="padding: 4px 15px;">
-      <input class="btn btn-success btn-sm" type="button" value="등록 하기" onclick="<?php echo $submit_str; ?>">
+
+    <div class="col-sm-12 form-group" style="padding:0; margin:0;">
+      <div class="col-xs-12 col-sm-4 col-md-2 point-sub1" style="line-height:36px; padding:4px 15px;">소유권 정보</div>
+      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 7px 10px 0;">
+        <label for="search_con" class="sr-only">조건</label>
+        <select class="form-control input-sm" name="search_con">
+          <option value="" <?php echo set_select('search_con', '');?>>구 분</option>
+          <option value="1" <?php echo set_select('search_con', '1');?>>개 인</option>
+          <option value="2" <?php echo set_select('search_con', '2');?>>법 인</option>
+          <option value="3" <?php echo set_select('search_con', '3');?>>국/공유지</option>
+        </select>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+        <label for="owner" class="sr-only">소유지분</label>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="소유지분 - (필수)" class="form-control input-sm" maxlength="5" required>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+        <label for="owner" class="sr-only">지분면적</label>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="지분면적(㎡) - (필수)" class="form-control input-sm" maxlength="5" required>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 7px 10px 0;">
+        <label for="search_con" class="sr-only">조건</label>
+        <select class="form-control input-sm" name="search_con">
+          <option value="" <?php echo set_select('search_con', '');?>>은행선택</option>
+          <option value="1" <?php echo set_select('search_con', '1');?>>개 인</option>
+          <option value="2" <?php echo set_select('search_con', '2');?>>법 인</option>
+          <option value="3" <?php echo set_select('search_con', '3');?>>국/공유지</option>
+        </select>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+        <label for="owner" class="sr-only">계좌번호</label>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="계좌번호" class="form-control input-sm" maxlength="5" required>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+        <label for="owner" class="sr-only">예 금 주</label>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="예 금 주" class="form-control input-sm" maxlength="5" required>
+      </div>
     </div>
-    <div class="">
-      no. / 소(공)유자 / 소유지분 / 소유면적 / 소유구분(개인, 법인, 국, 공유지) / 계약여부 / 총 매매대금 / 지급계좌(은행/계좌번호/예금주) / 소유자에게 국한되는 권리제한사항 및 비고</br></br></br>
-      <strong>대금지급 관련 사항</strong></br>
-       계약금1 / 계약금1 지급일자 / 계약금1 지급여부 / 계약금2 / 계약금2 지급일자 / 계약금2 지급여부 / 중도금1 / 중도금1 지급일자 / 중도금1 지급여부
-      / 중도금2 / 중도금2 지급일자 / 중도금2 지급여부 /  잔금 / 잔금지급일자 / 잔금 지급여부
+
+    <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
+      <div class="col-xs-12 col-sm-4 col-md-2 point-sub1" style="line-height:36px; padding:4px 15px;">&nbsp;</div>
+      <div class="col-xs-6 col-sm-4 col-md-10" style="padding: 7px 10px;">
+        <label for="owner" class="sr-only">소유자에게 국한되는 권리 제한사항</label>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="갑/을구 권리 제한사항" class="form-control input-sm" maxlength="5" required>
+      </div>
+    </div>
+    <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
+      <div class="col-xs-12 col-sm-4 col-md-2 point-sub1" style="line-height:36px; padding:4px 15px; height:80px;">상담 기록 (상담일시-내용)</div>
+      <div class="col-xs-12 col-sm-8 col-md-7" style="padding: 7px 10px;">
+        <textarea class="form-control" rows="3"></textarea>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 11px 10px;">
+        <label class="checkbox-inline">
+          <input type="checkbox" id="inlineCheckbox1" value="option1"> 계약 여부
+        </label>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+        <label for="owner" class="sr-only">계약금액</label>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="계약금액" class="form-control input-sm" maxlength="5" required>
+      </div>
+      <!-- <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+        <label for="owner" class="sr-only">평당단가</label>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="평당단가" class="form-control input-sm" maxlength="5" required>
+      </div> -->
+    </div>
+
+    <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
+      <div class="col-xs-12 col-sm-4 col-md-2 point-sub1" style="line-height:36px; padding:4px 15px;">계약금 지급 관련</div>
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+        <label for="owner" class="sr-only">1차 계약금</label>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="1차 계약금" class="form-control input-sm" maxlength="5" required>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+        <div class="input-group">
+          <label for="owner" class="sr-only">1차 계약금 지급일</label>
+          <input type="text" class="form-control input-sm" id="ref_date" name="ref_date" maxlength="10" value="<?php echo $ref_date;?>" placeholder="1차 계약금 지급일" onClick="cal_add(this); event.cancelBubble=true">
+          <div class="input-group-addon">
+            <a href="javascript:" onclick="cal_add(document.getElementById('ref_date'),this); event.cancelBubble=true">
+              <span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 11px 10px;">
+        <label class="checkbox-inline">
+          <input type="checkbox" id="inlineCheckbox1" value="option1"> 지급 여부
+        </label>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+        <label for="owner" class="sr-only">2차 계약금</label>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="2차 계약금" class="form-control input-sm" maxlength="5" required>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+        <div class="input-group">
+          <label for="owner" class="sr-only">2차 계약금 지급일</label>
+          <input type="text" class="form-control input-sm" id="ref_date" name="ref_date" maxlength="10" value="<?php echo $ref_date;?>" placeholder="2차 계약금 지급일" onClick="cal_add(this); event.cancelBubble=true">
+          <div class="input-group-addon">
+            <a href="javascript:" onclick="cal_add(document.getElementById('ref_date'),this); event.cancelBubble=true">
+              <span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 11px 10px;">
+        <label class="checkbox-inline">
+          <input type="checkbox" id="inlineCheckbox1" value="option1"> 지급 여부
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
+      <div class="col-xs-12 col-sm-4 col-md-2 point-sub1" style="line-height:36px; padding:4px 15px;">중도금 지급 관련 정보</div>
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+        <label for="owner" class="sr-only">1차 중도금</label>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="1차 중도금" class="form-control input-sm" maxlength="5" required>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+        <div class="input-group">
+          <label for="owner" class="sr-only">1차 중도금 지급일</label>
+          <input type="text" class="form-control input-sm" id="ref_date" name="ref_date" maxlength="10" value="<?php echo $ref_date;?>" placeholder="1차 중도금 지급일" onClick="cal_add(this); event.cancelBubble=true">
+          <div class="input-group-addon">
+            <a href="javascript:" onclick="cal_add(document.getElementById('ref_date'),this); event.cancelBubble=true">
+              <span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 11px 10px;">
+        <label class="checkbox-inline">
+          <input type="checkbox" id="inlineCheckbox1" value="option1"> 지급 여부
+        </label>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+        <label for="owner" class="sr-only">2차 중도금</label>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="2차 중도금" class="form-control input-sm" maxlength="5" required>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+        <div class="input-group">
+          <label for="owner" class="sr-only">2차 중도금 지급일</label>
+          <input type="text" class="form-control input-sm" id="ref_date" name="ref_date" maxlength="10" value="<?php echo $ref_date;?>" placeholder="2차 중도금 지급일" onClick="cal_add(this); event.cancelBubble=true">
+          <div class="input-group-addon">
+            <a href="javascript:" onclick="cal_add(document.getElementById('ref_date'),this); event.cancelBubble=true">
+              <span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 11px 10px;">
+        <label class="checkbox-inline">
+          <input type="checkbox" id="inlineCheckbox1" value="option1"> 지급 여부
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
+      <div class="col-xs-12 col-sm-4 col-md-2 point-sub1" style="line-height:36px; padding:4px 15px;">잔금 지급 관련 정보</div>
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+        <label for="owner" class="sr-only">잔금</label>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="잔금" class="form-control input-sm" maxlength="5" required>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+        <div class="input-group">
+          <label for="owner" class="sr-only">잔금 지급일</label>
+          <input type="text" class="form-control input-sm" id="ref_date" name="ref_date" maxlength="10" value="<?php echo $ref_date;?>" placeholder="잔금 지급일" onClick="cal_add(this); event.cancelBubble=true">
+          <div class="input-group-addon">
+            <a href="javascript:" onclick="cal_add(document.getElementById('ref_date'),this); event.cancelBubble=true">
+              <span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 11px 10px;">
+        <label class="checkbox-inline">
+          <input type="checkbox" id="inlineCheckbox1" value="option1"> 지급 여부
+        </label>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3" style="padding: 11px 10px;">
+        <label class="checkbox-inline">
+          <input type="checkbox" id="inlineCheckbox1" value="option1"> 소유권 확보 및 이전등기 경료 여부
+        </label>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-2 right" style="padding: 7px 10px;">
+        <input class="btn btn-success btn-sm" type="button" value="등록 하기" onclick="<?php echo $submit_str; ?>">
+      </div>
     </div>
   </div>
 </form>
-  <div class="row" style="margin: 0px;">
-    <div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -10px; color: #5E81FE;">
+  <div class="row font12" style="margin:20px 0 3px;">
+    <div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-bottom: 3px;">
       <a href="javascript:alert('준비 중입니다!');">
       <!-- <a href="<?php echo base_url('/cms_download/basic_site_list/download')."?pj=".$project; ?>"> -->
         <img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
