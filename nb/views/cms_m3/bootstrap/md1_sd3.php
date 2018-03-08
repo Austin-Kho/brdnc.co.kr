@@ -252,19 +252,24 @@ for($i=(count($year)-1); $i>=0; $i--) :
   );
   echo form_open(current_full_url(), $attributes, $hidden);
 ?>
-  <div class="row bo-top bo-bottom font12" id="owner_input" style="margin: 0 0 20px 0; display:none; height:200px;">
-    <div class="col-sm-12 bo-bottom center point-sub3" style="line-height:35px;">소유자 정보 입력하기 <?php echo $this->input->get('site_lot'); ?></div>
-    <div class="col-sm-12" style="">
+  <div class="bo-top bo-bottom font12" id="owner_input" style="margin-bottom:20px; display:none; height:250px;">
+    <div class="col-sm-12 bo-bottom point-sub3" style="line-height:35px;">
+      <span style="color:#324cfc;"><strong><?php echo "[".$sel_site->admin_dong."] ".$sel_site->lot_num." (".number_format($sel_site->area_returned, 2)."㎡)"; ?></strong></span> 소유자 정보 입력
+    </div>
+    <div class="col-sm-12 form-group" style="padding:0;">
+      <div class="col-sm-12 col-sm-4 col-md-2 point-sub" style="line-height:35px;">소유자 정보</div>
       <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 10px;">
         <label for="owner" class="sr-only">소유자명</label>
         <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="소유자명" class="form-control input-sm" maxlength="5" required>
       </div>
-
       <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 10px;">
         <label for="owner" class="sr-only">소유자명</label>
         <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="생년월일(ex:800123)" class="form-control input-sm" maxlength="5" required>
       </div>
-
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 10px 10px 0;">
+        <label class="radio-inline"><input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 남성</label>
+        <label class="radio-inline"><input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 여성</label>
+      </div>
       <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 10px;">
         <label for="owner" class="sr-only">소유자명</label>
         <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="연락처1" class="form-control input-sm" maxlength="5" required>
@@ -274,11 +279,36 @@ for($i=(count($year)-1); $i>=0; $i--) :
         <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="연락처2" class="form-control input-sm" maxlength="5" required>
       </div>
     </div>
+    <!-- 다음 우편번호 서비스 - iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
+    <div id="layer" style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
+      <img src="//t1.daumcdn.net/localimg/localimages/07/postcode/320/close.png" id="btnCloseLayer" style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1" onclick="closeDaumPostcode()" alt="닫기 버튼">
+    </div>
+    <!-- 다음 우편번호 서비스 -------------onclick="execDaumPostcode(1)"-----postcode1-----address1_1-----address2_1------------------------>
+    <div class="col-sm-12" style="padding:0;">
+    <div class="col-sm-12 col-sm-4 col-md-2 point-sub" style="line-height:35px;">소유자 주소</div>
+      <div class="col-xs-12 col-sm-8 col-md-10" style="">
+        <div class="col-xs-3 col-sm-5 col-md-1" style="padding-left: 0;">
+          <label for="postcode1" class="sr-only">우편번호</label>
+          <input type="text" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php if($this->input->post('zipcode')) echo set_value('zipcode'); else echo $addr[0]; ?>" readonly required>
+        </div>
+        <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
+          <input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="execDaumPostcode(1)">
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4" style="padding-right: 0;">
+          <label for="address1_1" class="sr-only">회사주소1</label>
+          <input type="text" class="form-control input-sm han" id="address1_1" name="address1_1" maxlength="100" value="<?php if($this->input->post('address1')) echo set_value('address1'); else echo $addr[1]; ?>" readonly required>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4" style="padding-right: 0;">
+          <label for="address2_1" class="sr-only">회사주소2</label>
+          <input type="text" class="form-control input-sm han" id="address2_1" name="address2_1" maxlength="93" value="<?php if($this->input->post('address2')) echo set_value('address2'); else echo $addr[2]; ?>" name="address2" placeholder="나머지 주소">
+        </div>
+      </div>
+    </div>
     <div class="col-xs-12 right" style="padding: 4px 15px;">
       <input class="btn btn-success btn-sm" type="button" value="등록 하기" onclick="<?php echo $submit_str; ?>">
     </div>
     <div class="">
-      no. / {지번ID} 행정동 지번 / 소(공)유자 / 소유지분 / 소유면적 / 소유구분(개인, 법인, 국, 공유지) / 계약여부 / 총 매매대금 / 지급계좌(은행/계좌번호/예금주) / 소유자에게 국한되는 권리제한사항 및 비고</br></br></br>
+      no. / 소(공)유자 / 소유지분 / 소유면적 / 소유구분(개인, 법인, 국, 공유지) / 계약여부 / 총 매매대금 / 지급계좌(은행/계좌번호/예금주) / 소유자에게 국한되는 권리제한사항 및 비고</br></br></br>
       <strong>대금지급 관련 사항</strong></br>
        계약금1 / 계약금1 지급일자 / 계약금1 지급여부 / 계약금2 / 계약금2 지급일자 / 계약금2 지급여부 / 중도금1 / 중도금1 지급일자 / 중도금1 지급여부
       / 중도금2 / 중도금2 지급일자 / 중도금2 지급여부 /  잔금 / 잔금지급일자 / 잔금 지급여부

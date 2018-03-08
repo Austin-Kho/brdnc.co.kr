@@ -637,6 +637,8 @@ class Cms_m3 extends CB_Controller {
 				}
 
 			}elseif($this->input->get('set_sort')=='2'){
+				// 소유권 정보 입력할 토지(지번) 데이터
+				if($this->input->get('site_lot')) $view['sel_site'] = $sel_site = $this->cms_main_model->data_row('cb_cms_site_status', array('seq' => $this->input->get('site_lot')));
 
 				if( !$this->input->get('search_con') OR $this->input->get('search_con')==='1'){
 					$like_array = array('lot_num'=>$this->input->get('search_word'));
@@ -679,12 +681,6 @@ class Cms_m3 extends CB_Controller {
 					}
 				}
 			}
-
-
-
-
-
-
 
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
