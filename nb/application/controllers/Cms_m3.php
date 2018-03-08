@@ -689,21 +689,27 @@ class Cms_m3 extends CB_Controller {
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
 
-			if(!$this->input->get('set_sort') OR $this->input->get('set_sort')==='1'){
+			if(!$this->input->get('set_sort') OR $this->input->get('set_sort')==='1'){ // 지번 입력 폼
 				$this->form_validation->set_rules('order_no', '순번', 'trim|required|numeric|max_length[5]');
 				$this->form_validation->set_rules('admin_dong', '행정동', 'trim|required|max_length[10]');
 				$this->form_validation->set_rules('lot_num', '지번', 'trim|required|max_length[10]');
 				$this->form_validation->set_rules('land_mark', '지목', 'trim|required|max_length[10]');
 				$this->form_validation->set_rules('area_official', '공부상 면적', 'trim|required|numeric|max_length[12]');
 				$this->form_validation->set_rules('area_returned', '환지면적', 'trim|numeric|max_length[12]');
+
+			}elseif($this->input->get('set_sort')==='2'){ // 소유권 입력 폼
+				// $this->form_validation->set_rules('order_no', '순번', 'trim|required|numeric|max_length[5]');
+				// $this->form_validation->set_rules('admin_dong', '행정동', 'trim|required|max_length[10]');
+				// $this->form_validation->set_rules('lot_num', '지번', 'trim|required|max_length[10]');
+				// $this->form_validation->set_rules('land_mark', '지목', 'trim|required|max_length[10]');
+				// $this->form_validation->set_rules('area_official', '공부상 면적', 'trim|required|numeric|max_length[12]');
+				// $this->form_validation->set_rules('area_returned', '환지면적', 'trim|numeric|max_length[12]');
 			}
-
-
 
 			if($this->form_validation->run() !== FALSE) : // 폼검증 통과 했을 경우, post 데이터가 있을 때
 
+				// 지번 입력 테이블
 				if($this->input->post('sort')==='basic'){
-
 					$right_area = !empty($this->input->post('area_returned')) ? $this->input->post('area_returned', TRUE) : $this->input->post('area_official', TRUE);
 
 					$site_basic_unit = array( // 토지 기초 데이터
@@ -723,6 +729,28 @@ class Cms_m3 extends CB_Controller {
 						alert('데이터베이스 에러입니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project', TRUE)));
 					}else{
 						alert('정상적으로 등록되었습니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project', TRUE)));
+					}
+
+				// 소유권 입력 테이블
+				}elseif($this->input->post('sort')==='ownership'){
+					$site_ownership_unit = array( // 소유권 정보 데이터
+						'pj_seq' => $this->input->post('project', TRUE),
+						'lot_seq' => $this->input->post('lot_seq', TRUE)
+						// 'order_no' => $this->input->post('order_no', TRUE),
+						// 'admin_dong' => $this->input->post('admin_dong', TRUE),
+						// 'lot_num' => $this->input->post('lot_num', TRUE),
+						// 'land_mark' => $this->input->post('land_mark', TRUE),
+						// 'area_official' => $this->input->post('area_official', TRUE),
+						// 'area_returned' => $right_area,
+						// 'reg_date' => date('Y-m-d'),
+						// 'reg_worker' => $this->session->userdata('mem_username')
+					);
+
+					$result = $this->cms_main_model->insert_data('cb_cms_site_ownership', $site_ownership_unit);
+					if( !$result){
+						alert('데이터베이스 에러입니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project', TRUE).'&set_sort=2'));
+					}else{
+						alert('정상적으로 등록되었습니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project', TRUE).'&set_sort=2'));
 					}
 				}
 

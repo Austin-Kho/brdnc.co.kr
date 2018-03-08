@@ -211,9 +211,9 @@ for($i=(count($year)-1); $i>=0; $i--) :
 <?php endforeach; ?>
       </select>
     </div>
-    <div class="col-xs-3 col-sm-2 col-md-3" style="padding: 4px 15px; text-align:center; line-height: 30px; <?php if( !empty($this->input->get('site_lot'))) echo "background-color:#fefdcb;"; ?>">
+    <div class="col-xs-3 col-sm-2 col-md-3" style="padding: 4px 15px; text-align:center; line-height: 30px;">
       <div class="col-xs-10" style="">
-        <?php if( !empty($this->input->get('site_lot'))): ?><a href="javascript:" onclick="$('#owner_input').toggle();"><?php echo $lt->lot_num." 소유자 정보 입력</a>"; endif; ?>
+        <?php if( !empty($this->input->get('site_lot'))): ?><a type="button" class="btn btn-info btn-xs" href="javascript:" onclick="$('#owner_input').toggle();"><?php echo $lt->lot_num." 신규 정보 입력</a>"; endif; ?>
       </div>
       <div class="col-xs-2" style="padding-top:5px;">
 <?php if( !empty($this->input->get('site_lot'))) : ?>
@@ -247,25 +247,42 @@ for($i=(count($year)-1); $i>=0; $i--) :
   $attributes = array('name' => 'ownership_insert');
   $hidden = array(
       'project' => $this->input->get('project'),
-      'sort' => 'ownership'
+      'sort' => 'ownership',
+      'lot_seq' => $this->input->get('site_lot')
   );
   echo form_open(current_full_url(), $attributes, $hidden);
 ?>
   <div class="row bo-top bo-bottom font12" id="owner_input" style="margin: 0 0 20px 0; display:none; height:200px;">
-    <div class="col-sm-12 col-md-2 center point-sub3" style="padding: 10px; 0">소유자 정보 입력하기</div>
-      <div class="">
-        no. / {지번ID} 행정동 지번 / 소(공)유자 / 소유지분 / 소유면적 / 소유구분(개인, 법인, 국, 공유지) / 계약여부 / 총 매매대금 / 지급계좌(은행/계좌번호/예금주) / 소유자에게 국한되는 권리제한사항 및 비고</br></br></br>
-        <strong>대금지급 관련 사항</strong></br>
-         계약금1 / 계약금1 지급일자 / 계약금1 지급여부 / 계약금2 / 계약금2 지급일자 / 계약금2 지급여부 / 중도금1 / 중도금1 지급일자 / 중도금1 지급여부
-        / 중도금2 / 중도금2 지급일자 / 중도금2 지급여부 /  잔금 / 잔금지급일자 / 잔금 지급여부
+    <div class="col-sm-12 bo-bottom center point-sub3" style="line-height:35px;">소유자 정보 입력하기 <?php echo $this->input->get('site_lot'); ?></div>
+    <div class="col-sm-12" style="">
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 10px;">
+        <label for="owner" class="sr-only">소유자명</label>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="소유자명" class="form-control input-sm" maxlength="5" required>
       </div>
-    <!-- <div class="col-xs-6 col-sm-4 col-md-10" style="padding: 4px 15px;">
-      <label for="order_no" class="sr-only">순번</label>
-      <input type="text" name="order_no" value="<?php echo set_value('order_no'); ?>" placeholder="no." class="form-control input-sm" maxlength="5" required>
+
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 10px;">
+        <label for="owner" class="sr-only">소유자명</label>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="생년월일(ex:800123)" class="form-control input-sm" maxlength="5" required>
+      </div>
+
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 10px;">
+        <label for="owner" class="sr-only">소유자명</label>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="연락처1" class="form-control input-sm" maxlength="5" required>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 10px;">
+        <label for="owner" class="sr-only">소유자명</label>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="연락처2" class="form-control input-sm" maxlength="5" required>
+      </div>
     </div>
-    <div class="col-xs-12 col-md-1 right" style="padding: 4px 15px;">
-      <input class="btn btn-warning btn-sm" type="button" value="추가 등록" onclick="<?php echo $submit_str; ?>">
-    </div>-->
+    <div class="col-xs-12 right" style="padding: 4px 15px;">
+      <input class="btn btn-success btn-sm" type="button" value="등록 하기" onclick="<?php echo $submit_str; ?>">
+    </div>
+    <div class="">
+      no. / {지번ID} 행정동 지번 / 소(공)유자 / 소유지분 / 소유면적 / 소유구분(개인, 법인, 국, 공유지) / 계약여부 / 총 매매대금 / 지급계좌(은행/계좌번호/예금주) / 소유자에게 국한되는 권리제한사항 및 비고</br></br></br>
+      <strong>대금지급 관련 사항</strong></br>
+       계약금1 / 계약금1 지급일자 / 계약금1 지급여부 / 계약금2 / 계약금2 지급일자 / 계약금2 지급여부 / 중도금1 / 중도금1 지급일자 / 중도금1 지급여부
+      / 중도금2 / 중도금2 지급일자 / 중도금2 지급여부 /  잔금 / 잔금지급일자 / 잔금 지급여부
+    </div>
   </div>
 </form>
   <div class="row" style="margin: 0px;">
