@@ -221,6 +221,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 <?php endif; ?>
       </div>
     </div>
+    <!-- 검색하기 폼 시작 -->
     <div class="col-sm-12 col-md-1 center point-sub1" style="padding: 10px; 0">검색 조건</div>
     <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
         <label for="search_con" class="sr-only">조건</label>
@@ -234,12 +235,11 @@ for($i=(count($year)-1); $i>=0; $i--) :
         <label for="search_word" class="sr-only">검색어</label>
         <input type="text" name="search_word" value="<?php echo $this->input->get('search_word'); ?>" placeholder="Search" class="form-control input-sm" onclick="this.value='';">
     </div>
-
     <div class="col-xs-6 col-sm-4 col-md-1 right" style="padding: 4px 15px;">
-        <button type="button" name="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> 검색하기</button>
+        <button type="button" name="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> 검색</button>
     </div>
   </div>
-
+  <!-- 검색하기 폼 종료 -->
 </form>
   <!-- 입력하기 폼 -->
 <?php
@@ -253,51 +253,28 @@ for($i=(count($year)-1); $i>=0; $i--) :
 ?>
   <div class="row bo-top bo-bottom font12" id="owner_input" style="margin: 0 0 20px 0; display:none; height:200px;">
     <div class="col-sm-12 col-md-2 center point-sub3" style="padding: 10px; 0">소유자 정보 입력하기</div>
-    <div class="col-xs-6 col-sm-4 col-md-10" style="padding: 4px 15px;">
-      no. / {지번ID} 행정동 지번 / 소(공)유자 / 소유지분 / 소유면적 / 소유구분(개인, 법인, 국, 공유지) / 계약여부 / 총 매매대금 / 지급계좌(은행/계좌번호/예금주) / 소유자에게 국한되는 권리제한사항 및 비고</br></br></br>
-
-
-      <strong>대금지급 관련 사항</strong></br>
-       계약금1 / 계약금1 지급일자 / 계약금1 지급여부 / 계약금2 / 계약금2 지급일자 / 계약금2 지급여부 / 중도금1 / 중도금1 지급일자 / 중도금1 지급여부
-      / 중도금2 / 중도금2 지급일자 / 중도금2 지급여부 /  잔금 / 잔금지급일자 / 잔금 지급여부
-      <!-- <label for="order_no" class="sr-only">순번</label>
+      <div class="">
+        no. / {지번ID} 행정동 지번 / 소(공)유자 / 소유지분 / 소유면적 / 소유구분(개인, 법인, 국, 공유지) / 계약여부 / 총 매매대금 / 지급계좌(은행/계좌번호/예금주) / 소유자에게 국한되는 권리제한사항 및 비고</br></br></br>
+        <strong>대금지급 관련 사항</strong></br>
+         계약금1 / 계약금1 지급일자 / 계약금1 지급여부 / 계약금2 / 계약금2 지급일자 / 계약금2 지급여부 / 중도금1 / 중도금1 지급일자 / 중도금1 지급여부
+        / 중도금2 / 중도금2 지급일자 / 중도금2 지급여부 /  잔금 / 잔금지급일자 / 잔금 지급여부
+      </div>
+    <!-- <div class="col-xs-6 col-sm-4 col-md-10" style="padding: 4px 15px;">
+      <label for="order_no" class="sr-only">순번</label>
       <input type="text" name="order_no" value="<?php echo set_value('order_no'); ?>" placeholder="no." class="form-control input-sm" maxlength="5" required>
     </div>
-    <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
-      <label for="admin_dong" class="sr-only">행정동</label>
-      <input type="text" name="admin_dong" value="<?php echo set_value('admin_dong'); ?>" placeholder="행정동(Lot)" class="form-control input-sm" maxlength="10" required>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
-      <label for="lot_num" class="sr-only">지번</label>
-      <input type="text" name="lot_num" value="<?php echo set_value('lot_num'); ?>" placeholder="지번(000-00)" class="form-control input-sm" maxlength="10" required>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 4px 15px;">
-      <label for="land_mark" class="sr-only">지목</label>
-      <input type="text" name="land_mark" value="<?php echo set_value('land_mark'); ?>" placeholder="지목" class="form-control input-sm" maxlength="10" required>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
-      <label for="area_official" class="sr-only">공부상 면적</label>
-      <input type="text" name="area_official" value="<?php echo set_value('area_official'); ?>" placeholder="공부상 면적(㎡)" class="form-control input-sm" maxlength="12" required>
-    </div>
-    <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
-      <label for="area_returned" class="sr-only">환지 면적</label>
-      <input type="text" name="area_returned" value="<?php echo set_value('area_returned'); ?>" placeholder="환지(실권리) 면적(㎡)" class="form-control input-sm" maxlength="12">
-    </div>
     <div class="col-xs-12 col-md-1 right" style="padding: 4px 15px;">
-  <?php  ?>
-      <input class="btn btn-warning btn-sm" type="button" value="추가 등록" onclick="<?php echo $submit_str; ?>"> -->
-    </div>
+      <input class="btn btn-warning btn-sm" type="button" value="추가 등록" onclick="<?php echo $submit_str; ?>">
+    </div>-->
   </div>
-
-
-
 </form>
-
-  <div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -10px; color: #5E81FE;">
-    <a href="javascript:alert('준비 중입니다!');">
-    <!-- <a href="<?php echo base_url('/cms_download/basic_site_list/download')."?pj=".$project; ?>"> -->
-      <img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
-    </a>
+  <div class="row" style="margin: 0px;">
+    <div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -10px; color: #5E81FE;">
+      <a href="javascript:alert('준비 중입니다!');">
+      <!-- <a href="<?php echo base_url('/cms_download/basic_site_list/download')."?pj=".$project; ?>"> -->
+        <img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
+      </a>
+    </div>
   </div>
 
   <!-- 출력 및 get으로 수정 삭제하기 -->
