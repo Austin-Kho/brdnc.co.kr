@@ -121,7 +121,7 @@ else :
 	foreach ($view['pay_sche'] as $lt) :
 		$pay_name = ($lt->pay_disc!=='') ? $lt->pay_name.' ('.$lt->pay_disc.')' : $lt->pay_name;
 ?>
-					<option value="<?php echo $lt->pay_code; ?>" <?php if($view['bill_issue']->pay_code==$lt->pay_code) echo "selected"; else echo set_select('pay_sche_code', $lt->pay_code); ?>><?php echo $pay_name; ?></option>
+					<option value="<?php echo $lt->pay_code; ?>" <?php if($this->input->post('pay_sche_code')) echo set_select('pay_sche_code', $lt->pay_code); elseif($view['bill_issue']->pay_code==$lt->pay_code) echo "selected"; ?>><?php echo $pay_name; ?></option>
 <?php endforeach; ?>
 				</select>
 			</div>
@@ -148,13 +148,13 @@ else :
 				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="host_name_1">발송자명(조 합)</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<input type="text" class="form-control input-sm" id="host_name_1" name="host_name_1" value="<?php if(isset($view['bill_issue']->host_name_1)) echo $view['bill_issue']->host_name_1; else echo set_value('host_name_1'); ?>" placeholder="시행자명">
+						<input type="text" class="form-control input-sm" id="host_name_1" name="host_name_1" value="<?php if($this->input->post('host_name_1')) echo set_value('host_name_1'); elseif(isset($view['bill_issue']->host_name_1)) echo $view['bill_issue']->host_name_1; ?>" placeholder="시행자명">
 					</div>
 				</div>
 
 				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="tell_1">연락처(조 합)</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
-					<input type="text" class="form-control input-sm" id="tell_1" name="tell_1" value="<?php if(isset($view['bill_issue']->tell_1)) echo $view['bill_issue']->tell_1; else echo set_value('tell_1'); ?>" placeholder="02-1234-5678">
+					<input type="text" class="form-control input-sm" id="tell_1" name="tell_1" value="<?php if($this->input->post('host_name_1')) echo set_value('tell_1'); elseif(isset($view['bill_issue']->tell_1)) echo $view['bill_issue']->tell_1; ?>" placeholder="02-1234-5678">
 				</div>
 			</div>
 		</div>
@@ -164,13 +164,13 @@ else :
 				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="host_name_2">발송자명(대행사)</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<input type="text" class="form-control input-sm" id="host_name_2" name="host_name_2" value="<?php if(isset($view['bill_issue']->host_name_2)) echo $view['bill_issue']->host_name_2; else echo set_value('host_name_2'); ?>" placeholder="시행자명">
+						<input type="text" class="form-control input-sm" id="host_name_2" name="host_name_2" value="<?php if($this->input->post('host_name_2')) echo set_value('host_name_2'); elseif(isset($view['bill_issue']->host_name_2)) echo $view['bill_issue']->host_name_2; ?>" placeholder="시행자명">
 					</div>
 				</div>
 
 				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="tell_2">연락처(대행사)</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
-					<input type="text" class="form-control input-sm" id="tell_2" name="tell_2" value="<?php if(isset($view['bill_issue']->tell_2)) echo $view['bill_issue']->tell_2; else echo set_value('tell_2'); ?>" placeholder="02-1234-5678">
+					<input type="text" class="form-control input-sm" id="tell_2" name="tell_2" value="<?php if($this->input->post('tell_2')) echo set_value('tell_2'); elseif(isset($view['bill_issue']->tell_2)) echo $view['bill_issue']->tell_2; ?>" placeholder="02-1234-5678">
 				</div>
 			</div>
 		</div>
@@ -179,13 +179,13 @@ else :
 				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="bank_acc_1">수취계좌 1</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<input type="text" class="form-control input-sm" id="bank_acc_1" name="bank_acc_1" value="<?php if(isset($view['bill_issue']->bank_acc_1)) echo $view['bill_issue']->bank_acc_1; else echo set_value('bank_acc_1'); ?>" placeholder="예금은행 + 계좌번호">
+						<input type="text" class="form-control input-sm" id="bank_acc_1" name="bank_acc_1" value="<?php if($this->input->post('bank_acc_1')) echo set_value('bank_acc_1'); elseif(isset($view['bill_issue']->bank_acc_1)) echo $view['bill_issue']->bank_acc_1; ?>" placeholder="예금은행 + 계좌번호">
 					</div>
 				</div>
 
 				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="acc_host_1">예 금 주 1</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
-					<input type="text" class="form-control input-sm" id="acc_host_1" name="acc_host_1" value="<?php if(isset($view['bill_issue']->acc_host_1)) echo $view['bill_issue']->acc_host_1; else echo set_value('acc_host_1'); ?>" placeholder="예금주">
+					<input type="text" class="form-control input-sm" id="acc_host_1" name="acc_host_1" value="<?php if($this->input->post('acc_host_1')) echo set_value('acc_host_1'); elseif(isset($view['bill_issue']->acc_host_1)) echo $view['bill_issue']->acc_host_1; ?>" placeholder="예금주">
 				</div>
 			</div>
 		</div>
@@ -195,13 +195,13 @@ else :
 				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="bank_acc_2">수취계좌 2</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
 					<div class="col-xs-12" style="padding: 0px;">
-						<input type="text" class="form-control input-sm" id="bank_acc_2" name="bank_acc_2" value="<?php if(isset($view['bill_issue']->bank_acc_2)) echo $view['bill_issue']->bank_acc_2; else echo set_value('bank_acc_2'); ?>" placeholder="예금은행 + 계좌번호">
+						<input type="text" class="form-control input-sm" id="bank_acc_2" name="bank_acc_2" value="<?php if($this->input->post('bank_acc_2')) echo set_value('bank_acc_2'); elseif(isset($view['bill_issue']->bank_acc_2)) echo $view['bill_issue']->bank_acc_2; ?>" placeholder="예금은행 + 계좌번호">
 					</div>
 				</div>
 
 				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="acc_host_2">예 금 주 2</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
-					<input type="text" class="form-control input-sm" id="acc_host_2" name="acc_host_2" value="<?php if(isset($view['bill_issue']->acc_host_2)) echo $view['bill_issue']->acc_host_2; else echo set_value('acc_host_2'); ?>" placeholder="예금주">
+					<input type="text" class="form-control input-sm" id="acc_host_2" name="acc_host_2" value="<?php if($this->input->post('acc_host_2')) echo set_value('acc_host_2'); elseif(isset($view['bill_issue']->acc_host_2)) echo $view['bill_issue']->acc_host_2; ?>" placeholder="예금주">
 				</div>
 			</div>
 		</div>
@@ -224,18 +224,18 @@ else :
 					<!-- <div class="col-xs-12" style="padding: 0px;"> -->
 						<div class="col-xs-4 col-sm-3 col-md-2" style="padding: 4px;">
 							<label for="postcode1" class="sr-only">우편번호</label>
-							<input type="text" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php if( !empty($view['addr'])) echo $view['addr'][0]; else echo set_value('postcode1');  ?>" readonly required placeholder="우편번호">
+							<input type="text" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php if($this->input->post('postcode1')) echo set_value('postcode1'); elseif( !empty($view['addr'])) echo $view['addr'][0]; ?>" readonly required placeholder="우편번호">
 						</div>
 						<div class="col-xs-4 col-sm-2 col-md-1" style="padding: 4px 0;">
 							<input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="execDaumPostcode(1)">
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-5" style="padding: 4px;">
 							<label for="address1_1" class="sr-only">계약자주소1</label>
-							<input type="text" class="form-control input-sm han" id="address1_1" name="address1_1" maxlength="100" value="<?php if( !empty($view['addr'])) echo $view['addr'][1]; else echo set_value('address1_1');  ?>" readonly required placeholder="일반주소">
+							<input type="text" class="form-control input-sm han" id="address1_1" name="address1_1" maxlength="100" value="<?php if($this->input->post('address1_1')) echo set_value('address1_1'); elseif( !empty($view['addr'])) echo $view['addr'][1]; ?>" readonly required placeholder="일반주소">
 						</div>
 						<div class="col-xs-12 col-sm-4 col-md-4" style="padding: 4px;">
 							<label for="address2_1" class="sr-only">계약자주소2</label>
-							<input type="text" class="form-control input-sm han" id="address2_1" name="address2_1" maxlength="93" value="<?php if( !empty($view['addr'])) echo $view['addr'][2]; else echo set_value('address2_1');  ?>" placeholder="나머지 주소">
+							<input type="text" class="form-control input-sm han" id="address2_1" name="address2_1" maxlength="93" value="<?php if($this->input->post('address2_1')) echo set_value('address2_1'); elseif( !empty($view['addr'])) echo $view['addr'][2]; ?>" placeholder="나머지 주소">
 						</div>
 					<!-- </div> -->
 				</div>
@@ -247,20 +247,18 @@ else :
 		<div class="col-sm-12 bo-top" style="padding: 0;">
 			<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="title">고지서 제목</label></div>
 			<div class="col-xs-8 col-md-10" style="padding: 4px;">
-				<input type="text" class="form-control input-sm" name="title" value="<?php if(isset($view['bill_issue']->title)) echo $view['bill_issue']->title; else echo set_value('title'); ?>" placeholder="제 목">
+				<input type="text" class="form-control input-sm" name="title" value="<?php if($this->input->post('title')) echo set_value('title'); elseif(isset($view['bill_issue']->title)) echo $view['bill_issue']->title; ?>" placeholder="제 목">
 			</div>
 		</div>
 	</div>
 
-
-
 	<div class="row" style="margin: 0; padding: 0;">
 		<div class="col-sm-12 bo-top  bo-bottom" style="padding: 0; margin-bottom: 20px;">
-			<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px; height: 112px;"><label for="paid_date">고지서 내용</label></div>
+			<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px; height: 112px;"><label for="content">고지서 내용</label></div>
 			<div class="col-xs-8 col-md-10" style="padding: 0;">
 
 				<div class="col-xs-12" style="padding: 4px;">
-					<textarea class="form-control input-sm" id="content" name="content"  rows="5" placeholder="내 용"><?php if(isset($view['bill_issue']->content)) echo $view['bill_issue']->content; else echo set_value('content'); ?></textarea>
+					<textarea class="form-control input-sm" id="content" name="content"  rows="5" placeholder="내 용"><?php if($this->input->post('content')) echo set_value('content'); elseif(isset($view['bill_issue']->content)) echo $view['bill_issue']->content; ?></textarea>
 				</div>
 			</div>
 		</div>
