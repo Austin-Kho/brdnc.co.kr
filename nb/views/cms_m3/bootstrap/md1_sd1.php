@@ -16,7 +16,7 @@
 					<label for="mode" class="sr-only">모드</label>
 					<input type="hidden" name="mode">
 					<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
-						<div class="col-xs-6 col-sm-4 col-md-2 center point-sub" style="padding: 9px 0;">사업 개시년도</div>
+						<div class="col-xs-6 col-sm-4 col-md-2 center bg-success" style="padding: 9px 0;">사업 개시년도</div>
 						<div class="col-xs-6 col-sm-8 col-md-2" style="padding: 3px 5px;">
 							<label for="yr" class="sr-only">사업 개시년도</label>
 							<select class="form-control input-sm" name="yr" onchange="submit();">
@@ -32,7 +32,7 @@
 							</select>
 						</div>
 
-						<div class="col-xs-6 col-sm-4 col-md-2 center point-sub" style="padding: 9px 0;">미등록현장 [<span style="color: #0c04ab;">신규등록</span>]</div>
+						<div class="col-xs-6 col-sm-4 col-md-2 center bg-success" style="padding: 9px 0;">미등록현장 [<span style="color: #0c04ab;">신규등록</span>]</div>
 						<div class="col-xs-6 col-sm-8 col-md-2" style="padding: 3px 5px;">
 							<label for="new_pj" class="sr-only">구분1</label>
 							<select class="form-control input-sm" name="new_pj" onchange="select_ch('reg');">
@@ -43,7 +43,7 @@
 							</select>
 						</div>
 
-						<div class="col-xs-6 col-sm-4 col-md-2 center point-sub" style="padding: 9px 0;">기등록현장 [<span style="color: #be032a;">데이터수정</span>]</div>
+						<div class="col-xs-6 col-sm-4 col-md-2 center bg-success" style="padding: 9px 0;">기등록현장 [<span style="color: #be032a;">데이터수정</span>]</div>
 						<div class="col-xs-6 col-sm-8 col-md-2" style="padding: 3px 5px;">
 							<label for="end_pj" class="sr-only">구분1</label>
 							<select class="form-control input-sm" name="end_pj" onchange="select_ch('modify');">
@@ -68,11 +68,11 @@
 					<label for="pj_sort" class="sr-only">모드</label><input type="hidden" name="pj_sort" value="<?php if(isset($pre_pj_seq)) echo $project->sort; ?>">
 
 					<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
-						<div class="col-xs-4 col-sm-4 col-md-2 center point-sub" style="padding: 9px 0;">프로젝트 명 <?php $pre_pj_seq; ?></div>
+						<div class="col-xs-4 col-sm-4 col-md-2 center bg-success" style="padding: 9px 0;">프로젝트 명 <?php $pre_pj_seq; ?></div>
 						<div class="col-xs-8 col-sm-8 col-md-4" style="padding: 9px;">
 							<span style="color: #000099;"><?php if(isset($pre_pj_seq)) echo $project->pj_name;?>&nbsp;</span>
 						</div>
-						<div class="col-xs-4 col-sm-4 col-md-2 center point-sub" style="padding: 9px 0;">프로젝트 종류</div>
+						<div class="col-xs-4 col-sm-4 col-md-2 center bg-success" style="padding: 9px 0;">프로젝트 종류</div>
 						<div class="col-xs-5 col-sm-6 col-md-3" style="padding: 9px;">
 							<span style="color: #000099;"><?php if(isset($pre_pj_seq)) echo $sort;?>&nbsp;</span>
 						</div>

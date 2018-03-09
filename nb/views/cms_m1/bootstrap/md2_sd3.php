@@ -48,7 +48,7 @@ else :
 	$attributes = array('method' => 'get', 'name' => 'pj_sel');
 	echo form_open(current_full_url(), $attributes);
 ?>
-			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">사업 개시년도</div>
+			<div class="col-xs-4 col-sm-3 col-md-2 center bg-info" style="padding: 10px; 0">사업 개시년도</div>
 			<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
 				<div class="col-xs-12 col-sm-8" style="padding: 0px;">
 					<label for="yr" class="sr-only">사업 개시년도</label>
@@ -65,7 +65,7 @@ else :
 					</select>
 				</div>
 			</div>
-			<div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">프로젝트 선택 </div>
+			<div class="col-xs-4 col-sm-3 col-md-2 center bg-info" style="padding: 10px; 0">프로젝트 선택 </div>
 			<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
 				<div class="col-xs-12 col-sm-8" style="padding: 0px;">
 					<label for="project" class="sr-only">프로젝트 선택</label>
@@ -100,7 +100,7 @@ else :
 	<div class="row" style="margin: 0; padding: 0;">
 		<div class="col-sm-12 bo-top" style="padding: 0;">
 
-			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="published_date">발 행 일 자</label></div>
+			<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="published_date">발 행 일 자</label></div>
 			<div class="col-xs-8 col-md-2" style="padding: 6px 4px;">
 				<div class="col-xs-11" style="padding: 0px;">
 					<div class="input-group">
@@ -113,7 +113,7 @@ else :
 					</div>
 				</div>
 			</div>
-			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="pay_sche_code">발 행 회 차</label></div>
+			<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="pay_sche_code">발 행 회 차</label></div>
 			<div class="col-xs-8 col-md-2" style="padding: 6px 4px;">
 				<select class="form-control input-sm" name="pay_sche_code" id="psc">
 					<option value="">납부회차</option>
@@ -126,7 +126,7 @@ else :
 				</select>
 			</div>
 <?php if($view['bill_issue']->pay_code>=$due_sche->start): // 2계약금 이후 납부 회차인 경우?>
-			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="sche_due_date">당회 납부기한</label></div>
+			<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="sche_due_date">당회 납부기한</label></div>
 			<div class="col-xs-8 col-md-2" style="padding: 6px 4px;">
 				<div class="col-xs-11" style="padding: 0px;">
 					<div class="input-group">
@@ -145,14 +145,14 @@ else :
 	<div id="show_hide" style="display:none;">
 		<div class="row" style="margin: 0; padding: 0;">
 			<div class="col-sm-12 bo-top" style="padding: 0;">
-				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="host_name_1">발송자명(조 합)</label></div>
+				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="host_name_1">발송자명(조 합)</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<input type="text" class="form-control input-sm" id="host_name_1" name="host_name_1" value="<?php if(isset($view['bill_issue']->host_name_1)) echo $view['bill_issue']->host_name_1; else echo set_value('host_name_1'); ?>" placeholder="시행자명">
 					</div>
 				</div>
 
-				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="tell_1">연락처(조 합)</label></div>
+				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="tell_1">연락처(조 합)</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
 					<input type="text" class="form-control input-sm" id="tell_1" name="tell_1" value="<?php if(isset($view['bill_issue']->tell_1)) echo $view['bill_issue']->tell_1; else echo set_value('tell_1'); ?>" placeholder="02-1234-5678">
 				</div>
@@ -161,14 +161,14 @@ else :
 
 		<div class="row" style="margin: 0; padding: 0;">
 			<div class="col-sm-12 bo-top" style="padding: 0;">
-				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="host_name_2">발송자명(대행사)</label></div>
+				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="host_name_2">발송자명(대행사)</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<input type="text" class="form-control input-sm" id="host_name_2" name="host_name_2" value="<?php if(isset($view['bill_issue']->host_name_2)) echo $view['bill_issue']->host_name_2; else echo set_value('host_name_2'); ?>" placeholder="시행자명">
 					</div>
 				</div>
 
-				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="tell_2">연락처(대행사)</label></div>
+				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="tell_2">연락처(대행사)</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
 					<input type="text" class="form-control input-sm" id="tell_2" name="tell_2" value="<?php if(isset($view['bill_issue']->tell_2)) echo $view['bill_issue']->tell_2; else echo set_value('tell_2'); ?>" placeholder="02-1234-5678">
 				</div>
@@ -176,14 +176,14 @@ else :
 		</div>
 		<div class="row" style="margin: 0; padding: 0;">
 			<div class="col-sm-12 bo-top" style="padding: 0;">
-				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="bank_acc_1">수취계좌 1</label></div>
+				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="bank_acc_1">수취계좌 1</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<input type="text" class="form-control input-sm" id="bank_acc_1" name="bank_acc_1" value="<?php if(isset($view['bill_issue']->bank_acc_1)) echo $view['bill_issue']->bank_acc_1; else echo set_value('bank_acc_1'); ?>" placeholder="예금은행 + 계좌번호">
 					</div>
 				</div>
 
-				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="acc_host_1">예 금 주 1</label></div>
+				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="acc_host_1">예 금 주 1</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
 					<input type="text" class="form-control input-sm" id="acc_host_1" name="acc_host_1" value="<?php if(isset($view['bill_issue']->acc_host_1)) echo $view['bill_issue']->acc_host_1; else echo set_value('acc_host_1'); ?>" placeholder="예금주">
 				</div>
@@ -192,14 +192,14 @@ else :
 
 		<div class="row" style="margin: 0; padding: 0;">
 			<div class="col-sm-12 bo-top" style="padding: 0;">
-				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="bank_acc_2">수취계좌 2</label></div>
+				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="bank_acc_2">수취계좌 2</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<input type="text" class="form-control input-sm" id="bank_acc_2" name="bank_acc_2" value="<?php if(isset($view['bill_issue']->bank_acc_2)) echo $view['bill_issue']->bank_acc_2; else echo set_value('bank_acc_2'); ?>" placeholder="예금은행 + 계좌번호">
 					</div>
 				</div>
 
-				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="acc_host_2">예 금 주 2</label></div>
+				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="acc_host_2">예 금 주 2</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
 					<input type="text" class="form-control input-sm" id="acc_host_2" name="acc_host_2" value="<?php if(isset($view['bill_issue']->acc_host_2)) echo $view['bill_issue']->acc_host_2; else echo set_value('acc_host_2'); ?>" placeholder="예금주">
 				</div>
@@ -214,7 +214,7 @@ else :
 
 		<div class="row" style="margin: 0; padding: 0;">
 			<div class="col-sm-12 bo-top" style="padding: 0;">
-				<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="address">발송자 주소</label></div>
+				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="address">발송자 주소</label></div>
 				<div class="col-xs-8 col-md-10" style="padding: 0px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<div class="col-xs-4 col-sm-3 col-md-2" style="padding: 4px;">
@@ -240,7 +240,7 @@ else :
 
 	<div class="row" style="margin: 0; padding: 0;">
 		<div class="col-sm-12 bo-top" style="padding: 0;">
-			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px;"><label for="title">고지서 제목</label></div>
+			<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="title">고지서 제목</label></div>
 			<div class="col-xs-8 col-md-10" style="padding: 4px;">
 				<input type="text" class="form-control input-sm" name="title" value="<?php if(isset($view['bill_issue']->title)) echo $view['bill_issue']->title; else echo set_value('title'); ?>" placeholder="제 목">
 			</div>
@@ -251,7 +251,7 @@ else :
 
 	<div class="row" style="margin: 0; padding: 0;">
 		<div class="col-sm-12 bo-top  bo-bottom" style="padding: 0; margin-bottom: 20px;">
-			<div class="col-xs-4 col-md-2 center point-sub3" style="padding: 10px; height: 112px;"><label for="paid_date">고지서 내용</label></div>
+			<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px; height: 112px;"><label for="paid_date">고지서 내용</label></div>
 			<div class="col-xs-8 col-md-10" style="padding: 0;">
 
 				<div class="col-xs-12" style="padding: 4px;">

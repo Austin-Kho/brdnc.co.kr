@@ -15,7 +15,7 @@
 	$attributes = array('method' => 'get', 'name' => 'list_frm');
 	echo form_open(current_full_url(), $attributes);
 ?>
-							<div class="point-sub col-md-2" style="height: 40px; padding-top: 10px;">부서별</div>
+							<div class="bg-success col-md-2" style="height: 40px; padding-top: 10px;">부서별</div>
 							<div class="col-md-7" style="height: 40px; padding-top: 5px;">
 								<div class="col-md-3" style="padding: 0;">
 									<select class="form-control input-sm" name="div_sel" onchange="submit();">

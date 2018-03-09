@@ -53,7 +53,7 @@ endif;?>
 		<!-- 신규 사용자 등록자가 있을 때 처리 종료 -->
 
 			<div class="form-group mg-0-15">
-				<div class="point-sub col-xs-12 col-sm-4 col-md-2 bo-top" style="padding-top: 9px; height: 40px;">
+				<div class="bg-success col-xs-12 col-sm-4 col-md-2 bo-top" style="padding-top: 9px; height: 40px;">
 					<font color="red">*</font> <font color="black">사용자 선택</font>
 				</div>
 				<div class="col-xs-12 col-sm-8 col-md-10 bo-top" style="height: 40px;">

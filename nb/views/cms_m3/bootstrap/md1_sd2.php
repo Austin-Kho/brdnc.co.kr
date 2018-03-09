@@ -49,7 +49,7 @@
   echo form_open(current_full_url(), $attributes);
 ?>
   <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
-    <div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">사업 개시년도</div>
+    <div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="padding: 10px; 0">사업 개시년도</div>
     <div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
       <div class="col-xs-12 col-sm-10" style="padding: 0px;">
         <label for="yr" class="sr-only">사업 개시년도</label>
@@ -66,7 +66,7 @@
         </select>
       </div>
     </div>
-    <div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">프로젝트 선택 </div>
+    <div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="padding: 10px; 0">프로젝트 선택 </div>
     <div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
       <div class="col-xs-12 col-sm-10" style="padding: 0px;">
         <label for="project" class="sr-only">프로젝트 선택</label>
@@ -78,7 +78,7 @@
         </select>
       </div>
     </div>
-    <div class="col-xs-4 col-sm-3 col-md-2 center point-sub" style="padding: 10px; 0">설정항목 선택 </div>
+    <div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="padding: 10px; 0">설정항목 선택 </div>
     <div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
       <div class="col-xs-12 col-sm-10" style="padding: 0px;">
         <label for="set_sort" class="sr-only">설정항목 선택</label>
@@ -364,7 +364,7 @@ echo form_open(current_full_url(), $attributes, $hidden);
   echo form_open(current_full_url(), $attributes, $hidden);
 ?>
   <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
-    <div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">차수구분 선택</div>
+    <div class="col-xs-4 col-sm-3 col-md-2 center bg-info" style="padding: 10px; 0">차수구분 선택</div>
     <div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
       <div class="col-xs-12 col-sm-10" style="padding: 0px;">
         <label for="con_diff" class="sr-only">차수구분 선택</label>
@@ -469,7 +469,7 @@ echo form_open(current_full_url(), $attributes, $hidden);
   echo form_open(current_full_url(), $attributes, $hidden);
 ?>
   <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
-    <div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">차수구분 선택</div>
+    <div class="col-xs-4 col-sm-3 col-md-2 center bg-info" style="padding: 10px; 0">차수구분 선택</div>
     <div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
       <div class="col-xs-12 col-sm-10" style="padding: 0px;">
         <label for="con_diff" class="sr-only">차수구분 선택</label>
@@ -481,7 +481,7 @@ echo form_open(current_full_url(), $attributes, $hidden);
         </select>
       </div>
     </div>
-    <div class="col-xs-4 col-sm-3 col-md-2 center point-sub1" style="padding: 10px; 0">회차구분 선택</div>
+    <div class="col-xs-4 col-sm-3 col-md-2 center bg-info" style="padding: 10px; 0">회차구분 선택</div>
     <div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
       <div class="col-xs-12 col-sm-10" style="padding: 0px;">
         <label for="pay_sort" class="sr-only">회차구분 선택</label>

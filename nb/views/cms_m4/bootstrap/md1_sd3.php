@@ -23,7 +23,7 @@
 	echo form_open(current_full_url(), $attributes, $hidden);
 ?>
 				<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
-					<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px; 0">거래일자</div>
+					<div class="col-xs-4 col-md-2 center bg-success" style="padding: 10px; 0">거래일자</div>
 					<div class="col-xs-8 col-md-6" style=" padding: 2px 5px;">
 						<div class="col-xs-10 col-md-4" style="padding: 1px 0px;">
 							<label for="deal_date" class="sr-only">입력일</label>
@@ -37,7 +37,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-xs-4 col-md-2 center point-sub" style="padding: 10px;">입력직원</div>
+					<div class="col-xs-4 col-md-2 center bg-success" style="padding: 10px;">입력직원</div>
 					<div class="col-xs-8 col-md-2" style=" padding-top: 10px;"><?php  echo $this->session->userdata['mem_username']; ?></div>
 				</div>
 <?php echo validation_errors(); ?>
