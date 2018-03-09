@@ -68,11 +68,11 @@
 					<label for="pj_sort" class="sr-only">모드</label><input type="hidden" name="pj_sort" value="<?php if(isset($pre_pj_seq)) echo $project->sort; ?>">
 
 					<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
-						<div class="col-xs-6 col-sm-4 col-md-2 center bg-success" style="line-height:38px;">프로젝트 명 <?php $pre_pj_seq; ?></div>
+						<div class="col-xs-6 col-sm-4 col-md-2 center bg-info" style="line-height:38px;">프로젝트 명 <?php $pre_pj_seq; ?></div>
 						<div class="col-xs-6 col-sm-8 col-md-4" style="line-height:38px;">
 							<span style="color: #000099;"><?php if(isset($pre_pj_seq)) echo $project->pj_name;?>&nbsp;</span>
 						</div>
-						<div class="col-xs-6 col-sm-4  col-md-2 center bg-success" style="line-height:38px;">프로젝트 종류</div>
+						<div class="col-xs-6 col-sm-4  col-md-2 center bg-info" style="line-height:38px;">프로젝트 종류</div>
 						<div class="col-xs-4 col-sm-5 col-md-3" style="line-height:38px;">
 							<span style="color: #000099;"><?php if(isset($pre_pj_seq)) echo $sort;?>&nbsp;</span>
 						</div>
