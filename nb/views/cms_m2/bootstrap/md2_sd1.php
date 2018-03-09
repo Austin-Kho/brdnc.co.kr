@@ -11,7 +11,7 @@ else :
 	$attribues = array('method' => 'get', 'name' => 'pj_sel');
 	form_open(current_url(), $attribues);
 ?>
-		<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="padding: 10px; 0">사업 개시년도</div>
+		<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">사업 개시년도</div>
 		<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
 			<div class="col-xs-12 col-sm-8" style="padding: 0px;">
 				<label for="yr" class="sr-only">사업 개시년도</label>
@@ -28,7 +28,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 				</select>
 			</div>
 		</div>
-		<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="padding: 10px; 0">프로젝트 선택</div>
+		<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">프로젝트 선택</div>
 		<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
 			<div class="col-xs-12 col-sm-8" style="padding: 0px;">
 				<label for="project" class="sr-only">프로젝트 선택</label>
