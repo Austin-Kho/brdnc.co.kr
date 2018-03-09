@@ -16,8 +16,8 @@
 					<label for="mode" class="sr-only">모드</label>
 					<input type="hidden" name="mode">
 					<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
-						<div class="col-xs-6 col-sm-4 col-md-2 center bg-success" style="padding: 9px 0;">사업 개시년도</div>
-						<div class="col-xs-6 col-sm-8 col-md-2" style="padding: 3px 5px;">
+						<div class="col-xs-6 col-sm-4 col-md-2 center bg-success" style="line-height:38px;">사업 개시년도</div>
+						<div class="col-xs-6 col-sm-8 col-md-2" style="padding: 4px 5px;">
 							<label for="yr" class="sr-only">사업 개시년도</label>
 							<select class="form-control input-sm" name="yr" onchange="submit();">
 								<option value=""> 전 체</option>
@@ -32,8 +32,8 @@
 							</select>
 						</div>
 
-						<div class="col-xs-6 col-sm-4 col-md-2 center bg-success" style="padding: 9px 0;">미등록현장 [<span style="color: #0c04ab;">신규등록</span>]</div>
-						<div class="col-xs-6 col-sm-8 col-md-2" style="padding: 3px 5px;">
+						<div class="col-xs-6 col-sm-4 col-md-2 center bg-success" style="line-height:38px;">미등록현장 [<span style="color: #0c04ab;">신규등록</span>]</div>
+						<div class="col-xs-6 col-sm-8 col-md-2" style="padding: 4px 5px;">
 							<label for="new_pj" class="sr-only">구분1</label>
 							<select class="form-control input-sm" name="new_pj" onchange="select_ch('reg');">
 								<option value="">선 택</option>
@@ -43,8 +43,8 @@
 							</select>
 						</div>
 
-						<div class="col-xs-6 col-sm-4 col-md-2 center bg-success" style="padding: 9px 0;">기등록현장 [<span style="color: #be032a;">데이터수정</span>]</div>
-						<div class="col-xs-6 col-sm-8 col-md-2" style="padding: 3px 5px;">
+						<div class="col-xs-6 col-sm-4 col-md-2 center bg-success" style="line-height:38px;">기등록현장 [<span style="color: #be032a;">데이터수정</span>]</div>
+						<div class="col-xs-6 col-sm-8 col-md-2" style="padding: 4px 5px;">
 							<label for="end_pj" class="sr-only">구분1</label>
 							<select class="form-control input-sm" name="end_pj" onchange="select_ch('modify');">
 								<option value="">선 택</option>
@@ -68,17 +68,17 @@
 					<label for="pj_sort" class="sr-only">모드</label><input type="hidden" name="pj_sort" value="<?php if(isset($pre_pj_seq)) echo $project->sort; ?>">
 
 					<div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
-						<div class="col-xs-4 col-sm-4 col-md-2 center bg-success" style="padding: 9px 0;">프로젝트 명 <?php $pre_pj_seq; ?></div>
-						<div class="col-xs-8 col-sm-8 col-md-4" style="padding: 9px;">
+						<div class="col-xs-6 col-sm-4 col-md-2 center bg-success" style="line-height:38px;">프로젝트 명 <?php $pre_pj_seq; ?></div>
+						<div class="col-xs-6 col-sm-8 col-md-4" style="line-height:38px;">
 							<span style="color: #000099;"><?php if(isset($pre_pj_seq)) echo $project->pj_name;?>&nbsp;</span>
 						</div>
-						<div class="col-xs-4 col-sm-4 col-md-2 center bg-success" style="padding: 9px 0;">프로젝트 종류</div>
-						<div class="col-xs-5 col-sm-6 col-md-3" style="padding: 9px;">
+						<div class="col-xs-6 col-sm-4  col-md-2 center bg-success" style="line-height:38px;">프로젝트 종류</div>
+						<div class="col-xs-4 col-sm-5 col-md-3" style="line-height:38px;">
 							<span style="color: #000099;"><?php if(isset($pre_pj_seq)) echo $sort;?>&nbsp;</span>
 						</div>
 <?php if($this->input->get('end_pj')) : // 등록 수정이면
 						?>
-						<div class="col-xs-3 col-sm-2 col-md-1" style="padding: 6px;">
+						<div class="col-xs-2 col-sm-3 col-md-1" style="padding: 6px;">
 							<input type="button" class="btn btn-success btn-xs" value=" 재 등록 " onclick="data_move('re_reg','<?php echo $this->input->get('end_pj');?>');">
 						</div>
 <?php endif; ?>

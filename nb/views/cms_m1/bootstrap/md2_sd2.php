@@ -43,7 +43,7 @@ else :
 	<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-프로젝트 선택 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
 
 
-			<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="padding: 10px; 0">입금자(동호수)</div>
+			<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">입금자(동호수)</div>
 			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 				<div class="col-xs-8" style="padding: 0px;">
 					<label for="payer" class="sr-only">입금자(동호수)</label>
@@ -55,7 +55,7 @@ else :
 			</div>
 		</div>
 		<div class="row bo-bottom font12" style="margin: 0 0 20px;">
-			<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="padding: 10px; 0">동 선택 <span class="red">*</span></div>
+			<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">동 선택 <span class="red">*</span></div>
 			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 				<div class="col-xs-12" style="padding: 0px;">
 					<label for="dong" class="sr-only">동</label>
@@ -68,7 +68,7 @@ else :
 				</div>
 			</div>
 
-			<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="padding: 10px; 0">호수 선택 <span class="red">*</span></div>
+			<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">호수 선택 <span class="red">*</span></div>
 			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 				<div class="col-xs-12" style="padding: 0px;">
 					<label for="ho" class="sr-only">호수</label>
@@ -174,7 +174,7 @@ else :
 				<input type="hidden" name="rec_seq" value="<?php echo $rec_seq; ?>">
 				<div class="row" style="margin: 0; padding: 0;">
 					<div class="col-sm-12 bo-top" style="padding: 0;">
-						<div class="col-xs-4 col-md-2 center bg-success" style="padding: 10px;">수납일자</div>
+						<div class="col-xs-4 col-md-2 center bg-success" style="line-height:38px;">수납일자</div>
 						<div class="col-xs-8 col-md-4" style="padding: 0;">
 							<label for="paid_date" class="sr-only">수납일자</label>
 							<div class="col-xs-12" style="padding: 4px;">
@@ -190,7 +190,7 @@ else :
 				</div>
 				<div class="row" style="margin: 0; padding: 0;">
 					<div class="col-sm-12 bo-top" style="padding: 0;">
-						<div class="col-xs-4 col-md-2 center bg-success" style="padding: 10px;">회차구분</div>
+						<div class="col-xs-4 col-md-2 center bg-success" style="line-height:38px;">회차구분</div>
 						<div class="col-xs-8 col-md-4" style="padding:  4px;">
 							<label for="pay_sche_code" class="sr-only">회차구분</label>
 							<select class="form-control input-sm" name="pay_sche_code">
@@ -202,7 +202,7 @@ else :
 <?php endforeach; ?>
 							</select>
 						</div>
-						<div class="col-xs-4 col-md-2 center bg-success" style="padding: 10px;">수납금액</div>
+						<div class="col-xs-4 col-md-2 center bg-success" style="line-height:38px;">수납금액</div>
 						<div class="col-xs-8 col-md-4" style="padding: 4px;">
 							<label for="paid_amount" class="sr-only">수납금액</label>
 							<input type="text" class="form-control input-sm en_only" name="paid_amount" value="<?php if($this->input->get('modi')=='1') echo $modi_rec->paid_amount; else echo set_value('paid_amount'); ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]">
@@ -212,7 +212,7 @@ else :
 
 				<div class="row" style="margin: 0; padding: 0;">
 					<div class="col-sm-12 bo-top" style="padding: 0;">
-						<div class="col-xs-4 col-md-2 center bg-success" style="padding: 10px;">수납계좌</div>
+						<div class="col-xs-4 col-md-2 center bg-success" style="line-height:38px;">수납계좌</div>
 						<div class="col-xs-8 col-md-4" style="padding: 4px;">
 							<label for="paid_acc" class="sr-only">수납계좌</label>
 							<select class="form-control input-sm" name="paid_acc">
@@ -222,7 +222,7 @@ else :
 <?php endforeach; ?>
 							</select>
 						</div>
-						<div class="col-xs-4 col-md-2 center bg-success" style="padding: 10px;">입금자</div>
+						<div class="col-xs-4 col-md-2 center bg-success" style="line-height:38px;">입금자</div>
 						<div class="col-xs-8 col-md-4" style="padding: 4px;">
 							<label for="paid_who" class="sr-only">입금자</label>
 							<input type="text" class="form-control input-sm" name="paid_who" value="<?php if($this->input->get('modi')=='1') echo $modi_rec->paid_who; else echo set_value('paid_who'); ?>" placeholder="입금자">
@@ -232,7 +232,7 @@ else :
 
 				<div class="row" style="margin: 0; padding: 0;">
 					<div class="col-sm-12 bo-top  bo-bottom" style="padding: 0; margin-bottom: 20px;">
-						<div class="col-xs-4 col-md-2 center bg-success" style="padding: 10px; height: 73px;">비 고</div>
+						<div class="col-xs-4 col-md-2 center bg-success" style="padding: 10px; height: 76px;">비 고</div>
 						<div class="col-xs-8 col-md-10" style="padding: 0;">
 							<label for="paid_date" class="sr-only">비 고</label>
 							<div class="col-xs-12" style="padding: 4px;">

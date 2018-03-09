@@ -214,9 +214,14 @@ else :
 
 		<div class="row" style="margin: 0; padding: 0;">
 			<div class="col-sm-12 bo-top" style="padding: 0;">
-				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="address">발송자 주소</label></div>
+				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;">
+					<label for="address">발송자 주소</label>
+					<div class="visible-sm col-sm-12 center bg-warning" style="height:34px;">&nbsp;</div>
+					<div class="visible-xs col-xs-12 center bg-warning" style="height:72px;">&nbsp;</div>
+				</div>
+
 				<div class="col-xs-8 col-md-10" style="padding: 0px;">
-					<div class="col-xs-12" style="padding: 0px;">
+					<!-- <div class="col-xs-12" style="padding: 0px;"> -->
 						<div class="col-xs-4 col-sm-3 col-md-2" style="padding: 4px;">
 							<label for="postcode1" class="sr-only">우편번호</label>
 							<input type="text" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php if( !empty($view['addr'])) echo $view['addr'][0]; else echo set_value('postcode1');  ?>" readonly required placeholder="우편번호">
@@ -232,7 +237,7 @@ else :
 							<label for="address2_1" class="sr-only">계약자주소2</label>
 							<input type="text" class="form-control input-sm han" id="address2_1" name="address2_1" maxlength="93" value="<?php if( !empty($view['addr'])) echo $view['addr'][2]; else echo set_value('address2_1');  ?>" placeholder="나머지 주소">
 						</div>
-					</div>
+					<!-- </div> -->
 				</div>
 			</div>
 		</div>

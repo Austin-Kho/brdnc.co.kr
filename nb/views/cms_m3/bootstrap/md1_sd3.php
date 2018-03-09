@@ -20,7 +20,7 @@
   $attributes = array('method' => 'get', 'name' => 'sel_condi');
   echo form_open(current_full_url(), $attributes);
 ?>
-    <div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="padding: 10px; 0">사업 개시년도</div>
+    <div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">사업 개시년도</div>
     <div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
       <div class="col-xs-12 col-sm-8" style="padding: 0px;">
         <label for="yr" class="sr-only">사업 개시년도</label>
@@ -37,7 +37,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
         </select>
       </div>
     </div>
-    <div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="padding: 10px; 0">프로젝트 선택</div>
+    <div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">프로젝트 선택</div>
     <div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
       <div class="col-xs-12 col-sm-8" style="padding: 0px;">
         <label for="project" class="sr-only">사업 개시년도</label>
@@ -104,7 +104,6 @@ for($i=(count($year)-1); $i>=0; $i--) :
         <input type="text" name="area_returned" value="<?php echo set_value('area_returned'); ?>" placeholder="환지(실권리) 면적(㎡)" class="form-control input-sm" maxlength="12">
       </div>
       <div class="col-xs-12 col-md-1 right" style="padding: 4px 15px;">
-<?php  ?>
         <input class="btn btn-success btn-sm" type="button" value="추가 등록" onclick="<?php echo $submit_str; ?>">
       </div>
     </div>
@@ -201,8 +200,8 @@ for($i=(count($year)-1); $i>=0; $i--) :
   echo form_open(current_full_url(), $attributes, $hidden);
 ?>
   <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
-    <div class="col-sm-12 col-md-1 center bg-info" style="padding: 10px; 0">입력 지번</div>
-    <div class="col-xs-3 col-sm-2 col-md-2" style="padding: 4px 15px;">
+    <div class="col-xs-12 col-sm-12 col-md-1 center bg-info" style="line-height:39px;">입력 지번</div>
+    <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
       <label for="site_lot" class="sr-only">지 번</label>
       <select class="form-control input-sm" name="site_lot" onchange="submit();">
         <option value="" <?php if(empty($this->input->get('site_lot'))) echo "selected";?>>전 체</option>
@@ -211,18 +210,18 @@ for($i=(count($year)-1); $i>=0; $i--) :
 <?php endforeach; ?>
       </select>
     </div>
-    <div class="col-xs-3 col-sm-2 col-md-3" style="padding: 4px 15px; text-align:center; line-height: 30px;">
+    <div class="col-xs-6 col-md-3" style="padding: 4px 0; text-align:center; line-height: 30px;">
       <div class="col-xs-10" style="">
         <?php if( !empty($this->input->get('site_lot'))): ?><a type="button" class="btn btn-warning btn-xs" href="javascript:" onclick="$('#owner_input').toggle();"><?php echo $lt->lot_num." 신규 정보 입력</a>"; endif; ?>
       </div>
-      <div class="col-xs-2" style="padding-top:5px;">
+      <div class="hidden-xs col-sm-1" style="padding:5px;">
 <?php if( !empty($this->input->get('site_lot'))) : ?>
         <button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="location.href='<?php echo base_url('cms_m3/project/1/3?project='.$project.'&set_sort=2') ?>'"><span aria-hidden="true">&times;</span></button>
 <?php endif; ?>
       </div>
     </div>
     <!-- 검색하기 폼 시작 -->
-    <div class="col-sm-12 col-md-1 center bg-info" style="padding: 10px; 0">검색 조건</div>
+    <div class="col-xs-12 col-sm-12 col-md-1 center bg-info" style="line-height:39px;">검색 조건</div>
     <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
       <label for="search_con" class="sr-only">조건</label>
       <select class="form-control input-sm" name="search_con">
@@ -235,7 +234,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
         <label for="search_word" class="sr-only">검색어</label>
         <input type="text" name="search_word" value="<?php echo $this->input->get('search_word'); ?>" placeholder="Search" class="form-control input-sm" onclick="this.value='';">
     </div>
-    <div class="col-xs-6 col-sm-4 col-md-1 right" style="padding: 4px 15px;">
+    <div class="col-xs-12 col-sm-4 col-md-1 right" style="padding: 4px 15px;">
         <button type="button" name="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> 검색</button>
     </div>
   </div>
@@ -257,7 +256,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
       <span style="color:#324cfc;"><strong><?php echo "[".$sel_site->admin_dong."] ".$sel_site->lot_num." (".number_format($sel_site->area_returned, 2)."㎡)"; ?></strong></span> - 소유자 정보 입력
     </div>
     <div class="col-sm-12 form-group" style="padding:0; margin:0;">
-      <div class="col-xs-12 col-sm-4 col-md-2 bg-success" style="line-height:36px; padding:4px 15px;">소유자 정보</div>
+      <div class="col-xs-12 col-sm-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">소유자 정보</div>
       <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
         <label for="owner" class="sr-only">소유자명</label>
         <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" data-toggle="tooltip" data-placement="top" title="소유자명 - (필수)" placeholder="소유자명 - (필수)" class="form-control input-sm" maxlength="5" required>
@@ -266,7 +265,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
         <label for="owner" class="sr-only">소유자명</label>
         <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" data-toggle="tooltip" data-placement="top" title="생년월일(ex:800123)" placeholder="생년월일(ex:800123)" class="form-control input-sm" maxlength="5" required>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 11px 10px 0;">
+      <div class="col-xs-12 col-sm-4 col-md-2" style="padding: 13px 10px;">
         <label class="radio-inline"><input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 남성</label>
         <label class="radio-inline"><input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 여성</label>
       </div>
@@ -285,24 +284,24 @@ for($i=(count($year)-1); $i>=0; $i--) :
     </div>
     <!-- 다음 우편번호 서비스 -------------onclick="execDaumPostcode(1)"-----postcode1-----address1_1-----address2_1------------------------>
     <div class="col-sm-12" style="padding:0; margin:0;">
-      <div class="col-xs-12 col-sm-4 col-md-2 bg-success bo-bottom" style="line-height:36px; padding:4px 15px;">&nbsp;</div>
-      <div class="col-xs-3 col-sm-5 col-md-1 bo-bottom" style="padding: 7px 10px;">
+      <div class="hidden-xs hidden-sm col-md-2 bg-info bo-bottom" style="line-height:36px; padding:4px 15px;">&nbsp;</div>
+      <div class="col-xs-6 col-sm-1 bo-bottom" style="padding: 7px 10px;">
         <label for="postcode1" class="sr-only">우편번호</label>
         <input type="text" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php if($this->input->post('zipcode')) echo set_value('zipcode'); else echo $addr[0]; ?>" readonly required>
       </div>
-      <div class="col-xs-3 col-sm-2 col-md-1 bo-bottom" style="padding: 7px 10px;">
+      <div class="col-xs-6 col-sm-1 bo-bottom" style="padding: 7px 10px;">
         <input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="execDaumPostcode(1)">
       </div>
-      <div class="col-xs-12 col-sm-6 col-md-4 bo-bottom" style="padding: 7px 10px;">
+      <div class="col-xs-12 col-sm-4 bo-bottom" style="padding: 7px 10px;">
         <label for="address1_1" class="sr-only">소유자주소</label>
         <input type="text" class="form-control input-sm han" id="address1_1" name="address1_1" maxlength="100" value="<?php if($this->input->post('address1')) echo set_value('address1'); else echo $addr[1]; ?>" readonly required>
       </div>
-      <div class="col-xs-12 col-sm-6 col-md-2 bo-bottom" style="padding: 7px 10px;">
+      <div class="col-xs-12 col-sm-3 col-md-2 bo-bottom" style="padding: 7px 10px;">
         <label for="address2_1" class="sr-only">소유자주소2</label>
         <input type="text" class="form-control input-sm han" id="address2_1" name="address2_1" maxlength="93" value="<?php if($this->input->post('address2')) echo set_value('address2'); else echo $addr[2]; ?>" name="address2" placeholder="나머지 주소">
       </div>
 
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+      <div class="col-xs-12 col-sm-3 col-md-2 bo-bottom" style="padding: 7px 10px;">
         <div class="input-group">
           <label for="owner" class="sr-only">등기부등본 발급일</label>
           <input type="text" class="form-control input-sm" id="ref_date" name="ref_date" maxlength="10" value="<?php echo $ref_date;?>" data-toggle="tooltip" data-placement="top" title="등기부등본 발급일" placeholder="등기부등본 발급일" onClick="cal_add(this); event.cancelBubble=true">
@@ -316,7 +315,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
     </div>
 
     <div class="col-sm-12 form-group" style="padding:0; margin:0;">
-      <div class="col-xs-12 col-sm-4 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">소유권 정보</div>
+      <div class="col-xs-12 col-sm-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">소유권 정보</div>
       <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 7px 10px 0;">
         <label for="search_con" class="sr-only">구분</label>
         <select class="form-control input-sm" name="search_con" data-toggle="tooltip" data-placement="top" title="소유 구분">
@@ -334,8 +333,8 @@ for($i=(count($year)-1); $i>=0; $i--) :
         <label for="owner" class="sr-only">지분면적</label>
         <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" data-toggle="tooltip" data-placement="top" title="지분면적(㎡) - (필수)" placeholder="지분면적(㎡) - (필수)" class="form-control input-sm" maxlength="5" required>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 7px 10px 0;">
-        <label for="search_con" class="sr-only">조건</label>
+      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 7px 10px;">
+        <label for="search_con" class="sr-only">은행선택</label>
         <select class="form-control input-sm" name="search_con" data-toggle="tooltip" data-placement="top" title="은행선택">
           <option value="" <?php echo set_select('search_con', '');?>>은행선택</option>
           <option value="1" <?php echo set_select('search_con', '1');?>>개 인</option>
@@ -354,39 +353,36 @@ for($i=(count($year)-1); $i>=0; $i--) :
     </div>
 
     <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
-      <div class="col-xs-12 col-sm-4 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">&nbsp;</div>
-      <div class="col-xs-6 col-sm-4 col-md-10" style="padding: 7px 10px;">
+      <div class="hidden-xs hidden-sm col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">&nbsp;</div>
+      <div class="col-xs-12 col-md-10" style="padding: 7px 10px;">
         <label for="owner" class="sr-only">갑/을구 권리 제한사항</label>
         <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" data-toggle="tooltip" data-placement="top" title="갑/을구 권리 제한사항" placeholder="갑/을구 권리 제한사항" class="form-control input-sm" maxlength="5" required>
       </div>
     </div>
     <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
       <div class="col-xs-12 col-sm-4 col-md-2 bg-info" style="line-height:36px; padding:4px 15px; height:80px;">상담 기록 (상담일시-내용)</div>
-      <div class="col-xs-12 col-sm-8 col-md-7" style="padding: 7px 10px;">
+      <div class="col-xs-12 col-sm-8 col-md-7" style="padding: 7px 10px 8px;">
         <textarea class="form-control" rows="3" data-toggle="tooltip" data-placement="top" title="상담 기록 (상담일시-내용)"></textarea>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 11px 10px;">
+      <div class="visible-sm col-sm-4" style="line-height:36px; padding:4px 15px;">&nbsp;</div>
+      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 13px 10px;">
         <label class="checkbox-inline">
           <input type="checkbox" id="inlineCheckbox1" value="option1"> 계약 여부
         </label>
       </div>
       <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
-        <label for="owner" class="sr-only">계약금액</label>
-        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" data-toggle="tooltip" data-placement="top" title="계약금액" placeholder="계약금액" class="form-control input-sm" maxlength="5" required>
+        <label for="owner" class="sr-only">총 매매계약 금액</label>
+        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" data-toggle="tooltip" data-placement="top" title="총 매매계약 금액" placeholder="총 매매계약 금액" class="form-control input-sm" maxlength="5" required>
       </div>
-      <!-- <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
-        <label for="owner" class="sr-only">평당단가</label>
-        <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" placeholder="평당단가" class="form-control input-sm" maxlength="5" required>
-      </div> -->
     </div>
 
     <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
-      <div class="col-xs-12 col-sm-4 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">계약금 지급 관련</div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+      <div class="col-xs-12 col-sm-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">계약금 지급 관련</div>
+      <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
         <label for="owner" class="sr-only">1차 계약금</label>
         <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" data-toggle="tooltip" data-placement="top" title="1차 계약금" placeholder="1차 계약금" class="form-control input-sm" maxlength="5" required>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+      <div class="col-xs-4 col-sm-4 col-md-2" style="padding: 7px 10px;">
         <div class="input-group">
           <label for="owner" class="sr-only">1차 계약금 지급일</label>
           <input type="text" class="form-control input-sm" id="ref_date" name="ref_date" maxlength="10" value="<?php echo $ref_date;?>" data-toggle="tooltip" data-placement="top" title="1차 계약금 지급일" placeholder="1차 계약금 지급일" onClick="cal_add(this); event.cancelBubble=true">
@@ -397,16 +393,16 @@ for($i=(count($year)-1); $i>=0; $i--) :
           </div>
         </div>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 11px 10px;">
+      <div class="col-xs-3 col-sm-4 col-md-1" style="padding: 13px 10px;">
         <label class="checkbox-inline">
           <input type="checkbox" id="inlineCheckbox1" value="option1"> 지급 여부
         </label>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+      <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
         <label for="owner" class="sr-only">2차 계약금</label>
         <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" data-toggle="tooltip" data-placement="top" title="2차 계약금" placeholder="2차 계약금" class="form-control input-sm" maxlength="5" required>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+      <div class="col-xs-4 col-sm-4 col-md-2" style="padding: 7px 10px;">
         <div class="input-group">
           <label for="owner" class="sr-only">2차 계약금 지급일</label>
           <input type="text" class="form-control input-sm" id="ref_date" name="ref_date" maxlength="10" value="<?php echo $ref_date;?>" data-toggle="tooltip" data-placement="top" title="2차 계약금 지급일" placeholder="2차 계약금 지급일" onClick="cal_add(this); event.cancelBubble=true">
@@ -417,19 +413,19 @@ for($i=(count($year)-1); $i>=0; $i--) :
           </div>
         </div>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 11px 10px;">
+      <div class="col-xs-3 col-sm-4 col-md-1" style="padding: 13px 10px;">
         <label class="checkbox-inline">
           <input type="checkbox" id="inlineCheckbox1" value="option1"> 지급 여부
         </label>
       </div>
     </div>
     <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
-      <div class="col-xs-12 col-sm-4 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">중도금 지급 관련 정보</div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+      <div class="col-xs-12 col-sm-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">중도금 지급 관련 정보</div>
+      <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
         <label for="owner" class="sr-only">1차 중도금</label>
         <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" data-toggle="tooltip" data-placement="top" title="1차 중도금" placeholder="1차 중도금" class="form-control input-sm" maxlength="5" required>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+      <div class="col-xs-4 col-sm-4 col-md-2" style="padding: 7px 10px;">
         <div class="input-group">
           <label for="owner" class="sr-only">1차 중도금 지급일</label>
           <input type="text" class="form-control input-sm" id="ref_date" name="ref_date" maxlength="10" value="<?php echo $ref_date;?>" data-toggle="tooltip" data-placement="top" title="1차 중도금 지급일" placeholder="1차 중도금 지급일" onClick="cal_add(this); event.cancelBubble=true">
@@ -440,16 +436,16 @@ for($i=(count($year)-1); $i>=0; $i--) :
           </div>
         </div>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 11px 10px;">
+      <div class="col-xs-3 col-sm-4 col-md-1" style="padding: 13px 10px;">
         <label class="checkbox-inline">
           <input type="checkbox" id="inlineCheckbox1" value="option1"> 지급 여부
         </label>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+      <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
         <label for="owner" class="sr-only">2차 중도금</label>
         <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" data-toggle="tooltip" data-placement="top" title="2차 중도금" placeholder="2차 중도금" class="form-control input-sm" maxlength="5" required>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+      <div class="col-xs-4 col-sm-4 col-md-2" style="padding: 7px 10px;">
         <div class="input-group">
           <label for="owner" class="sr-only">2차 중도금 지급일</label>
           <input type="text" class="form-control input-sm" id="ref_date" name="ref_date" maxlength="10" value="<?php echo $ref_date;?>" data-toggle="tooltip" data-placement="top" title="2차 중도금 지급일" placeholder="2차 중도금 지급일" onClick="cal_add(this); event.cancelBubble=true">
@@ -460,19 +456,19 @@ for($i=(count($year)-1); $i>=0; $i--) :
           </div>
         </div>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 11px 10px;">
+      <div class="col-xs-3 col-sm-4 col-md-1" style="padding: 13px 10px;">
         <label class="checkbox-inline">
           <input type="checkbox" id="inlineCheckbox1" value="option1"> 지급 여부
         </label>
       </div>
     </div>
     <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin-bottom:15px;">
-      <div class="col-xs-12 col-sm-4 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">잔금 지급 관련 정보</div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+      <div class="col-xs-12 col-sm-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">잔금 지급 관련 정보</div>
+      <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
         <label for="owner" class="sr-only">잔금</label>
         <input type="text" name="owner" value="<?php echo set_value('owner'); ?>" data-toggle="tooltip" data-placement="top" title="잔 금" placeholder="잔 금" class="form-control input-sm" maxlength="5" required>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+      <div class="col-xs-4 col-sm-4 col-md-2" style="padding: 7px 10px;">
         <div class="input-group">
           <label for="owner" class="sr-only">잔금 지급일</label>
           <input type="text" class="form-control input-sm" id="ref_date" name="ref_date" maxlength="10" value="<?php echo $ref_date;?>" data-toggle="tooltip" data-placement="top" title="잔금 지급일" placeholder="잔금 지급일" onClick="cal_add(this); event.cancelBubble=true">
@@ -483,17 +479,17 @@ for($i=(count($year)-1); $i>=0; $i--) :
           </div>
         </div>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 11px 10px;">
+      <div class="col-xs-3 col-sm-4 col-md-1" style="padding: 13px 10px;">
         <label class="checkbox-inline">
           <input type="checkbox" id="inlineCheckbox1" value="option1"> 지급 여부
         </label>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-3" style="padding: 11px 10px;">
+      <div class="col-xs-6 col-sm-4 col-md-3" style="padding: 13px 10px;">
         <label class="checkbox-inline">
           <input type="checkbox" id="inlineCheckbox1" value="option1"> 소유권 확보 및 이전등기 경료 여부
         </label>
       </div>
-      <div class="col-xs-6 col-sm-4 col-md-2 right" style="padding: 7px 10px;">
+      <div class="col-xs-6 col-sm-8 col-md-2 right" style="padding: 7px 10px;">
         <input class="btn btn-success btn-sm" type="button" value="등록 하기" onclick="<?php echo $submit_str; ?>">
       </div>
     </div>
