@@ -348,8 +348,8 @@ else :
 				<div class="visible-xs visible-sm col-xs-4  col-sm-3 center bg-warning" style="line-height:38px;">성 별 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="margin: 0; padding: 6px 0 4px; ">
-						<label class="radio-inline"><input type="radio" name="cont_gender" value="1" <?php echo $disabled; if(substr($is_reg['cont_data']->cont_birth_id, -1)=='1') echo 'checked'; ?> > 남성</label>
-						<label class="radio-inline"><input type="radio" name="cont_gender" value="2" <?php echo $disabled; if(substr($is_reg['cont_data']->cont_birth_id, -1)=='2') echo 'checked'; ?>> 여성</label>
+						<label class="radio-inline"><input type="radio" name="cont_gender" value="1" <?php echo $disabled; echo set_radio('cont_gender', '1', TRUE); if(substr($is_reg['cont_data']->cont_birth_id, -1)=='1') echo 'checked'; ?>> 남성</label>
+						<label class="radio-inline"><input type="radio" name="cont_gender" value="2" <?php echo $disabled; echo set_radio('cont_gender', '2'); if(substr($is_reg['cont_data']->cont_birth_id, -1)=='2') echo 'checked'; ?>> 여성</label>
 					</div>
 				</div>
 <?php endif; ?>
@@ -432,8 +432,11 @@ else :
 						<label for="app_pay_sche" class="sr-only">납부구분</label>
 						<select class="form-control input-sm" name="app_pay_sche">
 							<option value="">납부구분</option>
-<?php foreach ($pay_schedule as $lt) : ?>
-							<option value="<?php echo $lt->pay_code; ?>" <?php if( !empty($receiv_app)&&$lt->pay_code==$receiv_app->pay_sche_code){ echo "selected"; }else{ set_select('app_pay_sche', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
+<?php
+	foreach ($pay_schedule as $lt) :
+		$pay_name = empty($lt->pay_disc) ? $lt->pay_name : $lt->pay_disc;
+?>
+							<option value="<?php echo $lt->pay_code; ?>" <?php if( !empty($receiv_app)&&$lt->pay_code==$receiv_app->pay_sche_code){ echo "selected"; }else{ set_select('app_pay_sche', $pay_name); } ?>><?php echo $pay_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -494,8 +497,11 @@ else :
 						<label for="cont_pay_sche1" class="sr-only">납부구분</label>
 						<select class="form-control input-sm" name="cont_pay_sche1" <?php echo $disabled; ?>>
 							<option value="">납부구분</option>
-<?php foreach ($pay_schedule as $lt) : ?>
-							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['1'])&&$lt->pay_code==$received['1']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche1', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
+<?php
+	foreach ($pay_schedule as $lt) :
+		$pay_name = empty($lt->pay_disc) ? $lt->pay_name : $lt->pay_disc;
+?>
+							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['1'])&&$lt->pay_code==$received['1']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche1', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -552,15 +558,18 @@ else :
 						<div class="col-xs-10 col-md-8" style="padding: 0;">
 							<select class="form-control input-sm" name="cont_pay_sche2" <?php echo $disabled; ?>>
 								<option value="">납부구분</option>
-	<?php foreach ($pay_schedule as $lt) : ?>
-								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['2'])&&$lt->pay_code==$received['2']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche2', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
+<?php
+	foreach ($pay_schedule as $lt) :
+		$pay_name = empty($lt->pay_disc) ? $lt->pay_name : $lt->pay_disc;
+?>
+								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['2'])&&$lt->pay_code==$received['2']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche2', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
 	<?php endforeach; ?>
 							</select>
 						</div>
 						<div class="col-xs-2 col-md-4">
 							<div class="checkbox"  style="margin: 0; padding: 4px 0;">
 								<label>
-									<input type="checkbox" name="chk_2" id="chk_2" onclick="receive_add(this,2);" <?php if( !empty($type_name[1])){echo " checked ";} if( !empty($type_name[2])){echo " disabled ";}?> <?php echo $disabled; ?>>
+									<input type="checkbox" name="chk_2" id="chk_2" onclick="receive_add(this,2);" <?php if(($rec_num-1)==2){echo " checked ";} if(($rec_num-1)>2){echo " disabled ";}?> <?php echo $disabled; ?>>
 									<a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
 								</label>
 							</div>
@@ -619,15 +628,18 @@ else :
 						<div class="col-xs-10 col-md-8" style="padding: 0;">
 							<select class="form-control input-sm" name="cont_pay_sche3" <?php echo $disabled; ?>>
 								<option value="">납부구분</option>
-	<?php foreach ($pay_schedule as $lt) : ?>
-								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['3'])&&$lt->pay_code==$received['3']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche3', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
+<?php
+	foreach ($pay_schedule as $lt) :
+		$pay_name = empty($lt->pay_disc) ? $lt->pay_name : $lt->pay_disc;
+?>
+								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['3'])&&$lt->pay_code==$received['3']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche3', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
 	<?php endforeach; ?>
 							</select>
 						</div>
 						<div class="col-xs-2 col-md-4">
 							<div class="checkbox"  style="margin: 0; padding: 4px 0;">
 								<label>
-									<input type="checkbox" name="chk_3" id="chk_3" onclick="receive_add(this,3);" <?php if( !empty($type_name[1])){echo " checked ";} if( !empty($type_name[2])){echo " disabled ";}?>>
+									<input type="checkbox" name="chk_3" id="chk_3" onclick="receive_add(this,3);" <?php if(($rec_num-1)==3){echo " checked ";} if(($rec_num-1)>3){echo " disabled ";}?>>
 									<a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
 								</label>
 							</div>
@@ -687,15 +699,18 @@ else :
 						<div class="col-xs-10 col-md-8" style="padding: 0;">
 							<select class="form-control input-sm" name="cont_pay_sche4" <?php echo $disabled; ?>>
 								<option value="">납부구분</option>
-	<?php foreach ($pay_schedule as $lt) : ?>
-								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['4'])&&$lt->pay_code==$received['4']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche4', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
+<?php
+	foreach ($pay_schedule as $lt) :
+		$pay_name = empty($lt->pay_disc) ? $lt->pay_name : $lt->pay_disc;
+?>
+								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['4'])&&$lt->pay_code==$received['4']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche4', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
 	<?php endforeach; ?>
 							</select>
 						</div>
 						<div class="col-xs-2 col-md-4">
 							<div class="checkbox"  style="margin: 0; padding: 4px 0;">
 								<label>
-									<input type="checkbox" name="chk_4" id="chk_4" onclick="receive_add(this,4);" <?php if( !empty($type_name[1])){echo " checked ";} if( !empty($type_name[2])){echo " disabled ";}?>>
+									<input type="checkbox" name="chk_4" id="chk_4" onclick="receive_add(this,4);" <?php if(($rec_num-1)==4){echo " checked ";} if(($rec_num-1)>4){echo " disabled ";}?>>
 									<a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
 								</label>
 							</div>
@@ -755,15 +770,18 @@ else :
 						<div class="col-xs-10 col-md-8" style="padding: 0;">
 							<select class="form-control input-sm" name="cont_pay_sche5" <?php echo $disabled; ?>>
 								<option value="">납부구분</option>
-	<?php foreach ($pay_schedule as $lt) : ?>
-								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['5'])&&$lt->pay_code==$received['5']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche5', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
-	<?php endforeach; ?>
+<?php
+	foreach ($pay_schedule as $lt) :
+		$pay_name = empty($lt->pay_disc) ? $lt->pay_name : $lt->pay_disc;
+?>
+								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['5'])&&$lt->pay_code==$received['5']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche5', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
+<?php endforeach; ?>
 							</select>
 						</div>
 						<div class="col-xs-2 col-md-4">
 							<div class="checkbox"  style="margin: 0; padding: 4px 0;">
 								<label>
-									<input type="checkbox" name="chk_5" id="chk_5" onclick="receive_add(this,5);" <?php if( !empty($type_name[1])){echo " checked ";} if( !empty($type_name[2])){echo " disabled ";}?>>
+									<input type="checkbox" name="chk_5" id="chk_5" onclick="receive_add(this,5);" <?php if(($rec_num-1)==5){echo " checked ";} if(($rec_num-1)>5){echo " disabled ";}?>>
 									<a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
 								</label>
 							</div>
@@ -823,15 +841,18 @@ else :
 						<div class="col-xs-10 col-md-8" style="padding: 0;">
 							<select class="form-control input-sm" name="cont_pay_sche6" <?php echo $disabled; ?>>
 								<option value="">납부구분</option>
-	<?php foreach ($pay_schedule as $lt) : ?>
-								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['6'])&&$lt->pay_code==$received['6']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche6', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
-	<?php endforeach; ?>
+<?php
+	foreach ($pay_schedule as $lt) :
+		$pay_name = empty($lt->pay_disc) ? $lt->pay_name : $lt->pay_disc;
+?>
+								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['6'])&&$lt->pay_code==$received['6']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche6', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
+<?php endforeach; ?>
 							</select>
 						</div>
 						<div class="col-xs-2 col-md-4">
 							<div class="checkbox"  style="margin: 0; padding: 4px 0;">
 								<label>
-									<input type="checkbox" name="chk_6" id="chk_6" onclick="receive_add(this,6);" <?php if( !empty($type_name[1])){echo " checked ";} if( !empty($type_name[2])){echo " disabled ";}?>>
+									<input type="checkbox" name="chk_6" id="chk_6" onclick="receive_add(this,6);" <?php if(($rec_num-1)==6){echo " checked ";} if(($rec_num-1)>6){echo " disabled ";}?>>
 									<a><span class="glyphicon glyphicon-plus" aria-hidden="true" style="padding-top: 2px;"></span></a>
 								</label>
 							</div>
@@ -890,8 +911,11 @@ else :
 						<label for="cont_pay_sche7" class="sr-only">납부구분</label>
 						<select class="form-control input-sm" name="cont_pay_sche7" <?php echo $disabled; ?>>
 							<option value="">납부구분</option>
-<?php foreach ($pay_schedule as $lt) : ?>
-							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['7'])&&$lt->pay_code==$received['7']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche7', $lt->pay_code); } ?>><?php echo $lt->pay_name; ?></option>
+<?php
+	foreach ($pay_schedule as $lt) :
+		$pay_name = empty($lt->pay_disc) ? $lt->pay_name : $lt->pay_disc;
+?>
+							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['7'])&&$lt->pay_code==$received['7']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche7', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -968,14 +992,14 @@ else :
 				</div>
 <?php if( !empty($is_reg['cont_data'])) $inc_doc = explode("-", $is_reg['cont_data']->incom_doc); ?>
 				<div class="col-xs-8 col-sm-9 col-md-8" style="padding: 4px 15px;">
-					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_1" value="1" <?php echo $disabled; if( !empty($is_reg['cont_data'])&&$inc_doc[0]=='1') echo "checked";  ?>> 각서9종</label></div>
-					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_2" value="1" <?php echo $disabled; if( !empty($is_reg['cont_data'])&&$inc_doc[1]=='1') echo "checked"; ?>> 주민등본</label></div>
-					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_3" value="1" <?php echo $disabled; if( !empty($is_reg['cont_data'])&&$inc_doc[2]=='1') echo "checked"; ?>> 주민초본</label></div>
-					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_4" value="1" <?php echo $disabled; if( !empty($is_reg['cont_data'])&&$inc_doc[3]=='1') echo "checked"; ?>> 가족관계증명</label></div>
-					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_5" value="1" <?php echo $disabled; if( !empty($is_reg['cont_data'])&&$inc_doc[4]=='1') echo "checked"; ?>> 인감증명</label></div>
-					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_6" value="1" <?php echo $disabled; if( !empty($is_reg['cont_data'])&&$inc_doc[5]=='1') echo "checked"; ?>> 사용인감</label></div>
-					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_7" value="1" <?php echo $disabled; if( !empty($is_reg['cont_data'])&&$inc_doc[6]=='1') echo "checked"; ?>> 신분증</label></div>
-					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_8" value="1" <?php echo $disabled; if( !empty($is_reg['cont_data'])&&$inc_doc[7]=='1') echo "checked"; ?>> 배우자등본</label></div>
+					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_1" value="1" <?php echo $disabled; echo set_checkbox('incom_doc_1', '1'); if( !empty($is_reg['cont_data'])&&$inc_doc[0]=='1') echo "checked";  ?>> 각서9종</label></div>
+					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_2" value="1" <?php echo $disabled; echo set_checkbox('incom_doc_2', '1'); if( !empty($is_reg['cont_data'])&&$inc_doc[1]=='1') echo "checked"; ?>> 주민등본</label></div>
+					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_3" value="1" <?php echo $disabled; echo set_checkbox('incom_doc_3', '1'); if( !empty($is_reg['cont_data'])&&$inc_doc[2]=='1') echo "checked"; ?>> 주민초본</label></div>
+					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_4" value="1" <?php echo $disabled; echo set_checkbox('incom_doc_4', '1'); if( !empty($is_reg['cont_data'])&&$inc_doc[3]=='1') echo "checked"; ?>> 가족관계증명</label></div>
+					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_5" value="1" <?php echo $disabled; echo set_checkbox('incom_doc_5', '1'); if( !empty($is_reg['cont_data'])&&$inc_doc[4]=='1') echo "checked"; ?>> 인감증명</label></div>
+					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_6" value="1" <?php echo $disabled; echo set_checkbox('incom_doc_6', '1'); if( !empty($is_reg['cont_data'])&&$inc_doc[5]=='1') echo "checked"; ?>> 사용인감</label></div>
+					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_7" value="1" <?php echo $disabled; echo set_checkbox('incom_doc_7', '1'); if( !empty($is_reg['cont_data'])&&$inc_doc[6]=='1') echo "checked"; ?>> 신분증</label></div>
+					<div class="col-xs-6 col-sm-3 checkbox" style="margin: 5px 0; padding-right: 0;"><label><input type="checkbox" name="incom_doc_8" value="1" <?php echo $disabled; echo set_checkbox('incom_doc_8', '1'); if( !empty($is_reg['cont_data'])&&$inc_doc[7]=='1') echo "checked"; ?>> 배우자등본</label></div>
 				</div>
 			</div>
 <?php endif;
