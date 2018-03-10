@@ -697,7 +697,7 @@ class Cms_m3 extends CB_Controller {
 						FROM cb_cms_site_ownership JOIN cb_cms_site_status
 						ON cb_cms_site_ownership.lot_seq = cb_cms_site_status.seq
 						$w_qry
-						ORDER BY lot_order DESC, lot_seq DESC, cb_cms_site_ownership.seq DESC
+						ORDER BY cb_cms_site_ownership.seq DESC, lot_order DESC, lot_seq DESC
 						LIMIT $start, $limit "
 				);
 
