@@ -18,31 +18,56 @@
 <div class="main_start">&nbsp;</div>
 <!-- 3. 프로젝트 -> 1. 프로젝트 관리 ->2. 기본정보 수정 -->
 <script type="text/javascript">
-  // function excel(url){
-  //   var opt;
-  //   if(document.form1.opt1.checked===true) var opt = document.form1.opt1.value;
-  //   if(document.form1.opt2.checked===true) var opt = opt+"-"+document.form1.opt2.value;
-  //   if(document.form1.opt3.checked===true) var opt = opt+"-"+document.form1.opt3.value;
-  //   if(document.form1.opt4.checked===true) var opt = opt+"-"+document.form1.opt4.value;
-  //   if(document.form1.opt5.checked===true) var opt = opt+"-"+document.form1.opt5.value;
-  //   if(document.form1.opt6.checked===true) var opt = opt+"-"+document.form1.opt6.value;
-  //   if(document.form1.opt7.checked===true) var opt = opt+"-"+document.form1.opt7.value;
-  //   if(document.form1.opt8.checked===true) var opt = opt+"-"+document.form1.opt8.value;
-  //   if(document.form1.opt9.checked===true) var opt = opt+"-"+document.form1.opt9.value;
-  //   if(document.form1.opt10.checked===true) var opt = opt+"-"+document.form1.opt10.value;
-  //   if(document.form1.opt11.checked===true) var opt = opt+"-"+document.form1.opt11.value;
-  //   if(document.form1.opt12.checked===true) var opt = opt+"-"+document.form1.opt12.value;
-  //   if(document.form1.opt13.checked===true) var opt = opt+"-"+document.form1.opt13.value;
-  //   if(document.form1.opt14.checked===true) var opt = opt+"-"+document.form1.opt14.value;
-  //
-  //   location.href = url+"&row="+opt;
-  // }
+  function chkArr(url){
+    var opt;
+    if(document.ex_form.opt1.checked===true) var opt = document.ex_form.opt1.value;
+    if(document.ex_form.opt2.checked===true) var opt = opt+"-"+document.ex_form.opt2.value;
+    if(document.ex_form.opt3.checked===true) var opt = opt+"-"+document.ex_form.opt3.value;
+    if(document.ex_form.opt4.checked===true) var opt = opt+"-"+document.ex_form.opt4.value;
+    if(document.ex_form.opt5.checked===true) var opt = opt+"-"+document.ex_form.opt5.value;
+    if(document.ex_form.opt6.checked===true) var opt = opt+"-"+document.ex_form.opt6.value;
+    if(document.ex_form.opt7.checked===true) var opt = opt+"-"+document.ex_form.opt7.value;
+    if(document.ex_form.opt8.checked===true) var opt = opt+"-"+document.ex_form.opt8.value;
+    if(document.ex_form.opt9.checked===true) var opt = opt+"-"+document.ex_form.opt9.value;
+    if(document.ex_form.opt10.checked===true) var opt = opt+"-"+document.ex_form.opt10.value;
+    if(document.ex_form.opt11.checked===true) var opt = opt+"-"+document.ex_form.opt11.value;
+    if(document.ex_form.opt12.checked===true) var opt = opt+"-"+document.ex_form.opt12.value;
+    if(document.ex_form.opt13.checked===true) var opt = opt+"-"+document.ex_form.opt13.value;
+    if(document.ex_form.opt14.checked===true) var opt = opt+"-"+document.ex_form.opt14.value;
+    if(document.ex_form.opt15.checked===true) var opt = opt+"-"+document.ex_form.opt15.value;
+    if(document.ex_form.opt16.checked===true) var opt = opt+"-"+document.ex_form.opt16.value;
+    if(document.ex_form.opt17.checked===true) var opt = opt+"-"+document.ex_form.opt17.value;
+    if(document.ex_form.opt18.checked===true) var opt = opt+"-"+document.ex_form.opt18.value;
+    if(document.ex_form.opt19.checked===true) var opt = opt+"-"+document.ex_form.opt19.value;
+    if(document.ex_form.opt20.checked===true) var opt = opt+"-"+document.ex_form.opt20.value;
+    if(document.ex_form.opt21.checked===true) var opt = opt+"-"+document.ex_form.opt21.value;
+    if(document.ex_form.opt22.checked===true) var opt = opt+"-"+document.ex_form.opt22.value;
+    if(document.ex_form.opt23.checked===true) var opt = opt+"-"+document.ex_form.opt23.value;
+    if(document.ex_form.opt24.checked===true) var opt = opt+"-"+document.ex_form.opt24.value;
+    if(document.ex_form.opt25.checked===true) var opt = opt+"-"+document.ex_form.opt25.value;
+    if(document.ex_form.opt26.checked===true) var opt = opt+"-"+document.ex_form.opt26.value;
+    if(document.ex_form.opt27.checked===true) var opt = opt+"-"+document.ex_form.opt27.value;
+    if(document.ex_form.opt28.checked===true) var opt = opt+"-"+document.ex_form.opt28.value;
+    if(document.ex_form.opt29.checked===true) var opt = opt+"-"+document.ex_form.opt29.value;
+    if(document.ex_form.opt30.checked===true) var opt = opt+"-"+document.ex_form.opt30.value;
+    if(document.ex_form.opt31.checked===true) var opt = opt+"-"+document.ex_form.opt31.value;
+    if(document.ex_form.opt32.checked===true) var opt = opt+"-"+document.ex_form.opt32.value;
+    if(document.ex_form.opt33.checked===true) var opt = opt+"-"+document.ex_form.opt33.value;
+    if(document.ex_form.opt34.checked===true) var opt = opt+"-"+document.ex_form.opt34.value;
+    if(document.ex_form.opt35.checked===true) var opt = opt+"-"+document.ex_form.opt35.value;
+
+    location.href = url+"&row="+opt;
+  }
 </script>
 
 <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
 <?php
   $attributes = array('method' => 'get', 'name' => 'sel_condi');
-  echo form_open(current_full_url(), $attributes);
+  $hidden = array(
+    'project' => $this->input->get('project'),
+    'set_sort' => $this->input->get('set_sort')
+  );
+  echo form_open(current_full_url(), $attributes, $hidden);
 ?>
     <div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">사업 개시년도</div>
     <div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
@@ -96,8 +121,8 @@ for($i=(count($year)-1); $i>=0; $i--) :
   echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
   $attributes = array('name' => 'basic_insert');
   $hidden = array(
-      'project' => $this->input->get('project'),
-      'sort' => 'basic'
+    'project' => $this->input->get('project'),
+    'sort' => 'basic'
   );
   echo form_open(current_full_url(), $attributes, $hidden);
 ?>
@@ -349,7 +374,6 @@ for($i=(count($year)-1); $i>=0; $i--) :
         </div>
       </div>
     </div>
-
     <div class="col-sm-12 form-group" style="padding:0; margin:0;">
       <div class="col-xs-12 col-sm-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">소유권 정보</div>
       <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 7px 10px 0;">
@@ -387,7 +411,6 @@ for($i=(count($year)-1); $i>=0; $i--) :
         <input type="text" name="acc_owner" value="<?php echo set_value('acc_owner'); if( !empty($owner_row)) echo $payment_acc[2]; ?>" data-toggle="tooltip" data-placement="top" title="예 금 주" placeholder="예 금 주" class="form-control input-sm" maxlength="10">
       </div>
     </div>
-
     <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
       <div class="hidden-xs hidden-sm col-md-2 bg-info" style="height:79px;">&nbsp;</div>
       <div class="col-xs-12 col-md-10" style="padding: 7px 10px;">
@@ -415,7 +438,6 @@ for($i=(count($year)-1); $i>=0; $i--) :
           <input type="text" name="total_price" value="<?php echo set_value('total_price'); if( !empty($owner_row)) echo $owner_row->total_price; ?>" data-toggle="tooltip" data-placement="top" title="총 매매계약 금액 (단위:원)" placeholder="총 매매계약 금액 (단위:원)" class="form-control input-sm" maxlength="12">
         </div>
       </div>
-
     </div>
 
     <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
@@ -554,11 +576,16 @@ for($i=(count($year)-1); $i>=0; $i--) :
     </div>
     <div class="hidden-xs hidden-sm col-md-6 right" style="padding: 0 20px 0; margin-bottom: 3px;">
       <a href="javascript:" onclick="$('#output_option').toggle();"  style="margin: 0 10px;">[엑셀 출력항목 선택]</a>
-      <a href="javascript:alert('준비 중입니다!');">
-      <!-- <a href="<?php echo base_url('/cms_download/basic_site_list/download')."?pj=".$project; ?>"> -->
+      <!-- <a href="javascript:alert('준비 중입니다!');"> -->
+      <?php $url = base_url('/cms_download/site_owner_data/download')."?pj=".$project ?>
+			<a href="javascript:" onclick="<?php echo 'chkArr(\''.$url.'\')' ?>">
         <img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
       </a>
     </div>
+<?php
+  $attributes = array('method' => 'get', 'name' => 'ex_form');
+  echo form_open(current_full_url(), $attributes);
+?>
     <div class="hidden-xs col-sm-12 form-inline center bg-info" id="output_option" style="padding: 8px; display:none;">
 			<div class="checkbox"><label><input type="checkbox" name="opt1" value="1" checked> 번호&nbsp;</label></div>
 			<div class="checkbox"><label><input type="checkbox" name="opt2" value="2" checked> 행정동&nbsp;</label></div>
@@ -597,7 +624,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
       <div class="checkbox"><label><input type="checkbox" name="opt35" value="35"> 소유권이전등기&nbsp;</label></div>
 		</div>
   </div>
-
+</form>
   <!-- 출력 및 get으로 수정 삭제하기 -->
   <div class="table-responsive font12">
     <table class="table table-bordered table-hover table-condensed font12">
