@@ -242,7 +242,7 @@ class Cms_m1 extends CB_Controller {
 			if( !empty($cont_data)) $view['received']['5'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='6' ");
 			if( !empty($cont_data)) $view['received']['6'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='7' ");
 			if( !empty($cont_data)) $view['received']['7'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='8' ");
-			if( !empty($cont_data)) $view['rec_num'] = $this->cms_main_model->sql_num_rows(" SELECT seq FROM cb_cms_sales_received WHERE cont_seq='$cont_data->seq' ");
+			if( !empty($cont_data)) $view['rec_num'] = $this->cms_main_model->sql_num_rows(" SELECT seq FROM cb_cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code>='2' ");
 
 
 			// 라이브러리 로드
