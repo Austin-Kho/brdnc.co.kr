@@ -45,8 +45,8 @@ class Cms_main_model extends CB_Model
 	 * @param  string $where [검색조건]
 	 * @return [Array]        [추출 데이터]
 	 */
-	public function data_num_rows($table, $where='', $like, $or_like){
-		if($where!='') $this->db->where($where);
+	public function data_num_rows($table, $where, $like, $or_like){
+		if( !empty($where)) $this->db->where($where);
     if( !empty($like)) $this->db->like($like);
 		$qry = $this->db->get($table);
 		return $rlt = $qry->num_rows();

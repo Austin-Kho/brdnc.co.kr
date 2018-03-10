@@ -595,10 +595,21 @@ class Cms_m3 extends CB_Controller {
 			// 불러올 페이지에 보낼 조회 권한 데이터
 			$view['auth13'] = $auth['_m3_1_3'];
 
-			// 등록된 토지 기초 데이터 총 면적
-			$view['summary'] = $this->cms_main_model->data_row('cb_cms_site_status', array('pj_seq'=>$project), 'SUM(area_returned) as total_area'); // $table, $where, $order, $select, $group, $start='', $limit=''
-			// 소유권 관련
-			$view['site_lot'] = $this->cms_main_model->data_result('cb_cms_site_status', array('pj_seq'=>$project));
+			if( !$this->input->get('set_sort') OR $this->input->get('set_sort')=='1') {
+				// 등록된 토지 기초 데이터 총 면적
+				$view['summary'] = $this->cms_main_model->data_row('cb_cms_site_status', array('pj_seq'=>$project), 'SUM(area_returned) as total_area'); // $table, $where, $order, $select, $group, $start='', $limit=''
+
+			}elseif( !$this->input->get('set_sort') OR $this->input->get('set_sort')=='2') {
+				// 소유권 관련
+				$view['site_lot'] = $this->cms_main_model->data_result('cb_cms_site_status', array('pj_seq'=>$project));
+				$view['bank'] = $this->cms_main_model->data_result('cb_cms_capital_bank_code', '', 'bank_code'); // 은행 데이터
+
+				if( !empty($this->input->get('own_seq'))){
+					$view['owner_row'] = $this->cms_main_model->data_row('cb_cms_site_ownership', array('pj_seq'=>$project, 'seq'=>$this->input->get('own_seq')));
+				}
+				$view['own_total'] = $this->cms_main_model->sql_row(" SELECT SUM(owned_area) AS area, COUNT(seq) AS num FROM cb_cms_site_ownership WHERE pj_seq='$project' ");
+				$view['own_cont'] = $this->cms_main_model->sql_row(" SELECT SUM(owned_area) AS area, COUNT(seq) AS num FROM cb_cms_site_ownership WHERE pj_seq='$project' AND is_contract='1' ");
+			}
 
 
 			// 페이지네이션 라이브러리 로딩 추가
@@ -609,7 +620,7 @@ class Cms_m3 extends CB_Controller {
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = base_url('cms_m3/project/1/3/');   //페이징 주소
 				$config['total_rows'] = $view['total_rows'] = $this->cms_main_model->data_num_rows('cb_cms_site_status', array('pj_seq'=>$project));  //게시물의 전체 갯수
-				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
+				$config['per_page'] = 12; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 4;  // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
 				$config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
@@ -640,12 +651,12 @@ class Cms_m3 extends CB_Controller {
 				// 소유권 정보 입력할 토지(지번) 데이터
 				if($this->input->get('site_lot')) $view['sel_site'] = $sel_site = $this->cms_main_model->data_row('cb_cms_site_status', array('seq' => $this->input->get('site_lot')));
 
-				if( !$this->input->get('search_con') OR $this->input->get('search_con')==='1'){
+				if( !$this->input->get('search_con') OR $this->input->get('search_con')===''){
 					$like_array = array('lot_num'=>$this->input->get('search_word'));
-					$or_like_array = array('owner'=>$this->input->get('search_word'));;
+					$or_like_array = array('owner'=>$this->input->get('search_word'));
+				}elseif($this->input->get('search_con')==='1'){
+					$like_array = array('lot_num'=>$this->input->get('search_word'));
 				}elseif($this->input->get('search_con')==='2'){
-					$like_array = array('lot_num'=>$this->input->get('search_word'));
-				}elseif($this->input->get('search_con')==='3'){
 					$like_array = array('owner'=>$this->input->get('search_word'));
 				}
 
@@ -653,7 +664,7 @@ class Cms_m3 extends CB_Controller {
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = base_url('cms_m3/project/1/3/');   //페이징 주소
 				$config['total_rows'] = $view['total_rows'] = $this->cms_main_model->data_num_rows('cb_cms_site_ownership', array('pj_seq'=>$project), $like_array, $or_like_array);  //게시물의 전체 갯수
-				$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
+				$config['per_page'] = 12; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 4;  // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
 				$config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
@@ -668,11 +679,30 @@ class Cms_m3 extends CB_Controller {
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$view['pagination'] = $this->pagination->create_links();
 
-				// $table, $where, $order, $select, $group, $start='', $limit='', $like(array)
-				$view['owner_list'] = $this->cms_main_model->data_result('cb_cms_site_ownership', array('pj_seq'=>$project), 'lot_seq DESC, seq DESC', '', '', $start, $limit, $like_array, $or_like_array);
+				$w_qry = "WHERE cb_cms_site_ownership.pj_seq = ". $project;
+				if($this->input->get('search_word')){
+					switch ($this->input->get('search_con')) {
+						case '1': $w_qry.= " AND cb_cms_site_status.lot_num LIKE '%".$this->input->get('search_word')."%' "; break;
+						case '2': $w_qry.= " AND cb_cms_site_ownership.owner LIKE '%".$this->input->get('search_word')."%' "; break;
+						default: $w_qry.= " AND cb_cms_site_status.lot_num LIKE '%".$this->input->get('search_word')."%'  OR cb_cms_site_ownership.owner LIKE '%".$this->input->get('search_word')."%' "; break;
+					}
+				}
 
-				if($this->input->get('del_code1')) {
-					$del_rlt = $this->cms_main_model->delete_data('cb_cms_site_ownership', array('seq' => $this->input->get('del_code1')));
+				$view['owners_list'] = $this->cms_main_model->sql_result(
+					" SELECT cb_cms_site_ownership.*,
+						cb_cms_site_status.admin_dong AS admin_dong,
+						cb_cms_site_status.land_mark AS land_mark,
+						cb_cms_site_status.area_official AS area_official,
+						cb_cms_site_status.area_returned AS area_returned
+						FROM cb_cms_site_ownership JOIN cb_cms_site_status
+						ON cb_cms_site_ownership.lot_seq = cb_cms_site_status.seq
+						$w_qry
+						ORDER BY lot_order DESC, lot_seq DESC, cb_cms_site_ownership.seq DESC
+						LIMIT $start, $limit "
+				);
+
+				if($this->input->get('mode')==='3' && $this->input->get('own_seq')) {
+					$del_rlt = $this->cms_main_model->delete_data('cb_cms_site_ownership', array('seq' => $this->input->get('own_seq')));
 
 					if($del_rlt) {
 						alert('삭제 되었습니다.', base_url('cms_m3/project/1/3/?project='.$project.'&set_sort=2'));
@@ -694,12 +724,27 @@ class Cms_m3 extends CB_Controller {
 				$this->form_validation->set_rules('area_returned', '환지면적', 'trim|numeric|max_length[12]');
 
 			}elseif($this->input->get('set_sort')==='2'){ // 소유권 입력 폼
-				// $this->form_validation->set_rules('order_no', '순번', 'trim|required|numeric|max_length[5]');
-				// $this->form_validation->set_rules('admin_dong', '행정동', 'trim|required|max_length[10]');
-				// $this->form_validation->set_rules('lot_num', '지번', 'trim|required|max_length[10]');
-				// $this->form_validation->set_rules('land_mark', '지목', 'trim|required|max_length[10]');
-				// $this->form_validation->set_rules('area_official', '공부상 면적', 'trim|required|numeric|max_length[12]');
-				// $this->form_validation->set_rules('area_returned', '환지면적', 'trim|numeric|max_length[12]');
+				$this->form_validation->set_rules('owner', '소유자명', 'trim|required|max_length[10]');
+				$this->form_validation->set_rules('owner_id_birth', '생년월일', 'trim|numeric|max_length[6]');
+				if($this->input->post('owner_id_birth')) $this->form_validation->set_rules('owner_id_gender', '성별', 'trim|numeric|required');
+				$this->form_validation->set_rules('owner_tel_1', '연락처1', 'trim|required|max_length[13]');
+				$this->form_validation->set_rules('owner_tel_2', '연락처2', 'trim|max_length[13]');
+				$this->form_validation->set_rules('dup_issue_date', '등기부등본 발급일', 'trim|max_length[10]');
+				$this->form_validation->set_rules('owned_percent', '소유지분', 'trim|required|numeric|max_length[9]');
+				$this->form_validation->set_rules('owned_area', '지분면적', 'trim|required|numeric|max_length[13]');
+				$this->form_validation->set_rules('acc_number', '계좌번호', 'trim|max_length[20]');
+				$this->form_validation->set_rules('acc_owner', '예금주', 'trim|max_length[10]');
+				$this->form_validation->set_rules('total_price', '총 매매계약 금액', 'trim|numeric|max_length[12]');
+				$this->form_validation->set_rules('down_pay1', '1차 계약금', 'trim|numeric|max_length[11]');
+				$this->form_validation->set_rules('down_pay1_date', '1차 계약금 지급일', 'trim|max_length[10]');
+				$this->form_validation->set_rules('down_pay2', '2차 계약금', 'trim|numeric|max_length[11]');
+				$this->form_validation->set_rules('down_pay2_date', '2차 계약금 지급일', 'trim|max_length[10]');
+				$this->form_validation->set_rules('inter_pay1', '1차 중도금', 'trim|numeric|max_length[11]');
+				$this->form_validation->set_rules('inter_pay1_date', '1차 중도금 지급일', 'trim|max_length[10]');
+				$this->form_validation->set_rules('inter_pay2', '2차 중도금', 'trim|numeric|max_length[12]');
+				$this->form_validation->set_rules('inter_pay1_date', '2차 중도금 지급일', 'trim|max_length[10]');
+				$this->form_validation->set_rules('remain_pay', '잔 금', 'trim|numeric|max_length[12]');
+				$this->form_validation->set_rules('remain_pay_date', '잔금 지급일', 'trim|max_length[10]');
 			}
 
 			if($this->form_validation->run() !== FALSE) : // 폼검증 통과 했을 경우, post 데이터가 있을 때
@@ -729,20 +774,73 @@ class Cms_m3 extends CB_Controller {
 
 				// 소유권 입력 테이블
 				}elseif($this->input->post('sort')==='ownership'){
-					$site_ownership_unit = array( // 소유권 정보 데이터
+
+					$owner_id_date = $this->input->post('owner_id_birth')."-".$this->input->post('owner_id_gender');
+					$owner_addr = $this->input->post('postcode1')."|".$this->input->post('address1_1')."|".$this->input->post('address2_1');
+					$payment_acc = $this->input->post('bank_name')."|".$this->input->post('acc_number')."|".$this->input->post('acc_owner');
+					$is_contract = $this->input->post('is_contract', TRUE) ? $this->input->post('is_contract', TRUE) : 0;
+					$down_pay1_is_paid = $this->input->post('down_pay1_is_paid', TRUE) ? $this->input->post('down_pay1_is_paid', TRUE) : 0;
+					$down_pay2_is_paid = $this->input->post('down_pay2_is_paid', TRUE) ? $this->input->post('down_pay2_is_paid', TRUE) : 0;
+					$inter_pay1_is_paid = $this->input->post('inter_pay1_is_paid', TRUE) ? $this->input->post('inter_pay1_is_paid', TRUE) : 0;
+					$inter_pay2_is_paid = $this->input->post('inter_pay2_is_paid', TRUE) ? $this->input->post('inter_pay2_is_paid', TRUE) : 0;
+					$remain_pay_is_paid = $this->input->post('remain_pay_is_paid', TRUE) ? $this->input->post('remain_pay_is_paid', TRUE) : 0;
+					$ownership_is_take = $this->input->post('ownership_is_take', TRUE) ? $this->input->post('ownership_is_take', TRUE) : 0;
+
+					$site_own_unit = array( // 소유권 정보 데이터
 						'pj_seq' => $this->input->post('project', TRUE),
-						'lot_seq' => $this->input->post('lot_seq', TRUE)
-						// 'order_no' => $this->input->post('order_no', TRUE),
-						// 'admin_dong' => $this->input->post('admin_dong', TRUE),
-						// 'lot_num' => $this->input->post('lot_num', TRUE),
-						// 'land_mark' => $this->input->post('land_mark', TRUE),
-						// 'area_official' => $this->input->post('area_official', TRUE),
-						// 'area_returned' => $right_area,
-						// 'reg_date' => date('Y-m-d'),
-						// 'reg_worker' => $this->session->userdata('mem_username')
+						'lot_seq' => $this->input->post('lot_seq', TRUE),
+						'lot_order' => $this->input->post('lot_order', TRUE),
+						'lot_num' => $this->input->post('lot_num', TRUE),
+						'owner' => $this->input->post('owner', TRUE),
+						'owner_id_date' => $owner_id_date,
+						'owner_tel_1' => $this->input->post('owner_tel_1', TRUE),
+						'owner_tel_2' => $this->input->post('owner_tel_2', TRUE),
+						'owner_addr' => $owner_addr,
+						'dup_issue_date' => $this->input->post('dup_issue_date', TRUE),
+						'own_sort' => $this->input->post('own_sort', TRUE),
+						'owned_percent' => $this->input->post('owned_percent', TRUE),
+						'owned_area' => $this->input->post('owned_area', TRUE),
+						'is_contract' => $is_contract,
+						'total_price' => $this->input->post('total_price', TRUE),
+						'payment_acc' => $payment_acc,
+						'down_pay1' => $this->input->post('down_pay1', TRUE),
+						'down_pay1_date' => $this->input->post('down_pay1_date', TRUE),
+						'down_pay1_is_paid' => $down_pay1_is_paid,
+						'down_pay2' => $this->input->post('down_pay2', TRUE),
+						'down_pay2_date' => $this->input->post('down_pay2_date', TRUE),
+						'down_pay2_is_paid' => $down_pay2_is_paid,
+						'inter_pay1' => $this->input->post('inter_pay1', TRUE),
+						'inter_pay1_date' => $this->input->post('inter_pay1_date', TRUE),
+						'inter_pay1_is_paid' => $inter_pay1_is_paid,
+						'inter_pay2' => $this->input->post('inter_pay2', TRUE),
+						'inter_pay2_date' => $this->input->post('inter_pay2_date', TRUE),
+						'inter_pay2_is_paid' => $inter_pay2_is_paid,
+						'remain_pay' => $this->input->post('remain_pay', TRUE),
+						'remain_pay_date' => $this->input->post('remain_pay_date', TRUE),
+						'remain_pay_is_paid' => $remain_pay_is_paid,
+						'ownership_is_take' => $ownership_is_take,
+						'rights_restrictions' => $this->input->post('rights_restrictions', TRUE),
+						'counsel_record' => $this->input->post('counsel_record', TRUE)
 					);
 
-					$result = $this->cms_main_model->insert_data('cb_cms_site_ownership', $site_ownership_unit);
+					$insert_arr = array(
+						'reg_date' => date('Y-m-d'),
+						'reg_worker' => $this->session->userdata('mem_username')
+					);
+					$update_arr = array(
+						'modi_date' => date('Y-m-d'),
+						'modi_worker' => $this->session->userdata('mem_username')
+					);
+
+					$insert_data = array_merge($site_own_unit, $insert_arr); // 신규입력 데이터
+					$update_data = array_merge($site_own_unit, $update_arr); // 업데이트 데이터
+
+					if($this->input->post('mode')==='1') {
+						$result = $this->cms_main_model->insert_data('cb_cms_site_ownership', $insert_data);
+					}elseif($this->input->post('mode')==='2'){
+						$result = $this->cms_main_model->update_data('cb_cms_site_ownership', $update_data, array('seq'=>$this->input->post('own_seq')));
+					}
+
 					if( !$result){
 						alert('데이터베이스 에러입니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project', TRUE).'&set_sort=2'));
 					}else{
