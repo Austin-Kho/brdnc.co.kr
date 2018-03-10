@@ -316,7 +316,7 @@ foreach($app_data as $lt) :
 			<?php echo "[ 결과 : ".number_format($total_rows)." 건 ]"; ?>
 			<a href="javascript:" onclick="$('#output_option').toggle();"  style="margin: 0 10px;">[엑셀 출력항목 선택]</a>
 			<?php $url = base_url('/cms_download/contract_data/download')."?pj=".$project."&qry=".urlencode($cont_query); ?>
-			<a href='javascript:excel("<?php echo $url; ?>");'>
+			<a href="javascript:" onclick="excel("<?php echo $url; ?>");">
 				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
 			</a>
 		</div>
