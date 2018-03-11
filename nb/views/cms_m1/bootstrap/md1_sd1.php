@@ -23,6 +23,7 @@ else :
 			if(document.form1.opt13.checked===true) var opt = opt+"-13";
 			if(document.form1.opt14.checked===true) var opt = opt+"-14";
 			if(document.form1.opt15.checked===true) var opt = opt+"-15";
+			if(document.form1.opt15.checked===true) var opt = opt+"-16";
 
 			location.href = url+"&row="+opt;
 		}
@@ -321,21 +322,21 @@ foreach($app_data as $lt) :
 			</a>
 		</div>
 		<div class="hidden-xs col-sm-12 form-inline center bg-info" id="output_option" style="padding: 8px; display:none;">
-			<div class="checkbox"><label><input type="checkbox" name="opt1" checked disabled> 일련번호&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt2" checked> 차수&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt3" checked> 타입&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt4" checked> 동호수&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt5" checked> 계약자&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt6" checked> 생년월일(성별)&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt7" checked> 계약일자&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt8"> 총 납입금&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt9" checked> 연락처[1]&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt10"> 연락처[2]&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt11"> 주소[1][등본]&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt12" checked> 주소[2][우편]&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt13"> 미비서류&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt14"> 명의변경 횟수&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt15"> 비 고</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt2" checked> 일련번호&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt3" checked> 차수&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt4" checked> 타입&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt5" checked> 동호수&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt6" checked> 계약자&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt7" checked> 생년월일(성별)&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt8" checked> 계약일자&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt9"> 총 납입금&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt10" checked> 연락처[1]&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt11"> 연락처[2]&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt12"> 주소[1][등본]&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt13" checked> 주소[2][우편]&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt14"> 미비서류&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt15"> 명의변경 횟수&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt16"> 비 고</label></div>
 		</div>
 	</form>
 		<div class="col-xs-12 table-responsive" style="padding: 0;">
