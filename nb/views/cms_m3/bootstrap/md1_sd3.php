@@ -20,45 +20,45 @@
 <script type="text/javascript">
   function chkArr(url){
     var opt;
-    if(document.ex_form.opt1.checked===true) var opt = document.ex_form.opt1.value;
-    if(document.ex_form.opt2.checked===true) var opt = opt+"-"+document.ex_form.opt2.value;
-    if(document.ex_form.opt3.checked===true) var opt = opt+"-"+document.ex_form.opt3.value;
-    if(document.ex_form.opt4.checked===true) var opt = opt+"-"+document.ex_form.opt4.value;
-    if(document.ex_form.opt5.checked===true) var opt = opt+"-"+document.ex_form.opt5.value;
-    if(document.ex_form.opt6.checked===true) var opt = opt+"-"+document.ex_form.opt6.value;
-    if(document.ex_form.opt7.checked===true) var opt = opt+"-"+document.ex_form.opt7.value;
-    if(document.ex_form.opt8.checked===true) var opt = opt+"-"+document.ex_form.opt8.value;
-    if(document.ex_form.opt9.checked===true) var opt = opt+"-"+document.ex_form.opt9.value;
-    if(document.ex_form.opt10.checked===true) var opt = opt+"-"+document.ex_form.opt10.value;
-    if(document.ex_form.opt11.checked===true) var opt = opt+"-"+document.ex_form.opt11.value;
-    if(document.ex_form.opt12.checked===true) var opt = opt+"-"+document.ex_form.opt12.value;
-    if(document.ex_form.opt13.checked===true) var opt = opt+"-"+document.ex_form.opt13.value;
-    if(document.ex_form.opt14.checked===true) var opt = opt+"-"+document.ex_form.opt14.value;
-    if(document.ex_form.opt15.checked===true) var opt = opt+"-"+document.ex_form.opt15.value;
-    if(document.ex_form.opt16.checked===true) var opt = opt+"-"+document.ex_form.opt16.value;
-    if(document.ex_form.opt17.checked===true) var opt = opt+"-"+document.ex_form.opt17.value;
-    if(document.ex_form.opt18.checked===true) var opt = opt+"-"+document.ex_form.opt18.value;
-    if(document.ex_form.opt19.checked===true) var opt = opt+"-"+document.ex_form.opt19.value;
-    if(document.ex_form.opt20.checked===true) var opt = opt+"-"+document.ex_form.opt20.value;
-    if(document.ex_form.opt21.checked===true) var opt = opt+"-"+document.ex_form.opt21.value;
-    if(document.ex_form.opt22.checked===true) var opt = opt+"-"+document.ex_form.opt22.value;
-    if(document.ex_form.opt23.checked===true) var opt = opt+"-"+document.ex_form.opt23.value;
-    if(document.ex_form.opt24.checked===true) var opt = opt+"-"+document.ex_form.opt24.value;
-    if(document.ex_form.opt25.checked===true) var opt = opt+"-"+document.ex_form.opt25.value;
-    if(document.ex_form.opt26.checked===true) var opt = opt+"-"+document.ex_form.opt26.value;
-    if(document.ex_form.opt27.checked===true) var opt = opt+"-"+document.ex_form.opt27.value;
-    if(document.ex_form.opt28.checked===true) var opt = opt+"-"+document.ex_form.opt28.value;
-    if(document.ex_form.opt29.checked===true) var opt = opt+"-"+document.ex_form.opt29.value;
-    if(document.ex_form.opt30.checked===true) var opt = opt+"-"+document.ex_form.opt30.value;
-    if(document.ex_form.opt31.checked===true) var opt = opt+"-"+document.ex_form.opt31.value;
-    if(document.ex_form.opt32.checked===true) var opt = opt+"-"+document.ex_form.opt32.value;
-    if(document.ex_form.opt33.checked===true) var opt = opt+"-"+document.ex_form.opt33.value;
-    if(document.ex_form.opt34.checked===true) var opt = opt+"-"+document.ex_form.opt34.value;
-    if(document.ex_form.opt35.checked===true) var opt = opt+"-"+document.ex_form.opt35.value;
-    if(document.ex_form.opt36.checked===true) var opt = opt+"-"+document.ex_form.opt36.value;
-    if(document.ex_form.opt37.checked===true) var opt = opt+"-"+document.ex_form.opt37.value;
-    if(document.ex_form.opt38.checked===true) var opt = opt+"-"+document.ex_form.opt38.value;
-    if(document.ex_form.opt39.checked===true) var opt = opt+"-"+document.ex_form.opt39.value;
+    if(document.ex_form.opt1.checked===true) var opt = document.ex_form.opt1.value; // 소유자
+    if(document.ex_form.opt2.checked===true) var opt = opt+"-2"; // 생년월일(성별)
+    if(document.ex_form.opt3.checked===true) var opt = opt+"-3"; // 연락처1
+    if(document.ex_form.opt4.checked===true) var opt = opt+"-4"; // 연락처2
+    if(document.ex_form.opt5.checked===true) var opt = opt+"-5"; // 주소
+    if(document.ex_form.opt6.checked===true) var opt = opt+"-6"; // 소유구분
+    if(document.ex_form.opt7.checked===true) var opt = opt+"-7"; // 행정동
+    if(document.ex_form.opt8.checked===true) var opt = opt+"-8"; // 지번
+    if(document.ex_form.opt9.checked===true) var opt = opt+"-9"; // 지목
+    if(document.ex_form.opt10.checked===true) var opt = opt+"-10-11"; // 공부상면적
+    // if(document.ex_form.opt11.checked===true) var opt = opt+"-"+document.ex_form.opt11.value;
+    if(document.ex_form.opt12.checked===true) var opt = opt+"-12-13"+document.ex_form.opt12.value; // 환지면적
+    // if(document.ex_form.opt13.checked===true) var opt = opt+"-13"+document.ex_form.opt13.value;
+    if(document.ex_form.opt14.checked===true) var opt = opt+"-"+document.ex_form.opt14.value; // 소유지분
+    if(document.ex_form.opt15.checked===true) var opt = opt+"-"+document.ex_form.opt15.value; // 소유면적
+    // if(document.ex_form.opt16.checked===true) var opt = opt+"-"+document.ex_form.opt16.value;
+    if(document.ex_form.opt17.checked===true) var opt = opt+"-"+document.ex_form.opt17.value; // 은행계좌
+    // if(document.ex_form.opt18.checked===true) var opt = opt+"-"+document.ex_form.opt18.value;
+    // if(document.ex_form.opt19.checked===true) var opt = opt+"-"+document.ex_form.opt19.value;
+    if(document.ex_form.opt20.checked===true) var opt = opt+"-"+document.ex_form.opt20.value; // 계약여부
+    if(document.ex_form.opt21.checked===true) var opt = opt+"-"+document.ex_form.opt21.value; // 총 계약금액
+    if(document.ex_form.opt22.checked===true) var opt = opt+"-"+document.ex_form.opt22.value; // 계약금(1차)
+    // if(document.ex_form.opt23.checked===true) var opt = opt+"-"+document.ex_form.opt23.value;
+    // if(document.ex_form.opt24.checked===true) var opt = opt+"-"+document.ex_form.opt24.value;
+    if(document.ex_form.opt25.checked===true) var opt = opt+"-"+document.ex_form.opt25.value; // 계약금(2차)
+    // if(document.ex_form.opt26.checked===true) var opt = opt+"-"+document.ex_form.opt26.value;
+    // if(document.ex_form.opt27.checked===true) var opt = opt+"-"+document.ex_form.opt27.value;
+    if(document.ex_form.opt28.checked===true) var opt = opt+"-"+document.ex_form.opt28.value; // 중도금(1차)
+    // if(document.ex_form.opt29.checked===true) var opt = opt+"-"+document.ex_form.opt29.value;
+    // if(document.ex_form.opt30.checked===true) var opt = opt+"-"+document.ex_form.opt30.value;
+    if(document.ex_form.opt31.checked===true) var opt = opt+"-"+document.ex_form.opt31.value; // 중도금(2차)
+    // if(document.ex_form.opt32.checked===true) var opt = opt+"-"+document.ex_form.opt32.value;
+    // if(document.ex_form.opt33.checked===true) var opt = opt+"-"+document.ex_form.opt33.value;
+    if(document.ex_form.opt34.checked===true) var opt = opt+"-"+document.ex_form.opt34.value; // 잔금
+    // if(document.ex_form.opt35.checked===true) var opt = opt+"-"+document.ex_form.opt35.value;
+    // if(document.ex_form.opt36.checked===true) var opt = opt+"-"+document.ex_form.opt36.value;
+    if(document.ex_form.opt37.checked===true) var opt = opt+"-"+document.ex_form.opt37.value; // 소유권 이전등기
+    if(document.ex_form.opt38.checked===true) var opt = opt+"-"+document.ex_form.opt38.value; // 권리제한 사항
+    if(document.ex_form.opt39.checked===true) var opt = opt+"-"+document.ex_form.opt39.value; // 상담 기록
 
     location.href = url+"&row="+opt;
   }
@@ -600,33 +600,18 @@ for($i=(count($year)-1); $i>=0; $i--) :
       <div class="checkbox"><label><input type="checkbox" name="opt7" value="7" checked> 행정동&nbsp;</label></div>
 			<div class="checkbox"><label><input type="checkbox" name="opt8" value="8" checked> 지 번&nbsp;</label></div>
 			<div class="checkbox"><label><input type="checkbox" name="opt9" value="9" checked> 지 목&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt10" value="10" checked> 공부상 면적(㎡)&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt11" value="11" checked> 공부상 면적(평)&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt12" value="12" checked> 환지 면적(㎡)&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt13" value="13" checked> 환지 면적(평)&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt10" value="10" checked> 공부상 면적&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt12" value="12" checked> 환지 면적&nbsp;</label></div>
 			<div class="checkbox"><label><input type="checkbox" name="opt14" value="14" checked> 소유지분&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt15" value="15" checked> 소유면적(㎡)&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt16" value="16" checked> 소유면적(평)&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt17" value="17"> 은 행&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt18" value="18"> 계 좌&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt19" value="19"> 예금주&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt15" value="15" checked> 소유면적&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt17" value="17"> 은행계좌정보&nbsp;</label></div>
       <div class="checkbox"><label><input type="checkbox" name="opt20" value="20" checked> 계약여부&nbsp;</label></div>
       <div class="checkbox"><label><input type="checkbox" name="opt21" value="21" checked> 총 계약금액&nbsp;</label></div>
       <div class="checkbox"><label><input type="checkbox" name="opt22" value="22"> 계약금(1)&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt23" value="23"> 계약금(1) 지급일&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt24" value="24"> 계약금(1) 지급여부&nbsp;</label></div>
       <div class="checkbox"><label><input type="checkbox" name="opt25" value="25"> 계약금(2)&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt26" value="26"> 계약금(2) 지급일&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt27" value="27"> 계약금(2) 지급여부&nbsp;</label></div>
       <div class="checkbox"><label><input type="checkbox" name="opt28" value="28"> 중도금(1)&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt29" value="29"> 중도금(1) 지급일&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt30" value="30"> 중도금(1) 지급여부&nbsp;</label></div>
       <div class="checkbox"><label><input type="checkbox" name="opt31" value="31"> 중도금(2)&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt32" value="32"> 중도금(2) 지급일&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt33" value="33"> 중도금(2) 지급여부&nbsp;</label></div>
       <div class="checkbox"><label><input type="checkbox" name="opt34" value="34"> 잔 금&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt35" value="35"> 잔 금 지급일&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt36" value="36"> 잔 금 지급여부&nbsp;</label></div>
       <div class="checkbox"><label><input type="checkbox" name="opt37" value="37"> 소유권이전등기&nbsp;</label></div>
       <div class="checkbox"><label><input type="checkbox" name="opt38" value="38"> 권리제한사항&nbsp;</label></div>
       <div class="checkbox"><label><input type="checkbox" name="opt39" value="39"> 상담 기록&nbsp;</label></div>
