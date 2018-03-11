@@ -55,6 +55,10 @@
     if(document.ex_form.opt33.checked===true) var opt = opt+"-"+document.ex_form.opt33.value;
     if(document.ex_form.opt34.checked===true) var opt = opt+"-"+document.ex_form.opt34.value;
     if(document.ex_form.opt35.checked===true) var opt = opt+"-"+document.ex_form.opt35.value;
+    if(document.ex_form.opt36.checked===true) var opt = opt+"-"+document.ex_form.opt36.value;
+    if(document.ex_form.opt37.checked===true) var opt = opt+"-"+document.ex_form.opt37.value;
+    if(document.ex_form.opt38.checked===true) var opt = opt+"-"+document.ex_form.opt38.value;
+    if(document.ex_form.opt39.checked===true) var opt = opt+"-"+document.ex_form.opt39.value;
 
     location.href = url+"&row="+opt;
   }
@@ -577,7 +581,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
     <div class="hidden-xs hidden-sm col-md-6 right" style="padding: 0 20px 0; margin-bottom: 3px;">
       <a href="javascript:" onclick="$('#output_option').toggle();"  style="margin: 0 10px;">[엑셀 출력항목 선택]</a>
       <!-- <a href="javascript:alert('준비 중입니다!');"> -->
-      <?php $url = base_url('/cms_download/site_owner_data/download')."?pj=".$project ?>
+      <?php $url = base_url('/cms_download/site_owner_data/download')."?pj=".$project."&search_con=".$this->input->get('search_con')."&search_word=".$this->input->get('search_word') ?>
 			<a href="javascript:" onclick="<?php echo 'chkArr(\''.$url.'\')' ?>">
         <img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
       </a>
@@ -587,41 +591,46 @@ for($i=(count($year)-1); $i>=0; $i--) :
   echo form_open(current_full_url(), $attributes);
 ?>
     <div class="hidden-xs col-sm-12 form-inline center bg-info" id="output_option" style="padding: 8px; display:none;">
-			<div class="checkbox"><label><input type="checkbox" name="opt1" value="1" checked> 번호&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt2" value="2" checked> 행정동&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt3" value="3" checked> 지번&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt4" value="4" checked> 지목&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt5" value="5" checked> 공부상면적&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt6" value="6" checked> 환지면적&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt7" value="7" checked> 소유자&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt8" value="8"> 생년월일(성별)&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt9" value="9" checked> 연락처[1]&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt10" value="10"> 연락처[2]&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt11" value="11"> 주 소&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt12" value="12" checked> 소유구분&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt13" value="13" checked> 소유지분&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt14" value="14" checked> 소유면적&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt15" value="15"> 은행계좌&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt16" value="16"> 계약여부&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt17" value="17"> 총 계약금액&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt18" value="18"> 1차계약금&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt19" value="19"> 1차계약금 지급일&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt20" value="20"> 1차계약급 지급여부&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt21" value="21"> 2차계약금&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt22" value="22"> 2차계약금 지급일&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt23" value="23"> 2차계약급 지급여부&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt24" value="24"> 1차중도금&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt25" value="25"> 1차중도금 지급일&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt26" value="26"> 1차중도급 지급여부&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt27" value="27"> 2차중도금&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt28" value="28"> 2차중도금 지급일&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt29" value="29"> 2차중도급 지급여부&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt30" value="30"> 잔 금&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt31" value="31"> 잔 금 지급일&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt32" value="32"> 잔 급 지급여부&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt33" value="33"> 권리제한사항&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt34" value="34"> 상담 기록&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt35" value="35"> 소유권이전등기&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt1" value="1" checked> 소유자&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt2" value="2"> 생년월일(성별)&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt3" value="3"> 연락처[1]&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt4" value="4"> 연락처[2]&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt5" value="5"> 주 소&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt6" value="6" checked> 소유구분&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt7" value="7" checked> 행정동&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt8" value="8" checked> 지 번&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt9" value="9" checked> 지 목&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt10" value="10" checked> 공부상 면적(㎡)&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt11" value="11" checked> 공부상 면적(평)&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt12" value="12" checked> 환지 면적(㎡)&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt13" value="13" checked> 환지 면적(평)&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt14" value="14" checked> 소유지분&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt15" value="15" checked> 소유면적(㎡)&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt16" value="16" checked> 소유면적(평)&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt17" value="17"> 은 행&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt18" value="18"> 계 좌&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt19" value="19"> 예금주&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt20" value="20" checked> 계약여부&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt21" value="21" checked> 총 계약금액&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt22" value="22"> 계약금(1)&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt23" value="23"> 계약금(1) 지급일&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt24" value="24"> 계약금(1) 지급여부&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt25" value="25"> 계약금(2)&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt26" value="26"> 계약금(2) 지급일&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt27" value="27"> 계약금(2) 지급여부&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt28" value="28"> 중도금(1)&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt29" value="29"> 중도금(1) 지급일&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt30" value="30"> 중도금(1) 지급여부&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt31" value="31"> 중도금(2)&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt32" value="32"> 중도금(2) 지급일&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt33" value="33"> 중도금(2) 지급여부&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt34" value="34"> 잔 금&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt35" value="35"> 잔 금 지급일&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt36" value="36"> 잔 금 지급여부&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt37" value="37"> 소유권이전등기&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt38" value="38"> 권리제한사항&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt39" value="39"> 상담 기록&nbsp;</label></div>
+
 		</div>
   </div>
 </form>
