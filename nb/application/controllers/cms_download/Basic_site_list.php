@@ -87,7 +87,7 @@ class Basic_site_list extends CB_Controller {
 	        ),
 	      ),
 	    );
-		$spreadsheet->getActiveSheet()->getStyle('A3:H'.(count($basic_site_data)+4))->applyFromArray($allBorder);
+		$spreadsheet->getActiveSheet()->getStyle('A3:H'.(count($basic_site_data)+5))->applyFromArray($allBorder);
 
 		$spreadsheet->getActiveSheet()->getColumnDimension("A")->setWidth(8); // A열의 셀 넓이 설정
 		$spreadsheet->getActiveSheet()->getColumnDimension("B")->setWidth(10); // B열의 셀 넓이 설정
@@ -111,7 +111,7 @@ class Basic_site_list extends CB_Controller {
 
 		$spreadsheet->getActiveSheet()->getStyle('A3:H4')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFEAEAEA');
 
-		$spreadsheet->getActiveSheet()->getStyle('E5:H'.(count($basic_site_data)+4))->getNumberFormat()->setFormatCode('#,##0.00');  // 셀 숫자형 변환 (1000 -> 1,000)
+		$spreadsheet->getActiveSheet()->getStyle('E5:H'.(count($basic_site_data)+5))->getNumberFormat()->setFormatCode('#,##0.00');  // 셀 숫자형 변환 (1000 -> 1,000)
 
 		$spreadsheet->getActiveSheet()->mergeCells('A3:A4');// 해당 셀을 합칩니다.
 		$spreadsheet->getActiveSheet()->setCellValue('A3', 'no.');
@@ -159,6 +159,20 @@ class Basic_site_list extends CB_Controller {
 
 			$i++;
 		}
+		$total_rows = count($basic_site_data)+5;
+		$site_sum = $this->cms_main_model->data_row('cb_cms_site_status', array('pj_seq'=>$project), 'SUM(area_official) AS area_o, SUM(area_returned) as area_r');
+		$spreadsheet->getActiveSheet()->mergeCells('A'.$total_rows.':B'.$total_rows);// 해당 셀을 합칩니다.
+
+		$spreadsheet->getActiveSheet()->setCellValue('A'.$total_rows, "합 계");
+
+		$spreadsheet->getActiveSheet()->getStyle('E'.$total_rows)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+		$spreadsheet->getActiveSheet()->setCellValue('E'.$total_rows, $site_sum->area_o);
+		$spreadsheet->getActiveSheet()->getStyle('F'.$total_rows)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+		$spreadsheet->getActiveSheet()->setCellValue('F'.$total_rows, $site_sum->area_o*0.3025);
+		$spreadsheet->getActiveSheet()->getStyle('G'.$total_rows)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+		$spreadsheet->getActiveSheet()->setCellValue('G'.$total_rows, $site_sum->area_r);
+		$spreadsheet->getActiveSheet()->getStyle('H'.$total_rows)->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+		$spreadsheet->getActiveSheet()->setCellValue('H'.$total_rows, $site_sum->area_r*0.3025);
 
 
 
