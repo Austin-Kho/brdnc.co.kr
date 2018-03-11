@@ -19,46 +19,31 @@
 <!-- 3. 프로젝트 -> 1. 프로젝트 관리 ->2. 기본정보 수정 -->
 <script type="text/javascript">
   function chkArr(url){
-    var opt;
-    if(document.ex_form.opt1.checked===true) var opt = document.ex_form.opt1.value; // 소유자
-    if(document.ex_form.opt2.checked===true) var opt = opt+"-2"; // 생년월일(성별)
-    if(document.ex_form.opt3.checked===true) var opt = opt+"-3"; // 연락처1
-    if(document.ex_form.opt4.checked===true) var opt = opt+"-4"; // 연락처2
-    if(document.ex_form.opt5.checked===true) var opt = opt+"-5"; // 주소
-    if(document.ex_form.opt6.checked===true) var opt = opt+"-6"; // 소유구분
-    if(document.ex_form.opt7.checked===true) var opt = opt+"-7"; // 행정동
-    if(document.ex_form.opt8.checked===true) var opt = opt+"-8"; // 지번
-    if(document.ex_form.opt9.checked===true) var opt = opt+"-9"; // 지목
-    if(document.ex_form.opt10.checked===true) var opt = opt+"-10-11"; // 공부상면적
-    // if(document.ex_form.opt11.checked===true) var opt = opt+"-"+document.ex_form.opt11.value;
-    if(document.ex_form.opt12.checked===true) var opt = opt+"-12-13"+document.ex_form.opt12.value; // 환지면적
-    // if(document.ex_form.opt13.checked===true) var opt = opt+"-13"+document.ex_form.opt13.value;
-    if(document.ex_form.opt14.checked===true) var opt = opt+"-"+document.ex_form.opt14.value; // 소유지분
-    if(document.ex_form.opt15.checked===true) var opt = opt+"-"+document.ex_form.opt15.value; // 소유면적
-    // if(document.ex_form.opt16.checked===true) var opt = opt+"-"+document.ex_form.opt16.value;
-    if(document.ex_form.opt17.checked===true) var opt = opt+"-"+document.ex_form.opt17.value; // 은행계좌
-    // if(document.ex_form.opt18.checked===true) var opt = opt+"-"+document.ex_form.opt18.value;
-    // if(document.ex_form.opt19.checked===true) var opt = opt+"-"+document.ex_form.opt19.value;
-    if(document.ex_form.opt20.checked===true) var opt = opt+"-"+document.ex_form.opt20.value; // 계약여부
-    if(document.ex_form.opt21.checked===true) var opt = opt+"-"+document.ex_form.opt21.value; // 총 계약금액
-    if(document.ex_form.opt22.checked===true) var opt = opt+"-"+document.ex_form.opt22.value; // 계약금(1차)
-    // if(document.ex_form.opt23.checked===true) var opt = opt+"-"+document.ex_form.opt23.value;
-    // if(document.ex_form.opt24.checked===true) var opt = opt+"-"+document.ex_form.opt24.value;
-    if(document.ex_form.opt25.checked===true) var opt = opt+"-"+document.ex_form.opt25.value; // 계약금(2차)
-    // if(document.ex_form.opt26.checked===true) var opt = opt+"-"+document.ex_form.opt26.value;
-    // if(document.ex_form.opt27.checked===true) var opt = opt+"-"+document.ex_form.opt27.value;
-    if(document.ex_form.opt28.checked===true) var opt = opt+"-"+document.ex_form.opt28.value; // 중도금(1차)
-    // if(document.ex_form.opt29.checked===true) var opt = opt+"-"+document.ex_form.opt29.value;
-    // if(document.ex_form.opt30.checked===true) var opt = opt+"-"+document.ex_form.opt30.value;
-    if(document.ex_form.opt31.checked===true) var opt = opt+"-"+document.ex_form.opt31.value; // 중도금(2차)
-    // if(document.ex_form.opt32.checked===true) var opt = opt+"-"+document.ex_form.opt32.value;
-    // if(document.ex_form.opt33.checked===true) var opt = opt+"-"+document.ex_form.opt33.value;
-    if(document.ex_form.opt34.checked===true) var opt = opt+"-"+document.ex_form.opt34.value; // 잔금
-    // if(document.ex_form.opt35.checked===true) var opt = opt+"-"+document.ex_form.opt35.value;
-    // if(document.ex_form.opt36.checked===true) var opt = opt+"-"+document.ex_form.opt36.value;
-    if(document.ex_form.opt37.checked===true) var opt = opt+"-"+document.ex_form.opt37.value; // 소유권 이전등기
-    if(document.ex_form.opt38.checked===true) var opt = opt+"-"+document.ex_form.opt38.value; // 권리제한 사항
-    if(document.ex_form.opt39.checked===true) var opt = opt+"-"+document.ex_form.opt39.value; // 상담 기록
+    var opt = "1";
+    if(document.ex_form.opt2.checked===true) var opt = opt+"-2"; // 소유자
+    if(document.ex_form.opt3.checked===true) var opt = opt+"-3"; // 생년월일(성별)
+    if(document.ex_form.opt4.checked===true) var opt = opt+"-4"; // 연락처1
+    if(document.ex_form.opt5.checked===true) var opt = opt+"-5"; // 연락처2
+    if(document.ex_form.opt6.checked===true) var opt = opt+"-6"; // 주소
+    if(document.ex_form.opt7.checked===true) var opt = opt+"-7"; // 소유구분
+    if(document.ex_form.opt8.checked===true) var opt = opt+"-8"; // 행정동
+    if(document.ex_form.opt9.checked===true) var opt = opt+"-9"; // 지번
+    if(document.ex_form.opt10.checked===true) var opt = opt+"-10"; // 지목
+    if(document.ex_form.opt11.checked===true) var opt = opt+"-11-12"; // 공부상면적(m2/평)
+    if(document.ex_form.opt13.checked===true) var opt = opt+"-13-14"; // 환지면적(m2/평)
+    if(document.ex_form.opt15.checked===true) var opt = opt+"-15"; // 소유지분
+    if(document.ex_form.opt16.checked===true) var opt = opt+"-16-17"; // 소유면적(m2/평)
+    if(document.ex_form.opt18.checked===true) var opt = opt+"-18-19-20"; // 은행계좌(은행/계좌/예금주)
+    if(document.ex_form.opt21.checked===true) var opt = opt+"-21"; // 계약여부
+    if(document.ex_form.opt22.checked===true) var opt = opt+"-22"; // 총 계약금액
+    if(document.ex_form.opt23.checked===true) var opt = opt+"-23-24-25"; // 계약금(1차)(금액/지급일/지급여부)
+    if(document.ex_form.opt26.checked===true) var opt = opt+"-26-27-28"; // 계약금(2차)(금액/지급일/지급여부)
+    if(document.ex_form.opt29.checked===true) var opt = opt+"-29-30-31"; // 중도금(1차)(금액/지급일/지급여부)
+    if(document.ex_form.opt32.checked===true) var opt = opt+"-32-33-34"; // 중도금(2차)(금액/지급일/지급여부)
+    if(document.ex_form.opt35.checked===true) var opt = opt+"-35-36-37"; // 잔금(금액/지급일/지급여부)
+    if(document.ex_form.opt38.checked===true) var opt = opt+"-38"; // 소유권 이전등기
+    if(document.ex_form.opt39.checked===true) var opt = opt+"-39"; // 권리제한 사항
+    if(document.ex_form.opt40.checked===true) var opt = opt+"-40"; // 상담 기록
 
     location.href = url+"&row="+opt;
   }
@@ -591,30 +576,30 @@ for($i=(count($year)-1); $i>=0; $i--) :
   echo form_open(current_full_url(), $attributes);
 ?>
     <div class="hidden-xs col-sm-12 form-inline center bg-info" id="output_option" style="padding: 8px; display:none;">
-			<div class="checkbox"><label><input type="checkbox" name="opt1" value="1" checked> 소유자&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt2" value="2"> 생년월일(성별)&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt3" value="3"> 연락처[1]&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt4" value="4"> 연락처[2]&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt5" value="5"> 주 소&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt6" value="6" checked> 소유구분&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt7" value="7" checked> 행정동&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt8" value="8" checked> 지 번&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt9" value="9" checked> 지 목&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt10" value="10" checked> 공부상 면적&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt12" value="12" checked> 환지 면적&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt14" value="14" checked> 소유지분&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt15" value="15" checked> 소유면적&nbsp;</label></div>
-			<div class="checkbox"><label><input type="checkbox" name="opt17" value="17"> 은행계좌정보&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt20" value="20" checked> 계약여부&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt21" value="21" checked> 총 계약금액&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt22" value="22"> 계약금(1)&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt25" value="25"> 계약금(2)&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt28" value="28"> 중도금(1)&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt31" value="31"> 중도금(2)&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt34" value="34"> 잔 금&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt37" value="37"> 소유권이전등기&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt38" value="38"> 권리제한사항&nbsp;</label></div>
-      <div class="checkbox"><label><input type="checkbox" name="opt39" value="39"> 상담 기록&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt2" checked> 소유자&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt3"> 생년월일(성별)&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt4"> 연락처[1]&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt5"> 연락처[2]&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt6"> 주 소&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt7" checked> 소유구분&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt8" checked> 행정동&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt9" checked> 지 번&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt10" checked> 지 목&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt11" checked> 공부상 면적&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt13" checked> 환지 면적&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt15" checked> 소유지분&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt16" checked> 소유면적&nbsp;</label></div>
+			<div class="checkbox"><label><input type="checkbox" name="opt18"> 은행계좌정보&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt21" checked> 계약여부&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt22" checked> 총 계약금액&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt23"> 계약금(1차)&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt26"> 계약금(2차)&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt29"> 중도금(1차)&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt32"> 중도금(2차)&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt35"> 잔 금&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt38"> 소유권이전등기&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt39"> 권리제한사항&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt40"> 상담 기록&nbsp;</label></div>
 
 		</div>
   </div>

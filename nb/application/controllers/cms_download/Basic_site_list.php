@@ -180,26 +180,24 @@ class Basic_site_list extends CB_Controller {
 
 		$filename=$pj_title->pj_name. ' 사업 토지목록_조서.xlsx'; // 엑셀 파일 이름
 
-	    // Redirect output to a client's web browser (Excel2007)
-	    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // mime 타입
+    // Redirect output to a client's web browser (Excel2007)
+    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // mime 타입
 		header('Content-Disposition: attachment; filename='.iconv('UTF-8','CP949',$filename)); // 브라우저에서 받을 파일 이름
-	    header('Cache-Control: max-age=0'); // no cache
-	    // If you're serving to IE 9, then the following may be needed
-	    header('Cache-Control: max-age=1');
+    header('Cache-Control: max-age=0'); // no cache
+    // If you're serving to IE 9, then the following may be needed
+    header('Cache-Control: max-age=1');
 
-	    // If you're serving to IE over SSL, then the following may be needed
-	    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-	    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
-	    header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-	    header('Pragma: public'); // HTTP/1.0
+    // If you're serving to IE over SSL, then the following may be needed
+    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+    header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+    header('Pragma: public'); // HTTP/1.0
 
 		// Excel5 포맷으로 저장 -> 엑셀 2007 포맷으로 저장하고 싶은 경우 'Excel2007'로 변경합니다.
-    	$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Excel2007');
+  	$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Excel2007');
 		// 서버에 파일을 쓰지 않고 바로 다운로드 받습니다.
-    	$writer->save('php://output');
-    	exit;
-    	// create new file and remove Compatibility mode from word title
-    }
-
-
+  	$writer->save('php://output');
+  	exit;
+  	// create new file and remove Compatibility mode from word title
+  }
 } // End of this File
