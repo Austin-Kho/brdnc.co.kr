@@ -588,7 +588,7 @@ class Cms_m3 extends CB_Controller {
 
 		// 3-1 프로젝트 관리 3. 토지목록 조서 관리 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==1 && $sdi==3) {
-			$this->output->enable_profiler(TRUE); //프로파일러 보기//
+			// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m3_1_3', $this->session->userdata['mem_id']);
