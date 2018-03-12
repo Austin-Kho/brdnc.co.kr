@@ -705,9 +705,9 @@ class Cms_m3 extends CB_Controller {
 					$del_rlt = $this->cms_main_model->delete_data('cb_cms_site_ownership', array('seq' => $this->input->get('own_seq')));
 
 					if($del_rlt) {
-						alert('삭제 되었습니다.', base_url('cms_m3/project/1/3/?project='.$project.'&set_sort=2')."&page=".$this->input->get('page'));
+						alert('삭제 되었습니다.', base_url('cms_m3/project/1/3/?project='.$project.'&set_sort=2'."&page=".$this->input->get('page')));
 					}else{
-						alert('데이터베이스 에러입니다. 다시 시도하여 주십시요!', base_url('cms_m3/project/1/3/?project='.$project.'&set_sort=2')."&page=".$this->input->get('page'));
+						alert('데이터베이스 에러입니다. 다시 시도하여 주십시요!', base_url('cms_m3/project/1/3/?project='.$project.'&set_sort=2'."&page=".$this->input->get('page')));
 					}
 				}
 			}
@@ -767,9 +767,9 @@ class Cms_m3 extends CB_Controller {
 
 					$result = $this->cms_main_model->insert_data('cb_cms_site_status', $site_basic_unit);
 					if( !$result){
-						alert('데이터베이스 에러입니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project', TRUE)."&page=".$this->input->get('page')));
+						alert('데이터베이스 에러입니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project')."&page=".$this->input->post('page')));
 					}else{
-						alert('정상적으로 등록되었습니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project', TRUE)."&page=".$this->input->get('page')));
+						alert('정상적으로 등록되었습니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project')."&page=".$this->input->post('page')));
 					}
 
 				// 소유권 입력 테이블
@@ -842,9 +842,9 @@ class Cms_m3 extends CB_Controller {
 					}
 
 					if( !$result){
-						alert('데이터베이스 에러입니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project', TRUE).'&set_sort=2')."&page=".$this->input->get('page'));
+						alert('데이터베이스 에러입니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project').'&set_sort=2&page='.$this->input->post('page')));
 					}else{
-						alert('정상적으로 등록되었습니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project', TRUE).'&set_sort=2')."&page=".$this->input->get('page'));
+						alert('정상적으로 등록되었습니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project').'&set_sort=2&page='.$this->input->post('page')));
 					}
 				}
 

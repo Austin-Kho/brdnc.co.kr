@@ -111,7 +111,8 @@ for($i=(count($year)-1); $i>=0; $i--) :
   $attributes = array('name' => 'basic_insert');
   $hidden = array(
     'project' => $this->input->get('project'),
-    'sort' => 'basic'
+    'sort' => 'basic',
+    'page' => $this->input->get('page')
   );
   echo form_open(current_full_url(), $attributes, $hidden);
 ?>
@@ -195,7 +196,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
       $ar_py = $lt->area_returned*0.3025;
       $reg_date = (empty($lt->modi_date) or $lt->modi_date==='0000-00-00') ? $lt->reg_date : $lt->modi_date;
       $reg_worker = empty($lt->modi_worker) ? $lt->reg_worker : $lt->modi_worker;
-      $del_url = base_url('cms_m3/project/1/3/?del_code=').$lt->seq;
+      $del_url = base_url('cms_m3/project/1/3/?del_code=').$lt->seq."&page=".$this->input->get('page');
       if($auth13<2) { $del_submit = "alert('삭제 관리 권한이 없습니다.');";  }else { $del_submit = "if(confirm('이후 해당 데이터를 복구할 수 없습니다. 정말 삭제하시겠습니까?')===true) location.href='".$del_url."'"; }
 ?>
         <tr class="center">
@@ -203,14 +204,14 @@ for($i=(count($year)-1); $i>=0; $i--) :
           <td><?php echo $lt->admin_dong; ?></td>
           <td><?php echo $lt->lot_num; ?></td>
           <td><?php echo $lt->land_mark; ?></td>
-          <td class="right"><?php echo number_format($lt->area_official, 2); ?></td>
+          <td class="right warning"><?php echo number_format($lt->area_official, 2); ?></td>
           <td class="right"><?php echo number_format($ao_py, 2); ?></td>
-          <td class="right"><?php echo number_format($lt->area_returned, 2); ?></td>
+          <td class="right warning"><?php echo number_format($lt->area_returned, 2); ?></td>
           <td class="right"><?php echo number_format($ar_py, 2); ?></td>
           <td><?php echo $reg_date; ?></td>
           <td><?php echo $reg_worker; ?></td>
           <td><a href='javascript:'class="btn btn-info btn-xs" onclick="alert('준비 중입니다!')">수정</a></td>
-          <!-- <td><a href='javascript:'class="btn btn-info btn-xs" onclick="popUp_size('<?php echo base_url('/cms_popup/Capital_cash_book/cash_book/'.$lt->seq); ?>','cash_book','500','670')">수정</a></td> -->
+          <!-- <td><a href='javascript:'class="btn btn-info btn-xs" onclick="popUp_size('<?php echo base_url('/cms_popup/Capital_cash_book/cash_book/'.$lt->seq."&page=".$this->input->get('page')); ?>','cash_book','500','670')">수정</a></td> -->
           <td><a href='javascript:'class="btn btn-danger btn-xs" onclick="<?php echo $del_submit; ?>">삭제</a></td>
         </tr>
 <?php
@@ -292,7 +293,8 @@ for($i=(count($year)-1); $i>=0; $i--) :
     'lot_seq' => $this->input->get('site_lot'),
     'lot_order' => $sel_site->order_no,
     'lot_num' => $sel_site->lot_num,
-    'own_seq' => $this->input->get('own_seq')
+    'own_seq' => $this->input->get('own_seq'),
+    'page' => $this->input->get('page')
   );
   echo form_open(current_full_url(), $attributes, $hidden);
   if(!empty($owner_row)){
@@ -369,7 +371,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
         <label for="own_sort" class="sr-only">소유구분</label>
         <select class="form-control input-sm" name="own_sort" data-toggle="tooltip" data-placement="top" title="소유 구분" style="background-color:#fcfcd5;">
           <option value="">구 분</option>
-          <option value="1" <?php echo set_select('own_sort', '1'); if($owner_row->own_sort=='1') echo "selected";?>>개 인</option>
+          <option value="1" <?php echo set_select('own_sort', '1'); if( !$owner_row->own_sort OR $owner_row->own_sort=='1') echo "selected";?>>개 인</option>
           <option value="2" <?php echo set_select('own_sort', '2'); if($owner_row->own_sort=='2') echo "selected";?>>법 인</option>
           <option value="3" <?php echo set_select('own_sort', '3'); if($owner_row->own_sort=='3') echo "selected";?>>국/공유지</option>
         </select>
@@ -647,8 +649,8 @@ for($i=(count($year)-1); $i>=0; $i--) :
         case '3': $own_sort = "국공유지"; break;
         default: $own_sort = ""; break;
       }
-      $modi_url = base_url("cms_m3/project/1/3?project=".$project."&set_sort=2&mode=2&site_lot=".$lt->lot_seq."&own_seq=".$lt->seq);
-      $del_url = base_url("cms_m3/project/1/3?project=".$project."&set_sort=2&mode=3&site_lot=".$lt->lot_seq."&own_seq=".$lt->seq);
+      $modi_url = base_url("cms_m3/project/1/3?project=".$project."&set_sort=2&mode=2&site_lot=".$lt->lot_seq."&own_seq=".$lt->seq."&page=".$this->input->get('page'));
+      $del_url = base_url("cms_m3/project/1/3?project=".$project."&set_sort=2&mode=3&site_lot=".$lt->lot_seq."&own_seq=".$lt->seq."&page=".$this->input->get('page'));
       if($auth13<2) {
         $del_btn = "alert('이 페이지에 대한 관리 권한이 없습니다.')";
       }else {
@@ -661,10 +663,10 @@ for($i=(count($year)-1); $i>=0; $i--) :
           <td><?php echo $lt->admin_dong; ?></td>
           <td><?php echo $lt->lot_num; ?></td>
           <td><?php echo $lt->land_mark; ?></td>
-          <td class="right"><?php echo number_format($lt->area_returned, 4); ?></td>
+          <td class="right active"><?php echo number_format($lt->area_returned, 4); ?></td>
           <td class="right"><?php echo number_format($lt->area_returned*0.3025, 4); ?></td>
-          <td class="right"><?php echo number_format($lt->owned_percent, 4)."%"; ?></td>
-          <td class="right"><?php echo number_format($lt->owned_area, 4); ?></td>
+          <td class="right"><?php echo number_format($lt->owned_percent, 2)."%"; ?></td>
+          <td class="right active"><?php echo number_format($lt->owned_area, 4); ?></td>
           <td class="right"><?php echo number_format($lt->owned_area*0.3025, 4); ?></td>
           <td><?php echo $own_sort; ?></td>
           <td><?php if($lt->is_contract=='1') echo "완료"; ?></td>
