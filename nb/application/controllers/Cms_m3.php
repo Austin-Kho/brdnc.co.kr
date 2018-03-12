@@ -599,6 +599,10 @@ class Cms_m3 extends CB_Controller {
 				// 등록된 토지 기초 데이터 총 면적
 				$view['summary'] = $this->cms_main_model->data_row('cb_cms_site_status', array('pj_seq'=>$project), 'SUM(area_returned) as total_area'); // $table, $where, $order, $select, $group, $start='', $limit=''
 
+				if($this->input->get('mode')=='2' && !empty($this->input->get('lot_seq'))){ // 수정모드일 때
+					$view['basic_site'] = $this->cms_main_model->data_row('cb_cms_site_status', array('seq' => $this->input->get('lot_seq')));
+				}
+
 			}elseif( !$this->input->get('set_sort') OR $this->input->get('set_sort')=='2') {
 				// 소유권 관련
 				$view['site_lot'] = $this->cms_main_model->data_result('cb_cms_site_status', array('pj_seq'=>$project));
@@ -637,7 +641,7 @@ class Cms_m3 extends CB_Controller {
 
 				$view['site_lot_list'] = $this->cms_main_model->data_result('cb_cms_site_status', array('pj_seq'=>$project), 'order_no DESC, seq DESC', '', '', $start, $limit); // $table, $where, $order, $select, $group, $start='', $limit=''
 
-				if($this->input->get('del_code')) {
+				if($this->input->get('mode')==='3' && $this->input->get('del_code')) {
 					$del_rlt1 = $this->cms_main_model->delete_data('cb_cms_site_status', array('seq' => $this->input->get('del_code')));
 					$del_rlt2 = $this->cms_main_model->delete_data('cb_cms_site_ownership', array('lot_seq' => $this->input->get('del_code')));
 					if($del_rlt1 or $del_rlt2) {
@@ -765,7 +769,12 @@ class Cms_m3 extends CB_Controller {
 						'reg_worker' => $this->session->userdata('mem_username')
 					);
 
-					$result = $this->cms_main_model->insert_data('cb_cms_site_status', $site_basic_unit);
+					if(empty($this->input->post('mode')) OR $this->input->post('mode')==='1') {
+						$result = $this->cms_main_model->insert_data('cb_cms_site_status', $site_basic_unit);
+					}elseif($this->input->post('mode')==='2'){
+						$result = $this->cms_main_model->update_data('cb_cms_site_status', $site_basic_unit, array('seq'=>$this->input->post('lot_seq')));
+					}
+
 					if( !$result){
 						alert('데이터베이스 에러입니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project')."&page=".$this->input->post('page')));
 					}else{
