@@ -222,8 +222,8 @@ class Site_owner_data extends CB_Controller {
 			$owner_addr = str_replace("|", " ", $lt->owner_addr);
 			switch ($lt->own_sort) {
 				case '1': $own_sort = "개인"; break;
-				case '1': $own_sort = "법인"; break;
-				case '1': $own_sort = "국공유지"; break;
+				case '2': $own_sort = "법인"; break;
+				case '3': $own_sort = "국공유지"; break;
 				default: $own_sort = ""; break;
 			}
 			$bank_account = explode("|", $lt->payment_acc);
