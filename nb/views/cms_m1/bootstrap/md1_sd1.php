@@ -158,7 +158,7 @@ endfor;
 <?php else : ?>
 		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; margin-top: -18px; color: #5E81FE;">
 			<?php echo "[ 결과 : ".number_format($app_num)." 건 ]"; ?>
-			<a href="javascript:" onclick="$('.tr_toggle').toggle();" style="margin: 0 10px;" class="text_toggle">[청약 데이터 펼치기]</a>
+			<a href="javascript:" onclick="$('.tr_toggle').toggle();" style="margin: 0 10px 3px;" class="btn btn-xs btn-info text_toggle">[청약 데이터 펼치기]</a>
 			<a href="<?php echo base_url('/cms_download/application_data/download')."?pj=".$project; ?>">
 				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
 			</a>
@@ -212,7 +212,9 @@ foreach($app_data as $lt) :
 <?php $z++; endforeach; ?>
 				</tbody>
 			</table>
-			<div class="center"><a href="javascript:" onclick="$('.tr_toggle').toggle();"  class="btn btn-xs btn-info" style="padding: 0 10px;" class="text_toggle">[청약 데이터 펼치기]</a></div>
+			<div class="center">
+				<a href="javascript:" onclick="$('.tr_toggle').toggle();"  class="btn btn-xs btn-info text_toggle" style="padding: 0 10px;">[청약 데이터 펼치기]</a>
+			</div>
 		</div>
 <?php endif; ?>
   </div>
