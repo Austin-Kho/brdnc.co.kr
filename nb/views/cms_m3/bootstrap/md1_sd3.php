@@ -263,8 +263,10 @@ for($i=(count($year)-1); $i>=0; $i--) :
       </select>
     </div>
     <div class="col-xs-6 col-md-3" style="padding: 4px 0; text-align:center; line-height: 30px;">
-      <div class="col-xs-10" style="">
+      <div class="col-xs-10">
+<?php if($this->input->get('mode')=='1') : ?>
         <?php if( !empty($this->input->get('site_lot'))): ?><a type="button" class="btn btn-warning btn-xs" href="javascript:" onclick="$('#owner_input').toggle();"><?php echo $lt->lot_num." 신규 정보 입력</a>"; endif; ?>
+<?php endif; ?>
       </div>
       <div class="hidden-xs col-sm-1" style="padding:5px;">
 <?php if( !empty($this->input->get('site_lot'))) : ?>
