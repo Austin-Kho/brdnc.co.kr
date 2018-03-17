@@ -738,9 +738,10 @@ class Cms_m3 extends CB_Controller {
 				$this->form_validation->set_rules('dup_issue_date', '등기부등본 발급일', 'trim|max_length[10]');
 				$this->form_validation->set_rules('owned_percent', '소유지분', 'trim|required|numeric|max_length[9]');
 				$this->form_validation->set_rules('owned_area', '지분면적', 'trim|required|numeric|max_length[13]');
+				$this->form_validation->set_rules('total_price', '총 매매계약 금액', 'trim|numeric|max_length[12]');
+				$this->form_validation->set_rules('contract_date', '계약 체결일', 'trim|max_length[10]');
 				$this->form_validation->set_rules('acc_number', '계좌번호', 'trim|max_length[20]');
 				$this->form_validation->set_rules('acc_owner', '예금주', 'trim|max_length[10]');
-				$this->form_validation->set_rules('total_price', '총 매매계약 금액', 'trim|numeric|max_length[12]');
 				$this->form_validation->set_rules('down_pay1', '1차 계약금', 'trim|numeric|max_length[11]');
 				$this->form_validation->set_rules('down_pay1_date', '1차 계약금 지급일', 'trim|max_length[10]');
 				$this->form_validation->set_rules('down_pay2', '2차 계약금', 'trim|numeric|max_length[11]');
@@ -813,6 +814,7 @@ class Cms_m3 extends CB_Controller {
 						'owned_area' => $this->input->post('owned_area', TRUE),
 						'is_contract' => $is_contract,
 						'total_price' => $this->input->post('total_price', TRUE),
+						'contract_date' => $this->input->post('contract_date', TRUE),
 						'payment_acc' => $payment_acc,
 						'down_pay1' => $this->input->post('down_pay1', TRUE),
 						'down_pay1_date' => $this->input->post('down_pay1_date', TRUE),

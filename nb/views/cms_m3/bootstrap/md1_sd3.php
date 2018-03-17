@@ -29,10 +29,10 @@
     if(document.ex_form.opt8.checked===true) var opt = opt+"-8"; // 행정동
     if(document.ex_form.opt9.checked===true) var opt = opt+"-9"; // 지번
     if(document.ex_form.opt10.checked===true) var opt = opt+"-10"; // 지목
-    if(document.ex_form.opt11.checked===true) var opt = opt+"-11-12"; // 공부상면적(m2/평)
-    if(document.ex_form.opt13.checked===true) var opt = opt+"-13-14"; // 환지면적(m2/평)
+    if(document.ex_form.opt11.checked===true) var opt = opt+"-11-12"; // 공부상면적(㎡/평)
+    if(document.ex_form.opt13.checked===true) var opt = opt+"-13-14"; // 환지면적(㎡/평)
     if(document.ex_form.opt15.checked===true) var opt = opt+"-15"; // 소유지분
-    if(document.ex_form.opt16.checked===true) var opt = opt+"-16-17"; // 소유면적(m2/평)
+    if(document.ex_form.opt16.checked===true) var opt = opt+"-16-17"; // 소유면적(㎡/평)
     if(document.ex_form.opt18.checked===true) var opt = opt+"-18-19-20"; // 은행계좌(은행/계좌/예금주)
     if(document.ex_form.opt21.checked===true) var opt = opt+"-21"; // 계약여부
     if(document.ex_form.opt22.checked===true) var opt = opt+"-22"; // 총 계약금액
@@ -350,22 +350,45 @@ for($i=(count($year)-1); $i>=0; $i--) :
     <!-- 다음 우편번호 서비스 -------------onclick="execDaumPostcode(1)"-----postcode1-----address1_1-----address2_1------------------------>
     <div class="col-sm-12" style="padding:0; margin:0;">
       <div class="hidden-xs hidden-sm col-md-2 bg-info bo-bottom" style="line-height:36px; padding:4px 15px;">&nbsp;</div>
-      <div class="col-xs-6 col-sm-1 bo-bottom" style="padding: 7px 10px;">
+      <div class="col-xs-6 col-sm-2 col-md-1 bo-bottom" style="padding: 7px 10px;">
         <label for="postcode1" class="sr-only">우편번호</label>
         <input type="text" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php echo set_value('postcode1'); if( !empty($owner_row)) echo $owner_addr[0]; ?>" readonly>
       </div>
-      <div class="col-xs-6 col-sm-1 bo-bottom" style="padding: 7px 10px;">
+      <div class="col-xs-6 col-sm-2 col-md-1 bo-bottom" style="padding: 7px 10px;">
         <input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="execDaumPostcode(1)">
       </div>
       <div class="col-xs-12 col-sm-4 bo-bottom" style="padding: 7px 10px;">
         <label for="address1_1" class="sr-only">소유자주소</label>
         <input type="text" class="form-control input-sm han" id="address1_1" name="address1_1" maxlength="100" value="<?php echo set_value('address1_1'); if( !empty($owner_row)) echo $owner_addr[1]; ?>" readonly>
       </div>
-      <div class="col-xs-12 col-sm-3 col-md-2 bo-bottom" style="padding: 7px 10px;">
+      <div class="col-xs-12 col-sm-4 bo-bottom" style="padding: 7px 10px;">
         <label for="address2_1" class="sr-only">소유자주소2</label>
         <input type="text" class="form-control input-sm han" id="address2_1" name="address2_1" maxlength="93" value="<?php echo set_value('address2_1'); if( !empty($owner_row)) echo $owner_addr[2]; ?>" placeholder="나머지 주소">
       </div>
-      <div class="col-xs-12 col-sm-3 col-md-2 bo-bottom" style="padding: 7px 10px;">
+    </div>
+    <div class="col-sm-12 form-group" style="padding:0; margin:0;">
+      <div class="col-xs-12 col-sm-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">소유권 정보</div>
+      <div class="col-xs-6 col-sm-3 col-md-2" style="padding: 7px 10px 0;">
+        <label for="own_sort" class="sr-only">소유구분</label>
+        <select class="form-control input-sm" name="own_sort" data-toggle="tooltip" data-placement="top" title="소유 구분" style="background-color:#fcfcd5;">
+          <option value="">구 분</option>
+          <option value="1" <?php echo set_select('own_sort', '1'); if( !$owner_row->own_sort OR $owner_row->own_sort=='1') echo "selected";?>>개 인</option>
+          <option value="2" <?php echo set_select('own_sort', '2'); if($owner_row->own_sort=='2') echo "selected";?>>법 인</option>
+          <option value="3" <?php echo set_select('own_sort', '3'); if($owner_row->own_sort=='3') echo "selected";?>>국/공유지</option>
+        </select>
+      </div>
+      <div class="visible-md visible-lg col-md-1 right" style="line-height:34px; padding:5px 0;">소유지분(%)</div>
+      <div class="col-xs-6 col-sm-3 col-md-2" style="padding: 7px 10px;">
+        <label for="owned_percent" class="sr-only">소유지분</label>
+        <input type="text" name="owned_percent" value="<?php echo set_value('owned_percent'); if( !empty($owner_row)) echo $owner_row->owned_percent; ?>" data-toggle="tooltip" data-placement="top" title="소유지분(%) - (필수)" placeholder="소유지분(%) - (필수)" class="form-control input-sm" maxlength="9" required style="background-color:#fcfcd5;">
+      </div>
+      <div class="visible-md visible-lg col-md-1 right" style="line-height:34px; padding:5px 0;">지분면적(㎡)</div>
+      <div class="col-xs-6 col-sm-3 col-md-2" style="padding: 7px 10px;">
+        <label for="owned_area" class="sr-only">지분면적</label>
+        <input type="text" name="owned_area" value="<?php echo set_value('owned_area'); if( !empty($owner_row)) echo $owner_row->owned_area; ?>" data-toggle="tooltip" data-placement="top" title="지분면적(㎡) - (필수)" placeholder="지분면적(㎡) - (필수)" class="form-control input-sm" maxlength="13" required style="background-color:#fcfcd5;">
+      </div>
+
+      <div class="col-xs-6 col-sm-3 col-md-2" style="padding: 7px 10px;">
         <div class="input-group">
           <label for="dup_issue_date" class="sr-only">등기부등본 발급일</label>
           <input type="text" class="form-control input-sm" id="dup_issue_date" name="dup_issue_date" maxlength="10" value="<?php echo set_value('dup_issue_date'); if( !empty($owner_row && $owner_row->dup_issue_date!=='0000-00-00')) echo $owner_row->dup_issue_date; ?>" data-toggle="tooltip" data-placement="top" title="등기부등본 발급일" placeholder="등기부등본 발급일" onClick="cal_add(this); event.cancelBubble=true" readonly>
@@ -377,43 +400,6 @@ for($i=(count($year)-1); $i>=0; $i--) :
         </div>
       </div>
     </div>
-    <div class="col-sm-12 form-group" style="padding:0; margin:0;">
-      <div class="col-xs-12 col-sm-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">소유권 정보</div>
-      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 7px 10px 0;">
-        <label for="own_sort" class="sr-only">소유구분</label>
-        <select class="form-control input-sm" name="own_sort" data-toggle="tooltip" data-placement="top" title="소유 구분" style="background-color:#fcfcd5;">
-          <option value="">구 분</option>
-          <option value="1" <?php echo set_select('own_sort', '1'); if( !$owner_row->own_sort OR $owner_row->own_sort=='1') echo "selected";?>>개 인</option>
-          <option value="2" <?php echo set_select('own_sort', '2'); if($owner_row->own_sort=='2') echo "selected";?>>법 인</option>
-          <option value="3" <?php echo set_select('own_sort', '3'); if($owner_row->own_sort=='3') echo "selected";?>>국/공유지</option>
-        </select>
-      </div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
-        <label for="owned_percent" class="sr-only">소유지분</label>
-        <input type="text" name="owned_percent" value="<?php echo set_value('owned_percent'); if( !empty($owner_row)) echo $owner_row->owned_percent; ?>" data-toggle="tooltip" data-placement="top" title="소유지분(%) - (필수)" placeholder="소유지분(%) - (필수)" class="form-control input-sm" maxlength="9" required style="background-color:#fcfcd5;">
-      </div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
-        <label for="owned_area" class="sr-only">지분면적</label>
-        <input type="text" name="owned_area" value="<?php echo set_value('owned_area'); if( !empty($owner_row)) echo $owner_row->owned_area; ?>" data-toggle="tooltip" data-placement="top" title="지분면적(㎡) - (필수)" placeholder="지분면적(㎡) - (필수)" class="form-control input-sm" maxlength="13" required style="background-color:#fcfcd5;">
-      </div>
-      <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 7px 10px;">
-        <label for="bank_name" class="sr-only">은행선택</label>
-        <select class="form-control input-sm" name="bank_name" data-toggle="tooltip" data-placement="top" title="은행선택">
-          <option value="" <?php echo set_select('bank_name', ''); ?>>선 택</option>
-<?php foreach ($bank as $lt) : ?>
-          <option value="<?php echo $lt->bank_name; ?>" <?php echo set_select('bank_name', $lt->bank_name); if($payment_acc[0]==$lt->bank_name) echo "selected"; ?>><?php echo $lt->bank_name; ?></option>
-<?php endforeach; ?>
-        </select>
-      </div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
-        <label for="acc_number" class="sr-only">계좌번호</label>
-        <input type="text" name="acc_number" value="<?php echo set_value('acc_number'); if( !empty($owner_row)) echo $payment_acc[1]; ?>" data-toggle="tooltip" data-placement="top" title="계좌번호" placeholder="계좌번호" class="form-control input-sm" maxlength="20">
-      </div>
-      <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
-        <label for="acc_owner" class="sr-only">예 금 주</label>
-        <input type="text" name="acc_owner" value="<?php echo set_value('acc_owner'); if( !empty($owner_row)) echo $payment_acc[2]; ?>" data-toggle="tooltip" data-placement="top" title="예 금 주" placeholder="예 금 주" class="form-control input-sm" maxlength="10">
-      </div>
-    </div>
     <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
       <div class="hidden-xs hidden-sm col-md-2 bg-info" style="height:79px;">&nbsp;</div>
       <div class="col-xs-12 col-md-10" style="padding: 7px 10px;">
@@ -423,7 +409,11 @@ for($i=(count($year)-1); $i>=0; $i--) :
     </div>
     <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
       <div class="col-xs-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">상담 기록 (상담일시-내용)
+<?php if($this->agent->is_browser('Internet Explorer')): ?>
         <div class="hidden-xs hidden-sm col-md-2 bg-info" style="height:36px;">&nbsp;</div>
+<?php else: ?>
+        <div class="hidden-xs hidden-sm col-md-2 bg-info" style="height:45px;">&nbsp;</div>
+<?php endif; ?>
       </div>
       <div class="col-xs-12 col-sm-10" style="padding: 7px 10px 17px;">
         <label for="rights_restrictions" class="sr-only">상담 기록 (상담일시-내용)</label>
@@ -433,22 +423,49 @@ for($i=(count($year)-1); $i>=0; $i--) :
       <div class="col-xs-12 col-md-10" style="padding:0;">
         <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 13px 10px;">
           <label class="checkbox-inline">
-            <input type="checkbox" name="is_contract" value="1" <?php echo set_checkbox('is_contract', '1'); if($owner_row->is_contract=='1') echo "checked"; ?>> 계약 여부
+            <input type="checkbox" name="is_contract" value="1" <?php echo set_checkbox('is_contract', '1'); if($owner_row->is_contract=='1') echo "checked"; ?>> 계약 체결여부
           </label>
         </div>
         <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <label for="total_price" class="sr-only">총 매매계약 금액</label>
-          <input type="text" name="total_price" value="<?php echo set_value('total_price'); if( !empty($owner_row)) echo $owner_row->total_price; ?>" data-toggle="tooltip" data-placement="top" title="총 매매계약 금액 (단위:원)" placeholder="총 매매계약 금액 (단위:원)" class="form-control input-sm" maxlength="12">
+          <input type="text" name="total_price" value="<?php echo set_value('total_price'); if($owner_row->total_price !=='0') echo $owner_row->total_price; ?>" data-toggle="tooltip" data-placement="top" title="총 매매계약 금액 (단위:원)" placeholder="총 매매계약 금액 (단위:원)" class="form-control input-sm" maxlength="12">
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+          <div class="input-group">
+            <label for="contract_date" class="sr-only">계약 체결일</label>
+            <input type="text" class="form-control input-sm" id="contract_date" name="contract_date" maxlength="10" value="<?php echo set_value('contract_date'); if( !empty($owner_row && $owner_row->contract_date!=='0000-00-00')) echo $owner_row->contract_date; ?>" data-toggle="tooltip" data-placement="top" title="계약 체결일" placeholder="계약 체결일" onClick="cal_add(this); event.cancelBubble=true">
+            <div class="input-group-addon">
+              <a href="javascript:" onclick="cal_add(document.getElementById('contract_date'),this); event.cancelBubble=true">
+                <span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+          <label for="bank_name" class="sr-only">은행선택</label>
+          <select class="form-control input-sm" name="bank_name" data-toggle="tooltip" data-placement="top" title="은행선택">
+            <option value="" <?php echo set_select('bank_name', ''); ?>>입금은행</option>
+  <?php foreach ($bank as $lt) : ?>
+            <option value="<?php echo $lt->bank_name; ?>" <?php echo set_select('bank_name', $lt->bank_name); if($payment_acc[0]==$lt->bank_name) echo "selected"; ?>><?php echo $lt->bank_name; ?></option>
+  <?php endforeach; ?>
+          </select>
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+          <label for="acc_number" class="sr-only">계좌번호</label>
+          <input type="text" name="acc_number" value="<?php echo set_value('acc_number'); if( !empty($owner_row)) echo $payment_acc[1]; ?>" data-toggle="tooltip" data-placement="top" title="계좌번호" placeholder="계좌번호" class="form-control input-sm" maxlength="20">
+        </div>
+        <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
+          <label for="acc_owner" class="sr-only">예 금 주</label>
+          <input type="text" name="acc_owner" value="<?php echo set_value('acc_owner'); if( !empty($owner_row)) echo $payment_acc[2]; ?>" data-toggle="tooltip" data-placement="top" title="예 금 주" placeholder="예 금 주" class="form-control input-sm" maxlength="10">
         </div>
       </div>
     </div>
-
     <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
       <div class="col-xs-12 col-sm-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">계약금 지급 관련</div>
       <div class="col-xs-12 col-md-10" style="padding:0;">
         <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <label for="down_pay1" class="sr-only">1차 계약금</label>
-          <input type="text" name="down_pay1" value="<?php echo set_value('down_pay1'); if( !empty($owner_row)) echo $owner_row->down_pay1; ?>" data-toggle="tooltip" data-placement="top" title="1차 계약금" placeholder="1차 계약금" class="form-control input-sm" maxlength="11">
+          <input type="text" name="down_pay1" value="<?php echo set_value('down_pay1'); if($owner_row->down_pay1 !=='0') echo $owner_row->down_pay1; ?>" data-toggle="tooltip" data-placement="top" title="1차 계약금" placeholder="1차 계약금" class="form-control input-sm" maxlength="11">
         </div>
         <div class="col-xs-4 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <div class="input-group">
@@ -468,7 +485,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
         </div>
         <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <label for="down_pay2" class="sr-only">2차 계약금</label>
-          <input type="text" name="down_pay2" value="<?php echo set_value('down_pay2'); if( !empty($owner_row)) echo $owner_row->down_pay2; ?>" data-toggle="tooltip" data-placement="top" title="2차 계약금" placeholder="2차 계약금" class="form-control input-sm" maxlength="11">
+          <input type="text" name="down_pay2" value="<?php echo set_value('down_pay2'); if($owner_row->down_pay2 !=='0') echo $owner_row->down_pay2; ?>" data-toggle="tooltip" data-placement="top" title="2차 계약금" placeholder="2차 계약금" class="form-control input-sm" maxlength="11">
         </div>
         <div class="col-xs-4 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <div class="input-group">
@@ -494,7 +511,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
       <div class="col-xs-12 col-md-10" style="padding:0;">
         <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <label for="inter_pay1" class="sr-only">1차 중도금</label>
-          <input type="text" name="inter_pay1" value="<?php echo set_value('inter_pay1'); if( !empty($owner_row)) echo $owner_row->inter_pay1; ?>" data-toggle="tooltip" data-placement="top" title="1차 중도금" placeholder="1차 중도금" class="form-control input-sm" maxlength="11">
+          <input type="text" name="inter_pay1" value="<?php echo set_value('inter_pay1'); if($owner_row->inter_pay1 !=='0') echo $owner_row->inter_pay1; ?>" data-toggle="tooltip" data-placement="top" title="1차 중도금" placeholder="1차 중도금" class="form-control input-sm" maxlength="11">
         </div>
         <div class="col-xs-4 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <div class="input-group">
@@ -514,7 +531,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
         </div>
         <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <label for="inter_pay2" class="sr-only">2차 중도금</label>
-          <input type="text" name="inter_pay2" value="<?php echo set_value('inter_pay2'); if( !empty($owner_row)) echo $owner_row->inter_pay2; ?>" data-toggle="tooltip" data-placement="top" title="2차 중도금" placeholder="2차 중도금" class="form-control input-sm" maxlength="11">
+          <input type="text" name="inter_pay2" value="<?php echo set_value('inter_pay2'); if($owner_row->inter_pay2 !=='0') echo $owner_row->inter_pay2; ?>" data-toggle="tooltip" data-placement="top" title="2차 중도금" placeholder="2차 중도금" class="form-control input-sm" maxlength="11">
         </div>
         <div class="col-xs-4 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <div class="input-group">
@@ -539,7 +556,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
       <div class="col-xs-12 col-md-10" style="padding:0;">
         <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <label for="remain_pay" class="sr-only">잔금</label>
-          <input type="text" name="remain_pay" value="<?php echo set_value('remain_pay'); if( !empty($owner_row)) echo $owner_row->remain_pay; ?>" data-toggle="tooltip" data-placement="top" title="잔 금" placeholder="잔 금" class="form-control input-sm" maxlength="11">
+          <input type="text" name="remain_pay" value="<?php echo set_value('remain_pay'); if($owner_row->remain_pay !=='0') echo $owner_row->remain_pay; ?>" data-toggle="tooltip" data-placement="top" title="잔 금" placeholder="잔 금" class="form-control input-sm" maxlength="11">
         </div>
         <div class="col-xs-4 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <div class="input-group">
