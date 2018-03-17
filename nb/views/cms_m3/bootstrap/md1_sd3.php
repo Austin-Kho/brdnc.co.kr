@@ -364,7 +364,6 @@ for($i=(count($year)-1); $i>=0; $i--) :
         <label for="address2_1" class="sr-only">소유자주소2</label>
         <input type="text" class="form-control input-sm han" id="address2_1" name="address2_1" maxlength="93" value="<?php echo set_value('address2_1'); if( !empty($owner_row)) echo $owner_addr[2]; ?>" placeholder="나머지 주소">
       </div>
-
       <div class="col-xs-12 col-sm-3 col-md-2 bo-bottom" style="padding: 7px 10px;">
         <div class="input-group">
           <label for="dup_issue_date" class="sr-only">등기부등본 발급일</label>
@@ -425,7 +424,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
       <div class="col-xs-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">상담 기록 (상담일시-내용)
         <div class="hidden-xs hidden-sm col-md-2 bg-info" style="height:36px;">&nbsp;</div>
       </div>
-      <div class="col-xs-12 col-sm-10" style="padding: 7px 10px 8px;">
+      <div class="col-xs-12 col-sm-10" style="padding: 7px 10px 17px;">
         <label for="rights_restrictions" class="sr-only">상담 기록 (상담일시-내용)</label>
         <textarea class="form-control" name="counsel_record" rows="3" data-toggle="tooltip" data-placement="top" title="상담 기록 (상담일시-내용)" placeholder="상담일시 - 상담내용"><?php echo set_value('counsel_record'); if( !empty($owner_row)) echo $owner_row->counsel_record; ?></textarea>
       </div>
