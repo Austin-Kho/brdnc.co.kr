@@ -188,7 +188,7 @@ function execDaumPostcode(n) {
 						// 우편번호와 주소 정보를 해당 필드에 넣는다.
 						document.getElementById('postcode'+n).value = data.zonecode; //5자리 새우편번호 사용
 						document.getElementById('address1_'+n).value = fullAddr;
-						if(dtleAddr !=='') { document.getElementById('address2_'+n).value = dtleAddr; }
+						document.getElementById('address2_'+n).value = dtleAddr;
 						if(document.getElementById('addressEnglish'))  document.getElementById('addressEnglish').value = data.addressEnglish;
 
 						// 커서를 상세주소 필드로 이동한다.
