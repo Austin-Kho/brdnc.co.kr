@@ -44,6 +44,7 @@
     if(document.ex_form.opt38.checked===true) var opt = opt+"-38"; // 소유권 이전등기
     if(document.ex_form.opt39.checked===true) var opt = opt+"-39"; // 권리제한 사항
     if(document.ex_form.opt40.checked===true) var opt = opt+"-40"; // 상담 기록
+    if(document.ex_form.opt41.checked===true) var opt = opt+"-41"; // 등기부등본 발급일
 
     location.href = url+"&row="+opt;
   }
@@ -613,6 +614,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
       <div class="checkbox"><label><input type="checkbox" name="opt38"> 소유권이전등기&nbsp;</label></div>
       <div class="checkbox"><label><input type="checkbox" name="opt39"> 권리제한사항&nbsp;</label></div>
       <div class="checkbox"><label><input type="checkbox" name="opt40"> 상담 기록&nbsp;</label></div>
+      <div class="checkbox"><label><input type="checkbox" name="opt41"> 등기부등본 발급일&nbsp;</label></div>
 
 		</div>
   </div>

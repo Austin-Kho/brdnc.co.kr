@@ -197,6 +197,7 @@ class Site_owner_data extends CB_Controller {
 				case '38': $wn = 8; $title = "소유권이전등기"; $sub_title = ""; $num=""; $mc_code=""; break; //
 				case '39': $wn = 60; $title = "권리제한사항"; $sub_title = ""; $num=""; $mc_code=""; break; //
 				case '40': $wn = 60; $title = "상담 기록"; $sub_title = ""; $num=""; $mc_code=""; break; //
+				case '41': $wn = 13; $title = "등기부 발급일"; $sub_title = ""; $num=""; $mc_code=""; break; //
 				default: $wn = 5; break; // 번호
 			}
 
@@ -291,6 +292,7 @@ class Site_owner_data extends CB_Controller {
 					case '38': $content = $ownership_is_take; $align=""; break; // 소유권이전 여부
 					case '39': $content = $lt->rights_restrictions; $align="left"; break; // 권리제한 사항
 					case '40': $content = $lt->counsel_record; $align="left"; break; // 상담 기록
+					case '41': $content = $lt->dup_issue_date; $align=""; break; // 등기부 발급일
 				}
 				$spreadsheet->getActiveSheet()->setCellValue(toAlpha($j).(4+$i), $content);// 해당 셀의 내용을 입력 합니다.
 				if($align == "right") {
