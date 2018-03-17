@@ -671,7 +671,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
       }
 ?>
         <tr class="center">
-          <td><?php echo $lt->seq."-".$lt->lot_order; ?></td>
+          <td><?php echo $lt->lot_order."-".$lt->seq; ?></td>
           <td><?php echo $lt->owner; ?></td>
           <td><?php echo $lt->admin_dong; ?></td>
           <td><?php echo $lt->lot_num; ?></td>
@@ -687,8 +687,10 @@ for($i=(count($year)-1); $i>=0; $i--) :
           <td><a href="javascript:" onclick="<?php echo $modi_btn; ?>" type="button" class="btn btn-success btn-xs">수정</a></td>
           <td><a href="javascript:" onclick="<?php echo $del_btn; ?>" type="button" class="btn btn-danger btn-xs">삭제</a></td>
         </tr>
-<?php endforeach; ?>
-<?php endif;?>
+<?php
+  endforeach;
+endif;
+?>
       </tbody>
     </table>
   </div>

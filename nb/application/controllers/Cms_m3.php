@@ -619,6 +619,7 @@ class Cms_m3 extends CB_Controller {
 			// 페이지네이션 라이브러리 로딩 추가
 			$this->load->library('pagination');
 
+			// 기본 토지지번 데이터
 			if( !$this->input->get('set_sort') OR $this->input->get('set_sort')=='1') {
 
 				//페이지네이션 설정/////////////////////////////////
@@ -651,8 +652,9 @@ class Cms_m3 extends CB_Controller {
 					}
 				}
 
+			// 소유권 정보 입력할 토지(지번) 데이터
 			}elseif($this->input->get('set_sort')=='2'){
-				// 소유권 정보 입력할 토지(지번) 데이터
+
 				if($this->input->get('site_lot')) $view['sel_site'] = $sel_site = $this->cms_main_model->data_row('cb_cms_site_status', array('seq' => $this->input->get('site_lot')));
 
 				if( !$this->input->get('search_con') OR $this->input->get('search_con')===''){
@@ -701,7 +703,7 @@ class Cms_m3 extends CB_Controller {
 						FROM cb_cms_site_ownership JOIN cb_cms_site_status
 						ON cb_cms_site_ownership.lot_seq = cb_cms_site_status.seq
 						$w_qry
-						ORDER BY cb_cms_site_ownership.seq DESC, lot_order DESC, lot_seq DESC
+						ORDER BY lot_order DESC, cb_cms_site_ownership.seq DESC, lot_seq DESC
 						LIMIT $start, $limit "
 				);
 

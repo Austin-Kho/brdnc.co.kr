@@ -47,7 +47,7 @@ class Site_owner_data extends CB_Controller {
           FROM cb_cms_site_ownership JOIN cb_cms_site_status
           ON cb_cms_site_ownership.lot_seq = cb_cms_site_status.seq
           $w_qry
-          ORDER BY cb_cms_site_ownership.seq, lot_order, lot_seq "
+          ORDER BY lot_order, cb_cms_site_ownership.seq, lot_seq "
 		);
 
 		$row_opt = explode("-", urldecode($this->input->get('row'))); // 출력할 데이터 열 정보
@@ -251,7 +251,7 @@ class Site_owner_data extends CB_Controller {
 
 			for($j=0; $j<count($row_opt); $j++){
 				switch ($row_opt[$j]) {
-					case '1': $content = $i; $align=""; break; // 소유자
+					case '1': $content = $lt->lot_order."-".$i; $align=""; break; // 소유자
 					case '2': $content = $lt->owner; $align=""; break; // 소유자
 					case '3': $content = $lt->owner_id_date; $align=""; break; // 생년월일
 					case '4': $content = $lt->owner_tel_1; $align=""; break; // 연락처1
