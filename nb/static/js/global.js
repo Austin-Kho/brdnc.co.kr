@@ -170,28 +170,25 @@ function execDaumPostcode(n) {
 
 						// 각 주소의 노출 규칙에 따라 주소를 조합한다.
 						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-						var fullAddr = data.address; // 최종 주소 변수
+						var fullAddr = data.roadAddress;;  // 메인 도로명 주소
 						var extraAddr = ''; // 조합형 주소 변수
 
-						// 기본 주소가 도로명 타입일때 조합한다.
-						if(data.addressType === 'R'){
-								//법정동명이 있을 경우 추가한다.
-								if(data.bname !== ''){
-										extraAddr += data.bname;
-								}
-								// 건물명이 있을 경우 추가한다.
-								if(data.buildingName !== ''){
-										extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-								}
-
-								// 상세 주소란에 입력할 괄호안 주소 데이터를 만든다.
-								dtleAddr = (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+						//법정동명이 있을 경우 추가한다.
+						if(data.bname !== ''){
+								extraAddr += data.bname;
 						}
+						// 건물명이 있을 경우 추가한다.
+						if(data.buildingName !== ''){
+								extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+						}
+
+						// 상세 주소란에 입력할 괄호안 주소 데이터를 만든다.
+						dtleAddr = (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
 
 						// 우편번호와 주소 정보를 해당 필드에 넣는다.
 						document.getElementById('postcode'+n).value = data.zonecode; //5자리 새우편번호 사용
 						document.getElementById('address1_'+n).value = fullAddr;
-						document.getElementById('address2_'+n).value = dtleAddr;
+						if(dtleAddr !=='') { document.getElementById('address2_'+n).value = dtleAddr; }
 						if(document.getElementById('addressEnglish'))  document.getElementById('addressEnglish').value = data.addressEnglish;
 
 						// 커서를 상세주소 필드로 이동한다.
