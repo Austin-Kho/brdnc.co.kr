@@ -132,11 +132,11 @@
   <fieldset>
     <div class="row font12 form-group" style="margin: 0 0 50px;">
       <div class="col-xs-12 bo-top bo-bottom" style="padding:0;">
-        <div class="col-xs-4 col-sm-2 center label-wrap" style="padding:10px;">등록차수</div>
-        <div class="col-xs-5 col-sm-4 center label-wrap" style="padding:10px;">차수명</div>
-        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">등록(수정)일</div>
-        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">등록자</div>
-        <div class="col-xs-3 col-sm-2 center label-wrap" style="padding:10px;">&nbsp;</div>
+        <div class="col-xs-4 col-sm-2 center label-wrap">등록차수</div>
+        <div class="col-xs-5 col-sm-4 center label-wrap">차수명</div>
+        <div class="hidden-xs col-sm-2 center label-wrap">등록(수정)일</div>
+        <div class="hidden-xs col-sm-2 center label-wrap">등록자</div>
+        <div class="col-xs-3 col-sm-2 center label-wrap">&nbsp;</div>
 
 <?php if(empty($con_diff)): ?>
         <div class="col-xs-12 center bo-top" style="padding:60px;">등록된 데이터가 없습니다.</div>
@@ -182,14 +182,14 @@
   <fieldset>
     <div class="row font12 form-group" style="margin: 0 0 50px;">
       <div class="col-xs-12 bo-top bo-bottom" style="padding:0;">
-        <div class="col-xs-3 col-sm-1 center label-wrap" style="padding:10px;">납부구분</div>
-        <div class="hidden-xs col-sm-1 center label-wrap" style="padding:10px;">회차코드</div>
-        <div class="col-xs-3 col-sm-1 center label-wrap" style="padding:10px;">납부순서</div>
-        <div class="col-xs-4 col-sm-2 center label-wrap" style="padding:10px;">회차명칭</div>
-        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">부가설명</div>
-        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">납부기한</div>
-        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">등록(수정)일</div>
-        <div class="col-xs-2 col-sm-1 center label-wrap" style="padding:10px;">등록자</div>
+        <div class="col-xs-3 col-sm-1 center label-wrap">납부구분</div>
+        <div class="hidden-xs col-sm-1 center label-wrap">회차코드</div>
+        <div class="col-xs-3 col-sm-1 center label-wrap">납부순서</div>
+        <div class="col-xs-4 col-sm-2 center label-wrap">회차명칭</div>
+        <div class="hidden-xs col-sm-2 center label-wrap">부가설명</div>
+        <div class="hidden-xs col-sm-2 center label-wrap">납부기한</div>
+        <div class="hidden-xs col-sm-2 center label-wrap">등록(수정)일</div>
+        <div class="col-xs-2 col-sm-1 center label-wrap">등록자</div>
 
 <?php if(empty($pay_time)): ?>
       <div class="col-xs-12 center bo-top" style="padding:60px;">등록된 데이터가 없습니다.</div>
@@ -261,12 +261,12 @@ echo form_open(current_full_url(), $attributes, $hidden);
   <fieldset>
     <div class="row font12 form-group" style="margin: 0 0 50px;">
       <div class="col-xs-12 bo-top bo-bottom" style="padding:0;">
-        <div class="col-xs-3 col-sm-2 center label-wrap" style="padding:10px;">층 범위(시작)</div>
-        <div class="col-xs-3 col-sm-2 center label-wrap" style="padding:10px;">층 범위(종료)</div>
-        <div class="col-xs-4 col-sm-2 center label-wrap" style="padding:10px;">층 범위 명칭</div>
-        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">등록(수정)일</div>
-        <div class="col-xs-2 col-sm-2 center label-wrap" style="padding:10px;">등록자</div>
-        <div class="hidden-xs col-sm-2 center label-wrap" style="padding:10px;">&nbsp;</div>
+        <div class="col-xs-3 col-sm-2 center label-wrap">층 범위(시작)</div>
+        <div class="col-xs-3 col-sm-2 center label-wrap">층 범위(종료)</div>
+        <div class="col-xs-4 col-sm-2 center label-wrap">층 범위 명칭</div>
+        <div class="hidden-xs col-sm-2 center label-wrap">등록(수정)일</div>
+        <div class="col-xs-2 col-sm-2 center label-wrap">등록자</div>
+        <div class="hidden-xs col-sm-2 center label-wrap">&nbsp;</div>
 
 <?php if(empty($con_floor)): ?>
       <div class="col-xs-12 center bo-top" style="padding:60px;">등록된 데이터가 없습니다.</div>
@@ -320,11 +320,11 @@ echo form_open(current_full_url(), $attributes, $hidden);
   <fieldset>
     <div class="row font12 form-group" style="margin: 0 0 50px;">
       <div class="col-xs-12 bo-top bo-bottom" style="padding:0;">
-        <div class="col-xs-3 center label-wrap" style="padding:10px;">향별 조건코드</div>
-        <div class="col-xs-3 center label-wrap" style="padding:10px;">향별 조건명</div>
-        <div class="col-xs-2 center label-wrap" style="padding:10px;">등록(수정)일</div>
-        <div class="col-xs-2 center label-wrap" style="padding:10px;">등록자</div>
-        <div class="col-xs-2 center label-wrap" style="padding:10px;">&nbsp;</div>
+        <div class="col-xs-3 center label-wrap">향별 조건코드</div>
+        <div class="col-xs-3 center label-wrap">향별 조건명</div>
+        <div class="col-xs-2 center label-wrap">등록(수정)일</div>
+        <div class="col-xs-2 center label-wrap">등록자</div>
+        <div class="col-xs-2 center label-wrap">&nbsp;</div>
 
   <?php if(empty($con_direction)): ?>
       <div class="col-xs-12 center bo-top" style="padding:60px;">등록된 데이터가 없습니다.</div>
