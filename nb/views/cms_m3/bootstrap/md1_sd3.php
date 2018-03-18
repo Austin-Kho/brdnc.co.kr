@@ -98,7 +98,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 
 <div class="row font12" style="margin: 0 0 20px;">
   <ul class="nav nav-tabs">
-    <li role="presentation" class="<?php if(empty($this->input->get('set_sort')) or $this->input->get('set_sort')==='1') echo 'active'; ?>"><a href="<?php echo $set_sort_url1; ?>">토지 기초 정보</a></li>
+    <li role="presentation" class="<?php if(empty($this->input->get('set_sort')) or $this->input->get('set_sort')==='1') echo 'active'; ?>"><a href="<?php echo $set_sort_url1; ?>">기본 토지 정보</a></li>
     <li role="presentation" class="<?php if($this->input->get('set_sort')==='2') echo 'active'; ?>"><a href="<?php echo $set_sort_url2; ?>">소유권 관련 정보</a></li>
   </ul>
 </div>
@@ -307,7 +307,9 @@ for($i=(count($year)-1); $i>=0; $i--) :
     'lot_order' => $sel_site->order_no,
     'lot_num' => $sel_site->lot_num,
     'own_seq' => $this->input->get('own_seq'),
-    'page' => $this->input->get('page')
+    'page' => $this->input->get('page'),
+    'sc' => $this->input->get('search_con'),
+    'sw' => $this->input->get('search_word')
   );
   echo form_open(current_full_url(), $attributes, $hidden);
   if(!empty($owner_row)){
@@ -580,7 +582,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
           </label>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-3 right" style="padding: 7px 10px;">
-          <input class="btn btn-success btn-sm" type="button" value="<?php echo $sm; ?>" onclick="<?php echo $submit_str; ?>">
+          <input class="btn btn-sm <?php echo $cl; ?>" type="button" value="<?php echo $sm; ?>" onclick="<?php echo $submit_str; ?>">
         </div>
       </div>
     </div>
@@ -678,7 +680,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
         case '3': $own_sort = "국공유지"; break;
         default: $own_sort = ""; break;
       }
-      $modi_url = base_url("cms_m3/project/1/3?project=".$project."&set_sort=2&mode=2&site_lot=".$lt->lot_seq."&own_seq=".$lt->seq."&page=".$this->input->get('page'));
+      $modi_url = base_url("cms_m3/project/1/3?project=".$project."&set_sort=2&mode=2&site_lot=".$lt->lot_seq."&own_seq=".$lt->seq."&page=".$this->input->get('page')."&search_con=".$this->input->get('search_con')."&search_word=".$this->input->get('search_word')); //project=1&set_sort=2&mode=1&site_lot=&search_con=&search_word=김영구
       $del_url = base_url("cms_m3/project/1/3?project=".$project."&set_sort=2&mode=3&site_lot=".$lt->lot_seq."&own_seq=".$lt->seq."&page=".$this->input->get('page'));
       if($auth13<2) {
         $modi_btn = "alert('이 페이지에 대한 관리 권한이 없습니다.')";

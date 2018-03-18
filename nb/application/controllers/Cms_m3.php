@@ -51,9 +51,9 @@ class Cms_m3 extends CB_Controller {
 		$view['sec_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>$view['top_menu'][2]->men_id), 'men_order');
 
 		$view['s_di'] = array(
-			array('동호수 등록', '세부설정 관리', '토지조서 관리'), // 첫번째 하위 메뉴
+			array('동호수 등록', '세부설정 관리', '사업부지 관리'), // 첫번째 하위 메뉴
 			array('프로젝트 목록', '신규 등록', '검토 자료'),       // 두번째 하위 메뉴
-			array('동호(UNIT) 데이터 입력', 'UNIT별 세부설정 관리', '토지목록 조서 관리'),   // 첫번째 하위 제목
+			array('동호(UNIT) 데이터 입력', 'UNIT별 세부설정 관리', '토지목록 및 소유권 관리'),   // 첫번째 하위 제목
 			array('목록 및 기본정보 관리', '신규 프로젝트 등록', '예비 프로젝트 검토')     // 두번째 하위 제목
 		);
 
@@ -853,11 +853,19 @@ class Cms_m3 extends CB_Controller {
 					}elseif($this->input->post('mode')==='2'){
 						$result = $this->cms_main_model->update_data('cb_cms_site_ownership', $update_data, array('seq'=>$this->input->post('own_seq')));
 					}
+					$return_url = base_url('cms_m3/project/1/3/?project='.$this->input->post('project')
+					.'&set_sort=2&mode='.$this->input->post('mode')
+					.'&site_lot='.$this->input->post('lot_seq')
+					.'&own_seq='.$this->input->post('own_seq')
+					.'&page='.$this->input->post('page')
+					.'&search_con='.$this->input->post('sc')
+					.'&search_word='.$this->input->post('sw'));
 
 					if( !$result){
-						alert('데이터베이스 에러입니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project').'&set_sort=2&page='.$this->input->post('page')));
+						alert('데이터베이스 에러입니다.', $return_url);
+
 					}else{
-						alert('정상적으로 등록되었습니다.', base_url('cms_m3/project/1/3/?project='.$this->input->post('project').'&set_sort=2&page='.$this->input->post('page')));
+						alert('정상적으로 등록되었습니다.', $return_url);
 					}
 				}
 
