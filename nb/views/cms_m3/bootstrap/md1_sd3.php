@@ -120,7 +120,7 @@
   echo form_open(current_full_url(), $attributes, $hidden);
 ?>
   <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
-    <div class="col-sm-12 col-md-1 center bg-info" style="padding: 10px; 0">토지 데이터</div>
+    <div class="col-sm-12 col-md-1 center bgf8" style="padding: 10px; 0">토지 데이터</div>
     <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 4px 15px;">
       <label for="order_no" class="sr-only">순번</label>
       <input type="text" name="order_no" value="<?php echo set_value('order_no'); if($basic_site) echo $basic_site->order_no; ?>" placeholder="no." class="form-control input-sm" maxlength="5" required>
@@ -326,11 +326,11 @@
   }
 ?>
   <div class="bo-top bo-bottom font12" id="owner_input" style="<?php if($this->input->get('mode')!=='2' && empty($this->input->post('lot_seq'))) echo"display:none;"; ?>">
-    <div class="col-sm-12 bo-bottom bgf8" style="line-height:36px; padding:5px 15px;">
+    <div class="col-sm-12 bo-bottom bgfb" style="line-height:36px; padding:5px 15px;">
       <span style="color:#324cfc;"><strong><?php echo "[".$sel_site->admin_dong."] ".$sel_site->lot_num." (".number_format($sel_site->area_returned, 2)."㎡)"; ?></strong></span> - 소유자 정보 입력
     </div>
     <div class="col-sm-12 form-group" style="padding:0; margin:0;">
-      <div class="col-xs-12 col-sm-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">소유자 정보</div>
+      <div class="col-xs-12 col-sm-12 col-md-2 bgf8" style="line-height:36px; padding:4px 15px;">소유자 정보</div>
       <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
         <label for="owner" class="sr-only">소유자명</label>
         <input type="text" name="owner" value="<?php echo set_value('owner'); if( !empty($owner_row)) echo $owner_row->owner; ?>" data-toggle="tooltip" data-placement="top" title="소유자명 - (필수)" placeholder="소유자명 - (필수)" class="form-control input-sm" maxlength="10" required style="background-color:#fcfcd5;">
@@ -358,7 +358,7 @@
     </div>
     <!-- 다음 우편번호 서비스 -------------onclick="execDaumPostcode(1)"-----postcode1-----address1_1-----address2_1------------------------>
     <div class="col-sm-12" style="padding:0; margin:0;">
-      <div class="hidden-xs hidden-sm col-md-2 bg-info bo-bottom" style="line-height:36px; padding:4px 15px;">&nbsp;</div>
+      <div class="hidden-xs hidden-sm col-md-2 bgf8 bo-bottom" style="line-height:36px; padding:4px 15px;">&nbsp;</div>
       <div class="col-xs-6 col-sm-2 col-md-1 bo-bottom" style="padding: 7px 10px;">
         <label for="postcode1" class="sr-only">우편번호</label>
         <input type="text" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php echo set_value('postcode1'); if( !empty($owner_row)) echo $owner_addr[0]; ?>" readonly>
@@ -376,7 +376,7 @@
       </div>
     </div>
     <div class="col-sm-12 form-group" style="padding:0; margin:0;">
-      <div class="col-xs-12 col-sm-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">소유권 정보</div>
+      <div class="col-xs-12 col-sm-12 col-md-2 bgf8" style="line-height:36px; padding:4px 15px;">소유권 정보</div>
       <div class="col-xs-6 col-sm-3 col-md-2" style="padding: 7px 10px 0;">
         <label for="own_sort" class="sr-only">소유구분</label>
         <select class="form-control input-sm" name="own_sort" data-toggle="tooltip" data-placement="top" title="소유 구분" style="background-color:#fcfcd5;">
@@ -410,25 +410,25 @@
       </div>
     </div>
     <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
-      <div class="hidden-xs hidden-sm col-md-2 bg-info" style="height:79px;">&nbsp;</div>
+      <div class="hidden-xs hidden-sm col-md-2 bgf8" style="height:79px;">&nbsp;</div>
       <div class="col-xs-12 col-md-10" style="padding: 7px 10px;">
         <label for="rights_restrictions" class="sr-only">갑/을구 권리 제한사항</label>
         <textarea class="form-control" name="rights_restrictions" rows="3" data-toggle="tooltip" data-placement="top" title="갑/을구 권리 제한사항" placeholder="갑/을구 권리 제한사항"><?php echo set_value('rights_restrictions'); if( !empty($owner_row)) echo $owner_row->rights_restrictions; ?></textarea>
       </div>
     </div>
     <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
-      <div class="col-xs-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">상담 기록 (상담일시-내용)
+      <div class="col-xs-12 col-md-2 bgf8" style="line-height:36px; padding:4px 15px;">상담 기록 (상담일시-내용)
 <?php if($this->agent->is_browser('Internet Explorer')): ?>
-        <div class="hidden-xs hidden-sm col-md-2 bg-info" style="height:36px;">&nbsp;</div>
+        <div class="hidden-xs hidden-sm col-md-2 bgf8" style="height:36px;">&nbsp;</div>
 <?php else: ?>
-        <div class="hidden-xs hidden-sm col-md-2 bg-info" style="height:45px;">&nbsp;</div>
+        <div class="hidden-xs hidden-sm col-md-2 bgf8" style="height:45px;">&nbsp;</div>
 <?php endif; ?>
       </div>
       <div class="col-xs-12 col-sm-10" style="padding: 7px 10px 17px;">
         <label for="rights_restrictions" class="sr-only">상담 기록 (상담일시-내용)</label>
         <textarea class="form-control" name="counsel_record" rows="3" data-toggle="tooltip" data-placement="top" title="상담 기록 (상담일시-내용)" placeholder="상담일시 - 상담내용"><?php echo set_value('counsel_record'); if( !empty($owner_row)) echo $owner_row->counsel_record; ?></textarea>
       </div>
-      <div class="col-xs-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">계약 체결 여부</div>
+      <div class="col-xs-12 col-md-2 bgf8" style="line-height:36px; padding:4px 15px;">계약 체결 여부</div>
       <div class="col-xs-12 col-md-10" style="padding:0;">
         <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 13px 10px;">
           <label class="checkbox-inline">
@@ -470,7 +470,7 @@
       </div>
     </div>
     <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
-      <div class="col-xs-12 col-sm-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">계약금 지급 관련</div>
+      <div class="col-xs-12 col-sm-12 col-md-2 bgf8" style="line-height:36px; padding:4px 15px;">계약금 지급 관련</div>
       <div class="col-xs-12 col-md-10" style="padding:0;">
         <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <label for="down_pay1" class="sr-only">1차 계약금</label>
@@ -516,7 +516,7 @@
 
     </div>
     <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
-      <div class="col-xs-12 col-sm-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">중도금 지급 관련 정보</div>
+      <div class="col-xs-12 col-sm-12 col-md-2 bgf8" style="line-height:36px; padding:4px 15px;">중도금 지급 관련 정보</div>
       <div class="col-xs-12 col-md-10" style="padding:0;">
         <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <label for="inter_pay1" class="sr-only">1차 중도금</label>
@@ -561,7 +561,7 @@
       </div>
     </div>
     <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin-bottom:0;">
-      <div class="col-xs-12 col-sm-12 col-md-2 bg-info" style="line-height:36px; padding:4px 15px;">잔금 지급 관련 정보</div>
+      <div class="col-xs-12 col-sm-12 col-md-2 bgf8" style="line-height:36px; padding:4px 15px;">잔금 지급 관련 정보</div>
       <div class="col-xs-12 col-md-10" style="padding:0;">
         <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <label for="remain_pay" class="sr-only">잔금</label>
@@ -590,7 +590,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xs-12 bo-bottom right bgf8" style="padding: 10px; margin-bottom:30px;">
+    <div class="col-xs-12 bo-bottom right bgfb" style="padding: 10px; margin-bottom:30px;">
       <input class="btn btn-sm <?php echo $cl; ?>" type="button" value="<?php echo $sm; ?>" onclick="<?php echo $submit_str; ?>">
     </div>
   </div>
@@ -615,7 +615,7 @@
   $attributes = array('method' => 'get', 'name' => 'ex_form');
   echo form_open(current_full_url(), $attributes);
 ?>
-    <div class="hidden-xs col-sm-12 form-inline center bg-info" id="output_option" style="padding: 8px; display:none;">
+    <div class="hidden-xs col-sm-12 form-inline center bgf8" id="output_option" style="padding: 8px; display:none;">
 			<div class="checkbox"><label><input type="checkbox" name="opt2" checked> 소유자&nbsp;</label></div>
 			<div class="checkbox"><label><input type="checkbox" name="opt3"> 생년월일(성별)&nbsp;</label></div>
 			<div class="checkbox"><label><input type="checkbox" name="opt4"> 연락처[1]&nbsp;</label></div>
