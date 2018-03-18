@@ -251,6 +251,13 @@ for($i=(count($year)-1); $i>=0; $i--) :
       'mode' => '1'
   );
   echo form_open(current_full_url(), $attributes, $hidden);
+  $close_url = base_url(
+    'cms_m3/project/1/3?project='.$project
+    .'&set_sort=2&mode=1'
+    .'&page='.$this->input->get('page')
+    .'&search_con='.$this->input->get('search_con')
+    .'&search_word='.$this->input->get('search_word')
+  );
 ?>
   <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
     <div class="col-xs-12 col-sm-12 col-md-1 center bg-info" style="line-height:39px;">입력 지번</div>
@@ -271,7 +278,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
       </div>
       <div class="hidden-xs col-sm-1" style="padding:5px;">
 <?php if( !empty($this->input->get('site_lot'))) : ?>
-        <button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="location.href='<?php echo base_url('cms_m3/project/1/3?project='.$project.'&set_sort=2') ?>'"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" aria-label="Close" style="padding-left: 5px;" onclick="location.href='<?php echo $close_url; ?>'"><span aria-hidden="true">&times;</span></button>
 <?php endif; ?>
       </div>
     </div>

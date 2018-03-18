@@ -861,12 +861,7 @@ class Cms_m3 extends CB_Controller {
 					.'&search_con='.$this->input->post('sc')
 					.'&search_word='.$this->input->post('sw'));
 
-					if( !$result){
-						alert('데이터베이스 에러입니다.', $return_url);
-
-					}else{
-						alert('정상적으로 등록되었습니다.', $return_url);
-					}
+					if( !$result){ alert('데이터베이스 에러입니다.', $return_url); }else{ alert('정상적으로 등록되었습니다.', $return_url); }
 				}
 
 			endif;
