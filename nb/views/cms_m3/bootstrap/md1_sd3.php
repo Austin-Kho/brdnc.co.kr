@@ -120,10 +120,10 @@
   echo form_open(current_full_url(), $attributes, $hidden);
 ?>
   <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
-    <div class="col-sm-12 col-md-1 center bgf8" style="padding: 10px; 0">토지 데이터</div>
+    <div class="col-sm-12 col-md-1 center bg-info" style="line-height:38px;">토지 데이터</div>
     <div class="col-xs-6 col-sm-4 col-md-1" style="padding: 4px 15px;">
       <label for="order_no" class="sr-only">순번</label>
-      <input type="text" name="order_no" value="<?php echo set_value('order_no'); if($basic_site) echo $basic_site->order_no; ?>" placeholder="no." class="form-control input-sm" maxlength="5" required>
+      <input type="number" name="order_no" value="<?php echo set_value('order_no'); if($basic_site) echo $basic_site->order_no; ?>" placeholder="no." class="form-control input-sm" maxlength="5" required>
     </div>
     <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
       <label for="admin_dong" class="sr-only">행정동</label>
@@ -139,11 +139,11 @@
     </div>
     <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
       <label for="area_official" class="sr-only">공부상 면적</label>
-      <input type="text" name="area_official" value="<?php echo set_value('area_official'); if($basic_site) echo $basic_site->area_official; ?>" placeholder="공부상 면적(㎡)" class="form-control input-sm" maxlength="12" required>
+      <input type="number" name="area_official" value="<?php echo set_value('area_official'); if($basic_site) echo $basic_site->area_official; ?>" placeholder="공부상 면적(㎡)" class="form-control input-sm" maxlength="12" required>
     </div>
     <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 15px;">
       <label for="area_returned" class="sr-only">환지 면적</label>
-      <input type="text" name="area_returned" value="<?php echo set_value('area_returned'); if($basic_site) echo $basic_site->area_returned; ?>" placeholder="환지(실권리) 면적(㎡)" class="form-control input-sm" maxlength="12">
+      <input type="number" name="area_returned" value="<?php echo set_value('area_returned'); if($basic_site) echo $basic_site->area_returned; ?>" placeholder="환지(실권리) 면적(㎡)" class="form-control input-sm" maxlength="12">
     </div>
     <div class="col-xs-12 col-md-1 right" style="padding: 4px 15px;">
       <input class="btn <?php echo $cl; ?> btn-sm" type="button" value="<?php echo $sm;?>" onclick="<?php echo $submit_str; ?>">
@@ -337,7 +337,7 @@
       </div>
       <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
         <label for="owner_id_birth" class="sr-only">생년월일(6자리)</label>
-        <input type="text" name="owner_id_birth" value="<?php echo set_value('owner_id_birth');  if( !empty($owner_row)) echo $owner_id[0]; ?>" data-toggle="tooltip" data-placement="top" title="생년월일(ex:800123)" placeholder="생년월일(ex:800123)" class="form-control input-sm" maxlength="6">
+        <input type="number" name="owner_id_birth" value="<?php echo set_value('owner_id_birth');  if( !empty($owner_row)) echo $owner_id[0]; ?>" data-toggle="tooltip" data-placement="top" title="생년월일(ex:800123)" placeholder="생년월일(ex:800123)" class="form-control input-sm" maxlength="6">
       </div>
       <div class="col-xs-12 col-sm-4 col-md-2" style="padding: 13px 10px;">
         <label class="radio-inline"><input type="radio" name="owner_id_gender" value="1" <?php echo  set_radio('owner_id_gender', '1', TRUE); if($owner_id[1]=='1') echo "checked"; ?>> 남성</label>
@@ -361,7 +361,7 @@
       <div class="hidden-xs hidden-sm col-md-2 bgf8 bo-bottom" style="line-height:36px; padding:4px 15px;">&nbsp;</div>
       <div class="col-xs-6 col-sm-2 col-md-1 bo-bottom" style="padding: 7px 10px;">
         <label for="postcode1" class="sr-only">우편번호</label>
-        <input type="text" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php echo set_value('postcode1'); if( !empty($owner_row)) echo $owner_addr[0]; ?>" readonly>
+        <input type="number" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php echo set_value('postcode1'); if( !empty($owner_row)) echo $owner_addr[0]; ?>" readonly>
       </div>
       <div class="col-xs-6 col-sm-2 col-md-1 bo-bottom" style="padding: 7px 10px;">
         <input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="execDaumPostcode(1)">
@@ -389,12 +389,12 @@
       <div class="visible-md visible-lg col-md-1 right" style="line-height:34px; padding:5px 0;">소유지분(%)</div>
       <div class="col-xs-6 col-sm-3 col-md-2" style="padding: 7px 10px;">
         <label for="owned_percent" class="sr-only">소유지분</label>
-        <input type="text" name="owned_percent" value="<?php echo set_value('owned_percent'); if( !empty($owner_row)) echo $owner_row->owned_percent; ?>" data-toggle="tooltip" data-placement="top" title="소유지분(%) - (필수)" placeholder="소유지분(%) - (필수)" class="form-control input-sm" maxlength="9" required style="background-color:#fcfcd5;">
+        <input type="number" name="owned_percent" value="<?php echo set_value('owned_percent'); if( !empty($owner_row)) echo $owner_row->owned_percent; ?>" data-toggle="tooltip" data-placement="top" title="소유지분(%) - (필수)" placeholder="소유지분(%) - (필수)" class="form-control input-sm" maxlength="9" required style="background-color:#fcfcd5;">
       </div>
       <div class="visible-md visible-lg col-md-1 right" style="line-height:34px; padding:5px 0;">지분면적(㎡)</div>
       <div class="col-xs-6 col-sm-3 col-md-2" style="padding: 7px 10px;">
         <label for="owned_area" class="sr-only">지분면적</label>
-        <input type="text" name="owned_area" value="<?php echo set_value('owned_area'); if( !empty($owner_row)) echo $owner_row->owned_area; ?>" data-toggle="tooltip" data-placement="top" title="지분면적(㎡) - (필수)" placeholder="지분면적(㎡) - (필수)" class="form-control input-sm" maxlength="13" required style="background-color:#fcfcd5;">
+        <input type="number" name="owned_area" value="<?php echo set_value('owned_area'); if( !empty($owner_row)) echo $owner_row->owned_area; ?>" data-toggle="tooltip" data-placement="top" title="지분면적(㎡) - (필수)" placeholder="지분면적(㎡) - (필수)" class="form-control input-sm" maxlength="13" required style="background-color:#fcfcd5;">
       </div>
 
       <div class="col-xs-6 col-sm-3 col-md-2" style="padding: 7px 10px;">
@@ -437,7 +437,7 @@
         </div>
         <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <label for="total_price" class="sr-only">총 매매계약 금액</label>
-          <input type="text" name="total_price" value="<?php echo set_value('total_price'); if($owner_row->total_price !=='0') echo $owner_row->total_price; ?>" data-toggle="tooltip" data-placement="top" title="총 매매계약 금액 (단위:원)" placeholder="총 매매계약 금액 (단위:원)" class="form-control input-sm" maxlength="12">
+          <input type="number" name="total_price" value="<?php echo set_value('total_price'); if($owner_row->total_price !=='0') echo $owner_row->total_price; ?>" data-toggle="tooltip" data-placement="top" title="총 매매계약 금액 (단위:원)" placeholder="총 매매계약 금액 (단위:원)" class="form-control input-sm" maxlength="12">
         </div>
         <div class="col-xs-6 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <div class="input-group">
@@ -474,7 +474,7 @@
       <div class="col-xs-12 col-md-10" style="padding:0;">
         <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <label for="down_pay1" class="sr-only">1차 계약금</label>
-          <input type="text" name="down_pay1" value="<?php echo set_value('down_pay1'); if($owner_row->down_pay1 !=='0') echo $owner_row->down_pay1; ?>" data-toggle="tooltip" data-placement="top" title="1차 계약금" placeholder="1차 계약금" class="form-control input-sm" maxlength="11">
+          <input type="number" name="down_pay1" value="<?php echo set_value('down_pay1'); if($owner_row->down_pay1 !=='0') echo $owner_row->down_pay1; ?>" data-toggle="tooltip" data-placement="top" title="1차 계약금" placeholder="1차 계약금" class="form-control input-sm" maxlength="11">
         </div>
         <div class="col-xs-4 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <div class="input-group">
@@ -494,7 +494,7 @@
         </div>
         <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <label for="down_pay2" class="sr-only">2차 계약금</label>
-          <input type="text" name="down_pay2" value="<?php echo set_value('down_pay2'); if($owner_row->down_pay2 !=='0') echo $owner_row->down_pay2; ?>" data-toggle="tooltip" data-placement="top" title="2차 계약금" placeholder="2차 계약금" class="form-control input-sm" maxlength="11">
+          <input type="number" name="down_pay2" value="<?php echo set_value('down_pay2'); if($owner_row->down_pay2 !=='0') echo $owner_row->down_pay2; ?>" data-toggle="tooltip" data-placement="top" title="2차 계약금" placeholder="2차 계약금" class="form-control input-sm" maxlength="11">
         </div>
         <div class="col-xs-4 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <div class="input-group">
@@ -520,7 +520,7 @@
       <div class="col-xs-12 col-md-10" style="padding:0;">
         <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <label for="inter_pay1" class="sr-only">1차 중도금</label>
-          <input type="text" name="inter_pay1" value="<?php echo set_value('inter_pay1'); if($owner_row->inter_pay1 !=='0') echo $owner_row->inter_pay1; ?>" data-toggle="tooltip" data-placement="top" title="1차 중도금" placeholder="1차 중도금" class="form-control input-sm" maxlength="11">
+          <input type="number" name="inter_pay1" value="<?php echo set_value('inter_pay1'); if($owner_row->inter_pay1 !=='0') echo $owner_row->inter_pay1; ?>" data-toggle="tooltip" data-placement="top" title="1차 중도금" placeholder="1차 중도금" class="form-control input-sm" maxlength="11">
         </div>
         <div class="col-xs-4 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <div class="input-group">
@@ -540,7 +540,7 @@
         </div>
         <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <label for="inter_pay2" class="sr-only">2차 중도금</label>
-          <input type="text" name="inter_pay2" value="<?php echo set_value('inter_pay2'); if($owner_row->inter_pay2 !=='0') echo $owner_row->inter_pay2; ?>" data-toggle="tooltip" data-placement="top" title="2차 중도금" placeholder="2차 중도금" class="form-control input-sm" maxlength="11">
+          <input type="number" name="inter_pay2" value="<?php echo set_value('inter_pay2'); if($owner_row->inter_pay2 !=='0') echo $owner_row->inter_pay2; ?>" data-toggle="tooltip" data-placement="top" title="2차 중도금" placeholder="2차 중도금" class="form-control input-sm" maxlength="11">
         </div>
         <div class="col-xs-4 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <div class="input-group">
@@ -565,7 +565,7 @@
       <div class="col-xs-12 col-md-10" style="padding:0;">
         <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <label for="remain_pay" class="sr-only">잔금</label>
-          <input type="text" name="remain_pay" value="<?php echo set_value('remain_pay'); if($owner_row->remain_pay !=='0') echo $owner_row->remain_pay; ?>" data-toggle="tooltip" data-placement="top" title="잔 금" placeholder="잔 금" class="form-control input-sm" maxlength="11">
+          <input type="number" name="remain_pay" value="<?php echo set_value('remain_pay'); if($owner_row->remain_pay !=='0') echo $owner_row->remain_pay; ?>" data-toggle="tooltip" data-placement="top" title="잔 금" placeholder="잔 금" class="form-control input-sm" maxlength="11">
         </div>
         <div class="col-xs-4 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <div class="input-group">
