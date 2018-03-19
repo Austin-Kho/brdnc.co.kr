@@ -147,7 +147,7 @@ class Site_owner_data extends CB_Controller {
 		$spreadsheet->getActiveSheet()->mergeCells('A1:'.toAlpha(count($row_opt)-1).'1');// A1부터 해당 열까지 셀을 합칩니다.
 
 		$spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);// A1의 폰트를 변경 합니다.
-		$spreadsheet->getActiveSheet()->setCellValue('A1', $pj_title->pj_name.' 소유자별 토지목록');// 해당 셀의 내용을 입력 합니다.
+		$spreadsheet->getActiveSheet()->setCellValue('A1', $pj_title->pj_name.' 소유자별 토지목록 및 현황');// 해당 셀의 내용을 입력 합니다.
 		$spreadsheet->getActiveSheet()->getStyle(toAlpha(count($row_opt)-1).'2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
 		$spreadsheet->getActiveSheet()->setCellValue(toAlpha(count($row_opt)-1).'2', date('Y-m-d')." 현재");// 해당 셀의 내용을 입력 합니다.
 
