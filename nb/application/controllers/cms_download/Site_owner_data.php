@@ -194,7 +194,7 @@ class Site_owner_data extends CB_Controller {
 				case '35': $wn = 14; $title = "잔 금"; $sub_title = "금액"; $num="1"; $mc_code="2"; break; //
 				case '36': $wn = 13; $title = ""; $sub_title = "지급(기)일"; $num=""; $mc_code="sub"; break; //
 				case '37': $wn = 8; $title = ""; $sub_title = "지급여부"; $num=""; $mc_code="sub"; break; //
-				case '38': $wn = 8; $title = "소유권이전등기"; $sub_title = ""; $num=""; $mc_code=""; break; //
+				case '38': $wn = 8; $title = "소유권\n이전등기"; $sub_title = ""; $num=""; $mc_code=""; break; //
 				case '39': $wn = 60; $title = "권리제한사항"; $sub_title = ""; $num=""; $mc_code=""; break; //
 				case '40': $wn = 60; $title = "상담 기록"; $sub_title = ""; $num=""; $mc_code=""; break; //
 				case '41': $wn = 13; $title = "등기부 발급일"; $sub_title = ""; $num=""; $mc_code=""; break; //
@@ -300,6 +300,7 @@ class Site_owner_data extends CB_Controller {
 				}
 				if($align == "left") {$spreadsheet->getActiveSheet()->getStyle(toAlpha($j).(4+$i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);}
 			}
+			if($is_contract==='완료') {$spreadsheet->getActiveSheet()->getStyle('A'.(4+$i).':'.toAlpha($j-1).(4+$i))->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFFFFDCD');}
 			$i++;
 		}
 

@@ -615,7 +615,7 @@
   $attributes = array('method' => 'get', 'name' => 'ex_form');
   echo form_open(current_full_url(), $attributes);
 ?>
-    <div class="hidden-xs col-sm-12 form-inline center bgf8" id="output_option" style="padding: 8px; display:none;">
+    <div class="hidden-xs col-sm-12 form-inline center bg-info" id="output_option" style="padding: 8px; display:none;">
 			<div class="checkbox"><label><input type="checkbox" name="opt2" checked> 소유자&nbsp;</label></div>
 			<div class="checkbox"><label><input type="checkbox" name="opt3"> 생년월일(성별)&nbsp;</label></div>
 			<div class="checkbox"><label><input type="checkbox" name="opt4"> 연락처[1]&nbsp;</label></div>
