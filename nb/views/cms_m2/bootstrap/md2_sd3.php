@@ -2,6 +2,7 @@
 if($auth23<1) :
 	include('no_auth.php');
 else :
+	$submit_str = "";
 ?>
 <div class="main_start">
 <!-- 2. 사업관리 -> 1. 예산 관리 ->3. 수지 예산안 -->
@@ -47,8 +48,8 @@ for($i=(count($year)-1); $i>=0; $i--) :
 	</form>
 </div>
 
-<div class="row">
-	<div class="col-md-12 table-responsive">
+<div class="row" style="margin: 0;">
+	<div class="col-md-12 table-responsive" style="padding: 0;">
 		<table class="table table-bordered table-hover font12">
 			<thead>
 				<tr>
@@ -120,7 +121,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 			</tbody>
 		</table>
 	</div>
-	<div class="col-md-12 table-responsive">
+	<div class="col-md-12 table-responsive" style="padding: 0;">
 		<table class="table table-bordered table-condensed table-hover font11">
 			<thead>
 				<tr>
@@ -285,37 +286,53 @@ for($i=(count($year)-1); $i>=0; $i--) :
 		echo "</tr>";
 	endfor;
 ?>
-
-				<tr><td colspan="8"></td></tr>
+				<tr><td colspan="8">&nbsp;</td></tr>
 
 <?php
-
-	$out_total_row = 47;
-
-	for($k=0; $k<$out_total_row; $k++) :
-
-		echo "<tr>";
-
-		for($l=0; $l<8; $l++):
-
-			$nu = array(5, 10, 9, 14, 8);
-
-			if($l===0){ // 수입 지출 구분 열
-				// 1열 1행
-				$output_td_html = $k===0 ? "<td rowspan='".$out_total_row."' style='background-color:#eaecf1; text-align:center; vertical-align:middle;'>지</br></br></br>출</td>" : "";
-			}elseif($l===1){ // 지출 대분류 구분 열
-			}else {
-				$output_td_html = "<td>&nbsp;</td>";
-			}
+	$out_total_row = 20;
 
 
-				echo $output_td_html;
-			endfor;
-		echo "</tr>";
-	endfor;
 ?>
 			</tbody>
 		</table>
 	</div>
+	<div class="col-xs-12 bo-bottom" style="padding: 10px;">&nbsp;</div>
+	<div class="font12" style="padding: 0; background-color:yellow;">
+    <div class="col-sm-12 col-md-2 center bg-info bo-bottom" style="line-height:50px;">예산항목 추가</div>
+
+
+		<div class="col-xs-6 col-sm-3 col-md-2 bo-bottom" style="padding: 10px 15px;">
+			<label for="yr" class="sr-only">사업 개시년도</label>
+			<select class="form-control input-sm" name="yr" onchange="submit();">
+				<option value=""> 최상위 예산항목</option>
+<?php for($i=(count($year)-1); $i>=0; $i--) : ?>
+				<option value="<?php echo $year[$i]?>" <?php if($this->input->get('yr')==$year[$i]) echo "selected"; ?>><?php echo $year[$i]."년"?></option>
+<?php endfor; ?>
+			</select>
+    </div>
+		<div class="col-xs-6 col-sm-3 col-md-2 bo-bottom" style="padding: 10px 15px;">
+			<label for="yr" class="sr-only">사업 개시년도</label>
+			<select class="form-control input-sm" name="yr" onchange="submit();">
+				<option value=""> 차상위 예산항목</option>
+<?php for($i=(count($year)-1); $i>=0; $i--) : ?>
+				<option value="<?php echo $year[$i]?>" <?php if($this->input->get('yr')==$year[$i]) echo "selected"; ?>><?php echo $year[$i]."년"?></option>
+<?php endfor; ?>
+			</select>
+    </div>
+		<div class="col-xs-6 col-sm-3 col-md-2 bo-bottom" style="padding: 10px 15px;">
+      <label for="order_no" class="sr-only">순번</label>
+      <input type="text" name="order_no" value="<?php echo set_value('order_no'); if($basic_site) echo $basic_site->order_no; ?>" placeholder="예산항목 명" class="form-control input-sm" maxlength="20" required>
+    </div>
+
+		<div class="col-xs-6 col-sm-3 col-md-2 bo-bottom" style="padding: 10px 15px;">
+      <label for="order_no" class="sr-only">순번</label>
+      <input type="number" name="order_no" value="<?php echo set_value('order_no'); if($basic_site) echo $basic_site->order_no; ?>" placeholder="순서" class="form-control input-sm" maxlength="20" required>
+    </div>
+
+    <div class="col-xs-12 col-md-2 right bo-bottom" style="padding: 10px 15px;">
+      <input class="btn btn-success btn-sm" type="button" value="예산항목 추가" onclick="<?php echo $submit_str; ?>">
+    </div>
+  </div>
+	<div class="col-xs-12" style="padding: 10px;">&nbsp;</div>
 </div>
 <?php endif ?>
