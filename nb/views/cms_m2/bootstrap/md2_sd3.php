@@ -23,10 +23,10 @@ else :
 				<select class="form-control input-sm" name="yr" onchange="submit();">
 					<option value=""> 전 체
 <?php
-$start_year = "2015";
-// if(!$yr) $yr=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
-$year=range($start_year,date('Y'));
-for($i=(count($year)-1); $i>=0; $i--) :
+	$start_year = "2015";
+	// if(!$yr) $yr=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
+	$year=range($start_year,date('Y'));
+	for($i=(count($year)-1); $i>=0; $i--) :
 ?>
 					<option value="<?php echo $year[$i]?>" <?php if($this->input->get('yr')==$year[$i]) echo "selected"; ?>><?php echo $year[$i]."년"?>
 <?php endfor; ?>
@@ -125,11 +125,13 @@ for($i=(count($year)-1); $i>=0; $i--) :
 		<table class="table table-bordered table-condensed table-hover font11">
 			<thead>
 				<tr>
-					<th colspan="4" style="text-align: center; background-color:#BDD5FE;" width="20%">구 분</th>
+					<th colspan="4" style="text-align: center; background-color:#BDD5FE;" width="23%">구 분</th>
 					<th style="text-align: center; background-color:#BDD5FE;" width="15%">금 액</th>
-					<th style="text-align: center; background-color:#BDD5FE;" width="40%">산 출 내 역</th>
-					<th style="text-align: center; background-color:#BDD5FE;" width="20%">비 고</th>
+					<th style="text-align: center; background-color:#BDD5FE;" width="32%">산 출 내 역</th>
+					<th style="text-align: center; background-color:#BDD5FE;" width="15%">비 고</th>
 					<th style="text-align: center; background-color:#BDD5FE;" width="5%">비 율</th>
+					<th style="text-align: center; background-color:#BDD5FE;" width="5%">수 정</th>
+					<th style="text-align: center; background-color:#BDD5FE;" width="5%">삭 제</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -150,7 +152,7 @@ for($i=(count($year)-1); $i>=0; $i--) :
 		$type_price = $this->cms_main_model->data_row('cb_cms_sales_price', $tp_where, $tp_select); // 차수별 타입별 평균 세대가격 구하기
 		$t_price = $type_price->sum_price/1000; // 타입별 세대가격(단위 :천원)
 
-		for($j=0; $j<8; $j++):
+		for($j=0; $j<10; $j++):
 
 			if($j==0){ // 수입 지출 구분 열
 
@@ -286,12 +288,10 @@ for($i=(count($year)-1); $i>=0; $i--) :
 		echo "</tr>";
 	endfor;
 ?>
-				<tr><td colspan="8">&nbsp;</td></tr>
+				<tr><td colspan="10">&nbsp;</td></tr>
 
 <?php
 	$out_total_row = 20;
-
-
 ?>
 			</tbody>
 		</table>
