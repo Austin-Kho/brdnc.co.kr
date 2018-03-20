@@ -161,7 +161,7 @@ return $sort;
         <div class="col-xs-12 col-sm-9 col-md-10 form-wrap bo-top">
           <div class="col-xs-3 col-sm-5 col-md-1" style="padding-right: 0;">
             <label for="postcode1" class="sr-only">우편번호</label>
-            <input type="text" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php if($this->input->post('zipcode')) echo set_value('zipcode'); else echo $addr[0]; ?>" readonly required>
+            <input type="number" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php if($this->input->post('zipcode')) echo set_value('zipcode'); else echo $addr[0]; ?>" readonly required>
           </div>
           <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
             <input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="execDaumPostcode(1)">
@@ -183,7 +183,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm en_only" id="buy_land_extent" name="buy_land_extent" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('buy_land_extent')) echo set_value('buy_land_extent'); else echo $project_data->buy_land_extent; ?>" required placeholder="대지 매입면적 (㎡)">
+            <input type="number" class="form-control input-sm en_only" id="buy_land_extent" name="buy_land_extent" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('buy_land_extent')) echo set_value('buy_land_extent'); else echo $project_data->buy_land_extent; ?>" required placeholder="대지 매입면적 (㎡)">
           </div>
                 <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
         </div>
@@ -192,7 +192,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
             <div class="col-xs-10 col-sm-8">
-                <input type="text" class="form-control input-sm en_only" id="donation_land_extent" name="donation_land_extent" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('donation_land_extent')) echo set_value('donation_land_extent'); else echo $project_data->donation_land_extent; ?>" placeholder="기부채납 면적 (㎡)">
+                <input type="number" class="form-control input-sm en_only" id="donation_land_extent" name="donation_land_extent" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('donation_land_extent')) echo set_value('donation_land_extent'); else echo $project_data->donation_land_extent; ?>" placeholder="기부채납 면적 (㎡)">
             </div>
                         <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
         </div>
@@ -204,7 +204,7 @@ return $sort;
           </div>
           <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
             <div class="col-xs-10 col-sm-8">
-              <input type="text" class="form-control input-sm en_only" id="scheme_land_extent" name="scheme_land_extent" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('scheme_land_extent')) echo set_value('scheme_land_extent'); else echo $project_data->scheme_land_extent; ?>" required placeholder="계획 대지면적 (㎡)">
+              <input type="number" class="form-control input-sm en_only" id="scheme_land_extent" name="scheme_land_extent" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('scheme_land_extent')) echo set_value('scheme_land_extent'); else echo $project_data->scheme_land_extent; ?>" required placeholder="계획 대지면적 (㎡)">
             </div>
                   <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
           </div>
@@ -233,7 +233,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm en_only" id="num_unit" name="num_unit" onkeydown="onlyNum(this);" maxlength="6" value="<?php if($this->input->post('num_unit')) echo set_value('num_unit'); else echo $project_data->num_unit; ?>" required placeholder="세대(호/실) 수">
+            <input type="number" class="form-control input-sm en_only" id="num_unit" name="num_unit" onkeydown="onlyNum(this);" maxlength="6" value="<?php if($this->input->post('num_unit')) echo set_value('num_unit'); else echo $project_data->num_unit; ?>" required placeholder="세대(호/실) 수">
           </div>
                 <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>세대(호/실)</span></div>
         </div>
@@ -245,7 +245,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm en_only" id="build_area" name="build_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('build_area')) echo set_value('build_area'); else echo $project_data->build_area; ?>"  placeholder="건축 면적 (㎡)">
+            <input type="number" class="form-control input-sm en_only" id="build_area" name="build_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('build_area')) echo set_value('build_area'); else echo $project_data->build_area; ?>"  placeholder="건축 면적 (㎡)">
           </div>
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
         </div>
@@ -254,7 +254,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm en_only" id="gr_floor_area" name="gr_floor_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('gr_floor_area')) echo set_value('gr_floor_area'); else echo $project_data->gr_floor_area; ?>" required placeholder="총 연면적 (㎡)">
+            <input type="number" class="form-control input-sm en_only" id="gr_floor_area" name="gr_floor_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('gr_floor_area')) echo set_value('gr_floor_area'); else echo $project_data->gr_floor_area; ?>" required placeholder="총 연면적 (㎡)">
           </div>
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
         </div>
@@ -266,7 +266,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm en_only" id="on_floor_area" name="on_floor_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('on_floor_area')) echo set_value('on_floor_area'); else echo $project_data->on_floor_area; ?>" required placeholder="지상 연면적 (㎡)">
+            <input type="number" class="form-control input-sm en_only" id="on_floor_area" name="on_floor_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('on_floor_area')) echo set_value('on_floor_area'); else echo $project_data->on_floor_area; ?>" required placeholder="지상 연면적 (㎡)">
           </div>
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
         </div>
@@ -275,7 +275,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm en_only" id="ba_floor_area" name="ba_floor_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('ba_floor_area')) echo set_value('ba_floor_area'); else echo $project_data->ba_floor_area; ?>" required placeholder="지하 연면적 (㎡)">
+            <input type="number" class="form-control input-sm en_only" id="ba_floor_area" name="ba_floor_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('ba_floor_area')) echo set_value('ba_floor_area'); else echo $project_data->ba_floor_area; ?>" required placeholder="지하 연면적 (㎡)">
           </div>
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
         </div>
@@ -287,7 +287,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm en_only" id="floor_ar_rat" name="floor_ar_rat" maxlength="8" value="<?php if($this->input->post('floor_ar_rat')) echo set_value('floor_ar_rat'); else echo $project_data->floor_ar_rat; ?>" required placeholder="용적율 (%)">
+            <input type="number" class="form-control input-sm en_only" id="floor_ar_rat" name="floor_ar_rat" maxlength="8" value="<?php if($this->input->post('floor_ar_rat')) echo set_value('floor_ar_rat'); else echo $project_data->floor_ar_rat; ?>" required placeholder="용적율 (%)">
           </div>
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>%</span></div>
         </div>
@@ -296,7 +296,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm en_only" id="bu_to_la_rat" name="bu_to_la_rat" maxlength="8" value="<?php if($this->input->post('bu_to_la_rat')) echo set_value('bu_to_la_rat'); else echo $project_data->bu_to_la_rat; ?>"  placeholder="건폐율 (%)">
+            <input type="number" class="form-control input-sm en_only" id="bu_to_la_rat" name="bu_to_la_rat" maxlength="8" value="<?php if($this->input->post('bu_to_la_rat')) echo set_value('bu_to_la_rat'); else echo $project_data->bu_to_la_rat; ?>"  placeholder="건폐율 (%)">
           </div>
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>%</span></div>
         </div>
@@ -308,7 +308,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm en_only" id="law_num_parking" name="law_num_parking" onkeydown="onlyNum(this);" maxlength="6" value="<?php if($this->input->post('law_num_parking')) echo set_value('law_num_parking'); else echo $project_data->law_num_parking; ?>"  placeholder="법정 주차대수">
+            <input type="number" class="form-control input-sm en_only" id="law_num_parking" name="law_num_parking" onkeydown="onlyNum(this);" maxlength="6" value="<?php if($this->input->post('law_num_parking')) echo set_value('law_num_parking'); else echo $project_data->law_num_parking; ?>"  placeholder="법정 주차대수">
           </div>
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>대</span></div>
         </div>
@@ -317,7 +317,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm en_only" id="plan_num_parking" name="plan_num_parking" onkeydown="onlyNum(this);" maxlength="6" value="<?php if($this->input->post('plan_num_parking')) echo set_value('plan_num_parking'); else echo $project_data->plan_num_parking; ?>"  placeholder="계획 주차대수">
+            <input type="number" class="form-control input-sm en_only" id="plan_num_parking" name="plan_num_parking" onkeydown="onlyNum(this);" maxlength="6" value="<?php if($this->input->post('plan_num_parking')) echo set_value('plan_num_parking'); else echo $project_data->plan_num_parking; ?>"  placeholder="계획 주차대수">
           </div>
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>대</span></div>
         </div>
@@ -350,7 +350,7 @@ return $sort;
             <div class="col-xs-3 col-sm-2" style="padding: 11px 0 0 8px; text-align:right;"><span>타입 수량 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
                 <label for="<?php echo "type_quantity_".$j; ?>" class="sr-only">수량</span></label>
-                <input type="text" class="form-control input-sm en_only" id="<?php echo "type_quantity_".$j; ?>" name="<?php echo "type_quantity_".$j; ?>" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post("type_quantity_".$j)) echo set_value("type_quantity_".$j); else if($t_count>0) echo $type_quantity[$j-1]; ?>" required placeholder="타입별 단위 수량">
+                <input type="number" class="form-control input-sm en_only" id="<?php echo "type_quantity_".$j; ?>" name="<?php echo "type_quantity_".$j; ?>" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post("type_quantity_".$j)) echo set_value("type_quantity_".$j); else if($t_count>0) echo $type_quantity[$j-1]; ?>" required placeholder="타입별 단위 수량">
             </div>
             <div class="col-xs-3 col-sm-1 col-md-2" style="padding-right: 0;">
                 <label for="<?php echo "count_unit_".$j; ?>" class="sr-only">단위</span></label>
@@ -372,28 +372,28 @@ return $sort;
         <div class="col-xs-12 col-sm-9 col-md-10 form-wrap bo-top">
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding: 11px 0 0 8px; text-align:right;"><span>전용면적 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-                <label for="<?php echo "area_exc_".$j; ?>" class="sr-only">수량</span></label>
-                <input type="text" class="form-control input-sm eng" id="<?php echo "area_exc_".$j; ?>" name="<?php echo "area_exc_".$j; ?>" maxlength="10" value="<?php if($this->input->post("area_exc_".$j)) echo set_value("area_exc_".$j); else if($t_count>0) echo $area_exc[$j-1]; ?>" placeholder="전용면적">
+                <label for="<?php echo "area_exc_".$j; ?>" class="sr-only">전용면적</span></label>
+                <input type="number" class="form-control input-sm eng" id="<?php echo "area_exc_".$j; ?>" name="<?php echo "area_exc_".$j; ?>" maxlength="10" value="<?php if($this->input->post("area_exc_".$j)) echo set_value("area_exc_".$j); else if($t_count>0) echo $area_exc[$j-1]; ?>" placeholder="전용면적">
             </div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding: 11px 0 0 8px; text-align:right;"><span>주거공용 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-                <label for="<?php echo "area_com_".$j; ?>" class="sr-only">수량</span></label>
-                <input type="text" class="form-control input-sm eng" id="<?php echo "area_com_".$j; ?>" name="<?php echo "area_com_".$j; ?>" maxlength="10" value="<?php if($this->input->post("area_com_".$j)) echo set_value("area_com_".$j); else if($t_count>0) echo $area_com[$j-1]; ?>" placeholder="주거공용">
+                <label for="<?php echo "area_com_".$j; ?>" class="sr-only">주거공용</span></label>
+                <input type="number" class="form-control input-sm eng" id="<?php echo "area_com_".$j; ?>" name="<?php echo "area_com_".$j; ?>" maxlength="10" value="<?php if($this->input->post("area_com_".$j)) echo set_value("area_com_".$j); else if($t_count>0) echo $area_com[$j-1]; ?>" placeholder="주거공용">
             </div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding: 11px 0 0 8px; text-align:right;"><span>공급면적 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-                <label for="<?php echo "area_sup_".$j; ?>" class="sr-only">수량</span></label>
-                <input type="text" class="form-control input-sm eng" id="<?php echo "area_sup_".$j; ?>" name="<?php echo "area_sup_".$j; ?>" maxlength="10" value="<?php if($this->input->post("area_sup_".$j)) echo set_value("area_sup_".$j); else if($t_count>0) echo $area_sup[$j-1]; ?>" placeholder="공급면적">
+                <label for="<?php echo "area_sup_".$j; ?>" class="sr-only">공급면적</span></label>
+                <input type="number" class="form-control input-sm eng" id="<?php echo "area_sup_".$j; ?>" name="<?php echo "area_sup_".$j; ?>" maxlength="10" value="<?php if($this->input->post("area_sup_".$j)) echo set_value("area_sup_".$j); else if($t_count>0) echo $area_sup[$j-1]; ?>" placeholder="공급면적">
             </div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding: 11px 0 0 8px; text-align:right;"><span>기타공용 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-                <label for="<?php echo "area_other_".$j; ?>" class="sr-only">수량</span></label>
-                <input type="text" class="form-control input-sm eng" id="<?php echo "area_other_".$j; ?>" name="<?php echo "area_other_".$j; ?>" maxlength="10" value="<?php if($this->input->post("area_other_".$j)) echo set_value("area_other_".$j); else if($t_count>0) echo $area_other[$j-1]; ?>" placeholder="기타공용">
+                <label for="<?php echo "area_other_".$j; ?>" class="sr-only">기타공용</span></label>
+                <input type="number" class="form-control input-sm eng" id="<?php echo "area_other_".$j; ?>" name="<?php echo "area_other_".$j; ?>" maxlength="10" value="<?php if($this->input->post("area_other_".$j)) echo set_value("area_other_".$j); else if($t_count>0) echo $area_other[$j-1]; ?>" placeholder="기타공용">
             </div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding: 11px 0 0 8px; text-align:right;"><span>계약면적 :</span></div>
             <div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
-                <label for="<?php echo "area_cont_".$j; ?>" class="sr-only">수량</span></label>
-                <input type="text" class="form-control input-sm eng" id="<?php echo "area_cont_".$j; ?>" name="<?php echo "area_cont_".$j; ?>" maxlength="10" value="<?php if($this->input->post("area_cont_".$j)) echo set_value("area_cont_".$j); else if($t_count>0) echo $area_cont[$j-1]; ?>" placeholder="계약면적">
+                <label for="<?php echo "area_cont_".$j; ?>" class="sr-only">계약면적</span></label>
+                <input type="number" class="form-control input-sm eng" id="<?php echo "area_cont_".$j; ?>" name="<?php echo "area_cont_".$j; ?>" maxlength="10" value="<?php if($this->input->post("area_cont_".$j)) echo set_value("area_cont_".$j); else if($t_count>0) echo $area_cont[$j-1]; ?>" placeholder="계약면적">
             </div>
 <?php if($j<11): ?>
             <div class="col-xs-3 col-sm-4 col-md-2">
@@ -423,7 +423,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm en_only" id="land_cost" name="land_cost" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('land_cost')) echo set_value('land_cost'); else echo $project_data->land_cost; ?>" placeholder="토지 매입비 (단위:천원)">
+            <input type="number" class="form-control input-sm en_only" id="land_cost" name="land_cost" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('land_cost')) echo set_value('land_cost'); else echo $project_data->land_cost; ?>" placeholder="토지 매입비 (단위:천원)">
           </div>
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
         </div>
@@ -432,7 +432,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm en_only" id="build_cost" name="build_cost" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('build_cost')) echo set_value('build_cost'); else echo $project_data->build_cost; ?>" placeholder="평당 건축비 (단위:천원)">
+            <input type="number" class="form-control input-sm en_only" id="build_cost" name="build_cost" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('build_cost')) echo set_value('build_cost'); else echo $project_data->build_cost; ?>" placeholder="평당 건축비 (단위:천원)">
           </div>
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
         </div>
@@ -444,7 +444,7 @@ return $sort;
           </div>
           <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
               <div class="col-xs-10 col-sm-8">
-                  <input type="text" class="form-control input-sm en_only" id="inside_arcade_area" name="inside_arcade_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('inside_arcade_area')) echo set_value('inside_arcade_area'); else echo $project_data->inside_arcade_area; ?>" placeholder="단지내 상가 면적 (단위:㎡)">
+                  <input type="number" class="form-control input-sm en_only" id="inside_arcade_area" name="inside_arcade_area" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('inside_arcade_area')) echo set_value('inside_arcade_area'); else echo $project_data->inside_arcade_area; ?>" placeholder="단지내 상가 면적 (단위:㎡)">
               </div>
   <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>㎡</span></div>
           </div>
@@ -453,7 +453,7 @@ return $sort;
           </div>
           <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
               <div class="col-xs-10 col-sm-8">
-                  <input type="text" class="form-control input-sm en_only" id="inside_arcade_price" name="inside_arcade_price" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('inside_arcade_price')) echo set_value('inside_arcade_price'); else echo $project_data->inside_arcade_price; ?>" placeholder="단지내 상가 매각가 (단위:천원)">
+                  <input type="number" class="form-control input-sm en_only" id="inside_arcade_price" name="inside_arcade_price" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('inside_arcade_price')) echo set_value('inside_arcade_price'); else echo $project_data->inside_arcade_price; ?>" placeholder="단지내 상가 매각가 (단위:천원)">
               </div>
   <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
           </div>
@@ -465,7 +465,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm  en_only" id="arc_design_cost" name="arc_design_cost" onkeydown="onlyNum(this);" maxlength="8" value="<?php if($this->input->post('arc_design_cost')) echo set_value('arc_design_cost'); else echo $project_data->arc_design_cost; ?>" placeholder="설계 용역비 (단위:천원)">
+            <input type="number" class="form-control input-sm  en_only" id="arc_design_cost" name="arc_design_cost" onkeydown="onlyNum(this);" maxlength="8" value="<?php if($this->input->post('arc_design_cost')) echo set_value('arc_design_cost'); else echo $project_data->arc_design_cost; ?>" placeholder="설계 용역비 (단위:천원)">
           </div>
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
         </div>
@@ -474,7 +474,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm  en_only" id="supervision_cost" name="supervision_cost" onkeydown="onlyNum(this);" maxlength="8" value="<?php if($this->input->post('supervision_cost')) echo set_value('supervision_cost'); else echo $project_data->supervision_cost; ?>" placeholder="감리 용역비 (단위:천원)">
+            <input type="number" class="form-control input-sm  en_only" id="supervision_cost" name="supervision_cost" onkeydown="onlyNum(this);" maxlength="8" value="<?php if($this->input->post('supervision_cost')) echo set_value('supervision_cost'); else echo $project_data->supervision_cost; ?>" placeholder="감리 용역비 (단위:천원)">
           </div>
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
         </div>
@@ -485,7 +485,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm  en_only" id="initial_inves" name="initial_inves" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('initial_inves')) echo set_value('initial_inves'); else echo $project_data->initial_inves; ?>" placeholder="시행사 초기 투자금 (단위:천원)">
+            <input type="number" class="form-control input-sm  en_only" id="initial_inves" name="initial_inves" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('initial_inves')) echo set_value('initial_inves'); else echo $project_data->initial_inves; ?>" placeholder="시행사 초기 투자금 (단위:천원)">
           </div>
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
         </div>
@@ -494,7 +494,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm  en_only" id="dev_agency_charge" name="dev_agency_charge" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('dev_agency_charge')) echo set_value('dev_agency_charge'); else echo $project_data->dev_agency_charge; ?>" placeholder="시행대행 용역비 (단위:천원)">
+            <input type="number" class="form-control input-sm  en_only" id="dev_agency_charge" name="dev_agency_charge" onkeydown="onlyNum(this);" maxlength="5" value="<?php if($this->input->post('dev_agency_charge')) echo set_value('dev_agency_charge'); else echo $project_data->dev_agency_charge; ?>" placeholder="시행대행 용역비 (단위:천원)">
           </div>
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
         </div>
@@ -505,7 +505,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm  en_only" id="bridge_loan" name="bridge_loan" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('bridge_loan')) echo set_value('bridge_loan'); else echo $project_data->bridge_loan; ?>" placeholder="브리지 차입규모 (단위:천원)">
+            <input type="number" class="form-control input-sm  en_only" id="bridge_loan" name="bridge_loan" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('bridge_loan')) echo set_value('bridge_loan'); else echo $project_data->bridge_loan; ?>" placeholder="브리지 차입규모 (단위:천원)">
           </div>
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
         </div>
@@ -514,7 +514,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm  en_only" id="pf_loan" name="pf_loan" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('pf_loan')) echo set_value('pf_loan'); else echo $project_data->pf_loan; ?>" placeholder="PF 차입규모 (단위:천원)">
+            <input type="number" class="form-control input-sm  en_only" id="pf_loan" name="pf_loan" onkeydown="onlyNum(this);" maxlength="10" value="<?php if($this->input->post('pf_loan')) echo set_value('pf_loan'); else echo $project_data->pf_loan; ?>" placeholder="PF 차입규모 (단위:천원)">
           </div>
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>천원</span></div>
         </div>
@@ -525,7 +525,7 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-10 col-sm-8">
-            <input type="text" class="form-control input-sm  en_only" id="con_lead_time" name="con_lead_time" onkeydown="onlyNum(this);" maxlength="4" value="<?php if($this->input->post('con_lead_time')) echo set_value('con_lead_time'); else echo $project_data->con_lead_time; ?>" placeholder="공사 소요기간 (개월)">
+            <input type="number" class="form-control input-sm  en_only" id="con_lead_time" name="con_lead_time" onkeydown="onlyNum(this);" maxlength="4" value="<?php if($this->input->post('con_lead_time')) echo set_value('con_lead_time'); else echo $project_data->con_lead_time; ?>" placeholder="공사 소요기간 (개월)">
           </div>
           <div class="col-xs-2 col-sm-4" style="padding: 11px 0;"><span>개월</span></div>
         </div>
@@ -534,12 +534,12 @@ return $sort;
         </div>
         <div class="col-xs-12 col-sm-9 col-md-4 form-wrap bo-top">
           <div class="col-xs-5 col-sm-4">
-            <input type="text" class="form-control input-sm en_only" id="biz_start_year" name="biz_start_year" onkeydown="onlyNum(this);" maxlength="4" value="<?php if($this->input->post('biz_start_year')) echo set_value('biz_start_year'); else echo $biz_start_ym[0]; ?>" placeholder="YYYY">
+            <input type="number" class="form-control input-sm en_only" id="biz_start_year" name="biz_start_year" onkeydown="onlyNum(this);" maxlength="4" value="<?php if($this->input->post('biz_start_year')) echo set_value('biz_start_year'); else echo $biz_start_ym[0]; ?>" placeholder="YYYY">
           </div>
           <div class="col-xs-1" style="padding: 11px 0;"><span>년</span></div>
           <div class="col-xs-4 col-sm-3">
             <label for="biz_start_month" class="sr-only">사업개시 월</span></label>
-            <input type="text" class="form-control input-sm en_only" id="biz_start_month" name="biz_start_month" onkeydown="onlyNum(this);" maxlength="2" value="<?php if($this->input->post('biz_start_month')) echo set_value('biz_start_month'); else echo $biz_start_ym[1]; ?>" placeholder="MM">
+            <input type="number" class="form-control input-sm en_only" id="biz_start_month" name="biz_start_month" onkeydown="onlyNum(this);" maxlength="2" value="<?php if($this->input->post('biz_start_month')) echo set_value('biz_start_month'); else echo $biz_start_ym[1]; ?>" placeholder="MM">
           </div>
           <div class="col-xs-1 col-sm-2" style="padding: 11px 0;"><span>월</span></div>
         </div>

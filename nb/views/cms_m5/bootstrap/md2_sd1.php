@@ -42,15 +42,15 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap">
 							<div class="col-xs-3" style="padding-right: 0;">
-								<input type="text" class="form-control input-sm en_only" id="co_no1" name="co_no1" maxlength="3" value="<?php if($data['mode']=='com_reg') {echo set_value('co_no1');} else {echo substr($data['com']->co_no, 0, 3);} ?>" onkeydown="onlyNum(this);" required>
+								<input type="number" class="form-control input-sm en_only" id="co_no1" name="co_no1" maxlength="3" value="<?php if($data['mode']=='com_reg') {echo set_value('co_no1');} else {echo substr($data['com']->co_no, 0, 3);} ?>" onkeydown="onlyNum(this);" required>
 							</div>
 							<div class="col-xs-2" style="padding-right: 0;">
 								<label for="co_no2" class="sr-only">사업자번호2 </label>
-								<input type="text" class="form-control input-sm en_only" id="co_no2" name="co_no2" maxlength="2" value="<?php if($data['mode']=='com_reg') {echo set_value('co_no2');} else {echo substr($data['com']->co_no, 4, 2);} ?>" onkeydown="onlyNum(this);" required>
+								<input type="number" class="form-control input-sm en_only" id="co_no2" name="co_no2" maxlength="2" value="<?php if($data['mode']=='com_reg') {echo set_value('co_no2');} else {echo substr($data['com']->co_no, 4, 2);} ?>" onkeydown="onlyNum(this);" required>
 							</div>
 							<div class="col-xs-3" style="padding-right: 0;">
 								<label for="co_no3" class="sr-only">사업자번호3 </label>
-								<input type="text" class="form-control input-sm wid-90 en_only" id="co_no3" name="co_no3" maxlength="5" value="<?php if($data['mode']=='com_reg') {echo set_value('co_no3');} else {echo substr($data['com']->co_no, 7, 11);} ?>" onkeydown="onlyNum(this);" required>
+								<input type="number" class="form-control input-sm wid-90 en_only" id="co_no3" name="co_no3" maxlength="5" value="<?php if($data['mode']=='com_reg') {echo set_value('co_no3');} else {echo substr($data['com']->co_no, 7, 11);} ?>" onkeydown="onlyNum(this);" required>
 							</div>
 							<div class="col-xs-4">
 								<label for="co_form" class="sr-only">사업자종류 </label>
@@ -80,11 +80,11 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap">
 							<div class="col-xs-3" style="padding-right: 0;">
-								<input type="text" class="form-control input-sm en_only" id="or_no1" name="or_no1" maxlength="6" value="<?php if($data['mode']=='com_reg') {echo set_value('or_no1');} else {echo substr($data['com']->or_no, 0, 6);} ?>" onkeydown="onlyNum(this);" required>
+								<input type="number" class="form-control input-sm en_only" id="or_no1" name="or_no1" maxlength="6" value="<?php if($data['mode']=='com_reg') {echo set_value('or_no1');} else {echo substr($data['com']->or_no, 0, 6);} ?>" onkeydown="onlyNum(this);" required>
 							</div>
 					      	<div class="col-xs-4" style="padding-right: 0;">
 					      		<label for="or_no2" class="sr-only">법인(주민)등록번호2 </label>
-					      		<input type="text" class="form-control input-sm en_only" id="or_no2" name="or_no2" maxlength="7" value="<?php if($data['mode']=='com_reg') {echo set_value('or_no2');} else {echo substr($data['com']->or_no, 7, 13);} ?>" onkeydown="onlyNum(this);" required>
+					      		<input type="number" class="form-control input-sm en_only" id="or_no2" name="or_no2" maxlength="7" value="<?php if($data['mode']=='com_reg') {echo set_value('or_no2');} else {echo substr($data['com']->or_no, 7, 13);} ?>" onkeydown="onlyNum(this);" required>
 					      	</div>
 					      	<div class="col-xs-5">
 					      		<label for="sur" class="sr-only">부가세신고주기</label>
@@ -124,15 +124,15 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap">
 							<div class="col-xs-3" style="padding-right: 0;">
-								<input type="text" class="form-control input-sm en_only" id="co_phone1" name="co_phone1" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('co_phone1');} else {$p = explode('-', $data['com']->co_phone); echo $p[0];} ?>" onkeydown="onlyNum(this);" required>
+								<input type="number" class="form-control input-sm en_only" id="co_phone1" name="co_phone1" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('co_phone1');} else {$p = explode('-', $data['com']->co_phone); echo $p[0];} ?>" onkeydown="onlyNum(this);" required>
 							</div>
 							<div class="col-xs-3" style="padding-right: 0;">
 								<label for="co_phone2" class="sr-only">대표전화2</label>
-								<input type="text" class="form-control input-sm en_only" id="co_phone2" name="co_phone2" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('co_phone2');} else {$p = explode('-', $data['com']->co_phone); echo $p[1];} ?>" onkeydown="onlyNum(this);" required>
+								<input type="number" class="form-control input-sm en_only" id="co_phone2" name="co_phone2" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('co_phone2');} else {$p = explode('-', $data['com']->co_phone); echo $p[1];} ?>" onkeydown="onlyNum(this);" required>
 							</div>
 							<div class="col-xs-3" style="padding-right: 0;">
 								<label for="co_phone3" class="sr-only">대표전화3</label>
-								<input type="text" class="form-control input-sm en_only" id="co_phone3" name="co_phone3" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('co_phone3');} else {$p = explode('-', $data['com']->co_phone); echo $p[2];} ?>" onkeydown="onlyNum(this);" required>
+								<input type="number" class="form-control input-sm en_only" id="co_phone3" name="co_phone3" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('co_phone3');} else {$p = explode('-', $data['com']->co_phone); echo $p[2];} ?>" onkeydown="onlyNum(this);" required>
 							</div>
 							<div class="col-xs-3"></div>
 						</div>
@@ -153,11 +153,11 @@
 							</div>
 							<div class="col-xs-3" style="padding-right: 0;">
 								<label for="co_hp2" class="sr-only">휴대전화2</label>
-								<input type="text" class="form-control input-sm en_only" id="co_hp2" name="co_hp2" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('co_hp2');} else {$p = explode('-', $data['com']->co_hp); echo $p[1];} ?>" onkeydown="onlyNum(this);" required>
+								<input type="number" class="form-control input-sm en_only" id="co_hp2" name="co_hp2" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('co_hp2');} else {$p = explode('-', $data['com']->co_hp); echo $p[1];} ?>" onkeydown="onlyNum(this);" required>
 							</div>
 							<div class="col-xs-3" style="padding-right: 0;">
 								<label for="co_hp3" class="sr-only">휴대전화2</label>
-								<input type="text" class="form-control input-sm en_only" id="co_hp3" name="co_hp3" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('co_hp3');} else {$p = explode('-', $data['com']->co_hp); echo $p[2];} ?>" onkeydown="onlyNum(this);" required>
+								<input type="number" class="form-control input-sm en_only" id="co_hp3" name="co_hp3" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('co_hp3');} else {$p = explode('-', $data['com']->co_hp); echo $p[2];} ?>" onkeydown="onlyNum(this);" required>
 							</div>
 							<div class="col-xs-3"></div>
 						</div>
@@ -166,15 +166,15 @@
 						<div class="col-xs-12 col-sm-4 col-md-2 label-wrap"><label for="co_fax1">FAX</label></div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap">
 							<div class="col-xs-3" style="padding-right: 0;">
-								<input type="text" class="form-control input-sm en_only" id="co_fax1" name="co_fax1" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('co_fax1');} else {$p = explode('-', $data['com']->co_fax); echo $p[0];} ?>" onkeydown="onlyNum(this);">
+								<input type="number" class="form-control input-sm en_only" id="co_fax1" name="co_fax1" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('co_fax1');} else {$p = explode('-', $data['com']->co_fax); echo $p[0];} ?>" onkeydown="onlyNum(this);">
 							</div>
 							<div class="col-xs-3" style="padding-right: 0;">
 								<label for="co_fax2" class="sr-only">FAX2</label>
-								<input type="text" class="form-control input-sm en_only" id="co_fax2" name="co_fax2" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('co_fax2');} else {$p = explode('-', $data['com']->co_fax); echo $p[1];} ?>" onkeydown="onlyNum(this);">
+								<input type="number" class="form-control input-sm en_only" id="co_fax2" name="co_fax2" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('co_fax2');} else {$p = explode('-', $data['com']->co_fax); echo $p[1];} ?>" onkeydown="onlyNum(this);">
 							</div>
 							<div class="col-xs-3" style="padding-right: 0;">
 								<label for="co_fax3" class="sr-only">FAX3</label>
-								<input type="text" class="form-control input-sm en_only" id="co_fax3" name="co_fax3" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('co_fax3');} else {$p = explode('-', $data['com']->co_fax); echo $p[2];} ?>" onkeydown="onlyNum(this);">
+								<input type="number" class="form-control input-sm en_only" id="co_fax3" name="co_fax3" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('co_fax3');} else {$p = explode('-', $data['com']->co_fax); echo $p[2];} ?>" onkeydown="onlyNum(this);">
 							</div>
 							<div class="col-xs-3"></div>
 						</div>
@@ -243,12 +243,12 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-4 form-wrap">
 							<div class="col-xs-3" style="padding-right: 0;">
-								<input type="text" class="form-control input-sm en_only" id="carr_y" name="carr_y" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('carr_y');} else {$a = explode('-', $data['com']->carr); echo $a[0];} ?>" onkeydown="onlyNum(this);" required>
+								<input type="number" class="form-control input-sm en_only" id="carr_y" name="carr_y" maxlength="4" value="<?php if($data['mode']=='com_reg') {echo set_value('carr_y');} else {$a = explode('-', $data['com']->carr); echo $a[0];} ?>" onkeydown="onlyNum(this);" required>
 							</div>
 							<div class="col-xs-1 text-wrap">년</div>
 							<div class="col-xs-2" style="padding-right: 0;">
 								<label for="carr_m" class="sr-only">기초잔액 입력월2</label>
-								<input type="text" class="form-control input-sm en_only" id="carr_m" name="carr_m" maxlength="2" value="<?php if($data['mode']=='com_reg') {echo set_value('carr_m');} else {$a = explode('-', $data['com']->carr); echo $a[1];} ?>" onkeydown="onlyNum(this);" required>
+								<input type="number" class="form-control input-sm en_only" id="carr_m" name="carr_m" maxlength="2" value="<?php if($data['mode']=='com_reg') {echo set_value('carr_m');} else {$a = explode('-', $data['com']->carr); echo $a[1];} ?>" onkeydown="onlyNum(this);" required>
 							</div>
 							<div class="col-xs-6 text-wrap">월</div>
 						</div>
@@ -404,7 +404,7 @@
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-10 form-wrap">
 							<div class="col-xs-3 col-sm-5 col-md-1" style="padding-right: 0;">
-								<input type="text" class="form-control input-sm" id="postcode1" name="postcode1" maxlength="5" value="<?php if($data['mode']=='com_reg') {echo set_value('zipcode');} else {echo $data['com']->zipcode; } ?>" readonly required>
+								<input type="number" class="form-control input-sm" id="postcode1" name="postcode1" maxlength="5" value="<?php if($data['mode']=='com_reg') {echo set_value('zipcode');} else {echo $data['com']->zipcode; } ?>" readonly required>
 							</div>
 							<div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
 								<input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="execDaumPostcode(1)">

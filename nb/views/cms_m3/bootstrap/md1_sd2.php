@@ -146,10 +146,10 @@
         <input type='hidden' name="<?php echo "seq_".$a; ?>" value="<?php echo $con_diff[$a]->seq; ?>">
         <div class="col-xs-12" style="padding:0; display:<?php if($a!==0 && $a>count($con_diff)) echo "none;"; ?>">
           <div class="col-xs-4 col-sm-2 center bo-top" style="padding:5px; color: #B00448;">
-            <input type='text' class="form-control input-sm" name="<?php echo "diff_no_".$a; ?>" value="<?php if($this->input->post('diff_no_'.$a)) echo set_value('diff_no_'.$a); else echo $con_diff[$a]->diff_no; ?>" placeholder="등록차수">
+            <input type="text" class="form-control input-sm" name="<?php echo "diff_no_".$a; ?>" value="<?php if($this->input->post('diff_no_'.$a)) echo set_value('diff_no_'.$a); else echo $con_diff[$a]->diff_no; ?>" placeholder="등록차수">
           </div>
           <div class="col-xs-5 col-sm-4 center bo-top" style="padding:5px; color: #B00448;">
-            <input type='text' class="form-control input-sm" name="<?php echo "diff_name_".$a; ?>" value="<?php if($this->input->post('diff_name_'.$a)) echo set_value('diff_name_'.$a); else echo $con_diff[$a]->diff_name; ?>" placeholder="차수명">
+            <input type="text" class="form-control input-sm" name="<?php echo "diff_name_".$a; ?>" value="<?php if($this->input->post('diff_name_'.$a)) echo set_value('diff_name_'.$a); else echo $con_diff[$a]->diff_name; ?>" placeholder="차수명">
           </div>
           <div class="hidden-xs col-sm-2 center bo-top" style="padding-top:12px;"><?php if(isset($con_diff[$a]->reg_date)) echo $con_diff[$a]->reg_date; ?></div>
           <div class="hidden-xs col-sm-2 center bo-top" style="padding-top:12px;"><?php if(isset($con_diff[$a]->reg_worker)) echo $con_diff[$a]->reg_worker; ?></div>
@@ -208,16 +208,16 @@
             </select>
           </div>
           <div class="hidden-xs col-sm-1 center bo-top" style="padding-top:5px; color: #B00448;">
-            <input type='text' class="form-control input-sm" name="<?php echo "pay_code_".$b; ?>" value="<?php if($this->input->post("pay_code_".$b)) echo set_value("pay_code_".$b); else echo $pay_time[$b]->pay_code; ?>" placeholder="납부코드">
+            <input type="number" class="form-control input-sm" name="<?php echo "pay_code_".$b; ?>" value="<?php if($this->input->post("pay_code_".$b)) echo set_value("pay_code_".$b); else echo $pay_time[$b]->pay_code; ?>" placeholder="납부코드">
           </div>
           <div class="col-xs-3 col-sm-1 center bo-top" style="padding-top:5px; color: #B00448;">
-            <input type='text' class="form-control input-sm" name="<?php echo "pay_time_".$b; ?>" value="<?php if($this->input->post("pay_time_".$b)) echo set_value("pay_time_".$b); else echo $pay_time[$b]->pay_time; ?>" placeholder="납부순서">
+            <input type="number" class="form-control input-sm" name="<?php echo "pay_time_".$b; ?>" value="<?php if($this->input->post("pay_time_".$b)) echo set_value("pay_time_".$b); else echo $pay_time[$b]->pay_time; ?>" placeholder="납부순서">
           </div>
           <div class="col-xs-4 col-sm-2 center bo-top" style="padding-top:5px; color: #B00448;">
-            <input type='text' class="form-control input-sm" name="<?php echo "pay_name_".$b; ?>" value="<?php if($this->input->post("pay_name_".$b)) echo set_value("pay_name_".$b); else echo $pay_time[$b]->pay_name; ?>" placeholder="회차명칭">
+            <input type="text" class="form-control input-sm" name="<?php echo "pay_name_".$b; ?>" value="<?php if($this->input->post("pay_name_".$b)) echo set_value("pay_name_".$b); else echo $pay_time[$b]->pay_name; ?>" placeholder="회차명칭">
           </div>
           <div class="hidden-xs col-sm-2 center bo-top" style="padding-top:5px; color: #B00448;">
-            <input type='text' class="form-control input-sm" name="<?php echo "pay_disc_".$b; ?>" value="<?php if($this->input->post("pay_disc_".$b)) echo set_value("pay_disc_".$b); else echo $pay_time[$b]->pay_disc; ?>" placeholder="부가설명">
+            <input type="text" class="form-control input-sm" name="<?php echo "pay_disc_".$b; ?>" value="<?php if($this->input->post("pay_disc_".$b)) echo set_value("pay_disc_".$b); else echo $pay_time[$b]->pay_disc; ?>" placeholder="부가설명">
           </div>
           <div class="hidden-xs col-sm-2 center bo-top" style="padding-top:5px;">
             <div class="input-group" style="color: #B00448;">
@@ -279,13 +279,13 @@ echo form_open(current_full_url(), $attributes, $hidden);
         <div class="col-xs-12" style="padding:0; display:<?php if($c!==0 && $c>count($con_floor)) echo "none;"; ?>">
         <input type='hidden' name="<?php echo "seq_".$c; ?>" value="<?php echo $con_floor[$c]->seq; ?>">
           <div class="col-xs-3 col-sm-2 center bo-top" style="padding-top:3px; color: #B00448;">
-            <input type='text' class="form-control input-sm" name="<?php echo "s_range_".$c; ?>" value="<?php if($this->input->post("s_range_".$c)) echo set_value("s_range_".$c); else echo $fl_range[0]; ?>" placeholder="시작 층">
+            <input type="number" class="form-control input-sm" name="<?php echo "s_range_".$c; ?>" value="<?php if($this->input->post("s_range_".$c)) echo set_value("s_range_".$c); else echo $fl_range[0]; ?>" placeholder="시작 층">
           </div>
           <div class="col-xs-3 col-sm-2 center bo-top" style="padding-top:3px; color: #B00448;">
-            <input type='text' class="form-control input-sm" name="<?php echo "e_range_".$c; ?>" value="<?php if($this->input->post("e_range_".$c)) echo set_value("e_range_".$c); else echo $fl_range[1]; ?>" placeholder="종료 층">
+            <input type="number" class="form-control input-sm" name="<?php echo "e_range_".$c; ?>" value="<?php if($this->input->post("e_range_".$c)) echo set_value("e_range_".$c); else echo $fl_range[1]; ?>" placeholder="종료 층">
           </div>
           <div class="col-xs-4 col-sm-2 center bo-top" style="padding-top:3px; color: #B00448;">
-            <input type='text' class="form-control input-sm" name="<?php echo "floor_name_".$c; ?>" value="<?php if($this->input->post("floor_name_".$c)) echo set_value("floor_name_".$c); else echo $con_floor[$c]->floor_name; ?>" placeholder="층 범위 명">
+            <input type="text" class="form-control input-sm" name="<?php echo "floor_name_".$c; ?>" value="<?php if($this->input->post("floor_name_".$c)) echo set_value("floor_name_".$c); else echo $con_floor[$c]->floor_name; ?>" placeholder="층 범위 명">
           </div>
           <div class="hidden-xs col-sm-2 center bo-top" style="padding:10px;"><?php echo $con_floor[$c]->reg_date; ?></div>
           <div class="col-xs-2 col-sm-2 center bo-top" style="padding:10px;"><?php echo $con_floor[$c]->reg_worker; ?></div>
@@ -334,10 +334,10 @@ echo form_open(current_full_url(), $attributes, $hidden);
         <div class="col-xs-12" style="padding:0; display:<?php if($d!==0 && $d>count($con_direction)) echo "none;"; ?>">
         <input type='hidden' name="<?php echo "seq_".$d; ?>" value="<?php echo $con_direction[$d]->seq; ?>">
           <div class="col-xs-3 center bo-top" style="padding-top:3px; color: #B00448;">
-            <input type='text' class="form-control input-sm" name="<?php echo "dir_no_".$d; ?>" value="<?php if($this->input->post("dir_no_".$d)) echo set_value("dir_no_".$d); else echo $con_direction[$d]->dir_no; ?>" placeholder="향별 조건코드">
+            <input type="text" class="form-control input-sm" name="<?php echo "dir_no_".$d; ?>" value="<?php if($this->input->post("dir_no_".$d)) echo set_value("dir_no_".$d); else echo $con_direction[$d]->dir_no; ?>" placeholder="향별 조건코드">
           </div>
           <div class="col-xs-3 center bo-top" style="padding-top:3px; color: #B00448;">
-            <input type='text' class="form-control input-sm" name="<?php echo "dir_name_".$d; ?>" value="<?php if($this->input->post("dir_name_".$d)) echo set_value("dir_name_".$d); else echo $con_direction[$d]->dir_name; ?>" placeholder="향별 조건명">
+            <input type="text" class="form-control input-sm" name="<?php echo "dir_name_".$d; ?>" value="<?php if($this->input->post("dir_name_".$d)) echo set_value("dir_name_".$d); else echo $con_direction[$d]->dir_name; ?>" placeholder="향별 조건명">
           </div>
           <div class="col-xs-2 center bo-top" style="padding:10px;"><?php echo $con_direction[$d]->reg_date; ?></div>
           <div class="col-xs-2 center bo-top" style="padding:10px;"><?php echo $con_direction[$d]->reg_worker; ?></div>
@@ -429,13 +429,13 @@ echo form_open(current_full_url(), $attributes, $hidden);
 
               <td>
                 <div style="color: #B00448;">
-                  <input type="text" name="<?php echo "price_".$k; ?>" value="<?php if($this->input->post("price_".$k)) echo set_value("price_".$k); else echo $price[$k]->unit_price; ?>" placeholder="해당 타입 층별 가격" class="form-control input-sm">
+                  <input type="number" name="<?php echo "price_".$k; ?>" value="<?php if($this->input->post("price_".$k)) echo set_value("price_".$k); else echo $price[$k]->unit_price; ?>" placeholder="해당 타입 층별 가격" class="form-control input-sm">
                   <input type="hidden" name="<?php echo "price_".$k."_h"; ?>" value="<?php if( !empty($price[$k]->pr_seq)) echo "1"; else echo "0"; ?>">
                 </div>
               </td>
               <td>
                 <div style="color: #B00448;">
-                  <input type="text" name="<?php echo "num_".$k; ?>" value="<?php if($this->input->post("num_".$k)) echo set_value("num_".$k); else echo $price[$k]->unit_num; ?>" placeholder="해당 타입 층별 세대수" class="form-control input-sm">
+                  <input type="number" name="<?php echo "num_".$k; ?>" value="<?php if($this->input->post("num_".$k)) echo set_value("num_".$k); else echo $price[$k]->unit_num; ?>" placeholder="해당 타입 층별 세대수" class="form-control input-sm">
                 </div>
               </td>
               <td style="vertical-align:middle;"><?php if($price[$k]->pr_reg_date!=='0000-00-00') echo $price[$k]->pr_reg_date; ?></td>
@@ -551,7 +551,7 @@ foreach($pay_sche as $lt) : ?>
 ?>
             <td style="background-color: ; padding: 3px;">
               <div style="color: #B00448;">
-                <input type="text" class="form-control input-sm" name="<?php echo "pmt_".$p_seq."_".$pay_sche[$j]->seq; ?>" value="<?php if($this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq)) echo set_value("pmt_".$p_seq."_".$pay_sche[$j]->seq); else echo $pmt->payment; ?>" placeholder="회차별 납부액">
+                <input type="number" class="form-control input-sm" name="<?php echo "pmt_".$p_seq."_".$pay_sche[$j]->seq; ?>" value="<?php if($this->input->post("pmt_".$p_seq."_".$pay_sche[$j]->seq)) echo set_value("pmt_".$p_seq."_".$pay_sche[$j]->seq); else echo $pmt->payment; ?>" placeholder="회차별 납부액">
                 <input type="hidden" name="<?php echo "pmt_".$p_seq."_".$pay_sche[$j]->seq."_h"; ?>" value="<?php if( !empty($pmt->seq)) echo "1"; else echo "0"; ?>">
               </div>
             </td>

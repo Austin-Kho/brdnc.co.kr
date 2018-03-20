@@ -217,7 +217,7 @@
 <?php if($this->input->get('seq')) $tax_addr = explode("-", $sel_acc->tax_addr); ?>
 								<div class="col-xs-3 col-sm-5 col-md-1" style="padding: 0;">
 									<label for="postcode1" class="sr-only">우편번호</label>
-									<input type="text" class="form-control input-sm wid-95" id="postcode1" name="postcode1" maxlength="5" readonly required autofocus value="<?php if($this->input->get('seq')) echo $tax_addr[0]; ?>">
+									<input type="number" class="form-control input-sm wid-95" id="postcode1" name="postcode1" maxlength="5" readonly required autofocus value="<?php if($this->input->get('seq')) echo $tax_addr[0]; ?>">
 								</div>
 								<div class="col-xs-3 col-sm-2 col-md-1" style="padding: 0;">
 									<input type="button" class="btn btn-info btn-sm wid-90" value="우편번호" onclick="execDaumPostcode(1)">

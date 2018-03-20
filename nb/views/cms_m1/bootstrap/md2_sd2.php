@@ -205,7 +205,7 @@ else :
 						<div class="col-xs-4 col-md-2 center bgfg" style="line-height:38px;">수납금액</div>
 						<div class="col-xs-8 col-md-4" style="padding: 4px;">
 							<label for="paid_amount" class="sr-only">수납금액</label>
-							<input type="text" class="form-control input-sm en_only" name="paid_amount" value="<?php if($this->input->get('modi')=='1') echo $modi_rec->paid_amount; else echo set_value('paid_amount'); ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]">
+							<input type="number" class="form-control input-sm en_only" name="paid_amount" value="<?php if($this->input->get('modi')=='1') echo $modi_rec->paid_amount; else echo set_value('paid_amount'); ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]">
 						</div>
 					</div>
 				</div>

@@ -224,7 +224,7 @@ else :
 					<!-- <div class="col-xs-12" style="padding: 0px;"> -->
 						<div class="col-xs-4 col-sm-3 col-md-2" style="padding: 4px;">
 							<label for="postcode1" class="sr-only">우편번호</label>
-							<input type="text" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php if($this->input->post('postcode1')) echo set_value('postcode1'); elseif( !empty($view['addr'])) echo $view['addr'][0]; ?>" readonly required placeholder="우편번호">
+							<input type="number" class="form-control input-sm en_only" id="postcode1" name="postcode1" maxlength="5" value="<?php if($this->input->post('postcode1')) echo set_value('postcode1'); elseif( !empty($view['addr'])) echo $view['addr'][0]; ?>" readonly required placeholder="우편번호">
 						</div>
 						<div class="col-xs-4 col-sm-2 col-md-1" style="padding: 4px 0;">
 							<input type="button" class="btn btn-info btn-sm" value="우편번호" onclick="execDaumPostcode(1)">
