@@ -2,7 +2,7 @@
 if($auth23<1) :
 	include('no_auth.php');
 else :
-	$submit_str = "";
+	if($auth23<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="if(confirm('새로운 예산항목을 등록하시겠습니까?')===true) submit();";}
 ?>
 <div class="main_start">
 <!-- 2. 사업관리 -> 1. 예산 관리 ->3. 수지 예산안 -->
@@ -289,50 +289,60 @@ else :
 	endfor;
 ?>
 				<tr><td colspan="10">&nbsp;</td></tr>
-
 <?php
-	$out_total_row = 20;
+	foreach($top_bud as $lt) :
+		$bud = 1;
 ?>
+				<tr>
+					<td></td>
+					<td><?php echo $lt->bud_name; ?></td>
+				</tr>
+<?php endforeach; ?>
 			</tbody>
 		</table>
 	</div>
-	<div class="col-xs-12 bo-bottom" style="padding: 10px;">&nbsp;</div>
-	<div class="font12" style="padding: 0; background-color:yellow;">
-    <div class="col-sm-12 col-md-2 center bg-info bo-bottom" style="line-height:50px;">예산항목 추가</div>
-
-
-		<div class="col-xs-6 col-sm-3 col-md-2 bo-bottom" style="padding: 10px 15px;">
-			<label for="yr" class="sr-only">사업 개시년도</label>
-			<select class="form-control input-sm" name="yr" onchange="submit();">
-				<option value=""> 최상위 예산항목</option>
-<?php for($i=(count($year)-1); $i>=0; $i--) : ?>
-				<option value="<?php echo $year[$i]?>" <?php if($this->input->get('yr')==$year[$i]) echo "selected"; ?>><?php echo $year[$i]."년"?></option>
-<?php endfor; ?>
-			</select>
-    </div>
-		<div class="col-xs-6 col-sm-3 col-md-2 bo-bottom" style="padding: 10px 15px;">
-			<label for="yr" class="sr-only">사업 개시년도</label>
-			<select class="form-control input-sm" name="yr" onchange="submit();">
-				<option value=""> 차상위 예산항목</option>
-<?php for($i=(count($year)-1); $i>=0; $i--) : ?>
-				<option value="<?php echo $year[$i]?>" <?php if($this->input->get('yr')==$year[$i]) echo "selected"; ?>><?php echo $year[$i]."년"?></option>
-<?php endfor; ?>
-			</select>
-    </div>
-		<div class="col-xs-6 col-sm-3 col-md-2 bo-bottom" style="padding: 10px 15px;">
-      <label for="order_no" class="sr-only">순번</label>
-      <input type="text" name="order_no" value="<?php echo set_value('order_no'); if($basic_site) echo $basic_site->order_no; ?>" placeholder="예산항목 명" class="form-control input-sm" maxlength="20" required>
-    </div>
-
-		<div class="col-xs-6 col-sm-3 col-md-2 bo-bottom" style="padding: 10px 15px;">
-      <label for="order_no" class="sr-only">순번</label>
-      <input type="number" name="order_no" value="<?php echo set_value('order_no'); if($basic_site) echo $basic_site->order_no; ?>" placeholder="순서" class="form-control input-sm" maxlength="20" required>
-    </div>
-
-    <div class="col-xs-12 col-md-2 right bo-bottom" style="padding: 10px 15px;">
-      <input class="btn btn-success btn-sm" type="button" value="예산항목 추가" onclick="<?php echo $submit_str; ?>">
-    </div>
-  </div>
 	<div class="col-xs-12" style="padding: 10px;">&nbsp;</div>
+	<div class="font12 col-xs-12" style="padding: 0;">
+<?php
+	echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
+	$attributes = array('name' => 'bud_insert');
+	$hidden = array('project'=>$project);
+	echo form_open(current_full_url(), $attributes, $hidden);
+?>
+	    <div class="col-sm-12 col-md-2 center bg-info bo-top" style="line-height:50px;">예산항목 추가</div>
+			<div class="col-xs-6 col-sm-3 col-md-2 bo-top" style="padding: 10px 15px;">
+				<label for="top_bud" class="sr-only">최상위 예산항목</label>
+				<select class="form-control input-sm" name="top_bud">
+					<option value="">최상위 예산항목</option>
+<?php foreach($top_bud as $lt) : ?>
+					<option value="<?php echo $lt->bud_seq; ?>" <?php echo set_select('top_bud', $lt->bud_seq); ?>><?php echo $lt->bud_name; ?></option>
+<?php endforeach; ?>
+				</select>
+	    </div>
+			<div class="col-xs-6 col-sm-3 col-md-2 bo-top" style="padding: 10px 15px;">
+				<label for="sec_bud" class="sr-only">차상위 예산항목</label>
+				<select class="form-control input-sm" name="sec_bud">
+					<option value="">차상위 예산항목</option>
+<?php foreach($sec_bud as $lt) : ?>
+					<option value="<?php echo $lt->bud_seq; ?>" <?php echo set_select('sec_bud', $lt->bud_seq); ?>><?php echo $lt->bud_name; ?></option>
+<?php endforeach; ?>
+				</select>
+	    </div>
+			<div class="col-xs-6 col-sm-3 col-md-2 bo-top" style="padding: 10px 15px;">
+	      <label for="bud_name" class="sr-only">예산항목 명</label>
+	      <input type="text" name="bud_name" value="<?php echo set_value('bud_name'); ?>" placeholder="예산항목 명" class="form-control input-sm" maxlength="20" required>
+	    </div>
+
+			<div class="col-xs-6 col-sm-3 col-md-2 bo-top" style="padding: 10px 15px;">
+	      <label for="bud_order" class="sr-only">정렬 순서</label>
+	      <input type="number" name="bud_order" value="<?php echo set_value('bud_order'); ?>" placeholder="정렬 순서" class="form-control input-sm" maxlength="3">
+	    </div>
+
+	    <div class="col-xs-12 col-md-2 right bo-top" style="padding: 10px 15px;">
+	      <input class="btn btn-success btn-sm" type="button" value="예산항목 추가" onclick="<?php echo $submit_str; ?>">
+	    </div>
+		</form>
+  </div>
+	<div class="col-xs-12 bo-top" style="padding: 10px;">&nbsp;</div>
 </div>
 <?php endif ?>
