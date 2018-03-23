@@ -291,13 +291,20 @@ else :
 				<tr><td colspan="10">&nbsp;</td></tr>
 <?php
 	foreach($top_bud as $lt) :
-		$bud = 1;
+		echo "<tr>";
+		
+		echo "<td rowspan='10'>&nbsp;</td>";
+
+
+		foreach ($sec_bud as $$val) :
+
+
+		endforeach;
+
+		echo "</tr>";
+
+	endforeach;
 ?>
-				<tr>
-					<td></td>
-					<td><?php echo $lt->bud_name; ?></td>
-				</tr>
-<?php endforeach; ?>
 			</tbody>
 		</table>
 	</div>

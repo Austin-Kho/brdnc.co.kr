@@ -153,12 +153,9 @@ class Cms_m2 extends CB_Controller
 			$view['apt_take'] = $this->cms_main_model->data_row('cb_cms_sales_price', array('pj_seq'=>$project), 'SUM(unit_price*unit_num) AS total'); // 차수 데이터
 
 			// 사업수지 예산 관련 데이터
-			// $view['']
+			$view['top_bud'] = $this->cms_main_model->data_result('cb_cms_project_budget', array('pj_seq'=>$project, 'bud_parent'=>0), 'bud_order, bud_seq');
 
 			// 예산항목 입력 시 셀렉트
-			$view['top_bud'] = $this->cms_main_model->data_result('cb_cms_project_budget', array('pj_seq'=>$project, 'bud_parent'=>0), 'bud_order, bud_seq');
-			
-
 			$view['sec_bud'] = $this->cms_main_model->data_result('cb_cms_project_budget', array('pj_seq'=>$project, 'bud_parent !='=>0, 'bud_amount'=>0), 'bud_order, bud_seq');
 
 			// 라이브러리 로드
@@ -186,11 +183,7 @@ class Cms_m2 extends CB_Controller
 
 				$result = $this->cms_main_model->insert_data('cb_cms_project_budget', $bud_data);
 
-				if( !$result){
-					alert('데이터베이스 에러입니다.', '');
-				}else{
-					alert('정상적으로 등록되었습니다.', '');
-				}
+				if( !$result){ alert('데이터베이스 에러입니다.', ''); }else{ alert('정상적으로 등록되었습니다.', ''); }
 			}
 
 		}
