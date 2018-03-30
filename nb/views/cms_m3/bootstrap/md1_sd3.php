@@ -516,7 +516,7 @@
 
     </div>
     <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin:0;">
-      <div class="col-xs-12 col-sm-12 col-md-2 bgf8" style="line-height:36px; padding:4px 15px;">중도금 지급 관련 정보</div>
+      <div class="col-xs-12 col-sm-12 col-md-2 bgf8" style="line-height:36px; padding:4px 15px;">중도금 지급 관련</div>
       <div class="col-xs-12 col-md-10" style="padding:0;">
         <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <label for="inter_pay1" class="sr-only">1차 중도금</label>
@@ -561,7 +561,7 @@
       </div>
     </div>
     <div class="col-sm-12 form-group bo-bottom" style="padding:0; margin-bottom:0;">
-      <div class="col-xs-12 col-sm-12 col-md-2 bgf8" style="line-height:36px; padding:4px 15px;">잔금 지급 관련 정보</div>
+      <div class="col-xs-12 col-sm-12 col-md-2 bgf8" style="line-height:36px; padding:4px 15px;">잔 금 지급 관련</div>
       <div class="col-xs-12 col-md-10" style="padding:0;">
         <div class="col-xs-5 col-sm-4 col-md-2" style="padding: 7px 10px;">
           <label for="remain_pay" class="sr-only">잔금</label>

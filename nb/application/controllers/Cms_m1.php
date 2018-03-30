@@ -248,45 +248,54 @@ class Cms_m1 extends CB_Controller {
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
 
-			if($this->input->post('project')) $this->form_validation->set_rules('project', '프로젝트', 'trim|required');
-			if($this->input->post('cont_sort1')) $this->form_validation->set_rules('cont_sort1', '등록구분1', 'trim|required');
-			if($this->input->post('type')) $this->form_validation->set_rules('type', '타입', 'trim|required');
-			if($this->input->post('dong')) $this->form_validation->set_rules('dong', '동', 'trim|required');
-			if($this->input->post('ho')) $this->form_validation->set_rules('ho', '호수', 'trim|required');
-			if($this->input->post('cont_code')) $this->form_validation->set_rules('cont_code', '계약일련번호', 'trim|max_length[12]');
-			if($this->input->post('custom_name')) $this->form_validation->set_rules('custom_name', '청/계약자명', 'trim|required|max_length[20]');
+			// 청약, 계약 공통 폼 데이터
+			$this->form_validation->set_rules('project', '프로젝트', 'trim|required');
+			$this->form_validation->set_rules('cont_sort1', '등록구분1', 'trim|required');
+			$this->form_validation->set_rules('type', '타입', 'trim|required');
+			$this->form_validation->set_rules('dong', '동', 'trim|required');
+			$this->form_validation->set_rules('ho', '호수', 'trim|required');
 
-			$this->form_validation->set_rules('birth_date', '생년월일', 'trim|required|numeric|max_length[6]');
-			$this->form_validation->set_rules('cont_gender', '계약자 성별', 'trim|required');
+			$this->form_validation->set_rules('conclu_date', '처리일자', 'trim|exact_length[10]');
+			$this->form_validation->set_rules('due_date', '계약예정일', 'trim|exact_length[10]');
+			$this->form_validation->set_rules('custom_name', '청/계약자명', 'trim|required|max_length[20]');
 
-			if($this->input->post('conclu_date')) $this->form_validation->set_rules('conclu_date', '처리일자', 'trim|exact_length[10]');
-			if($this->input->post('due_date')) $this->form_validation->set_rules('due_date', '계약예정일', 'trim|exact_length[10]');
-			if($this->input->post('app_in_date')) $this->form_validation->set_rules('app_in_date', '청약금 입금일', 'trim|exact_length[10]');
-			if($this->input->post('cont_in_date1')) $this->form_validation->set_rules('cont_in_date1', '계약금 입금일1', 'trim|exact_length[10]');
-			if($this->input->post('cont_in_date2')) $this->form_validation->set_rules('cont_in_date2', '계약금 입금일2', 'trim|exact_length[10]');
-			if($this->input->post('cont_in_date3')) $this->form_validation->set_rules('cont_in_date3', '계약금 입금일3', 'trim|exact_length[10]');
-			if($this->input->post('cont_in_date4')) $this->form_validation->set_rules('cont_in_date4', '계약금 입금일4', 'trim|exact_length[10]');
-			if($this->input->post('cont_in_date5')) $this->form_validation->set_rules('cont_in_date5', '계약금 입금일5', 'trim|exact_length[10]');
-			if($this->input->post('cont_in_date6')) $this->form_validation->set_rules('cont_in_date6', '계약금 입금일6', 'trim|exact_length[10]');
-			if($this->input->post('cont_in_date7')) $this->form_validation->set_rules('cont_in_date7', '계약금 입금일7', 'trim|exact_length[10]');
+			$this->form_validation->set_rules('tel_1', '연락처[1]', 'trim|max_length[13]|required');
+			$this->form_validation->set_rules('tel_2', '연락처[2]', 'trim|max_length[13]');
+			$this->form_validation->set_rules('note', '비고', 'trim|max_length[200]');
 
-			if($this->input->post('app_in_mon')) $this->form_validation->set_rules('app_in_mon', '청약금', 'trim|numeric');
-			if($this->input->post('tel_1')) $this->form_validation->set_rules('tel_1', '연락처[1]', 'trim|required');
-			if($this->input->post('conclu_date')) $this->form_validation->set_rules('conclu_date', '청/계약일', 'trim|required');
-			if($this->input->post('deposit_1')) $this->form_validation->set_rules('deposit_1', '계약금1', 'trim|numeric');
-			if($this->input->post('deposit_2')) $this->form_validation->set_rules('deposit_2', '계약금2', 'trim|numeric');
-			if($this->input->post('deposit_3')) $this->form_validation->set_rules('deposit_3', '계약금3', 'trim|numeric');
-			if($this->input->post('deposit_4')) $this->form_validation->set_rules('deposit_4', '계약금4', 'trim|numeric');
-			if($this->input->post('deposit_5')) $this->form_validation->set_rules('deposit_5', '계약금5', 'trim|numeric');
-			if($this->input->post('deposit_6')) $this->form_validation->set_rules('deposit_6', '계약금6', 'trim|numeric');
-			if($this->input->post('deposit_7')) $this->form_validation->set_rules('deposit_7', '계약금7', 'trim|numeric');
-			if($this->input->post('postcode1')) $this->form_validation->set_rules('postcode1', '우편변호1', 'trim|numeric|max_length[5]');
-			if($this->input->post('address1_1')) $this->form_validation->set_rules('address1_1', '메인주소1', 'trim|max_length[100]');
-			if($this->input->post('address2_1')) $this->form_validation->set_rules('address2_1', '세부주소1', 'trim|max_length[50]');
-			if($this->input->post('postcode2')) $this->form_validation->set_rules('postcode2', '우편번호2', 'trim|numeric|max_length[5]');
-			if($this->input->post('address1_2')) $this->form_validation->set_rules('address1_2', '메인주소2', 'trim|max_length[100]');
-			if($this->input->post('address2_2')) $this->form_validation->set_rules('address2_2', '세부주소2', 'trim|max_length[50]');
-			if($this->input->post('note')) $this->form_validation->set_rules('note', '비고', 'trim|max_length[200]');
+			// 계약일 경우 폼 데이터
+			if($this->input->get('cont_sort2')==='2'){
+				$this->form_validation->set_rules('cont_code', '계약일련번호', 'trim|max_length[12]');
+
+				$this->form_validation->set_rules('birth_date', '생년월일', 'trim|required|numeric|max_length[6]');
+				$this->form_validation->set_rules('cont_gender', '계약자 성별', 'trim|required');
+
+				$this->form_validation->set_rules('app_in_date', '청약금 입금일', 'trim|exact_length[10]');
+				$this->form_validation->set_rules('cont_in_date1', '계약금 입금일1', 'trim|exact_length[10]');
+				$this->form_validation->set_rules('cont_in_date2', '계약금 입금일2', 'trim|exact_length[10]');
+				$this->form_validation->set_rules('cont_in_date3', '계약금 입금일3', 'trim|exact_length[10]');
+				$this->form_validation->set_rules('cont_in_date4', '계약금 입금일4', 'trim|exact_length[10]');
+				$this->form_validation->set_rules('cont_in_date5', '계약금 입금일5', 'trim|exact_length[10]');
+				$this->form_validation->set_rules('cont_in_date6', '계약금 입금일6', 'trim|exact_length[10]');
+				$this->form_validation->set_rules('cont_in_date7', '계약금 입금일7', 'trim|exact_length[10]');
+
+				$this->form_validation->set_rules('app_in_mon', '청약금', 'trim|numeric');
+				$this->form_validation->set_rules('deposit_1', '계약금1', 'trim|numeric');
+				$this->form_validation->set_rules('deposit_2', '계약금2', 'trim|numeric');
+				$this->form_validation->set_rules('deposit_3', '계약금3', 'trim|numeric');
+				$this->form_validation->set_rules('deposit_4', '계약금4', 'trim|numeric');
+				$this->form_validation->set_rules('deposit_5', '계약금5', 'trim|numeric');
+				$this->form_validation->set_rules('deposit_6', '계약금6', 'trim|numeric');
+				$this->form_validation->set_rules('deposit_7', '계약금7', 'trim|numeric');
+
+				$this->form_validation->set_rules('postcode1', '우편변호1', 'trim|numeric|max_length[5]');
+				$this->form_validation->set_rules('address1_1', '메인주소1', 'trim|max_length[100]');
+				$this->form_validation->set_rules('address2_1', '세부주소1', 'trim|max_length[50]');
+				$this->form_validation->set_rules('postcode2', '우편번호2', 'trim|numeric|max_length[5]');
+				$this->form_validation->set_rules('address1_2', '메인주소2', 'trim|max_length[100]');
+				$this->form_validation->set_rules('address2_2', '세부주소2', 'trim|max_length[50]');
+			}
+
 
 			if($this->form_validation->run() !== FALSE) {
 
