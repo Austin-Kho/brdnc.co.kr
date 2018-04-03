@@ -151,7 +151,7 @@
 									</select>
 								</td>
 								<!-- 입금금액 _1 -->
-								<td class="center"><input type="text" name="inc_1" id="inc_1" size="10" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_1,this,document.inout_frm.exp_1)"></td>
+								<td class="center"><input type="number" name="inc_1" id="inc_1" style="width:80px;" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_1,this,document.inout_frm.exp_1)"></td>
 								<!--출금처 _1 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_1" id="out_1"  style="width:62px;" onChange="charge(1,this.value);" disabled>
@@ -162,7 +162,7 @@
 									</select>
 								</td>
 								<!-- 출금금액 _1 -->
-								<td class="center"><input type="text" name="exp_1" id="exp_1" size="10" onkeyPress ='iNum(this)'></td>
+								<td class="center"><input type="number" name="exp_1" id="exp_1" style="width:80px;" onkeyPress ='iNum(this)'></td>
 								<!-- 수수료 _1 -->
 								<td class="center" style="padding: 5px 0 0 0;"><div class="checkbox" style="margin:0;"><label><div class="checkbox" style="margin:0;"><label><input type="checkbox" name="char1_1" onclick="char2_chk(document.inout_frm.char2_1,1);" disabled>금액:</label> <input type="text" name="char2_1" size="3" onkeyPress ='iNum(this)' disabled></div></td>
 								<!-- 증빙서류 _1 -->
@@ -176,7 +176,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_1" size="11"></td>
+								<td class="center"><input type="text" name="note_1" size="10"></td>
 							</tr>
 							<!-- ------------------------------------1col------------------------------------------ -->
 							<!-- ------------------------------------2col------------------------------------------ -->
@@ -267,7 +267,7 @@
 									</select>
 								</td>
 								<!-- 입금금액 _2 -->
-								<td class="center"><input type="text" name="inc_2" id="inc_2" size="10" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_2,this,document.inout_frm.exp_2)"></td>
+								<td class="center"><input type="number" name="inc_2" id="inc_2" style="width:80px;" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_2,this,document.inout_frm.exp_2)"></td>
 								<!--출금처 _2 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_2" id="out_2"  style="width:62px;" onChange="charge(2,this.value);" disabled>
@@ -278,7 +278,7 @@
 									</select>
 								</td>
 								<!-- 출금금액 _2 -->
-								<td class="center"><input type="text" name="exp_2" id="exp_2" size="10" onkeyPress ='iNum(this)'></td>
+								<td class="center"><input type="number" name="exp_2" id="exp_2" style="width:80px;" onkeyPress ='iNum(this)'></td>
 								<!-- 수수료 _2 -->
 								<td class="center" style="padding: 5px 0 0 0;"><div class="checkbox" style="margin:0;"><label><div class="checkbox" style="margin:0;"><label><input type="checkbox" name="char1_2" onclick="char2_chk(document.inout_frm.char2_2,2);" disabled>금액:</label> <input type="text" name="char2_2" size="3" onkeyPress ='iNum(this)' disabled></div></td>
 								<!-- 증빙서류 _2 -->
@@ -292,7 +292,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_2" size="11"></td>
+								<td class="center"><input type="text" name="note_2" size="10"></td>
 							</tr>
 							<!-- ------------------------------------2col------------------------------------------ -->
 							<!-- ------------------------------------3col------------------------------------------ -->
@@ -383,7 +383,7 @@
 									</select>
 								</td>
 								<!-- 입금금액 _3 -->
-								<td class="center"><input type="text" name="inc_3" id="inc_3" size="10" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_3,this,document.inout_frm.exp_3)"></td>
+								<td class="center"><input type="number" name="inc_3" id="inc_3" style="width:80px;" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_3,this,document.inout_frm.exp_3)"></td>
 								<!--출금처 _3 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_3" id="out_3"  style="width:62px;" onChange="charge(3,this.value);" disabled>
@@ -394,7 +394,7 @@
 									</select>
 								</td>
 								<!-- 출금금액 _3 -->
-								<td class="center"><input type="text" name="exp_3" id="exp_3" size="10" onkeyPress ='iNum(this)'></td>
+								<td class="center"><input type="number" name="exp_3" id="exp_3" style="width:80px;" onkeyPress ='iNum(this)'></td>
 								<!-- 수수료 _3 -->
 								<td class="center" style="padding: 5px 0 0 0;"><div class="checkbox" style="margin:0;"><label><div class="checkbox" style="margin:0;"><label><input type="checkbox" name="char1_3" onclick="char2_chk(document.inout_frm.char2_3,3);" disabled>금액:</label> <input type="text" name="char2_3" size="3" onkeyPress ='iNum(this)' disabled></div></td>
 								<!-- 증빙서류 _3 -->
@@ -408,7 +408,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_3" size="11"></td>
+								<td class="center"><input type="text" name="note_3" size="10"></td>
 							</tr>
 							<!-- ------------------------------------3col------------------------------------------ -->
 							<!-- ------------------------------------4col------------------------------------------ -->
@@ -499,7 +499,7 @@
 									</select>
 								</td>
 								<!-- 입금금액 _4 -->
-								<td class="center"><input type="text" name="inc_4" id="inc_4" size="10" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_4,this,document.inout_frm.exp_4)"></td>
+								<td class="center"><input type="number" name="inc_4" id="inc_4" style="width:80px;" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_4,this,document.inout_frm.exp_4)"></td>
 								<!--출금처 _4 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_4" id="out_4"  style="width:62px;" onChange="charge(4,this.value);" disabled>
@@ -510,7 +510,7 @@
 									</select>
 								</td>
 								<!-- 출금금액 _4 -->
-								<td class="center"><input type="text" name="exp_4" id="exp_4" size="10" onkeyPress ='iNum(this)'></td>
+								<td class="center"><input type="number" name="exp_4" id="exp_4" style="width:80px;" onkeyPress ='iNum(this)'></td>
 								<!-- 수수료 _4 -->
 								<td class="center" style="padding: 5px 0 0 0;"><div class="checkbox" style="margin:0;"><label><div class="checkbox" style="margin:0;"><label><input type="checkbox" name="char1_4" onclick="char2_chk(document.inout_frm.char2_4,4);" disabled>금액:</label> <input type="text" name="char2_4" size="3" onkeyPress ='iNum(this)' disabled></div></td>
 								<!-- 증빙서류 _4 -->
@@ -524,7 +524,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_4" size="11"></td>
+								<td class="center"><input type="text" name="note_4" size="10"></td>
 							</tr>
 							<!-- ------------------------------------4col------------------------------------------ -->
 							<!-- ------------------------------------5col------------------------------------------ -->
@@ -615,7 +615,7 @@
 									</select>
 								</td>
 								<!-- 입금금액 _5 -->
-								<td class="center"><input type="text" name="inc_5" id="inc_5" size="10" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_5,this,document.inout_frm.exp_5)"></td>
+								<td class="center"><input type="number" name="inc_5" id="inc_5" style="width:80px;" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_5,this,document.inout_frm.exp_5)"></td>
 								<!--출금처 _5 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_5" id="out_5"  style="width:62px;" onChange="charge(5,this.value);" disabled>
@@ -626,7 +626,7 @@
 									</select>
 								</td>
 								<!-- 출금금액 _5 -->
-								<td class="center"><input type="text" name="exp_5" id="exp_5" size="10" onkeyPress ='iNum(this)'></td>
+								<td class="center"><input type="number" name="exp_5" id="exp_5" style="width:80px;" onkeyPress ='iNum(this)'></td>
 								<!-- 수수료 _5 -->
 								<td class="center" style="padding: 5px 0 0 0;"><div class="checkbox" style="margin:0;"><label><div class="checkbox" style="margin:0;"><label><input type="checkbox" name="char1_5" onclick="char2_chk(document.inout_frm.char2_5,5);" disabled>금액:</label> <input type="text" name="char2_5" size="3" onkeyPress ='iNum(this)' disabled></div></td>
 								<!-- 증빙서류 _5 -->
@@ -640,7 +640,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_5" size="11"></td>
+								<td class="center"><input type="text" name="note_5" size="10"></td>
 							</tr>
 							<!-- ------------------------------------5col------------------------------------------ -->
 							<!-- ------------------------------------6col------------------------------------------ -->
@@ -731,7 +731,7 @@
 									</select>
 								</td>
 								<!-- 입금금액 _6 -->
-								<td class="center"><input type="text" name="inc_6" id="inc_6" size="10" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_6,this,document.inout_frm.exp_6)"></td>
+								<td class="center"><input type="number" name="inc_6" id="inc_6" style="width:80px;" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_6,this,document.inout_frm.exp_6)"></td>
 								<!--출금처 _6 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_6" id="out_6"  style="width:62px;" onChange="charge(6,this.value);" disabled>
@@ -742,7 +742,7 @@
 									</select>
 								</td>
 								<!-- 출금금액 _6 -->
-								<td class="center"><input type="text" name="exp_6" id="exp_6" size="10" onkeyPress ='iNum(this)'></td>
+								<td class="center"><input type="number" name="exp_6" id="exp_6" style="width:80px;" onkeyPress ='iNum(this)'></td>
 								<!-- 수수료 _6 -->
 								<td class="center" style="padding: 5px 0 0 0;"><div class="checkbox" style="margin:0;"><label><div class="checkbox" style="margin:0;"><label><input type="checkbox" name="char1_6" onclick="char2_chk(document.inout_frm.char2_6,6);" disabled>금액:</label> <input type="text" name="char2_6" size="3" onkeyPress ='iNum(this)' disabled></div></td>
 								<!-- 증빙서류 _6 -->
@@ -756,7 +756,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_6" size="11"></td>
+								<td class="center"><input type="text" name="note_6" size="10"></td>
 							</tr>
 							<!-- ------------------------------------6col------------------------------------------ -->
 							<!-- ------------------------------------7col------------------------------------------ -->
@@ -847,7 +847,7 @@
 									</select>
 								</td>
 								<!-- 입금금액 _7 -->
-								<td class="center"><input type="text" name="inc_7" id="inc_7" size="10" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_7,this,document.inout_frm.exp_7)"></td>
+								<td class="center"><input type="number" name="inc_7" id="inc_7" style="width:80px;" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_7,this,document.inout_frm.exp_7)"></td>
 								<!--출금처 _7 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_7" id="out_7"  style="width:62px;" onChange="charge(7,this.value);" disabled>
@@ -858,7 +858,7 @@
 									</select>
 								</td>
 								<!-- 출금금액 _7 -->
-								<td class="center"><input type="text" name="exp_7" id="exp_7" size="10" onkeyPress ='iNum(this)'></td>
+								<td class="center"><input type="number" name="exp_7" id="exp_7" style="width:80px;" onkeyPress ='iNum(this)'></td>
 								<!-- 수수료 _7 -->
 								<td class="center" style="padding: 5px 0 0 0;"><div class="checkbox" style="margin:0;"><label><div class="checkbox" style="margin:0;"><label><input type="checkbox" name="char1_7" onclick="char2_chk(document.inout_frm.char2_7,7);" disabled>금액:</label> <input type="text" name="char2_7" size="3" onkeyPress ='iNum(this)' disabled></div></td>
 								<!-- 증빙서류 _7 -->
@@ -872,7 +872,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_7" size="11"></td>
+								<td class="center"><input type="text" name="note_7" size="10"></td>
 							</tr>
 							<!-- ------------------------------------7col------------------------------------------ -->
 							<!-- ------------------------------------8col------------------------------------------ -->
@@ -963,7 +963,7 @@
 									</select>
 								</td>
 								<!-- 입금금액 _8 -->
-								<td class="center"><input type="text" name="inc_8" id="inc_8" size="10" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_8,this,document.inout_frm.exp_8)"></td>
+								<td class="center"><input type="number" name="inc_8" id="inc_8" style="width:80px;" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_8,this,document.inout_frm.exp_8)"></td>
 								<!--출금처 _8 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_8" id="out_8"  style="width:62px;" onChange="charge(8,this.value);" disabled>
@@ -974,7 +974,7 @@
 									</select>
 								</td>
 								<!-- 출금금액 _8 -->
-								<td class="center"><input type="text" name="exp_8" id="exp_8" size="10" onkeyPress ='iNum(this)'></td>
+								<td class="center"><input type="number" name="exp_8" id="exp_8" style="width:80px;" onkeyPress ='iNum(this)'></td>
 								<!-- 수수료 _8 -->
 								<td class="center" style="padding: 5px 0 0 0;"><div class="checkbox" style="margin:0;"><label><div class="checkbox" style="margin:0;"><label><input type="checkbox" name="char1_8" onclick="char2_chk(document.inout_frm.char2_8,8);" disabled>금액:</label> <input type="text" name="char2_8" size="3" onkeyPress ='iNum(this)' disabled></div></td>
 								<!-- 증빙서류 _8 -->
@@ -988,7 +988,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_8" size="11"></td>
+								<td class="center"><input type="text" name="note_8" size="10"></td>
 							</tr>
 							<!-- ------------------------------------8col------------------------------------------ -->
 							<!-- ------------------------------------9col------------------------------------------ -->
@@ -1079,7 +1079,7 @@
 									</select>
 								</td>
 								<!-- 입금금액 _9 -->
-								<td class="center"><input type="text" name="inc_9" id="inc_9" size="10" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_9,this,document.inout_frm.exp_9)"></td>
+								<td class="center"><input type="number" name="inc_9" id="inc_9" style="width:80px;" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_9,this,document.inout_frm.exp_9)"></td>
 								<!--출금처 _9 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_9" id="out_9"  style="width:62px;" onChange="charge(9,this.value);" disabled>
@@ -1090,7 +1090,7 @@
 									</select>
 								</td>
 								<!-- 출금금액 _9 -->
-								<td class="center"><input type="text" name="exp_9" id="exp_9" size="10" onkeyPress ='iNum(this)'></td>
+								<td class="center"><input type="number" name="exp_9" id="exp_9" style="width:80px;" onkeyPress ='iNum(this)'></td>
 								<!-- 수수료 _9 -->
 								<td class="center" style="padding: 5px 0 0 0;"><div class="checkbox" style="margin:0;"><label><div class="checkbox" style="margin:0;"><label><input type="checkbox" name="char1_9" onclick="char2_chk(document.inout_frm.char2_9,9);" disabled>금액:</label> <input type="text" name="char2_9" size="3" onkeyPress ='iNum(this)' disabled></div></td>
 								<!-- 증빙서류 _9 -->
@@ -1104,7 +1104,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_9" size="11"></td>
+								<td class="center"><input type="text" name="note_9" size="10"></td>
 							</tr>
 							<!-- ------------------------------------9col------------------------------------------ -->
 							<!-- ------------------------------------10col------------------------------------------ -->
@@ -1195,7 +1195,7 @@
 									</select>
 								</td>
 								<!-- 입금금액 _10 -->
-								<td class="center"><input type="text" name="inc_10" id="inc_10" size="10" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_10,this,document.inout_frm.exp_10)"></td>
+								<td class="center"><input type="number" name="inc_10" id="inc_10" style="width:80px;" onkeyPress ='iNum(this)' onChange="transfer(document.inout_frm.class1_10,this,document.inout_frm.exp_10)"></td>
 								<!--출금처 _10 -->
 								<td class="center" style=" padding-top: 7px;">
 									<select name="out_10" id="out_10"  style="width:62px;" onChange="charge(10,this.value);" disabled>
@@ -1206,7 +1206,7 @@
 									</select>
 								</td>
 								<!-- 출금금액 _10 -->
-								<td class="center"><input type="text" name="exp_10" id="exp_10" size="10" onkeyPress ='iNum(this)'></td>
+								<td class="center"><input type="number" name="exp_10" id="exp_10" style="width:80px;" onkeyPress ='iNum(this)'></td>
 								<!-- 수수료 _10 -->
 								<td class="center" style="padding: 5px 0 0 0;"><div class="checkbox" style="margin:0;"><label><div class="checkbox" style="margin:0;"><label><input type="checkbox" name="char1_10" onclick="char2_chk(document.inout_frm.char2_10,10);" disabled>금액:</label> <input type="text" name="char2_10" size="3" onkeyPress ='iNum(this)' disabled></div></td>
 								<!-- 증빙서류 _10 -->
@@ -1220,7 +1220,7 @@
 										<option value="6"> 간이영수증
 									</select>
 								</td>
-								<td class="center"><input type="text" name="note_10" size="11"></td>
+								<td class="center"><input type="text" name="note_10" size="10"></td>
 							</tr>
 							<!-- ------------------------------------10col------------------------------------------ -->
 						</tbody>
