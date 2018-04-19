@@ -117,7 +117,7 @@
     'lot_seq' => $this->input->get('lot_seq'),
     'page' => $this->input->get('page')
   );
-  echo form_open(current_full_url(), $attributes, $hidden);
+  echo form_open_multipart(current_full_url(), $attributes, $hidden);
 ?>
   <div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
     <div class="col-sm-12 col-md-1 center bg-info" style="line-height:38px;">토지 데이터</div>
@@ -250,7 +250,7 @@
       'set_sort' => '2',
       'mode' => '1'
   );
-  echo form_open(current_full_url(), $attributes, $hidden);
+  echo form_open_multipart(current_full_url(), $attributes, $hidden);
   $close_url = base_url(
     'cms_m3/project/1/3?project='.$project
     .'&set_sort=2&mode=1'
