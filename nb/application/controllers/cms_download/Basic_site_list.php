@@ -78,7 +78,7 @@ class Basic_site_list extends CB_Controller {
 	        ),
 	      ),
 	    );
-    	$spreadsheet->getActiveSheet()->getStyle('A1:H1')->applyFromArray($styleArray);
+    	// $spreadsheet->getActiveSheet()->getStyle('A1:H1')->applyFromArray($styleArray);
 
 		$allBorder = array(
 	      'borders' => array(
@@ -107,7 +107,7 @@ class Basic_site_list extends CB_Controller {
 		$spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);// A1의 폰트를 변경 합니다.
 		$spreadsheet->getActiveSheet()->setCellValue('A1', $pj_title->pj_name.' 토지목록 조서');// 해당 셀의 내용을 입력 합니다.
 		$spreadsheet->getActiveSheet()->getStyle('H2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-		$spreadsheet->getActiveSheet()->setCellValue('H2', date('Y-m-d')." 현재");// 해당 셀의 내용을 입력 합니다.
+		// $spreadsheet->getActiveSheet()->setCellValue('H2', date('Y-m-d')." 현재");// 해당 셀의 내용을 입력 합니다.
 
 		$spreadsheet->getActiveSheet()->getStyle('A3:H4')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFEAEAEA');
 
