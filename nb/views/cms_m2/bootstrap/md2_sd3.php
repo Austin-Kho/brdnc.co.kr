@@ -126,9 +126,9 @@ else :
 			<thead>
 				<tr>
 					<th colspan="4" style="text-align: center; background-color:#BDD5FE;" width="23%">구 분</th>
-					<th style="text-align: center; background-color:#BDD5FE;" width="15%">금 액</th>
+					<th style="text-align: center; background-color:#BDD5FE;" width="13%">금 액</th>
 					<th style="text-align: center; background-color:#BDD5FE;" width="32%">산 출 내 역</th>
-					<th style="text-align: center; background-color:#BDD5FE;" width="15%">비 고</th>
+					<th style="text-align: center; background-color:#BDD5FE;" width="17%">비 고</th>
 					<th style="text-align: center; background-color:#BDD5FE;" width="5%">비 율</th>
 					<th style="text-align: center; background-color:#BDD5FE;" width="5%">수 정</th>
 					<th style="text-align: center; background-color:#BDD5FE;" width="5%">삭 제</th>
@@ -292,7 +292,7 @@ else :
 <?php
 	foreach($top_bud as $lt) :
 		echo "<tr>";
-		
+
 		echo "<td rowspan='10'>&nbsp;</td>";
 
 
