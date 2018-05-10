@@ -155,8 +155,8 @@ class Cms_m2 extends CB_Controller
 			// 사업수지 예산 관련 데이터
 			$view['top_bud'] = $this->cms_main_model->data_result('cb_cms_project_budget', array('pj_seq'=>$project, 'bud_parent'=>0), 'bud_order, bud_seq');
 
-			// 예산항목 입력 시 셀렉트
-			$view['sec_bud'] = $this->cms_main_model->data_result('cb_cms_project_budget', array('pj_seq'=>$project, 'bud_parent !='=>0, 'bud_amount'=>0), 'bud_order, bud_seq');
+			// // 예산항목 입력 시 셀렉트
+			// $view['sec_bud'] = $this->cms_main_model->data_result('cb_cms_project_budget', array('pj_seq'=>$project, 'bud_parent !='=>0, 'bud_amount'=>0), 'bud_order, bud_seq');
 
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
@@ -166,7 +166,7 @@ class Cms_m2 extends CB_Controller
 			$this->form_validation->set_rules('bud_name', '예산항목 명칭', 'trim|max_length[20]|required');
 			$this->form_validation->set_rules('bud_order', '항목 정렬순서', 'trim|numeric|max_length[3]');
 
-			if($this->form_validation->run() !== FALSE) {
+			if($this->form_validation->run() !== FALSE) { // 예산항목 관리 폼의 데이터가 유효한 경우
 
 				if( !empty($this->input->post('sec_bud'))){
 					$bud_parent = $this->input->post('sec_bud');
@@ -181,11 +181,10 @@ class Cms_m2 extends CB_Controller
 					'bud_order' => $this->input->post('bud_order')
 				);
 
-				$result = $this->cms_main_model->insert_data('cb_cms_project_budget', $bud_data);
+				// $result = $this->cms_main_model->insert_data('cb_cms_project_budget', $bud_data); //
 
 				if( !$result){ alert('데이터베이스 에러입니다.', ''); }else{ alert('정상적으로 등록되었습니다.', ''); }
 			}
-
 		}
 
 		/**

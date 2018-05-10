@@ -246,7 +246,7 @@ else :
 
 				if($i<count($diff)*(count($type)+1)){
 					// 각 타입 행
-					if($i%(count($type)+1)!==4){ $income_td_html = "<td style='padding-left:30px;'> 세대가격&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ".number_format($type_price->sum_price/$type_price->type_num/1000)."</td>";
+					if($i%(count($type)+1)!==4){ $income_td_html = "<td style='padding-left:30px;'> 세대가격&nbsp; : &nbsp; ".number_format($type_price->sum_price/$type_price->type_num/1000)."</td>";
 					// 타입 소계 행
 					}else{ $income_td_html = "<td style='padding-left:30px; background-color:#f6f8fc;'>&nbsp;</td>"; }
 				// 공동주택 합계 행
@@ -288,66 +288,93 @@ else :
 		echo "</tr>";
 	endfor;
 ?>
-				<tr><td colspan="10">&nbsp;</td></tr>
+				<tr><td colspan="10" style="height: 15px;"></td></tr><!-- 수입 / 지출 구분 행 -->
 <?php
-	foreach($top_bud as $lt) :
-		echo "<tr>";
 
-		echo "<td rowspan='10'>&nbsp;</td>";
-
-
-		foreach ($sec_bud as $$val) :
-
-
-		endforeach;
-
-		echo "</tr>";
-
-	endforeach;
 ?>
 			</tbody>
 		</table>
 	</div>
-	<div class="col-xs-12" style="padding: 10px;">&nbsp;</div>
-	<div class="font12 col-xs-12" style="padding: 0;">
+
+
+
+
+
+	<div class="col-xs-12 bo-bottom" style="padding: 10px; margin-top: 20px;"><h5>■ 예산(비용/지출)항목 추가</h5></div>
+	<div class="font12 col-xs-12" style="padding: 20px 0 0;">
 <?php
 	echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
 	$attributes = array('name' => 'bud_insert');
 	$hidden = array('project'=>$project);
 	echo form_open(current_full_url(), $attributes, $hidden);
 ?>
-	    <div class="col-sm-12 col-md-2 center bg-info bo-top" style="line-height:50px;">예산항목 추가</div>
-			<div class="col-xs-6 col-sm-3 col-md-2 bo-top" style="padding: 10px 15px;">
-				<label for="top_bud" class="sr-only">최상위 예산항목</label>
-				<select class="form-control input-sm" name="top_bud">
-					<option value="">최상위 예산항목</option>
+			<div class="col-xs-12" style="padding: 0;">
+				<table class="table table-striped">
+					<thead>
+						<th style="width:11%;">항목 단계</th>
+						<th style="width:11%;">최상위 항목</th>
+						<th style="width:11%;">차상위 항목</th>
+						<th style="width:13%;">항목 명칭</th>
+						<th style="width:26%;">산출 내역</th>
+						<th style="width:18%;">비 고</th>
+						<th style="width:10%;">정렬 순서</th>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								<label for="top_bud" class="sr-only">메뉴 단계</label>
+								<select class="form-control input-sm" name="depth" required>
+									<option value="">단계 선택</option>
+									<option value="1">최 상위 (1단계)</option>
+									<option value="2">차 상위 (2단계)</option>
+									<option value="3">최 하위 (3단계)</option>
+								</select>
+							</td>
+
+							<td>
+								<label for="top_bud" class="sr-only">최상위 예산항목</label>
+								<select class="form-control input-sm" name="top_bud">
+									<option value="">항목 선택</option>
 <?php foreach($top_bud as $lt) : ?>
-					<option value="<?php echo $lt->bud_seq; ?>" <?php echo set_select('top_bud', $lt->bud_seq); ?>><?php echo $lt->bud_name; ?></option>
+									<option value="<?php echo $lt->bud_seq; ?>" <?php echo set_select('top_bud', $lt->bud_seq); ?>><?php echo $lt->bud_name; ?></option>
 <?php endforeach; ?>
-				</select>
-	    </div>
-			<div class="col-xs-6 col-sm-3 col-md-2 bo-top" style="padding: 10px 15px;">
-				<label for="sec_bud" class="sr-only">차상위 예산항목</label>
-				<select class="form-control input-sm" name="sec_bud">
-					<option value="">차상위 예산항목</option>
+								</select>
+							</td>
+							
+							<td>
+								<label for="sec_bud" class="sr-only">차상위 예산항목</label>
+								<select class="form-control input-sm" name="sec_bud">
+									<option value="">항목 선택</option>
 <?php foreach($sec_bud as $lt) : ?>
-					<option value="<?php echo $lt->bud_seq; ?>" <?php echo set_select('sec_bud', $lt->bud_seq); ?>><?php echo $lt->bud_name; ?></option>
+									<option value="<?php echo $lt->bud_seq; ?>" <?php echo set_select('sec_bud', $lt->bud_seq); ?>><?php echo $lt->bud_name; ?></option>
 <?php endforeach; ?>
-				</select>
-	    </div>
-			<div class="col-xs-6 col-sm-3 col-md-2 bo-top" style="padding: 10px 15px;">
-	      <label for="bud_name" class="sr-only">예산항목 명</label>
-	      <input type="text" name="bud_name" value="<?php echo set_value('bud_name'); ?>" placeholder="예산항목 명" class="form-control input-sm" maxlength="20" required>
-	    </div>
+								</select>
+							</td>
+							<td>
+								<label for="bud_name" class="sr-only">예산항목 명</label>
+					      <input type="text" name="bud_name" value="<?php echo set_value('bud_name'); ?>" placeholder="예산항목 명" class="form-control input-sm" maxlength="20" required>
+							</td>
+							<td>
+								<label for="bud_name" class="sr-only">산출 내역</label>
+					      <input type="text" name="bud_name" value="<?php echo set_value('bud_name'); ?>" placeholder="산출 내역" class="form-control input-sm" maxlength="20" required>
+							</td>
+							<td>
+								<label for="bud_name" class="sr-only">비 고</label>
+					      <input type="text" name="bud_name" value="<?php echo set_value('bud_name'); ?>" placeholder="비 고" class="form-control input-sm" maxlength="20" required>
+							</td>
+							<td>
+								<label for="bud_order" class="sr-only">정렬 순서</label>
+					      <input type="number" name="bud_order" value="<?php echo set_value('bud_order'); ?>" placeholder="정렬 순서" class="form-control input-sm" maxlength="3">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 
-			<div class="col-xs-6 col-sm-3 col-md-2 bo-top" style="padding: 10px 15px;">
-	      <label for="bud_order" class="sr-only">정렬 순서</label>
-	      <input type="number" name="bud_order" value="<?php echo set_value('bud_order'); ?>" placeholder="정렬 순서" class="form-control input-sm" maxlength="3">
-	    </div>
-
-	    <div class="col-xs-12 col-md-2 right bo-top" style="padding: 10px 15px;">
+	    <div class="col-xs-12 right bo-top" style="padding: 10px 15px;">
 	      <input class="btn btn-success btn-sm" type="button" value="예산항목 추가" onclick="<?php echo $submit_str; ?>">
 	    </div>
+
 		</form>
   </div>
 	<div class="col-xs-12 bo-top" style="padding: 10px;">&nbsp;</div>
