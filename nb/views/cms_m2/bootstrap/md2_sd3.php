@@ -290,7 +290,10 @@ else :
 ?>
 				<tr><td colspan="10" style="height: 15px;"></td></tr><!-- 수입 / 지출 구분 행 -->
 <?php
-
+				# 1열 1행 --총 항목 수 + 최상위 항목수(소계) + 합계 항목(1) // 총항목수 = 차상위 항목 수 + 차차상위 항목 수 - 차차상위 항목의 차상위 항목 수
+				$sec_bud_num = 0; // 차상위 항목 수
+				$third_bud_num = 0; // 차차상위 항목 수
+				$ts_num = 0; // 차차상위 항목의 차상위 항목 수
 ?>
 			</tbody>
 		</table>
@@ -340,7 +343,7 @@ else :
 <?php endforeach; ?>
 								</select>
 							</td>
-							
+
 							<td>
 								<label for="sec_bud" class="sr-only">차상위 예산항목</label>
 								<select class="form-control input-sm" name="sec_bud">
