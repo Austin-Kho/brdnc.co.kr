@@ -970,8 +970,8 @@ class Cms_m1 extends CB_Controller {
 			$unit = $view['unit'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$now_dong' AND ho='$now_ho' ");  // 선택한 동호수 유닛
 
 			if( !empty($unit->seq)){
-				$cont_where = " WHERE unit_seq='$unit->seq' AND cb_cms_sales_contract.seq=cont_seq  ";
-				$cont_query = "  SELECT *, cb_cms_sales_contractor.seq AS contractor_seq FROM cb_cms_sales_contract, cb_cms_sales_contractor ".$cont_where;
+				$cont_where = " WHERE unit_seq='$unit->seq' AND cb_cms_sales_contract.seq=cont_seq ";
+				$cont_query = "  SELECT *, cb_cms_sales_contractor.seq AS contractor_seq FROM cb_cms_sales_contract, cb_cms_sales_contractor ".$cont_where." ORDER BY is_rescission ";
 				$cont_data = $view['cont_data'] = $this->cms_main_model->sql_row($cont_query); // 계약 및 계약자 데이터
 
 				// 수납 데이터

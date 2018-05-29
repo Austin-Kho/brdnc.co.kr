@@ -301,7 +301,7 @@ foreach($pay_sche as $lt) :
 ?>
 						<tr class="<?php if(empty($cont_data)) echo "active"; ?>">
 							<td style="color: <?php if(date('Y-md')>$due_date) echo '#d00202' ?>;"><?php echo $due_date; ?></td>
-							<td><?php echo $lt->pay_name; ?></td>
+							<td><?php echo $pay_name; ?></td>
 							<td class="right"><?php if( !empty($payment))echo number_format($payment->payment); ?></td>
 							<td class="right" style="color: #0427A4;"><?php if( !empty($ppsche)) echo $paid_per_sche; ?></td>
 							<td class="right" style="color: <?php if( !empty($ppsche)) echo $col; ?>;"><?php if(( !empty($ppsche) && $lt->pay_code<3) OR !empty($due_date)) echo $compair; ?></td>
