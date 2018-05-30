@@ -95,7 +95,7 @@ else :
 
 <?php foreach($now_payer as $lt) :
  	$dong_ho = explode("-", $lt->unit_dong_ho);
- 	echo $del_op."<a ".$red_style." href='".base_url('cms_m1/sales/2/2?yr='.$yr.'project='.$project.'&payer='.$lt->paid_who.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1])."'>".$lt->paid_who."(".$lt->unit_dong_ho.")</a>".$del_cl;
+ 	echo $del_op."<a ".$red_style." href='".base_url('cms_m1/sales/2/2?yr='.$yr.'project='.$project.'&payer='.$this->input->get('payer').'&dong='.$dong_ho[0].'&ho='.$dong_ho[1])."'>".$lt->contractor."(".$lt->unit_dong_ho.")</a>".$del_cl;
 ?>
 <?php endforeach; ?>
 			</div>

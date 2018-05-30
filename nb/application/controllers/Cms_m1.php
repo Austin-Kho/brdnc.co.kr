@@ -954,7 +954,7 @@ class Cms_m1 extends CB_Controller {
 				$paid_who = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_received WHERE paid_who LIKE '%$now_payer%' ");
 
 				$view['now_payer'] = $this->cms_main_model->sql_result(
-					" SELECT paid_who, cb_cms_sales_received.cont_seq AS r_cont_seq, unit_dong_ho, is_rescission
+					" SELECT paid_who, cb_cms_sales_received.cont_seq AS r_cont_seq, contractor, unit_dong_ho, is_rescission
 					  FROM cb_cms_sales_received, cb_cms_sales_contract, cb_cms_sales_contractor
 						WHERE cb_cms_sales_received.pj_seq='$project'
 						AND cb_cms_sales_received.cont_seq=cb_cms_sales_contract.seq
