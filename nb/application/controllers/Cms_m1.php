@@ -951,16 +951,17 @@ class Cms_m1 extends CB_Controller {
 			$now_ho = $this->input->get('ho');
 			if(!empty($this->input->get('payer'))){
 				$now_payer = $this->input->get('payer');
-				$paid_who = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_received WHERE paid_who='$now_payer' ");
+				$paid_who = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_received WHERE paid_who LIKE '%$now_payer%' ");
 
-				if(!empty($paid_who)){
-					$view['now_payer'] = $this->cms_main_model->sql_result(" SELECT paid_who, cont_seq, unit_dong_ho, is_rescission FROM cb_cms_sales_received, cb_cms_sales_contract WHERE cb_cms_sales_received.pj_seq='$project' AND cont_seq=cb_cms_sales_contract.seq AND paid_who LIKE '%$now_payer%' GROUP BY cont_seq ");
-				}else {
-					$pay_cont_seq =  $this->cms_main_model->sql_row(" SELECT cont_seq FROM cb_cms_sales_contractor WHERE contractor='$now_payer' ");
-					if(!empty($pay_cont_seq)){
-						$view['now_payer'] = $this->cms_main_model->sql_result(" SELECT paid_who, cont_seq, unit_dong_ho, is_rescission FROM cb_cms_sales_received, cb_cms_sales_contract WHERE cb_cms_sales_received.pj_seq='$project' AND cont_seq=cb_cms_sales_contract.seq AND cont_seq='$pay_cont_seq->cont_seq' GROUP BY cont_seq ");
-					}
-				}
+				$view['now_payer'] = $this->cms_main_model->sql_result(
+					" SELECT paid_who, cb_cms_sales_received.cont_seq AS r_cont_seq, unit_dong_ho, is_rescission
+					  FROM cb_cms_sales_received, cb_cms_sales_contract, cb_cms_sales_contractor
+						WHERE cb_cms_sales_received.pj_seq='$project'
+						AND cb_cms_sales_received.cont_seq=cb_cms_sales_contract.seq
+						AND cb_cms_sales_contractor.cont_seq=cb_cms_sales_contract.seq
+						AND (paid_who LIKE '%$now_payer%' OR contractor LIKE '%$now_payer%')
+						GROUP BY cb_cms_sales_received.cont_seq "
+				);
 			}
 
 			// $view['dong_list'] = $this->cms_main_model->sql_result(" SELECT dong FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND is_contract='1' GROUP BY dong ORDER BY dong "); // 동 리스트
