@@ -93,9 +93,13 @@ else :
 			<div class="col-xs-11 col-sm-11 col-md-3" style="padding: 12px 10px 6px; margin: 0;">
 
 
-<?php foreach($now_payer as $lt) :
+<?php
+$ci = 0;
+foreach($now_payer as $lt) :
+	$cm = ($ci==0) ? "" : " / ";
  	$dong_ho = explode("-", $lt->unit_dong_ho);
- 	echo $del_op."<a ".$red_style." href='".base_url('cms_m1/sales/2/2?yr='.$yr.'project='.$project.'&payer='.$this->input->get('payer').'&dong='.$dong_ho[0].'&ho='.$dong_ho[1])."'>".$lt->contractor."(".$lt->unit_dong_ho.")</a>".$del_cl;
+ 	echo $del_op.$cm."<a ".$red_style." href='".base_url('cms_m1/sales/2/2?yr='.$yr.'project='.$project.'&payer='.$this->input->get('payer').'&dong='.$dong_ho[0].'&ho='.$dong_ho[1])."'>".$lt->contractor."(".$lt->unit_dong_ho.")</a>".$del_cl;
+	$ci+=1;
 ?>
 <?php endforeach; ?>
 			</div>
