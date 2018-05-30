@@ -27,7 +27,7 @@ class Contract_data extends CB_Controller {
 		/** 데이터 가져오기 시작 **/
 		//----------------------------------------------------------//
 		$project = urldecode($this->input->get('pj'));
-		$cont_query = urldecode($this->input->get('qry'));
+		$cont_query = urldecode($this->input->get('qry'))." ORDER BY cont_code, cb_cms_sales_contract.cont_date, cb_cms_sales_contract.seq ";
 		$cont_data = $this->cms_main_model->sql_result($cont_query); // 계약 및 계약자 데이터
 		$row_opt = explode("-", urldecode($this->input->get('row')));
 		$pj_title = $this->cms_main_model->sql_row(" SELECT pj_name FROM cb_cms_project WHERE seq='$project' ");
@@ -219,25 +219,25 @@ class Contract_data extends CB_Controller {
 
 		$filename='계약자_데이터.xlsx'; // 엑셀 파일 이름
 
-	    // Redirect output to a client's web browser (Excel2007)
-	    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // mime 타입
-		header('Content-Disposition: attachment; filename='.iconv('UTF-8','CP949',$filename)); // 브라우저에서 받을 파일 이름
-	    header('Cache-Control: max-age=0'); // no cache
-	    // If you're serving to IE 9, then the following may be needed
-	    header('Cache-Control: max-age=1');
+	  // Redirect output to a client's web browser (Excel2007)
+		  header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // mime 타입
+			header('Content-Disposition: attachment; filename='.iconv('UTF-8','CP949',$filename)); // 브라우저에서 받을 파일 이름
+		  header('Cache-Control: max-age=0'); // no cache
+	  // If you're serving to IE 9, then the following may be needed
+	  	header('Cache-Control: max-age=1');
 
-	    // If you're serving to IE over SSL, then the following may be needed
-	    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-	    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
-	    header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-	    header('Pragma: public'); // HTTP/1.0
+	  // If you're serving to IE over SSL, then the following may be needed
+		  header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+		  header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+		  header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+		  header('Pragma: public'); // HTTP/1.0
 
 		// Excel5 포맷으로 저장 -> 엑셀 2007 포맷으로 저장하고 싶은 경우 'Excel2007'로 변경합니다.
     	$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Excel2007');
 		// 서버에 파일을 쓰지 않고 바로 다운로드 받습니다.
     	$writer->save('php://output');
     	exit;
-    	// create new file and remove Compatibility mode from word title
+    // create new file and remove Compatibility mode from word title
 	}
 }
 // End of File

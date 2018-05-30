@@ -143,7 +143,7 @@ class Cms_m1 extends CB_Controller {
 
 
 			// 계약 데이터 가져오기
-			if( !$this->input->get('order')) $cont_query .= " ORDER BY cb_cms_sales_contract.cont_date DESC, cb_cms_sales_contract.seq DESC ";
+			if( !$this->input->get('order')) $cont_query .= " ORDER BY cont_code DESC, cb_cms_sales_contract.cont_date DESC, cb_cms_sales_contract.seq DESC ";
 			if($this->input->get('order')=='1') $cont_query .= " ORDER BY cont_code ";
 			if($this->input->get('order')=='2') $cont_query .= " ORDER BY cont_code DESC ";
 			if($start != '' or $limit !='')	$cont_query .= " LIMIT ".$start.", ".$limit." ";
