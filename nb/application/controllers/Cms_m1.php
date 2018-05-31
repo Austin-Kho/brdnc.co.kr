@@ -985,8 +985,8 @@ class Cms_m1 extends CB_Controller {
 
 
 			$view['contractor_info'] = ( !empty($this->input->get('ho'))) ? "
-			<font color='#9f0404'><span class='glyphicon glyphicon-import' aria-hidden='true' style='padding-right: 10px;'></span></font><b>
-			[".$unit->type." 타입] &nbsp;".$now_dong ." 동 ". $now_ho." 호 - 계약자 : ".$cont_data->contractor."</b>" : "";
+			<font color='#5c6a9a'><span class='glyphicon glyphicon-user' aria-hidden='true' style='padding-right: 10px;'></span></font><b>
+			[일련번호 : ".$cont_data->cont_code."] &nbsp;".$now_dong ." 동 ". $now_ho." 호 (".$unit->type.") - 계약자 : ".$cont_data->contractor."</b>" : "";
 
 			// 수납 계좌
 			$view['paid_acc'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_bank_acc WHERE pj_seq='$project' ");
