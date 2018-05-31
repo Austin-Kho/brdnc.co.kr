@@ -16,6 +16,7 @@ class Received_data extends CB_Controller {
 		//----------------------------------------------------------//
 		$project = urldecode($this->input->get('pj'));
 		$rec_query = urldecode($this->input->get('qry'));
+		$rec_query .= "ORDER BY paid_date, cb_cms_sales_received.seq ";
 		$rec_data = $this->cms_main_model->sql_result($rec_query); // 계약 및 계약자 데이터
 
 		//----------------------------------------------------------//
@@ -71,16 +72,34 @@ class Received_data extends CB_Controller {
     );
     $spreadsheet->getActiveSheet()->getStyle('A1:J1')->applyFromArray($styleArray);
 
-		$spreadsheet->getActiveSheet()->getColumnDimension("A")->setWidth(5); // A열의 셀 넓이 설정
-		$spreadsheet->getActiveSheet()->getColumnDimension("B")->setWidth(10); // B열의 셀 넓이 설정
-		$spreadsheet->getActiveSheet()->getColumnDimension("C")->setWidth(10); // C열의 셀 넓이 설정
-		$spreadsheet->getActiveSheet()->getColumnDimension("D")->setWidth(12); // D열의 셀 넓이 설정
-		$spreadsheet->getActiveSheet()->getColumnDimension("E")->setWidth(10); // E열의 셀 넓이 설정
-		$spreadsheet->getActiveSheet()->getColumnDimension("F")->setWidth(10); // F열의 셀 넓이 설정
-		$spreadsheet->getActiveSheet()->getColumnDimension("G")->setWidth(12); // G열의 셀 넓이 설정
-		$spreadsheet->getActiveSheet()->getColumnDimension("H")->setWidth(8); // H열의 셀 넓이 설정
-		$spreadsheet->getActiveSheet()->getColumnDimension("I")->setWidth(6); // I열의 셀 넓이 설정
-		$spreadsheet->getActiveSheet()->getColumnDimension("J")->setWidth(10); // J열의 셀 넓이 설정
+		$outBorder = array(
+      'borders' => array(
+        'outline' => array(
+          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        ),
+      ),
+    );
+		// $spreadsheet->getActiveSheet()->getStyle('A2:'.toAlpha(count($row_opt)-1).'2')->applyFromArray($outBorder);
+
+		$allBorder = array(
+      'borders' => array(
+        'allborders' => array(
+          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+        ),
+      ),
+    );
+		// $spreadsheet->getActiveSheet()->getStyle('A3:J'.(count($rec_data)+3))->applyFromArray($allBorder);
+
+		$spreadsheet->getActiveSheet()->getColumnDimension("A")->setWidth(6); // A열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("B")->setWidth(12); // B열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("C")->setWidth(12); // C열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("D")->setWidth(18); // D열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("E")->setWidth(12); // E열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("F")->setWidth(12); // F열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("G")->setWidth(13); // G열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("H")->setWidth(10); // H열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("I")->setWidth(8); // I열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("J")->setWidth(12); // J열의 셀 넓이 설정
 
 		$spreadsheet->getActiveSheet()->getDefaultRowDimension()->setRowHeight(19.5); // 전체 기본 셀 높이 설정
 		$spreadsheet->getActiveSheet()->getRowDimension(1)->setRowHeight(37.5); // 1행의 셀 높이 설정
@@ -124,12 +143,14 @@ class Received_data extends CB_Controller {
 			$spreadsheet->getActiveSheet()->setCellValue('A'.(3+$j), $j);
 			$spreadsheet->getActiveSheet()->setCellValue('B'.(3+$j), $lt->paid_date);
 			$spreadsheet->getActiveSheet()->getStyle('C'.(3+$j))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-			$spreadsheet->getActiveSheet()->setCellValue('C'.(3+$j), number_format($lt->paid_amount));
+			$spreadsheet->getActiveSheet()->setCellValue('C'.(3+$j), $lt->paid_amount);
+			$spreadsheet->getActiveSheet()->getStyle('C'.(3+$j))->getNumberFormat()->setFormatCode('#,##0'); // 셀 숫자형 변환 (1000 -> 1,000)
 			$spreadsheet->getActiveSheet()->setCellValue('D'.(3+$j), $lt->paid_who);
 			$spreadsheet->getActiveSheet()->setCellValue('E'.(3+$j), $lt->pay_name);
 			$spreadsheet->getActiveSheet()->setCellValue('F'.(3+$j), $lt->acc_nick);
 			$spreadsheet->getActiveSheet()->getStyle('G'.(3+$j))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-			$spreadsheet->getActiveSheet()->setCellValue('G'.(3+$j), number_format($total_rec->pa));
+			$spreadsheet->getActiveSheet()->setCellValue('G'.(3+$j), $total_rec->pa);
+			// $spreadsheet->getActiveSheet()->getStyle('G'.(3+$j))->getNumberFormat()->setFormatCode('#,##0'); // 셀 숫자형 변환 (1000 -> 1,000)
 			$spreadsheet->getActiveSheet()->setCellValue('H'.(3+$j), $contractor->ct);
 			$spreadsheet->getActiveSheet()->setCellValue('I'.(3+$j), $lt->unit_type);
 			$spreadsheet->getActiveSheet()->setCellValue('J'.(3+$j), $lt->unit_dong_ho);
