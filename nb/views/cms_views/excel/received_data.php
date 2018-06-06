@@ -32,6 +32,18 @@ echo $EXCEL_STR1 = "
 $i = 1;
 // 데이터 가져오기 시작
 foreach ($rec_data as $lt) :
+  $dong_ho = explode("-", $lt->unit_dong_ho);
+  $contractor = $this->cms_main_model->sql_row(
+    " SELECT contractor AS ct
+      FROM cb_cms_sales_contractor
+      WHERE cont_seq='$lt->cont_seq' "
+  );
+  $total_rec = $this->cms_main_model->sql_row(
+    " SELECT SUM(paid_amount) AS pa
+      FROM cb_cms_sales_received
+      WHERE pj_seq='$project' AND cb_cms_sales_received.cont_seq='$lt->cont_seq'
+      GROUP BY cb_cms_sales_received.cont_seq "
+  );
 
 echo $EXCEL_STR2 = "
 <tr   height='20' style='font-size:9pt;'>
@@ -39,12 +51,12 @@ echo $EXCEL_STR2 = "
 	 <td align='center'>".$lt->paid_date."</td>
 	 <td align='right'>".$lt->paid_amount."</td>
 	 <td align='center'>".$lt->paid_who."</td>
-	 <td align='center'>".$i."</td>
-	 <td align='center'>".$i."</td>
-	 <td align='right'>".$i."</td>
-	 <td align='center'>".$i."</td>
-	 <td align='center'>".$i."</td>
-	 <td align='center'>".$i."</td>
+	 <td align='center'>".$lt->pay_name."</td>
+	 <td align='center'>".$lt->acc_nick."</td>
+	 <td align='right'>".$total_rec->pa."</td>
+	 <td align='center'>".$contractor->ct."</td>
+	 <td align='center'>".$lt->unit_type."</td>
+	 <td align='center'>".$lt->unit_dong_ho."</td>
 </tr>
    ";
    $i++;
