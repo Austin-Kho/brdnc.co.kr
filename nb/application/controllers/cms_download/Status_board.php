@@ -262,7 +262,7 @@ class Status_board extends CB_Controller
 
 		/** 파일 저장 단계 시작 **/
 		//----------------------------------------------------------//
-		$filename='동호수_현황표.xlsx'; // 엑셀 파일 이름
+		$filename='동호수_현황표('.date('Y-m-d').').xlsx'; // 엑셀 파일 이름
 
 	    // Redirect output to a client's web browser (Excel2007)
 	    Header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // mime 타입

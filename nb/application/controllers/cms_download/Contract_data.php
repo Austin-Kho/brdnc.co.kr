@@ -217,7 +217,7 @@ class Contract_data extends CB_Controller {
 
 		// 본문 내용 ---------------------------------------------------------------//
 
-		$filename='계약자_데이터.xlsx'; // 엑셀 파일 이름
+		$filename='계약자_데이터('.date('Y-m-d').').xlsx'; // 엑셀 파일 이름
 
 	  // Redirect output to a client's web browser (Excel2007)
 		  header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // mime 타입
