@@ -128,7 +128,7 @@ for($l=0; $l<$view['max_floor']; $l++) { // 1. 최고층 만큼 반복
             // $cont_data = $this->cms_main_model->sql_row(" SELECT  cont_diff, contractor, cb_cms_sales_contract.cont_date, unit_type, unit_dong_ho FROM cb_cms_sales_contract, cb_cms_sales_contractor WHERE unit_seq='$db_ho->seq' AND is_rescission='0' AND cb_cms_sales_contract.seq=cont_seq AND is_transfer='0' ");
             // $dong_ho = explode("-", $cont_data->unit_dong_ho);
             $condi = "계약";
-            $condi_fc = "color:yellow;";
+            $condi_fc = "color:#fff;";
             $condi_col = "#5a6c82"; // 계약 시
             // $condi = $cont_data->contractor;
             // $con_diff = $cont_data->cont_diff;
