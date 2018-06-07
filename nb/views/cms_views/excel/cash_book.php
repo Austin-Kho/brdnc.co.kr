@@ -1,8 +1,7 @@
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
 Header("Content-type: application/vnd.ms-excel; charset=UTF-8" );
-Header("Content-Disposition: attachment; filename=".iconv("UTF-8","cp949//IGNORE", '입출금_내역서.xls'));
+Header("Content-Disposition: attachment; filename=".iconv("UTF-8","cp949//IGNORE", "입출금_내역서(".date('Y-m-d').").xls"));
 Header("Content-Description: PHP7 Generated Data" );
 Header("Pragma: no-cache");
 Header("Expires: 0");

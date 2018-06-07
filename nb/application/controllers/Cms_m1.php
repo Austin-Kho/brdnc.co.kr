@@ -890,7 +890,7 @@ class Cms_m1 extends CB_Controller {
 			$rec_query = " SELECT cb_cms_sales_received.seq, cont_seq, paid_amount, paid_date, paid_who, acc_nick, pay_name, unit_type, unit_dong_ho ";
 
 			$rec_query .= " FROM cb_cms_sales_received, cb_cms_sales_pay_sche, cb_cms_sales_bank_acc, cb_cms_sales_contract ";
-			$rec_query .= " WHERE cb_cms_sales_received.pj_seq='$project' AND cb_cms_sales_pay_sche.pj_seq='$project'  AND pay_sche_code=cb_cms_sales_pay_sche.pay_code AND paid_acc=cb_cms_sales_bank_acc.seq AND cont_seq=cb_cms_sales_contract.seq ";
+			$rec_query .= " WHERE is_refund='0' AND cb_cms_sales_received.pj_seq='$project' AND cb_cms_sales_pay_sche.pj_seq='$project'  AND pay_sche_code=cb_cms_sales_pay_sche.pay_code AND paid_acc=cb_cms_sales_bank_acc.seq AND cont_seq=cb_cms_sales_contract.seq ";
 			if( !empty($this->input->get('con_pay_sche'))) { $rec_query .= " AND pay_sche_code='".$this->input->get('con_pay_sche')."' ";}
 			if( !empty($this->input->get('con_paid_acc'))) { $rec_query .= " AND paid_acc='".$this->input->get('con_paid_acc')."' ";}
 			if( !empty($this->input->get('s_date'))) { $rec_query .= " AND paid_date>='".$this->input->get('s_date')."' ";}
@@ -985,8 +985,8 @@ class Cms_m1 extends CB_Controller {
 
 
 			$view['contractor_info'] = ( !empty($this->input->get('ho'))) ? "
-			<font color='#9f0404'><span class='glyphicon glyphicon-import' aria-hidden='true' style='padding-right: 10px;'></span></font><b>
-			[".$unit->type." 타입] &nbsp;".$now_dong ." 동 ". $now_ho." 호 - 계약자 : ".$cont_data->contractor."</b>" : "";
+			<font color='#5c6a9a'><span class='glyphicon glyphicon-user' aria-hidden='true' style='padding-right: 10px;'></span></font><b>
+			[ 일련번호 : ".$cont_data->cont_code." ] &nbsp;".$now_dong ."동 ". $now_ho."호 ( ".$unit->type." 타입 / 계약자 : ".$cont_data->contractor." )</b>" : "";
 
 			// 수납 계좌
 			$view['paid_acc'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_bank_acc WHERE pj_seq='$project' ");

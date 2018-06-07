@@ -101,7 +101,7 @@ class Status_board extends CB_Controller
 		// 전체 글꼴 및 정렬
 		$spreadsheet->getActiveSheet()->duplicateStyleArray( // 전체 글꼴 및 정렬
 			array(
-				'font' => array('size' => 6),
+				'font' => array('size' => 7),
 				'alignment' => array(
 					'vertical'   => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
 					'horizontal'   => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER
@@ -144,7 +144,7 @@ class Status_board extends CB_Controller
 		$spreadsheet->getActiveSheet()->getRowDimension(1)->setRowHeight(37.5); // 1행의 셀 높이 설정
 
 		$pj_name = $this->cms_main_model->sql_row(" SELECT pj_name FROM cb_cms_project WHERE seq='$project' ");
-		$spreadsheet->getActiveSheet()->setCellValue('A1', $pj_name->pj_name.' 동호수 상황표');// 해당 셀의 내용을 입력 합니다.
+		$spreadsheet->getActiveSheet()->setCellValue('A1', $pj_name->pj_name.' 동호수 현황표');// 해당 셀의 내용을 입력 합니다.
 
 		// 타입 관련 데이터 구하기
 		$type_data = $this->cms_main_model->sql_row(" SELECT type_name, type_color FROM cb_cms_project WHERE seq='$project' ");
@@ -163,23 +163,38 @@ class Status_board extends CB_Controller
 		$spreadsheet->getActiveSheet()->getColumnDimension('A')->setWidth(2); // 첫 번째 열의 셀 넓이 설정
 
 		$base_col = 0; // 시작열
+		$type_num = count($type[name]);
+
+		// 범례 시작
+		$spreadsheet->getActiveSheet()->mergeCells('B2:C2'); // 셀을 합칩니다.
+		$spreadsheet->getActiveSheet()->getStyle("B2:C".($type_num+2))->applyFromArray($allBorder);
+		// $spreadsheet->getActiveSheet()->getStyle('B2')->getFont()->setBold(true);// A1의 글씨를 볼드로 변경합니다.
+		$spreadsheet->getActiveSheet()->getStyle("B2:C".($type_num+2))->getFont()->setSize(8);// A1의 폰트를 변경 합니다.
+		$spreadsheet->getActiveSheet()->setCellValue('B2', '범례');// 해당 셀의 내용을 입력 합니다.
+
+		for($tn=0; $tn<$type_num; $tn++) : // 타입수만큼 반복
+			$spreadsheet->getActiveSheet()->getStyle('B'.(3+$tn))->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB(str_replace('#', 'FF', $type_color[$type['name'][$tn]]));
+			$spreadsheet->getActiveSheet()->setCellValue('C'.(3+$tn), $type['name'][$tn]);// 해당 셀의 내용을 입력 합니다.
+		endfor;
+		// 범례 종료
 
 		for($j=0; $j<count($dong_data); $j++) : // 1. 동 수만큼 반복
 
 				$d = $dong_data[$j]->dong; // 동 구하기
 				$line_num = $view['line_num'][$j] = // 라인수 구하기
-						$this->cms_main_model->sql_row(" SELECT MIN(RIGHT(ho,2)) AS from_line, MAX(RIGHT(ho,2)) AS to_line FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$d' ");
+				$this->cms_main_model->sql_row(" SELECT MIN(RIGHT(ho,2)) AS from_line, MAX(RIGHT(ho,2)) AS to_line FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$d' ");
 
 				// 동(베이스) 표기 셀 병합
-				$spreadsheet->getActiveSheet()->mergeCells(toAlpha($base_col+1).((2*$view['max_floor'])+7).":".toAlpha($base_col+$line_num->to_line).((2*$view['max_floor'])+8));
-				$spreadsheet->getActiveSheet()->setCellValue(toAlpha($base_col+1).((2*$view['max_floor'])+7), $d.'동');// 해당 셀의 내용을 입력 합니다.
-				$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col+1).((2*$view['max_floor'])+7).":".toAlpha($base_col+$line_num->to_line).((2*$view['max_floor'])+8))->applyFromArray($outBorder);
-				$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col+1).((2*$view['max_floor'])+7))->getFont()->setSize(9);// A1의 폰트를 변경 합니다.
-				$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col+1).((2*$view['max_floor'])+7))->getFont()->setBold(true);// A1의 글씨를 볼드로 변경합니다.
-				$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col+1).((2*$view['max_floor'])+7))->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFd6d7d5');
+				$spreadsheet->getActiveSheet()->mergeCells(toAlpha($base_col+1).((2*$view['max_floor'])+5+$type_num).":".toAlpha($base_col+$line_num->to_line).((2*$view['max_floor'])+6+$type_num));
+				$spreadsheet->getActiveSheet()->setCellValue(toAlpha($base_col+1).((2*$view['max_floor'])+5+$type_num), $d.'동');// 해당 셀의 내용을 입력 합니다.
+				$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col+1).((2*$view['max_floor'])+5+$type_num).":".toAlpha($base_col+$line_num->to_line).((2*$view['max_floor'])+6+$type_num))->applyFromArray($outBorder);
+				$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col+1).((2*$view['max_floor'])+5+$type_num))->getFont()->setSize(9);// A1의 폰트를 변경 합니다.
+				$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col+1).((2*$view['max_floor'])+5+$type_num))->getFont()->setBold(true);// A1의 글씨를 볼드로 변경합니다.
+				$spreadsheet->getActiveSheet()->getStyle(toAlpha($base_col+1).((2*$view['max_floor'])+5+$type_num))->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFd6d7d5');
 
 				for($k=0; $k<$line_num->to_line; $k++): // 2. 라인수 만큼 반복
-						$base_row = 5; // 시작행 초기화
+						$base_row = 3+count($type[name]); // 시작행 초기화
+						// $base_row = 5; // 시작행 초기화
 						$base_col++; // 라인수 증가분 만큼 시작열 증가시키기
 
 						// 동 부분 열 너비 지정
@@ -209,22 +224,25 @@ class Status_board extends CB_Controller
 								if($db_ho !==null) : // 세대 상태 확인 소스
 									if($db_ho->is_hold==1) :
 										$condi = "hold";
-										$condi_col = "FFd2d2d5"; // hold  시
+										$condi_col = "FFc6c5c5"; // hold  시
 									elseif($db_ho->is_application==1) :
-										$app_data = $this->cms_main_model->sql_row(" SELECT  applicant, app_date, unit_type, unit_dong_ho FROM cb_cms_sales_application WHERE unit_seq='$db_ho->seq' AND disposal_div<>'3' ");
-										$dong_ho = explode("-", $app_data->unit_dong_ho);
-										$condi = $app_data->applicant;
-										$condi_col = "FFfcfcbd"; // 청약 시
+										// $app_data = $this->cms_main_model->sql_row(" SELECT  applicant, app_date, unit_type, unit_dong_ho FROM cb_cms_sales_application WHERE unit_seq='$db_ho->seq' AND disposal_div<>'3' ");
+										// $dong_ho = explode("-", $app_data->unit_dong_ho);
+										$condi = "청약";
+										// $condi = $app_data->applicant;
+										$condi_col = "FFe5ff44"; // 청약 시
 									elseif($db_ho->is_contract==1) :
-										$cont_data = $this->cms_main_model->sql_row(" SELECT  cont_diff, contractor, cb_cms_sales_contract.cont_date, unit_type, unit_dong_ho FROM cb_cms_sales_contract, cb_cms_sales_contractor WHERE unit_seq='$db_ho->seq' AND is_rescission='0' AND cb_cms_sales_contract.seq=cont_seq AND is_transfer='0' ");
-										$dong_ho = explode("-", $cont_data->unit_dong_ho);
-										$condi = $cont_data->contractor;
-										$con_diff = $cont_data->cont_diff;
-										if($con_diff==1):
-											$condi_col = "FFdec1ae"; // 계약 시  1차
-										elseif($con_diff==2):
-											$condi_col = "FFd7e3ff"; // 계약 시  2차
-										endif;
+										// $cont_data = $this->cms_main_model->sql_row(" SELECT  cont_diff, contractor, cb_cms_sales_contract.cont_date, unit_type, unit_dong_ho FROM cb_cms_sales_contract, cb_cms_sales_contractor WHERE unit_seq='$db_ho->seq' AND is_rescission='0' AND cb_cms_sales_contract.seq=cont_seq AND is_transfer='0' ");
+										// $dong_ho = explode("-", $cont_data->unit_dong_ho);
+										$condi = "계약";
+										$condi_col = "FF90a3bb"; // 계약 시
+										// $condi = $cont_data->contractor;
+										// $con_diff = $cont_data->cont_diff;
+										// if($con_diff==1):
+										// 	$condi_col = "FF855c43"; // 계약 시  1차
+										// elseif($con_diff==2):
+										// 	$condi_col = "FF5c5a5a"; // 계약 시  2차
+										// endif;
 									else :
 										$condi = "";
 										$condi_col = "";
@@ -262,7 +280,7 @@ class Status_board extends CB_Controller
 
 		/** 파일 저장 단계 시작 **/
 		//----------------------------------------------------------//
-		$filename='동호수_현황표.xlsx'; // 엑셀 파일 이름
+		$filename= $pj_name->pj_name.'_동호수_현황표('.date('Y-m-d').').xlsx'; // 엑셀 파일 이름
 
 	    // Redirect output to a client's web browser (Excel2007)
 	    Header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // mime 타입
