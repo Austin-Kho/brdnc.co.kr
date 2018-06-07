@@ -15,10 +15,10 @@ class Received_data2 extends CB_Controller {
 	 * @return [type] [description]
 	 */
 	public function index(){
-		$this->excel_file();
+		$this->download();
 	}
 
-	public function excel_file(){
+	public function download(){
 
 		$data['pj_seq'] = urldecode($this->input->get('pj'));
 		$rec_query = urldecode($this->input->get('qry'));
