@@ -51,10 +51,10 @@ $type_num = count($type[name]);
 $EXCEL_STR = "
 <table>
   <tr align='center' height='48'>
-    <td colspan='".$max_col."' style='font-size:15pt; text-align:center;'><b>".$project->pj_name." 동호수 현황표</b></td>
+    <td colspan='".$max_col."' style='font-size:20pt; text-align:center;'><b>".$project->pj_name." 동호수 현황표</b></td>
   </tr>
   <tr align='right' height='20'>
-    <td colspan='".$max_col."' style='font-size:8pt;'>".date('Y-m-d')."</td>
+    <td colspan='".($max_col-1)."' style='font-size:8pt;'>".date('Y-m-d')."</td>
   </tr>
 ";
 $EXCEL_STR .= "<tr height='20'>";
@@ -129,7 +129,7 @@ for($l=0; $l<$view['max_floor']; $l++) { // 1. 최고층 만큼 반복
             // $dong_ho = explode("-", $cont_data->unit_dong_ho);
             $condi = "계약";
             $condi_fc = "color:#fff;";
-            $condi_col = "#5a6c82"; // 계약 시
+            $condi_col = "#51657e"; // 계약 시
             // $condi = $cont_data->contractor;
             // $con_diff = $cont_data->cont_diff;
             // if($con_diff==1):
