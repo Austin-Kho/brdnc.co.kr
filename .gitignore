@@ -60,6 +60,3 @@ composer.user.json
 npm-debug.log
 _ide_helper.php
 package-lock.json
-
-## python
-/python/*
