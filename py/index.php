@@ -4,18 +4,13 @@
     <meta charset="utf-8">
     <title>파이썬으로 지루한 작업 자동화 하기</title>
     <style media="screen">
-      h2 {padding-left: 10px;}
-      h4 {padding-left: 20px;}
-      h4 {padding-left: 30px;}
-      /* section {
+      h2 {padding: 10px 10px 20px;}
+      h4 {padding: 10px 20px 20px;}
+      h4 {padding: 10px 30px 20px;}
+      section {
         padding: 10px 20px;
         background-color: #fbf6e0;
       }
-      code {
-        width: inherit;
-        padding: 8px;
-        background-color: #e0edfb;
-      } */
     </style>
     <!-- 합쳐지고 최소화된 최신 CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -38,7 +33,7 @@
           <h5>사전 데이터 유형</h5>
           <p>리스트와 마찬가지로 사전(dictionary)은 많은 값으 모음이다. 그러나 리스트의 인덱스와는 달리 사전의 인덱스는 정수만이 아닌 다양한 데이터 유형을 사용할 수 있다.<br>
           사전을 위한 인덱스를 키(key)라고 하며, 키와 그에 연관된 값을 키-값 쌍(key-value pair)이라고 한다. 코드에서 사전은 중괄호 { }로 정의된다.</p>
-          <code>>>> myCat = {'size': 'fat', 'color': 'gray', 'disposition': 'loud'}</code>
+          <div><pre class="brush:php;">>>> myCat = {'size': 'fat', 'color': 'gray', 'disposition': 'loud'}</pre></div>
           <p>dnl zhemsms myCat 변수에 사전을 할당한다. 사전의 키는 'size', 'color', 'disposition' 이다.<br>
             이들키에 대한 값은 각각 'fat', 'gray', 'loud'다. 이들 키를 통해 값을 사용할 수 있다.</p>
         </article>
