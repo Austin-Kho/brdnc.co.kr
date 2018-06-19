@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <style media="screen">
       h2 {padding: 20px 10px 10px;}
-      h4 {padding: 20px 20px 10px;}
+      h4 {padding: 20px 20px 10px;cursor: pointer;}
       h4 {padding: 20px 30px 10px;}
       section { padding: 10px 50px; background-color: #fbf6e0; }
       code { padding: 10px; background-color: #faebe7; }
@@ -17,6 +17,8 @@
     </style>
     <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <!-- jquery Framework -->
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
   </head>
   <body>
@@ -25,9 +27,9 @@
     <h4>2장 흐름 제어</h4>
     <h4>3장 함수</h4>
     <h4>4장 리스트</h4>
-    <h4>5장 사전 및 구조화 데이터</h4>
+    <h4 onclick="$('#output_option').toggle();">5장 사전 및 구조화 데이터</h4>
       <section>
-        <article class="">
+        <article class="a1">
           <h5>사전 데이터 유형</h5>
           <p>리스트와 마찬가지로 사전(dictionary)은 많은 값의 모음이다. 그러나 리스트의 인덱스와는 달리 사전의 인덱스는 정수만이 아닌 다양한 데이터 유형을 사용할 수 있다.<br>
           사전을 위한 인덱스를 키(key)라고 하며, 키와 그에 연관된 값을 키-값 쌍(key-value pair)이라고 한다. 코드에서 사전은 중괄호 { }로 정의된다.</p>
