@@ -8,6 +8,7 @@
     <!-- 부가적인 테마 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <style media="screen">
+      h1 {padding: 10px 10px 50px; color: #177930; }
       h2 {padding: 10px 10px 10px;}
       h4 {padding: 10px 20px 10px; cursor: pointer; }
       h4 {padding: 10px 30px 10px;}
@@ -35,10 +36,11 @@
     </script>
   </head>
   <body>
+    <h1><span class="glyphicon glyphicon-cd" aria-hidden="true" style="color: #71132a;"></span><strong> 파이썬으로 지루한 작업 자동화 하기</strong></h1>
     <h2>1부 파이썬 프로그래밍 기초</h2>
 
-    <h4 class="heading"><a>1장 파이썬 기초</a></h4>
-      <div class="chapter" style="display: block;">
+    <h4 class="heading"><a>1장 파이썬(python) 기초</a></h4>
+      <div class="chapter">
         <section>
           <article class="">
             <p>
@@ -135,28 +137,23 @@
       <div class="chapter">
 
       </div>
-    <h4 class="heading"><a>3장 함수</a></h4>
+    <h4 class="heading"><a>3장 함수(method)</a></h4>
       <div class="chapter">
 
       </div>
-    <h4 class="heading"><a>4장 리스트</a></h4>
+    <h4 class="heading"><a>4장 리스트(list)</a></h4>
       <div class="chapter">
 
       </div>
-    <h4 class="heading"><a>5장 사전 및 구조화 데이터</a></h4>
+    <h4 class="heading"><a>5장 사전(dictionary) 및 구조화 데이터</a></h4>
       <div class="chapter">
         <section>
           <article class="">
             <p>
               <h5><strong>■ 사전 데이터 유형</strong></h5>
-              <p>
-                리스트와 마찬가지로 사전(dictionary)은 많은 값의 모음이다. 그러나 리스트의 인덱스와는 달리 사전의 인덱스는 정수만이 아닌 다양한 데이터 유형을 사용할 수 있다.<br>
-                사전을 위한 인덱스를 키(key)라고 하며, 키와 그에 연관된 값을 키-값 쌍(key-value pair)이라고 한다. 코드에서 사전은 중괄호 { }로 정의된다.
-              </p>
+              <p>리스트와 마찬가지로 사전(dictionary)은 많은 값의 모음이다. 그러나 리스트의 인덱스와는 달리 사전의 인덱스는 정수만이 아닌 다양한 데이터 유형을 사용할 수 있다.<br>사전을 위한 인덱스를 키(key)라고 하며, 키와 그에 연관된 값을 키-값 쌍(key-value pair)이라고 한다. 코드에서 사전은 중괄호 { }로 정의된다.</p>
               <pre class="brush:xml">>>> myCat = {'size': 'fat', 'color': 'gray', 'disposition': 'loud'}</pre>
-              <p>
-                위 코드는 myCat 변수에 사전을 할당한다. 사전의 키는 'size', 'color', 'disposition' 이다. 이들키에 대한 값은 각각 'fat', 'gray', 'loud'다. 이들 키를 통해 값을 사용할 수 있다.
-              </p>
+              <p>위 코드는 myCat 변수에 사전을 할당한다. 사전의 키는 'size', 'color', 'disposition' 이다. 이들키에 대한 값은 각각 'fat', 'gray', 'loud'다. 이들 키를 통해 값을 사용할 수 있다.</p>
             </p>
 
             <h5><strong>■ 관련 메소드</strong></h5>
@@ -172,7 +169,7 @@
 
 
 
-    <h4 class="heading"><a>6장 문자열 조작하기</a></h4>
+    <h4 class="heading"><a>6장 문자열(String) 조작하기</a></h4>
       <div class="chapter">
 
       </div>
