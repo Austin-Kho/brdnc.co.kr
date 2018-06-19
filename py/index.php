@@ -3,26 +3,24 @@
   <head>
     <meta charset="utf-8">
     <title>파이썬으로 지루한 작업 자동화 하기</title>
-    <style media="screen">
-      h2 {padding: 10px 10px 20px;}
-      h4 {padding: 10px 20px 20px;}
-      h4 {padding: 10px 30px 20px;}
-      section {
-        padding: 10px 20px;
-        background-color: #fbf6e0;
-      }
-    </style>
     <!-- 합쳐지고 최소화된 최신 CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <!-- 부가적인 테마 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <style media="screen">
+      h2 {padding: 20px 10px 10px;}
+      h4 {padding: 20px 20px 10px;}
+      h4 {padding: 20px 30px 10px;}
+      section { padding: 10px 50px; background-color: #fbf6e0; }
+      code { padding: 10px; background-color: #faebe7; }
+      p { padding: 3px; }
+    </style>
     <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
   </head>
   <body>
     <h2>1부 파이썬 프로그래밍 기초</h2>
-
     <h4>1장 파이썬 기초</h4>
     <h4>2장 흐름 제어</h4>
     <h4>3장 함수</h4>
@@ -31,10 +29,10 @@
       <section>
         <article class="">
           <h5>사전 데이터 유형</h5>
-          <p>리스트와 마찬가지로 사전(dictionary)은 많은 값으 모음이다. 그러나 리스트의 인덱스와는 달리 사전의 인덱스는 정수만이 아닌 다양한 데이터 유형을 사용할 수 있다.<br>
+          <p>리스트와 마찬가지로 사전(dictionary)은 많은 값의 모음이다. 그러나 리스트의 인덱스와는 달리 사전의 인덱스는 정수만이 아닌 다양한 데이터 유형을 사용할 수 있다.<br>
           사전을 위한 인덱스를 키(key)라고 하며, 키와 그에 연관된 값을 키-값 쌍(key-value pair)이라고 한다. 코드에서 사전은 중괄호 { }로 정의된다.</p>
-          <div><pre class="brush:php;">>>> myCat = {'size': 'fat', 'color': 'gray', 'disposition': 'loud'}</pre></div>
-          <p>dnl zhemsms myCat 변수에 사전을 할당한다. 사전의 키는 'size', 'color', 'disposition' 이다.<br>
+          <p><code>>>> myCat = {'size': 'fat', 'color': 'gray', 'disposition': 'loud'}</code></p>
+          <p>위 코드는 myCat 변수에 사전을 할당한다. 사전의 키는 'size', 'color', 'disposition' 이다.<br>
             이들키에 대한 값은 각각 'fat', 'gray', 'loud'다. 이들 키를 통해 값을 사용할 수 있다.</p>
         </article>
       </section>
@@ -45,7 +43,8 @@
           <ul>
             <li>keys() : 사전명.keys() 형식으로 사용하며 해당 사전의 key 데이터를 추출한다.</li>
             <li>values() : 사전명.values() 형식으로 사용하며 해당 사전의 value 데이터를 추출한다.</li>
-            <li>items() :  사전명.items() 형식으로 사용하며 해당 사전의 key와 value를 </li>
+            <li>items() :  사전명.items() 형식으로 사용하며 해당 사전의 key와 value 데이터를 추출한다.(dict_items[('key1', 'value1'), ('key2', 'value2')]형식의 튜플로 반환)</li>
+            <li>get() : 사전명.get('key', 'defaultValue') 형식으로 사용하며 해당 사전의 키와 값을 가져오는데, 첫번째 인자로 가져올 값의 키, 두번째 인자로 해당 키가 없을 때 가져올 기본 값을 사용한다.</li>
           </ul>
         </article>
       </section>
