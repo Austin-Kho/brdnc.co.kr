@@ -8,8 +8,8 @@
     <!-- 부가적인 테마 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <style media="screen">
-      h1 {padding: 10px 10px 50px; color: #177930; }
-      h2 {padding: 10px 10px 10px;}
+      h1 {padding: 10px 10px 50px; }
+      h2 {padding: 10px 10px 10px; }
       h4 {padding: 10px 20px 10px; cursor: pointer; }
       h4 {padding: 10px 30px 10px;}
       pre { background-color: #fbefdb; }
@@ -26,10 +26,10 @@
       $(document).ready(function() {
         $(".heading").click(function() {
           if($(this).next(".chapter").is(":visible")){
-            $(this).next(".chapter").slideUp(250);
+            $(this).next(".chapter").slideUp(350);
           } else {
-            $(".chapter").slideUp(150);
-            $(this).next(".chapter").slideDown(250);
+            $(".chapter").slideUp(300);
+            $(this).next(".chapter").slideDown(350);
           }
         });
       });

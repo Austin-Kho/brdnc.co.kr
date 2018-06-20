@@ -1,4 +1,4 @@
-    <h1><span class="glyphicon glyphicon-cd" aria-hidden="true" style="color: #71132a;"></span><strong> 파이썬으로 지루한 작업 자동화 하기</strong></h1>
+    <h1><span class="glyphicon glyphicon-sunglasses" aria-hidden="true" style="color: #5dcb11;"></span><strong> 파이썬으로 지루한 작업 자동화 하기</strong></h1>
     <h2>1부 파이썬 프로그래밍 기초</h2>
 
     <h4 class="heading"><a>1장 파이썬(python) 기초</a></h4>
