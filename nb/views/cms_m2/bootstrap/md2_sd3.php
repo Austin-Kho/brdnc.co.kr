@@ -49,6 +49,7 @@ else :
 </div>
 
 <div class="row" style="margin: 0;">
+	<!-- 사업 요약부분 시작 -->
 	<div class="col-md-12 table-responsive" style="padding: 0;">
 		<table class="table table-bordered table-hover font12">
 			<thead>
@@ -121,6 +122,8 @@ else :
 			</tbody>
 		</table>
 	</div>
+	<!-- 사업 요약부분 종료 -->
+	<!-- 사업수지 테이블 시작 -->
 	<div class="col-md-12 table-responsive" style="padding: 0;">
 		<table class="table table-bordered table-condensed table-hover font11">
 			<thead>
@@ -300,10 +303,11 @@ else :
 
 				$fir_coln = $total_coln + $fir_bun_num + 1; // 1열1행 세로 결합 행 수
 ?>
+
 			</tbody>
 		</table>
 	</div>
-
+	<!-- 사업수지 테이블 종료 -->
 
 
 
