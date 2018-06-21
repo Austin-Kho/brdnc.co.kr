@@ -17,6 +17,13 @@
       section { background-color: #FFF; padding: 10px; margin: 10px 0;}
       /* article { background-color: yellow; } */
       .chapter { margin-left: 30px; padding: 10px 20px; background-color: #eaf4fc; display: none;}
+      a#MOVE_TOP_BTN {
+        position: fixed;
+        right: 3%;
+        bottom: 38px;
+        display: none;
+        z-index: 999;
+      }
     </style>
     <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
@@ -31,6 +38,23 @@
             $(".chapter").slideUp(300);
             $(this).next(".chapter").slideDown(350);
           }
+        });
+      });
+
+      $(function() {
+        $(window).scroll(function() {
+          if ($(this).scrollTop() > 500) {
+            $('#MOVE_TOP_BTN').fadeIn();
+          } else {
+            $('#MOVE_TOP_BTN').fadeOut();
+          }
+        });
+
+        $("#MOVE_TOP_BTN").click(function() {
+          $('html, body').animate({
+            scrollTop : 0
+          }, 400);
+          return false;
         });
       });
     </script>
