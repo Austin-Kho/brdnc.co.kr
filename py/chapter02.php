@@ -125,7 +125,7 @@
             <pre>>>> print('My name is ')<br>>>> for i in range(5):<br>        print('Jimmy Five Times (' + str(i) + ')')</pre>
             <p>※ for 루프 안에서도 break 와 continue 문을 사용할 수 있다. continue 문은 for 루프의 카운터를 다음 값으로 진행 시킨다.마치 프로그램 실행이 루프의 끝에 다다른 것과도 같다. 사실 continue 와 break 문은 while 과 for 루프 안에서만 사용할 수 있다.</p>
             <p><strong>▶ range()</strong> 메소드 : range(시작 값, 종료 값(자신을 포함하지 않음), 증감 값)와 같이 인자를 사용하며, 첫번째(생략 시 0)와 세번째 인자(생략 시 1)는 생략할 수 있다.</p>
-            <pre>>>> for i in range(5):<br>        print(i)<br>>>> for i in range(12, 16):<br>        print(i)<br>>>> for i in range(0, 10, 2):<br>        print(i)<br>>>> for i in range(5, -1, -1):<br>        print(i)</pre>
+            <pre>>>> for i in range(5):<br>        print(i)<br>0<br>1<br>2<br>3<br>4<br>>>> for i in range(12, 16):<br>        print(i)<br>12<br>13<br>14<br>15<br>>>> for i in range(0, 10, 2):<br>        print(i)<br>0<br>2<br>4<br>6<br>8<br>>>> for i in range(5, -1, -1):<br>        print(i)<br>5<br>4<br>3<br>2<br>1<br>0</pre>
           </p>
 
           <p>
