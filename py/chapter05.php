@@ -28,7 +28,7 @@
             <li><strong>values()</strong> : 사전명.values() 형식으로 사용하며 해당 사전의 value 데이터를 추출한다.</li>
             <li><strong>items()</strong> :  사전명.items() 형식으로 사용하며 해당 사전의 key와 value 데이터를 추출한다.(dict_items[('key1', 'value1'), ('key2', 'value2')]형식의 튜플로 반환)</li>
             <li><strong>get()</strong> : 사전명.get('key', 'defaultValue') 형식으로 사용하며 해당 사전의 키와 값을 가져오는데, 첫번째 인자로 가져올 값의 키, 두번째 인자로 해당 키가 없을 때 가져올 기본 값을 사용한다.</li>
-            <li><strong>setdefault()</strong> : 사전명.setdefault('key', 'value') 형식으로 사용하며 해당 사전의 키와 값을 가져오는데, 첫번째 인자로 가져올 값의 키, 두번째 인자로 해당 키가 없을 때 가져올 기본 값을 사용한다.</li>
+            <li><strong>setdefault()</strong> : 사전명.setdefault('key', 'value') 형식으로 사용하며 해당 사전 안에 어떤 특정한 키에 값이 존재하지 않는 경우에만 그 키에 값을 설정한다. 첫 번째 매개변수는 검사할 키이며, 두 번째 매개변수는 키가 존재하지 않을 때 해당 키에 설정할 수 있는 값이다. 키가 존재하는 경우 setDefault() 메소드는 키의 값을 돌려준다.</li>
           </ul>
         </article>
       </section>
