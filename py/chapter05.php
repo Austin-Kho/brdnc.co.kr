@@ -19,8 +19,24 @@
           <p>
             <h5><strong>■ 키 또는 값이 사전에 존재하는지 확인하기</strong></h5>
             <p>리스트에서와 같이 사전에서도 in 연산자와 not in 연산자로 특정 키 또는 값이 사전에 존재하는지 여부를 확인할 수 있다.</p>
-            <pre>>>> spam = ['cats', 'dogs', 'moose']<br>>>> 'name' in spam.keys()<br>True<br>>>> 'Zophie' in spam.values()<br>True<br>'color' in spam.keys()<br>False<br>'color' not in spam.keys()<br>True<br>>>> 'color' in spam<br>False</pre>
+            <pre>>>> spam = {'name': 'Zophie', 'age': 7}<br>>>> 'name' in spam.keys()<br>True<br>>>> 'Zophie' in spam.values()<br>True<br>'color' in spam.keys()<br>False<br>'color' not in spam.keys()<br>True<br>>>> 'color' in spam<br>False</pre>
           </p>
+
+          <p>
+            <h5><strong>■ get() 메소드와 setdefault() 메소드</strong></h5>
+            <p><strong>▶ get()</strong> : 키의 값을 사용할 때마다 그 전에 사전에 키가 존재하는지 여부를 확인하려면 귀찮을 것이다. 다행히도 사전에는 두개의 매개변수를 가지는 get() 메소드가 있다. 하나는 가져올 값의 키이며, 다른 하나는 키가 존재하지 않을 때 대신 돌려줄 값이다.</p>
+            <pre>>>> picnicItems = {'apples': 5, 'cups': 2}<br>>>> 'I am bringing ' + str(picnicItems.get('cups', 0)) + ' cups.'<br>'I am bringing 2 cups.'<br>>>> 'I am bringing ' + str(picnicItems.get('eggs', 0)) + ' eggs.'<br>'I am bringing 0 eggs.'</pre>
+            <p><strong>▶ setdefault()</strong> : 사전 안의 어떤 특정한 키에 이미 값이 존재하지 않는 경우에만 그 키에 값을 설정할 때가 종종 있다.</p>
+            <pre>>>> spam = {'name': 'Pooka', 'age': 5}<br>>>> if 'color' not in spam:<br>        spam['color'] = 'black'</pre>
+            <p>setdefault() 메소드는 한 줄의 코드에서 이러한 작업을 수행할 수 있는 방법을 제공한다. 메소드에 전달되는 첫 번째 매개변수는 검사할 키이며, 두 번째 매개변수는 키가 존재하지 않을 때 해당 키에 설정할 수 있는 값이다. 키가 존재하는 경우 setdefault() 메소드는 키의 값을 돌려준다.</p>
+            <pre>>>> spam = {'name': 'Pooka', 'age': 5}<br>>>> spam.setdefault('color', 'black')<br>'black'<br>>>> spam<br>{'color': 'black', 'age': 5, 'name': 'Pooka'}
+              <br>>>> spam.setdefault('color': 'white')<br>'black'<br>>>> spam<br>{'color': 'black', 'age': 5, 'name': 'Pooka'}</pre>
+          </p>
+
+          <h5><strong>■ 관련 모듈</strong></h5>
+          <ul>
+            <li><strong>import pprint</strong> : pprint.pprint(dict) 사전을 키와 값으로 정렬하여 보기 좋게 출력하여 준다.</li>
+          </ul>
 
           <h5><strong>■ 관련 메소드</strong></h5>
           <ul>
