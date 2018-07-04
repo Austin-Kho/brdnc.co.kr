@@ -19,6 +19,10 @@
   include_once "chapter16.php";
   include_once "chapter17.php";
   include_once "chapter18.php";
+  echo "<hr>";
+  include_once "appendix01.php";
+  include_once "appendix02.php";
+  include_once "appendix03.php";
 
   include_once "footer.php";
 ?>
