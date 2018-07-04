@@ -33,6 +33,7 @@
                   <li>pip install pyobjc (OS X에서만)</li>
                   <li>pip install python3-xlib (Linux에서만)</li>
                   <li>pip install pyautogui</li>
+                  <li>pip install pyperclip</li>
               </ul>
             <!-- </pre> -->
           </p>
