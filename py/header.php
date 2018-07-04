@@ -16,6 +16,8 @@
       p { padding: 2px; }
       section { background-color: #FFF; padding: 10px; margin: 10px 0;}
       /* article { background-color: yellow; } */
+      ::selection { background-color: #fb5f72; color: #FFF; }
+    	::-moz-selection { background-color: #fb5f72; color: #FFF; }
       .chapter { margin-left: 30px; padding: 10px 20px; background-color: #eaf4fc; display: none;}
       a#MOVE_TOP_BTN {
         position: fixed;
