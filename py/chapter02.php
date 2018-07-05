@@ -149,6 +149,28 @@
             <pre>>>> import sys<br>>>><br>>>> while True:<br>       print('Type exit to exit.')<br>       response = input()<br>       if response == 'exit':<br>          sys.exit()<br>       print('You typed ' + response + '.')</pre>
           </p>
 
+          <p>
+            <h5><strong>■ 연습 문제</strong></h5>
+            <ul>
+              <li>1. 부울 데이터 유형의 두 가지 값은 무엇인가? 이들을 어떻게 입력해야 하는가?</li>
+              <li>2. 세 개의 부울 연산자는 무엇인가?</li>
+              <li>3. 각 부울 연산자의 진리표를만들어 보라. (즉, 연산자에 대해 가능한 모든 부울 값 조합, 그리고 각 조합이 어떻게 평가되는지 써 보라)</li>
+              <li>4. 다음과 같은 표현식은 어떻게 평가되는가?</li>
+              <pre>(5 >4) and (3 == 5)<br>not (5 > 4)<br>(5 >4) or (3 == 5)<br>not ((5 >4) or (3 == 5))<br>(True and True) and (True == False)<br>(not False) or (not True)</pre>
+              <li>5. 여섯 가지 비교 연산자는 무엇인가?</li>
+              <li>6. 같음 연산자와 할당 연산자의 차이점은 무엇인가?</li>
+              <li>7. 조건이란 무엇이며 이를 어디에서 사용하는지 설명하라.</li>
+              <li>8. 아래 코드에 있는 3개의 블록을 지적하라.</li>
+              <pre>spam = 0<br>if spam == 10:<br>    print('eggs')<br>    if spam > 5:<br>        print('bacon')<br>    else:<br>        print('ham')<br>    print('spam')<br>print('spam')</pre>
+              <li>9. spam 변수에 1이 저장되어 있으면 Hello를, 2가 저장되어 있으면 Howdy를 출력하고, 그 밖에 다른 값이라면 Greetings!를 출력하는 코드를 만들어라.</li>
+              <li>10. 프로그램이 무한루프에 갇혔다면 어떤 키를 눌러야 할까?</li>
+              <li>11. break 와 continue 사이의 차이점은 무엇인가?</li>
+              <li>12. for 루프에서 range(10), range(0, 10), range(0, 10, 1) 사이의 차이점은 무엇인가?</li>
+              <li>13. for 루프를 사용하여 숫자 1부터 10까지를 출력하는 프로그램을 만들어라. 그런 다음 while 루프를 사용하여 똑같이 숫자 1부터 10까지를 출력하는 프로그램을 만들어라.</li>
+              <li>14. spam 이라는 이름의 모듈 안에 bacon()이라는 이름의 함수가 있다면 spam 모듈을 가져온 다음에 어떻게 이 함수를 부를 수 있을까?</li>
+            </ul>
+          </p>
+
         </article>
       </section>
     </div>

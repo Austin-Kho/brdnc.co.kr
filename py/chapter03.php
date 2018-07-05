@@ -67,6 +67,26 @@ ZeroDivisionError: division by zero<br>>>> print(spam(1))<br>42.0</pre>
               <pre>>>> def spam(divideBy)<br>       try:<br>          return 42 / divideBy<br>       except ZeroDivisionError:<br>          print('Error: Invalid argument.')<br><br>>>> print(spam(2))<br>21.0<br>>>> print(spam(12))<br>3.5<br>>>> print(spam(0))<br>Error: Invalid argument.<br>None<br>>>> print(spam(1))<br>42.0</pre>
             </p>
           </p>
+
+          <p>
+            <h5><strong>■ 연습 문제</strong></h5>
+            <ul>
+              <li>1. 함수가 프로그램에 도움이 되는 이유는 무엇인가?</li>
+              <li>2. 언제 함수 안의 코드가 실행되는가? 함수가 정의될 때인가, 아니면 함수가 호출될 때인가?</li>
+              <li>3. 함수를 만드는 명령문은 무엇인가?</li>
+              <li>4. 함수와 함수 호출의 차이점은 무엇인가?</li>
+              <li>5. 파이썬 프로그램에는 얼마나 많은 전역 범위가 있는가? 지역 범위는 얼마나 많이 있는가?</li>
+              <li>6. 지역 범위 안에 있는 변수는 함수 호출이 끝나면 어떻게 되는가?</li>
+              <li>7. 반환 값이란 무엇인가? 반환 값은 표현식의 일부가 될 수 있는가?</li>
+              <li>8. 함수에 return 문이 없다면 그 함수 호출의 반환값은 무엇인가?</li>
+              <li>9. 함수 안에 있는 변수가 전역 변수를 참조하도록 강제할 수 있는 방법은 무엇인가?</li>
+              <li>10. None 데이터 유형은 무엇인가?</li>
+              <li>11. import areallyourpetsnamederic 문은 어떤 일을 하는가?</li>
+              <li>12. spam 이라는 이름의 모듈 안에 bacon() 이라는 이름의 함수가 있다면 spam 모듈을 가져온 다음에 어떻게 이 함수를 부를 수 있을까?</li>
+              <li>13. 오류가 일어났을 때 프로그램이 멈춰버리는 문제를 막으려면 어떻게 해야 하는가?</li>
+              <li>14. try 절에서는 어떤 일이 일어나는가? except 절에서는 어떤일이 일어나는가?</li>
+            </ul>
+          </p>
         </article>
       </section>
     </div>

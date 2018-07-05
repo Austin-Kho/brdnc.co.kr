@@ -103,6 +103,25 @@
               <p>strip() 에 'ampS' 매개변수를 전달하면 spam에 저장되어 있는 문자열의 끝에 있는 a, m, p, S 를 제거하라고 지시하는 것이다. 글자의 순서는 중요치 않다. stirp('ampS')는 strip('mapS') 또는 strip('Spam')과 똑같은 일을 한다.</p>
             </ul>
           </p>
+
+          <p>
+            <h5><strong>■ 연습 문제</strong></h5>
+            <ul>
+              <li>1. 이스케이프 문자란 무엇인가?</li>
+              <li>2. \n과 \t 이스케이프 문자는 무엇을 뜻하는가?</li>
+              <li>3. 문자열에 \ 백슬래시 문자를 어떻게 넣을 수 있는가?</li>
+              <li>4. 문자열 값 "Howl's Moving Castle"은 유효한 문자열이다. Howl's에 있는 따옴표가 이스케이프되지 않았는데 문제가 생기지 않는 이유는 무엇인가?</li>
+              <li>5. 문자열에 \n을 넣고 싶지 않다면 줄바꿈을 넣는 문자열을 어떻게 만들 수 있는가?</li>
+              <li>6. 다음 표현식은 어떻게 평가되는가?</li>
+              <pre>'Hello world!'[1]<br>'Hello world!'[0:5]<br>'Hello world!'[:5]<br>'Hello world!'[3:]</pre>
+              <li>7. 다음 표현식은 어떻게 평가되는가?</li>
+              <pre>'Hello'.upper()<br>'Hello'.upper().isupper()<br>'Hello'.upper().lower()</pre>
+              <li>8. 다음 표현식은 어떻게 평가되는가?</li>
+              <pre>'Remember, remember, the fifth of November.'.split()<br>'-'.join('There can be only one.'.split())</pre>
+              <li>9. 어떤 문자열 메소드를 사용하여 문자열을 오른쪽, 왼쪽, 가운데로 정렬할 수 있는가?</li>
+              <li>10. 문자열의 시작 또는 끝에 있는 공백 문자를 어떻게 잘라낼 수 있는가?</li>
+            </ul>
+          </p>
         </article>
       </section>
     </div>
