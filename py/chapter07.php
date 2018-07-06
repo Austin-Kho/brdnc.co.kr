@@ -393,7 +393,7 @@ for groups in emailRegex.findall(text):<br>    matches.append(groups[0])
               <pre>'12,34,567' (which has only two digits between commas)<br>'1234' (which lacks commas)</pre>
               <li>21. 성이 Nakamoto(나카모토)인 어떤 사람이 전체 이름과 일치하는 정규식은 어떻게 만드는가? 이름은 성 앞에 나오고 언제나 대문자로 시작하는 한 개의 단어라고 가정할 수 있다. 정규식은 다음과 일치해야 한다.</li>
               <pre>'Satoshe Nakamoto'<br>'Alice Nakamoto'<br>'RoboCop Nakamoto'</pre><p>그러나 다음과 일치해서는 안된다.</p>
-              <pre>'satoshe Nakamoto' (이름의 첫글자가 대문자가 아니기 때문에)<br>'Mr. Nakamoto' (ㅇㅍ에 있는 단어에 문자가 아닌 기호가 있기 때문에)<br>'Nakamoto' (이름이 없기 때문에)<br>'Satoshi nakamoto' (nakamoto의 첫 글자가 대문자가 아니기 때문에)</pre>
+              <pre>'satoshe Nakamoto' (이름의 첫글자가 대문자가 아니기 때문에)<br>'Mr. Nakamoto' (앞에 있는 단어에 문자가 아닌 기호가 있기 때문에)<br>'Nakamoto' (이름이 없기 때문에)<br>'Satoshi nakamoto' (nakamoto의 첫 글자가 대문자가 아니기 때문에)</pre>
               <li>22. 다음과 같은 문장과 일치하는 정규식은 어떻게 만드는가? 첫 번째 단어는 Alice, Bob, Carol이며, 두 번째 단어는 eats, pets, throws이고, 세 번째 단어는 apples, cats, baseball이어야 한다. 또한 문장은 마침표로 끝나야 한다. 이 정규식은 대소문자를 구분하지 않는다. 정규식은 다음과 일치해야 한다.</li>
               <pre>'Alice eats apples.'<br>'Bob pets cats.'<br>'Carol throws baseballs'<br>'Alice throws Apples.'<br>'BOB EATS CATS.'</pre><p>그러나 다음과 일치해서는 안된다.</p>
               <pre>'RoboCop eats apples.'<br>'ALICE THROWS FOOTBALLS.'<br>'Carol eats 7 cats.'</pre>
