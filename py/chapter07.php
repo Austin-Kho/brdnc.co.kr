@@ -263,14 +263,140 @@
             <pre>phoneRegex = re.compile(r'((\d{3}|\(\d{3}\))?(\s|-|\.)?\d{3}(\s|-|\.)\d{4}(\s*(ext|x|ext.)\s*\d{2,5})?)')</pre>
             <p>여러 줄에 걸쳐 주석을 붙인 정규표현식으로 나눌 수 있다.</p>
             <pre>phoneRegex = re.compile(r'''(
-              (\d{3}|\(\d{3}\))?             # area code
-              (\s|-|\.)?                     # separator
-              \d{3}                          # first 3 digits
-              (\s|-|\.)                      # separator
-              \d{4}                          # last 4 digits
-              (\s*(ext|x|ext.)\s*\d{2,5})?   # extension
-              )''', re.VERBOSE)</pre>
+    (\d{3}|\(\d{3}\))?             # area code
+    (\s|-|\.)?                     # separator
+    \d{3}                          # first 3 digits
+    (\s|-|\.)                      # separator
+    \d{4}                          # last 4 digits
+    (\s*(ext|x|ext.)\s*\d{2,5})?   # extension
+    )''', re.VERBOSE)</pre>
             <p>위 예제에서 여러 줄 문자열을 만들기 위해 홑따옴표 세개(''')를 사용한 것에 유의하라. 이렇게 하면 정규표현식을 여러 줄에 걸쳐서 정의할 수 있어서 읽기가 더 좋아진다. 정규표현식 안에 있는 주석의 규칙은 일반 파이썬 코드와 같다. 위의 경우 여러줄 텍스트 안에 있는 여분의 빈칸은 대조할 텍스트 패턴의 일부로 간주되지 않는다.</p>
+          </p>
+
+          <p>
+            <h5><strong>■ IGNORECASE, re.DOTALL, re.VERBOSE 결합하기</strong></h5>
+            <p>정규표현식에 주석을 쓰기 위해 re.VERBOSE와 대소문자 구분을 무시하기 위해 re.IGNORECASE를 같이 사용하고 싶다면? re.compile() 함수는 두 번째 인수로 단 하나의 값만 가질 수 있다.
+              <br>하지만 re.IGNORECASE, re.DOTALL, re.VERBOSE 변수들을 파이프 문자(|)로 결합 할 수 있다. 여기서 |문자는 비트 단위 or 연산자라고 부른다.</p>
+            <pre>>>> someRegexValue = re.compile('foo', re.IGNORECASE | re.DOTALL | re.VERBOSE)</pre>
+            <p>이 구문은 파이썬의 초기 버전에서 유래되었다. 비트단위 연산자에 관한 자세한 내용은 <a href="http://nostarch.com/automatestuff/" target="_blank">http://nostarch.com/automatestuff/</a>에서 볼 수 있다.</p>
+          </p>
+
+          <p>
+            <h5><strong>■ 프로젝트 : 전화번호와 이메일 주소 추출하기</strong></h5>
+            <p>긴 웹페이지 또는 문서에서 모든 전화번호 및 이메일 주소를 찾는 작업을 해야 한다가 가정해 보다. 전화번호와 이메일 주소를 추출하려면 먼저 다음과 같은 일을 해야 한다.</p>
+            <ul>
+              <li>클립보드로부터 텍스트를 가져온다.</li>
+              <li>텍스트에서 모든 전화번호와 이메일 주소를 찾는다.</li>
+              <li>이들을 클립보드에 붙여 넣는다.</li>
+            </ul>
+            <p>이제 이런 일을 어떻게 코드로 할 수 있을지 생각한다. 코드는 다음과 같은 일을 해야 한다.</p>
+            <ul>
+              <li>문자열 복사하기와 붙여넣기를 위해 pyperclip 모듈을 사용한다.</li>
+              <li>두 개의 정규표현식을 만든다. 하나는 전화번호를 위해, 하나는 이메일 주소를 위해서다.</li>
+              <li>두 정규표현식 모두 첫 번째 일치하는 것만이 아닌 일치하는 모든 것을 찾아야 한다.</li>
+              <li>일치하는 문자열들을 깔끔한 형식으로 만들고, 붙여넣기를 위해 한 문자열로 묶어야 한다.</li>
+              <li>텍스트에서 일치하는 것을 찾을 수 없다면 뭔가 메세지를 표시한다.</li>
+            </ul>
+          </p>
+
+          <p>
+            <h5><strong>▶ 1단계: 전화번호에 대한 정규식 만들기</strong></h5>
+            <p>다음 내용을 입력한 후 phoneAndEmail.py로 저장하자.</p>
+            <pre>#! python3<br>#  phoneAndEmail.py - Finds phone numbers and email addresses on the clipboard.
+            <br>import pyperclip, re
+            <br>phoneRegex = re.compile(r'''(
+    (\d{3}|\(\d{3}\))?             # area code / 세 자리 숫자, 혹은 괄호 안의 세자리 숫자 이므로 파이프로 결합하고 지역번호 자체가 선택적이므로 ?가 붙는다.
+    (\s|-|\.)?                     # separator / 빈칸(\s), 하이픈(-) 또는 점(.)일 수 있으므로 이 부분도 파이프(|)로 결합 후 선택적이므로 ?가 붙는다.
+    (\d{3})                        # first 3 digits / 세 자리 숫자
+    (\s|-|\.)                      # separator / 빈칸, 하이픈, 또는 점
+    (\d{4})                        # last 4 digits / 네 자리 숫자
+    (\s*(ext|x|ext.)\s*(\d{2,5}))? # extension / 선택적인 내선번호로 몇 개든 숫자가 나온 후 ext, x 또는 ext가 나오고 그 뒤에 2-5개의 숫자가 나온다.
+    )''', re.VERBOSE)
+            <br># TODO : Create email regex.
+            <br># TODO : Find matches in clipboard text.
+            <br># TODO : Copy results to the clipboard.</pre>
+            <p>TODO 주석은 프로그램의 골격을 나타낸다. 이들은 실제 코드를 작성해 가면서 대체될 것이다.</p>
+          </p>
+
+          <p>
+            <h5><strong>▶ 2단계: 이메일 주소에 대한 정규식 만들기</strong></h5>
+            <p>이메일 주소를 찾기 위해서도 정규표현식이 필요하다. </p>
+            <pre>#! python3<br>#  phoneAndEmail.py - Finds phone numbers and email addresses on the clipboard.
+            <br>import pyperclip, re
+            <br>phoneRegex = re.compile(r'''(
+--snip--
+            <br><strong># Create email regex.<br>emailRegex = re.compile(r'''(
+    [a-zA-Z0-9._%+-]+     # username
+    @                     # @ symbol
+    [a-zA-Z0-9.-]+        # domain name
+    (\.[a-zA-Z]{2,4})     # dot-something
+    )''', re.VERBOSE)</strong>
+            <br># TODO : Find matches in clipboard text.
+            <br># TODO : Copy results to the clipboard.</pre>
+            <p>위 정규표현식은 가능한 모든 유효한 이메일 주소와 일치하지는 못하지만 실제로 보게 되는 거의 모든 일반적인 이메일 주소와는 일치할 것이다.</p>
+          </p>
+
+          <p>
+            <h5><strong>▶ 3단계: 클립보드 텍스트에서 일치하는 모든 것을 찾기</strong></h5>
+            <p>이제 전화번호와 이메일 주소의 정규표현식을 지정했으므로 파이썬의 re 모듈이 클립보드에 있는 모든 일치되는 것을 찾기 위해 동작하도록 할 수 있다.
+            <br>pyperclip.paste() 함수는 클립보드에 있는 텍스트 문자열 값을 가져온다. findall() 정규식 메소드는 튜플의 리스트를 돌려준다.</p>
+            <pre>#! python3<br>#  phoneAndEmail.py - Finds phone numbers and email addresses on the clipboard.
+            <br>import pyperclip, re
+            <br>phoneRegex = re.compile(r'''(
+--snip--
+            <br><strong># Find matches in clipboard text.<br>text = str(pyperclip.paste())<br>matches = []<br>for groups in phoneRegex.findall(text):
+    phoneNum = '-'.join([groups[1], groups[3], groups[5]])
+    if groups[8] != '':
+        phoneNum += ' x' + groups[8]
+    matches.append(phoneNum)<br>for groups in emailRegex.findall(text):<br>    matches.append(groups[0])</strong>
+            <br># TODO : Copy results to the clipboard.</pre>
+            <p>각각의 일치가 하나의 튜플이며, 각 튜플은 정규식의 각 그룹에 대한 문자열을 포함하고 있다. 그룹 0은 전체 정규표현식과 일치하므로 튜플의 인덱스 0에 있는 그룹이 우리가 관심을 가질 만한 것이다.</p>
+          </p>
+
+          <p>
+            <h5><strong>▶ 4단계: 일치하는 텍스트들을 하나의 문자열로 클립보드에 붙이기</strong></h5>
+            <p>이제 matches 에 있는 문자열 리스트에 이메일 주소와 전화번호가 있으므로 이들을 클립보드에 붙여야 한다. pyperclip.copy() 함수는 문자열의 리스트가 아니라 하나의 문자열 값만을 받는다.</p>
+            <pre>#! python3<br>#  phoneAndEmail.py - Finds phone numbers and email addresses on the clipboard.
+            <br>import pyperclip, re
+            <br>phoneRegex = re.compile(r'''(
+--snip--
+for groups in emailRegex.findall(text):<br>    matches.append(groups[0])
+            <br><strong># Copy results to the clipboard.<br>if len(matches) > 0:<br>    pyperclip.copy('\n'.join(matches))<br>    print('Copied to clipboard: ')
+    print('\n'.join(matches))<br>else:<br>    print('No phone numbers or email addresses found.')</strong></pre>
+            <p>특정 페이지나 문서를 열고 Ctrl-A 를 눌러 모든 텍스트를 선택한 다음 Ctrl-C 를 눌러서 이들을 클립보드에 붙이고 이 프로그램을 실행한다.</p>
+          </p>
+
+          <p>
+            <h5><strong>■ 연습 문제</strong></h5>
+            <ul>
+              <li>1. Regex 객체를 만드는 함수는 무엇인가?</li>
+              <li>2. 정규식 객체를 생성할 때 원시 문자열을 자주 사용하는 이유는 무엇인가></li>
+              <li>3. search() 메소드는 무엇을 돌려주는가?</li>
+              <li>4. Match 객체에서 패턴과 일치하는 실제 문자열을 어떻게 받을 수 있는가?</li>
+              <li>5. r'(\d\d\d)-(\d\d\d-\d\d\d\d)'로부터 만든 정규식에서 그룹0은 무엇과 일치하는가? 그룹1과 그룹2는 각각 무엇과 일치하는가?</li>
+              <li>6. 괄호와 마침표는 정규표현식 구문에서 특정한 의미를 가진다. 정규식이 실제 괄호, 마침표와 일치하도록 지정하려면 어떻게 해야 하는가?</li>
+              <li>7. findall() 메소드는 문자열 리스트 또는 문자열 튜플의 리스트를 돌려준다. 각각은 어떤 경우인가?</li>
+              <li>8. | 문자는 정규표현식에서 무엇을 의미 하는가?</li>
+              <li>9. ? 문자는 정규표현식에서 무엇을 의미 하는가></li>
+              <li>10. 정규표현식에서 + 와 * 문자의 차이점은 무엇인가?</li>
+              <li>11. 정규표현식에서 {3}과 {3,5}의 차이점은 무엇인가?</li>
+              <li>12. 정규표현식에서 \d, \w, \s 단축 문자 클래스는 무엇을 의미하는가?</li>
+              <li>13. 정규표현식에서 \D, \W, \S 단축 문자 클래스는 무엇을 의미하는가?</li>
+              <li>14. 정규표현식에서 대소문자를 구분하지 않게 하려면 어떻게 해야 하는가?</li>
+              <li>15. 문자는 보통 무엇과 일치 하는가? re.DOTALL을 re.compile()의 두 번째 매개변수로 전달하면 우엇과 일치 하는가?</li>
+              <li>16. .* 과 .*? 사이의 차이는 무엇인가?</li>
+              <li>17. 모든 숫자 및 소문자와 일치하는 문자 클래스 구문은 무엇인가/></li>
+              <li>18. 만약 numRegex = re.compile(r'\d+')라면, numRegex.sub('X', '12 drummers, 11 pipers, five rings, 3 hens')는 무엇을 돌려주는가?</li>
+              <li>19. re.VERBOSE 를 re.compile()의 두 번째 매개변수로 전달하면 무엇이 가능해지는가?</li>
+              <li>20. 세 자릿수마다 쉼표를 찍는 숫자와 일치하는 정규식은 어떻게 만드는가? 이 정규식은 다음과 일치해야 한다.</li>
+              <pre>'42'<br>'1,234'<br>'6,368,745'</pre><p>그러나 다음과 일치해서는 안된다.</p>
+              <pre>'12,34,567' (which has only two digits between commas)<br>'1234' (which lacks commas)</pre>
+              <li>21. 성이 Nakamoto(나카모토)인 어떤 사람이 전체 이름과 일치하는 정규식은 어떻게 만드는가? 이름은 성 앞에 나오고 언제나 대문자로 시작하는 한 개의 단어라고 가정할 수 있다. 정규식은 다음과 일치해야 한다.</li>
+              <pre>'Satoshe Nakamoto'<br>'Alice Nakamoto'<br>'RoboCop Nakamoto'</pre><p>그러나 다음과 일치해서는 안된다.</p>
+              <pre>'satoshe Nakamoto' (이름의 첫글자가 대문자가 아니기 때문에)<br>'Mr. Nakamoto' (ㅇㅍ에 있는 단어에 문자가 아닌 기호가 있기 때문에)<br>'Nakamoto' (이름이 없기 때문에)<br>'Satoshi nakamoto' (nakamoto의 첫 글자가 대문자가 아니기 때문에)</pre>
+              <li>22. 다음과 같은 문장과 일치하는 정규식은 어떻게 만드는가? 첫 번째 단어는 Alice, Bob, Carol이며, 두 번째 단어는 eats, pets, throws이고, 세 번째 단어는 apples, cats, baseball이어야 한다. 또한 문장은 마침표로 끝나야 한다. 이 정규식은 대소문자를 구분하지 않는다. 정규식은 다음과 일치해야 한다.</li>
+              <pre>'Alice eats apples.'<br>'Bob pets cats.'<br>'Carol throws baseballs'<br>'Alice throws Apples.'<br>'BOB EATS CATS.'</pre><p>그러나 다음과 일치해서는 안된다.</p>
+              <pre>'RoboCop eats apples.'<br>'ALICE THROWS FOOTBALLS.'<br>'Carol eats 7 cats.'</pre>
           </p>
 
         </article>
