@@ -240,12 +240,37 @@
 
           <p>
             <h5><strong>■ 대소문자를 구분하지 않고 일치시키기</strong></h5>
-            <p>일반적으로, 정규표현식은 사용자가 지정한 대소문자를 정허ㅘㄱ히 구분해서 텍스트를 대조한다. 예를 들어 다음과 같은 정규표현식들은 완전히 다른 문자열과 일치한다.</p>
+            <p>일반적으로, 정규표현식은 사용자가 지정한 대소문자를 정확히 구분해서 텍스트를 대조한다. 예를 들어 다음과 같은 정규표현식들은 완전히 다른 문자열과 일치한다.</p>
             <pre>>>> regex1 = re.compile('RoboCop')<br>>>> regex2 = re.compile('ROBOCOP')<br>>>> regex3 = re.compile('robOcop')<br>>>> regex4 = re.compile('RobocOp')</pre>
             <p>그러나 때로 대문자든 소문자든 구분 없이 글자들을 대조하고 싶을 수도 있다. 정규식이 대소문자를 구분하지 않게 하기 위해 re.IGNORECASE 또는 re.I를 re.compile()의 두 번째 매개변수로 전달할 수 있다.</p>
             <pre>>>> robocop = re.compile(r'robocop', re.I)<br>>>> robocop.search('RoboCop is part man, part machine, all cop.').group()<br>'RoboCop'
             <br>>>> robocop.search('ROBOCOP protects the innocent.').group()<br>'ROBOCOP'
             <br>>>> robocop.search('Al, why does your programming book talk about roboop so much?').group()<br>'robocop'</pre>
+          </p>
+
+          <p>
+            <h5><strong>■ sub() 메소드로 문자열 대체하기</strong></h5>
+            <p>정규표현식은 텍스트 패턴을 찾을 수 있을 뿐만 아니라 패턴을 새로운 텍스트로 대체할 때에도 쓸 수 있다. Regex 객체의 sub() 메소드는 두 개의 매개변수를 전달한다. 첫 번째 매개변수는 어떤 일치하는 텍스트든 이를 대체할 문자열이다. 두 번째는 정규표현식과 대조할 문자열이다. sub() 메소드는 대체가 적용된 문자열을 돌려준다.</p>
+            <pre>>>> namesRegex = re.compile(r'Agnet \w+')<br>>>> namesRegex.sub('CENSORED', 'Agent Alice gave the secret documents to Agent Bob.')<br>'CENSORED gave the secret documents to CENSORED.'</pre>
+            <p>때로는 일치하는 텍스트 그 자체를 대체할 텍스트의 일부로 사용해야 할 수도 있다. sub() 의 첫 번째 매개변수에 \1, \2, \3과 같이 입력할 수 있다. 이는 "그룹 1, 2, 3...의 텍스트를 대체 텍스트에 넣어라."는 뜻이다. 예를 들어 비밀 요원의 이름을 검열 삭제(censor)하되 이름의 첫 글자만 보여주고 싶다고 가정해 보자. 이를 위해서는 Agent(\w)\w* 정규식을 사용하고 r'\1****' 문자열을 sub()의 첫 번째 매개변수로 넘긴다. 이 문자열에서 \1은 무엇이든 그룹1과 일치하는 텍스트로 대체된다.</p>
+            <pre>>>> agentNameRegex = re.compile(r'Agent (\w)\w*')<br>>>> agentNameRegex.sub(r'\1****', 'Agent Alice told Carol that Agent Eve knew Agent Bob was a double agent.')<br>'A**** told C**** that E**** knew B**** was a double agent.'</pre>
+          </p>
+
+          <p>
+            <h5><strong>■ 복잡한 정규표현식 관리하기</strong></h5>
+            <p>일치해야 하는 텍스트 패턴이 단순하지 않고 복잡한 경우 길고 복잡한 정규표현식을 써야 할 수도 있다. re.compile() 함수에게 정규표현식 문자열 안에 있는 공백과 주석을 무시하도록 지시함으로써 어려움을 덜어낼 수 있다. 이 "상세 모드"는 re.compile()의 두 번째 매개변수로 re.VERBOSE를 전달함으로서 사용할 수 있게 된다.
+            <br>이제 다음과 같이 읽기 어려운 정규표현식을,</p>
+            <pre>phoneRegex = re.compile(r'((\d{3}|\(\d{3}\))?(\s|-|\.)?\d{3}(\s|-|\.)\d{4}(\s*(ext|x|ext.)\s*\d{2,5})?)')</pre>
+            <p>여러 줄에 걸쳐 주석을 붙인 정규표현식으로 나눌 수 있다.</p>
+            <pre>phoneRegex = re.compile(r'''(
+              (\d{3}|\(\d{3}\))?             # area code
+              (\s|-|\.)?                     # separator
+              \d{3}                          # first 3 digits
+              (\s|-|\.)                      # separator
+              \d{4}                          # last 4 digits
+              (\s*(ext|x|ext.)\s*\d{2,5})?   # extension
+              )''', re.VERBOSE)</pre>
+            <p>위 예제에서 여러 줄 문자열을 만들기 위해 홑따옴표 세개(''')를 사용한 것에 유의하라. 이렇게 하면 정규표현식을 여러 줄에 걸쳐서 정의할 수 있어서 읽기가 더 좋아진다. 정규표현식 안에 있는 주석의 규칙은 일반 파이썬 코드와 같다. 위의 경우 여러줄 텍스트 안에 있는 여분의 빈칸은 대조할 텍스트 패턴의 일부로 간주되지 않는다.</p>
           </p>
 
         </article>
