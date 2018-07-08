@@ -13,7 +13,7 @@
       h4 {padding: 10px 20px 10px; cursor: pointer; }
       section > article > h4 { padding: 0;}
       pre { background-color: #f0f5fa; }
-      code > pre > strong { color: #980202; }
+      pre > strong { color: #980202; }
       p { padding: 2px; }
       section { background-color: #FFF; padding: 10px; margin: 10px 0;}
       /* article { background-color: yellow; } */
