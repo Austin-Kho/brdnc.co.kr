@@ -11,9 +11,9 @@
       h1 {padding: 10px 10px 50px; }
       h2 {padding: 10px 10px 10px; }
       h4 {padding: 10px 20px 10px; cursor: pointer; }
-      h4 {padding: 10px 30px 10px;}
-      pre { background-color: #f3f7f0; }
-      pre > strong { color: #023169 }
+      section > article > h4 { padding: 0;}
+      pre { background-color: #eff6fc; }
+      pre > strong { color: #980202; }
       p { padding: 2px; }
       section { background-color: #FFF; padding: 10px; margin: 10px 0;}
       /* article { background-color: yellow; } */

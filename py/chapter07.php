@@ -36,7 +36,14 @@
             <pre>>>> <strong>import re</strong></pre>
             <p>정규표현식을 나타내는 문자열 값을 re.compile()에 전달하면 Regex 패턴 객체(또는 단순히 Regex 객체)를 돌려받는다. 다음과 같이 전화번호 패턴과 일치하는 Regex 객체를 만들 수 있다. 아래 phoneNumRegex 변수는 정규식 객체를 포함하고 있다.</p>
             <pre>>>> phoneNumRegex = <strong>re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')</strong></pre>
-            <p>❖ 파이썬은 백슬래시(\)를 이스케이프 문자로 사용하므로 실제 하나의 백슬래시를 입력하려면 이스케이프 문자를 포함한 두 개의 백슬래시(\\)를 입력해야 한다. 정규표현식은 자주 백슬래시를 사용하기 때문에, 이스케이프하기 위해 백슬래시를 하나씩 더 붙일 필요없이 re.compile() 함수에 원시 문자열을 전달하면 편리하다. r'\d\d\d-\d\d\d-\d\d\d\d'라고 입력하는 것이 '\\d\\d\\d-\\d\\d\\d-\\d\\d\\d\\d'보다는 편할 것이다.</p>
+            <div class="jumbotron" style="padding:5px;">
+              <h5> 원시 문자열을 re.compile()에 전달하기</h5>
+              <p style="font-size:11pt;">※ 파이썬은 백슬래시(\)를 이스케이프 문자로 사용한다. 문자열 값 '\n'은 백슬래시 다음에 소문자 n이 오는 문자열이 아니라 하나의 줄바꿈 문자를 뜻한다. 하나의 백슬래시를 출력하기 위해서는 \\를 입력해야 한다.
+                따라서 '\\n'은 백슬래시 다음 소문자 n이 오는 문자열이다.
+                <br>하지만 문자열 값의 첫 번째 따옴표 앞에 r을 놓으면 문자열을 원시 문자열, 즉 글자를 이스케이프하지 않는 문자열로 지정할 수 있다. 정규표현식은 자주 백슬래시를 사용하기 때문에, 백슬래시를 하나 더 붙일 필요 없이
+                re.compile() 함수에 원시 문자열을 전달하면 편리하다. r'\d\d\d-\d\d\d-\d\d\d\d'라고 입력하는 것이 '\\d\\d\\d-\\d\\d\\d-\\d\\d\\d\\d'보다는 편할 것이다.</p>
+            </div>
+
           </p>
 
           <p>
@@ -89,7 +96,7 @@
             <pre>>>> batRegex = re.compile(r'Bat<strong>(wo)?</strong>man')<br>>>> mo1 = batRegex.search('The Adventures of <strong>Batman</strong>')<br>>>> mo1.group()<br>'<strong>Batman</strong>'
               <br>>>> mo2 = batRegex.search('The Adventures of <strong>Batwoman</strong>')<br>>>> mo2.group<br>'<strong>Batwoman</strong>'</pre>
             <p>정규표현식의 (wo)? 부분은 패턴이 선택적 그룹이라는 것을 뜻한다. 이 정규식은 wo가 없거나 한 번 나타나는 텍스트와 일치한다. 그 때문에 이 정규식은 'Batwoman', 'Batman'과 모두 일치 한다. 이전 전화번호 예제를 사용하여 지역 코드가 있거나 없는 전화번호를 찾는 정규식을 만들 수 있다.</p>
-            <pre>>>> phoneNumRegex = re.compile(r'<strong>(\d\d\d)?</strong>\d\d\d-\d\d\d\d')<br>>>> mo1 = phoneNumRegex.search('My number is 415-555-4242.')<br>>>> mo1.group()<br>'<strong>415-555-4242</strong>'
+            <pre>>>> phoneNumRegex = re.compile(r'<strong>(\d\d\d-)?</strong>\d\d\d-\d\d\d\d')<br>>>> mo1 = phoneNumRegex.search('My number is 415-555-4242.')<br>>>> mo1.group()<br>'<strong>415-555-4242</strong>'
             <br>>>> mo2 = phoneNumRegex.search('My number is 555-4242.')<br>>>> mo2.group()<br>'<strong>555-4242</strong>'</pre>
             <p>'?' 글자를 '그 앞에 있는 그룹이 0번 또는 1번 나타나면 일치한다.'는 뜻으로 볼 수 있다. 참고로 실제 물음표(?) 글자와 일치해야 할 때에는 \?로 이스케이프 시킨다. </p>
           </p>
@@ -140,7 +147,7 @@
             <p>한편 findall()은 Match 객체가 아니라 문자열의 리스트를 돌려준다. 정규표현식 안에 그룹이 없는 한은 그렇다. 리스트의 각 문자열은 검색 텍스트에서 정규표현식과 일치하는 부분들이다.</p>
             <pre>>>> phoneNumRegex = re.compile(r'<strong>\d\d\d-\d\d\d-\d\d\d\d</strong>') # has no groups<br>>>> phoneNumRegex.<strong>findall('Cell: 415-555-9999 Work: 212-555-0000')</strong><br>[<strong>'415-555-9999', '212-555-0000'</strong>]</pre>
             <p>정규표현식 안에 그룹이 있을 경우 findall()은 튜플의 리스트를 돌려준다. 각 튜플은 발견된 일치 부분을 뜻하고, 각 튜플의 아이템은 정규표현식의 각 그룹과 일치되는 문자열을 뜻한다.</p>
-            <pre>>>> phoneNumRegex = re.compile(r'<strong>(\d\d\)-(\d\d\d)-(\d\d\d\d)</strong>')   # has groups<br>>>> phoneNumRegex.<strong>findall('Cell: 415-555-9999 Work: 212-555-0000')</strong><br>[<strong>('415', '555', '9999'), ('212', '555', '0000')</strong>]</pre>
+            <pre>>>> phoneNumRegex = re.compile(r'<strong>(\d\d\d)-(\d\d\d)-(\d\d\d\d)</strong>')   # has groups<br>>>> phoneNumRegex.<strong>findall('Cell: 415-555-9999 Work: 212-555-0000')</strong><br>[<strong>('415', '555', '9999'), ('212', '555', '0000')</strong>]</pre>
             <p>위의 예와 같이 findall() 메소드는 그룹이 없는 정규식에서는 리스트를, 그룹이 있는 정규식에서는 튜플의 리스트를 돌려준다.</p>
           </p>
 
@@ -148,7 +155,7 @@
             <h5><strong>■ 문자 클래스</strong></h5>
             <p>앞의 예에서 \d가 무엇이든 숫자 한 글자를 나타낸다는 것을 배웠다. 즉 \d는 (0|1|2|3|4|5|6|7|8|9)의 짧은 버전이다. 다음 표는 그와 같은 기타 문자 클래스이다.</p>
 
-            <h5><strong>▶ 표 7-1 널리 쓰이는 짧은 버전의 문자 클래스</strong></h5>
+            <h5><strong>•• 표 7-1 널리 쓰이는 짧은 버전의 문자 클래스</strong></h5>
             <table class="table table-hover table-condensed table table-bordered">
               <thead>
                 <tr>
@@ -172,28 +179,28 @@
 
           <p>
             <h5><strong>■ 사용자 정의 문자 클래스 만들기</strong></h5>
-            <p>어떤 문자의 집합과 대조할 때 짧은 버전의 문자 클래스(\d,\w,\s 같은 것들)는 너무 광범위할 수 있다. 대괄호를 사용하면 사용자 정의 문자 클래스를 정의할 수 있다. 예를 들어 문자 클래스 [aeiouAEIOU]는 대문자든 소문자든 모든 영어 모음과 일치한다.</p>
+            <p>어떤 문자의 집합과 대조할 때 짧은 버전의 문자 클래스(\d,\w,\s 같은 것들)는 너무 광범위할 수 있다. <u><mark>[](대괄호)</mark>를 사용하면 사용자 정의 문자 클래스를 정의</u>할 수 있다. 예를 들어 문자 클래스 [aeiouAEIOU]는 대문자든 소문자든 모든 영어 모음과 일치한다.</p>
             <pre>>>> vowelRegex = re.compile(r'<strong>[aeiouAEIOU]</strong>')<br>>>> vowelRegex.findall('RoboCop eats baby food. BABY FOOD.')<br>['o', 'o', 'o', 'e', 'a', 'a', 'o', 'o', 'A', 'O', 'O']</pre>
-            <p>또한 하이픈을 사용하여 문자 또는 숫자의 범위를 포함할 수도 있다. 예를 들어 [a-zA-Z0-9]문자 클래스는 소문자, 대문자, 숫자와 모두 일치한다. 대괄호 안에서는 일반 정규식 기호가 그 기호의 뜻으로 해석되지 않는다는 점에 유의한다. 즉, *, ? 또는 ()글자 앞에 백슬래시를 두어 이스케이프할 필요가 없다는 뜻이다. 예를 들어 문자 클래스 [0-5.]는 숫자 0에서 5까지, 그리고 마침표와 일치한다. [0-5/.]처럼 할 필요는 없다.
-            <br>여는 괄호 뒤에 캐럿 문자(^)를 두면 부정형 문자 클래스를 만들 수 있다. 부정형 문자 클래스는 문자 클래스에 없는 모든 문자와 일치한다.</p>
+            <p>또한 <u><mark>하이픈(-)</mark>을 사용하여 문자 또는 숫자의 범위</u>를 포함할 수도 있다. 예를 들어 [a-zA-Z0-9]문자 클래스는 소문자, 대문자, 숫자와 모두 일치한다. 대괄호 안에서는 일반 정규식 기호가 그 기호의 뜻으로 해석되지 않는다는 점에 유의한다. 즉, *, ? 또는 ()글자 앞에 백슬래시를 두어 이스케이프할 필요가 없다는 뜻이다. 예를 들어 문자 클래스 [0-5.]는 숫자 0에서 5까지, 그리고 마침표와 일치한다. [0-5/.]처럼 할 필요는 없다.
+            <br><u>여는 대괄호([) 뒤에 <mark>캐럿 문자(^)</mark>를 두면 부정형 문자 클래스</u>를 만들 수 있다. 부정형 문자 클래스는 문자 클래스에 없는 모든 문자와 일치한다.</p>
             <pre>>>> consonantRegex = re.compile(r'<strong>[^aeiouAEIOU]</strong>')<br>>>> consonantRegex.findall('RoboCop eats baby food. BABY FOOD.')<br>['R', 'b', 'c', 'p', ' ', 't', 's', ' ', 'b', 'b', 'y', ' ', 'f', 'd', '.', ' ', 'B', 'B', 'Y', ' ', 'F', 'D', '.']</pre>
             <p>이제 모든 모음과 일치하는 패턴 대신 모음이 아닌 모든 글자와 일치하는 패턴이 되었다.</p>
           </p>
 
           <p>
             <h5><strong>■ 캐럿과 달러 기호 글자</strong></h5>
-            <p>검색 텍스트의 시작 부분에서 일치하는 텍스트가 나타나야 한다는 것을 주문하기 위해 정규식 앞머리에 캐럿 기호(^)를 사용할 수 있다. 마찬가지로 문자열이 정규식 패턴으로 끝나야 한다는 것을 지시하기 위해 정규식의 끝에 달러 기호($)를 붙일 수 있다. 또한 전체 문자열이 정구식과 일치해야 한다는 것을 지시하기 위해 ^기호와 $기호를 함께 쓸 수도 있다. 즉 문자열의 일부 부분만이 일치하는 것으로는 부족하다는 뜻이다. r'^Hello' 정규표현식 문자열은 'Hello'로 시작되는 문자열과 일치한다.</p>
-            <pre>>>> beginsWithHello = re.compile(r'<strong>^Hello</strong>')<br>>>> beginsWithHello.search('Hello world')<br><_sre.SRE_Match object; span=(0, 5), match='<strong>Hello</strong>'><br>>>> beginsWithHello.search('He said hello.') == <strong>None</strong><br>True</pre>
+            <p><u>검색 텍스트의 시작 부분에서 일치하는 텍스트가 나타나야 한다는 것을 주문하기 위해 정규식 앞머리에 <mark>캐럿 기호(^)</mark></u>를 사용할 수 있다. 마찬가지로 <u>문자열이 정규식 패턴으로 끝나야 한다는 것을 지시하기 위해 정규식의 끝에 <mark>달러 기호($)</mark></u>를 붙일 수 있다. 또한 <u><mark>전체 문자열</mark>이 정규식과 일치해야 한다는 것을 지시하기 위해 <mark>^기호와 $기호를 함께</mark> 쓸 수도 있다.</u> 즉 문자열의 일부 부분만이 일치하는 것으로는 부족하다는 뜻이다. r'^Hello' 정규표현식 문자열은 'Hello'로 시작되는 문자열과 일치한다.</p>
+            <pre>>>> beginsWithHello = re.compile(r'<strong>^Hello</strong>')<br>>>> beginsWithHello.search('Hello world')<br>&lt;re.Match object; span=(0, 5), match='<strong>Hello</strong>'><br>>>> beginsWithHello.search('He said hello.') == <strong>None</strong><br>True</pre>
             <p>r'\d$' 정규표현식 문자열은 0에서 9까지의 숫자 글자로 끝나는 문자열과 일치한다.</p>
-            <pre>>>> endWithNumber = re.compile(r'<strong>\d+$</strong>')<br>>>> endWithNumber.search('Your number is 42')<br><_sre.SRE_Match object; span=(16, 17), match='<strong>2</strong>'><br>>>> endWithNumber.search('Your number is forty two.') == <strong>None</strong><br>True</pre>
+            <pre>>>> endWithNumber = re.compile(r'<strong>\d$</strong>')<br>>>> endWithNumber.search('Your number is 42')<br>&lt;re.Match object; span=(16, 17), match='<strong>2</strong>'><br>>>> endWithNumber.search('Your number is forty two.') == <strong>None</strong><br>True</pre>
             <p>r'^\d$' 정규표현식 문자열은 하나 또는 그보다 많은 숫자 글자로 시작하고 끝나는 문자열과 일치한다.</p>
-            <pre>>>> wholeStringIsNum = re.compile(r'<strong>^\d+$</strong>')<br>>>> wholeStringIsNum.search('1234567890')<br><_sre.SRE_Match object; span=(0, 10), match='<strong>1234567890</strong>'><br>>>> wholeStringIsNum.search('12345xyz67890') == <strong>None</strong><br>True<br>>>> wholeStringIsNum.search('12  34567890') == <strong>None</strong><br>True</pre>
+            <pre>>>> wholeStringIsNum = re.compile(r'<strong>^\d+$</strong>')<br>>>> wholeStringIsNum.search('1234567890')<br>&lt;re.Match object; span=(0, 10), match='<strong>1234567890</strong>'><br>>>> wholeStringIsNum.search('12345xyz67890') == <strong>None</strong><br>True<br>>>> wholeStringIsNum.search('12  34567890') == <strong>None</strong><br>True</pre>
             <p>위 예제의 두 search() 호출은 ^와 $를 함께 사용하는 경우 전체 문자열이 정규식과 일치해야 한다는 것을 보여준다.</p>
           </p>
 
           <p>
             <h5><strong>■ 와일드카드 문자</strong></h5>
-            <p>정규식에서 '.'글자(또는 점)는 와일드카드라고 하며 줄바꿈을 제외한 모든 문자와 일치한다.</p>
+            <p>정규식에서 '.'글자(또는 점)는 와일드카드라고 하며 줄바꿈을 제외한 모든 문자(한글자)와 일치한다.</p>
             <pre>>>> atRegex = re.compile(r'<strong>.at</strong>')<br>>>> atRegex.findall('The cat in the hat sat on the flat mat.')<br>['cat', 'hat', 'sat', 'lat', 'mat']</pre>
             <p>점(.) 글자는 한 글자와만 일치한다는 것을 기억하라. 위 예제에서 텍스트 flat이 lat하고만 일치한 이유다. 실제 점 글자와 일치시키려면, 백슬래시로 점글자를 이스케이프 시켜야 한다. 즉 \.이 된다.</p>
           </p>
@@ -202,7 +209,7 @@
             <h5><strong>▶ 점-별표로 모든 것을 일치시키기</strong></h5>
             <p>가끔 모든 것, 그리고 어느 것과든 일치시킬 필요가 있다. 이 때 '무엇이든'을 표현하기 위해 점과 별표(.*)를 사용할 수 있다. 점글자는 '줄바꿈을 제외한 모든 한 개의 글자'를 뜻하며, 별표는 '앞에 있는 글자가 없거나 한 번 이상 나오는 것' 을 뜻한다.</p>
             <pre>>>> nameRegex = re.compile(r'First Name: (<strong>.*</strong>) Last Name: (.*)')<br>>>> mo = nameRegex.search('First Name: <strong>Al</strong> Last Name: <strong>Sweigart</strong>')<br>>>> mo.group(1)<br>'<strong>Al</strong>'<br>>>> mo.group(2)<br>'<strong>Sweigart</strong>'</pre>
-            <p>점-별표는 최대 일치 모드를 사용한다. 항상 될 수 있는 대로 많은 텍스트와 일치시키려고 한다. 만약 최소 일치 방식을 사용하려면 점-별표, 그 다음 물음표(?)를 사용한다. 중괄호와 마찬가지로, 물음펴는 파이썬에게 최소 일치 방식을 사용하라고 지시한다. 최대 일치와 최소일치 버전 사이의 차이를 보자.</p>
+            <p>점-별표는 최대 일치 모드를 사용한다. 항상 될 수 있는 대로 많은 텍스트와 일치시키려고 한다. 만약 최소 일치 방식을 사용하려면 점-별표, 그 다음 물음표(?)를 사용한다. 중괄호와 마찬가지로, 물음표는 파이썬에게 최소 일치 방식을 사용하라고 지시한다. 최대 일치와 최소일치 버전 사이의 차이를 보자.</p>
             <pre>>>> nongreedyRegex = re.compile(r'<<strong>.*?</strong>>')<br>>>> mo = nongreedyRegex.search('&lt;To serve man> for dinner.>')<br>>>> mo.group()<br>'<strong>&lt;To serve man></strong>'
               <br>>>> greedyRegex = re.compile(r'<<strong>.*</strong>>')<br>>>> mo = greedyRegex.search('&lt;To serve man> for dinner.>')<br>>>> mo.group()<br>'<strong>&lt;To serve man> for dinner.></strong>'</pre>
             <p>두 정규표현식 모두 대략 '여는 부등호, 그 다음에는 무엇이든, 그 다음에는 닫는 부등호와 일치한다' 고 해석할 수 있다. 그러나 '&lt;To serve man> for dinner.>'문자열은 닫는 부등호에 관해서는 두가지 가능한 일치가 있다. 최소 일치 버전에서는 '&lt;To serve man>'과 일치하고 최대 일치 버전에서는 '&lt;To serve man> for dinner.>'와 일치한다.</p>
@@ -212,7 +219,7 @@
             <h5><strong>▶ 점 문자로 줄바꿈 문자와 일치시키기</strong></h5>
             <p>점-별표는 줄바꿈을 제외한 모든 글자와 일치한다. re.compile()에 re.DOTALL을 두 번째 매개변수로 전달하면 점 문자가 줄바꿈 문자를 포함한 모든 글자와 일치하도록 만들 수 있다.</p>
             <pre>>>> noNewlineRegex = re.compile('.*')<br>>>> noNewlineRegex.search('Serve the public trust.\nProtect the innocent.\nUphold the law.').group()<br>'Serve the public trust.'
-            <br>>>> newlineRegex = re.compile('.*', <strong>re.DOTALL</strong>)<br>NewlineRegex.search('Serve the public trust.\nProtect the innocent.\nUphold the law.').group()<br>'<strong>Serve the public trust.\nProtect the innocent.\nUphold the law.</strong>'</pre>
+            <br>>>> newlineRegex = re.compile('.*', <strong>re.DOTALL</strong>)<br>>>> newlineRegex.search('Serve the public trust.\nProtect the innocent.\nUphold the law.').group()<br>'<strong>Serve the public trust.\nProtect the innocent.\nUphold the law.</strong>'</pre>
             <p>re.compile()을 호출해서 만들 때 re.DOTALL 이 없다면 정규식 noNewlineRegex는 첫 번째 줄바꿈 문자까지 모든 글자와 일치하고 반면, re.compile()에 re.DOTALL을 전달해서 만든 newlineRegex는 모든 글자와 일치한다.</p>
           </p>
 
@@ -230,7 +237,7 @@
               <li>{n, m}? 또는 *? 또는 +? 는 그 앞의 그룹에 대해 최소 일치를 수행한다.</li>
               <li>^spam은 문자열이 spam으로 시작해야 한다는 것을 뜻한다.</li>
               <li>spam$는 문자열이 spam오로 끝나야 한다는 것을 뜻한다.</li>
-              <li>.은 줄바꿈 문자를 제외한 모든 글자와 일치한다.</li>
+              <li>.은 줄바꿈 문자를 제외한 모든 (한)글자와 일치한다.</li>
               <li>\d, \w, \s는 각각 숫자, 단어, 또는 공백 문자와 일치한다.</li>
               <li>\D, \W, \S는 각각 숫자, 단어, 또는 공백 문자를 제외한 모든 글자와 일치한다.</li>
               <li>[abc]는 대괄호 안의 모든 글자와 일치한다. (이 예에서는 a, b 또는 c)</li>
@@ -245,15 +252,15 @@
             <p>그러나 때로 대문자든 소문자든 구분 없이 글자들을 대조하고 싶을 수도 있다. 정규식이 대소문자를 구분하지 않게 하기 위해 re.IGNORECASE 또는 re.I를 re.compile()의 두 번째 매개변수로 전달할 수 있다.</p>
             <pre>>>> robocop = re.compile(r'robocop', <strong>re.I</strong>)<br>>>> robocop.search('RoboCop is part man, part machine, all cop.').group()<br>'<strong>RoboCop</strong>'
             <br>>>> robocop.search('ROBOCOP protects the innocent.').group()<br>'<strong>ROBOCOP</strong>'
-            <br>>>> robocop.search('Al, why does your programming book talk about roboop so much?').group()<br>'<strong>robocop</strong>'</pre>
+            <br>>>> robocop.search('Al, why does your programming book talk about robocop so much?').group()<br>'<strong>robocop</strong>'</pre>
           </p>
 
           <p>
             <h5><strong>■ sub() 메소드로 문자열 대체하기</strong></h5>
             <p>정규표현식은 텍스트 패턴을 찾을 수 있을 뿐만 아니라 패턴을 새로운 텍스트로 대체할 때에도 쓸 수 있다. Regex 객체의 sub() 메소드는 두 개의 매개변수를 전달한다. 첫 번째 매개변수는 어떤 일치하는 텍스트든 이를 대체할 문자열이다. 두 번째는 정규표현식과 대조할 문자열이다. sub() 메소드는 대체가 적용된 문자열을 돌려준다.</p>
-            <pre>>>> namesRegex = re.compile(r'Agnet \w+')<br>>>> namesRegex.<strong>sub</strong>('<strong>CENSORED</strong>', 'Agent Alice gave the secret documents to Agent Bob.')<br>'<strong>CENSORED</strong> gave the secret documents to <strong>CENSORED</strong>.'</pre>
+            <pre>>>> namesRegex = re.compile(r'Agent \w+')<br>>>> namesRegex.<strong>sub</strong>('<strong>CENSORED</strong>', 'Agent Alice gave the secret documents to Agent Bob.')<br>'<strong>CENSORED</strong> gave the secret documents to <strong>CENSORED</strong>.'</pre>
             <p>때로는 일치하는 텍스트 그 자체를 대체할 텍스트의 일부로 사용해야 할 수도 있다. sub() 의 첫 번째 매개변수에 \1, \2, \3과 같이 입력할 수 있다. 이는 "그룹 1, 2, 3...의 텍스트를 대체 텍스트에 넣어라."는 뜻이다. 예를 들어 비밀 요원의 이름을 검열 삭제(censor)하되 이름의 첫 글자만 보여주고 싶다고 가정해 보자. 이를 위해서는 Agent(\w)\w* 정규식을 사용하고 r'\1****' 문자열을 sub()의 첫 번째 매개변수로 넘긴다. 이 문자열에서 \1은 무엇이든 그룹1과 일치하는 텍스트로 대체된다.</p>
-            <pre>>>> agentNameRegex = re.compile(r'Agent (\w)\w*')<br>>>> agentNameRegex.<strong>sub</strong>(r'<strong>\1****</strong>', 'Agent Alice told Carol that Agent Eve knew Agent Bob was a double agent.')<br>'<strong>A****</strong> told <strong>C****</strong> that <strong>E****</strong> knew <strong>B****</strong> was a double agent.'</pre>
+            <pre>>>> agentNameRegex = re.compile(r'Agent (\w)\w*')<br>>>> agentNameRegex.<strong>sub</strong>(r'<strong>\1****</strong>', 'Agent Alice told Agent Carol that Agent Eve knew Agent Bob was a double agent.')<br>'<strong>A****</strong> told <strong>C****</strong> that <strong>E****</strong> knew <strong>B****</strong> was a double agent.'</pre>
           </p>
 
           <p>
@@ -370,7 +377,7 @@ for groups in emailRegex.findall(text):<br>    matches.append(groups[0])
             <h5><strong>■ 연습 문제</strong></h5>
             <ul>
               <li>1. Regex 객체를 만드는 함수는 무엇인가?</li>
-              <li>2. 정규식 객체를 생성할 때 원시 문자열을 자주 사용하는 이유는 무엇인가></li>
+              <li>2. 정규식 객체를 생성할 때 원시 문자열을 자주 사용하는 이유는 무엇인가?</li>
               <li>3. search() 메소드는 무엇을 돌려주는가?</li>
               <li>4. Match 객체에서 패턴과 일치하는 실제 문자열을 어떻게 받을 수 있는가?</li>
               <li>5. r'(\d\d\d)-(\d\d\d-\d\d\d\d)'로부터 만든 정규식에서 그룹0은 무엇과 일치하는가? 그룹1과 그룹2는 각각 무엇과 일치하는가?</li>
@@ -383,7 +390,7 @@ for groups in emailRegex.findall(text):<br>    matches.append(groups[0])
               <li>12. 정규표현식에서 \d, \w, \s 단축 문자 클래스는 무엇을 의미하는가?</li>
               <li>13. 정규표현식에서 \D, \W, \S 단축 문자 클래스는 무엇을 의미하는가?</li>
               <li>14. 정규표현식에서 대소문자를 구분하지 않게 하려면 어떻게 해야 하는가?</li>
-              <li>15. 문자는 보통 무엇과 일치 하는가? re.DOTALL을 re.compile()의 두 번째 매개변수로 전달하면 우엇과 일치 하는가?</li>
+              <li>15. 문자는 보통 무엇과 일치 하는가? re.DOTALL을 re.compile()의 두 번째 매개변수로 전달하면 무엇과 일치 하는가?</li>
               <li>16. .* 과 .*? 사이의 차이는 무엇인가?</li>
               <li>17. 모든 숫자 및 소문자와 일치하는 문자 클래스 구문은 무엇인가/></li>
               <li>18. 만약 numRegex = re.compile(r'\d+')라면, numRegex.sub('X', '12 drummers, 11 pipers, five rings, 3 hens')는 무엇을 돌려주는가?</li>
