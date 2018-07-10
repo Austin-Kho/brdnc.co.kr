@@ -21,16 +21,5 @@
     <![endif]-->
   </head>
   <body>
-    <div class="container">
-      <h1>Python books</h1>
-      <h3><a href="./book01">01. 파이썬으로 지루한 작업 자동화 하기</a></h3>
-      <h3><a href="./book02">02. 개발자를 위한 파이썬(Python)</a></h3>
-    </div>
-
-
-    <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-  </body>
-</html>
+    <div class="container-fluid">
+      <div class="row">
