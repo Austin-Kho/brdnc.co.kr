@@ -9,8 +9,8 @@
             </div>
           </div>
 
-          <div class="row" style="margin-bottom: 10px; background-color: #b6b2af; color: #FFF;">
-            <div class="col-xs-12"><h5>I 빠르게 살펴보는 파이썬 기초</h5></div>
+          <div class="row subject_group" style="margin-bottom: 10px; background-color: #b6b2af; color: #FFF; cursor: pointer;">
+            <div class="col-xs-12"><h5>I 빠르게 살펴보는 파이썬 기초33</h5></div>
           </div>
 
           <div class="nav nav-sidebar">
@@ -98,7 +98,7 @@
             <li><a href="./82" class="d3">8.2.1 with 이용하기</a></li>
           </div>
 
-          <div class="row" style="margin-bottom: 10px; background-color: #b6b2af; color: #FFF;">
+          <div class="row subject_group" style="margin-bottom: 10px; background-color: #b6b2af; color: #FFF; cursor: pointer;">
             <div class="col-xs-12"><h5>II 도전! 파이썬 실무 예제</h5></div>
           </div>
 
