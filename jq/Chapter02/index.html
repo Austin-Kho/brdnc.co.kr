@@ -8,7 +8,15 @@
     <link rel="stylesheet" href="02.css" type="text/css" />
 
     <script src="../jquery.js"></script>
-    <script src="listings/2.2.new.js"></script>
+    <!-- <script src="listings/2.2.new.js"></script> -->
+    <script src="02.js"></script>
+    <script>
+      $('li li').addClass('special'); // 연습문제 1
+      $('td').parent().find('td:eq(2)').addClass('year'); // 연습문제 2
+      $('td:contains(Tragedy)').parent().find('td:eq(0)').addClass('special'); // 연습문제 3
+      $('li a').parent().next().addClass('afterlink'); // 연습문제 4
+      $('a[href$=".pdf"]').closest('ul').addClass('tragedy'); // 연습문제 5
+    </script>
   </head>
   <body>
     <div id="container">
