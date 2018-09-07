@@ -4,3 +4,13 @@
 // page or follow along with the examples in the book.
 //
 // See README.txt for more information.
+
+$(() => {
+    $('div.poem-stanza').addClass('highlight')
+});
+
+// function addHighlightClass() {
+//     $('div.poem-stanza').addClass('highlight');
+// }
+  
+// $(addHighlightClass);
