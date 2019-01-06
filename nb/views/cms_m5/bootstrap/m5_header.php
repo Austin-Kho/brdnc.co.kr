@@ -30,7 +30,7 @@ else :
 		</li>
 <?
   	endfor;
-  endif;
+	endif;
 
 ?>
   </ul>
