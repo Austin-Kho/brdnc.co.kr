@@ -12,6 +12,7 @@
 	a { outline:none; }
 	* : focus { outline: none; }
 	a, img{ border:0; outline:none; }
+	input[type=number] { text-align: right; }
 
 	/************************************IME MODE**************************************/
 	.han {
