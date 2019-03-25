@@ -1,16 +1,16 @@
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine on
-RewriteCond %{HTTP_HOST} ^(www.)?brinc.co.kr$
+RewriteCond %{HTTP_HOST} ^(www.)?brinc.cafe24.com$
 # RewriteCond %{REQUEST_URI} !^/wp/    # 베이스 url 에서 접속할 폴더 명
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 # RewriteRule ^(.*)$ /wp/$1            # 베이스 url 에서 접속할 폴더 명
-RewriteCond %{HTTP_HOST} ^(www.)?brinc.co.kr$
+RewriteCond %{HTTP_HOST} ^(www.)?brinc.cafe24.com$
 RewriteRule ^(/)?$ wp/index.php [L]
 </IfModule>
 # END WordPress
 
 # 변경 할 부분
-# brinc.co.kr<-this(2)
+# brinc.cafe24.com<-this(2)
 # wp/<-this(3)

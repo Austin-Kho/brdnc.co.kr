@@ -63,7 +63,7 @@ class Site_owner_data extends CB_Controller {
     	$spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
 
 	    // Set document properties
-	    $spreadsheet->getProperties()->setCreator('brinc.co.kr')
+	    $spreadsheet->getProperties()->setCreator('brinc.cafe24.com')
 	      ->setLastModifiedBy($this->session->userdata('mem_username'))
 	      ->setTitle('Site_owner_data')
 	      ->setSubject('소유자별 토지목록 조서')

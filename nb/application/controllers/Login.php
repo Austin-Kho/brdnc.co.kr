@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * Login class
@@ -28,7 +28,6 @@ class Login extends CB_Controller
     function __construct()
     {
         parent::__construct();
-
     }
 
 
@@ -41,7 +40,7 @@ class Login extends CB_Controller
         $eventname = 'event_login_index';
         $this->load->event($eventname);
 
-        if ($this->member->is_member() !== false && ! ($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {
+        if ($this->member->is_member() !== false && !($this->member->is_admin() === 'super' && $this->uri->segment(1) === config_item('uri_segment_admin'))) {
             redirect();
         }
 
@@ -53,7 +52,7 @@ class Login extends CB_Controller
 
         $this->load->library(array('form_validation'));
 
-         if ( ! function_exists('password_hash')) {
+        if (!function_exists('password_hash')) {
             $this->load->helper('password');
         }
 
@@ -158,33 +157,39 @@ class Login extends CB_Controller
             $view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
             if ($use_login_account === 'both') {
-                $userinfo = $this->Member_model->get_by_both($this->input->post('mem_userid'),
-                'mem_id, mem_userid, mem_username, mem_level, request, mem_is_admin');
+                $userinfo = $this->Member_model->get_by_both(
+                    $this->input->post('mem_userid'),
+                    'mem_id, mem_userid, mem_username, mem_level, request, mem_is_admin'
+                );
             } elseif ($use_login_account === 'email') {
-                $userinfo = $this->Member_model->get_by_email($this->input->post('mem_userid'),
-                'mem_id, mem_userid, mem_username, mem_level, request, mem_is_admin');
+                $userinfo = $this->Member_model->get_by_email(
+                    $this->input->post('mem_userid'),
+                    'mem_id, mem_userid, mem_username, mem_level, request, mem_is_admin'
+                );
             } else {
-                $userinfo = $this->Member_model->get_by_userid($this->input->post('mem_userid'),
-                'mem_id, mem_userid, mem_username, mem_level, request, mem_is_admin');
+                $userinfo = $this->Member_model->get_by_userid(
+                    $this->input->post('mem_userid'),
+                    'mem_id, mem_userid, mem_username, mem_level, request, mem_is_admin'
+                );
             }
 
             // 승인 전 비관리자 회원인 경우 안내
-      			if($userinfo['request'] !=='1' && $userinfo[mem_is_admin] !== '1'){
-      				alert('관리자 사용 승인 후 사용이 가능합니다.\n승인 지연 시, 직접 관리자에게 문의하여 주세요.\n\nEmail :
+            if ($userinfo['request'] !== '1' && $userinfo[mem_is_admin] !== '1') {
+                alert('관리자 사용 승인 후 사용이 가능합니다.\n승인 지연 시, 직접 관리자에게 문의하여 주세요.\n\nEmail :
               kori.susie@gmail.com / 전화문의 : 010-3320-0088', base_url('/login/'));
-      			}
+            }
 
             // 로그인 처리 및 세션 데이터 생성
-      			$this->member->update_login_log(element('mem_id', $userinfo), $this->input->post('user_data'), 1, '로그인 성공');
-      			$user_sess_data = array(
-      				'mem_id' => $userinfo['mem_id'],
-      				'mem_userid' => $userinfo['mem_userid'],
-      				'mem_username' => $userinfo['mem_username'],
-      				'mem_is_admin' => $userinfo['mem_is_admin'],
-      				'mem_level' => $userinfo['mem_level'],
-      				'logged_in' => TRUE
-      			);
-      			$this->session->set_userdata($user_sess_data);
+            $this->member->update_login_log(element('mem_id', $userinfo), $this->input->post('user_data'), 1, '로그인 성공');
+            $user_sess_data = array(
+                'mem_id' => $userinfo['mem_id'],
+                'mem_userid' => $userinfo['mem_userid'],
+                'mem_username' => $userinfo['mem_username'],
+                'mem_is_admin' => $userinfo['mem_is_admin'],
+                'mem_level' => $userinfo['mem_level'],
+                'logged_in' => true
+            );
+            $this->session->set_userdata($user_sess_data);
 
             if ($this->input->post('autologin')) {
                 $vericode = array('$', '/', '.');
@@ -213,7 +218,7 @@ class Login extends CB_Controller
             if ($change_password_date) {
 
                 $meta_change_pw_datetime = $this->member->item('meta_change_pw_datetime');
-                if ( ctimestamp() - strtotime($meta_change_pw_datetime) > $change_password_date * 86400) {
+                if (ctimestamp() - strtotime($meta_change_pw_datetime) > $change_password_date * 86400) {
                     $this->session->set_userdata(
                         'membermodify',
                         '1'
@@ -248,12 +253,12 @@ class Login extends CB_Controller
      */
     public function _check_id_pw($password, $userid)
     {
-         if ( ! function_exists('password_hash')) {
+        if (!function_exists('password_hash')) {
             $this->load->helper('password');
         }
 
-        $max_login_try_count = (int) $this->cbconfig->item('max_login_try_count');
-        $max_login_try_limit_second = (int) $this->cbconfig->item('max_login_try_limit_second');
+        $max_login_try_count = (int)$this->cbconfig->item('max_login_try_count');
+        $max_login_try_limit_second = (int)$this->cbconfig->item('max_login_try_limit_second');
 
         $loginfailnum = 0;
         $loginfailmessage = '';
@@ -269,9 +274,9 @@ class Login extends CB_Controller
 
             if ($logindata && is_array($logindata)) {
                 foreach ($logindata as $key => $val) {
-                    if ((int) $val['mll_success'] === 0) {
+                    if ((int)$val['mll_success'] === 0) {
                         $loginfailnum++;
-                    } elseif ((int) $val['mll_success'] === 1) {
+                    } elseif ((int)$val['mll_success'] === 1) {
                         break;
                     }
                 }
@@ -285,7 +290,7 @@ class Login extends CB_Controller
                     $this->form_validation->set_message(
                         '_check_id_pw',
                         '회원님은 패스워드를 연속으로 ' . $loginfailnum . '회 잘못 입력하셨기 때문에 '
-                        . $next_login . '초 후에 다시 로그인 시도가 가능합니다'
+                            . $next_login . '초 후에 다시 로그인 시도가 가능합니다'
                     );
                     return false;
                 }
@@ -302,7 +307,7 @@ class Login extends CB_Controller
         $is_dormant_member = false;
         if ($use_login_account === 'both') {
             $userinfo = $this->Member_model->get_by_both($userid, $userselect);
-            if ( ! $userinfo) {
+            if (!$userinfo) {
                 $userinfo = $this->Member_dormant_model->get_by_both($userid, $userselect);
                 if ($userinfo) {
                     $is_dormant_member = true;
@@ -310,7 +315,7 @@ class Login extends CB_Controller
             }
         } elseif ($use_login_account === 'email') {
             $userinfo = $this->Member_model->get_by_email($userid, $userselect);
-            if ( ! $userinfo) {
+            if (!$userinfo) {
                 $userinfo = $this->Member_dormant_model->get_by_email($userid, $userselect);
                 if ($userinfo) {
                     $is_dormant_member = true;
@@ -318,7 +323,7 @@ class Login extends CB_Controller
             }
         } else {
             $userinfo = $this->Member_model->get_by_userid($userid, $userselect);
-            if ( ! $userinfo) {
+            if (!$userinfo) {
                 $userinfo = $this->Member_dormant_model->get_by_userid($userid, $userselect);
                 if ($userinfo) {
                     $is_dormant_member = true;
@@ -327,14 +332,14 @@ class Login extends CB_Controller
         }
         $hash = password_hash($password, PASSWORD_BCRYPT);
 
-        if ( ! element('mem_id', $userinfo) OR ! element('mem_password', $userinfo)) {
+        if (!element('mem_id', $userinfo) or !element('mem_password', $userinfo)) {
             $this->form_validation->set_message(
                 '_check_id_pw',
                 '회원 아이디와 패스워드가 서로 맞지 않습니다' . $loginfailmessage
             );
             $this->member->update_login_log(0, $userid, 0, '회원 아이디가 존재하지 않습니다');
             return false;
-        } elseif ( ! password_verify($password, element('mem_password', $userinfo))) {
+        } elseif (!password_verify($password, element('mem_password', $userinfo))) {
             $this->form_validation->set_message(
                 '_check_id_pw',
                 '회원 아이디와 패스워드가 서로 맞지 않습니다' . $loginfailmessage
@@ -348,7 +353,7 @@ class Login extends CB_Controller
             );
             $this->member->update_login_log(element('mem_id', $userinfo), $userid, 0, '접근이 금지된 아이디입니다');
             return false;
-        } elseif ($this->cbconfig->item('use_register_email_auth') && ! element('mem_email_cert', $userinfo)) {
+        } elseif ($this->cbconfig->item('use_register_email_auth') && !element('mem_email_cert', $userinfo)) {
             $this->form_validation->set_message(
                 '_check_id_pw',
                 '회원님은 아직 이메일 인증을 받지 않으셨습니다'
