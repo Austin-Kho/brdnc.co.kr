@@ -47,8 +47,8 @@ class Cms_m3 extends CB_Controller {
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
 
-		$view['top_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>0), 'men_order');
-		$view['sec_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>$view['top_menu'][2]->men_id), 'men_order');
+		$view['top_menu'] = $this->cms_main_model->sql_result("SELECT * FROM cb_menu WHERE men_parent=0 ORDER BY men_order");
+		$view['sec_menu'] = $this->cms_main_model->sql_result("SELECT * FROM cb_menu WHERE men_parent={$view['top_menu'][2]->men_id} ORDER BY men_order");
 
 		$view['s_di'] = array(
 			array('동호수 등록', '세부설정 관리', '사업부지 관리'), // 첫번째 하위 메뉴
@@ -60,8 +60,8 @@ class Cms_m3 extends CB_Controller {
 		// 등록된 프로젝트 데이터
 		$where = "";
 		if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
-		$view['pj_list'] = $this->cms_main_model->data_result('cb_cms_project', '', 'biz_start_ym DESC');
-		$project = $view['project'] = ($this->input->get_post('project')) ? $this->input->get_post('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
+		$view['pj_list'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC ');
+		$project = $view['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
 
 
 

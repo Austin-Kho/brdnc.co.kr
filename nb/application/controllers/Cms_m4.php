@@ -54,8 +54,8 @@ class Cms_m4 extends CB_Controller {
 		$mdi = $this->uri->segment(3, 1);
 		$sdi = $this->uri->segment(4, 1);
 
-		$view['top_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>0), 'men_order');
-		$view['sec_menu'] = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>$view['top_menu'][3]->men_id), 'men_order');
+		$view['top_menu'] = $this->cms_main_model->sql_result("SELECT * FROM cb_menu WHERE men_parent=0 ORDER BY men_order");
+		$view['sec_menu'] = $this->cms_main_model->sql_result("SELECT * FROM cb_menu WHERE men_parent={$view['top_menu'][3]->men_id} ORDER BY men_order");
 
 		$view['s_di'] = array(
 			array('자금 일보', '입출금 내역', '입출금 등록'), // 첫번째 하위 메뉴
