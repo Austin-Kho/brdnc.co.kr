@@ -305,11 +305,9 @@ class Site_owner_data extends CB_Controller {
 		}
 
 		$total_rows = count($own_data)+5;
-		$site_sum = $this->cms_main_model->data_row('cb_cms_site_status', array('pj_seq'=>$project), 'SUM(area_official) AS area_o, SUM(area_returned) as area_r');
-		$own_sum = $this->cms_main_model->data_row(
-			'cb_cms_site_ownership',
-			array('pj_seq'=>$project),
-			'SUM(owned_area) AS owned_area,
+		$site_sum = $this->cms_main_model->sql_row("SELECT SUM(area_official) AS area_o, SUM(area_returned) as area_r FROM cb_cms_site_status WHERE pj_seq={$project}");
+		$own_sum = $this->cms_main_model->sql_row("
+			SELECT SUM(owned_area) AS owned_area,
 			 SUM(is_contract) as is_contract,
 			 SUM(total_price) AS total_price,
 			 SUM(down_pay1) AS down_pay1,
@@ -322,9 +320,8 @@ class Site_owner_data extends CB_Controller {
 			 SUM(inter_pay2_is_paid) as inter_pay2_is_paid,
 			 SUM(remain_pay) AS remain_pay,
 			 SUM(remain_pay_is_paid) as remain_pay_is_paid,
-			 SUM(ownership_is_take) as ownership_is_take
-			'
-		);
+			 SUM(ownership_is_take) as ownership_is_take cb_cms_site_ownership WHERE pj_seq={$project}
+			");
 		$total_price = ($own_sum->total_price==0) ? "-" : $own_sum->total_price;
 		$down_pay1 = ($own_sum->down_pay1==0) ? "-" : $own_sum->down_pay1;
 		$down_pay2 = ($own_sum->down_pay2==0) ? "-" : $own_sum->down_pay2;

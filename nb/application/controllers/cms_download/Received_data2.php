@@ -25,7 +25,7 @@ class Received_data2 extends CB_Controller {
 		$rec_query .= "ORDER BY paid_date, cb_cms_sales_received.seq ";
 
 		$data['rec_data'] = $this->cms_main_model->sql_result($rec_query); // 수납 데이터
-		$data['project'] = $this->cms_main_model->data_row("cb_cms_project", array('seq'=>$data['pj_seq']), "pj_name"); // 수납 데이터
+		$data['project'] = $this->cms_main_model->sql_row("SELECT pj_name FROM cb_cms_project"); // 수납 데이터
 
 		// 실제 엑셀 VIEW 파일 로드
 		$this->load->view('/cms_views/excel/received_data', $data);

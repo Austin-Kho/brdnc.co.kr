@@ -23,7 +23,7 @@ class Status_board2 extends CB_Controller
 	public function download(){
 
 		$data['pj_seq'] = urldecode($this->input->get('pj')); // 프로젝트 아이디
-		$data['project'] = $this->cms_main_model->data_row("cb_cms_project", array('seq'=>$data['pj_seq']), "pj_name"); // 프로젝트 데이터
+		$data['project'] = $this->cms_main_model->sql_row("SELECT pj_name FROM cb_cms_project WHERE seq={$data['pj_seq']}"); // 프로젝트 데이터
 
 		// 실제 엑셀 VIEW 파일 로드
 		$this->load->view('/cms_views/excel/status_board', $data);

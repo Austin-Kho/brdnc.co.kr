@@ -179,7 +179,7 @@ class Cms_m4 extends CB_Controller {
 
 			// Excel_cach_book file 다운로드 Start
 			if($this->input->get('excel_cach_book')==='ok') {
-				$view['com_title'] = $this->cms_main_model->data_row('cb_cms_com_info', array(1=>1));
+				$view['com_title'] = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_com_info WHERE seq=1");
 				$view['cb_list'] = $this->cms_m4_model->cash_book_list($cb_table, $view['where'], '', '', '', 'ASC');
 				$this->load->view('/cms_views/excel/cash_book', $view);
 			}
@@ -238,7 +238,7 @@ class Cms_m4 extends CB_Controller {
 			// 현장 데이터
 			$view['pj_dt'] = $this->cms_m4_model->pj_dt();
 			// 입출금처
-			$view['in_out'] = $this->cms_main_model->data_result('cb_cms_capital_bank_account');
+			$view['in_out'] = $this->cms_main_model->sql_result("SELECT * FROM cb_cms_capital_bank_account");
 
 			// 폼 검증 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증

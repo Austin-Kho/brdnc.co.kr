@@ -27,7 +27,7 @@ class Cash_book extends CB_Controller {
 		// sql문에 적용할 테이블명 ////////////////
 		$cb_table = 'cb_cms_capital_cash_book, cb_cms_capital_bank_account';
 
-		$data['com_title'] = $this->cms_main_model->data_row('cb_cms_com_info', array(1=>1));
+		$data['com_title'] = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_com_info WHERE seq=1");
 		$data['cash_book_list'] = $this->cms_m4_model->cash_book_list($cb_table, $data['where'], '', '', '', 'ASC');
 
 		// 실제 엑셀 VIEW 파일 로드

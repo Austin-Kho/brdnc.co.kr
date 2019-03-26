@@ -69,7 +69,6 @@ class Cms_m1 extends CB_Controller {
 		if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
 		$project = $view['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
 		$view['pj_list'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC '); // 프로젝트 목록
-		// $view['pj_now'] = $pj_now = $this->cms_main_model->data_row('cb_cms_project', array('seq' => $project)); // 현재 페이지 선택 프로젝트
 		$view['pj_now'] = $pj_now = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_project WHERE seq={$project}");
 
 		// 프로젝트명, 타입 정보 구하기
@@ -370,14 +369,15 @@ class Cms_m1 extends CB_Controller {
 						if($now_floor>=$a[0] && $now_floor<=$a[1]) $con_floor_no = $lt->seq;
 					}
 
-					$pr_where = array(
-						'pj_seq'=>$pj,
-						'con_diff_no'=>$this->input->post('diff_no'),
-						'con_type'=>$this->input->post('type'),
-						'con_direction_no'=>'1', // 향후 필요 시 폼으로 데이터 받을 것
-						'con_floor_no'=>$con_floor_no
-					);
-					$price_seq = $this->cms_main_model->data_row('cb_cms_sales_price' , $pr_where);
+					// $pr_where = array(
+					// 	'pj_seq'=>$pj,
+					// 	'con_diff_no'=>$this->input->post('diff_no'),
+					// 	'con_type'=>$this->input->post('type'),
+					// 	'con_direction_no'=>'1', // 향후 필요 시 폼으로 데이터 받을 것
+					// 	'con_floor_no'=>$con_floor_no
+					// );
+					$pr_where_sql = "pj_seq={$pj} AND con_diff_no={$this->input->post('diff_no')} AND con_type={$this->input->post('type')} AND con_direction_no=1 AND con_floor_no={$con_floor_no}";
+					$price_seq = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_sales_price WHERE {$pr_where_sql}");
 
 					$cont_arr1 = array( // 계약 테이블 입력 데이터
 						'pj_seq' => $this->input->post('project', TRUE),

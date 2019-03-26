@@ -104,7 +104,7 @@ endif;?>
   if (element('menu', $layout)) :
 
       for($i=0; $i<count($top_menu); $i++) :
-          $sub_menu = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>$top_menu[$i]->men_id), 'men_order');
+          $sub_menu = $this->cms_main_model->sql_result("SELECT * FROM cb_menu WHERE men_parent={$top_menu[$i]->men_id} ORDER BY men_order");
 ?>
                                 <tr>
                                   <th class="head-td center bo-right mbo-top" style="vertical-align: middle; background-color: #FBF9F0; width: 100px;"><div style="width: 90px;"><?php echo $top_menu[$i]->men_name; ?></div></th>
@@ -112,7 +112,7 @@ endif;?>
                                   <td class="head-td bo-right bo-left mbo-top  bgf8" style="vertical-align: middle; padding: 0 0 0 10px;"><div style="width: 80px;"><strong><?php echo $sub_menu[$j]->men_name; ?></strong></div></td>
 <?php
         for($k=0; $k<4; $k++) :
-            $det_menu = $this->cms_main_model->data_result('cb_menu', array('men_parent'=>$sub_menu[$j]->men_id), 'men_order');
+            $det_menu = $this->cms_main_model->sql_result("SELECT * FROM cb_menu WHERE men_parent={$sub_menu[$j]->men_id} ORDER BY men_order");
 
             if( !empty($det_menu[$k])) :
                 $auth_view = '_m'.(1+$i).'_'.(1+$j).'_'.(1+$k);

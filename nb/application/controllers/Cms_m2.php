@@ -68,7 +68,6 @@ class Cms_m2 extends CB_Controller
 		if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
 		$view['pj_list'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC ');
 		$project = $view['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
-		// $pj_now = $view['pj_now'] = $this->cms_main_model->data_row('cb_cms_project', array('seq' => $project)); // cb_cms_project 테이블 정보
 		$view['pj_now'] = $pj_now = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_project WHERE seq={$project}");
 
 
@@ -140,52 +139,53 @@ class Cms_m2 extends CB_Controller
 
 		// 예산집행 관리 3. 수지 관리 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==2 && $sdi==3) {
-			$this->output->enable_profiler(TRUE); //프로파일러 보기//
+			// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m2_2_3', $this->session->userdata['mem_id']);
 			// 불러올 페이지에 보낼 조회 권한 데이터
 			$view['auth23'] = $auth['_m2_2_3'];
 
-			$view['diff'] = $this->cms_main_model->data_result('cb_cms_sales_con_diff', array('pj_seq'=>$project)); // 차수 데이터
-			$view['type'] = explode("-", $pj_now->type_name); // 타입 데이터
-			$view['area_sup'] = explode("-", $pj_now->area_sup); // 공급 면적 데이터
-			$view['type_quantity'] = explode("-", $pj_now->type_quantity); // 타입별 세대수 데이터
-			$view['apt_take'] = $this->cms_main_model->data_row('cb_cms_sales_price', array('pj_seq'=>$project), 'SUM(unit_price*unit_num) AS total'); // 차수 데이터
+			// $view['diff'] = $this->cms_main_model->sql_result("SELECT * FROM cb_cms_sales_con_diff WHERE pj_seq={$project}"); // 차수 데이터
 
-			// 사업수지 예산 관련 데이터
-			$view['top_bud'] = $this->cms_main_model->data_result('cb_cms_project_budget', array('pj_seq'=>$project, 'bud_parent'=>0), 'bud_order, bud_seq');
+			// $view['type'] = explode("-", $pj_now->type_name); // 타입 데이터
+			// $view['area_sup'] = explode("-", $pj_now->area_sup); // 공급 면적 데이터
+			// $view['type_quantity'] = explode("-", $pj_now->type_quantity); // 타입별 세대수 데이터
+			// $view['apt_take'] = $this->cms_main_model->sql_row("SELECT *, SUM(unit_price*unit_num) AS total FROM cb_cms_sales_price WHERE pj_seq={$project}"); // 차수 데이터
+
+			// // 사업수지 예산 관련 데이터
+			// $view['top_bud'] = $this->cms_main_model->sql_result("SELECT * FROM cb_cms_project_budget WHERE pj_seq={$project} AND bud_parent=0 ORDER BY 'bud_order, bud_seq'");
 
 			// // 예산항목 입력 시 셀렉트
-			// $view['sec_bud'] = $this->cms_main_model->data_result('cb_cms_project_budget', array('pj_seq'=>$project, 'bud_parent !='=>0, 'bud_amount'=>0), 'bud_order, bud_seq');
+			// $view['sec_bud'] = $this->cms_main_model->sql_result("SELECT * FROM cb_cms_project_budget WHERE pj_seq={$project} AND bud_parent !=0 ORDER BY 'bud_order, bud_seq'");
 
-			// 라이브러리 로드
-			$this->load->library('form_validation'); // 폼 검증
+			// // 라이브러리 로드
+			// $this->load->library('form_validation'); // 폼 검증
 
-			$this->form_validation->set_rules('top_bud', '최상위 예산항목', 'trim');
-			$this->form_validation->set_rules('sec_bud', '차상위 예산항목', 'trim');
-			$this->form_validation->set_rules('bud_name', '예산항목 명칭', 'trim|max_length[20]|required');
-			$this->form_validation->set_rules('bud_order', '항목 정렬순서', 'trim|numeric|max_length[3]');
+			// $this->form_validation->set_rules('top_bud', '최상위 예산항목', 'trim');
+			// $this->form_validation->set_rules('sec_bud', '차상위 예산항목', 'trim');
+			// $this->form_validation->set_rules('bud_name', '예산항목 명칭', 'trim|max_length[20]|required');
+			// $this->form_validation->set_rules('bud_order', '항목 정렬순서', 'trim|numeric|max_length[3]');
 
-			if($this->form_validation->run() !== FALSE) { // 예산항목 관리 폼의 데이터가 유효한 경우
+			// if($this->form_validation->run() !== FALSE) { // 예산항목 관리 폼의 데이터가 유효한 경우
 
-				if( !empty($this->input->post('sec_bud'))){
-					$bud_parent = $this->input->post('sec_bud');
-				}else{
-					$bud_parent = !empty($this->input->post('top_bud')) ? $this->input->post('top_bud') : 0;
-				}
+			// 	if( !empty($this->input->post('sec_bud'))){
+			// 		$bud_parent = $this->input->post('sec_bud');
+			// 	}else{
+			// 		$bud_parent = !empty($this->input->post('top_bud')) ? $this->input->post('top_bud') : 0;
+			// 	}
 
-				$bud_data = array(
-					'pj_seq' => $this->input->post('project'),
-					'bud_parent' => $bud_parent,
-					'bud_name' => $this->input->post('bud_name'),
-					'bud_order' => $this->input->post('bud_order')
-				);
+			// 	$bud_data = array(
+			// 		'pj_seq' => $this->input->post('project'),
+			// 		'bud_parent' => $bud_parent,
+			// 		'bud_name' => $this->input->post('bud_name'),
+			// 		'bud_order' => $this->input->post('bud_order')
+			// 	);
 
-				// $result = $this->cms_main_model->insert_data('cb_cms_project_budget', $bud_data); //
+			// 	// $result = $this->cms_main_model->insert_data('cb_cms_project_budget', $bud_data); //
 
-				if( !$result){ alert('데이터베이스 에러입니다.', ''); }else{ alert('정상적으로 등록되었습니다.', ''); }
-			}
+			// 	if( !$result){ alert('데이터베이스 에러입니다.', ''); }else{ alert('정상적으로 등록되었습니다.', ''); }
+			// }
 		}
 
 		/**

@@ -151,9 +151,12 @@ else :
 		echo "<tr>";
 
 		// 차수별 타입별 평균 세대가격 구하기(where문)
-		$tp_where = array('pj_seq' => $project, 'con_diff_no' => $diff[(ceil(($i+1)/(count($type)+1))-1)]->diff_no, 'con_type_no' => ($i%(count($type)+1))+1, 'con_direction_no' => 1);
-		$type_price = $this->cms_main_model->data_row('cb_cms_sales_price', $tp_where, $tp_select); // 차수별 타입별 평균 세대가격 구하기
-		$t_price = $type_price->sum_price/1000; // 타입별 세대가격(단위 :천원)
+		// $tp_where = array('pj_seq' => $project, 'con_diff_no' => $diff[(ceil(($i+1)/(count($type)+1))-1)]->diff_no, 'con_type_no' => ($i%(count($type)+1))+1, 'con_direction_no' => 1);
+		
+		// $cdn = $diff[(ceil(($i+1)/(count($type)+1))-1)]->diff_no;
+		// $ctn = ($i%(count($type)+1))+1;
+		// $type_price = $this->cms_main_model->sql_row("SELECT {$tp_select} FROM cb_cms_sales_price WHERE pj_seq={$project} AND con_diff_no={$cdn} AND con_type_no={$ctn} AND con_direction_no=1"); // 차수별 타입별 평균 세대가격 구하기
+		// $t_price = $type_price->sum_price/1000; // 타입별 세대가격(단위 :천원)
 
 		for($j=0; $j<10; $j++):
 

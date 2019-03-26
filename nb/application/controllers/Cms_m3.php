@@ -597,19 +597,19 @@ class Cms_m3 extends CB_Controller {
 
 			if( !$this->input->get('set_sort') OR $this->input->get('set_sort')=='1') {
 				// 등록된 토지 기초 데이터 총 면적
-				$view['summary'] = $this->cms_main_model->data_row('cb_cms_site_status', array('pj_seq'=>$project), 'SUM(area_returned) as total_area'); // $table, $where, $order, $select, $group, $start='', $limit=''
+				$view['summary'] = $this->cms_main_model->sql_row("SELECT *, SUM(area_returned) as total_area FROM cb_cms_site_status WHERE pj_seq={$project}");
 
 				if($this->input->get('mode')=='2' && !empty($this->input->get('lot_seq'))){ // 수정모드일 때
-					$view['basic_site'] = $this->cms_main_model->data_row('cb_cms_site_status', array('seq' => $this->input->get('lot_seq')));
+					$view['basic_site'] = $this->cms_main_model->sql_row("SELECT * FROM WHERE seq={$this->input->get('lot_seq')}");
 				}
 
 			}elseif( !$this->input->get('set_sort') OR $this->input->get('set_sort')=='2') {
 				// 소유권 관련
-				$view['site_lot'] = $this->cms_main_model->data_result('cb_cms_site_status', array('pj_seq'=>$project));
-				$view['bank'] = $this->cms_main_model->data_result('cb_cms_capital_bank_code', '', 'bank_code'); // 은행 데이터
+				$view['site_lot'] = $this->cms_main_model->sql_result("SELECT * FROM cb_cms_site_status WHERE pj_seq={$project}");
+				$view['bank'] = $this->cms_main_model->sql_result("SELECT * FROM cb_cms_capital_bank_code ORDER BY bank_code"); // 은행 데이터
 
 				if( !empty($this->input->get('own_seq'))){
-					$view['owner_row'] = $this->cms_main_model->data_row('cb_cms_site_ownership', array('pj_seq'=>$project, 'seq'=>$this->input->get('own_seq')));
+					$view['owner_row'] = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_site_ownership WHERE pj_seq={$project} AND seq={$this->input->get('own_seq')}");
 				}
 				$view['own_total'] = $this->cms_main_model->sql_row(" SELECT SUM(owned_area) AS area, COUNT(seq) AS num FROM cb_cms_site_ownership WHERE pj_seq='$project' ");
 				$view['own_cont'] = $this->cms_main_model->sql_row(" SELECT SUM(owned_area) AS area, COUNT(seq) AS num FROM cb_cms_site_ownership WHERE pj_seq='$project' AND is_contract='1' ");
@@ -624,7 +624,7 @@ class Cms_m3 extends CB_Controller {
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = base_url('cms_m3/project/1/3/');   //페이징 주소
-				$config['total_rows'] = $view['total_rows'] = $this->cms_main_model->data_num_rows('cb_cms_site_status', array('pj_seq'=>$project));  //게시물의 전체 갯수
+				$config['total_rows'] = $view['total_rows'] = $this->cms_main_model->sql_num_rows("SELECT seq FROM cb_cms_site_status WHERE pj_seq={$project}");  //게시물의 전체 갯수
 				$config['per_page'] = 12; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 4;  // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -640,7 +640,7 @@ class Cms_m3 extends CB_Controller {
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$view['pagination'] = $this->pagination->create_links();
 
-				$view['site_lot_list'] = $this->cms_main_model->data_result('cb_cms_site_status', array('pj_seq'=>$project), 'order_no DESC, seq DESC', '', '', $start, $limit); // $table, $where, $order, $select, $group, $start='', $limit=''
+				$view['site_lot_list'] = $this->cms_main_model->sql_result("SELECT * FROM cb_cms_site_status WHERE pj_seq={$project} ORDER BY 'order_no DESC, seq DESC' LIMIT {$start}, {$limit}");
 
 				if($this->input->get('mode')==='3' && $this->input->get('del_code')) {
 					$del_rlt1 = $this->cms_main_model->delete_data('cb_cms_site_status', array('seq' => $this->input->get('del_code')));
@@ -655,21 +655,22 @@ class Cms_m3 extends CB_Controller {
 			// 소유권 정보 입력할 토지(지번) 데이터
 			}elseif($this->input->get('set_sort')=='2'){
 
-				if($this->input->get('site_lot')) $view['sel_site'] = $sel_site = $this->cms_main_model->data_row('cb_cms_site_status', array('seq' => $this->input->get('site_lot')));
+				if($this->input->get('site_lot')) $view['sel_site'] = $sel_site = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_site_status WHERE seq={$this->input->get('site_lot')}");
 
 				if( !$this->input->get('search_con') OR $this->input->get('search_con')===''){
-					$like_array = array('lot_num'=>$this->input->get('search_word'));
-					$or_like_array = array('owner'=>$this->input->get('search_word'));
+					$like_arr_sql = "WHERE lit_num LIKE %{$this->input->get('search_word')}%";
+					$or_like_arr_sql = "OR owner LIKE %{$this->input->get('search_word')}%";
 				}elseif($this->input->get('search_con')==='1'){
-					$like_array = array('lot_num'=>$this->input->get('search_word'));
+					$like_arr_sql = "WHERE lot_num LIKE %{$this->input->get('search_word')}%";
+					$or_like_arr_sql = '';
 				}elseif($this->input->get('search_con')==='2'){
-					$like_array = array('owner'=>$this->input->get('search_word'));
+					$like_arr_sql = "WHERE owner LIKE %{$this->input->get('search_word')}%";
+					$or_like_arr_sql = '';
 				}
-
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = base_url('cms_m3/project/1/3/');   //페이징 주소
-				$config['total_rows'] = $view['total_rows'] = $this->cms_main_model->data_num_rows('cb_cms_site_ownership', array('pj_seq'=>$project), $like_array, $or_like_array);  //게시물의 전체 갯수
+				$config['total_rows'] = $view['total_rows'] = $this->cms_main_model->sql_num_rows("SELECT * FROM cb_cms_site_ownership WHERE pj_seq={$project} {$like_arr_sql} {$or_like_arr_sql}");  //게시물의 전체 갯수
 				$config['per_page'] = 12; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 4;  // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -903,7 +904,7 @@ class Cms_m3 extends CB_Controller {
 
 			// 등록된 프로젝트 데이터
 			$view['pj_list'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC '.$limit);
-			if($this->input->get('project')) $view['project_data'] = $this->cms_main_model->data_row('cb_cms_project', array('seq'=>$project));
+			if($this->input->get('project')) $view['project_data'] = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_project WHERE seq={$project}");
 
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
