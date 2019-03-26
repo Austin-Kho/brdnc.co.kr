@@ -42,7 +42,7 @@ class Basic_site_list extends CB_Controller {
     	$spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
 
 		// Set document properties
-	    $spreadsheet->getProperties()->setCreator('brinc.cafe24.com')
+	    $spreadsheet->getProperties()->setCreator(site_url())
 	      ->setLastModifiedBy($this->session->userdata('mem_username'))
 	      ->setTitle('토지목록 조서')
 	      ->setSubject($pj_title.' 토지목록_데이터')

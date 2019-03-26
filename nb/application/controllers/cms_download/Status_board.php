@@ -23,7 +23,7 @@ class Status_board extends CB_Controller
 
     // Set document properties
     $spreadsheet->getProperties()
-		 	 ->setCreator('brinc.cafe24.com')
+		 	 ->setCreator(site_url())
        ->setLastModifiedBy($this->session->userdata('mem_username'))
        ->setTitle('Status_board')
        ->setSubject('동호수_현황표')

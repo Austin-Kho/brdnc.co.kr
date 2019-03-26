@@ -95,7 +95,7 @@ class Daily_money_report extends CB_Controller {
     $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
 
     // Set document properties
-    $spreadsheet->getProperties()->setCreator('brinc.cafe24.com')
+    $spreadsheet->getProperties()->setCreator(site_url())
       ->setLastModifiedBy($this->session->userdata('mem_username'))
       ->setTitle('Daily_money_report')
       ->setSubject('자금일보')
