@@ -1,6 +1,6 @@
 <?php
     $this->managelayout->add_css(element('view_skin_url', $layout) . '/css/style.css');
-    $mar_bottom = ($this->is_mobile === true) ? "margin-top: 20px; margin-bottom: 20px" : "margin-top: 150px; margin-bottom: 200px;";
+    $mar_bottom = isset($this->is_mobile) ? "margin-top: 20px; margin-bottom: 20px" : "margin-top: 150px; margin-bottom: 200px;";
     $sh_col = array("#d3ebc9", "#ebdcc9", "#c9d7eb", "#ebcbe8", "#ebcbd0", "#ddd", "#d5f4f1", "#ffffae", "#ecd8fa");
     $box_title = (!empty($this->cbconfig->item('site_logo'))) ? $this->cbconfig->item('site_logo') : "로그인";
 ?>
@@ -115,4 +115,4 @@
         }
     });
     //]]>
-</script> 
+</script>

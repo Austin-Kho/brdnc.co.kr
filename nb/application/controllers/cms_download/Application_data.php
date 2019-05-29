@@ -51,7 +51,7 @@ class Application_data extends CB_Controller {
 					'horizontal'   => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER
 				)
 			),
-			'A:I'
+			'A:K'
 		);
 
 		// 헤더 스타일 생성 -- add style to the header
@@ -69,7 +69,7 @@ class Application_data extends CB_Controller {
         ),
       ),
     );
-    $spreadsheet->getActiveSheet()->getStyle('A1:I1')->applyFromArray($styleArray);
+    $spreadsheet->getActiveSheet()->getStyle('A1:K1')->applyFromArray($styleArray);
 
 		$outBorder = array(
       'borders' => array(
@@ -87,39 +87,43 @@ class Application_data extends CB_Controller {
         ),
       ),
     );
-		$spreadsheet->getActiveSheet()->getStyle('A3:I'.(count($app_data)+3))->applyFromArray($allBorder);
+		$spreadsheet->getActiveSheet()->getStyle('A3:K'.(count($app_data)+3))->applyFromArray($allBorder);
 
 		$spreadsheet->getActiveSheet()->getColumnDimension("A")->setWidth(6); // A열의 셀 넓이 설정
 		$spreadsheet->getActiveSheet()->getColumnDimension("B")->setWidth(8); // B열의 셀 넓이 설정
 		$spreadsheet->getActiveSheet()->getColumnDimension("C")->setWidth(10); // C열의 셀 넓이 설정
 		$spreadsheet->getActiveSheet()->getColumnDimension("D")->setWidth(10); // D열의 셀 넓이 설정
-		$spreadsheet->getActiveSheet()->getColumnDimension("E")->setWidth(12); // E열의 셀 넓이 설정
-		$spreadsheet->getActiveSheet()->getColumnDimension("F")->setWidth(12); // F열의 셀 넓이 설정
+        $spreadsheet->getActiveSheet()->getColumnDimension("E")->setWidth(10); // E열의 셀 넓이 설정
+        $spreadsheet->getActiveSheet()->getColumnDimension("F")->setWidth(10); // F열의 셀 넓이 설정
 		$spreadsheet->getActiveSheet()->getColumnDimension("G")->setWidth(12); // G열의 셀 넓이 설정
-		$spreadsheet->getActiveSheet()->getColumnDimension("H")->setWidth(10); // H열의 셀 넓이 설정
-		$spreadsheet->getActiveSheet()->getColumnDimension("I")->setWidth(50); // I열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("H")->setWidth(12); // H열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("I")->setWidth(12); // I열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("J")->setWidth(10); // J열의 셀 넓이 설정
+		$spreadsheet->getActiveSheet()->getColumnDimension("K")->setWidth(50); // K열의 셀 넓이 설정
 
 		$spreadsheet->getActiveSheet()->getDefaultRowDimension()->setRowHeight(19.5); // 전체 기본 셀 높이 설정
 		$spreadsheet->getActiveSheet()->getRowDimension(1)->setRowHeight(37.5); // 1행의 셀 높이 설정
 		// $spreadsheet->getActiveSheet()->getRowDimension(2)->setRowHeight(9.5); // 2행의 셀 높이 설정
 
-		$spreadsheet->getActiveSheet()->mergeCells('A1:I1');// A1부터 D1까지 셀을 합칩니다.
+		$spreadsheet->getActiveSheet()->mergeCells('A1:K1');// A1부터 D1까지 셀을 합칩니다.
 
 		$spreadsheet->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);// A1의 폰트를 변경 합니다.
 		$spreadsheet->getActiveSheet()->setCellValue('A1', $pj_title->pj_name.' 청약자 데이터');// 해당 셀의 내용을 입력 합니다.
-		$spreadsheet->getActiveSheet()->getStyle('I2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-		$spreadsheet->getActiveSheet()->setCellValue('I2', date('Y-m-d')." 현재");// 해당 셀의 내용을 입력 합니다.
+		$spreadsheet->getActiveSheet()->getStyle('K2')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+		$spreadsheet->getActiveSheet()->setCellValue('K2', date('Y-m-d')." 현재");// 해당 셀의 내용을 입력 합니다.
 
-		$spreadsheet->getActiveSheet()->getStyle('A3:I3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFEAEAEA');
+		$spreadsheet->getActiveSheet()->getStyle('A3:K3')->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FFEAEAEA');
 		$spreadsheet->getActiveSheet()->setCellValue('A3', 'no.');
 		$spreadsheet->getActiveSheet()->setCellValue('B3', '타 입');// 해당 셀의 내용을 입력 합니다.
 		$spreadsheet->getActiveSheet()->setCellValue('C3', '동 호 수');// 해당 셀의 내용을 입력 합니다.
 		$spreadsheet->getActiveSheet()->setCellValue('D3', '청 약 자');// 해당 셀의 내용을 입력 합니다.
-		$spreadsheet->getActiveSheet()->setCellValue('E3', '차 수');// 해당 셀의 내용을 입력 합니다.
-		$spreadsheet->getActiveSheet()->setCellValue('F3', '청 약 금');// 해당 셀의 내용을 입력 합니다.
-		$spreadsheet->getActiveSheet()->setCellValue('G3', '청약 일자');// 해당 셀의 내용을 입력 합니다.
-		$spreadsheet->getActiveSheet()->setCellValue('H3', '상 태');// 해당 셀의 내용을 입력 합니다.
-		$spreadsheet->getActiveSheet()->setCellValue('I3', '비 고');// 해당 셀의 내용을 입력 합니다.
+        $spreadsheet->getActiveSheet()->setCellValue('E3', '전화번호1');// 해당 셀의 내용을 입력 합니다.
+        $spreadsheet->getActiveSheet()->setCellValue('F3', '전화번호2');// 해당 셀의 내용을 입력 합니다.
+		$spreadsheet->getActiveSheet()->setCellValue('G3', '차 수');// 해당 셀의 내용을 입력 합니다.
+		$spreadsheet->getActiveSheet()->setCellValue('H3', '청 약 금');// 해당 셀의 내용을 입력 합니다.
+		$spreadsheet->getActiveSheet()->setCellValue('I3', '청약 일자');// 해당 셀의 내용을 입력 합니다.
+		$spreadsheet->getActiveSheet()->setCellValue('J3', '상 태');// 해당 셀의 내용을 입력 합니다.
+		$spreadsheet->getActiveSheet()->setCellValue('K3', '비 고');// 해당 셀의 내용을 입력 합니다.
 
 		$i=1;
 		foreach ($app_data as $lt) {
@@ -135,16 +139,17 @@ class Application_data extends CB_Controller {
 			$spreadsheet->getActiveSheet()->setCellValue('B'.(3+$i), $lt->unit_type);
 			$spreadsheet->getActiveSheet()->setCellValue('C'.(3+$i), $lt->unit_dong_ho);
 			$spreadsheet->getActiveSheet()->setCellValue('D'.(3+$i), $lt->applicant);
-
+            $spreadsheet->getActiveSheet()->setCellValue('E'.(3+$i), $lt->app_tel1);
+            $spreadsheet->getActiveSheet()->setCellValue('F'.(3+$i), $lt->app_tel2);
 			$diff = $this->cms_main_model->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no = '$lt->app_diff' ");
-			$spreadsheet->getActiveSheet()->setCellValue('E'.(3+$i), $diff->diff_name);
-			$spreadsheet->getActiveSheet()->getStyle('F'.(3+$i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
-			$spreadsheet->getActiveSheet()->setCellValue('F'.(3+$i), $lt->app_in_mon);
-			$spreadsheet->getActiveSheet()->getStyle('F4:F'.(count($app_data)+3))->getNumberFormat()->setFormatCode('#,##0');
-			$spreadsheet->getActiveSheet()->setCellValue('G'.(3+$i), $lt->app_date);
-			$spreadsheet->getActiveSheet()->setCellValue('H'.(3+$i), $con);
-			$spreadsheet->getActiveSheet()->getStyle('I'.(3+$i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
-			$spreadsheet->getActiveSheet()->setCellValue('I'.(3+$i), $lt->note);
+			$spreadsheet->getActiveSheet()->setCellValue('G'.(3+$i), $diff->diff_name);
+			$spreadsheet->getActiveSheet()->getStyle('H'.(3+$i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT);
+			$spreadsheet->getActiveSheet()->setCellValue('H'.(3+$i), $lt->app_in_mon);
+			$spreadsheet->getActiveSheet()->getStyle('H4:H'.(count($app_data)+3))->getNumberFormat()->setFormatCode('#,##0');
+			$spreadsheet->getActiveSheet()->setCellValue('I'.(3+$i), $lt->app_date);
+			$spreadsheet->getActiveSheet()->setCellValue('J'.(3+$i), $con);
+			$spreadsheet->getActiveSheet()->getStyle('K'.(3+$i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_LEFT);
+			$spreadsheet->getActiveSheet()->setCellValue('K'.(3+$i), $lt->note);
 
 			$i++;
 		}

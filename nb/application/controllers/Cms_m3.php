@@ -600,7 +600,7 @@ class Cms_m3 extends CB_Controller {
 				$view['summary'] = $this->cms_main_model->sql_row("SELECT *, SUM(area_returned) as total_area FROM cb_cms_site_status WHERE pj_seq={$project}");
 
 				if($this->input->get('mode')=='2' && !empty($this->input->get('lot_seq'))){ // 수정모드일 때
-					$view['basic_site'] = $this->cms_main_model->sql_row("SELECT * FROM WHERE seq={$this->input->get('lot_seq')}");
+					$view['basic_site'] = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_site_status WHERE seq={$this->input->get('lot_seq')}");
 				}
 
 			}elseif( !$this->input->get('set_sort') OR $this->input->get('set_sort')=='2') {
@@ -658,19 +658,23 @@ class Cms_m3 extends CB_Controller {
 				if($this->input->get('site_lot')) $view['sel_site'] = $sel_site = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_site_status WHERE seq={$this->input->get('site_lot')}");
 
 				if( !$this->input->get('search_con') OR $this->input->get('search_con')===''){
-					$like_arr_sql = "WHERE lit_num LIKE %{$this->input->get('search_word')}%";
-					$or_like_arr_sql = "OR owner LIKE %{$this->input->get('search_word')}%";
+					$like_arr_sql = "AND lot_num LIKE '%{$this->input->get('search_word')}%'";
+					$or_like_arr_sql = "OR owner LIKE '%{$this->input->get('search_word')}%'";
 				}elseif($this->input->get('search_con')==='1'){
-					$like_arr_sql = "WHERE lot_num LIKE %{$this->input->get('search_word')}%";
+					$like_arr_sql = "AND lot_num LIKE '%{$this->input->get('search_word')}%'";
 					$or_like_arr_sql = '';
 				}elseif($this->input->get('search_con')==='2'){
-					$like_arr_sql = "WHERE owner LIKE %{$this->input->get('search_word')}%";
+					$like_arr_sql = "AND owner LIKE '%{$this->input->get('search_word')}%'";
 					$or_like_arr_sql = '';
 				}
 
 				//페이지네이션 설정/////////////////////////////////
 				$config['base_url'] = base_url('cms_m3/project/1/3/');   //페이징 주소
+
+
 				$config['total_rows'] = $view['total_rows'] = $this->cms_main_model->sql_num_rows("SELECT * FROM cb_cms_site_ownership WHERE pj_seq={$project} {$like_arr_sql} {$or_like_arr_sql}");  //게시물의 전체 갯수
+
+
 				$config['per_page'] = 12; // 한 페이지에 표시할 게시물 수
 				$config['num_links'] = 4;  // 링크 좌우로 보여질 페이지 수
 				$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트

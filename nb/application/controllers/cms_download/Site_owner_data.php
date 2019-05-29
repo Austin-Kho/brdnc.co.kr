@@ -40,14 +40,14 @@ class Site_owner_data extends CB_Controller {
 		// 실제 출력할 데이터
 		$own_data = $this->cms_main_model->sql_result(
 			" SELECT cb_cms_site_ownership.*,
-          cb_cms_site_status.admin_dong AS admin_dong,
-          cb_cms_site_status.land_mark AS land_mark,
-          cb_cms_site_status.area_official AS area_official,
-          cb_cms_site_status.area_returned AS area_returned
-          FROM cb_cms_site_ownership JOIN cb_cms_site_status
-          ON cb_cms_site_ownership.lot_seq = cb_cms_site_status.seq
-          $w_qry
-          ORDER BY lot_order, cb_cms_site_ownership.seq, lot_seq "
+	          cb_cms_site_status.admin_dong AS admin_dong,
+	          cb_cms_site_status.land_mark AS land_mark,
+	          cb_cms_site_status.area_official AS area_official,
+	          cb_cms_site_status.area_returned AS area_returned
+	          FROM cb_cms_site_ownership JOIN cb_cms_site_status
+	          ON cb_cms_site_ownership.lot_seq = cb_cms_site_status.seq
+	          $w_qry
+	          ORDER BY lot_order, cb_cms_site_ownership.seq, lot_seq "
 		);
 
 		$row_opt = explode("-", urldecode($this->input->get('row'))); // 출력할 데이터 열 정보
@@ -106,38 +106,38 @@ class Site_owner_data extends CB_Controller {
 		);
 
 		// 헤더 스타일 생성 -- add style to the header
-    $styleArray = array(
-      'font' => array(
-        'bold' => true,
-      ),
-      'alignment' => array(
-        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-      ),
-      'borders' => array(
-        'allborders' => array(
-          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-        ),
-      ),
-    );
-    $spreadsheet->getActiveSheet()->getStyle('A1:'.toAlpha(count($row_opt)-1).'1')->applyFromArray($styleArray);
+	    $styleArray = array(
+	      'font' => array(
+	        'bold' => true,
+	      ),
+	      'alignment' => array(
+	        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+	        'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+	      ),
+	      'borders' => array(
+	        'allborders' => array(
+	          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+	        ),
+	      ),
+	    );
+	    $spreadsheet->getActiveSheet()->getStyle('A1:'.toAlpha(count($row_opt)-1).'1')->applyFromArray($styleArray);
 
 		$outBorder = array(
-      'borders' => array(
-        'outline' => array(
-          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-        ),
-      ),
-    );
+	      'borders' => array(
+	        'outline' => array(
+	          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+	        ),
+	      ),
+	    );
 		$spreadsheet->getActiveSheet()->getStyle('A2:'.toAlpha(count($row_opt)-1).'2')->applyFromArray($outBorder);
 
 		$allBorder = array(
-      'borders' => array(
-        'allborders' => array(
-          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-        ),
-      ),
-    );
+	      'borders' => array(
+	        'allborders' => array(
+	          'style' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+	        ),
+	      ),
+	    );
 		$spreadsheet->getActiveSheet()->getStyle('A3:'.toAlpha(count($row_opt)-1).(count($own_data)+5))->applyFromArray($allBorder);
 
 		$spreadsheet->getActiveSheet()->getDefaultRowDimension()->setRowHeight(19.5); // 전체 기본 셀 높이 설정
@@ -306,28 +306,28 @@ class Site_owner_data extends CB_Controller {
 
 		$total_rows = count($own_data)+5;
 		$site_sum = $this->cms_main_model->sql_row("SELECT SUM(area_official) AS area_o, SUM(area_returned) as area_r FROM cb_cms_site_status WHERE pj_seq={$project}");
-		$own_sum = $this->cms_main_model->sql_row("
-			SELECT SUM(owned_area) AS owned_area,
-			 SUM(is_contract) as is_contract,
-			 SUM(total_price) AS total_price,
-			 SUM(down_pay1) AS down_pay1,
-			 SUM(down_pay1_is_paid) as down_pay1_is_paid,
-			 SUM(down_pay2) AS down_pay2,
-			 SUM(down_pay2_is_paid) as down_pay2_is_paid,
-			 SUM(inter_pay1) AS inter_pay1,
-			 SUM(inter_pay1_is_paid) as inter_pay1_is_paid,
-			 SUM(inter_pay2) AS inter_pay2,
-			 SUM(inter_pay2_is_paid) as inter_pay2_is_paid,
-			 SUM(remain_pay) AS remain_pay,
-			 SUM(remain_pay_is_paid) as remain_pay_is_paid,
-			 SUM(ownership_is_take) as ownership_is_take cb_cms_site_ownership WHERE pj_seq={$project}
-			");
-		$total_price = ($own_sum->total_price==0) ? "-" : $own_sum->total_price;
-		$down_pay1 = ($own_sum->down_pay1==0) ? "-" : $own_sum->down_pay1;
-		$down_pay2 = ($own_sum->down_pay2==0) ? "-" : $own_sum->down_pay2;
-		$inter_pay1 = ($own_sum->inter_pay1==0) ? "-" : $own_sum->inter_pay1;
-		$inter_pay2 = ($own_sum->inter_pay2==0) ? "-" : $own_sum->inter_pay2;
-		$remain_pay = ($own_sum->remain_pay==0) ? "-" : $own_sum->remain_pay;
+		// $own_sum = $this->cms_main_model->sql_row("
+		// 		SELECT SUM(owned_area) AS owned_area,
+		// 		 SUM(is_contract) as is_contract,
+		// 		 SUM(total_price) AS total_price,
+		// 		 SUM(down_pay1) AS down_pay1,
+		// 		 SUM(down_pay1_is_paid) as down_pay1_is_paid,
+		// 		 SUM(down_pay2) AS down_pay2,
+		// 		 SUM(down_pay2_is_paid) as down_pay2_is_paid,
+		// 		 SUM(inter_pay1) AS inter_pay1,
+		// 		 SUM(inter_pay1_is_paid) as inter_pay1_is_paid,
+		// 		 SUM(inter_pay2) AS inter_pay2,
+		// 		 SUM(inter_pay2_is_paid) as inter_pay2_is_paid,
+		// 		 SUM(remain_pay) AS remain_pay,
+		// 		 SUM(remain_pay_is_paid) as remain_pay_is_paid,
+		// 		 SUM(ownership_is_take) as ownership_is_take cb_cms_site_ownership WHERE pj_seq={$project}
+		// ");
+		// $total_price = ($own_sum->total_price==0) ? "-" : $own_sum->total_price;
+		// $down_pay1 = ($own_sum->down_pay1==0) ? "-" : $own_sum->down_pay1;
+		// $down_pay2 = ($own_sum->down_pay2==0) ? "-" : $own_sum->down_pay2;
+		// $inter_pay1 = ($own_sum->inter_pay1==0) ? "-" : $own_sum->inter_pay1;
+		// $inter_pay2 = ($own_sum->inter_pay2==0) ? "-" : $own_sum->inter_pay2;
+		// $remain_pay = ($own_sum->remain_pay==0) ? "-" : $own_sum->remain_pay;
 
 		for($n=0; $n<count($row_opt); $n++){ // 합계 행
 			switch ($row_opt[$n]) {
@@ -364,31 +364,31 @@ class Site_owner_data extends CB_Controller {
 		}
 
 		// set right to left direction
-    // $spreadsheet->getActiveSheet()->setRightToLeft(true);
+	    // $spreadsheet->getActiveSheet()->setRightToLeft(true);
 
 		// 본문 내용 ---------------------------------------------------------------//
 
 		$filename = $pj_title->pj_name.'_소유자별_토지목록_및_현황('.date('Y-m-d').').xlsx'; // 엑셀 파일 이름
 
-    // Redirect output to a client's web browser (Excel2007)
-    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // mime 타입
-		header('Content-Disposition: attachment; filename='.iconv('UTF-8','CP949',$filename)); // 브라우저에서 받을 파일 이름
-    header('Cache-Control: max-age=0'); // no cache
-    // If you're serving to IE 9, then the following may be needed
-    header('Cache-Control: max-age=1');
+	    // Redirect output to a client's web browser (Excel2007)
+	    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // mime 타입
+			header('Content-Disposition: attachment; filename='.iconv('UTF-8','CP949',$filename)); // 브라우저에서 받을 파일 이름
+	    header('Cache-Control: max-age=0'); // no cache
+	    // If you're serving to IE 9, then the following may be needed
+	    header('Cache-Control: max-age=1');
 
-    // If you're serving to IE over SSL, then the following may be needed
-    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
-    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
-    header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
-    header('Pragma: public'); // HTTP/1.0
+	    // If you're serving to IE over SSL, then the following may be needed
+	    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+	    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT'); // always modified
+	    header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+	    header('Pragma: public'); // HTTP/1.0
 
-		// Excel5 포맷으로 저장 -> 엑셀 2007 포맷으로 저장하고 싶은 경우 'Excel2007'로 변경합니다.
-  	$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Excel2007');
-		// 서버에 파일을 쓰지 않고 바로 다운로드 받습니다.
-  	$writer->save('php://output');
-  	exit;
-  	// create new file and remove Compatibility mode from word title
+			// Excel5 포맷으로 저장 -> 엑셀 2007 포맷으로 저장하고 싶은 경우 'Excel2007'로 변경합니다.
+	  	$writer = \PhpOffice\PhpSpreadsheet\IOFactory::createWriter($spreadsheet, 'Excel2007');
+			// 서버에 파일을 쓰지 않고 바로 다운로드 받습니다.
+	  	$writer->save('php://output');
+	  	exit;
+	  	// create new file and remove Compatibility mode from word title
 	}
 }
 // End of File
