@@ -24,7 +24,7 @@
 									echo '1/' . $j;
 								} ?>"><?php echo $s_di[0][$i]; ?></a>
 				</li>
-			<?
+			<?php
 		endfor;
 	else :
 		$len = count($s_di[1]);
@@ -39,7 +39,7 @@
 									echo '1/' . $j;
 								} ?>"><?php echo $s_di[1][$i]; ?></a>
 				</li>
-			<?
+			<?php
 		endfor;
 	endif;
 	?>

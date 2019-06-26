@@ -7,15 +7,15 @@
 	<?php endfor; ?>
 </ul>
 <!-- ---------------------------------mdi-menu end------------------------------------ -->
-
 <div class="page-header">
 	<ul class="nav nav-pills">
-
-		<?php if (!$this->uri->segment(3) or $this->uri->segment(3) === '1') :
+		<?php
+		if (!$this->uri->segment(3) or $this->uri->segment(3) === '1') :
 			$len = count($s_di[0]);
 			for ($i = 0; $i < $len; $i++) :
 				$j = $i + 1;
 				?>
+
 				<li role="presentation" class="<?php if ((!$this->uri->segment(4) && $j == 1) or $this->uri->segment(4) == $j) echo 'active'; ?>">
 					<a href="<?php echo $this->config->base_url('cms_m5/config'); ?>/<?php if ($this->uri->segment(3)) {
 																							echo $this->uri->segment(3) . '/' . $j;
@@ -23,7 +23,7 @@
 																							echo '1/' . $j;
 																						} ?>"><?php echo $s_di[0][$i]; ?></a>
 				</li>
-			<?
+			<?php
 		endfor;
 	else :
 		$len = count($s_di[1]);
@@ -37,7 +37,7 @@
 																							echo '1/' . $j;
 																						} ?>"><?php echo $s_di[1][$i]; ?></a>
 				</li>
-			<?
+			<?php
 		endfor;
 	endif;
 
