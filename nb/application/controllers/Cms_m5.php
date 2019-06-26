@@ -1,14 +1,16 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Cms_m5 extends CB_Controller {
+class Cms_m5 extends CB_Controller
+{
 
 	/**
 	 * [__construct 이 클래스의 생성자]
 	 */
-	public function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
-		if($this->member->is_member() === false) {
+		if ($this->member->is_member() === false) {
 			redirect(site_url('login?url=' . urlencode(current_full_url())));
 		}
 		$this->load->model('cms_main_model'); //모델 파일 로드
@@ -20,7 +22,8 @@ class Cms_m5 extends CB_Controller {
 	 * [index 클래스명 생략시 기본 실행 함수]
 	 * @return [type] [description]
 	 */
-	public function index() {
+	public function index()
+	{
 		$this->config();
 	}
 
@@ -30,8 +33,9 @@ class Cms_m5 extends CB_Controller {
 	 * @param  string $sdi [3단계 제목]
 	 * @return [type]      [description]
 	 */
-	 public function config($mdi='', $sdi=''){
-		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+	public function config($mdi = '', $sdi = '')
+	{
+		$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		///////////////////////////
 		// 이벤트 라이브러리를 로딩합니다
@@ -64,7 +68,7 @@ class Cms_m5 extends CB_Controller {
 		);
 
 		// 1. 기본정보관리 1. 부서관리 ////////////////////////////////////////////////////////////////////
-		if($mdi==1 && $sdi==1 ){
+		if ($mdi == 1 && $sdi == 1) {
 
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m5_1_1', $this->session->userdata['mem_id']);
@@ -91,7 +95,7 @@ class Cms_m5 extends CB_Controller {
 
 			// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
 			$page = $this->input->get('page'); // get 방식 아닌 경우 $this->uri->segment($config['uri_segment']);
-			$start = ($page<=1 or empty($page)) ? 0 : ($page-1) * $config['per_page'];
+			$start = ($page <= 1 or empty($page)) ? 0 : ($page - 1) * $config['per_page'];
 			$limit = $config['per_page'];
 
 			//페이지네이션 초기화
@@ -106,7 +110,7 @@ class Cms_m5 extends CB_Controller {
 			$view['list'] = $this->cms_m5_model->com_div_list($div_table, $start, $limit, $st1, $st2, '');
 
 			// 세부 부서데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-			if($this->input->get('seq')) $view['sel_div'] = $this->cms_main_model->sql_row("SELECT * FROM {$div_table} WHERE seq={$this->input->get('seq')}");
+			if ($this->input->get('seq')) $view['sel_div'] = $this->cms_main_model->sql_row("SELECT * FROM {$div_table} WHERE seq={$this->input->get('seq')}");
 
 
 			// 폼 검증 라이브러리 로드
@@ -117,7 +121,7 @@ class Cms_m5 extends CB_Controller {
 			$this->form_validation->set_rules('res_work', '담당업무', 'required');
 
 
-			if($this->form_validation->run() !==FALSE) { // 포스트데이터가 있을 경우
+			if ($this->form_validation->run() !== FALSE) { // 포스트데이터가 있을 경우
 				$div_data = array(
 					'div_code' => $this->input->post('div_code', TRUE),
 					'div_name' => $this->input->post('div_name', TRUE),
@@ -127,24 +131,24 @@ class Cms_m5 extends CB_Controller {
 					'note' => $this->input->post('note', TRUE)
 				);
 
-				if($this->input->post('mode')==='reg') {
+				if ($this->input->post('mode') === 'reg') {
 					$result = $this->cms_main_model->insert_data($div_table, $div_data);
-				}else if($this->input->post('mode')==='modify') {
+				} else if ($this->input->post('mode') === 'modify') {
 					$result = $this->cms_main_model->update_data($div_table, $div_data, $where = array('seq' => $this->input->post('seq')));
-				}else if($this->input->post_get('mode')==='del'){
+				} else if ($this->input->post_get('mode') === 'del') {
 					$result = $this->cms_main_model->delete_data($div_table, array('seq' => $this->input->post('seq')));
 				}
-				if($result){
+				if ($result) {
 					alert('정상적으로 처리되었습니다.', base_url('cms_m5/config/1/1/'));
-				}else{
+				} else {
 					alert('다시 시도하여 주십시요.', base_url('cms_m5/config/1/1/'));
 				}
 			}
 
 
 
-		// 1. 기본정보관리 2. 직원관리 ////////////////////////////////////////////////////////////////////
-		}else if($mdi==1 && $sdi==2) {
+			// 1. 기본정보관리 2. 직원관리 ////////////////////////////////////////////////////////////////////
+		} else if ($mdi == 1 && $sdi == 2) {
 
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m5_1_2', $this->session->userdata['mem_id']);
@@ -171,7 +175,7 @@ class Cms_m5 extends CB_Controller {
 
 			// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
 			$page = $this->input->get('page'); // get 방식 아닌 경우 $this->uri->segment($config['uri_segment']);
-			$start = ($page<=1 or empty($page)) ? 0 : ($page-1) * $config['per_page'];
+			$start = ($page <= 1 or empty($page)) ? 0 : ($page - 1) * $config['per_page'];
 			$limit = $config['per_page'];
 
 			//페이지네이션 초기화
@@ -186,7 +190,7 @@ class Cms_m5 extends CB_Controller {
 			$view['list'] = $this->cms_m5_model->com_mem_list($mem_table, $start, $limit, $st1, $st2, '');
 
 			// 세부 부서데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-			if($this->input->get('seq')) $view['sel_mem'] = $this->cms_main_model->sql_row("SELECT * FROM {$mem_table} WHERE seq={$this->input->get('seq')}");
+			if ($this->input->get('seq')) $view['sel_mem'] = $this->cms_main_model->sql_row("SELECT * FROM {$mem_table} WHERE seq={$this->input->get('seq')}");
 
 			// 폼 검증 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
@@ -199,10 +203,12 @@ class Cms_m5 extends CB_Controller {
 			$this->form_validation->set_rules('join_date', '입사일', 'required');
 
 
-			if($this->form_validation->run() !==FALSE) { // 포스트데이터가 있는 경우
+			if ($this->form_validation->run() !== FALSE) { // 포스트데이터가 있는 경우
 
-				if($this->input->post('is_reti')===NULL) $is_reti = 0; else $is_reti = 1;
-				if($this->input->post('reti_date')===NULL) $reti_date = 0; else $reti_date = $this->input->post('reti_date', TRUE);
+				if ($this->input->post('is_reti') === NULL) $is_reti = 0;
+				else $is_reti = 1;
+				if ($this->input->post('reti_date') === NULL) $reti_date = 0;
+				else $reti_date = $this->input->post('reti_date', TRUE);
 				$mem_data = array(
 					'com_seq' => 1,
 					'div_name' => $this->input->post('div_name', TRUE),
@@ -217,24 +223,24 @@ class Cms_m5 extends CB_Controller {
 					'reti_date' => $reti_date
 				);
 
-				if($this->input->post('mode')=='reg') {
+				if ($this->input->post('mode') == 'reg') {
 					$result = $this->cms_main_model->insert_data($mem_table, $mem_data);
-				}else if($this->input->post('mode')=='modify') {
+				} else if ($this->input->post('mode') == 'modify') {
 					$result = $this->cms_main_model->update_data($mem_table, $mem_data, $where = array('seq' => $this->input->post('seq')));
-				}else if($this->input->post_get('mode')==='del'){
+				} else if ($this->input->post_get('mode') === 'del') {
 					$result = $this->cms_main_model->delete_data($mem_table, array('seq' => $this->input->post('seq')));
 				}
-				if($result){
+				if ($result) {
 					alert('정상적으로 처리되었습니다.', base_url('cms_m5/config/1/2/'));
-				}else{
+				} else {
 					alert('다시 시도하여 주십시요.', base_url('cms_m5/config/1/2/'));
 				}
 			}
 
 
 
-		// 1. 기본정보관리 3. 거래처정보 ////////////////////////////////////////////////////////////////////
-		}else if($mdi==1 && $sdi==3) {
+			// 1. 기본정보관리 3. 거래처정보 ////////////////////////////////////////////////////////////////////
+		} else if ($mdi == 1 && $sdi == 3) {
 
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m5_1_3', $this->session->userdata['mem_id']);
@@ -261,7 +267,7 @@ class Cms_m5 extends CB_Controller {
 
 			// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
 			$page = $this->input->get('page'); // get 방식 아닌 경우 $this->uri->segment($config['uri_segment']);
-			$start = ($page<=1 or empty($page)) ? 0 : ($page-1) * $config['per_page'];
+			$start = ($page <= 1 or empty($page)) ? 0 : ($page - 1) * $config['per_page'];
 			$limit = $config['per_page'];
 
 			//페이지네이션 초기화
@@ -273,7 +279,7 @@ class Cms_m5 extends CB_Controller {
 			$view['list'] = $this->cms_m5_model->com_accounts_list($acc_table, $start, $limit, $st1, $st2, '');
 
 			// 세부 거래처데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-			if($this->input->get('seq')) $view['sel_acc'] = $this->cms_main_model->sql_row("SELECT * FROM {$acc_table} WHERE seq={$this->input->get('seq')}");
+			if ($this->input->get('seq')) $view['sel_acc'] = $this->cms_main_model->sql_row("SELECT * FROM {$acc_table} WHERE seq={$this->input->get('seq')}");
 
 			// 폼 검증 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
@@ -283,9 +289,9 @@ class Cms_m5 extends CB_Controller {
 			$this->form_validation->set_rules('main_tel', '직급(책)', 'required');
 
 
-			if($this->form_validation->run() !==FALSE) { // 포스트데이터 있을 경우
+			if ($this->form_validation->run() !== FALSE) { // 포스트데이터 있을 경우
 
-				$tax_addr = $this->input->post('postcode1', TRUE)."-".$this->input->post('address1_1', TRUE)."-".$this->input->post('address2_1', TRUE);
+				$tax_addr = $this->input->post('postcode1', TRUE) . "-" . $this->input->post('address1_1', TRUE) . "-" . $this->input->post('address2_1', TRUE);
 				$acc_data = array(
 					'si_name' => $this->input->post('si_name', TRUE),
 					'acc_cla' => $this->input->post('acc_cla', TRUE),
@@ -305,27 +311,27 @@ class Cms_m5 extends CB_Controller {
 					'tax_worker' => $this->input->post('tax_worker', TRUE),
 					'tax_email' => $this->input->post('tax_email', TRUE),
 					'note' => $this->input->post('note', TRUE),
-					'reg_date' =>'now()'
+					'reg_date' => 'now()'
 				);
 
-				if($this->input->post('mode')=='reg') {
+				if ($this->input->post('mode') == 'reg') {
 					$result = $this->cms_main_model->insert_data($acc_table, $acc_data);
-				}else if($this->input->post('mode')=='modify') {
+				} else if ($this->input->post('mode') == 'modify') {
 					$result = $this->cms_main_model->update_data($acc_table, $acc_data, $where = array('seq' => $this->input->post('seq')));
-				}else if($this->input->post_get('mode')==='del'){
+				} else if ($this->input->post_get('mode') === 'del') {
 					$result = $this->cms_main_model->delete_data($acc_table, array('seq' => $this->input->post('seq')));
 				}
-				if($result){
+				if ($result) {
 					alert('정상적으로 처리되었습니다.', base_url('cms_m5/config/1/3/'));
-				}else{
+				} else {
 					alert('다시 시도하여 주십시요.', base_url('cms_m5/config/1/3/'));
 				}
 			}
 
 
 
-		// 1. 기본정보관리 4. 계좌관리 ////////////////////////////////////////////////////////////////////
-		}else if($mdi==1 && $sdi==4) {
+			// 1. 기본정보관리 4. 계좌관리 ////////////////////////////////////////////////////////////////////
+		} else if ($mdi == 1 && $sdi == 4) {
 
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m5_1_4', $this->session->userdata['mem_id']);
@@ -352,7 +358,7 @@ class Cms_m5 extends CB_Controller {
 
 			// 게시물 목록을 불러오기 위한 start / limit 값 가져오기
 			$page = $this->input->get('page'); // get 방식 아닌 경우 $this->uri->segment($config['uri_segment']);
-			$start = ($page<=1 or empty($page)) ? 0 : ($page-1) * $config['per_page'];
+			$start = ($page <= 1 or empty($page)) ? 0 : ($page - 1) * $config['per_page'];
 			$limit = $config['per_page'];
 
 			//페이지네이션 초기화
@@ -370,7 +376,7 @@ class Cms_m5 extends CB_Controller {
 			$view['list'] = $this->cms_m5_model->bank_account_list($bank_table, $start, $limit, $st1, $st2, '');
 
 			// 세부 은행데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-			if($this->input->get('seq')) $view['sel_bank'] = $this->cms_main_model->sql_row("SELECT * FROM {$bank_table} WHERE no={$this->input->get('seq')}");
+			if ($this->input->get('seq')) $view['sel_bank'] = $this->cms_main_model->sql_row("SELECT * FROM {$bank_table} WHERE no={$this->input->get('seq')}");
 
 			// 폼 검증 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
@@ -382,7 +388,7 @@ class Cms_m5 extends CB_Controller {
 			$this->form_validation->set_rules('open_date', '개설일자', 'required');
 
 
-			if($this->form_validation->run() !==FALSE) { // post data 있는 경우
+			if ($this->form_validation->run() !== FALSE) { // post data 있는 경우
 
 				$bank_name = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_capital_bank_code WHERE bank_code={$this->input->post('bank_code')}");
 				$bank_data = array(
@@ -396,24 +402,24 @@ class Cms_m5 extends CB_Controller {
 					'note' => $this->input->post('note', TRUE)
 				);
 
-				if($this->input->post('mode')=='reg') {
+				if ($this->input->post('mode') == 'reg') {
 					$result = $this->cms_main_model->insert_data($bank_table, $bank_data);
-				}else if($this->input->post('mode')=='modify') {
+				} else if ($this->input->post('mode') == 'modify') {
 					$result = $this->cms_main_model->update_data($bank_table, $bank_data, $where = array('no' => $this->input->post('seq')));
-				}else if($this->input->post('mode')=='del') {
+				} else if ($this->input->post('mode') == 'del') {
 					$result = $this->cms_main_model->delete_data($bank_table, $where = array('no' => $this->input->post('seq')));
 				}
-				if($result){
+				if ($result) {
 					alert('정상적으로 처리되었습니다.', base_url('cms_m5/config/1/4/'));
-				}else{
+				} else {
 					alert('다시 시도하여 주십시요.', base_url('cms_m5/config/1/4/'));
 				}
 			}
 
 
 
-		// 2. 회사정보관리 1. 회사정보 ////////////////////////////////////////////////////////////////////
-		}else if($mdi==2 && $sdi==1) {
+			// 2. 회사정보관리 1. 회사정보 ////////////////////////////////////////////////////////////////////
+		} else if ($mdi == 2 && $sdi == 1) {
 
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m5_2_1', $this->session->userdata['mem_id']);
@@ -459,12 +465,13 @@ class Cms_m5 extends CB_Controller {
 
 			// 회사 등록 정보가 있는지 확인
 			$com_chk = $this->cms_m5_model->is_com_chk();
-			if( !$com_chk) {
+
+			if (!$com_chk) {
 				$view['data'] = array( // 없으면 등록권한 및 새로 등록하라는 변수 전달
 					'auth21' => $auth['_m5_2_1'],
 					'mode' => 'com_reg'
 				);
-			}  else {
+			} else {
 				$view['data'] = array( // 있으면 등록권한, 등록회사정보 및 수정하라는 변수 전달
 					'auth21' => $auth['_m5_2_1'],
 					'com' => $com_chk,
@@ -472,17 +479,25 @@ class Cms_m5 extends CB_Controller {
 				);
 			}
 
-			if($this->form_validation->run() !== FALSE) { // 폼 전송 데이타가 있으면,
+			// // 회사 리스트 정보
+			// $com_list = $this->cms_m5_model->com_list();
+
+			// $view['data'] = array(
+			// 	'auth21' => $auth['_m5_2_1'],
+			// 	'com' => $com_list,
+			// );
+
+			if ($this->form_validation->run() !== FALSE) { // 폼 전송 데이타가 있으면,
 
 				//폼 데이타 가공
-				$co_no = $this->input->post('co_no1')."-".$this->input->post('co_no2')."-".$this->input->post('co_no3');
-				$or_no = $this->input->post('or_no1')."-".$this->input->post('or_no2');
-				$co_phone = $this->input->post('co_phone1').'-'.$this->input->post('co_phone2').'-'.$this->input->post('co_phone3');
-				$co_hp = $this->input->post('co_hp1').'-'.$this->input->post('co_hp2').'-'.$this->input->post('co_hp3');
-				$co_fax = $this->input->post('co_fax1').'-'.$this->input->post('co_fax2').'-'.$this->input->post('co_fax3');
-				$carr = $this->input->post('carr_y').'-'.$this->input->post('carr_m');
-				$email = $this->input->post('email1').'@'.$this->input->post('email2');
-				$calc_mail = $this->input->post('calc_mail1').'@'.$this->input->post('calc_mail2');
+				$co_no = $this->input->post('co_no1') . "-" . $this->input->post('co_no2') . "-" . $this->input->post('co_no3');
+				$or_no = $this->input->post('or_no1') . "-" . $this->input->post('or_no2');
+				$co_phone = $this->input->post('co_phone1') . '-' . $this->input->post('co_phone2') . '-' . $this->input->post('co_phone3');
+				$co_hp = $this->input->post('co_hp1') . '-' . $this->input->post('co_hp2') . '-' . $this->input->post('co_hp3');
+				$co_fax = $this->input->post('co_fax1') . '-' . $this->input->post('co_fax2') . '-' . $this->input->post('co_fax3');
+				$carr = $this->input->post('carr_y') . '-' . $this->input->post('carr_m');
+				$email = $this->input->post('email1') . '@' . $this->input->post('email2');
+				$calc_mail = $this->input->post('calc_mail1') . '@' . $this->input->post('calc_mail2');
 
 				$com_data = array(
 					'co_name' => $this->input->post('co_name', TRUE),
@@ -518,29 +533,29 @@ class Cms_m5 extends CB_Controller {
 					'red_date' => 'now()'
 				);
 
-			if($view['mode']=='com_reg') {
-				$result = $this->cms_main_model->insert_data('cb_cms_com_info', $com_data);
-				$msg = '등록';
-			}else if($view['mode']=='com_modify') {
-				$result = $this->cms_main_model->update_data('cb_cms_com_info', $com_data, array('seq'=>1));
-				$msg = '변경';
+				if ($view['mode'] == 'com_reg') {
+					$result = $this->cms_main_model->insert_data('cb_cms_com_info', $com_data);
+					$msg = '등록';
+				} else if ($view['mode'] == 'com_modify') {
+					$result = $this->cms_main_model->update_data('cb_cms_com_info', $com_data, array('seq' => 1));
+					$msg = '변경';
+				}
+
+				if ($result) {
+					// 등록 성공 시
+					alert('회사 정보가 ' . $msg . ' 되었습니다.', base_url('cms_m5/config/2/1/'));
+					exit;
+				} else { // 등록 실패 시
+					// 실패 시
+					alert('회사 정보' . $msg . '에 실패하였습니다.\n 다시 시도하여 주십시요.', base_url('cms_m5/config/2/1/'));
+					exit;
+				}
 			}
 
-			if($result) {
-				// 등록 성공 시
-				alert('회사 정보가 '.$msg.' 되었습니다.', base_url('cms_m5/config/2/1/'));
-				exit;
-			}else{ // 등록 실패 시
-				// 실패 시
-				alert('회사 정보'.$msg.'에 실패하였습니다.\n 다시 시도하여 주십시요.', base_url('cms_m5/config/2/1/'));
-				exit;
-			}
-		}
 
 
-
-		// 2. 회사정보관리 2. 권한관리 ////////////////////////////////////////////////////////////////////
-		}else if($mdi==2 && $sdi==2) {
+			// 2. 회사정보관리 2. 권한관리 ////////////////////////////////////////////////////////////////////
+		} else if ($mdi == 2 && $sdi == 2) {
 
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m5_2_2', $this->session->userdata['mem_id']);
@@ -549,8 +564,8 @@ class Cms_m5 extends CB_Controller {
 			$this->load->library('form_validation');
 
 			// 폼 검증할 필드와 규칙 사전 정의
-			if($this->input->post('no')) $this->form_validation->set_rules('no', '유저번호', 'required');
-			if($this->input->post('user_no')) $this->form_validation->set_rules('user_no', '사용자 번호', 'required');
+			if ($this->input->post('no')) $this->form_validation->set_rules('no', '유저번호', 'required');
+			if ($this->input->post('user_no')) $this->form_validation->set_rules('user_no', '사용자 번호', 'required');
 
 			$view['auth22'] = $auth['_m5_2_2'];   // 등록 권한
 			$view['new_rq'] = $this->cms_m5_model->new_rq_chk();   //  신규 등록 신청자가 있는 지 확인
@@ -559,9 +574,9 @@ class Cms_m5 extends CB_Controller {
 			$view['user_auth'] = $this->cms_m5_model->user_auth($this->input->get('un', TRUE)); //  선택된 유저의 권한 데이터
 
 
-			if($this->form_validation->run() !== FALSE) { // 폼 검증 통과 시, 즉 post-data 가 있을 경우
+			if ($this->form_validation->run() !== FALSE) { // 폼 검증 통과 시, 즉 post-data 가 있을 경우
 
-				if(!empty($this->input->post('no')) && empty($this->input->post('user_no')) && empty($this->input->post('user_id'))){ // 신규 사용자 request 승인 또는 거부 클릭 시
+				if (!empty($this->input->post('no')) && empty($this->input->post('user_no')) && empty($this->input->post('user_id'))) { // 신규 사용자 request 승인 또는 거부 클릭 시
 					//사용자 승인//////////////////////////////////////////////
 					$where_no = $this->input->post('no', TRUE);
 					$auth_data = array(
@@ -569,54 +584,240 @@ class Cms_m5 extends CB_Controller {
 						'request' => $this->input->post('sf', TRUE)
 					);
 					$result = $this->cms_m5_model->rq_perm($where_no, $auth_data);
-					if($result){
+					if ($result) {
 						alert('요청하신 작업이 정상적으로 처리 되었습니다.', base_url('cms_m5/config/2/2/'));
 						exit;
-					}else{
+					} else {
 						alert('데이터베이스 에러입니다. 다시 확인하여 주십시요', base_url('/cms_m5/config/2/2/'));
 						exit;
-					}// 사용자 승인//////////////////////////////////////////////
+					} // 사용자 승인//////////////////////////////////////////////
 				}
 
-				if($this->input->get('un')&&$this->input->post('user_no')&&$this->input->post('user_id')){ // 사용자 권한 설정 버튼 클릭 시
+				if ($this->input->get('un') && $this->input->post('user_no') && $this->input->post('user_id')) { // 사용자 권한 설정 버튼 클릭 시
 
 					// 사용자 권한 설정/////////////////////////////////////////
 
-					if($this->input->post('_m1_1_1_m')=='on'){$_m1_1_1=2;} else if($this->input->post('_m1_1_1')=='on') {$_m1_1_1=1;} else {$_m1_1_1=0;}
-					if($this->input->post('_m1_1_2_m')=='on'){$_m1_1_2=2;} else if($this->input->post('_m1_1_2')=='on') {$_m1_1_2=1;} else {$_m1_1_2=0;}
-					if($this->input->post('_m1_1_3_m')=='on'){$_m1_1_3=2;} else if($this->input->post('_m1_1_3')=='on'){$_m1_1_3=1;} else {$_m1_1_3=0;}
-					if($this->input->post('_m1_1_4_m')=='on'){$_m1_1_4=2;} else if($this->input->post('_m1_1_4')=='on'){$_m1_1_4=1;} else {$_m1_1_4=0;}
-					if($this->input->post('_m1_2_1_m')=='on'){$_m1_2_1=2;} else if($this->input->post('_m1_2_1')=='on'){$_m1_2_1=1;} else {$_m1_2_1=0;}
-					if($this->input->post('_m1_2_2_m')=='on'){$_m1_2_2=2;} else if($this->input->post('_m1_2_2')=='on'){$_m1_2_2=1;} else {$_m1_2_2=0;}
-					if($this->input->post('_m1_2_3_m')=='on'){$_m1_2_3=2;} else if($this->input->post('_m1_2_3')=='on'){$_m1_2_3=1;} else {$_m1_2_3=0;}
+					if ($this->input->post('_m1_1_1_m') == 'on') {
+						$_m1_1_1 = 2;
+					} else if ($this->input->post('_m1_1_1') == 'on') {
+						$_m1_1_1 = 1;
+					} else {
+						$_m1_1_1 = 0;
+					}
+					if ($this->input->post('_m1_1_2_m') == 'on') {
+						$_m1_1_2 = 2;
+					} else if ($this->input->post('_m1_1_2') == 'on') {
+						$_m1_1_2 = 1;
+					} else {
+						$_m1_1_2 = 0;
+					}
+					if ($this->input->post('_m1_1_3_m') == 'on') {
+						$_m1_1_3 = 2;
+					} else if ($this->input->post('_m1_1_3') == 'on') {
+						$_m1_1_3 = 1;
+					} else {
+						$_m1_1_3 = 0;
+					}
+					if ($this->input->post('_m1_1_4_m') == 'on') {
+						$_m1_1_4 = 2;
+					} else if ($this->input->post('_m1_1_4') == 'on') {
+						$_m1_1_4 = 1;
+					} else {
+						$_m1_1_4 = 0;
+					}
+					if ($this->input->post('_m1_2_1_m') == 'on') {
+						$_m1_2_1 = 2;
+					} else if ($this->input->post('_m1_2_1') == 'on') {
+						$_m1_2_1 = 1;
+					} else {
+						$_m1_2_1 = 0;
+					}
+					if ($this->input->post('_m1_2_2_m') == 'on') {
+						$_m1_2_2 = 2;
+					} else if ($this->input->post('_m1_2_2') == 'on') {
+						$_m1_2_2 = 1;
+					} else {
+						$_m1_2_2 = 0;
+					}
+					if ($this->input->post('_m1_2_3_m') == 'on') {
+						$_m1_2_3 = 2;
+					} else if ($this->input->post('_m1_2_3') == 'on') {
+						$_m1_2_3 = 1;
+					} else {
+						$_m1_2_3 = 0;
+					}
 
-					if($this->input->post('_m2_1_1_m')=='on'){$_m2_1_1=2;} else if($this->input->post('_m2_1_1')=='on'){$_m2_1_1=1;} else {$_m2_1_1=0;}
-					if($this->input->post('_m2_1_2_m')=='on'){$_m2_1_2=2;} else if($this->input->post('_m2_1_2')=='on'){$_m2_1_2=1;} else {$_m2_1_2=0;}
-					if($this->input->post('_m2_1_3_m')=='on'){$_m2_1_3=2;} else if($this->input->post('_m2_1_3')=='on'){$_m2_1_3=1;} else {$_m2_1_3=0;}
-					if($this->input->post('_m2_2_1_m')=='on'){$_m2_2_1=2;} else if($this->input->post('_m2_2_1')=='on'){$_m2_2_1=1;} else {$_m2_2_1=0;}
-					if($this->input->post('_m2_2_2_m')=='on'){$_m2_2_2=2;} else if($this->input->post('_m2_2_2')=='on'){$_m2_2_2=1;} else {$_m2_2_2=0;}
-					if($this->input->post('_m2_2_3_m')=='on'){$_m2_2_3=2;} else if($this->input->post('_m2_2_3')=='on'){$_m2_2_3=1;} else {$_m2_2_3=0;}
+					if ($this->input->post('_m2_1_1_m') == 'on') {
+						$_m2_1_1 = 2;
+					} else if ($this->input->post('_m2_1_1') == 'on') {
+						$_m2_1_1 = 1;
+					} else {
+						$_m2_1_1 = 0;
+					}
+					if ($this->input->post('_m2_1_2_m') == 'on') {
+						$_m2_1_2 = 2;
+					} else if ($this->input->post('_m2_1_2') == 'on') {
+						$_m2_1_2 = 1;
+					} else {
+						$_m2_1_2 = 0;
+					}
+					if ($this->input->post('_m2_1_3_m') == 'on') {
+						$_m2_1_3 = 2;
+					} else if ($this->input->post('_m2_1_3') == 'on') {
+						$_m2_1_3 = 1;
+					} else {
+						$_m2_1_3 = 0;
+					}
+					if ($this->input->post('_m2_2_1_m') == 'on') {
+						$_m2_2_1 = 2;
+					} else if ($this->input->post('_m2_2_1') == 'on') {
+						$_m2_2_1 = 1;
+					} else {
+						$_m2_2_1 = 0;
+					}
+					if ($this->input->post('_m2_2_2_m') == 'on') {
+						$_m2_2_2 = 2;
+					} else if ($this->input->post('_m2_2_2') == 'on') {
+						$_m2_2_2 = 1;
+					} else {
+						$_m2_2_2 = 0;
+					}
+					if ($this->input->post('_m2_2_3_m') == 'on') {
+						$_m2_2_3 = 2;
+					} else if ($this->input->post('_m2_2_3') == 'on') {
+						$_m2_2_3 = 1;
+					} else {
+						$_m2_2_3 = 0;
+					}
 
-					if($this->input->post('_m3_1_1_m')=='on'){$_m3_1_1=2;} else if($this->input->post('_m3_1_1')=='on'){$_m3_1_1=1;} else {$_m3_1_1=0;}
-					if($this->input->post('_m3_1_2_m')=='on'){$_m3_1_2=2;} else if($this->input->post('_m3_1_2')=='on'){$_m3_1_2=1;} else {$_m3_1_2=0;}
-					if($this->input->post('_m3_1_3_m')=='on'){$_m3_1_3=2;} else if($this->input->post('_m3_1_3')=='on'){$_m3_1_3=1;} else {$_m3_1_3=0;}
-					if($this->input->post('_m3_2_1_m')=='on'){$_m3_2_1=2;} else if($this->input->post('_m3_2_1')=='on'){$_m3_2_1=1;} else {$_m3_2_1=0;}
-					if($this->input->post('_m3_2_2_m')=='on'){$_m3_2_2=2;} else if($this->input->post('_m3_2_2')=='on'){$_m3_2_2=1;} else {$_m3_2_2=0;}
-					if($this->input->post('_m3_2_3_m')=='on'){$_m3_2_3=2;} else if($this->input->post('_m3_2_3')=='on'){$_m3_2_3=1;} else {$_m3_2_3=0;}
+					if ($this->input->post('_m3_1_1_m') == 'on') {
+						$_m3_1_1 = 2;
+					} else if ($this->input->post('_m3_1_1') == 'on') {
+						$_m3_1_1 = 1;
+					} else {
+						$_m3_1_1 = 0;
+					}
+					if ($this->input->post('_m3_1_2_m') == 'on') {
+						$_m3_1_2 = 2;
+					} else if ($this->input->post('_m3_1_2') == 'on') {
+						$_m3_1_2 = 1;
+					} else {
+						$_m3_1_2 = 0;
+					}
+					if ($this->input->post('_m3_1_3_m') == 'on') {
+						$_m3_1_3 = 2;
+					} else if ($this->input->post('_m3_1_3') == 'on') {
+						$_m3_1_3 = 1;
+					} else {
+						$_m3_1_3 = 0;
+					}
+					if ($this->input->post('_m3_2_1_m') == 'on') {
+						$_m3_2_1 = 2;
+					} else if ($this->input->post('_m3_2_1') == 'on') {
+						$_m3_2_1 = 1;
+					} else {
+						$_m3_2_1 = 0;
+					}
+					if ($this->input->post('_m3_2_2_m') == 'on') {
+						$_m3_2_2 = 2;
+					} else if ($this->input->post('_m3_2_2') == 'on') {
+						$_m3_2_2 = 1;
+					} else {
+						$_m3_2_2 = 0;
+					}
+					if ($this->input->post('_m3_2_3_m') == 'on') {
+						$_m3_2_3 = 2;
+					} else if ($this->input->post('_m3_2_3') == 'on') {
+						$_m3_2_3 = 1;
+					} else {
+						$_m3_2_3 = 0;
+					}
 
-					if($this->input->post('_m4_1_1_m')=='on'){$_m4_1_1=2;} else if($this->input->post('_m4_1_1')=='on'){$_m4_1_1=1;} else {$_m4_1_1=0;}
-					if($this->input->post('_m4_1_2_m')=='on'){$_m4_1_2=2;} else if($this->input->post('_m4_1_2')=='on'){$_m4_1_2=1;} else {$_m4_1_2=0;}
-					if($this->input->post('_m4_1_3_m')=='on'){$_m4_1_3=2;} else if($this->input->post('_m4_1_3')=='on'){$_m4_1_3=1;} else {$_m4_1_3=0;}
-					if($this->input->post('_m4_2_1_m')=='on'){$_m4_2_1=2;} else if($this->input->post('_m4_2_1')=='on'){$_m4_2_1=1;} else {$_m4_2_1=0;}
-					if($this->input->post('_m4_2_2_m')=='on'){$_m4_2_2=2;} else if($this->input->post('_m4_2_2')=='on'){$_m4_2_2=1;} else {$_m4_2_2=0;}
-					if($this->input->post('_m4_2_3_m')=='on'){$_m4_2_3=2;} else if($this->input->post('_m4_2_3')=='on'){$_m4_2_3=1;} else {$_m4_2_3=0;}
+					if ($this->input->post('_m4_1_1_m') == 'on') {
+						$_m4_1_1 = 2;
+					} else if ($this->input->post('_m4_1_1') == 'on') {
+						$_m4_1_1 = 1;
+					} else {
+						$_m4_1_1 = 0;
+					}
+					if ($this->input->post('_m4_1_2_m') == 'on') {
+						$_m4_1_2 = 2;
+					} else if ($this->input->post('_m4_1_2') == 'on') {
+						$_m4_1_2 = 1;
+					} else {
+						$_m4_1_2 = 0;
+					}
+					if ($this->input->post('_m4_1_3_m') == 'on') {
+						$_m4_1_3 = 2;
+					} else if ($this->input->post('_m4_1_3') == 'on') {
+						$_m4_1_3 = 1;
+					} else {
+						$_m4_1_3 = 0;
+					}
+					if ($this->input->post('_m4_2_1_m') == 'on') {
+						$_m4_2_1 = 2;
+					} else if ($this->input->post('_m4_2_1') == 'on') {
+						$_m4_2_1 = 1;
+					} else {
+						$_m4_2_1 = 0;
+					}
+					if ($this->input->post('_m4_2_2_m') == 'on') {
+						$_m4_2_2 = 2;
+					} else if ($this->input->post('_m4_2_2') == 'on') {
+						$_m4_2_2 = 1;
+					} else {
+						$_m4_2_2 = 0;
+					}
+					if ($this->input->post('_m4_2_3_m') == 'on') {
+						$_m4_2_3 = 2;
+					} else if ($this->input->post('_m4_2_3') == 'on') {
+						$_m4_2_3 = 1;
+					} else {
+						$_m4_2_3 = 0;
+					}
 
-					if($this->input->post('_m5_1_1_m')=='on'){$_m5_1_1=2;} else if($this->input->post('_m5_1_1')=='on'){$_m5_1_1=1;} else {$_m5_1_1=0;}
-					if($this->input->post('_m5_1_2_m')=='on'){$_m5_1_2=2;} else if($this->input->post('_m5_1_2')=='on'){$_m5_1_2=1;} else {$_m5_1_2=0;}
-					if($this->input->post('_m5_1_3_m')=='on'){$_m5_1_3=2;} else if($this->input->post('_m5_1_3')=='on'){$_m5_1_3=1;} else {$_m5_1_3=0;}
-					if($this->input->post('_m5_1_4_m')=='on'){$_m5_1_4=2;} else if($this->input->post('_m5_1_4')=='on'){$_m5_1_4=1;} else {$_m5_1_4=0;}
-					if($this->input->post('_m5_2_1_m')=='on'){$_m5_2_1=2;} else if($this->input->post('_m5_2_1')=='on'){$_m5_2_1=1;} else {$_m5_2_1=0;}
-					if($this->input->post('_m5_2_2_m')=='on'){$_m5_2_2=2;} else if($this->input->post('_m5_2_2')=='on'){$_m5_2_2=1;} else {$_m5_2_2=0;}
+					if ($this->input->post('_m5_1_1_m') == 'on') {
+						$_m5_1_1 = 2;
+					} else if ($this->input->post('_m5_1_1') == 'on') {
+						$_m5_1_1 = 1;
+					} else {
+						$_m5_1_1 = 0;
+					}
+					if ($this->input->post('_m5_1_2_m') == 'on') {
+						$_m5_1_2 = 2;
+					} else if ($this->input->post('_m5_1_2') == 'on') {
+						$_m5_1_2 = 1;
+					} else {
+						$_m5_1_2 = 0;
+					}
+					if ($this->input->post('_m5_1_3_m') == 'on') {
+						$_m5_1_3 = 2;
+					} else if ($this->input->post('_m5_1_3') == 'on') {
+						$_m5_1_3 = 1;
+					} else {
+						$_m5_1_3 = 0;
+					}
+					if ($this->input->post('_m5_1_4_m') == 'on') {
+						$_m5_1_4 = 2;
+					} else if ($this->input->post('_m5_1_4') == 'on') {
+						$_m5_1_4 = 1;
+					} else {
+						$_m5_1_4 = 0;
+					}
+					if ($this->input->post('_m5_2_1_m') == 'on') {
+						$_m5_2_1 = 2;
+					} else if ($this->input->post('_m5_2_1') == 'on') {
+						$_m5_2_1 = 1;
+					} else {
+						$_m5_2_1 = 0;
+					}
+					if ($this->input->post('_m5_2_2_m') == 'on') {
+						$_m5_2_2 = 2;
+					} else if ($this->input->post('_m5_2_2') == 'on') {
+						$_m5_2_2 = 1;
+					} else {
+						$_m5_2_2 = 0;
+					}
 
 					$auth_dt = array(
 						'user_no' => $this->input->post('user_no', TRUE),
@@ -658,10 +859,11 @@ class Cms_m5 extends CB_Controller {
 						'_m5_2_2' => $_m5_2_2
 					);
 					$auth_result = $this->cms_m5_model->auth_reg($this->input->get('un'), $auth_dt);
-					if($auth_result) alert('요청하신 작업이 정상적으로 처리되었습니다.', base_url('cms_m5/config/2/2/')."?un=".$this->input->get('un')); else alert('데이터베이스 에러입니다. 다시 시도하여 주십시요.', base_url('cms_m5/config/2/2/'));
-				}//사용자 권한 설정/////////////////////////////////////////
-			 }// 폼 검증 로직 종료
-		}// 권한관리 sdi 분기 종료
+					if ($auth_result) alert('요청하신 작업이 정상적으로 처리되었습니다.', base_url('cms_m5/config/2/2/') . "?un=" . $this->input->get('un'));
+					else alert('데이터베이스 에러입니다. 다시 시도하여 주십시요.', base_url('cms_m5/config/2/2/'));
+				} //사용자 권한 설정/////////////////////////////////////////
+			} // 폼 검증 로직 종료
+		} // 권한관리 sdi 분기 종료
 
 		/**
 		 * 레이아웃을 정의합니다
@@ -673,25 +875,25 @@ class Cms_m5 extends CB_Controller {
 		$page_name = $this->cbconfig->item('site_page_name_main');
 
 		$layoutconfig = array(
-				'path' => 'cms_m5',
-				'layout' => 'layout',
-				'skin' => 'm5_header',
-				'layout_dir' => 'bootstrap',
-				'mobile_layout_dir' => 'bootstrap',
-				'use_sidebar' => 0,
-				'use_mobile_sidebar' => 0,
-				'skin_dir' => 'bootstrap',
-				'mobile_skin_dir' => 'bootstrap',
-				'page_title' => $page_title,
-				'meta_description' => $meta_description,
-				'meta_keywords' => $meta_keywords,
-				'meta_author' => $meta_author,
-				'page_name' => $page_name,
+			'path' => 'cms_m5',
+			'layout' => 'layout',
+			'skin' => 'm5_header',
+			'layout_dir' => 'bootstrap',
+			'mobile_layout_dir' => 'bootstrap',
+			'use_sidebar' => 0,
+			'use_mobile_sidebar' => 0,
+			'skin_dir' => 'bootstrap',
+			'mobile_skin_dir' => 'bootstrap',
+			'page_title' => $page_title,
+			'meta_description' => $meta_description,
+			'meta_keywords' => $meta_keywords,
+			'meta_author' => $meta_author,
+			'page_name' => $page_name,
 		);
 		$view['layout'] = $this->managelayout->front($layoutconfig, $this->cbconfig->get_device_view_type());
 		$this->data = $view;
 		$this->layout = element('layout_skin_file', element('layout', $view));
 		$this->view = element('view_skin_file', element('layout', $view));
-	}// config 함수 종료
+	} // config 함수 종료
 }// 클래스 종료
 // End of this File
