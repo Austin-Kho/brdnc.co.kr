@@ -35,7 +35,7 @@ class Cms_m5 extends CB_Controller
      */
     public function config($mdi = '', $sdi = '')
     {
-         $this->output->enable_profiler(TRUE); //프로파일러 보기//
+        $this->output->enable_profiler ( TRUE ); //프로파일러 보기//
 
         ///////////////////////////
         // 이벤트 라이브러리를 로딩합니다
@@ -191,7 +191,7 @@ class Cms_m5 extends CB_Controller
             $view['pagination'] = $this->pagination->create_links ();
 
             // db[전체부서목록] 데이터 불러오기
-            $view['all_div'] = $this->cms_m5_model->all_div_name ( 'cb_cms_com_div', $this->input->get('com') );
+            $view['all_div'] = $this->cms_m5_model->all_div_name ( 'cb_cms_com_div', $this->input->get ( 'com' ) );
 
             //  db [직원 ]데이터 불러오기
             $view['list'] = $this->cms_m5_model->com_mem_list ( $mem_table, $company, $start, $limit, $st1, $st2, '' );
@@ -357,7 +357,7 @@ class Cms_m5 extends CB_Controller
 
             //페이지네이션 설정/////////////////////////////////
             $config['base_url'] = base_url ( 'cms_m5/config/1/4/' );  //페이징 주소
-            $config['total_rows'] = $this->cms_m5_model->bank_account_list ( $bank_table, '', '', $st1, $st2, 'num' );  //게시물의 전체 갯수
+            $config['total_rows'] = $this->cms_m5_model->bank_account_list ( $bank_table, $company, '', '', $st1, $st2, 'num' );  //게시물의 전체 갯수
             $config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
             $config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
             $config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -374,13 +374,13 @@ class Cms_m5 extends CB_Controller
             $view['pagination'] = $this->pagination->create_links ();
 
             // db[전체은행목록] 데이터 불러오기
-            $view['com_bank'] = $this->cms_m5_model->all_bank_name ();
+            $view['com_bank'] = $this->cms_m5_model->all_bank_name ( $company );
             //은행 디비 전체 불러오기
             $view['all_bank'] = $this->cms_main_model->sql_result ( "SELECT * FROM cb_cms_capital_bank_code ORDER BY bank_code" );
             $view['all_div'] = $this->cms_main_model->sql_result ( "SELECT * FROM cb_cms_com_div" );
 
             //  db [은행 ]데이터 불러오기
-            $view['list'] = $this->cms_m5_model->bank_account_list ( $bank_table, $start, $limit, $st1, $st2, '' );
+            $view['list'] = $this->cms_m5_model->bank_account_list ( $bank_table, $company, $start, $limit, $st1, $st2, '' );
 
             // 세부 은행데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
             if ( $this->input->get ( 'seq' ) ) $view['sel_bank'] = $this->cms_main_model->sql_row ( "SELECT * FROM {$bank_table} WHERE no={$this->input->get('seq')}" );
@@ -388,6 +388,7 @@ class Cms_m5 extends CB_Controller
             // 폼 검증 라이브러리 로드
             $this->load->library ( 'form_validation' ); // 폼 검증
             // 폼 검증할 필드와 규칙 사전 정의
+            $this->form_validation->set_rules ( 'com_seq', '회사코드', 'required' );
             $this->form_validation->set_rules ( 'bank', '은행명', 'required' );
             $this->form_validation->set_rules ( 'name', '계좌별칭', 'required' );
             $this->form_validation->set_rules ( 'number', '계좌번호', 'required' );
@@ -399,6 +400,7 @@ class Cms_m5 extends CB_Controller
 
                 $bank_name = $this->cms_main_model->sql_row ( "SELECT * FROM cb_cms_capital_bank_code WHERE bank_code={$this->input->post('bank_code')}" );
                 $bank_data = array(
+                    'com_seq' => $this->input->post ( 'com_seq', TRUE ),
                     'bank' => $bank_name->bank_name,
                     'bank_code' => $this->input->post ( 'bank_code', TRUE ),
                     'name' => $this->input->post ( 'name', TRUE ),
@@ -417,7 +419,8 @@ class Cms_m5 extends CB_Controller
                     $result = $this->cms_main_model->delete_data ( $bank_table, $where = array('no' => $this->input->post ( 'seq' )) );
                 }
                 if ( $result ) {
-                    alert ( '정상적으로 처리되었습니다.', base_url ( 'cms_m5/config/1/4/' ) );
+                    $ret_url = "?com_sel=" . $this->input->post ( 'com_seq' );
+                    alert ( '정상적으로 처리되었습니다.', base_url ( 'cms_m5/config/1/4/' ) . $ret_url );
                 } else {
                     alert ( '다시 시도하여 주십시요.', base_url ( 'cms_m5/config/1/4/' ) );
                 }

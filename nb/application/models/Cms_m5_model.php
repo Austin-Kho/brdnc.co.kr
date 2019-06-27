@@ -129,10 +129,11 @@ class Cms_m5_model extends CB_Model
 	 * [all_bank_name 셀렉트바 전체 목록]
 	 * @return [Array] [목록]
 	 */
-	public function all_bank_name()
+	public function all_bank_name($com)
 	{
 		$this->db->select('bank_code, bank');
 		$this->db->where('bank_code!=', '');
+		$this->db->where('com_seq', $com);
 		$this->db->group_by('bank_code');
 
 		$qry = $this->db->get('cms_capital_bank_account');
@@ -147,8 +148,9 @@ class Cms_m5_model extends CB_Model
 	 * @param  [String] $n           [전체리스트 수, 실제리스트 구분인자]
 	 * @return [Array]              [실제리스트 데이터]
 	 */
-	public function bank_account_list($table, $start = '', $limit = '', $st1 = '', $st2 = '', $n)
+	public function bank_account_list($table, $com, $start = '', $limit = '', $st1 = '', $st2 = '', $n)
 	{
+	    $this->db->where('com_seq', $com);
 		$this->db->where('name !=', '현금'); // 현금계정은 제외하고 불러옴
 		// 검색어가 있을 경우
 		if ($st1 != '') {
