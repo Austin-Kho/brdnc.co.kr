@@ -11,10 +11,11 @@ else :
 		<div class="bg-success col-md-2 bo-top bo-bottom" style="padding-top: 10px; margin-bottom: 20px; height: 40px;">회사 정보</div>
 		<div class="col-xs-8 col-sm-8 col-md-10 bo-top bo-bottom" style="height: 40px; padding-top: 4px;">
 			<div class="col-md-3" style="padding: 0;">
-				<select class="form-control input-sm" name="div_sel" onchange="submit();">
-					<option value=''>전 체</option>
+				<select class="form-control input-sm" name="com_sel" onchange="submit();">
+					<option value=''>선 택</option>
 					<?php foreach ($com as $lt) : ?>
-						<option value="<?php echo $lt->div_code; ?>" <? if ($lt->div_code == $this->input->get('div_sel')) echo "selected"; ?>><?php echo $lt->div_name ?></option>
+						<option value="<?php echo $lt->com_code; ?>" <? if ($lt->com_code == $this->input->get('com_sel')) echo "selected"; ?>><?php echo $lt->div_name ?></option>
+						<option value="1">(주)바램디앤씨</option>
 					<?php endforeach; ?>
 				</select>
 			</div>
@@ -38,7 +39,10 @@ else :
 																																	echo set_value('co_name');
 																																} else {
 																																	echo $data['com']->co_name;
-																																} ?>" required>
+																																} ?>" 
+																																
+																																
+																																required>
 					</div>
 				</div>
 				<div class="col-xs-12 col-sm-4 col-md-2 label-wrap">

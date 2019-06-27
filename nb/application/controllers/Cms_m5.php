@@ -463,29 +463,29 @@ class Cms_m5 extends CB_Controller
 			$this->form_validation->set_rules('address2_1', '주소2', 'required');
 
 
-			// 회사 등록 정보가 있는지 확인
-			$com_chk = $this->cms_m5_model->is_com_chk();
+			// // 회사 등록 정보가 있는지 확인
+			// $com_chk = $this->cms_m5_model->is_com_chk();
 
-			if (!$com_chk) {
-				$view['data'] = array( // 없으면 등록권한 및 새로 등록하라는 변수 전달
-					'auth21' => $auth['_m5_2_1'],
-					'mode' => 'com_reg'
-				);
-			} else {
-				$view['data'] = array( // 있으면 등록권한, 등록회사정보 및 수정하라는 변수 전달
-					'auth21' => $auth['_m5_2_1'],
-					'com' => $com_chk,
-					'mode' => 'com_modify'
-				);
-			}
+			// if (!$com_chk) {
+			// 	$view['data'] = array( // 없으면 등록권한 및 새로 등록하라는 변수 전달
+			// 		'auth21' => $auth['_m5_2_1'],
+			// 		'mode' => 'com_reg'
+			// 	);
+			// } else {
+			// 	$view['data'] = array( // 있으면 등록권한, 등록회사정보 및 수정하라는 변수 전달
+			// 		'auth21' => $auth['_m5_2_1'],
+			// 		'com' => $com_chk,
+			// 		'mode' => 'com_modify'
+			// 	);
+			// }
 
-			// // 회사 리스트 정보
-			// $com_list = $this->cms_m5_model->com_list();
+			// 회사 리스트 정보
+			$com_list = $this->cms_m5_model->com_list();
 
-			// $view['data'] = array(
-			// 	'auth21' => $auth['_m5_2_1'],
-			// 	'com' => $com_list,
-			// );
+			$view['data'] = array(
+				'auth21' => $auth['_m5_2_1'],
+				'com' => $com_list,
+			);
 
 			if ($this->form_validation->run() !== FALSE) { // 폼 전송 데이타가 있으면,
 
