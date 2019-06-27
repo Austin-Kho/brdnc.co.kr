@@ -4,71 +4,78 @@ if ( $auth13 < 1 ) :
 else :
     ?>
     <div class="main_start">&nbsp;</div>
-    <!-- 5. 환경설정 -> 1. 기본정보관리 ->3. 거래처 정보 관리 페이지 -->
+    <!-- 5. 환경설정 -> 1. 기본정보관리 ->3. 계좌 정보 관리 페이지 -->
 
     <?php if ( !$this->input->get ( 'ss_di' ) or $this->input->get ( 'ss_di' ) == 1 ) : ?>
-    <div class="row">
-        <div class="col-md-12" style="<?php if ( !$this->agent->is_mobile () ) echo 'height: 490px;'; ?>">
-            <div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
-                <!-- <form name="list_frm" method="get" action=""> -->
-                <?php
-                $attributes = array('method' => 'get', 'name' => 'list_frm');
-                echo form_open ( current_full_url (), $attributes );
-                ?>
-                <div class="bg-success col-md-2" style="height: 40px; padding-top: 10px;">업체구분</div>
-                <div class="col-md-7" style="height: 40px; padding-top: 5px;">
-                    <div class="col-md-3" style="padding: 0;">
-                        <select class="form-control input-sm" name="acc_sort" onchange="submit();">
-                            <option value="">전 체</option>
-                            <option value="1" <?php if ( $this->input->get ( 'acc_sort' ) == 1 ) echo 'selected'; ?>>
-                                매입거래처
-                            </option>
-                            <option value="2" <?php if ( $this->input->get ( 'acc_sort' ) == 2 ) echo 'selected'; ?>>
-                                매출거래처
-                            </option>
-                            <option value="3" <?php if ( $this->input->get ( 'acc_sort' ) == 3 ) echo 'selected'; ?>>
-                                매입매출거래처
-                            </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-2" style="height: 40px; padding-top: 5px;">
-                    <input type="text" class="form-control input-sm" name="acc_search" placeholder="거래처 검색"
-                           value="<?php if ( $this->input->get ( 'acc_search' ) ) echo $this->input->get ( 'acc_search' ); ?>"
-                           onkeydown="if(event.keyCode==13)submit();">
-                </div>
-                <div class="col-md-1 right" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
-                    <button class="btn btn-primary btn-sm"> 검 색</button>
-                </div>
-                </form>
+    <div class="row bo-top bo-bottom" style="margin: 0 0 20px 0;">
+        <!-- <form name="list_frm" methoZd="get" action=""> -->
+        <?php
+        $attributes = array('method' => 'get', 'name' => 'list_frm');
+        echo form_open ( current_full_url (), $attributes );
+        ?>
+        <div class="col-xs-12 col-sm-4 col-md-2 center bg-success" style="padding: 11px;">회사 정보</div>
+        <div class="col-xs-12 col-sm-8 col-md-2" style="padding: 5px;">
+            <div class="col-xs-12" style="padding: 0;">
+                <select class="form-control input-sm" name="com_sel" onchange="submit();">
+                    <option value='0'>선 택</option>
+                    <?php foreach ($com_list as $lt) : ?>
+                        <option value="<?php echo $lt->seq; ?>" <? if ( $lt->seq == $this->input->get ( 'com_sel' ) ) echo "selected"; ?>><?php echo $lt->co_name; ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-4 col-md-2 bg-success center" style="height: 40px; padding-top: 10px;">은행별</div>
+        <div class="col-xs-12 col-sm-8 col-md-2" style="height: 40px; padding-top: 5px;">
+            <div class="col-xs-12" style="padding: 0;">
+                <select class="form-control input-sm" name="bank_code" onchange="submit();">
+                    <option value="">전 체</option>
+                    <?php foreach ($com_bank as $lt) : ?>
+                        <option value="<?php echo $lt->bank_code; ?>" <? if ( $lt->bank_code == $this->input->get ( 'bank_code' ) ) echo "selected"; ?>><?php echo $lt->bank; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-10 col-md-3" style="height: 40px; padding-top: 5px;">
+            <input type="text" class="form-control input-sm" name="bank_search" placeholder="계좌 검색"
+                   value="<?php if ( $this->input->get ( 'bank_search' ) ) echo $this->input->get ( 'bank_search' ); ?>"
+                   onkeydown="if(event.keyCode==13)submit();">
+        </div>
+        <div class="col-xs-12 col-sm-2 col-md-1 right"
+             style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
+            <button class="btn btn-primary btn-sm"> 검 색</button>
+        </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12" style="<?php if ( !$this->agent->is_mobile () ) echo 'height: 420px;'; ?>">
+
             <div class="row table-responsive" style="margin: 0;">
                 <table class="table table-bordered table-condensed table-hover font12">
                     <thead style="background-color: #F2F2F9;">
                     <tr>
                         <th class="col-md-1 center"><input type="checkbox"></th>
-                        <th class="col-md-2 center bo-left">상호(회사명)</th>
-                        <th class="col-md-1 center bo-left">업체구분</th>
-                        <th class="col-md-2 center bo-left">전화번호</th>
-                        <th class="col-md-4 center bo-left">주 소</th>
+                        <th class="col-md-1 center bo-left">계좌명칭</th>
+                        <th class="col-md-2 center bo-left">거래은행</th>
+                        <th class="col-md-1 center bo-left">은행코드</th>
+                        <th class="col-md-3 center bo-left">계좌번호</th>
+                        <th class="col-md-2 center bo-left">관리부서(현장)</th>
                         <th class="col-md-2 center bo-left">비 고</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php foreach ($list as $lt) : ?>
-                        <?php if ( $lt->acc_cla == 1 ) $acc_cla = '매입거래처' ?>
-                        <?php if ( $lt->acc_cla == 2 ) $acc_cla = '매출거래처' ?>
-                        <?php if ( $lt->acc_cla == 3 ) $acc_cla = '매입매출거래처' ?>
-                        <?php $tax_addr = explode ( "-", $lt->tax_addr ); ?>
                         <tr>
                             <td class="center"><input type="checkbox"></td>
                             <td class="center bo-left"><a href="javascript:"
-                                                          onclick="location.href='?ss_di=2&amp;mode=modify&amp;seq=<?php echo $lt->seq; ?>'"><?php echo $lt->si_name; ?></a>
+                                                          onclick="location.href='?ss_di=2&amp;mode=modify&amp;seq=<?php echo $lt->no; ?>&amp;com=<?php echo $com_now->seq ?>'"><?php echo $lt->name; ?></a>
                             </td>
-                            <td class="center bo-left"><?php echo $acc_cla; ?></td>
-                            <td class="bo-left" style="padding-left: 15px;"><?php echo $lt->main_tel; ?></td>
-                            <td class="bo-left"
-                                style="padding-left: 15px;"><?php echo $tax_addr[0] . " " . $tax_addr[1] . " " . $tax_addr[2]; ?></td>
+                            <td class="center bo-left"><?php echo $lt->bank; ?></td>
+                            <td class="center bo-left"><?php echo $lt->bank_code; ?></td>
+                            <td class="center bo-left"><?php echo $lt->number; ?></td>
+                            <td class="bo-left" style="padding-left: 15px;"><?php echo $lt->holder; ?></td>
                             <td class="bo-left" style="padding-left: 15px;"><?php echo $lt->note; ?></td>
                         </tr>
                     <?php endforeach; ?>
@@ -86,11 +93,15 @@ else :
             <div class="col-md-12"
                  style="height: 70px; padding: 26px 15px; margin: 18px 0; border-width: 0 0 1px 0; border-style: solid; border-color: #B2BCDE;">
                 <?
-                if ( $auth13 < 2 ) {
+                if ( $auth14 < 2 ) {
                     $submit_str = "alert('등록 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
                     $del_str = "alert('삭제 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
                 } else {
-                    $submit_str = "location.href='?ss_di=2&amp;mode=reg' ";
+                    if ( !$this->input->get ( 'com_sel' ) ) {
+                        $submit_str = "alert('회사 정보를 선택하여 주십시요!'); document.list_frm.com_sel.focus();";
+                    } else {
+                        $submit_str = "location.href='?ss_di=2&amp;mode=reg&amp;com=" . $this->input->get ( 'com_sel' ) . "' ";
+                    }
                     $del_str = "alert('준비중..! 현재 해당 부서에 대한 수정 화면에서 개별 삭제처리만 가능합니다.')";
                 } ?>
                 <div class="col-xs-6">
@@ -106,250 +117,153 @@ else :
 
 
 <?php elseif ( $this->input->get ( 'ss_di' ) == 2 ) : ?>
-    <div class="row">
-
+    <div class="row" style="padding: 0 15px;">
         <?php
-        $attributes = array('name' => 'form1', 'class' => 'form-horizontal');
+        $attributes = array('name' => 'form1');
         if ( $this->input->get ( 'seq' ) ) :
-            $hidden = array('mode' => $this->input->get ( 'mode' ), 'seq' => $sel_acc->seq);
+            $hidden = array('mode' => $this->input->get ( 'mode' ), 'com_seq' => $this->input->get ( 'com' ), 'seq' => $sel_bank->no);
         else :
-            $hidden = array('mode' => $this->input->get ( 'mode' ));
+            $hidden = array('mode' => $this->input->get ( 'mode' ), 'com_seq' => $this->input->get ( 'com' ));
         endif;
         echo form_open ( current_full_url (), $attributes, $hidden );
         ?>
         <fieldset class="font12">
-            <div class="col-md-12">
-                <div style="height:20px; margin: 5px 0; background-color: #eee;"></div>
+            <div class="row" style="<?php if ( !$this->agent->is_mobile () ) echo 'height: 490px;'; ?>">
+                <div style="height:60px; line-height: 60px; padding-left: 20px; margin: 5px 0 30px; font-size: 11pt; background-color: #f2f2f2;">
+                    <?php
+                    $co_name = $this->cms_main_model->sql_row ( "SELECT * FROM cb_cms_com WHERE seq={$this->input->get('com')}" );
+                    ?>
+                    ◼︎ 회사명 : <strong><span style="color:#122699; "><?php echo $co_name->co_name; ?></span></strong>
+                </div>
                 <div style="height: 36px; padding: 8px 0 0 10px; margin-bottom: 10px;">
                     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true" style="color: green;"></span>
-                    <strong>거래처 <?php if ( $this->input->get ( 'mode' ) == 'reg' ) echo '신규';
+                    <strong>은행계좌 <?php if ( $this->input->get ( 'mode' ) == 'reg' ) echo '신규';
                         else echo '수정'; ?>등록</strong>
                 </div>
                 <div class="row bo-top">
-                    <div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
-                        <label for="si_name">상호(회사명) <span class="red">*</span></label>
+                    <div class="col-xs-4 col-sm-4 col-md-2 label-wrap2">
+                        <label for="bank">거래은행 <span class="red">*</span></label>
                     </div>
-                    <div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-                        <input type="text" class="form-control input-sm han" id="si_name" name="si_name" maxlength="30"
-                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_acc->si_name; ?>" required
-                               autofocus>
+                    <div class="col-xs-8 col-sm-8 col-md-4 form-wrap2">
+                        <div class="col-xs-7 col-md-5" style="padding-left: 0;">
+                            <select class="form-control input-sm" name="bank"
+                                    onchange="this.form.bank_code.value=this.value;" autofocus>
+                                <option value=''>전 체</option>
+                                <?php foreach ($all_bank as $lt) : ?>
+                                    <option value="<?php echo $lt->bank_code; ?>" <?php if ( $this->input->get ( 'seq' ) && $lt->bank_code == $sel_bank->bank_code ) echo "selected"; ?>><?php echo $lt->bank_name; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="col-xs-5 col-md-3" style="padding-left: 0;">
+                            <input type="text" class="form-control input-sm han wid-90" id="bank_code" name="bank_code"
+                                   maxlength="3"
+                                   value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_bank->bank_code; ?>"
+                                   readonly>
+                        </div>
                     </div>
-                    <div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
-                        <label for="acc_cla">거래처구분 <span class="red">*</span></label>
+                    <div class="col-xs-4 col-sm-4 col-md-2 label-wrap2">
+                        <label for="name">계좌별칭 <span class="red">*</span></label>
                     </div>
-                    <div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-                        <select class="form-control input-sm" name="acc_cla">
-                            <option value="0">전 체</option>
-                            <option value="1" <?php if ( $this->input->get ( 'seq' ) && $sel_acc->acc_cla == '1' ) echo 'selected'; ?>>
-                                매입거래처
-                            </option>
-                            <option value="2" <?php if ( $this->input->get ( 'seq' ) && $sel_acc->acc_cla == '2' ) echo 'selected'; ?>>
-                                매출거래처
-                            </option>
-                            <option value="3" <?php if ( $this->input->get ( 'seq' ) && $sel_acc->acc_cla == '3' ) echo 'selected'; ?>>
-                                매입매출거래처
-                            </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="row bo-top">
-                    <div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
-                        <label for="main_tel">대표전화 <span class="red">*</span></label>
-                    </div>
-                    <div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-                        <input type="text" class="form-control input-sm han" id="main_tel" name="main_tel"
-                               maxlength="30"
-                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_acc->main_tel; ?>">
-                    </div>
-                    <div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
-                        <label for="main_fax">대표팩스</label>
-                    </div>
-                    <div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-                        <input type="text" class="form-control input-sm han" id="main_fax" name="main_fax"
-                               maxlength="30"
-                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_acc->main_fax; ?>">
+                    <div class="col-xs-8 col-sm-8 col-md-4 form-wrap2">
+                        <input type="text" class="form-control input-sm en_only" id="name" name="name" maxlength="14"
+                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_bank->name; ?>">
                     </div>
                 </div>
                 <div class="row bo-top">
-                    <div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
-                        <label for="main_web">홈페이지 주소</label>
+                    <div class="col-xs-4 col-sm-4 col-md-2 label-wrap2">
+                        <label for="number">계좌번호 <span class="red">*</span></label>
                     </div>
-                    <div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-                        <input type="text" class="form-control input-sm en_only" id="main_web" name="main_web"
-                               maxlength="30"
-                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_acc->main_web; ?>">
+                    <div class="col-xs-8 col-sm-8 col-md-4 form-wrap2">
+                        <input type="text" class="form-control input-sm han" id="number" name="number" maxlength="30"
+                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_bank->number; ?>">
                     </div>
-                    <div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
-                        <label for="web_name">웹 사이트명</label>
+                    <div class="col-xs-4 col-sm-4 col-md-2 label-wrap2">
+                        <label for="holder">예금주 <span class="red">*</span></label>
                     </div>
-                    <div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-                        <input type="text" class="form-control input-sm en_only" id="web_name" name="web_name"
-                               maxlength="30"
-                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_acc->web_name; ?>">
+                    <div class="col-xs-8 col-sm-8 col-md-4 form-wrap2">
+                        <input type="text" class="form-control input-sm han" id="holder" name="holder" maxlength="30"
+                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_bank->holder; ?>">
                     </div>
                 </div>
                 <div class="row bo-top">
-                    <div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
-                        <label for="res_div">담당 부서</label>
+                    <div class="col-xs-4 col-sm-4 col-md-2 label-wrap2">
+                        <label for="dir_tel">관리 구분 <span class="red">*</span></label>
                     </div>
-                    <div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-                        <input type="text" class="form-control input-sm en_only" id="res_div" name="res_div"
-                               maxlength="30"
-                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_acc->res_div; ?>">
+                    <div class="col-xs-8 col-sm-8 col-md-4 form-wrap2 checkbox" style="margin-bottom: 0">
+                        <label style="padding-bottom: 13px;"><input type="checkbox" name="is_com" value="1" checked> 본사
+                            관리계좌</label>
                     </div>
-                    <div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
-                        <label for="res_worker">담당 직원</label>
+                    <div class="col-xs-4 col-sm-4 col-md-2 label-wrap2">
+                        <label for="mobile">관리 부서 <span class="red">*</span></label>
                     </div>
-                    <div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-                        <input type="text" class="form-control input-sm en_only" id="res_worker" name="res_worker"
-                               maxlength="30"
-                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_acc->res_worker; ?>">
+                    <div class="col-xs-8 col-sm-8 col-md-4 form-wrap2">
+                        <div class="col-xs12 col-sm-8 col-md-6" style="padding-left: 0;">
+                            <select class="form-control input-sm" name="div_seq">
+                                <option value=''>전 체</option>
+                                <?php foreach ($all_div as $lt) : ?>
+                                    <option value="<?php echo $lt->div_code; ?>" <? if ( $this->input->get ( 'seq' ) && $lt->div_code == $sel_bank->div_seq ) echo "selected"; ?>><?php echo $lt->div_name ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="row bo-top bo-bottom">
-                    <div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
-                        <label for="res_mobile">모바일폰</label>
+                    <div class="col-xs-4 col-sm-4 col-md-2 label-wrap2">
+                        <label for="manager">관리책임자</label>
                     </div>
-                    <div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-                        <input type="text" class="form-control input-sm en_only" id="res_mobile" name="res_mobile"
+                    <div class="col-xs-8 col-sm-8 col-md-4 form-wrap2">
+                        <input type="text" class="form-control input-sm en_only" id="manager" name="manager"
                                maxlength="30"
-                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_acc->res_mobile; ?>">
+                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_bank->manager; ?>">
                     </div>
-                    <div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
-                        <label for="res_email">담당 이메일</label>
+                    <div class="col-xs-4 col-sm-4 col-md-2 label-wrap2">
+                        <label for="open_date">개설일자 <span class="red">*</span></label>
                     </div>
-                    <div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-                        <input type="text" class="form-control input-sm han" id="res_email" name="res_email"
-                               maxlength="30"
-                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_acc->res_email; ?>">
+                    <div class="col-xs-8 col-sm-8 col-md-4 form-wrap2">
+                        <div class="col-xs-10 col-sm-8 col-md-6" style="padding-left: 0;">
+                            <div>
+                                <input type="text" class="form-control input-sm wid-100" id="open_date" name="open_date"
+                                       maxlength="10"
+                                       value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_bank->open_date; ?>"
+                                       onClick="cal_add(this); event.cancelBubble=true" maxlength="10" required>
+                            </div>
+                        </div>
+                        <div class="col-xs-2 col-sm-4 col-md-6 glyphicon-wrap">
+                            <a href="javascript:"
+                               onclick="cal_add(document.getElementById('open_date'),this); event.cancelBubble=true"><span
+                                        class="glyphicon glyphicon-calendar" aria-hidden="true"
+                                        id="glyphicon"></span></a>
+                        </div>
                     </div>
                 </div>
 
                 <div class="row" style="padding: 10px; font-weight: bold;">
-                    <span class="red">*</span> 세금계산서 관련
+                    <span class="red">*</span> 기타 사항
                 </div>
 
                 <div class="row bo-top">
-                    <div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
-                        <label for="tax_no">사업자등록번호</label>
+                    <div class="col-xs-12 col-sm-12 col-md-2 label-wrap2 bo-bottom" style="height: 90px;">
+                        <label for="note">비 고 (거래계좌 정보 등)</label>
                     </div>
-                    <div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-                        <input type="text" class="form-control input-sm en_only" id="tax_no" name="tax_no"
-                               maxlength="30"
-                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_acc->tax_no; ?>">
-                    </div>
-                    <div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
-                        <label for="tax_ceo">대표자</label>
-                    </div>
-                    <div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-                        <input type="text" class="form-control input-sm en_only" id="tax_ceo" name="tax_ceo"
-                               maxlength="30"
-                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_acc->tax_ceo; ?>">
-                    </div>
-                </div>
-                <div class="row bo-top">
-                    <div class=" col-xs-12 col-sm-4 col-md-2 label-wrap2">
-                        <label for="zipcode">주 소</label>
-                    </div>
-                    <div class=" col-xs-12 col-sm-8 col-md-10 form-wrap2">
-
-                        <!-- 다음 우편번호 서비스 - iOS에서는 position:fixed 버그가 있음, 적용하는 사이트에 맞게 position:absolute 등을 이용하여 top,left값 조정 필요 -->
-                        <div id="layer"
-                             style="display:none;position:fixed;overflow:hidden;z-index:1;-webkit-overflow-scrolling:touch;">
-                            <img src="//t1.daumcdn.net/localimg/localimages/07/postcode/320/close.png"
-                                 id="btnCloseLayer"
-                                 style="cursor:pointer;position:absolute;right:-3px;top:-3px;z-index:1"
-                                 onclick="closeDaumPostcode()" alt="닫기 버튼">
-                        </div>
-                        <!-- 다음 우편번호 서비스 -------------onclick="execDaumPostcode(1)"-----postcode1-----address1_1-----address2_1------------------------>
-
-                        <?php if ( $this->input->get ( 'seq' ) ) $tax_addr = explode ( "-", $sel_acc->tax_addr ); ?>
-                        <div class="col-xs-3 col-sm-5 col-md-1" style="padding: 0;">
-                            <label for="postcode1" class="sr-only">우편번호</label>
-                            <input type="number" class="form-control input-sm wid-95" id="postcode1" name="postcode1"
-                                   maxlength="5" readonly required autofocus
-                                   value="<?php if ( $this->input->get ( 'seq' ) ) echo $tax_addr[0]; ?>">
-                        </div>
-                        <div class="col-xs-3 col-sm-2 col-md-1" style="padding: 0;">
-                            <input type="button" class="btn btn-info btn-sm wid-90" value="우편번호"
-                                   onclick="execDaumPostcode(1)">
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-4" style="padding: 0;">
-                            <label for="address1_1" class="sr-only">회사주소1</label>
-                            <input type="text" class="form-control input-sm wid-98" id="address1_1" name="address1_1"
-                                   maxlength="100" readonly required autofocus
-                                   value="<?php if ( $this->input->get ( 'seq' ) ) echo $tax_addr[1]; ?>">
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-3" style="padding: 0;">
-                            <label for="address2_1" class="sr-only">회사주소2</label>
-                            <input type="text" class="form-control input-sm wid-98" id="address2_1" maxlength="100"
-                                   name="address2_1"
-                                   value="<?php if ( $this->input->get ( 'seq' ) ) echo $tax_addr[2]; ?>">
-                        </div>
-                        <div class="col-md-3 col-sm-12 col-xs-12 glyphicon-wrap">나머지 주소</div>
-                    </div>
-                </div>
-                <div class="row bo-top">
-                    <div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
-                        <label for="tax_uptae">업 태</label>
-                    </div>
-                    <div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-                        <input type="text" class="form-control input-sm en_only" id="tax_uptae" name="tax_uptae"
-                               maxlength="30"
-                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_acc->tax_uptae; ?>">
-                    </div>
-                    <div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
-                        <label for="tax_jongmok">종 목</label>
-                    </div>
-                    <div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-                        <input type="text" class="form-control input-sm en_only" id="tax_jongmok" name="tax_jongmok"
-                               maxlength="30"
-                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_acc->tax_jongmok; ?>">
-                    </div>
-                </div>
-                <div class="row bo-top">
-                    <div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
-                        <label for="tax_worker">셰금계산서 담당자</label>
-                    </div>
-                    <div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-                        <input type="text" class="form-control input-sm en_only" id="tax_worker" name="tax_worker"
-                               maxlength="30"
-                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_acc->tax_worker; ?>">
-                    </div>
-                    <div class=" col-xs-4 col-sm-4 col-md-2 label-wrap2">
-                        <label for="tax_email">세금계산서 이메일</label>
-                    </div>
-                    <div class=" col-xs-8 col-sm-8 col-md-4 form-wrap2">
-                        <input type="text" class="form-control input-sm en_only" id="tax_email" name="tax_email"
-                               maxlength="30"
-                               value="<?php if ( $this->input->get ( 'seq' ) ) echo $sel_acc->tax_email; ?>">
-                    </div>
-                </div>
-
-                <div class="row bo-top bo-bottom">
-                    <div class=" col-xs-12 col-sm-12 col-md-2 label-wrap2" style="height: 80px;">
-                        <label for="note">비 고</label>
-                    </div>
-                    <div class=" col-xs-12 col-sm-12 col-md-10 form-wrap2" style="height: 80px;">
+                    <div class="col-xs-12 col-sm-12 col-md-10 form-wrap2 bo-bottom" style="height: 90px;">
                         <textarea class="form-control input-sm" id="note" name="note" rows="3"
-                                  cols="114"><?php if ( $this->input->get ( 'seq' ) ) echo $sel_acc->note; ?></textarea>
+                                  cols="114"><?php if ( $this->input->get ( 'seq' ) ) echo $sel_bank->note; ?></textarea>
                     </div>
                 </div>
-
 
             </div>
         </fieldset>
         </form>
 
-        <div class="row" style="margin: 0 15px;">
+        <div class="row" style="padding: 0 15px;">
             <div class="col-md-12"
                  style="height: 70px; padding: 26px 15px; margin: 18px 0; border-width: 0 0 1px 0; border-style: solid; border-color: #B2BCDE;">
                 <?
-                if ( $auth13 < 2 ) {
+                if ( $auth14 < 2 ) {
                     $submit_str = "alert('등록 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
                     $del_str = "alert('삭제 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
                 } else {
-                    $submit_str = "acc_submit('" . $this->input->get ( 'mode' ) . "');";
+                    $submit_str = "bank_submit('" . $this->input->get ( 'mode' ) . "');";
                     $del_str = "form1_seq_del(" . $this->input->get ( 'seq' ) . ");";
                 }
                 ?>
@@ -357,7 +271,7 @@ else :
                     <button class="btn btn-success btn-sm"
                             onclick="<?php echo $submit_str; ?>"><?php if ( $this->input->get ( 'mode' ) == 'modify' ) echo '수정하기';
                         else echo '등록하기'; ?></button>
-                    <button class="btn btn-info btn-sm" onclick="location.href='?ss_di=1' ">목록으로</button>
+                    <button class="btn btn-info btn-sm" onclick="location.href='?ss_di=1&amp;com_sel=<?php echo $this->input->get ( 'com' ) ?>' ">목록으로</button>
                 </div>
                 <div class="col-xs-6" style="text-align: right;">
                     <?php if ( $this->input->get ( 'seq' ) ) : ?>

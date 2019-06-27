@@ -61,9 +61,9 @@ class Cms_m5 extends CB_Controller
         $view['sec_menu'] = $this->cms_main_model->sql_result ( "SELECT * FROM cb_menu WHERE men_parent={$view['top_menu'][4]->men_id} ORDER BY men_order" );
 
         $view['s_di'] = array(
-            array('부서 정보', '직원 정보', '거래처 정보', '계좌 정보'), // m1 첫번째 하위 메뉴
+            array('부서 정보', '직원 정보', '계좌 정보', '거래처 정보'), // m1 첫번째 하위 메뉴
             array('회사 정보', '권한 관리'),                        // m2 두번째 하위 메뉴
-            array('부서 정보 관리', '직원 정보 관리', '거래처 정보 정보', '은행계좌 관리'), // m1-s 첫번째 하위 제목
+            array('부서 정보 관리', '직원 정보 관리', '은행계좌 관리', '거래처 정보 정보'), // m1-s 첫번째 하위 제목
             array('회사 기본 정보', '사용자 권한관리')                               // m2-s 두번째 하위 제목
         );
 
@@ -246,14 +246,102 @@ class Cms_m5 extends CB_Controller
                 }
             }
 
-
-            // 1. 기본정보관리 3. 거래처정보 ////////////////////////////////////////////////////////////////////
+            // 1. 기본정보관리 3. 계좌관리 ////////////////////////////////////////////////////////////////////
         } else if ( $mdi == 1 && $sdi == 3 ) {
 
             // 조회 등록 권한 체크
             $auth = $this->cms_main_model->auth_chk ( '_m5_1_3', $this->session->userdata['mem_id'] );
             // 불러올 페이지에 보낼 조회 권한 데이터
             $view['auth13'] = $auth['_m5_1_3'];
+
+            // 검색어 get 데이터
+            $st1 = $this->input->get ( 'bank_code' );
+            $st2 = $this->input->get ( 'bank_search' );
+
+            // model data ////////////////////////
+            $bank_table = 'cb_cms_capital_bank_account';
+
+            //페이지네이션 라이브러리 로딩 추가
+            $this->load->library ( 'pagination' );
+
+            //페이지네이션 설정/////////////////////////////////
+            $config['base_url'] = base_url ( 'cms_m5/config/1/4/' );  //페이징 주소
+            $config['total_rows'] = $this->cms_m5_model->bank_account_list ( $bank_table, $company, '', '', $st1, $st2, 'num' );  //게시물의 전체 갯수
+            $config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
+            $config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
+            $config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
+            $config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
+
+            // 게시물 목록을 불러오기 위한 start / limit 값 가져오기
+            $page = $this->input->get ( 'page' ); // get 방식 아닌 경우 $this->uri->segment($config['uri_segment']);
+            $start = ($page <= 1 or empty( $page )) ? 0 : ($page - 1) * $config['per_page'];
+            $limit = $config['per_page'];
+
+            //페이지네이션 초기화
+            $this->pagination->initialize ( $config );
+            //페이징 링크를 생성하여 view에서 사용할 변수에 할당
+            $view['pagination'] = $this->pagination->create_links ();
+
+            // db[전체은행목록] 데이터 불러오기
+            $view['com_bank'] = $this->cms_m5_model->all_bank_name ( $company );
+            //은행 디비 전체 불러오기
+            $view['all_bank'] = $this->cms_main_model->sql_result ( "SELECT * FROM cb_cms_capital_bank_code ORDER BY bank_code" );
+            $view['all_div'] = $this->cms_main_model->sql_result ( "SELECT * FROM cb_cms_com_div" );
+
+            //  db [은행 ]데이터 불러오기
+            $view['list'] = $this->cms_m5_model->bank_account_list ( $bank_table, $company, $start, $limit, $st1, $st2, '' );
+
+            // 세부 은행데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
+            if ( $this->input->get ( 'seq' ) ) $view['sel_bank'] = $this->cms_main_model->sql_row ( "SELECT * FROM {$bank_table} WHERE no={$this->input->get('seq')}" );
+
+            // 폼 검증 라이브러리 로드
+            $this->load->library ( 'form_validation' ); // 폼 검증
+            // 폼 검증할 필드와 규칙 사전 정의
+            $this->form_validation->set_rules ( 'com_seq', '회사코드', 'required' );
+            $this->form_validation->set_rules ( 'bank', '은행명', 'required' );
+            $this->form_validation->set_rules ( 'name', '계좌별칭', 'required' );
+            $this->form_validation->set_rules ( 'number', '계좌번호', 'required' );
+            $this->form_validation->set_rules ( 'holder', '예금주', 'required' );
+            $this->form_validation->set_rules ( 'open_date', '개설일자', 'required' );
+
+
+            if ( $this->form_validation->run () !== FALSE ) { // post data 있는 경우
+
+                $bank_name = $this->cms_main_model->sql_row ( "SELECT * FROM cb_cms_capital_bank_code WHERE bank_code={$this->input->post('bank_code')}" );
+                $bank_data = array(
+                    'com_seq' => $this->input->post ( 'com_seq', TRUE ),
+                    'bank' => $bank_name->bank_name,
+                    'bank_code' => $this->input->post ( 'bank_code', TRUE ),
+                    'name' => $this->input->post ( 'name', TRUE ),
+                    'number' => $this->input->post ( 'number', TRUE ),
+                    'holder' => $this->input->post ( 'holder', TRUE ),
+                    'manager' => $this->input->post ( 'manager', TRUE ),
+                    'open_date' => $this->input->post ( 'open_date', TRUE ),
+                    'note' => $this->input->post ( 'note', TRUE )
+                );
+
+                if ( $this->input->post ( 'mode' ) == 'reg' ) {
+                    $result = $this->cms_main_model->insert_data ( $bank_table, $bank_data );
+                } else if ( $this->input->post ( 'mode' ) == 'modify' ) {
+                    $result = $this->cms_main_model->update_data ( $bank_table, $bank_data, $where = array('no' => $this->input->post ( 'seq' )) );
+                } else if ( $this->input->post ( 'mode' ) == 'del' ) {
+                    $result = $this->cms_main_model->delete_data ( $bank_table, $where = array('no' => $this->input->post ( 'seq' )) );
+                }
+                if ( $result ) {
+                    $ret_url = "?com_sel=" . $this->input->post ( 'com_seq' );
+                    alert ( '정상적으로 처리되었습니다.', base_url ( 'cms_m5/config/1/4/' ) . $ret_url );
+                } else {
+                    alert ( '다시 시도하여 주십시요.', base_url ( 'cms_m5/config/1/4/' ) );
+                }
+            }
+
+            // 1. 기본정보관리 4. 거래처정보 ////////////////////////////////////////////////////////////////////
+        } else if ( $mdi == 1 && $sdi == 4 ) {
+
+            // 조회 등록 권한 체크
+            $auth = $this->cms_main_model->auth_chk ( '_m5_1_4', $this->session->userdata['mem_id'] );
+            // 불러올 페이지에 보낼 조회 권한 데이터
+            $view['auth14'] = $auth['_m5_1_4'];
 
             // 검색어 get 데이터
             $st1 = $this->input->get ( 'acc_sort' );
@@ -336,95 +424,6 @@ class Cms_m5 extends CB_Controller
                 }
             }
 
-
-            // 1. 기본정보관리 4. 계좌관리 ////////////////////////////////////////////////////////////////////
-        } else if ( $mdi == 1 && $sdi == 4 ) {
-
-            // 조회 등록 권한 체크
-            $auth = $this->cms_main_model->auth_chk ( '_m5_1_4', $this->session->userdata['mem_id'] );
-            // 불러올 페이지에 보낼 조회 권한 데이터
-            $view['auth14'] = $auth['_m5_1_4'];
-
-            // 검색어 get 데이터
-            $st1 = $this->input->get ( 'bank_code' );
-            $st2 = $this->input->get ( 'bank_search' );
-
-            // model data ////////////////////////
-            $bank_table = 'cb_cms_capital_bank_account';
-
-            //페이지네이션 라이브러리 로딩 추가
-            $this->load->library ( 'pagination' );
-
-            //페이지네이션 설정/////////////////////////////////
-            $config['base_url'] = base_url ( 'cms_m5/config/1/4/' );  //페이징 주소
-            $config['total_rows'] = $this->cms_m5_model->bank_account_list ( $bank_table, $company, '', '', $st1, $st2, 'num' );  //게시물의 전체 갯수
-            $config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
-            $config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
-            $config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
-            $config['reuse_query_string'] = TRUE; //http://example.com/index.php/test/page/20?query=search%term
-
-            // 게시물 목록을 불러오기 위한 start / limit 값 가져오기
-            $page = $this->input->get ( 'page' ); // get 방식 아닌 경우 $this->uri->segment($config['uri_segment']);
-            $start = ($page <= 1 or empty( $page )) ? 0 : ($page - 1) * $config['per_page'];
-            $limit = $config['per_page'];
-
-            //페이지네이션 초기화
-            $this->pagination->initialize ( $config );
-            //페이징 링크를 생성하여 view에서 사용할 변수에 할당
-            $view['pagination'] = $this->pagination->create_links ();
-
-            // db[전체은행목록] 데이터 불러오기
-            $view['com_bank'] = $this->cms_m5_model->all_bank_name ( $company );
-            //은행 디비 전체 불러오기
-            $view['all_bank'] = $this->cms_main_model->sql_result ( "SELECT * FROM cb_cms_capital_bank_code ORDER BY bank_code" );
-            $view['all_div'] = $this->cms_main_model->sql_result ( "SELECT * FROM cb_cms_com_div" );
-
-            //  db [은행 ]데이터 불러오기
-            $view['list'] = $this->cms_m5_model->bank_account_list ( $bank_table, $company, $start, $limit, $st1, $st2, '' );
-
-            // 세부 은행데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
-            if ( $this->input->get ( 'seq' ) ) $view['sel_bank'] = $this->cms_main_model->sql_row ( "SELECT * FROM {$bank_table} WHERE no={$this->input->get('seq')}" );
-
-            // 폼 검증 라이브러리 로드
-            $this->load->library ( 'form_validation' ); // 폼 검증
-            // 폼 검증할 필드와 규칙 사전 정의
-            $this->form_validation->set_rules ( 'com_seq', '회사코드', 'required' );
-            $this->form_validation->set_rules ( 'bank', '은행명', 'required' );
-            $this->form_validation->set_rules ( 'name', '계좌별칭', 'required' );
-            $this->form_validation->set_rules ( 'number', '계좌번호', 'required' );
-            $this->form_validation->set_rules ( 'holder', '예금주', 'required' );
-            $this->form_validation->set_rules ( 'open_date', '개설일자', 'required' );
-
-
-            if ( $this->form_validation->run () !== FALSE ) { // post data 있는 경우
-
-                $bank_name = $this->cms_main_model->sql_row ( "SELECT * FROM cb_cms_capital_bank_code WHERE bank_code={$this->input->post('bank_code')}" );
-                $bank_data = array(
-                    'com_seq' => $this->input->post ( 'com_seq', TRUE ),
-                    'bank' => $bank_name->bank_name,
-                    'bank_code' => $this->input->post ( 'bank_code', TRUE ),
-                    'name' => $this->input->post ( 'name', TRUE ),
-                    'number' => $this->input->post ( 'number', TRUE ),
-                    'holder' => $this->input->post ( 'holder', TRUE ),
-                    'manager' => $this->input->post ( 'manager', TRUE ),
-                    'open_date' => $this->input->post ( 'open_date', TRUE ),
-                    'note' => $this->input->post ( 'note', TRUE )
-                );
-
-                if ( $this->input->post ( 'mode' ) == 'reg' ) {
-                    $result = $this->cms_main_model->insert_data ( $bank_table, $bank_data );
-                } else if ( $this->input->post ( 'mode' ) == 'modify' ) {
-                    $result = $this->cms_main_model->update_data ( $bank_table, $bank_data, $where = array('no' => $this->input->post ( 'seq' )) );
-                } else if ( $this->input->post ( 'mode' ) == 'del' ) {
-                    $result = $this->cms_main_model->delete_data ( $bank_table, $where = array('no' => $this->input->post ( 'seq' )) );
-                }
-                if ( $result ) {
-                    $ret_url = "?com_sel=" . $this->input->post ( 'com_seq' );
-                    alert ( '정상적으로 처리되었습니다.', base_url ( 'cms_m5/config/1/4/' ) . $ret_url );
-                } else {
-                    alert ( '다시 시도하여 주십시요.', base_url ( 'cms_m5/config/1/4/' ) );
-                }
-            }
 
 
             // 2. 회사정보관리 1. 회사정보 ////////////////////////////////////////////////////////////////////
