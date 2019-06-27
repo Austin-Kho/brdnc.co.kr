@@ -16,8 +16,10 @@ class Cms_m5_model extends CB_Model
 	 * @param  [String] $n           [전체리스트 수, 실제리스트 구분인자]
 	 * @return [Array]              [실제리스트 데이터]
 	 */
-	public function com_div_list($table, $start = '', $limit = '', $st1 = '', $st2 = '', $n)
+	public function com_div_list($table, $com, $start = '', $limit = '', $st1 = '', $st2 = '', $n)
 	{
+        $this->db->where('com_seq', $com);
+
 		// 검색어가 있을 경우
 		if ($st1 != '') {
 			$this->db->where('div_code', $st1);
@@ -45,10 +47,10 @@ class Cms_m5_model extends CB_Model
 	 * [all_div_name 셀렉트바 전체 목록 불러오기]
 	 * @return [Array] [부서 목록]
 	 */
-	public function all_div_name($table)
+	public function all_div_name($table, $com)
 	{
 		$this->db->select('seq, div_code, div_name');
-		$qry = $this->db->get($table);
+		$qry = $this->db->get_where($table, array('com_seq' => $com));
 		return $result = $qry->result();
 	}
 

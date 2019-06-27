@@ -76,7 +76,12 @@ class Cms_m4 extends CB_Controller
 			// 불러올 페이지에 보낼 조회 권한 데이터
 			$view['auth11'] = $auth['_m4_1_1'];
 
-			// 자금일보 검색 일자
+			// 자금일보 회사 선택
+            $view['company'] = $company = ($this->input->post('company')) ? $this->input->post('company') : 1; // 선택한 회사 고유식별 값(아이디)
+            $view['com_list'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_com '); // 회사 목록
+            $view['com_now'] = $com_now = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_com WHERE seq={$company}");
+
+            // 자금일보 검색 일자
 			$view['ref_date'] = $this->input->post('ref_date', TRUE);
 			if (!$this->input->post('ref_date')) $view['ref_date'] = date('Y-m-d');
 

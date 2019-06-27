@@ -67,6 +67,11 @@ class Cms_m5 extends CB_Controller
 			array('회사 기본 정보', '사용자 권한관리')                               // m2-s 두번째 하위 제목
 		);
 
+        // 회사 리스트 정보
+        $view['company'] = $company = ($this->input->get('com_sel')); // 선택한 회사 고유식별 값(아이디)
+        $view['com_list'] = $this->cms_m5_model->com_list(); // 회사 목록
+        if ($company) $view['com_now'] = $com_now = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_com WHERE seq={$company}");
+
 		// 1. 기본정보관리 1. 부서관리 ////////////////////////////////////////////////////////////////////
 		if ($mdi == 1 && $sdi == 1) {
 
@@ -87,7 +92,7 @@ class Cms_m5 extends CB_Controller
 
 			//페이지네이션 설정/////////////////////////////////
 			$config['base_url'] = base_url('cms_m5/config/1/1/');   //페이징 주소
-			$config['total_rows'] = $this->cms_m5_model->com_div_list($div_table, '', '', $st1, $st2, 'num');  //게시물의 전체 갯수
+			$config['total_rows'] = $this->cms_m5_model->com_div_list($div_table, $company, '', '', $st1, $st2, 'num');  //게시물의 전체 갯수
 			$config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
 			$config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
 			$config['uri_segment'] = 5; //페이지 번호가 위치한 세그먼트
@@ -104,10 +109,10 @@ class Cms_m5 extends CB_Controller
 			$view['pagination'] = $this->pagination->create_links();
 
 			// db[전체부서목록] 데이터 불러오기
-			$view['all_div'] = $this->cms_m5_model->all_div_name($div_table);
+			$view['all_div'] = $this->cms_m5_model->all_div_name($div_table, $company);
 
 			//  db [부서]데이터 불러오기
-			$view['list'] = $this->cms_m5_model->com_div_list($div_table, $start, $limit, $st1, $st2, '');
+			$view['list'] = $this->cms_m5_model->com_div_list($div_table, $company, $start, $limit, $st1, $st2, '');
 
 			// 세부 부서데이터 - 열람(수정)모드일 경우 해당 키 값 가져오기
 			if ($this->input->get('seq')) $view['sel_div'] = $this->cms_main_model->sql_row("SELECT * FROM {$div_table} WHERE seq={$this->input->get('seq')}");
@@ -116,6 +121,7 @@ class Cms_m5 extends CB_Controller
 			// 폼 검증 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
 			//// 폼 검증할 필드와 규칙 사전 정의
+            $this->form_validation->set_rules('com_seq', '회사코드', 'required');
 			$this->form_validation->set_rules('div_code', '부서코드', 'required');
 			$this->form_validation->set_rules('div_name', '부서명', 'required');
 			$this->form_validation->set_rules('res_work', '담당업무', 'required');
@@ -123,6 +129,7 @@ class Cms_m5 extends CB_Controller
 
 			if ($this->form_validation->run() !== FALSE) { // 포스트데이터가 있을 경우
 				$div_data = array(
+                    'com_seq' => $this->input->post('com_seq', TRUE),
 					'div_code' => $this->input->post('div_code', TRUE),
 					'div_name' => $this->input->post('div_name', TRUE),
 					'manager' => $this->input->post('manager', TRUE),
@@ -139,7 +146,8 @@ class Cms_m5 extends CB_Controller
 					$result = $this->cms_main_model->delete_data($div_table, array('seq' => $this->input->post('seq')));
 				}
 				if ($result) {
-					alert('정상적으로 처리되었습니다.', base_url('cms_m5/config/1/1/'));
+                    $ret_url = "?com_sel=".$this->input->post('com_seq');
+					alert('정상적으로 처리되었습니다.', base_url('cms_m5/config/1/1/').$ret_url);
 				} else {
 					alert('다시 시도하여 주십시요.', base_url('cms_m5/config/1/1/'));
 				}
@@ -184,7 +192,7 @@ class Cms_m5 extends CB_Controller
 			$view['pagination'] = $this->pagination->create_links();
 
 			// db[전체부서목록] 데이터 불러오기
-			$view['all_div'] = $this->cms_m5_model->all_div_name('cb_cms_com_div');
+			$view['all_div'] = $this->cms_m5_model->all_div_name('cb_cms_com_div', $company);
 
 			//  db [직원 ]데이터 불러오기
 			$view['list'] = $this->cms_m5_model->com_mem_list($mem_table, $start, $limit, $st1, $st2, '');
@@ -423,6 +431,7 @@ class Cms_m5 extends CB_Controller
 
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m5_2_1', $this->session->userdata['mem_id']);
+            $view['auth21'] = $auth['_m5_2_1'];   // 등록 권한
 
 			// 라이브러리 로드
 			$this->load->library('form_validation'); // 폼 검증
@@ -461,14 +470,6 @@ class Cms_m5 extends CB_Controller
 			$this->form_validation->set_rules('postcode1', '우편번호', 'required|numeric');
 			$this->form_validation->set_rules('address1_1', '주소1', 'required');
 			$this->form_validation->set_rules('address2_1', '주소2', 'required');
-
-			// 회사 리스트 정보
-			$com_list = $this->cms_m5_model->com_list();
-
-			$view['data'] = array(
-				'auth21' => $auth['_m5_2_1'],
-				'com' => $com_list,
-			);
 
 			if ($this->form_validation->run() !== FALSE) { // 폼 전송 데이타가 있으면,
 

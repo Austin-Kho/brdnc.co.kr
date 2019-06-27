@@ -1,5 +1,5 @@
 <?php
-if ($data['auth21'] < 1) :
+if ($auth21 < 1) :
 	include('no_auth.php');
 else :
 	?>
@@ -16,7 +16,7 @@ else :
 			<div class="col-sm-3" style="padding: 0;">
 				<select class="form-control input-sm" name="com_sel" onchange="submit();">
 					<option value='0'>선 택</option>
-					<?php foreach ($data['com'] as $lt) : ?>
+					<?php foreach ($com_list as $lt) : ?>
 						<option value="<?php echo $lt->seq; ?>" <? if ($lt->seq == $this->input->get('com_sel')) echo "selected"; ?>><?php echo $lt->co_name; ?></option>
 					<?php endforeach; ?>
 				</select>
@@ -41,7 +41,7 @@ else :
 						<input type="text" class="form-control input-sm han" id="co_name" name="co_name" maxlength="30" value="<?php if (!$this->input->get('com_sel')) {
 																																	echo set_value('co_name');
 																																} else {
-																																	echo $data['com'][$this->input->get('com_sel') - 1]->co_name;
+																																	echo $com_now->co_name;
 																																} ?>" required>
 					</div>
 				</div>
@@ -53,7 +53,7 @@ else :
 						<input type="number" class="form-control input-sm en_only" id="co_no1" name="co_no1" maxlength="3" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('co_no1');
 																																	} else {
-																																		echo substr($data['com'][$this->input->get('com_sel') - 1]->co_no, 0, 3);
+																																		echo substr($com_now->co_no, 0, 3);
 																																	} ?>" onkeydown="onlyNum(this);" required>
 					</div>
 					<div class="col-xs-2" style="padding-right: 0;">
@@ -61,7 +61,7 @@ else :
 						<input type="number" class="form-control input-sm en_only" id="co_no2" name="co_no2" maxlength="2" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('co_no2');
 																																	} else {
-																																		echo substr($data['com'][$this->input->get('com_sel') - 1]->co_no, 4, 2);
+																																		echo substr($com_now->co_no, 4, 2);
 																																	} ?>" onkeydown="onlyNum(this);" required>
 					</div>
 					<div class="col-xs-3" style="padding-right: 0;">
@@ -69,7 +69,7 @@ else :
 						<input type="number" class="form-control input-sm wid-90 en_only" id="co_no3" name="co_no3" maxlength="5" value="<?php if (!$this->input->get('com_sel')) {
 																																				echo set_value('co_no3');
 																																			} else {
-																																				echo substr($data['com'][$this->input->get('com_sel') - 1]->co_no, 7, 11);
+																																				echo substr($com_now->co_no, 7, 11);
 																																			} ?>" onkeydown="onlyNum(this);" required>
 					</div>
 					<div class="col-xs-4">
@@ -79,17 +79,17 @@ else :
 							<option value="1" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_form', '1');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->co_form == 1) echo 'selected';
+													if ($com_now->co_form == 1) echo 'selected';
 												} ?>>법인</option>
 							<option value="2" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_form', '2');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->co_form == 2) echo 'selected';
+													if ($com_now->co_form == 2) echo 'selected';
 												} ?>>개인(일반)</option>
 							<option value="3" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_form', '3');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->co_form == 3) echo 'selected';
+													if ($com_now->co_form == 3) echo 'selected';
 												} ?>>개인(간이)</option>
 						</select>
 					</div>
@@ -107,7 +107,7 @@ else :
 						<input type="text" class="form-control input-sm han" id="ceo" name="ceo" maxlength="30" value="<?php if (!$this->input->get('com_sel')) {
 																															echo set_value('ceo');
 																														} else {
-																															echo $data['com'][$this->input->get('com_sel') - 1]->ceo;
+																															echo $com_now->ceo;
 																														} ?>" required>
 					</div>
 				</div>
@@ -119,7 +119,7 @@ else :
 						<input type="number" class="form-control input-sm en_only" id="or_no1" name="or_no1" maxlength="6" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('or_no1');
 																																	} else {
-																																		echo substr($data['com'][$this->input->get('com_sel') - 1]->or_no, 0, 6);
+																																		echo substr($com_now->or_no, 0, 6);
 																																	} ?>" onkeydown="onlyNum(this);" required>
 					</div>
 					<div class="col-xs-4" style="padding-right: 0;">
@@ -127,7 +127,7 @@ else :
 						<input type="number" class="form-control input-sm en_only" id="or_no2" name="or_no2" maxlength="7" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('or_no2');
 																																	} else {
-																																		echo substr($data['com'][$this->input->get('com_sel') - 1]->or_no, 7, 13);
+																																		echo substr($com_now->or_no, 7, 13);
 																																	} ?>" onkeydown="onlyNum(this);" required>
 					</div>
 					<div class="col-xs-5">
@@ -137,17 +137,17 @@ else :
 							<option value="1" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('sur', '1');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->sur == 1) echo 'selected';
+													if ($com_now->sur == 1) echo 'selected';
 												} ?>>부가세 분기 신고</option>
 							<option value="2" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('sur', '2');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->sur == 2) echo 'selected';
+													if ($com_now->sur == 2) echo 'selected';
 												} ?>>부가세 반기 신고</option>
 							<option value="3" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('sur', '3');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->sur == 3) echo 'selected';
+													if ($com_now->sur == 3) echo 'selected';
 												} ?>>부가세 월별 신고</option>
 						</select>
 					</div>
@@ -164,7 +164,7 @@ else :
 						<input type="text" class="form-control input-sm han" id="biz_cond" name="biz_cond" maxlength="30" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('biz_cond');
 																																	} else {
-																																		echo $data['com'][$this->input->get('com_sel') - 1]->biz_cond;
+																																		echo $com_now->biz_cond;
 																																	} ?>" required>
 					</div>
 				</div>
@@ -177,7 +177,7 @@ else :
 						<input type="text" class="form-control input-sm han" id="biz_even" name="biz_even" maxlength="30" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('biz_even');
 																																	} else {
-																																		echo $data['com'][$this->input->get('com_sel') - 1]->biz_even;
+																																		echo $com_now->biz_even;
 																																	} ?>" required>
 					</div>
 				</div>
@@ -191,7 +191,7 @@ else :
 						<input type="number" class="form-control input-sm en_only" id="co_phone1" name="co_phone1" maxlength="4" value="<?php if (!$this->input->get('com_sel')) {
 																																			echo set_value('co_phone1');
 																																		} else {
-																																			$p = explode('-', $data['com'][$this->input->get('com_sel') - 1]->co_phone);
+																																			$p = explode('-', $com_now->co_phone);
 																																			echo $p[0];
 																																		} ?>" onkeydown="onlyNum(this);" required>
 					</div>
@@ -200,7 +200,7 @@ else :
 						<input type="number" class="form-control input-sm en_only" id="co_phone2" name="co_phone2" maxlength="4" value="<?php if (!$this->input->get('com_sel')) {
 																																			echo set_value('co_phone2');
 																																		} else {
-																																			$p = explode('-', $data['com'][$this->input->get('com_sel') - 1]->co_phone);
+																																			$p = explode('-', $com_now->co_phone);
 																																			echo $p[1];
 																																		} ?>" onkeydown="onlyNum(this);" required>
 					</div>
@@ -209,7 +209,7 @@ else :
 						<input type="number" class="form-control input-sm en_only" id="co_phone3" name="co_phone3" maxlength="4" value="<?php if (!$this->input->get('com_sel')) {
 																																			echo set_value('co_phone3');
 																																		} else {
-																																			$p = explode('-', $data['com'][$this->input->get('com_sel') - 1]->co_phone);
+																																			$p = explode('-', $com_now->co_phone);
 																																			echo $p[2];
 																																		} ?>" onkeydown="onlyNum(this);" required>
 					</div>
@@ -225,32 +225,32 @@ else :
 							<option value="010" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_hp1', '010');
 												} else {
-													if (substr($data['com'][$this->input->get('com_sel') - 1]->co_hp, 0, 3) == '010') echo 'selected';
+													if (substr($com_now->co_hp, 0, 3) == '010') echo 'selected';
 												} ?>>010</option>
 							<option value="011" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_hp1', '011');
 												} else {
-													if (substr($data['com'][$this->input->get('com_sel') - 1]->co_hp, 0, 3) == '011') echo 'selected';
+													if (substr($com_now->co_hp, 0, 3) == '011') echo 'selected';
 												} ?>>011</option>
 							<option value="016" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_hp1', '016');
 												} else {
-													if (substr($data['com'][$this->input->get('com_sel') - 1]->co_hp, 0, 3) == '016') echo 'selected';
+													if (substr($com_now->co_hp, 0, 3) == '016') echo 'selected';
 												} ?>>016</option>
 							<option value="017" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_hp1', '017');
 												} else {
-													if (substr($data['com'][$this->input->get('com_sel') - 1]->co_hp, 0, 3) == '017') echo 'selected';
+													if (substr($com_now->co_hp, 0, 3) == '017') echo 'selected';
 												} ?>>017</option>
 							<option value="018" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_hp1', '018');
 												} else {
-													if (substr($data['com'][$this->input->get('com_sel') - 1]->co_hp, 0, 3) == '018') echo 'selected';
+													if (substr($com_now->co_hp, 0, 3) == '018') echo 'selected';
 												} ?>>018</option>
 							<option value="019" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_hp1', '019');
 												} else {
-													if (substr($data['com'][$this->input->get('com_sel') - 1]->co_hp, 0, 3) == '019') echo 'selected';
+													if (substr($com_now->co_hp, 0, 3) == '019') echo 'selected';
 												} ?>>019</option>
 						</select>
 					</div>
@@ -259,7 +259,7 @@ else :
 						<input type="number" class="form-control input-sm en_only" id="co_hp2" name="co_hp2" maxlength="4" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('co_hp2');
 																																	} else {
-																																		$p = explode('-', $data['com'][$this->input->get('com_sel') - 1]->co_hp);
+																																		$p = explode('-', $com_now->co_hp);
 																																		echo $p[1];
 																																	} ?>" onkeydown="onlyNum(this);" required>
 					</div>
@@ -268,7 +268,7 @@ else :
 						<input type="number" class="form-control input-sm en_only" id="co_hp3" name="co_hp3" maxlength="4" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('co_hp3');
 																																	} else {
-																																		$p = explode('-', $data['com'][$this->input->get('com_sel') - 1]->co_hp);
+																																		$p = explode('-', $com_now->co_hp);
 																																		echo $p[2];
 																																	} ?>" onkeydown="onlyNum(this);" required>
 					</div>
@@ -282,7 +282,7 @@ else :
 						<input type="number" class="form-control input-sm en_only" id="co_fax1" name="co_fax1" maxlength="4" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('co_fax1');
 																																	} else {
-																																		$p = explode('-', $data['com'][$this->input->get('com_sel') - 1]->co_fax);
+																																		$p = explode('-', $com_now->co_fax);
 																																		echo $p[0];
 																																	} ?>" onkeydown="onlyNum(this);">
 					</div>
@@ -291,7 +291,7 @@ else :
 						<input type="number" class="form-control input-sm en_only" id="co_fax2" name="co_fax2" maxlength="4" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('co_fax2');
 																																	} else {
-																																		$p = explode('-', $data['com'][$this->input->get('com_sel') - 1]->co_fax);
+																																		$p = explode('-', $com_now->co_fax);
 																																		echo $p[1];
 																																	} ?>" onkeydown="onlyNum(this);">
 					</div>
@@ -300,7 +300,7 @@ else :
 						<input type="number" class="form-control input-sm en_only" id="co_fax3" name="co_fax3" maxlength="4" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('co_fax3');
 																																	} else {
-																																		$p = explode('-', $data['com'][$this->input->get('com_sel') - 1]->co_fax);
+																																		$p = explode('-', $com_now->co_fax);
 																																		echo $p[2];
 																																	} ?>" onkeydown="onlyNum(this);">
 					</div>
@@ -314,12 +314,12 @@ else :
 							<option value="1" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_div1', '1');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->co_div1 == 1) echo 'selected';
+													if ($com_now->co_div1 == 1) echo 'selected';
 												} ?>>중소기업</option>
 							<option value="2" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_div1', '2');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->co_div1 == 2) echo 'selected';
+													if ($com_now->co_div1 == 2) echo 'selected';
 												} ?>>비중소기업</option>
 						</select>
 					</div>
@@ -330,32 +330,32 @@ else :
 							<option value="1" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_div2', '1');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->co_div2 == 1) echo 'selected';
+													if ($com_now->co_div2 == 1) echo 'selected';
 												} ?>>중소기업</option>
 							<option value="2" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_div2', '2');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->co_div2 == 2) echo 'selected';
+													if ($com_now->co_div2 == 2) echo 'selected';
 												} ?>>일반</option>
 							<option value="3" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_div2', '3');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->co_div2 == 3) echo 'selected';
+													if ($com_now->co_div2 == 3) echo 'selected';
 												} ?>>상장</option>
 							<option value="4" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_div2', '4');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->co_div2 == 4) echo 'selected';
+													if ($com_now->co_div2 == 4) echo 'selected';
 												} ?>>비상장기업</option>
 							<option value="5" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_div2', '5');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->co_div2 == 5) echo 'selected';
+													if ($com_now->co_div2 == 5) echo 'selected';
 												} ?>>공공</option>
 							<option value="6" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_div2', '6');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->co_div2 == 6) echo 'selected';
+													if ($com_now->co_div2 == 6) echo 'selected';
 												} ?>>비영리</option>
 						</select>
 					</div>
@@ -366,17 +366,17 @@ else :
 							<option value="1" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_div3', '1');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->co_div3 == 1) echo 'selected';
+													if ($com_now->co_div3 == 1) echo 'selected';
 												} ?>>내국</option>
 							<option value="2" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_div3', '2');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->co_div3 == 2) echo 'selected';
+													if ($com_now->co_div3 == 2) echo 'selected';
 												} ?>>외국</option>
 							<option value="3" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('co_div3', '3');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->co_div3 == 3) echo 'selected';
+													if ($com_now->co_div3 == 3) echo 'selected';
 												} ?>>외투</option>
 						</select>
 					</div>
@@ -393,7 +393,7 @@ else :
 							<input type="text" class="form-control input-sm wid-100" id="es_date" name="es_date" maxlength="10" value="<?php if (!$this->input->get('com_sel')) {
 																																			echo set_value('es_date');
 																																		} else {
-																																			echo $data['com'][$this->input->get('com_sel') - 1]->es_date;
+																																			echo $com_now->es_date;
 																																		} ?>" readonly onClick="cal_add(this); event.cancelBubble=true" maxlength="10" required>
 						</div>
 					</div>
@@ -410,7 +410,7 @@ else :
 							<input type="text" class="form-control input-sm wid-100" id="op_date" name="op_date" maxlength="10" value="<?php if (!$this->input->get('com_sel')) {
 																																			echo set_value('op_date');
 																																		} else {
-																																			echo $data['com'][$this->input->get('com_sel') - 1]->op_date;
+																																			echo $com_now->op_date;
 																																		} ?>" readonly onClick="cal_add(this); event.cancelBubble=true" maxlength="10" required>
 						</div>
 					</div>
@@ -428,7 +428,7 @@ else :
 						<input type="number" class="form-control input-sm en_only" id="carr_y" name="carr_y" maxlength="4" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('carr_y');
 																																	} else {
-																																		$a = explode('-', $data['com'][$this->input->get('com_sel') - 1]->carr);
+																																		$a = explode('-', $com_now->carr);
 																																		echo $a[0];
 																																	} ?>" onkeydown="onlyNum(this);" required>
 					</div>
@@ -438,7 +438,7 @@ else :
 						<input type="number" class="form-control input-sm en_only" id="carr_m" name="carr_m" maxlength="2" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('carr_m');
 																																	} else {
-																																		$a = explode('-', $data['com'][$this->input->get('com_sel') - 1]->carr);
+																																		$a = explode('-', $com_now->carr);
 																																		echo $a[1];
 																																	} ?>" onkeydown="onlyNum(this);" required>
 					</div>
@@ -454,62 +454,62 @@ else :
 							<option value="01" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('m_wo_st', '01');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->m_wo_st == '01') echo 'selected';
+													if ($com_now->m_wo_st == '01') echo 'selected';
 												} ?>>01</option>
 							<option value="02" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('m_wo_st', '02');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->m_wo_st == '02') echo 'selected';
+													if ($com_now->m_wo_st == '02') echo 'selected';
 												} ?>>02</option>
 							<option value="03" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('m_wo_st', '03');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->m_wo_st == '03') echo 'selected';
+													if ($com_now->m_wo_st == '03') echo 'selected';
 												} ?>>03</option>
 							<option value="04" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('m_wo_st', '04');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->m_wo_st == '04') echo 'selected';
+													if ($com_now->m_wo_st == '04') echo 'selected';
 												} ?>>04</option>
 							<option value="05" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('m_wo_st', '05');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->m_wo_st == '05') echo 'selected';
+													if ($com_now->m_wo_st == '05') echo 'selected';
 												} ?>>05</option>
 							<option value="06" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('m_wo_st', '06');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->m_wo_st == '06') echo 'selected';
+													if ($com_now->m_wo_st == '06') echo 'selected';
 												} ?>>06</option>
 							<option value="07" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('m_wo_st', '07');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->m_wo_st == '07') echo 'selected';
+													if ($com_now->m_wo_st == '07') echo 'selected';
 												} ?>>07</option>
 							<option value="08" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('m_wo_st', '08');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->m_wo_st == '08') echo 'selected';
+													if ($com_now->m_wo_st == '08') echo 'selected';
 												} ?>>08</option>
 							<option value="09" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('m_wo_st', '09');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->m_wo_st == '09') echo 'selected';
+													if ($com_now->m_wo_st == '09') echo 'selected';
 												} ?>>09</option>
 							<option value="10" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('m_wo_st', '10');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->m_wo_st == '10') echo 'selected';
+													if ($com_now->m_wo_st == '10') echo 'selected';
 												} ?>>10</option>
 							<option value="11" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('m_wo_st', '11');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->m_wo_st == '11') echo 'selected';
+													if ($com_now->m_wo_st == '11') echo 'selected';
 												} ?>>11</option>
 							<option value="12" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('m_wo_st', '12');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->m_wo_st == '12') echo 'selected';
+													if ($com_now->m_wo_st == '12') echo 'selected';
 												} ?>>12</option>
 						</select>
 					</div>
@@ -521,32 +521,32 @@ else :
 							<option value="01" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('bl_cycle', '01');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->bl_cycle == '01') echo 'selected';
+													if ($com_now->bl_cycle == '01') echo 'selected';
 												} ?>>01</option>
 							<option value="02" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('bl_cycle', '02');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->bl_cycle == '02') echo 'selected';
+													if ($com_now->bl_cycle == '02') echo 'selected';
 												} ?>>02</option>
 							<option value="03" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('bl_cycle', '03');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->bl_cycle == '03') echo 'selected';
+													if ($com_now->bl_cycle == '03') echo 'selected';
 												} ?>>03</option>
 							<option value="04" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('bl_cycle', '04');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->bl_cycle == '04') echo 'selected';
+													if ($com_now->bl_cycle == '04') echo 'selected';
 												} ?>>04</option>
 							<option value="06" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('bl_cycle', '06');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->bl_cycle == '06') echo 'selected';
+													if ($com_now->bl_cycle == '06') echo 'selected';
 												} ?>>06</option>
 							<option value="12" <?php if (!$this->input->get('com_sel')) {
 													echo set_select('bl_cycle', '12');
 												} else {
-													if ($data['com'][$this->input->get('com_sel') - 1]->bl_cycle == '12') echo 'selected';
+													if ($com_now->bl_cycle == '12') echo 'selected';
 												} ?>>12</option>
 						</select>
 					</div>
@@ -562,7 +562,7 @@ else :
 						<input type="text" class="form-control input-sm en_only" id="email1" name="email1" maxlength="30" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('email1');
 																																	} else {
-																																		$a = explode('@', $data['com'][$this->input->get('com_sel') - 1]->email);
+																																		$a = explode('@', $com_now->email);
 																																		echo $a[0];
 																																	} ?>" required>
 					</div>
@@ -572,7 +572,7 @@ else :
 						<input type="text" class="form-control input-sm en_only" id="email2" name="email2" maxlength="30" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('email2');
 																																	} else {
-																																		$a = explode('@', $data['com'][$this->input->get('com_sel') - 1]->email);
+																																		$a = explode('@', $com_now->email);
 																																		echo $a[1];
 																																	} ?>" required>
 					</div>
@@ -595,7 +595,7 @@ else :
 						<input type="text" class="form-control input-sm en_only" id="calc_mail1" name="calc_mail1" maxlength="30" value="<?php if (!$this->input->get('com_sel')) {
 																																				echo set_value('calc_mail1');
 																																			} else {
-																																				$a = explode('@', $data['com'][$this->input->get('com_sel') - 1]->calc_mail);
+																																				$a = explode('@', $com_now->calc_mail);
 																																				echo $a[0];
 																																			} ?>" required>
 					</div>
@@ -605,7 +605,7 @@ else :
 						<input type="text" class="form-control input-sm en_only" id="calc_mail2" name="calc_mail2" maxlength="30" value="<?php if (!$this->input->get('com_sel')) {
 																																				echo set_value('calc_mail2');
 																																			} else {
-																																				$a = explode('@', $data['com'][$this->input->get('com_sel') - 1]->calc_mail);
+																																				$a = explode('@', $com_now->calc_mail);
 																																				echo $a[1];
 																																			} ?>" required>
 					</div>
@@ -634,7 +634,7 @@ else :
 									<input type="text" class="form-control input-sm" id="tax_off1_code" name="tax_off1_code" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('tax_off1_code');
 																																	} else {
-																																		echo $data['com'][$this->input->get('com_sel') - 1]->tax_off1_code;
+																																		echo $com_now->tax_off1_code;
 																																	} ?>" readonly required>
 									<span class="input-group-btn">
 										<button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('<?php echo base_url('cms_popup/tax_off/lists/1/'); ?>', 'tax_search', 500, 616)"> &nbsp;
@@ -649,7 +649,7 @@ else :
 									<input type="text" class="form-control input-sm" id="tax_off1_name" name="tax_off1_name" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('tax_off1_name');
 																																	} else {
-																																		echo $data['com'][$this->input->get('com_sel') - 1]->tax_off1_name;
+																																		echo $com_now->tax_off1_name;
 																																	} ?>" readonly required>
 								</div>
 							</td>
@@ -667,8 +667,8 @@ else :
 								<div class="col-xs-11  input-group">
 									<input type="text" class="form-control input-sm" id=tax_off2_code"" name="tax_off2_code" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('tax_off2_code');
-																																	} else if ($data['com'][$this->input->get('com_sel') - 1]->tax_off2_code > 0) {
-																																		echo $data['com'][$this->input->get('com_sel') - 1]->tax_off2_code;
+																																	} else if ($com_now->tax_off2_code > 0) {
+																																		echo $com_now->tax_off2_code;
 																																	} ?>" readonly>
 									<span class="input-group-btn">
 										<button class="btn btn-default btn-sm" type="button" onclick="javascript:open_Win('<?php echo base_url('/cms_popup/tax_off/lists/2/'); ?>', 'tax_search', 500, 616)"> &nbsp;
@@ -683,7 +683,7 @@ else :
 									<input type="text" class="form-control input-sm" id="tax_off2_name" name="tax_off2_name" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('tax_off2_name');
 																																	} else {
-																																		echo $data['com'][$this->input->get('com_sel') - 1]->tax_off2_name;
+																																		echo $com_now->tax_off2_name;
 																																	} ?>" readonly>
 								</div>
 							</td>
@@ -707,7 +707,7 @@ else :
 						<input type="number" class="form-control input-sm" id="postcode1" name="postcode1" maxlength="5" value="<?php if (!$this->input->get('com_sel')) {
 																																	echo set_value('zipcode');
 																																} else {
-																																	echo $data['com'][$this->input->get('com_sel') - 1]->zipcode;
+																																	echo $com_now->zipcode;
 																																} ?>" readonly required>
 					</div>
 					<div class="col-xs-3 col-sm-2 col-md-1" style="padding-right: 0;">
@@ -718,7 +718,7 @@ else :
 						<input type="text" class="form-control input-sm" id="address1_1" name="address1_1" maxlength="100" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('address1');
 																																	} else {
-																																		echo $data['com'][$this->input->get('com_sel') - 1]->address1;
+																																		echo $com_now->address1;
 																																	} ?>" readonly required>
 					</div>
 					<div class="col-xs-12 col-sm-6 col-md-3" style="padding-right: 0;">
@@ -726,7 +726,7 @@ else :
 						<input type="text" class="form-control input-sm" id="address2_1" name="address2_1" maxlength="100" value="<?php if (!$this->input->get('com_sel')) {
 																																		echo set_value('address2');
 																																	} else {
-																																		echo $data['com'][$this->input->get('com_sel') - 1]->address2;
+																																		echo $com_now->address2;
 																																	} ?>" name="address2">
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-3 glyphicon-wrap" style="padding: 12px 12px 5px 15px;">나머지 주소</div>
@@ -740,7 +740,7 @@ else :
 					<div class="col-md-6 col-xs-12" style="padding-right: 0;"><input type="text" class="form-control input-sm en_only" id="en_co_name" name="en_co_name" maxlength="50" value="<?php if (!$this->input->get('com_sel')) {
 																																																	echo set_value('en_co_name');
 																																																} else {
-																																																	echo $data['com'][$this->input->get('com_sel') - 1]->en_co_name;
+																																																	echo $com_now->en_co_name;
 																																																} ?>"></div>
 					<div class="col-md-6 col-xs-12 text-wrap" style="padding: 12px 12px 5px 15px;">기타소득 지급조서 신고가 있는 경우 입력</div>
 				</div>
@@ -754,7 +754,7 @@ else :
 					<div class="col-md-10 col-xs-12"><input type="text" class="form-control input-sm wid-100 en_only" id="addressEnglish" name="addressEnglish" maxlength="200" value="<?php if (!$this->input->get('com_sel')) {
 																																															echo set_value('en_address');
 																																														} else {
-																																															echo $data['com'][$this->input->get('com_sel') - 1]->en_address;
+																																															echo $com_now->en_address;
 																																														} ?>"></div>
 					<div class="col-md-2">&nbsp;</div>
 					<div class="col-xs-12">상세주소, 번지(number), 거리(street), 시군구(city), 광역시도(state), 국가(country) 순으로 기재</div>
