@@ -1,274 +1,296 @@
 <!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<?php if ($this->cbconfig->get_device_view_type() === 'desktop' && $this->cbconfig->get_device_type() === 'mobile') : ?>
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <?php if ($this->cbconfig->get_device_view_type() === 'desktop' && $this->cbconfig->get_device_type() === 'mobile') : ?>
     <meta name="viewport" content="width=1000">
-<?php else : ?>
+  <?php else : ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<?php endif; ?>
-    <title><?php echo html_escape(element('page_title', $layout)); ?></title>
-    <?php if (element('meta_description', $layout)) { ?><meta name="description" content="<?php echo html_escape(element('meta_description', $layout)); ?>"><?php } ?>
-    <?php if (element('meta_keywords', $layout)) { ?><meta name="keywords" content="<?php echo html_escape(element('meta_keywords', $layout)); ?>"><?php } ?>
-    <?php if (element('meta_author', $layout)) { ?><meta name="author" content="<?php echo html_escape(element('meta_author', $layout)); ?>"><?php } ?>
-    <?php if (element('favicon', $layout)) { ?><link rel="shortcut icon" type="image/x-icon" href="<?php echo element('favicon', $layout); ?>" /><?php } ?>
-    <?php if (element('canonical', $view)) { ?><link rel="canonical" href="<?php echo element('canonical', $view); ?>" /><?php } ?>
+  <?php endif; ?>
+  <title><?php echo html_escape(element('page_title', $layout)); ?></title>
+  <?php if (element('meta_description', $layout)) { ?>
+    <meta name="description" content="<?php echo html_escape(element('meta_description', $layout)); ?>"><?php } ?>
+  <?php if (element('meta_keywords', $layout)) { ?>
+    <meta name="keywords" content="<?php echo html_escape(element('meta_keywords', $layout)); ?>"><?php } ?>
+  <?php if (element('meta_author', $layout)) { ?>
+    <meta name="author" content="<?php echo html_escape(element('meta_author', $layout)); ?>"><?php } ?>
+  <?php if (element('favicon', $layout)) { ?>
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo element('favicon', $layout); ?>" /><?php } ?>
+  <?php if (element('canonical', $view)) { ?>
+    <link rel="canonical" href="<?php echo element('canonical', $view); ?>" /><?php } ?>
 
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap-theme.min.css'); ?>" />
-    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo element('layout_skin_url', $layout); ?>/css/style.css" />
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css" />
-    <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/ui-lightness/jquery-ui.css" />
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" />
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap-theme.min.css'); ?>" />
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" type="text/css" href="<?php echo element('layout_skin_url', $layout); ?>/css/style.css" />
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/earlyaccess/nanumgothic.css" />
+  <link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/ui-lightness/jquery-ui.css" />
 
-    <!-- Custom styles for this template -->
-		<link rel="stylesheet" href="<?php echo base_url('static/css/cms.css');?>" />
-    <?php echo $this->managelayout->display_css(); ?>
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="<?php echo base_url('static/css/cms.css'); ?>" />
+  <?php echo $this->managelayout->display_css(); ?>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-    <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
-    <script type="text/javascript">
-      // 자바스크립트에서 사용하는 전역변수 선언
-      var cb_url = "<?php echo trim(site_url(), '/'); ?>";
-      var cb_cookie_domain = "<?php echo config_item('cookie_domain'); ?>";
-      var cb_charset = "<?php echo config_item('charset'); ?>";
-      var cb_time_ymd = "<?php echo cdate('Y-m-d'); ?>";
-      var cb_time_ymdhis = "<?php echo cdate('Y-m-d H:i:s'); ?>";
-      var layout_skin_path = "<?php echo element('layout_skin_path', $layout); ?>";
-      var view_skin_path = "<?php echo element('view_skin_path', $layout); ?>";
-      var is_member = "<?php echo $this->member->is_member() ? '1' : ''; ?>";
-      var is_admin = "<?php echo $this->member->is_admin(); ?>";
-      var cb_admin_url = <?php echo $this->member->is_admin() === 'super' ? 'cb_url + "/' . config_item('uri_segment_admin') . '"' : '""'; ?>;
-      var cb_board = "<?php echo isset($view) ? element('board_key', $view) : ''; ?>";
-      var cb_board_url = <?php echo ( isset($view) && element('board_key', $view)) ? 'cb_url + "/' . config_item('uri_segment_board') . '/' . element('board_key', $view) . '"' : '""'; ?>;
-      var cb_device_type = "<?php echo $this->cbconfig->get_device_type() === 'mobile' ? 'mobile' : 'desktop' ?>";
-      var cb_csrf_hash = "<?php echo $this->security->get_csrf_hash(); ?>";
-      var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
-    </script>
-    <!--[if lt IE 9]>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+  <script type="text/javascript">
+    // 자바스크립트에서 사용하는 전역변수 선언
+    var cb_url = "<?php echo trim(site_url(), '/'); ?>";
+    var cb_cookie_domain = "<?php echo config_item('cookie_domain'); ?>";
+    var cb_charset = "<?php echo config_item('charset'); ?>";
+    var cb_time_ymd = "<?php echo cdate('Y-m-d'); ?>";
+    var cb_time_ymdhis = "<?php echo cdate('Y-m-d H:i:s'); ?>";
+    var layout_skin_path = "<?php echo element('layout_skin_path', $layout); ?>";
+    var view_skin_path = "<?php echo element('view_skin_path', $layout); ?>";
+    var is_member = "<?php echo $this->member->is_member() ? '1' : ''; ?>";
+    var is_admin = "<?php echo $this->member->is_admin(); ?>";
+    var cb_admin_url = <?php echo $this->member->is_admin() === 'super' ? 'cb_url + "/' . config_item('uri_segment_admin') . '"' : '""'; ?>;
+    var cb_board = "<?php echo isset($view) ? element('board_key', $view) : ''; ?>";
+    var cb_board_url = <?php echo (isset($view) && element('board_key', $view)) ? 'cb_url + "/' . config_item('uri_segment_board') . '/' . element('board_key', $view) . '"' : '""'; ?>;
+    var cb_device_type = "<?php echo $this->cbconfig->get_device_type() === 'mobile' ? 'mobile' : 'desktop' ?>";
+    var cb_csrf_hash = "<?php echo $this->security->get_csrf_hash(); ?>";
+    var cookie_prefix = "<?php echo config_item('cookie_prefix'); ?>";
+  </script>
+  <!--[if lt IE 9]>
     <script src="<?php echo base_url('assets/js/html5shiv.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/respond.min.js'); ?>"></script>
-    <script src="<?php echo base_url('static/js/ie-emulation-modes-warning.js');?>"></script>
+    <script src="<?php echo base_url('static/js/ie-emulation-modes-warning.js'); ?>"></script>
     <![endif]-->
-    <script src="<?php echo base_url('assets/js/common.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/jquery.validate.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/jquery.validate.extension.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/sideview.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/js.cookie.js'); ?>"></script>
+  <script src="<?php echo base_url('assets/js/common.js'); ?>"></script>
+  <script src="<?php echo base_url('assets/js/jquery.validate.min.js'); ?>"></script>
+  <script src="<?php echo base_url('assets/js/jquery.validate.extension.js'); ?>"></script>
+  <script src="<?php echo base_url('assets/js/sideview.js'); ?>"></script>
+  <script src="<?php echo base_url('assets/js/js.cookie.js'); ?>"></script>
 
-    <script src="<?php echo base_url('static/lib/calendar/calendar.js');?>"></script>
-		<script src="<?php echo base_url('static/js/global.js');?>"></script>
-    <?php
-			switch ($this->uri->segment(1)) {
-				case 'cms_m1': echo '<script src="'.base_url('static/js/').'cms_m1.js"></script>';	break;
-				case 'cms_m2': echo '<script src="'.base_url('static/js/').'cms_m2.js"></script>';	break;
-				case 'cms_m3': echo '<script src="'.base_url('static/js/').'cms_m3.js"></script>';	break;
-				case 'cms_m4': echo '<script src="'.base_url('static/js/').'cms_m4.js"></script>';	break;
-				case 'cms_m5': echo '<script src="'.base_url('static/js/').'cms_m5.js"></script>';	break;
-			}
-		?>
-		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script><!-- 다음 우편번호 서비스 -->
-    <?php echo $this->managelayout->display_js(); ?>
-  </head>
+  <script src="<?php echo base_url('static/lib/calendar/calendar.js'); ?>"></script>
+  <script src="<?php echo base_url('static/js/global.js'); ?>"></script>
+  <?php
+  switch ($this->uri->segment(1)) {
+    case 'cms_m1':
+      echo '<script src="' . base_url('static/js/') . 'cms_m1.js"></script>';
+      break;
+    case 'cms_m2':
+      echo '<script src="' . base_url('static/js/') . 'cms_m2.js"></script>';
+      break;
+    case 'cms_m3':
+      echo '<script src="' . base_url('static/js/') . 'cms_m3.js"></script>';
+      break;
+    case 'cms_m4':
+      echo '<script src="' . base_url('static/js/') . 'cms_m4.js"></script>';
+      break;
+    case 'cms_m5':
+      echo '<script src="' . base_url('static/js/') . 'cms_m5.js"></script>';
+      break;
+  }
+  ?>
+  <!-- <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script> 다음 우편번호 서비스 HTTP -->
+  <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script><!-- 다음 우편번호 서비스 HTTPS -->
+  <?php echo $this->managelayout->display_js(); ?>
+</head>
 
-  <body <?php echo isset($view) ? element('body_script', $view) : ''; ?> role="document" onclick="cal_del();">
-    <div class="wrapper">
+<body <?php echo isset($view) ? element('body_script', $view) : ''; ?> role="document" onclick="cal_del();">
+  <div class="wrapper">
 
-<?php if ($this->cbconfig->get_device_view_type() !== 'mobile') { ?>
+    <?php if ($this->cbconfig->get_device_view_type() !== 'mobile') { ?>
 
       <!-- header start -->
       <header class="header">
         <div class="container">
           <ul class="header-top-menu">
-<?php if ($this->member->is_admin() === 'super') { ?>
-            <li><i class="fa fa-cog"></i><a href="<?php echo site_url(config_item('uri_segment_admin')); ?>" title="관리자 페이지로 이동">관리자</a></li>
-<?php } ?>
-<?php
-if ($this->member->is_member()) {
-  if ($this->cbconfig->item('use_notification')) {
-?>
-            <li class="notifications"><i class="fa fa-bell-o"></i>알림 <span class="badge notification_num"><?php echo number_format(element('notification_num', $layout) + 0); ?></span>
-              <div class="notifications-menu"> </div>
-            </li>
-            <script type="text/javascript">
-              //<![CDATA[
-              $(document).mouseup(function (e)
-              {
-                var noticontainer = $('.notifications-menu');
+            <?php if ($this->member->is_admin() === 'super') { ?>
+              <li><i class="fa fa-cog"></i><a href="<?php echo site_url(config_item('uri_segment_admin')); ?>" title="관리자 페이지로 이동">관리자</a></li>
+            <?php } ?>
+            <?php
+            if ($this->member->is_member()) {
+              if ($this->cbconfig->item('use_notification')) {
+                ?>
+                <li class="notifications"><i class="fa fa-bell-o"></i>알림 <span class="badge notification_num"><?php echo number_format(element('notification_num', $layout) + 0); ?></span>
+                  <div class="notifications-menu"> </div>
+                </li>
+                <script type="text/javascript">
+                  //<![CDATA[
+                  $(document).mouseup(function(e) {
+                    var noticontainer = $('.notifications-menu');
 
-                if ( ! noticontainer.is(e.target) // if the target of the click isn't the container...
-                && noticontainer.has(e.target).length === 0) // ... nor a descendant of the container
-                {
-                  noticontainer.hide();
-                }
-              });
-              //]]>
-            </script>
-<?php
-  }
-?>
-            <li><i class="fa fa-sign-out"></i><a href="<?php echo site_url('login/logout?url=' . urlencode(current_full_url())); ?>" title="로그아웃">로그아웃</a></li>
-            <li><i class="fa fa-user"></i><a href="<?php echo site_url('mypage'); ?>" title="마이페이지">마이페이지</a></li>
-<?php }else{ ?>
-            <li><i class="fa fa-sign-in"></i><a href="<?php echo site_url('login?url=' . urlencode(current_full_url())); ?>" title="로그인">로그인</a></li>
-            <li><i class="fa fa-user"></i><a href="<?php echo site_url('register'); ?>" title="회원가입">회원가입</a></li>
-<?php } ?>
-<?php if ($this->cbconfig->item('open_currentvisitor')) { ?>
-            <li><i class="fa fa-link"></i><a href="<?php echo site_url('currentvisitor'); ?>" title="현재접속자">현재접속자</a> <span class="badge"><?php echo element('current_visitor_num', $layout); ?></span></li>
-<?php } ?>
+                    if (!noticontainer.is(e.target) // if the target of the click isn't the container...
+                      &&
+                      noticontainer.has(e.target).length === 0) // ... nor a descendant of the container
+                    {
+                      noticontainer.hide();
+                    }
+                  });
+                  //]]>
+                </script>
+              <?php
+            }
+            ?>
+              <li><i class="fa fa-sign-out"></i><a href="<?php echo site_url('login/logout?url=' . urlencode(current_full_url())); ?>" title="로그아웃">로그아웃</a></li>
+              <li><i class="fa fa-user"></i><a href="<?php echo site_url('mypage'); ?>" title="마이페이지">마이페이지</a></li>
+            <?php } else { ?>
+              <li><i class="fa fa-sign-in"></i><a href="<?php echo site_url('login?url=' . urlencode(current_full_url())); ?>" title="로그인">로그인</a></li>
+              <li><i class="fa fa-user"></i><a href="<?php echo site_url('register'); ?>" title="회원가입">회원가입</a></li>
+            <?php } ?>
+            <?php if ($this->cbconfig->item('open_currentvisitor')) { ?>
+              <li><i class="fa fa-link"></i><a href="<?php echo site_url('currentvisitor'); ?>" title="현재접속자">현재접속자</a> <span class="badge"><?php echo element('current_visitor_num', $layout); ?></span></li>
+            <?php } ?>
           </ul>
         </div>
       </header>
       <!-- header-content end -->
 
-<?php }else{ ?>
+    <?php } else { ?>
 
       <div class="header_line"></div>
 
-<?php } ?>
+    <?php } ?>
 
-      <!-- nav start -->
-      <nav class="navbar navbar-inverse nav-tab"> <!--class="navbar navbar-default navbar-fixed-top" -->
-        <div class="container">
+    <!-- nav start -->
+    <nav class="navbar navbar-inverse nav-tab">
+      <!--class="navbar navbar-default navbar-fixed-top" -->
+      <div class="container">
 
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" <?php if ($this->cbconfig->get_device_view_type() !== 'mobile') {?>data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" <?php } ?> id="btn_side"> <!--data-target="#topmenu-navbar-collapse"-->
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a href="<?php echo site_url(); ?>" class="navbar-brand" title="<?php echo html_escape($this->cbconfig->item('site_title'));?>">
-              <strong><small><?php echo $this->cbconfig->item('site_logo'); ?></small></strong>
-            </a>
-          </div>
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" <?php if ($this->cbconfig->get_device_view_type() !== 'mobile') { ?>data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" <?php } ?> id="btn_side">
+            <!--data-target="#topmenu-navbar-collapse"-->
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a href="<?php echo site_url(); ?>" class="navbar-brand" title="<?php echo html_escape($this->cbconfig->item('site_title')); ?>">
+            <strong><small><?php echo $this->cbconfig->item('site_logo'); ?></small></strong>
+          </a>
+        </div>
 
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="navbar"><!--id="topmenu-navbar-collapse"-->
-            <ul class="nav navbar-nav navbar-right">
-              <li>
-                <form class="navbar-form navbar-right" name="header_search" id="header_search" action="<?php echo site_url('search'); ?>" onSubmit="return headerSearch(this);">
-                  <div class="form-group">
-                    <input type="text" class="form-control px150" placeholder="Search" name="skeyword" accesskey="s" />
-                    <button class="btn btn-default btn-sm" type="submit"><i class="fa fa-search"></i></button>
-                  </div>
-                </form>
-                <script type="text/javascript">
-                  //<![CDATA[
-                  $(function() {
-                    $('#topmenu-navbar-collapse .dropdown').hover(function() {
-                      $(this).addClass('open');
-                    }, function() {
-                      $(this).removeClass('open');
-                    });
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navbar">
+          <!--id="topmenu-navbar-collapse"-->
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <form class="navbar-form navbar-right" name="header_search" id="header_search" action="<?php echo site_url('search'); ?>" onSubmit="return headerSearch(this);">
+                <div class="form-group">
+                  <input type="text" class="form-control px150" placeholder="Search" name="skeyword" accesskey="s" />
+                  <button class="btn btn-default btn-sm" type="submit"><i class="fa fa-search"></i></button>
+                </div>
+              </form>
+              <script type="text/javascript">
+                //<![CDATA[
+                $(function() {
+                  $('#topmenu-navbar-collapse .dropdown').hover(function() {
+                    $(this).addClass('open');
+                  }, function() {
+                    $(this).removeClass('open');
                   });
-                  function headerSearch(f) {
-                    var skeyword = f.skeyword.value.replace(/(^\s*)|(\s*$)/g,'');
-                    if (skeyword.length < 2) {
-                      alert('2글자 이상으로 검색해 주세요');
-                      f.skeyword.focus();
-                      return false;
-                    }
-                    return true;
+                });
+
+                function headerSearch(f) {
+                  var skeyword = f.skeyword.value.replace(/(^\s*)|(\s*$)/g, '');
+                  if (skeyword.length < 2) {
+                    alert('2글자 이상으로 검색해 주세요');
+                    f.skeyword.focus();
+                    return false;
                   }
-                  //]]>
-                </script>
-              </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-<?php
-  $menuhtml = '';
-  if (element('menu', $layout)) {
-    $menu = element('menu', $layout);
-    if (element(0, $menu)) {
-      $i = 1;
-      foreach (element(0, $menu) as $mkey => $mval) {
-        $act = (strpos($this->uri->segment(1), (string)'m'.$i))
-          ? strpos($this->uri->segment(1), (string)'m'.$i)
-          : strpos($this->uri->segment(2), (string)'m'.$i);
-        $active = ($act) ? "active" : "";
-        if (element(element('men_id', $mval), $menu)) {
-          $mlink = element('men_link', $mval) ? element('men_link', $mval) : 'javascript:;';
-          $menuhtml .= '<li class="dropdown '.$active.'">
+                  return true;
+                }
+                //]]>
+              </script>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <?php
+            $menuhtml = '';
+            if (element('menu', $layout)) {
+              $menu = element('menu', $layout);
+              if (element(0, $menu)) {
+                $i = 1;
+                foreach (element(0, $menu) as $mkey => $mval) {
+                  $act = (strpos($this->uri->segment(1), (string)'m' . $i))
+                    ? strpos($this->uri->segment(1), (string)'m' . $i)
+                    : strpos($this->uri->segment(2), (string)'m' . $i);
+                  $active = ($act) ? "active" : "";
+                  if (element(element('men_id', $mval), $menu)) {
+                    $mlink = element('men_link', $mval) ? element('men_link', $mval) : 'javascript:;';
+                    $menuhtml .= '<li class="dropdown ' . $active . '">
             <a href="' . $mlink . '" ' . element('men_custom', $mval);
-          if (element('men_target', $mval)) {
-            $menuhtml .= ' target="' . element('men_target', $mval) . '"';
-          }
-          $menuhtml .= ' title="' . html_escape(element('men_name', $mval)) . '">' . html_escape(element('men_name', $mval)) . '</a>
+                    if (element('men_target', $mval)) {
+                      $menuhtml .= ' target="' . element('men_target', $mval) . '"';
+                    }
+                    $menuhtml .= ' title="' . html_escape(element('men_name', $mval)) . '">' . html_escape(element('men_name', $mval)) . '</a>
             <ul class="dropdown-menu">';
 
-          foreach (element(element('men_id', $mval), $menu) as $skey => $sval) {
-            $slink = element('men_link', $sval) ? element('men_link', $sval) : 'javascript:;';
-            $menuhtml .= '<li><a href="' . $slink . '" ' . element('men_custom', $sval);
-            if (element('men_target', $sval)) {
-              $menuhtml .= ' target="' . element('men_target', $sval) . '"';
+                    foreach (element(element('men_id', $mval), $menu) as $skey => $sval) {
+                      $slink = element('men_link', $sval) ? element('men_link', $sval) : 'javascript:;';
+                      $menuhtml .= '<li><a href="' . $slink . '" ' . element('men_custom', $sval);
+                      if (element('men_target', $sval)) {
+                        $menuhtml .= ' target="' . element('men_target', $sval) . '"';
+                      }
+                      $menuhtml .= ' title="' . html_escape(element('men_name', $sval)) . '">' . html_escape(element('men_name', $sval)) . '</a></li>';
+                    }
+                    $menuhtml .= '</ul></li>';
+                  } else {
+                    $mlink = element('men_link', $mval) ? element('men_link', $mval) : 'javascript:;';
+
+                    $menuhtml .= '<li><a href="' . $mlink . '" ' . element('men_custom', $mval);
+                    if (element('men_target', $mval)) {
+                      $menuhtml .= ' target="' . element('men_target', $mval) . '"';
+                    }
+                    $menuhtml .= ' title="' . html_escape(element('men_name', $mval)) . '">' . html_escape(element('men_name', $mval)) . '</a></li>';
+                  }
+                  $i++;
+                }
+              }
             }
-            $menuhtml .= ' title="' . html_escape(element('men_name', $sval)) . '">' . html_escape(element('men_name', $sval)) . '</a></li>';
-          }
-          $menuhtml .= '</ul></li>';
-
-        } else {
-          $mlink = element('men_link', $mval) ? element('men_link', $mval) : 'javascript:;';
-
-          $menuhtml .= '<li><a href="' . $mlink . '" ' . element('men_custom', $mval);
-          if (element('men_target', $mval)) {
-            $menuhtml .= ' target="' . element('men_target', $mval) . '"';
-          }
-          $menuhtml .= ' title="' . html_escape(element('men_name', $mval)) . '">' . html_escape(element('men_name', $mval)) . '</a></li>';
-        }
-        $i++;
-      }
-    }
-  }
-  echo $menuhtml;
-?>
-              <li class="dropdown">
-<?php if (@$this->member->is_member() !== false) : ?>
+            echo $menuhtml;
+            ?>
+            <li class="dropdown">
+              <?php if (@$this->member->is_member() !== false) : ?>
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                   <span id="top_user_id" style="font-size:15px;"><span class="glyphicon glyphicon-user" aria-hidden="true"> <?php echo html_escape($this->member->item('mem_username')); ?> 님</span> <span class="caret"></span>
                 </a></span>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="<?php echo base_url('board/notice'); ?>"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"> 공지사항</span></a></li>
-                  <li><a href="<?php echo base_url('membermodify');?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"> 정보수정</span></a></li>
+                  <li><a href="<?php echo base_url('membermodify'); ?>"><span class="glyphicon glyphicon-edit" aria-hidden="true"> 정보수정</span></a></li>
                   <li><a href="<?php echo site_url('login/logout?url=' . urlencode(current_full_url())); ?>"><span class="glyphicon glyphicon-log-out" aria-hidden="true"> 로그아웃</span></a></li>
-<?php   else :  ?>
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">기타메뉴 <span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="<?php echo site_url('login?url=' . urlencode(current_full_url())); ?>"><span class="glyphicon glyphicon-log-in" aria-hidden="true"> 로그인</a></li>
-                  <li><a href="<?php echo site_url('register'); ?>"><span class="glyphicon glyphicon-link" aria-hidden="true"> 회원가입</span></a></li>
-                  <li><a href="<?php echo base_url('board/notice'); ?>"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"> 공지사항</span></a></li>
-<?php  endif; ?>
+                <?php else :  ?>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">기타메뉴 <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="<?php echo site_url('login?url=' . urlencode(current_full_url())); ?>"><span class="glyphicon glyphicon-log-in" aria-hidden="true"> 로그인</a></li>
+                    <li><a href="<?php echo site_url('register'); ?>"><span class="glyphicon glyphicon-link" aria-hidden="true"> 회원가입</span></a></li>
+                    <li><a href="<?php echo base_url('board/notice'); ?>"><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"> 공지사항</span></a></li>
+                  <?php endif; ?>
                   <li class="divider"></li>
                   <li class="dropdown-header">협업솔루션</li>
                   <li><a href="https://brdnc.slack.com/join/shared_invite/enQtMjg2NTYwODc3NzE1LTZiYmM3NGQ3YzNlNTY5NzE4N2RmYTI0OTBlNDM1MmI5ZGQyNzNjNDc4NGQ1MTg3NjU1OTY3NDc1NzcxMmIxYmI" target="blank"><span class="glyphicon glyphicon-time" aria-hidden="true"> Slack(brdnc)-참여하기</span></a></li>
                   <li><a href="https://brdnc.slack.com/" target="blank"><span class="glyphicon glyphicon-time" aria-hidden="true"> Slack(brdnc)-바로가기</span></a></li>
                   <li><a href="https://trello.com/" target="blank"><span class="glyphicon glyphicon-time" aria-hidden="true"> Trello-바로가기</span></a></li>
                 </ul>
-              </li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
-        </div>
-      </nav>
-      <!-- nav end --> <!-- header end -->
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div>
+    </nav>
+    <!-- nav end -->
+    <!-- header end -->
 
-      <!-- main start -->
-      <div class="container theme-showcase main_container" role="main">
-        <div class="main">
-          <div class="main_container"> <!--class="container"-->
-            <div class="row">
+    <!-- main start -->
+    <div class="container theme-showcase main_container" role="main">
+      <div class="main">
+        <div class="main_container">
+          <!--class="container"-->
+          <div class="row">
 
-<?php if (element('use_sidebar', $layout)) {?>
+            <?php if (element('use_sidebar', $layout)) { ?>
               <div class="col-md-9 col-sm-8 col-xs-12 mb20">
-<?php } ?>
+              <?php } ?>
 
-                <!-- 본문 시작 -->
-                <?php if (isset($yield))echo $yield; ?>
-                <!-- 본문 끝 -->
+              <!-- 본문 시작 -->
+              <?php if (isset($yield)) echo $yield; ?>
+              <!-- 본문 끝 -->
 
-<?php if (element('use_sidebar', $layout)) {?>
+              <?php if (element('use_sidebar', $layout)) { ?>
               </div>
               <div class="col-md-3 col-sm-4 col-xs-12">
                 <div class="sidebar">
@@ -277,60 +299,60 @@ if ($this->member->is_member()) {
                   <!-- 사이드바 끝 -->
                 </div>
               </div>
-<?php } ?>
-            </div>
+            <?php } ?>
           </div>
         </div>
-        <!-- main end -->
+      </div>
+      <!-- main end -->
 
-        <!-- footer start -->
-        <footer class="footer">
-          <div class="container">
-            <div style="float: left; margin-right:15px;"><img src="<?php echo $this->config->base_url(); ?>static/img/cms_box_logo.png" width="120px"></div>
-            <div style="float: left; padding-top: 14px;">
-              <ul class="company">
-                <li><a href="<?php echo document_url('aboutus'); ?>" title="회사소개">회사소개</a></li>
-                <li><a href="<?php echo document_url('provision'); ?>" title="이용약관">이용약관</a></li>
-                <li><a href="<?php echo document_url('privacy'); ?>" title="개인정보 취급방침">개인정보 취급방침</a></li>
-                <!-- <li><a href="<?php echo site_url('pointranking'); ?>" title="포인트 전체랭킹">포인트 전체랭킹</a></li>
+      <!-- footer start -->
+      <footer class="footer">
+        <div class="container">
+          <div style="float: left; margin-right:15px;"><img src="<?php echo $this->config->base_url(); ?>static/img/cms_box_logo.png" width="120px"></div>
+          <div style="float: left; padding-top: 14px;">
+            <ul class="company">
+              <li><a href="<?php echo document_url('aboutus'); ?>" title="회사소개">회사소개</a></li>
+              <li><a href="<?php echo document_url('provision'); ?>" title="이용약관">이용약관</a></li>
+              <li><a href="<?php echo document_url('privacy'); ?>" title="개인정보 취급방침">개인정보 취급방침</a></li>
+              <!-- <li><a href="<?php echo site_url('pointranking'); ?>" title="포인트 전체랭킹">포인트 전체랭킹</a></li>
                 <li><a href="<?php echo site_url('pointranking/month'); ?>" title="포인트 월별랭킹">포인트 월별랭킹</a></li>
                 <li><a href="<?php echo site_url('levelup'); ?>" title="레벨업">레벨업</a></li> -->
-              </ul>
-            </div>
-            <div class="copyright">
-<?php if ($this->cbconfig->item('company_address')) { ?>
+            </ul>
+          </div>
+          <div class="copyright">
+            <?php if ($this->cbconfig->item('company_address')) { ?>
               <span> | <?php echo $this->cbconfig->item('company_address'); ?>
                 <?php if ($this->cbconfig->item('company_zipcode')) { ?> | (우편 <?php echo $this->cbconfig->item('company_zipcode'); ?>)<?php } ?>
               </span>
-<?php } ?>
-              <?php if ($this->cbconfig->item('company_owner')) { ?><span> | <b>대표</b> <?php echo $this->cbconfig->item('company_owner'); ?></span><?php } ?>
-              <?php if ($this->cbconfig->item('company_phone')) { ?><span> | <b>전화</b> <?php echo $this->cbconfig->item('company_phone'); ?></span><?php } ?>
-              <?php if ($this->cbconfig->item('company_fax')) { ?><span> | <b>팩스</b> <?php echo $this->cbconfig->item('company_fax'); ?></span><?php } ?>
-            </div>
-            <div class="copyright">
-              <?php if ($this->cbconfig->item('company_reg_no')) { ?><span> | <b>사업자</b> <?php echo $this->cbconfig->item('company_reg_no'); ?></span><?php } ?>
-              <?php if ($this->cbconfig->item('company_retail_sale_no')) { ?><span> | <b>통신판매</b> <?php echo $this->cbconfig->item('company_retail_sale_no'); ?></span><?php } ?>
-              <?php if ($this->cbconfig->item('company_added_sale_no')) { ?><span> | <b>부가통신</b> <?php echo $this->cbconfig->item('company_added_sale_no'); ?></span><?php } ?>
-              <?php if ($this->cbconfig->item('company_admin_name')) { ?><span> | <b>정보관리책임자명</b> <?php echo $this->cbconfig->item('company_admin_name'); ?></span><?php } ?>
-              <span> | Copyright&copy; <?php echo $this->cbconfig->item('site_title'); ?>. All Rights Reserved.</span>
-            </div>
-<?php if ($this->cbconfig->get_device_view_type() === 'mobile') { ?>
-            <div class="see_mobile"><a href="<?php echo current_full_url(); ?>" class="btn btn-default btn-xs viewpcversion"> PC 버전으로 보기 </a></div>
-<?php
-  } else {
-     if ($this->cbconfig->get_device_type() === 'mobile') { ?>
-            <div class="see_mobile"><a href="<?php echo current_full_url(); ?>" class="btn btn-default btn-lg viewmobileversion" style="width:100%;font-size:5em;"> 모바일 버전으로 보기 </a></div>
-<?php } else { ?>
-            <div class="see_mobile"><a href="<?php echo current_full_url(); ?>" class="btn btn-default btn-xs viewmobileversion"> 모바일 버전으로 보기 </a></div>
-<?php }
-  }
-?>
+            <?php } ?>
+            <?php if ($this->cbconfig->item('company_owner')) { ?><span> | <b>대표</b> <?php echo $this->cbconfig->item('company_owner'); ?></span><?php } ?>
+            <?php if ($this->cbconfig->item('company_phone')) { ?><span> | <b>전화</b> <?php echo $this->cbconfig->item('company_phone'); ?></span><?php } ?>
+            <?php if ($this->cbconfig->item('company_fax')) { ?><span> | <b>팩스</b> <?php echo $this->cbconfig->item('company_fax'); ?></span><?php } ?>
           </div>
-        </footer>
-        <!-- footer end -->
-      </div>
+          <div class="copyright">
+            <?php if ($this->cbconfig->item('company_reg_no')) { ?><span> | <b>사업자</b> <?php echo $this->cbconfig->item('company_reg_no'); ?></span><?php } ?>
+            <?php if ($this->cbconfig->item('company_retail_sale_no')) { ?><span> | <b>통신판매</b> <?php echo $this->cbconfig->item('company_retail_sale_no'); ?></span><?php } ?>
+            <?php if ($this->cbconfig->item('company_added_sale_no')) { ?><span> | <b>부가통신</b> <?php echo $this->cbconfig->item('company_added_sale_no'); ?></span><?php } ?>
+            <?php if ($this->cbconfig->item('company_admin_name')) { ?><span> | <b>정보관리책임자명</b> <?php echo $this->cbconfig->item('company_admin_name'); ?></span><?php } ?>
+            <span> | Copyright&copy; <?php echo $this->cbconfig->item('site_title'); ?>. All Rights Reserved.</span>
+          </div>
+          <?php if ($this->cbconfig->get_device_view_type() === 'mobile') { ?>
+            <div class="see_mobile"><a href="<?php echo current_full_url(); ?>" class="btn btn-default btn-xs viewpcversion"> PC 버전으로 보기 </a></div>
+          <?php
+        } else {
+          if ($this->cbconfig->get_device_type() === 'mobile') { ?>
+              <div class="see_mobile"><a href="<?php echo current_full_url(); ?>" class="btn btn-default btn-lg viewmobileversion" style="width:100%;font-size:5em;"> 모바일 버전으로 보기 </a></div>
+            <?php } else { ?>
+              <div class="see_mobile"><a href="<?php echo current_full_url(); ?>" class="btn btn-default btn-xs viewmobileversion"> 모바일 버전으로 보기 </a></div>
+            <?php }
+        }
+        ?>
+        </div>
+      </footer>
+      <!-- footer end -->
+    </div>
 
-  <?php if ($this->cbconfig->get_device_view_type() === 'mobile') {?>
+    <?php if ($this->cbconfig->get_device_view_type() === 'mobile') { ?>
       <div id="side_menu">
         <div class="side_wr add_side_wr">
           <div id="isroll_wrap" class="side_inner_rel">
@@ -341,66 +363,65 @@ if ($this->member->is_member()) {
                 </form>
               </div>
               <div class="m_login">
-<?php if ($this->member->is_member()){ ?>
-                <span><a href="<?php echo site_url('login/logout?url=' . urlencode(current_full_url())); ?>" class="btn btn-primary btn-xs" title="로그아웃"> <i class="fa fa-sign-out"></i> 로그아웃 </a></span>
-                <span><a href="<?php echo site_url('mypage'); ?>" class="btn btn-primary btn-xs" title="마이페이지"> <i class="fa fa-user"></i> 마이페이지 </a></span>
-<?php }else{ ?>
-                <span><a href="<?php echo site_url('login?url=' . urlencode(current_full_url())); ?>" class="btn btn-primary btn-xs" title="로그인"> <i class="fa fa-sign-in"></i> 로그인 </a></span>
-                <span><a href="<?php echo site_url('register'); ?>" class="btn btn-primary btn-xs" title="회원가입"> <i class="fa fa-user"></i> 회원가입 </a></span>
-<?php } ?>
+                <?php if ($this->member->is_member()) { ?>
+                  <span><a href="<?php echo site_url('login/logout?url=' . urlencode(current_full_url())); ?>" class="btn btn-primary btn-xs" title="로그아웃"> <i class="fa fa-sign-out"></i> 로그아웃 </a></span>
+                  <span><a href="<?php echo site_url('mypage'); ?>" class="btn btn-primary btn-xs" title="마이페이지"> <i class="fa fa-user"></i> 마이페이지 </a></span>
+                <?php } else { ?>
+                  <span><a href="<?php echo site_url('login?url=' . urlencode(current_full_url())); ?>" class="btn btn-primary btn-xs" title="로그인"> <i class="fa fa-sign-in"></i> 로그인 </a></span>
+                  <span><a href="<?php echo site_url('register'); ?>" class="btn btn-primary btn-xs" title="회원가입"> <i class="fa fa-user"></i> 회원가입 </a></span>
+                <?php } ?>
               </div>
               <ul class="m_board">
-<?php if ($this->cbconfig->item('open_currentvisitor')) { ?>
-                <li><a href="<?php echo site_url('currentvisitor'); ?>" title="현재 접속자"><span class="fa fa-link"></span> 현재 접속자</a></li>
-<?php } ?>
-<?php if ($this->member->is_member()) { ?>
-                <li><a href="<?php echo site_url('notification'); ?>" title="나의 알림"><span class="fa fa-bell-o"></span>알림 : <?php echo number_format(element('notification_num', $layout) + 0); ?> 개</a></li>
-<?php    if ($this->cbconfig->item('use_note') && $this->member->item('mem_use_note')) { ?>
-                <li><a href="javascript:;" onClick="note_list();" title="나의 쪽지"><span class="fa fa-envelope"></span> 쪽지 : <?php echo number_format($this->member->item('meta_unread_note_num') + 0); ?> 개</a></li>
-<?php    } ?>
-<?php    if ($this->cbconfig->item('use_point')) { ?>
-                <li><a href="<?php echo site_url('mypage/point'); ?>" title="나의 포인트"><span class="fa fa-gift"></span> 포인트 : <?php echo number_format($this->member->item('mem_point') + 0); ?> 점</a></li>
-<?php    }
-      }
- ?>
+                <?php if ($this->cbconfig->item('open_currentvisitor')) { ?>
+                  <li><a href="<?php echo site_url('currentvisitor'); ?>" title="현재 접속자"><span class="fa fa-link"></span> 현재 접속자</a></li>
+                <?php } ?>
+                <?php if ($this->member->is_member()) { ?>
+                  <li><a href="<?php echo site_url('notification'); ?>" title="나의 알림"><span class="fa fa-bell-o"></span>알림 : <?php echo number_format(element('notification_num', $layout) + 0); ?> 개</a></li>
+                  <?php if ($this->cbconfig->item('use_note') && $this->member->item('mem_use_note')) { ?>
+                    <li><a href="javascript:;" onClick="note_list();" title="나의 쪽지"><span class="fa fa-envelope"></span> 쪽지 : <?php echo number_format($this->member->item('meta_unread_note_num') + 0); ?> 개</a></li>
+                  <?php    } ?>
+                  <?php if ($this->cbconfig->item('use_point')) { ?>
+                    <li><a href="<?php echo site_url('mypage/point'); ?>" title="나의 포인트"><span class="fa fa-gift"></span> 포인트 : <?php echo number_format($this->member->item('mem_point') + 0); ?> 점</a></li>
+                  <?php    }
+              }
+              ?>
               </ul>
               <ul class="m_menu">
-  <?php
-    $menuhtml = '';
-    if (element('menu', $layout)) {
-      $menu = element('menu', $layout);
-      if (element(0, $menu)) {
-        foreach (element(0, $menu) as $mkey => $mval) {
-          if (element(element('men_id', $mval), $menu)) {
-            $menuhtml .= '<li class="dropdown">
+                <?php
+                $menuhtml = '';
+                if (element('menu', $layout)) {
+                  $menu = element('menu', $layout);
+                  if (element(0, $menu)) {
+                    foreach (element(0, $menu) as $mkey => $mval) {
+                      if (element(element('men_id', $mval), $menu)) {
+                        $menuhtml .= '<li class="dropdown">
               <a href="' . element('men_link', $mval) . '" ' . element('men_custom', $mval);
-            if (element('men_target', $mval)) {
-              $menuhtml .= ' target="' . element('men_target', $mval) . '"';
-            }
-            $menuhtml .= ' class="text_link" title="' . html_escape(element('men_name', $mval)) . '">' . html_escape(element('men_name', $mval)) . '</a><a href="#" style="width:25px;float:right;" class="subopen" data-menu-order="' . $mkey . '"><i class="fa fa-caret-down"></i></a>
+                        if (element('men_target', $mval)) {
+                          $menuhtml .= ' target="' . element('men_target', $mval) . '"';
+                        }
+                        $menuhtml .= ' class="text_link" title="' . html_escape(element('men_name', $mval)) . '">' . html_escape(element('men_name', $mval)) . '</a><a href="#" style="width:25px;float:right;" class="subopen" data-menu-order="' . $mkey . '"><i class="fa fa-caret-down"></i></a>
               <ul class="dropdown-custom-menu drop-downorder-' . $mkey . '">';
 
-            foreach (element(element('men_id', $mval), $menu) as $skey => $sval) {
-              $menuhtml .= '<li><a href="' . element('men_link', $sval) . '" ' . element('men_custom', $sval);
-              if (element('men_target', $sval)) {
-                $menuhtml .= ' target="' . element('men_target', $sval) . '"';
-              }
-              $menuhtml .= ' title="' . html_escape(element('men_name', $sval)) . '">' . html_escape(element('men_name', $sval)) . '</a></li>';
-            }
-            $menuhtml .= '</ul></li>';
-
-          } else {
-            $menuhtml .= '<li><a class="text_link" href="' . element('men_link', $mval) . '" ' . element('men_custom', $mval);
-            if (element('men_target', $mval)) {
-              $menuhtml .= ' target="' . element('men_target', $mval) . '"';
-            }
-            $menuhtml .= ' title="' . html_escape(element('men_name', $mval)) . '">' . html_escape(element('men_name', $mval)) . '</a></li>';
-          }
-        }
-      }
-    }
-    echo $menuhtml;
-  ?>
+                        foreach (element(element('men_id', $mval), $menu) as $skey => $sval) {
+                          $menuhtml .= '<li><a href="' . element('men_link', $sval) . '" ' . element('men_custom', $sval);
+                          if (element('men_target', $sval)) {
+                            $menuhtml .= ' target="' . element('men_target', $sval) . '"';
+                          }
+                          $menuhtml .= ' title="' . html_escape(element('men_name', $sval)) . '">' . html_escape(element('men_name', $sval)) . '</a></li>';
+                        }
+                        $menuhtml .= '</ul></li>';
+                      } else {
+                        $menuhtml .= '<li><a class="text_link" href="' . element('men_link', $mval) . '" ' . element('men_custom', $mval);
+                        if (element('men_target', $mval)) {
+                          $menuhtml .= ' target="' . element('men_target', $mval) . '"';
+                        }
+                        $menuhtml .= ' title="' . html_escape(element('men_name', $mval)) . '">' . html_escape(element('men_name', $mval)) . '</a></li>';
+                      }
+                    }
+                  }
+                }
+                echo $menuhtml;
+                ?>
               </ul>
             </div>
           </div>
@@ -413,30 +434,35 @@ if ($this->member->is_member()) {
     <script src="<?php echo base_url('assets/js/iscroll.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/mobile.sidemenu.js'); ?>"></script>
 
-<?php } ?>
+  <?php } ?>
 
-    <script type="text/javascript">
-      $(document).on('click', '.viewpcversion', function(){
-        Cookies.set('device_view_type', 'desktop', { expires: 1 });
+  <script type="text/javascript">
+    $(document).on('click', '.viewpcversion', function() {
+      Cookies.set('device_view_type', 'desktop', {
+        expires: 1
       });
-      $(document).on('click', '.viewmobileversion', function(){
-        Cookies.set('device_view_type', 'mobile', { expires: 1 });
+    });
+    $(document).on('click', '.viewmobileversion', function() {
+      Cookies.set('device_view_type', 'mobile', {
+        expires: 1
       });
+    });
 
-			$(document).ready(function() {
-		      	$('[data-toggle="tooltip"]').tooltip();
-				$('[data-toggle="popover"]').popover();
-			});
-			// 다음 우편번호 서비스 -3 --/ 우편번호 찾기 화면을 넣을 element
-			var element_layer = document.getElementById('layer');
-		</script>
-<?php echo element('popup', $layout); ?>
-<?php echo $this->cbconfig->item('footer_script'); ?>
-    <!--
+    $(document).ready(function() {
+      $('[data-toggle="tooltip"]').tooltip();
+      $('[data-toggle="popover"]').popover();
+    });
+    // 다음 우편번호 서비스 -3 --/ 우편번호 찾기 화면을 넣을 element
+    var element_layer = document.getElementById('layer');
+  </script>
+  <?php echo element('popup', $layout); ?>
+  <?php echo $this->cbconfig->item('footer_script'); ?>
+  <!--
     Layout Directory : <?php echo element('layout_skin_path', $layout); ?>,
     Layout URL : <?php echo element('layout_skin_url', $layout); ?>,
     Skin Directory : <?php echo element('view_skin_path', $layout); ?>,
     Skin URL : <?php echo element('view_skin_url', $layout); ?>,
     -->
-  </body>
+</body>
+
 </html>

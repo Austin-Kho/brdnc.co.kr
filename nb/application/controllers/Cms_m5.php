@@ -35,7 +35,7 @@ class Cms_m5 extends CB_Controller
 	 */
 	public function config($mdi = '', $sdi = '')
 	{
-		$this->output->enable_profiler(TRUE); //프로파일러 보기//
+		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		///////////////////////////
 		// 이벤트 라이브러리를 로딩합니다
@@ -462,23 +462,6 @@ class Cms_m5 extends CB_Controller
 			$this->form_validation->set_rules('address1_1', '주소1', 'required');
 			$this->form_validation->set_rules('address2_1', '주소2', 'required');
 
-
-			// // 회사 등록 정보가 있는지 확인
-			// $com_chk = $this->cms_m5_model->is_com_chk();
-
-			// if (!$com_chk) {
-			// 	$view['data'] = array( // 없으면 등록권한 및 새로 등록하라는 변수 전달
-			// 		'auth21' => $auth['_m5_2_1'],
-			// 		'mode' => 'com_reg'
-			// 	);
-			// } else {
-			// 	$view['data'] = array( // 있으면 등록권한, 등록회사정보 및 수정하라는 변수 전달
-			// 		'auth21' => $auth['_m5_2_1'],
-			// 		'com' => $com_chk,
-			// 		'mode' => 'com_modify'
-			// 	);
-			// }
-
 			// 회사 리스트 정보
 			$com_list = $this->cms_m5_model->com_list();
 
@@ -533,11 +516,11 @@ class Cms_m5 extends CB_Controller
 					'red_date' => 'now()'
 				);
 
-				if ($view['mode'] == 'com_reg') {
-					$result = $this->cms_main_model->insert_data('cb_cms_com_info', $com_data);
+				if (!$this->input->get('com_sel')) {
+					$result = $this->cms_main_model->insert_data('cb_cms_com', $com_data);
 					$msg = '등록';
-				} else if ($view['mode'] == 'com_modify') {
-					$result = $this->cms_main_model->update_data('cb_cms_com_info', $com_data, array('seq' => 1));
+				} else {
+					$result = $this->cms_main_model->update_data('cb_cms_com', $com_data, array('seq' => $this->input->get('com_sel')));
 					$msg = '변경';
 				}
 

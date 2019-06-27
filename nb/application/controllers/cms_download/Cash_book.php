@@ -1,11 +1,13 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Cash_book extends CB_Controller {
+class Cash_book extends CB_Controller
+{
 	/**
 	 * [__construct 이 클래스의 생성자]
 	 */
-	public function __construct(){
+	public function __construct()
+	{
 		parent::__construct();
 		$this->load->model('cms_main_model'); //모델 파일 로드
 		$this->load->model('cms_m4_model'); //모델 파일 로드
@@ -15,11 +17,13 @@ class Cash_book extends CB_Controller {
 	 * [index 클래스명 생략시 기본 실행 함수]
 	 * @return [type] [description]
 	 */
-	public function index(){
+	public function index()
+	{
 		$this->excel_file();
 	}
 
-	public function excel_file(){
+	public function excel_file()
+	{
 
 		$data['where'] = $this->input->get('add_where');
 		$data['sc'] = $this->input->get('sc');

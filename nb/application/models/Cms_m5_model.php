@@ -181,7 +181,7 @@ class Cms_m5_model extends CB_Model
 	 */
 	public function is_com_chk()
 	{
-		$qry = $this->db->get('cms_com_info');
+		$qry = $this->db->get('cms_com');
 		if ($result = $qry->row()) {
 			return $result;
 		} else {
@@ -198,8 +198,8 @@ class Cms_m5_model extends CB_Model
 	 */
 	public function com_list()
 	{
-		$qry = $this->db->get('cms_com');
-		if ($result = $qry->result()) {
+		$query = $this->db->get('cms_com');
+		if ($result = $query->result()) {
 			return $result;
 		} else {
 			return FALSE;
