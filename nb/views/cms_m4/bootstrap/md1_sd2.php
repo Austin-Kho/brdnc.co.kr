@@ -16,9 +16,9 @@ else :
                 document.getElementById(b).value = "<?php echo date ( 'Y-m-d' );?>";
             }
 
-            function to_del(code) {
+            function to_del(code, com) {
                 if (del_data = confirm('데이터가 삭제됩니다. 계속 진행하시겠습니까?')) {
-                    location.href = '?del_code=' + code
+                    location.href = '?del_code=' + code + '&com=' + com
                 } else {
                     return false;
                 }
@@ -47,7 +47,7 @@ else :
                 <div class="col-xs-8 col-md-3" style="padding: 6px;">
                     <div class="col-sm-12" style="padding: 0;">
                         <select class="form-control input-sm" name="com_sel" onchange="submit()">
-<!--                            <option value='0'>선 택</option>-->
+                            <option value='0'>선 택</option>
                             <?php foreach ($com_list as $lt) : ?>
                                 <option value="<?php echo $lt->seq; ?>" <? if ( $lt->seq == $this->input->get ( 'com_sel' ) OR $lt->seq == $company ) echo "selected"; ?>><?php echo $lt->co_name; ?></option>
                             <?php endforeach; ?>
@@ -315,7 +315,7 @@ else :
                             <td class="center">
                                 <?php if ($m_auth->mem_is_admin === '1' or $m_auth->mem_level >= 60 or ($m_auth->mem_level < 60 && date ( 'Y-m-d', strtotime ( '-3 day' ) ) <= $lt->deal_date)) : //관리자와 마스터 쓰기권한이 아니면 최근 3일전 건에 대해서만 삭제 가능   ?>
                                 <a href='javascript:' class="btn btn-danger btn-xs"
-                                   onclick="to_del(<?php echo $lt->seq_num; ?>);">
+                                   onclick="to_del(<?php echo $lt->seq_num.', '.$this->input->get('com_sel'); ?>);">
                                     <?php else: ?>
                                     <a href="javascript:" class="btn btn-default btn-xs"
                                        onclick="alert('마스터 관리자가 아니면 3일전 이후 건에 대해서만 삭제 가능합니다.\n\n삭제 필요 시 마스터 관리자에게 요청하여 주십시요.');">
