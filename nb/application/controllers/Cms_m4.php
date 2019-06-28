@@ -186,7 +186,7 @@ class Cms_m4 extends CB_Controller
 
             // Excel_cach_book file 다운로드 Start
             if ($this->input->get('excel_cach_book') === 'ok') {
-                $view['com_title'] = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_com_info WHERE seq=1");
+                $view['com_title'] = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_com WHERE seq=" . $company);
                 $view['cb_list'] = $this->cms_m4_model->cash_book_list($cb_table, $view['where'], '', '', '', 'ASC');
                 $this->load->view('/cms_views/excel/cash_book', $view);
             }

@@ -13,7 +13,7 @@ else :
         $attributes = array('method' => 'get', 'name' => 'list_frm');
         echo form_open ( current_full_url (), $attributes );
         ?>
-        <!--  Todo 회사 정보 선택 입력 및 출력 적용하기 -->
+
         <div class="col-xs-12 col-sm-4 col-md-2 center bg-success" style="padding: 11px;">회사 정보</div>
         <div class="col-xs-12 col-sm-8 col-md-2" style="padding: 5px;">
             <div class="col-xs-12" style="padding: 0;">
