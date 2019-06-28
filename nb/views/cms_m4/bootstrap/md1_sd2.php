@@ -47,9 +47,9 @@ else :
                 <div class="col-xs-8 col-md-3" style="padding: 6px;">
                     <div class="col-sm-12" style="padding: 0;">
                         <select class="form-control input-sm" name="com_sel" onchange="submit()">
-                            <option value='0'>선 택</option>
+<!--                            <option value='0'>선 택</option>-->
                             <?php foreach ($com_list as $lt) : ?>
-                                <option value="<?php echo $lt->seq; ?>" <? if ( $lt->seq == $this->input->get ( 'com_sel' ) ) echo "selected"; ?>><?php echo $lt->co_name; ?></option>
+                                <option value="<?php echo $lt->seq; ?>" <? if ( $lt->seq == $this->input->get ( 'com_sel' ) OR $lt->seq == $company ) echo "selected"; ?>><?php echo $lt->co_name; ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
@@ -57,7 +57,7 @@ else :
 
                 <div class="col-xs-12 col-sm-4 col-md-2 center bg-success" style="padding: 12px;">거래기간</div>
                 <div class="col-xs-7 col-sm-5 col-md-3" style="padding: 6px;">
-                    <div class="col-xs-5" style="padding: 0px;">
+                    <div class="col-xs-5" style="padding: 0px;">:
                         <label for="s_date" class="sr-only">시작일</label>
                         <div>
                             <input type="text" class="form-control input-sm wid-95" id="s_date" name="s_date"

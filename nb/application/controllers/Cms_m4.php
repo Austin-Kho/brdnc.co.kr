@@ -69,7 +69,7 @@ class Cms_m4 extends CB_Controller
         );
 
         // 회사 선택
-        $view['company'] = $company = ($this->input->get ( 'com_sel' )); // 선택한 회사 고유식별 값(아이디)
+        $view['company'] = $company = ($this->input->get ( 'com_sel' )) ? $this->input->get ( 'com_sel' ) : 2; // 선택한 회사 고유식별 값(아이디)
         $view['com_list'] = $this->cms_main_model->sql_result ( ' SELECT * FROM cb_cms_com ' ); // 회사 목록
         if ( $company ) $view['com_now'] = $com_now = $this->cms_main_model->sql_row ( "SELECT * FROM cb_cms_com WHERE seq={$company}" );
 
