@@ -426,13 +426,21 @@ function edit_jh_chk(){
 // 서브밋 체크
 function inout_frm_chk(com){
 
-	var form=document.inout_frm;
+	var form1 = document.base_frm;
+	var form=document.inout_form;
+
+	if(form1.com_sel.value==='0'){
+		alert('회사정보를 선택하세요!');
+		form.com_sel.focus();
+		return;
+	}
 
 	if(!form.deal_date.value){
 		alert('거래일자를 입력하세요!');
 		form.deal_date.focus();
 		return;
 	}
+
 	if(!form.class1_1.value&&!form.class1_2.value&&!form.class1_3.value&&!form.class1_4.value&&!form.class1_5.value&&!form.class1_6.value&&!form.class1_7.value&&!form.class1_8.value&&!form.class1_9.value&&!form.class1_10.value){
 		alert('하나 이상의 거래를 입력하세요!');
 		form.class1_1.focus();

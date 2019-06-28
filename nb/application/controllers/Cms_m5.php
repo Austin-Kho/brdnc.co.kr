@@ -329,9 +329,9 @@ class Cms_m5 extends CB_Controller
                 }
                 if ( $result ) {
                     $ret_url = "?com_sel=" . $this->input->post ( 'com_seq' );
-                    alert ( '정상적으로 처리되었습니다.', base_url ( 'cms_m5/config/1/4/' ) . $ret_url );
+                    alert ( '정상적으로 처리되었습니다.', base_url ( 'cms_m5/config/1/3/' ) . $ret_url );
                 } else {
-                    alert ( '다시 시도하여 주십시요.', base_url ( 'cms_m5/config/1/4/' ) );
+                    alert ( '다시 시도하여 주십시요.', base_url ( 'cms_m5/config/1/3/' ) );
                 }
             }
 
@@ -418,12 +418,12 @@ class Cms_m5 extends CB_Controller
                     $result = $this->cms_main_model->delete_data ( $acc_table, array('seq' => $this->input->post ( 'seq' )) );
                 }
                 if ( $result ) {
-                    alert ( '정상적으로 처리되었습니다.', base_url ( 'cms_m5/config/1/3/' ) );
+                    $ret_url = "?com_sel=" . $this->input->post ( 'com_seq' );
+                    alert ( '정상적으로 처리되었습니다.', base_url ( 'cms_m5/config/1/4/' ) . $ret_url );
                 } else {
-                    alert ( '다시 시도하여 주십시요.', base_url ( 'cms_m5/config/1/3/' ) );
+                    alert ( '다시 시도하여 주십시요.', base_url ( 'cms_m5/config/1/4/' ) );
                 }
             }
-
 
 
             // 2. 회사정보관리 1. 회사정보 ////////////////////////////////////////////////////////////////////
