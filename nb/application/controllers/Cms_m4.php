@@ -246,7 +246,6 @@ class Cms_m4 extends CB_Controller
             // 폼 검증 라이브러리 로드
             $this->load->library ( 'form_validation' ); // 폼 검증
             // 폼 검증할 필드와 규칙 사전 정의
-            $this->form_validation->set_rules ( 'com_sel', '회사정보', 'required' );
             $this->form_validation->set_rules ( 'deal_date', '거래일자', 'required' );
 
             if ( $this->input->post ( 'class1_1' ) ) {
@@ -314,7 +313,6 @@ class Cms_m4 extends CB_Controller
 
             if ( $this->form_validation->run () !== FALSE ) {
                 // form(inout_frm-post)에서 받은 데이터
-                $company = $this->input->post ( 'com_sel', TRUE );
                 $deal_date = $this->input->post ( 'deal_date', TRUE );
                 $worker = $this->session->userdata['mem_username'];
 

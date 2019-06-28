@@ -33,7 +33,7 @@ class Capital_cash_book extends CB_Controller
 		// $this->output->enable_profiler(TRUE);
 
 		$seq_id = $this->uri->segment(4);
-		$data['row'] = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_capital_cash_book WHERE=seq_num={$seq_id}");
+		$data['row'] = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_capital_cash_book WHERE seq_num={$seq_id}");
 
 		// 계정별 세부계정과목 구하기
 		for($i=1; $i<=5; $i++) : // 자본/부채/자산/수익/비용->(5)

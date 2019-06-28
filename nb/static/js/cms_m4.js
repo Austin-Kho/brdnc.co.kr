@@ -427,7 +427,7 @@ function edit_jh_chk(){
 function inout_frm_chk(com){
 
 	var form1 = document.base_frm;
-	var form=document.inout_form;
+	var form=document.inout_frm;
 
 	if(form1.com_sel.value==='0'){
 		alert('회사정보를 선택하세요!');

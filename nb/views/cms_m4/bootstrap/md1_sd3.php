@@ -26,7 +26,7 @@ else :
         </form>
 
         <?php
-        $attributes = array('name' => 'inout_form');
+        $attributes = array('name' => 'inout_frm');
         $hidden = array(
             'cont_1_h' => '', // 수수료 발생 시 - 적요_1
             'cont_2_h' => '', // 수수료 발생 시 - 적요_2
