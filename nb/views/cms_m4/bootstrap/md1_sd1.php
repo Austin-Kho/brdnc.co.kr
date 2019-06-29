@@ -3,10 +3,21 @@ if ( $auth11 < 1 ) :
     include ('no_auth.php');
 else :
     ?>
+    <script>
+        function excel_open() {
+            var form = document.d_cash_book_frm;
+            if (form.com_sel.value === '0') {
+                alert('회사 정보를 선택해 주세요!');
+                form.com_sel.focus();
+                return;
+            }
+            location.href = cb_url + '/cms_download/daily_money_report/download?com_sel=' + form.com_sel.value + '&ref_date=' + form.ref_date.value;
+        }
+    </script>
     <div class="main_start">
         <!-- 4. 본사관리 -> 1. 자금관리 ->1. 자금일보 페이지 -->
 
-        <a href="<?php echo base_url ( '/cms_download/daily_money_report/download?ref_date=' ) . $ref_date; ?>">
+        <a href="javascript:excel_open()">
             <img src="<?php echo base_url ( 'static/img/excel_icon.jpg' ); ?>" height="14" border="0" alt="EXCEL 아이콘"
                  style="margin-top: -3px;"/> EXCEL로 출력
         </a>

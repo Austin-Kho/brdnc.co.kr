@@ -146,13 +146,13 @@ class Cms_m4 extends CB_Controller
             $view['da_in'] = $this->cms_m4_model->select_data_lt ( "cb_cms_capital_cash_book", "account, cont, acc, inc, note", " com_seq={$company} AND (com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='{$view['ref_date']}'", "", "seq_num" );
 
             // $aaq="SELECT SUM(inc) AS total_inc FROM cb_cms_capital_cash_book WHERE (com_div>0 AND class2<>8) AND (class1='1' or class1='3') AND deal_date='$ref_date'";
-            $view['da_in_total'] = $this->cms_m4_model->da_in_total ( 'cb_cms_capital_cash_book', $view['ref_date'], " com_seq={$company} " );
+            $view['da_in_total'] = $this->cms_m4_model->da_in_total ( 'cb_cms_capital_cash_book', $company, $view['ref_date'] );
 
             $da_ex_qry = "SELECT account, cont, acc, exp, note FROM cb_cms_capital_cash_book WHERE com_seq={$company} AND (com_div>0) AND (class1='2' or class1='3') AND deal_date='{$ref_date}' order by seq_num";
             $view['da_ex'] = $this->cms_m4_model->select_data_lt ( "cb_cms_capital_cash_book", "account, cont, acc, exp, note", " com_seq={$company} AND (com_div>0) AND (class1='2' or class1='3') AND deal_date='{$view['ref_date']}'", "", "seq_num" );
 
             // $bbq="SELECT SUM(exp) AS total_exp FROM cb_cms_capital_cash_book WHERE (com_div>0) AND (class1='2' or class1='3') AND deal_date='$ref_date'";
-            $view['da_ex_total'] = $this->cms_m4_model->da_ex_total ( 'cb_cms_capital_cash_book', $view['ref_date'], " com_seq={$company} " );
+            $view['da_ex_total'] = $this->cms_m4_model->da_ex_total ( 'cb_cms_capital_cash_book', $company, $view['ref_date'] );
 
 
             // 자금 현황 2. 입출금 내역 ////////////////////////////////////////////////////////////////////
