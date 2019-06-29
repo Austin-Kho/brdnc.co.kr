@@ -470,9 +470,14 @@ function inout_frm_chk(com){
 					return;
 				}
 			}
-			if(eval('form.class2_'+i).value<6){
+			if(eval('form.class2_'+i).value<'6'){
 				if(d1_acc1_id.value==='0'&&d1_acc2_id.value==='0'&&d1_acc3_id.value==='0'&&d1_acc4_id.value==='0'&&d1_acc5_id.value==='0'){
 					alert('계정과목을 선택하여 주십시요!');
+					d1_acc1_id.focus();
+					d1_acc2_id.focus();
+					d1_acc3_id.focus();
+					d1_acc4_id.focus();
+					d1_acc5_id.focus();
 					return;
 				}
 			}
