@@ -463,23 +463,23 @@ function inout_frm_chk(com){
 
 		if(eval('form.class1_'+i).value){
 
-			if(eval('form.class2_'+i).value=='7'){
-				if(!eval('form.pj_seq_'+i).value){
-					alert('전도금을 대체(이체)할 현장을 선택하여 주십시요!');
-					eval('form.pj_seq_'+i).focus();
-					return;
-				}
-			}
-			if(eval('form.jh_loan_'+i).checked===true){ // 조합여부 체크박스
-				if(!eval('form.pj_seq_'+i).value){ // 조합현장 선택목록
-					alert('대여금을 지급하는 현장을 선택하세요!');
+			if(eval('form.class2_'+i).value==='7'){
+				if(eval('form.pj_seq_'+i).value==='0'){
+					alert('전도금을 대체(이체)할 현장(프로젝트)을 선택하여 주십시요!');
 					eval('form.pj_seq_'+i).focus();
 					return;
 				}
 			}
 			if(eval('form.class2_'+i).value<6){
-				if(!d1_acc1_id.value&&!d1_acc2_id.value&&!d1_acc3_id.value&&!d1_acc4_id.value&&!d1_acc5_id.value){
+				if(d1_acc1_id.value==='0'&&d1_acc2_id.value==='0'&&d1_acc3_id.value==='0'&&d1_acc4_id.value==='0'&&d1_acc5_id.value==='0'){
 					alert('계정과목을 선택하여 주십시요!');
+					return;
+				}
+			}
+			if(eval('form.jh_loan_'+i).checked===true){ // 조합여부 체크박스
+				if(eval('form.pj_seq_'+i).value==='0'){ // 조합현장 선택목록
+					alert('대여금 또는 사업비를 지급하는 프로젝트를 선택하세요!');
+					eval('form.pj_seq_'+i).focus();
 					return;
 				}
 			}
@@ -544,8 +544,7 @@ function inout_frm_chk(com){
 		}
 	}
 
-	var aaa=confirm('거래내용을 등록하시겠습니까???');
-	if(aaa==true){
+	if(confirm('거래내용을 등록하시겠습니까???')==true){
 		form.submit();
 	}
 }

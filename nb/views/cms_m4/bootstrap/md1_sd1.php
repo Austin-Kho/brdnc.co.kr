@@ -194,27 +194,27 @@ else :
                         <td class="right"><?php if ( $jh_yd_tot == 0 ) {
                                 echo "-";
                             } else {
-                                echo number_format ( $jh_yd_tot );
+                                echo number_format ( $jh_yd_tot ); // 전일 잔액 합계
                             } ?></td>
                         <td class="right">
                             <font color="#ff3300"><?php if ( $jh_td_exp == 0 ) {
                                     echo "-";
                                 } else {
-                                    echo number_format ( $jh_td_exp );
+                                    echo number_format ( $jh_td_exp ); // 금일 대여 합계
                                 } ?></font>
                         </td>
                         <td class="right">
                             <font color="#0066ff"><?php if ( $jh_td_inc == 0 ) {
                                     echo "-";
                                 } else {
-                                    echo number_format ( $jh_td_inc );
+                                    echo number_format ( $jh_td_inc ); // 금일 회수 합계
                                 } ?></font>
                         </td>
                         <td class="right">
                             <font color="#000099"><?php if ( $jh_td_tot == 0 ) {
                                     echo "-";
                                 } else {
-                                    echo number_format ( $jh_td_tot );
+                                    echo number_format ( $jh_td_tot ); // 금일 잔액 합계
                                 } ?></font>
                         </td>
                     </tr>
