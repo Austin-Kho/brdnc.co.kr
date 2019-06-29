@@ -73,6 +73,8 @@ class Cms_m4 extends CB_Controller
         $view['com_list'] = $this->cms_main_model->sql_result ( ' SELECT * FROM cb_cms_com ' ); // 회사 목록
         if ( $company ) $view['com_now'] = $com_now = $this->cms_main_model->sql_row ( "SELECT * FROM cb_cms_com WHERE seq={$company}" );
 
+
+
         // 자금 현황 1. 자금일보 ////////////////////////////////////////////////////////////////////
         if ( $mdi == 1 && $sdi == 1 ) {
 
@@ -80,6 +82,9 @@ class Cms_m4 extends CB_Controller
             $auth = $this->cms_main_model->auth_chk ( '_m4_1_1', $this->session->userdata['mem_id'] );
             // 불러올 페이지에 보낼 조회 권한 데이터
             $view['auth11'] = $auth['_m4_1_1'];
+
+            // 회사 선택 재정의 (post용)
+            $view['company'] = $company = $this->input->post ( 'com_sel' ) ? $this->input->post ( 'com_sel' ) : 0; // 선택한 회사 고유식별 값(아이디)
 
             // 자금일보 검색 일자
             $view['ref_date'] = $this->input->post ( 'ref_date', TRUE );
