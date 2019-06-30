@@ -12,7 +12,7 @@ else :
         $attributes = array('method' => 'get', 'name' => 'base_frm');
         echo form_open ( current_full_url (), $attributes );
         ?>
-        <div class="col-xs-4 col-md-2 center bg-success" style="padding: 12px;">회사 정보</div>
+        <div class="col-xs-4 col-md-2 center bg-info" style="padding: 12px;">회사 정보</div>
         <div class="col-xs-8 col-md-2" style="padding: 6px;">
             <div class="col-sm-12" style="padding: 0;">
                 <select class="form-control input-sm" name="com_sel" onchange="submit()">

@@ -13,7 +13,7 @@ else :
         $attributes = array('method' => 'get', 'name' => 'list_frm');
         echo form_open ( current_full_url (), $attributes );
         ?>
-        <div class="col-xs-12 col-sm-4 col-md-2 center bg-success" style="padding: 11px;">회사 정보</div>
+        <div class="col-xs-12 col-sm-4 col-md-2 center bg-info" style="padding: 11px;">회사 정보</div>
         <div class="col-xs-12 col-sm-8 col-md-2" style="padding: 5px;">
             <div class="col-xs-12" style="padding: 0;">
                 <select class="form-control input-sm" name="com_sel" onchange="submit();">

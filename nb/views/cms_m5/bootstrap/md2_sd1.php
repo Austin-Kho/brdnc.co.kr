@@ -11,7 +11,7 @@ else :
 		$attributes = array('method' => 'get', 'name' => 'list_frm');
 		echo form_open(current_full_url(), $attributes);
 		?>
-		<div class="bg-success col-xs-12 col-sm-2 bo-top bo-bottom" style="padding-top: 10px; margin-bottom: 20px; height: 40px;">회사 정보</div>
+		<div class="bg-info col-xs-12 col-sm-2 bo-top bo-bottom" style="padding-top: 10px; margin-bottom: 20px; height: 40px;">회사 정보</div>
 		<div class="col-xs-12 col-sm-10 bo-top bo-bottom" style="height: 40px; padding-top: 4px;">
 			<div class="col-sm-3" style="padding: 0;">
 				<select class="form-control input-sm" name="com_sel" onchange="submit();">
