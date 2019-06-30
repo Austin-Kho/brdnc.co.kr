@@ -30,7 +30,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 sftp-config.json
 
 ## Atom sftp files
-*.ftpconfig
+.ftpconfig
 
 ## wp
 wp/wp-content/uploads/*
@@ -62,4 +62,4 @@ _ide_helper.php
 package-lock.json
 
 # vscode
-.vscode/sftp.json
+/.vscode
