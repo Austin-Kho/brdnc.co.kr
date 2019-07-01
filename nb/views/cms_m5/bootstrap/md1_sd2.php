@@ -13,9 +13,9 @@ else :
         $attributes = array('method' => 'get', 'name' => 'list_frm');
         echo form_open ( current_full_url (), $attributes );
         ?>
-        <div class="col-xs-12 col-sm-4 col-md-2 center bg-info" style="padding: 11px;">회사 정보</div>
-        <div class="col-xs-12 col-sm-8 col-md-2" style="padding: 5px;">
-            <div class="col-xs-12" style="padding: 0;">
+        <div class="col-xs-4 col-md-2 center bg-info" style="padding: 11px;">회사 정보</div>
+        <div class="col-xs-8 col-md-2" style="padding: 5px;">
+            <div class="col-xs-12">
                 <select class="form-control input-sm" name="com_sel" onchange="submit();">
                     <option value='0'>선 택</option>
                     <?php foreach ($com_list as $lt) : ?>
@@ -25,8 +25,8 @@ else :
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-4 col-md-2 bg-success center" style="height: 40px; padding-top: 10px;">부서 정보</div>
-        <div class="col-xs-12 col-sm-8 col-md-2" style="height: 40px; padding-top: 5px;">
+        <div class="col-xs-4 col-md-2 bg-success center" style="height: 40px; padding-top: 10px;">부서 정보</div>
+        <div class="col-xs-8 col-sm-3 col-md-2" style="height: 40px; padding-top: 5px;">
             <div class="col-xs-12" style="padding: 0;">
                 <select class="form-control input-sm" name="div_sel" onchange="submit();">
                     <option value="">전 체</option>
@@ -37,12 +37,12 @@ else :
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-10 col-md-3" style="height: 40px; padding-top: 5px;">
+        <div class="col-xs-12 col-sm-4 col-md-3" style="height: 40px; padding-top: 5px;">
             <input type="text" class="form-control input-sm" name="mem_search" placeholder="(임)직원 검색"
                    value="<?php if ( $this->input->get ( 'mem_search' ) ) echo $this->input->get ( 'mem_search' ); ?>"
                    onkeydown="if(event.keyCode==13)submit();">
         </div>
-        <div class="col-xs-12 col-sm-2 col-md-1 right"
+        <div class="col-xs-12 col-sm-1 col-md-1 right"
              style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
             <button class="btn btn-primary btn-sm"> 검 색</button>
         </div>

@@ -55,8 +55,8 @@ else :
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-4 col-md-2 center bg-success" style="padding: 12px;">거래기간</div>
-                <div class="col-xs-7 col-sm-5 col-md-3" style="padding: 6px;">
+                <div class="col-xs-12 col-md-2 center bg-success" style="padding: 12px;">거래기간</div>
+                <div class="col-xs-7 col-md-3" style="padding: 6px;">
                     <div class="col-xs-5" style="padding: 0px;">
                         <label for="s_date" class="sr-only">시작일</label>
                         <div>
