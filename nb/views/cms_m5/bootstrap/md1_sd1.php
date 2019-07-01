@@ -14,8 +14,8 @@ else :
         echo form_open ( current_full_url (), $attributes );
         ?>
 
-        <div class="col-xs-4 col-md-2 center bg-info" style="padding: 11px;">회사 정보</div>
-        <div class="col-xs-8 col-md-2" style="padding: 5px;">
+        <div class="col-xs-4 col-md-2 center bg-info" style="height: 40px; line-height: 40px;">회사 정보</div>
+        <div class="col-xs-8 col-md-2" style="height: 40px; line-height: 40px;">
             <div class="col-xs-12" style="padding: 0;">
                 <select class="form-control input-sm" name="com_sel" onchange="submit();">
                     <option value='0'>선 택</option>
@@ -26,8 +26,8 @@ else :
             </div>
         </div>
 
-        <div class="col-xs-4 col-md-2 bg-success center" style="height: 40px; padding-top: 10px;">부서 정보</div>
-        <div class="col-xs-8 col-sm-3 col-md-2" style="height: 40px; padding-top: 5px;">
+        <div class="col-xs-4 col-md-2 bg-success center" style="height: 40px; line-height: 40px;">부서 정보</div>
+        <div class="col-xs-8 col-sm-3 col-md-2" style="height: 40px; line-height: 40px;">
             <div class="col-xs-12" style="padding: 0;">
                 <select class="form-control input-sm" name="div_sel"
                         onchange="submit();" <?php if ( !$this->input->get ( 'com_sel' ) ) echo 'disabled' ?>>
@@ -45,7 +45,7 @@ else :
                    onkeydown="if(event.keyCode==13)submit();">
         </div>
         <div class="col-xs-12 col-sm-1 col-md-1 right"
-             style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
+             style="background-color: #F4F4F4; height: 40px; line-height: 40px;">
             <button class="btn btn-primary btn-sm"> 검 색</button>
         </div>
         </form>

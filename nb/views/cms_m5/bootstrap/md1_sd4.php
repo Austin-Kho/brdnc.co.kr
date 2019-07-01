@@ -15,8 +15,8 @@ else :
                 $attributes = array('method' => 'get', 'name' => 'list_frm');
                 echo form_open ( current_full_url (), $attributes );
                 ?>
-                <div class="bg-success col-md-2" style="height: 40px; padding-top: 10px;">업체구분</div>
-                <div class="col-md-7" style="height: 40px; padding-top: 5px;">
+                <div class="col-xs-4 col-md-2 bg-success center" style="height: 40px; line-height: 40px;">업체구분</div>
+                <div class="col-xs-8 col-md-7" style="height: 40px; line-height: 40px;">
                     <div class="col-md-3" style="padding: 0;">
                         <select class="form-control input-sm" name="acc_sort" onchange="submit();">
                             <option value="">전 체</option>
@@ -32,12 +32,12 @@ else :
                         </select>
                     </div>
                 </div>
-                <div class="col-md-2" style="height: 40px; padding-top: 5px;">
+                <div class="col-xs-12 col-md-2" style="height: 40px; line-height: 40px;">
                     <input type="text" class="form-control input-sm" name="acc_search" placeholder="거래처 검색"
                            value="<?php if ( $this->input->get ( 'acc_search' ) ) echo $this->input->get ( 'acc_search' ); ?>"
                            onkeydown="if(event.keyCode==13)submit();">
                 </div>
-                <div class="col-md-1 right" style="background-color: #F4F4F4; height: 40px; padding-top: 5px;">
+                <div class="col-xs-12 col-md-1 right" style="background-color: #F4F4F4; height: 40px; line-height: 40px;">
                     <button class="btn btn-primary btn-sm"> 검 색</button>
                 </div>
                 </form>
