@@ -12,6 +12,15 @@ class Daily_money_report extends CB_Controller {
 		$this->load->helper('cms_cut_string');
 	}
 
+    /**
+     * [index 클래스명 생략시 기본 실행 함수]
+     * @return [type] [description]
+     */
+    public function index()
+    {
+        $this->download();
+    }
+
 	public function download(){
 
 		/** 데이터 가져오기 시작 **/

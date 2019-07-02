@@ -166,7 +166,7 @@ class Cms_m4 extends CB_Controller
             $view['m_auth'] = $m_auth;
 
 
-            $view['where'] = " (cb_cms_capital_cash_book.com_seq={$company} AND com_div>0 AND ((in_acc=no AND class2<>7) OR out_acc=no) OR (com_div IS NULL AND in_acc=no AND class2=6)) ";
+            $view['where'] = "(cb_cms_capital_cash_book.com_seq={$company} AND com_div>0 AND ((in_acc=no AND class2<>7) OR out_acc=no) OR (com_div IS NULL AND in_acc=no AND class2=6)) ";
 
             // 검색어 get 데이터
             $sh_frm = array(

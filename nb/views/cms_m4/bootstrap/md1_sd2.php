@@ -7,6 +7,17 @@ else :
         <!-- 4. 본사관리 -> 1. 자금관리 ->2. 입출금 내역 페이지 -->
 
         <script type="text/javascript">
+
+            function excel_open(url) {
+                var form = document.cash_book_frm;
+                if (form.com_sel.value === '0') {
+                    alert('회사 정보를 선택해 주세요!');
+                    form.com_sel.focus();
+                    return;
+                }
+                location.href = url;
+            }
+
             function term_put(a, b, term) {
                 if (term == 'd') var term = "<?php echo date ( 'Y-m-d' ); ?>";
                 if (term == 'w') var term = "<?php echo date ( 'Y-m-d', strtotime ( '-1 weeks' ) );?>";
@@ -29,8 +40,9 @@ else :
         $url_s_date = rawurlencode ( $this->input->get ( 's_date' ) );
         $url_e_date = rawurlencode ( $this->input->get ( 'e_date' ) );
         if ( $this->input->get ( 'search_text' ) == "" ) $sc = 0; else $sc = 1;
+            $excel_url = base_url('cms_download/cash_book') . "?add_where=" . $url_where . "&sc=" . $sc . "&com=".$this->input->get('com_sel');
         ?>
-        <a href="<?php echo base_url ( 'cms_download/cash_book' ) . "?add_where=" . $url_where . "&sc=" . $sc; ?>">
+        <a href="javascript:excel_open('<?php echo $excel_url; ?>')">
             <img src="<?php echo base_url ( 'static/img/excel_icon.jpg' ); ?>" height="14" border="0" alt="EXCEL 아이콘"
                  style="margin-top: -3px;"/> EXCEL로 출력
         </a>

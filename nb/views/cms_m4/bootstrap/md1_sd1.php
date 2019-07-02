@@ -11,7 +11,7 @@ else :
                 form.com_sel.focus();
                 return;
             }
-            location.href = cb_url + '/cms_download/daily_money_report/download?com_sel=' + form.com_sel.value + '&ref_date=' + form.ref_date.value;
+            location.href = cb_url + '/cms_download/daily_money_report?com_sel=' + form.com_sel.value + '&ref_date=' + form.ref_date.value;
         }
     </script>
     <div class="main_start">
