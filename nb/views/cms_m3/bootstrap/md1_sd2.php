@@ -547,7 +547,9 @@ foreach($pay_sche as $lt) : ?>
   $p++;
   $sche_num = count($pay_sche)==0 ? 1 : count($pay_sche);
   for($j=0; $j<$sche_num; $j++) :
-  $pmt = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_payment WHERE pj_seq='$project' AND price_seq='".$p_seq."' AND pay_sche_seq='".$pay_sche[$j]->seq."' ");
+    if ($this->input->get('pay_sort')!=='') :
+      $pmt = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_payment WHERE pj_seq='$project' AND price_seq='".$p_seq."' AND pay_sche_seq='".$pay_sche[$j]->seq."' ");
+    endif;
 ?>
             <td style="background-color: ; padding: 3px;">
               <div style="color: #B00448;">

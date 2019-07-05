@@ -399,8 +399,8 @@ foreach ($cont_data as $lt) :
 		$n++;
 	}
 	$condi = ($view['bill_issue']->pay_code <= $is_paid)
-		? "<span style='color: #2205D0;'>".$view['pay_sche']->pay_name." 완납 중</span>"
-		: "<span style='color: #CD0505;'>".$view['pay_sche']->pay_name." 미납 중</span>";
+		? "<span style='color: #2205D0;'>" . $view['pay_sche']->pay_name . " 완납 중</span>"
+		: "<span style='color: #CD0505;'>" . $view['pay_sche']->pay_name . " 미납 중</span>";
 	$chk_con = ($view['bill_issue']->pay_code <= $is_paid)
 		? "disabled"
 		: "";

@@ -402,7 +402,7 @@ class Board_write extends CB_Controller
         $form_validation = $this->form_validation->run();
 
         $file_error = '';
-        $uploadfiledata = '';
+        $uploadfiledata = array();
 
         if (element('use_upload_file', $board)) {
             $check = array(
@@ -555,7 +555,7 @@ class Board_write extends CB_Controller
 
                 foreach ($_FILES['post_file']['name'] as $i => $value) {
                     if ($value) {
-                        $uploadconfig = '';
+                        $uploadconfig = array();
                         $uploadconfig['upload_path'] = $upload_path;
                         $uploadconfig['allowed_types']
                             = element('upload_file_extension', $board)

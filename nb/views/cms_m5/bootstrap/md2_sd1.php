@@ -765,7 +765,7 @@ else :
 			$btn_css = (!$this->input->get('com_sel')) ? "btn-primary" : "btn-success";
 			$mode = (!$this->input->get('com_sel')) ? "com_reg" : "com_modify";
 
-			if ($data['auth21'] < 2) {
+			if ($auth21 < 2) {
 				$submit_str = "alert('등록 권한이 없습니다!')";
 			} else {
 				$submit_str = "com_submit('" . $mode . "');";

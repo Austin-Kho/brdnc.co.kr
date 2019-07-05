@@ -93,7 +93,7 @@ else :
             <div class="col-md-12"
                  style="height: 70px; padding: 26px 15px; margin: 18px 0; border-width: 0 0 1px 0; border-style: solid; border-color: #B2BCDE;">
                 <?
-                if ( $auth14 < 2 ) {
+                if ( $auth13 < 2 ) {
                     $submit_str = "alert('등록 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
                     $del_str = "alert('삭제 권한이 없습니다. 관리자에게 문의하여 주십시요!')";
                 } else {

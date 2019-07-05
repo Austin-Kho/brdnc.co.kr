@@ -688,10 +688,10 @@ if ( ! function_exists('display_html_content')) {
 
         $content = preg_replace_callback(
             "/{&#51648;&#46020;\:([^}]*)}/is",
-            create_function('$match', '
-                 global $thumb_width;
+            function($match) {
+                global $thumb_width;
                  return get_google_map($match[1], $thumb_width);
-            '),
+             },
             $content
         ); // Google Map
 

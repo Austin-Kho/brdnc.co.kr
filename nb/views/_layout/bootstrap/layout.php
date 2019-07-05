@@ -18,8 +18,7 @@
     <meta name="author" content="<?php echo html_escape(element('meta_author', $layout)); ?>"><?php } ?>
   <?php if (element('favicon', $layout)) { ?>
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo element('favicon', $layout); ?>" /><?php } ?>
-  <?php if (element('canonical', $view)) { ?>
-    <link rel="canonical" href="<?php echo element('canonical', $view); ?>" /><?php } ?>
+    <link rel="canonical" href="<?php echo base_url(); ?>" />
 
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" />
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/css/bootstrap-theme.min.css'); ?>" />

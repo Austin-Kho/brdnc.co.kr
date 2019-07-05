@@ -74,7 +74,7 @@ endif;?>
 ?>
 			<fieldset class="font12">
 				<div class="row bo-top" style="padding-top: 15px;">
-<?php // if($this->input->get('un')) : ?>
+<?php if($this->input->get('un')!=='') : ?>
 					<input type="hidden" name="user_id" value="<?php echo $sel_user->mem_userid; ?>">
 					<div class="row bo-tb" style="margin: 0 0 15px;">
 						<div class="col-sm-12 col-xs-6" style="padding: 0;">
@@ -94,7 +94,7 @@ endif;?>
 							</div>
 						</div>
 					</div>
-<?php // endif; ?>
+<?php endif; ?>
 				</div>
 				<div class="row" style="margin: 0;">
 					<div class="table-responsive" style="padding: 0;">

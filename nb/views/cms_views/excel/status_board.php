@@ -16,6 +16,7 @@ if(strlen($max_fl->max_ho)==4) $view['max_floor'] = substr($max_fl->max_ho, -4,2
 $dong_data = $this->cms_main_model->sql_result(" SELECT dong FROM cb_cms_project_all_housing_unit WHERE pj_seq='$pj_seq' GROUP BY dong ");
 
 // 총 라인 수 구하기
+$total_line = 0;
 for($a=0; $a<count($dong_data); $a++) :
   $d = $dong_data[$a]->dong;
   $line_num = $view['line_num'][$a] = $this->cms_main_model->sql_row(
@@ -43,7 +44,7 @@ if(!empty($type)) :
   endfor;
 endif;
 
-$type_num = count($type[name]);
+$type_num = count($type['name']);
 
 // ------------------- 데이터 가져오기 종료 -------------------//
 

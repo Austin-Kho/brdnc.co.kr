@@ -38,8 +38,7 @@ class Cms_m2 extends CB_Controller
 		$eventname = 'event_main_index';
 		$this->load->event($eventname);
 
-		$view = array();
-		$view['data'] = array();
+		$view['data'] = $view = array();
 
 		// 이벤트가 존재하면 실행합니다
 		$view['data']['event']['before'] = Events::trigger('before', $eventname);

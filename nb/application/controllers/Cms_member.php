@@ -98,9 +98,9 @@ class Cms_member extends CB_Controller
 		 */
 
 			if ($use_login_account === 'both') {
-				$userinfo = $this->Member_model->get_by_both($this->input->post('user_data'), 'mem_id, mem_userid, mem_username, mem_level, request, mem_is_admin');
+				$userinfo = $this->Member_model->get_by_both($this->input->post('user_data'), 'mem_id, mem_userid, mem_email, mem_username, mem_level, request, mem_is_admin');
 			} elseif ($use_login_account === 'email') {
-				$userinfo = $this->Member_model->get_by_email($this->input->post('user_data'), 'mem_id, mem_userid, mem_username, mem_level, request, mem_is_admin');
+				$userinfo = $this->Member_model->get_by_email($this->input->post('user_data'), 'mem_id, mem_userid, mem_email, mem_level, request, mem_is_admin');
 			} else {
 				$userinfo = $this->Member_model->get_by_userid($this->input->post('user_data'), 'mem_id, mem_userid, mem_username, mem_level, request, mem_is_admin');
 			}

@@ -9,6 +9,10 @@ else :
 <?php
   $attributes = array('method' => 'get', 'name' => 'form1');
   echo form_open(current_full_url(), $attributes);
+
+  $start_year = "2015";
+  $yr = (!$this->input->get('yr')) ? :$this->input->get('yr');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
+  $year=range($start_year,date('Y'));
 ?>
 		<div class="row bo-top bo-bottom font12" style="margin: 0;">
 			<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">사업 개시년도</div>
@@ -18,9 +22,7 @@ else :
 					<select class="form-control input-sm" name="yr" onchange="submit();">
 						<option value=""> 전 체
 <?php
-  $start_year = "2015";
-  // if(!$yr) $yr=date('Y');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
-  $year=range($start_year,date('Y'));
+  
   for($i=(count($year)-1); $i>=0; $i--) :
 ?>
 						<option value="<?php echo $year[$i]?>" <?php if($this->input->get('yr')==$year[$i]) echo "selected"; ?>><?php echo $year[$i]."년"?>
@@ -35,7 +37,7 @@ else :
 					<select class="form-control input-sm" name="project" onchange="submit();">
 						<option value="0"> 전 체
 <?php foreach($pj_list as $lt) : ?>
-						<option value="<?php echo $lt->seq; ?>" <?php if(( !$this->input->post('project') && $lt->seq=='1') OR $this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?>
+						<option value="<?php echo $lt->seq; ?>" <?php if($this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?>
 <?php endforeach; ?>
 					</select>
 				</div>
@@ -98,7 +100,7 @@ $ci = 0;
 foreach($now_payer as $lt) :
 	$cm = ($ci==0) ? "" : " / ";
  	$dong_ho = explode("-", $lt->unit_dong_ho);
- 	echo $del_op.$cm."<a ".$red_style." href='".base_url('cms_m1/sales/2/2?yr='.$yr.'project='.$project.'&payer='.$this->input->get('payer').'&dong='.$dong_ho[0].'&ho='.$dong_ho[1])."'>".$lt->contractor."(".$lt->unit_dong_ho.")</a>".$del_cl;
+ 	echo $del_op . $cm . "<a " . $red_style . " href='" . base_url('cms_m1/sales/2/2?yr=' . $yr . '&project=' . $project . '&payer=' . $this->input->get('payer') . '&dong=' . $dong_ho[0] . '&ho=' . $dong_ho[1]) . "'>" . $lt->contractor . "(" . $lt->unit_dong_ho . ")</a>" . $del_cl;
 	$ci+=1;
 ?>
 <?php endforeach; ?>
@@ -289,10 +291,12 @@ foreach($now_payer as $lt) :
 <?php
 foreach($pay_sche as $lt) :
 	$pay_name = ($lt->pay_disc!=='') ? $lt->pay_disc : $lt->pay_name;
+	$due_date = "-";
+	$compair = "-";
 
-	if($lt->pay_time==1 && !empty($cont_data)) $due_date = $cont_data->cont_date;
-	if($lt->pay_time==2 && !empty($cont_data)) $due_date = date('Y-m-d', strtotime($cont_data->cont_date."+1months"));
-	if($lt->pay_time>2) $due_date = ($lt->pay_due_date!=='0000-00-00') ? $lt->pay_due_date : "";
+	if($lt->pay_time==1 && !empty($cont_data)) $due_date = $cont_data->cont_date; // 계약일자
+	if($lt->pay_time==2 && !empty($cont_data)) $due_date = date('Y-m-d', strtotime($cont_data->cont_date."+1months")); // 계약 1개월 후
+	if($lt->pay_time>2) $due_date = ($lt->pay_due_date=='0000-00-00') ? "-" :$lt->pay_due_date; // DB 기록 없는 경우
 
 	if( !empty($cont_data)) {
 		$ppsche = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS pps FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' AND pay_sche_code='$lt->pay_code' ");
@@ -304,11 +308,13 @@ foreach($pay_sche as $lt) :
 
 ?>
 						<tr class="<?php if(empty($cont_data)) echo "active"; ?>">
-							<td style="color: <?php if(date('Y-md')>$due_date) echo '#d00202' ?>;"><?php echo $due_date; ?></td>
+							<td style="color: <?php if(date('Y-m-d')>$due_date) echo '#d00202' ?>;"><?php echo $due_date; ?></td>
 							<td><?php echo $pay_name; ?></td>
 							<td class="right"><?php if( !empty($payment))echo number_format($payment->payment); ?></td>
 							<td class="right" style="color: #0427A4;"><?php if( !empty($ppsche)) echo $paid_per_sche; ?></td>
-							<td class="right" style="color: <?php if( !empty($ppsche)) echo $col; ?>;"><?php if(( !empty($ppsche) && $lt->pay_code<3) OR !empty($due_date)) echo $compair; ?></td>
+							<td class="right" style="color: <?php if( !empty($ppsche)) echo $col; ?>;">
+								<?php if(( !empty($ppsche) && $lt->pay_code<3) OR !empty($due_date)) echo $compair; ?>
+							</td>
 						</tr>
 <?php endforeach; ?>
 					</tbody>

@@ -32,15 +32,14 @@ class Cms_m1 extends CB_Controller {
 	 * @return [type]      [description]
 	 */
 	public function sales($mdi='', $sdi=''){
-		// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+		$this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 		///////////////////////////
 		// 이벤트 라이브러리를 로딩합니다
 		$eventname = 'event_main_index';
 		$this->load->event($eventname);
 
-		$view = array();
-		$view['data'] = array();
+		$view['data'] = $view = array();
 
 		// 이벤트가 존재하면 실행합니다
 		$view['data']['event']['before'] = Events::trigger('before', $eventname);
@@ -66,8 +65,8 @@ class Cms_m1 extends CB_Controller {
 
 		// 등록된 프로젝트 데이터
 		$where = "";
-		if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
-		$project = $view['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
+		if($this->input->get('yr') !=="") $where=" WHERE biz_start_ym LIKE '{$this->input->get('yr')}%' ";
+		$project = $view['project'] = (!$this->input->get('project')) ? '1' : $this->input->get('project'); // 선택한 프로젝트 고유식별 값(아이디)
 		$view['pj_list'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC '); // 프로젝트 목록
 		$view['pj_now'] = $pj_now = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_project WHERE seq={$project}");
 
