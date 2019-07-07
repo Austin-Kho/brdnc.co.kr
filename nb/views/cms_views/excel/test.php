@@ -17,9 +17,9 @@ $EXCEL_STR = "
 </tr>
 <tr><td  colspan='3' align='right' height='20' style='font-size:9pt;'>".date('Y-m-d')." 현재</td></tr>
 <tr align='center' height='20' style='font-size:9pt;'>
-  <td width='50' bgcolor='#EAEAEA'>번호</td>
-  <td width='90' bgcolor='#EAEAEA'>코드</td>
-  <td width='100' bgcolor='#EAEAEA'>내용</td>
+  <td width='50' bgcolor='#EAEAEA'>번호1</td>
+  <td width='90' bgcolor='#EAEAEA'>코드1</td>
+  <td width='100' bgcolor='#EAEAEA'>내용1</td>
 </tr>";
 
 // while($row = mysql_fetch_array($result)) {

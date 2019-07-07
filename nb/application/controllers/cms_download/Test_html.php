@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Test extends CB_Controller {
+class Test_html extends CB_Controller {
 	/**
 	 * [__construct 이 클래스의 생성자]
 	 */
@@ -24,11 +24,18 @@ class Test extends CB_Controller {
 
 	public function excel_file(){
 
-    $output_file_name = "다운로드.xls";
-    header( "Content-type: application/vnd.ms-excel" );
-    header( "Content-type: application/vnd.ms-excel; charset=utf-8");
-    header( "Content-Disposition: attachment; filename = invoice.xls" );
-    header( "Content-Description: PHP4 Generated Data" );
+//    $output_file_name = "다운로드.xls";
+//    header( "Content-type: application/vnd.ms-excel" );
+//    header( "Content-type: application/vnd.ms-excel; charset=utf-8");
+//    header( "Content-Disposition: attachment; filename = invoice.xls" );
+//    header( "Content-Description: PHP4 Generated Data" );
+
+        defined('BASEPATH') OR exit('No direct script access allowed');
+        Header("Content-type: application/vnd.ms-excel; charset=UTF-8" );
+        Header("Content-Disposition: attachment; filename=".iconv("UTF-8","cp949//IGNORE", "입출금_내역서(".date('Y-m-d').").xls"));
+        Header("Content-Description: PHP7 Generated Data" );
+        Header("Pragma: no-cache");
+        Header("Expires: 0");
 
     // $sql = "select * from tblName order by reg_date desc";
     // $result = mysql_query($sql);

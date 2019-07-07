@@ -36,13 +36,25 @@ else :
         </script>
         <?php
         $url_where = rawurlencode($where);
-        $url_s_date = rawurlencode($this->input->get('s_date'));
-        $url_e_date = rawurlencode($this->input->get('e_date'));
-        if ($this->input->get('search_text') == "") $sc = 0;
-        else $sc = 1;
-        $excel_url = base_url('cms_download/cash_book') . "?add_where=" . $url_where . "&sc=" . $sc . "&com=" . $this->input->get('com_sel');
+
+//        $sc = ($this->input->get('search_text') === "") ? 0 : 1;
+
+
+        ///
+        // 검색어 get 데이터
+        $sf = array(
+            'c1' => $this->input->get('class1', TRUE),
+            'c2' => $this->input->get('class2', TRUE),
+            'sd' => $this->input->get('s_date', TRUE),
+            'ed' => $this->input->get('e_date', TRUE),
+            'sc' => $this->input->get('search_con', TRUE),
+            'st' => $this->input->get('search_text', TRUE)
+        );
+
+        $excel_url = base_url('cms_download/cash_book'). "?com={$this->input->get('com_sel')}&c1={$sf['c1']}&c2={$sf['c2']}&sd={$sf['sd']}&ed={$sf['ed']}&sc={$sf['sc']}&st={$sf['st']}";
         ?>
         <a href="javascript:excel_open('<?php echo $excel_url; ?>')">
+<!--        <a href="javascript:alert('--><?php //echo $excel_url; ?><!--')">-->
             <img src="<?php echo base_url('static/img/excel_icon.jpg'); ?>" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;" /> EXCEL로 출력
         </a>
     </div>
