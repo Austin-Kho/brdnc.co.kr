@@ -896,7 +896,7 @@ class Cms_m1 extends CB_Controller {
 			if( !empty($this->input->get('s_date'))) { $rec_query .= " AND paid_date>='".$this->input->get('s_date')."' ";}
 			if( !empty($this->input->get('e_date'))) { $rec_query .= " AND paid_date<='".$this->input->get('e_date')."' ";}
 
-			$view['rec_query'] = $rec_query; // Excel 출력 데이터로 보낼 쿼리
+//			$view['rec_query'] = $rec_query; // Excel 출력 데이터로 보낼 쿼리
 
 			$amount_qry = " SELECT SUM(paid_amount) AS total_amount FROM cb_cms_sales_received WHERE pj_seq='$project'  ";
 

@@ -10,12 +10,32 @@ class Received_data extends CB_Controller {
 		$this->load->model('cms_main_model'); //모델 파일 로드
 	}
 
+    /**
+     * [index 클래스명 생략시 기본 실행 함수]
+     * @return [type] [description]
+     */
+    public function index()
+    {
+        $this->download();
+    }
+
 	public function download(){
 
 		/** 데이터 가져오기 시작 **/
 		//----------------------------------------------------------//
+
 		$project = urldecode($this->input->get('pj'));
-		$rec_query = urldecode($this->input->get('qry'));
+
+        // 수납 데이터 검색 필터링
+        $rec_query = " SELECT cb_cms_sales_received.seq, cont_seq, paid_amount, paid_date, paid_who, acc_nick, pay_name, unit_type, unit_dong_ho ";
+
+        $rec_query .= " FROM cb_cms_sales_received, cb_cms_sales_pay_sche, cb_cms_sales_bank_acc, cb_cms_sales_contract ";
+        $rec_query .= " WHERE is_refund='0' AND cb_cms_sales_received.pj_seq='{$project}' AND cb_cms_sales_pay_sche.pj_seq='{$project}'  AND pay_sche_code=cb_cms_sales_pay_sche.pay_code AND paid_acc=cb_cms_sales_bank_acc.seq AND cont_seq=cb_cms_sales_contract.seq ";
+        if( !empty($this->input->get('ps'))) { $rec_query .= " AND pay_sche_code='".$this->input->get('ps')."' ";}
+        if( !empty($this->input->get('ac'))) { $rec_query .= " AND paid_acc='".$this->input->get('ac')."' ";}
+        if( !empty($this->input->get('sd'))) { $rec_query .= " AND paid_date>='".$this->input->get('sd')."' ";}
+        if( !empty($this->input->get('ed'))) { $rec_query .= " AND paid_date<='".$this->input->get('ed')."' ";}
+
 		$rec_query .= "ORDER BY paid_date, cb_cms_sales_received.seq ";
 		$rec_data = $this->cms_main_model->sql_result($rec_query); // 계약 및 계약자 데이터
 

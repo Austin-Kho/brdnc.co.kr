@@ -183,7 +183,7 @@ else :
 		</div>
 
 		<div class="col-xs-12 hidden-xs hidden-sm right" style="padding: 0 20px 0; color: #5E81FE;"><?php echo "[ 결과 : ".number_format($total_rows)." 건 ]"; ?>
-			<a href="<?php echo base_url('/cms_download/received_data2')."?pj=".$project."&qry=".urlencode($rec_query); ?>" style="padding-left: 30px;">
+			<a href="<?php echo base_url('/cms_download/received_data2')."?pj={$project}&ps={$this->input->get('con_pay_sche')}&ac={$this->input->get('con_paid_acc')}&sd={$this->input->get('s_date')}&ed={$this->input->get('e_date')}"; ?>" style="padding-left: 30px;">
 				<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
 			</a>
 		</div>
