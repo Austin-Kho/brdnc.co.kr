@@ -27,7 +27,21 @@ class Contract_data extends CB_Controller {
 		/** 데이터 가져오기 시작 **/
 		//----------------------------------------------------------//
 		$project = urldecode($this->input->get('pj'));
-		$cont_query = urldecode($this->input->get('qry'))." ORDER BY cont_code, cb_cms_sales_contract.cont_date, cb_cms_sales_contract.seq ";
+
+        // 계약 데이터 검색 필터링
+        $cont_query = "  SELECT *, cb_cms_sales_contractor.seq AS contractor_seq  ";
+        $cont_query .= " FROM cb_cms_sales_contract, cb_cms_sales_contractor  ";
+        $cont_query .= " WHERE pj_seq='$project' AND is_transfer='0' AND is_rescission='0' AND cb_cms_sales_contract.seq = cont_seq ";
+
+        if( !empty($this->input->get('df'))) {$df = $this->input->get('df'); $cont_query .= " AND cont_diff='$df' ";}
+        if( !empty($this->input->get('tp'))) {$tp = $this->input->get('tp'); $cont_query .= " AND unit_type='$tp' ";}
+        if( !empty($this->input->get('do'))) {$do = $this->input->get('do'); $cont_query .= " AND unit_dong='$do' ";}
+        if( !empty($this->input->get('sd'))) {$sd = $this->input->get('sd'); $cont_query .= " AND cb_cms_sales_contract.cont_date>='$sd' ";}
+        if( !empty($this->input->get('ed'))) {$ed = $this->input->get('ed'); $cont_query .= " AND cb_cms_sales_contract.cont_date<='$ed' ";}
+        if( !empty($this->input->get('sn'))) {$sn = $this->input->get('sn'); $cont_query .= " AND (cb_cms_sales_contractor.contractor='$sn' OR cb_cms_sales_contract.note LIKE '%$ctor%') ";}
+
+		$cont_query .= " ORDER BY cont_code, cb_cms_sales_contract.cont_date, cb_cms_sales_contract.seq ";
+
 		$cont_data = $this->cms_main_model->sql_result($cont_query); // 계약 및 계약자 데이터
 		$row_opt = explode("-", urldecode($this->input->get('row')));
 		$pj_title = $this->cms_main_model->sql_row(" SELECT pj_name FROM cb_cms_project WHERE seq='$project' ");

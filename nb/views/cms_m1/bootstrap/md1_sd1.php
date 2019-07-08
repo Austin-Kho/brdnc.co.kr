@@ -249,7 +249,7 @@ endfor;
 			<div class="hidden-xs col-sm-12 right" style="padding: 0 20px 3px; color: #5E81FE;">
 				<?php echo "[ 결과 : ".number_format($total_rows)." 건 ]"; ?>
 				<a href="javascript:" onclick="$('#output_option').toggle();"  style="margin: 0 10px;">[엑셀 출력항목 선택]</a>
-				<?php $url = base_url('/cms_download/contract_data/download')."?pj=".$project."&qry=".urlencode($cont_query); ?>
+				<?php $url = base_url('/cms_download/contract_data/download')."?pj=".$project."&df={$this->input->get('diff')}&tp={$this->input->get('type')}&do={$this->input->get('dong')}&sd={$this->input->get('s_date')}&ed={$this->input->get('e_date')}&sn={$this->input->get('sc_name')}"; ?>
 				<a href="javascript:" onclick="<?php echo 'excel(\''.$url.'\')' ?>">
 					<img src="<?php echo base_url(); ?>static/img/excel_icon.jpg" height="14" border="0" alt="EXCEL 아이콘" style="margin-top: -3px;"/> EXCEL로 출력
 				</a>
