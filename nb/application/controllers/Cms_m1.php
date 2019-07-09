@@ -32,7 +32,7 @@ class Cms_m1 extends CB_Controller {
 	 * @return [type]      [description]
 	 */
 	public function sales($mdi='', $sdi=''){
-		$this->output->enable_profiler(TRUE); //프로파일러 보기//
+//		$this->output->enable_profiler(TRUE); //프로파일러 보기///
 
 		///////////////////////////
 		// 이벤트 라이브러리를 로딩합니다
