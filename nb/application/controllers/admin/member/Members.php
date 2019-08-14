@@ -116,7 +116,7 @@ class Members extends CB_Controller
                     'mem_id' => element('mem_id', $val),
                 );
                 $result['list'][$key]['member_group_member'] = $this->Member_group_member_model->get('', '', $where, '', 0, 'mgm_id', 'ASC');
-                $mgroup = '';
+                $mgroup = [];
                 if ($result['list'][$key]['member_group_member']) {
                     foreach ($result['list'][$key]['member_group_member'] as $mk => $mv) {
                         if (element('mgr_id', $mv)) {

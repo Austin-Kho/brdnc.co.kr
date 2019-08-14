@@ -62,4 +62,5 @@ _ide_helper.php
 package-lock.json
 
 # vscode
-/.vscode
+/.vscode/*.*
+.vscode/sftp.json
