@@ -919,7 +919,7 @@ class Cms_m3 extends CB_Controller {
 			$this->form_validation->set_rules('address1_1', '메인 주소', 'trim|required');
 			$this->form_validation->set_rules('address2_1', '상세 주소', 'trim|max_length[93]');
 			$this->form_validation->set_rules('buy_land_extent', '대지 매입면적', 'trim|required|numeric|max_length[10]');
-			$this->form_validation->set_rules('donation_land_extent', '기부채납 면적', 'trim|required|numeric|max_length[10]');
+			$this->form_validation->set_rules('donation_land_extent', '기부채납 면적', 'trim|numeric|max_length[10]');
 			$this->form_validation->set_rules('scheme_land_extent', '계획 대지면적', 'trim|required|numeric|max_length[10]');
 			$this->form_validation->set_rules('area_usage', '용도지역지구', 'trim|max_length[30]');
 			$this->form_validation->set_rules('build_size', '건축 규모', 'trim|max_length[60]');
@@ -1059,7 +1059,7 @@ class Cms_m3 extends CB_Controller {
 			$this->form_validation->set_rules('address1_1', '메인 주소', 'trim|required');
 			$this->form_validation->set_rules('address2_1', '상세 주소', 'trim|max_length[93]');
 			$this->form_validation->set_rules('buy_land_extent', '대지 매입면적', 'trim|required|numeric|max_length[10]');
-			$this->form_validation->set_rules('donation_land_extent', '기부채납 면적', 'trim|required|numeric|max_length[10]');
+			$this->form_validation->set_rules('donation_land_extent', '기부채납 면적', 'trim|numeric|max_length[10]');
 			$this->form_validation->set_rules('scheme_land_extent', '계획 대지면적', 'trim|required|numeric|max_length[10]');
 			$this->form_validation->set_rules('area_usage', '용도지역지구', 'trim|max_length[30]');
 			$this->form_validation->set_rules('build_size', '건축 규모', 'trim|max_length[60]');
