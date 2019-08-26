@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /**
  * Cbconfigs class
@@ -591,7 +591,6 @@ class Layoutskin extends CB_Controller
 
             // 이벤트가 존재하면 실행합니다
             $view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
-
         } else {
             /**
              * 유효성 검사를 통과한 경우입니다.
@@ -1032,7 +1031,6 @@ class Layoutskin extends CB_Controller
         $this->data = $view;
         $this->layout = element('layout_skin_file', element('layout', $view));
         $this->view = element('view_skin_file', element('layout', $view));
-
     }
 
     /**
@@ -1331,7 +1329,6 @@ class Layoutskin extends CB_Controller
 
             // 이벤트가 존재하면 실행합니다
             $view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
-
         } else {
             /**
              * 유효성 검사를 통과한 경우입니다.
@@ -1342,7 +1339,8 @@ class Layoutskin extends CB_Controller
             $view['view']['event']['formruntrue'] = Events::trigger('formruntrue', $eventname);
 
             $array = array(
-                'site_meta_title_default', 'site_meta_description_default', 'site_meta_keywords_default', 'site_meta_author_default', 'site_page_name_default');
+                'site_meta_title_default', 'site_meta_description_default', 'site_meta_keywords_default', 'site_meta_author_default', 'site_page_name_default'
+            );
             foreach ($pagelist as $pval) {
                 $array[] = 'site_meta_title_' . element('key', $pval);
                 $array[] = 'site_meta_description_' . element('key', $pval);
@@ -1428,11 +1426,11 @@ class Layoutskin extends CB_Controller
                     @chmod($file, 0644);
                 }
 
-                $uploadconfig = '';
+                $uploadconfig = [];
                 $uploadconfig['upload_path'] = $upload_path;
                 $uploadconfig['allowed_types'] = 'ico';
-                $uploadconfig['max_width'] = '16';
-                $uploadconfig['max_height'] = '16';
+                $uploadconfig['max_width'] = '300';
+                $uploadconfig['max_height'] = '300';
                 $uploadconfig['encrypt_name'] = true;
 
                 $this->upload->initialize($uploadconfig);
@@ -1442,7 +1440,6 @@ class Layoutskin extends CB_Controller
                     $site_favicon = element('file_name', $img);
                 } else {
                     $file_error = $this->upload->display_errors();
-
                 }
             }
         }
@@ -1451,13 +1448,12 @@ class Layoutskin extends CB_Controller
          * 유효성 검사를 하지 않는 경우, 또는 유효성 검사에 실패한 경우입니다.
          * 즉 글쓰기나 수정 페이지를 보고 있는 경우입니다
          */
-        if ($form_validation === false OR $file_error !== '') {
+        if ($form_validation === false or $file_error !== '') {
 
             // 이벤트가 존재하면 실행합니다
             $view['view']['event']['formrunfalse'] = Events::trigger('formrunfalse', $eventname);
 
             $view['view']['message'] = $file_error;
-
         } else {
             /**
              * 유효성 검사를 통과한 경우입니다.
@@ -1473,7 +1469,7 @@ class Layoutskin extends CB_Controller
             } elseif ($this->input->post('site_favicon_del')) {
                 $savedata['site_favicon'] = '';
             }
-            if ($site_favicon OR $this->input->post('site_favicon_del')) {
+            if ($site_favicon or $this->input->post('site_favicon_del')) {
                 @unlink(config_item('uploads_dir') . '/favicon/' . $this->cbconfig->item('site_favicon'));
             }
 
