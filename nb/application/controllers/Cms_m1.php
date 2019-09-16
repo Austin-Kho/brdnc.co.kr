@@ -375,7 +375,11 @@ class Cms_m1 extends CB_Controller {
 					// 	'con_direction_no'=>'1', // 향후 필요 시 폼으로 데이터 받을 것
 					// 	'con_floor_no'=>$con_floor_no
 					// );
-					$pr_where_sql = "pj_seq={$pj} AND con_diff_no={$this->input->post('diff_no')} AND con_type={$this->input->post('type')} AND con_direction_no=1 AND con_floor_no={$con_floor_no}";
+					$pr_where_sql = "pj_seq='{$pj}' 
+					                    AND con_diff_no='{$this->input->post('diff_no')}' 
+					                    AND con_type='{$this->input->post('type')}' 
+					                    AND con_direction_no='1' 
+					                    AND con_floor_no='{$con_floor_no}' ";
 					$price_seq = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_sales_price WHERE {$pr_where_sql}");
 
 					$cont_arr1 = array( // 계약 테이블 입력 데이터
