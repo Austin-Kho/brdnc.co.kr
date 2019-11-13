@@ -27,7 +27,7 @@ class Basic_site_list extends CB_Controller {
         /** 데이터 가져오기 시작 **/
 		//----------------------------------------------------------//
 		$project = urldecode($this->input->get('pj'));
-		$basic_site_data = $this->cms_main_model->sql_result("SELECT * FROM cb_cms_site_status WHERE pj_seq={$project} ORDER BY 'order_no, seq'"); // 토지 지번 목록 데이터
+		$basic_site_data = $this->cms_main_model->sql_result("SELECT * FROM cb_cms_site_status WHERE pj_seq={$project} ORDER BY `order_no`, `seq` "); // 토지 지번 목록 데이터
 		$pj_title = $this->cms_main_model->sql_row("SELECT pj_name FROM cb_cms_project WHERE seq={$project}");
 
 		//----------------------------------------------------------//

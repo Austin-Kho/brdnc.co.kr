@@ -36,7 +36,7 @@ else :
 						<select class="form-control input-sm" name="project" onchange="submit();">
 							<option value="0" <?php if( !$this->input->get('project')) echo "selected"; ?>> 선 택</option>
 <?php foreach($pj_list as $lt) : ?>
-							<option value="<?php echo $lt->seq; ?>" <?php if(( !$this->input->get('project') && $lt->seq=='1') OR $this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?></option>
+							<option value="<?php echo $lt->seq; ?>" <?php if(( !$this->input->get('project') && $lt->seq=='3') OR $this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>

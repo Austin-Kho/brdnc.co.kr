@@ -66,7 +66,7 @@ class Cms_m2 extends CB_Controller
 		$where = "";
 		if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
 		$view['pj_list'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC ');
-		$project = $view['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
+		$project = $view['project'] = ($this->input->get('project')) ? $this->input->get('project') : 3; // 선택한 프로젝트 고유식별 값(아이디)
 		$view['pj_now'] = $pj_now = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_project WHERE seq={$project}");
 
 

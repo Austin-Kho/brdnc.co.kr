@@ -60,7 +60,7 @@ class Cms_m3 extends CB_Controller {
 		$where = "";
 		if($this->input->get('yr') !="") $where=" WHERE biz_start_ym LIKE '".$this->input->get('yr')."%' ";
 		$view['pj_list'] = $this->cms_main_model->sql_result(' SELECT * FROM cb_cms_project '.$where.' ORDER BY biz_start_ym DESC ');
-		$project = $view['project'] = ($this->input->get('project')) ? $this->input->get('project') : 1; // 선택한 프로젝트 고유식별 값(아이디)
+		$project = $view['project'] = ($this->input->get('project')) ? $this->input->get('project') : 3; // 선택한 프로젝트 고유식별 값(아이디)
 
 
 
@@ -587,7 +587,7 @@ class Cms_m3 extends CB_Controller {
 
 		// 3-1 프로젝트 관리 3. 토지목록 조서 관리 ////////////////////////////////////////////////////////////////////
 		}else if($mdi==1 && $sdi==3) {
-			// $this->output->enable_profiler(TRUE); //프로파일러 보기//
+			 $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
 			// 조회 등록 권한 체크
 			$auth = $this->cms_main_model->auth_chk('_m3_1_3', $this->session->userdata['mem_id']);
@@ -639,7 +639,7 @@ class Cms_m3 extends CB_Controller {
 				//페이징 링크를 생성하여 view에서 사용할 변수에 할당
 				$view['pagination'] = $this->pagination->create_links();
 
-				$view['site_lot_list'] = $this->cms_main_model->sql_result("SELECT * FROM cb_cms_site_status WHERE pj_seq={$project} ORDER BY 'order_no DESC, seq DESC' LIMIT {$start}, {$limit}");
+				$view['site_lot_list'] = $this->cms_main_model->sql_result("SELECT * FROM cb_cms_site_status WHERE pj_seq={$project} ORDER BY `order_no`, `seq` LIMIT {$start}, {$limit}");
 
 				if($this->input->get('mode')==='3' && $this->input->get('del_code')) {
 					$del_rlt1 = $this->cms_main_model->delete_data('cb_cms_site_status', array('seq' => $this->input->get('del_code')));
