@@ -264,7 +264,7 @@ class Cms_m5 extends CB_Controller
             $this->load->library ( 'pagination' );
 
             //페이지네이션 설정/////////////////////////////////
-            $config['base_url'] = base_url ( 'cms_m5/config/1/4/' );  //페이징 주소
+            $config['base_url'] = base_url ( 'cms_m5/config/1/3/' );  //페이징 주소
             $config['total_rows'] = $this->cms_m5_model->bank_account_list ( $bank_table, $company, '', '', $st1, $st2, 'num' );  //게시물의 전체 갯수
             $config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
             $config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
@@ -353,7 +353,7 @@ class Cms_m5 extends CB_Controller
             $this->load->library ( 'pagination' );
 
             //페이지네이션 설정/////////////////////////////////
-            $config['base_url'] = base_url ( 'cms_m5/config/1/3/' );  //페이징 주소
+            $config['base_url'] = base_url ( 'cms_m5/config/1/4/' );  //페이징 주소
             $config['total_rows'] = $this->cms_m5_model->com_accounts_list ( $acc_table, '', '', $st1, $st2, 'num' );  //게시물의 전체 갯수
             $config['per_page'] = 10; // 한 페이지에 표시할 게시물 수
             $config['num_links'] = 3; // 링크 좌우로 보여질 페이지 수
