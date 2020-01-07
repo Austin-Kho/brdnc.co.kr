@@ -31,7 +31,8 @@ class Contract_data extends CB_Controller {
         // 계약 데이터 검색 필터링
         $cont_query = "  SELECT *, cb_cms_sales_contractor.seq AS contractor_seq  ";
         $cont_query .= " FROM cb_cms_sales_contract, cb_cms_sales_contractor  ";
-        $cont_query .= " WHERE pj_seq='$project' AND is_transfer='0' AND is_rescission='0' AND cb_cms_sales_contract.seq = cont_seq ";
+//        $cont_query .= " WHERE pj_seq='$project' AND cb_cms_sales_contract.seq = cont_seq ";
+         $cont_query .= " WHERE pj_seq='$project' AND is_transfer='0' AND is_rescission='0' AND cb_cms_sales_contract.seq = cont_seq ";
 
         if( !empty($this->input->get('df'))) {$df = $this->input->get('df'); $cont_query .= " AND cont_diff='$df' ";}
         if( !empty($this->input->get('tp'))) {$tp = $this->input->get('tp'); $cont_query .= " AND unit_type='$tp' ";}
