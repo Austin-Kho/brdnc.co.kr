@@ -122,6 +122,7 @@ else :
   $attributes = array('name' => 'form1', 'method' => 'get');
   echo form_open(uri_string(), $attributes);
 ?>
+            <input type="hidden" name="project" value="<?php echo $this->input->get('project'); ?>">
 				<div class="col-xs-12 col-sm-2 col-md-1 center bgf8" style="height: 40px; padding: 10px 0;">검색 조건</div>
 				<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
 					<label for="con_pay_sche" class="sr-only">회차별</label>
