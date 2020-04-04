@@ -13,6 +13,11 @@
     echo form_open(current_full_url(), $attributes);
 ?>
 			<fieldset class="font12">
+                <div class="checkbox"  style="margin: 5px;">
+                    <label for="data_cr">
+                        <input type="checkbox" name="data_cr" id="data_cr" value="1" <?php echo set_checkbox('data_cr', '1'); ?>> 동호수지정 여부
+                    </label>
+                </div>
 				<div class="form-group"><!-- 프로젝트명/종류 -->
 					<div class="col-xs-12 col-sm-3 col-md-2 label-wrap bo-top">
 						<label for="pj_name">프로젝트 명 <span class="red">*</span></label>

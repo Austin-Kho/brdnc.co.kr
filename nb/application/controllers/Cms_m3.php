@@ -989,6 +989,7 @@ class Cms_m3 extends CB_Controller {
 				$update_pj_data = array(
 					'pj_name' => $this->input->post('pj_name', TRUE),
 					'sort' => $this->input->post('sort', TRUE),
+					'data_cr' => $this->input->post('data_cr', TRUE),
 					'local_addr' => $local_addr,
 					'buy_land_extent' => $this->input->post('buy_land_extent', TRUE),
 					'donation_land_extent' => $this->input->post('donation_land_extent', TRUE),
@@ -1130,6 +1131,7 @@ class Cms_m3 extends CB_Controller {
 				$new_pj_data = array(
 					'pj_name' => $this->input->post('pj_name', TRUE),
 					'sort' => $this->input->post('sort', TRUE),
+					'data_cr' => $this->input->post('data_cr', TRUE),
 					'local_addr' => $local_addr,
 					'buy_land_extent' => $this->input->post('buy_land_extent', TRUE),
 					'donation_land_extent' => $this->input->post('donation_land_extent', TRUE),
