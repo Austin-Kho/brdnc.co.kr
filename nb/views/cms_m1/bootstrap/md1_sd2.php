@@ -42,7 +42,7 @@ else :
 					</div>
 				</div>
 			</div>
-			<div class="row bo-top bo-bottom font12" style="margin: 0;">
+			<div class="row bo-top bo-bottom font12" style="margin: 0 0 15px;">
 				<div class="row bo-bottom font12" style="margin: 0;">
 					<div class="col-xs-4 col-sm-3 col-md-2 center bgf8" style="line-height:38px;">처리 구분 <span class="red">*</span></div>
 					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
@@ -90,7 +90,7 @@ else :
 	<?php endif; ?>
 					</div>
 				</div>
-				<div class="row bo-bottom font12" style="margin: 0;">
+				<div class="row font12" style="margin: 0;">
 					<div class="col-xs-4 col-sm-3 col-md-2 center bgf8" style="line-height:38px;">차수 구분 <span class="red">*</span></div>
 					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 						<div class="col-xs-12" style="padding: 0px;">
@@ -122,12 +122,14 @@ else :
 						</div>
 					</div>
 				</div>
-				<div class="row bo-bottom font12" style="margin: 0 0 15px;">
+
+<?php if($pj_now->data_cr=='1'):?>
+				<div class="row bo-top font12" style="margin: 0;">
 					<div class="col-xs-4 col-sm-3 col-md-2 center bgf8" style="line-height:38px;">동 선택 <span class="red">*</span></div>
 					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 						<div class="col-xs-12" style="padding: 0px;">
 							<label for="dong" class="sr-only">동</label>
-							<select class="form-control input-sm" name="dong" onchange="submit();"  <?php if( !$this->input->get('type')) echo "disabled"; ?>>
+							<select class="form-control input-sm" name="dong" onchange="submit();"  <?php if( $pj_now->data_cr=='0' or !$this->input->get('type')) echo "disabled"; ?>>
 								<option value=""> 선 택</option>
 	<?php foreach($dong_list as $lt) : ?>
 								<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->get('dong')) echo "selected"; ?>><?php echo $lt->dong." 동"; ?></option>
@@ -149,12 +151,20 @@ else :
 						</div>
 					</div>
 				</div>
+ <?php endif ?>
+
 			</div>
 		</form>
 		<!-- ===================계약물건 검색 종료================== -->
 
 
-<?php $disabled = (($this->input->get('cont_sort2') OR $this->input->get('cont_sort3')) && $this->input->get('ho')) ? "" : "disabled"; ?>
+<?php
+    if ($pj_now->data_cr=='1') {
+        $disabled = (($this->input->get('cont_sort2') OR $this->input->get('cont_sort3')) && $this->input->get('ho')) ? "" : "disabled";
+    } else {
+        $disabled = (($this->input->get('cont_sort2') OR $this->input->get('cont_sort3')) && $this->input->get('type')) ? "" : "disabled";
+    }
+?>
 
 		<!-- ===================계약내용 기록 시작================== -->
 <?php
