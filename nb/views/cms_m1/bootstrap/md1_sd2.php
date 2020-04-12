@@ -116,7 +116,7 @@ else :
 							<select class="form-control input-sm" name="type" onchange="submit();" <?php if( !$this->input->get('diff_no')) echo "disabled"; ?>>
 								<option value=""> 선 택</option>
 <?php foreach($type_list as $lt) : ?>
-								<option value="<?php echo $lt->type; ?>" <?php if($lt->type==$this->input->get('type')) echo "selected"; ?>><?php echo $lt->type; ?></option>
+								<option value="<?php echo $lt; ?>" <?php if($lt==$this->input->get('type')) echo "selected"; ?>><?php echo $lt; ?></option>
 <?php endforeach; ?>
 							</select>
 						</div>
@@ -271,8 +271,8 @@ else :
 	endif;
 
 	if(empty($is_reg['app_data']) && empty($is_reg['cont_data'])) : $conclu_date = set_value('conclu_date');
-	elseif( !empty($is_reg['app_data']) && ($this->input->get('cont_sort2')==1 OR  $this->input->get('cont_sort3')==3)) : $conclu_date = $is_reg['app_data']->app_date;  // 청약 데이터 있고 청약이나 청약해지
-	elseif( !empty($is_reg['app_data']) && ($this->input->get('cont_sort2')==2 OR  $this->input->get('cont_sort3')==4)) : $conclu_date = "";  // 청약 데이터 있고 계약이나 계약 해지
+	elseif($this->input->get('cont_sort2')==1 OR  $this->input->get('cont_sort3')==3) : $conclu_date = $is_reg['app_data']->app_date;  // 청약 데이터 있고 청약이나 청약해지
+	elseif($this->input->get('cont_sort2')==2 OR  $this->input->get('cont_sort3')==4) : $conclu_date = "";  // 청약 데이터 있고 계약이나 계약 해지
 	else : $conclu_date = $is_reg['cont_data']->cont_date;
 	endif;
 ?>

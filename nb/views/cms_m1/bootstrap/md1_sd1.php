@@ -389,10 +389,10 @@ endfor;
                             case '3': $condi = "<font color='#354E62'>환불완료</font>"; break;
                             default: $condi = "<font color='#05980F'>정상청약</font>"; break;
                         endswitch;
-                        $unit_dh = explode("-", $lt->unit_dong_ho);
+                        $app_url = ($pj_now->data_cr=='1') ? "&dong=".$unit_dh[0]."&ho=".$unit_dh[1] : "&app_id=".$lt->seq;
                         switch ($lt->disposal_div) {
-                            case '0': $app_edit_link = "<a href='".base_url('cms_m1/sales/1/2')."?project=".$project."&mode=2&cont_sort1=1&cont_sort2=1&diff_no=".$lt->app_diff."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>"; break;
-                            case '2': $app_edit_link = "<a href='".base_url('cms_m1/sales/1/2')."?project=".$project."&mode=2&cont_sort1=2&cont_sort3=3&diff_no=".$lt->app_diff."&type=".$lt->unit_type."&dong=".$unit_dh[0]."&ho=".$unit_dh[1]."'>"; break;
+                            case '0': $app_edit_link = "<a href='".base_url('cms_m1/sales/1/2')."?project=".$project."&mode=2&cont_sort1=1&cont_sort2=1&diff_no=".$lt->app_diff."&type=".$lt->unit_type.$app_url."'>"; break;
+                            case '2': $app_edit_link = "<a href='".base_url('cms_m1/sales/1/2')."?project=".$project."&mode=2&cont_sort1=2&cont_sort3=3&diff_no=".$lt->app_diff."&type=".$lt->unit_type.$app_url."'>"; break;
                             default: $app_edit_link = ""; break;
                         }
                         $app_edit = ($lt->disposal_div=='0' OR $lt->disposal_div=='2') ? "</a>" : "";

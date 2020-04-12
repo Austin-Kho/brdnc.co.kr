@@ -153,6 +153,8 @@ class Cms_m1 extends CB_Controller {
 
             // 계약현황 2. 계약등록 ////////////////////////////////////////////////////////////////////
         }else if($mdi==1 && $sdi==2) {
+            $this->output->enable_profiler(TRUE); //프로파일러 보기//
+
             // 조회 등록 권한 체크
             $auth = $this->cms_main_model->auth_chk('_m1_1_2', $this->session->userdata['mem_id']);
             // 불러올 페이지에 보낼 조회 권한 데이터
@@ -161,31 +163,48 @@ class Cms_m1 extends CB_Controller {
 
             $where_add = " WHERE pj_seq='$project' "; // 프로젝트 지정 쿼리
 
-            // 타입 데이터 불러오기
-            if($this->input->get('mode')=='1'){ // 신규 등록 시
-                if($this->input->get('cont_sort1')==1 && $this->input->get('cont_sort2')==1) $where_add .= " AND is_hold='0' AND is_application='0' AND is_contract='0' "; // 청약 대상
-                if($this->input->get('cont_sort1')==1 && $this->input->get('cont_sort2')==2) $where_add .= " AND is_hold='0' AND is_contract='0' "; // 계약대상
+            if ($pj_now->data_cr=='1'){
+                // 타입 데이터 불러오기
+                if($this->input->get('mode')=='1'){ // 신규 등록 시
+                    if($this->input->get('cont_sort1')==1 && $this->input->get('cont_sort2')==1) $where_add .= " AND is_hold='0' AND is_application='0' AND is_contract='0' "; // 청약 대상
+                    if($this->input->get('cont_sort1')==1 && $this->input->get('cont_sort2')==2) $where_add .= " AND is_hold='0' AND is_contract='0' "; // 계약대상
 
-            }else if($this->input->get('mode')=='2'){ // 변경 등록 시
-                if($this->input->get('cont_sort1')==1 && $this->input->get('cont_sort2')==1) $where_add .= " AND is_hold='0' AND is_application='1' "; // 청약 대상
-                if($this->input->get('cont_sort1')==1 && $this->input->get('cont_sort2')==2) $where_add .= " AND is_hold='0' AND (is_application='1' OR is_contract='1') "; // 계약대상
-                if($this->input->get('cont_sort1')==2 && $this->input->get('cont_sort3')==3) $where_add .= " AND is_application='1' "; // 청약 물건 (청약해지대상)
-                if($this->input->get('cont_sort1')==2 && $this->input->get('cont_sort3')==4) $where_add .= " AND is_contract='1' ";	 // 계약 물건 (계약해지대상)
+                }else if($this->input->get('mode')=='2'){ // 변경 등록 시
+                    if($this->input->get('cont_sort1')==1 && $this->input->get('cont_sort2')==1) $where_add .= " AND is_hold='0' AND is_application='1' "; // 청약 대상
+                    if($this->input->get('cont_sort1')==1 && $this->input->get('cont_sort2')==2) $where_add .= " AND is_hold='0' AND (is_application='1' OR is_contract='1') "; // 계약대상
+                    if($this->input->get('cont_sort1')==2 && $this->input->get('cont_sort3')==3) $where_add .= " AND is_application='1' "; // 청약 물건 (청약해지대상)
+                    if($this->input->get('cont_sort1')==2 && $this->input->get('cont_sort3')==4) $where_add .= " AND is_contract='1' ";	 // 계약 물건 (계약해지대상)
+                }
+                $view['type_list'] = $this->cms_main_model->sql_result("SELECT type FROM cb_cms_project_all_housing_unit $where_add GROUP BY type ORDER BY type");
+
+                // 동 데이터 불러오기
+                $now_type = $this->input->get('type');
+                if($this->input->get('type')) $where_add .= " AND type='$now_type' ";
+                $view['dong_list'] = $this->cms_main_model->sql_result("SELECT dong FROM cb_cms_project_all_housing_unit $where_add GROUP BY dong ORDER BY dong");
+
+                // 호수 데이터 불러오기
+                $now_dong = $this->input->get('dong');
+                if($this->input->get('dong')) $where_add .= " AND dong='$now_dong' ";
+                $view['ho_list'] = $this->cms_main_model->sql_result("SELECT ho FROM cb_cms_project_all_housing_unit $where_add GROUP BY ho ORDER BY ho");
+
+                // 타입 동호수 텍스트
+                $now_ho = $this->input->get('ho');
+
+                $view['dong_ho'] = ($this->input->get('ho'))
+                    ? "<font color='#9f0404'><span class='glyphicon glyphicon-fire' aria-hidden='true' style='padding-right: 10px;'></span></font><b>[".$now_type." 타입] &nbsp;".$now_dong ." 동 ". $now_ho." 호</b>"
+                    : "<span style='color: #9f0404;'>".$msg."</span>";
+
+                // 청약 또는 계약 체결된 동호수인지 확인
+                if($now_ho){
+                    $dongho = $view['unit_dong_ho'] = $now_dong."-".$now_ho; // 동호(1005-2002 형식)
+
+                    //  등록할 동호수 유닛 데이터
+                    $unit_seq = $view['unit_seq'] =  $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND type='$now_type' AND dong='$now_dong' AND ho='$now_ho' ");
+                }
+            } else {
+                $type_name = $this->cms_main_model->sql_result("SELECT type_name FROM cb_cms_project WHERE seq='$project'");
+                $view['type_list'] = explode("-", $type_name[0]->type_name);
             }
-            $view['type_list'] = $this->cms_main_model->sql_result("SELECT type FROM cb_cms_project_all_housing_unit $where_add GROUP BY type ORDER BY type");
-
-            // 동 데이터 불러오기
-            $now_type = $this->input->get('type');
-            if($this->input->get('type')) $where_add .= " AND type='$now_type' ";
-            $view['dong_list'] = $this->cms_main_model->sql_result("SELECT dong FROM cb_cms_project_all_housing_unit $where_add GROUP BY dong ORDER BY dong");
-
-            // 호수 데이터 불러오기
-            $now_dong = $this->input->get('dong');
-            if($this->input->get('dong')) $where_add .= " AND dong='$now_dong' ";
-            $view['ho_list'] = $this->cms_main_model->sql_result("SELECT ho FROM cb_cms_project_all_housing_unit $where_add GROUP BY ho ORDER BY ho");
-
-            // 타입 동호수 텍스트
-            $now_ho = $this->input->get('ho');
 
             if( !$this->input->get('cont_sort1')){
                 $msg = "* 등록 구분을 선택하세요.";
@@ -193,32 +212,22 @@ class Cms_m1 extends CB_Controller {
                 $msg = "* 세부 등록 구분을 선택하세요.";
             }else if( !$this->input->get('type')){
                 $msg = "* 등록(변경)할 타입을 선택 하세요.";
-            }else if( !$this->input->get('dong')){
-                $msg = "* 등록(변경)할 동을 선택 하세요.";
-            }else if( !$this->input->get('ho')){
-                $msg = "* 등록(변경)할 호수를 선택 하세요.";
-            }
-            $view['dong_ho'] = ($this->input->get('ho'))
-                ? "<font color='#9f0404'><span class='glyphicon glyphicon-fire' aria-hidden='true' style='padding-right: 10px;'></span></font><b>[".$now_type." 타입] &nbsp;".$now_dong ." 동 ". $now_ho." 호</b>"
-                : "<span style='color: #9f0404;'>".$msg."</span>";
-
-
-            // 청약 또는 계약 체결된 동호수인지 확인
-            if($now_ho){
-                $dongho = $view['unit_dong_ho'] = $now_dong."-".$now_ho; // 동호(1005-2002 형식)
-
-                //  등록할 동호수 유닛 데이터
-                $unit_seq = $view['unit_seq'] =  $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND type='$now_type' AND dong='$now_dong' AND ho='$now_ho' ");
-
-                // 청약 또는 계약 유닛인지 확인
-                if($unit_seq->is_application=='1') { // 청약 물건이면
-                    $app_data = $view['is_reg']['app_data'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_application WHERE unit_seq='$unit_seq->seq' AND disposal_div<>'3' "); // 청약 데이터
-                }else if($unit_seq->is_contract=='1'){ // 계약 물건이면
-                    $view['is_app_cont'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_application WHERE pj_seq='$project' AND unit_seq='$unit_seq->seq' AND disposal_div='1' "); // 청약->계약전환 물건인지 확인
-                    $cont_where = " WHERE unit_seq='$unit_seq->seq' AND is_transfer='0' AND is_rescission='0' AND cb_cms_sales_contract.seq=cont_seq  ";
-                    $cont_query = "  SELECT *, cb_cms_sales_contract.seq AS cont_seq, cb_cms_sales_contractor.seq AS contractor_seq  FROM cb_cms_sales_contract, cb_cms_sales_contractor ".$cont_where;
-                    $cont_data = $view['is_reg']['cont_data'] = $this->cms_main_model->sql_row($cont_query); // 계약 및 계약자 데이터
+            }else if ($pj_now->data_cr=='1') {
+                if (!$this->input->get('dong')) {
+                    $msg = "* 등록(변경)할 동을 선택 하세요.";
+                } else if (!$this->input->get('ho')) {
+                    $msg = "* 등록(변경)할 호수를 선택 하세요.";
                 }
+            }
+
+            // 청약 또는 계약 유닛인지 확인
+            if(!empty($this->input->get('app_id'))) { // 청약 물건이면
+                $app_data = $view['is_reg']['app_data'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_application WHERE seq='".$this->input->get('app_id')."' AND disposal_div<>'3' "); // 청약 데이터
+            }else if($unit_seq->is_contract=='1'){ // 계약 물건이면
+                $view['is_app_cont'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_application WHERE pj_seq='$project' AND unit_seq='$unit_seq->seq' AND disposal_div='1' "); // 청약->계약전환 물건인지 확인
+                $cont_where = " WHERE unit_seq='$unit_seq->seq' AND is_transfer='0' AND is_rescission='0' AND cb_cms_sales_contract.seq=cont_seq  ";
+                $cont_query = "  SELECT *, cb_cms_sales_contract.seq AS cont_seq, cb_cms_sales_contractor.seq AS contractor_seq  FROM cb_cms_sales_contract, cb_cms_sales_contractor ".$cont_where;
+                $cont_data = $view['is_reg']['cont_data'] = $this->cms_main_model->sql_row($cont_query); // 계약 및 계약자 데이터
             }
 
             // 차수 데이터 불러오기
@@ -302,31 +311,47 @@ class Cms_m1 extends CB_Controller {
             if($this->form_validation->run() !== FALSE) {
 
                 $pj = $this->input->post('project', TRUE); // 프로젝트 아이디
-                $un = $this->input->post('unit_seq', TRUE); // 동호 아이디
-
-
+                if ($pj_now->data_cr=='1') $un = $this->input->post('unit_seq', TRUE); // 동호 아이디
 
                 if($this->input->post('cont_sort2')=='1'){ // 청약일 때
 
                     // 1. 청약 관리 테이블 입력
-                    $app_arr = array(
-                        'pj_seq' => $this->input->post('project', TRUE),
-                        'applicant' => $this->input->post('custom_name', TRUE),
-                        'app_tel1' => $this->input->post('tel_1', TRUE),
-                        'app_tel2' => $this->input->post('tel_2', TRUE),
-                        'app_date' => $this->input->post('conclu_date', TRUE),
-                        'due_date' => $this->input->post('due_date', TRUE),
-                        'unit_seq' => $this->input->post('unit_seq', TRUE),
-                        'unit_type' => $this->input->post('type', TRUE),
-                        'unit_dong_ho' => $this->input->post('unit_dong_ho', TRUE),
-                        'app_diff' => $this->input->post('diff_no', TRUE),
-                        'app_in_mon' => $this->input->post('app_in_mon', TRUE),
-                        'app_in_acc' => $this->input->post('app_in_acc', TRUE),
-                        'app_in_date' => $this->input->post('app_in_date', TRUE),
-                        'app_in_who' => $this->input->post('app_in_who', TRUE),
-                        'note' => $this->input->post('note', TRUE)
-                    );
-                    if($this->input->post('mode')=='1' && $this->input->post('unit_is_app')=='0'){ // 신규 청약 등록 일 때
+                    if($pj_now->data_cr=='1') {
+                        $app_arr = array(
+                            'pj_seq' => $this->input->post('project', TRUE),
+                            'applicant' => $this->input->post('custom_name', TRUE),
+                            'app_tel1' => $this->input->post('tel_1', TRUE),
+                            'app_tel2' => $this->input->post('tel_2', TRUE),
+                            'app_date' => $this->input->post('conclu_date', TRUE),
+                            'due_date' => $this->input->post('due_date', TRUE),
+                            'unit_seq' => $this->input->post('unit_seq', TRUE),
+                            'unit_type' => $this->input->post('type', TRUE),
+                            'unit_dong_ho' => $this->input->post('unit_dong_ho', TRUE),
+                            'app_diff' => $this->input->post('diff_no', TRUE),
+                            'app_in_mon' => $this->input->post('app_in_mon', TRUE),
+                            'app_in_acc' => $this->input->post('app_in_acc', TRUE),
+                            'app_in_date' => $this->input->post('app_in_date', TRUE),
+                            'app_in_who' => $this->input->post('app_in_who', TRUE),
+                            'note' => $this->input->post('note', TRUE)
+                        );
+                    }else{
+                        $app_arr = array(
+                            'pj_seq' => $this->input->post('project', TRUE),
+                            'applicant' => $this->input->post('custom_name', TRUE),
+                            'app_tel1' => $this->input->post('tel_1', TRUE),
+                            'app_tel2' => $this->input->post('tel_2', TRUE),
+                            'app_date' => $this->input->post('conclu_date', TRUE),
+                            'due_date' => $this->input->post('due_date', TRUE),
+                            'unit_type' => $this->input->post('type', TRUE),
+                            'app_diff' => $this->input->post('diff_no', TRUE),
+                            'app_in_mon' => $this->input->post('app_in_mon', TRUE),
+                            'app_in_acc' => $this->input->post('app_in_acc', TRUE),
+                            'app_in_date' => $this->input->post('app_in_date', TRUE),
+                            'app_in_who' => $this->input->post('app_in_who', TRUE),
+                            'note' => $this->input->post('note', TRUE)
+                        );
+                    }
+                    if($this->input->post('mode')=='1' && $this->input->post('cont_sort1')=='1'){ // 신규 청약 등록 일 때
                         $add_arr = array('ini_reg_worker' => $this->session->userdata('mem_username'));
                         $app_put = array_merge($app_arr, $add_arr);
                         $result = $this->cms_main_model->insert_data('cb_cms_sales_application', $app_put, 'ini_reg_date'); // 청약관리 테이블 데이터 입력
@@ -340,7 +365,7 @@ class Cms_m1 extends CB_Controller {
                                 if( !$result2) alert('데이터베이스 에러입니다.', base_url(uri_string()));
                             }
                         }
-                    } else if($this->input->post('mode')=='2' && $this->input->post('unit_is_app')=='1'){ // 기존 청약정보 수정일 때
+                    } else if($this->input->post('mode')=='2' && !empty($this->input->get('app_id'))){ // 기존 청약정보 수정일 때
                         $add_arr = array('last_modi_date' => date('Y-m-d'), 'last_modi_worker' => $this->session->userdata('mem_username'));
                         $app_put = array_merge($app_arr, $add_arr);
                         $where = array('pj_seq'=>$pj, 'unit_type' =>$this->input->post('type'), 'unit_dong_ho'=>$this->input->post('unit_dong_ho'));
@@ -349,7 +374,9 @@ class Cms_m1 extends CB_Controller {
                             alert('데이터베이스 에러입니다.', base_url(uri_string()));
                         }
                     }
-                    $ret_url = "?project=".$pj."&mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&diff_no=".$this->input->post('diff_no')."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho');
+                    $ret_url = ($pj_now->data_cr=='1')
+                        ? "?project=".$pj."&mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&diff_no=".$this->input->post('diff_no')."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho')
+                        : "?project=".$pj."&mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&diff_no=".$this->input->post('diff_no')."&type=".$this->input->post('type')."&app_id=".$this->input->get('app_id');
                     alert('청약 정보 입력이 정상 처리되었습니다.', base_url('cms_m1/sales/1/2').$ret_url);
 
 
