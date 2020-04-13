@@ -323,7 +323,8 @@ endfor;
                 $adr2 = explode(" ", $adr1[1]);
                 $addr = $adr2[0]." ".$adr2[1];
                 $unit_dh = explode("-", $lt->unit_dong_ho);
-                $cont_edit_link ="<a href ='".base_url('cms_m1/sales/1/2?project='.$project.'&mode=2&cont_sort1=1&cont_sort2=2&diff_no='.$lt->cont_diff.'&type='.$lt->unit_type.'&dong='.$unit_dh[0].'&ho='.$unit_dh[1])."'>" ;
+                $cont_url = ($pj_now->data_cr=='1') ? "&dong=".$unit_dh[0]."&ho=".$unit_dh[1] : "&cont_id=".$lt->seq;
+                $cont_edit_link ="<a href ='".base_url('cms_m1/sales/1/2?project='.$project.'&mode=2&cont_sort1=1&cont_sort2=2&diff_no='.$lt->cont_diff.'&type='.$lt->unit_type.$cont_url)."'>" ;
                 $new_span = ($lt->cont_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #2A41DB; color: #fff; font-size: 10px;'>&nbsp;N </span>&nbsp; " : "";
                 ?>
                 <tr>

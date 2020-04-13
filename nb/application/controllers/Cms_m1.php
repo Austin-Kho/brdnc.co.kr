@@ -221,9 +221,9 @@ class Cms_m1 extends CB_Controller {
             }
 
             // 청약 또는 계약 유닛인지 확인
-            if(!empty($this->input->get('app_id'))) { // 청약 물건이면
+            if(!empty($unit_seq->is_application=='1' or $this->input->get('app_id'))) { // 청약 물건이면
                 $app_data = $view['is_reg']['app_data'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_application WHERE seq='".$this->input->get('app_id')."' AND disposal_div<>'3' "); // 청약 데이터
-            }else if($unit_seq->is_contract=='1'){ // 계약 물건이면
+            }else if($unit_seq->is_contract=='1' or !empty($this->input->get('cont_id'))){ // 계약 물건이면
                 $view['is_app_cont'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_application WHERE pj_seq='$project' AND unit_seq='$unit_seq->seq' AND disposal_div='1' "); // 청약->계약전환 물건인지 확인
                 $cont_where = " WHERE unit_seq='$unit_seq->seq' AND is_transfer='0' AND is_rescission='0' AND cb_cms_sales_contract.seq=cont_seq  ";
                 $cont_query = "  SELECT *, cb_cms_sales_contract.seq AS cont_seq, cb_cms_sales_contractor.seq AS contractor_seq  FROM cb_cms_sales_contract, cb_cms_sales_contractor ".$cont_where;
