@@ -11,7 +11,7 @@ else :
   echo form_open(current_full_url(), $attributes);
 
   $start_year = "2015";
-  $yr = (!$this->input->get('yr')) ? :$this->input->get('yr');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
+  $yr = (!$this->input->get('yr')) ? $start_year :$this->input->get('yr');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
   $year=range($start_year,date('Y'));
 ?>
 		<div class="row bo-top bo-bottom font12" style="margin: 0;">
@@ -100,7 +100,7 @@ $ci = 0;
 foreach($now_payer as $lt) :
 	$cm = ($ci==0) ? "" : " / ";
  	$dong_ho = explode("-", $lt->unit_dong_ho);
- 	echo $del_op . $cm . "<a " . $red_style . " href='" . base_url('cms_m1/sales/2/2?yr=' . $yr . '&project=' . $project . '&payer=' . $this->input->get('payer') . '&dong=' . $dong_ho[0] . '&ho=' . $dong_ho[1]) . "'>" . $lt->contractor . "(" . $lt->unit_dong_ho . ")</a>" . $del_cl;
+ 	echo $del_op . $cm . "<a " . $red_style . " href='" . base_url('cms_m1/sales/2/2?yr=' . $yr . '&project='.$project.'&payer=' . $this->input->get('payer') . '&dong=' . $dong_ho[0] . '&ho=' . $dong_ho[1]) . "'>" . $lt->contractor . "(" . $lt->unit_dong_ho . ")</a>" . $del_cl;
 	$ci+=1;
 ?>
 <?php endforeach; ?>
