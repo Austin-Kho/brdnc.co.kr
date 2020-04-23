@@ -80,7 +80,7 @@ function cont_check(){
 		form2.custom_name.focus();
 		return;
 	}
-	if(!form1.cont_sort3&&!form2.birth_date.value){
+	if(form1.cont_sort2.value=='2'&&!form1.cont_sort3&&!form2.birth_date.value){
 		alert('계약 고객의 생년월일을 입력하여 주십시요!');
 		form2.birth_date.focus();
 		return;
