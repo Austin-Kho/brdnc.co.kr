@@ -1032,7 +1032,7 @@ else :
 			</div>
 		</form>
 
-<?php if($auth12<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="cont_check();";} ?>
+<?php $submit_str = ($auth12<2) ? "alert('등록 권한이 없습니다!')" : "cont_check();"; ?>
 		<div class="form-group btn-wrap" style="margin: <?php echo $mg = ((( !$this->input->get('cont_sort2') && !$this->input->get('cont_sort3')) OR ($this->input->get('cont_sort2')!=2 && $this->input->get('cont_sort3')!=4)))? '130px' :' 30px'; ?> 0 0 0;">
 			<input type="button" class="btn btn-primary btn-sm" onclick="<?php echo $submit_str?>" value="등록 하기">
 		</div>
