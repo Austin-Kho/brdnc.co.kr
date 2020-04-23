@@ -296,7 +296,8 @@ function cont_check(){
 		if(form1.cont_sort3.value=='4') var cont_sort = "계약 해지";
 	}
 	if(form2.dong && form2.ho){
-		var conf_str = '거래 구분 : '+cont_sort+'\n계약 고객 : '+form2.custom_name.value+'\n거래 일자 : '+form2.conclu_date.value+'\n해당 호수 : '+form2.dong.value+'동 '+form2.ho.value+'호\n\n상기 내용을 등록 하시겠습니까?';
+		var dong_ho = (form2.dong.value&&form2.ho.value) ?  '\n해당 호수 : '+form1.dong.value+'동 '+form2.ho.value+'호' : '';
+		var conf_str = '거래 구분 : '+cont_sort+'\n계약 고객 : '+form2.custom_name.value+'\n거래 일자 : '+form2.conclu_date.value+dong_ho+'\n\n상기 내용을 등록 하시겠습니까?';
 		if(confirm(conf_str)===true){
 			form2.submit();
 		}else{
