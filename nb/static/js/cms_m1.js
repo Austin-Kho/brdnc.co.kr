@@ -75,6 +75,11 @@ function cont_check(){
 		form2.conclu_date.focus();
 		return;
 	}
+	if(!form1.cont_sort3&&form1.cont_sort2=='2'&&!form2.cont_code.value){
+		alert('계약 일련번호를 입력하여 주십시요!');
+		form2.cont_code.focus();
+		return;
+	}
 	if(!form1.cont_sort3&&!form2.custom_name.value){
 		alert('계약 고객명을 입력하여 주십시요!');
 		form2.custom_name.focus();

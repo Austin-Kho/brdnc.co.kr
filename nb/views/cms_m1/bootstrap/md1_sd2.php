@@ -213,7 +213,7 @@ else :
 
 <!--==================================동호 선택 후 계약 상황판 S======================================-->
 <?php if($this->input->get('cont_sort2')=="1" && !empty($is_reg['app_data'])) : // 청약 등록 호수인 경우 ?>
-<?php $app_url = ($pj_now->data_cr=='1') ? "&dong=".$dong_ho[0]."&ho=".$dong_ho[1] : "&app_id=".$this->input->get('app_id');?>
+<?php $app_url = ($pj_now->data_cr=='1') ? "&dong=".$dong_ho[0]."&ho=".$dong_ho[1] : "&app_id=".$this->input->get('app_id')."&cont_id=".$this->input->get('app_id');?>
 			<div class="row bo-top font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center bgfb" style="line-height:38px;">구 분</div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
@@ -241,8 +241,8 @@ else :
 <?php if( !empty($is_reg['app_data'])) : // 현재 청약상태 호수이면  ?>
 					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">청약 : <?php echo $is_reg['app_data']->app_date; ?></div>
 					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">입금 : <?php echo number_format($is_reg['app_data']->app_in_mon)." 원"; ?></div>
-					<div class="col-xs-6 col-sm-4 col-md-3" style="padding: 4px 0px;">계좌 : <?php if( !empty($dep_acc[($is_reg['app_data']->app_in_acc-1)]->acc_nick)) echo $dep_acc[($is_reg['app_data']->app_in_acc-1)]->acc_nick; ?></div>
-					<div class="col-xs-12 hidden-xs" style="padding: 4px 0px;">&nbsp;</div>
+					<div class="col-xs-6 col-sm-4 col-md-3" style="padding: 4px 0px;">계좌 : <?php if( !empty($dep_acc_all[($is_reg['app_data']->app_in_acc-1)]->acc_nick)) echo $dep_acc_all[($is_reg['app_data']->app_in_acc-1)]->acc_nick; ?></div>
+                    <div class="col-xs-12 hidden-xs" style="padding: 4px 0px;">&nbsp;</div>
 <?php elseif( !empty($is_reg['cont_data'])) : // 현재 청약상태 호수이면  ?>
 					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">계약 : <?php echo $is_reg['cont_data']->cont_date; ?></div>
 					<div class="col-xs-12 hidden-xs" style="padding: 4px 0px;">&nbsp;</div>
@@ -272,7 +272,7 @@ else :
 	else : $conclu_date_label = "청약 일자";
 	endif;
 
-	if(empty($is_reg['app_data']) && empty($is_reg['cont_data'])) : $conclu_date = set_value('conclu_date');
+	if (set_value('conclu_date') || (empty($is_reg['app_data']) && empty($is_reg['cont_data']))) : $conclu_date = set_value('conclu_date');
 	elseif($this->input->get('cont_sort2')==1 OR  $this->input->get('cont_sort3')==3) : $conclu_date = $is_reg['app_data']->app_date;  // 청약 데이터 있고 청약이나 청약해지
 	elseif($this->input->get('cont_sort2')==2 AND $this->input->get('cont_sort3')==4) : $conclu_date = "";  // 청약 데이터 있고 계약이나 계약 해지
 	else : $conclu_date = $is_reg['cont_data']->cont_date;
@@ -323,7 +323,7 @@ else :
 	else : $cont_code = $is_reg['cont_data']->cont_code;
 	endif;
 ?>
-				<div class="col-xs-4 col-sm-3 col-md-2 center bgfb" style="line-height:38px;">계약 일련번호</div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center bgfb" style="line-height:38px;">계약 일련번호 <span class="red">*</span></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="cont_code" class="sr-only">계약 일련번호</label>
@@ -553,7 +553,7 @@ else :
 						<select class="form-control input-sm" name="dep_acc_2" <?php echo $disabled; ?>>
 							<option value="">입금계좌</option>
 <?php foreach ($dep_acc as $lt) : ?>
-							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received['2']->paid_acc)&&$received['2']->paid_acc==$lt->seq) echo "selected"; else set_select('dep_acc_2', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
+							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received['2']->paid_acc)&&$received['2']->paid_acc==$lt->seq) echo "selected"; else echo set_select('dep_acc_2', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -623,7 +623,7 @@ else :
 						<select class="form-control input-sm" name="dep_acc_3" <?php echo $disabled; ?>>
 							<option value="">입금계좌</option>
 <?php foreach ($dep_acc as $lt) : ?>
-							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received['3']->paid_acc)&&$received['3']->paid_acc==$lt->seq) echo "selected"; else set_select('dep_acc_3', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
+							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received['3']->paid_acc)&&$received['3']->paid_acc==$lt->seq) echo "selected"; else echo set_select('dep_acc_3', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -694,7 +694,7 @@ else :
 						<select class="form-control input-sm" name="dep_acc_4" <?php echo $disabled; ?>>
 							<option value="">입금계좌</option>
 <?php foreach ($dep_acc as $lt) : ?>
-							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received['4']->paid_acc)&&$received['4']->paid_acc==$lt->seq) echo "selected"; else set_select('dep_acc_4', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
+							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received['4']->paid_acc)&&$received['4']->paid_acc==$lt->seq) echo "selected"; else echo set_select('dep_acc_4', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -765,7 +765,7 @@ else :
 						<select class="form-control input-sm" name="dep_acc_5" <?php echo $disabled; ?>>
 							<option value="">입금계좌</option>
 <?php foreach ($dep_acc as $lt) : ?>
-							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received['5']->paid_acc)&&$received['5']->paid_acc==$lt->seq) echo "selected"; else set_select('dep_acc_5', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
+							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received['5']->paid_acc)&&$received['5']->paid_acc==$lt->seq) echo "selected"; else echo set_select('dep_acc_5', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -836,7 +836,7 @@ else :
 						<select class="form-control input-sm" name="dep_acc_6" <?php echo $disabled; ?>>
 							<option value="">입금계좌</option>
 <?php foreach ($dep_acc as $lt) : ?>
-							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received['6']->paid_acc)&&$received['6']->paid_acc==$lt->seq) echo "selected"; else set_select('dep_acc_6', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
+							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received['6']->paid_acc)&&$received['6']->paid_acc==$lt->seq) echo "selected"; else echo set_select('dep_acc_6', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -907,7 +907,7 @@ else :
 						<select class="form-control input-sm" name="dep_acc_7" <?php echo $disabled; ?>>
 							<option value="">입금계좌</option>
 <?php foreach ($dep_acc as $lt) : ?>
-							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received['7']->paid_acc)&&$received['7']->paid_acc==$lt->seq) echo "selected"; else set_select('dep_acc_7', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
+							<option value="<?php echo $lt->seq ?>" <?php if( !empty($received['7']->paid_acc)&&$received['7']->paid_acc==$lt->seq) echo "selected"; else echo set_select('dep_acc_7', $lt->seq); ?>><?php echo $lt->acc_nick; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>

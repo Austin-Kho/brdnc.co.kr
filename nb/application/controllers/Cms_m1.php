@@ -153,7 +153,7 @@ class Cms_m1 extends CB_Controller {
 
             // 계약현황 2. 계약등록 ////////////////////////////////////////////////////////////////////
         }else if($mdi==1 && $sdi==2) {
-            $this->output->enable_profiler(TRUE); //프로파일러 보기//
+//            $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
             // 조회 등록 권한 체크
             $auth = $this->cms_main_model->auth_chk('_m1_1_2', $this->session->userdata['mem_id']);
@@ -222,11 +222,11 @@ class Cms_m1 extends CB_Controller {
             }
 
             // 청약 또는 계약 유닛인지 확인
-            if(!empty($unit_seq->is_application=='1' or $this->input->get('app_id'))) { // 청약 물건이면
-                $app_data = $view['is_reg']['app_data'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_application WHERE seq='".$this->input->get('app_id')."' AND disposal_div<>'3' "); // 청약 데이터
-            }else if($unit_seq->is_contract=='1' or !empty($this->input->get('cont_id'))){ // 계약 물건이면
-                $view['is_app_cont'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_application WHERE pj_seq='$project' AND unit_seq='$unit_seq->seq' AND disposal_div='1' "); // 청약->계약전환 물건인지 확인
-                $cont_where = " WHERE unit_seq='$unit_seq->seq' AND is_transfer='0' AND is_rescission='0' AND cb_cms_sales_contract.seq=cont_seq  ";
+            if(!empty($unit_seq->is_application=='0' or $this->input->get('app_id'))) { // 청약 물건이면
+                $app_data = $view['is_reg']['app_data'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_application WHERE seq='".$this->input->get('app_id')."' AND disposal_div<>'2' "); // 청약 데이터
+            }else if($unit_seq->is_contract=='0' or !empty($this->input->get('cont_id'))){ // 계약 물건이면
+                $view['is_app_cont'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_application WHERE pj_seq='$project' AND unit_seq='$unit_seq->seq' AND disposal_div='0' "); // 청약->계약전환 물건인지 확인
+                $cont_where = " WHERE unit_seq='$unit_seq->seq' AND is_transfer='-1' AND is_rescission='0' AND cb_cms_sales_contract.seq=cont_seq  ";
                 $cont_query = "  SELECT *, cb_cms_sales_contract.seq AS cont_seq, cb_cms_sales_contractor.seq AS contractor_seq  FROM cb_cms_sales_contract, cb_cms_sales_contractor ".$cont_where;
                 $cont_data = $view['is_reg']['cont_data'] = $this->cms_main_model->sql_row($cont_query); // 계약 및 계약자 데이터
             }
@@ -236,6 +236,7 @@ class Cms_m1 extends CB_Controller {
 
             // 분양대금 수납 계정
             $view['dep_acc'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_bank_acc WHERE pj_seq='$project' ORDER BY seq ");
+            $view['dep_acc_all'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_bank_acc ORDER BY seq ");
 
             // 계약 등록 시 당회 납부 회차 데이터 가져오기
             if($this->input->get('cont_sort2')=='2'){
@@ -276,9 +277,8 @@ class Cms_m1 extends CB_Controller {
             $this->form_validation->set_rules('note', '비고', 'trim|max_length[200]');
 
             // 계약일 경우 폼 데이터
-            if($this->input->get('cont_sort2')==='2'){
-                $this->form_validation->set_rules('cont_code', '계약일련번호', 'trim|max_length[12]');
-
+            if($this->input->get('cont_sort2')=='2'){
+                $this->form_validation->set_rules('cont_code', '계약일련번호', 'trim|required|max_length[12]');
                 $this->form_validation->set_rules('birth_date', '생년월일', 'trim|required|numeric|max_length[6]');
                 $this->form_validation->set_rules('cont_gender', '계약자 성별', 'trim|required');
 
@@ -318,41 +318,24 @@ class Cms_m1 extends CB_Controller {
                 if($this->input->post('cont_sort2')=='1'){ // 청약일 때
 
                     // 1. 청약 관리 테이블 입력
-                    if($pj_now->data_cr=='1') {
-                        $app_arr = array(
-                            'pj_seq' => $this->input->post('project', TRUE),
-                            'applicant' => $this->input->post('custom_name', TRUE),
-                            'app_tel1' => $this->input->post('tel_1', TRUE),
-                            'app_tel2' => $this->input->post('tel_2', TRUE),
-                            'app_date' => $this->input->post('conclu_date', TRUE),
-                            'due_date' => $this->input->post('due_date', TRUE),
-                            'unit_seq' => $this->input->post('unit_seq', TRUE),
-                            'unit_type' => $this->input->post('type', TRUE),
-                            'unit_dong_ho' => $this->input->post('unit_dong_ho', TRUE),
-                            'app_diff' => $this->input->post('diff_no', TRUE),
-                            'app_in_mon' => $this->input->post('app_in_mon', TRUE),
-                            'app_in_acc' => $this->input->post('app_in_acc', TRUE),
-                            'app_in_date' => $this->input->post('app_in_date', TRUE),
-                            'app_in_who' => $this->input->post('app_in_who', TRUE),
-                            'note' => $this->input->post('note', TRUE)
-                        );
-                    }else{
-                        $app_arr = array(
-                            'pj_seq' => $this->input->post('project', TRUE),
-                            'applicant' => $this->input->post('custom_name', TRUE),
-                            'app_tel1' => $this->input->post('tel_1', TRUE),
-                            'app_tel2' => $this->input->post('tel_2', TRUE),
-                            'app_date' => $this->input->post('conclu_date', TRUE),
-                            'due_date' => $this->input->post('due_date', TRUE),
-                            'unit_type' => $this->input->post('type', TRUE),
-                            'app_diff' => $this->input->post('diff_no', TRUE),
-                            'app_in_mon' => $this->input->post('app_in_mon', TRUE),
-                            'app_in_acc' => $this->input->post('app_in_acc', TRUE),
-                            'app_in_date' => $this->input->post('app_in_date', TRUE),
-                            'app_in_who' => $this->input->post('app_in_who', TRUE),
-                            'note' => $this->input->post('note', TRUE)
-                        );
-                    }
+                    $app_arr = array(
+                        'pj_seq' => $this->input->post('project', TRUE),
+                        'applicant' => $this->input->post('custom_name', TRUE),
+                        'app_tel1' => $this->input->post('tel_1', TRUE),
+                        'app_tel2' => $this->input->post('tel_2', TRUE),
+                        'app_date' => $this->input->post('conclu_date', TRUE),
+                        'due_date' => $this->input->post('due_date', TRUE),
+                        'unit_seq' => $this->input->post('unit_seq', TRUE),
+                        'unit_type' => $this->input->post('type', TRUE),
+                        'unit_dong_ho' => $this->input->post('unit_dong_ho', TRUE),
+                        'app_diff' => $this->input->post('diff_no', TRUE),
+                        'app_in_mon' => $this->input->post('app_in_mon', TRUE),
+                        'app_in_acc' => $this->input->post('app_in_acc', TRUE),
+                        'app_in_date' => $this->input->post('app_in_date', TRUE),
+                        'app_in_who' => $this->input->post('app_in_who', TRUE),
+                        'note' => $this->input->post('note', TRUE)
+                    );
+
                     if($this->input->post('mode')=='1' && $this->input->post('cont_sort1')=='1'){ // 신규 청약 등록 일 때
                         $add_arr = array('ini_reg_worker' => $this->session->userdata('mem_username'));
                         $app_put = array_merge($app_arr, $add_arr);
@@ -408,39 +391,31 @@ class Cms_m1 extends CB_Controller {
                     // 유닛 해당 가격(분담금) 아이디 추출
                     $price_seq = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_sales_price WHERE {$pr_where_sql}");
 
-                    if ($pj_now->data_cr=='1') {
-                        $cont_arr1 = array( // 계약 테이블 입력 데이터
-                            'pj_seq' => $this->input->post('project', TRUE),
-                            'cont_code' => $this->input->post('cont_code', TRUE),
-                            'cont_date' => $this->input->post('conclu_date', TRUE),
-                            'unit_seq' => $this->input->post('unit_seq', TRUE),
-                            'unit_type' => $this->input->post('type', TRUE),
-                            'unit_dong' => $this->input->post('dong', TRUE),
-                            'unit_dong_ho' => $this->input->post('unit_dong_ho', TRUE),
-                            'cont_diff' => $this->input->post('diff_no', TRUE),
-                            'price_seq' => $price_seq->seq,
-                            'note' => $this->input->post('note', TRUE)
-                        );
-                    } else {
-                        $cont_arr1 = array( // 계약 테이블 입력 데이터
-                            'pj_seq' => $this->input->post('project', TRUE),
-                            'cont_code' => $this->input->post('cont_code', TRUE),
-                            'cont_date' => $this->input->post('conclu_date', TRUE),
-                            'unit_type' => $this->input->post('type', TRUE),
-                            'cont_diff' => $this->input->post('diff_no', TRUE),
-                            'note' => $this->input->post('note', TRUE)
-                        );
-                    }
+                    $cont_arr1 = array( // 계약 테이블 입력 데이터
+                        'pj_seq' => $this->input->post('project', TRUE),
+                        'cont_code' => $this->input->post('cont_code', TRUE),
+                        'cont_date' => $this->input->post('conclu_date', TRUE),
+                        'unit_seq' => $this->input->post('unit_seq', TRUE),
+                        'unit_type' => $this->input->post('type', TRUE),
+                        'unit_dong' => $this->input->post('dong', TRUE),
+                        'unit_dong_ho' => $this->input->post('unit_dong_ho', TRUE),
+                        'cont_diff' => $this->input->post('diff_no', TRUE),
+                        'price_seq' => $price_seq->seq,
+                        'note' => $this->input->post('note', TRUE)
+                    );
+
                     /******************************계약 테이블 데이터******************************/
                     /////////////////////////////////////////////////////////////////////////////신규 계약 인서트
                     if(!empty($this->input->get('cont_id')) OR $this->input->get('unit_is_cont')=='0'){  // 신규 계약일 때
                         //   1. 계약관리 테이블에 해당 데이터를 인서트한다.
                         $add_arr1 = array('ini_reg_worker' => $this->session->userdata('mem_username'));
                         $cont_arr11 = array_merge($cont_arr1, $add_arr1);
-                        $result[0] = $this->cms_main_model->insert_data('cb_cms_sales_contract', $cont_arr11, 'ini_reg_date');
-                        if( !$result[0]){
-                            alert('데이터베이스 에러입니다.1', base_url(uri_string()));
-                        }
+                        alert(var_dump($cont_arr11), current_full_url());
+                        return;
+//                        $result[0] = $this->cms_main_model->insert_data('cb_cms_sales_contract', $cont_arr11, 'ini_reg_date');
+//                        if( !$result[0]){
+//                            alert('데이터베이스 에러입니다.1', current_full_url());
+//                        }
                     }
 
                     /******************************계약자 테이블 데이터******************************/
