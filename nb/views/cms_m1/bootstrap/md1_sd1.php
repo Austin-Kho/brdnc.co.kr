@@ -370,7 +370,7 @@ endfor;
                     <thead class="bo-top center bgf8">
                     <tr>
                         <td width="8%">타 입</td>
-                        <td width="9%">동 호 수</td>
+                        <?php if($pj_now->data_cr=='1'):?><td width="9%">동 호 수</td><?php endif?>
                         <td width="9%">청 약 자</td>
                         <td width="9%">차 수</td>
                         <td width="10%">청 약 금</td>
@@ -401,7 +401,7 @@ endfor;
                         ?>
                         <tr <?php if($z>10) echo "class='tr_toggle'; style='display:none;'" ?>>
                             <td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type] ?>;">&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></span></td>
-                            <td><?php echo $app_edit_link.$lt->unit_dong_ho.$app_edit; ?></td>
+                            <?php if($pj_now->data_cr=='1'): ?><td><?php echo $app_edit_link.$lt->unit_dong_ho.$app_edit; ?></td><?php endif ?>
                             <td><?php echo $app_edit_link.$lt->applicant.$app_edit; ?></td>
                             <?php $diff = $this->cms_main_model->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no = '$lt->app_diff' "); ?>
                             <td ><?php echo $diff->diff_name;?></td>

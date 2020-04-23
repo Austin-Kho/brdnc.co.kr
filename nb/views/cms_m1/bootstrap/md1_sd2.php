@@ -319,7 +319,7 @@ else :
 					</div>
 				</div>
 <?php else :
-	if(empty($is_reg['cont_data'])) : $cont_code = set_value('custom_name');
+	if(empty($is_reg['cont_data'])) : $cont_code = set_value('cont_code');
 	else : $cont_code = $is_reg['cont_data']->cont_code;
 	endif;
 ?>
@@ -448,7 +448,7 @@ else :
 	foreach ($pay_schedule as $lt) :
 		$pay_name = empty($lt->pay_disc) ? $lt->pay_name : $lt->pay_disc;
 ?>
-							<option value="<?php echo $lt->pay_code; ?>" <?php if( !empty($receiv_app)&&$lt->pay_code==$receiv_app->pay_sche_code){ echo "selected"; }else{ set_select('app_pay_sche', $pay_name); } ?>><?php echo $pay_name; ?></option>
+							<option value="<?php echo $lt->pay_code; ?>" <?php if( !empty($receiv_app)&&$lt->pay_code==$receiv_app->pay_sche_code): echo "selected"; else: echo set_select('app_pay_sche', $lt->pay_code); endif; ?>><?php echo $pay_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -513,7 +513,7 @@ else :
 	foreach ($pay_schedule as $lt) :
 		$pay_name = empty($lt->pay_disc) ? $lt->pay_name : $lt->pay_disc;
 ?>
-							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['1'])&&$lt->pay_code==$received['1']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche1', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
+							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['1'])&&$lt->pay_code==$received['1']->pay_sche_code){ echo "selected"; }else{ echo set_select('cont_pay_sche1', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
@@ -574,7 +574,7 @@ else :
 	foreach ($pay_schedule as $lt) :
 		$pay_name = empty($lt->pay_disc) ? $lt->pay_name : $lt->pay_disc;
 ?>
-								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['2'])&&$lt->pay_code==$received['2']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche2', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
+								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['2'])&&$lt->pay_code==$received['2']->pay_sche_code){ echo "selected"; }else{ echo set_select('cont_pay_sche2', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
 	<?php endforeach; ?>
 							</select>
 						</div>
@@ -644,7 +644,7 @@ else :
 	foreach ($pay_schedule as $lt) :
 		$pay_name = empty($lt->pay_disc) ? $lt->pay_name : $lt->pay_disc;
 ?>
-								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['3'])&&$lt->pay_code==$received['3']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche3', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
+								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['3'])&&$lt->pay_code==$received['3']->pay_sche_code){ echo "selected"; }else{ echo set_select('cont_pay_sche3', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
 	<?php endforeach; ?>
 							</select>
 						</div>
@@ -715,7 +715,7 @@ else :
 	foreach ($pay_schedule as $lt) :
 		$pay_name = empty($lt->pay_disc) ? $lt->pay_name : $lt->pay_disc;
 ?>
-								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['4'])&&$lt->pay_code==$received['4']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche4', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
+								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['4'])&&$lt->pay_code==$received['4']->pay_sche_code){ echo "selected"; }else{ echo set_select('cont_pay_sche4', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
 	<?php endforeach; ?>
 							</select>
 						</div>
@@ -786,7 +786,7 @@ else :
 	foreach ($pay_schedule as $lt) :
 		$pay_name = empty($lt->pay_disc) ? $lt->pay_name : $lt->pay_disc;
 ?>
-								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['5'])&&$lt->pay_code==$received['5']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche5', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
+								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['5'])&&$lt->pay_code==$received['5']->pay_sche_code){ echo "selected"; }else{ echo set_select('cont_pay_sche5', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
 <?php endforeach; ?>
 							</select>
 						</div>
@@ -857,7 +857,7 @@ else :
 	foreach ($pay_schedule as $lt) :
 		$pay_name = empty($lt->pay_disc) ? $lt->pay_name : $lt->pay_disc;
 ?>
-								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['6'])&&$lt->pay_code==$received['6']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche6', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
+								<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['6'])&&$lt->pay_code==$received['6']->pay_sche_code){ echo "selected"; }else{ echo set_select('cont_pay_sche6', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
 <?php endforeach; ?>
 							</select>
 						</div>
@@ -927,7 +927,7 @@ else :
 	foreach ($pay_schedule as $lt) :
 		$pay_name = empty($lt->pay_disc) ? $lt->pay_name : $lt->pay_disc;
 ?>
-							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['7'])&&$lt->pay_code==$received['7']->pay_sche_code){ echo "selected"; }else{ set_select('cont_pay_sche7', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
+							<option value="<?php echo $lt->pay_code ?>" <?php if( !empty($received['7'])&&$lt->pay_code==$received['7']->pay_sche_code){ echo "selected"; }else{ echo set_select('cont_pay_sche7', $lt->pay_code); } ?>><?php echo $pay_name; ?></option>
 <?php endforeach; ?>
 						</select>
 					</div>
