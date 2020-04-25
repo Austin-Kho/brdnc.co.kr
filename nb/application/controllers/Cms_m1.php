@@ -32,7 +32,7 @@ class Cms_m1 extends CB_Controller {
      * @return [type]      [description]
      */
     public function sales($mdi='', $sdi=''){
-//		$this->output->enable_profiler(TRUE); //프로파일러 보기///
+		// $this->output->enable_profiler(TRUE); //프로파일러 보기///
 
         ///////////////////////////
         // 이벤트 라이브러리를 로딩합니다
@@ -153,7 +153,7 @@ class Cms_m1 extends CB_Controller {
 
             // 계약현황 2. 계약등록 ////////////////////////////////////////////////////////////////////
         }else if($mdi==1 && $sdi==2) {
-//            $this->output->enable_profiler(TRUE); //프로파일러 보기//
+            $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
             // 조회 등록 권한 체크
             $auth = $this->cms_main_model->auth_chk('_m1_1_2', $this->session->userdata['mem_id']);
@@ -350,6 +350,9 @@ class Cms_m1 extends CB_Controller {
                                 if( !$result2) alert('데이터베이스 에러입니다.', base_url(uri_string()));
                             }
                         }
+                        $app = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_application ORDER BY seq DESC LIMIT 1 ");
+                        $app_id = $app->seq;
+
                     } else if($this->input->post('mode')=='2' && !empty($this->input->get('app_id'))){ // 기존 청약정보 수정일 때
                         $add_arr = array('last_modi_date' => date('Y-m-d'), 'last_modi_worker' => $this->session->userdata('mem_username'));
                         $app_put = array_merge($app_arr, $add_arr);
@@ -358,10 +361,11 @@ class Cms_m1 extends CB_Controller {
                         if( !$result){
                             alert('데이터베이스 에러입니다.', base_url(uri_string()));
                         }
+                        $app_id = $this->input->get('app_id');
                     }
                     $ret_url = ($pj_now->data_cr=='1')
                         ? "?project=".$pj."&mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&diff_no=".$this->input->post('diff_no')."&type=".$this->input->post('type')."&dong=".$this->input->post('dong')."&ho=".$this->input->post('ho')
-                        : "?project=".$pj."&mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&diff_no=".$this->input->post('diff_no')."&type=".$this->input->post('type')."&app_id=".$this->input->get('app_id');
+                        : "?project=".$pj."&mode=2&cont_sort1=".$this->input->post('cont_sort1')."&cont_sort2=".$this->input->post('cont_sort2')."&diff_no=".$this->input->post('diff_no')."&type=".$this->input->post('type')."&app_id=".$app_id;
                     alert('청약 정보 입력이 정상 처리되었습니다.', base_url('cms_m1/sales/1/2').$ret_url);
 
 
@@ -371,15 +375,19 @@ class Cms_m1 extends CB_Controller {
                     /******************************계약 테이블 데이터******************************/
                     $con_fl = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_con_floor WHERE pj_seq='$pj' ORDER BY seq "); // 층별 조건 객체배열
 
-                    if(strlen($this->input->post('ho'))==3) { // 현재 층수 구하기
-                        $now_floor = substr($this->input->post('ho'), 0, 1);
-                    }else if(strlen($this->input->post('ho'))==4){
-                        $now_floor = substr($this->input->post('ho'), 0, 2);
-                    }
+                    if($pj_now->data_cr=='1') {
+                        if(strlen($this->input->post('ho'))==3) { // 현재 층수 구하기
+                            $now_floor = substr($this->input->post('ho'), 0, 1);
+                        }else if(strlen($this->input->post('ho'))==4){
+                            $now_floor = substr($this->input->post('ho'), 0, 2);
+                        }
 
-                    foreach($con_fl as $lt) { // 층수조건 아이디 (con_floor_no) 구하기
-                        $a = explode("-", $lt->floor_range);
-                        if($now_floor>=$a[0] && $now_floor<=$a[1]) $con_floor_no = $lt->seq;
+                        foreach($con_fl as $lt) { // 층수조건 아이디 (con_floor_no) 구하기
+                            $a = explode("-", $lt->floor_range);
+                            if($now_floor>=$a[0] && $now_floor<=$a[1]) $con_floor_no = $lt->seq;
+                        }
+                    }else{
+                        $con_floor_no = $con_fl[0]->seq;
                     }
 
                     $pr_where_sql = "pj_seq='{$pj}' 
@@ -390,37 +398,41 @@ class Cms_m1 extends CB_Controller {
 
                     // 유닛 해당 가격(분담금) 아이디 추출
                     $price_seq = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_sales_price WHERE {$pr_where_sql}");
+                    $unit_seq = ($pj_now->data_cr=='1') ? $this->input->post('unit_seq') : NULL;
+                    $unit_dong = ($pj_now->data_cr=='1') ? $this->input->post('dong') : NULL;
+                    $unit_dong_ho = ($pj_now->data_cr=='1') ? $this->input->post('unit_dong_ho') : NULL;
 
                     $cont_arr1 = array( // 계약 테이블 입력 데이터
                         'pj_seq' => $this->input->post('project', TRUE),
                         'cont_code' => $this->input->post('cont_code', TRUE),
                         'cont_date' => $this->input->post('conclu_date', TRUE),
-                        'unit_seq' => $this->input->post('unit_seq', TRUE),
+                        'unit_seq' => $unit_seq,
                         'unit_type' => $this->input->post('type', TRUE),
-                        'unit_dong' => $this->input->post('dong', TRUE),
-                        'unit_dong_ho' => $this->input->post('unit_dong_ho', TRUE),
+                        'unit_dong' => $unit_dong,
+                        'unit_dong_ho' => $unit_dong_ho,
                         'cont_diff' => $this->input->post('diff_no', TRUE),
                         'price_seq' => $price_seq->seq,
                         'note' => $this->input->post('note', TRUE)
                     );
 
+
                     /******************************계약 테이블 데이터******************************/
                     /////////////////////////////////////////////////////////////////////////////신규 계약 인서트
-                    if(!empty($this->input->get('cont_id')) OR $this->input->get('unit_is_cont')=='0'){  // 신규 계약일 때
+                    if(!empty($this->input->get('cont_id')) OR !$this->input->get('unit_is_cont')){  // 신규 계약일 때
                         //   1. 계약관리 테이블에 해당 데이터를 인서트한다.
                         $add_arr1 = array('ini_reg_worker' => $this->session->userdata('mem_username'));
                         $cont_arr11 = array_merge($cont_arr1, $add_arr1);
-                        alert(var_dump($cont_arr11), current_full_url());
-                        return;
-//                        $result[0] = $this->cms_main_model->insert_data('cb_cms_sales_contract', $cont_arr11, 'ini_reg_date');
-//                        if( !$result[0]){
-//                            alert('데이터베이스 에러입니다.1', current_full_url());
-//                        }
+
+
+                        $result[0] = $this->cms_main_model->insert_data('cb_cms_sales_contract', $cont_arr11, 'ini_reg_date');
+                        if( !$result[0]){
+                            alert('데이터베이스 에러입니다.1', current_full_url());
+                        }
                     }
 
                     /******************************계약자 테이블 데이터******************************/
-                    $cr_cont = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_contract WHERE pj_seq='$pj' AND unit_seq='$un' AND is_rescission='0' ");
-                    $cont_seq = ($pj_now->data_cr=='1') ? $cr_cont->seq : $this->input->get('cont_id');
+                    $cr_cont = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_contract ORDER BY seq DESC LIMIT 1 ");
+                    $cont_seq = $cr_cont->seq;
                     if( !empty($this->input->post('birth_date'))) $birth_gender = $this->input->post('birth_date').'-'.$this->input->post('cont_gender');
                     $addr_id = $this->input->post('postcode1')."|".$this->input->post('address1_1')."|".$this->input->post('address2_1');
                     $addr_dm = $this->input->post('postcode2')."|".$this->input->post('address1_2')."|".$this->input->post('address2_2');
@@ -445,6 +457,7 @@ class Cms_m1 extends CB_Controller {
                         'incom_doc' =>  $incom_doc
                     );
                     /******************************계약자 테이블 데이터******************************/
+
                     /******************************계약금 1 폼 데이터******************************/
                     $cont_arr3 = array( // 수납 테이블 입력 데이터
                         'pj_seq' => $this->input->post('project', TRUE),
@@ -538,17 +551,19 @@ class Cms_m1 extends CB_Controller {
                     /******************************계약금 7 폼 데이터******************************/
 
 
-                    if(!empty($this->input->get('cont_id')) OR $this->input->post('unit_is_cont')=='0'){  // 신규 계약일 때
+                    if(!empty($this->input->get('cont_id')) OR !$this->input->post('unit_is_cont')){  // 신규 계약일 때
 
                         //   2. 계약자관리 테이블에 해당 데이터를 인서트한다.
                         $add_arr2 = array('cont_seq' => $cont_seq, 'ini_reg_worker' => $this->session->userdata('mem_username'));
                         $cont_arr22 = array_merge($cont_arr2, $add_arr2);
+
                         $result[1] = $this->cms_main_model->insert_data('cb_cms_sales_contractor', $cont_arr22, 'ini_reg_date');
+
                         if( !$result[1]) {
                             alert('데이터베이스 에러입니다.2', '');
                         }
 
-                        //   3. 청약 테이블 해당 데이터에 계약 전환 업데이트
+                        // 3. 청약 테이블 해당 데이터에 계약 전환 업데이트
                         if(!empty($this->input->get('app_id')) OR $this->input->post('unit_is_app')=='1'){ // 청약 상태인 데이터 이면
                             // 청약 테이블 계약전환 처리
                             $dis_data = array(

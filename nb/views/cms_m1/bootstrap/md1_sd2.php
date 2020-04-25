@@ -29,7 +29,7 @@ else :
 						</select>
 					</div>
 				</div>
-				<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">프로젝트 선택 </div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">프로젝트 선택 <?php var_dump($con_floor_no); ?></div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="project" class="sr-only">프로젝트 선택</label>
@@ -213,7 +213,10 @@ else :
 
 <!--==================================동호 선택 후 계약 상황판 S======================================-->
 <?php if($this->input->get('cont_sort2')=="1" && !empty($is_reg['app_data'])) : // 청약 등록 호수인 경우 ?>
-<?php $app_url = ($pj_now->data_cr=='1') ? "&dong=".$dong_ho[0]."&ho=".$dong_ho[1] : "&app_id=".$this->input->get('app_id')."&cont_id=".$this->input->get('app_id');?>
+<?php
+    $cont_id = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_contract WHERE pj_seq='$pj' AND unit_seq='$un' AND is_rescission='0' ");
+    $app_url = ($pj_now->data_cr=='1') ? "&dong=".$dong_ho[0]."&ho=".$dong_ho[1] : "&app_id=".$this->input->get('app_id')."&cont_id=".$this->input->get('app_id');
+?>
 			<div class="row bo-top font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center bgfb" style="line-height:38px;">구 분</div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
@@ -354,7 +357,7 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="birth_date" class="sr-only">생년 월일</label>
-						<input type="number" class="form-control input-sm" name="birth_date" value="<?php if($this->input->post('birth_date')) echo set_value('birth_date'); else echo substr($is_reg['cont_data']->cont_birth_id, 0, 6); ?>" maxlength="6" <?php echo $disabled; ?> placeholder="ex : 981231">
+						<input type="number" min="0" max="999999" class="form-control input-sm" name="birth_date" value="<?php if($this->input->post('birth_date')) echo set_value('birth_date'); else echo substr($is_reg['cont_data']->cont_birth_id, 0, 6); ?>" <?php echo $disabled; ?> placeholder="ex : 981231">
 					</div>
 				</div>
 				<div class="visible-xs visible-sm col-xs-4  col-sm-3 center bgfb" style="line-height:38px;">성 별 <span class="red">*</span></div>
@@ -418,7 +421,7 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="app_in_mon" class="sr-only">청약금</label>
-						<input type="number" class="form-control input-sm en_only" name="app_in_mon" onkeyPress ='iNum(this)' placeholder="청약금" value="<?php echo $app_in_mon; ?>" <?php echo $disabled; if($this->input->get('cont_sort2')==2 OR $this->input->get('cont_sort2')==4) echo "readonly"; ?>>
+						<input type="number" min="0" class="form-control input-sm en_only" name="app_in_mon" onkeyPress ='iNum(this)' placeholder="청약금" value="<?php echo $app_in_mon; ?>" <?php echo $disabled; if($this->input->get('cont_sort2')==2 OR $this->input->get('cont_sort2')==4) echo "readonly"; ?>>
 					</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
@@ -484,7 +487,7 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="deposit_1" class="sr-only">계약금[1]</label>
-						<input type="number" class="form-control input-sm en_only" name="deposit_1" value="<?php echo $deposit_1; ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]" <?php echo $disabled; ?>>
+						<input type="number" min="0" class="form-control input-sm en_only" name="deposit_1" value="<?php echo $deposit_1; ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]" <?php echo $disabled; ?>>
 					</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
@@ -544,7 +547,7 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="deposit_2" class="sr-only">계약금[2]</label>
-						<input type="number" class="form-control input-sm en_only" name="deposit_2" value="<?php echo $deposit_2; ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]"  <?php echo $disabled; ?>>
+						<input type="number" min="0" class="form-control input-sm en_only" name="deposit_2" value="<?php echo $deposit_2; ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]"  <?php echo $disabled; ?>>
 					</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
@@ -614,7 +617,7 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="deposit_3" class="sr-only">계약금[3]</label>
-						<input type="number" class="form-control input-sm en_only" name="deposit_3" value="<?php echo $deposit_3; ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]"  <?php echo $disabled; ?>>
+						<input type="number" min="0" class="form-control input-sm en_only" name="deposit_3" value="<?php echo $deposit_3; ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]"  <?php echo $disabled; ?>>
 					</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
@@ -685,7 +688,7 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="deposit_4" class="sr-only">계약금[4]</label>
-						<input type="number" class="form-control input-sm en_only" name="deposit_4" value="<?php echo $deposit_4; ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]"  <?php echo $disabled; ?>>
+						<input type="number" min="0" class="form-control input-sm en_only" name="deposit_4" value="<?php echo $deposit_4; ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]"  <?php echo $disabled; ?>>
 					</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
@@ -756,7 +759,7 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="deposit_5" class="sr-only">계약금[5]</label>
-						<input type="number" class="form-control input-sm en_only" name="deposit_5" value="<?php echo $deposit_5; ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]"  <?php echo $disabled; ?>>
+						<input type="number" min="0" class="form-control input-sm en_only" name="deposit_5" value="<?php echo $deposit_5; ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]"  <?php echo $disabled; ?>>
 					</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
@@ -827,7 +830,7 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="deposit_6" class="sr-only">계약금[6]</label>
-						<input type="number" class="form-control input-sm en_only" name="deposit_6" value="<?php echo $deposit_6; ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]"  <?php echo $disabled; ?>>
+						<input type="number" min="0" class="form-control input-sm en_only" name="deposit_6" value="<?php echo $deposit_6; ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]"  <?php echo $disabled; ?>>
 					</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
@@ -898,7 +901,7 @@ else :
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="deposit_7" class="sr-only">계약금[7]</label>
-						<input type="number" class="form-control input-sm en_only" name="deposit_7" value="<?php echo $deposit_7; ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]"  <?php echo $disabled; ?>>
+						<input type="number" min="0" class="form-control input-sm en_only" name="deposit_7" value="<?php echo $deposit_7; ?>" onkeyPress ='iNum(this)'  placeholder="분담금 [단위:원]"  <?php echo $disabled; ?>>
 					</div>
 				</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
@@ -950,7 +953,7 @@ else :
 					<div class="col-xs-12" style="padding: 0px;">
 						<div class="col-xs-4 col-sm-3 col-md-1" style="padding-right: 0;">
 							<label for="postcode1" class="sr-only">우편번호</label>
-							<input type="number" class="form-control input-sm en_only" id="postcode1" name="postcode1" onclick="execDaumPostcode(1)" style="margin: 4px 0;" maxlength="5" value="<?php if( !empty($addr1)) echo $addr1[0]; else echo set_value('postcode1');  ?>" readonly required placeholder="우편번호">
+							<input type="number" min="0" class="form-control input-sm en_only" id="postcode1" name="postcode1" onclick="execDaumPostcode(1)" style="margin: 4px 0;" maxlength="5" value="<?php if( !empty($addr1)) echo $addr1[0]; else echo set_value('postcode1');  ?>" readonly required placeholder="우편번호">
 						</div>
 						<div class="col-xs-4 col-sm-2 col-md-1" style="padding-right: 0;">
 							<input type="button" class="btn btn-info btn-sm" value="우편번호" style="margin: 4px 0;" onclick="execDaumPostcode(1)">
@@ -977,7 +980,7 @@ else :
 					<div class="col-xs-12" style="padding: 0px;">
 						<div class="col-xs-4 col-sm-3 col-md-1" style="padding-right: 0;">
 							<label for="postcode2" class="sr-only">우편번호</label>
-							<input type="number" class="form-control input-sm en_only" id="postcode2" name="postcode2"  onclick="execDaumPostcode(2)" style="margin: 4px 0;" maxlength="5" value="<?php if( !empty($addr2)) echo $addr2[0]; else echo set_value('postcode2');  ?>" readonly required placeholder="우편번호">
+							<input type="number" min="0" class="form-control input-sm en_only" id="postcode2" name="postcode2"  onclick="execDaumPostcode(2)" style="margin: 4px 0;" maxlength="5" value="<?php if( !empty($addr2)) echo $addr2[0]; else echo set_value('postcode2');  ?>" readonly required placeholder="우편번호">
 						</div>
 						<div class="col-xs-4 col-sm-2 col-md-1" style="padding-right: 0;">
 							<input type="button" class="btn btn-info btn-sm" value="우편번호" style="margin: 4px 0;" onclick="execDaumPostcode(2)">

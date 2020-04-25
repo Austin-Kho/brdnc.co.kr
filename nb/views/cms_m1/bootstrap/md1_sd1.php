@@ -259,7 +259,8 @@ endfor;
 				<div class="checkbox"><label><input type="checkbox" name="opt2" checked> 일련번호&nbsp;</label></div>
 				<div class="checkbox"><label><input type="checkbox" name="opt3" checked> 차수&nbsp;</label></div>
 				<div class="checkbox"><label><input type="checkbox" name="opt4" checked> 타입&nbsp;</label></div>
-				<div class="checkbox"><label><input type="checkbox" name="opt5" checked> 동호수&nbsp;</label></div>
+                <?php $chk = ($pj_now->data_cr=='1') ? "checked" : ""; ?>
+				<div class="checkbox"><label><input type="checkbox" name="opt5" <?php echo $chk; ?>> 동호수&nbsp;</label></div>
 				<div class="checkbox"><label><input type="checkbox" name="opt6" checked> 계약자&nbsp;</label></div>
 				<div class="checkbox"><label><input type="checkbox" name="opt7" checked> 생년월일(성별)&nbsp;</label></div>
 				<div class="checkbox"><label><input type="checkbox" name="opt8" checked> 계약일자&nbsp;</label></div>
@@ -280,7 +281,9 @@ endfor;
                 <td width="7%">일련번호</td>
                 <td width="7%">차 수</td>
                 <td width="6%">타 입</td>
+                <?php if($pj_now->data_cr=='1'): ?>
                 <td width="7%">동 호 수</td>
+                <?php endif ?>
                 <td width="6%">계 약 자</td>
                 <td width="10%">계약 일자</td>
                 <td width="10%">연락처 [1]</td>
@@ -331,7 +334,9 @@ endfor;
                     <td><?php echo $cont_edit_link.$lt->cont_code."</a>"; ?></td>
                     <td><?php echo $nd->diff_name; ?></td>
                     <td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></td>
+                    <?php if($pj_now->data_cr=='1'): ?>
                     <td><?php echo $cont_edit_link.$lt->unit_dong_ho."</a>"; ?></td>
+                    <?php endif ?>
                     <td><?php echo $cont_edit_link.$lt->contractor."</a>"; ?></td>
                     <td><?php echo $new_span." ".$lt->cont_date; ?></span></td>
                     <td><?php echo $lt->cont_tel1; ?></td>
