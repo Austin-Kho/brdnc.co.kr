@@ -29,7 +29,7 @@ else :
 						</select>
 					</div>
 				</div>
-				<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">프로젝트 선택 <?php var_dump($con_floor_no); ?></div>
+				<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">프로젝트 선택</div>
 				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<label for="project" class="sr-only">프로젝트 선택</label>
@@ -215,7 +215,7 @@ else :
 <?php if($this->input->get('cont_sort2')=="1" && !empty($is_reg['app_data'])) : // 청약 등록 호수인 경우 ?>
 <?php
     $cont_id = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_contract WHERE pj_seq='$pj' AND unit_seq='$un' AND is_rescission='0' ");
-    $app_url = ($pj_now->data_cr=='1') ? "&dong=".$dong_ho[0]."&ho=".$dong_ho[1] : "&app_id=".$this->input->get('app_id')."&cont_id=".$this->input->get('app_id');
+    $app_url = ($pj_now->data_cr=='1') ? "&dong=".$dong_ho[0]."&ho=".$dong_ho[1] : "&app_id=".$this->input->get('app_id');
 ?>
 			<div class="row bo-top font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center bgfb" style="line-height:38px;">구 분</div>
@@ -246,7 +246,7 @@ else :
 					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">입금 : <?php echo number_format($is_reg['app_data']->app_in_mon)." 원"; ?></div>
 					<div class="col-xs-6 col-sm-4 col-md-3" style="padding: 4px 0px;">계좌 : <?php if( !empty($dep_acc_all[($is_reg['app_data']->app_in_acc-1)]->acc_nick)) echo $dep_acc_all[($is_reg['app_data']->app_in_acc-1)]->acc_nick; ?></div>
                     <div class="col-xs-12 hidden-xs" style="padding: 4px 0px;">&nbsp;</div>
-<?php elseif( !empty($is_reg['cont_data'])) : // 현재 청약상태 호수이면  ?>
+<?php elseif( !empty($is_reg['cont_data'])) : // 현재 계약상태 호수이면  ?>
 					<div class="col-xs-6 col-sm-4 col-md-2" style="padding: 4px 0px;">계약 : <?php echo $is_reg['cont_data']->cont_date; ?></div>
 					<div class="col-xs-12 hidden-xs" style="padding: 4px 0px;">&nbsp;</div>
 <?php else : // 신규 계약 등록 처리 시 ?>
