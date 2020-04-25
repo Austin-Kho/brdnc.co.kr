@@ -47,7 +47,7 @@ class Cms_main_model extends CB_Model
 	 */
 	public function data_num_rows($table, $where, $like, $or_like){
 		if( !empty($where)) $this->db->where($where);
-    if( !empty($like)) $this->db->like($like);
+        if( !empty($like)) $this->db->like($like);
 		$qry = $this->db->get($table);
 		return $rlt = $qry->num_rows();
 	}

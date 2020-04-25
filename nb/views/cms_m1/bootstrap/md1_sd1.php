@@ -107,23 +107,27 @@ endfor;
 					</tr>
 				</thead>
 				<tbody class="bo-bottom center">
-<?php for($i=0; $i<count($summary); $i++) :
-	if($i==0) $first_td = "<td rowspan='".count($summary)."' style='background-color:#FFF; vertical-align:middle;'>".$pj_now->pj_name."</td>"; else $first_td = "";
+<?php for($i=0; $i<count($tp_name); $i++) :
+	$first_td = ($i==0) ? "<td rowspan='".count($tp_name)."' style='background-color:#FFF; vertical-align:middle;'>".$pj_now->pj_name."</td>" : $first_td = "";
 ?>
 					<tr>
 						<?php echo $first_td; ?>
 						<td style="background-color: <?php echo $tp_color[$i].";"; ?>"><?php echo $tp_name[$i]; ?></td>
 						<td class="right"><?php echo $summary[$i]->type_num." 세대"; ?></td>
 						<td class="right"><?php if(empty($summary[$i]->hold)) echo "0 세대"; else echo $summary[$i]->hold." 세대"; ?></td>
-						<td class="right" style="color: #273169;"><?php if(empty($summary[$i]->app)) echo "0 건"; else echo $summary[$i]->app." 건"; ?></td>
+						<td class="right" style="color: #273169;"><?php if(empty($summary_app[$i])) echo "0 건"; else echo $tp_name[$i]." 건"; ?></td>
 	<?php for($j=0; $j<count($sc_cont_diff); $j++):
 					$cn = $this->cms_main_model->sql_row(" SELECT COUNT(seq) AS cont_num FROM cb_cms_sales_contract WHERE pj_seq='$project' AND unit_type='".$tp_name[$i]."' AND cont_diff='".$sc_cont_diff[$j]->cont_diff."' ");
-	?>
+//	?>
 						<td class="right"><?php echo $cn->cont_num." 건 "; ?></td>
 	<?php endfor; ?>
-						<td class="right" style="color: #a60202;"><?php if(empty($summary[$i]->cont)) echo "0 건"; else echo $summary[$i]->cont." 건"; ?></td>
-						<td class="right"><?php if(empty($summary[$i]->cont)) echo "0.00 %"; else echo number_format(($summary[$i]->cont/$summary[$i]->type_num*100), 2)." %" ?></td>
-						<td class="right"><?php if(empty($summary[$i]->cont)) echo "0.00 %"; else echo number_format((($summary[$i]->app+$summary[$i]->cont)/$summary[$i]->type_num*100), 2)." %" ?></td>
+<!---->
+<!---->
+						<td class="right" style="color: #a60202;"><?php if(empty($summary_cont[$i])) echo "0 건"; else echo array_sum($summary_cont)." 건"; ?></td>
+<!--						<td class="right">--><?php //if(empty($tp_name[$i]->cont)) echo "0.00 %"; else echo number_format(($tp_name[$i]->cont/$tp_name[$i]->type_num*100), 2)." %" ?><!--</td>-->
+<!--						<td class="right">--><?php //if(empty($tp_name[$i]->cont)) echo "0.00 %"; else echo number_format((($tp_name[$i]->app+$tp_name[$i]->cont)/$tp_name[$i]->type_num*100), 2)." %" ?><!--</td>-->
+
+
 					</tr>
 <?php endfor; ?>
 				</tbody>
@@ -297,11 +301,10 @@ endfor;
             <tbody class="bo-bottom center">
             <?php
             foreach ($cont_data as $lt) :
-                $nd = $this->cms_main_model->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$lt->cont_diff' ");
-                $total_rec = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS received FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$lt->cont_seq' ");
-
-                $deposit1 = $this->cms_main_model->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<3 ");
-                $deposit2 = $this->cms_main_model->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<5 ");
+                $nd = $this->cms_main_model->sql_row(" SELECT diff_name FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$lt->cont_diff' "); // 해당 계약 건 차수 데이터 추출
+                $total_rec = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS received FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$lt->cont_seq' "); // 해당 계약 건 총 납입금
+                $deposit1 = $this->cms_main_model->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$lt->price_seq' AND sche_pay_code<3 "); // 1차 계약금
+                $deposit2 = $this->cms_main_model->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$lt->price_seq' AND sche_pay_code<5 "); // 2차 계약금
                 if($total_rec->received>=$deposit2->payment){
                     $is_paid_ok = "<span style='color: #2205D0;'>2차 완납</span>";
                 }elseif($total_rec->received>=$deposit1->payment){

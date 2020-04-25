@@ -87,6 +87,9 @@ class Cms_m1 extends CB_Controller {
 
             for($i=0; $i<count($view['tp_name']); $i++) {
                 $view['summary'][$i] = $this->cms_main_model->sql_row(" SELECT COUNT(type) AS type_num, SUM(is_hold) AS hold, SUM(is_application) AS app, SUM(is_contract) AS cont FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND type='".$view['tp_name'][$i]."' ");
+
+                $view['summary_app'][$i] = $this->cms_main_model->sql_num_rows(" SELECT seq FROM cb_cms_sales_application WHERE pj_seq='{$project}' AND unit_type='{$view['tp_name'][$i]}' AND disposal_div='0' ");
+                $view['summary_cont'][$i] = $this->cms_main_model->sql_num_rows(" SELECT seq FROM cb_cms_sales_contract WHERE pj_seq='{$project}' AND unit_type='{$view['tp_name'][$i]}' ");
             }
 
             // 요약 총계 데이터 가져오기
