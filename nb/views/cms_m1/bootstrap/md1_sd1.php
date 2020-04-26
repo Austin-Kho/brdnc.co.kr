@@ -109,25 +109,23 @@ endfor;
 				<tbody class="bo-bottom center">
 <?php for($i=0; $i<count($tp_name); $i++) :
 	$first_td = ($i==0) ? "<td rowspan='".count($tp_name)."' style='background-color:#FFF; vertical-align:middle;'>".$pj_now->pj_name."</td>" : $first_td = "";
+    $type_cont_sum = 0;
 ?>
 					<tr>
 						<?php echo $first_td; ?>
 						<td style="background-color: <?php echo $tp_color[$i].";"; ?>"><?php echo $tp_name[$i]; ?></td>
 						<td class="right"><?php echo $summary[$i]->type_num." 세대"; ?></td>
 						<td class="right"><?php if(empty($summary[$i]->hold)) echo "0 세대"; else echo $summary[$i]->hold." 세대"; ?></td>
-						<td class="right" style="color: #273169;"><?php if(empty($summary_app[$i])) echo "0 건"; else echo $tp_name[$i]." 건"; ?></td>
+						<td class="right" style="color: #273169;"><?php if(empty($summary_app[$i])) echo "0 건"; else echo $summary_app[$i]." 건"; ?></td>
 	<?php for($j=0; $j<count($sc_cont_diff); $j++):
 					$cn = $this->cms_main_model->sql_row(" SELECT COUNT(seq) AS cont_num FROM cb_cms_sales_contract WHERE pj_seq='$project' AND unit_type='".$tp_name[$i]."' AND cont_diff='".$sc_cont_diff[$j]->cont_diff."' ");
+	                $type_cont_sum += $cn->cont_num;
 //	?>
 						<td class="right"><?php echo $cn->cont_num." 건 "; ?></td>
 	<?php endfor; ?>
-<!---->
-<!---->
-						<td class="right" style="color: #a60202;"><?php if(empty($summary_cont[$i])) echo "0 건"; else echo array_sum($summary_cont)." 건"; ?></td>
-<!--						<td class="right">--><?php //if(empty($tp_name[$i]->cont)) echo "0.00 %"; else echo number_format(($tp_name[$i]->cont/$tp_name[$i]->type_num*100), 2)." %" ?><!--</td>-->
-<!--						<td class="right">--><?php //if(empty($tp_name[$i]->cont)) echo "0.00 %"; else echo number_format((($tp_name[$i]->app+$tp_name[$i]->cont)/$tp_name[$i]->type_num*100), 2)." %" ?><!--</td>-->
-
-
+						<td class="right" style="color: #a60202;"><?php if(empty($summary_cont[$i])) echo "0 건"; else echo $type_cont_sum." 건"; ?></td>
+						<td class="right"><?php if(!$type_cont_sum) echo "0.00 %"; else echo number_format(($type_cont_sum/$summary[$i]->type_num*100), 2)." %" ?></td>
+                        <td class="right"><?php if(!($summary_app[$i]+$type_cont_sum)) echo "0.00 %"; else echo number_format((($summary_app[$i]+$type_cont_sum)/$summary[$i]->type_num*100), 2)." %" ?></td>
 					</tr>
 <?php endfor; ?>
 				</tbody>
@@ -143,7 +141,8 @@ endfor;
 ?>
 						<td style="font-weight: bold;"><?php echo $cntot->total." 건"; ?></td>
 <?php endfor; ?>
-						<td style="color: #a60202; font-weight: bold;"><?php echo $sum_all->cont." 건"; ?></td>
+<!--						<td style="color: #a60202; font-weight: bold;">--><?php //echo $sum_all->cont." 건"; ?><!--</td>-->
+                        <td style="color: #a60202; font-weight: bold;"><?php echo array_sum($summary_cont)." 건"; ?></td>
 
 
 						<td><?php echo number_format(($sum_all->cont/$sum_all->unit_num*100), 2)." %" ?></td>
