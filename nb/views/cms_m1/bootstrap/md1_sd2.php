@@ -145,10 +145,8 @@ else :
 							<label for="ho" class="sr-only">호수</label>
 							<select class="form-control input-sm" name="ho" onchange="submit();" <?php if( !$this->input->get('dong')) echo "disabled"; ?>>
 								<option value=""> 선 택</option>
-	<?php foreach($ho_list as $lt) :
-        $cont_ho = ($is_reg['cont_data']->unit_dong_ho) ? explode('-', $is_reg['cont_data']->unit_dong_ho)[1] : '';
-	?>
-								<option value="<?php echo $lt->ho; ?>" <?php if($lt->ho==$this->input->get('ho') or $lt->ho==$cont_ho) echo "selected"; ?>><?php echo $lt->ho." 호"; ?></option>
+	<?php foreach($ho_list as $lt) : ?>
+								<option value="<?php echo $lt->ho; ?>" <?php if($lt->ho==$this->input->get('ho')) echo "selected"; ?>><?php echo $lt->ho." 호"; ?></option>
 	<?php endforeach; ?>
 							</select>
 						</div>
@@ -186,7 +184,17 @@ else :
 			<input type="hidden" name="ho" value="<?php echo $this->input->get('ho'); ?>">
             <input type="hidden" name="app_id" value="<?php echo $this->input->get('app_id'); ?>">
 <?php
-    $unitseq = ( !empty($unit_seq)) ? $unit_seq->seq : "";
+	
+	if (!$unit_seq AND $this->input->get('dong') AND $this->input->get('ho')) {
+		$unit = $this->cms_main_model->sql_row(
+		        "SELECT * FROM cb_cms_project_all_housing_unit
+                 WHERE pj_seq={$this->input->get('project')}
+                 AND type={$this->input->get('type')}
+                 AND dong={$this->input->get('dong')}
+                 AND ho={$this->input->get('ho')}"
+        );
+    }
+    $unitseq = ( !empty($unit_seq)) ? $unit_seq->seq : $unit->seq;
     $unit_is_app = ( !empty($unit_seq)) ? $unit_seq->is_application : "";
     $unit_is_cont = ( !empty($unit_seq)) ? $unit_seq->is_contract : "";
     $unit_dong_ho = ( !empty($unit_dong_ho)) ? $unit_dong_ho : "";
