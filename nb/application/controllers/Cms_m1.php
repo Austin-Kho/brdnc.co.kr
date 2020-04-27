@@ -423,8 +423,8 @@ class Cms_m1 extends CB_Controller {
                     }
 
                     /******************************계약자 테이블 데이터******************************/
-                    $cr_cont = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_contract ORDER BY seq DESC LIMIT 1 ");
-                    $cont_seq = $cr_cont->seq;
+                    $cr_cont = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_contract ORDER BY seq DESC LIMIT 0 ");
+                    $cont_seq = ( $cont_data->cont_seq) ?  $cont_data->cont_seq : $cr_cont->seq;
                     if( !empty($this->input->post('birth_date'))) $birth_gender = $this->input->post('birth_date').'-'.$this->input->post('cont_gender');
                     $addr_id = $this->input->post('postcode1')."|".$this->input->post('address1_1')."|".$this->input->post('address2_1');
                     $addr_dm = $this->input->post('postcode2')."|".$this->input->post('address1_2')."|".$this->input->post('address2_2');
