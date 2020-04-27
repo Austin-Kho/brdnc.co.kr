@@ -126,14 +126,14 @@ else :
 
 <?php if($pj_now->data_cr=='1'):?>
 				<div class="row bo-top font12" style="margin: 0;">
-					<div class="col-xs-4 col-sm-3 col-md-2 center bgf8" style="line-height:38px;">동 선택 <span class="red">*</span></div>
+					<div class="col-xs-4 col-sm-3 col-md-2 center bgf8" style="line-height:38px;">동 선택 <?php echo $unit_dong_ho; ?> <span class="red">*</span></div>
 					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 						<div class="col-xs-12" style="padding: 0px;">
 							<label for="dong" class="sr-only">동</label>
 							<select class="form-control input-sm" name="dong" onchange="submit();"  <?php if( $pj_now->data_cr=='0' or !$this->input->get('type')) echo "disabled"; ?>>
 								<option value=""> 선 택</option>
 	<?php foreach($dong_list as $lt) : ?>
-								<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->get('dong')) echo "selected"; ?>><?php echo $lt->dong." 동"; ?></option>
+								<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->get('dong') or ($lt->dong==$is_reg['cont_data']->unit_dong)) echo "selected"; ?>><?php echo $lt->dong." 동"; ?></option>
 	<?php endforeach; ?>
 							</select>
 						</div>
@@ -143,10 +143,12 @@ else :
 					<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 						<div class="col-xs-12" style="padding: 0px;">
 							<label for="ho" class="sr-only">호수</label>
-							<select class="form-control input-sm" name="ho" onchange="submit();" <?php if( !$this->input->get('dong')) echo "disabled"; ?>>
+							<select class="form-control input-sm" name="ho" onchange="submit();" <?php if( !$this->input->get('dong') AND empty($is_reg['cont_data']->unit_dong)) echo "disabled"; ?>>
 								<option value=""> 선 택</option>
-	<?php foreach($ho_list as $lt) : ?>
-								<option value="<?php echo $lt->ho; ?>" <?php if($lt->ho==$this->input->get('ho')) echo "selected"; ?>><?php echo $lt->ho." 호"; ?></option>
+	<?php foreach($ho_list as $lt) :
+        $cont_ho = ($is_reg['cont_data']->unit_dong_ho) ? explode('-', $is_reg['cont_data']->unit_dong_ho)[1] : '';
+	?>
+								<option value="<?php echo $lt->ho; ?>" <?php if($lt->ho==$this->input->get('ho') or $lt->ho==$cont_ho) echo "selected"; ?>><?php echo $lt->ho." 호"; ?></option>
 	<?php endforeach; ?>
 							</select>
 						</div>
@@ -161,7 +163,7 @@ else :
 
 <?php
     if ($pj_now->data_cr=='1') {
-        $disabled = (($this->input->get('cont_sort2') OR $this->input->get('cont_sort3')) && $this->input->get('ho')) ? "" : "disabled";
+        $disabled = (($this->input->get('cont_sort2') OR $this->input->get('cont_sort3')) && ($this->input->get('ho') OR !empty($is_reg['cont_data']->unit_dong_ho))) ? "" : "disabled";
     } else {
         $disabled = (($this->input->get('cont_sort2') OR $this->input->get('cont_sort3')) && $this->input->get('type')) ? "" : "disabled";
     }
