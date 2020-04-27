@@ -9,7 +9,8 @@ else :
 		<!-- ===================계약물건 검색 시작================== -->
 <?php
 	$attributes = array('method' => 'get', 'name' => 'set1');
-	echo form_open(current_full_url(), $attributes);
+    $hidden = array('app_id' => $this->input->get('app_id'), 'cont_id' => $this->input->get('cont_id'));
+	echo form_open(current_full_url(), $attributes, $hidden);
 ?>
 			<div class="row bo-top bo-bottom font12" style="margin: 0 0 20px 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">사업 개시년도</div>
@@ -115,9 +116,8 @@ else :
 							<label for="type" class="sr-only">타입</label>
 							<select class="form-control input-sm" name="type" onchange="submit();" <?php if( !$this->input->get('diff_no')) echo "disabled"; ?>>
 								<option value=""> 선 택</option>
-<?php foreach($type_list as $lt) :
-        $lt_val = ($pj_now->data_cr=='1') ? $lt->type : $lt; ?>
-								<option value="<?php echo $lt_val; ?>" <?php if($lt_val==$this->input->get('type')) echo "selected"; ?>><?php echo $lt_val; ?></option>
+<?php foreach($type_list as $lt) : ?>
+								<option value="<?php echo $lt; ?>" <?php if($lt==$this->input->get('type')) echo "selected"; ?>><?php echo $lt; ?></option>
 <?php endforeach; ?>
 							</select>
 						</div>
@@ -215,12 +215,11 @@ else :
 <?php if($this->input->get('cont_sort2')=="1" && !empty($is_reg['app_data'])) : // 청약 등록 호수인 경우 ?>
 <?php
     $cont_id = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_contract WHERE pj_seq='$pj' AND unit_seq='$un' AND is_rescission='0' ");
-    $app_url = ($pj_now->data_cr=='1') ? "&dong=".$dong_ho[0]."&ho=".$dong_ho[1] : "&app_id=".$this->input->get('app_id');
 ?>
 			<div class="row bo-top font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center bgfb" style="line-height:38px;">구 분</div>
 				<div class="col-xs-8 col-sm-9 col-md-10" style="padding: 4px 15px; color: #4a6bbe">
-					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 6px 10px 4px;"><label><input type="checkbox" onclick="if(this.checked===true) location.href='<?php echo base_url('cms_m1/sales/1/2')."?project=".$project."&mode=2&cont_sort1=1&cont_sort2=2&diff_no=".$is_reg['app_data']->app_diff."&type=".$is_reg['app_data']->unit_type.$app_url; ?>';">계약전환</label></div>
+					<div class="col-xs-6 col-sm-4 col-md-2 checkbox" style="margin: 0; padding: 6px 10px 4px;"><label><input type="checkbox" onclick="if(this.checked===true) location.href='<?php echo base_url('cms_m1/sales/1/2')."?project=".$project."&mode=2&cont_sort1=1&cont_sort2=2&diff_no=".$is_reg['app_data']->app_diff."&type=".$is_reg['app_data']->unit_type."&app_id=".$this->input->get('app_id'); ?>';">계약전환</label></div>
 				</div>
 			</div>
 <?php endif; ?>
@@ -392,7 +391,7 @@ else :
 					</div>
 				</div>
 			</div>
-<?php if( !($this->input->get('cont_sort2')=='2' && empty($is_app_cont) && empty($is_reg['app_data']))): // 계약등록 시 청약 데이터가 없는 신규 등록인 경우만 제외하고 ->?>
+<?php if( !($this->input->get('cont_sort2')=='2' && empty($is_reg['app_data']) && empty($is_app_cont))): // 계약등록 시 청약 데이터가 없는 신규 등록인 경우만 제외하고 ->?>
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center bgfb" style="line-height:38px;">청약금 <span class="red">*</span>
 					<div class="bgfb hidden-md hidden-lg" style="height: 153px;">&nbsp;</div>
@@ -408,7 +407,11 @@ else :
 						<label for="app_in_date" class="sr-only">입금일</label>
 						<div class="col-xs-12" style="padding: 0;">
 							<div class="input-group">
-								<input type="text" name="app_in_date" id="app_in_date" class="form-control input-sm en_only" value="<?php if( !empty($is_reg['app_data'])) echo $is_reg['app_data']->app_in_date; elseif ( !empty($is_app_cont)) echo $is_app_cont->app_in_date; else echo set_value('app_in_date'); ?>" placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
+								<input type="text" name="app_in_date" id="app_in_date" class="form-control input-sm en_only" value="<?php
+                                if( !empty($is_reg['app_data'])) echo $is_reg['app_data']->app_in_date;
+                                elseif ( !empty($is_app_cont)) echo $is_app_cont->app_in_date;
+                                else echo set_value('app_in_date'); ?>"
+                                       placeholder="입금일 (0000-00-00)" onclick="cal_add(this); event.cancelBubble=true">
 								<span class="input-group-addon">
 									<a href="javascript:" onclick="cal_add(document.getElementById('app_in_date'),this); event.cancelBubble=true">
 										<span class="glyphicon glyphicon-calendar" aria-hidden="true" id="glyphicon"></span>

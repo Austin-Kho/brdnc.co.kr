@@ -162,23 +162,27 @@ class Cms_m1 extends CB_Controller {
             // 불러올 페이지에 보낼 조회 권한 데이터
             $view['auth12'] = $auth['_m1_1_2'];
 
+            if( !$this->input->get('cont_sort1')){
+                $msg = "* 등록 구분을 선택하세요.";
+            }else if( !$this->input->get('cont_sort2') &&  !$this->input->get('cont_sort3')){
+                $msg = "* 세부 등록 구분을 선택하세요.";
+            }else if( !$this->input->get('type')){
+                $msg = "* 등록(변경)할 타입을 선택 하세요.";
+            }else if ($pj_now->data_cr=='1') {
+                if (!$this->input->get('dong')) {
+                    $msg = "* 등록(변경)할 동을 선택 하세요.";
+                } else if (!$this->input->get('ho')) {
+                    $msg = "* 등록(변경)할 호수를 선택 하세요.";
+                }
+            }
 
             $where_add = " WHERE pj_seq='$project' "; // 프로젝트 지정 쿼리
 
             // 타입 데이터 불러오기
-            if($this->input->get('mode')=='1'){ // 신규 등록 시
-                if($this->input->get('cont_sort1')==1 && $this->input->get('cont_sort2')==1) $where_add .= " AND is_hold='0' AND is_application='0' AND is_contract='0' "; // 청약 대상
-                if($this->input->get('cont_sort1')==1 && $this->input->get('cont_sort2')==2) $where_add .= " AND is_hold='0' AND is_contract='0' "; // 계약대상
-
-            }else if($this->input->get('mode')=='2'){ // 변경 등록 시
-                if($this->input->get('cont_sort1')==1 && $this->input->get('cont_sort2')==1) $where_add .= " AND is_hold='0' AND is_application='1' "; // 청약 대상
-                if($this->input->get('cont_sort1')==1 && $this->input->get('cont_sort2')==2) $where_add .= " AND is_hold='0' AND (is_application='1' OR is_contract='1') "; // 계약대상
-                if($this->input->get('cont_sort1')==2 && $this->input->get('cont_sort3')==3) $where_add .= " AND is_application='1' "; // 청약 물건 (청약해지대상)
-                if($this->input->get('cont_sort1')==2 && $this->input->get('cont_sort3')==4) $where_add .= " AND is_contract='1' ";	 // 계약 물건 (계약해지대상)
-            }
+            $type_name = $this->cms_main_model->sql_result("SELECT type_name FROM cb_cms_project WHERE seq='$project'");
+            $view['type_list'] = explode("-", $type_name[0]->type_name);
 
             if ($pj_now->data_cr=='1'){
-                $view['type_list'] = $this->cms_main_model->sql_result("SELECT type FROM cb_cms_project_all_housing_unit $where_add GROUP BY type ORDER BY type");
 
                 // 동 데이터 불러오기
                 $now_type = $this->input->get('type');
@@ -204,30 +208,13 @@ class Cms_m1 extends CB_Controller {
                     //  등록할 동호수 유닛 데이터
                     $unit_seq = $view['unit_seq'] =  $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND type='$now_type' AND dong='$now_dong' AND ho='$now_ho' ");
                 }
-            } else {
-                $type_name = $this->cms_main_model->sql_result("SELECT type_name FROM cb_cms_project WHERE seq='$project'");
-                $view['type_list'] = explode("-", $type_name[0]->type_name);
-            }
-
-            if( !$this->input->get('cont_sort1')){
-                $msg = "* 등록 구분을 선택하세요.";
-            }else if( !$this->input->get('cont_sort2') &&  !$this->input->get('cont_sort3')){
-                $msg = "* 세부 등록 구분을 선택하세요.";
-            }else if( !$this->input->get('type')){
-                $msg = "* 등록(변경)할 타입을 선택 하세요.";
-            }else if ($pj_now->data_cr=='1') {
-                if (!$this->input->get('dong')) {
-                    $msg = "* 등록(변경)할 동을 선택 하세요.";
-                } else if (!$this->input->get('ho')) {
-                    $msg = "* 등록(변경)할 호수를 선택 하세요.";
-                }
             }
 
             // 청약 또는 계약 상태인지 확인
-            if(!empty($unit_seq->is_application=='0' or $this->input->get('app_id'))) { // 청약 물건이면
-                $app_data = $view['is_reg']['app_data'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_application WHERE seq='".$this->input->get('app_id')."' AND disposal_div<>'2' "); // 청약 데이터
+            if($unit_seq->is_application=='1' or !empty($this->input->get('app_id'))) { // 청약 물건이면
+                $app_data = $view['is_reg']['app_data'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_application WHERE seq='".$this->input->get('app_id')."' AND disposal_div<'2' "); // 청약 데이터
 
-            }else if($unit_seq->is_contract=='0' or !empty($this->input->get('cont_id'))){ // 계약 물건이면
+            }else if($unit_seq->is_contract=='1' or !empty($this->input->get('cont_id'))){ // 계약 물건이면
                 $view['is_app_cont'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_application WHERE pj_seq='$project' AND unit_seq='$unit_seq->seq' AND disposal_div='0' "); // 청약->계약전환 물건인지 확인
 
                 $cont_where = " WHERE cb_cms_sales_contract.seq='{$this->input->get('cont_id')}' AND is_transfer='0' AND is_rescission='0' AND cb_cms_sales_contract.seq=cont_seq  ";
