@@ -983,33 +983,48 @@ class Cms_m1 extends CB_Controller {
             $auth = $this->cms_main_model->auth_chk('_m1_2_2', $this->session->userdata['mem_id']);
             // 불러올 페이지에 보낼 조회 권한 데이터
             $view['auth22'] = $auth['_m1_2_2'];
-
-
-            $now_dong = $this->input->get('dong');
-            $now_ho = $this->input->get('ho');
+            
             if(!empty($this->input->get('payer'))){
                 $now_payer = $this->input->get('payer');
                 $paid_who = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_received WHERE paid_who LIKE '%$now_payer%' ");
 
                 $view['now_payer'] = $this->cms_main_model->sql_result(
-                    " SELECT paid_who, cb_cms_sales_received.cont_seq AS r_cont_seq, contractor, unit_dong_ho, is_rescission
+                    " SELECT paid_who, cb_cms_sales_received.cont_seq AS r_cont_seq, cont_code, unit_type, contractor, unit_dong_ho, is_rescission
 					  FROM cb_cms_sales_received, cb_cms_sales_contract, cb_cms_sales_contractor
 						WHERE cb_cms_sales_received.pj_seq='$project'
 						AND cb_cms_sales_received.cont_seq=cb_cms_sales_contract.seq
 						AND cb_cms_sales_contractor.cont_seq=cb_cms_sales_contract.seq
-						AND (paid_who LIKE '%$now_payer%' OR contractor LIKE '%$now_payer%')
+						AND (cont_code LIKE '%$now_payer%' OR paid_who LIKE '%$now_payer%' OR contractor LIKE '%$now_payer%')
 						GROUP BY cb_cms_sales_received.cont_seq "
                 );
             }
 
-            // $view['dong_list'] = $this->cms_main_model->sql_result(" SELECT dong FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND is_contract='1' GROUP BY dong ORDER BY dong "); // 동 리스트
-            $view['dong_list'] = $this->cms_main_model->sql_result(" SELECT dong FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' GROUP BY dong ORDER BY dong "); // 동 리스트
-            $view['ho_list'] = $this->cms_main_model->sql_result(" SELECT ho FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$now_dong' AND is_contract='1' GROUP BY ho ORDER BY ho "); // 호 리스트
+            $now_dong = $this->input->get('dong');
+            $now_ho = $this->input->get('ho');
+            
+            if ($pj_now->data_cr=='1') {
+				$view['dong_list'] = $this->cms_main_model->sql_result(" SELECT dong FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' GROUP BY dong ORDER BY dong "); // 동 리스트
+				$view['ho_list'] = $this->cms_main_model->sql_result(" SELECT ho FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$now_dong' AND is_contract='1' GROUP BY ho ORDER BY ho "); // 호 리스트
+				$unit = $view['unit'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$now_dong' AND ho='$now_ho' ");  // 선택한 동호수 유닛
+			} else {
+				// 타입 데이터 불러오기
+				$type_name = $this->cms_main_model->sql_result("SELECT type_name FROM cb_cms_project WHERE seq='$project'");
+				$view['type_list'] = explode("-", $type_name[0]->type_name);
+				
+            	$cont_code_list = $view['cont_code_list'] = $this->cms_main_model->sql_result("
+ 						SELECT cb_cms_sales_contract.seq AS contract_seq, cont_code, contractor, is_rescission
+						FROM cb_cms_sales_contract, cb_cms_sales_contractor
+						WHERE pj_seq='{$this->input->get('project')}'
+						AND cb_cms_sales_contractor.cont_seq=cb_cms_sales_contract.seq
+						AND unit_type='{$this->input->get('type')}' ");
+            	
+            	$cont_id = $view['cont_id'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_contract WHERE seq='{$cont_code_list->contract_seq}' ");
+			}
 
-            $unit = $view['unit'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_project_all_housing_unit WHERE pj_seq='$project' AND dong='$now_dong' AND ho='$now_ho' ");  // 선택한 동호수 유닛
-
-            if( !empty($unit->seq)){
-                $cont_where = " WHERE unit_seq='$unit->seq' AND cb_cms_sales_contract.seq=cont_seq ";
+            if( !empty($cont_id) OR !empty($unit->seq)){
+                $cont_where = ($unit->seq)
+					? " WHERE unit_seq='$unit->seq' AND cb_cms_sales_contract.seq=cont_seq "
+					: " WHERE seq='$cont_id' AND cb_cms_sales_contract.seq=cont_seq ";
                 $cont_query = "  SELECT *, cb_cms_sales_contractor.seq AS contractor_seq FROM cb_cms_sales_contract, cb_cms_sales_contractor ".$cont_where." ORDER BY is_rescission ";
                 $cont_data = $view['cont_data'] = $this->cms_main_model->sql_row($cont_query); // 계약 및 계약자 데이터
 
@@ -1071,9 +1086,9 @@ class Cms_m1 extends CB_Controller {
                     $result = $this->cms_main_model->insert_data('cb_cms_sales_received', $ins_data); // 입력 모드일 경우
                 }
 
-                if( !$result) alert("데이터베이스 에러입니다.", '');
+                if( !$result) alert("데이터베이스 에러입니다.", current_full_url());
 
-                alert("수납내역이 정상 입력 되었습니다.", base_url('cms_m1/sales/2/2?project='.$project.'&dong='.$this->input->post('dong').'&ho='.$this->input->post('ho')));
+                alert("수납내역이 정상 입력 되었습니다.", current_full_url());
             }
 
 

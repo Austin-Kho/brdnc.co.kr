@@ -11,7 +11,7 @@ else :
   echo form_open(current_full_url(), $attributes);
 
   $start_year = "2015";
-  $yr = (!$this->input->get('yr')) ? $start_year :$this->input->get('yr');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
+  $yr = (!$this->input->get('yr')) ? "" :$this->input->get('yr');  // 첫 화면에 전체 계약 목록을 보이고 싶으면 이 행을 주석 처리
   $year=range($start_year,date('Y'));
 ?>
 		<div class="row bo-top bo-bottom font12" style="margin: 0;">
@@ -21,35 +21,32 @@ else :
 					<label for="yr" class="sr-only">사업 개시년도</label>
 					<select class="form-control input-sm" name="yr" onchange="submit();">
 						<option value=""> 전 체
-<?php
-  
-  for($i=(count($year)-1); $i>=0; $i--) :
-?>
-						<option value="<?php echo $year[$i]?>" <?php if($this->input->get('yr')==$year[$i]) echo "selected"; ?>><?php echo $year[$i]."년"?>
-<?php endfor; ?>
-					</select>
+                        <?php for($i=(count($year)-1); $i>=0; $i--) : ?>
+                            <option value="<?php echo $year[$i]?>" <?php if($this->input->get('yr')==$year[$i]) echo "selected"; ?>><?php echo $year[$i]."년"?>
+                        <?php endfor; ?>
+                    </select>
 				</div>
-			</div>
+            </div>
 			<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">프로젝트 선택 </div>
 			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 				<div class="col-xs-12" style="padding: 0px;">
 					<label for="project" class="sr-only">프로젝트 선택</label>
 					<select class="form-control input-sm" name="project" onchange="submit();">
 						<option value="0"> 전 체
-<?php foreach($pj_list as $lt) : ?>
-                        <option value="<?php echo $lt->seq; ?>" <?php if(( !$this->input->post('project') && $lt->seq=='3') OR $this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?>
-<?php endforeach; ?>
+                        <?php foreach($pj_list as $lt) : ?>
+                            <option value="<?php echo $lt->seq; ?>" <?php if(( !$this->input->post('project') && $lt->seq=='3') OR $this->input->get('project')==$lt->seq) echo "selected"; ?>><?php echo $lt->pj_name; ?>
+                        <?php endforeach; ?>
 					</select>
 				</div>
 			</div>
 	<!--||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-프로젝트 선택 종료-|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
 
-
-			<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">입금자(동호수)</div>
+            <?php $search_label = ($pj_now->data_cr=='1') ? "계약자(동호수)" : "계약자(계약코드)"; ?>
+			<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;"><?php echo $search_label; ?></div>
 			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 				<div class="col-xs-8" style="padding: 0px;">
-					<label for="payer" class="sr-only">입금자(동호수)</label>
-					<input type="text" name="payer" value="<?php if($this->input->get('payer')) echo $this->input->get("payer"); ?>" class="form-control input-sm" placeholder="입금자 또는 계약자" onkeydown="if(event.keyCode==13)submit();">
+					<label for="payer" class="sr-only">계약자(입금자/계약코드)</label>
+					<input type="text" name="payer" value="<?php if($this->input->get('payer')) echo $this->input->get("payer"); ?>" class="form-control input-sm" placeholder="입금자/계약자/코드" onkeydown="if(event.keyCode==13)submit();">
 				</div>
 				<div class="col-xs-4">
 					<input type="button" class="btn btn-primary btn-sm" onclick="submit();" value="검 색">
@@ -57,15 +54,16 @@ else :
 			</div>
 		</div>
 		<div class="row bo-bottom font12" style="margin: 0 0 20px;">
+<?php if ($pj_now->data_cr=='1'): ?>
 			<div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">동 선택 <span class="red">*</span></div>
 			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 				<div class="col-xs-12" style="padding: 0px;">
 					<label for="dong" class="sr-only">동</label>
-					<select class="form-control input-sm" name="dong" onchange="dong_seq();">
+					<select class="form-control input-sm" name="dong" onchange="dong_sel();">
 						<option value=""> 선 택</option>
-<?php foreach($dong_list as $lt) : ?>
-						<option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->get('dong')) echo "selected"; ?>><?php echo $lt->dong." 동"; ?></option>
-<?php endforeach; ?>
+                        <?php foreach($dong_list as $lt) : ?>
+						    <option value="<?php echo $lt->dong; ?>" <?php if($lt->dong==$this->input->get('dong')) echo "selected"; ?>><?php echo $lt->dong." 동"; ?></option>
+                        <?php endforeach; ?>
 					</select>
 				</div>
 			</div>
@@ -76,12 +74,39 @@ else :
 					<label for="ho" class="sr-only">호수</label>
 					<select class="form-control input-sm" name="ho" id="ho" onchange="submit();" <?php if( !$this->input->get('dong')) echo "disabled"; ?>>
 						<option value="">선 택</option>
-<?php foreach($ho_list as $lt) : ?>
-						<option value="<?php echo $lt->ho; ?>" <?php if($lt->ho==$this->input->get('ho')) echo "selected"; ?>><?php echo $lt->ho." 호"; ?></option>
-<?php endforeach; ?>
+                        <?php foreach($ho_list as $lt) : ?>
+						    <option value="<?php echo $lt->ho; ?>" <?php if($lt->ho==$this->input->get('ho')) echo "selected"; ?>><?php echo $lt->ho." 호"; ?></option>
+                        <?php endforeach; ?>
 					</select>
 				</div>
 			</div>
+<?php else: ?>
+            <div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">타입 선택 <span class="red">*</span></div>
+            <div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+                <div class="col-xs-12" style="padding: 0px;">
+                    <label for="dong" class="sr-only">타입</label>
+                    <select class="form-control input-sm" name="type" onchange="type_sel();">
+                        <option value=""> 선 택</option>
+				        <?php foreach($type_list as $lt) : ?>
+                            <option value="<?php echo $lt; ?>" <?php if($lt==$this->input->get('type')) echo "selected"; ?>><?php echo $lt; ?></option>
+				        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-xs-4 col-sm-3 col-md-2 center bg-success" style="line-height:38px;">계약코드 선택 <span class="red">*</span></div>
+            <div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
+                <div class="col-xs-12" style="padding: 0px;">
+                    <label for="ho" class="sr-only">계약코드</label>
+                    <select class="form-control input-sm" name="cont_code" id="cont_code" onchange="submit();" <?php if( !$this->input->get('type')) echo "disabled"; ?>>
+                        <option value="">선 택</option>
+				        <?php foreach($cont_code_list as $lt) : ?>
+                            <option value="<?php echo $lt->cont_code; ?>" <?php if($lt->cont_code==$this->input->get('cont_code')) echo "selected"; ?>><?php echo $lt->contractor."(".$lt->cont_code.")"; ?></option>
+				        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+<?php endif ?>
 
 <?php if($this->input->get('payer') && empty($now_payer)): ?>
 			<div class="col-xs-12 col-sm-12 col-md-4" style="padding: 8px; 0">
@@ -100,7 +125,10 @@ $ci = 0;
 foreach($now_payer as $lt) :
 	$cm = ($ci==0) ? "" : " / ";
  	$dong_ho = explode("-", $lt->unit_dong_ho);
- 	echo $del_op . $cm . "<a " . $red_style . " href='" . base_url('cms_m1/sales/2/2?yr=' . $yr . '&project='.$project.'&payer=' . $this->input->get('payer') . '&dong=' . $dong_ho[0] . '&ho=' . $dong_ho[1]) . "'>" . $lt->contractor . "(" . $lt->unit_dong_ho . ")</a>" . $del_cl;
+ 	$result_list = ($pj_now->data_cr=='1')
+        ? $del_op.$cm."<a ".$red_style." href='".base_url('cms_m1/sales/2/2?yr='.$yr.'&project='.$project.'&payer='.$this->input->get('payer').'&dong='.$dong_ho[0].'&ho='.$dong_ho[1])."'>".$lt->contractor."(".$lt->unit_dong_ho.")</a>".$del_cl
+        : $del_op.$cm."<a ".$red_style." href='".base_url('cms_m1/sales/2/2?yr='.$yr.'&project='.$project.'&payer='.$this->input->get('payer').'&type='.$lt->unit_type.'&cont_code='.$lt->cont_code)."'>".$lt->contractor."(".$lt->cont_code.")</a>".$del_cl;
+ 	echo $result_list;
 	$ci+=1;
 ?>
 <?php endforeach; ?>
