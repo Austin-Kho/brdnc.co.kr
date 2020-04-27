@@ -438,6 +438,7 @@ class Cms_m1 extends CB_Controller {
                     $cont_arr2 = array( // 계약자 (contractor) 테이블 입력 데이터
                         'contractor' => $this->input->post('custom_name', TRUE),
                         'cont_birth_id' => $birth_gender,
+                        'is_registered' => $this->input->post('is_registered', TRUE),
                         'cont_tel1' =>  $this->input->post('tel_1', TRUE),
                         'cont_tel2' =>  $this->input->post('tel_2', TRUE),
                         'cont_addr1' =>  $addr_id,

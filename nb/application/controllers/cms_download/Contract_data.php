@@ -31,8 +31,7 @@ class Contract_data extends CB_Controller {
         // 계약 데이터 검색 필터링
         $cont_query = "  SELECT *, cb_cms_sales_contractor.seq AS contractor_seq  ";
         $cont_query .= " FROM cb_cms_sales_contract, cb_cms_sales_contractor  ";
-//        $cont_query .= " WHERE pj_seq='$project' AND cb_cms_sales_contract.seq = cont_seq ";
-         $cont_query .= " WHERE pj_seq='$project' AND is_transfer='0' AND is_rescission='0' AND cb_cms_sales_contract.seq = cont_seq ";
+        $cont_query .= " WHERE pj_seq='$project' AND is_transfer='0' AND is_rescission='0' AND cb_cms_sales_contract.seq = cont_seq ";
 
         if( !empty($this->input->get('df'))) {$df = $this->input->get('df'); $cont_query .= " AND cont_diff='$df' ";}
         if( !empty($this->input->get('tp'))) {$tp = $this->input->get('tp'); $cont_query .= " AND unit_type='$tp' ";}
@@ -157,17 +156,18 @@ class Contract_data extends CB_Controller {
 				case '3': $wn = 11; $title = "차수"; $num=""; break; // 차수
 				case '4': $wn = 7; $title = "타입"; $num=""; break; // 타입
 				case '5': $wn = 10; $title = "동호수"; $num=""; break; // 동호수
-				case '6': $wn = 9; $title = "계약자"; $num=""; break; // 계약자
-				case '7': $wn = 10; $title = "생년월일"; $num=""; break; // 생년월일
-				case '8': $wn = 12; $title = "계약일자"; $num=""; break; // 계약일자
-				case '9': $wn = 12; $title = "총납입금"; $num="ok"; break; // 총납입금
-				case '10': $wn = 14; $title = "연락처[1]"; $num=""; break; // 연락처
-				case '11': $wn = 14; $title = "연락처[2]"; $num=""; break; // 연락처
-				case '12': $wn = 75; $title = "주소[신분증]"; $num=""; break; // 등본주소
-				case '13': $wn = 75; $title = "주소[우편물]"; $num=""; break; // 우편주소
-				case '14': $wn = 20; $title = "미비서류"; $num=""; break; // 미비서류
-				case '15': $wn = 12; $title = "명의변경 횟수"; $num="ok"; break; // 명의변경 횟수
-				case '16': $wn = 120; $title = "비 고"; $num=""; break; // 비고
+				case '6': $wn = 10; $title = "인가여부"; $num=""; break; // 인가여부
+				case '7': $wn = 9; $title = "계약자"; $num=""; break; // 계약자
+				case '8': $wn = 10; $title = "생년월일"; $num=""; break; // 생년월일
+				case '9': $wn = 12; $title = "계약일자"; $num=""; break; // 계약일자
+				case '10': $wn = 12; $title = "총납입금"; $num="ok"; break; // 총납입금
+				case '11': $wn = 14; $title = "연락처[1]"; $num=""; break; // 연락처
+				case '12': $wn = 14; $title = "연락처[2]"; $num=""; break; // 연락처
+				case '13': $wn = 75; $title = "주소[신분증]"; $num=""; break; // 등본주소
+				case '14': $wn = 75; $title = "주소[우편물]"; $num=""; break; // 우편주소
+				case '15': $wn = 20; $title = "미비서류"; $num=""; break; // 미비서류
+				case '16': $wn = 12; $title = "명의변경 횟수"; $num="ok"; break; // 명의변경 횟수
+				case '17': $wn = 120; $title = "비 고"; $num=""; break; // 비고
 				default: $wn = 5; break; // 번호
 			}
 			$spreadsheet->getActiveSheet()->getColumnDimension(toAlpha($k))->setWidth($wn); // 열의 셀 넓이 설정
@@ -200,23 +200,25 @@ class Contract_data extends CB_Controller {
 			// $spreadsheet->getActiveSheet()->setCellValue('A'.(3+$i), $i);
 
 			for($j=0; $j<count($row_opt); $j++){
+				$ir = $lt->is_registered==1 ? "인가" : "";
 				switch ($row_opt[$j]) {
 					case '1': $content = $i; $align =""; break; // 일련번호
 					case '2': $content = $lt->cont_code; $align =""; break; // 일련번호
 					case '3': $content = $nd->diff_name; $align =""; break; // 차수
 					case '4': $content = $lt->unit_type; $align =""; break; // 타입
 					case '5': $content = $lt->unit_dong_ho; $align =""; break; // 동호수
-					case '6': $content = $lt->contractor; $align =""; break; // 계약자
-					case '7': $content = $lt->cont_birth_id; $align =""; break; // 생년월일
-					case '8': $content = $lt->cont_date; $align =""; break; // 계약일자
-					case '9': $content = $total_rec->received; $align = "right"; break; // 총납입금
-					case '10': $content = $lt->cont_tel1; $align =""; break; // 연락처
-					case '11': $content = $lt->cont_tel2; $align =""; break; // 연락처
-					case '12': $content = $addr1; $align = "left"; break; // 등본주소
-					case '13': $content = $addr2; $align = "left"; break; // 우편주소
-					case '14': $content = $incom_doc; $align =""; break; // 미비서류
-					case '15': $content = $lt->transfer_number; $align ="right"; break; // 명의변경 횟수
-					case '16': $content = $lt->note; $align = "left"; break; // 비고
+					case '6': $content = $ir; $align =""; break; // 인가여부
+					case '7': $content = $lt->contractor; $align =""; break; // 계약자
+					case '8': $content = $lt->cont_birth_id; $align =""; break; // 생년월일
+					case '9': $content = $lt->cont_date; $align =""; break; // 계약일자
+					case '10': $content = $total_rec->received; $align = "right"; break; // 총납입금
+					case '11': $content = $lt->cont_tel1; $align =""; break; // 연락처
+					case '12': $content = $lt->cont_tel2; $align =""; break; // 연락처
+					case '13': $content = $addr1; $align = "left"; break; // 등본주소
+					case '14': $content = $addr2; $align = "left"; break; // 우편주소
+					case '15': $content = $incom_doc; $align =""; break; // 미비서류
+					case '16': $content = $lt->transfer_number; $align ="right"; break; // 명의변경 횟수
+					case '17': $content = $lt->note; $align = "left"; break; // 비고
 				}
 				$spreadsheet->getActiveSheet()->setCellValue(toAlpha($j).(3+$i), $content);// 해당 셀의 내용을 입력 합니다.
 				if($align == "right") {
@@ -236,7 +238,7 @@ class Contract_data extends CB_Controller {
 
 	  // Redirect output to a client's web browser (Excel2007)
 		  header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); // mime 타입
-			header('Content-Disposition: attachment; filename='.iconv('UTF-8','CP949',$filename)); // 브라우저에서 받을 파일 이름
+		  header('Content-Disposition: attachment; filename='.iconv('UTF-8','CP949',$filename)); // 브라우저에서 받을 파일 이름
 		  header('Cache-Control: max-age=0'); // no cache
 	  // If you're serving to IE 9, then the following may be needed
 	  	header('Cache-Control: max-age=1');

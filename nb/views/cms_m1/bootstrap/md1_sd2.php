@@ -371,11 +371,14 @@ else :
 					</div>
 				</div>
 				<div class="visible-xs visible-sm col-xs-4  col-sm-3 center bgfb" style="line-height:38px;">성 별 <span class="red">*</span></div>
-				<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
-					<div class="col-xs-12" style="margin: 0; padding: 6px 0 4px; ">
+				<div class="col-xs-8 col-sm-9 col-md-4" style="padding: 4px 15px;">
+					<div class="col-xs-6" style="margin: 0; padding: 6px 0 4px; ">
 						<label class="radio-inline"><input type="radio" name="cont_gender" value="1" <?php echo $disabled; echo set_radio('cont_gender', '1', TRUE); if(substr($is_reg['cont_data']->cont_birth_id, -1)=='1') echo 'checked'; ?>> 남성</label>
 						<label class="radio-inline"><input type="radio" name="cont_gender" value="2" <?php echo $disabled; echo set_radio('cont_gender', '2'); if(substr($is_reg['cont_data']->cont_birth_id, -1)=='2') echo 'checked'; ?>> 여성</label>
 					</div>
+                    <div class="col-xs-6 checkbox" style="margin: 0; padding: 6px 0 4px;">
+                        <label><input type="checkbox" name="is_registered" value="1" <?php echo $disabled; echo set_checkbox('is_registered', '1'); if($is_reg['cont_data']->is_registered=='1') echo "checked";  ?>> 인가 조합원 여부</label>
+                    </div>
 				</div>
 <?php endif; ?>
 			</div>
