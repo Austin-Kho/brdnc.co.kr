@@ -215,11 +215,11 @@ class Cms_m1 extends CB_Controller {
                 $app_data = $view['is_reg']['app_data'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_application WHERE seq='".$this->input->get('app_id')."' AND disposal_div<'2' "); // 청약 데이터
 
             }else if($unit_seq->is_contract=='1' or !empty($this->input->get('cont_id'))){ // 계약 물건이면
-                $view['is_app_cont'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_application WHERE pj_seq='$project' AND unit_seq='$unit_seq->seq' AND disposal_div='0' "); // 청약->계약전환 물건인지 확인
-
                 $cont_where = " WHERE cb_cms_sales_contract.seq='{$this->input->get('cont_id')}' AND is_transfer='0' AND is_rescission='0' AND cb_cms_sales_contract.seq=cont_seq  ";
                 $cont_query = "  SELECT *, cb_cms_sales_contract.seq AS cont_seq, cb_cms_sales_contractor.seq AS contractor_seq  FROM cb_cms_sales_contract, cb_cms_sales_contractor ".$cont_where;
                 $cont_data = $view['is_reg']['cont_data'] = $this->cms_main_model->sql_row($cont_query); // 계약 및 계약자 데이터
+
+                $view['is_app_cont'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_application WHERE pj_seq='$project' AND seq='{$cont_data->app_id}' AND disposal_div='1' "); // 청약->계약전환 물건인지 확인
             }
 
             // 차수 데이터 불러오기
@@ -397,6 +397,7 @@ class Cms_m1 extends CB_Controller {
                         'pj_seq' => $this->input->post('project', TRUE),
                         'cont_code' => $this->input->post('cont_code', TRUE),
                         'cont_date' => $this->input->post('conclu_date', TRUE),
+                        'app_id' => $this->input->post('app_id', TRUE),
                         'unit_seq' => $unit_seq,
                         'unit_type' => $this->input->post('type', TRUE),
                         'unit_dong' => $unit_dong,
@@ -659,7 +660,7 @@ class Cms_m1 extends CB_Controller {
                             }
                         }
                         $cont_case = $this->input->post('unit_dong_ho', TRUE) ? $this->input->post('unit_dong_ho', TRUE) : $this->input->post('custom_name', TRUE);
-                        alert($cont_case.'의 계약 정보입력이 정상처리되었습니다.', current_full_url());
+                        alert($cont_case.'의 계약 정보입력이 정상처리되었습니다.', base_url('cms_m1/sales/1/1'));
 
                     }else if(!empty($this->input->get('cont_id')) OR $this->input->post('unit_is_cont')=='1'){ // 기존 계약정보 수정일 때
 

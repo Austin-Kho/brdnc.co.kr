@@ -182,31 +182,34 @@ else :
 			<input type="hidden" name="type" value="<?php echo $this->input->get('type'); ?>">
 			<input type="hidden" name="dong" value="<?php echo $this->input->get('dong'); ?>">
 			<input type="hidden" name="ho" value="<?php echo $this->input->get('ho'); ?>">
-<?php $unitseq = ( !empty($unit_seq)) ? $unit_seq->seq : ""; ?>
+            <input type="hidden" name="app_id" value="<?php echo $this->input->get('app_id'); ?>">
+<?php
+    $unitseq = ( !empty($unit_seq)) ? $unit_seq->seq : "";
+    $unit_is_app = ( !empty($unit_seq)) ? $unit_seq->is_application : "";
+    $unit_is_cont = ( !empty($unit_seq)) ? $unit_seq->is_contract : "";
+    $unit_dong_ho = ( !empty($unit_dong_ho)) ? $unit_dong_ho : "";
+    $cont_seq = ( !empty($is_reg['cont_data'])) ? $is_reg['cont_data']->seq : "";
+    $ctator_seq = ( !empty($is_reg['cont_data'])) ? $is_reg['cont_data']->contractor_seq : "";
+    $received_1 = ( !empty($received['1'])) ? $received['1']->seq : ""; // 계약금 폼1 입력 데이터
+    $received_2 = ( !empty($received['2'])) ? $received['2']->seq : ""; // 계약금 폼2 입력 데이터
+    $received_3 = ( !empty($received['3'])) ? $received['3']->seq : ""; // 계약금 폼3 입력 데이터
+    $received_4 = ( !empty($received['4'])) ? $received['4']->seq : ""; // 계약금 폼4 입력 데이터
+    $received_5 = ( !empty($received['5'])) ? $received['5']->seq : ""; // 계약금 폼5 입력 데이터
+    $received_6 = ( !empty($received['6'])) ? $received['6']->seq : ""; // 계약금 폼6 입력 데이터
+    $received_7 = ( !empty($received['7'])) ? $received['7']->seq : ""; // 계약금 폼7 입력 데이터
+?>
 			<input type="hidden" name="unit_seq" value="<?php echo $unitseq; ?>">
-<?php $unit_is_app = ( !empty($unit_seq)) ? $unit_seq->is_application : ""; ?>
 			<input type="hidden" name="unit_is_app" value="<?php echo $unit_is_app; ?>">
-<?php $unit_is_cont = ( !empty($unit_seq)) ? $unit_seq->is_contract : ""; ?>
 			<input type="hidden" name="unit_is_cont" value="<?php echo $unit_is_cont; ?>">
-<?php $unit_dong_ho = ( !empty($unit_dong_ho)) ? $unit_dong_ho : ""; ?>
 			<input type="hidden" name="unit_dong_ho" value="<?php echo $unit_dong_ho; ?>">
-<?php $cont_seq = ( !empty($is_reg['cont_data'])) ? $is_reg['cont_data']->seq : ""; ?>
 			<input type="hidden" name="cont_seq" value="<?php echo $cont_seq; ?>">
-<?php $ctator_seq = ( !empty($is_reg['cont_data'])) ? $is_reg['cont_data']->contractor_seq : ""; ?>
 			<input type="hidden" name="contractor_seq" value="<?php echo $ctator_seq; ?>">
-<?php $received_1 = ( !empty($received['1'])) ? $received['1']->seq : ""; // 계약금 폼1 입력 데이터 ?>
 			<input type="hidden" name="received1" value="<?php echo $received_1; ?>">
-<?php $received_2 = ( !empty($received['2'])) ? $received['2']->seq : ""; // 계약금 폼2 입력 데이터?>
 			<input type="hidden" name="received2" value="<?php echo $received_2; ?>">
-<?php $received_3 = ( !empty($received['3'])) ? $received['3']->seq : ""; // 계약금 폼3 입력 데이터?>
 			<input type="hidden" name="received3" value="<?php echo $received_3; ?>">
-<?php $received_4 = ( !empty($received['4'])) ? $received['4']->seq : ""; // 계약금 폼4 입력 데이터?>
 			<input type="hidden" name="received4" value="<?php echo $received_4; ?>">
-<?php $received_5 = ( !empty($received['5'])) ? $received['5']->seq : ""; // 계약금 폼5 입력 데이터?>
 			<input type="hidden" name="received5" value="<?php echo $received_5; ?>">
-<?php $received_6 = ( !empty($received['6'])) ? $received['6']->seq : ""; // 계약금 폼6 입력 데이터?>
 			<input type="hidden" name="received6" value="<?php echo $received_6; ?>">
-<?php $received_7 = ( !empty($received['7'])) ? $received['7']->seq : ""; // 계약금 폼7 입력 데이터?>
 			<input type="hidden" name="received7" value="<?php echo $received_7; ?>">
 
 <?php if( !empty($is_reg['app_data'])) $dong_ho = explode("-", $is_reg['app_data']->unit_dong_ho); ?>
@@ -232,8 +235,6 @@ else :
 				</div>
 			</div>
 <?php endif; ?>
-
-
 
 <?php if($this->input->get('cont_sort2')=="2") : // 계약 등록 처리 시 ?>
 			<div class="row bo-top font12" style="margin: 0;">
@@ -391,7 +392,7 @@ else :
 					</div>
 				</div>
 			</div>
-<?php if( !($this->input->get('cont_sort2')=='2' && empty($is_reg['app_data']) && empty($is_app_cont))): // 계약등록 시 청약 데이터가 없는 신규 등록인 경우만 제외하고 ->?>
+<?php if( !($this->input->get('cont_sort2')=='2' && empty($is_reg['app_data']) && empty($is_reg['cont_data']->app_id))): // 계약등록 시 청약 데이터가 없는 신규 등록인 경우만 제외하고 ->?>
 			<div class="row bo-bottom font12" style="margin: 0;">
 				<div class="col-xs-4 col-sm-3 col-md-2 center bgfb" style="line-height:38px;">청약금 <span class="red">*</span>
 					<div class="bgfb hidden-md hidden-lg" style="height: 153px;">&nbsp;</div>
@@ -407,7 +408,8 @@ else :
 						<label for="app_in_date" class="sr-only">입금일</label>
 						<div class="col-xs-12" style="padding: 0;">
 							<div class="input-group">
-								<input type="text" name="app_in_date" id="app_in_date" class="form-control input-sm en_only" value="<?php
+								<input type="text" name="app_in_date" id="app_in_date" class="form-control input-sm en_only"
+                                       value="<?php
                                 if( !empty($is_reg['app_data'])) echo $is_reg['app_data']->app_in_date;
                                 elseif ( !empty($is_app_cont)) echo $is_app_cont->app_in_date;
                                 else echo set_value('app_in_date'); ?>"
