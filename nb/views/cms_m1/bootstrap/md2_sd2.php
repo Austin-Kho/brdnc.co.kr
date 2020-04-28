@@ -46,7 +46,7 @@ else :
 			<div class="col-xs-8 col-sm-9 col-md-2" style="padding: 4px 15px;">
 				<div class="col-xs-8" style="padding: 0px;">
 					<label for="payer" class="sr-only">계약자(입금자/계약코드)</label>
-					<input type="text" name="payer" value="<?php if($this->input->get('payer')) echo $this->input->get("payer"); ?>" class="form-control input-sm" placeholder="입금자/계약자/코드" onkeydown="if(event.keyCode==13)submit();">
+					<input type="text" name="payer" value="<?php if($this->input->get('payer')) echo $this->input->get("payer"); ?>" class="form-control input-sm" placeholder="입금자/계약자/코드" onkeydown="if(event.keyCode==13)submit();" onclick="this.value=''">
 				</div>
 				<div class="col-xs-4">
 					<input type="button" class="btn btn-primary btn-sm" onclick="submit();" value="검 색">
@@ -158,17 +158,16 @@ foreach($now_payer as $lt) :
 						</tr>
 					</thead>
 					<tbody>
-<?php if($this->input->get('ho')) : ?>
-<?php foreach($received as $lt):
-	$paid_sche = $this->cms_main_model->sql_row(" SELECT pay_name, pay_disc FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$lt->pay_sche_code' ");
-	$paid_acc_nick = $this->cms_main_model->sql_row(" SELECT acc_nick FROM cb_cms_sales_bank_acc WHERE pj_seq='$project' AND seq='$lt->paid_acc' ");
-	$pay_name = ($paid_sche->pay_disc!=='') ?$paid_sche->pay_disc : $paid_sche->pay_name;
+<?php if($this->input->get('ho') OR $this->input->get('cont_code')) : ?>
+                    <?php foreach($received as $lt):
+	                    $paid_sche = $this->cms_main_model->sql_row(" SELECT pay_name, pay_disc FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$lt->pay_sche_code' ");
+	                    $paid_acc_nick = $this->cms_main_model->sql_row(" SELECT acc_nick FROM cb_cms_sales_bank_acc WHERE pj_seq='$project' AND seq='$lt->paid_acc' ");
+	                    $pay_name = ($paid_sche->pay_disc!=='') ?$paid_sche->pay_disc : $paid_sche->pay_name;
 
-	// 해지인 경우 red 스타일과 환불인 경우 Del 태그 만들기
-	if($cont_data->is_rescission>0) {$red_style = "style = 'color : red'"; } else {$red_style = ""; }
-	if($cont_data->is_rescission>1) {$del_op = "<del>"; $del_cl = "</del>";} else {$del_op = ""; $del_cl = "";}
-
-?>
+	                    // 해지인 경우 red 스타일과 환불인 경우 Del 태그 만들기
+	                    if($cont_data->is_rescission>0) {$red_style = "style = 'color : red'"; } else {$red_style = ""; }
+	                    if($cont_data->is_rescission>1) {$del_op = "<del>"; $del_cl = "</del>";} else {$del_op = ""; $del_cl = "";}
+                    ?>
 						<tr style="background-color: #F9FAD9;">
 							<td><?php echo $lt->paid_date; ?></td>
 							<td><?php echo $pay_name; ?></td>
@@ -180,7 +179,7 @@ foreach($now_payer as $lt) :
 							<td><?php echo $paid_acc_nick->acc_nick ; ?></td>
 							<td><?php echo $lt->paid_who; ?></td>
 						</tr>
-<?php endforeach; ?>
+                    <?php endforeach; ?>
 <?php endif; ?>
 					</tbody>
 					<tfoot>
@@ -202,9 +201,13 @@ foreach($now_payer as $lt) :
 				<input type="hidden" name="modi" value="<?php echo $this->input->get('modi'); ?>">
 				<input type="hidden" name="dong" value="<?php echo $this->input->get('dong'); ?>">
 				<input type="hidden" name="ho" value="<?php echo $this->input->get('ho'); ?>">
+
+                <input type="hidden" name="type" value="<?php echo $this->input->get('type'); ?>">
+                <input type="hidden" name="cont_code" value="<?php echo $this->input->get('cont_code'); ?>">
+            
 <?php $cont_seq = ( !empty($cont_data)) ? $cont_data->seq : ""; // 계약 아이디 ?>
 				<input type="hidden" name="cont_seq" value="<?php echo $cont_seq; ?>">
-<?php $rec_seq = ( !empty($this->input->get('rec_seq'))) ? $this->input->get('rec_seq') : ""; // 계약 아이디 ?>
+<?php $rec_seq = ( !empty($this->input->get('rec_seq'))) ? $this->input->get('rec_seq') : ""; // 수납 아이디 ?>
 				<input type="hidden" name="rec_seq" value="<?php echo $rec_seq; ?>">
 				<div class="row" style="margin: 0; padding: 0;">
 					<div class="col-sm-12 bo-top" style="padding: 0;">
@@ -276,9 +279,9 @@ foreach($now_payer as $lt) :
 					</div>
 				</div>
 
-	<?php if( !$this->input->get('ho')) : ?>
+	<?php if( !$this->input->get('ho') && !$this->input->get('cont_code')) : ?>
 				<div class="row">
-					<div class="col-sm-12 center" style="padding: 70px 0  86px;"><?php echo validation_errors('<div class="error">', '</div>'); ?>등록할 동 호수를 선택하여 주세요.</div>
+					<div class="col-sm-12 center" style="padding: 70px 0  86px;"><?php echo validation_errors('<div class="error">', '</div>'); ?>등록할 계약 건을 선택하여 주세요.</div>
 				</div>
 	<?php endif; ?>
 	<?php if($auth22<2) {$submit_str="alert('등록 권한이 없습니다!')";} else {$submit_str="receive_chk();";} ?>

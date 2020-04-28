@@ -977,7 +977,7 @@ class Cms_m1 extends CB_Controller {
 
             // 2. 수납관리 2. 수납등록 ////////////////////////////////////////////////////////////////////
         }else if($mdi==2 && $sdi==2) {
-            // $this->output->enable_profiler(TRUE); //프로파일러 보기//
+            $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
             // 조회 등록 권한 체크
             $auth = $this->cms_main_model->auth_chk('_m1_2_2', $this->session->userdata['mem_id']);
@@ -1012,34 +1012,42 @@ class Cms_m1 extends CB_Controller {
 				$view['type_list'] = explode("-", $type_name[0]->type_name);
 				
             	$cont_code_list = $view['cont_code_list'] = $this->cms_main_model->sql_result("
- 						SELECT cb_cms_sales_contract.seq AS contract_seq, cont_code, contractor, is_rescission
+ 						SELECT cb_cms_sales_contract.seq AS cont_seq, cont_code, contractor
 						FROM cb_cms_sales_contract, cb_cms_sales_contractor
 						WHERE pj_seq='{$this->input->get('project')}'
 						AND cb_cms_sales_contractor.cont_seq=cb_cms_sales_contract.seq
 						AND unit_type='{$this->input->get('type')}' ");
-            	
-            	$cont_id = $view['cont_id'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_contract WHERE seq='{$cont_code_list->contract_seq}' ");
 			}
 
-            if( !empty($cont_id) OR !empty($unit->seq)){
-                $cont_where = ($unit->seq)
+            if( !empty($this->input->get('cont_code')) OR !empty($unit->seq)){
+                $cont_where = (!empty($unit->seq))
 					? " WHERE unit_seq='$unit->seq' AND cb_cms_sales_contract.seq=cont_seq "
-					: " WHERE seq='$cont_id' AND cb_cms_sales_contract.seq=cont_seq ";
-                $cont_query = "  SELECT *, cb_cms_sales_contractor.seq AS contractor_seq FROM cb_cms_sales_contract, cb_cms_sales_contractor ".$cont_where." ORDER BY is_rescission ";
+					: " WHERE cont_code='{$this->input->get('cont_code')}' AND unit_type='{$this->input->get('type')}' AND cb_cms_sales_contract.seq=cont_seq ";
+                
+                $cont_query = "
+ 						SELECT *, cb_cms_sales_contract.seq AS cont_seq, cb_cms_sales_contractor.seq AS contractor_seq
+ 						FROM cb_cms_sales_contract, cb_cms_sales_contractor ".$cont_where."
+ 						ORDER BY is_rescission ";
+                
                 $cont_data = $view['cont_data'] = $this->cms_main_model->sql_row($cont_query); // 계약 및 계약자 데이터
-
+				
                 // 수납 데이터
                 $view['received'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' ORDER BY paid_date, seq "); // 계약자별 수납데이터
                 $view['total_paid'] = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS total_paid FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$cont_data->seq' "); // 계약자별 총 수납액
             }
+            
             // 수납 약정
             $pay_sche = $view['pay_sche'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' "); // 전체 약정 회차
-
-
-
-            $view['contractor_info'] = ( !empty($this->input->get('ho'))) ? "
-			<font color='#5c6a9a'><span class='glyphicon glyphicon-user' aria-hidden='true' style='padding-right: 10px;'></span></font><b>
-			[ 일련번호 : ".$cont_data->cont_code." ] &nbsp;".$now_dong ."동 ". $now_ho."호 ( ".$unit->type." 타입 / 계약자 : ".$cont_data->contractor." )</b>" : "";
+			
+			$style_str = "<font color='#5c6a9a'><span class='glyphicon glyphicon-user' aria-hidden='true' style='padding-right: 10px;'></span></font>";
+			
+            if($pj_now->data_cr=='1' AND !empty($this->input->get('ho'))){
+				$view['contractor_info'] = $style_str."<b>[ 일련번호 : ".$cont_data->cont_code." ] &nbsp;".$now_dong."동 ".$now_ho."호 ( ".$unit->type." 타입 / 계약자 : ".$cont_data->contractor." )</b>";
+			}elseif(!empty($this->input->get('cont_code'))) {
+				$view['contractor_info'] = $style_str."<b>[ 일련번호 : ".$cont_data->cont_code." ] &nbsp;( ".$cont_data->unit_type." 타입 / 계약자 : ".$cont_data->contractor." )</b>";
+			}else{
+				$view['contractor_info'] = "";
+			}
 
             // 수납 계좌
             $view['paid_acc'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_bank_acc WHERE pj_seq='$project' ");

@@ -395,14 +395,24 @@ function receive_chk(){
 		form1.project.focus();
 		return;
 	}
-	if( !form1.dong.value){
+	if( form1.dong && !form1.dong.value){
 		alert("수납 입력할 동을 선택하여 주세요.");
 		form1.dong.focus();
 		return;
 	}
-	if( !form1.ho.value){
+	if( form1.ho && !form1.ho.value){
 		alert("수납 입력할 호를 선택하여 주세요.");
 		form1.ho.focus();
+		return;
+	}
+	if( form1.type && !form1.type.value){
+		alert("수납 입력할 타입을 선택하여 주세요.");
+		form1.type.focus();
+		return;
+	}
+	if( form1.cont_code && !form1.cont_code.value){
+		alert("수납 입력할 계약 건을 선택하여 주세요.");
+		form1.cont_code.focus();
 		return;
 	}
 	if( !form2.paid_date.value){
