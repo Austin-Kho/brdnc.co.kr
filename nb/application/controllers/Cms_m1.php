@@ -977,7 +977,7 @@ class Cms_m1 extends CB_Controller {
 
             // 2. 수납관리 2. 수납등록 ////////////////////////////////////////////////////////////////////
         }else if($mdi==2 && $sdi==2) {
-            $this->output->enable_profiler(TRUE); //프로파일러 보기//
+            // $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
             // 조회 등록 권한 체크
             $auth = $this->cms_main_model->auth_chk('_m1_2_2', $this->session->userdata['mem_id']);
@@ -1103,7 +1103,7 @@ class Cms_m1 extends CB_Controller {
 
             // 1. 수납관리 3. 수납 고지서 관리 ////////////////////////////////////////////////////////////////////
         }else if($mdi==2 && $sdi==3) {
-            // $this->output->enable_profiler(TRUE); //프로파일러 보기//
+             $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
             // 조회 등록 권한 체크
             $auth = $this->cms_main_model->auth_chk('_m1_2_3', $this->session->userdata['mem_id']);
@@ -1111,15 +1111,15 @@ class Cms_m1 extends CB_Controller {
             $view['auth23'] = $auth['_m1_2_3'];
 
             // view page로 보낼 데이터 구하기
-            $view['view']['bill_issue'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_bill_issue WHERE pj_seq='$project' ");
-            $view['view']['addr'] = explode("|", $view['view']['bill_issue']->address);
+            $view['view']['bill_issue'] = $bill_issue = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_bill_issue WHERE pj_seq='$project' ");
+            $view['view']['addr'] = explode("|", $bill_issue->address);
             $view['view']['pay_sche'] = $this->cms_main_model->sql_result(" SELECT *, MAX(pay_code) AS pay_code FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' GROUP BY pay_time ORDER BY pay_code ");
             // 실제 납부회차
             $view['view']['real_sche'] = $this->cms_main_model->sql_result( " SELECT MAX(pay_code) AS pay_code FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' GROUP BY pay_time ");
 
             // 2차 계약금 이후 회차의 납부기한 데이터
             $view['due_sche'] = $this->cms_main_model->sql_row(" SELECT MIN(pay_code) AS start FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_time='3' ");
-            $pay_code = $view['view']['bill_issue']->pay_code;
+            $pay_code = $bill_issue->pay_code;
             $ddate = $this->cms_main_model->sql_row(" SELECT pay_due_date FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$pay_code' ");
             $view['due_date'] = ($ddate->pay_due_date == "0000-00-00") ? "" : $ddate->pay_due_date;
 
@@ -1133,7 +1133,7 @@ class Cms_m1 extends CB_Controller {
             }
 
             // 계약자 데이터 구하기	// 계약 데이터 검색 필터링
-            $cont_query = "  SELECT *, cb_cms_sales_contractor.seq AS contractor_seq  ";
+            $cont_query = "  SELECT *, cb_cms_sales_contract.seq AS cont_seq, cb_cms_sales_contractor.seq AS contractor_seq  ";
             $cont_query .= " FROM cb_cms_sales_contract, cb_cms_sales_contractor  ";
             $cont_query .= " WHERE pj_seq='$project' AND is_transfer='0' AND is_rescission='0' AND cb_cms_sales_contract.seq = cont_seq ";
             if( !empty($this->input->get('diff'))) {$df = $this->input->get('diff'); $cont_query .= " AND cont_diff='$df' ";}
@@ -1214,14 +1214,22 @@ class Cms_m1 extends CB_Controller {
                     'title' => $this->input->post('title', TRUE),
                     'content' => $this->input->post('content', TRUE),
                     'last_update_user' => $this->session->userdata('mem_username'),
-                    'last_update_time' => date()
+                    'last_update_time' => date("Y-m-d h:i:s")
                 );
                 $due_date_data = array('pay_due_date' => $this->input->post('sche_due_date', TRUE));
-
-                if(isset($bill_set_data)) {
-                    $result = $this->cms_main_model->update_data('cb_cms_sales_bill_issue', $bill_set_data, array('pj_seq' => $project));
-                    if(isset($due_date_data)) {$result1 = $this->cms_main_model->update_data('cb_cms_sales_pay_sche', $due_date_data, array('pj_seq' => $project, 'pay_code' => $pay_code));}
-                    if(isset($result)) alert('정상적으로 설정 되었습니다.', current_url());
+                
+                if(!empty($bill_set_data)) {
+                	if ($bill_issue!==NULL) {
+						$result = $this->cms_main_model->update_data('cb_cms_sales_bill_issue', $bill_set_data, array('pj_seq' => $project));
+					} else {
+                		$pj_arr = array('pj_seq' => $project);
+						$put_data = array_merge($pj_arr, $bill_set_data);
+						$result = $this->cms_main_model->insert_data('cb_cms_sales_bill_issue', $put_data);
+					}
+                	
+                    if(!empty($due_date_data)) {$result1 = $this->cms_main_model->update_data('cb_cms_sales_pay_sche', $due_date_data, array('pj_seq' => $project, 'pay_code' => $pay_code));}
+                    
+                    if($result) alert('정상적으로 설정 되었습니다.', current_url());
                 }
             endif; // 폼검증 통과 시 종료
         }

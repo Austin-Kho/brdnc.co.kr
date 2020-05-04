@@ -82,7 +82,7 @@ else :
 
 	<div class="row bg-success bo-top bo-bottom font12" style="margin: 0 0 20px;">
 		<div class="col-xs-6 checkbox" style="">
-			<h5><span class="glyphicon glyphicon-cog" aria-hidden="true" style="color:#c2630c"></span> &nbsp;기본 설정</h5>
+			<h5><span class="glyphicon glyphicon-cog" aria-hidden="true" style="color:#c2630c"></span>&nbsp;기본 설정</h5>
 		</div>
 		<div class="col-xs-6 font14 right checkbox" style="padding-top: 13px;">
 			<label>
@@ -93,6 +93,7 @@ else :
 
 	<!-- -------------------------------------------------- -->
 <?php
+	echo validation_errors('<div class="alert alert-warning" role="alert">', '</div>');
 	$attributes = array('name' => 'bill_set');
 	echo form_open(current_full_url(), $attributes);
 ?>
@@ -266,8 +267,9 @@ else :
 	<div class="form-group btn-wrap" style="margin: ;">
 <?php
 	$submit_str = $auth23<2	? "alert('이 페이지에 대한 관리(등록)권한이 없습니다.')" : "if(confirm('고지서 기본사항을 설정하시겠습니까?')) submit();";
+	$btn_value = ($view['bill_issue']!==NULL) ? "UPDATE" : "REGISTER";
 ?>
-		<input type="button" class="btn btn-default btn-sm" onclick="<?php echo $submit_str?>" value="UPDATE">
+		<input type="button" class="btn btn-default btn-sm" onclick="<?php echo $submit_str?>" value="<?php echo $btn_value; ?>">
 	</div>
 </form>
 	<!-- -------------------------------------------------- -->
@@ -373,7 +375,9 @@ else :
 						<td width="10%">계약 일련번호</td>
 						<td width="10%">차 수</td>
 						<td width="8%">타 입</td>
+                        <?php if($pj_now->data_cr=='1'): ?>
 						<td width="12%">동 호 수</td>
+                        <?php endif ?>
 						<td width="10%">계 약 자</td>
 						<td width="13%">총 납입금</td>
 						<td width="16%">현 회차상태(완납회차)</td>
@@ -382,6 +386,8 @@ else :
 				</thead>
 				<tbody class="bo-bottom center">
 <?php
+var_dump($view['real_sche']);
+
 for($i=0; $i<count($tp_name); $i++) :
 	$type_color[$tp_name[$i]] = $tp_color[$i];
 endfor;
@@ -392,12 +398,14 @@ foreach ($cont_data as $lt) :
 	$nd = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_con_diff WHERE pj_seq='$project' AND diff_no='$lt->cont_diff' ");
 	// 총 납부금액 구하기
 	$total_rec = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS received FROM cb_cms_sales_received WHERE pj_seq='$project' AND cont_seq='$lt->cont_seq' ");
+	
 	$n = 0;
 	foreach ($view['real_sche'] as $val) { // 실제 납부회차 만큼 반복
 		$time_payment[$n] = $this->cms_main_model->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<=$val->pay_code ");
 		if($total_rec->received>=$time_payment[$n]->payment) $is_paid = $val->pay_code;
 		$n++;
 	}
+	
 	$condi = ($view['bill_issue']->pay_code <= $is_paid)
 		? "<span style='color: #2205D0;'>" . $view['pay_sche']->pay_name . " 완납 중</span>"
 		: "<span style='color: #CD0505;'>" . $view['pay_sche']->pay_name . " 미납 중</span>";
@@ -407,20 +415,26 @@ foreach ($cont_data as $lt) :
 
 
 	$paid_out = $this->cms_main_model->sql_row(" SELECT pay_name FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' AND pay_code='$is_paid' ");
-	$paid_out_name = isset($paid_out->pay_name) ? $paid_out->pay_name : "<span style='color:#d25606;'>납부유예 중</span>";
+	$paid_out_name = !empty($paid_out->pay_name) ? $paid_out->pay_name : "<span style='color:#d25606;'>납부유예 중</span>";
 
 	$dong_ho = explode("-", $lt->unit_dong_ho);
 	$unit_dh = explode("-", $lt->unit_dong_ho);
-	$cont_edit_link ="<a href ='".base_url('cms_m1/sales/1/2?project='.$project.'&mode=2&cont_sort1=1&cont_sort2=2&diff_no='.$nd->diff_no.'&type='.$lt->unit_type.'&dong='.$unit_dh[0].'&ho='.$unit_dh[1])."'>" ;
+	
+	$cont_edit_link ="<a href ='".base_url('cms_m1/sales/1/2?project='.$project.'&mode=2&cont_sort1=1&cont_sort2=2&diff_no='.$lt->cont_diff.'&type='.$lt->unit_type.'&dong='.$unit_dh[0].'&ho='.$unit_dh[1])."'>" ;
+	$rec_edit_link = ($pj_now->data_cr=='1')
+        ? base_url('cms_m1/sales/2/2')."?project=".$project."&type=".$lt->unit_type."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]
+        : base_url('cms_m1/sales/2/2')."?project=".$project."&type=".$lt->unit_type."&cont_code=".$lt->cont_code;
 ?>
 					<tr>
 						<td><div class="checkbox" style="margin:0;"><label><input type="checkbox" name="chk[]" value="<?php echo $lt->cont_seq; ?>" <?php echo $chk_con; ?>> 선택</label></div></td>
 						<td><?php echo $cont_edit_link."[".$lt->cont_code."]</a>"; ?></td>
 						<td><?php echo $nd->diff_name; ?></td>
 						<td class="left" style="padding-left:20px;"><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type;?></td>
+                        <?php if($pj_now->data_cr=='1'): ?>
 						<td><?php echo $cont_edit_link.$lt->unit_dong_ho."</a>"; ?></td>
+						<?php endif ?>
 						<td><?php echo $cont_edit_link.$lt->contractor."</a>"; ?></td>
-						<td class="right"><a href="<?php echo base_url('cms_m1/sales/2/2')."?project=".$project."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>"><?php echo number_format($total_rec->received); ?></a></td>
+						<td class="right"><a href="<?php echo $rec_edit_link; ?>"><?php echo number_format($total_rec->received); ?></a> | <?php echo $is_paid; ?></td>
 						<td><?php echo $condi.' ('.$paid_out_name.')'; ?></td>
 						<td><?php echo $new_span." ".$lt->cont_date; ?></span></td>
 					</tr>
