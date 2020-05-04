@@ -167,13 +167,18 @@ foreach($now_payer as $lt) :
 	                    // 해지인 경우 red 스타일과 환불인 경우 Del 태그 만들기
 	                    if($cont_data->is_rescission>0) {$red_style = "style = 'color : red'"; } else {$red_style = ""; }
 	                    if($cont_data->is_rescission>1) {$del_op = "<del>"; $del_cl = "</del>";} else {$del_op = ""; $del_cl = "";}
+
+	                    $modi_pay_url = ($pj_now->data_cr=='1')
+                            ? "?project={$project}&payer={$this->input->get('payer')}&dong={$this->input->get('dong')}&ho={$this->input->get('ho')}&modi=1&rec_seq={$lt->seq}"
+                            : "?project={$project}&payer={$this->input->get('payer')}&type={$this->input->get('type')}&cont_code={$this->input->get('cont_code')}&modi=1&rec_seq={$lt->seq}";
+
                     ?>
 						<tr style="background-color: #F9FAD9;">
 							<td><?php echo $lt->paid_date; ?></td>
 							<td><?php echo $pay_name; ?></td>
 							<td class="right">
 								<?php echo $del_op; ?>
-									<a <?php echo $red_style; ?> href="?modi=1&project=<?php echo $project; ?>&dong=<?php echo $this->input->get('dong'); ?>&ho=<?php echo $this->input->get('ho'); ?>&rec_seq=<?php echo $lt->seq; ?>" data-toggle="tooltip" title="입력 내용 수정하기"><?php echo number_format($lt->paid_amount); ?></a>
+                                    <a <?php echo $red_style; ?> href="<?php echo $modi_pay_url; ?>" data-toggle="tooltip" title="입력 내용 수정하기"><?php echo number_format($lt->paid_amount); ?></a>
 								<?php echo $del_cl; ?>
 							</td>
 							<td><?php echo $paid_acc_nick->acc_nick ; ?></td>
