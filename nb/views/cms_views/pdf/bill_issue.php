@@ -8,16 +8,15 @@
     $cont_recieve = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS total FROM cb_cms_sales_received WHERE cont_seq ='$cont_seq[$i]' ");
     // 가격 컨디션 구하기
     $ho = explode('-', $contractor->unit_dong_ho)[1];
-
+    $con_floor = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_con_floor WHERE pj_seq={$project} ");
     $n = strlen($ho)-2;
-    if((int)substr($ho, 0, $n) == 1) : $floor_con = 1;
-    elseif ((int)substr($ho, 0, $n) == 2) : $floor_con = 2;
-    elseif ((int)substr($ho, 0, $n) == 3) : $floor_con = 3;
-    elseif ((int)substr($ho, 0, $n) >= 4 && (int)substr($ho, 0, $n) <= 5) : $floor_con = 4;
-    elseif ((int)substr($ho, 0, $n) >= 6 && (int)substr($ho, 0, $n) <= 10) : $floor_con = 5;
-    elseif ((int)substr($ho, 0, $n) > 10) : $floor_con = 6;
-    endif;
-    $price = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_price WHERE pj_seq='$project' AND con_diff_no='$contractor->cont_diff' AND con_type='$contractor->unit_type' AND con_floor_no='$floor_con' ");
+    foreach($con_floor as $lt) :
+        $floor = explode("-", $lt->floor_range);
+       if((int)substr($ho, 0, $n) >= $floor[0] AND (int)substr($ho, 0, $n) <= $floor[1])  $floor_con = $lt->seq;
+    endforeach;
+
+    $con_floor_query = ($pj_now->data_cr=='1') ? "AND con_floor_no='{$floor_con}'" : "";
+    $price = $this->cms_main_model->sql_row(" SELECT seq, unit_price FROM cb_cms_sales_price WHERE pj_seq='$project' AND con_diff_no='$contractor->cont_diff' AND con_type='$contractor->unit_type' ".$con_floor_query);
 ?>
     <table style="width:100%;">
       <tr>
@@ -55,14 +54,16 @@
     	<tr>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center;" width="20%;">계약자명</td>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center;" width="20%;">계 약 일</td>
-            <td style="padding: 3px 0px; border:1px solid black; text-align:center;" width="20%;">동 / 호수</td>
+            <?php $div_title = ($pj_now->data_cr=='1') ? "동 / 호수" : "조합원번호"; ?>
+            <td style="padding: 3px 0px; border:1px solid black; text-align:center;" width="20%;"><?php echo $div_title; ?></td>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center;" width="20%;">평형(TYPE)</td>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center;" width="20%;">총 분담금액</td>
         </tr>
         <tr>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center; "><?php echo $contractor->contractor; ?></td>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center; "><?php echo $contractor->cont_date; ?></td>
-            <td style="padding: 3px 0px; border:1px solid black; text-align:center; "><?php echo $contractor->unit_dong_ho; ?></td>
+            <?php $div_content = ($pj_now->data_cr=='1') ? $contractor->unit_dong_ho : $contractor->cont_code; ?>
+            <td style="padding: 3px 0px; border:1px solid black; text-align:center; "><?php echo $div_content; ?></td>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center; "><?php echo $contractor->unit_type; ?></td>
             <td style="padding: 3px 10px; border:1px solid black; text-align:right; "><?php echo number_format($price->unit_price); ?></td>
         </tr>
@@ -159,8 +160,10 @@
             <td style="padding: 3px 0px; border:1px solid black; text-align:center; "><?php echo explode('+', $bill_issue->bank_acc_1)[0]; ?></td>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center; "><?php echo explode('+', $bill_issue->bank_acc_1)[1]; ?></td>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center; " colspan="2"><?php echo $bill_issue->acc_host_1; ?></td>
-            <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php if($total_pay_sum_1==0) echo '-'; else echo number_format($total_pay_sum_1); ?></td>
+            <?php $pay_sum = (!empty($bill_issue->bank_acc_2)) ? $total_pay_sum_1 : $total_pay_sum; ?>
+            <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php if($total_pay_sum_1==0) echo '-'; else echo number_format($pay_sum); ?></td>
         </tr>
+        <?php if (!empty($bill_issue->bank_acc_2)): ?>
         <tr>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center;"><?php if(isset($bill_issue->bank_acc_2)) echo "PM 용역비"; ?></td>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center; "><?php if(isset($bill_issue->bank_acc_2)) echo explode('+', $bill_issue->bank_acc_2)[0]; ?></td>
@@ -168,12 +171,16 @@
             <td style="padding: 3px 0px; border:1px solid black; text-align:center; " colspan="2"><?php if(isset($bill_issue->bank_acc_2)) echo $bill_issue->acc_host_2; ?></td>
             <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php if($total_pay_sum_2==0) echo '-'; else echo number_format($total_pay_sum_2); ?></td>
         </tr>
+        <?php endif ?>
         <tr>
-            <td style="padding: 5px 10px; border:1px solid black;" colspan="4">
+            <?php $colspan_num = (!empty($bill_issue->bank_acc_2)) ? '4' : '6'; ?>
+            <td style="padding: 5px 10px; border:1px solid black;" colspan="<?php echo $colspan_num; ?>">
                 ※ 계좌 입금 시 반드시 계약자명과 동호수를 표기하여 납부하여 주시기 바랍니다. <br /> &nbsp;&nbsp;&nbsp;&nbsp;예) 홍길동901-101 or 홍길동901101
             </td>
+           <?php if (!empty($bill_issue->bank_acc_2)): ?>
             <td style="padding: 3px 0px; border:1px solid black; text-align:center;">합 계</td>
             <td style="padding: 3px 10px; border:1px solid black; text-align:right;"><?php if($total_pay_sum==0) echo '-'; else echo number_format($total_pay_sum);?></td>
+            <?php endif ?>
         </tr>
     </table>
 
@@ -221,6 +228,7 @@
     if($lt->pay_time==1) $due_date = $contractor->cont_date;
     if($lt->pay_time==2) $due_date = date('Y-m-d', strtotime($contractor->cont_date."+1months"));
     if($lt->pay_time>2) $due_date = ($lt->pay_due_date!=='0000-00-00') ? $lt->pay_due_date : "";
+
     // 약정금액
     $pay = $this->cms_main_model->sql_row(" SELECT payment FROM cb_cms_sales_payment WHERE price_seq='$price->seq' AND pay_sche_seq='$lt->seq' ");
     // 납입금액
@@ -244,7 +252,7 @@
 
     if($cont_recieve->total<$time_cum){ // 완납회차 후 칸 띄우기
       if(empty($bool)):
-        for($k=0; $k<(23-count($pay_sche)-$rep); $k++):
+        for($k=0; $k<(22-count($pay_sche)-$rep); $k++):
           echo "<tr><td colspan='11'>&nbsp;</td></tr>";
         endfor;
         $bool = true;
@@ -269,13 +277,13 @@
 endforeach;
 ?>
               </table>
-              <!-- <table style="height:100%; background-color:red;">
+              <table style="height:100%;">
                   <tr>
                       <td valign="bottom">
-                          <span style="font-size: 10px;"><?php if(isset($bill_issue->host_name_2)) echo "※ 미 도래한 납부회차의 납부기한은 예정사항이며 추후 변동 시 변경고지될 수 있습니다." ?><span>
+                          <span style="font-size: 10px;"><?php if(isset($bill_issue->host_name_2)) echo "※ 미 도래한 납부회차의 납부기한  및 납부금액은 예정사항이며 추후 변동 시 변경고지될 수 있습니다." ?><span>
                       </td>
                   </tr>
-              </table> -->
+              </table>
             </td>
         </tr>
         <tr>

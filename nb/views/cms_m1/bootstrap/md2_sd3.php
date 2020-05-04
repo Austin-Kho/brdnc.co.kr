@@ -177,7 +177,7 @@ else :
 		</div>
 		<div class="row" style="margin: 0; padding: 0;">
 			<div class="col-sm-12 bo-top" style="padding: 0;">
-				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="bank_acc_1">수취계좌 1</label></div>
+				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="bank_acc_1">수취계좌(분담금)</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<input type="text" class="form-control input-sm" id="bank_acc_1" name="bank_acc_1" value="<?php if($this->input->post('bank_acc_1')) echo set_value('bank_acc_1'); elseif(isset($view['bill_issue']->bank_acc_1)) echo $view['bill_issue']->bank_acc_1; ?>" placeholder="예금은행 + 계좌번호">
@@ -193,7 +193,7 @@ else :
 
 		<div class="row" style="margin: 0; padding: 0;">
 			<div class="col-sm-12 bo-top" style="padding: 0;">
-				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="bank_acc_2">수취계좌 2</label></div>
+				<div class="col-xs-4 col-md-2 center bg-warning" style="padding: 10px;"><label for="bank_acc_2">수취계좌(대행비)</label></div>
 				<div class="col-xs-8 col-md-4" style="padding: 6px 4px;">
 					<div class="col-xs-12" style="padding: 0px;">
 						<input type="text" class="form-control input-sm" id="bank_acc_2" name="bank_acc_2" value="<?php if($this->input->post('bank_acc_2')) echo set_value('bank_acc_2'); elseif(isset($view['bill_issue']->bank_acc_2)) echo $view['bill_issue']->bank_acc_2; ?>" placeholder="예금은행 + 계좌번호">

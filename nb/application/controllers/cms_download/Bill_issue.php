@@ -18,6 +18,7 @@ class Bill_issue extends CB_Controller {
 		$view['issue_date'] = $this->input->get("date", TRUE);
 
 		// view page로 보낼 데이터 구하기
+        $view['pj_now'] = $this->cms_main_model->sql_row("SELECT data_cr FROM cb_cms_project WHERE seq={$view['project']}");
 		$view['bill_issue'] = $this->cms_main_model->sql_row("SELECT * FROM cb_cms_sales_bill_issue WHERE pj_seq={$project}");
 		$view['pay_sche'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_pay_sche WHERE pj_seq = '$project' ORDER BY pay_code ASC, pay_time ASC ");
 		$view['real_sche'] = $this->cms_main_model->sql_result( " SELECT MAX(pay_code) AS pay_code FROM cb_cms_sales_pay_sche WHERE pj_seq='$project' GROUP BY pay_time ");
