@@ -1050,16 +1050,16 @@ class Cms_m1 extends CB_Controller {
 			}
 
             // 수납 계좌
-            $view['paid_acc'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_bank_acc WHERE pj_seq='$project' ");
+            $view['paid_acc'] = $this->cms_main_model->sql_result(" SELECT * FROM cb_cms_sales_bank_acc WHERE pj_seq='{$project}' ");
             // 수정 시 수납 데이터
-            $view['modi_rec'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE seq='".$this->input->get('rec_seq')."' ");
+            $view['modi_rec'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE seq='{$this->input->get('rec_seq')}' ");
             // 데이터 삭제
             if( !empty($this->input->get('del_code'))){
                 $result = $this->cms_main_model->delete_data('cb_cms_sales_received', array('seq' => $this->input->get('del_code')));
                 if($result) {
-                    alert('삭제 되었습니다.', base_url('cms_m1/sales/2/2').'?modi=0&project='.$project.'&dong='.$this->input->get('dong').'&ho='.$this->input->get('ho'));
+                    alert('삭제 되었습니다.', current_full_url());
                 }else{
-                    alert('다시 시도하여 주십시요.', base_url('cms_m1/sales/2/2').'?modi=0&project='.$project.'&dong='.$this->input->get('dong').'&ho='.$this->input->get('ho'));
+                    alert('다시 시도하여 주십시요.', current_full_url());
                 }
             }
 
@@ -1229,7 +1229,7 @@ class Cms_m1 extends CB_Controller {
                 	
                     if(!empty($due_date_data)) {$result1 = $this->cms_main_model->update_data('cb_cms_sales_pay_sche', $due_date_data, array('pj_seq' => $project, 'pay_code' => $pay_code));}
                     
-                    if($result) alert('정상적으로 설정 되었습니다.', current_url());
+                    if($result) alert('정상적으로 설정 되었습니다.', current_full_url());
                 }
             endif; // 폼검증 통과 시 종료
         }

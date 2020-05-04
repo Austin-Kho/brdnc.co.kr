@@ -386,8 +386,6 @@ else :
 				</thead>
 				<tbody class="bo-bottom center">
 <?php
-var_dump($view['real_sche']);
-
 for($i=0; $i<count($tp_name); $i++) :
 	$type_color[$tp_name[$i]] = $tp_color[$i];
 endfor;
@@ -401,8 +399,8 @@ foreach ($cont_data as $lt) :
 	
 	$n = 0;
 	foreach ($view['real_sche'] as $val) { // 실제 납부회차 만큼 반복
-		$time_payment[$n] = $this->cms_main_model->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$lt->price_seq' AND pay_sche_seq<=$val->pay_code ");
-		if($total_rec->received>=$time_payment[$n]->payment) $is_paid = $val->pay_code;
+		$time_payment[$n] = $this->cms_main_model->sql_row(" SELECT SUM(payment) AS payment FROM cb_cms_sales_payment WHERE price_seq='$lt->price_seq' AND sche_pay_code<=$val->pay_code ");
+		if ($total_rec->received>=$time_payment[$n]->payment) $is_paid = $val->pay_code;
 		$n++;
 	}
 	
@@ -434,7 +432,7 @@ foreach ($cont_data as $lt) :
 						<td><?php echo $cont_edit_link.$lt->unit_dong_ho."</a>"; ?></td>
 						<?php endif ?>
 						<td><?php echo $cont_edit_link.$lt->contractor."</a>"; ?></td>
-						<td class="right"><a href="<?php echo $rec_edit_link; ?>"><?php echo number_format($total_rec->received); ?></a> | <?php echo $is_paid; ?></td>
+						<td class="right"><a href="<?php echo $rec_edit_link; ?>"><?php echo number_format($total_rec->received); ?></a></td>
 						<td><?php echo $condi.' ('.$paid_out_name.')'; ?></td>
 						<td><?php echo $new_span." ".$lt->cont_date; ?></span></td>
 					</tr>

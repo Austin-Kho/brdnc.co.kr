@@ -8,7 +8,6 @@ class Bill_issue extends CB_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('cms_main_model'); //모델 파일 로드
-
 	}
 
 	public function download(){
