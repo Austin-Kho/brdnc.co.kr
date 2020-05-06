@@ -171,7 +171,6 @@ foreach($now_payer as $lt) :
 	                    $modi_pay_url = ($pj_now->data_cr=='1')
                             ? "?project={$project}&payer={$this->input->get('payer')}&dong={$this->input->get('dong')}&ho={$this->input->get('ho')}&modi=1&rec_seq={$lt->seq}"
                             : "?project={$project}&payer={$this->input->get('payer')}&type={$this->input->get('type')}&cont_code={$this->input->get('cont_code')}&modi=1&rec_seq={$lt->seq}";
-
                     ?>
 						<tr style="background-color: #F9FAD9;">
 							<td><?php echo $lt->paid_date; ?></td>

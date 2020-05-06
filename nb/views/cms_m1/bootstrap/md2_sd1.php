@@ -205,7 +205,9 @@ else :
 						<td>당 건 총입금액</td>
 						<td>계약자</td>
 						<td>타입</td>
+                        <?php if ($pj_now->data_cr=='1') :?>
 						<td>동호수</td>
+                        <?php endif ?>
 					</tr>
 				</thead>
 				<tbody>
@@ -224,17 +226,23 @@ foreach($rec_list as $lt) :
 	$dong_ho = explode("-", $lt->unit_dong_ho);
 	$contractor = $this->cms_main_model->sql_row(" SELECT contractor AS ct FROM cb_cms_sales_contractor WHERE cont_seq='$lt->cont_seq' ");
 	$total_rec = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS pa FROM cb_cms_sales_received WHERE pj_seq='$project' AND cb_cms_sales_received.cont_seq='$lt->cont_seq' GROUP BY cb_cms_sales_received.cont_seq ");
+
+    $modi_pay_url = ($pj_now->data_cr=='1')
+        ? base_url('cms_m1/sales/2/2')."?project={$project}&payer={$contractor->ct}&dong={$dong_ho[0]}&ho={$dong_ho[1]}&modi=1&rec_seq={$lt->seq}"
+        : base_url('cms_m1/sales/2/2')."?project={$project}&payer={$contractor->ct}&type={$lt->unit_type}&cont_code={$lt->cont_code}&modi=1&rec_seq={$lt->seq}";
 ?>
 					<tr class="center">
 						<td><?php echo $lt->paid_date; ?></td>
-						<td class="right"><a href="<?php echo  base_url('cms_m1/sales/2/2').'?modi=1&project='.$project.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1].'&rec_seq='.$lt->seq; ?>"><?php echo number_format($lt->paid_amount); ?></a></td>
+						<td class="right"><a href="<?php echo $modi_pay_url; ?>"><?php echo number_format($lt->paid_amount); ?></a></td>
 						<td><?php echo $lt->paid_who; ?></td>
 						<td><?php echo $lt->pay_name; ?></td>
 						<td><?php echo $lt->acc_nick; ?></td>
-						<td class="right"><a href="<?php echo  base_url('cms_m1/sales/2/2').'?modi=1&project='.$project.'&dong='.$dong_ho[0].'&ho='.$dong_ho[1].'&rec_seq='.$lt->seq; ?>"><?php echo number_format($total_rec->pa); ?></a></td>
+						<td class="right"><a href="<?php echo  $modi_pay_url; ?>"><?php echo number_format($total_rec->pa); ?></a></td>
 						<td><b><?php echo $contractor->ct; ?></b></td>
 						<td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span> <?php echo $lt->unit_type; ?></td>
+                        <?php if ($pj_now->data_cr=='1') : ?>
 						<td><a href="<?php echo base_url('cms_m1/sales/1/2')."?mode=1&cont_sort1=1&cont_sort2=2&project=".$project."&type=".$lt->unit_type."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>"><?php echo $lt->unit_dong_ho; ?></a></td>
+                        <?php endif ?>
 					</tr>
 <?php endforeach; ?>
 				</tbody>
