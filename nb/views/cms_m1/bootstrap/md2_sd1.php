@@ -238,7 +238,7 @@ foreach($rec_list as $lt) :
 					<tr class="center">
 						<td><?php echo $lt->paid_date; ?></td>
 						<td class="right"><a href="<?php echo $modi_pay_url; ?>"><?php echo number_format($lt->paid_amount); ?></a></td>
-						<td><?php echo $lt->paid_who; ?></td>
+                        <td><a href="<?php echo $modi_pay_url; ?>"><?php echo $lt->paid_who; ?></a></td>
 						<td><?php echo $lt->pay_name; ?></td>
 						<td><?php echo $lt->acc_nick; ?></td>
 						<td class="right"><a href="<?php echo  $modi_pay_url; ?>"><?php echo number_format($total_rec->pa); ?></a></td>
