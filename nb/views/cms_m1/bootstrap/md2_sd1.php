@@ -242,7 +242,7 @@ foreach($rec_list as $lt) :
 						<td><?php echo $lt->pay_name; ?></td>
 						<td><?php echo $lt->acc_nick; ?></td>
 						<td class="right"><a href="<?php echo  $modi_pay_url; ?>"><?php echo number_format($total_rec->pa); ?></a></td>
-						<td><b><?php echo $contractor->ct; ?></b></td>
+                        <td><b><a href="<?php echo $modi_cont_url; ?>"><?php echo $contractor->ct; ?></a></b></td>
 						<td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;</span> <a href="<?php echo $modi_cont_url; ?>"><?php echo $lt->unit_type; ?></a></td>
                         <?php if ($pj_now->data_cr=='1') : ?>
 						<td><a href="<?php echo $modi_cont_url; ?>"><?php echo $lt->unit_dong_ho; ?></a></td>
