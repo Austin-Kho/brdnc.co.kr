@@ -228,8 +228,8 @@ foreach($rec_list as $lt) :
 	$total_rec = $this->cms_main_model->sql_row(" SELECT SUM(paid_amount) AS pa FROM cb_cms_sales_received WHERE pj_seq='$project' AND cb_cms_sales_received.cont_seq='$lt->cont_seq' GROUP BY cb_cms_sales_received.cont_seq ");
 
     $modi_pay_url = ($pj_now->data_cr=='1')
-        ? base_url('cms_m1/sales/2/2')."?project={$project}&payer={$contractor->ct}&dong={$dong_ho[0]}&ho={$dong_ho[1]}&modi=1&rec_seq={$lt->seq}"
-        : base_url('cms_m1/sales/2/2')."?project={$project}&payer={$contractor->ct}&type={$lt->unit_type}&cont_code={$lt->cont_code}&modi=1&rec_seq={$lt->seq}";
+        ? base_url('cms_m1/sales/2/2')."?project={$project}&dong={$dong_ho[0]}&ho={$dong_ho[1]}&modi=1&rec_seq={$lt->seq}"
+        : base_url('cms_m1/sales/2/2')."?project={$project}&type={$lt->unit_type}&cont_code={$lt->cont_code}&modi=1&rec_seq={$lt->seq}";
 
     $modi_cont_url = ($pj_now->data_cr=='1')
         ? base_url('cms_m1/sales/1/2')."?mode=2&cont_sort1=1&cont_sort2=2&project={$project}&diff_no={$lt->cont_diff}&type={$lt->unit_type}&dong={$dong_ho[0]}&ho={$dong_ho[1]}"

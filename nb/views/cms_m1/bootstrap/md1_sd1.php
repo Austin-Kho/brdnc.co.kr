@@ -330,21 +330,28 @@ endfor;
                 $adr2 = explode(" ", $adr1[1]);
                 $addr = $adr2[0]." ".$adr2[1];
                 $unit_dh = explode("-", $lt->unit_dong_ho);
-                $dh_url = ($pj_now->data_cr=='1') ? '&dong='.$unit_dh[0].'&ho='.$unit_dh[1] : '';
-                $cont_edit_link ="<a href ='".base_url('cms_m1/sales/1/2?project='.$project.'&mode=2&cont_sort1=1&cont_sort2=2&diff_no='.$lt->cont_diff.'&type='.$lt->unit_type.$dh_url."&cont_id=".$lt->seq)."'>" ;
+//                $dh_url = ($pj_now->data_cr=='1') ? '&dong='.$unit_dh[0].'&ho='.$unit_dh[1] : '';
+//                $cont_edit_link ="<a href ='".base_url('cms_m1/sales/1/2?project='.$project.'&mode=2&cont_sort1=1&cont_sort2=2&diff_no='.$lt->cont_diff.'&type='.$lt->unit_type.$dh_url."&cont_id=".$lt->seq)."'>" ;
+
+                $cont_edit_link = ($pj_now->data_cr=='1')
+                    ? base_url('cms_m1/sales/1/2')."?mode=2&cont_sort1=1&cont_sort2=2&project={$project}&diff_no={$lt->cont_diff}&type={$lt->unit_type}&dong={$dong_ho[0]}&ho={$dong_ho[1]}"
+                    : base_url('cms_m1/sales/1/2')."?mode=2&cont_sort1=1&cont_sort2=2&project={$project}&diff_no={$lt->cont_diff}&type={$lt->unit_type}&cont_id={$lt->cont_seq}";
+                $modi_pay_url = ($pj_now->data_cr=='1')
+                    ? base_url('cms_m1/sales/2/2')."?modi=1&project={$project}&dong={$dong_ho[0]}&ho={$dong_ho[1]}"
+                    : base_url('cms_m1/sales/2/2')."?modi=1&project={$project}&type={$lt->unit_type}&cont_code={$lt->cont_code}";
                 $new_span = ($lt->cont_date>=date('Y-m-d', strtotime('-3 day')))  ? "<span style='background-color: #2A41DB; color: #fff; font-size: 10px;'>&nbsp;N </span>&nbsp; " : "";
                 ?>
                 <tr>
-                    <td><?php echo $cont_edit_link.$lt->cont_code."</a>"; ?></td>
+                    <td><a href="<?php echo $cont_edit_link; ?>"><?php echo $lt->cont_code; ?></a></td>
                     <td><?php echo $nd->diff_name; ?></td>
                     <td class="left"><span style="background-color: <?php echo $type_color[$lt->unit_type]; ?>">&nbsp;&nbsp;&nbsp;&nbsp;</span>&nbsp; <?php echo $lt->unit_type; ?></td>
                     <?php if($pj_now->data_cr=='1'): ?>
-                    <td><?php echo $cont_edit_link.$lt->unit_dong_ho."</a>"; ?></td>
+                    <td><a href="<?php echo $cont_edit_link; ?>"><?php echo $lt->unit_dong_ho; ?></a></td>
                     <?php endif ?>
-                    <td><?php echo $cont_edit_link.$lt->contractor."</a>"; ?></td>
+                    <td><a href="<?php echo $cont_edit_link; ?>"><?php echo $lt->contractor; ?></a></td>
                     <td><?php echo $new_span." ".$lt->cont_date; ?></span></td>
                     <td><?php echo $lt->cont_tel1; ?></td>
-                    <td class="right"><a href="<?php echo base_url('cms_m1/sales/2/2')."?project=".$project."&dong=".$dong_ho[0]."&ho=".$dong_ho[1]; ?>"><?php echo number_format($total_rec->received); ?></a></td>
+                    <td class="right"><a href="<?php echo $modi_pay_url; ?>"><?php echo number_format($total_rec->received); ?></a></td>
                     <td><?php echo $is_paid_ok; ?></td>
                     <td><div style="cursor: pointer; color: red;" data-toggle="tooltip" data-placement="left" title="<?php echo $incom_doc; ?>"><?php echo cut_string($incom_doc, 9, ".."); ?></div></td>
                     <td class="left"><div style="cursor: pointer;" data-toggle="tooltip" data-placement="left" title="<?php echo $lt->note; ?>"><?php echo cut_string($lt->note, 12, ".."); ?></div></td>
