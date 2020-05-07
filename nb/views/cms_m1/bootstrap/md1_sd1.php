@@ -334,7 +334,7 @@ endfor;
 //                $cont_edit_link ="<a href ='".base_url('cms_m1/sales/1/2?project='.$project.'&mode=2&cont_sort1=1&cont_sort2=2&diff_no='.$lt->cont_diff.'&type='.$lt->unit_type.$dh_url."&cont_id=".$lt->seq)."'>" ;
 
                 $cont_edit_link = ($pj_now->data_cr=='1')
-                    ? base_url('cms_m1/sales/1/2')."?mode=2&cont_sort1=1&cont_sort2=2&project={$project}&diff_no={$lt->cont_diff}&type={$lt->unit_type}&dong={$dong_ho[0]}&ho={$dong_ho[1]}"
+                    ? base_url('cms_m1/sales/1/2')."?mode=2&cont_sort1=1&cont_sort2=2&project={$project}&diff_no={$lt->cont_diff}&type={$lt->unit_type}&cont_id={$lt->cont_seq}&dong={$dong_ho[0]}&ho={$dong_ho[1]}"
                     : base_url('cms_m1/sales/1/2')."?mode=2&cont_sort1=1&cont_sort2=2&project={$project}&diff_no={$lt->cont_diff}&type={$lt->unit_type}&cont_id={$lt->cont_seq}";
                 $modi_pay_url = ($pj_now->data_cr=='1')
                     ? base_url('cms_m1/sales/2/2')."?modi=1&project={$project}&dong={$dong_ho[0]}&ho={$dong_ho[1]}"
