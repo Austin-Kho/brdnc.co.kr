@@ -195,6 +195,7 @@ endfor;
 					</select>
 				</div>
 				<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
+                    <?php if($pj_now->data_cr=='1') : ?>
 					<label for="dong" class="sr-only">동별</label>
 					<select class="form-control input-sm" name="dong">
 						<option value=""> 동 별</option>
@@ -202,6 +203,7 @@ endfor;
 						<option value="<?php echo $lt->unit_dong; ?>" <?php if($lt->unit_dong==$this->input->get('dong')) echo "selected"; ?>> <?php echo $lt->unit_dong; ?></option>
 	<?php endforeach; ?>
 					</select>
+                    <?php endif ?>
 				</div>
 				<div class="col-xs-6 col-sm-2 col-md-1" style="height: 40px; padding: 5px;">
 					<label for="order" class="sr-only">정 렬</label>
