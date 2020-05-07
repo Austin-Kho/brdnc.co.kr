@@ -405,6 +405,17 @@ class Cms_m1 extends CB_Controller {
                     );
                     /******************************계약 테이블 데이터******************************/
 
+                    if(!$this->input->get('cont_id') AND !$this->input->post('unit_is_cont')) { // // 신규 계약일 때 contract 테이블 데이터 입력
+
+                        //   1. 계약관리 테이블에 해당 데이터를 인서트한다.
+                        $add_arr1 = array('ini_reg_worker' => $this->session->userdata('mem_username'));
+                        $cont_arr11 = array_merge($cont_arr1, $add_arr1);
+
+                        $result[-1] = $this->cms_main_model->insert_data('cb_cms_sales_contract', $cont_arr11, 'ini_reg_date');
+                        if (!$result[-1]) {
+                            alert('데이터베이스 에러입니다.0', current_full_url());
+                        }
+                    }
                     /******************************계약자 테이블 데이터******************************/
                     $cr_cont = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_contract ORDER BY seq DESC LIMIT 1 ");
                     $cont_seq = ( $cont_data->cont_seq) ?  $cont_data->cont_seq : $cr_cont->seq;
@@ -530,19 +541,8 @@ class Cms_m1 extends CB_Controller {
 
                     /////////////////////////////////////////////////////////////////////////////신규 계약 인서트
 
-                    if(!$this->input->get('cont_id') AND !$this->input->post('unit_is_cont')){ // 신규 계약일 때
+                    if(!$this->input->get('cont_id') AND !$this->input->post('unit_is_cont')){ // // 신규 계약일 때 contractor 테이블 데이터 입력
 
-                        // 신규 계약일 때 contract 테이블 데이터 입력
-                        //   1. 계약관리 테이블에 해당 데이터를 인서트한다.
-                        $add_arr1 = array('ini_reg_worker' => $this->session->userdata('mem_username'));
-                        $cont_arr11 = array_merge($cont_arr1, $add_arr1);
-
-                        $result[-1] = $this->cms_main_model->insert_data('cb_cms_sales_contract', $cont_arr11, 'ini_reg_date');
-                        if( !$result[-1]){
-                            alert('데이터베이스 에러입니다.0', current_full_url());
-                        }
-
-                        // 신규 계약일 때 contractor 테이블 데이터 입력
                         //   2. 계약자관리 테이블에 해당 데이터를 인서트한다.
                         $add_arr2 = array('cont_seq' => $cont_seq, 'ini_reg_worker' => $this->session->userdata('mem_username'));
                         $cont_arr22 = array_merge($cont_arr2, $add_arr2);
