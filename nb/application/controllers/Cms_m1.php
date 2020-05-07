@@ -403,21 +403,7 @@ class Cms_m1 extends CB_Controller {
                         'price_seq' => $price_seq->seq,
                         'note' => $this->input->post('note', TRUE)
                     );
-
-
                     /******************************계약 테이블 데이터******************************/
-                    /////////////////////////////////////////////////////////////////////////////신규 계약 인서트
-                    if(!empty(!$this->input->get('cont_id')) AND !$this->input->get('unit_is_cont')){  // 신규 계약일 때 contract 테이블 데이터 입력
-                        //   1. 계약관리 테이블에 해당 데이터를 인서트한다.
-                        $add_arr1 = array('ini_reg_worker' => $this->session->userdata('mem_username'));
-                        $cont_arr11 = array_merge($cont_arr1, $add_arr1);
-
-
-                        $result[0] = $this->cms_main_model->insert_data('cb_cms_sales_contract', $cont_arr11, 'ini_reg_date');
-                        if( !$result[0]){
-                            alert('데이터베이스 에러입니다.1', current_full_url());
-                        }
-                    }
 
                     /******************************계약자 테이블 데이터******************************/
                     $cr_cont = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_contract ORDER BY seq DESC LIMIT 1 ");
@@ -542,8 +528,21 @@ class Cms_m1 extends CB_Controller {
                     /******************************계약금 7 폼 데이터******************************/
 
 
-                    if(!$this->input->get('cont_id') AND !$this->input->post('unit_is_cont')){  // 신규 계약일 때 contractor 테이블 데이터 입력
+                    /////////////////////////////////////////////////////////////////////////////신규 계약 인서트
 
+                    if(!$this->input->get('cont_id') AND !$this->input->post('unit_is_cont')){ // 신규 계약일 때
+
+                        // 신규 계약일 때 contract 테이블 데이터 입력
+                        //   1. 계약관리 테이블에 해당 데이터를 인서트한다.
+                        $add_arr1 = array('ini_reg_worker' => $this->session->userdata('mem_username'));
+                        $cont_arr11 = array_merge($cont_arr1, $add_arr1);
+
+                        $result[-1] = $this->cms_main_model->insert_data('cb_cms_sales_contract', $cont_arr11, 'ini_reg_date');
+                        if( !$result[-1]){
+                            alert('데이터베이스 에러입니다.0', current_full_url());
+                        }
+
+                        // 신규 계약일 때 contractor 테이블 데이터 입력
                         //   2. 계약자관리 테이블에 해당 데이터를 인서트한다.
                         $add_arr2 = array('cont_seq' => $cont_seq, 'ini_reg_worker' => $this->session->userdata('mem_username'));
                         $cont_arr22 = array_merge($cont_arr2, $add_arr2);
@@ -663,22 +662,25 @@ class Cms_m1 extends CB_Controller {
 
                     }else if(!empty($this->input->get('cont_id')) OR $this->input->post('unit_is_cont')=='1'){ // 기존 계약정보 수정일 때
                     	
-                    	//   0. unit 테이블 업데이트
-						$unit_data = array('is_contract' => '1');
-						$unit_where = array(
-							'pj_seq' => $pj,
-							'type' => $this->input->post('type', TRUE),
-							'dong' => $this->input->post('dong', TRUE),
-							'ho' => $this->input->post('ho', TRUE)
-						);
-						$rlt[0] = $this->cms_main_model->update_data('cb_cms_project_all_housing_unit', $unit_data, $unit_where);
-						if( !$rlt[0]){
-							alert('데이터베이스 에러입니다.0', current_full_url());
-						}
+                    	if ($pj_now->data_cr=='1') {
+                            //   0. unit 테이블 업데이트
+                            $unit_data = array('is_contract' => '1');
+                            $unit_where = array(
+                                'pj_seq' => $pj,
+                                'type' => $this->input->post('type', TRUE),
+                                'dong' => $this->input->post('dong', TRUE),
+                                'ho' => $this->input->post('ho', TRUE)
+                            );
+                            $rlt[0] = $this->cms_main_model->update_data('cb_cms_project_all_housing_unit', $unit_data, $unit_where);
+                            if( !$rlt[0]){
+                                alert('데이터베이스 에러입니다.0', current_full_url());
+                            }
+                        }
 
                         //   1. 계약관리 테이블(contract)에 해당 데이터를 업데이트한다.
                         $add_arr1 = array('last_modi_date' => date('Y-m-d'), 'last_modi_worker' => $this->session->userdata('mem_username'));
-                        $cont_arr11 = array_merge($cont_arr1, $add_arr1);
+
+                    	$cont_arr11 = array_merge($cont_arr1, $add_arr1);
                         $result[0] = $this->cms_main_model->update_data('cb_cms_sales_contract', $cont_arr11, array('seq' => $cont_seq));
                         if( !$result[0]){
                             alert('데이터베이스 에러입니다.1', base_url(uri_string()));
@@ -686,7 +688,8 @@ class Cms_m1 extends CB_Controller {
 
                         //   2. 계약자관리 테이블에 해당 데이터를 업데이트한다.
                         $cont_arr22 = array_merge($cont_arr2, $add_arr1);
-                        $result[1] = $this->cms_main_model->update_data('cb_cms_sales_contractor', $cont_arr22, array('seq'=>$this->input->post('contractor_seq'), 'cont_seq'=>$this->input->post('cont_seq')));
+
+                        $result[1] = $this->cms_main_model->update_data('cb_cms_sales_contractor', $cont_arr22, array('seq'=>$cont_data->contractor_seq, 'cont_seq'=>$cont_data->cont_seq));
                         if( !$result[1]) {
                             alert('데이터베이스 에러입니다.2', '');
                         }
