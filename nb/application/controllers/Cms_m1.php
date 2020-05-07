@@ -155,7 +155,7 @@ class Cms_m1 extends CB_Controller {
 
             // 계약현황 2. 계약등록 ////////////////////////////////////////////////////////////////////
         }else if($mdi==1 && $sdi==2) {
-            // $this->output->enable_profiler(TRUE); //프로파일러 보기//
+             $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
             // 조회 등록 권한 체크
             $auth = $this->cms_main_model->auth_chk('_m1_1_2', $this->session->userdata['mem_id']);
@@ -235,15 +235,15 @@ class Cms_m1 extends CB_Controller {
             }
 
             // 수납 관리 테이블 정보 가져오기
-            if( !empty($cont_data)) $view['receiv_app'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='1' ");
-            if( !empty($cont_data)) $view['received']['1'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='2' ");
-            if( !empty($cont_data)) $view['received']['2'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='3' ");
-            if( !empty($cont_data)) $view['received']['3'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='4' ");
-            if( !empty($cont_data)) $view['received']['4'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='5' ");
-            if( !empty($cont_data)) $view['received']['5'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='6' ");
-            if( !empty($cont_data)) $view['received']['6'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='7' ");
-            if( !empty($cont_data)) $view['received']['7'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code='8' ");
-            if( !empty($cont_data)) $view['rec_num'] = $this->cms_main_model->sql_num_rows(" SELECT seq FROM cb_cms_sales_received WHERE cont_seq='$cont_data->seq' AND cont_form_code>='2' ");
+            if( !empty($cont_data)) $view['receiv_app'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->cont_seq' AND cont_form_code='1' ");
+            if( !empty($cont_data)) $view['received']['1'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->cont_seq' AND cont_form_code='2' ");
+            if( !empty($cont_data)) $view['received']['2'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->cont_seq' AND cont_form_code='3' ");
+            if( !empty($cont_data)) $view['received']['3'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->cont_seq' AND cont_form_code='4' ");
+            if( !empty($cont_data)) $view['received']['4'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->cont_seq' AND cont_form_code='5' ");
+            if( !empty($cont_data)) $view['received']['5'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->cont_seq' AND cont_form_code='6' ");
+            if( !empty($cont_data)) $view['received']['6'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->cont_seq' AND cont_form_code='7' ");
+            if( !empty($cont_data)) $view['received']['7'] = $this->cms_main_model->sql_row(" SELECT * FROM cb_cms_sales_received WHERE cont_seq='$cont_data->cont_seq' AND cont_form_code='8' ");
+            if( !empty($cont_data)) $view['rec_num'] = $this->cms_main_model->sql_num_rows(" SELECT seq FROM cb_cms_sales_received WHERE cont_seq='$cont_data->cont_seq' AND cont_form_code>='2' ");
 
 
             // 라이브러리 로드
@@ -420,9 +420,10 @@ class Cms_m1 extends CB_Controller {
                     }
 
                     /******************************계약자 테이블 데이터******************************/
-                    $cr_cont = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_contract ORDER BY seq DESC LIMIT 0 ");
+                    $cr_cont = $this->cms_main_model->sql_row(" SELECT seq FROM cb_cms_sales_contract ORDER BY seq DESC LIMIT 1 ");
                     $cont_seq = ( $cont_data->cont_seq) ?  $cont_data->cont_seq : $cr_cont->seq;
                     if( !empty($this->input->post('birth_date'))) $birth_gender = $this->input->post('birth_date').'-'.$this->input->post('cont_gender');
+                    $is_registered = ($this->input->post('is_registered', TRUE)==='1') ? '1' : '0';
                     $addr_id = $this->input->post('postcode1')."|".$this->input->post('address1_1')."|".$this->input->post('address2_1');
                     $addr_dm = $this->input->post('postcode2')."|".$this->input->post('address1_2')."|".$this->input->post('address2_2');
                     $idoc1 = $this->input->post('incom_doc_1');
@@ -438,7 +439,7 @@ class Cms_m1 extends CB_Controller {
                     $cont_arr2 = array( // 계약자 (contractor) 테이블 입력 데이터
                         'contractor' => $this->input->post('custom_name', TRUE),
                         'cont_birth_id' => $birth_gender,
-                        'is_registered' => $this->input->post('is_registered', TRUE),
+                        'is_registered' =>  $is_registered,
                         'cont_tel1' =>  $this->input->post('tel_1', TRUE),
                         'cont_tel2' =>  $this->input->post('tel_2', TRUE),
                         'cont_addr1' =>  $addr_id,

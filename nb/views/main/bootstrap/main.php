@@ -16,63 +16,63 @@
 		<div class="item active">
 			<img src="<?php echo $this->config->base_url('static/img/111.jpg'); ?>" alt="1st slide">
 			<div class="carousel-caption">
-				<h4>9 Block 에르바체 - TYPE(72)</h4>
+				<h4>9 Block Xi - TYPE(72)</h4>
 				<p>72 TYPE 거실(Living Room)</p>
 			</div>
 		</div>
 		<div class="item">
 			<img src="<?php echo $this->config->base_url('static/img/222.jpg'); ?>" alt="2nd slide">
 			<div class="carousel-caption">
-				<h4>9 Block 에르바체 - TYPE(72)</h4>
+				<h4>9 Block Xi - TYPE(72)</h4>
 				<p>72 TYPE 침실1 - Bed Room(1st)</p>
 			</div>
 		</div>
 		<div class="item">
 			<img src="<?php echo $this->config->base_url('static/img/333.jpg'); ?>" alt="3rd slide">
 			<div class="carousel-caption">
-				<h4>9 Block 에르바체 - TYPE(72)</h4>
+				<h4>9 Block Xi - TYPE(72)</h4>
 				<p>72 TYPE 주방(kitchen) Praesent commodo cursus magna, vel scelerisque nisl<br> consectetur.</p>
 			</div>
 		</div>
 		<div class="item">
 			<img src="<?php echo $this->config->base_url('static/img/444.jpg'); ?>" alt="4th slide">
 			<div class="carousel-caption">
-				<h4>9 Block 에르바체 - TYPE(72)</h4>
+				<h4>9 Block Xi - TYPE(72)</h4>
 				<p>72 TYPE 안방(Main Room) Praesent commodo cursus magna, vel scelerisque nisl<br> consectetur.</p>
 			</div>
 		</div>
 		<div class="item">
 			<img src="<?php echo $this->config->base_url('static/img/555.jpg'); ?>" alt="5th slide">
 			<div class="carousel-caption">
-				<h4>9 Block 에르바체 - TYPE(72)</h4>
+				<h4>9 Block Xi - TYPE(72)</h4>
 				<p>72 TYPE 욕실(Bath Room) Praesent commodo cursus magna, vel scelerisque nisl<br> consectetur.</p>
 			</div>
 		</div>
 		<div class="item">
 			<img src="<?php echo $this->config->base_url('static/img/666.jpg'); ?>" alt="6th slide">
 			<div class="carousel-caption">
-				<h4>9 Block 에르바체 - TYPE(84C)</h4>
+				<h4>9 Block Xi - TYPE(84C)</h4>
 				<p>84C TYPE 침실1(1st Bed Room) Praesent commodo cursus magna, vel scelerisque nisl<br> consectetur.</p>
 			</div>
 		</div>
 		<div class="item">
 			<img src="<?php echo $this->config->base_url('static/img/777.jpg'); ?>" alt="7th slide">
 			<div class="carousel-caption">
-				<h4>9 Block 에르바체 - TYPE(84C)</h4>
+				<h4>9 Block Xi - TYPE(84C)</h4>
 				<p>84C TYPE 거실(Living Room) Praesent commodo cursus magna, vel scelerisque nisl<br> consectetur.</p>
 			</div>
 		</div>
 		<div class="item">
 			<img src="<?php echo $this->config->base_url('static/img/888.jpg'); ?>" alt="8th slide">
 			<div class="carousel-caption">
-				<h4>9 Block 에르바체 - TYPE(84C)</h4>
+				<h4>9 Block Xi - TYPE(84C)</h4>
 				<p>84C TYPE 주방(kitchen) Praesent commodo cursus magna, vel scelerisque nisl<br> consectetur.</p>
 			</div>
 		</div>
 		<div class="item">
 			<img src="<?php echo $this->config->base_url('static/img/999.jpg'); ?>" alt="9th slide">
 			<div class="carousel-caption">
-				<h4>9 Block 에르바체 - TYPE(84C)</h4>
+				<h4>9 Block Xi - TYPE(84C)</h4>
 				<p>84C TYPE 안방(Main Room) Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 			</div>
 		</div>
