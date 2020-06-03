@@ -155,7 +155,7 @@ class Cms_m1 extends CB_Controller {
 
             // 계약현황 2. 계약등록 ////////////////////////////////////////////////////////////////////
         }else if($mdi==1 && $sdi==2) {
-             $this->output->enable_profiler(TRUE); //프로파일러 보기//
+             // $this->output->enable_profiler(TRUE); //프로파일러 보기//
 
             // 조회 등록 권한 체크
             $auth = $this->cms_main_model->auth_chk('_m1_1_2', $this->session->userdata['mem_id']);
