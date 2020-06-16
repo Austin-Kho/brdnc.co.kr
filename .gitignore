@@ -64,3 +64,4 @@ package-lock.json
 # vscode
 /.vscode/*.*
 .vscode/sftp.json
+.vscode/
